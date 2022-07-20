@@ -63,7 +63,172 @@ textarea:-moz-placeholder { color: #999999; }
 textarea::-moz-placeholder { color: #999999; }
 textarea:-ms-input-placeholder { color: #999999; }
 
-.App{
+.tinder{
+  display: flex;
+}
+
+.tinder__info{
+  max-width: 340px;
+  width: 100%;
+}
+
+.tinder__info-user{
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 90px;
+  background-image: linear-gradient(45deg,#fd267a,#ff6036);
+}
+
+.tinder__info-user-photo{
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+  background-image: url(./assets/images/profile/1.png);
+  background-position: 50% 79.5455%;
+  background-size: auto 95.581%;
+  margin-left: 12px;
+}
+
+.tinder__info-user-name{
+  margin-left: 8px;
+}
+
+.tinder__info-review{
+  position: absolute;
+  top: 27px;
+  right: 15px;
+}
+.tinder__info-review-link,
+.tinder__info-work-mode-link{
+  height: 36px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000052;
+  border-radius: 50%;
+  color: #FFFFFF;
+  transition: all .3s;
+}
+.tinder__info-review-link:hover,
+.tinder__info-work-mode-link:hover{
+  background-color: #00000073;
+}
+
+.tinder__info-work-mode{
+  position: absolute;
+  top: 27px;
+  right: 66px;
+}
+
+.tinder__content{
+  width: 100%;
+}
+
+.tinder__info-content-titles{
+  margin-top: 10px;
+  display: flex;
+}
+
+.tinder__info-content-title{
+  font-size: 20px;
+  color: #21262e;
+  font-weight: 700;
+  margin-left: 15px;
+  padding: 0 6px;
+  cursor: pointer;
+}
+
+.tinder__info-content-title--active{
+  border-bottom: 3px solid #ff4458;
+}
+
+.tinder__info-content-box{
+  margin-left: 20px;
+}
+
+.tinder__content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f4;
+}
+
+.tinder__content-search{
+  width: 375px;
+  max-height: 667px;
+  height: 100%;
+}
+
+.tinder__content-search-photo{
+  background-image: url(./assets/images/photos/1.jpg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 100%;
+  height: 100%;
+  position: relative;
+  -webkit-box-shadow: inset -30px -200px 45px -60px rgba(0,0,0,1);
+  -moz-box-shadow: inset -30px -200px 45px -60px rgba(0,0,0,1);
+  box-shadow: inset -30px -200px 45px -60px rgba(0,0,0,1);
+}
+
+.tinder__content-search-descr{
+  position: absolute;
+  bottom: 102px;
+  left: 0;
+  padding: 0 20px 25px;
+}
+
+.tinder__content-search-descr-person{
+  font-size: 36px;
+  font-weight: 800;
+  color: #FFFFFF;
+  text-shadow: 0 1px 1px #0000001f;
+}
+
+.tinder__content-search-descr-years{
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.tinder__content-search-descr-distance{
+  color: #FFFFFF;
+  text-shadow: 0 1px 1px #0000001f;
+}
+
+.tinder__content-search-buttons{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 102px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.tinder__content-search-btn{
+  background: transparent;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tinder__content-search-btn--small{
+  width: 60px;
+  height: 60px;
+}
+
+.tinder__content-search-btn--large{
+  width: 70px;
+  height: 70px;
+}
+
+/* .App{
   display: flex;
   margin: 0;
   height: 100vh;
@@ -185,7 +350,7 @@ button{
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-}
+} */
 
 /* Authorization */
 
@@ -194,7 +359,7 @@ button{
   margin: 0 auto;
 }
 
-.auth-form--container{
+.auth-form__container{
   width: 100%;  
   min-height: 100vh;
   display: -webkit-box;
@@ -213,7 +378,7 @@ button{
   background: linear-gradient(-135deg, #c850c0, #FCEFB4);
 }
 
-.auth-form--wrap{
+.auth-form__wrap{
   width: 960px;
   background: #fff;
   border-radius: 10px;
@@ -229,18 +394,18 @@ button{
   padding: 177px 130px 33px 95px;
 }
 
-.auth-form--img{
+.auth-form__img{
   width: 316px;
 }
-.auth-form--img img {
+.auth-form__img img {
   max-width: 100%;
 }
 
-.auth-form--form{
+.auth-form__form{
   width: 290px;
 }
 
-.auth-form--title {
+.auth-form__title {
   font-family: Poppins-Bold;
   font-size: 24px;
   color: #333333;
@@ -252,23 +417,23 @@ button{
   padding-bottom: 54px;
 }
 
-.auth-form--validation{
+.auth-form__validation{
   font-family: Poppins-Medium;
   font-size: 15px;
   color: #992626;
 }
-.auth-form--validation div{
+.auth-form__validation div{
   margin-bottom: 10px;
 }
 
-.auth-form--input-wrap{
+.auth-form__input-wrap{
   position: relative;
   width: 100%;
   z-index: 1;
   margin-bottom: 10px;
 }
 
-.auth-form--input {
+.auth-form__input {
   font-family: Poppins-Medium;
   font-size: 15px;
   line-height: 1.5;
@@ -281,7 +446,7 @@ button{
   border-radius: 25px;
   padding: 0 30px 0 68px;
 }
-.auth-form--symbol-input{
+.auth-form__symbol-input{
   font-size: 15px;
 
   display: -webkit-box;
@@ -306,7 +471,7 @@ button{
   transition: all 0.4s;
 }
 
-.auth-form--container-btn{
+.auth-form__container-btn{
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -318,12 +483,13 @@ button{
   padding-top: 20px;
 }
 
-.auth-form--submit-btn {
+.auth-form__submit-btn {
   font-family: Montserrat-Bold;
   font-size: 15px;
   line-height: 1.5;
   color: #fff;
   text-transform: uppercase;
+  cursor: pointer;
 
   width: 100%;
   height: 50px;
@@ -343,18 +509,18 @@ button{
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
-.auth-form--disabled-submit-btn{
+.auth-form__disabled-submit-btn{
   background: #aaaaaa !important;
   cursor: not-allowed;
 }
 
-.auth-form--create-account{
+.auth-form__create-account{
   font-family: Poppins-Regular;
   text-align: center;
   padding-top: 136px;
 }
 
-.auth-form--create-account-link{
+.auth-form__create-account-link{
   font-size: 13px;
   line-height: 1.5;
   color: #666666;

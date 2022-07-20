@@ -165,7 +165,7 @@ const RegistrationForm = (props: {formError: string}) => {
 
               <div className="auth-form--container-btn">
                 <button disabled={!isFormValid} type='submit' className={"auth-form--submit-btn" + (isFormValid ? "" : " auth-form--disabled-submit-btn")}>
-                  Login
+                  Sign up
                 </button>
               </div>
               <div className="text-center p-t-136 auth-form--create-account">
