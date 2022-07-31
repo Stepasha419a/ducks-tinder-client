@@ -1,35 +1,40 @@
 import nodemailer from 'nodemailer'
+import {google} from 'googleapis'
 
-class MailService {
-    transporter;
+const oAuth2Client = new google.auth.OAuth2(process.env.CLIENT_ID, process.env.CLIENT_SECRET, process.env.REDIRECT_URI)
+oAuth2Client.setCredentials({refresh_token: process.env.REFRESH_TOKEN})
 
-    constructor() {
-        this.transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST || 'smtp.gmail.com',
-            port: Number(process.env.SMTP_PORT) || 587,
-            secure: false,
+export const sendMail = async (to: string, link: string, name: string) => {
+    try {
+        const accessToken = await oAuth2Client.getAccessToken()
+
+        const transport = nodemailer.createTransport({ //@ts-ignore
+            service: "gmail",
             auth: {
-                user: process.env.SMTP_USER || 'testauth419a@gmail.com',
-                pass: process.env.SMTP_PASSWORD || 'testAuth419atestAuth419a'
+                type: 'OAuth2',
+                user: process.env.CLIENT_USER,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN,
+                accessToken: accessToken,
             }
         })
-    }
 
-    async sendActivationMail(to: string, link: string, name: string) {
-        await this.transporter.sendMail({
-            from: process.env.SMTP_USER || 'testauth419a@gmail.com',
+        const mailOptions = {
+            from: `Ducks Tinder <${process.env.CLIENT_USER}>`,
             to,
-            subject: 'Здравствуйте ' + name + ', Активация Аккаунта на ' + (process.env.API_URL || 'http://localhost:5000'),
-            text: '',
-            html:
-                `
-                <div>
-                    <h1>${name}, для активации перейдите по ссылке</h1>
-                    <a href=${link}>${link}</a>
-                </div>
-                `
-        })
+            subject: `Активация аккаунта на Ducks Tinder`,
+            text: `Добрый день ${name}!`,
+            html: `<div>
+                <h1>для активации перейдите по ссылке</h1>
+                <a href=${link}>${link}</a>
+            </div>`
+        }
+        
+        const result = await transport.sendMail(mailOptions)
+
+        return result
+    } catch (error) {
+        return error
     }
 }
-
-export default new MailService()

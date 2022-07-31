@@ -1,9 +1,9 @@
-import UserModel from "../models/user-model";
+import UserModel, {partnerSettings} from "../models/user-model";
 import bcrypt from 'bcryptjs'
 import {v4} from 'uuid'
 import UserDto from "../dtos/userDto";
 import tokenService from "./TokenService";
-import mailService from "./MailService";
+import {sendMail} from "./MailService";
 import userModel from "../models/user-model";
 import ApiError from "../exceptions/api-error";
 
@@ -13,7 +13,7 @@ interface userDataInterface {
 }
 
 class AuthService{
-    async registration(email: string, name: string, password: string) {
+    async registration(email: string, name: string, password: string, age: number, sex: string, partnerSettings: partnerSettings) {
         const candidate = await UserModel.findOne({email})
         if(candidate) {
             throw ApiError.BadRequest(`The user with such an email already exists`)
@@ -22,13 +22,14 @@ class AuthService{
         const hashPassword = await bcrypt.hash(password, 7)
         const activationLink = v4()
 
-        const user = await UserModel.create({email, name, password: hashPassword, activationLink})
-        await mailService.sendActivationMail(email, `${(process.env.API_URL || 'http://localhost:5000')}/api/activate/${activationLink}`, name)
+        const user = await UserModel.create({email, name, password: hashPassword, age, sex, partnerSettings, activationLink})
+        await sendMail(email, `${(process.env.API_URL)}/api/activate/${activationLink}`, name)
             .catch((error: any) => {
+                console.log('ERROR.MESSAGE: ',error.message)
                 throw ApiError.BadRequest(`This email doesn't exist`)
             })
 
-        const userDto = new UserDto(user) //id, email, isActivated
+        const userDto = new UserDto(user) //id, email, isActivated...
         const tokens = tokenService.generateTokens({...userDto})
         await tokenService.saveToken(userDto.id, tokens.refreshToken)
 

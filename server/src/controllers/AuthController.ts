@@ -12,8 +12,8 @@ class AuthController {
                 return next(ApiError.BadRequest('Ошибка при валидации'))
             }
 
-            const {email, name, password} = req.body
-            const userData = await authService.registration(email, name, password)
+            const {email, name, password, age, sex, partnerSettings} = req.body
+            const userData = await authService.registration(email, name, password, age, sex, partnerSettings)
 
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
             return res.json(userData)

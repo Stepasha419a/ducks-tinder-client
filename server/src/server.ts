@@ -1,3 +1,4 @@
+require('dotenv').config()
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
@@ -7,7 +8,7 @@ import { ConnectionOptions } from 'tls'
 import cors from 'cors'
 import errorMiddleware from './middlewares/error-middleware'
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT
 
 const app = express()
 
@@ -15,7 +16,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: process.env.CLIENT_URL || 'http://localhost:3000'
+    origin: process.env.CLIENT_URL
 }))
 app.use(express.static('static'))
 app.use(fileUpload({}))
@@ -24,7 +25,7 @@ app.use(errorMiddleware)
 
 async function startApp() {
     try {
-        await mongoose.connect(process.env.DB_URL || 'mongodb://localhost/ducks-db', {useUnifiedTopology: true, useNewUrlParser: true} as ConnectionOptions)
+        await mongoose.connect(process.env.DB_URL as string, {useUnifiedTopology: true, useNewUrlParser: true} as ConnectionOptions)
 
         app.listen(PORT, () => console.log(`Server is working on port ${PORT}`))
 

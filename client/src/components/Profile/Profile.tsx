@@ -1,55 +1,151 @@
 import { useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import profilePhoto from '../../assets/images/profile/1.png'
 import { IUser } from "../../models/IUser"
 import { Link } from "react-router-dom"
 import photo from '../../assets/images/photos/2.jpg'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBriefcase, faMagnifyingGlass, faFireFlameCurved, faUser } from "@fortawesome/free-solid-svg-icons"
+import { useState } from "react"
 
 const Profile = () => {
 
     const user = useSelector((state: AppStateType) => state.authPage.user as IUser )
+
+    const [currentDistanceSetting, setCurrentDistanceSetting] = useState('60')
+
+    const submitSettings = () => {
+        console.log('asd')
+    }
 
     let photoStyle = {
         backgroundImage: `url(${photo})`
     }
 
     return (
-    <div className="App Profile">
-        <div className="info-box">
-            <div className="profile-info">
-                <Link to="/">
-                    <div className="profile-photo">
-                        <img src={profilePhoto} alt="" className="photo" />
+        <div className="tinder">
+            <aside className="tinder__info tinder__info--gray">
+                <div className="tinder__info-user">
+                    <Link className="tinder__info-main-link" to='/'>
+                        <FontAwesomeIcon icon={faFireFlameCurved}/>
+                    </Link>
+                    <div className="tinder__info-review">
+                        <Link className="tinder__info-review-link" to='#'>
+                            <FontAwesomeIcon icon={faBriefcase} />
+                        </Link>
                     </div>
-                </Link>
-            </div>
-
-            <div className="socials">
-            </div>
-        </div>
-        <div className="search">
-            <div className="window">
-                <div className="photo">
-                    <div style={photoStyle}></div>
-                </div>
-                <div className="control-panel">
-                    <div className="control-panel-container">
-                        <div className="user-info">
-                            <h1 className="name">{user.name}</h1>
-                            <span className="age">21</span>
-                        </div>
-                        <div className="sex">Male</div>
-                    </div>
-                    <hr />
-                    <div className="edit-info">
-                        <Link to="edit">
-                            <span>Edit info</span>
+                    <div className="tinder__info-work-mode">
+                        <Link className="tinder__info-work-mode-link" to='#'>
+                            <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </Link>
                     </div>
                 </div>
+                <div className="tinder__settings-groups">
+                    <div className="tinder__settings-group">
+                        <div className="tinder__settings-group-title">
+                            Account Settings
+                        </div>
+                        <div className="tinder__settings-group-items">
+                            <div className="tinder__settings-group-item">
+                                <div className="tinder__settings-group-item-descr">
+                                    <div className="tinder__settings-group-item-descr-title">
+                                        Email
+                                    </div>
+                                    <div className="tinder__settings-group-item-descr-setting">
+                                        Dark_Magic419a@mail.ru
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="tinder__settings-group-item">
+                                <div className="tinder__settings-group-item-descr">
+                                    <div className="tinder__settings-group-item-descr-title">
+                                        Phone number
+                                    </div>
+                                    <div className="tinder__settings-group-item-descr-setting">
+                                        79159963451
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="tinder__settings-group-descr">
+                            Verified phone number and email adress help to protect your account
+                        </div>
+                    </div>
+                    <div className="tinder__settings-group">
+                        <div className="tinder__settings-group-title">
+                        Find Settings
+                        </div>
+                        <div className="tinder__settings-group-items">
+                            <div className="tinder__settings-group-item">
+                                <div className="tinder__settings-group-item-descr">
+                                    <div className="tinder__settings-group-item-descr-title">
+                                        Place
+                                    </div>
+                                    <div className="tinder__settings-group-item-descr-setting">
+                                        Дзержинский район Россия
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="tinder__settings-group-item">
+                                <div className="tinder__settings-group-item-descr">
+                                    <div className="tinder__settings-group-item-descr-title">
+                                        Distance
+                                    </div>
+                                    <div className="tinder__settings-group-item-descr-setting">
+                                        {60} км.
+                                    </div>
+                                </div>
+                                <div className="tinder__settings-group-item-setting">
+                                    <div className="tinder__settings-group-item-setting-change">
+                                        <input 
+                                            value={currentDistanceSetting}
+                                            onChange={(e) => setCurrentDistanceSetting(e.target.value)}
+                                            onBlur={() => submitSettings()}
+                                            className="tinder__settings-group-item-setting-change-input" 
+                                            type="text"
+                                        />
+                                    </div>
+                                    <div className="tinder__settings-group-item-setting-descr">
+                                        Show people only in this range
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="tinder__settings-group-descr">
+                        When the local profiles are over, you will be able to 
+                        switch to the Global Mode for dating people from all over the world.
+                        </div>
+                    </div>
+                </div>
+            </aside>
+            <div className="tinder__content">
+                <div className="tinder__content-search tinder__content-search--profile">
+                    <div className="tinder__content-search-photo tinder__content-search-photo--profile">
+                    </div>
+                    <div className="tinder__content-info tinder__content-info--profile">
+                        <div className="tinder__content-info-descr">
+                            <div className="tinder__content-info-descr-name">
+                                Степан
+                                <span className="tinder__content-info-descr-years">
+                                    22
+                                </span>
+                            </div>
+                            <div className="tinder__content-info-descr-sex">
+                                <FontAwesomeIcon icon={faUser}  className="tinder__content-info-descr-sex-icon"/>
+                                Мужчина
+                            </div>
+                        </div>
+                        <hr className="tinder__content-info-separator"/>
+                        <div className="tinder__content-change-info-wrapper">
+                            <div className="tinder__content-change-info">
+                                <Link to="edit">
+                                    <span className="tinder__content-change-info-text">Edit Info</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
     )
 }
 
