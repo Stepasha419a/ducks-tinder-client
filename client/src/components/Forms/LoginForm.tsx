@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightLong, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, setFormError } from '../../redux/authReducer';
+import { loginThunk, setFormError } from '../../redux/authReducer';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppStateType } from '../../redux/reduxStore';
 
@@ -74,7 +74,7 @@ const LoginForm = (props: {formError: string}) => {
     event.preventDefault()
     
     if(!emailError && !passwordError) {
-      dispatch(login({email, password}) as any)
+      dispatch(loginThunk({email, password}) as any)
     }
   }
 

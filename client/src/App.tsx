@@ -2,25 +2,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import LoginForm from './components/Forms/LoginForm';
 import Tinder from './components/Tinder/Tinder';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import { useEffect } from 'react';
-import { checkAuth } from './redux/authReducer';
+import { checkAuthThunk } from './redux/authReducer';
 import { AppStateType } from './redux/reduxStore';
 import RegistrationForm from './components/Forms/Registration';
 import Profile from './components/Profile/Profile';
 
 function App() {
 
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const isAuth = useSelector((state: AppStateType) => state.authPage.isAuth)
-  const user = useSelector((state: AppStateType) => state.authPage.user)
   const formError = useSelector((state: AppStateType) => state.authPage.formError)
   
   useEffect(() => {
-    dispatch(checkAuth() as any)
+    dispatch(checkAuthThunk() as any)
   }, [dispatch])
 
   /* useEffect(() => {

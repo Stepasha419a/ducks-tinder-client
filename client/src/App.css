@@ -249,6 +249,11 @@ textarea:-ms-input-placeholder { color: #999999; }
   padding: 12px 16px;
 }
 
+.tinder__settings-group-item--sumple-button{
+  border-top: 1px solid rgb(214, 214, 214);
+  cursor: pointer;
+}
+
 .tinder__settings-group-item-descr{
   display: flex;
   justify-content: space-between;
@@ -257,6 +262,10 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__settings-group-item-descr-title{
   font-size: 18px;
   font-weight: 400;
+}
+
+.tinder__settings-group-item-descr-title--center{
+  margin: 0 auto;
 }
 
 .tinder__settings-group-item-setting{
@@ -517,7 +526,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .auth-form__title {
-  font-family: Poppins-Bold;
+  font-weight: 700;
   font-size: 24px;
   color: #333333;
   line-height: 1.2;
@@ -529,7 +538,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .auth-form__validation{
-  font-family: Poppins-Medium;
+  font-weight: 500;
   font-size: 15px;
   color: #992626;
 }
@@ -545,7 +554,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .auth-form__input {
-  font-family: Poppins-Medium;
+  font-weight: 500;
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
@@ -595,9 +604,8 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .auth-form__submit-btn {
-  font-family: Montserrat-Bold;
+  font-weight: 700;
   font-size: 15px;
-  line-height: 1.5;
   color: #fff;
   text-transform: uppercase;
   cursor: pointer;
@@ -626,7 +634,6 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .auth-form__create-account{
-  font-family: Poppins-Regular;
   text-align: center;
   padding-top: 136px;
 }

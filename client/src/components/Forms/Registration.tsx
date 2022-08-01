@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightLong, faEnvelope, faLock, faFileText } from '@fortawesome/free-solid-svg-icons'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../../redux/authReducer';
+import { registerThunk } from '../../redux/authReducer';
 import { Link, useNavigate } from 'react-router-dom';
 import { AppStateType } from '../../redux/reduxStore';
 
@@ -87,34 +87,34 @@ const RegistrationForm = (props: {formError: string}) => {
     event.preventDefault()
     
     if(!emailError && !passwordError) {
-      dispatch(register({email, password, name}) as any)
+      dispatch(registerThunk({email, password, name}) as any)
     }
   }
 
   return (
       <div className="auth-form">
-        <div className="auth-form--container">
-          <div className="auth-form--wrap">
-            <div className="auth-form--img">
+        <div className="auth-form__container">
+          <div className="auth-form__wrap">
+            <div className="auth-form__img">
                 <img src={authImg} alt="IMG"/>
             </div>
-            <form onSubmit={e => submitHandler(e as FormEvent<HTMLFormElement>)} className="auth-form--form">
-              <span className="auth-form--title">
-                Member Logind
+            <form onSubmit={e => submitHandler(e as FormEvent<HTMLFormElement>)} className="auth-form__form">
+              <span className="auth-form__title">
+                Member Sign Up
               </span>
 
               {props.formError && 
-                <span className="auth-form--validation">
+                <span className="auth-form__validation">
                   <div>{props.formError}</div>
                 </span>
               }
 
-              <span className="auth-form--validation">
+              <span className="auth-form__validation">
                 {(nameDirty && nameError) && <div>{nameError}</div> }
               </span>
-              <div className="auth-form--input-wrap">
+              <div className="auth-form__input-wrap">
                 <input 
-                  className="auth-form--input" 
+                  className="auth-form__input" 
                   name="name"
                   type="text" 
                   placeholder="First name" 
@@ -122,17 +122,17 @@ const RegistrationForm = (props: {formError: string}) => {
                   value={name} 
                   onChange={e => nameHandler(e)}
                 />
-                <span className="auth-form--symbol-input">
+                <span className="auth-form__symbol-input">
                   <FontAwesomeIcon icon={faFileText} />
                 </span>
               </div>
 
-              <span className="auth-form--validation">
+              <span className="auth-form__validation">
                 {(emailDirty && emailError) && <div>{emailError}</div> }
               </span>
-              <div className="auth-form--input-wrap">
+              <div className="auth-form__input-wrap">
                 <input 
-                  className="auth-form--input" 
+                  className="auth-form__input" 
                   name="email"
                   type="text" 
                   placeholder="Email" 
@@ -140,17 +140,17 @@ const RegistrationForm = (props: {formError: string}) => {
                   value={email} 
                   onChange={e => emailHandler(e)}
                 />
-                <span className="auth-form--symbol-input">
+                <span className="auth-form__symbol-input">
                   <FontAwesomeIcon icon={faEnvelope} />
                 </span>
               </div>
 
-              <span className="auth-form--validation">
+              <span className="auth-form__validation">
                 {(passwordDirty && passwordError) && <div>{passwordError}</div> }
               </span>
-              <div className="auth-form--input-wrap">
+              <div className="auth-form__input-wrap">
                 <input 
-                  className="auth-form--input"
+                  className="auth-form__input"
                   name="password"
                   type="password" 
                   placeholder="Password" 
@@ -158,18 +158,18 @@ const RegistrationForm = (props: {formError: string}) => {
                   value={password} 
                   onChange={e => passwordHandler(e)}
                 />
-                <span className="auth-form--symbol-input">
+                <span className="auth-form__symbol-input">
                   <FontAwesomeIcon icon={faLock} />
                 </span>
               </div>
 
-              <div className="auth-form--container-btn">
-                <button disabled={!isFormValid} type='submit' className={"auth-form--submit-btn" + (isFormValid ? "" : " auth-form--disabled-submit-btn")}>
+              <div className="auth-form__container-btn">
+                <button disabled={!isFormValid} type='submit' className={"auth-form__submit-btn" + (isFormValid ? "" : " auth-form__disabled-submit-btn")}>
                   Sign up
                 </button>
               </div>
-              <div className="text-center p-t-136 auth-form--create-account">
-                <Link className="auth-form--create-account-link" to='/login'>
+              <div className="text-center p-t-136 auth-form__create-account">
+                <Link className="auth-form__create-account-link" to='/login'>
                   Log in your Account &nbsp;
                   <FontAwesomeIcon icon={faArrowRightLong} />
                 </Link>

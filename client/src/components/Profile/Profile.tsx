@@ -1,24 +1,18 @@
-import { useSelector } from "react-redux"
-import { AppStateType } from "../../redux/reduxStore"
-import { IUser } from "../../models/IUser"
+import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import photo from '../../assets/images/photos/2.jpg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBriefcase, faMagnifyingGlass, faFireFlameCurved, faUser } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
+import { logoutThunk } from "../../redux/authReducer"
 
 const Profile = () => {
 
-    const user = useSelector((state: AppStateType) => state.authPage.user as IUser )
+    const dispatch = useDispatch()
 
     const [currentDistanceSetting, setCurrentDistanceSetting] = useState('60')
 
     const submitSettings = () => {
         console.log('asd')
-    }
-
-    let photoStyle = {
-        backgroundImage: `url(${photo})`
     }
 
     return (
@@ -113,6 +107,17 @@ const Profile = () => {
                         <div className="tinder__settings-group-descr">
                         When the local profiles are over, you will be able to 
                         switch to the Global Mode for dating people from all over the world.
+                        </div>
+                    </div>
+                    <div className="tinder__settings-group">
+                        <div className="tinder__settings-group-items">
+                            <div onClick={() => dispatch(logoutThunk() as any)} className="tinder__settings-group-item tinder__settings-group-item--sumple-button">
+                                <div className="tinder__settings-group-item-descr">
+                                    <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--center">
+                                        Log out
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

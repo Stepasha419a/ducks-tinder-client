@@ -40,9 +40,9 @@ const setAuthData = (params: IUser, dispatch: ThunkDispatch<unknown, unknown, Ac
     }
 }
 
-export const register = createAsyncThunk(
+export const registerThunk = createAsyncThunk(
     "auth/registerUser",
-    async function (params: UserAuthParams, {rejectWithValue, dispatch}) {
+    async (params: UserAuthParams, {rejectWithValue, dispatch}) => {
         try {
             const response = await authAPI.registration(params.email, params.name, params.password,)
             localStorage.setItem('token', response.data.accessToken)
@@ -55,9 +55,9 @@ export const register = createAsyncThunk(
     }
 )
 
-export const login = createAsyncThunk(
+export const loginThunk = createAsyncThunk(
     "auth/loginUser",
-    async function (params: UserAuthParams, {rejectWithValue, dispatch}) {
+    async (params: UserAuthParams, {rejectWithValue, dispatch}) => {
         try {
             const response = await authAPI.login(params.email, params.password)
             localStorage.setItem('token', response.data.accessToken)
@@ -69,9 +69,9 @@ export const login = createAsyncThunk(
     }
 )
 
-export const checkAuth = createAsyncThunk(
+export const checkAuthThunk = createAsyncThunk(
     "auth/checkAuth",
-    async function (_, {rejectWithValue, dispatch}) {
+    async (_, {rejectWithValue, dispatch}) => {
         try {
             dispatch(setLoading(true))
             const response = await axios.get<AuthResponse>(`${API_URL}refresh`, {withCredentials: true})
@@ -82,6 +82,19 @@ export const checkAuth = createAsyncThunk(
             rejectWithValue(error.message)
         } finally {
             dispatch(setLoading(false))
+        }
+    }
+)
+
+export const logoutThunk = createAsyncThunk(
+    'auth/logout',
+    async (_, {rejectWithValue, dispatch}) => {
+        try {
+            await authAPI.logout()
+            dispatch(setAuthUserData(null))
+            dispatch(setAuth(false))
+        } catch (error: any) {
+            rejectWithValue(error.message)
         }
     }
 )
