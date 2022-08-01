@@ -9,13 +9,16 @@ import { checkAuthThunk } from './redux/authReducer';
 import { AppStateType } from './redux/reduxStore';
 import RegistrationForm from './components/Forms/Registration';
 import Profile from './components/Profile/Profile';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
 
   const dispatch = useDispatch()
 
+  const isLoading = useSelector((state: AppStateType) => state.authPage.isLoading)
   const formError = useSelector((state: AppStateType) => state.authPage.formError)
-  
+
   useEffect(() => {
     dispatch(checkAuthThunk() as any)
   }, [dispatch])
@@ -27,15 +30,23 @@ function App() {
   }, [isAuth, navigate, user.picture, user.description]) */
 
   return (
-    <Routes>
-      <Route path="/login" element={<LoginForm formError={formError}/>}/>
-      <Route path="/reg" element={<RegistrationForm formError={formError}/>}/>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Tinder />}/>
-        <Route path="profile" element={<Profile />}/>
-        <Route path="*" element={<div>404 NOT FOUND</div>} />
-      </Route>
-    </Routes>
+    <>
+      <div className={'loading-page ' + (!isLoading && 'loading-page--invisible')}>
+        <FontAwesomeIcon icon={faFireFlameCurved} className="loading-page__icon"/>
+      </div>
+      
+      <Routes>
+        <Route path="/login" element={<LoginForm formError={formError}/>}/>
+        <Route path="/reg" element={<RegistrationForm formError={formError}/>}/>
+
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Tinder />}/>
+            <Route path="profile" element={<Profile />}/>
+            <Route path="*" element={<div>404 NOT FOUND</div>} />
+          </Route>
+        
+      </Routes>
+    </>
   );
 }
 

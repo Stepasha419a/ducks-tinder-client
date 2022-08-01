@@ -86,7 +86,7 @@ const RegistrationForm = (props: {formError: string}) => {
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     
-    if(!emailError && !passwordError) {
+    if(!emailError && !passwordError && !nameError) {
       dispatch(registerThunk({email, password, name}) as any)
     }
   }

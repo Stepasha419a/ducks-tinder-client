@@ -14,7 +14,7 @@ const Layout = () => {
         }
     }, [isAuth, navigate])
     
-    return <Outlet />
+    return (isAuth ? <Outlet /> : null)
 }
 
 export default Layout
