@@ -12,7 +12,7 @@ const authReducer = createSlice({
     name: "auth",
     initialState: {
         user: {} as IUser,
-        isAuth: false as boolean,
+        isAuth: null as boolean | null,
         isLoading: false as boolean,
         formError: '' as string
     },
@@ -79,6 +79,7 @@ export const checkAuthThunk = createAsyncThunk(
             dispatch(setAuth(true))
             dispatch(setAuthUserData(response.data.user))
         } catch (error: any) {
+            dispatch(setAuth(false))
             rejectWithValue(error.message)
         } finally {
             dispatch(setLoading(false))

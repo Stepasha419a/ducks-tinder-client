@@ -9,7 +9,7 @@ const Layout = () => {
     const isAuth = useSelector((state: AppStateType) => state.authPage.isAuth)
 
     useEffect(() => {
-        if(!isAuth) {
+        if(isAuth === false) {
             navigate('/login')
         }
     }, [isAuth, navigate])

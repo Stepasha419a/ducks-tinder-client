@@ -2,8 +2,8 @@ import UserModel, {partnerSettings} from "../models/user-model";
 import bcrypt from 'bcryptjs'
 import {v4} from 'uuid'
 import UserDto from "../dtos/userDto";
-import tokenService from "./TokenService";
 import {sendMail} from "./MailService";
+import tokenService from "./TokenService";
 import userModel from "../models/user-model";
 import ApiError from "../exceptions/api-error";
 

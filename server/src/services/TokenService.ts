@@ -47,6 +47,7 @@ class TokenService {
 
     async findToken(refreshToken: string) {
         const tokenData = tokenModule.findOne({refreshToken})
+        //console.log(`findToken tokenData: ${tokenData}`)
         return tokenData
     }
 }
