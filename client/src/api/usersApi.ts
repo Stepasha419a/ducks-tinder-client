@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { IUser } from "../models/IUser";
+import { IUser, IUserUnrequired } from "../models/IUser";
 import { instance } from "./api";
 
 export type UserType = {
@@ -19,7 +19,7 @@ export const usersAPI = {
         return instance.get(`users/${id}`)
             .then(res => res)
     },
-    updateUser(user: UserType): Promise<AxiosResponse<IUser>> {
+    updateUser(user: IUserUnrequired): Promise<AxiosResponse<IUser>> {
         return instance.put('users', user)
             .then(res => res)
     },

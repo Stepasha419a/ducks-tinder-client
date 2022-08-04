@@ -6,6 +6,7 @@ import { API_URL } from "../api/api";
 import { authAPI, UserAuthParams } from "../api/authApi";
 import { IUser } from "../models/IUser";
 import { AuthResponse } from "../models/response/AuthResponse";
+import { setCurrentUser } from "./usersReducer";
 
 
 const authReducer = createSlice({
@@ -17,7 +18,7 @@ const authReducer = createSlice({
         formError: '' as string
     },
     reducers: {
-        setAuthUserData: (state, action) => {
+        setUserData: (state, action) => {
             state.user = action.payload
         },
         setAuth: (state, action) => {
@@ -35,7 +36,7 @@ const authReducer = createSlice({
 
 const setAuthData = (params: IUser, dispatch: ThunkDispatch<unknown, unknown, Action>) => {
     if(params) {
-        dispatch(setAuthUserData(params))
+        dispatch(setUserData(params))
         dispatch(setAuth(true))
     }
 }
@@ -48,6 +49,7 @@ export const registerThunk = createAsyncThunk(
             localStorage.setItem('token', response.data.accessToken)
 
             setAuthData(response.data.user, dispatch)
+            dispatch(setCurrentUser(response.data.user))
         } catch (error: any) {
             dispatch(setFormError(error.response.data.message))
             rejectWithValue(error.message)
@@ -62,6 +64,7 @@ export const loginThunk = createAsyncThunk(
             const response = await authAPI.login(params.email, params.password)
             localStorage.setItem('token', response.data.accessToken)
             setAuthData(response.data.user, dispatch)
+            dispatch(setCurrentUser(response.data.user))
         } catch (error: any) {
             dispatch(setFormError(error.response.data.message))
             rejectWithValue(error.message)
@@ -76,8 +79,8 @@ export const checkAuthThunk = createAsyncThunk(
             dispatch(setLoading(true))
             const response = await axios.get<AuthResponse>(`${API_URL}refresh`, {withCredentials: true})
             localStorage.setItem('token', response.data.accessToken)
-            dispatch(setAuth(true))
-            dispatch(setAuthUserData(response.data.user))
+            dispatch(setCurrentUser(response.data.user))
+            setAuthData(response.data.user, dispatch)
         } catch (error: any) {
             dispatch(setAuth(false))
             rejectWithValue(error.message)
@@ -92,7 +95,7 @@ export const logoutThunk = createAsyncThunk(
     async (_, {rejectWithValue, dispatch}) => {
         try {
             await authAPI.logout()
-            dispatch(setAuthUserData(null))
+            dispatch(setUserData(null))
             dispatch(setAuth(false))
         } catch (error: any) {
             rejectWithValue(error.message)
@@ -100,6 +103,6 @@ export const logoutThunk = createAsyncThunk(
     }
 )
 
-const {setAuthUserData, setAuth, setLoading} = authReducer.actions
+const {setUserData, setAuth, setLoading} = authReducer.actions
 export const {setFormError} = authReducer.actions
 export default authReducer.reducer

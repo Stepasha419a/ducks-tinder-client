@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import { usersAPI, UserType } from "../api/usersApi";
+import { usersAPI } from "../api/usersApi";
+import { IUser, makeUserObject } from "../models/IUser";
 
 const usersReducer = createSlice({
     name: 'users',
     initialState: {
-        users: [] as UserType[],
-        currentUser: null as null | UserType
+        users: [] as IUser[],
+        currentUser: {} as IUser
     },
     reducers: {
         setUsers: (state, action) => {
@@ -17,7 +18,7 @@ const usersReducer = createSlice({
     }
 })
 
-export const fetchUsers = createAsyncThunk(
+export const fetchUsersThunk = createAsyncThunk(
     'users/fetchUsers',
     async function(_, {rejectWithValue, dispatch}) {
         try {
@@ -37,7 +38,25 @@ export const fetchUsers = createAsyncThunk(
     }
 )
 
+export const updateUserThunk = createAsyncThunk(
+    'users/updateUser',
+    async (args: {currentUser: IUser, inputName: string, changedData: String | Number, innerObjectName?: string}, {rejectWithValue, dispatch}) => {
+        try {
+            const user = makeUserObject(args)
+
+            const response = await usersAPI.updateUser(user)
+            console.log(`response: ${response.data}`)
+            
+            dispatch(setCurrentUser(response.data))
+        } catch (error: any) {
+            rejectWithValue(error.message)
+        }
+    }
+)
+
 const {setUsers} = usersReducer.actions
+
+export const {setCurrentUser} = usersReducer.actions
 
 export type UsersReducerType = typeof usersReducer
 

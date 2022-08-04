@@ -2,19 +2,24 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBriefcase, faMagnifyingGlass, faFireFlameCurved, faUser } from "@fortawesome/free-solid-svg-icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { logoutThunk } from "../../redux/authReducer"
 import { AppStateType } from "../../redux/reduxStore"
+import { updateUserThunk } from "../../redux/usersReducer"
 
 const Profile = () => {
 
     const dispatch = useDispatch()
 
-    const currentUser = useSelector((state: AppStateType) => state.authPage.user)
+    const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
 
     const [currentDistanceSetting, setCurrentDistanceSetting] = useState(currentUser.partnerSettings.distance.toString())
 
-    const submitSettings = () => {
+    //dispatch(updateUserThunk({currentUser, inputName: 'distance', changedData: 90, innerObjectName: 'partnerSettings'}) as any)
+
+    // objectName for inner object in user object if it is
+    const submitSettings = (inputName: string, changedData: string | number, innerObjectName?: string) => { 
+        dispatch(updateUserThunk({currentUser, inputName, changedData, innerObjectName}) as any)
     }
 
     return (
@@ -95,7 +100,7 @@ const Profile = () => {
                                         <input 
                                             value={currentDistanceSetting}
                                             onChange={(e) => setCurrentDistanceSetting(e.target.value)}
-                                            onBlur={() => submitSettings()}
+                                            onBlur={(e) => submitSettings('distance', e.target.value, 'partnerSettings')}
                                             className="tinder__settings-group-item-setting-change-input" 
                                             type="text"
                                         />
