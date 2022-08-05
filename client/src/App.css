@@ -225,6 +225,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   max-height: calc(100vh - 90px);
   overflow: auto;
   border-right: 1px solid rgb(214, 214, 214);
+  padding-bottom: 50px;
 }
 
 .tinder__settings-groups::-webkit-scrollbar {
@@ -249,6 +250,34 @@ textarea:-ms-input-placeholder { color: #999999; }
   padding: 12px 16px;
 }
 
+.tinder__settings-group-item--pointer{
+  cursor: pointer;
+}
+
+.tinder__settings-group-item--link{
+  padding: 0;
+}
+
+.tinder__settings-group-item-link{
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.tinder__settings-group-item--link:hover .tinder__settings-group-item-descr-setting-icon{
+  color: #fd267a !important;
+}
+
+.tinder__settings-group-item-descr-setting-open-icon{
+  font-size: 14px;
+  color: #d4d8de;
+  margin-left: 10px;
+  transition: .2s;
+}
+
+.tinder__settings-group-item:hover .tinder__settings-group-item-descr-setting-open-icon{
+  color: #fd267a !important;
+}
+
 .tinder__settings-group-item--sumple-button{
   border-top: 1px solid rgb(214, 214, 214);
   cursor: pointer;
@@ -257,6 +286,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__settings-group-item-descr{
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .tinder__settings-group-item-descr-title{
@@ -264,12 +294,21 @@ textarea:-ms-input-placeholder { color: #999999; }
   font-weight: 400;
 }
 
+.tinder__settings-group-item-descr-title--link{
+  color: #21262e;
+}
+
 .tinder__settings-group-item-descr-title--center{
   margin: 0 auto;
 }
 
-.tinder__settings-group-item-setting{
+.tinder__settings-group-item-setting,
+.tinder__settings-group-item-descr-setting,
+.tinder__settings-group-item-descr-setting-icon{
   color: #505965;
+}
+.tinder__settings-group-item-descr-setting-icon{
+  transition: .2s;
 }
 
 .tinder__settings-group-descr{
@@ -278,12 +317,34 @@ textarea:-ms-input-placeholder { color: #999999; }
   padding: 0 16px;
 }
 
-.tinder__settings-group-item-setting-change-input{
-  width: 40px;
-  border: 1px solid #505965;
-  font-size: 18px;
-  padding: 5px 2px;
-  margin: 15px 0;
+
+.tinder__settings-group-item-setting-change-input[type=range] {
+  width: 100%;
+  height: 10px;
+  -webkit-appearance: none;
+  margin: 15px 0 30px;
+  width: 100%;
+}
+.tinder__settings-group-item-setting-change-input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: #ff0000;
+  border-radius: 50%;
+}
+.tinder__settings-group-item-setting-change-input[type=range]::-webkit-slider-thumb {
+  box-shadow: 0px 0px 2px #000000;
+  height: 28px;
+  width: 28px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -13px;
+  border-radius: 50%;
+  transition: .2s;
+}
+.tinder__settings-group-item-setting-change-input[type=range]::-webkit-slider-thumb:hover {
+  box-shadow: 0px 0px 3px #ce0101;
 }
 
 .tinder__content{

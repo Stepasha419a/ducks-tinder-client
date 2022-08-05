@@ -8,12 +8,12 @@ import userModel from "../models/user-model";
 import ApiError from "../exceptions/api-error";
 
 interface userDataInterface {
-    id: string
+    _id: string
     refreshToken: string
 }
 
 class AuthService{
-    async registration(email: string, name: string, password: string, age: number, sex: string, partnerSettings: partnerSettings) {
+    async registration(email: string, name: string, nickname: string, password: string, age: number, sex: string, partnerSettings: partnerSettings) {
         const candidate = await UserModel.findOne({email})
         if(candidate) {
             throw ApiError.BadRequest(`The user with such an email already exists`)
@@ -22,16 +22,15 @@ class AuthService{
         const hashPassword = await bcrypt.hash(password, 7)
         const activationLink = v4()
 
-        const user = await UserModel.create({email, name, password: hashPassword, age, sex, partnerSettings, activationLink})
+        const user = await UserModel.create({email, name, nickname, password: hashPassword, age, sex, partnerSettings, activationLink})
         await sendMail(email, `${(process.env.API_URL)}/api/activate/${activationLink}`, name)
-            .catch((error: any) => {
-                console.log('ERROR.MESSAGE: ',error.message)
+            .catch(() => {
                 throw ApiError.BadRequest(`This email doesn't exist`)
             })
 
         const userDto = new UserDto(user) //id, email, isActivated...
         const tokens = tokenService.generateTokens({...userDto})
-        await tokenService.saveToken(userDto.id, tokens.refreshToken)
+        await tokenService.saveToken(userDto._id, tokens.refreshToken)
 
         return {...tokens, user: userDto}
     }
@@ -49,7 +48,7 @@ class AuthService{
 
         const userDto = new UserDto(user)
         const tokens = tokenService.generateTokens({...userDto})
-        await tokenService.saveToken(userDto.id, tokens.refreshToken)
+        await tokenService.saveToken(userDto._id, tokens.refreshToken)
 
         return {...tokens, user: userDto}
 
@@ -80,10 +79,10 @@ class AuthService{
             throw ApiError.UnauthorizedError()
         }
 
-        const user = await userModel.findById(userData.id)
+        const user = await userModel.findById(userData._id)
         const userDto = new UserDto(user)
         const tokens = tokenService.generateTokens({...userDto})
-        await tokenService.saveToken(userDto.id, tokens.refreshToken)
+        await tokenService.saveToken(userDto._id, tokens.refreshToken)
 
         return {...tokens, user: userDto}
     }

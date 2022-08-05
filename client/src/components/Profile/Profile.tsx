@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faBriefcase, faMagnifyingGlass, faFireFlameCurved, faUser } from "@fortawesome/free-solid-svg-icons"
-import { useEffect, useState } from "react"
+import { faBriefcase, faMagnifyingGlass, faFireFlameCurved, faUser, faArrowUpRightFromSquare, faAngleRight } from "@fortawesome/free-solid-svg-icons"
+import { useState } from "react"
 import { logoutThunk } from "../../redux/authReducer"
 import { AppStateType } from "../../redux/reduxStore"
 import { updateUserThunk } from "../../redux/usersReducer"
@@ -14,8 +14,6 @@ const Profile = () => {
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
 
     const [currentDistanceSetting, setCurrentDistanceSetting] = useState(currentUser.partnerSettings.distance.toString())
-
-    //dispatch(updateUserThunk({currentUser, inputName: 'distance', changedData: 90, innerObjectName: 'partnerSettings'}) as any)
 
     // objectName for inner object in user object if it is
     const submitSettings = (inputName: string, changedData: string | number, innerObjectName?: string) => { 
@@ -46,23 +44,25 @@ const Profile = () => {
                             Account Settings
                         </div>
                         <div className="tinder__settings-group-items">
-                            <div className="tinder__settings-group-item">
+                            <div className="tinder__settings-group-item tinder__settings-group-item--pointer">
                                 <div className="tinder__settings-group-item-descr">
                                     <div className="tinder__settings-group-item-descr-title">
                                         Email
                                     </div>
                                     <div className="tinder__settings-group-item-descr-setting">
                                         {currentUser.email}
+                                        <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                                     </div>
                                 </div>
                             </div>
-                            <div className="tinder__settings-group-item">
+                            <div className="tinder__settings-group-item tinder__settings-group-item--pointer">
                                 <div className="tinder__settings-group-item-descr">
                                     <div className="tinder__settings-group-item-descr-title">
                                         Name
                                     </div>
                                     <div className="tinder__settings-group-item-descr-setting">
                                         {currentUser.name}
+                                        <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                                     </div>
                                 </div>
                             </div>
@@ -73,16 +73,28 @@ const Profile = () => {
                     </div>
                     <div className="tinder__settings-group">
                         <div className="tinder__settings-group-title">
-                        Find Settings
+                            Find Settings
                         </div>
                         <div className="tinder__settings-group-items">
-                            <div className="tinder__settings-group-item">
+                            <div className="tinder__settings-group-item tinder__settings-group-item--pointer">
                                 <div className="tinder__settings-group-item-descr">
                                     <div className="tinder__settings-group-item-descr-title">
                                         Place
                                     </div>
                                     <div className="tinder__settings-group-item-descr-setting">
                                         {currentUser.partnerSettings.place}
+                                        <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                                <div className="tinder__settings-group-item-descr">
+                                    <div className="tinder__settings-group-item-descr-title">
+                                        Interested in
+                                    </div>
+                                    <div className="tinder__settings-group-item-descr-setting">
+                                        {currentUser.partnerSettings.preferSex}
+                                        <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                                     </div>
                                 </div>
                             </div>
@@ -98,11 +110,13 @@ const Profile = () => {
                                 <div className="tinder__settings-group-item-setting">
                                     <div className="tinder__settings-group-item-setting-change">
                                         <input 
+                                            className="tinder__settings-group-item-setting-change-input"
                                             value={currentDistanceSetting}
                                             onChange={(e) => setCurrentDistanceSetting(e.target.value)}
                                             onBlur={(e) => submitSettings('distance', e.target.value, 'partnerSettings')}
-                                            className="tinder__settings-group-item-setting-change-input" 
-                                            type="text"
+                                            type="range" 
+                                            min="5" 
+                                            max="100"
                                         />
                                     </div>
                                     <div className="tinder__settings-group-item-setting-descr">
@@ -114,6 +128,70 @@ const Profile = () => {
                         <div className="tinder__settings-group-descr">
                             When the local profiles are over, you will be able to 
                             switch to the Global Mode for dating people from all over the world.
+                        </div>
+                    </div>
+                    <div className="tinder__settings-group">
+                        <div className="tinder__settings-group-title">
+                            Internet account
+                        </div>
+                        <div className="tinder__settings-group-items">
+                            <div className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                                <div className="tinder__settings-group-item-descr">
+                                    <div className="tinder__settings-group-item-descr-title">
+                                        Nickname
+                                    </div>
+                                    <div className="tinder__settings-group-item-descr-setting">
+                                        {currentUser.nickname}
+                                        <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="tinder__settings-group-descr">
+                            Create a username, share it and start searching for couples on Tinder around the world.
+                        </div>
+                    </div>
+                    <div className="tinder__settings-group">
+                        <div className="tinder__settings-group-title">
+                            Safety Tips
+                        </div>
+                        <div className="tinder__settings-group-items">
+                            <div className="tinder__settings-group-item tinder__settings-group-item--link">
+                                <Link to="/policy" className="tinder__settings-group-item-link">
+                                    <div className="tinder__settings-group-item-descr">
+                                        <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
+                                            Community Rules
+                                        </div>
+                                        <div className="tinder__settings-group-item-descr-setting">
+                                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="tinder__settings-group-item-descr-setting-icon" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="tinder__settings-group-item tinder__settings-group-item--link">
+                                <Link to="/policy" className="tinder__settings-group-item-link">
+                                    <div className="tinder__settings-group-item-descr">
+                                        <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
+                                            Security and Policy Development Center
+                                        </div>
+                                        <div className="tinder__settings-group-item-descr-setting">
+                                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="tinder__settings-group-item-descr-setting-icon" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
+                            <div className="tinder__settings-group-item tinder__settings-group-item--link">
+                                <Link to="/policy" className="tinder__settings-group-item-link">
+                                    <div className="tinder__settings-group-item-descr">
+                                        <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
+                                            Safety Tips
+                                        </div>
+                                        <div className="tinder__settings-group-item-descr-setting">
+                                            <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="tinder__settings-group-item-descr-setting-icon" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
                     </div>
                     <div className="tinder__settings-group">

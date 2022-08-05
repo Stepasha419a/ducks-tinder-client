@@ -1,7 +1,8 @@
 export interface IUser {
-    id: string
+    _id: string
     email: string
     name: string
+    nickname: string
     age: number
     sex: 'male' | 'female'
     isActivated: boolean
@@ -18,9 +19,10 @@ export interface IUser {
 }
 
 export interface IUserUnrequired {
-    _id: string // _ID because server required _id value as id value equals
+    _id: string
     email?: string
     name?: string
+    nickname?: string
     age?: number
     sex?: 'male' | 'female'
     isActivated?: boolean
@@ -40,7 +42,7 @@ export const makeUserObject = (args: {currentUser: IUser | any, inputName: strin
     const {currentUser, inputName, changedData, innerObjectName} = args
     
     if(innerObjectName) {
-        return {_id: currentUser.id, [innerObjectName]: {...currentUser[innerObjectName] as IUser, [inputName]: changedData}}
+        return {_id: currentUser._id, [innerObjectName]: {...currentUser[innerObjectName] as IUser, [inputName]: changedData}}
     }
-    return {_id: currentUser.id, [inputName]: changedData}
+    return {_id: currentUser._id, [inputName]: changedData}
 }

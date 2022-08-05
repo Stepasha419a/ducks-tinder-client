@@ -1,19 +1,10 @@
 import { partnerSettings } from "../models/user-model"
 
-export interface UserModelInterface {
-    email: string
-    name: string
-    _id: string
-    isActivated: boolean
-    age: number
-    sex: string
-    partnerSettings: partnerSettings
-}
-
 export interface UserDtoInterface {
     email: string
     name: string
-    id: string
+    nickname: string
+    _id: string
     isActivated: boolean
     age: number
     sex: string
@@ -23,16 +14,18 @@ export interface UserDtoInterface {
 export default class UserDto { // Data transfer object
     email
     name
-    id
+    nickname
+    _id
     isActivated
     age
     sex
     partnerSettings
 
-    constructor(model: UserModelInterface) {
+    constructor(model: UserDtoInterface) {
         this.email = model.email
         this.name = model.name
-        this.id = model._id
+        this.nickname = model.nickname
+        this._id = model._id
         this.isActivated = model.isActivated
         this.age = model.age
         this.sex = model.sex

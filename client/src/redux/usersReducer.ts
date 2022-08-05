@@ -45,7 +45,6 @@ export const updateUserThunk = createAsyncThunk(
             const user = makeUserObject(args)
 
             const response = await usersAPI.updateUser(user)
-            console.log(`response: ${response.data}`)
             
             dispatch(setCurrentUser(response.data))
         } catch (error: any) {
