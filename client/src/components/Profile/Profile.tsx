@@ -157,7 +157,7 @@ const Profile = () => {
                         </div>
                         <div className="tinder__settings-group-items">
                             <div className="tinder__settings-group-item tinder__settings-group-item--link">
-                                <Link to="/policy" className="tinder__settings-group-item-link">
+                                <Link to="/policy" className="tinder__settings-group-item-link" target="_blank" >
                                     <div className="tinder__settings-group-item-descr">
                                         <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
                                             Community Rules
@@ -169,7 +169,7 @@ const Profile = () => {
                                 </Link>
                             </div>
                             <div className="tinder__settings-group-item tinder__settings-group-item--link">
-                                <Link to="/policy" className="tinder__settings-group-item-link">
+                                <Link to="/policy" className="tinder__settings-group-item-link" target="_blank" >
                                     <div className="tinder__settings-group-item-descr">
                                         <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
                                             Security and Policy Development Center
@@ -181,7 +181,7 @@ const Profile = () => {
                                 </Link>
                             </div>
                             <div className="tinder__settings-group-item tinder__settings-group-item--link">
-                                <Link to="/policy" className="tinder__settings-group-item-link">
+                                <Link to="/policy" className="tinder__settings-group-item-link" target="_blank" >
                                     <div className="tinder__settings-group-item-descr">
                                         <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
                                             Safety Tips

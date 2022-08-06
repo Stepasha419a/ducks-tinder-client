@@ -11,6 +11,7 @@ import RegistrationForm from './components/Forms/Registration';
 import Profile from './components/Profile/Profile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
+import Policy from './components/Policy/Policy';
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Tinder />}/>
             <Route path="profile" element={<Profile />}/>
+            <Route path="policy" element={<Policy />}/>
             <Route path="*" element={<div>404 NOT FOUND</div>} />
           </Route>
         
