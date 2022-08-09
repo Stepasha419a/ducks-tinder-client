@@ -1,0 +1,45 @@
+import { useEffect, useState } from "react"
+import { IUser } from "../../models/IUser"
+
+interface ProfileSettingPropsInterface {
+    currentUser: IUser
+    setIsSetting: (isSetting: boolean) => void
+    submitSettings: (inputName: string, changedData: string | number, innerObjectName?: string) => void
+    formName: string
+    settingInputName: string
+    innerObjectName: string
+    setInnerObjectName: (innerObjectName: string) => void
+}
+// When u call innerObjectName input so currentUser[settingInputName] after that is not available, maybe because of useState startment argument
+const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, setIsSetting, submitSettings, formName, settingInputName, innerObjectName, setInnerObjectName}) => {
+    const [inputValue, setInputValue] = useState('')
+
+    useEffect(() => { //@ts-ignore
+        setInputValue(innerObjectName ? currentUser[innerObjectName][settingInputName] : currentUser[settingInputName])
+    }, [innerObjectName, currentUser, settingInputName, setInnerObjectName])
+
+    const cancelHandler = () => {
+        setInnerObjectName('')
+        setIsSetting(false)
+    }
+    
+    return (
+        <div className="tinder__content-setting">
+            <div className="tinder__content-setting-name">
+                {formName}
+            </div>
+            <div className="tinder__content-setting-change">
+                <input onChange={(e) => setInputValue(e.target.value)} value={inputValue} type="text" className="tinder__content-setting-change-input"/>
+            </div>
+            <div className="tinder__content-setting-descr">Your {formName}</div>
+            <button onClick={() => cancelHandler()} className="tinder__content-setting-submit-button tinder__content-setting-submit-button--margin-bottom">
+                Cancel
+            </button>
+            <button onClick={() => submitSettings(settingInputName, inputValue, innerObjectName)} className="tinder__content-setting-submit-button">
+                Update my {formName}
+            </button>
+        </div>
+    )
+}
+
+export default ProfileSetting
