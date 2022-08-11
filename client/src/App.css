@@ -274,7 +274,8 @@ textarea:-ms-input-placeholder { color: #999999; }
   transition: .2s;
 }
 
-.tinder__settings-group-item:hover .tinder__settings-group-item-descr-setting-open-icon{
+.tinder__settings-group-item:hover .tinder__settings-group-item-descr-setting-open-icon,
+.tinder__settings-group-item--pointer:hover .tinder__settings-group-item-descr-setting{
   color: #fd267a !important;
 }
 
@@ -307,6 +308,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__settings-group-item-descr-setting-icon{
   color: #505965;
 }
+.tinder__settings-group-item-descr-setting,
 .tinder__settings-group-item-descr-setting-icon{
   transition: .2s;
 }
@@ -370,6 +372,33 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__content-setting-change-input:focus{
   border-color: rgb(214, 214, 214);
   color: #000;
+}
+
+.tinder__content-setting-change-input-wrapper{
+  position: relative;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid rgb(214, 214, 214);
+  padding: 16px;
+  cursor: pointer;
+}
+
+.tinder__content-setting-change-input-radio {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.tinder__content-setting-change-input-radio + label{
+  cursor: pointer;
+}
+
+.tinder__content-setting-change-checked{
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  color: #ff4458;
+  width: 20px;
+  height: 20px;
 }
 
 .tinder__content-setting-descr{
