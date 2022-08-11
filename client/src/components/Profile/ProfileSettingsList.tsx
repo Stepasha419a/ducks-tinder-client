@@ -65,6 +65,17 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
+                    <div onClick={() => setSettingInput('Sex', 'sex')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                        <div className="tinder__settings-group-item-descr">
+                            <div className="tinder__settings-group-item-descr-title">
+                                Sex
+                            </div>
+                            <div className="tinder__settings-group-item-descr-setting">
+                                {currentUser.sex}
+                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="tinder__settings-group-descr">
                     Verified email adress helps to protect your account

@@ -31,7 +31,7 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
                 {formName}
             </div>
             <div className="tinder__content-setting-change">
-                {settingInputName === 'preferSex' && innerObjectName === 'partnerSettings' ?
+                {(settingInputName === 'preferSex' && innerObjectName === 'partnerSettings') || (settingInputName === 'sex' && innerObjectName === '') ?
 
                     <div>
                         <div onClick={() => setInputValue('male')} className={"tinder__content-setting-change-input-wrapper " + (inputValue === 'male' ? "tinder__content-setting-change-input-wrapper--active" : "") }>
