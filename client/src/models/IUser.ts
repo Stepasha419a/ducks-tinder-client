@@ -38,7 +38,7 @@ export interface IUserUnrequired {
     }
 }
 
-export const makeUserObject = (args: {currentUser: IUser | any, inputName: string, changedData: String | Number, innerObjectName?: string}) => {
+export const makeUserObject = (args: {currentUser: IUser | any, inputName: string, changedData: String | Number | {from: number, to: number}, innerObjectName?: string}) => {
     const {currentUser, inputName, changedData, innerObjectName} = args
     
     if(innerObjectName) {

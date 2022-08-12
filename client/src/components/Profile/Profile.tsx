@@ -23,7 +23,7 @@ const Profile = () => {
 
 
     // objectName for inner object in user object if it is
-    const submitSettings = (inputName: string, changedData: string | number, innerObjectName?: string) => { 
+    const submitSettings = (inputName: string, changedData: string | number | {from: number, to: number}, innerObjectName?: string) => { 
         dispatch(updateUserThunk({currentUser, inputName, changedData, innerObjectName}) as any)
         setIsSetting(false)
         setInnerObjectName('')

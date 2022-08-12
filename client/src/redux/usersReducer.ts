@@ -40,7 +40,7 @@ export const fetchUsersThunk = createAsyncThunk(
 
 export const updateUserThunk = createAsyncThunk(
     'users/updateUser',
-    async (args: {currentUser: IUser, inputName: string, changedData: String | Number, innerObjectName?: string}, {rejectWithValue, dispatch}) => {
+    async (args: {currentUser: IUser, inputName: string, changedData: String | Number | {from: number, to: number}, innerObjectName?: string}, {rejectWithValue, dispatch}) => {
         try {
             const user = makeUserObject(args)
 

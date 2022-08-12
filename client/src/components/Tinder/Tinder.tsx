@@ -1,7 +1,4 @@
 import photo from '../../assets/images/photos/1.jpg'
-import { useSelector } from 'react-redux'
-import { AppStateType } from '../../redux/reduxStore'
-import { IUser } from '../../models/IUser'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
@@ -21,8 +18,6 @@ type DialogType = {
 }
 
 const Tinder = () => {
-
-    const user = useSelector((state: AppStateType) => state.authPage.user as IUser )
 
     const [isPairsOpened, setIsPairsOpened] = useState(true)
 

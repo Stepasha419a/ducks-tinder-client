@@ -1,5 +1,7 @@
 import { faAngleRight, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react"
+import InputRange from "react-input-range"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { IUser } from "../../models/IUser"
@@ -10,7 +12,7 @@ interface ProfileSettingsListPropsInterface{
     setIsSetting: (isSetting: boolean) => void
     currentDistanceSetting: number | string
     setCurrentDistanceSetting: (currentDistanceSetting: string) => void
-    submitSettings: (inputName: string, changedData: string | number, innerObjectName?: string) => void
+    submitSettings: (inputName: string, changedData: string | number | {from: number, to: number}, innerObjectName?: string) => void
     setFormName: (formName: string) => void
     setSettingInputName: (inputName: string) => void
     setInnerObjectName: (innerObjectName: string) => void
@@ -28,6 +30,8 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
     }) => {
 
     const dispatch = useDispatch()
+    
+    const [ageSetting, setAgeSetting] = useState({min: currentUser.partnerSettings.age.from, max: currentUser.partnerSettings.age.to})
 
     const setSettingInput = (formName: string, inputName: string, innerObjectName?: string) => {
         setIsSetting(true)
@@ -97,17 +101,6 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Interested in', 'preferSex', 'partnerSettings')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
-                                Interested in
-                            </div>
-                            <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.partnerSettings.preferSex}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
-                            </div>
-                        </div>
-                    </div>
                     <div className="tinder__settings-group-item">
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">
@@ -131,6 +124,41 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                             <div className="tinder__settings-group-item-setting-descr">
                                 Show people only in this range
+                            </div>
+                        </div>
+                    </div>
+                    <div onClick={() => setSettingInput('Interested in', 'preferSex', 'partnerSettings')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                        <div className="tinder__settings-group-item-descr">
+                            <div className="tinder__settings-group-item-descr-title">
+                                Interested in
+                            </div>
+                            <div className="tinder__settings-group-item-descr-setting">
+                                {currentUser.partnerSettings.preferSex}
+                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="tinder__settings-group-item">
+                        <div className="tinder__settings-group-item-descr">
+                            <div className="tinder__settings-group-item-descr-title">
+                                Age
+                            </div>
+                            <div className="tinder__settings-group-item-descr-setting">
+                                from {ageSetting.min} to {ageSetting.max}
+                            </div>
+                        </div>
+                        <div className="tinder__settings-group-item-setting">
+                            <div className="tinder__settings-group-item-setting-change-slider">
+                                <InputRange
+                                    step={1}
+                                    draggableTrack={false}
+                                    allowSameValues={false}
+                                    minValue={18}
+                                    maxValue={100}
+                                    value={ageSetting}
+                                    onChange={setAgeSetting as any}
+                                    onChangeComplete={() => submitSettings('age', {from: ageSetting.min, to: ageSetting.max}, 'partnerSettings' )}
+                                />
                             </div>
                         </div>
                     </div>
