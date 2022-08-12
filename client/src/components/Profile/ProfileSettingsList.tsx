@@ -12,6 +12,8 @@ interface ProfileSettingsListPropsInterface{
     setIsSetting: (isSetting: boolean) => void
     currentDistanceSetting: number | string
     setCurrentDistanceSetting: (currentDistanceSetting: string) => void
+    currentAgeSetting: number | string
+    setCurrentAgeSetting: (currentDistanceSetting: string) => void
     submitSettings: (inputName: string, changedData: string | number | {from: number, to: number}, innerObjectName?: string) => void
     setFormName: (formName: string) => void
     setSettingInputName: (inputName: string) => void
@@ -22,7 +24,9 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
         currentUser, 
         setIsSetting, 
         currentDistanceSetting, 
-        setCurrentDistanceSetting, 
+        setCurrentDistanceSetting,
+        currentAgeSetting,
+        setCurrentAgeSetting,
         submitSettings,
         setFormName,
         setSettingInputName, 
@@ -80,6 +84,32 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
+                    <div className="tinder__settings-group-item">
+                        <div className="tinder__settings-group-item-descr">
+                            <div className="tinder__settings-group-item-descr-title">
+                                Age
+                            </div>
+                            <div className="tinder__settings-group-item-descr-setting">
+                                {currentAgeSetting} years old
+                            </div>
+                        </div>
+                        <div className="tinder__settings-group-item-setting">
+                            <div className="tinder__settings-group-item-setting-change">
+                                <input 
+                                    className="tinder__settings-group-item-setting-change-input"
+                                    value={currentAgeSetting}
+                                    onChange={(e) => setCurrentAgeSetting(e.target.value)}
+                                    onBlur={(e) => submitSettings('age', e.target.value)}
+                                    type="range" 
+                                    min="18" 
+                                    max="100"
+                                />
+                            </div>
+                            <div className="tinder__settings-group-item-setting-descr">
+                                Show people only in this range
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="tinder__settings-group-descr">
                     Verified email adress helps to protect your account
@@ -107,7 +137,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Distance
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.partnerSettings.distance} км.
+                                {currentDistanceSetting} км.
                             </div>
                         </div>
                         <div className="tinder__settings-group-item-setting">
@@ -141,7 +171,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                     <div className="tinder__settings-group-item">
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">
-                                Age
+                                Partner age
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
                                 from {ageSetting.min} to {ageSetting.max}
