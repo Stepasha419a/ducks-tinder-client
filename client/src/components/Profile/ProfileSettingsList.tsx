@@ -10,10 +10,10 @@ import { logoutThunk } from "../../redux/authReducer"
 interface ProfileSettingsListPropsInterface{
     currentUser: IUser
     setIsSetting: (isSetting: boolean) => void
-    currentDistanceSetting: number | string
-    setCurrentDistanceSetting: (currentDistanceSetting: string) => void
-    currentAgeSetting: number | string
-    setCurrentAgeSetting: (currentDistanceSetting: string) => void
+    currentDistanceSetting: number
+    setCurrentDistanceSetting: (currentDistanceSetting: number) => void
+    currentAgeSetting: number
+    setCurrentAgeSetting: (currentAgeSetting: number) => void
     submitSettings: (inputName: string, changedData: string | number | {from: number, to: number}, innerObjectName?: string) => void
     setFormName: (formName: string) => void
     setSettingInputName: (inputName: string) => void
@@ -94,15 +94,16 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                         <div className="tinder__settings-group-item-setting">
-                            <div className="tinder__settings-group-item-setting-change">
-                                <input 
-                                    className="tinder__settings-group-item-setting-change-input"
+                            <div className="tinder__settings-group-item-setting-change-slider">
+                                <InputRange
+                                    step={1}
+                                    draggableTrack={false}
+                                    allowSameValues={false}
+                                    minValue={18}
+                                    maxValue={100}
                                     value={currentAgeSetting}
-                                    onChange={(e) => setCurrentAgeSetting(e.target.value)}
-                                    onBlur={(e) => submitSettings('age', e.target.value)}
-                                    type="range" 
-                                    min="18" 
-                                    max="100"
+                                    onChange={age => setCurrentAgeSetting(age as number)}
+                                    onChangeComplete={() => submitSettings('age', currentAgeSetting)}
                                 />
                             </div>
                             <div className="tinder__settings-group-item-setting-descr">
@@ -141,15 +142,16 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                         <div className="tinder__settings-group-item-setting">
-                            <div className="tinder__settings-group-item-setting-change">
-                                <input 
-                                    className="tinder__settings-group-item-setting-change-input"
+                            <div className="tinder__settings-group-item-setting-change-slider">
+                                <InputRange
+                                    step={1}
+                                    draggableTrack={false}
+                                    allowSameValues={false}
+                                    minValue={18}
+                                    maxValue={100}
                                     value={currentDistanceSetting}
-                                    onChange={(e) => setCurrentDistanceSetting(e.target.value)}
-                                    onBlur={(e) => submitSettings('distance', e.target.value, 'partnerSettings')}
-                                    type="range" 
-                                    min="5" 
-                                    max="100"
+                                    onChange={dist => setCurrentDistanceSetting(dist as number)}
+                                    onChangeComplete={() => submitSettings('distance', currentDistanceSetting, 'partnerSettings')}
                                 />
                             </div>
                             <div className="tinder__settings-group-item-setting-descr">
