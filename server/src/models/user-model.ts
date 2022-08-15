@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 export interface partnerSettings{
     place: String
     distance: Number
+    usersOnlyInDistance: Boolean
     preferSex: 'male' | 'female' | 'unknown'
     age: {
         from: Number

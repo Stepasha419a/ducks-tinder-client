@@ -14,7 +14,7 @@ interface ProfileSettingsListPropsInterface{
     setCurrentDistanceSetting: (currentDistanceSetting: number) => void
     currentAgeSetting: number
     setCurrentAgeSetting: (currentAgeSetting: number) => void
-    submitSettings: (inputName: string, changedData: string | number | {from: number, to: number}, innerObjectName?: string) => void
+    submitSettings: (inputName: string, changedData: string | number | boolean | {from: number, to: number}, innerObjectName?: string) => void
     setFormName: (formName: string) => void
     setSettingInputName: (inputName: string) => void
     setInnerObjectName: (innerObjectName: string) => void
@@ -158,8 +158,20 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                     onChangeComplete={() => submitSettings('distance', currentDistanceSetting, 'partnerSettings')}
                                 />
                             </div>
-                            <div className="tinder__settings-group-item-setting-descr">
+                            <div className="tinder__settings-group-item-setting-descr tinder__settings-group-item-setting-descr--relative">
                                 Show people only in this range
+
+                                <label className="tinder__settings-group-item-setting-checkbox">
+                                    <input 
+                                        checked={currentUser.partnerSettings.usersOnlyInDistance}
+                                        onChange={(e) => submitSettings('usersOnlyInDistance', e.target.checked, 'partnerSettings')} 
+                                        type="checkbox" 
+                                        className="tinder__settings-group-item-setting-checkbox-input"
+                                    />
+                                    <div className="tinder__settings-group-item-setting-checkbox-div">
+
+                                    </div>
+                                </label>
                             </div>
                         </div>
                     </div>

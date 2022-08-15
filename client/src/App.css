@@ -401,11 +401,6 @@ textarea:-ms-input-placeholder { color: #999999; }
   height: 20px;
 }
 
-
-
-
-
-
 .tinder__settings-group-item-setting-change-slider {
   margin: 20px 15px 30px;
 }
@@ -461,12 +456,65 @@ textarea:-ms-input-placeholder { color: #999999; }
   left: 25%;
 }
 
+.tinder__settings-group-item-setting-descr--relative{
+  position: relative;
+}
 
+.tinder__settings-group-item-setting-checkbox{
+  position: absolute;
+  top: -4px;
+  right: 0;
 
+  --width: 48px;
+  --height: 28px;
+  --unactive-color: rgb(121, 121, 121);
+  --active-color: #ff4458;
+  --box-color: #ffffff;
+  --offset: 20px;
+  --duration: 0.3s
+}
 
+.tinder__settings-group-item-setting-checkbox:hover{
+  filter: brightness(0.9);
+}
 
+.tinder__settings-group-item-setting-checkbox-div{
+  position: relative;
+  width: var(--width);
+  height: var(--height);
+  border-radius: var(--width);
+  background-color: var(--unactive-color);
+  cursor: pointer;
+  transition: var(--duration);
+}
 
+.tinder__settings-group-item-setting-checkbox-input{
+  display: none;
+}
 
+.tinder__settings-group-item-setting-checkbox-input:checked ~ .tinder__settings-group-item-setting-checkbox-div{
+  background-color: var(--active-color);
+}
+.tinder__settings-group-item-setting-checkbox-input:checked ~ .tinder__settings-group-item-setting-checkbox-div::before{
+  left: calc(var(--width) - var(--height) + var(--offset));
+}
+
+.tinder__settings-group-item-setting-checkbox-div::before{
+  --width: 48px;
+  --height: 28px;
+  --box-color: #ffffff;
+  --offset: 2px;
+  
+  content: '';
+  position: absolute;
+  top: var(--offset);
+  left: var(--offset);
+  width: calc(var(--height) - 2 * var(--offset));
+  height: calc(var(--height) - 2 * var(--offset));
+  background-color: var(--box-color);
+  border-radius: 50%;
+  transition: var(--duration);
+}
 
 .tinder__content-setting-descr{
   font-size: 14px;

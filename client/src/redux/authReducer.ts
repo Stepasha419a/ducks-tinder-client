@@ -45,7 +45,7 @@ export const registerThunk = createAsyncThunk(
     "auth/registerUser",
     async (params: UserAuthParams, {rejectWithValue, dispatch}) => {
         try {
-            const response = await authAPI.registration(params.email, params.name, params.password,)
+            const response = await authAPI.registration(params.email, params.name, params.password)
             localStorage.setItem('token', response.data.accessToken)
 
             setAuthData(response.data.user, dispatch)
