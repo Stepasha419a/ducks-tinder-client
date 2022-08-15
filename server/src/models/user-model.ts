@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 export interface partnerSettings{
     place: String
     distance: Number
-    preferSex: 'male' | 'female'
+    preferSex: 'male' | 'female' | 'unknown'
     age: {
         from: Number
         to: Number
-    }
+    } | 'unknown'
 }
 
 const UserSchema = new mongoose.Schema({

@@ -22,6 +22,8 @@ class AuthService{
         const hashPassword = await bcrypt.hash(password, 7)
         const activationLink = v4()
 
+        if(!partnerSettings) partnerSettings = {place: 'unknown', distance: 0, preferSex: 'unknown', age: {from: 18, to: 24}}
+
         const user = await UserModel.create({email, name, nickname, password: hashPassword, age, sex, partnerSettings, activationLink})
         await sendMail(email, `${(process.env.API_URL)}/api/activate/${activationLink}`, name)
             .catch(() => {

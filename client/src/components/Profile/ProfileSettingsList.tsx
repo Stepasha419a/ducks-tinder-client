@@ -35,7 +35,11 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
 
     const dispatch = useDispatch()
     
-    const [ageSetting, setAgeSetting] = useState({min: currentUser.partnerSettings.age.from, max: currentUser.partnerSettings.age.to})
+    const [ageSetting, setAgeSetting] = useState(currentUser.partnerSettings ? 
+        {min: currentUser.partnerSettings.age.from, max: currentUser.partnerSettings.age.to}
+        :
+        {min: 1, max: 6}
+        )
 
     const setSettingInput = (formName: string, inputName: string, innerObjectName?: string) => {
         setIsSetting(true)
@@ -79,7 +83,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Sex
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.sex}
+                                {currentUser.sex || 'unknown'}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
@@ -90,7 +94,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Age
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentAgeSetting} years old
+                                {currentAgeSetting || 'unknown'} years old
                             </div>
                         </div>
                         <div className="tinder__settings-group-item-setting">
@@ -127,7 +131,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Place
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.partnerSettings.place}
+                                {currentUser.partnerSettings ? currentUser.partnerSettings.place : 'unknown'}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
@@ -138,7 +142,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Distance
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentDistanceSetting} км.
+                                {currentDistanceSetting || 'unknown'} км.
                             </div>
                         </div>
                         <div className="tinder__settings-group-item-setting">
@@ -165,7 +169,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Interested in
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.partnerSettings.preferSex}
+                                {currentUser.partnerSettings ? currentUser.partnerSettings.preferSex : 'unknown'}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
@@ -211,7 +215,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Nickname
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.nickname}
+                                {currentUser.nickname || 'unknown'}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
