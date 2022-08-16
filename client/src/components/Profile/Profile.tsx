@@ -8,6 +8,7 @@ import { updateUserThunk } from "../../redux/usersReducer"
 import ProfileUserImage from "./ProfileUserImage"
 import ProfileSettingsList from "./ProfileSettingsList"
 import ProfileSetting from "./ProfileSetting"
+import ProfileUserImageSetting from "./ProfileUserImageSetting"
 
 const Profile = () => {
 
@@ -17,7 +18,8 @@ const Profile = () => {
 
     const [currentDistanceSetting, setCurrentDistanceSetting] = useState(currentUser.partnerSettings ? currentUser.partnerSettings.distance : 0)
     const [currentAgeSetting, setCurrentAgeSetting] = useState(currentUser.age ? currentUser.age : 0)
-    const [isSetting, setIsSetting] = useState(false)
+    const [isUserInfoSetting, setIsUserInfoSetting] = useState(false)
+    const [isImageSetting, setIsImageSetting] = useState(true)
     const [formName, setFormName] = useState('') // name of the title in ProfileSetting
     const [settingInputName, setSettingInputName] = useState('')
     const [innerObjectName, setInnerObjectName] = useState('')
@@ -27,7 +29,7 @@ const Profile = () => {
     const submitSettings = (inputName: string, changedData: string | number | boolean | {from: number, to: number}, innerObjectName?: string) => { 
         console.log(changedData)
         dispatch(updateUserThunk({currentUser, inputName, changedData, innerObjectName}) as any)
-        setIsSetting(false)
+        setIsUserInfoSetting(false)
         setInnerObjectName('')
     }
 
@@ -49,10 +51,10 @@ const Profile = () => {
                         </Link>
                     </div>
                 </div>
-                {isSetting ? 
+                {isUserInfoSetting ? 
                     <ProfileSetting
                         currentUser={currentUser}
-                        setIsSetting={setIsSetting}
+                        setIsUserInfoSetting={setIsUserInfoSetting}
                         submitSettings={submitSettings}
                         formName={formName}
                         settingInputName={settingInputName}
@@ -62,7 +64,7 @@ const Profile = () => {
                 :
                     <ProfileSettingsList 
                         currentUser={currentUser}
-                        setIsSetting={setIsSetting}
+                        setIsUserInfoSetting={setIsUserInfoSetting}
                         currentDistanceSetting={currentDistanceSetting}
                         setCurrentDistanceSetting={setCurrentDistanceSetting}
                         currentAgeSetting={currentAgeSetting}
@@ -75,7 +77,16 @@ const Profile = () => {
                 }
             </aside>
             <div className="tinder__content">
-                <ProfileUserImage currentUser={currentUser}/>
+                <div className="tinder__content-search tinder__content-search--profile">
+                {isImageSetting ?
+                    <ProfileUserImageSetting />
+                :
+                    <ProfileUserImage 
+                        currentUser={currentUser}
+                        setIsImageSetting={setIsImageSetting}
+                    />
+                }
+                </div>
             </div>
         </div>
     )

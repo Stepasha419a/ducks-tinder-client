@@ -9,7 +9,7 @@ import { logoutThunk } from "../../redux/authReducer"
 
 interface ProfileSettingsListPropsInterface{
     currentUser: IUser
-    setIsSetting: (isSetting: boolean) => void
+    setIsUserInfoSetting: (isSetting: boolean) => void
     currentDistanceSetting: number
     setCurrentDistanceSetting: (currentDistanceSetting: number) => void
     currentAgeSetting: number
@@ -22,7 +22,7 @@ interface ProfileSettingsListPropsInterface{
 
 const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
         currentUser, 
-        setIsSetting, 
+        setIsUserInfoSetting, 
         currentDistanceSetting, 
         setCurrentDistanceSetting,
         currentAgeSetting,
@@ -42,7 +42,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
         )
 
     const setSettingInput = (formName: string, inputName: string, innerObjectName?: string) => {
-        setIsSetting(true)
+        setIsUserInfoSetting(true)
         setFormName(formName)
         setSettingInputName(inputName)
         innerObjectName && setInnerObjectName(innerObjectName)
@@ -109,9 +109,6 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                     onChange={age => setCurrentAgeSetting(age as number)}
                                     onChangeComplete={() => submitSettings('age', currentAgeSetting)}
                                 />
-                            </div>
-                            <div className="tinder__settings-group-item-setting-descr">
-                                Show people only in this range
                             </div>
                         </div>
                     </div>

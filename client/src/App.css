@@ -684,6 +684,8 @@ textarea:-ms-input-placeholder { color: #999999; }
   position: absolute;
   left: 15px;
   bottom: 19px;
+  cursor: pointer;
+  border: none;
 }
 
 .tinder__content-change-info-text{
@@ -711,19 +713,57 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 /* gradient animation end */
 
-.tinder__content-change-info a{
+.tinder__content-change-info{
   min-height: 47px;
   display: flex;
   text-decoration: none;
   color: #000;
 }
 
-.tinder__content-change-info a span{
+.tinder__content-change-info span{
   margin: auto;
 }
 
 .tinder__content-info-separator{
   border: 1px solid #0000001f
+}
+
+.tinder__content-change-btns{
+  display: flex;
+  height: 46px;
+  border-bottom: 1px solid #d4d8de;
+}
+
+.tinder__content-change-button{
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.tinder__content-change-button--active{
+  color: #d6002f;
+}
+
+.tinder__content-change-button--border{
+  border-right: 1px solid #d4d8de;
+}
+
+.tinder__content-change-images{
+  padding: 8px 4px;
+}
+
+.tinder__content-change-descr{
+  text-align: center;
+  padding: 0 16px;
+  margin: 10px 0 14px;
+}
+
+.tinder__content-change-save-btn{
+  border: none;
 }
 
 /* Authorization */

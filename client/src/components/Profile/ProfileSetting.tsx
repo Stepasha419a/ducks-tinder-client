@@ -5,7 +5,7 @@ import { IUser } from "../../models/IUser"
 
 interface ProfileSettingPropsInterface {
     currentUser: IUser
-    setIsSetting: (isSetting: boolean) => void
+    setIsUserInfoSetting: (isSetting: boolean) => void
     submitSettings: (inputName: string, changedData: string | number, innerObjectName?: string) => void
     formName: string
     settingInputName: string
@@ -13,7 +13,7 @@ interface ProfileSettingPropsInterface {
     setInnerObjectName: (innerObjectName: string) => void
 }
 // When u call innerObjectName input so currentUser[settingInputName] after that is not available, maybe because of useState startment argument
-const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, setIsSetting, submitSettings, formName, settingInputName, innerObjectName, setInnerObjectName}) => {
+const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, setIsUserInfoSetting, submitSettings, formName, settingInputName, innerObjectName, setInnerObjectName}) => {
     const [inputValue, setInputValue] = useState('')
 
     useEffect(() => { //@ts-ignore
@@ -22,7 +22,7 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
 
     const cancelHandler = () => {
         setInnerObjectName('')
-        setIsSetting(false)
+        setIsUserInfoSetting(false)
     }
     
     return (
