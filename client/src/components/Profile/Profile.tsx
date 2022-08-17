@@ -8,7 +8,7 @@ import { updateUserThunk } from "../../redux/usersReducer"
 import ProfileUserImage from "./ProfileUserImage"
 import ProfileSettingsList from "./ProfileSettingsList"
 import ProfileSetting from "./ProfileSetting"
-import ProfileUserImageSetting from "./ProfileUserImageSetting"
+import ProfileImageSetting from "./ProfileImageChange/ProfileImageSetting"
 
 const Profile = () => {
 
@@ -79,7 +79,9 @@ const Profile = () => {
             <div className="tinder__content">
                 <div className="tinder__content-search tinder__content-search--profile">
                 {isImageSetting ?
-                    <ProfileUserImageSetting />
+                    <ProfileImageSetting 
+                        setIsImageSetting={setIsImageSetting}
+                    />
                 :
                     <ProfileUserImage 
                         currentUser={currentUser}
