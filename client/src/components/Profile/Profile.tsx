@@ -27,7 +27,6 @@ const Profile = () => {
 
     // objectName for inner object in user object if it is
     const submitSettings = (inputName: string, changedData: string | number | boolean | {from: number, to: number}, innerObjectName?: string) => { 
-        console.log(changedData)
         dispatch(updateUserThunk({currentUser, inputName, changedData, innerObjectName}) as any)
         setIsUserInfoSetting(false)
         setInnerObjectName('')
@@ -81,6 +80,7 @@ const Profile = () => {
                 {isImageSetting ?
                     <ProfileImageSetting 
                         setIsImageSetting={setIsImageSetting}
+                        currentUser={currentUser}
                     />
                 :
                     <ProfileUserImage 

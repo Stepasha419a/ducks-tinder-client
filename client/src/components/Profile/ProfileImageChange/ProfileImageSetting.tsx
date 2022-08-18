@@ -1,13 +1,15 @@
 import { useState } from "react"
+import { IUser } from "../../../models/IUser"
 import ProfileChangeImage from "./ProfileChangeImage"
 import ProfilePreview from "./ProfilePreview"
 
 interface ProfileImageSettingPropsInterface{
     setIsImageSetting: (isImageSetting: boolean) => void
+    currentUser: IUser
 }
 
-const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({setIsImageSetting}) => {
-    const [isPreviewSetting, setIsPreviewSetting] = useState(false)
+const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({setIsImageSetting, currentUser}) => {
+    const [isPreviewSetting, setIsPreviewSetting] = useState(true)
 
     return(
         <div className="tinder__content-change">
@@ -17,7 +19,7 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({setIs
             </div>
             <div className="tinder__content-change-panel">
                 {isPreviewSetting ?
-                    <ProfilePreview />
+                    <ProfilePreview currentUser={currentUser}/>
                 :
                     <ProfileChangeImage setIsImageSetting={setIsImageSetting}/>
                 }
