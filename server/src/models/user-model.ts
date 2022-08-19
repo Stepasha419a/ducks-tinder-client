@@ -21,7 +21,8 @@ const UserSchema = new mongoose.Schema({
     activationLink: {type: String},
     age: {type: Number},
     sex: {type: String},
-    partnerSettings: {type: {} as partnerSettings}
+    partnerSettings: {type: {} as partnerSettings},
+    pictures: {type: [] as string[]}
 })
 
 export default mongoose.model('User', UserSchema)

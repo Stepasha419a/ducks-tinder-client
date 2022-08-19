@@ -46,6 +46,31 @@ class UserController{
             next(error)
         }
     }
+
+    async savePicture(req: any, res: any, next: NextFunction) {
+        try {
+            const { userId } = req.body
+            const pictureFile = req.files.file
+            const user = await userService.savePicture(userId, pictureFile)
+    
+            res.json(user)
+
+        } catch (error: any) {
+            next(error)
+        }
+    }
+
+    async deletePicture(req: any, res: any, next: NextFunction) {
+        try {
+            const { userId, pictureName } = req.body
+            const user = await userService.deletePicture(userId, pictureName)
+    
+            res.json(user)
+            
+        } catch (error: any) {
+            next(error)
+        }
+    }
 }
 
 export default new UserController()

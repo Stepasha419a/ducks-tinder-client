@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { UserDtoInterface } from "../dtos/userDto";
-import tokenModule from "../models/token-module";
+import tokenModel from "../models/token-model";
 
 class TokenService {
     generateTokens(payload: UserDtoInterface) {
@@ -13,17 +13,17 @@ class TokenService {
     }
 
     async saveToken(userId: string, refreshToken: string) {
-        const tokenData = await tokenModule.findOne({user: userId})
+        const tokenData = await tokenModel.findOne({user: userId})
         if(tokenData) {
             tokenData.refreshToken = refreshToken
             return tokenData.save()
         }
-        const token = await tokenModule.create({user: userId, refreshToken})
+        const token = await tokenModel.create({user: userId, refreshToken})
         return token
     }
 
     async removeToken(refreshToken: string) {
-        const tokenData = tokenModule.deleteOne({refreshToken})
+        const tokenData = tokenModel.deleteOne({refreshToken})
         return tokenData
     }
 
@@ -46,7 +46,7 @@ class TokenService {
     }
 
     async findToken(refreshToken: string) {
-        const tokenData = tokenModule.findOne({refreshToken})
+        const tokenData = tokenModel.findOne({refreshToken})
         //console.log(`findToken tokenData: ${tokenData}`)
         return tokenData
     }
