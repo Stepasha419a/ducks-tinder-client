@@ -19,7 +19,7 @@ const Profile = () => {
     const [currentDistanceSetting, setCurrentDistanceSetting] = useState(currentUser.partnerSettings ? currentUser.partnerSettings.distance : 0)
     const [currentAgeSetting, setCurrentAgeSetting] = useState(currentUser.age ? currentUser.age : 0)
     const [isUserInfoSetting, setIsUserInfoSetting] = useState(false)
-    const [isImageSetting, setIsImageSetting] = useState(true)
+    const [isImageSetting, setIsImageSetting] = useState(false)
     const [formName, setFormName] = useState('') // name of the title in ProfileSetting
     const [settingInputName, setSettingInputName] = useState('')
     const [innerObjectName, setInnerObjectName] = useState('')

@@ -899,6 +899,89 @@ textarea:-ms-input-placeholder { color: #999999; }
   margin-left: 8px;
 }
 
+.tinder__content-preview-full{
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+  font-size: 24px;
+  color: #FFFFFF;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: .3s;
+}
+
+.tinder__content-preview-full:hover,
+.tinder__content-full-preview-close:hover{
+  transform: scale(1.1);
+}
+
+.tinder__content-full-preview{
+  height: 100%;
+  background-color: #FFFFFF;
+}
+
+.tinder__content-full-preview-photo{
+  background-image: url(./assets/images/photos/1.jpg);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 125%;
+  height: 470px;
+  position: relative;
+}
+
+.tinder__content-full-preview-close{
+  position: absolute;
+  bottom: -20px;
+  right: 18px;
+  font-size: 44px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: .3s;
+}
+
+.tinder__content-full-preview-close-icon{
+  color:  rgba(224, 48, 48, 0.747);
+  background-color: #FFFFFF;
+  border-radius: 50%;
+}
+
+.tinder__content-full-preview-info{
+  color: #000;
+  padding: 10px 16px;
+}
+
+.tinder__content-full-preview-info-flex{
+  display: flex;
+  align-items: baseline;
+}
+
+.tinder__content-full-preview-info-name{
+  font-weight: 800;
+  font-size: 36px;
+}
+
+.tinder__content-full-preview-info-years{
+  font-size: 28px;
+  font-weight: 300;
+  margin-left: 8px;
+  display: inline;
+}
+
+.tinder__content-full-preview-info-sex{
+  display: flex;
+  align-items: baseline;
+  color: #505965;
+  font-size: 20px;
+  margin: 8px 0 0 4px;
+}
+
+.tinder__content-full-preview-info-sex-icon{
+  margin-right: 6px;
+  font-size: 16px;
+}
+
 /* Authorization */
 
 .auth-form{
