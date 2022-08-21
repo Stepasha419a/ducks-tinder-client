@@ -354,9 +354,15 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder__content-setting-name{
   border-bottom: 1px solid rgb(214, 214, 214);
-  padding: 25px 16px 10px;
+  padding: 20px 16px 10px;
   text-transform: uppercase;
   color: #505965;
+}
+
+.tinder__content-setting-name--error{
+  color: #c62c1e;
+  border-bottom: none;
+  padding: 25px 16px 0px;
 }
 
 .tinder__content-setting-change-input{
@@ -532,6 +538,11 @@ textarea:-ms-input-placeholder { color: #999999; }
   color: #c62c1e;
   text-align: left;
   font-size: 16px;
+}
+
+.tinder__content-setting-submit-button:disabled{
+  background-color: #f0f2f4;
+  cursor: not-allowed;
 }
 
 .tinder__content-setting-submit-button--margin-bottom{
