@@ -1,12 +1,21 @@
 import * as uuid from 'uuid'
 import * as path from 'path'
-import { unlink } from 'fs'
+import { unlink, mkdirSync } from 'fs'
 
 class FileService{
+    makeUserDir(userId: string) {
+        try {
+            mkdirSync(path.resolve('static', userId))
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     savePicture(file: any, userId: string) {
         try {
-            const fileName = `${userId}user` + uuid.v4() + '.jpg'
-            const filePath = path.resolve('static', fileName)
+            const fileName = uuid.v4() + '.jpg'
+            const filePath = path.resolve(`static\\${userId}`, fileName)
 
             file.mv(filePath)
 
@@ -17,9 +26,9 @@ class FileService{
         }
     }
 
-    deletePicture(fileName: string) {
+    deletePicture(fileName: string, userId: string) {
         try {
-            const filePath = path.resolve('static', fileName)
+            const filePath = path.resolve(`static\\${userId}`, fileName)
 
             unlink(filePath, (error) => {
                 if(error) console.log(error);

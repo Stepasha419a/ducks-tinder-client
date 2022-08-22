@@ -67,7 +67,7 @@ class UserService{
         if(!user.pictures) throw new Error('Pictures не найдены');
         if(!user.pictures.includes(pictureName)) throw new Error(`Picture с именем ${pictureName} не найдено`);
 
-        const fileName = fileService.deletePicture(pictureName)
+        const fileName = fileService.deletePicture(pictureName, userId)
         const fileIndex = user.pictures.indexOf(fileName)
         
         user.pictures.splice(fileIndex, 1)

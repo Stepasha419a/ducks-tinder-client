@@ -6,6 +6,7 @@ import {sendMail} from "./MailService";
 import tokenService from "./TokenService";
 import userModel from "../models/user-model";
 import ApiError from "../exceptions/api-error";
+import fileService from "./fileService";
 
 interface userDataInterface {
     _id: string
@@ -25,6 +26,9 @@ class AuthService{
         if(!partnerSettings) partnerSettings = {place: 'unknown', distance: 0, usersOnlyInDistance: false, preferSex: 'unknown', age: {from: 18, to: 24}}
 
         const user = await UserModel.create({email, name, nickname, password: hashPassword, age, sex, partnerSettings, activationLink})
+
+        await fileService.makeUserDir(user._id.toString())
+
         await sendMail(email, `${(process.env.API_URL)}/api/activate/${activationLink}`, name)
             .catch(() => {
                 throw ApiError.BadRequest(`This email doesn't exist`)
