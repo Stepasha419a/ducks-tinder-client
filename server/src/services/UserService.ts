@@ -78,6 +78,8 @@ class UserService{
     }
 
     async delete(id: string) {
+        await fileService.deleteUserDir(id)
+
         const user = await UserModel.findByIdAndDelete(id)
 
         return user

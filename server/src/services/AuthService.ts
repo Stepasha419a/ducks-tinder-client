@@ -27,7 +27,7 @@ class AuthService{
 
         const user = await UserModel.create({email, name, nickname, password: hashPassword, age, sex, partnerSettings, activationLink})
 
-        await fileService.makeUserDir(user._id.toString())
+        fileService.makeUserDir(user._id.toString())
 
         await sendMail(email, `${(process.env.API_URL)}/api/activate/${activationLink}`, name)
             .catch(() => {

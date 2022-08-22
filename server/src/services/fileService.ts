@@ -1,11 +1,20 @@
 import * as uuid from 'uuid'
 import * as path from 'path'
-import { unlink, mkdirSync } from 'fs'
+import { unlink, mkdirSync, rmSync } from 'fs'
 
 class FileService{
     makeUserDir(userId: string) {
         try {
             mkdirSync(path.resolve('static', userId))
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    deleteUserDir(userId: string) {
+        try {
+            rmSync(path.resolve('static', userId), { recursive: true, force: true })
 
         } catch (error) {
             console.log(error)
