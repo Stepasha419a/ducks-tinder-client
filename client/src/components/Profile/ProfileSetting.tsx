@@ -20,17 +20,40 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
     const [isFormValid, setIsFormValid] = useState(false)
     const [isFormCloseable, setIsFormCloseable] = useState(true)
 
-    const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.target.value)
-        if(e.target.value.length < 2 || e.target.value.length > 15) {
+    const checkInput = (event: ChangeEvent<HTMLInputElement>, formName: string, limit: {min: number, max: number}) => {
+        if(event.target.value.length < limit.min || event.target.value.length > limit.max) {
             setInputValueError(`${formName} has to be more 2 and less 15`)
-          if(!e.target.value) {
+        if(!event.target.value) {
             setInputValueError(`${formName} can't be empty`)
-          }
+        }
         } else{
             setInputValueError('')
         }
     }
+
+    const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value)
+        if(settingInputName === 'email') {
+            emailHandler(e)
+        }
+
+        if(settingInputName !== 'email' && settingInputName !== 'place') {
+            checkInput(e, formName, {min: 2, max: 15})
+        }
+        if(settingInputName === 'place') {
+            checkInput(e, formName, {min: 8, max: 25})
+        }
+    }
+
+    const emailHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.target.value)
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        if(!re.test(String(e.target.value).toLowerCase())) {
+            setInputValueError('Incorrect email')
+        } else {
+            setInputValueError('')
+        }
+      }
 
     useEffect(() => {
         if(inputValueError) {
