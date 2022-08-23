@@ -38,7 +38,6 @@ class UserService{
     }
 
     async savePicture(userId: string, pictureFile: any) {
-        console.log(userId)
         if(!userId) {
             throw new Error('Id не указан')
         }

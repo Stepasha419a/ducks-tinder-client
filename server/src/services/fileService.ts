@@ -41,7 +41,6 @@ class FileService{
 
             unlink(filePath, (error) => {
                 if(error) console.log(error);
-                console.log(`${filePath} was deleted`)
             })
 
             return fileName

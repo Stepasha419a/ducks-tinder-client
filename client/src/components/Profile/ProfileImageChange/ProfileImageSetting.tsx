@@ -27,7 +27,7 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({setIs
                     {isPreviewSetting ?
                         <ProfilePreview currentUser={currentUser} setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}/>
                     :
-                        <ProfileChangeImage setIsImageSetting={setIsImageSetting}/>
+                        <ProfileChangeImage currentUser={currentUser} setIsImageSetting={setIsImageSetting}/>
                     }
                 </div>
             </>

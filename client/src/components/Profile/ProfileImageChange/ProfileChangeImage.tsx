@@ -1,11 +1,18 @@
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { IUser } from "../../../models/IUser"
 
 interface ProfileChangeImagePropsInterface{
+    currentUser: IUser
     setIsImageSetting: (isImageSetting: boolean) => void
 }
 
-const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({setIsImageSetting}) => {
+const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
+    let arrForLoop = []
+    for(let i = 0; i < 9 - currentUser.pictures.length; i++) {
+        arrForLoop.push(i)
+    }
+
     const submitHandler = () => {
         setIsImageSetting(false)
     }
@@ -13,66 +20,27 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({setIsIm
     return(
         <>
             <div className="tinder__content-change-images">
-                <div className="tinder__content-change-images-col">
-                    <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--plus">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                        </button>
-                    </div>
-                    <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--plus">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                        </button>
-                    </div>
-                    <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--plus">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                        </button>
-                    </div>
-                </div>
-                <div className="tinder__content-change-images-col">
-                <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--plus">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                        </button>
-                    </div>
-                    <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--plus">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                        </button>
-                    </div>
-                    <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--plus">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                        </button>
-                    </div>
-                </div>
-                <div className="tinder__content-change-images-col">
-                    <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--plus">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                        </button>
-                    </div>
-                    <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--plus">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                        </button>
-                    </div>
-                    <div className="tinder__content-change-images-col-item">
-                        <div className="tinder__content-change-images-col-item-img" />
-                        <button className="tinder__content-change-images-col-item-btn--xmark">
-                            <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
-                        </button>
-                    </div>
-                </div>
+                {currentUser.pictures.map(picture => {
+                    return(
+                        <div key={picture} className="tinder__content-change-images-item">
+                            <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/${picture})`}} className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" />
+                            <button className="tinder__content-change-images-col-item-btn--xmark">
+                                <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
+                            </button>
+                        </div>
+                    )
+                })}
+                {arrForLoop.map(item => {
+                    return(
+                        <div key={item} className="tinder__content-change-images-item">
+                            <div className="tinder__content-change-images-col-item-img" />
+                            <button className="tinder__content-change-images-col-item-btn--plus">
+                                <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
+                            </button>
+                        </div>
+                    )
+                })
+                }
             </div>
             <div className="tinder__content-change-descr">
                 Add more photos to fill out your profile 

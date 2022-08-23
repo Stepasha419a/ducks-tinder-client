@@ -765,15 +765,13 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .tinder__content-change-images{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
   padding: 8px 4px;
 }
 
-.tinder__content-change-images-col{
-  display: flex;
-  justify-content: space-around;
-}
-
-.tinder__content-change-images-col-item{
+.tinder__content-change-images-item{
   width: 114px;
   height: 160px;
   padding-bottom: 8px;
@@ -781,12 +779,19 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .tinder__content-change-images-col-item-img{
+  background-position: 50% 79.5455%;
+  background-size: auto 150.581%;
+  background-repeat: no-repeat;
   height: 100%;
   width: 100%;
   border: 4px dashed #d4d8de;
   border-radius: 8px;
   background-color: #e9ebee;
   cursor: pointer;
+}
+
+.tinder__content-change-images-col-item-img--image{
+  border: none;
 }
 
 .tinder__content-change-images-col-item-btn--xmark,

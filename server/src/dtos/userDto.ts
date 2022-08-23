@@ -9,6 +9,7 @@ export interface UserDtoInterface {
     age: number
     sex: string
     partnerSettings: partnerSettings
+    pictures: string[]
 }
 
 export default class UserDto { // Data transfer object
@@ -20,6 +21,7 @@ export default class UserDto { // Data transfer object
     age
     sex
     partnerSettings
+    pictures
 
     constructor(model: UserDtoInterface) {
         this.email = model.email
@@ -30,6 +32,7 @@ export default class UserDto { // Data transfer object
         this.age = model.age
         this.sex = model.sex
         this.partnerSettings = model.partnerSettings
+        this.pictures = model.pictures
     }
 
 }
