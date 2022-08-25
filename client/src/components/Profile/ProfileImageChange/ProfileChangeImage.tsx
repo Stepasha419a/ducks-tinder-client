@@ -1,6 +1,8 @@
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react"
 import { IUser } from "../../../models/IUser"
+import ProfileCropImage from "./CropImage/ProfileCropImage"
 
 interface ProfileChangeImagePropsInterface{
     currentUser: IUser
@@ -8,6 +10,8 @@ interface ProfileChangeImagePropsInterface{
 }
 
 const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
+    const [isImageCropOpen, setIsImageCropOpen] = useState(true)
+
     let arrForLoop = []
     for(let i = 0; i < 9 - currentUser.pictures.length; i++) {
         arrForLoop.push(i)
@@ -32,7 +36,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                 })}
                 {arrForLoop.map(item => {
                     return(
-                        <div key={item} className="tinder__content-change-images-item">
+                        <div onClick={() => setIsImageCropOpen(true)} key={item} className="tinder__content-change-images-item">
                             <div className="tinder__content-change-images-col-item-img" />
                             <button className="tinder__content-change-images-col-item-btn--plus">
                                 <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
@@ -51,6 +55,10 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                     <span className="tinder__content-change-save-text">Save changes</span>
                 </button>
             </div>
+
+            {isImageCropOpen &&
+                <ProfileCropImage setIsImageCropOpen={setIsImageCropOpen}/>
+            }
         </>
     )
 }
