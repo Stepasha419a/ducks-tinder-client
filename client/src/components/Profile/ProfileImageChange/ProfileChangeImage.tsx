@@ -1,8 +1,9 @@
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { IUser } from "../../../models/IUser"
 import ProfileCropImage from "./CropImage/ProfileCropImage"
+import ProfileDialogUpload from "./CropImage/ProfileDialogUpload"
 
 interface ProfileChangeImagePropsInterface{
     currentUser: IUser
@@ -10,10 +11,19 @@ interface ProfileChangeImagePropsInterface{
 }
 
 const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
-    const [isImageCropOpen, setIsImageCropOpen] = useState(true)
+    const [isImageCropOpen, setIsImageCropOpen] = useState(false)
+    const [isDialogUploadOpen, setIsDialogUploadOpen] = useState(true)
+    const [imageURL, setImageURL] = useState({})
+
+    const onImageChange = (e: any) => {
+        setIsDialogUploadOpen(false)
+        const [image] = e.target.files
+        setImageURL(URL.createObjectURL(image))
+        setIsImageCropOpen(true)
+    }
 
     let arrForLoop = []
-    for(let i = 0; i < 9 - currentUser.pictures.length; i++) {
+    for(let i = 0; i < 9 - currentUser.pictures.gallery.length - 1; i++) {
         arrForLoop.push(i)
     }
 
@@ -24,10 +34,25 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
     return(
         <>
             <div className="tinder__content-change-images">
-                {currentUser.pictures.map(picture => {
+                {currentUser.pictures.avatar ?
+                <div className="tinder__content-change-images-item">
+                    <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" />
+                    <button className="tinder__content-change-images-col-item-btn--xmark">
+                        <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
+                    </button>
+                </div>
+                :
+                <div onClick={() => setIsDialogUploadOpen(true)} className="tinder__content-change-images-item">
+                    <div className="tinder__content-change-images-col-item-img" />
+                    <button className="tinder__content-change-images-col-item-btn--plus">
+                        <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
+                    </button>
+                </div>
+                }
+                {currentUser.pictures.gallery.map(picture => {
                     return(
                         <div key={picture} className="tinder__content-change-images-item">
-                            <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/${picture})`}} className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" />
+                            <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/gallery/${picture})`}} className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" />
                             <button className="tinder__content-change-images-col-item-btn--xmark">
                                 <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
                             </button>
@@ -36,7 +61,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                 })}
                 {arrForLoop.map(item => {
                     return(
-                        <div onClick={() => setIsImageCropOpen(true)} key={item} className="tinder__content-change-images-item">
+                        <div onClick={() => setIsDialogUploadOpen(true)} key={item} className="tinder__content-change-images-item">
                             <div className="tinder__content-change-images-col-item-img" />
                             <button className="tinder__content-change-images-col-item-btn--plus">
                                 <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
@@ -56,8 +81,12 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                 </button>
             </div>
 
+            {isDialogUploadOpen &&
+                <ProfileDialogUpload onImageChange={onImageChange} setIsDialogUploadOpen={setIsDialogUploadOpen}/>
+            }
+
             {isImageCropOpen &&
-                <ProfileCropImage setIsImageCropOpen={setIsImageCropOpen}/>
+                <ProfileCropImage imageURL={imageURL} setIsImageCropOpen={setIsImageCropOpen}/>
             }
         </>
     )

@@ -880,7 +880,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   height: calc(100% - 45px);
 }
 
-.tinder__crop{
+.tinder__popup{
   position: fixed;
   z-index: 150;
   width: 100%;
@@ -891,7 +891,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   transition: all .5s ease 0s;
 }
 
-.tinder__crop-body{
+.tinder__popup-body{
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -899,21 +899,123 @@ textarea:-ms-input-placeholder { color: #999999; }
   padding: 30px 10px;
 }
 
-.tinder__crop-content{
+.tinder__popup-content{
   position: relative;
-  background-color: #FFF;
+  background-color: #FFFFFF;
   width: 440px;
   height: 625px;
-  padding: 20px;
+  padding: 24px;
   transition: all .5s ease 0s;
+  border-radius: 8px;
+}
+
+.tinder__upload-content{
+  height: 400px;
+}
+
+.tinder__upload-close{
+  position: relative;
+}
+
+.tinder__upload-close-btn{
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.tinder__upload-close-btn::before{
+  content: '';
+  display: block;
+  height: 15px;
+  width: 3px;
+  background: #505965;
+  transform: rotate(-45deg);
+  position: absolute;
+  bottom: 4px;
+  right: 10px;
+  border-radius: 2px;
+}
+.tinder__upload-close-btn::after{
+  content: '';
+  display: block;
+  height: 15px;
+  width: 3px;
+  background: #505965;
+  transform: rotate(45deg);
+  position: absolute;
+  bottom: 4px;
+  right: 10px;
+  border-radius: 2px;
+}
+
+.tinder__upload-title{
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.tinder__upload-descr{
+  font-size: 16;
+  color: #505965;
+  margin-bottom: 24px;
+}
+
+.tinder__upload-inputs{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tinder__upload-input-wrapper{
+  background: linear-gradient(45deg,#fd267a,#ff6036);
+  width: 320px;
+  border-radius: 16px;
+}
+
+.tinder__upload-input-label{
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.tinder__upload-input[type="file"] {
+  display: none;
+}
+
+.tinder__upload-input-span{
+  color: #FFFFFF;
+  font-size: 14px;
+}
+
+.tinder__upload-input-span--bold{
+  font-size: 36px;
+  font-weight: 700;
 }
 
 .tinder__crop-title{
   font-size: 24px;
   font-weight: 500;
   color: #000;
-  padding: 10px 0;
+  margin-bottom: 16px;
   text-align: center;
+}
+
+.tinder__crop-image{
+  width: 392px;
+  height: 430px;
+  position: relative;
+}
+
+.tinder__crop-inputs{
+  margin-top: 24px;
 }
 
 .tinder__crop-input-range{
@@ -932,6 +1034,10 @@ textarea:-ms-input-placeholder { color: #999999; }
   box-shadow: none;
   border: 1px solid rgb(119, 119, 119);
   bottom: -13px;
+}
+
+.tinder__crop-input-range .input-range__slider:hover{
+  border: 1px solid #ff0000;
 }
 
 .tinder__crop-btns{

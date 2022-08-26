@@ -6,7 +6,6 @@ export interface IUser {
     age: number
     sex: 'male' | 'female'
     isActivated: boolean
-    pictures: string[]
     partnerSettings: {
         place: string
         distance: number
@@ -16,6 +15,10 @@ export interface IUser {
             from: number
             to: number
         }
+    }
+    pictures: {
+        avatar: string
+        gallery: string[]
     }
 }
 

@@ -1,4 +1,4 @@
-import UserModel, {partnerSettings} from "../models/user-model";
+import UserModel, {partnerSettingsInterface} from "../models/user-model";
 import bcrypt from 'bcryptjs'
 import {v4} from 'uuid'
 import UserDto from "../dtos/userDto";
@@ -14,7 +14,7 @@ interface userDataInterface {
 }
 
 class AuthService{
-    async registration(email: string, name: string, nickname: string, password: string, age: number, sex: string, partnerSettings: partnerSettings) {
+    async registration(email: string, name: string, nickname: string, password: string, age: number, sex: string, partnerSettings: partnerSettingsInterface) {
         const candidate = await UserModel.findOne({email})
         if(candidate) {
             throw ApiError.BadRequest(`The user with such an email already exists`)
@@ -24,8 +24,13 @@ class AuthService{
         const activationLink = v4()
 
         if(!partnerSettings) partnerSettings = {place: 'unknown', distance: 0, usersOnlyInDistance: false, preferSex: 'unknown', age: {from: 18, to: 24}}
+        
+        const pictures = {
+            avatar: '',
+            gallery: [] as string[]
+        }
 
-        const user = await UserModel.create({email, name, nickname, password: hashPassword, age, sex, partnerSettings, activationLink})
+        const user = await UserModel.create({email, name, nickname, password: hashPassword, age, sex, partnerSettings, pictures, activationLink})
 
         fileService.makeUserDir(user._id.toString())
 

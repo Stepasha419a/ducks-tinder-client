@@ -19,7 +19,7 @@ router.get('/users', authMiddleware, userController.getUsers)
 router.get('/users/:id', authMiddleware, userController.getOne)
 router.put('/users', authMiddleware, userController.update)
 router.delete('/users/:id', authMiddleware, userController.delete)
-router.put('/users/savePicture', authMiddleware, userController.savePicture)
+router.post('/users/savePicture', authMiddleware, userController.savePicture)
 router.put('/users/deletePicture', authMiddleware, userController.deletePicture)
 
 export default router

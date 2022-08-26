@@ -37,12 +37,11 @@ class UserService{
         return updatedUser
     }
 
-    async savePicture(userId: string, pictureFile: any) {
-        if(!userId) {
-            throw new Error('Id не указан')
-        }
+    async savePicture(userId: string, pictureFile: any, setting: 'avatar' | 'gallery') {
+        if(!userId) throw new Error('Id не указан');
+        if(setting != 'avatar' && setting != 'gallery') throw new Error('Setting указан некорректно');
 
-        const fileName = fileService.savePicture(pictureFile, userId)
+        const fileName = fileService.savePicture(pictureFile, userId, setting)
 
         const user = await UserModel.findById(userId)
 
@@ -58,15 +57,16 @@ class UserService{
         return updatedUser
     }
 
-    async deletePicture(userId: string, pictureName: string) {
+    async deletePicture(userId: string, pictureName: string, setting: 'avatar' | 'gallery') {
         if(!userId) throw new Error('Id не указан');
+        if(setting != 'avatar' && setting != 'gallery') throw new Error('Setting указан некорректно');
 
         const user = await UserModel.findById(userId)
 
         if(!user.pictures) throw new Error('Pictures не найдены');
         if(!user.pictures.includes(pictureName)) throw new Error(`Picture с именем ${pictureName} не найдено`);
 
-        const fileName = fileService.deletePicture(pictureName, userId)
+        const fileName = fileService.deletePicture(pictureName, userId, setting)
         const fileIndex = user.pictures.indexOf(fileName)
         
         user.pictures.splice(fileIndex, 1)

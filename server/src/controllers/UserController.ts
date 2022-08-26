@@ -49,9 +49,9 @@ class UserController{
 
     async savePicture(req: any, res: any, next: NextFunction) {
         try {
-            const { userId } = req.body
+            const { userId, setting } = req.body
             const pictureFile = req.files.file
-            const user = await userService.savePicture(userId, pictureFile)
+            const user = await userService.savePicture(userId, pictureFile, setting)
     
             res.json(user)
 
@@ -62,8 +62,8 @@ class UserController{
 
     async deletePicture(req: any, res: any, next: NextFunction) {
         try {
-            const { userId, pictureName } = req.body
-            const user = await userService.deletePicture(userId, pictureName)
+            const { userId, pictureName, setting } = req.body
+            const user = await userService.deletePicture(userId, pictureName, setting)
     
             res.json(user)
             

@@ -1,4 +1,4 @@
-import { partnerSettings } from "../models/user-model"
+import { partnerSettingsInterface, picturesInterface } from "../models/user-model"
 
 export interface UserDtoInterface {
     email: string
@@ -8,8 +8,8 @@ export interface UserDtoInterface {
     isActivated: boolean
     age: number
     sex: string
-    partnerSettings: partnerSettings
-    pictures: string[]
+    partnerSettings: partnerSettingsInterface
+    pictures: picturesInterface
 }
 
 export default class UserDto { // Data transfer object

@@ -6,6 +6,8 @@ class FileService{
     makeUserDir(userId: string) {
         try {
             mkdirSync(path.resolve('static', userId))
+            mkdirSync(path.resolve('static', userId, 'avatar'))
+            mkdirSync(path.resolve('static', userId, 'gallery'))
 
         } catch (error) {
             console.log(error)
@@ -21,10 +23,10 @@ class FileService{
         }
     }
 
-    savePicture(file: any, userId: string) {
+    savePicture(file: any, userId: string, setting: 'avatar' | 'gallery') {
         try {
             const fileName = uuid.v4() + '.jpg'
-            const filePath = path.resolve(`static\\${userId}`, fileName)
+            const filePath = path.resolve(`static\\${userId}\\${setting}`, fileName)
 
             file.mv(filePath)
 
@@ -35,9 +37,9 @@ class FileService{
         }
     }
 
-    deletePicture(fileName: string, userId: string) {
+    deletePicture(fileName: string, userId: string, setting: 'avatar' | 'gallery') {
         try {
-            const filePath = path.resolve(`static\\${userId}`, fileName)
+            const filePath = path.resolve(`static\\${userId}\\${setting}`, fileName)
 
             unlink(filePath, (error) => {
                 if(error) console.log(error);

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export interface partnerSettings{
+export interface partnerSettingsInterface{
     place: String
     distance: Number
     usersOnlyInDistance: Boolean
@@ -9,6 +9,11 @@ export interface partnerSettings{
         from: Number
         to: Number
     } | 'unknown'
+}
+
+export interface picturesInterface{
+    avatar: string
+    gallery: string[]
 }
 
 const UserSchema = new mongoose.Schema({
@@ -21,8 +26,8 @@ const UserSchema = new mongoose.Schema({
     activationLink: {type: String},
     age: {type: Number},
     sex: {type: String},
-    partnerSettings: {type: {} as partnerSettings},
-    pictures: {type: [] as string[]}
+    partnerSettings: {type: {} as partnerSettingsInterface},
+    pictures: {type: {} as picturesInterface}
 })
 
 export default mongoose.model('User', UserSchema)

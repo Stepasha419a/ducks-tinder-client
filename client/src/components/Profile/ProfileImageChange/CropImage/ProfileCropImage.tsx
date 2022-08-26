@@ -4,10 +4,10 @@ import InputRange from "react-input-range"
 
 interface ProfileCropImagePropsInterface{
     setIsImageCropOpen: (setting: boolean) => void
-    photoURL?: any
+    imageURL: any
 }
 
-const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageCropOpen, photoURL}) => {
+const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageCropOpen, imageURL}) => {
     const [crop, setCrop] = useState({x: 0, y: 0})
     const [zoom, setZoom] = useState(1)
     const [rotation, setRotation] = useState(0)
@@ -22,26 +22,27 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
     }
 
     return(
-        <div className="tinder__crop">
-            <div className="tinder__crop-body">
-                <div className="tinder__crop-content">
+        <div className="tinder__popup tinder__crop">
+            <div className="tinder__popup-body tinder__crop-body">
+                <div className="tinder__popup-content tinder__crop-content">
                     <div className="tinder__crop-title">Redact photo</div>
-
-                    {/* <Cropper
-                        image={photoURL}
-                        crop={crop}
-                        zoom={zoom}
-                        rotation={rotation}
-                        aspect={1}
-                        onCropChange={setCrop}
-                        onZoomChange={setZoom}
-                        onRotationChange={setRotation}
-                        onCropComplete={cropComplete}
-                    /> */}
+                    <div className="tinder__crop-image">
+                        <Cropper
+                            image={imageURL}
+                            crop={crop}
+                            zoom={zoom}
+                            rotation={rotation}
+                            aspect={0.75}
+                            onCropChange={setCrop}
+                            onZoomChange={setZoom}
+                            onRotationChange={setRotation}
+                            onCropComplete={cropComplete}
+                        />
+                    </div>
                     <div className="tinder__crop-inputs">
                         <div className="tinder__crop-input-range">
                             <InputRange
-                                step={0.1}
+                                step={0.01}
                                 draggableTrack={false}
                                 allowSameValues={false}
                                 minValue={1}
