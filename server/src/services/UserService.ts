@@ -45,12 +45,10 @@ class UserService{
 
         const user = await UserModel.findById(userId)
 
-        if(!user.pictures) {
-            user.pictures = []
-            user.pictures.push(fileName)
-        } else{
-            user.pictures.push(fileName)
+        if(setting === 'avatar') {
+            user.pictures.avatar = fileName
         }
+        user.pictures.gallery.push(fileName)
 
         const updatedUser = await UserModel.findByIdAndUpdate(user._id, user, {new: true})
         

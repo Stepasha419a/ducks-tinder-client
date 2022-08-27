@@ -53,6 +53,19 @@ export const updateUserThunk = createAsyncThunk(
     }
 )
 
+export const saveUserImage = createAsyncThunk(
+    'users/updateUserImage',
+    async (args: {file: any, userId: string, setting: 'avatar' | 'gallery'}, {rejectWithValue, dispatch}) => {
+        try {
+            const response = await usersAPI.savePicture(args.file, args.userId, args.setting)
+            
+            dispatch(setCurrentUser(response.data))
+        } catch (error: any) {
+            rejectWithValue(error.message)
+        }
+    }
+)
+
 const {setUsers} = usersReducer.actions
 
 export const {setCurrentUser} = usersReducer.actions

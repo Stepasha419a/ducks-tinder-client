@@ -1,6 +1,6 @@
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { ChangeEvent, useState } from "react"
+import { useState } from "react"
 import { IUser } from "../../../models/IUser"
 import ProfileCropImage from "./CropImage/ProfileCropImage"
 import ProfileDialogUpload from "./CropImage/ProfileDialogUpload"
@@ -12,7 +12,7 @@ interface ProfileChangeImagePropsInterface{
 
 const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
     const [isImageCropOpen, setIsImageCropOpen] = useState(false)
-    const [isDialogUploadOpen, setIsDialogUploadOpen] = useState(true)
+    const [isDialogUploadOpen, setIsDialogUploadOpen] = useState(false)
     const [imageURL, setImageURL] = useState({})
 
     const onImageChange = (e: any) => {
@@ -71,6 +71,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                 })
                 }
             </div>
+            <img src={imageURL as string} alt="asd" />
             <div className="tinder__content-change-descr">
                 Add more photos to fill out your profile 
                 <br/>by another 4% and get more likes.
@@ -86,7 +87,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
             }
 
             {isImageCropOpen &&
-                <ProfileCropImage imageURL={imageURL} setIsImageCropOpen={setIsImageCropOpen}/>
+                <ProfileCropImage setIsImageCropOpen={setIsImageCropOpen} imageURL={imageURL} currentUser={currentUser}/>
             }
         </>
     )

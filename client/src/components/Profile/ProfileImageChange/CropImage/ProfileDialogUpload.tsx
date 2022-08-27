@@ -4,8 +4,6 @@ interface ProfileDialogUploadPropsInterface{
 }
 
 const ProfileDialogUpload: React.FC<ProfileDialogUploadPropsInterface> = ({onImageChange, setIsDialogUploadOpen}) => {
-    
-
     return(
         <div className="tinder__popup tinder__upload">
             <div className="tinder__popup-body tinder__upload">

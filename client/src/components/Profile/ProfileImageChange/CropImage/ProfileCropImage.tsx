@@ -1,24 +1,41 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Cropper from "react-easy-crop"
 import InputRange from "react-input-range"
+import { useDispatch } from "react-redux"
+import { IUser } from "../../../../models/IUser"
+import { saveUserImage } from "../../../../redux/usersReducer"
+import getCroppedImg from "./cropImage"
 
 interface ProfileCropImagePropsInterface{
+    currentUser: IUser
     setIsImageCropOpen: (setting: boolean) => void
     imageURL: any
 }
 
-const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageCropOpen, imageURL}) => {
+const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageCropOpen, imageURL, currentUser}) => {
+    const dispatch = useDispatch()
+    const setting = 'gallery'
     const [crop, setCrop] = useState({x: 0, y: 0})
-    const [zoom, setZoom] = useState(1)
+    const [zoom, setZoom] = useState(0.1)
     const [rotation, setRotation] = useState(0)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
 
-    const cropComplete = (croppedArea: any, croppedAreaPixels: any) => {
+    useEffect(() => {
+        console.log(croppedAreaPixels)
+    }, [croppedAreaPixels])
+
+    const cropComplete = (croppedAreaPixels: any) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }
 
-    const cropImage = async () => {
-
+    const cropImage = async (userId: string, setting: "avatar" | "gallery") => {
+        try {
+            const {file}: any = await getCroppedImg(imageURL, croppedAreaPixels, rotation)
+            dispatch(saveUserImage({file, userId, setting}) as any)
+            setIsImageCropOpen(false)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return(
@@ -45,7 +62,7 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                                 step={0.01}
                                 draggableTrack={false}
                                 allowSameValues={false}
-                                minValue={1}
+                                minValue={1.1}
                                 maxValue={3}
                                 value={zoom}
                                 onChange={zoom => setZoom(zoom as number)}
@@ -56,7 +73,7 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                         <button onClick={() => setIsImageCropOpen(false)} className="tinder__crop-button">
                             Cancel
                         </button>
-                        <button onClick={() => cropImage} className="tinder__crop-button tinder__crop-button--select">
+                        <button onClick={() => cropImage(currentUser._id, setting)} className="tinder__crop-button tinder__crop-button--select">
                             Select
                         </button>
                     </div>
