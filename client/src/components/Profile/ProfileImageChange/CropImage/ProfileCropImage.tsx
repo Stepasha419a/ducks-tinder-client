@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Cropper from "react-easy-crop"
 import InputRange from "react-input-range"
 import { useDispatch } from "react-redux"
 import { IUser } from "../../../../models/IUser"
 import { saveUserImage } from "../../../../redux/usersReducer"
-import getCroppedImg from "./cropImage"
+import getCroppedImg from "./cropImage.js"
 
 interface ProfileCropImagePropsInterface{
     currentUser: IUser
@@ -16,15 +16,11 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
     const dispatch = useDispatch()
     const setting = 'gallery'
     const [crop, setCrop] = useState({x: 0, y: 0})
-    const [zoom, setZoom] = useState(0.1)
+    const [zoom, setZoom] = useState(1)
     const [rotation, setRotation] = useState(0)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
 
-    useEffect(() => {
-        console.log(croppedAreaPixels)
-    }, [croppedAreaPixels])
-
-    const cropComplete = (croppedAreaPixels: any) => {
+    const cropComplete = (croppedArea: any, croppedAreaPixels: any) => {
         setCroppedAreaPixels(croppedAreaPixels)
     }
 
@@ -49,7 +45,7 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                             crop={crop}
                             zoom={zoom}
                             rotation={rotation}
-                            aspect={0.75}
+                            aspect={3 / 4}
                             onCropChange={setCrop}
                             onZoomChange={setZoom}
                             onRotationChange={setRotation}

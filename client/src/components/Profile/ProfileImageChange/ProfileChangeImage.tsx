@@ -71,7 +71,6 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                 })
                 }
             </div>
-            <img src={imageURL as string} alt="asd" />
             <div className="tinder__content-change-descr">
                 Add more photos to fill out your profile 
                 <br/>by another 4% and get more likes.
