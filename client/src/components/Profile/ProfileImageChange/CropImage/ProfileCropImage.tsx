@@ -10,11 +10,12 @@ interface ProfileCropImagePropsInterface{
     currentUser: IUser
     setIsImageCropOpen: (setting: boolean) => void
     imageURL: any
+    currentImageCrop: 'avatar' | 'gallery' | ''
+    setCurrentImageCrop: (setting: 'avatar' | 'gallery' | '') => void
 }
 
-const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageCropOpen, imageURL, currentUser}) => {
+const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageCropOpen, imageURL, currentUser, currentImageCrop, setCurrentImageCrop}) => {
     const dispatch = useDispatch()
-    const setting = 'gallery'
     const [crop, setCrop] = useState({x: 0, y: 0})
     const [zoom, setZoom] = useState(1)
     const [rotation, setRotation] = useState(0)
@@ -24,11 +25,12 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
         setCroppedAreaPixels(croppedAreaPixels)
     }
 
-    const cropImage = async (userId: string, setting: "avatar" | "gallery") => {
+    const cropImage = async (userId: string, setting: "avatar" | "gallery" | '') => {
         try {
-            const {file}: any = await getCroppedImg(imageURL, croppedAreaPixels, rotation)
-            dispatch(saveUserImage({file, userId, setting}) as any)
+            const {picture}: any = await getCroppedImg(imageURL, croppedAreaPixels, rotation)
+            setting && dispatch(saveUserImage({picture, userId, setting}) as any)
             setIsImageCropOpen(false)
+            setCurrentImageCrop('')
         } catch (error) {
             console.log(error)
         }
@@ -69,7 +71,7 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                         <button onClick={() => setIsImageCropOpen(false)} className="tinder__crop-button">
                             Cancel
                         </button>
-                        <button onClick={() => cropImage(currentUser._id, setting)} className="tinder__crop-button tinder__crop-button--select">
+                        <button onClick={() => cropImage(currentUser._id, currentImageCrop)} className="tinder__crop-button tinder__crop-button--select">
                             Select
                         </button>
                     </div>

@@ -47,8 +47,9 @@ class UserService{
 
         if(setting === 'avatar') {
             user.pictures.avatar = fileName
+        } else {
+            user.pictures.gallery.push(fileName)
         }
-        user.pictures.gallery.push(fileName)
 
         const updatedUser = await UserModel.findByIdAndUpdate(user._id, user, {new: true})
         
@@ -61,13 +62,17 @@ class UserService{
 
         const user = await UserModel.findById(userId)
 
-        if(!user.pictures) throw new Error('Pictures не найдены');
-        if(!user.pictures.includes(pictureName)) throw new Error(`Picture с именем ${pictureName} не найдено`);
+        if(!user.pictures[setting]) throw new Error('Pictures не найдены');
+        if(setting === 'gallery') {
+            if(!user.pictures.gallery.includes(pictureName)) throw new Error(`Picture с именем ${pictureName} не найдено`);
+            const fileName = fileService.deletePicture(pictureName, userId, setting)
+            const fileIndex = user.pictures.gallery.indexOf(fileName)
 
-        const fileName = fileService.deletePicture(pictureName, userId, setting)
-        const fileIndex = user.pictures.indexOf(fileName)
-        
-        user.pictures.splice(fileIndex, 1)
+            user.pictures.gallery.splice(fileIndex, 1)
+        } else {
+            fileService.deletePicture(pictureName, userId, setting)
+            user.pictures.avatar = ''
+        }
 
         const updatedUser = await UserModel.findByIdAndUpdate(user._id, user, {new: true})
         

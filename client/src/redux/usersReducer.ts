@@ -55,9 +55,22 @@ export const updateUserThunk = createAsyncThunk(
 
 export const saveUserImage = createAsyncThunk(
     'users/updateUserImage',
-    async (args: {file: any, userId: string, setting: 'avatar' | 'gallery'}, {rejectWithValue, dispatch}) => {
+    async (args: {picture: any, userId: string, setting: 'avatar' | 'gallery'}, {rejectWithValue, dispatch}) => {
         try {
-            const response = await usersAPI.savePicture(args.file, args.userId, args.setting)
+            const response = await usersAPI.savePicture(args.picture, args.userId, args.setting)
+            
+            dispatch(setCurrentUser(response.data))
+        } catch (error: any) {
+            rejectWithValue(error.message)
+        }
+    }
+)
+
+export const deleteUserImage = createAsyncThunk(
+    'users/deleteUserImage',
+    async (args: {pictureName: string, userId: string, setting: 'avatar' | 'gallery'}, {rejectWithValue, dispatch}) => {
+        try {
+            const response = await usersAPI.deletePicture(args.pictureName, args.userId, args.setting)
             
             dispatch(setCurrentUser(response.data))
         } catch (error: any) {

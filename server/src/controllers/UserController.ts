@@ -50,7 +50,7 @@ class UserController{
     async savePicture(req: any, res: any, next: NextFunction) {
         try {
             const { userId, setting } = req.body
-            const pictureFile = req.files.file
+            const pictureFile = req.files.picture
             const user = await userService.savePicture(userId, pictureFile, setting)
     
             res.json(user)

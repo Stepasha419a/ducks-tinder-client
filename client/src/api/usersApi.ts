@@ -27,8 +27,8 @@ export const usersAPI = {
         return instance.delete(`users/${id}`)
             .then(res => res)
     },
-    savePicture(file: any, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {
-        return instance.post(`users/savePicture`, {file, userId, setting}, {
+    savePicture(picture: any, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {
+        return instance.post(`users/savePicture`, {picture, userId, setting}, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -36,7 +36,7 @@ export const usersAPI = {
             .then(res => res)
     },
     deletePicture(pictureName: string, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {
-        return instance.put(`users/savePicture`, {pictureName, userId, setting})
+        return instance.put(`users/deletePicture`, {pictureName, userId, setting})
             .then(res => res)
     }
 }
