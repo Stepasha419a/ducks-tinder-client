@@ -93,9 +93,9 @@ textarea:-ms-input-placeholder { color: #999999; }
   height: 36px;
   width: 36px;
   border-radius: 50%;
-  background-image: url(./assets/images/profile/1.png);
   background-position: 50% 79.5455%;
-  background-size: auto 95.581%;
+  background-size: auto 160%;
+  background-repeat: no-repeat;
 }
 
 .tinder__info-user-name{
@@ -1066,7 +1066,6 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .tinder__content-preview-photo{
-  background-image: url(./assets/images/photos/1.jpg);
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: auto 100%;
@@ -1118,7 +1117,6 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .tinder__content-full-preview-photo{
-  background-image: url(./assets/images/photos/1.jpg);
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: auto 125%;

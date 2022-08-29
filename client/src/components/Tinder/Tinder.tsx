@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { dialogs, pairs } from '../../assets/hardcodeObjects/hardcodeObjects'
+import { useSelector } from 'react-redux'
+import { AppStateType } from '../../redux/reduxStore'
 
 type PairType = {
     id: number,
@@ -18,6 +20,8 @@ type DialogType = {
 }
 
 const Tinder = () => {
+    const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+
     const [isPairsOpened, setIsPairsOpened] = useState(true)
 
     let photoStyle = {
@@ -29,9 +33,13 @@ const Tinder = () => {
         <aside className="tinder__info">
             <div className="tinder__info-user">
                 <Link className="tinder__info-user-person" to='profile'>
-                    <div className="tinder__info-user-photo"></div>
+                    {currentUser.pictures.avatar ?
+                    <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} className="tinder__info-user-photo"></div>
+                    :
+                    <div style={{backgroundImage: `url(${photo})`}} className="tinder__info-user-photo"></div>
+                    }
                     <div className="tinder__info-user-name">
-                        Stepan
+                        {currentUser.name}
                     </div>
                 </Link>
                 <div className="tinder__info-review">

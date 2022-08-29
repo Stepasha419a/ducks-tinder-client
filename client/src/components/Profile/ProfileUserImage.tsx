@@ -1,6 +1,7 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IUser } from "../../models/IUser"
+import defaultUserPhoto from "../../assets/images/photos/1.jpg"
 
 interface ProfileUserImagePropsInterface{
     currentUser: IUser
@@ -10,7 +11,7 @@ interface ProfileUserImagePropsInterface{
 const ProfileUserImage: React.FC<ProfileUserImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
     return(
         <>
-            <div className="tinder__content-search-photo tinder__content-search-photo--profile">
+            <div  style={currentUser.pictures.avatar ? {backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`} : {backgroundImage: `url(${defaultUserPhoto})`}}  className="tinder__content-search-photo tinder__content-search-photo--profile">
             </div>
             <div className="tinder__content-info tinder__content-info--profile">
                 <div className="tinder__content-info-descr">
