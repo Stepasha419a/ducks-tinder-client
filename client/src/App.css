@@ -601,6 +601,10 @@ textarea:-ms-input-placeholder { color: #999999; }
   position: relative;
 }
 
+.tinder__content-slider{
+  height: 467px;
+}
+
 .tinder__content-search-descr{
   position: absolute;
   bottom: 102px;
@@ -1174,6 +1178,81 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__content-full-preview-info-sex-icon{
   margin-right: 6px;
   font-size: 16px;
+}
+
+.tinder__image-slider{
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tinder__image-slider-item{
+  height: 100%;
+  width: 100%;
+}
+
+.tinder__image-slider-arrows{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.tinder__image-slider-rigth-arrow-wrapper,
+.tinder__image-slider-left-arrow-wrapper{
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.tinder__image-slider-left-arrow{
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  color: #FFFFFF;
+  font-size: 30px;
+  visibility: hidden;
+  opacity: 0;
+  transition: .2s;
+}
+
+.tinder__image-slider-right-arrow{
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  color: #FFFFFF;
+  font-size: 30px;
+  visibility: hidden;
+  opacity: 0;
+  transition: .2s;
+}
+
+.tinder__image-slider-arrows:hover .tinder__image-slider-left-arrow,
+.tinder__image-slider-arrows:hover .tinder__image-slider-right-arrow{
+  visibility: visible;
+  opacity: 1;
+}
+
+.tinder__image-slider-item-wrapper--hidden{
+  display: none;
+  visibility: hidden;
+}
+
+.tinder__image-slider-item-wrapper--active{
+  height: 100%;
+  width: 100%;
+  display: block;
+  visibility: visible;
+}
+
+.tinder__image-slider-item{
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 110%;
 }
 
 /* Authorization */
