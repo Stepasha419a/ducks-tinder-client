@@ -1,7 +1,7 @@
 import { faCircleDown, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IUser } from "../../../models/IUser"
-import defaultUserPhoto from "../../../assets/images/photos/1.jpg"
+import ImageSlider from "../../Slider/ImageSlider"
 
 interface ProfileFullPreviewPropsInterface{
     currentUser: IUser
@@ -11,7 +11,8 @@ interface ProfileFullPreviewPropsInterface{
 const ProfileFullPreview: React.FC<ProfileFullPreviewPropsInterface> = ({currentUser, setIsFullPreviewPageSetting}) => {
     return(
         <div className="tinder__content-full-preview">
-            <div style={currentUser.pictures.avatar ? {backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`} : {backgroundImage: `url(${defaultUserPhoto})`}}  className="tinder__content-full-preview-photo">
+            <div className="tinder__content-full-preview-slider">
+                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName={'tinder__image-slider-item--bdrd-top'}/>
                 <button onClick={() => setIsFullPreviewPageSetting(false)} className="tinder__content-full-preview-close">
                     <FontAwesomeIcon icon={faCircleDown} className="tinder__content-full-preview-close-icon"/>
                 </button>

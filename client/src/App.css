@@ -1069,7 +1069,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   padding: 12px;
 }
 
-.tinder__content-preview-photo{
+.tinder__content-preview-inner{
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: auto 100%;
@@ -1118,6 +1118,11 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__content-full-preview{
   height: 100%;
   background-color: #FFFFFF;
+}
+
+.tinder__content-full-preview-slider{
+  height: 470px;
+  position: relative;
 }
 
 .tinder__content-full-preview-photo{
@@ -1189,6 +1194,30 @@ textarea:-ms-input-placeholder { color: #999999; }
   align-items: center;
 }
 
+.tinder__slider-stripes{
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  padding: 0 8px;
+}
+
+.tinder__slider-stripe{
+  width: 100%;
+  min-width: 20px;
+  height: 4px;
+  background-color: #ffffff2f;
+  border-radius: 2px;
+  margin: 0 2px;
+}
+
+.tinder__slider-stripe--active{
+  background-color: #FFFFFF;
+}
+
 .tinder__image-slider-item{
   height: 100%;
   width: 100%;
@@ -1198,16 +1227,21 @@ textarea:-ms-input-placeholder { color: #999999; }
   position: absolute;
   height: 100%;
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .tinder__image-slider-rigth-arrow-wrapper,
 .tinder__image-slider-left-arrow-wrapper{
   height: 100%;
-  width: 100%;
+  width: 50%;
   cursor: pointer;
 }
+.tinder__image-slider-rigth-arrow-wrapper{
+  float: right;
+}
+.tinder__image-slider-left-arrow-wrapper{
+  float: left;
+}
+
 
 .tinder__image-slider-left-arrow{
   position: absolute;
@@ -1253,6 +1287,15 @@ textarea:-ms-input-placeholder { color: #999999; }
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: auto 110%;
+}
+
+.tinder__image-slider-item--bdrd{
+  border-radius: 8px;
+}
+
+.tinder__image-slider-item--bdrd-top{
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 /* Authorization */

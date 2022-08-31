@@ -6,12 +6,17 @@ import defaultUserPhoto from "../../assets/images/photos/1.jpg"
 interface ImageSliderPropsInterface{
     images: string[] | []
     userId: string
+    imageExtraClassName?: string
 }
 
-const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId}) => {
-    console.log(images)
+const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId, imageExtraClassName = ''}) => {
     const [current, setCurrent] = useState(0)
     const length = images.length
+    const stripesArray = []
+
+    for(let i = 0; i <= length - 1; i++) {
+        stripesArray.push(i)
+    }
 
     const prevSlide = () => {
         setCurrent(current === 0 ? 0 : current - 1)
@@ -20,8 +25,6 @@ const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId}) => {
     const nextSlide = () => {
         setCurrent(current === length - 1 ? length - 1 : current + 1)
     }
-    
-    console.log(current)
 
     if(!Array.isArray(images) || images.length <= 0) {
         return (
@@ -33,6 +36,13 @@ const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId}) => {
 
     return(
         <div className="tinder__image-slider">
+            <div className="tinder__slider-stripes">
+                {stripesArray.map(stripe => {
+                    return(
+                        <div key={stripe} className={`tinder__slider-stripe${stripe === current ? ' tinder__slider-stripe--active' : ''}`}></div>
+                    )
+                })}
+            </div>
             <div className="tinder__image-slider-arrows">
                 {current === 0 ? null :
                 <div onClick={prevSlide} className="tinder__image-slider-left-arrow-wrapper">
@@ -51,7 +61,7 @@ const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId}) => {
                     <div key={index} className={index === current ? 'tinder__image-slider-item-wrapper--active' : 'tinder__image-slider-item-wrapper--hidden'}>
                         <div
                             style={{backgroundImage: `url(http://localhost:5000/${userId}/${index > 0 ? 'gallery' : 'avatar'}/${imageName})`}} 
-                            className="tinder__image-slider-item">
+                            className={`tinder__image-slider-item ${imageExtraClassName}`}>
                         </div>
                     </div>
                 )
