@@ -1,6 +1,6 @@
 import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { IUser } from "../../../models/IUser"
 import { deleteUserImage } from "../../../redux/usersReducer"
@@ -19,6 +19,27 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
     const [isDialogUploadOpen, setIsDialogUploadOpen] = useState(false)
     const [imageURL, setImageURL] = useState({})
     const [currentImageCrop, setCurrentImageCrop] = useState('' as 'avatar' | 'gallery' | '')
+
+    interface imageInterface{
+        id: number,
+        order: number
+        image: string
+        setting: string
+    }
+    const [images, setImages] = useState([] as imageInterface[])
+    const [currentImage, setCurrentImage] = useState({} as imageInterface)
+
+    useEffect(() => {
+        currentUser.pictures.avatar &&
+        setImages([{id: 0, order: 0, image: currentUser.pictures.avatar, setting: 'avatar'}, ...currentUser.pictures.gallery.map((image, index) => {
+            return {id: index + 1, order: index + 1, image: image, setting: 'gallery'}
+        })])
+
+        !currentUser.pictures.avatar &&
+        setImages(['' as any, ...currentUser.pictures.gallery.map((image, index) => {
+            return {id: index + 1, order: index + 1, image: image}
+        })])
+    }, [currentUser.pictures.avatar, currentUser.pictures.gallery])
 
     const openSettingHandler = (setting: 'avatar' | 'gallery' | '') => {
         setCurrentImageCrop(setting)
@@ -45,12 +66,77 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
         setIsImageSetting(false)
     }
 
+    const dragStartHangler = (e: any, card: imageInterface) => {
+        setCurrentImage(card)
+    }
+
+    const dragEndHangler = (e: any, card: string, setting: string) => {
+        e.target.style.backgroundImage = `url(http://localhost:5000/${currentUser._id}/${setting}/${card})`
+        e.target.style.backgroundPosition = '50% 79.5455%'
+        e.target.style.backgroundSize = 'auto 100%'
+        e.target.style.backgroundRepeat = 'no-repeat'
+        e.target.style.opacity = '1'
+    }
+
+    const dragOverHangler = (e: any) => {
+        e.preventDefault()
+        e.target.style.opacity = '0.5'
+
+    }
+
+    const dropHangler = (e: any, card: imageInterface) => {
+        e.preventDefault() //@ts-ignore
+        setCurrentImage(images.map(image => {
+            if(image.id === card.id) {
+                console.log(images)
+                return {...image, order: currentImage.order}
+            }
+
+            if(image.id === currentImage.id) {
+                return {...image, order: card.order}
+            }
+            return image
+        })) 
+        e.target.style.opacity = '1'
+    }
+
+    const sortCards = (a: imageInterface, b: imageInterface) => a.order - b.order;
+
+
     return(
         <>
             <div className="tinder__content-change-images">
-                {currentUser.pictures.avatar ?
+                {images.sort(sortCards).map(imageObj => {
+                    return(
+                        <div key={imageObj.id} className="tinder__content-change-images-item">
+                            <div 
+                                draggable
+                                onDragStart={(e) => dragStartHangler(e, imageObj)}
+                                onDragLeave={e => dragEndHangler(e, images[0].image, imageObj.setting)}
+                                onDragEnd={e => dragEndHangler(e, imageObj.image, imageObj.setting)}
+                                onDragOver={e => dragOverHangler(e)}
+                                onDrop={e => dropHangler(e, imageObj)} 
+                                style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/${imageObj.setting}/${imageObj.image})`}} 
+                                className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" 
+                            />
+                            <button onClick={() => deleteImageHandler(imageObj.image, currentUser._id, imageObj.setting as 'avatar' | 'gallery')} className="tinder__content-change-images-col-item-btn--xmark">
+                                <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
+                            </button>
+                        </div>
+                    )
+                })}
+                {images[0] ?
                 <div className="tinder__content-change-images-item">
-                    <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" />
+                    <div
+                        draggable
+                        onDragStart={(e) => dragStartHangler(e, images[0])}
+                        onDragLeave={e => dragEndHangler(e, images[0].image, 'avatar')}
+                        onDragEnd={e => dragEndHangler(e, images[0].image, 'avatar')}
+                        onDragOver={e => dragOverHangler(e)}
+                        onDrop={e => dropHangler(e, images[0])}
+                        style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} 
+                        className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" 
+                    />
                     <button onClick={() => deleteImageHandler(currentUser.pictures.avatar, currentUser._id, 'avatar')} className="tinder__content-change-images-col-item-btn--xmark">
                         <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
                     </button>
@@ -63,16 +149,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                     </button>
                 </div>
                 }
-                {currentUser.pictures.gallery.map(picture => {
-                    return(
-                        <div key={picture} className="tinder__content-change-images-item">
-                            <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/gallery/${picture})`}} className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" />
-                            <button onClick={() => deleteImageHandler(picture, currentUser._id, 'gallery')} className="tinder__content-change-images-col-item-btn--xmark">
-                                <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
-                            </button>
-                        </div>
-                    )
-                })}
+                
                 {arrForLoop.map(item => {
                     return(
                         <div onClick={() => openSettingHandler('gallery')} key={item} className="tinder__content-change-images-item">

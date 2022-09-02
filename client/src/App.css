@@ -796,6 +796,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder__content-change-images-col-item-img--image{
   border: none;
+  cursor: grab;
 }
 
 .tinder__content-change-images-col-item-btn--xmark,
