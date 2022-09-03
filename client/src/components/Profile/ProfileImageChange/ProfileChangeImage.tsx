@@ -85,10 +85,9 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
     }
 
     const dropHangler = (e: any, card: imageInterface) => {
-        e.preventDefault() //@ts-ignore
-        setCurrentImage(images.map(image => {
+        e.preventDefault() 
+        setImages(images.map(image => {
             if(image.id === card.id) {
-                console.log(images)
                 return {...image, order: currentImage.order}
             }
 
