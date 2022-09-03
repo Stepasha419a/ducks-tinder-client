@@ -37,7 +37,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
 
         !currentUser.pictures.avatar &&
         setImages(['' as any, ...currentUser.pictures.gallery.map((image, index) => {
-            return {id: index + 1, order: index + 1, image: image}
+            return {id: index + 1, order: index + 1, image: image, setting: 'gallery'}
         })])
     }, [currentUser.pictures.avatar, currentUser.pictures.gallery])
 
@@ -102,17 +102,26 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
 
     const sortCards = (a: imageInterface, b: imageInterface) => a.order - b.order;
 
-
     return(
         <>
             <div className="tinder__content-change-images">
-                {images.sort(sortCards).map(imageObj => {
+                {images.sort(sortCards).map((imageObj, index) => {
+                    if(!imageObj) {
+                        return(
+                            <div onClick={() => index === 0 ? openSettingHandler('avatar') : openSettingHandler('gallery')} key={index} className="tinder__content-change-images-item">
+                                <div className="tinder__content-change-images-col-item-img" />
+                                <button className="tinder__content-change-images-col-item-btn--plus">
+                                    <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
+                                </button>
+                            </div>
+                        )
+                    }
                     return(
-                        <div key={imageObj.id} className="tinder__content-change-images-item">
+                        <div key={index} className="tinder__content-change-images-item">
                             <div 
                                 draggable
                                 onDragStart={(e) => dragStartHangler(e, imageObj)}
-                                onDragLeave={e => dragEndHangler(e, images[0].image, imageObj.setting)}
+                                onDragLeave={e => dragEndHangler(e, imageObj.image, imageObj.setting)}
                                 onDragEnd={e => dragEndHangler(e, imageObj.image, imageObj.setting)}
                                 onDragOver={e => dragOverHangler(e)}
                                 onDrop={e => dropHangler(e, imageObj)} 
@@ -125,30 +134,6 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                         </div>
                     )
                 })}
-                {images[0] ?
-                <div className="tinder__content-change-images-item">
-                    <div
-                        draggable
-                        onDragStart={(e) => dragStartHangler(e, images[0])}
-                        onDragLeave={e => dragEndHangler(e, images[0].image, 'avatar')}
-                        onDragEnd={e => dragEndHangler(e, images[0].image, 'avatar')}
-                        onDragOver={e => dragOverHangler(e)}
-                        onDrop={e => dropHangler(e, images[0])}
-                        style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} 
-                        className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" 
-                    />
-                    <button onClick={() => deleteImageHandler(currentUser.pictures.avatar, currentUser._id, 'avatar')} className="tinder__content-change-images-col-item-btn--xmark">
-                        <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
-                    </button>
-                </div>
-                :
-                <div onClick={() => openSettingHandler('avatar')} className="tinder__content-change-images-item">
-                    <div className="tinder__content-change-images-col-item-img" />
-                    <button className="tinder__content-change-images-col-item-btn--plus">
-                        <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
-                    </button>
-                </div>
-                }
                 
                 {arrForLoop.map(item => {
                     return(

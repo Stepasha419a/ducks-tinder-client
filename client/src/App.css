@@ -1290,6 +1290,10 @@ textarea:-ms-input-placeholder { color: #999999; }
   background-size: auto 110%;
 }
 
+.tinder__image-slider-item--default{
+  background-size: auto 125%;
+}
+
 .tinder__image-slider-item--bdrd{
   border-radius: 8px;
 }

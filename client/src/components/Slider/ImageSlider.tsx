@@ -26,10 +26,10 @@ const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId, image
         setCurrent(current === length - 1 ? length - 1 : current + 1)
     }
 
-    if(!Array.isArray(images) || images.length <= 0) {
+    if(!Array.isArray(images) || images.length <= 0 || images[0] === '') {
         return (
             <div className="tinder__image-slider">
-                <div style={{backgroundImage: `url(${defaultUserPhoto})`}} className="tinder__image-slider-item"></div>
+                <div style={{backgroundImage: `url(${defaultUserPhoto})`}} className={`tinder__image-slider-item tinder__image-slider-item--default ${imageExtraClassName}`}></div>
             </div>
         )
     }
