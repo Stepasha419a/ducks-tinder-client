@@ -1,6 +1,6 @@
 import * as uuid from 'uuid'
 import * as path from 'path'
-import { unlink, mkdirSync, rmSync } from 'fs'
+import { unlinkSync, mkdirSync, rmSync, readdirSync, renameSync } from 'fs'
 
 class FileService{
     makeUserDir(userId: string) {
@@ -41,12 +41,23 @@ class FileService{
         try {
             const filePath = path.resolve(`static\\${userId}\\${setting}`, fileName)
 
-            unlink(filePath, (error) => {
-                if(error) console.log(error);
-            })
+            unlinkSync(filePath)
 
             return fileName
 
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    changePicturesDir(userId: string, newAvatarImageName: string) {
+        try {
+            const newGalleryImageName = readdirSync(path.resolve(`static\\${userId}\\avatar\\`))[0]
+
+            const storageName = path.resolve(`static\\${userId}\\`)
+
+            renameSync(`${storageName}\\avatar\\${newGalleryImageName}`, `${storageName}\\gallery\\${newGalleryImageName}`)
+            renameSync(`${storageName}\\gallery\\${newAvatarImageName}`, `${storageName}\\avatar\\${newAvatarImageName}`)
         } catch (error) {
             console.log(error)
         }

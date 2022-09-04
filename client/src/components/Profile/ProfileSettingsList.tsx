@@ -38,7 +38,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
     const [ageSetting, setAgeSetting] = useState(currentUser.partnerSettings ? 
         {min: currentUser.partnerSettings.age.from, max: currentUser.partnerSettings.age.to}
         :
-        {min: 1, max: 6}
+        {min: 18, max: 24}
         )
 
     const setSettingInput = (formName: string, inputName: string, innerObjectName?: string) => {

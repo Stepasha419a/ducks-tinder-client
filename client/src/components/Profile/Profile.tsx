@@ -16,8 +16,8 @@ const Profile = () => {
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
 
-    const [currentDistanceSetting, setCurrentDistanceSetting] = useState(currentUser.partnerSettings ? currentUser.partnerSettings.distance : 0)
-    const [currentAgeSetting, setCurrentAgeSetting] = useState(currentUser.age ? currentUser.age : 0)
+    const [currentDistanceSetting, setCurrentDistanceSetting] = useState(currentUser.partnerSettings ? currentUser.partnerSettings.distance : 5)
+    const [currentAgeSetting, setCurrentAgeSetting] = useState(currentUser.age ? currentUser.age : 18)
     const [isUserInfoSetting, setIsUserInfoSetting] = useState(false)
     const [isImageSetting, setIsImageSetting] = useState(false)
     const [formName, setFormName] = useState('') // name of the title in ProfileSetting

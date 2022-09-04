@@ -3,13 +3,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { IUser } from "../../../models/IUser"
-import { deleteUserImage } from "../../../redux/usersReducer"
+import { deleteUserImage, mixUserImages } from "../../../redux/usersReducer"
 import ProfileCropImage from "./CropImage/ProfileCropImage"
 import ProfileDialogUpload from "./CropImage/ProfileDialogUpload"
 
 interface ProfileChangeImagePropsInterface{
     currentUser: IUser
     setIsImageSetting: (isImageSetting: boolean) => void
+}
+
+export interface imageInterface{
+    id: number,
+    order: number
+    image: string
+    setting: string
 }
 
 const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
@@ -20,14 +27,10 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
     const [imageURL, setImageURL] = useState({})
     const [currentImageCrop, setCurrentImageCrop] = useState('' as 'avatar' | 'gallery' | '')
 
-    interface imageInterface{
-        id: number,
-        order: number
-        image: string
-        setting: string
-    }
     const [images, setImages] = useState([] as imageInterface[])
     const [currentImage, setCurrentImage] = useState({} as imageInterface)
+
+    const [imagesChanged, setImagesChanged] = useState(false)
 
     useEffect(() => {
         currentUser.pictures.avatar &&
@@ -40,6 +43,11 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
             return {id: index + 1, order: index + 1, image: image, setting: 'gallery'}
         })])
     }, [currentUser.pictures.avatar, currentUser.pictures.gallery])
+
+    useEffect(() => {
+        imagesChanged && dispatch(mixUserImages({currentUser, images}) as any)
+        setImagesChanged(false)
+    }, [imagesChanged, dispatch, currentUser, images])
 
     const openSettingHandler = (setting: 'avatar' | 'gallery' | '') => {
         setCurrentImageCrop(setting)
@@ -86,7 +94,10 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
 
     const dropHangler = (e: any, card: imageInterface) => {
         e.preventDefault() 
-        setImages(images.map(image => {
+        setImages(images.map((image, index) => {
+            if(index === images.length - 1) {
+                setImagesChanged(true)
+            }
             if(image.id === card.id) {
                 return {...image, order: currentImage.order}
             }

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import { usersAPI } from "../api/usersApi";
-import { IUser, makeUserObject } from "../models/IUser";
+import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage";
+import { IUser, makeUserImagesObject, makeUserObject } from "../models/IUser";
 
 const usersReducer = createSlice({
     name: 'users',
@@ -54,7 +55,7 @@ export const updateUserThunk = createAsyncThunk(
 )
 
 export const saveUserImage = createAsyncThunk(
-    'users/updateUserImage',
+    'users/saveUserImage',
     async (args: {picture: any, userId: string, setting: 'avatar' | 'gallery'}, {rejectWithValue, dispatch}) => {
         try {
             const response = await usersAPI.savePicture(args.picture, args.userId, args.setting)
@@ -72,6 +73,20 @@ export const deleteUserImage = createAsyncThunk(
         try {
             const response = await usersAPI.deletePicture(args.pictureName, args.userId, args.setting)
             
+            dispatch(setCurrentUser(response.data))
+        } catch (error: any) {
+            rejectWithValue(error.message)
+        }
+    }
+)
+
+export const mixUserImages = createAsyncThunk(
+    'users/mixUserImages',
+    async (args: {currentUser: IUser, images: imageInterface[]}, {rejectWithValue, dispatch}) => {
+        try {
+            const userImages = makeUserImagesObject(args)
+            
+            const response = await usersAPI.updateUser(userImages)
             dispatch(setCurrentUser(response.data))
         } catch (error: any) {
             rejectWithValue(error.message)

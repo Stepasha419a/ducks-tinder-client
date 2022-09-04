@@ -1,3 +1,5 @@
+import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage"
+
 export interface IUser {
     _id: string
     email: string
@@ -30,7 +32,10 @@ export interface IUserUnrequired {
     age?: number
     sex?: 'male' | 'female'
     isActivated?: boolean
-    pictures?: string[]
+    pictures?: {
+        avatar?: string
+        gallery?: string[]
+    }
     partnerSettings?: {
         place?: string
         distance?: number
@@ -50,4 +55,11 @@ export const makeUserObject = (args: {currentUser: IUser | any, inputName: strin
         return {_id: currentUser._id, [innerObjectName]: {...currentUser[innerObjectName] as IUser, [inputName]: changedData}}
     }
     return {_id: currentUser._id, [inputName]: changedData}
+}
+
+export const makeUserImagesObject = (args: {currentUser: IUser, images: imageInterface[]}) => {
+    const {currentUser, images} = args
+    const parsedImages = images.map(image => image.image)
+
+    return{_id: currentUser._id, pictures: {avatar: parsedImages[0], gallery: parsedImages.slice(1)}}
 }

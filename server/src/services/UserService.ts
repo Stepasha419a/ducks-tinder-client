@@ -18,18 +18,13 @@ class UserService{
     
         return user
     }
-    
-    /* async create(user: any, picture: any) {
-        const fileName = fileService.saveFile(picture, 'userName')
-        const createdUser = await UserModel.create({...user, picture: fileName})
-
-        return createdUser
-    
-    } */
 
     async update(user: any) {
         if(!user._id) {
             throw new Error('Id не указан')
+        }
+        if(user.pictures) {
+            fileService.changePicturesDir(user._id, user.pictures.avatar)
         }
 
         const updatedUser = await UserModel.findByIdAndUpdate(user._id, user, {new: true})
