@@ -545,8 +545,8 @@ textarea:-ms-input-placeholder { color: #999999; }
   cursor: not-allowed;
 }
 
-.tinder__content-setting-submit-button--margin-bottom{
-  margin-bottom: 8px;
+.tinder__content-setting-submit-button--no-border-bottom{
+  border-bottom: none;
 }
 
 .tinder__content{

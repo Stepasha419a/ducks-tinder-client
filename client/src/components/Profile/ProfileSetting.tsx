@@ -130,7 +130,7 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
                 }
             </div>
             <div className="tinder__content-setting-descr">Your {formName}</div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="tinder__content-setting-submit-button tinder__content-setting-submit-button--margin-bottom">
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="tinder__content-setting-submit-button tinder__content-setting-submit-button--no-border-bottom">
                 Cancel
             </button>
             <button disabled={!isFormValid} onClick={() => submitSettings(settingInputName, inputValue, innerObjectName)} className="tinder__content-setting-submit-button">
