@@ -1,10 +1,12 @@
+import { faBriefcase, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import photo from '../../assets/images/photos/1.jpg'
-import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBriefcase, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { AppStateType } from "../../redux/reduxStore"
 import { dialogs, pairs } from '../../assets/hardcodeObjects/hardcodeObjects'
-import { useSelector } from 'react-redux'
-import { AppStateType } from '../../redux/reduxStore'
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 type PairType = {
     id: number,
@@ -18,20 +20,42 @@ type DialogType = {
     lastMessage: string
 }
 
-interface TinderPropsInterface{
+interface ChatPropsInterface{
     isPairsOpened: boolean,
     setIsPairsOpened: (setting: boolean) => void
 }
 
-const Tinder: React.FC<TinderPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => {
+const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => {
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+
+    const [messages, setMessages] = useState([])
+    const [value, setValue] = useState('')
+
+    useEffect(() => {
+        subscribe()
+    }, [])
+
+    const subscribe = async () => {
+        const eventSource = new EventSource(`http://localhost:5000/api/chat/connect`)
+        eventSource.onmessage = (event: any) => {
+            const message = JSON.parse(event.data)
+            setMessages(prev => [...prev, message] as any)
+        }
+    }
+
+    const sendMessage = async () => {
+        await axios.post('http://localhost:5000/api/chat/sendMessage', {
+            message: value,
+            id: Date.now()
+        })
+    }
 
     let photoStyle = {
         backgroundImage: `url(${photo})`
     }
 
     return(
-    <div className="tinder">
+        <div className="tinder">
         <aside className="tinder__info">
             <div className="tinder__info-user">
                 <Link className="tinder__info-user-person" to='profile'>
@@ -60,7 +84,7 @@ const Tinder: React.FC<TinderPropsInterface> = ({isPairsOpened, setIsPairsOpened
                     <Link onClick={() => setIsPairsOpened(true)} className={'tinder__info-content-title ' + (isPairsOpened ? 'tinder__info-content-title--active' : '')} to='/'>
                         Pairs
                     </Link>
-                    <Link onClick={() => setIsPairsOpened(false)} className={'tinder__info-content-title ' + (!isPairsOpened ? 'tinder__info-content-title--active' : '')} to='/chat'>
+                    <Link onClick={() => setIsPairsOpened(false)} className={'tinder__info-content-title ' + (!isPairsOpened ? 'tinder__info-content-title--active' : '')} to='/'>
                         Messages
                     </Link>
                 </div>
@@ -100,35 +124,23 @@ const Tinder: React.FC<TinderPropsInterface> = ({isPairsOpened, setIsPairsOpened
                 </div>
             </div>
         </aside>
-        <div className="tinder__content">
-            <div className="tinder__content-search">
-                <div className="tinder__content-search-photo">
-                    <div className="tinder__content-search-descr">
-                        <div className="tinder__content-search-descr-person">
-                            Polina <span className="tinder__content-search-descr-years">17</span>
+        <div className="tinder__chat">
+            <div className="tinder__chat-container">
+                <div className="tinder__chat-messages">
+                    {messages.map((message: any) =>
+                        <div key={message.id} className="tinder__chat-message">
+                            {message.message}
                         </div>
-                        <div className="tinder__content-search-descr-distance">
-                            30 
-                            <span className="tinder__content-search-distance-text">
-                                &nbsp;miles from you
-                            </span>
-                        </div>
-                    </div>
-                    <div className="tinder__content-search-buttons">
-                        <button className="tinder__content-search-btn tinder__content-search-btn--small">cancel</button>
-                        <button className="tinder__content-search-btn tinder__content-search-btn--large">dislike</button>
-                        <button className="tinder__content-search-btn tinder__content-search-btn--small">super like</button>
-                        <button className="tinder__content-search-btn tinder__content-search-btn--large">like</button>
-                        <button className="tinder__content-search-btn tinder__content-search-btn--small">boost</button>
-                    </div>
+                    )}
                 </div>
-            </div>
-            <div className="tinder__content-instructions">
-
+                <div className="tinder__chat-form">
+                    <input value={value} onChange={(e) => setValue(e.target.value)} className="tinder__chat-form-input" type="text" />
+                    <button onClick={sendMessage} className="tinder__chat-form-button">send</button>
+                </div>
             </div>
         </div>
     </div>
     )
 }
 
-export default Tinder
+export default Chat

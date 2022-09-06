@@ -158,6 +158,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   margin-left: 15px;
   padding: 0 6px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .tinder__info-content-title--active{
@@ -1301,6 +1302,47 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__image-slider-item--bdrd-top{
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+}
+
+.tinder__chat{
+  height: 100vh;
+  width: 100%;
+  background-color: #f0f2f4;
+}
+
+.tinder__chat-container{
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tinder__chat-messages{
+  width: 100%;
+  height: calc(100% - 70px);
+}
+
+.tinder__chat-form{
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tinder__chat-form-input{
+  border: 1px solid #505965;
+  width: 300px;
+  height: 50px;
+}
+
+.tinder__chat-form-button{
+  width: 100px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #505965;
 }
 
 /* Authorization */
