@@ -25,7 +25,7 @@ class ChatController{
             const message = req.body
 
             emitter.emit('sendMessage', message)
-            res.status(200)
+            res.status(200).end()
         } catch (error: any) {
             next(error)
         }
