@@ -1,59 +1,32 @@
-import { NextFunction } from "express"
-import events from 'events'
+import ws from 'ws'
 
-const emitter = new events.EventEmitter()
+const wss = new ws.Server({
+    port: process.env.WSPORT as number | undefined,
+}, () => console.log(`WS Server started on port ${process.env.WSPORT}`))
 
-class ChatController{
+wss.on('connection', (ws) => {
+    ws.on('message', (message: any) => {
+        message = JSON.parse(message)
+        
+        switch (message.event) {
+            case 'message':
 
-    async connect(req: any, res: any, next: NextFunction) {
-        try {
-            res.writeHead(200, {
-                'Connection': 'keep-alive',
-                'Content-type': 'text/event-stream',
-                'Cache-Control': 'no-cache'
-            })
-            emitter.on('sendMessage', (message) => {
-                res.write(`data: ${JSON.stringify(message)}\n\n`)
-            })
-        } catch (error: any) {
-            next(error)
+                broadcastMessage(message)
+                break;
+            case 'connection':
+
+                broadcastMessage(message)
+                break;
+            default:
+                break;
         }
-    }
+    })
+})
 
-    async sendMessage(req: any, res: any, next: NextFunction) {
-        try {
-            const message = req.body
-
-            emitter.emit('sendMessage', message)
-            res.status(200).end()
-        } catch (error: any) {
-            next(error)
-        }
-    }
-
-
-
-    /* // Long pulling method
-    async getMessages(req: any, res: any, next: NextFunction) {
-        try {
-            emitter.once('sendMessage', (message) => {
-                res.json(message)
-            })
-        } catch (error: any) {
-            next(error)
-        }
-    }
-
-    async sendMessage(req: any, res: any, next: NextFunction) {
-        try {
-            const message = req.body
-
-            emitter.emit('sendMessage', message)
-            res.status(200)
-        } catch (error: any) {
-            next(error)
-        }
-    } */
+function broadcastMessage(message: any) {
+    wss.clients.forEach(client => {
+        client.send(JSON.stringify(message))
+    })
 }
 
-export default new ChatController()
+export default wss
