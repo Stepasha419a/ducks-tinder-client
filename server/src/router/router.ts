@@ -23,6 +23,7 @@ router.delete('/users/:id', authMiddleware, userController.delete)
 router.post('/users/savePicture', authMiddleware, userController.savePicture)
 router.put('/users/deletePicture', authMiddleware, userController.deletePicture)
 
-router.post('/chat/create', authMiddleware, ChatController.createDialog)
+router.post('/chat', authMiddleware, ChatController.createDialog)
+router.delete('/chat/:id', authMiddleware,  ChatController.deleteDialog)
 
 export default router

@@ -12,9 +12,22 @@ class ChatService{
 
         const response = await DialogModel.create({members})
 
-        members.forEach(async (_id) => {
-            const user = await UserModel.findById(_id)
-            await UserModel.findByIdAndUpdate(_id, {dialogs: [...user.dialogs, response._id]}, {new: true})
+        members.forEach(async (id) => {
+            const user = await UserModel.findById(id)
+            await UserModel.findByIdAndUpdate(id, {dialogs: [...user.dialogs, response._id]}, {new: true})
+        })
+
+        return response
+    }
+
+    async deleteDialog(dialogId: string) {
+        const response = await DialogModel.findByIdAndDelete(dialogId)
+
+        response.members.forEach(async (id: string) => {
+            const user = await UserModel.findById(id)
+            const index = user.dialogs.find((item: any) => item === dialogId)
+            user.dialogs.splice(index, 1)
+            await UserModel.findByIdAndUpdate(id, {dialogs: user.dialogs}, {new: true})
         })
 
         return response

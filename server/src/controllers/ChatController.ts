@@ -26,8 +26,15 @@ class ChatController{
 
     }
 
-    async deleteDialog() {
+    async deleteDialog(req: any, res: any, next: NextFunction) {
+        try {
+            const dialogId = req.params.id
 
+            const response = await chatService.deleteDialog(dialogId)
+            return res.json(response)
+        } catch (error) {
+            next(error)
+        }
     }
 }
 
