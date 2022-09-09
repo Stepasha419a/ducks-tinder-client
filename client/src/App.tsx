@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import LoginForm from './components/Forms/LoginForm';
 import Tinder from './components/Tinder/Tinder';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import { useEffect, useState } from 'react';
 import { checkAuthThunk } from './redux/authReducer';
@@ -25,6 +25,12 @@ function App() {
   useEffect(() => {
     dispatch(checkAuthThunk() as any)
   }, [dispatch])
+  
+  const pathname = useLocation().pathname
+
+  useEffect(() => {
+    pathname === '/chat' ? setIsPairsOpened(false) : setIsPairsOpened(true);
+  }, [pathname])
 
   /* useEffect(() => {
     if(isAuth && (!user.picture || !user.description)) {
