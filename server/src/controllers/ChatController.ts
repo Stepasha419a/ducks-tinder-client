@@ -1,4 +1,35 @@
+import { NextFunction } from 'express'
 import ws from 'ws'
+import chatService from '../services/ChatService'
+
+class ChatController{
+    async createDialog(req: any, res: any, next: NextFunction) {
+        try {
+            const members = req.body
+
+            const response = await chatService.createDialog(members)
+            return res.json(response)
+        } catch (error) {
+            next(error)
+        } 
+    }
+
+    async connect(req: any, res: any, next: NextFunction) {
+        try {
+            
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async disconnect() {
+
+    }
+
+    async deleteDialog() {
+
+    }
+}
 
 const wss = new ws.Server({
     port: process.env.WSPORT as number | undefined,
@@ -29,4 +60,4 @@ function broadcastMessage(message: any) {
     })
 }
 
-export default wss
+export default new ChatController()

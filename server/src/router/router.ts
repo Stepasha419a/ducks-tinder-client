@@ -3,7 +3,7 @@ import userController from '../controllers/UserController'
 import { body } from 'express-validator'
 import authController from '../controllers/AuthController'
 import authMiddleware from '../middlewares/auth-middleware'
-import wss from '../controllers/ChatController'
+import ChatController from '../controllers/ChatController'
 const router = new (Router as any)()
 
 router.post('/registration', 
@@ -23,6 +23,6 @@ router.delete('/users/:id', authMiddleware, userController.delete)
 router.post('/users/savePicture', authMiddleware, userController.savePicture)
 router.put('/users/deletePicture', authMiddleware, userController.deletePicture)
 
-wss
+router.post('/chat/create', authMiddleware, ChatController.createDialog)
 
 export default router

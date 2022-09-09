@@ -22,6 +22,7 @@ export interface IUser {
         avatar: string
         gallery: string[]
     }
+    dialogs: string[]
 }
 
 export interface IUserUnrequired {
@@ -46,6 +47,7 @@ export interface IUserUnrequired {
             to?: number
         }
     }
+    dialogs?: string[]
 }
 
 export const makeUserObject = (args: {currentUser: IUser | any, inputName: string, changedData: String | Number | Boolean | {from: number, to: number}, innerObjectName?: string}) => {

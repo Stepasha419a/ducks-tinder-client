@@ -15,7 +15,6 @@ export interface picturesInterface{
     avatar: string
     gallery: string[]
 }
-
 const UserSchema = new mongoose.Schema({
     email: {type: String, unique: true, required: true},
     name: {type: String, required: true, default: 'Unnamed user'},
@@ -27,7 +26,8 @@ const UserSchema = new mongoose.Schema({
     age: {type: Number},
     sex: {type: String},
     partnerSettings: {type: {} as partnerSettingsInterface},
-    pictures: {type: {} as picturesInterface}
+    pictures: {type: {} as picturesInterface},
+    dialogs: {type: [] as string[], default: []}
 })
 
 export default mongoose.model('User', UserSchema)
