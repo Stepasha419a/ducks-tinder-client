@@ -6,6 +6,12 @@ interface MessageInterface{
     author: string
 }
 
+export interface IDialog{
+    _id: string
+    messages: MessageInterface[]
+    members: String[]
+}
+
 const DialogSchema = new mongoose.Schema({
     messages: {type: [] as MessageInterface[]},
     members: {type: [] as String[]}
