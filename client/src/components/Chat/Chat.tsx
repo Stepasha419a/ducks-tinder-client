@@ -17,7 +17,7 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) =
     const [connected, setConnected] = useState(false)
 
     function connect() {
-        socket.current = new WebSocket('ws://localhost:5001')
+        socket.current = new WebSocket('ws://localhost:5001/631ce80629e52709bada95d1')
         
         socket.current.onopen = () => {
             setConnected(true)

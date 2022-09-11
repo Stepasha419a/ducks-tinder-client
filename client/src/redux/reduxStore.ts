@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit"
 import { Action, combineReducers } from "redux"
 import { ThunkAction } from "redux-thunk"
 import authReducer from "./authReducer"
+import chatReducer from "./chatReducer"
 import usersReducer from "./usersReducer"
 
 let rootReducer = combineReducers({
     usersPage: usersReducer,
-    authPage: authReducer
+    authPage: authReducer,
+    chat: chatReducer
 })
 
 type RootReducerType = typeof rootReducer
