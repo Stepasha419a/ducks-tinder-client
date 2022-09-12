@@ -1,13 +1,6 @@
-import { WebSocketServer } from "ws";
 import ApiError from "../exceptions/api-error";
-import DialogModel, { IDialog } from "../models/dialog-model";
+import DialogModel, { IDialog, MessageInterface } from "../models/dialog-model";
 import UserModel from "../models/user-model";
-
-function broadcastMessage(message: any, wss: WebSocketServer) {
-    wss.clients.forEach(client => {
-        client.send(JSON.stringify(message))
-    })
-}
 
 class ChatService{
     async getDialogs(userId: string) {
@@ -33,6 +26,19 @@ class ChatService{
         return dialog
     }
     
+    async sendMessage(username: string, dialogId: string, message: string) {
+        const dialog = await DialogModel.findById(dialogId)
+            .catch(() => {throw ApiError.BadRequest(`Dialog не найден`)})
+
+        const newMessage: MessageInterface = {
+            id: Date.now().toString(),
+            content: message,
+            username
+        }
+
+        await DialogModel.findByIdAndUpdate(dialogId, {messages: [...dialog.messages, newMessage]}, {new: true})
+    }
+    
     async createDialog(members: string[]) {
         const dialogCandidate = await DialogModel.findOne({members})
         const dialogCandidateReverseIDs = await DialogModel.findOne({members: members.reverse()})
@@ -48,32 +54,6 @@ class ChatService{
         })
 
         return response
-    }
-
-    async connect(wss: WebSocketServer, dialogId: string) {
-        wss.on('connection', (ws) => {
-            ws.on('message', async (message: any) => {
-                message = JSON.parse(message)
-                
-                switch (message.event) {
-                    case 'message':
-        
-                        const dialog = await DialogModel.findById(dialogId)
-                            .catch(() => {throw ApiError.BadRequest(`Dialog не найден`)})
-
-                        await DialogModel.findByIdAndUpdate(dialogId, {messages: [...dialog.messages, message]}, {new: true})
-
-                        broadcastMessage(message, wss)
-                        break;
-                    case 'connection':
-        
-                        broadcastMessage(message, wss)
-                        break;
-                    default:
-                        break;
-                }
-            })
-        })
     }
 
     async deleteDialog(dialogId: string) {

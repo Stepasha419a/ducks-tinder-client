@@ -7,6 +7,7 @@ import fileUpload from 'express-fileupload'
 import { ConnectionOptions } from 'tls'
 import cors from 'cors'
 import errorMiddleware from './middlewares/error-middleware'
+import wss from './services/WebsocketService'
 
 const PORT = process.env.PORT
 
@@ -22,6 +23,8 @@ app.use(express.static('static'))
 app.use(fileUpload({}))
 app.use('/api', router)
 app.use(errorMiddleware)
+
+wss // starting websocket server
 
 async function startApp() {
     try {

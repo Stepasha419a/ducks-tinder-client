@@ -1,11 +1,5 @@
 import { NextFunction } from 'express'
-import ws from 'ws'
 import chatService from '../services/ChatService'
-
-const wss = new ws.Server({
-    port: process.env.WSPORT as number | undefined,
-    backlog: 10
-}, () => console.log(`WS Server started on port ${process.env.WSPORT}`))
 
 class ChatController{
     async getDialogs(req: any, res: any, next: NextFunction) {
@@ -51,17 +45,6 @@ class ChatController{
         } catch (error) {
             next(error)
         } 
-    }
-
-    async connect(req: any, res: any, next: NextFunction) {
-        try {
-            const dialogId = req.params.id
-
-            await chatService.connect(wss, dialogId)
-            
-        } catch (error) {
-            next(error)
-        }
     }
 
     async disconnect(req: any, res: any, next: NextFunction) {

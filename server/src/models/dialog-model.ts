@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-interface MessageInterface{
+export interface MessageInterface{
     id: string
     content: string
-    author: string
+    username: string
 }
 
 export interface IDialog{
