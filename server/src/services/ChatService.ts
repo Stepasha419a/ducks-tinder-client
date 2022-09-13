@@ -9,12 +9,14 @@ class ChatService{
         }
 
         const user = await UserModel.findById(userId)
-        const dialogs = []
+        const dialogs = [] as IDialog[]
 
-        user.dialogs.forEach(async (dialogId: IDialog) => {
-            const dialog = await UserModel.findById(dialogId)
-            dialogs.push(dialog)
-        })
+        for await (let dialogId of user.dialogs) {
+            const dialog = await DialogModel.findById(dialogId)
+            dialogs.push({_id: dialog._id.toString(), messages: dialog.messages, members: dialog.members})
+        }
+
+        return dialogs
     }
 
     async getDialog(dialogId: string) {
@@ -50,7 +52,7 @@ class ChatService{
 
         members.forEach(async (id) => {
             const user = await UserModel.findById(id)
-            await UserModel.findByIdAndUpdate(id, {dialogs: [...user.dialogs, response._id]}, {new: true})
+            await UserModel.findByIdAndUpdate(id, {dialogs: [...user.dialogs, response._id.toString()]}, {new: true})
         })
 
         return response

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { chatApi } from "../api/chatApi";
 import { usersAPI } from "../api/usersApi";
 import { IDialog } from "../models/IDialog";
 
@@ -23,6 +24,26 @@ const chatReducer = createSlice({
         } */
     }
 })
+
+export const getDialogsThunk = createAsyncThunk(
+    'chat/getDialogs',
+    async function(args: {id: string}, {rejectWithValue, dispatch}) {
+        try {
+            const response = await chatApi.getDialogs(args.id)
+
+            if(!response) {
+                throw new Error("Can't get dialogs. Server Error");
+            }
+
+            console.log(response)
+
+            //dispatch(setUsers(data))
+
+        } catch (error: any) {
+            return rejectWithValue(error.message)
+        }
+    }
+)
 
 export const connectChatThunk = createAsyncThunk(
     'chat/connectChat',
