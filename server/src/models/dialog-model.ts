@@ -6,6 +6,11 @@ export interface MessageInterface{
     username: string
 }
 
+export interface MemberInterface{
+    id: string,
+    name: string
+}
+
 export interface IDialog{
     _id: string
     messages: MessageInterface[]
@@ -14,7 +19,7 @@ export interface IDialog{
 
 const DialogSchema = new mongoose.Schema({
     messages: {type: [] as MessageInterface[]},
-    members: {type: [] as String[]}
+    members: {type: [] as MemberInterface[]}
 })
 
 export default mongoose.model('Dialog', DialogSchema)

@@ -2,6 +2,11 @@ import ApiError from "../exceptions/api-error";
 import DialogModel, { IDialog, MessageInterface } from "../models/dialog-model";
 import UserModel from "../models/user-model";
 
+interface dialogMembersInterface{
+    id: string
+    name: string
+}
+
 class ChatService{
     async getDialogs(userId: string) {
         if(!userId) {
@@ -41,7 +46,7 @@ class ChatService{
         await DialogModel.findByIdAndUpdate(dialogId, {messages: [...dialog.messages, newMessage]}, {new: true})
     }
     
-    async createDialog(members: string[]) {
+    async createDialog(members: dialogMembersInterface[]) {
         const dialogCandidate = await DialogModel.findOne({members})
         const dialogCandidateReverseIDs = await DialogModel.findOne({members: members.reverse()})
         if(dialogCandidate || dialogCandidateReverseIDs) {
@@ -50,9 +55,9 @@ class ChatService{
 
         const response = await DialogModel.create({members})
 
-        members.forEach(async (id) => {
-            const user = await UserModel.findById(id)
-            await UserModel.findByIdAndUpdate(id, {dialogs: [...user.dialogs, response._id.toString()]}, {new: true})
+        members.forEach(async (member) => {
+            const user = await UserModel.findById(member.id)
+            await UserModel.findByIdAndUpdate(member.id, {dialogs: [...user.dialogs, response._id.toString()]}, {new: true})
         })
 
         return response
@@ -61,11 +66,11 @@ class ChatService{
     async deleteDialog(dialogId: string) {
         const response = await DialogModel.findByIdAndDelete(dialogId)
 
-        response.members.forEach(async (id: string) => {
-            const user = await UserModel.findById(id)
+        response.members.forEach(async (member: dialogMembersInterface) => {
+            const user = await UserModel.findById(member.id)
             const index = user.dialogs.find((item: any) => item === dialogId)
             user.dialogs.splice(index, 1)
-            await UserModel.findByIdAndUpdate(id, {dialogs: user.dialogs}, {new: true})
+            await UserModel.findByIdAndUpdate(member.id, {dialogs: user.dialogs}, {new: true})
         })
 
         return response

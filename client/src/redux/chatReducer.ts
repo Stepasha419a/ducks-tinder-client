@@ -35,9 +35,9 @@ export const getDialogsThunk = createAsyncThunk(
                 throw new Error("Can't get dialogs. Server Error");
             }
 
-            console.log(response)
+            const data = await response.data
 
-            //dispatch(setUsers(data))
+            dispatch(setDialogs(data))
 
         } catch (error: any) {
             return rejectWithValue(error.message)
@@ -64,5 +64,7 @@ export const connectChatThunk = createAsyncThunk(
         }
     }
 )
+
+export const {setDialogs} = chatReducer.actions
 
 export default chatReducer.reducer

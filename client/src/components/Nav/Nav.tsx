@@ -4,18 +4,13 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import photo from '../../assets/images/photos/1.jpg'
 import { AppStateType } from '../../redux/reduxStore'
-import { dialogs, pairs } from '../../assets/hardcodeObjects/hardcodeObjects'
+import { pairs } from '../../assets/hardcodeObjects/hardcodeObjects'
+import Dialogs from '../Dialogs/Dialogs'
 
 type PairType = {
     id: number,
     img: string,
     name: string
-}
-type DialogType = {
-    id: number,
-    img: string,
-    name: string,
-    lastMessage: string
 }
 
 interface NavPropsInterface{
@@ -78,23 +73,7 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => 
                     })}
                     </div>
                     :
-                    <div className="tinder__info-content-dialogs">
-                    {dialogs.map((item: DialogType) => {
-                        return (
-                            <div className="tinder__info-content-dialogs-item" key={item.id}>
-                                <div className="tinder__info-content-dialogs-item-photo" style={photoStyle}/>
-                                <div className="tinder__info-content-dialogs-item-descr">
-                                    <div className="tinder__info-content-dialogs-item-descr-name">
-                                        {item.name}
-                                    </div>
-                                    <div className="tinder__info-content-dialogs-item-descr-message">
-                                        {item.lastMessage}
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-                    </div>
+                    <Dialogs />
                     }
                 </div>
             </div>

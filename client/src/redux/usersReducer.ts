@@ -39,6 +39,26 @@ export const fetchUsersThunk = createAsyncThunk(
     }
 )
 
+export const getUserThunk = createAsyncThunk(
+    'users/getUser',
+    async function(args: {id: String}, {rejectWithValue, dispatch}) {
+        try {
+            const response = await usersAPI.getCurrentUser(args.id)
+
+            if(!response) {
+                throw new Error("Can't get users. Server Error");
+            }
+
+            const data = await response.data
+            
+            return data
+
+        } catch (error: any) {
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
 export const updateUserThunk = createAsyncThunk(
     'users/updateUser',
     async (args: {currentUser: IUser, inputName: string, changedData: String | Number | Boolean | {from: number, to: number}, innerObjectName?: string}, {rejectWithValue, dispatch}) => {

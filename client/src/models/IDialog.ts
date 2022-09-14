@@ -4,8 +4,13 @@ interface MessageInterface{
     username: string
 }
 
+export interface MemberInterface{
+    id: string,
+    name: string
+}
+
 export interface IDialog {
     _id: string
     messages: MessageInterface[]
-    members: String[]
+    members: MemberInterface[]
 }

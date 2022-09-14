@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { KeyboardEvent, MutableRefObject, useEffect, useRef, useState } from "react"
+import { KeyboardEvent, MutableRefObject, useRef, useState } from "react"
 import Nav from "../Nav/Nav"
-import { getDialogsThunk } from "../../redux/chatReducer"
 
 interface ChatPropsInterface{
     isPairsOpened: boolean,
@@ -10,8 +9,6 @@ interface ChatPropsInterface{
 }
 
 const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => {
-    const dispatch = useDispatch()
-
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
 
     const [messages, setMessages] = useState([] as string[])
@@ -20,7 +17,7 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) =
     const [connected, setConnected] = useState(false)
 
     function connect() {
-        socket.current = new WebSocket('ws://localhost:5001/631f6fe0d5893b7010cf8db8')
+        socket.current = new WebSocket('ws://localhost:5001/6321cf9571d86489467bf5e2')
         
         socket.current.onopen = () => {
             setConnected(true)
@@ -38,6 +35,7 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) =
 
     const sendMessage = async () => {
         const message = {
+            id: Date.now(),
             username: currentUser.name,
             content: value,
         }

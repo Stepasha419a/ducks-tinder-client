@@ -15,7 +15,7 @@ export const usersAPI = {
         return instance.get('users')
             .then(res => res)
     },
-    getCurrentUser(id: string): Promise<AxiosResponse<IUser>> {
+    getCurrentUser(id: String): Promise<AxiosResponse<IUser>> {
         return instance.get(`users/${id}`)
             .then(res => res)
     },
