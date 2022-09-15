@@ -1,5 +1,7 @@
 import fileService from "./fileService";
 import UserModel from "../models/user-model";
+import UserDto from "../dtos/userDto";
+import ApiError from "../exceptions/api-error";
 
 class UserService{
 
@@ -15,8 +17,11 @@ class UserService{
         }
 
         const user = await UserModel.findById(id)
+        if(!user) {throw ApiError.BadRequest('User не найден')}
+        
+        const userDto = new UserDto(user)
     
-        return user
+        return userDto
     }
 
     async update(user: any) {

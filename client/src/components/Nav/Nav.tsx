@@ -2,10 +2,10 @@ import { faBriefcase, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import photo from '../../assets/images/photos/1.jpg'
 import { AppStateType } from '../../redux/reduxStore'
 import { pairs } from '../../assets/hardcodeObjects/hardcodeObjects'
 import Dialogs from '../Dialogs/Dialogs'
+import Avatar from '../Avatar/Avatar'
 
 type PairType = {
     id: number,
@@ -18,10 +18,6 @@ interface NavPropsInterface{
     setIsPairsOpened: (setting: boolean) => void
 }
 
-const photoStyle = {
-    backgroundImage: `url(${photo})`
-}
-
 const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => {
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
 
@@ -29,11 +25,7 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => 
         <aside className="tinder__info">
             <div className="tinder__info-user">
                 <Link className="tinder__info-user-person" to='/profile'>
-                    {currentUser.pictures.avatar ?
-                    <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} className="tinder__info-user-photo"></div>
-                    :
-                    <div style={{backgroundImage: `url(${photo})`}} className="tinder__info-user-photo"></div>
-                    }
+                    <Avatar />
                     <div className="tinder__info-user-name">
                         {currentUser.name}
                     </div>
@@ -64,7 +56,7 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => 
                     {pairs.map((item: PairType) => {
                         return (
                             <div className="tinder__info-content-pairs-item" key={item.id}>
-                                <div className="tinder__info-content-pairs-item-photo" style={photoStyle}/>
+                                <Avatar showDefaultPhoto />
                                 <div className="tinder__info-content-pairs-item-name">
                                     {item.name}
                                 </div>
