@@ -45,6 +45,26 @@ export const getDialogsThunk = createAsyncThunk(
     }
 )
 
+export const getDialogThunk = createAsyncThunk(
+    'chat/getDialog',
+    async function(args: {id: string}, {rejectWithValue}) {
+        try {
+            const response = await chatApi.getDialog(args.id)
+
+            if(!response) {
+                throw new Error("Can't get dialog. Server Error");
+            }
+
+            const data = await response.data
+
+            return data
+
+        } catch (error: any) {
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
 export const connectChatThunk = createAsyncThunk(
     'chat/connectChat',
     async function(_, {rejectWithValue, dispatch}) {
@@ -62,6 +82,27 @@ export const connectChatThunk = createAsyncThunk(
         } catch (error: any) {
             return rejectWithValue(error.message)
         }
+    }
+)
+
+export const connect = createAsyncThunk(
+    'chat/connectChat',
+    async function (args: {socket: any}, {rejectWithValue, dispatch}) {
+        const {socket} = args
+        socket.current = new WebSocket('ws://localhost:5001/6321d9c182a36d7a054c36f2')
+    
+        socket.current.onopen = () => {
+            //setConnected(true)
+        }
+    
+        socket.current.onmessage = (event: any) => {
+            //const message = JSON.parse(event.data)
+            //setMessages((prev: string[]) => [...prev, message])
+        }
+    
+        socket.current.onclose = () => {
+            //setConnected(false)
+        }   
     }
 )
 

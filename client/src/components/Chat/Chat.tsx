@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
 import { KeyboardEvent, MutableRefObject, useRef, useState } from "react"
 import Nav from "../Nav/Nav"
+import { getDialogThunk } from "../../redux/chatReducer"
 
 interface ChatPropsInterface{
     isPairsOpened: boolean,
@@ -9,6 +10,8 @@ interface ChatPropsInterface{
 }
 
 const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => {
+    const dispatch = useDispatch()
+
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
 
     const [messages, setMessages] = useState([] as string[])
@@ -21,6 +24,8 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) =
         
         socket.current.onopen = () => {
             setConnected(true)
+            dispatch(getDialogThunk({id: '6321d9c182a36d7a054c36f2'}) as any)
+                .then((res: any) => setMessages(res.payload.messages))
         }
 
         socket.current.onmessage = (event: any) => {
@@ -56,7 +61,7 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) =
                 {connected ?
                     <div className="tinder__chat-container">
                         <div className="tinder__chat-messages">
-                            {messages.slice(1).map((message: any) =>
+                            {messages.map((message: any) =>
                                 <div key={message.id} className="tinder__chat-message">
                                     {message.username}: {message.content}
                                 </div>

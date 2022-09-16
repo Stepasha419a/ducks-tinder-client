@@ -6,5 +6,9 @@ export const chatApi = {
     getDialogs(id: string): Promise<AxiosResponse<IDialog[]>> {
         return instance.get(`chat/${id}`)
             .then(res => res)
+    },
+    getDialog(id: string): Promise<AxiosResponse<IDialog>> {
+        return instance.get(`chat/one/${id}`)
+            .then(res => res)
     }
 }
