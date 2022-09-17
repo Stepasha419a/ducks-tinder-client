@@ -1,4 +1,4 @@
-interface MessageInterface{
+export interface MessageInterface{
     id: string
     content: string
     username: string

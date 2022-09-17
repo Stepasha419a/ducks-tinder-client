@@ -1,27 +1,26 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import { chatApi } from "../api/chatApi";
-import { usersAPI } from "../api/usersApi";
-import { IDialog } from "../models/IDialog";
+import { IDialog, MessageInterface } from "../models/IDialog";
 
 const chatReducer = createSlice({
     name: 'chat',
     initialState: {
         dialogs: [] as IDialog[],
-        currentConnection: ''
+        isConnected: false,
+        currentMessages: [] as MessageInterface[]
     },
     reducers: {
         setDialogs: (state, action) => {
             state.dialogs = action.payload
         },
-        setCurrentConnection: (state, action) => {
-            state.currentConnection = action.payload
-        }
-        /* setUsers: (state, action) => {
-            state.users = action.payload
+        setIsConnected: (state, action) => {
+            state.isConnected = action.payload
         },
-        setCurrentUser: (state, action) => {
-            state.currentUser = action.payload
-        } */
+        setCurrentMessages: (state, action) => {
+            if(action.payload.length === 0) {state.currentMessages = []}
+            else if( Array.isArray(action.payload)) { state.currentMessages = [...state.currentMessages, ...action.payload] }
+            else { state.currentMessages = [...state.currentMessages, action.payload] }
+        }
     }
 })
 
@@ -45,39 +44,29 @@ export const getDialogsThunk = createAsyncThunk(
     }
 )
 
-export const getDialogThunk = createAsyncThunk(
-    'chat/getDialog',
-    async function(args: {id: string}, {rejectWithValue}) {
-        try {
-            const response = await chatApi.getDialog(args.id)
-
-            if(!response) {
-                throw new Error("Can't get dialog. Server Error");
-            }
-
-            const data = await response.data
-
-            return data
-
-        } catch (error: any) {
-            return rejectWithValue(error.message)
-        }
-    }
-)
-
 export const connectChatThunk = createAsyncThunk(
     'chat/connectChat',
-    async function(_, {rejectWithValue, dispatch}) {
+    async function(args: {socket: any, dialogId: string}, {rejectWithValue, dispatch}) {
         try {
-            const response = await usersAPI.getUsers()
-
-            if(!response) {
-                throw new Error("Can't get users. Server Error");
+            const {socket, dialogId} = args
+            socket.current = new WebSocket(`ws://localhost:5001/${dialogId}`)
+            
+            socket.current.onopen = async () => {
+                dispatch(setIsConnected(true))
+                const response = await chatApi.getDialog(dialogId)
+                const dialog = await response.data
+                dispatch(setCurrentMessages(dialog.messages))
+            }
+    
+            socket.current.onmessage = (event: any) => {
+                const message: MessageInterface = JSON.parse(event.data)
+                dispatch(setCurrentMessages(message))
             }
 
-            //const data = await response.data
-
-            //dispatch(setUsers(data))
+            socket.current.onclose = () => {
+                dispatch(setIsConnected(false))
+                dispatch(setCurrentMessages([]))
+            }
 
         } catch (error: any) {
             return rejectWithValue(error.message)
@@ -85,27 +74,20 @@ export const connectChatThunk = createAsyncThunk(
     }
 )
 
-export const connect = createAsyncThunk(
-    'chat/connectChat',
-    async function (args: {socket: any}, {rejectWithValue, dispatch}) {
-        const {socket} = args
-        socket.current = new WebSocket('ws://localhost:5001/6321d9c182a36d7a054c36f2')
-    
-        socket.current.onopen = () => {
-            //setConnected(true)
+export const disconnectChatThunk = createAsyncThunk(
+    'chat/disconnectChat',
+    function(args: {socket: any}, {rejectWithValue}) {
+        try {
+            const {socket} = args
+
+            socket.current.close()
+
+        } catch (error: any) {
+            return rejectWithValue(error.message)
         }
-    
-        socket.current.onmessage = (event: any) => {
-            //const message = JSON.parse(event.data)
-            //setMessages((prev: string[]) => [...prev, message])
-        }
-    
-        socket.current.onclose = () => {
-            //setConnected(false)
-        }   
     }
 )
 
-export const {setDialogs} = chatReducer.actions
+export const {setDialogs, setIsConnected, setCurrentMessages} = chatReducer.actions
 
 export default chatReducer.reducer

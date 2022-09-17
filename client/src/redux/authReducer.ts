@@ -28,7 +28,6 @@ const authReducer = createSlice({
             state.isLoading = action.payload
         },
         setFormError(state, action) {
-            console.log(action)
             state.formError = action.payload
         }
     }

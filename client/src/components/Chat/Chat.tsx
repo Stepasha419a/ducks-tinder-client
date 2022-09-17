@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { KeyboardEvent, MutableRefObject, useRef, useState } from "react"
+import { KeyboardEvent, MutableRefObject, useEffect, useRef, useState } from "react"
 import Nav from "../Nav/Nav"
-import { getDialogThunk } from "../../redux/chatReducer"
+import { connectChatThunk, disconnectChatThunk } from "../../redux/chatReducer"
 
 interface ChatPropsInterface{
     isPairsOpened: boolean,
@@ -13,30 +13,21 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) =
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+    const messages = useSelector((state: AppStateType) => state.chat.currentMessages)
+    const isConnected = useSelector((state: AppStateType) => state.chat.isConnected)
 
-    const [messages, setMessages] = useState([] as string[])
     const [value, setValue] = useState('')
     const socket: MutableRefObject<WebSocket | undefined> = useRef()
-    const [connected, setConnected] = useState(false)
 
     function connect() {
-        socket.current = new WebSocket('ws://localhost:5001/6321d9c182a36d7a054c36f2')
-        
-        socket.current.onopen = () => {
-            setConnected(true)
-            dispatch(getDialogThunk({id: '6321d9c182a36d7a054c36f2'}) as any)
-                .then((res: any) => setMessages(res.payload.messages))
-        }
-
-        socket.current.onmessage = (event: any) => {
-            const message = JSON.parse(event.data)
-            setMessages((prev: string[]) => [...prev, message])
-        }
-
-        socket.current.onclose = () => {
-            setConnected(false)
-        }
+        dispatch(connectChatThunk({socket, dialogId: '6321d9c182a36d7a054c36f2'}) as any)
     }
+
+    useEffect(() => {
+        return () => {
+            dispatch(disconnectChatThunk({socket}) as any)
+        }
+    }, [dispatch, socket])
 
     const sendMessage = async () => {
         const message = {
@@ -58,7 +49,7 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened}) =
         <div className="tinder">
             <Nav isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened}/>
             <div className="tinder__chat">
-                {connected ?
+                {isConnected ?
                     <div className="tinder__chat-container">
                         <div className="tinder__chat-messages">
                             {messages.map((message: any) =>
