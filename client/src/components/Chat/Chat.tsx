@@ -1,9 +1,12 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { KeyboardEvent, MutableRefObject, useState } from "react"
+import { KeyboardEvent, MutableRefObject, useEffect, useState } from "react"
 import Nav from "../Nav/Nav"
 import Message from "./Message/Message"
 import { MessageInterface } from "../../models/IDialog"
+import { IUser } from "../../models/IUser"
+import { getUserThunk } from "../../redux/usersReducer"
+import { setIncludedMembersIds } from "../../redux/chatReducer"
 
 interface ChatPropsInterface{
     isPairsOpened: boolean,
@@ -12,10 +15,27 @@ interface ChatPropsInterface{
 }
 
 const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, socket}) => {
+    const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
     const messages = useSelector((state: AppStateType) => state.chat.currentMessages)
     const isConnected = useSelector((state: AppStateType) => state.chat.isConnected)
+    const members = useSelector((state: AppStateType) => state.chat.currentMembers)
+    const includedMembersIds = useSelector((state: AppStateType) => state.chat.includedMembersIds)
+
+    const [userMembers, setUserMembers] = useState([] as IUser[])
+
+    console.log(userMembers)
+
+    useEffect(() => {
+        members.forEach(async (member) => {
+            if(!includedMembersIds.includes(member.id)) {
+                dispatch(setIncludedMembersIds(member.id))
+                const user = await dispatch(getUserThunk({id: member.id}) as any)
+                setUserMembers(prev => [...prev, user.payload])
+            }
+        })
+    }, [members, dispatch, includedMembersIds])
 
     const [value, setValue] = useState('')
 

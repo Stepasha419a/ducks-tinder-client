@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { IDialog, MemberInterface } from "../../../models/IDialog"
 import { getDialogsThunk } from "../../../redux/chatReducer"
 import { AppStateType } from "../../../redux/reduxStore"
-import { getUserThunk } from "../../../redux/usersReducer"
 import Dialog from "./Dialog"
 
 interface DialogsInterface{
@@ -17,7 +16,7 @@ const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
     const dialogs = useSelector((state: AppStateType) => state.chat.dialogs)
     const currentDialogId = useSelector((state: AppStateType) => state.chat.currentDialogId)
 
-    useEffect(() => {
+    /* useEffect(() => {
         dialogs.forEach((dialog) => {
             dialog.members.forEach((member) => {
                 if(!(member.id === currentUser._id)) {
@@ -25,7 +24,7 @@ const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
                 }
             })
         })
-    }, [dialogs, currentUser._id, dispatch])
+    }, [dialogs, currentUser._id, dispatch]) */
 
     useEffect(() => {
         dispatch(getDialogsThunk({id: currentUser._id}) as any)

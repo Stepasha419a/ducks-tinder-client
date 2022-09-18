@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import { chatApi } from "../api/chatApi";
-import { IDialog, MessageInterface } from "../models/IDialog";
+import { IDialog, MemberInterface, MessageInterface } from "../models/IDialog";
 
 const chatReducer = createSlice({
     name: 'chat',
@@ -8,7 +8,9 @@ const chatReducer = createSlice({
         dialogs: [] as IDialog[],
         isConnected: false,
         currentMessages: [] as MessageInterface[],
-        currentDialogId: ''
+        currentDialogId: '',
+        currentMembers: [] as MemberInterface[],
+        includedMembersIds: [] as string[]
     },
     reducers: {
         setDialogs: (state, action) => {
@@ -24,6 +26,12 @@ const chatReducer = createSlice({
         },
         setCurrentDialogId: (state, action) => {
             state.currentDialogId = action.payload
+        },
+        setCurrentMembers: (state, action) => {
+            state.currentMembers = action.payload
+        },
+        setIncludedMembersIds: (state, action) => {
+            state.includedMembersIds = [...state.includedMembersIds, action.payload]
         }
     }
 })
@@ -61,6 +69,7 @@ export const connectChatThunk = createAsyncThunk(
                 const response = await chatApi.getDialog(dialogId)
                 const dialog = await response.data
                 dispatch(setCurrentMessages(dialog.messages))
+                dispatch(setCurrentMembers(dialog.members))
             }
     
             socket.current.onmessage = (event: any) => {
@@ -69,7 +78,6 @@ export const connectChatThunk = createAsyncThunk(
             }
 
             socket.current.onclose = () => {
-                console.log('disconnect')
                 dispatch(setIsConnected(false))
                 dispatch(setCurrentMessages([]))
                 dispatch(setCurrentDialogId(''))
@@ -95,6 +103,6 @@ export const disconnectChatThunk = createAsyncThunk(
     }
 )
 
-export const {setDialogs, setIsConnected, setCurrentMessages, setCurrentDialogId} = chatReducer.actions
+export const {setDialogs, setIsConnected, setCurrentMessages, setCurrentDialogId, setCurrentMembers, setIncludedMembersIds} = chatReducer.actions
 
 export default chatReducer.reducer

@@ -46,7 +46,7 @@ export const getUserThunk = createAsyncThunk(
             const response = await usersAPI.getCurrentUser(args.id)
 
             if(!response) {
-                throw new Error("Can't get users. Server Error");
+                throw new Error("Can't get user. Server Error");
             }
 
             const data = await response.data
