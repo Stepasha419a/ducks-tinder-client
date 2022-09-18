@@ -64,6 +64,7 @@ export const connectChatThunk = createAsyncThunk(
             }
 
             socket.current.onclose = () => {
+                console.log('disconnect')
                 dispatch(setIsConnected(false))
                 dispatch(setCurrentMessages([]))
             }

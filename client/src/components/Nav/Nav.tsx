@@ -6,6 +6,7 @@ import { AppStateType } from '../../redux/reduxStore'
 import { pairs } from '../../assets/hardcodeObjects/hardcodeObjects'
 import Dialogs from '../Dialogs/Dialogs'
 import Avatar from '../Avatar/Avatar'
+import { MutableRefObject } from 'react'
 
 type PairType = {
     id: number,
@@ -16,9 +17,10 @@ type PairType = {
 interface NavPropsInterface{
     isPairsOpened: boolean,
     setIsPairsOpened: (setting: boolean) => void
+    socket: MutableRefObject<WebSocket | undefined>
 }
 
-const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => {
+const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, socket}) => {
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
 
     return(
@@ -65,7 +67,7 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => 
                     })}
                     </div>
                     :
-                    <Dialogs />
+                    <Dialogs socket={socket}/>
                     }
                 </div>
             </div>

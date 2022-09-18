@@ -1,15 +1,17 @@
+import { MutableRefObject } from "react"
 import Nav from "../Nav/Nav"
 
 interface TinderPropsInterface{
     isPairsOpened: boolean,
     setIsPairsOpened: (setting: boolean) => void
+    socket: MutableRefObject<WebSocket | undefined>
 }
 
-const Tinder: React.FC<TinderPropsInterface> = ({isPairsOpened, setIsPairsOpened}) => {
+const Tinder: React.FC<TinderPropsInterface> = ({isPairsOpened, setIsPairsOpened, socket}) => {
 
     return(
     <div className="tinder">
-        <Nav isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened}/>
+        <Nav isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket}/>
         <div className="tinder__content">
             <div className="tinder__content-search">
                 <div className="tinder__content-search-photo">

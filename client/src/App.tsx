@@ -4,7 +4,7 @@ import LoginForm from './components/Forms/LoginForm';
 import Tinder from './components/Tinder/Tinder';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { checkAuthThunk } from './redux/authReducer';
 import { AppStateType } from './redux/reduxStore';
 import RegistrationForm from './components/Forms/Registration';
@@ -21,6 +21,8 @@ function App() {
   const isLoading = useSelector((state: AppStateType) => state.authPage.isLoading)
   const formError = useSelector((state: AppStateType) => state.authPage.formError)
   const [isPairsOpened, setIsPairsOpened] = useState(true)
+
+  const socket: MutableRefObject<WebSocket | undefined> = useRef()
 
   useEffect(() => {
     dispatch(checkAuthThunk() as any)
@@ -49,9 +51,9 @@ function App() {
         <Route path="/reg" element={<RegistrationForm formError={formError}/>}/>
 
           <Route path="/" element={<Layout />}>
-            <Route index element={<Tinder isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened}/>}/>
+            <Route index element={<Tinder isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket}/>}/>
             <Route path="profile" element={<Profile />}/>
-            <Route path="chat" element={<Chat isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened}/>}/>
+            <Route path="chat" element={<Chat isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket}/>}/>
             <Route path="policy" element={<Policy />}/>
             <Route path="*" element={<div>404 NOT FOUND</div>} />
           </Route>
