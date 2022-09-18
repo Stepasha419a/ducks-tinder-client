@@ -2,6 +2,8 @@ import { useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
 import { KeyboardEvent, MutableRefObject, useState } from "react"
 import Nav from "../Nav/Nav"
+import Message from "./Message/Message"
+import { MessageInterface } from "../../models/IDialog"
 
 interface ChatPropsInterface{
     isPairsOpened: boolean,
@@ -22,6 +24,7 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
             id: Date.now(),
             username: currentUser.name,
             content: value,
+            userId: currentUser._id
         }
         socket.current?.send(JSON.stringify(message))
         setValue('')
@@ -40,15 +43,15 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
                 {isConnected ?
                     <div className="tinder__chat-container">
                         <div className="tinder__chat-messages">
-                            {messages.map((message: any) =>
-                                <div key={message.id} className="tinder__chat-message">
-                                    {message.username}: {message.content}
-                                </div>
+                            {messages.map((message: MessageInterface) =>
+                                <Message key={message.id} message={message}/>
                             )}
                         </div>
-                        <div className="tinder__chat-form">
-                            <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="tinder__chat-form-input" type="text" />
-                            <button onClick={sendMessage} className="tinder__chat-form-button">send</button>
+                        <div className="tinder__chat-form-wrapper">
+                            <div className="tinder__chat-form">
+                                <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="tinder__chat-form-input" type="text" />
+                                <button onClick={sendMessage} className="tinder__chat-form-button">send</button>
+                            </div>
                         </div>
                     </div>
                 :

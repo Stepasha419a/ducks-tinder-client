@@ -191,6 +191,12 @@ textarea:-ms-input-placeholder { color: #999999; }
   background-color: rgba(0, 0, 0, 0.171);
 }
 
+.tinder__info-content-dialogs-item--active{
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.171);
+}
+
 .tinder__info-content-pairs-item-photo,
 .tinder__info-content-dialogs-item-photo{
   height: 36px;
@@ -1308,41 +1314,68 @@ textarea:-ms-input-placeholder { color: #999999; }
   height: 100vh;
   width: 100%;
   background-color: #f0f2f4;
+  overflow: auto;
 }
 
 .tinder__chat-container{
   width: 100%;
   height: 100%;
-  max-width: 800px;
   margin: 0 auto;
+  margin-left: 17.5%;
 }
 
 .tinder__chat-messages{
   width: 100%;
-  height: calc(100% - 70px);
+  padding-bottom: 40px;
+}
+
+.tinder__chat-message{
+  display: flex;
+  margin: 8px 0;
+}
+
+.tinder__chat-form-wrapper{
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 340px;
+  width: calc(100% - 355px);
+  background-color: #e6e9ec;
+  padding: 0 0 0 14%;
 }
 
 .tinder__chat-form{
   height: 50px;
   width: 100%;
   display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+  padding: 4px 0;
 }
 
 .tinder__chat-form-input{
-  border: 1px solid #505965;
-  width: 300px;
-  height: 50px;
+  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
+  height: 42px;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 20px;
 }
 
 .tinder__chat-form-button{
   width: 100px;
-  height: 50px;
+  height: 42px;
   border: none;
   cursor: pointer;
-  background-color: #fff;
-  border: 1px solid #505965;
+  background-color: transparent;
+  transition: .2s;
+  font-size: 24px;
+  border-radius: 8px;
+  margin-left: 8px;
+}
+
+.tinder__chat-form-button:hover{
+  background-color: #d6dadd;
 }
 
 /* Authorization */

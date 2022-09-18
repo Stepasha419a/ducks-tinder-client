@@ -10,7 +10,7 @@ wss.on('connection', (ws, req) => {
     ws.on('message', async (args: any) => {
         args = JSON.parse(args)
 
-        req.url && ChatService.sendMessage(args.username, req.url.slice(1), args.content)
+        req.url && ChatService.sendMessage(args.username, req.url.slice(1), args.content, args.userId)
         broadcastMessage(args, wss)
     })
 })

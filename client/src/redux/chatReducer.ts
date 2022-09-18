@@ -7,7 +7,8 @@ const chatReducer = createSlice({
     initialState: {
         dialogs: [] as IDialog[],
         isConnected: false,
-        currentMessages: [] as MessageInterface[]
+        currentMessages: [] as MessageInterface[],
+        currentDialogId: ''
     },
     reducers: {
         setDialogs: (state, action) => {
@@ -20,6 +21,9 @@ const chatReducer = createSlice({
             if(action.payload.length === 0) {state.currentMessages = []}
             else if( Array.isArray(action.payload)) { state.currentMessages = [...state.currentMessages, ...action.payload] }
             else { state.currentMessages = [...state.currentMessages, action.payload] }
+        },
+        setCurrentDialogId: (state, action) => {
+            state.currentDialogId = action.payload
         }
     }
 })
@@ -52,6 +56,7 @@ export const connectChatThunk = createAsyncThunk(
             socket.current = new WebSocket(`ws://localhost:5001/${dialogId}`)
             
             socket.current.onopen = async () => {
+                dispatch(setCurrentDialogId(dialogId))
                 dispatch(setIsConnected(true))
                 const response = await chatApi.getDialog(dialogId)
                 const dialog = await response.data
@@ -67,6 +72,7 @@ export const connectChatThunk = createAsyncThunk(
                 console.log('disconnect')
                 dispatch(setIsConnected(false))
                 dispatch(setCurrentMessages([]))
+                dispatch(setCurrentDialogId(''))
             }
 
         } catch (error: any) {
@@ -89,6 +95,6 @@ export const disconnectChatThunk = createAsyncThunk(
     }
 )
 
-export const {setDialogs, setIsConnected, setCurrentMessages} = chatReducer.actions
+export const {setDialogs, setIsConnected, setCurrentMessages, setCurrentDialogId} = chatReducer.actions
 
 export default chatReducer.reducer

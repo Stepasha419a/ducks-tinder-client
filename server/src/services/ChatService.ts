@@ -33,14 +33,15 @@ class ChatService{
         return dialog
     }
     
-    async sendMessage(username: string, dialogId: string, message: string) {
+    async sendMessage(username: string, dialogId: string, message: string, userId: string) {
         const dialog = await DialogModel.findById(dialogId)
             .catch(() => {throw ApiError.BadRequest(`Dialog не найден`)})
 
         const newMessage: MessageInterface = {
             id: Date.now().toString(),
             content: message,
-            username
+            username,
+            userId
         }
 
         await DialogModel.findByIdAndUpdate(dialogId, {messages: [...dialog.messages, newMessage]}, {new: true})

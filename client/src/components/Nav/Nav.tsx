@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { AppStateType } from '../../redux/reduxStore'
 import { pairs } from '../../assets/hardcodeObjects/hardcodeObjects'
-import Dialogs from '../Dialogs/Dialogs'
+import Dialogs from '../Chat/Dialogs/Dialogs'
 import Avatar from '../Avatar/Avatar'
 import { MutableRefObject } from 'react'
 

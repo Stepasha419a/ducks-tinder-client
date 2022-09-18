@@ -1,9 +1,9 @@
 import { MutableRefObject, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { IDialog, MemberInterface } from "../../models/IDialog"
-import { getDialogsThunk } from "../../redux/chatReducer"
-import { AppStateType } from "../../redux/reduxStore"
-import { getUserThunk } from "../../redux/usersReducer"
+import { IDialog, MemberInterface } from "../../../models/IDialog"
+import { getDialogsThunk } from "../../../redux/chatReducer"
+import { AppStateType } from "../../../redux/reduxStore"
+import { getUserThunk } from "../../../redux/usersReducer"
 import Dialog from "./Dialog"
 
 interface DialogsInterface{
@@ -15,6 +15,7 @@ const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
     const dialogs = useSelector((state: AppStateType) => state.chat.dialogs)
+    const currentDialogId = useSelector((state: AppStateType) => state.chat.currentDialogId)
 
     useEffect(() => {
         dialogs.forEach((dialog) => {
@@ -35,7 +36,7 @@ const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
             {dialogs ? dialogs.map((dialog: IDialog) => {
                 const dialogCompanion = dialog.members.find((member: MemberInterface) => member.id !== currentUser._id)
                 return (
-                    <Dialog key={dialog._id} dialog={dialog} dialogCompanion={dialogCompanion} socket={socket}/>
+                    <Dialog key={dialog._id} dialog={dialog} dialogCompanion={dialogCompanion} socket={socket} currentDialogId={currentDialogId}/>
                 )
             })
             :
