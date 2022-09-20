@@ -16,16 +16,6 @@ const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
     const dialogs = useSelector((state: AppStateType) => state.chat.dialogs)
     const currentDialogId = useSelector((state: AppStateType) => state.chat.currentDialogId)
 
-    /* useEffect(() => {
-        dialogs.forEach((dialog) => {
-            dialog.members.forEach((member) => {
-                if(!(member.id === currentUser._id)) {
-                    dispatch(getUserThunk({id: member.id}) as any)
-                }
-            })
-        })
-    }, [dialogs, currentUser._id, dispatch]) */
-
     useEffect(() => {
         dispatch(getDialogsThunk({id: currentUser._id}) as any)
     }, [currentUser._id, dispatch])

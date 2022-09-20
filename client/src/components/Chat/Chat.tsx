@@ -25,8 +25,6 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
 
     const [userMembers, setUserMembers] = useState([] as IUser[])
 
-    console.log(userMembers)
-
     useEffect(() => {
         members.forEach(async (member) => {
             if(!includedMembersIds.includes(member.id)) {
@@ -63,8 +61,11 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
                 {isConnected ?
                     <div className="tinder__chat-container">
                         <div className="tinder__chat-messages">
-                            {messages.map((message: MessageInterface) =>
-                                <Message key={message.id} message={message}/>
+                            {messages.map((message: MessageInterface) => 
+                                userMembers.length ? 
+                                    <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)}/> 
+                                : 
+                                    <div key={message.id}>loading message...</div>
                             )}
                         </div>
                         <div className="tinder__chat-form-wrapper">
