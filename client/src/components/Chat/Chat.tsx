@@ -63,7 +63,7 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
                         <div className="tinder__chat-messages">
                             {messages.map((message: MessageInterface) => 
                                 userMembers.length ? 
-                                    <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)}/> 
+                                    <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)} currentUserId={currentUser._id}/> 
                                 : 
                                     <div key={message.id}>loading message...</div>
                             )}

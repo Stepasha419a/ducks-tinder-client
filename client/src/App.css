@@ -1325,13 +1325,61 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .tinder__chat-messages{
-  width: 100%;
   padding-bottom: 40px;
 }
 
-.tinder__chat-message{
-  display: flex;
+.tinder__chat-message-wrapper{
+  display: table;
   margin: 8px 0;
+  position: relative;
+}
+
+.tinder__chat-message{
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  border-bottom-left-radius: 0px;
+}
+
+.tinder__chat-message--own-message{
+  background: linear-gradient(45deg,#ffdeeb,#ff623623)
+}
+
+.tinder__chat-message-username{
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+.tinder__chat-message-content{
+  overflow-wrap: break-word;
+  max-width: 584px;
+}
+
+.tinder__chat-message-mark{
+  position: absolute;
+  bottom: 0;
+  left: -8px;
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.tinder__chat-message-mark--own-message{
+  background: linear-gradient(45deg,#ffdeeb,#ff623600)
+}
+
+.tinder__chat-message-mark::before{
+  content: "";
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  border-radius: 69%;
+  bottom: 50px;
+  left: -16px;
+  box-shadow: 0px 50px 0 0 #f0f2f4;
 }
 
 .tinder__chat-form-wrapper{
