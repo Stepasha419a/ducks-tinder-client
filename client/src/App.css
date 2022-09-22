@@ -1330,8 +1330,17 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder__chat-message-wrapper{
   display: table;
-  margin: 8px 0;
+  padding: 8px 0;
   position: relative;
+}
+
+.tinder__chat-message-container{
+  display: flex;
+  align-items: flex-end;
+}
+
+.tinder__chat-message-avatar{
+  margin-right: 8px;
 }
 
 .tinder__chat-message{
@@ -1358,8 +1367,8 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder__chat-message-mark{
   position: absolute;
-  bottom: 0;
-  left: -8px;
+  bottom: 8px;
+  left: 36px;
   width: 12px;
   height: 12px;
   background-color: #fff;

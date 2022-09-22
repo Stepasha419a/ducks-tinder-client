@@ -31,7 +31,8 @@ const chatReducer = createSlice({
             state.currentMembers = action.payload
         },
         setIncludedMembersIds: (state, action) => {
-            state.includedMembersIds = [...state.includedMembersIds, action.payload]
+            if(action.payload.length === 0) {state.includedMembersIds = []}
+            else {state.includedMembersIds = [...state.includedMembersIds, action.payload]}
         }
     }
 })

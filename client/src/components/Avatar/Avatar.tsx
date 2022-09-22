@@ -3,34 +3,37 @@ import { AppStateType } from "../../redux/reduxStore"
 import defaultPhoto from '../../assets/images/photos/1.jpg'
 import { useEffect, useState } from "react"
 import { getUserThunk } from "../../redux/usersReducer"
-import { IUser } from "../../models/IUser"
+import { IUserUnrequired } from "../../models/IUser"
 
 interface AvatarInterface{
     otherUserId?: string
     imageExtraClassName?: string
     showDefaultPhoto?: boolean
+    avatarUrl?: string
 }
 
-const Avatar: React.FC<AvatarInterface> = ({otherUserId, imageExtraClassName, showDefaultPhoto}) => {
+const Avatar: React.FC<AvatarInterface> = ({otherUserId, imageExtraClassName, showDefaultPhoto, avatarUrl}) => {
     const dispatch = useDispatch()
 
     let currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
-    const [otherUser, setOtherUser] = useState(null as IUser | null)
+    const [otherUser, setOtherUser] = useState(null as IUserUnrequired | null)
 
     useEffect(() => {
-        if(otherUserId) {
+        if(otherUserId && !avatarUrl) {
             dispatch(getUserThunk({id: otherUserId}) as any).then((res: any) => setOtherUser(res.payload))
+        } else if(otherUserId && avatarUrl) {
+            setOtherUser({_id: otherUserId, pictures: {avatar: avatarUrl}})
         }
-    }, [otherUserId, dispatch])
+    }, [otherUserId, avatarUrl, dispatch])
 
-    if((otherUserId && !otherUser?.pictures.avatar) || !currentUser.pictures.avatar || showDefaultPhoto) {
+    if((otherUserId && !otherUser?.pictures?.avatar) || !currentUser.pictures.avatar || showDefaultPhoto) {
         return <div style={{backgroundImage: `url(${defaultPhoto})`}} className={`tinder__info-user-photo ${imageExtraClassName}`}></div>
     }
 
     return(
         <div>
             {otherUser ?
-                <div style={{backgroundImage: `url(http://localhost:5000/${otherUser._id}/avatar/${otherUser.pictures.avatar})`}} className={`tinder__info-user-photo ${imageExtraClassName}`}></div>
+                <div style={{backgroundImage: `url(http://localhost:5000/${otherUser._id}/avatar/${otherUser.pictures?.avatar})`}} className={`tinder__info-user-photo ${imageExtraClassName}`}></div>
             :
             currentUser &&
                 <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} className={`tinder__info-user-photo ${imageExtraClassName}`}></div>
