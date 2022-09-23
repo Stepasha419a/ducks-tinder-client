@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { KeyboardEvent, MutableRefObject, useEffect, useState } from "react"
+import { KeyboardEvent, MutableRefObject, useEffect, useRef, useState } from "react"
 import Nav from "../Nav/Nav"
 import Message from "./Message/Message"
 import { MessageInterface } from "../../models/IDialog"
 import { IUser } from "../../models/IUser"
 import { getUserThunk } from "../../redux/usersReducer"
 import { setIncludedMembersIds } from "../../redux/chatReducer"
+import { isRefElementVisible, scrollToBottom } from "./utils/ChatUtils"
 
 interface ChatPropsInterface{
     isPairsOpened: boolean,
@@ -24,6 +25,9 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
     const includedMembersIds = useSelector((state: AppStateType) => state.chat.includedMembersIds)
 
     const [userMembers, setUserMembers] = useState([] as IUser[])
+    const [value, setValue] = useState('')
+
+    const bottomElementRef = useRef<null | HTMLElement>(null) as React.MutableRefObject<HTMLInputElement>;
 
     useEffect(() => {
         members.forEach(async (member) => {
@@ -35,7 +39,15 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
         })
     }, [members, dispatch, includedMembersIds])
 
-    const [value, setValue] = useState('')
+    useEffect(() => {
+        if(bottomElementRef.current && isRefElementVisible(bottomElementRef)) {
+            scrollToBottom(bottomElementRef, true)
+        }
+    }, [messages])
+
+    useEffect(() => {
+        bottomElementRef && scrollToBottom(bottomElementRef)
+    }, [userMembers])
 
     const sendMessage = async () => {
         const message = {
@@ -67,6 +79,7 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
                                 : 
                                     <div key={message.id}>loading message...</div>
                             )}
+                            <div ref={bottomElementRef} className="tinder__chat-messages-end-ref"></div>
                         </div>
                         <div className="tinder__chat-form-wrapper">
                             <div className="tinder__chat-form">

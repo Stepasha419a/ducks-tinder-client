@@ -82,6 +82,8 @@ export const connectChatThunk = createAsyncThunk(
                 dispatch(setIsConnected(false))
                 dispatch(setCurrentMessages([]))
                 dispatch(setCurrentDialogId(''))
+                dispatch(setCurrentMembers([]))
+                dispatch(setIncludedMembersIds([]))
             }
 
         } catch (error: any) {
