@@ -3,13 +3,7 @@ import mongoose from "mongoose";
 export interface MessageInterface{
     id: string
     content: string
-    username: string
     userId: string
-}
-
-export interface MemberInterface{
-    id: string,
-    name: string
 }
 
 export interface IDialog{
@@ -20,7 +14,7 @@ export interface IDialog{
 
 const DialogSchema = new mongoose.Schema({
     messages: {type: [] as MessageInterface[]},
-    members: {type: [] as MemberInterface[]}
+    members: {type: [] as string[]}
 })
 
 export default mongoose.model('Dialog', DialogSchema)

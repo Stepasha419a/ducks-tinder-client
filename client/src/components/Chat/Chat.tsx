@@ -19,10 +19,10 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
-    const messages = useSelector((state: AppStateType) => state.chat.currentMessages)
-    const isConnected = useSelector((state: AppStateType) => state.chat.isConnected)
-    const members = useSelector((state: AppStateType) => state.chat.currentMembers)
-    const includedMembersIds = useSelector((state: AppStateType) => state.chat.includedMembersIds)
+    const messages = useSelector((state: AppStateType) => state.chatPage.currentMessages)
+    const isConnected = useSelector((state: AppStateType) => state.chatPage.isConnected)
+    const members = useSelector((state: AppStateType) => state.chatPage.currentMembers)
+    const includedMembersIds = useSelector((state: AppStateType) => state.chatPage.includedMembersIds)
 
     const [userMembers, setUserMembers] = useState([] as IUser[])
     const [value, setValue] = useState('')
@@ -30,10 +30,10 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
     const bottomElementRef = useRef<null | HTMLElement>(null) as React.MutableRefObject<HTMLInputElement>;
 
     useEffect(() => {
-        members.forEach(async (member) => {
-            if(!includedMembersIds.includes(member.id)) {
-                dispatch(setIncludedMembersIds(member.id))
-                const user = await dispatch(getUserThunk({id: member.id}) as any)
+        members.forEach(async (memberId) => {
+            if(!includedMembersIds.includes(memberId)) {
+                dispatch(setIncludedMembersIds(memberId))
+                const user = await dispatch(getUserThunk({id: memberId}) as any)
                 setUserMembers(prev => [...prev, user.payload])
             }
         })

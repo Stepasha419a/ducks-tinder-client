@@ -1,20 +1,25 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { Dispatch } from "react";
 import { chatApi } from "../api/chatApi";
-import { IDialog, MemberInterface, MessageInterface } from "../models/IDialog";
+import { IDialog, MessageInterface } from "../models/IDialog";
+import { AppStateType } from "./reduxStore";
 
 const chatReducer = createSlice({
-    name: 'chat',
+    name: 'chatPage',
     initialState: {
         dialogs: [] as IDialog[],
         isConnected: false,
         currentMessages: [] as MessageInterface[],
         currentDialogId: '',
-        currentMembers: [] as MemberInterface[],
+        currentMembers: [] as string[],
         includedMembersIds: [] as string[]
     },
     reducers: {
         setDialogs: (state, action) => {
             state.dialogs = action.payload
+        },
+        pushMessage: (state, action) => {
+            state.dialogs[action.payload.dialogIndex].messages = [...state.dialogs[action.payload.dialogIndex].messages, action.payload.message]
         },
         setIsConnected: (state, action) => {
             state.isConnected = action.payload
@@ -36,6 +41,9 @@ const chatReducer = createSlice({
         }
     }
 })
+
+const initialState = chatReducer.getInitialState()
+type ChatReducerInitialStateType = typeof initialState
 
 export const getDialogsThunk = createAsyncThunk(
     'chat/getDialogs',
@@ -59,7 +67,7 @@ export const getDialogsThunk = createAsyncThunk(
 
 export const connectChatThunk = createAsyncThunk(
     'chat/connectChat',
-    async function(args: {socket: any, dialogId: string}, {rejectWithValue, dispatch}) {
+    async function(args: {socket: any, dialogId: string}, {rejectWithValue, dispatch, getState}) {
         try {
             const {socket, dialogId} = args
             socket.current = new WebSocket(`ws://localhost:5001/${dialogId}`)
@@ -75,7 +83,8 @@ export const connectChatThunk = createAsyncThunk(
     
             socket.current.onmessage = (event: any) => {
                 const message: MessageInterface = JSON.parse(event.data)
-                dispatch(setCurrentMessages(message))
+                const {chatPage} = getState() as AppStateType
+                sendMessage(message, dispatch, chatPage)
             }
 
             socket.current.onclose = () => {
@@ -106,6 +115,12 @@ export const disconnectChatThunk = createAsyncThunk(
     }
 )
 
-export const {setDialogs, setIsConnected, setCurrentMessages, setCurrentDialogId, setCurrentMembers, setIncludedMembersIds} = chatReducer.actions
+function sendMessage(message: MessageInterface, dispatch: Dispatch<any>, chatPage: ChatReducerInitialStateType) {
+    dispatch(setCurrentMessages(message))
+    const dialogIndex = chatPage.dialogs.findIndex((dialog: IDialog) => dialog._id === chatPage.currentDialogId)
+    dispatch(pushMessage({dialogIndex: dialogIndex, message: message}))
+}
+
+export const {setDialogs, pushMessage, setIsConnected, setCurrentMessages, setCurrentDialogId, setCurrentMembers, setIncludedMembersIds} = chatReducer.actions
 
 export default chatReducer.reducer

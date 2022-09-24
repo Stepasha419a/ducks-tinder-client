@@ -21,7 +21,7 @@ const Message: React.FC<MessageComponentInterface> = ({message, user, currentUse
                 <div className={`tinder__chat-message${message.userId === currentUserId ? ' tinder__chat-message--own-message' : ''}`}>
                     {!(message.userId === currentUserId) &&
                         <div className="tinder__chat-message-username">
-                            {message.username}
+                            {user?.name}
                         </div>
                     }
                     <div className="tinder__chat-message-content">

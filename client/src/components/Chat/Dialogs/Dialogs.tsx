@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { IDialog, MemberInterface } from "../../../models/IDialog"
+import { IDialog } from "../../../models/IDialog"
 import { getDialogsThunk } from "../../../redux/chatReducer"
 import { AppStateType } from "../../../redux/reduxStore"
 import Dialog from "./Dialog"
@@ -13,8 +13,8 @@ const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
-    const dialogs = useSelector((state: AppStateType) => state.chat.dialogs)
-    const currentDialogId = useSelector((state: AppStateType) => state.chat.currentDialogId)
+    const dialogs = useSelector((state: AppStateType) => state.chatPage.dialogs)
+    const currentDialogId = useSelector((state: AppStateType) => state.chatPage.currentDialogId)
 
     useEffect(() => {
         dispatch(getDialogsThunk({id: currentUser._id}) as any)
@@ -23,9 +23,9 @@ const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
     return (
         <div className="tinder__info-content-dialogs">
             {dialogs ? dialogs.map((dialog: IDialog) => {
-                const dialogCompanion = dialog.members.find((member: MemberInterface) => member.id !== currentUser._id)
+                const dialogCompanionId = dialog.members.find((memberId: string) => memberId !== currentUser._id)
                 return (
-                    <Dialog key={dialog._id} dialog={dialog} dialogCompanion={dialogCompanion} socket={socket} currentDialogId={currentDialogId}/>
+                    <Dialog key={dialog._id} dialog={dialog} dialogCompanionId={dialogCompanionId} socket={socket} currentDialogId={currentDialogId} />
                 )
             })
             :

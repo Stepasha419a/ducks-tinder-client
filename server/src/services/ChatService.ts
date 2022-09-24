@@ -2,11 +2,6 @@ import ApiError from "../exceptions/api-error";
 import DialogModel, { IDialog, MessageInterface } from "../models/dialog-model";
 import UserModel from "../models/user-model";
 
-interface dialogMembersInterface{
-    id: string
-    name: string
-}
-
 class ChatService{
     async getDialogs(userId: string) {
         if(!userId) {
@@ -33,21 +28,20 @@ class ChatService{
         return dialog
     }
     
-    async sendMessage(username: string, dialogId: string, message: string, userId: string) {
+    async sendMessage(dialogId: string, message: string, userId: string) {
         const dialog = await DialogModel.findById(dialogId)
             .catch(() => {throw ApiError.BadRequest(`Dialog не найден`)})
 
         const newMessage: MessageInterface = {
             id: Date.now().toString(),
             content: message,
-            username,
             userId
         }
 
         await DialogModel.findByIdAndUpdate(dialogId, {messages: [...dialog.messages, newMessage]}, {new: true})
     }
     
-    async createDialog(members: dialogMembersInterface[]) {
+    async createDialog(members: string[]) {
         const dialogCandidate = await DialogModel.findOne({members})
         const dialogCandidateReverseIDs = await DialogModel.findOne({members: members.reverse()})
         if(dialogCandidate || dialogCandidateReverseIDs) {
@@ -56,9 +50,9 @@ class ChatService{
 
         const response = await DialogModel.create({members})
 
-        members.forEach(async (member) => {
-            const user = await UserModel.findById(member.id)
-            await UserModel.findByIdAndUpdate(member.id, {dialogs: [...user.dialogs, response._id.toString()]}, {new: true})
+        members.forEach(async (memberId) => {
+            const user = await UserModel.findById(memberId)
+            await UserModel.findByIdAndUpdate(memberId, {dialogs: [...user.dialogs, response._id.toString()]}, {new: true})
         })
 
         return response
@@ -67,11 +61,11 @@ class ChatService{
     async deleteDialog(dialogId: string) {
         const response = await DialogModel.findByIdAndDelete(dialogId)
 
-        response.members.forEach(async (member: dialogMembersInterface) => {
-            const user = await UserModel.findById(member.id)
+        response.members.forEach(async (memberId: string) => {
+            const user = await UserModel.findById(memberId)
             const index = user.dialogs.find((item: any) => item === dialogId)
             user.dialogs.splice(index, 1)
-            await UserModel.findByIdAndUpdate(member.id, {dialogs: user.dialogs}, {new: true})
+            await UserModel.findByIdAndUpdate(memberId, {dialogs: user.dialogs}, {new: true})
         })
 
         return response

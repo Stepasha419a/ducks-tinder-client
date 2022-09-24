@@ -224,6 +224,10 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 .tinder__info-content-dialogs-item-descr-message{
   margin-top: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 210px;
+  overflow: hidden;
 }
 
 .tinder__settings-groups{

@@ -8,7 +8,7 @@ import usersReducer from "./usersReducer"
 let rootReducer = combineReducers({
     usersPage: usersReducer,
     authPage: authReducer,
-    chat: chatReducer
+    chatPage: chatReducer
 })
 
 type RootReducerType = typeof rootReducer
