@@ -51,10 +51,10 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
                             <Link className="tinder__info-content-pairs-link" to='/pairs'>
                                 <div className="tinder__info-content-pairs-box">
                                     <div className="tinder__info-content-pairs-box-likes-count">
-                                        10
+                                        15
                                     </div>
                                     <div className="tinder__info-content-pairs-box-likes">
-                                        10 likes
+                                        15 likes
                                     </div>
                                     <FontAwesomeIcon icon={faHeartCircleExclamation} className="tinder__info-content-pairs-box-icon"/>
                                 </div>

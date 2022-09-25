@@ -13,6 +13,11 @@ body{
   color: #21262e;
 }
 
+#root{
+  margin: 0;
+  height: 100vh;
+}
+
 button{
   font-family: 'Roboto', sans-serif;
 }
@@ -53,11 +58,14 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder{
   display: flex;
+  height: 100%;
 }
 
 .tinder__info{
   max-width: 340px;
   width: 100%;
+  height: 100%;
+  border-right: 1px solid rgb(214, 214, 214);
 }
 .tinder__info--gray{
   background-color: #f0f2f4;
@@ -1499,6 +1507,49 @@ textarea:-ms-input-placeholder { color: #999999; }
   left: 37%;
   color: rgb(245, 212, 29);
   font-size: 24px;
+}
+
+.tinder__pairs{
+  width: 100%;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tinder__pairs::-webkit-scrollbar{
+  display: none;
+}
+
+.tinder__pairs-likes{
+  height: 90px;
+  width: 100%;
+  border-bottom: 1px solid rgb(214, 214, 214);
+  font-size: 24px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+}
+
+.tinder__pairs-likes-icon{
+  color: rgb(245, 212, 29);
+  font-size: 32px;
+}
+
+.tinder__pairs-users{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  margin-top: 80px;
+  padding: 20px;
+}
+
+.tinder__pairs-user{
+  width: 244px;
+  height: 305px;
+  background-color: #ccc;
+  margin: 5px;
+  border-radius: 8px;
 }
 
 /* Authorization */
