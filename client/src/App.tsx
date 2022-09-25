@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 import Policy from './components/Policy/Policy';
 import Chat from './components/Chat/Chat';
+import Pairs from './components/Pairs/Pairs';
 
 function App() {
 
@@ -50,10 +51,11 @@ function App() {
         <Route path="/login" element={<LoginForm formError={formError}/>}/>
         <Route path="/reg" element={<RegistrationForm formError={formError}/>}/>
 
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Tinder isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket}/>}/>
+          <Route path="/" element={<Layout isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket} />}>
+            <Route index element={<Tinder />}/>
             <Route path="profile" element={<Profile />}/>
-            <Route path="chat" element={<Chat isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket}/>}/>
+            <Route path="chat" element={<Chat socket={socket}/>}/>
+            <Route path="pairs" element={<Pairs />}/>
             <Route path="policy" element={<Policy />}/>
             <Route path="*" element={<div>404 NOT FOUND</div>} />
           </Route>

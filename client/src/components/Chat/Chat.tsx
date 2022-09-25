@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
 import { KeyboardEvent, MutableRefObject, useEffect, useRef, useState } from "react"
-import Nav from "../Nav/Nav"
 import Message from "./Message/Message"
 import { MessageInterface } from "../../models/IDialog"
 import { IUser } from "../../models/IUser"
@@ -10,12 +9,10 @@ import { setIncludedMembersIds } from "../../redux/chatReducer"
 import { isRefElementVisible, scrollToBottom } from "./utils/ChatUtils"
 
 interface ChatPropsInterface{
-    isPairsOpened: boolean,
-    setIsPairsOpened: (setting: boolean) => void
     socket: MutableRefObject<WebSocket | undefined>
 }
 
-const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, socket}) => {
+const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
@@ -67,34 +64,31 @@ const Chat: React.FC<ChatPropsInterface> = ({isPairsOpened, setIsPairsOpened, so
     }
 
     return(
-        <div className="tinder">
-            <Nav isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket}/>
-            <div className="tinder__chat">
-                {isConnected ?
-                    <div className="tinder__chat-container">
-                        <div className="tinder__chat-messages">
-                            {messages.map((message: MessageInterface) => 
-                                userMembers.length ? 
-                                    <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)} currentUserId={currentUser._id}/> 
-                                : 
-                                    <div key={message.id}>loading message...</div>
-                            )}
-                            <div ref={bottomElementRef} className="tinder__chat-messages-end-ref"></div>
-                        </div>
-                        <div className="tinder__chat-form-wrapper">
-                            <div className="tinder__chat-form">
-                                <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="tinder__chat-form-input" type="text" />
-                                <button onClick={sendMessage} className="tinder__chat-form-button">send</button>
-                            </div>
+        <div className="tinder__chat">
+            {isConnected ?
+                <div className="tinder__chat-container">
+                    <div className="tinder__chat-messages">
+                        {messages.map((message: MessageInterface) => 
+                            userMembers.length ? 
+                                <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)} currentUserId={currentUser._id}/> 
+                            : 
+                                <div key={message.id}>loading message...</div>
+                        )}
+                        <div ref={bottomElementRef} className="tinder__chat-messages-end-ref"></div>
+                    </div>
+                    <div className="tinder__chat-form-wrapper">
+                        <div className="tinder__chat-form">
+                            <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="tinder__chat-form-input" type="text" />
+                            <button onClick={sendMessage} className="tinder__chat-form-button">send</button>
                         </div>
                     </div>
-                :
-                    <div>
-                        choose the dialog
-                    </div>
-                }
-            </div>
-    </div>
+                </div>
+            :
+                <div>
+                    choose the dialog
+                </div>
+            }
+        </div>
     )
 }
 

@@ -1,18 +1,11 @@
-import { faBriefcase, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase, faHeartCircleExclamation, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { AppStateType } from '../../redux/reduxStore'
-import { pairs } from '../../assets/hardcodeObjects/hardcodeObjects'
 import Dialogs from '../Chat/Dialogs/Dialogs'
 import Avatar from '../Avatar/Avatar'
 import { MutableRefObject } from 'react'
-
-type PairType = {
-    id: number,
-    img: string,
-    name: string
-}
 
 interface NavPropsInterface{
     isPairsOpened: boolean,
@@ -54,18 +47,19 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
                 </div>
                 <div className="tinder__info-content-box">
                     {isPairsOpened ?
-                    <div className="tinder__info-content-pairs">
-                    {pairs.map((item: PairType) => {
-                        return (
-                            <div className="tinder__info-content-pairs-item" key={item.id}>
-                                <Avatar showDefaultPhoto />
-                                <div className="tinder__info-content-pairs-item-name">
-                                    {item.name}
+                        <div className="tinder__info-content-pairs">
+                            <Link className="tinder__info-content-pairs-link" to='/pairs'>
+                                <div className="tinder__info-content-pairs-box">
+                                    <div className="tinder__info-content-pairs-box-likes-count">
+                                        10
+                                    </div>
+                                    <div className="tinder__info-content-pairs-box-likes">
+                                        10 likes
+                                    </div>
+                                    <FontAwesomeIcon icon={faHeartCircleExclamation} className="tinder__info-content-pairs-box-icon"/>
                                 </div>
-                            </div>
-                        )
-                    })}
-                    </div>
+                            </Link>
+                        </div>
                     :
                     <Dialogs socket={socket}/>
                     }
