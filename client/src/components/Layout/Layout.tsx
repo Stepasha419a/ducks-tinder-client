@@ -22,8 +22,6 @@ const Layout: React.FC<LayoutPropsInterface> = ({isPairsOpened, setIsPairsOpened
         }
     }, [isAuth, navigate])
 
-    console.log(useLocation())
-
     if(isAuth) {
         if(url === '/' || url === '/chat' || url === '/pairs') {
             return(
