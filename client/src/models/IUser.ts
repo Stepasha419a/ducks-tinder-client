@@ -23,6 +23,7 @@ export interface IUser {
         gallery: string[]
     }
     dialogs: string[]
+    pairs: []
 }
 
 export interface IUserUnrequired {

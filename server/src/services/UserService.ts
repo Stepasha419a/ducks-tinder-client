@@ -86,6 +86,53 @@ class UserService{
 
         return user
     }
+
+    async createPair(membersId: string[]) {
+
+        const users = []
+        for await (let memberId of membersId) {
+            const user = await UserModel.findById(memberId)
+                .catch(() => {throw ApiError.BadRequest('User с таким Id не найден')})
+            users.push(user)
+        }
+
+        if(!users[0].pairs.includes(users[1]._id) && !users[1].pairs.includes(users[0]._id)) {
+            for await (let user of users) {
+                const otherUser = users.find(otherUser => otherUser._id !== user._id)
+
+                user.pairs = [...user.pairs, otherUser._id.toString()]
+                await UserModel.findByIdAndUpdate(user._id, user, {new: true})
+            }
+        } else {
+            throw ApiError.BadRequest('Pair с такими Id уже существует')
+        }
+
+        return membersId
+    }
+
+    async deletePair(membersId: string[]) {
+        const users = []
+        for await (let memberId of membersId) {
+            const user = await UserModel.findById(memberId)
+                .catch(() => {throw ApiError.BadRequest('User с таким Id не найден')})
+            users.push(user)
+        }
+
+        if(users[0].pairs.includes(users[1]._id) && users[1].pairs.includes(users[0]._id)) {
+            for await (let user of users) {
+                const otherUser = users.find(otherUser => otherUser._id !== user._id)
+
+                const memberIdIndex = user.pairs.findIndex((memberId: string) => memberId === otherUser._id.toString())
+
+                user.pairs = [...user.pairs.splice(memberIdIndex + 1, 1)]
+                await UserModel.findByIdAndUpdate(user._id, user, {new: true})
+            }
+        } else {
+            throw ApiError.BadRequest('Pair с такими Id не найден')
+        }
+
+        return membersId
+    }
 }
 
 export default new UserService()

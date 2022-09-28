@@ -22,6 +22,8 @@ router.put('/users', authMiddleware, userController.update)
 router.delete('/users/:id', authMiddleware, userController.delete)
 router.post('/users/savePicture', authMiddleware, userController.savePicture)
 router.put('/users/deletePicture', authMiddleware, userController.deletePicture)
+router.post('/users/pairs', authMiddleware, userController.createPair)
+router.put('/users/pairs', authMiddleware, userController.deletePair)
 
 router.get('/chat/:userID', authMiddleware, ChatController.getDialogs)
 router.get('/chat/one/:id', authMiddleware, ChatController.getDialog)

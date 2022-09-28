@@ -36,123 +36,213 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
                 className="tinder__pairs-users"
             >
                 <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-
-                    </div>
-                </div>
-                <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
-                    </div>
-                </div>
-                <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
-                    </div>
-                </div>
-                <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-
-                    </div>
-                </div>
-                <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
-                    </div>
-                </div>
-                <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
-                    </div>
-                </div>
-                <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-
-                    </div>
-                </div>
-                <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
-                    </div>
-                    <div className="tinder__pairs-user-descr">
-                        
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className="tinder__pairs-user">
-                    <div className="tinder__pairs-user-name">
-
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
-                    <div className="tinder__pairs-user-descr">
-                        
+                </div>
+                <div className="tinder__pairs-user">
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="tinder__pairs-user">
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="tinder__pairs-user">
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="tinder__pairs-user">
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="tinder__pairs-user">
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="tinder__pairs-user">
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div className="tinder__pairs-user">
+                    <div className="tinder__pairs-user-info">
+                        <div className="tinder__pairs-user-descr">
+                            <div className="tinder__pairs-user-name">Polina</div>
+                            <div className="tinder__pairs-user-years">23</div>
+                        </div>
+                        <div className="tinder__pairs-user-distance">
+                            30 
+                            <span className="tinder__pairs-user-distance-text">
+                                miles from you
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

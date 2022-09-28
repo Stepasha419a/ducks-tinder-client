@@ -47,19 +47,22 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
                 </div>
                 <div className="tinder__info-content-box">
                     {isPairsOpened ?
-                        <div className="tinder__info-content-pairs">
-                            <Link className="tinder__info-content-pairs-link" to='/pairs'>
-                                <div className="tinder__info-content-pairs-box">
-                                    <div className="tinder__info-content-pairs-box-likes-count">
-                                        15
+                        currentUser.pairs.length ? <div className="tinder__info-content-pairs">
+                                <Link className="tinder__info-content-pairs-link" to='/pairs'>
+                                    <div className="tinder__info-content-pairs-box">
+                                        <div className="tinder__info-content-pairs-box-likes-count">
+                                            {currentUser.pairs.length}
+                                        </div>
+                                        <div className="tinder__info-content-pairs-box-likes">
+                                            {currentUser.pairs.length} likes
+                                        </div>
+                                        <FontAwesomeIcon icon={faHeartCircleExclamation} className="tinder__info-content-pairs-box-icon"/>
                                     </div>
-                                    <div className="tinder__info-content-pairs-box-likes">
-                                        15 likes
-                                    </div>
-                                    <FontAwesomeIcon icon={faHeartCircleExclamation} className="tinder__info-content-pairs-box-icon"/>
-                                </div>
-                            </Link>
-                        </div>
+                                </Link>
+                            </div>
+                        :
+                            <div>You don't have likes. Like someone to have a like too</div>
+
                     :
                     <Dialogs socket={socket}/>
                     }

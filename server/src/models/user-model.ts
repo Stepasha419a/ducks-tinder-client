@@ -27,7 +27,8 @@ const UserSchema = new mongoose.Schema({
     sex: {type: String},
     partnerSettings: {type: {} as partnerSettingsInterface},
     pictures: {type: {} as picturesInterface},
-    dialogs: {type: [] as string[], default: []}
+    dialogs: {type: [] as string[], default: []},
+    pairs: {type: [] as string[], default: []}
 })
 
 export default mongoose.model('User', UserSchema)

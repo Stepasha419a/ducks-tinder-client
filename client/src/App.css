@@ -1546,9 +1546,36 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__pairs-user{
   width: 244px;
   height: 305px;
-  background-color: #ccc;
+  background-color: rgb(180, 180, 180);
   margin: 5px;
   border-radius: 8px;
+  position: relative;
+}
+
+.tinder__pairs-user-info{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.tinder__pairs-user-descr{
+  display: flex;
+}
+
+.tinder__pairs-user-years{
+  padding-left: 10px;
+}
+
+.tinder__pairs-user-distance{
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.tinder__pairs-user-distance-text{
+  padding-left: 5px;
 }
 
 /* Authorization */

@@ -71,6 +71,30 @@ class UserController{
             next(error)
         }
     }
+
+    async createPair(req: any, res: any, next: NextFunction) {
+        try {
+            const membersId = req.body
+
+            const response = await userService.createPair(membersId)
+
+            res.json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async deletePair(req: any, res: any, next: NextFunction) {
+        try {
+            const membersId = req.body
+
+            const response = await userService.deletePair(membersId)
+
+            res.json(response)
+        } catch (error) {
+            next(error)
+        }
+    }
 }
 
 export default new UserController()
