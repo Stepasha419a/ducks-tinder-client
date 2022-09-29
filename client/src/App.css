@@ -1546,10 +1546,18 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__pairs-user{
   width: 244px;
   height: 305px;
-  background-color: rgb(180, 180, 180);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 125%;
   margin: 5px;
   border-radius: 8px;
   position: relative;
+  cursor: pointer;
+  transition: .1s;
+}
+
+.tinder__pairs-user:hover{
+  transform: scale(1.03);
 }
 
 .tinder__pairs-user-info{
