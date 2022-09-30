@@ -8,6 +8,7 @@ export interface UserDtoInterface {
     isActivated: boolean
     age: number
     sex: string
+    interests: string[]
     partnerSettings: partnerSettingsInterface
     pictures: picturesInterface
     dialogs: string[]
@@ -22,6 +23,7 @@ export default class UserDto { // Data transfer object
     isActivated
     age
     sex
+    interests
     partnerSettings
     pictures
     dialogs
@@ -35,6 +37,7 @@ export default class UserDto { // Data transfer object
         this.isActivated = model.isActivated
         this.age = model.age
         this.sex = model.sex
+        this.interests = model.interests
         this.partnerSettings = model.partnerSettings
         this.pictures = model.pictures
         this.dialogs = model.dialogs

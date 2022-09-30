@@ -25,6 +25,7 @@ const UserSchema = new mongoose.Schema({
     activationLink: {type: String},
     age: {type: Number},
     sex: {type: String},
+    interests: {type: [] as string[], default: []},
     partnerSettings: {type: {} as partnerSettingsInterface},
     pictures: {type: {} as picturesInterface},
     dialogs: {type: [] as string[], default: []},

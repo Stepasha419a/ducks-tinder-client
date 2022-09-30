@@ -8,6 +8,7 @@ export interface IUser {
     age: number
     sex: 'male' | 'female'
     isActivated: boolean
+    interests: string[]
     partnerSettings: {
         place: string
         distance: number
@@ -34,6 +35,7 @@ export interface IUserUnrequired {
     age?: number
     sex?: 'male' | 'female'
     isActivated?: boolean
+    interests?: string[]
     pictures?: {
         avatar?: string
         gallery?: string[]

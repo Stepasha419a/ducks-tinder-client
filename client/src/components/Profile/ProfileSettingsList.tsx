@@ -122,6 +122,17 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                     Find Settings
                 </div>
                 <div className="tinder__settings-group-items">
+                    <div onClick={() => setSettingInput('Interests', 'interests')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                        <div className="tinder__settings-group-item-descr">
+                            <div className="tinder__settings-group-item-descr-title">
+                                Interests
+                            </div>
+                            <div className="tinder__settings-group-item-descr-setting">
+                            {!currentUser.interests.length ? "You don't have interests" : null}
+                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                            </div>
+                        </div>
+                    </div>
                     <div onClick={() => setSettingInput('Place', 'place', 'partnerSettings')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">

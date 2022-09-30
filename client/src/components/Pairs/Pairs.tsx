@@ -1,8 +1,10 @@
 import { faHeartCircleExclamation } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useRef, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { IUser } from "../../models/IUser"
 import { AppStateType } from "../../redux/reduxStore"
+import { getUserThunk } from "../../redux/usersReducer"
 import Pair from "./Pair"
 
 interface PairsPropsInterface{
@@ -10,11 +12,34 @@ interface PairsPropsInterface{
 }
 
 const Pairs: React.FC<PairsPropsInterface> = () => {
+    const dispatch = useDispatch()
+
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
 
     const [pairsPaddingWidth, setPairsPaddingWidth] = useState(0)
+    const [pairs, setPairs] = useState([] as IUser[])
+
+    const interests = ['fighting', 'ski', 'football', 'volleyball', 'tennis', 'ping pong',
+    'swimming', 'karting', 'horse ridding', 'hunting', 'fishing', 'skateboarding', 'bicycle', 'running',
+    'surfing', 'snowboarding', 'shooting', 'parachuting', 'paintball', 'bowling', 'billiard', 'skates', 
+    'dancing', 'cosplay', 'ballet', 'room quest', 'fitness', 'yoga', 'meditation', 'tourism', 'traveling',
+    'hiking', 'camping', 'cars', 'education', 'foreign languages', 'cards', 'poker', 'chess', 'checkers',
+    'nard', 'psychology', 'table games', 'sport', 'blogging', 'computer games', 'programming', 'drawing',
+    '3D drawing', 'gardener', 'animals', 'volunteering', 'serials', 'books', 'movies', 'cinema', 'food',
+    'cooking', 'photo', 'design', 'writing', 'music', 'handmade']
 
     const userPairsRef = useRef<HTMLHeadingElement>(null)
+
+    useEffect(() => {
+        const fetchUser = async (userId: string) => {
+            const data = await dispatch(getUserThunk({id: userId}) as any)
+            return data.payload
+        }
+        
+        for(let userId of currentUser.pairs) {
+            fetchUser(userId).then(data => setPairs(prevPairs => [...prevPairs, data]))
+        }
+    }, [dispatch, currentUser.pairs])
 
     useEffect(() => {
         if(userPairsRef.current) {
@@ -37,8 +62,8 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
                 style={{paddingLeft: `${pairsPaddingWidth}px`, paddingRight: `${pairsPaddingWidth}px`}} 
                 className="tinder__pairs-users"
             >
-                {currentUser.pairs.map((userId: string) => {
-                    return <Pair key={userId} userId={userId}/>
+                {pairs.map((user: IUser) => {
+                    return <Pair key={user._id} user={user}/>
                 })}
             </div>
         </div>

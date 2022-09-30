@@ -568,6 +568,24 @@ textarea:-ms-input-placeholder { color: #999999; }
   border-bottom: none;
 }
 
+.tinder__content-setting-change-search{
+  height: 100px;
+  margin-left: 10px;
+}
+
+.tinder__content-setting-change-search-input{
+  width: calc(100% - 20px);
+  height: 20px;
+  font-size: 18px;
+  padding: 15px;
+  border: 1px solid rgb(214, 214, 214);
+  margin-top: 10px;
+}
+
+.tinder__content-setting-change-search-input:focus{
+  border-color: rgb(214, 214, 214);
+}
+
 .tinder__content{
   display: flex;
   justify-content: center;

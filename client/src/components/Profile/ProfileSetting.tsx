@@ -2,6 +2,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ChangeEvent, useEffect, useState } from "react"
 import { IUser } from "../../models/IUser"
+import InterestsSetting from "./SettingFields/IterestsSetting"
 
 interface ProfileSettingPropsInterface {
     currentUser: IUser
@@ -84,6 +85,10 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
     const cancelHandler = () => {
         setInnerObjectName('')
         setIsUserInfoSetting(false)
+    }
+
+    if(settingInputName === 'interests') {
+        return <InterestsSetting currentUser={currentUser} isFormValid={isFormValid} isFormCloseable={isFormCloseable} submitSettings={submitSettings} cancelHandler={cancelHandler}/>
     }
     
     return (

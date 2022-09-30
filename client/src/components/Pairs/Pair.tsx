@@ -1,29 +1,11 @@
-import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
 import { IUser } from "../../models/IUser"
-import { getUserThunk } from "../../redux/usersReducer"
 import defaultPhoto from '../../assets/images/photos/1.jpg'
 
 interface PairPropsInterface {
-    userId: string
+    user: IUser
 }
 
-const Pair: React.FC<PairPropsInterface> = ({userId}) => {
-    const dispatch = useDispatch()
-
-    const [user, setUser] = useState({} as IUser)
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            const data = await dispatch(getUserThunk({id: userId}) as any)
-            return data.payload
-        }
-        
-        fetchUser().then(data => setUser(data))
-    }, [dispatch, userId])
-
-    console.log(user)
-
+const Pair: React.FC<PairPropsInterface> = ({user}) => {
     if(!user.name) {
         return <div>loading...</div>
     }
