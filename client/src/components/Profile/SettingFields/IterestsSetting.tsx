@@ -5,7 +5,7 @@ interface InterestsSettingPropsInterface{
     currentUser: IUser
     isFormValid: boolean
     isFormCloseable: boolean
-    submitSettings: (inputName: string, changedData: string | number, innerObjectName?: string) => void
+    submitSettings: (inputName: string, changedData: string | number | boolean | string[] | {from: number, to: number}, innerObjectName?: string) => void
     cancelHandler: () => void
 }
 
@@ -25,6 +25,8 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
 
     if(inputValue.length > 1) {
         filteredResults = interestsList.filter(item => {
+            if(interests.includes(item)) return 0;
+
             if(item.slice(0, inputValue.length) === inputValue.toLowerCase().slice(0, inputValue.length)) {
                 return 1
             } else {
@@ -35,26 +37,45 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
         filteredResults = []
     }
 
+    const AddInterest = (itemName: string) => {
+        const newInterests = [...interests, itemName]
+        setInterests(newInterests)
+    }
+
+    const deleteInterest = (itemName: string) => {
+        const itemNameIndex = interests.findIndex(item => item === itemName)
+        const newInterests = [...interests]
+        newInterests.splice(itemNameIndex, 1)
+        setInterests(newInterests)
+    }
+
     return(
         <div className="tinder__content-setting">
             <div className="tinder__content-setting-name">
                 Interests
             </div>
             <div className="tinder__content-setting-change">
-                <div className="tinder__content-setting-change-search">
-                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="tinder__content-setting-change-search-input" placeholder="type your interest name here" type="text"/>
-                    <div className="tinder__content-setting-change-search-result">
+                <div className="tinder__content-setting-search">
+                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="tinder__content-setting-search-input" placeholder="type your interest's name here" type="text"/>
+                    <div className="tinder__content-setting-result">
                         {filteredResults.map(item => {
                             return(
-                                <div key={item}>{item}</div>
+                                <div onClick={() => AddInterest(item)} key={item} className="tinder__content-setting-result-item">
+                                    {item}
+                                    <div className="tinder__content-setting-result-item-plus"></div>
+                                </div>
                             )
                         })}
                     </div>
                 </div>
-                <div className="tinder__content-setting-change-interests">
+                <div className="tinder__content-setting-interests-title">Your interests</div>
+                <div className="tinder__content-setting-interests">
                     {interests.map(item => {
                         return(
-                            <div key={item}>{item}</div>
+                            <div onClick={() => deleteInterest(item)} key={item} className="tinder__content-setting-interests-item">
+                                {item}
+                                <div className="tinder__content-setting-interests-item-xmark"></div>
+                            </div>
                         )
                     })}
                 </div>
@@ -62,7 +83,7 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
             <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="tinder__content-setting-submit-button tinder__content-setting-submit-button--no-border-bottom">
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings('interests', 'inputValue')} className="tinder__content-setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings('interests', interests)} className="tinder__content-setting-submit-button">
                 Update my interests
             </button>
         </div>

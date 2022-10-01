@@ -14,7 +14,7 @@ interface ProfileSettingsListPropsInterface{
     setCurrentDistanceSetting: (currentDistanceSetting: number) => void
     currentAgeSetting: number
     setCurrentAgeSetting: (currentAgeSetting: number) => void
-    submitSettings: (inputName: string, changedData: string | number | boolean | {from: number, to: number}, innerObjectName?: string) => void
+    submitSettings: (inputName: string, changedData: string | number | boolean | string[] | {from: number, to: number}, innerObjectName?: string) => void
     setFormName: (formName: string) => void
     setSettingInputName: (inputName: string) => void
     setInnerObjectName: (innerObjectName: string) => void
@@ -128,7 +128,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Interests
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                            {!currentUser.interests.length ? "You don't have interests" : null}
+                            {!currentUser.interests.length ? "You don't have interests" : `${currentUser.interests[0]} and so on...`}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>

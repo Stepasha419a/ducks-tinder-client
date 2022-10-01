@@ -7,7 +7,7 @@ import InterestsSetting from "./SettingFields/IterestsSetting"
 interface ProfileSettingPropsInterface {
     currentUser: IUser
     setIsUserInfoSetting: (isSetting: boolean) => void
-    submitSettings: (inputName: string, changedData: string | number, innerObjectName?: string) => void
+    submitSettings: (inputName: string, changedData: string | number | boolean | string[] | {from: number, to: number}, innerObjectName?: string) => void
     formName: string
     settingInputName: string
     innerObjectName: string

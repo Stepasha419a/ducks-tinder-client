@@ -568,21 +568,95 @@ textarea:-ms-input-placeholder { color: #999999; }
   border-bottom: none;
 }
 
-.tinder__content-setting-change-search{
-  height: 100px;
+.tinder__content-setting-search{
   margin-left: 10px;
 }
 
-.tinder__content-setting-change-search-input{
+.tinder__content-setting-search-input{
   width: calc(100% - 20px);
   height: 20px;
   font-size: 18px;
   padding: 15px;
   border: 1px solid rgb(214, 214, 214);
+  border-radius: 6px;
   margin-top: 10px;
 }
 
-.tinder__content-setting-change-search-input:focus{
+.tinder__content-setting-result,
+.tinder__content-setting-interests{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px 0;
+}
+
+.tinder__content-setting-interests{
+  margin-left: 10px;
+}
+
+.tinder__content-setting-interests-title{
+  font-size: 18px;
+  font-weight: 500;
+  border-top: 1px solid rgb(214, 214, 214);
+  padding: 15px 15px 5px;
+}
+
+.tinder__content-setting-result-item,
+.tinder__content-setting-interests-item{
+  border: 2px solid rgb(214, 214, 214);
+  border-radius: 8px;
+  padding: 5px;
+  padding-right: 20px;
+  margin: 5px;
+  position: relative;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.tinder__content-setting-result-item-plus,
+.tinder__content-setting-interests-item-xmark{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.tinder__content-setting-result-item-plus::before,
+.tinder__content-setting-result-item-plus::after,
+.tinder__content-setting-interests-item-xmark::before,
+.tinder__content-setting-interests-item-xmark::after{
+  content: '';
+  display: block;
+  width: 2px;
+  height: 10px;
+  border-radius: 4px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(214, 214, 214);
+  transition: .2s;
+}
+.tinder__content-setting-result-item-plus::after{
+  transform: rotate(90deg);
+}
+
+.tinder__content-setting-interests-item-xmark::before{
+  transform: rotate(45deg);
+}
+.tinder__content-setting-interests-item-xmark::after{
+  transform: rotate(135deg);
+}
+
+.tinder__content-setting-result-item:hover,
+.tinder__content-setting-interests-item:hover{
+  background-color: #fff;
+}
+
+.tinder__content-setting-result-item:hover .tinder__content-setting-result-item-plus::before,
+.tinder__content-setting-result-item:hover .tinder__content-setting-result-item-plus::after,
+.tinder__content-setting-interests-item:hover .tinder__content-setting-interests-item-xmark::before,
+.tinder__content-setting-interests-item:hover .tinder__content-setting-interests-item-xmark::after{
+  background-color: rgb(255, 71, 71);
+}
+
+.tinder__content-setting-search-input:focus{
   border-color: rgb(214, 214, 214);
 }
 
@@ -1196,6 +1270,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__content-full-preview-info-flex{
   display: flex;
   align-items: baseline;
+  color: #21262e;
 }
 
 .tinder__content-full-preview-info-name{
@@ -1554,11 +1629,33 @@ textarea:-ms-input-placeholder { color: #999999; }
   font-size: 32px;
 }
 
+.tinder__pairs-settings{
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+}
+
+.tinder__pairs-setting{
+  border: 2px solid rgb(214, 214, 214);
+  border-radius: 16px;
+  font-weight: 600;
+  padding: 5px 10px;
+  margin: 5px;
+  position: relative;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.tinder__pairs-setting:hover{
+  border-color: rgb(255, 159, 159);
+  color: rgb(128, 28, 28);
+}
+
 .tinder__pairs-users{
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 .tinder__pairs-user{
