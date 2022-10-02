@@ -1607,6 +1607,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  position: relative;
 }
 
 .tinder__pairs::-webkit-scrollbar{
@@ -1646,9 +1647,14 @@ textarea:-ms-input-placeholder { color: #999999; }
   transition: .2s;
 }
 
+.tinder__pairs-setting--sort{
+  border-color: #e65050;
+  color: #e65050;
+}
+
 .tinder__pairs-setting:hover{
-  border-color: rgb(255, 159, 159);
-  color: rgb(128, 28, 28);
+  border-color: #e65050;
+  color: #e65050;
 }
 
 .tinder__pairs-users{
@@ -1699,6 +1705,202 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder__pairs-user-distance-text{
   padding-left: 5px;
+}
+
+.tinder__pairs-popup{
+  position: fixed;
+  z-index: 150;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all .5s ease 0s;
+}
+
+.tinder__pairs-popup-body{
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 10px;
+}
+
+.tinder__pairs-popup-content{
+  position: relative;
+  background-color: #FFFFFF;
+  width: 440px;
+  height: 600px;
+  padding: 24px;
+  transition: all .5s ease 0s;
+  border-radius: 8px;
+}
+
+.tinder__pairs-popup-content--overflow{
+  overflow: auto;
+}
+.tinder__pairs-popup-content--overflow::-webkit-scrollbar{
+  display: none;
+}
+
+.tinder__pairs-popup-title{
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tinder__pairs-popup-close{
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  cursor: pointer;
+}
+.tinder__pairs-popup-close::before,
+.tinder__pairs-popup-close::after{
+  content: '';
+  display: block;
+  height: 4px;
+  width: 20px;
+  background-color: #b9bfc5;
+  border-radius: 4px;
+  position: absolute;
+  top: 11px;
+  left: 2px;
+}
+.tinder__pairs-popup-close::before{
+  transform: rotate(45deg);
+}
+.tinder__pairs-popup-close::after{
+  transform: rotate(135deg);
+}
+
+.tinder__pairs-popup-sort-items{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tinder__pairs-popup-setting{
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.tinder__pairs-popup-setting--cursor{
+  cursor: pointer;
+}
+
+.tinder__pairs-popup-hr{
+  position: relative;
+  margin-bottom: 4px;
+}
+.tinder__pairs-popup-hr::before{
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: -24px;
+  width: calc(100% + 48px);
+  height: 1px;
+  background-color: rgb(214, 214, 214);
+}
+
+.tinder__pairs-popup-setting-value{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #505965;
+}
+
+.tinder__pairs-popup-setting-change--flex{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tinder__pairs-popup-setting-change .input-range{
+  margin: 20px 0 10px;
+}
+
+.tinder__pairs-popup-setting-change .input-range__track{
+  height: 4px;
+  border-radius: 4px;
+}
+
+.tinder__pairs-popup-setting-change .input-range__slider{
+  bottom: -12px;
+}
+
+.tinder__pairs-popup-setting-change .input-range__track--active{
+  background-color: #e65050;
+}
+
+.tinder__pairs-popup-setting-item,
+.tinder__pairs-popup-sort-item{
+  border: 2px solid #b9bfc5;
+  border-radius: 16px;
+  font-weight: 600;
+  padding: 5px 20px;
+  margin: 5px;
+  color: #505965;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.tinder__pairs-popup-setting-item--active{
+  border-color: #e65050;
+  color: #e65050;
+}
+
+.tinder__pairs-popup-setting-show-all{
+  width: 89px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #e65050;
+  margin-top: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.tinder__pairs-popup-setting-change--checkbox{
+  padding: 20px 0 5px;
+}
+
+.tinder__pairs-popup-setting-checkbox{
+  display: none;
+}
+
+.tinder__pairs-popup-setting-label-checked{
+  width: 20px;
+  height: 20px;
+  border: 2px solid #505965;
+  border-radius: 4px;
+  position: absolute;
+  top: 18px ;
+  right: 0;
+  cursor: pointer;
+}
+
+.tinder__pairs-popup-setting-checkbox:checked ~ .tinder__pairs-popup-setting-label-checked::before,
+.tinder__pairs-popup-setting-checkbox:checked ~ .tinder__pairs-popup-setting-label-checked::after{
+  content: '';
+  display: block;
+  height: 3px;
+  width: 14px;
+  background-color: #e65050;
+  position: absolute;
+  top: 7px;
+  left: 3px;
+}
+.tinder__pairs-popup-setting-checkbox:checked ~ .tinder__pairs-popup-setting-label-checked::after{
+  width: 6px;
+  top: 9px;
+  left: 1px;
+  transform: rotate(40deg);
+}
+
+.tinder__pairs-popup-setting-checkbox:checked ~ .tinder__pairs-popup-setting-label-checked::before{
+  transform: rotate(-45deg);
 }
 
 /* Authorization */

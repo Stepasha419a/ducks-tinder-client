@@ -6,6 +6,8 @@ import { IUser } from "../../models/IUser"
 import { AppStateType } from "../../redux/reduxStore"
 import { getUserThunk } from "../../redux/usersReducer"
 import Pair from "./Pair"
+import PairsSettingsPopup from "./popups/PairsSettingsPopup"
+import PairsSortsListPopup from "./popups/PairsSortsListPopup"
 import { sortItemBySettings } from "./utils/PairsUtils"
 
 interface PairsPropsInterface{
@@ -19,7 +21,9 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
 
     const [pairsPaddingWidth, setPairsPaddingWidth] = useState(0)
     const [pairs, setPairs] = useState([] as IUser[])
-    const [sortSettings, setSortSettings] = useState(['haveInterests'] as string[])
+    const [sortSettings, setSortSettings] = useState([] as string[])
+    const [isSortPopupOpen, setIsSortPopupOpen] = useState(false)
+    const [isSortsListPopupOpen, setIsSortsListPopupOpen] = useState(false)
 
     const interestsList = ['fighting', 'ski', 'football', 'volleyball', 'tennis', 'ping pong',
     'swimming', 'karting', 'horse ridding', 'hunting', 'fishing', 'skateboarding', 'bicycle', 'running',
@@ -30,7 +34,7 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
     '3D drawing', 'gardener', 'animals', 'volunteering', 'serials', 'books', 'movies', 'cinema', 'food',
     'cooking', 'photo', 'design', 'writing', 'music', 'handmade']
 
-    const interestsForLoop = ['music', 'travelling', 'movies', 'sport', 'have Interests']
+    const interestsForLoop = ['music', 'travelling', 'movies', 'sport', 'have interests']
 
     const userPairsRef = useRef<HTMLHeadingElement>(null)
 
@@ -52,6 +56,17 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
         }
     }, [userPairsRef.current?.clientWidth])
 
+    const addSort = (sortSetting: string) => {
+        setSortSettings(prev => [...prev, sortSetting])
+    }
+
+    const deleteSort = (sortSetting: string) => {
+        const sortIndex = sortSettings.findIndex(item => item === sortSetting)
+        const newSortSettings = [...sortSettings]
+        newSortSettings.splice(sortIndex, 1)
+        setSortSettings(newSortSettings)
+    }
+
     return(
         <div className="tinder__pairs">
             <div className="tinder__pairs-likes">
@@ -59,12 +74,12 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
                 &nbsp;{currentUser.pairs.length} likes
             </div>
             <div className="tinder__pairs-settings">
-                <div className="tinder__pairs-setting">
+                <div onClick={() => setIsSortPopupOpen(true)} className="tinder__pairs-setting">
                     <FontAwesomeIcon icon={faSliders}/>
                 </div>
                 {interestsForLoop.map(item => {
                     return(
-                        <div className="tinder__pairs-setting">
+                        <div onClick={() => {sortSettings.includes(item) ? deleteSort(item) : addSort(item)}} key={item} className={`tinder__pairs-setting${sortSettings.includes(item) ? ' tinder__pairs-setting--sort' : ''}`}>
                             {item}
                         </div>
                     )
@@ -83,6 +98,13 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
                     return null
                 })}
             </div>
+            {isSortPopupOpen && 
+                <PairsSettingsPopup interestsList={interestsList} sortSettings={sortSettings} addSort={addSort} deleteSort={deleteSort} setIsSortPopupOpen={setIsSortPopupOpen} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
+            }{
+            isSortsListPopupOpen &&
+                <PairsSortsListPopup interestsList={interestsList} sortSettings={sortSettings} addSort={addSort} deleteSort={deleteSort} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
+            }
+            
         </div>
     )
 }

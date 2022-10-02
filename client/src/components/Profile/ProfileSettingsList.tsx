@@ -159,7 +159,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                     step={1}
                                     draggableTrack={false}
                                     allowSameValues={false}
-                                    minValue={18}
+                                    minValue={2}
                                     maxValue={100}
                                     value={currentDistanceSetting}
                                     onChange={dist => setCurrentDistanceSetting(dist as number)}
