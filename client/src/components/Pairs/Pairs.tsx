@@ -4,24 +4,20 @@ import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { IUser } from "../../models/IUser"
 import { AppStateType } from "../../redux/reduxStore"
-import { getUserThunk } from "../../redux/usersReducer"
+import { getUserThunk, setPairSorts } from "../../redux/usersReducer"
 import Pair from "./Pair"
 import PairsSettingsPopup from "./popups/PairsSettingsPopup"
 import PairsSortsListPopup from "./popups/PairsSortsListPopup"
 import { sortItemBySettings } from "./utils/PairsUtils"
 
-interface PairsPropsInterface{
-
-}
-
-const Pairs: React.FC<PairsPropsInterface> = () => {
+const Pairs: React.FC = () => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+    const pairSorts = useSelector((state: AppStateType) => state.usersPage.pairSorts)
 
     const [pairsPaddingWidth, setPairsPaddingWidth] = useState(0)
     const [pairs, setPairs] = useState([] as IUser[])
-    const [sortSettings, setSortSettings] = useState([] as string[])
     const [isSortPopupOpen, setIsSortPopupOpen] = useState(false)
     const [isSortsListPopupOpen, setIsSortsListPopupOpen] = useState(false)
 
@@ -34,7 +30,7 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
     '3D drawing', 'gardener', 'animals', 'volunteering', 'serials', 'books', 'movies', 'cinema', 'food',
     'cooking', 'photo', 'design', 'writing', 'music', 'handmade']
 
-    const interestsForLoop = ['music', 'travelling', 'movies', 'sport', 'have interests']
+    const interestsForLoop = ['music', 'travelling', 'movies', 'sport']
 
     const userPairsRef = useRef<HTMLHeadingElement>(null)
 
@@ -56,15 +52,35 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
         }
     }, [userPairsRef.current?.clientWidth])
 
-    const addSort = (sortSetting: string) => {
-        setSortSettings(prev => [...prev, sortSetting])
+    const addSort = (sortSetting: string | number | {min: number, max: number}, field: string) => {
+        if(field === 'interests' || field === 'account') {
+            const newValue = {[field]: [...pairSorts[field], sortSetting]}
+            dispatch(setPairSorts({...pairSorts, ...newValue}))
+        } else {
+            const newValue = {[field]: sortSetting}
+            dispatch(setPairSorts({...pairSorts, ...newValue}))
+        }
     }
 
-    const deleteSort = (sortSetting: string) => {
-        const sortIndex = sortSettings.findIndex(item => item === sortSetting)
-        const newSortSettings = [...sortSettings]
-        newSortSettings.splice(sortIndex, 1)
-        setSortSettings(newSortSettings)
+    const deleteSort = (sortSetting: string | number | {min: number, max: number}, field: string) => {
+        if(field === 'interests' || field === 'account') {
+            const sortIndex = pairSorts[field].findIndex(item => item === sortSetting)
+            const newArr = [...pairSorts[field]]
+            newArr.splice(sortIndex, 1)
+            dispatch(setPairSorts({...pairSorts, [field]: newArr}))
+        } else {
+            dispatch(setPairSorts({...pairSorts, [field]: sortSetting}))
+        }
+    }
+
+    const clearSorts = () => {
+        dispatch(setPairSorts({
+            distance: 100,
+            age: {min: 18, max: 100},
+            photos: 1,
+            interests: [],
+            account: []
+        }))
     }
 
     return(
@@ -79,11 +95,14 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
                 </div>
                 {interestsForLoop.map(item => {
                     return(
-                        <div onClick={() => {sortSettings.includes(item) ? deleteSort(item) : addSort(item)}} key={item} className={`tinder__pairs-setting${sortSettings.includes(item) ? ' tinder__pairs-setting--sort' : ''}`}>
+                        <div onClick={() => {pairSorts.interests.includes(item) ? deleteSort(item, 'interests') : addSort(item, 'interests')}} key={item} className={`tinder__pairs-setting${pairSorts.interests.includes(item) ? ' tinder__pairs-setting--sort' : ''}`}>
                             {item}
                         </div>
                     )
                 })}
+                <div onClick={() => {pairSorts.account.includes('have interests') ? deleteSort('have interests', 'account') : addSort('have interests', 'account')}} className={`tinder__pairs-setting${pairSorts.account.includes('have interests') ? ' tinder__pairs-setting--sort' : ''}`}>
+                    have interests
+                </div>
             </div>
             <div 
                 ref={userPairsRef} 
@@ -91,18 +110,18 @@ const Pairs: React.FC<PairsPropsInterface> = () => {
                 className="tinder__pairs-users"
             >
                 {pairs.map((user: IUser) => {
-                    const isValid = sortItemBySettings(user, sortSettings)
-                    if(isValid || !sortSettings.length) {
+                    const isValid = sortItemBySettings(user, pairSorts)
+                    if(isValid) {
                         return <Pair key={user._id} user={user}/>
                     }
                     return null
                 })}
             </div>
             {isSortPopupOpen && 
-                <PairsSettingsPopup interestsList={interestsList} sortSettings={sortSettings} addSort={addSort} deleteSort={deleteSort} setIsSortPopupOpen={setIsSortPopupOpen} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
+                <PairsSettingsPopup interestsList={interestsList} pairSorts={pairSorts} clearSorts={clearSorts} addSort={addSort} deleteSort={deleteSort} setIsSortPopupOpen={setIsSortPopupOpen} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
             }{
             isSortsListPopupOpen &&
-                <PairsSortsListPopup interestsList={interestsList} sortSettings={sortSettings} addSort={addSort} deleteSort={deleteSort} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
+                <PairsSortsListPopup interestsList={interestsList} pairSorts={pairSorts} addSort={addSort} deleteSort={deleteSort} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
             }
             
         </div>

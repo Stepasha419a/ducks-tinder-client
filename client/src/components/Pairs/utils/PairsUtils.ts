@@ -1,32 +1,50 @@
 import { IUser } from "../../../models/IUser";
+import { ISorts } from "../../../redux/usersReducer";
 
-export const sortItemBySettings = (item: IUser, sortSettings: string[]) => {
-    let isValid = false
-    for (let i = 0; i < sortSettings.length; i++) {
-        let result = sortPair(item, sortSettings[i])
+export const sortItemBySettings = (item: IUser, sortSettings: ISorts) => {
+    for (const sortKey in sortSettings) {
+        let result = sortPair(item, sortKey, sortSettings)
         if(!result) {
-            isValid = false
-            return isValid
-        }
-
-        if(i === sortSettings.length - 1) {
-            isValid = true
-            return isValid
+            return false
         }
     }
+    return true
 }
 
-const sortPair = (item: IUser, sortSetting: string) => {
-    switch (sortSetting) {
-        case 'have interests':
-            if(item.interests.length) {
-                return true
+const sortPair = (item: IUser, sortKey: string, sortSettings: ISorts) => {
+    switch (sortKey) {
+        case 'distance':
+            if(item.partnerSettings.distance > sortSettings.distance) {
+                return false
             }
-            return false
+            return true
+        case 'age':
+            if(item.age < sortSettings.age.min || item.age > sortSettings.age.max) {
+                return false
+            }
+            return true
+        case 'photos':
+            const userPhotosCount = 1 + item.pictures.gallery.length
+            if(userPhotosCount < sortSettings.photos) {
+                return false
+            }
+            return true
+        case 'account':
+            for(let accountSetting of sortSettings.account) {
+                if(accountSetting === 'have interests' && !item.interests.length) {
+                    return false
+                }
+                if(accountSetting === 'identify confirmed' && !item.isActivated) {
+                    return false
+                }
+            }
+            return true
         default:
-            if(item.interests.includes(sortSetting)) {
-                return true
+            for(let interest of sortSettings.interests) {
+                if(!item.interests.includes(interest)) {
+                    return false
+                }
             }
-            return false
+            return true
     }
 }

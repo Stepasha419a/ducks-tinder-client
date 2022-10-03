@@ -3,11 +3,26 @@ import { usersAPI } from "../api/usersApi";
 import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage";
 import { IUser, makeUserImagesObject, makeUserObject } from "../models/IUser";
 
+export interface ISorts {
+    distance: number,
+    age: {min: number, max: number},
+    photos: number,
+    interests: string[],
+    account: string[]  
+}
+
 const usersReducer = createSlice({
     name: 'users',
     initialState: {
         users: [] as IUser[],
-        currentUser: {} as IUser
+        currentUser: {} as IUser,
+        pairSorts: {
+            distance: 100,
+            age: {min: 18, max: 100},
+            photos: 1,
+            interests: [],
+            account: []
+        } as ISorts
     },
     reducers: {
         setUsers: (state, action) => {
@@ -15,6 +30,9 @@ const usersReducer = createSlice({
         },
         setCurrentUser: (state, action) => {
             state.currentUser = action.payload
+        },
+        setPairSorts: (state, action) => {
+            state.pairSorts = action.payload
         }
     }
 })
@@ -116,7 +134,7 @@ export const mixUserImages = createAsyncThunk(
 
 const {setUsers} = usersReducer.actions
 
-export const {setCurrentUser} = usersReducer.actions
+export const {setCurrentUser, setPairSorts} = usersReducer.actions
 
 export type UsersReducerType = typeof usersReducer
 

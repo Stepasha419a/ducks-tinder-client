@@ -1,12 +1,14 @@
+import { ISorts } from "../../../redux/usersReducer"
+
 interface PairsSortsListPopupProps{
     interestsList: string[]
-    sortSettings: string[]
-    addSort: (sort: string) => void
-    deleteSort: (sort: string) => void
+    pairSorts: ISorts
+    addSort: (sort: string, field: string) => void
+    deleteSort: (sort: string, field: string) => void
     setIsSortsListPopupOpen: (setting: boolean) => void
 }
 
-const PairsSortsListPopup: React.FC<PairsSortsListPopupProps> = ({interestsList, sortSettings, addSort, deleteSort, setIsSortsListPopupOpen}) => {
+const PairsSortsListPopup: React.FC<PairsSortsListPopupProps> = ({interestsList, pairSorts, addSort, deleteSort, setIsSortsListPopupOpen}) => {
     return(
         <div className="tinder__pairs-popup">
             <div className="tinder__pairs-popup-body">
@@ -16,10 +18,13 @@ const PairsSortsListPopup: React.FC<PairsSortsListPopupProps> = ({interestsList,
                     <div className="tinder__pairs-popup-sort-items">
                         {interestsList.map(item => {
                             return(
-                                <div onClick={() => {sortSettings.includes(item) ? deleteSort(item) : addSort(item)}} key={item} className={`tinder__pairs-popup-setting-item${sortSettings.includes(item) ? ' tinder__pairs-popup-setting-item--active' : ''}`}>{item}</div>
+                                <div onClick={() => {pairSorts.interests.includes(item) ? deleteSort(item, 'interests') : addSort(item, 'interests')}} key={item} className={`tinder__pairs-popup-setting-item${pairSorts.interests.includes(item) ? ' tinder__pairs-popup-setting-item--active' : ''}`}>{item}</div>
                             )
                         })}
                     </div>
+                    <button onClick={() => setIsSortsListPopupOpen(false)} className="tinder__pairs-popup-btn tinder__pairs-popup-btn--sorts-list">
+                        Confirm
+                    </button>
                 </div>
             </div>
         </div>
