@@ -61,7 +61,7 @@ const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId, image
                     <div key={index} className={index === current ? 'tinder__image-slider-item-wrapper--active' : 'tinder__image-slider-item-wrapper--hidden'}>
                         <div
                             style={{backgroundImage: `url(http://localhost:5000/${userId}/${index > 0 ? 'gallery' : 'avatar'}/${imageName})`}} 
-                            className={`tinder__image-slider-item ${imageExtraClassName}`}>
+                            className={`tinder__image-slider-item${' ' + imageExtraClassName}`}>
                         </div>
                     </div>
                 )

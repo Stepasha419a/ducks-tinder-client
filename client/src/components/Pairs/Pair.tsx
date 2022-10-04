@@ -3,15 +3,16 @@ import defaultPhoto from '../../assets/images/photos/1.jpg'
 
 interface PairPropsInterface {
     user: IUser
+    setCurrentPair: (pair: IUser) => void
 }
 
-const Pair: React.FC<PairPropsInterface> = ({user}) => {
+const Pair: React.FC<PairPropsInterface> = ({user, setCurrentPair}) => {
     if(!user.name) {
         return <div>loading...</div>
     }
 
     return(
-        <div style={{backgroundImage: `url(${user.pictures.avatar ? `http://localhost:5000/${user._id}/avatar/` + user.pictures.avatar : defaultPhoto})`}} className="tinder__pairs-user">
+        <div onClick={() => setCurrentPair(user)} style={{backgroundImage: `url(${user.pictures.avatar ? `http://localhost:5000/${user._id}/avatar/` + user.pictures.avatar : defaultPhoto})`}} className="tinder__pairs-user">
             <div className="tinder__pairs-user-info">
                 <div className="tinder__pairs-user-descr">
                     <div className="tinder__pairs-user-name">{user.name}</div>

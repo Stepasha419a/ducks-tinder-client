@@ -1,4 +1,4 @@
-import { ISorts } from "../../../redux/usersReducer"
+import { ISorts } from "../utils/PairsUtils"
 
 interface PairsSortsListPopupProps{
     interestsList: string[]
@@ -26,6 +26,7 @@ const PairsSortsListPopup: React.FC<PairsSortsListPopupProps> = ({interestsList,
                         Confirm
                     </button>
                 </div>
+                <div onClick={() => setIsSortsListPopupOpen(false)} className="tinder__pairs-popup-close-area"></div>
             </div>
         </div>
     )

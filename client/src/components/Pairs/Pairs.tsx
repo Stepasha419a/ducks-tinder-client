@@ -4,22 +4,30 @@ import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { IUser } from "../../models/IUser"
 import { AppStateType } from "../../redux/reduxStore"
-import { getUserThunk, setPairSorts } from "../../redux/usersReducer"
+import { getUserThunk } from "../../redux/usersReducer"
 import Pair from "./Pair"
+import PairPopup from "./popups/PairPopup"
 import PairsSettingsPopup from "./popups/PairsSettingsPopup"
 import PairsSortsListPopup from "./popups/PairsSortsListPopup"
-import { sortItemBySettings } from "./utils/PairsUtils"
+import { ISorts, sortItemBySettings } from "./utils/PairsUtils"
 
 const Pairs: React.FC = () => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
-    const pairSorts = useSelector((state: AppStateType) => state.usersPage.pairSorts)
 
     const [pairsPaddingWidth, setPairsPaddingWidth] = useState(0)
-    const [pairs, setPairs] = useState([] as IUser[])
+    const [pairs, setPairs] = useState<IUser[]>([])
+    const [currentPair, setCurrentPair] = useState<IUser>({} as IUser)
     const [isSortPopupOpen, setIsSortPopupOpen] = useState(false)
     const [isSortsListPopupOpen, setIsSortsListPopupOpen] = useState(false)
+    const [pairSorts, setPairSorts] = useState<ISorts>({
+        distance: 100,
+        age: {min: 18, max: 100},
+        photos: 1,
+        interests: [],
+        account: []
+    })
 
     const interestsList = ['fighting', 'ski', 'football', 'volleyball', 'tennis', 'ping pong',
     'swimming', 'karting', 'horse ridding', 'hunting', 'fishing', 'skateboarding', 'bicycle', 'running',
@@ -55,32 +63,32 @@ const Pairs: React.FC = () => {
     const addSort = (sortSetting: string | number | {min: number, max: number}, field: string) => {
         if(field === 'interests' || field === 'account') {
             const newValue = {[field]: [...pairSorts[field], sortSetting]}
-            dispatch(setPairSorts({...pairSorts, ...newValue}))
+            setPairSorts({...pairSorts, ...newValue})
         } else {
             const newValue = {[field]: sortSetting}
-            dispatch(setPairSorts({...pairSorts, ...newValue}))
+            setPairSorts({...pairSorts, ...newValue})
         }
     }
 
     const deleteSort = (sortSetting: string | number | {min: number, max: number}, field: string) => {
         if(field === 'interests' || field === 'account') {
-            const sortIndex = pairSorts[field].findIndex(item => item === sortSetting)
+            const sortIndex = pairSorts[field].findIndex((item: string) => item === sortSetting)
             const newArr = [...pairSorts[field]]
             newArr.splice(sortIndex, 1)
-            dispatch(setPairSorts({...pairSorts, [field]: newArr}))
+            setPairSorts({...pairSorts, [field]: newArr})
         } else {
-            dispatch(setPairSorts({...pairSorts, [field]: sortSetting}))
+            setPairSorts({...pairSorts, [field]: sortSetting})
         }
     }
 
     const clearSorts = () => {
-        dispatch(setPairSorts({
+        setPairSorts({
             distance: 100,
             age: {min: 18, max: 100},
             photos: 1,
             interests: [],
             account: []
-        }))
+        })
     }
 
     return(
@@ -112,7 +120,7 @@ const Pairs: React.FC = () => {
                 {pairs.map((user: IUser) => {
                     const isValid = sortItemBySettings(user, pairSorts)
                     if(isValid) {
-                        return <Pair key={user._id} user={user}/>
+                        return <Pair key={user._id} user={user} setCurrentPair={setCurrentPair}/>
                     }
                     return null
                 })}
@@ -122,6 +130,9 @@ const Pairs: React.FC = () => {
             }{
             isSortsListPopupOpen &&
                 <PairsSortsListPopup interestsList={interestsList} pairSorts={pairSorts} addSort={addSort} deleteSort={deleteSort} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
+            }{
+            currentPair.name &&
+                <PairPopup currentPair={currentPair} setCurrentPair={setCurrentPair} />
             }
             
         </div>

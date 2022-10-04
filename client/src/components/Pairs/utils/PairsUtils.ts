@@ -1,5 +1,12 @@
 import { IUser } from "../../../models/IUser";
-import { ISorts } from "../../../redux/usersReducer";
+
+export interface ISorts {
+    distance: number,
+    age: {min: number, max: number},
+    photos: number,
+    interests: string[],
+    account: string[]  
+}
 
 export const sortItemBySettings = (item: IUser, sortSettings: ISorts) => {
     for (const sortKey in sortSettings) {
