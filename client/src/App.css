@@ -291,6 +291,13 @@ textarea:-ms-input-placeholder { color: #999999; }
   transition: .2s;
 }
 
+.tinder__settings-group-item-descr-setting--text-overflow{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
 .tinder__settings-group-item:hover .tinder__settings-group-item-descr-setting-open-icon,
 .tinder__settings-group-item--pointer:hover .tinder__settings-group-item-descr-setting{
   color: #fd267a !important;
@@ -395,6 +402,11 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__content-setting-change-input:focus{
   border-color: rgb(214, 214, 214);
   color: #000;
+}
+
+.tinder__content-setting-change-textarea{
+  resize: none;
+  height: 200px;
 }
 
 .tinder__content-setting-change-input-wrapper{
@@ -590,7 +602,16 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .tinder__content-setting-interests{
-  margin-left: 10px;
+  overflow: auto;
+  max-height: 200px;
+  background-color: #ececec;
+  padding: 10px;
+  border-top: 2px solid rgb(214, 214, 214);
+  border-bottom: 2px solid rgb(214, 214, 214);
+}
+
+.tinder__content-setting-interests::-webkit-scrollbar{
+  display: none;
 }
 
 .tinder__content-setting-interests-title{
@@ -1960,6 +1981,35 @@ textarea:-ms-input-placeholder { color: #999999; }
   border-top-right-radius: 8px;
 }
 
+.tinder__pairs-slider-pair-info{
+  position: absolute;
+  bottom: 100px;
+  left: 20px;
+}
+
+.tinder__pairs-slider-info{
+  display: flex;
+  align-items: baseline;
+}
+
+.tinder__pairs-slider-info-name{
+  font-weight: 800;
+  font-size: 36px;
+  color: #fff;
+}
+
+.tinder__pairs-slider-info-years{
+  font-size: 28px;
+  font-weight: 300;
+  margin-left: 8px;
+  color: #fff;
+}
+
+.tinder__pairs-slider-distance{
+  color: #fff;
+  padding-top: 10px;
+}
+
 .tinder__pairs-popup-scroll-down{
   width: 100%;
   height: 50px;
@@ -1975,7 +2025,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder__pairs-popup-info-flex{
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
   color: #21262e;
 }
@@ -2010,7 +2060,21 @@ textarea:-ms-input-placeholder { color: #999999; }
   border: 1px solid #0000001f
 }
 
-.tinder__pairs-popup-interests{
+.tinder__pairs-popup-description{
+  font-size: 16px;
+  color: #505965;
+  padding: 15px;
+  line-height: 1.35;
+}
+
+.tinder__pairs-popup-interests-title{
+  font-size: 20px;
+  font-weight: 600;
+  color: #505965;
+  margin: 10px 0 0 25px;
+}
+
+.tinder__pairs-popup-interests-items{
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -2026,12 +2090,14 @@ textarea:-ms-input-placeholder { color: #999999; }
   color: #505965;
 }
 
+
 .tinder__pairs-popup-setting-item--no-cursor{
   cursor: default;
 }
 
 .tinder__pairs-popup-show-all{
   margin: 0 auto;
+  padding: 10px 0;
 }
 
 /* Authorization */

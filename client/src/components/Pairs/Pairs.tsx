@@ -8,7 +8,7 @@ import { getUserThunk } from "../../redux/usersReducer"
 import Pair from "./Pair"
 import PairPopup from "./popups/PairPopup"
 import PairsSettingsPopup from "./popups/PairsSettingsPopup"
-import PairsSortsListPopup from "./popups/PairsSortsListPopup"
+import InterestsSettingPopup from "./popups/InterestsSettingPopup"
 import { ISorts, sortItemBySettings } from "./utils/PairsUtils"
 
 const Pairs: React.FC = () => {
@@ -20,7 +20,7 @@ const Pairs: React.FC = () => {
     const [pairs, setPairs] = useState<IUser[]>([])
     const [currentPair, setCurrentPair] = useState<IUser>({} as IUser)
     const [isSortPopupOpen, setIsSortPopupOpen] = useState(false)
-    const [isSortsListPopupOpen, setIsSortsListPopupOpen] = useState(false)
+    const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] = useState(false)
     const [pairSorts, setPairSorts] = useState<ISorts>({
         distance: 100,
         age: {min: 18, max: 100},
@@ -28,15 +28,6 @@ const Pairs: React.FC = () => {
         interests: [],
         account: []
     })
-
-    const interestsList = ['fighting', 'ski', 'football', 'volleyball', 'tennis', 'ping pong',
-    'swimming', 'karting', 'horse ridding', 'hunting', 'fishing', 'skateboarding', 'bicycle', 'running',
-    'surfing', 'snowboarding', 'shooting', 'parachuting', 'paintball', 'bowling', 'billiard', 'skates', 
-    'dancing', 'cosplay', 'ballet', 'room quest', 'fitness', 'yoga', 'meditation', 'tourism', 'traveling',
-    'hiking', 'camping', 'cars', 'education', 'foreign languages', 'cards', 'poker', 'chess', 'checkers',
-    'nard', 'psychology', 'table games', 'sport', 'blogging', 'computer games', 'programming', 'drawing',
-    '3D drawing', 'gardener', 'animals', 'volunteering', 'serials', 'books', 'movies', 'cinema', 'food',
-    'cooking', 'photo', 'design', 'writing', 'music', 'handmade']
 
     const interestsForLoop = ['music', 'travelling', 'movies', 'sport']
 
@@ -126,10 +117,10 @@ const Pairs: React.FC = () => {
                 })}
             </div>
             {isSortPopupOpen && 
-                <PairsSettingsPopup interestsList={interestsList} pairSorts={pairSorts} clearSorts={clearSorts} addSort={addSort} deleteSort={deleteSort} setIsSortPopupOpen={setIsSortPopupOpen} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
+                <PairsSettingsPopup pairSorts={pairSorts} clearSorts={clearSorts} addSort={addSort} deleteSort={deleteSort} setIsSortPopupOpen={setIsSortPopupOpen} setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}/>
             }{
-            isSortsListPopupOpen &&
-                <PairsSortsListPopup interestsList={interestsList} pairSorts={pairSorts} addSort={addSort} deleteSort={deleteSort} setIsSortsListPopupOpen={setIsSortsListPopupOpen}/>
+            isInterestsSettingPopupOpen &&
+                <InterestsSettingPopup pairInterests={pairSorts.interests} addSort={addSort} deleteSort={deleteSort} setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}/>
             }{
             currentPair.name &&
                 <PairPopup currentPair={currentPair} setCurrentPair={setCurrentPair} />

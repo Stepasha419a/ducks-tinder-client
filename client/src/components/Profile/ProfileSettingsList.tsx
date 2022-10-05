@@ -77,6 +77,17 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
+                    <div onClick={() => setSettingInput('Description', 'description')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                        <div className="tinder__settings-group-item-descr">
+                            <div className="tinder__settings-group-item-descr-title">
+                                Description
+                            </div>
+                            <div className="tinder__settings-group-item-descr-setting tinder__settings-group-item-descr-setting--text-overflow">
+                                {currentUser.description}
+                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                            </div>
+                        </div>
+                    </div>
                     <div onClick={() => setSettingInput('Sex', 'sex')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">

@@ -3,6 +3,7 @@ import { partnerSettingsInterface, picturesInterface } from "../models/user-mode
 export interface UserDtoInterface {
     email: string
     name: string
+    description: string
     nickname: string
     _id: string
     isActivated: boolean
@@ -18,6 +19,7 @@ export interface UserDtoInterface {
 export default class UserDto { // Data transfer object
     email
     name
+    description
     nickname
     _id
     isActivated
@@ -32,6 +34,7 @@ export default class UserDto { // Data transfer object
     constructor(model: UserDtoInterface) {
         this.email = model.email
         this.name = model.name
+        this.description = model.description
         this.nickname = model.nickname
         this._id = model._id
         this.isActivated = model.isActivated

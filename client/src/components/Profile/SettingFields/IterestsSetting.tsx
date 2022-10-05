@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { IUser } from "../../../models/IUser"
+import InterestsSettingPopup from "../../Pairs/popups/InterestsSettingPopup"
 
 interface InterestsSettingPropsInterface{
     currentUser: IUser
@@ -21,6 +22,7 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
     
     const [interests, setInterests] = useState(currentUser.interests as string[])
     const [inputValue, setInputValue] = useState('')
+    const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] = useState(false)
     let filteredResults = [] as string[]
 
     if(inputValue.length > 1) {
@@ -37,7 +39,7 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
         filteredResults = []
     }
 
-    const AddInterest = (itemName: string) => {
+    const addInterest = (itemName: string) => {
         const newInterests = [...interests, itemName]
         setInterests(newInterests)
     }
@@ -50,6 +52,7 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
     }
 
     return(
+        <>
         <div className="tinder__content-setting">
             <div className="tinder__content-setting-name">
                 Interests
@@ -60,7 +63,7 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
                     <div className="tinder__content-setting-result">
                         {filteredResults.map(item => {
                             return(
-                                <div onClick={() => AddInterest(item)} key={item} className="tinder__content-setting-result-item">
+                                <div onClick={() => addInterest(item)} key={item} className="tinder__content-setting-result-item">
                                     {item}
                                     <div className="tinder__content-setting-result-item-plus"></div>
                                 </div>
@@ -79,6 +82,7 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
                         )
                     })}
                 </div>
+                <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="tinder__pairs-popup-setting-show-all tinder__pairs-popup-show-all">Show all</div>
             </div>
             <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="tinder__content-setting-submit-button tinder__content-setting-submit-button--no-border-bottom">
                 Cancel
@@ -87,6 +91,10 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
                 Update my interests
             </button>
         </div>
+        {isInterestsSettingPopupOpen &&
+            <InterestsSettingPopup pairInterests={interests} addSort={addInterest} deleteSort={deleteInterest} setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen} />
+        }
+        </>
     )
 }
 

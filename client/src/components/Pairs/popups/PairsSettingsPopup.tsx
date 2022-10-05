@@ -3,16 +3,15 @@ import InputRange from "react-input-range"
 import { ISorts } from "../utils/PairsUtils"
 
 interface PairsSettingsPopupProps{
-    interestsList: string[]
     pairSorts: ISorts
     clearSorts: () => void
     addSort: (sortSetting: string | number | {min: number, max: number}, field: string) => void
     deleteSort: (sortSetting: string | number | {min: number, max: number}, field: string) => void
-    setIsSortsListPopupOpen: (setting: boolean) => void
+    setIsInterestsSettingPopupOpen: (setting: boolean) => void
     setIsSortPopupOpen: (setting: boolean) => void
 }
 
-const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({interestsList, pairSorts, clearSorts, addSort, deleteSort, setIsSortsListPopupOpen, setIsSortPopupOpen}) => {
+const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({ pairSorts, clearSorts, addSort, deleteSort, setIsInterestsSettingPopupOpen, setIsSortPopupOpen}) => {
     const [distanceSetting, setDistanceSetting] = useState(pairSorts.distance)
     const [ageSetting, setAgeSetting] = useState<{min: number, max: number}>(pairSorts.age)
     const [photoCount, setPhotoCount] = useState(pairSorts.photos)
@@ -109,7 +108,7 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({interestsList, p
                                 )
                             })}
                         </div>
-                        <div onClick={() => setIsSortsListPopupOpen(true)} className="tinder__pairs-popup-setting-show-all">Show all</div>
+                        <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="tinder__pairs-popup-setting-show-all">Show all</div>
                     </div>
                     <div className="tinder__pairs-popup-hr"></div>
                     <div onClick={() => {pairSorts.account.includes('identify confirmed') ? deleteSort('identify confirmed', 'account') : addSort('identify confirmed', 'account')}} className="tinder__pairs-popup-setting tinder__pairs-popup-setting--cursor">

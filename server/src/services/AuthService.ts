@@ -25,6 +25,7 @@ class AuthService{
 
         if(!partnerSettings) partnerSettings = {place: 'unknown', distance: 0, usersOnlyInDistance: false, preferSex: 'unknown', age: {from: 18, to: 24}}
         
+        const description = ''
         const interests = [] as string[]
         const dialogs = [] as string[]
         const pictures = {
@@ -33,7 +34,7 @@ class AuthService{
         }
         const pairs = [] as string[]
 
-        const user = await UserModel.create({email, name, nickname, password: hashPassword, age, sex, interests, partnerSettings, pictures, dialogs, pairs, activationLink})
+        const user = await UserModel.create({email, name, description, nickname, password: hashPassword, age, sex, interests, partnerSettings, pictures, dialogs, pairs, activationLink})
 
         fileService.makeUserDir(user._id.toString())
 

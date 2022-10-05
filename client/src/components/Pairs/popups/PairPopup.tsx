@@ -33,6 +33,19 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
                     <div onClick={() => setCurrentPair({} as IUser)} className="tinder__pairs-popup-close"></div>
                     <div className="tinder__pairs-popup-slider">
                         <ImageSlider images={[currentPair.pictures.avatar, ...currentPair.pictures.gallery]} userId={currentPair._id} imageExtraClassName='tinder__pairs-popup-slider-image'/>
+                        <div className="tinder__pairs-slider-pair-info">
+                            <div className="tinder__pairs-slider-info">
+                                <div className="tinder__pairs-slider-info-name">
+                                    {currentPair.name} 
+                                </div>
+                                <div className="tinder__pairs-slider-info-years">
+                                    {currentPair.age || 'unknown years'}
+                                </div>
+                            </div>
+                            <div className="tinder__pairs-slider-distance">
+                                {currentPair.partnerSettings?.distance || 'unknown'} km from you
+                            </div>
+                        </div>
                     </div>
                     <div onClick={() => scrollToBottom()} className="tinder__pairs-popup-scroll-down">
                         <FontAwesomeIcon icon={faChevronDown}/>
@@ -52,14 +65,23 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
                         </div>
                     </div>
                     <hr className="tinder__pairs-popup-info-separator"/>
+                    <div className="tinder__pairs-popup-description">
+                        {currentPair.description}
+                    </div>
+                    <hr className="tinder__pairs-popup-info-separator"/>
                     <div className="tinder__pairs-popup-interests">
-                        {interestsForLoop.map(item => {
-                        return(
-                            <div key={item} className='tinder__pairs-popup-interest'>
-                                {item}
-                            </div>
-                        )
-                        })}
+                        <div className="tinder__pairs-popup-interests-title">
+                            Interests
+                        </div>
+                        <div className="tinder__pairs-popup-interests-items">
+                            {interestsForLoop.map(item => {
+                            return(
+                                <div key={item} className='tinder__pairs-popup-interest'>
+                                    {item}
+                                </div>
+                            )
+                            })}
+                        </div>
                     </div>
                     <div onClick={() => setIsInterestsListPopupOpen(true)} className="tinder__pairs-popup-setting-show-all tinder__pairs-popup-show-all">Show all</div>
                     <div ref={bottomElementRef} className="tinder_pairs-popup-bottom"/>

@@ -2,6 +2,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ChangeEvent, useEffect, useState } from "react"
 import { IUser } from "../../models/IUser"
+import DescriptionSetting from "./SettingFields/DescriptionSetting"
 import InterestsSetting from "./SettingFields/IterestsSetting"
 
 interface ProfileSettingPropsInterface {
@@ -21,7 +22,7 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
     const [isFormValid, setIsFormValid] = useState(false)
     const [isFormCloseable, setIsFormCloseable] = useState(true)
 
-    const emailHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const emailHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputValue(e.target.value)
         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         if(!re.test(String(e.target.value).toLowerCase())) {
@@ -31,9 +32,9 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
         }
     }
 
-    const checkInput = (event: ChangeEvent<HTMLInputElement>, formName: string, limit: {min: number, max: number}) => {
+    const checkInput = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, formName: string, limit: {min: number, max: number}) => {
         if(event.target.value.length < limit.min || event.target.value.length > limit.max) {
-            setInputValueError(`${formName} has to be more 2 and less 15`)
+            setInputValueError(`${formName} has to be more ${limit.min} and less ${limit.max}`)
         if(!event.target.value) {
             setInputValueError(`${formName} can't be empty`)
         }
@@ -42,7 +43,7 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
         }
     }
 
-    const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setInputValue(e.target.value)
         if(settingInputName === 'email') {
             emailHandler(e)
@@ -53,6 +54,9 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
         }
         if(settingInputName === 'place') {
             checkInput(e, formName, {min: 8, max: 25})
+        }
+        if(settingInputName === 'description') {
+            checkInput(e, formName, {min: 20, max: 400})
         }
     }
 
@@ -89,6 +93,8 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
 
     if(settingInputName === 'interests') {
         return <InterestsSetting currentUser={currentUser} isFormValid={isFormValid} isFormCloseable={isFormCloseable} submitSettings={submitSettings} cancelHandler={cancelHandler}/>
+    } else if(settingInputName === 'description') {
+        return <DescriptionSetting inputValueDirty={inputValueDirty} inputValueError={inputValueError} inputHandler={inputHandler} setInputValueDirty={setInputValueDirty} inputValue={inputValue} isFormValid={isFormValid} isFormCloseable={isFormCloseable} submitSettings={submitSettings} cancelHandler={cancelHandler}/>
     }
     
     return (

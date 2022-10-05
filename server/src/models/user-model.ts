@@ -18,6 +18,7 @@ export interface picturesInterface{
 const UserSchema = new mongoose.Schema({
     email: {type: String, unique: true, required: true},
     name: {type: String, required: true, default: 'Unnamed user'},
+    description: {type: String, required: true, default: ''},
     nickname: {type: String},
     picture: {type: String},
     password: {type: String, required: true},
