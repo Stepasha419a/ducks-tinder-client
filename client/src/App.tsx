@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
 import LoginForm from './components/Forms/LoginForm';
 import Tinder from './components/Tinder/Tinder';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { checkAuthThunk } from './redux/authReducer';
@@ -14,13 +14,19 @@ import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 import Policy from './components/Policy/Policy';
 import Chat from './components/Chat/Chat';
 import Pairs from './components/Pairs/Pairs';
+import { potentialFields } from './models/IUser';
+import { checkField } from './components/Profile/utils/ProfileUtils';
 
 function App() {
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const isLoading = useSelector((state: AppStateType) => state.authPage.isLoading)
   const formError = useSelector((state: AppStateType) => state.authPage.formError)
+  const isAuth = useSelector((state: AppStateType) => state.authPage.isAuth)
+  const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+
   const [isPairsOpened, setIsPairsOpened] = useState(true)
 
   const socket: MutableRefObject<WebSocket | undefined> = useRef()
@@ -35,11 +41,16 @@ function App() {
     pathname === '/chat' ? setIsPairsOpened(false) : setIsPairsOpened(true);
   }, [pathname])
 
-  /* useEffect(() => {
-    if(isAuth && (!user.picture || !user.description)) {
-      navigate('profile')
+  useEffect(() => {
+    if(isAuth) {
+      for (const field of potentialFields) {
+        const result = checkField(currentUser, field)
+        if(result) {
+          return navigate('profile')
+        }
+      }
     }
-  }, [isAuth, navigate, user.picture, user.description]) */
+  }, [isAuth, navigate])
 
   return (
     <>

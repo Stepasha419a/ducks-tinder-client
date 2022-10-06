@@ -64,6 +64,8 @@ export const interestsList = ['fighting', 'ski', 'football', 'volleyball', 'tenn
     '3D drawing', 'gardener', 'animals', 'volunteering', 'serials', 'books', 'movies', 'cinema', 'food',
     'cooking', 'photo', 'design', 'writing', 'music', 'handmade']
 
+export const potentialFields = ['description', 'sex', 'interests', 'place', 'distance', 'preferSex']
+
 export const makeUserObject = (args: {currentUser: IUser | any, inputName: string, changedData: String | Number | Boolean | String[] | {from: number, to: number}, innerObjectName?: string}) => {
     const {currentUser, inputName, changedData, innerObjectName} = args
     

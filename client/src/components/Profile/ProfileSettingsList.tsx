@@ -1,11 +1,12 @@
 import { faAngleRight, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import InputRange from "react-input-range"
 import { useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { IUser } from "../../models/IUser"
+import { IUser, potentialFields } from "../../models/IUser"
 import { logoutThunk } from "../../redux/authReducer"
+import { checkField } from "./utils/ProfileUtils"
 
 interface ProfileSettingsListPropsInterface{
     currentUser: IUser
@@ -39,7 +40,23 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
         {min: currentUser.partnerSettings.age.from, max: currentUser.partnerSettings.age.to}
         :
         {min: 18, max: 24}
-        )
+    )
+    const [errorFields, setErrorFields] = useState<string[]>([])
+ 
+    useEffect(() => {
+        const errorFields = []
+
+        for (let i = 0; i < potentialFields.length; i++) {
+            const field = potentialFields[i]
+            const result = checkField(currentUser, field)
+
+            if(result) {
+                errorFields.push(field)
+            }
+        }
+        
+        setErrorFields(errorFields)
+    }, [])
 
     const setSettingInput = (formName: string, inputName: string, innerObjectName?: string) => {
         setIsUserInfoSetting(true)
@@ -77,7 +94,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Description', 'description')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                    <div onClick={() => setSettingInput('Description', 'description')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('description') ? ' tinder__settings-group-item--error' : ''}`}>
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">
                                 Description
@@ -88,7 +105,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Sex', 'sex')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                    <div onClick={() => setSettingInput('Sex', 'sex')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('sex') ? ' tinder__settings-group-item--error' : ''}`}>
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">
                                 Sex
@@ -105,7 +122,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Age
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentAgeSetting || 'unknown'} years old
+                                {currentAgeSetting} years old
                             </div>
                         </div>
                         <div className="tinder__settings-group-item-setting">
@@ -133,7 +150,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                     Find Settings
                 </div>
                 <div className="tinder__settings-group-items">
-                    <div onClick={() => setSettingInput('Interests', 'interests')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                    <div onClick={() => setSettingInput('Interests', 'interests')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('interests') ? ' tinder__settings-group-item--error' : ''}`}>
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">
                                 Interests
@@ -144,7 +161,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Place', 'place', 'partnerSettings')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                    <div onClick={() => setSettingInput('Place', 'place', 'partnerSettings')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('place') ? ' tinder__settings-group-item--error' : ''}`}>
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">
                                 Place
@@ -155,7 +172,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
-                    <div className="tinder__settings-group-item">
+                    <div className={`tinder__settings-group-item${errorFields.includes('distance') ? ' tinder__settings-group-item--error' : ''}`}>
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">
                                 Distance
@@ -194,7 +211,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Interested in', 'preferSex', 'partnerSettings')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
+                    <div onClick={() => setSettingInput('Interested in', 'preferSex', 'partnerSettings')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('preferSex') ? ' tinder__settings-group-item--error' : ''}`}>
                         <div className="tinder__settings-group-item-descr">
                             <div className="tinder__settings-group-item-descr-title">
                                 Interested in

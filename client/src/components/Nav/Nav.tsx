@@ -1,11 +1,14 @@
 import { faBriefcase, faHeartCircleExclamation, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { AppStateType } from '../../redux/reduxStore'
 import Dialogs from '../Chat/Dialogs/Dialogs'
 import Avatar from '../Avatar/Avatar'
-import { MutableRefObject } from 'react'
+import { MutableRefObject, useEffect, useState } from 'react'
+import { IUser } from '../../models/IUser'
+import { getUserThunk } from '../../redux/usersReducer'
+import defaultPhoto from '../../assets/images/photos/1.jpg'
 
 interface NavPropsInterface{
     isPairsOpened: boolean,
@@ -14,7 +17,20 @@ interface NavPropsInterface{
 }
 
 const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, socket}) => {
+    const dispatch = useDispatch()
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+    const [firstPair, setFirstPair] = useState<IUser>({} as IUser)
+
+    useEffect(() => {
+        if(currentUser.pairs.length) {
+            const fetchUser = async (userId: string) => {
+                const data = await dispatch(getUserThunk({id: userId}) as any)
+                return data.payload
+            }
+
+            fetchUser(currentUser.pairs[0 as number] as string).then(data => setFirstPair(data))
+        }
+    }, [currentUser.pairs, dispatch])
 
     return(
         <aside className="tinder__info">
@@ -47,9 +63,9 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
                 </div>
                 <div className="tinder__info-content-box">
                     {isPairsOpened ?
-                        currentUser.pairs.length ? <div className="tinder__info-content-pairs">
+                        currentUser.pairs.length ? firstPair.name ? <div className="tinder__info-content-pairs">
                                 <Link className="tinder__info-content-pairs-link" to='/pairs'>
-                                    <div className="tinder__info-content-pairs-box">
+                                    <div style={{backgroundImage: `url(${firstPair.pictures.avatar ? `http://localhost:5000/${firstPair._id}/avatar/` + firstPair.pictures.avatar : defaultPhoto})`}} className="tinder__info-content-pairs-box">
                                         <div className="tinder__info-content-pairs-box-likes-count">
                                             {currentUser.pairs.length}
                                         </div>
@@ -60,6 +76,8 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
                                     </div>
                                 </Link>
                             </div>
+                            :
+                            <div>loading...</div>
                         :
                             <div>You don't have likes. Like someone to have a like too</div>
 

@@ -28,7 +28,7 @@ const ProfileFullPreview: React.FC<ProfileFullPreviewPropsInterface> = ({current
                 </div>
                 <div className="tinder__content-full-preview-info-sex">
                     <FontAwesomeIcon icon={faUser} className="tinder__content-full-preview-info-sex-icon"/>
-                    {currentUser.sex[0].toUpperCase() + currentUser.sex.slice(1) || 'unkown sex'}
+                    {currentUser.sex ? currentUser.sex[0].toUpperCase() + currentUser.sex.slice(1) : 'unkown sex'}
                 </div>
             </div>
             <hr className="tinder__content-info-separator"/>

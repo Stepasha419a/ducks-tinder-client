@@ -271,6 +271,10 @@ textarea:-ms-input-placeholder { color: #999999; }
   cursor: pointer;
 }
 
+.tinder__settings-group-item--error{
+  background-color: #fdd7d7;
+}
+
 .tinder__settings-group-item--link{
   padding: 0;
 }
@@ -735,6 +739,10 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder__content-slider{
   height: 467px;
+}
+
+.tinder__content-slider--pointer{
+  cursor: pointer;
 }
 
 .tinder__content-search-descr{
@@ -1937,8 +1945,9 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .tinder__pairs-popup-btn{
+  display: block;
   width: 50%;
-  height: 100%;
+  height: calc(100% + 6px);
   border: none;
   background-color: #fff;
   font-size: 22px;
@@ -1946,6 +1955,8 @@ textarea:-ms-input-placeholder { color: #999999; }
   text-transform: uppercase;
   cursor: pointer;
   transition: .2s;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .tinder__pairs-popup-btn--sorts-list{
@@ -1956,6 +1967,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 
 .tinder__pairs-popup-btn--border{
   border-right: 1px solid rgb(214, 214, 214);
+  border-bottom-right-radius: 0;
 }
 
 .tinder__pairs-popup-btn:hover{
