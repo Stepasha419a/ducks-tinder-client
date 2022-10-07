@@ -2,10 +2,12 @@ import { faAngleRight, faArrowUpRightFromSquare } from "@fortawesome/free-solid-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import InputRange from "react-input-range"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { IUser, potentialFields } from "../../models/IUser"
 import { logoutThunk } from "../../redux/authReducer"
+import { AppStateType } from "../../redux/reduxStore"
+import { createNotification } from "../../redux/usersReducer"
 import { checkField } from "./utils/ProfileUtils"
 
 interface ProfileSettingsListPropsInterface{
@@ -35,6 +37,8 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
     }) => {
 
     const dispatch = useDispatch()
+
+    const notifications = useSelector((state: AppStateType) => state.usersPage.notifications)
     
     const [ageSetting, setAgeSetting] = useState(currentUser.partnerSettings ? 
         {min: currentUser.partnerSettings.age.from, max: currentUser.partnerSettings.age.to}
@@ -44,19 +48,32 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
     const [errorFields, setErrorFields] = useState<string[]>([])
  
     useEffect(() => {
-        const errorFields = []
+        const newErrorFields = []
 
         for (let i = 0; i < potentialFields.length; i++) {
             const field = potentialFields[i]
-            const result = checkField(currentUser, field)
+            
+            let result = checkField(currentUser, field)
 
             if(result) {
-                errorFields.push(field)
+                newErrorFields.push(field)
             }
         }
         
-        setErrorFields(errorFields)
-    }, [])
+        if(newErrorFields.length) {
+            setErrorFields(newErrorFields)
+        } else {
+            setErrorFields([])
+        }
+    }, [currentUser, dispatch])
+
+    useEffect(() => {
+        const errorText = "You have some empty fields, there are selected with red color"
+        const result = notifications.find(item => item.text === errorText)
+        if(!result && errorFields.length) {
+            dispatch(createNotification({type: 'error', text: errorText}))
+        }
+    }, [errorFields.length, dispatch, notifications])
 
     const setSettingInput = (formName: string, inputName: string, innerObjectName?: string) => {
         setIsUserInfoSetting(true)
@@ -100,7 +117,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Description
                             </div>
                             <div className="tinder__settings-group-item-descr-setting tinder__settings-group-item-descr-setting--text-overflow">
-                                {currentUser.description}
+                                {currentUser.description || "Empty description"}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
@@ -111,7 +128,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Sex
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.sex || 'unknown'}
+                                {currentUser.sex || 'Empty sex'}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
@@ -156,7 +173,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Interests
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                            {!currentUser.interests.length ? "You don't have interests" : `${currentUser.interests[0]} and so on...`}
+                            {!currentUser.interests.length ? "Empty interests" : `${currentUser.interests[0]} and so on...`}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
@@ -167,7 +184,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Place
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.partnerSettings ? currentUser.partnerSettings.place : 'unknown'}
+                                {currentUser.partnerSettings.place || 'Empty place'}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
@@ -178,7 +195,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Distance
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentDistanceSetting || 'unknown'} км.
+                                {currentDistanceSetting || 'Empty distance'} км.
                             </div>
                         </div>
                         <div className="tinder__settings-group-item-setting">
@@ -217,7 +234,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                 Interested in
                             </div>
                             <div className="tinder__settings-group-item-descr-setting">
-                                {currentUser.partnerSettings ? currentUser.partnerSettings.preferSex : 'unknown'}
+                                {currentUser.partnerSettings.preferSex || 'empty sex prefer'}
                                 <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>

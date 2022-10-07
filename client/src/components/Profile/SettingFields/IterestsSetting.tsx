@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { IUser } from "../../../models/IUser"
 import InterestsSettingPopup from "../../Pairs/popups/InterestsSettingPopup"
 
@@ -10,7 +10,7 @@ interface InterestsSettingPropsInterface{
     cancelHandler: () => void
 }
 
-const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser, isFormValid, isFormCloseable, submitSettings, cancelHandler}) => {
+const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser, submitSettings, cancelHandler}) => {
     const interestsList = ['fighting', 'ski', 'football', 'volleyball', 'tennis', 'ping pong',
     'swimming', 'karting', 'horse ridding', 'hunting', 'fishing', 'skateboarding', 'bicycle', 'running',
     'surfing', 'snowboarding', 'shooting', 'parachuting', 'paintball', 'bowling', 'billiard', 'skates', 
@@ -23,7 +23,22 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
     const [interests, setInterests] = useState(currentUser.interests as string[])
     const [inputValue, setInputValue] = useState('')
     const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] = useState(false)
+    const [isFormValid, setIsFormValid] = useState(false)
+    const [isFormCloseable, setIsFormCloseable] = useState(true)
+    const [inputValueError, setInputValueError] = useState('')
     let filteredResults = [] as string[]
+
+    useEffect(() => {
+        if(!interests.length) {
+            setIsFormValid(false)
+            setIsFormCloseable(false)
+            setInputValueError('Form can\'t be empty')
+        } else {
+            setIsFormValid(true)
+            setIsFormCloseable(true)
+            setInputValueError('')
+        }
+    }, [interests.length])
 
     if(inputValue.length > 1) {
         filteredResults = interestsList.filter(item => {
@@ -38,7 +53,7 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
     } else {
         filteredResults = []
     }
-
+ 
     const addInterest = (itemName: string) => {
         const newInterests = [...interests, itemName]
         setInterests(newInterests)
@@ -54,6 +69,9 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
     return(
         <>
         <div className="tinder__content-setting">
+            <div className="tinder__content-setting-name tinder__content-setting-name--error">
+                {inputValueError}
+            </div>
             <div className="tinder__content-setting-name">
                 Interests
             </div>

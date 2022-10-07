@@ -50,7 +50,7 @@ function App() {
         }
       }
     }
-  }, [isAuth, navigate])
+  }, [isAuth, navigate, currentUser])
 
   return (
     <>

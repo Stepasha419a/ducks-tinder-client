@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBriefcase, faMagnifyingGlass, faFireFlameCurved } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
 import { AppStateType } from "../../redux/reduxStore"
-import { updateUserThunk } from "../../redux/usersReducer"
+import { deleteNotification, updateUserThunk } from "../../redux/usersReducer"
 import ProfileUserImage from "./ProfileUserImage"
 import ProfileSettingsList from "./ProfileSettingsList"
 import ProfileSetting from "./ProfileSetting"
@@ -15,6 +15,7 @@ const Profile = () => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+    const notifications = useSelector((state: AppStateType) => state.usersPage.notifications)
 
     const [currentDistanceSetting, setCurrentDistanceSetting] = useState(currentUser.partnerSettings ? currentUser.partnerSettings.distance : 5)
     const [currentAgeSetting, setCurrentAgeSetting] = useState(currentUser.age ? currentUser.age : 18)
@@ -30,6 +31,10 @@ const Profile = () => {
         dispatch(updateUserThunk({currentUser, inputName, changedData, innerObjectName}) as any)
         setIsUserInfoSetting(false)
         setInnerObjectName('')
+    }
+
+    const closeNotification = (id: number) => {
+        dispatch(deleteNotification(id))
     }
 
     return (
@@ -90,6 +95,21 @@ const Profile = () => {
                 }
                 </div>
             </div>
+            {notifications.length ?
+            <div className="tinder__notifications">
+                {notifications.map(item => {
+                    return(
+                        <div onClick={() => closeNotification(item.id)} key={item.id} className={`tinder__notification${item.type === 'error' ? ' tinder__notification--error' : ''}`}>
+                            {item.text}
+                            <div className={`tinder__notification-mark${item.type === 'error' ? ' tinder__notification-mark--error' : ''}`}></div>
+                            <div className="tinder__notification-close">click to close</div>
+                        </div>
+                    )
+                })
+                }
+            </div>
+            :
+            null}
         </div>
     )
 }

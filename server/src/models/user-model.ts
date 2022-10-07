@@ -4,11 +4,11 @@ export interface partnerSettingsInterface{
     place: String
     distance: Number
     usersOnlyInDistance: Boolean
-    preferSex: 'male' | 'female' | 'unknown'
+    preferSex: 'male' | 'female' | ''
     age: {
         from: Number
         to: Number
-    } | 'unknown'
+    }
 }
 
 export interface picturesInterface{
@@ -17,7 +17,7 @@ export interface picturesInterface{
 }
 const UserSchema = new mongoose.Schema({
     email: {type: String, unique: true, required: true},
-    name: {type: String, required: true, default: 'Unnamed user'},
+    name: {type: String, required: true},
     description: {type: String, required: false, default: ''},
     nickname: {type: String},
     picture: {type: String},

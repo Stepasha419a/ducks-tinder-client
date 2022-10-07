@@ -23,7 +23,7 @@ class AuthService{
         const hashPassword = await bcrypt.hash(password, 7)
         const activationLink = v4()
 
-        if(!partnerSettings) partnerSettings = {place: 'unknown', distance: 0, usersOnlyInDistance: false, preferSex: 'unknown', age: {from: 18, to: 24}}
+        if(!partnerSettings) partnerSettings = {place: '', distance: 0, usersOnlyInDistance: false, preferSex: '', age: {from: 18, to: 24}}
         
         const description = ''
         const interests = [] as string[]

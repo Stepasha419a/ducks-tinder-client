@@ -3,11 +3,18 @@ import { usersAPI } from "../api/usersApi";
 import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage";
 import { IUser, makeUserImagesObject, makeUserObject } from "../models/IUser";
 
+interface INotification {
+    id: number
+    type: string
+    text: string
+}
+
 const usersReducer = createSlice({
     name: 'users',
     initialState: {
         users: [] as IUser[],
-        currentUser: {} as IUser
+        currentUser: {} as IUser,
+        notifications: [] as INotification[]
     },
     reducers: {
         setUsers: (state, action) => {
@@ -15,6 +22,21 @@ const usersReducer = createSlice({
         },
         setCurrentUser: (state, action) => {
             state.currentUser = action.payload
+        },
+        createNotification: (state, action) => {
+            const notification: INotification = {
+                id: Date.now(),
+                type: action.payload.type,
+                text: action.payload.text
+            }
+
+            state.notifications = [...state.notifications, notification]
+        },
+        deleteNotification: (state, action) => {
+            const index = state.notifications.findIndex(item => item.id === action.payload)
+            const newNotifications = [...state.notifications]
+            newNotifications.splice(index, 1)
+            state.notifications = newNotifications
         }
     }
 })
@@ -116,7 +138,7 @@ export const mixUserImages = createAsyncThunk(
 
 const {setUsers} = usersReducer.actions
 
-export const {setCurrentUser} = usersReducer.actions
+export const {setCurrentUser, createNotification, deleteNotification} = usersReducer.actions
 
 export type UsersReducerType = typeof usersReducer
 
