@@ -27,6 +27,14 @@ export const usersAPI = {
         return instance.delete(`users/${id}`)
             .then(res => res)
     },
+    createPair(userId: string, createUserPairId: string) {
+        return instance.post(`users/pairs`, {userId, createUserPairId})
+            .then(res => res)
+    },
+    deletePair(userId: string, createUserPairId: string) {
+        return instance.put(`users/pairs`, {userId, createUserPairId})
+            .then(res => res)
+    },
     savePicture(picture: any, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {
         return instance.post(`users/savePicture`, {picture, userId, setting}, {
             headers: {

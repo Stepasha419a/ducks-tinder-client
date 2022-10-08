@@ -2105,7 +2105,6 @@ textarea:-ms-input-placeholder { color: #999999; }
   color: #505965;
 }
 
-
 .tinder__pairs-popup-setting-item--no-cursor{
   cursor: default;
 }
@@ -2113,6 +2112,31 @@ textarea:-ms-input-placeholder { color: #999999; }
 .tinder__pairs-popup-show-all{
   margin: 0 auto;
   padding: 10px 0;
+}
+
+.tinder__pairs-popup-setting-btns{
+  display: flex;
+  border-top: 2px solid #0000001f;
+}
+
+.tinder__pairs-popup-setting-btn{
+  border: none;
+  background-color: #fff;
+  width: 50%;
+  height: 46px;
+  cursor: pointer;
+  font-size: 22px;
+  color: #505965;
+  text-transform: uppercase;
+  transition: .2s;
+}
+
+.tinder__pairs-popup-setting-btn--border{
+  border-right: 2px solid #0000001f;
+}
+
+.tinder__pairs-popup-setting-btn:hover{
+  color: #e65050;
 }
 
 .tinder__notifications{

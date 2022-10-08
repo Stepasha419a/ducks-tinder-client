@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { usersAPI } from "../api/usersApi";
 import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage";
 import { IUser, makeUserImagesObject, makeUserObject } from "../models/IUser";
@@ -14,7 +14,8 @@ const usersReducer = createSlice({
     initialState: {
         users: [] as IUser[],
         currentUser: {} as IUser,
-        notifications: [] as INotification[]
+        notifications: [] as INotification[],
+        pairs: [] as IUser[]
     },
     reducers: {
         setUsers: (state, action) => {
@@ -37,6 +38,9 @@ const usersReducer = createSlice({
             const newNotifications = [...state.notifications]
             newNotifications.splice(index, 1)
             state.notifications = newNotifications
+        },
+        setPairs: (state, action) => {
+            state.pairs = action.payload
         }
     }
 })
@@ -55,8 +59,9 @@ export const fetchUsersThunk = createAsyncThunk(
 
             dispatch(setUsers(data))
 
-        } catch (error: any) {
-            return rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
@@ -75,8 +80,9 @@ export const getUserThunk = createAsyncThunk(
             
             return data
 
-        } catch (error: any) {
-            return rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
@@ -90,21 +96,70 @@ export const updateUserThunk = createAsyncThunk(
             const response = await usersAPI.updateUser(user)
             
             dispatch(setCurrentUser(response.data))
-        } catch (error: any) {
-            rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
+        }
+    }
+)
+
+export const getUserPairsThunk = createAsyncThunk(
+    'users/getUserPairsThunk',
+    async (args: {pairsId: string[]}, {rejectWithValue, dispatch}) => {
+        try {
+            const pairs = []
+            for await (const pairId of args.pairsId) {
+                const data = await dispatch(getUserThunk({id: pairId}) as any)
+                pairs.push(data.payload)
+            }
+
+            dispatch(setPairs(pairs))
+
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
+        }
+    }
+)
+
+export const deletePairThunk = createAsyncThunk(
+    'users/updateUser',
+    async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
+        try {
+            const response = await usersAPI.deletePair(args.userId, args.createUserPairId)
+            
+            dispatch(setCurrentUser(response.data))
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
+        }
+    }
+)
+
+export const createPairThunk = createAsyncThunk(
+    'users/updateUser',
+    async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
+        try {
+            const response = await usersAPI.createPair(args.userId, args.createUserPairId)
+            
+            dispatch(setCurrentUser(response.data))
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
 
 export const saveUserImage = createAsyncThunk(
     'users/saveUserImage',
-    async (args: {picture: any, userId: string, setting: 'avatar' | 'gallery'}, {rejectWithValue, dispatch}) => {
+    async (args: {picture: File, userId: string, setting: 'avatar' | 'gallery'}, {rejectWithValue, dispatch}) => {
         try {
             const response = await usersAPI.savePicture(args.picture, args.userId, args.setting)
             
             dispatch(setCurrentUser(response.data))
-        } catch (error: any) {
-            rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
@@ -116,8 +171,9 @@ export const deleteUserImage = createAsyncThunk(
             const response = await usersAPI.deletePicture(args.pictureName, args.userId, args.setting)
             
             dispatch(setCurrentUser(response.data))
-        } catch (error: any) {
-            rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
@@ -130,15 +186,16 @@ export const mixUserImages = createAsyncThunk(
             
             const response = await usersAPI.updateUser(userImages)
             dispatch(setCurrentUser(response.data))
-        } catch (error: any) {
-            rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
 
 const {setUsers} = usersReducer.actions
 
-export const {setCurrentUser, createNotification, deleteNotification} = usersReducer.actions
+export const {setCurrentUser, createNotification, deleteNotification, setPairs} = usersReducer.actions
 
 export type UsersReducerType = typeof usersReducer
 

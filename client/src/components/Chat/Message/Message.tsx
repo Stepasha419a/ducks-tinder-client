@@ -9,12 +9,11 @@ interface MessageComponentInterface{
 }
 
 const Message: React.FC<MessageComponentInterface> = ({message, user, currentUserId}) => {
-    
     return(
         <div className="tinder__chat-message-wrapper">
             <div className="tinder__chat-message-container">
                 {user?.pictures ? 
-                    <Avatar otherUserId={user?._id} imageExtraClassName={'tinder__chat-message-avatar'} avatarUrl={user?.pictures.avatar}/>
+                    <Avatar otherUserId={user._id} imageExtraClassName={'tinder__chat-message-avatar'} avatarUrl={user.pictures.avatar}/>
                 :
                     <Avatar showDefaultPhoto imageExtraClassName={'tinder__chat-message-avatar'}/>
                 }

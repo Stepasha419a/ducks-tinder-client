@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Action } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { API_URL } from "../api/api";
@@ -49,9 +49,12 @@ export const registerThunk = createAsyncThunk(
 
             setAuthData(response.data.user, dispatch)
             dispatch(setCurrentUser(response.data.user))
-        } catch (error: any) {
-            dispatch(setFormError(error.response.data.message))
-            rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof AxiosError) {
+                rejectWithValue(error.message)
+                dispatch(setFormError(error.response?.data.message))
+            }
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
@@ -64,9 +67,12 @@ export const loginThunk = createAsyncThunk(
             localStorage.setItem('token', response.data.accessToken)
             setAuthData(response.data.user, dispatch)
             dispatch(setCurrentUser(response.data.user))
-        } catch (error: any) {
-            dispatch(setFormError(error.response.data.message))
-            rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof AxiosError) {
+                rejectWithValue(error.message)
+                dispatch(setFormError(error.response?.data.message))
+            }
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
@@ -80,9 +86,12 @@ export const checkAuthThunk = createAsyncThunk(
             localStorage.setItem('token', response.data.accessToken)
             dispatch(setCurrentUser(response.data.user))
             setAuthData(response.data.user, dispatch)
-        } catch (error: any) {
-            dispatch(setAuth(false))
-            rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) {
+                dispatch(setAuth(false))
+                rejectWithValue(error.message)
+            }
+            rejectWithValue(['unexpected error', error])
         } finally {
             dispatch(setLoading(false))
         }
@@ -96,8 +105,9 @@ export const logoutThunk = createAsyncThunk(
             await authAPI.logout()
             dispatch(setUserData(null))
             dispatch(setAuth(false))
-        } catch (error: any) {
-            rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )

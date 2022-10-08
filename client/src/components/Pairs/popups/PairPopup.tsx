@@ -1,7 +1,11 @@
 import { faChevronDown, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useRef, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { IUser } from "../../../models/IUser"
+import { createDialogThunk } from "../../../redux/chatReducer"
+import { AppStateType } from "../../../redux/reduxStore"
+import { deletePairThunk } from "../../../redux/usersReducer"
 import ImageSlider from "../../Slider/ImageSlider"
 import InterestsListPopup from "./InterestsListPopup"
 
@@ -11,6 +15,10 @@ interface PairPopupProps{
 }
 
 const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
+    const dispatch = useDispatch()
+
+    const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+
     const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] = useState(false)
 
     const bottomElementRef = useRef<null | HTMLElement>(null) as React.MutableRefObject<HTMLInputElement>;
@@ -23,6 +31,19 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
 
     const scrollToBottom = () => {
         bottomElementRef.current?.scrollIntoView({ behavior: "smooth" })
+    }
+
+    const deletePair = (userId: string) => {
+        dispatch(deletePairThunk({userId: currentUser._id, createUserPairId: userId}) as any)
+    }
+
+    const refuseHandler = (userId: string) => {
+        deletePair(userId)
+    }
+
+    const acceptHandler = (userId: string) => {
+        dispatch(createDialogThunk({currentUserId: currentUser._id, otherUserId: currentPair._id}) as any)
+        deletePair(userId)
     }
 
     return(
@@ -84,6 +105,14 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
                         </div>
                     </div>
                     <div onClick={() => setIsInterestsListPopupOpen(true)} className="tinder__pairs-popup-setting-show-all tinder__pairs-popup-show-all">Show all</div>
+                    <div className="tinder__pairs-popup-setting-btns">
+                        <button onClick={() => refuseHandler(currentPair._id)} className="tinder__pairs-popup-setting-btn tinder__pairs-popup-setting-btn--border">
+                            Refuse
+                        </button>
+                        <button onClick={() => acceptHandler(currentPair._id)} className="tinder__pairs-popup-setting-btn">
+                            Accept
+                        </button>
+                    </div>
                     <div ref={bottomElementRef} className="tinder_pairs-popup-bottom"/>
                 </div>
                 <div onClick={() => setCurrentPair({} as IUser)} className="tinder__pairs-popup-close-area"></div>

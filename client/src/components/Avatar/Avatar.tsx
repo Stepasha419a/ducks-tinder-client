@@ -26,7 +26,7 @@ const Avatar: React.FC<AvatarInterface> = ({otherUserId, imageExtraClassName, sh
         }
     }, [otherUserId, avatarUrl, dispatch])
 
-    if((otherUserId && !otherUser?.pictures?.avatar) || !currentUser.pictures.avatar || showDefaultPhoto) {
+    if((otherUserId && !otherUser?.pictures?.avatar) || (!currentUser.pictures.avatar && !otherUser && otherUserId) || (!currentUser.pictures.avatar && !otherUserId) || showDefaultPhoto) {
         return <div style={{backgroundImage: `url(${defaultPhoto})`}} className={`tinder__info-user-photo ${imageExtraClassName}`}></div>
     }
 

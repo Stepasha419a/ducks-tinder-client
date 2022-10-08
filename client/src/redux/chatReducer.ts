@@ -59,8 +59,25 @@ export const getDialogsThunk = createAsyncThunk(
 
             dispatch(setDialogs(data))
 
-        } catch (error: any) {
-            return rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
+        }
+    }
+)
+
+export const createDialogThunk = createAsyncThunk(
+    'users/createDialogThunk',
+    async (args: {currentUserId: string, otherUserId: string}, {rejectWithValue, dispatch}) => {
+        try {
+            const response = await chatApi.createDialog([args.currentUserId, args.otherUserId])
+
+            if(!response) {
+                throw new Error("Can't create dialog. Server Error");
+            }
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
@@ -95,8 +112,9 @@ export const connectChatThunk = createAsyncThunk(
                 dispatch(setIncludedMembersIds([]))
             }
 
-        } catch (error: any) {
-            return rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )
@@ -109,8 +127,9 @@ export const disconnectChatThunk = createAsyncThunk(
 
             socket.current.close()
 
-        } catch (error: any) {
-            return rejectWithValue(error.message)
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
         }
     }
 )

@@ -4,20 +4,22 @@ import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { IUser } from "../../models/IUser"
 import { AppStateType } from "../../redux/reduxStore"
-import { getUserThunk } from "../../redux/usersReducer"
+import { getUserPairsThunk } from "../../redux/usersReducer"
 import Pair from "./Pair"
 import PairPopup from "./popups/PairPopup"
 import PairsSettingsPopup from "./popups/PairsSettingsPopup"
 import InterestsSettingPopup from "./popups/InterestsSettingPopup"
 import { ISorts, sortItemBySettings } from "./utils/PairsUtils"
+import { useNavigate } from "react-router-dom"
 
 const Pairs: React.FC = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+    const pairsState = useSelector((state: AppStateType) => state.usersPage.pairs)
 
     const [pairsPaddingWidth, setPairsPaddingWidth] = useState(0)
-    const [pairs, setPairs] = useState<IUser[]>([])
     const [currentPair, setCurrentPair] = useState<IUser>({} as IUser)
     const [isSortPopupOpen, setIsSortPopupOpen] = useState(false)
     const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] = useState(false)
@@ -29,19 +31,16 @@ const Pairs: React.FC = () => {
         account: []
     })
 
+    if(!currentUser.pairs.length) {
+        navigate('/')
+    }
+
     const interestsForLoop = ['music', 'travelling', 'movies', 'sport']
 
     const userPairsRef = useRef<HTMLHeadingElement>(null)
 
     useEffect(() => {
-        const fetchUser = async (userId: string) => {
-            const data = await dispatch(getUserThunk({id: userId}) as any)
-            return data.payload
-        }
-        
-        for(let userId of currentUser.pairs) {
-            fetchUser(userId).then(data => setPairs(prevPairs => [...prevPairs, data]))
-        }
+        dispatch(getUserPairsThunk({pairsId: currentUser.pairs}) as any)
     }, [dispatch, currentUser.pairs])
 
     useEffect(() => {
@@ -108,7 +107,7 @@ const Pairs: React.FC = () => {
                 style={{paddingLeft: `${pairsPaddingWidth}px`, paddingRight: `${pairsPaddingWidth}px`}} 
                 className="tinder__pairs-users"
             >
-                {pairs.map((user: IUser) => {
+                {pairsState.length && pairsState.map((user: IUser) => {
                     const isValid = sortItemBySettings(user, pairSorts)
                     if(isValid) {
                         return <Pair key={user._id} user={user} setCurrentPair={setCurrentPair}/>
@@ -123,7 +122,7 @@ const Pairs: React.FC = () => {
                 <InterestsSettingPopup pairInterests={pairSorts.interests} addSort={addSort} deleteSort={deleteSort} setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}/>
             }{
             currentPair.name &&
-                <PairPopup currentPair={currentPair} setCurrentPair={setCurrentPair} />
+                <PairPopup currentPair={currentPair} setCurrentPair={setCurrentPair}/>
             }
             
         </div>

@@ -10,5 +10,9 @@ export const chatApi = {
     getDialog(id: string): Promise<AxiosResponse<IDialog>> {
         return instance.get(`chat/one/${id}`)
             .then(res => res)
+    },
+    createDialog(ids: string[]): Promise<AxiosResponse<string[]>> {
+        return instance.post(`chat/`, ids)
+            .then(res => res)
     }
 }

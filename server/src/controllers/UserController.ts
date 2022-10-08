@@ -74,9 +74,9 @@ class UserController{
 
     async createPair(req: any, res: any, next: NextFunction) {
         try {
-            const membersId = req.body
+            const {userId, createUserPairId} = req.body
 
-            const response = await userService.createPair(membersId)
+            const response = await userService.createPair(userId, createUserPairId)
 
             res.json(response)
         } catch (error) {
@@ -86,9 +86,9 @@ class UserController{
 
     async deletePair(req: any, res: any, next: NextFunction) {
         try {
-            const membersId = req.body
+            const {userId, createUserPairId} = req.body
 
-            const response = await userService.deletePair(membersId)
+            const response = await userService.deletePair(userId, createUserPairId)
 
             res.json(response)
         } catch (error) {

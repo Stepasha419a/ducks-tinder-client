@@ -63,7 +63,7 @@ class ChatService{
 
         response.members.forEach(async (memberId: string) => {
             const user = await UserModel.findById(memberId)
-            const index = user.dialogs.find((item: any) => item === dialogId)
+            const index = user.dialogs.findIndex((item: any) => item === dialogId)
             user.dialogs.splice(index, 1)
             await UserModel.findByIdAndUpdate(memberId, {dialogs: user.dialogs}, {new: true})
         })
