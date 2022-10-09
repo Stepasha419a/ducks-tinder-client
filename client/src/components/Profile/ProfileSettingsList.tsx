@@ -72,8 +72,8 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
         const result = notifications.find(item => item.text === errorText)
         if(!result && errorFields.length) {
             dispatch(createNotification({type: 'error', text: errorText}))
-        }
-    }, [errorFields.length, dispatch, notifications])
+        } // eslint-disable-next-line
+    }, [errorFields.length, dispatch])
 
     const setSettingInput = (formName: string, inputName: string, innerObjectName?: string) => {
         setIsUserInfoSetting(true)

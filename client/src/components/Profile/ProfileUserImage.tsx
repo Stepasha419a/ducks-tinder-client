@@ -11,7 +11,7 @@ interface ProfileUserImagePropsInterface{
 const ProfileUserImage: React.FC<ProfileUserImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
     return(
         <>
-            <div onClick={() => setIsImageSetting(true)} className="tinder__content-slider tinder__content-slider--pointer">
+            <div className="tinder__content-slider">
                 <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id}/>
             </div>
             <div className="tinder__content-info tinder__content-info--profile">

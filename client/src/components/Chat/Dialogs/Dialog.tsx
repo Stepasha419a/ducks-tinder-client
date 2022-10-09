@@ -1,6 +1,7 @@
 import { MutableRefObject, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { IDialog } from "../../../models/IDialog"
+import { IUser } from "../../../models/IUser"
 import { connectChatThunk, disconnectChatThunk } from "../../../redux/chatReducer"
 import { getUserThunk } from "../../../redux/usersReducer"
 import Avatar from "../../Avatar/Avatar"
@@ -15,7 +16,7 @@ interface DialogInterface{
 const Dialog: React.FC<DialogInterface> = ({dialog, dialogCompanionId, socket, currentDialogId}) => {
     const dispatch = useDispatch()
 
-    const [dialogName, setDialogName] = useState('')
+    const [dialogPartner, setDialogPartner] = useState<IUser>({} as IUser)
 
     function connect(dialogId: string) {
         dispatch(disconnectChatThunk({socket}) as any)
@@ -29,7 +30,7 @@ const Dialog: React.FC<DialogInterface> = ({dialog, dialogCompanionId, socket, c
     }, [dispatch, socket])
 
     useEffect(() => {
-        dispatch(getUserThunk({id: dialogCompanionId as String}) as any).then((res: any) => setDialogName(res.payload.name))
+        dispatch(getUserThunk({id: dialogCompanionId as String}) as any).then((res: any) => setDialogPartner(res.payload))
     }, [dialogCompanionId, dispatch])
 
     return(
@@ -37,10 +38,10 @@ const Dialog: React.FC<DialogInterface> = ({dialog, dialogCompanionId, socket, c
             <Avatar otherUserId={dialogCompanionId} imageExtraClassName={'tinder__info-content-dialogs-item-photo'} />
             <div className="tinder__info-content-dialogs-item-descr">
                 <div className="tinder__info-content-dialogs-item-descr-name">
-                    {dialogName}
+                    {dialogPartner.name}
                 </div>
                 <div className="tinder__info-content-dialogs-item-descr-message">
-                    {dialog.messages[dialog.messages.length - 1]?.content}
+                    {dialog.messages[dialog.messages.length - 1]?.userId === dialogPartner._id ? `${dialogPartner.name}: ` : 'you: '}{dialog.messages[dialog.messages.length - 1]?.content}
                 </div>
             </div>
         </div>

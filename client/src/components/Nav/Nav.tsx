@@ -79,7 +79,7 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
                             :
                             <div>loading...</div>
                         :
-                            <div>You don't have likes. Like someone to have a like too</div>
+                            <div className='tinder__info-content-no-pairs'>You don't have likes. Like someone to have a like too</div>
 
                     :
                     <Dialogs socket={socket}/>

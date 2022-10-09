@@ -225,6 +225,13 @@ textarea:-ms-input-placeholder { color: #999999; }
   margin-left: 10px;
 }
 
+.tinder__info-content-no-pairs{
+  font-weight: 600;
+  color: #505965;
+  padding: 5px;
+  margin-top: 10px;
+}
+
 .tinder__info-content-dialogs-item-descr-name{
   font-weight: 500;
   font-size: 18px;
@@ -2144,9 +2151,23 @@ textarea:-ms-input-placeholder { color: #999999; }
   top: 0;
   right: 0;
   padding: 20px;
+  overflow: hidden;
+}
+
+@keyframes slidein {
+  from {
+    left: 420px;
+  }
+
+  to {
+    left: 0px;
+  }
 }
 
 .tinder__notification{
+  position: absolute;
+  top: 0;
+  left: 0;
   max-width: 400px;
   background-color: #dce6505d;
   border-radius: 8px;
@@ -2154,6 +2175,12 @@ textarea:-ms-input-placeholder { color: #999999; }
   margin-bottom: 10px;
   position: relative;
   cursor: pointer;
+  animation-name: slidein;
+  animation-duration: 1s;
+}
+
+.tinder__notification--active{
+  left: 0px;
 }
 
 .tinder__notification--error{

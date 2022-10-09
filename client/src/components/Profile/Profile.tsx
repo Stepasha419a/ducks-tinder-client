@@ -95,8 +95,8 @@ const Profile = () => {
                 }
                 </div>
             </div>
-            {notifications.length ?
-            <div className="tinder__notifications">
+            {notifications.length ? 
+            <div className='tinder__notifications'>
                 {notifications.map(item => {
                     return(
                         <div onClick={() => closeNotification(item.id)} key={item.id} className={`tinder__notification${item.type === 'error' ? ' tinder__notification--error' : ''}`}>
@@ -108,8 +108,8 @@ const Profile = () => {
                 })
                 }
             </div>
-            :
-            null}
+            : null
+            }
         </div>
     )
 }
