@@ -7,6 +7,8 @@ import { IUser } from "../../models/IUser"
 import { getUserThunk } from "../../redux/usersReducer"
 import { setIncludedMembersIds } from "../../redux/chatReducer"
 import { isRefElementVisible, scrollToBottom } from "./utils/ChatUtils"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMessage } from "@fortawesome/free-solid-svg-icons"
 
 interface ChatPropsInterface{
     socket: MutableRefObject<WebSocket | undefined>
@@ -84,8 +86,13 @@ const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
                     </div>
                 </div>
             :
-                <div>
-                    choose the dialog
+                <div className="tinder__chat-no-dialogs">
+                    <div className="tinder__chat-no-dialogs-inner">
+                        <FontAwesomeIcon icon={faMessage} className="tinder__chat-no-dialogs-icon"/>
+                        <div className="tinder__chat-no-dialogs-text">
+                            Choose the dialog
+                        </div>
+                    </div>
                 </div>
             }
         </div>

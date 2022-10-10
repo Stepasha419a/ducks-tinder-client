@@ -1,4 +1,4 @@
-import { faBriefcase, faHeartCircleExclamation, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase, faHeart, faHeartCircleExclamation, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -79,7 +79,12 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
                             :
                             <div>loading...</div>
                         :
-                            <div className='tinder__info-content-no-pairs'>You don't have likes. Like someone to have a like too</div>
+                            <div className='tinder__info-content-no-pairs'>
+                                <FontAwesomeIcon icon={faHeart} className="tinder__info-content-no-pairs-icon"/>
+                                <div className="tinder__info-content-no-pairs-text">
+                                    You don't have likes. Like someone to have a like too
+                                </div>
+                            </div>
 
                     :
                     <Dialogs socket={socket}/>
