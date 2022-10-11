@@ -2,11 +2,40 @@ import fileService from "./fileService";
 import UserModel from "../models/user-model";
 import UserDto from "../dtos/userDto";
 import ApiError from "../exceptions/api-error";
+import { ISorts } from "../models/dialog-model";
+
+interface ISort {
+    distance: number,
+    onlyNear: boolean,
+    age: {min: number, max: number},
+    preferAge: {min: number, max: number},
+    sex: 'male' | 'female',
+    preferSex: 'male' | 'female'
+}
 
 class UserService{
 
     async getAll() {
         const users = await UserModel.find()
+
+        return users
+    }
+
+    async getCertain(params: ISorts) {
+        /* const users = await UserModel.find({
+            "distance": {$gt: 0, $lt: params.distance},
+            "age": {$gt: params.age.min, $lt: params.age.max}, 
+            "partnerSettings": { 
+                "age": {$gt: params.preferAge.min, $lt: params.preferAge.max}, 
+                "preferSex": params.preferSex
+            },
+            "sex": params.sex,
+        }) */
+
+        const users = await UserModel.find({
+            "partnerSettings.age.from": {$gt: params.preferAge.min},
+            "partnerSettings.age.to": {$lt: params.preferAge.max},
+        })
 
         return users
     }

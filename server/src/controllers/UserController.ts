@@ -14,6 +14,19 @@ class UserController{
         }
     }
 
+    async getCertainUsers(req: any, res: any, next: NextFunction) {
+        try {
+            const { params } = req.body
+            
+            const users = await userService.getCertain(params)
+
+            res.json(users)
+
+        } catch (error: any) {
+            next(error)
+        }
+    }
+
     async getOne(req: any, res: any, next: NextFunction) {
         try {
             const user = await userService.getOne(req.params.id)

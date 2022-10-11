@@ -17,6 +17,7 @@ router.get('/activate/:link', authController.activate)
 router.get('/refresh', authController.refresh)
 
 router.get('/users', authMiddleware, userController.getUsers)
+router.get('/users/certain', authMiddleware, userController.getCertainUsers)
 router.get('/users/:id', authMiddleware, userController.getOne)
 router.put('/users', authMiddleware, userController.update)
 router.delete('/users/:id', authMiddleware, userController.delete)
