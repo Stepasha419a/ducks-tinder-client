@@ -1,3 +1,4 @@
+import { IQuerySorts, makeQuerySortsObj } from './../models/IUser';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { usersAPI } from "../api/usersApi";
 import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage";
@@ -15,7 +16,8 @@ const usersReducer = createSlice({
         users: [] as IUser[],
         currentUser: {} as IUser,
         notifications: [] as INotification[],
-        pairs: [] as IUser[]
+        pairs: [] as IUser[],
+        tinderUsers: [] as IUser[]
     },
     reducers: {
         setUsers: (state, action) => {
@@ -41,6 +43,9 @@ const usersReducer = createSlice({
         },
         setPairs: (state, action) => {
             state.pairs = action.payload
+        },
+        setTinderUsers: (state, action) => {
+            state.tinderUsers = action.payload
         }
     }
 })
@@ -58,6 +63,29 @@ export const fetchUsersThunk = createAsyncThunk(
             const data = await response.data
 
             dispatch(setUsers(data))
+
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
+        }
+    }
+)
+
+export const getSortedUsersThunk = createAsyncThunk(
+    'users/getSortedUsers',
+    async function(args: {user: IUser}, {rejectWithValue, dispatch}) {
+        try {
+            const querySortsObj = makeQuerySortsObj(args.user)
+
+            const response = await usersAPI.getSortedUsers(querySortsObj)
+
+            if(!response) {
+                throw new Error("Can't get user. Server Error");
+            }
+
+            const data = await response.data
+            
+            dispatch(setTinderUsers(data))
 
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
@@ -104,7 +132,7 @@ export const updateUserThunk = createAsyncThunk(
 )
 
 export const getUserPairsThunk = createAsyncThunk(
-    'users/getUserPairsThunk',
+    'users/getUserPairs',
     async (args: {pairsId: string[]}, {rejectWithValue, dispatch}) => {
         try {
             const pairs = []
@@ -123,7 +151,7 @@ export const getUserPairsThunk = createAsyncThunk(
 )
 
 export const deletePairThunk = createAsyncThunk(
-    'users/updateUser',
+    'users/deletePair',
     async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
         try {
             const response = await usersAPI.deletePair(args.userId, args.createUserPairId)
@@ -137,7 +165,7 @@ export const deletePairThunk = createAsyncThunk(
 )
 
 export const createPairThunk = createAsyncThunk(
-    'users/updateUser',
+    'users/createPair',
     async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
         try {
             const response = await usersAPI.createPair(args.userId, args.createUserPairId)
@@ -195,7 +223,7 @@ export const mixUserImages = createAsyncThunk(
 
 const {setUsers} = usersReducer.actions
 
-export const {setCurrentUser, createNotification, deleteNotification, setPairs} = usersReducer.actions
+export const {setCurrentUser, createNotification, deleteNotification, setPairs, setTinderUsers} = usersReducer.actions
 
 export type UsersReducerType = typeof usersReducer
 

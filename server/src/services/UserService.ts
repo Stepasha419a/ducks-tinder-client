@@ -4,15 +4,6 @@ import UserDto from "../dtos/userDto";
 import ApiError from "../exceptions/api-error";
 import { ISorts } from "../models/dialog-model";
 
-interface ISort {
-    distance: number,
-    onlyNear: boolean,
-    age: {min: number, max: number},
-    preferAge: {min: number, max: number},
-    sex: 'male' | 'female',
-    preferSex: 'male' | 'female'
-}
-
 class UserService{
 
     async getAll() {
@@ -21,21 +12,15 @@ class UserService{
         return users
     }
 
-    async getCertain(params: ISorts) {
-        /* const users = await UserModel.find({
-            "distance": {$gt: 0, $lt: params.distance},
-            "age": {$gt: params.age.min, $lt: params.age.max}, 
-            "partnerSettings": { 
-                "age": {$gt: params.preferAge.min, $lt: params.preferAge.max}, 
-                "preferSex": params.preferSex
-            },
-            "sex": params.sex,
-        }) */
-
+    async getSorted(sorts: ISorts) {
         const users = await UserModel.find({
-            "partnerSettings.age.from": {$gt: params.preferAge.min},
-            "partnerSettings.age.to": {$lt: params.preferAge.max},
-        })
+            "_id": {$nin: sorts.userIds},
+            "partnerSettings.distance": {$gt: 0, $lt: sorts.distance},
+            "age": {$gt: sorts.preferAge.min - 1, $lt: sorts.preferAge.max + 1}, 
+            "partnerSettings.age.from": {$lt: sorts.age + 1},
+            "partnerSettings.age.to": {$gt: sorts.age - 1},
+            "sex": sorts.sex
+        }).limit(5)
 
         return users
     }

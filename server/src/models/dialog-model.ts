@@ -15,10 +15,11 @@ export interface IDialog{
 export interface ISorts {
     distance: number,
     onlyNear: boolean,
-    age: {min: number, max: number},
+    age: number,
     preferAge: {min: number, max: number},
     sex: 'male' | 'female',
-    preferSex: 'male' | 'female'
+    preferSex: 'male' | 'female',
+    userIds: string[]
 }
 
 const DialogSchema = new mongoose.Schema({

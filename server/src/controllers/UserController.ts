@@ -14,11 +14,11 @@ class UserController{
         }
     }
 
-    async getCertainUsers(req: any, res: any, next: NextFunction) {
+    async getSortedUsers(req: any, res: any, next: NextFunction) {
         try {
-            const { params } = req.body
+            const sorts = req.body
             
-            const users = await userService.getCertain(params)
+            const users = await userService.getSorted(sorts)
 
             res.json(users)
 

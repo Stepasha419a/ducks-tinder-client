@@ -25,7 +25,8 @@ export interface IUser {
         gallery: string[]
     }
     dialogs: string[]
-    pairs: []
+    pairs: string[],
+    shownUsers: string[]
 }
 
 export interface IUserUnrequired {
@@ -53,6 +54,28 @@ export interface IUserUnrequired {
         }
     }
     dialogs?: string[]
+}
+
+export interface IQuerySorts {
+    distance: number,
+    onlyNear: boolean,
+    age: number,
+    preferAge: {min: number, max: number},
+    sex: 'male' | 'female',
+    preferSex: 'male' | 'female',
+    userIds?: string[]
+}
+
+export const makeQuerySortsObj = (user: IUser) => {
+    return {
+        distance: user.partnerSettings.distance,
+        onlyNear: user.partnerSettings.usersOnlyInDistance,
+        age: user.age,
+        preferAge: {min: user.partnerSettings.age.from, max: user.partnerSettings.age.to},
+        sex: user.sex,
+        preferSex: user.partnerSettings.preferSex,
+        userIds: user.shownUsers?.length ? user.shownUsers : []
+    }
 }
 
 export const interestsList = ['fighting', 'ski', 'football', 'volleyball', 'tennis', 'ping pong',

@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { IUser, IUserUnrequired } from "../models/IUser";
+import { IQuerySorts, IUser, IUserUnrequired } from "../models/IUser";
 import { instance } from "./api";
 
 export type UserType = {
@@ -13,6 +13,10 @@ export type UserType = {
 export const usersAPI = {
     getUsers(): Promise<AxiosResponse<IUser[]>> {
         return instance.get('users')
+            .then(res => res)
+    },
+    getSortedUsers(sorts: IQuerySorts): Promise<AxiosResponse<IUser[]>> {
+        return instance.post(`users/sorted`, sorts)
             .then(res => res)
     },
     getCurrentUser(id: String): Promise<AxiosResponse<IUser>> {
