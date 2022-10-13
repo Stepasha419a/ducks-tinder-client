@@ -1,11 +1,22 @@
 import { faBolt, faHeart, faRotateLeft, faStar, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { AppStateType } from "../../redux/reduxStore"
+import { getSortedUsersThunk } from "../../redux/usersReducer"
 
 interface TinderPropsInterface{
     
 }
 
 const Tinder: React.FC<TinderPropsInterface> = () => {
+    const dispatch = useDispatch()
+
+    const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+
+    useEffect(() => {
+        dispatch(getSortedUsersThunk({user: currentUser}) as any)
+    })
 
     return(
         <div className="tinder__content">

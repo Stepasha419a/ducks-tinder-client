@@ -76,7 +76,7 @@ export const getSortedUsersThunk = createAsyncThunk(
     async function(args: {user: IUser}, {rejectWithValue, dispatch}) {
         try {
             const querySortsObj = makeQuerySortsObj(args.user)
-
+            console.log(querySortsObj)
             const response = await usersAPI.getSortedUsers(querySortsObj)
 
             if(!response) {

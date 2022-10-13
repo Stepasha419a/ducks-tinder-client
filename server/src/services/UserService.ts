@@ -19,7 +19,8 @@ class UserService{
             "age": {$gt: sorts.preferAge.min - 1, $lt: sorts.preferAge.max + 1}, 
             "partnerSettings.age.from": {$lt: sorts.age + 1},
             "partnerSettings.age.to": {$gt: sorts.age - 1},
-            "sex": sorts.sex
+            "sex": sorts.preferSex,
+            "partnerSettings.preferSex": sorts.sex
         }).limit(5)
 
         return users
