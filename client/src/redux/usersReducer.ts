@@ -1,4 +1,4 @@
-import { IQuerySorts, makeQuerySortsObj } from './../models/IUser';
+import { makeQuerySortsObj } from './../models/IUser';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { usersAPI } from "../api/usersApi";
 import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage";
@@ -76,7 +76,7 @@ export const getSortedUsersThunk = createAsyncThunk(
     async function(args: {user: IUser}, {rejectWithValue, dispatch}) {
         try {
             const querySortsObj = makeQuerySortsObj(args.user)
-            console.log(querySortsObj)
+            
             const response = await usersAPI.getSortedUsers(querySortsObj)
 
             if(!response) {

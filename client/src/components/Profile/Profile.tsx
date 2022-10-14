@@ -81,7 +81,7 @@ const Profile = () => {
                 }
             </aside>
             <div className="tinder__content">
-                <div className="tinder__content-search tinder__content-search--profile">
+                <div className="tinder__content-user tinder__content-user--profile">
                 {isImageSetting ?
                     <ProfileImageSetting 
                         setIsImageSetting={setIsImageSetting}
