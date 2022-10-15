@@ -14,6 +14,7 @@ export interface UserDtoInterface {
     pictures: picturesInterface
     dialogs: string[]
     pairs: string[]
+    checkedUsers: string[]
 }
 
 export default class UserDto { // Data transfer object
@@ -30,6 +31,7 @@ export default class UserDto { // Data transfer object
     pictures
     dialogs
     pairs
+    checkedUsers
 
     constructor(model: UserDtoInterface) {
         this.email = model.email
@@ -45,6 +47,7 @@ export default class UserDto { // Data transfer object
         this.pictures = model.pictures
         this.dialogs = model.dialogs
         this.pairs = model.pairs
+        this.checkedUsers = model.checkedUsers
     }
 
 }

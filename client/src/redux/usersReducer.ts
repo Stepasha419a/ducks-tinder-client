@@ -45,7 +45,7 @@ const usersReducer = createSlice({
             state.pairs = action.payload
         },
         setTinderUsers: (state, action) => {
-            state.tinderUsers = action.payload
+            state.tinderUsers = [...state.tinderUsers, ...action.payload]
         }
     }
 })

@@ -35,6 +35,7 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
 
     const deletePair = (userId: string) => {
         dispatch(deletePairThunk({userId: currentUser._id, createUserPairId: userId}) as any)
+        console.log({userId: currentUser._id, createUserPairId: userId})
     }
 
     const refuseHandler = (userId: string) => {

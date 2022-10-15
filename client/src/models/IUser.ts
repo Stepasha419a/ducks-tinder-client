@@ -26,7 +26,7 @@ export interface IUser {
     }
     dialogs: string[]
     pairs: string[],
-    shownUsers: string[]
+    checkedUsers: string[]
 }
 
 export interface IUserUnrequired {
@@ -54,6 +54,7 @@ export interface IUserUnrequired {
         }
     }
     dialogs?: string[]
+    checkedUsers?: string[]
 }
 
 export interface IQuerySorts {
@@ -74,7 +75,7 @@ export const makeQuerySortsObj = (user: IUser) => {
         preferAge: {min: user.partnerSettings.age.from, max: user.partnerSettings.age.to},
         sex: user.sex,
         preferSex: user.partnerSettings.preferSex,
-        userIds: user.shownUsers?.length ? user.shownUsers : []
+        userIds: user.checkedUsers?.length ? user.checkedUsers : []
     }
 }
 

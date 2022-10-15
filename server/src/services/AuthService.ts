@@ -33,8 +33,9 @@ class AuthService{
             gallery: [] as string[]
         }
         const pairs = [] as string[]
+        const checkedUsers = [] as string[]
 
-        const user = await UserModel.create({email, name, description, nickname, password: hashPassword, age, sex, interests, partnerSettings, pictures, dialogs, pairs, activationLink})
+        const user = await UserModel.create({email, name, description, nickname, password: hashPassword, age, sex, interests, partnerSettings, pictures, dialogs, pairs, checkedUsers, activationLink})
 
         fileService.makeUserDir(user._id.toString())
 

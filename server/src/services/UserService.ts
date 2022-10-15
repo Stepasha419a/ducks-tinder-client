@@ -130,7 +130,10 @@ class UserService{
         if(user.pairs.includes(userPair._id)) {
             const memberIdIndex = user.pairs.findIndex((memberId: string) => memberId === userPair._id.toString())
 
-            user.pairs = [...user.pairs.splice(memberIdIndex + 1, 1)]
+            const newUserPairs = [...user.pairs]
+            newUserPairs.splice(memberIdIndex, 1)
+
+            user.pairs = [...newUserPairs]
             await UserModel.findByIdAndUpdate(user._id, user, {new: true})
         } else {
             throw ApiError.BadRequest('Pair с такими Id не найден')

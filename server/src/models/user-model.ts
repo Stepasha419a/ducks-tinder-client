@@ -30,7 +30,8 @@ const UserSchema = new mongoose.Schema({
     partnerSettings: {type: {} as partnerSettingsInterface},
     pictures: {type: {} as picturesInterface},
     dialogs: {type: [] as string[], default: []},
-    pairs: {type: [] as string[], default: []}
+    pairs: {type: [] as string[], default: []},
+    checkedUsers: {type: [] as string[], default: []}
 })
 
 export default mongoose.model('User', UserSchema)
