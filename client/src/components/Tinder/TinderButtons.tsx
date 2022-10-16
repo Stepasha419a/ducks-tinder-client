@@ -8,9 +8,10 @@ import { updateUserThunk } from "../../redux/usersReducer"
 interface TinderButtonsProps{
     currentTinderUsersIndex: number
     setCurrentTinderUsersIndex: (set: number) => void
+    isMinimum?: boolean
 }
 
-const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, setCurrentTinderUsersIndex}) => {
+const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, setCurrentTinderUsersIndex, isMinimum = false}) => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
@@ -43,7 +44,7 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
     }
 
     const btnFocus = (e: FocusEvent<HTMLButtonElement, any>, color: string) => {
-        if(currentTinderUsersIndex && color === 'gold') {
+        if(currentTinderUsersIndex && isReturn && color === 'gold') {
             const target = e.target as Element;
             target.classList.add(`tinder__content-btn--active-${color}`)
         } else if (color !== 'gold'){
@@ -59,33 +60,55 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
     }
 
     return(
-        <div className="tinder__content-buttons">
-            <button onClick={() => returnUser()} onFocus={(e) => btnFocus(e, 'gold')} onMouseOut={(e) => btnMouseOut(e, 'gold')} className={`tinder__content-btn tinder__content-btn--small${(currentTinderUsersIndex && isReturn) ? ' tinder__content-btn--gold' : ' tinder__content-btn--blocked'}`}>
-                <div className="tinder__content-btn-icon-wrapper">
-                    <FontAwesomeIcon icon={faRotateLeft} className={`tinder__content-btn-icon ${(currentTinderUsersIndex && isReturn) ? ' tinder__content-btn-icon--gold' : ' tinder__content-btn-icon--blocked'}`}/>
-                </div>
-            </button>
-            <button onClick={() => dislikeUser()} onFocus={(e) => btnFocus(e, 'red')} onMouseOut={(e) => btnMouseOut(e, 'red')} className="tinder__content-btn tinder__content-btn--large tinder__content-btn--red">
-                <div className="tinder__content-btn-icon-wrapper tinder__content-btn-icon-wrapper--large">
-                    <FontAwesomeIcon icon={faXmark} className="tinder__content-btn-icon tinder__content-btn-icon--red tinder__content-btn-icon--large"/>
-                </div>
-            </button>
-            <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'blue')} onMouseOut={(e) => btnMouseOut(e, 'blue')} className="tinder__content-btn tinder__content-btn--small tinder__content-btn--blue">
-                <div className="tinder__content-btn-icon-wrapper">
-                    <FontAwesomeIcon icon={faStar} className="tinder__content-btn-icon tinder__content-btn-icon--blue"/>
-                </div>
-            </button>
-            <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'green')} onMouseOut={(e) => btnMouseOut(e, 'green')} className="tinder__content-btn tinder__content-btn--large tinder__content-btn--green">
-                <div className="tinder__content-btn-icon-wrapper tinder__content-btn-icon-wrapper--large">
-                    <FontAwesomeIcon icon={faHeart} className="tinder__content-btn-icon tinder__content-btn-icon--green"/>
-                </div>
-            </button>
-            <button onFocus={(e) => btnFocus(e, 'purple')} onMouseOut={(e) => btnMouseOut(e, 'purple')} className="tinder__content-btn tinder__content-btn--small tinder__content-btn--purple">
-                <div className="tinder__content-btn-icon-wrapper">
-                    <FontAwesomeIcon icon={faBolt} className="tinder__content-btn-icon tinder__content-btn-icon--purple"/>
-                </div>
-            </button>
-        </div>
+        <>
+        {isMinimum ?
+            <div className="tinder__content-buttons tinder__content-buttons--center">
+                <button onClick={() => dislikeUser()} onFocus={(e) => btnFocus(e, 'red')} onMouseOut={(e) => btnMouseOut(e, 'red')} className="tinder__content-btn tinder__content-btn--large tinder__content-btn--red tinder__content-btn--minimized">
+                    <div className="tinder__content-btn-icon-wrapper tinder__content-btn-icon-wrapper--large tinder__content-btn-icon-wrapper--minimized">
+                        <FontAwesomeIcon icon={faXmark} className="tinder__content-btn-icon tinder__content-btn-icon--red tinder__content-btn-icon--large"/>
+                    </div>
+                </button>
+                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'blue')} onMouseOut={(e) => btnMouseOut(e, 'blue')} className="tinder__content-btn tinder__content-btn--small tinder__content-btn--blue tinder__content-btn--minimized">
+                    <div className="tinder__content-btn-icon-wrapper tinder__content-btn-icon-wrapper--minimized">
+                        <FontAwesomeIcon icon={faStar} className="tinder__content-btn-icon tinder__content-btn-icon--blue"/>
+                    </div>
+                </button>
+                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'green')} onMouseOut={(e) => btnMouseOut(e, 'green')} className="tinder__content-btn tinder__content-btn--large tinder__content-btn--green tinder__content-btn--minimized">
+                    <div className="tinder__content-btn-icon-wrapper tinder__content-btn-icon-wrapper--large tinder__content-btn-icon-wrapper--minimized">
+                        <FontAwesomeIcon icon={faHeart} className="tinder__content-btn-icon tinder__content-btn-icon--green"/>
+                    </div>
+                </button>
+            </div>
+        :
+            <div className="tinder__content-buttons">
+                <button onClick={() => returnUser()} onFocus={(e) => btnFocus(e, 'gold')} onMouseOut={(e) => btnMouseOut(e, 'gold')} className={`tinder__content-btn tinder__content-btn--small${(currentTinderUsersIndex && isReturn) ? ' tinder__content-btn--gold' : ' tinder__content-btn--blocked'}`}>
+                    <div className="tinder__content-btn-icon-wrapper">
+                        <FontAwesomeIcon icon={faRotateLeft} className={`tinder__content-btn-icon ${(currentTinderUsersIndex && isReturn) ? ' tinder__content-btn-icon--gold' : ' tinder__content-btn-icon--blocked'}`}/>
+                    </div>
+                </button>
+                <button onClick={() => dislikeUser()} onFocus={(e) => btnFocus(e, 'red')} onMouseOut={(e) => btnMouseOut(e, 'red')} className="tinder__content-btn tinder__content-btn--large tinder__content-btn--red">
+                    <div className="tinder__content-btn-icon-wrapper tinder__content-btn-icon-wrapper--large">
+                        <FontAwesomeIcon icon={faXmark} className="tinder__content-btn-icon tinder__content-btn-icon--red tinder__content-btn-icon--large"/>
+                    </div>
+                </button>
+                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'blue')} onMouseOut={(e) => btnMouseOut(e, 'blue')} className="tinder__content-btn tinder__content-btn--small tinder__content-btn--blue">
+                    <div className="tinder__content-btn-icon-wrapper">
+                        <FontAwesomeIcon icon={faStar} className="tinder__content-btn-icon tinder__content-btn-icon--blue"/>
+                    </div>
+                </button>
+                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'green')} onMouseOut={(e) => btnMouseOut(e, 'green')} className="tinder__content-btn tinder__content-btn--large tinder__content-btn--green">
+                    <div className="tinder__content-btn-icon-wrapper tinder__content-btn-icon-wrapper--large">
+                        <FontAwesomeIcon icon={faHeart} className="tinder__content-btn-icon tinder__content-btn-icon--green"/>
+                    </div>
+                </button>
+                <button onFocus={(e) => btnFocus(e, 'purple')} onMouseOut={(e) => btnMouseOut(e, 'purple')} className="tinder__content-btn tinder__content-btn--small tinder__content-btn--purple">
+                    <div className="tinder__content-btn-icon-wrapper">
+                        <FontAwesomeIcon icon={faBolt} className="tinder__content-btn-icon tinder__content-btn-icon--purple"/>
+                    </div>
+                </button>
+            </div>
+        }
+        </>
     )
 }
 

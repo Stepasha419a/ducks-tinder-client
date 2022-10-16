@@ -40,11 +40,13 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
 
     const refuseHandler = (userId: string) => {
         deletePair(userId)
+        setCurrentPair({} as IUser)
     }
 
     const acceptHandler = (userId: string) => {
         dispatch(createDialogThunk({currentUserId: currentUser._id, otherUserId: currentPair._id}) as any)
         deletePair(userId)
+        setCurrentPair({} as IUser)
     }
 
     return(

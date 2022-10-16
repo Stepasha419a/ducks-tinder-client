@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
 import { getSortedUsersThunk, updateUserThunk } from "../../redux/usersReducer"
 import TinderButtons from "./TinderButtons"
+import TinderFullPreview from "./TinderFullPreview"
 import TinderUser from "./TinderUser"
 
 const Tinder: React.FC = () => {
@@ -12,10 +13,13 @@ const Tinder: React.FC = () => {
     const tinderUsers = useSelector((state: AppStateType) => state.usersPage.tinderUsers)
 
     const [currentTinderUsersIndex, setCurrentTinderUsersIndex] = useState<number>(0)
+    const [isFullPreview, setIsFullPreview] = useState(false)
 
     useEffect(() => {
-        if(!currentTinderUsersIndex || currentTinderUsersIndex % 5 === 0) {
-            dispatch(getSortedUsersThunk({user: currentUser}) as any)
+        if(!currentTinderUsersIndex) {
+            dispatch(getSortedUsersThunk({user: currentUser, type: 'set'}) as any)
+        } else if(currentTinderUsersIndex % 5 === 0) {
+            dispatch(getSortedUsersThunk({user: currentUser, type: 'add'}) as any)
         }
     }, [currentUser, dispatch, currentTinderUsersIndex])
 
@@ -39,8 +43,17 @@ const Tinder: React.FC = () => {
         <div className="tinder__content">
             <button onClick={() => resetHandler()} className="tinder__content-reset">reset</button>
             <div className="tinder__content-users">
-                <TinderUser currentUser={tinderUsers[currentTinderUsersIndex]}/>
-                <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} setCurrentTinderUsersIndex={setCurrentTinderUsersIndex}/>
+                {isFullPreview ?
+                <>
+                    <TinderFullPreview currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview}/>
+                    <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} setCurrentTinderUsersIndex={setCurrentTinderUsersIndex} isMinimum/>
+                </>
+                :
+                <>
+                    <TinderUser currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview}/>
+                    <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} setCurrentTinderUsersIndex={setCurrentTinderUsersIndex}/>
+                </>
+                }
             </div>
             <div className="tinder__content-instructions">
 

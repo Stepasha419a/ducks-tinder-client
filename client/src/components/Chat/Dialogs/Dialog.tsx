@@ -41,7 +41,17 @@ const Dialog: React.FC<DialogInterface> = ({dialog, dialogCompanionId, socket, c
                     {dialogPartner.name}
                 </div>
                 <div className="tinder__info-content-dialogs-item-descr-message">
-                    {dialog.messages[dialog.messages.length - 1]?.userId === dialogPartner._id ? `${dialogPartner.name}: ` : 'you: '}{dialog.messages[dialog.messages.length - 1]?.content}
+                    {dialog.messages.length 
+                    ? 
+                    dialog.messages[dialog.messages.length - 1]?.userId === dialogPartner._id 
+                        ? 
+                        `${dialogPartner.name}: ` 
+                        : 
+                        'you: ' 
+                    :
+                    'send first message'}
+
+                    {dialog.messages[dialog.messages.length - 1]?.content}
                 </div>
             </div>
         </div>
