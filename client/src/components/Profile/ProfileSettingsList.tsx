@@ -83,67 +83,67 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
     }
 
     return(
-        <div className="tinder__settings-groups">
-            <div className="tinder__settings-group">
-                <div className="tinder__settings-group-title">
+        <div className="settings-groups">
+            <div className="settings-group">
+                <div className="settings-group-title">
                     Account Settings
                 </div>
-                <div className="tinder__settings-group-items">
-                    <div onClick={() => setSettingInput('Email', 'email')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                <div className="settings-group-items">
+                    <div onClick={() => setSettingInput('Email', 'email')} className="settings-group-item settings-group-item--pointer">
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Email
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 {currentUser.email}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Name', 'name')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Name', 'name')} className="settings-group-item settings-group-item--pointer">
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Name
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 {currentUser.name}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Description', 'description')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('description') ? ' tinder__settings-group-item--error' : ''}`}>
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Description', 'description')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('description') ? ' settings-group-item--error' : ''}`}>
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Description
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting tinder__settings-group-item-descr-setting--text-overflow">
+                            <div className="settings-group-item-descr-setting settings-group-item-descr-setting--text-overflow">
                                 {currentUser.description || "Empty description"}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Sex', 'sex')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('sex') ? ' tinder__settings-group-item--error' : ''}`}>
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Sex', 'sex')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('sex') ? ' settings-group-item--error' : ''}`}>
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Sex
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 {currentUser.sex || 'Empty sex'}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div className="tinder__settings-group-item">
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                    <div className="settings-group-item">
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Age
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 {currentAgeSetting} years old
                             </div>
                         </div>
-                        <div className="tinder__settings-group-item-setting">
-                            <div className="tinder__settings-group-item-setting-change-slider">
+                        <div className="settings-group-item-setting">
+                            <div className="settings-group-item-setting-change-slider">
                                 <InputRange
                                     step={1}
                                     draggableTrack={false}
@@ -158,48 +158,48 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                         </div>
                     </div>
                 </div>
-                <div className="tinder__settings-group-descr">
+                <div className="settings-group-descr">
                     Verified email adress helps to protect your account
                 </div>
             </div>
-            <div className="tinder__settings-group">
-                <div className="tinder__settings-group-title">
+            <div className="settings-group">
+                <div className="settings-group-title">
                     Find Settings
                 </div>
-                <div className="tinder__settings-group-items">
-                    <div onClick={() => setSettingInput('Interests', 'interests')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('interests') ? ' tinder__settings-group-item--error' : ''}`}>
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                <div className="settings-group-items">
+                    <div onClick={() => setSettingInput('Interests', 'interests')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('interests') ? ' settings-group-item--error' : ''}`}>
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Interests
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                             {!currentUser.interests.length ? "Empty interests" : `${currentUser.interests[0]} and so on...`}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Place', 'place', 'partnerSettings')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('place') ? ' tinder__settings-group-item--error' : ''}`}>
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Place', 'place', 'partnerSettings')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('place') ? ' settings-group-item--error' : ''}`}>
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Place
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 {currentUser.partnerSettings.place || 'Empty place'}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div className={`tinder__settings-group-item${errorFields.includes('distance') ? ' tinder__settings-group-item--error' : ''}`}>
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                    <div className={`settings-group-item${errorFields.includes('distance') ? ' settings-group-item--error' : ''}`}>
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Distance
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 {currentDistanceSetting || 'Empty distance'} км.
                             </div>
                         </div>
-                        <div className="tinder__settings-group-item-setting">
-                            <div className="tinder__settings-group-item-setting-change-slider">
+                        <div className="settings-group-item-setting">
+                            <div className="settings-group-item-setting-change-slider">
                                 <InputRange
                                     step={1}
                                     draggableTrack={false}
@@ -211,45 +211,45 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                     onChangeComplete={() => submitSettings('distance', currentDistanceSetting, 'partnerSettings')}
                                 />
                             </div>
-                            <div className="tinder__settings-group-item-setting-descr tinder__settings-group-item-setting-descr--relative">
+                            <div className="settings-group-item-setting-descr settings-group-item-setting-descr--relative">
                                 Show people only in this range
 
-                                <label className="tinder__settings-group-item-setting-checkbox">
+                                <label className="settings-group-item-setting-checkbox">
                                     <input 
                                         checked={currentUser.partnerSettings.usersOnlyInDistance}
                                         onChange={(e) => submitSettings('usersOnlyInDistance', e.target.checked, 'partnerSettings')} 
                                         type="checkbox" 
-                                        className="tinder__settings-group-item-setting-checkbox-input"
+                                        className="settings-group-item-setting-checkbox-input"
                                     />
-                                    <div className="tinder__settings-group-item-setting-checkbox-div">
+                                    <div className="settings-group-item-setting-checkbox-div">
 
                                     </div>
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Interested in', 'preferSex', 'partnerSettings')} className={`tinder__settings-group-item tinder__settings-group-item--pointer${errorFields.includes('preferSex') ? ' tinder__settings-group-item--error' : ''}`}>
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Interested in', 'preferSex', 'partnerSettings')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('preferSex') ? ' settings-group-item--error' : ''}`}>
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Interested in
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 {currentUser.partnerSettings.preferSex || 'empty sex prefer'}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div className="tinder__settings-group-item">
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                    <div className="settings-group-item">
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Partner age
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 from {ageSetting.min} to {ageSetting.max}
                             </div>
                         </div>
-                        <div className="tinder__settings-group-item-setting">
-                            <div className="tinder__settings-group-item-setting-change-slider">
+                        <div className="settings-group-item-setting">
+                            <div className="settings-group-item-setting-change-slider">
                                 <InputRange
                                     step={1}
                                     draggableTrack={false}
@@ -264,80 +264,80 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                         </div>
                     </div>
                 </div>
-                <div className="tinder__settings-group-descr">
+                <div className="settings-group-descr">
                     When the local profiles are over, you will be able to 
                     switch to the Global Mode for dating people from all over the world.
                 </div>
             </div>
-            <div className="tinder__settings-group">
-                <div className="tinder__settings-group-title">
+            <div className="settings-group">
+                <div className="settings-group-title">
                     Internet account
                 </div>
-                <div className="tinder__settings-group-items">
-                    <div onClick={() => setSettingInput('Nickname', 'nickname')} className="tinder__settings-group-item tinder__settings-group-item--pointer">
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title">
+                <div className="settings-group-items">
+                    <div onClick={() => setSettingInput('Nickname', 'nickname')} className="settings-group-item settings-group-item--pointer">
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title">
                                 Nickname
                             </div>
-                            <div className="tinder__settings-group-item-descr-setting">
+                            <div className="settings-group-item-descr-setting">
                                 {currentUser.nickname || 'unknown'}
-                                <FontAwesomeIcon icon={faAngleRight} className="tinder__settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="tinder__settings-group-descr">
+                <div className="settings-group-descr">
                     Create a username, share it and start searching for couples on Tinder around the world.
                 </div>
             </div>
-            <div className="tinder__settings-group">
-                <div className="tinder__settings-group-title">
+            <div className="settings-group">
+                <div className="settings-group-title">
                     Safety Tips
                 </div>
-                <div className="tinder__settings-group-items">
-                    <div className="tinder__settings-group-item tinder__settings-group-item--link">
-                        <Link to="/policy" className="tinder__settings-group-item-link" target="_blank" >
-                            <div className="tinder__settings-group-item-descr">
-                                <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
+                <div className="settings-group-items">
+                    <div className="settings-group-item settings-group-item--link">
+                        <Link to="/policy" className="settings-group-item-link" target="_blank" >
+                            <div className="settings-group-item-descr">
+                                <div className="settings-group-item-descr-title settings-group-item-descr-title--link">
                                     Community Rules
                                 </div>
-                                <div className="tinder__settings-group-item-descr-setting">
-                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="tinder__settings-group-item-descr-setting-icon" />
+                                <div className="settings-group-item-descr-setting">
+                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings-group-item-descr-setting-icon" />
                                 </div>
                             </div>
                         </Link>
                     </div>
-                    <div className="tinder__settings-group-item tinder__settings-group-item--link">
-                        <Link to="/policy" className="tinder__settings-group-item-link" target="_blank" >
-                            <div className="tinder__settings-group-item-descr">
-                                <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
+                    <div className="settings-group-item settings-group-item--link">
+                        <Link to="/policy" className="settings-group-item-link" target="_blank" >
+                            <div className="settings-group-item-descr">
+                                <div className="settings-group-item-descr-title settings-group-item-descr-title--link">
                                     Security and Policy Development Center
                                 </div>
-                                <div className="tinder__settings-group-item-descr-setting">
-                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="tinder__settings-group-item-descr-setting-icon" />
+                                <div className="settings-group-item-descr-setting">
+                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings-group-item-descr-setting-icon" />
                                 </div>
                             </div>
                         </Link>
                     </div>
-                    <div className="tinder__settings-group-item tinder__settings-group-item--link">
-                        <Link to="/policy" className="tinder__settings-group-item-link" target="_blank" >
-                            <div className="tinder__settings-group-item-descr">
-                                <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--link">
+                    <div className="settings-group-item settings-group-item--link">
+                        <Link to="/policy" className="settings-group-item-link" target="_blank" >
+                            <div className="settings-group-item-descr">
+                                <div className="settings-group-item-descr-title settings-group-item-descr-title--link">
                                     Safety Tips
                                 </div>
-                                <div className="tinder__settings-group-item-descr-setting">
-                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="tinder__settings-group-item-descr-setting-icon" />
+                                <div className="settings-group-item-descr-setting">
+                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings-group-item-descr-setting-icon" />
                                 </div>
                             </div>
                         </Link>
                     </div>
                 </div>
             </div>
-            <div className="tinder__settings-group">
-                <div className="tinder__settings-group-items">
-                    <div onClick={() => dispatch(logoutThunk() as any)} className="tinder__settings-group-item tinder__settings-group-item--sumple-button">
-                        <div className="tinder__settings-group-item-descr">
-                            <div className="tinder__settings-group-item-descr-title tinder__settings-group-item-descr-title--center">
+            <div className="settings-group">
+                <div className="settings-group-items">
+                    <div onClick={() => dispatch(logoutThunk() as any)} className="settings-group-item settings-group-item--sumple-button">
+                        <div className="settings-group-item-descr">
+                            <div className="settings-group-item-descr-title settings-group-item-descr-title--center">
                                 Log out
                             </div>
                         </div>

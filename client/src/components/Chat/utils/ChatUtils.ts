@@ -10,5 +10,5 @@ export const isRefElementVisible = (ref: React.MutableRefObject<HTMLInputElement
 }
 
 export const scrollToBottom = (ref: React.MutableRefObject<HTMLInputElement>, smooth?: boolean) => {
-    smooth ? ref.current?.scrollIntoView({ behavior: "smooth" }) : document.querySelector('.tinder__chat')?.scrollTo(0, document.querySelector('.tinder__chat')?.scrollHeight || 0);
+    smooth ? ref.current?.scrollIntoView({ behavior: "smooth" }) : document.querySelector('.chat')?.scrollTo(0, document.querySelector('.chat')?.scrollHeight || 0);
 }

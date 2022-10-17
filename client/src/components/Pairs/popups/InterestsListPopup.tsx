@@ -5,23 +5,23 @@ interface InterestsListPopupProps{
 
 const InterestsListPopup: React.FC<InterestsListPopupProps> = ({interestsList, setIsInterestsListPopupOpen}) => {
     return(
-        <div className="tinder__pairs-popup">
-            <div className="tinder__pairs-popup-body">
-                <div className="tinder__pairs-popup-content tinder__pairs-popup-content--overflow">
-                    <div className="tinder__pairs-popup-title">Interests</div>
-                    <div onClick={() => setIsInterestsListPopupOpen(false)} className="tinder__pairs-popup-close"></div>
-                    <div className="tinder__pairs-popup-sort-items">
+        <div className="pairs-popup">
+            <div className="pairs-popup-body">
+                <div className="pairs-popup-content pairs-popup-content--overflow">
+                    <div className="pairs-popup-title">Interests</div>
+                    <div onClick={() => setIsInterestsListPopupOpen(false)} className="pairs-popup-close"></div>
+                    <div className="pairs-popup-sort-items">
                         {interestsList.map(item => {
                             return(
-                                <div key={item} className='tinder__pairs-popup-setting-item tinder__pairs-popup-setting-item--no-cursor'>{item}</div>
+                                <div key={item} className='pairs-popup-setting-item pairs-popup-setting-item--no-cursor'>{item}</div>
                             )
                         })}
                     </div>
-                    <button onClick={() => setIsInterestsListPopupOpen(false)} className="tinder__pairs-popup-btn tinder__pairs-popup-btn--sorts-list">
+                    <button onClick={() => setIsInterestsListPopupOpen(false)} className="pairs-popup-btn pairs-popup-btn--sorts-list">
                         Close
                     </button>
                 </div>
-                <div onClick={() => setIsInterestsListPopupOpen(false)} className="tinder__pairs-popup-close-area"></div>
+                <div onClick={() => setIsInterestsListPopupOpen(false)} className="pairs-popup-close-area"></div>
             </div>
         </div>
     )

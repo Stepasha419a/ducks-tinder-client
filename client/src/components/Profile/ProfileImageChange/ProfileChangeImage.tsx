@@ -114,20 +114,20 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
 
     return(
         <>
-            <div className="tinder__content-change-images">
+            <div className="content-change-images">
                 {images.sort(sortCards).map((imageObj, index) => {
                     if(!imageObj) {
                         return(
-                            <div onClick={() => index === 0 ? openSettingHandler('avatar') : openSettingHandler('gallery')} key={index} className="tinder__content-change-images-item">
-                                <div className="tinder__content-change-images-col-item-img" />
-                                <button className="tinder__content-change-images-col-item-btn--plus">
-                                    <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
+                            <div onClick={() => index === 0 ? openSettingHandler('avatar') : openSettingHandler('gallery')} key={index} className="content-change-images-item">
+                                <div className="content-change-images-col-item-img" />
+                                <button className="content-change-images-col-item-btn--plus">
+                                    <FontAwesomeIcon className="content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
                                 </button>
                             </div>
                         )
                     }
                     return(
-                        <div key={index} className="tinder__content-change-images-item">
+                        <div key={index} className="content-change-images-item">
                             <div 
                                 draggable
                                 onDragStart={(e) => dragStartHangler(e, imageObj)}
@@ -136,10 +136,10 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                                 onDragOver={e => dragOverHangler(e)}
                                 onDrop={e => dropHangler(e, imageObj)} 
                                 style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/${imageObj.setting}/${imageObj.image})`}} 
-                                className="tinder__content-change-images-col-item-img tinder__content-change-images-col-item-img--image" 
+                                className="content-change-images-col-item-img content-change-images-col-item-img--image" 
                             />
-                            <button onClick={() => deleteImageHandler(imageObj.image, currentUser._id, imageObj.setting as 'avatar' | 'gallery')} className="tinder__content-change-images-col-item-btn--xmark">
-                                <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
+                            <button onClick={() => deleteImageHandler(imageObj.image, currentUser._id, imageObj.setting as 'avatar' | 'gallery')} className="content-change-images-col-item-btn--xmark">
+                                <FontAwesomeIcon className="content-change-images-col-item-btn-mark--xmark" icon={faXmark}/>
                             </button>
                         </div>
                     )
@@ -147,23 +147,23 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                 
                 {arrForLoop.map(item => {
                     return(
-                        <div onClick={() => openSettingHandler('gallery')} key={item} className="tinder__content-change-images-item">
-                            <div className="tinder__content-change-images-col-item-img" />
-                            <button className="tinder__content-change-images-col-item-btn--plus">
-                                <FontAwesomeIcon className="tinder__content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
+                        <div onClick={() => openSettingHandler('gallery')} key={item} className="content-change-images-item">
+                            <div className="content-change-images-col-item-img" />
+                            <button className="content-change-images-col-item-btn--plus">
+                                <FontAwesomeIcon className="content-change-images-col-item-btn-mark--plus" icon={faPlus}/>
                             </button>
                         </div>
                     )
                 })
                 }
             </div>
-            <div className="tinder__content-change-descr">
+            <div className="content-change-descr">
                 Add more photos to fill out your profile 
                 <br/>by another 4% and get more likes.
             </div>
-            <div className="tinder__content-change-save">
-                <button onClick={() => submitHandler()} className="tinder__content-change-save-btn">
-                    <span className="tinder__content-change-save-text">Save changes</span>
+            <div className="content-change-save">
+                <button onClick={() => submitHandler()} className="content-change-save-btn">
+                    <span className="content-change-save-text">Save changes</span>
                 </button>
             </div>
 

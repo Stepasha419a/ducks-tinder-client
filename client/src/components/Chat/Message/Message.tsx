@@ -10,23 +10,23 @@ interface MessageComponentInterface{
 
 const Message: React.FC<MessageComponentInterface> = ({message, user, currentUserId}) => {
     return(
-        <div className="tinder__chat-message-wrapper">
-            <div className="tinder__chat-message-container">
+        <div className="chat-message-wrapper">
+            <div className="chat-message-container">
                 {user?.pictures ? 
-                    <Avatar otherUserId={user._id} imageExtraClassName={'tinder__chat-message-avatar'} avatarUrl={user.pictures.avatar}/>
+                    <Avatar otherUserId={user._id} imageExtraClassName={'chat-message-avatar'} avatarUrl={user.pictures.avatar}/>
                 :
-                    <Avatar showDefaultPhoto imageExtraClassName={'tinder__chat-message-avatar'}/>
+                    <Avatar showDefaultPhoto imageExtraClassName={'chat-message-avatar'}/>
                 }
-                <div className={`tinder__chat-message${message.userId === currentUserId ? ' tinder__chat-message--own-message' : ''}`}>
+                <div className={`chat-message${message.userId === currentUserId ? ' chat-message--own-message' : ''}`}>
                     {!(message.userId === currentUserId) &&
-                        <div className="tinder__chat-message-username">
+                        <div className="chat-message-username">
                             {user?.name}
                         </div>
                     }
-                    <div className="tinder__chat-message-content">
+                    <div className="chat-message-content">
                         {message.content}
                     </div>
-                    <div className={`tinder__chat-message-mark${message.userId === currentUserId ? ' tinder__chat-message-mark--own-message' : ''}`}></div>
+                    <div className={`chat-message-mark${message.userId === currentUserId ? ' chat-message-mark--own-message' : ''}`}></div>
                 </div>
             </div>
         </div>

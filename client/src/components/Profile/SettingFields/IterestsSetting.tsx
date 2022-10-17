@@ -68,44 +68,44 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
 
     return(
         <>
-        <div className="tinder__content-setting">
-            <div className="tinder__content-setting-name tinder__content-setting-name--error">
+        <div className="content-setting">
+            <div className="content-setting-name content-setting-name--error">
                 {inputValueError}
             </div>
-            <div className="tinder__content-setting-name">
+            <div className="content-setting-name">
                 Interests
             </div>
-            <div className="tinder__content-setting-change">
-                <div className="tinder__content-setting-search">
-                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="tinder__content-setting-search-input" placeholder="type your interest's name here" type="text"/>
-                    <div className="tinder__content-setting-result">
+            <div className="content-setting-change">
+                <div className="content-setting-search">
+                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="content-setting-search-input" placeholder="type your interest's name here" type="text"/>
+                    <div className="content-setting-result">
                         {filteredResults.map(item => {
                             return(
-                                <div onClick={() => addInterest(item)} key={item} className="tinder__content-setting-result-item">
+                                <div onClick={() => addInterest(item)} key={item} className="content-setting-result-item">
                                     {item}
-                                    <div className="tinder__content-setting-result-item-plus"></div>
+                                    <div className="content-setting-result-item-plus"></div>
                                 </div>
                             )
                         })}
                     </div>
                 </div>
-                <div className="tinder__content-setting-interests-title">Your interests</div>
-                <div className="tinder__content-setting-interests">
+                <div className="content-setting-interests-title">Your interests</div>
+                <div className="content-setting-interests">
                     {interests.map(item => {
                         return(
-                            <div onClick={() => deleteInterest(item)} key={item} className="tinder__content-setting-interests-item">
+                            <div onClick={() => deleteInterest(item)} key={item} className="content-setting-interests-item">
                                 {item}
-                                <div className="tinder__content-setting-interests-item-xmark"></div>
+                                <div className="content-setting-interests-item-xmark"></div>
                             </div>
                         )
                     })}
                 </div>
-                <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="tinder__pairs-popup-setting-show-all tinder__pairs-popup-show-all">Show all</div>
+                <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="pairs-popup-setting-show-all pairs-popup-show-all">Show all</div>
             </div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="tinder__content-setting-submit-button tinder__content-setting-submit-button--no-border-bottom">
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content-setting-submit-button content-setting-submit-button--no-border-bottom">
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings('interests', interests)} className="tinder__content-setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings('interests', interests)} className="content-setting-submit-button">
                 Update my interests
             </button>
         </div>

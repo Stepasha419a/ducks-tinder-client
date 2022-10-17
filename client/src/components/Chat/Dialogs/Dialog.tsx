@@ -34,13 +34,13 @@ const Dialog: React.FC<DialogInterface> = ({dialog, dialogCompanionId, socket, c
     }, [dialogCompanionId, dispatch])
 
     return(
-        <div onClick={() => connect(dialog._id)} className={`tinder__info-content-dialogs-item${currentDialogId === dialog._id ? ' tinder__info-content-dialogs-item--active': ''}`}>
-            <Avatar otherUserId={dialogCompanionId} imageExtraClassName={'tinder__info-content-dialogs-item-photo'} />
-            <div className="tinder__info-content-dialogs-item-descr">
-                <div className="tinder__info-content-dialogs-item-descr-name">
+        <div onClick={() => connect(dialog._id)} className={`info-content-dialogs-item${currentDialogId === dialog._id ? ' info-content-dialogs-item--active': ''}`}>
+            <Avatar otherUserId={dialogCompanionId} imageExtraClassName={'info-content-dialogs-item-photo'} />
+            <div className="info-content-dialogs-item-descr">
+                <div className="info-content-dialogs-item-descr-name">
                     {dialogPartner.name}
                 </div>
-                <div className="tinder__info-content-dialogs-item-descr-message">
+                <div className="info-content-dialogs-item-descr-message">
                     {dialog.messages.length 
                     ? 
                     dialog.messages[dialog.messages.length - 1]?.userId === dialogPartner._id 

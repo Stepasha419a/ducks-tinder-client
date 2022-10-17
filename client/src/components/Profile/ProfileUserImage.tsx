@@ -11,26 +11,26 @@ interface ProfileUserImagePropsInterface{
 const ProfileUserImage: React.FC<ProfileUserImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
     return(
         <>
-            <div className="tinder__content-slider">
+            <div className="content-slider">
                 <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id}/>
             </div>
-            <div className="tinder__content-info tinder__content-info--profile">
-                <div className="tinder__content-info-descr">
-                    <div className="tinder__content-info-descr-name">
+            <div className="content-info content-info--profile">
+                <div className="content-info-descr">
+                    <div className="content-info-descr-name">
                         {currentUser.name}
-                        <span className="tinder__content-info-descr-years">
+                        <span className="content-info-descr-years">
                             {currentUser.age}
                         </span>
                     </div>
-                    <div className="tinder__content-info-descr-sex">
-                        <FontAwesomeIcon icon={faUser}  className="tinder__content-info-descr-sex-icon"/>
+                    <div className="content-info-descr-sex">
+                        <FontAwesomeIcon icon={faUser}  className="content-info-descr-sex-icon"/>
                         {currentUser.sex}
                     </div>
                 </div>
-                <hr className="tinder__content-info-separator"/>
-                <div className="tinder__content-change-info-wrapper">
-                    <button onClick={() => setIsImageSetting(true)} className="tinder__content-change-info">
-                        <span className="tinder__content-change-info-text">Edit Info</span>
+                <hr className="content-info-separator"/>
+                <div className="content-change-info-wrapper">
+                    <button onClick={() => setIsImageSetting(true)} className="content-change-info">
+                        <span className="content-change-info-text">Edit Info</span>
                     </button>
                 </div>
             </div>

@@ -39,18 +39,18 @@ const Profile = () => {
 
     return (
         <div className="tinder">
-            <aside className="tinder__info tinder__info--gray">
-                <div className="tinder__info-user">
-                    <Link className="tinder__info-main-link" to='/'>
+            <aside className="info info--gray">
+                <div className="info-user">
+                    <Link className="info-main-link" to='/'>
                         <FontAwesomeIcon icon={faFireFlameCurved}/>
                     </Link>
-                    <div className="tinder__info-review">
-                        <Link className="tinder__info-review-link" to='#'>
+                    <div className="info-review">
+                        <Link className="info-review-link" to='#'>
                             <FontAwesomeIcon icon={faBriefcase} />
                         </Link>
                     </div>
-                    <div className="tinder__info-work-mode">
-                        <Link className="tinder__info-work-mode-link" to='#'>
+                    <div className="info-work-mode">
+                        <Link className="info-work-mode-link" to='#'>
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </Link>
                     </div>
@@ -80,8 +80,8 @@ const Profile = () => {
                     />
                 }
             </aside>
-            <div className="tinder__content">
-                <div className="tinder__content-user tinder__content-user--profile">
+            <div className="content">
+                <div className="content-user content-user--profile">
                 {isImageSetting ?
                     <ProfileImageSetting 
                         setIsImageSetting={setIsImageSetting}
@@ -96,13 +96,13 @@ const Profile = () => {
                 </div>
             </div>
             {notifications.length ? 
-            <div className='tinder__notifications'>
+            <div className='notifications'>
                 {notifications.map(item => {
                     return(
-                        <div onClick={() => closeNotification(item.id)} key={item.id} className={`tinder__notification${item.type === 'error' ? ' tinder__notification--error' : ''}`}>
+                        <div onClick={() => closeNotification(item.id)} key={item.id} className={`notification${item.type === 'error' ? ' notification--error' : ''}`}>
                             {item.text}
-                            <div className={`tinder__notification-mark${item.type === 'error' ? ' tinder__notification-mark--error' : ''}`}></div>
-                            <div className="tinder__notification-close">click to close</div>
+                            <div className={`notification-mark${item.type === 'error' ? ' notification-mark--error' : ''}`}></div>
+                            <div className="notification-close">click to close</div>
                         </div>
                     )
                 })

@@ -37,11 +37,11 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
     }
 
     return(
-        <div className="tinder__popup tinder__crop">
-            <div className="tinder__popup-body tinder__crop-body">
-                <div className="tinder__popup-content tinder__crop-content">
-                    <div className="tinder__crop-title">Redact photo</div>
-                    <div className="tinder__crop-image">
+        <div className="popup crop">
+            <div className="popup-body crop-body">
+                <div className="popup-content crop-content">
+                    <div className="crop-title">Redact photo</div>
+                    <div className="crop-image">
                         <Cropper
                             image={imageURL}
                             crop={crop}
@@ -54,8 +54,8 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                             onCropComplete={cropComplete}
                         />
                     </div>
-                    <div className="tinder__crop-inputs">
-                        <div className="tinder__crop-input-range">
+                    <div className="crop-inputs">
+                        <div className="crop-input-range">
                             <InputRange
                                 step={0.01}
                                 draggableTrack={false}
@@ -67,11 +67,11 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                             />
                         </div>
                     </div>
-                    <div className="tinder__crop-btns">
-                        <button onClick={() => setIsImageCropOpen(false)} className="tinder__crop-button">
+                    <div className="crop-btns">
+                        <button onClick={() => setIsImageCropOpen(false)} className="crop-button">
                             Cancel
                         </button>
-                        <button onClick={() => cropImage(currentUser._id, currentImageCrop)} className="tinder__crop-button tinder__crop-button--select">
+                        <button onClick={() => cropImage(currentUser._id, currentImageCrop)} className="crop-button crop-button--select">
                             Select
                         </button>
                     </div>

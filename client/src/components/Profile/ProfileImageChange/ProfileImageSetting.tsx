@@ -14,16 +14,16 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({setIs
     const [isFullPreviewPageSetting, setIsFullPreviewPageSetting] = useState(false)
 
     return(
-        <div className="tinder__content-change">
+        <div className="content-change">
             {isFullPreviewPageSetting ?
                 <ProfileFullPreview currentUser={currentUser} setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}/>
             :
             <>
-                <div className="tinder__content-change-btns">
-                    <button onClick={() => setIsPreviewSetting(false)} className={`tinder__content-change-button tinder__content-change-button--border ${!isPreviewSetting ? 'tinder__content-change-button--active' : ''}`}>Change</button>
-                    <button onClick={() => setIsPreviewSetting(true)} className={`tinder__content-change-button  ${isPreviewSetting ? 'tinder__content-change-button--active' : ''}`}>Preview</button>
+                <div className="content-change-btns">
+                    <button onClick={() => setIsPreviewSetting(false)} className={`content-change-button content-change-button--border ${!isPreviewSetting ? 'content-change-button--active' : ''}`}>Change</button>
+                    <button onClick={() => setIsPreviewSetting(true)} className={`content-change-button  ${isPreviewSetting ? 'content-change-button--active' : ''}`}>Preview</button>
                 </div>
-                <div className="tinder__content-change-panel">
+                <div className="content-change-panel">
                     {isPreviewSetting ?
                         <ProfilePreview currentUser={currentUser} setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}/>
                     :

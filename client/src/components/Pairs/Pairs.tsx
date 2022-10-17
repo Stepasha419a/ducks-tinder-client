@@ -82,30 +82,30 @@ const Pairs: React.FC = () => {
     }
 
     return(
-        <div className="tinder__pairs">
-            <div className="tinder__pairs-likes">
-                <FontAwesomeIcon icon={faHeartCircleExclamation} className="tinder__pairs-likes-icon"/>
+        <div className="pairs">
+            <div className="pairs-likes">
+                <FontAwesomeIcon icon={faHeartCircleExclamation} className="pairs-likes-icon"/>
                 &nbsp;{currentUser.pairs.length} likes
             </div>
-            <div className="tinder__pairs-settings">
-                <div onClick={() => setIsSortPopupOpen(true)} className="tinder__pairs-setting">
+            <div className="pairs-settings">
+                <div onClick={() => setIsSortPopupOpen(true)} className="pairs-setting">
                     <FontAwesomeIcon icon={faSliders}/>
                 </div>
                 {interestsForLoop.map(item => {
                     return(
-                        <div onClick={() => {pairSorts.interests.includes(item) ? deleteSort(item, 'interests') : addSort(item, 'interests')}} key={item} className={`tinder__pairs-setting${pairSorts.interests.includes(item) ? ' tinder__pairs-setting--sort' : ''}`}>
+                        <div onClick={() => {pairSorts.interests.includes(item) ? deleteSort(item, 'interests') : addSort(item, 'interests')}} key={item} className={`pairs-setting${pairSorts.interests.includes(item) ? ' pairs-setting--sort' : ''}`}>
                             {item}
                         </div>
                     )
                 })}
-                <div onClick={() => {pairSorts.account.includes('have interests') ? deleteSort('have interests', 'account') : addSort('have interests', 'account')}} className={`tinder__pairs-setting${pairSorts.account.includes('have interests') ? ' tinder__pairs-setting--sort' : ''}`}>
+                <div onClick={() => {pairSorts.account.includes('have interests') ? deleteSort('have interests', 'account') : addSort('have interests', 'account')}} className={`pairs-setting${pairSorts.account.includes('have interests') ? ' pairs-setting--sort' : ''}`}>
                     have interests
                 </div>
             </div>
             <div 
                 ref={userPairsRef} 
                 style={{paddingLeft: `${pairsPaddingWidth}px`, paddingRight: `${pairsPaddingWidth}px`}} 
-                className="tinder__pairs-users"
+                className="pairs-users"
             >
                 {pairsState.length && pairsState.map((user: IUser) => {
                     const isValid = sortItemBySettings(user, pairSorts)

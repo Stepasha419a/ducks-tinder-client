@@ -28,40 +28,40 @@ const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId, image
 
     if(!Array.isArray(images) || images.length <= 0 || images[0] === '') {
         return (
-            <div className="tinder__image-slider">
-                <div style={{backgroundImage: `url(${defaultUserPhoto})`}} className={`tinder__image-slider-item tinder__image-slider-item--default ${imageExtraClassName}`}></div>
+            <div className="image-slider">
+                <div style={{backgroundImage: `url(${defaultUserPhoto})`}} className={`image-slider-item image-slider-item--default ${imageExtraClassName}`}></div>
             </div>
         )
     }
 
     return(
-        <div className="tinder__image-slider">
-            <div className="tinder__slider-stripes">
+        <div className="image-slider">
+            <div className="slider-stripes">
                 {stripesArray.map(stripe => {
                     return(
-                        <div key={stripe} className={`tinder__slider-stripe${stripe === current ? ' tinder__slider-stripe--active' : ''}`}></div>
+                        <div key={stripe} className={`slider-stripe${stripe === current ? ' slider-stripe--active' : ''}`}></div>
                     )
                 })}
             </div>
-            <div className="tinder__image-slider-arrows">
+            <div className="image-slider-arrows">
                 {current === 0 ? null :
-                <div onClick={prevSlide} className="tinder__image-slider-left-arrow-wrapper">
-                    <FontAwesomeIcon icon={faAngleLeft} className="tinder__image-slider-left-arrow"/>
+                <div onClick={prevSlide} className="image-slider-left-arrow-wrapper">
+                    <FontAwesomeIcon icon={faAngleLeft} className="image-slider-left-arrow"/>
                 </div>
                 }
                 {current === length - 1 ? null :
-                <div onClick={nextSlide} className="tinder__image-slider-rigth-arrow-wrapper">
-                    <FontAwesomeIcon icon={faAngleRight} className="tinder__image-slider-right-arrow"/>
+                <div onClick={nextSlide} className="image-slider-rigth-arrow-wrapper">
+                    <FontAwesomeIcon icon={faAngleRight} className="image-slider-right-arrow"/>
                 </div>
                 }
             </div>
 
             {images.map((imageName, index) => {
                 return(
-                    <div key={index} className={index === current ? 'tinder__image-slider-item-wrapper--active' : 'tinder__image-slider-item-wrapper--hidden'}>
+                    <div key={index} className={index === current ? 'image-slider-item-wrapper--active' : 'image-slider-item-wrapper--hidden'}>
                         <div
                             style={{backgroundImage: `url(http://localhost:5000/${userId}/${index > 0 ? 'gallery' : 'avatar'}/${imageName})`}} 
-                            className={`tinder__image-slider-item${' ' + imageExtraClassName}`}>
+                            className={`image-slider-item${' ' + imageExtraClassName}`}>
                         </div>
                     </div>
                 )

@@ -14,28 +14,28 @@ interface DescriptionSettingProps {
 
 const DescriptionSetting: React.FC<DescriptionSettingProps> = ({ submitSettings, inputValueDirty, inputValueError, inputHandler, setInputValueDirty, inputValue, isFormCloseable, cancelHandler, isFormValid }) => {
     return (
-        <div className="tinder__content-setting">
+        <div className="content-setting">
             {inputValueDirty &&
-                <div className="tinder__content-setting-name tinder__content-setting-name--error">
+                <div className="content-setting-name content-setting-name--error">
                     {inputValueError}
                 </div>
             }
-            <div className="tinder__content-setting-name">
+            <div className="content-setting-name">
                 Description
             </div>
-            <div className="tinder__content-setting-change">
+            <div className="content-setting-change">
                 <textarea 
                     onChange={(e) => inputHandler(e)} 
                     onBlur={(() => setInputValueDirty(true))} 
                     value={inputValue} 
-                    className="tinder__content-setting-change-input tinder__content-setting-change-textarea"
+                    className="content-setting-change-input content-setting-change-textarea"
                 />
             </div>
-            <div className="tinder__content-setting-descr">Your description</div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="tinder__content-setting-submit-button tinder__content-setting-submit-button--no-border-bottom">
+            <div className="content-setting-descr">Your description</div>
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content-setting-submit-button content-setting-submit-button--no-border-bottom">
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings('description', inputValue)} className="tinder__content-setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings('description', inputValue)} className="content-setting-submit-button">
                 Update my description
             </button>
         </div>

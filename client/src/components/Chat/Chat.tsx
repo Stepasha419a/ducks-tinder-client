@@ -66,30 +66,30 @@ const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
     }
 
     return(
-        <div className="tinder__chat">
+        <div className="chat">
             {isConnected ?
-                <div className="tinder__chat-container">
-                    <div className="tinder__chat-messages">
+                <div className="chat-container">
+                    <div className="chat-messages">
                         {messages.map((message: MessageInterface) => 
                             userMembers.length ? 
                                 <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)} currentUserId={currentUser._id}/> 
                             : 
                                 <div key={message.id}>loading message...</div>
                         )}
-                        <div ref={bottomElementRef} className="tinder__chat-messages-end-ref"></div>
+                        <div ref={bottomElementRef} className="chat-messages-end-ref"></div>
                     </div>
-                    <div className="tinder__chat-form-wrapper">
-                        <div className="tinder__chat-form">
-                            <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="tinder__chat-form-input" type="text" />
-                            <button onClick={sendMessage} className="tinder__chat-form-button">send</button>
+                    <div className="chat-form-wrapper">
+                        <div className="chat-form">
+                            <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="chat-form-input" type="text" />
+                            <button onClick={sendMessage} className="chat-form-button">send</button>
                         </div>
                     </div>
                 </div>
             :
-                <div className="tinder__chat-no-dialogs">
-                    <div className="tinder__chat-no-dialogs-inner">
-                        <FontAwesomeIcon icon={faMessage} className="tinder__chat-no-dialogs-icon"/>
-                        <div className="tinder__chat-no-dialogs-text">
+                <div className="chat-no-dialogs">
+                    <div className="chat-no-dialogs-inner">
+                        <FontAwesomeIcon icon={faMessage} className="chat-no-dialogs-icon"/>
+                        <div className="chat-no-dialogs-text">
                             Choose the dialog
                         </div>
                     </div>

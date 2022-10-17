@@ -27,16 +27,16 @@ const Avatar: React.FC<AvatarInterface> = ({otherUserId, imageExtraClassName, sh
     }, [otherUserId, avatarUrl, dispatch])
 
     if((otherUserId && !otherUser?.pictures?.avatar) || (!currentUser.pictures.avatar && !otherUser && otherUserId) || (!currentUser.pictures.avatar && !otherUserId) || showDefaultPhoto) {
-        return <div style={{backgroundImage: `url(${defaultPhoto})`}} className={`tinder__info-user-photo ${imageExtraClassName}`}></div>
+        return <div style={{backgroundImage: `url(${defaultPhoto})`}} className={`info-user-photo ${imageExtraClassName}`}></div>
     }
 
     return(
         <div>
             {otherUser ?
-                <div style={{backgroundImage: `url(http://localhost:5000/${otherUser._id}/avatar/${otherUser.pictures?.avatar})`}} className={`tinder__info-user-photo ${imageExtraClassName}`}></div>
+                <div style={{backgroundImage: `url(http://localhost:5000/${otherUser._id}/avatar/${otherUser.pictures?.avatar})`}} className={`info-user-photo ${imageExtraClassName}`}></div>
             :
             currentUser &&
-                <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} className={`tinder__info-user-photo ${imageExtraClassName}`}></div>
+                <div style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/avatar/${currentUser.pictures.avatar})`}} className={`info-user-photo ${imageExtraClassName}`}></div>
             }
         </div>
     )

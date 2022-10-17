@@ -21,7 +21,7 @@ const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
     }, [currentUser._id, dispatch])
 
     return (
-        <div className="tinder__info-content-dialogs">
+        <div className="info-content-dialogs">
             {dialogs ? dialogs.map((dialog: IDialog) => {
                 const dialogCompanionId = dialog.members.find((memberId: string) => memberId !== currentUser._id)
                 return (
