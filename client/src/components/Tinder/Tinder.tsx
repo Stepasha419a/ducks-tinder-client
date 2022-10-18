@@ -41,8 +41,8 @@ const Tinder: React.FC = () => {
 
     return(
         <div className="content">
-            <button onClick={() => resetHandler()} className="content-reset">reset</button>
-            <div className="content-users">
+            <button onClick={() => resetHandler()} className="content__reset">reset</button>
+            <div className="content__users">
                 {isFullPreview ?
                 <>
                     <TinderFullPreview currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview}/>
@@ -55,7 +55,7 @@ const Tinder: React.FC = () => {
                 </>
                 }
             </div>
-            <div className="content-instructions">
+            <div className="content__instructions">
 
             </div>
         </div>

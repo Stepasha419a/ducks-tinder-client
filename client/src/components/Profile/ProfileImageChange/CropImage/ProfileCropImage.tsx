@@ -38,10 +38,10 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
 
     return(
         <div className="popup crop">
-            <div className="popup-body crop-body">
-                <div className="popup-content crop-content">
-                    <div className="crop-title">Redact photo</div>
-                    <div className="crop-image">
+            <div className="popup__body crop__body">
+                <div className="popup__content crop__content">
+                    <div className="crop__title">Redact photo</div>
+                    <div className="crop__image">
                         <Cropper
                             image={imageURL}
                             crop={crop}
@@ -54,8 +54,8 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                             onCropComplete={cropComplete}
                         />
                     </div>
-                    <div className="crop-inputs">
-                        <div className="crop-input-range">
+                    <div className="crop__inputs">
+                        <div className="crop__input-range">
                             <InputRange
                                 step={0.01}
                                 draggableTrack={false}
@@ -67,11 +67,11 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                             />
                         </div>
                     </div>
-                    <div className="crop-btns">
-                        <button onClick={() => setIsImageCropOpen(false)} className="crop-button">
+                    <div className="crop__btns">
+                        <button onClick={() => setIsImageCropOpen(false)} className="crop__button">
                             Cancel
                         </button>
-                        <button onClick={() => cropImage(currentUser._id, currentImageCrop)} className="crop-button crop-button--select">
+                        <button onClick={() => cropImage(currentUser._id, currentImageCrop)} className="crop__button crop__button--select">
                             Select
                         </button>
                     </div>

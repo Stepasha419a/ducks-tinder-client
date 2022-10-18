@@ -39,18 +39,18 @@ const Profile = () => {
 
     return (
         <div className="tinder">
-            <aside className="info info--gray">
-                <div className="info-user">
-                    <Link className="info-main-link" to='/'>
+            <aside className="info info__-gray">
+                <div className="info__user">
+                    <Link className="info__main-link" to='/'>
                         <FontAwesomeIcon icon={faFireFlameCurved}/>
                     </Link>
-                    <div className="info-review">
-                        <Link className="info-review-link" to='#'>
+                    <div className="info__review">
+                        <Link className="info__review-link" to='#'>
                             <FontAwesomeIcon icon={faBriefcase} />
                         </Link>
                     </div>
-                    <div className="info-work-mode">
-                        <Link className="info-work-mode-link" to='#'>
+                    <div className="info__work-mode">
+                        <Link className="info__work-mode-link" to='#'>
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </Link>
                     </div>
@@ -81,7 +81,7 @@ const Profile = () => {
                 }
             </aside>
             <div className="content">
-                <div className="content-user content-user--profile">
+                <div className="content__user content__user--profile">
                 {isImageSetting ?
                     <ProfileImageSetting 
                         setIsImageSetting={setIsImageSetting}
@@ -101,8 +101,8 @@ const Profile = () => {
                     return(
                         <div onClick={() => closeNotification(item.id)} key={item.id} className={`notification${item.type === 'error' ? ' notification--error' : ''}`}>
                             {item.text}
-                            <div className={`notification-mark${item.type === 'error' ? ' notification-mark--error' : ''}`}></div>
-                            <div className="notification-close">click to close</div>
+                            <div className={`notification__mark${item.type === 'error' ? ' notification__mark--error' : ''}`}></div>
+                            <div className="notification__close">click to close</div>
                         </div>
                     )
                 })

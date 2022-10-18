@@ -83,67 +83,67 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
     }
 
     return(
-        <div className="settings-groups">
-            <div className="settings-group">
-                <div className="settings-group-title">
+        <div className="settings__groups">
+            <div className="settings__group">
+                <div className="settings__group-title">
                     Account Settings
                 </div>
-                <div className="settings-group-items">
-                    <div onClick={() => setSettingInput('Email', 'email')} className="settings-group-item settings-group-item--pointer">
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                <div className="settings__group-items">
+                    <div onClick={() => setSettingInput('Email', 'email')} className="settings__group-item settings__group-item--pointer">
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Email
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 {currentUser.email}
-                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings__group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Name', 'name')} className="settings-group-item settings-group-item--pointer">
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Name', 'name')} className="settings__group-item settings__group-item--pointer">
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Name
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 {currentUser.name}
-                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings__group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Description', 'description')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('description') ? ' settings-group-item--error' : ''}`}>
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Description', 'description')} className={`settings__group-item settings__group-item--pointer${errorFields.includes('description') ? ' settings__group-item--error' : ''}`}>
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Description
                             </div>
-                            <div className="settings-group-item-descr-setting settings-group-item-descr-setting--text-overflow">
+                            <div className="settings__group-item-descr-setting settings__group-item-descr-setting--text-overflow">
                                 {currentUser.description || "Empty description"}
-                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings__group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Sex', 'sex')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('sex') ? ' settings-group-item--error' : ''}`}>
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Sex', 'sex')} className={`settings__group-item settings__group-item--pointer${errorFields.includes('sex') ? ' settings__group-item--error' : ''}`}>
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Sex
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 {currentUser.sex || 'Empty sex'}
-                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings__group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div className="settings-group-item">
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                    <div className="settings__group-item">
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Age
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 {currentAgeSetting} years old
                             </div>
                         </div>
-                        <div className="settings-group-item-setting">
-                            <div className="settings-group-item-setting-change-slider">
+                        <div className="settings__group-item-setting">
+                            <div className="settings__group-item-setting-change-slider">
                                 <InputRange
                                     step={1}
                                     draggableTrack={false}
@@ -158,48 +158,48 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                         </div>
                     </div>
                 </div>
-                <div className="settings-group-descr">
+                <div className="settings__group-descr">
                     Verified email adress helps to protect your account
                 </div>
             </div>
-            <div className="settings-group">
-                <div className="settings-group-title">
+            <div className="settings__group">
+                <div className="settings__group-title">
                     Find Settings
                 </div>
-                <div className="settings-group-items">
-                    <div onClick={() => setSettingInput('Interests', 'interests')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('interests') ? ' settings-group-item--error' : ''}`}>
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                <div className="settings__group-items">
+                    <div onClick={() => setSettingInput('Interests', 'interests')} className={`settings__group-item settings__group-item--pointer${errorFields.includes('interests') ? ' settings__group-item--error' : ''}`}>
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Interests
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                             {!currentUser.interests.length ? "Empty interests" : `${currentUser.interests[0]} and so on...`}
-                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings__group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Place', 'place', 'partnerSettings')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('place') ? ' settings-group-item--error' : ''}`}>
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Place', 'place', 'partnerSettings')} className={`settings__group-item settings__group-item--pointer${errorFields.includes('place') ? ' settings__group-item--error' : ''}`}>
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Place
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 {currentUser.partnerSettings.place || 'Empty place'}
-                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings__group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div className={`settings-group-item${errorFields.includes('distance') ? ' settings-group-item--error' : ''}`}>
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                    <div className={`settings__group-item${errorFields.includes('distance') ? ' settings__group-item--error' : ''}`}>
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Distance
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 {currentDistanceSetting || 'Empty distance'} км.
                             </div>
                         </div>
-                        <div className="settings-group-item-setting">
-                            <div className="settings-group-item-setting-change-slider">
+                        <div className="settings__group-item-setting">
+                            <div className="settings__group-item-setting-change-slider">
                                 <InputRange
                                     step={1}
                                     draggableTrack={false}
@@ -211,45 +211,45 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                                     onChangeComplete={() => submitSettings('distance', currentDistanceSetting, 'partnerSettings')}
                                 />
                             </div>
-                            <div className="settings-group-item-setting-descr settings-group-item-setting-descr--relative">
+                            <div className="settings__group-item-setting-descr settings__group-item-setting-descr--relative">
                                 Show people only in this range
 
-                                <label className="settings-group-item-setting-checkbox">
+                                <label className="settings__group-item-setting-checkbox">
                                     <input 
                                         checked={currentUser.partnerSettings.usersOnlyInDistance}
                                         onChange={(e) => submitSettings('usersOnlyInDistance', e.target.checked, 'partnerSettings')} 
                                         type="checkbox" 
-                                        className="settings-group-item-setting-checkbox-input"
+                                        className="settings__group-item-setting-checkbox-input"
                                     />
-                                    <div className="settings-group-item-setting-checkbox-div">
+                                    <div className="settings__group-item-setting-checkbox-div">
 
                                     </div>
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div onClick={() => setSettingInput('Interested in', 'preferSex', 'partnerSettings')} className={`settings-group-item settings-group-item--pointer${errorFields.includes('preferSex') ? ' settings-group-item--error' : ''}`}>
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                    <div onClick={() => setSettingInput('Interested in', 'preferSex', 'partnerSettings')} className={`settings__group-item settings__group-item--pointer${errorFields.includes('preferSex') ? ' settings__group-item--error' : ''}`}>
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Interested in
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 {currentUser.partnerSettings.preferSex || 'empty sex prefer'}
-                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings__group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
-                    <div className="settings-group-item">
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                    <div className="settings__group-item">
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Partner age
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 from {ageSetting.min} to {ageSetting.max}
                             </div>
                         </div>
-                        <div className="settings-group-item-setting">
-                            <div className="settings-group-item-setting-change-slider">
+                        <div className="settings__group-item-setting">
+                            <div className="settings__group-item-setting-change-slider">
                                 <InputRange
                                     step={1}
                                     draggableTrack={false}
@@ -264,80 +264,80 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                         </div>
                     </div>
                 </div>
-                <div className="settings-group-descr">
+                <div className="settings__group-descr">
                     When the local profiles are over, you will be able to 
                     switch to the Global Mode for dating people from all over the world.
                 </div>
             </div>
-            <div className="settings-group">
-                <div className="settings-group-title">
+            <div className="settings__group">
+                <div className="settings__group-title">
                     Internet account
                 </div>
-                <div className="settings-group-items">
-                    <div onClick={() => setSettingInput('Nickname', 'nickname')} className="settings-group-item settings-group-item--pointer">
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title">
+                <div className="settings__group-items">
+                    <div onClick={() => setSettingInput('Nickname', 'nickname')} className="settings__group-item settings__group-item--pointer">
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title">
                                 Nickname
                             </div>
-                            <div className="settings-group-item-descr-setting">
+                            <div className="settings__group-item-descr-setting">
                                 {currentUser.nickname || 'unknown'}
-                                <FontAwesomeIcon icon={faAngleRight} className="settings-group-item-descr-setting-open-icon" />
+                                <FontAwesomeIcon icon={faAngleRight} className="settings__group-item-descr-setting-open-icon" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="settings-group-descr">
+                <div className="settings__group-descr">
                     Create a username, share it and start searching for couples on Tinder around the world.
                 </div>
             </div>
-            <div className="settings-group">
-                <div className="settings-group-title">
+            <div className="settings__group">
+                <div className="settings__group-title">
                     Safety Tips
                 </div>
-                <div className="settings-group-items">
-                    <div className="settings-group-item settings-group-item--link">
-                        <Link to="/policy" className="settings-group-item-link" target="_blank" >
-                            <div className="settings-group-item-descr">
-                                <div className="settings-group-item-descr-title settings-group-item-descr-title--link">
+                <div className="settings__group-items">
+                    <div className="settings__group-item settings__group-item--link">
+                        <Link to="/policy" className="settings__group-item-link" target="_blank" >
+                            <div className="settings__group-item-descr">
+                                <div className="settings__group-item-descr-title settings__group-item-descr-title--link">
                                     Community Rules
                                 </div>
-                                <div className="settings-group-item-descr-setting">
-                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings-group-item-descr-setting-icon" />
+                                <div className="settings__group-item-descr-setting">
+                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings__group-item-descr-setting-icon" />
                                 </div>
                             </div>
                         </Link>
                     </div>
-                    <div className="settings-group-item settings-group-item--link">
-                        <Link to="/policy" className="settings-group-item-link" target="_blank" >
-                            <div className="settings-group-item-descr">
-                                <div className="settings-group-item-descr-title settings-group-item-descr-title--link">
+                    <div className="settings__group-item settings__group-item--link">
+                        <Link to="/policy" className="settings__group-item-link" target="_blank" >
+                            <div className="settings__group-item-descr">
+                                <div className="settings__group-item-descr-title settings__group-item-descr-title--link">
                                     Security and Policy Development Center
                                 </div>
-                                <div className="settings-group-item-descr-setting">
-                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings-group-item-descr-setting-icon" />
+                                <div className="settings__group-item-descr-setting">
+                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings__group-item-descr-setting-icon" />
                                 </div>
                             </div>
                         </Link>
                     </div>
-                    <div className="settings-group-item settings-group-item--link">
-                        <Link to="/policy" className="settings-group-item-link" target="_blank" >
-                            <div className="settings-group-item-descr">
-                                <div className="settings-group-item-descr-title settings-group-item-descr-title--link">
+                    <div className="settings__group-item settings__group-item--link">
+                        <Link to="/policy" className="settings__group-item-link" target="_blank" >
+                            <div className="settings__group-item-descr">
+                                <div className="settings__group-item-descr-title settings__group-item-descr-title--link">
                                     Safety Tips
                                 </div>
-                                <div className="settings-group-item-descr-setting">
-                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings-group-item-descr-setting-icon" />
+                                <div className="settings__group-item-descr-setting">
+                                    <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="settings__group-item-descr-setting-icon" />
                                 </div>
                             </div>
                         </Link>
                     </div>
                 </div>
             </div>
-            <div className="settings-group">
-                <div className="settings-group-items">
-                    <div onClick={() => dispatch(logoutThunk() as any)} className="settings-group-item settings-group-item--sumple-button">
-                        <div className="settings-group-item-descr">
-                            <div className="settings-group-item-descr-title settings-group-item-descr-title--center">
+            <div className="settings__group">
+                <div className="settings__group-items">
+                    <div onClick={() => dispatch(logoutThunk() as any)} className="settings__group-item settings__group-item--sumple-button">
+                        <div className="settings__group-item-descr">
+                            <div className="settings__group-item-descr-title settings__group-item-descr-title--center">
                                 Log out
                             </div>
                         </div>

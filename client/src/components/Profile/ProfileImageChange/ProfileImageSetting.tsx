@@ -14,16 +14,16 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({setIs
     const [isFullPreviewPageSetting, setIsFullPreviewPageSetting] = useState(false)
 
     return(
-        <div className="content-change">
+        <div className="content__change">
             {isFullPreviewPageSetting ?
                 <ProfileFullPreview currentUser={currentUser} setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}/>
             :
             <>
-                <div className="content-change-btns">
-                    <button onClick={() => setIsPreviewSetting(false)} className={`content-change-button content-change-button--border ${!isPreviewSetting ? 'content-change-button--active' : ''}`}>Change</button>
-                    <button onClick={() => setIsPreviewSetting(true)} className={`content-change-button  ${isPreviewSetting ? 'content-change-button--active' : ''}`}>Preview</button>
+                <div className="content__change-btns">
+                    <button onClick={() => setIsPreviewSetting(false)} className={`content__change-button content__change-button--border ${!isPreviewSetting ? 'content__change-button--active' : ''}`}>Change</button>
+                    <button onClick={() => setIsPreviewSetting(true)} className={`content__change-button  ${isPreviewSetting ? 'content__change-button--active' : ''}`}>Preview</button>
                 </div>
-                <div className="content-change-panel">
+                <div className="content__change-panel">
                     {isPreviewSetting ?
                         <ProfilePreview currentUser={currentUser} setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}/>
                     :

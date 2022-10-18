@@ -10,28 +10,28 @@ interface ProfileFullPreviewPropsInterface{
 
 const ProfileFullPreview: React.FC<ProfileFullPreviewPropsInterface> = ({currentUser, setIsFullPreviewPageSetting}) => {
     return(
-        <div className="content-full-preview">
-            <div className="content-full-preview-slider">
-                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName={'image-slider-item--bdrd-top'}/>
-                <button onClick={() => setIsFullPreviewPageSetting(false)} className="content-full-preview-close">
-                    <FontAwesomeIcon icon={faCircleDown} className="content-full-preview-close-icon"/>
+        <div className="content__full-preview">
+            <div className="content__full-preview-slider">
+                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName={'image__slider-item--bdrd-top'}/>
+                <button onClick={() => setIsFullPreviewPageSetting(false)} className="content__full-preview-close">
+                    <FontAwesomeIcon icon={faCircleDown} className="content__full-preview-close-icon"/>
                 </button>
             </div>
-            <div className="content-full-preview-info">
-                <div className="content-full-preview-info-flex">
-                    <div className="content-full-preview-info-name">
+            <div className="content__full-preview-info">
+                <div className="content__full-preview-info-flex">
+                    <div className="content__full-preview-info-name">
                         {currentUser.name}
                     </div>
-                    <div className="content-full-preview-info-years">
+                    <div className="content__full-preview-info-years">
                         {currentUser.age || 'unkown years'}
                     </div>
                 </div>
-                <div className="content-full-preview-info-sex">
-                    <FontAwesomeIcon icon={faUser} className="content-full-preview-info-sex-icon"/>
+                <div className="content__full-preview-info-sex">
+                    <FontAwesomeIcon icon={faUser} className="content__full-preview-info-sex-icon"/>
                     {currentUser.sex ? currentUser.sex[0].toUpperCase() + currentUser.sex.slice(1) : 'unkown sex'}
                 </div>
             </div>
-            <hr className="content-info-separator"/>
+            <hr className="content__info-separator"/>
         </div>
     )
 }

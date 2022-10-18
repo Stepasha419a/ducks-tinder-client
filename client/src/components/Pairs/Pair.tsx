@@ -12,15 +12,15 @@ const Pair: React.FC<PairPropsInterface> = ({user, setCurrentPair}) => {
     }
 
     return(
-        <div onClick={() => setCurrentPair(user)} style={{backgroundImage: `url(${user.pictures.avatar ? `http://localhost:5000/${user._id}/avatar/` + user.pictures.avatar : defaultPhoto})`}} className="pairs-user">
-            <div className="pairs-user-info">
-                <div className="pairs-user-descr">
-                    <div className="pairs-user-name">{user.name}</div>
-                    <div className="pairs-user-years">{user.age}</div>
+        <div onClick={() => setCurrentPair(user)} style={{backgroundImage: `url(${user.pictures.avatar ? `http://localhost:5000/${user._id}/avatar/` + user.pictures.avatar : defaultPhoto})`}} className="pairs__user">
+            <div className="pairs__user-info">
+                <div className="pairs__user-descr">
+                    <div className="pairs__user-name">{user.name}</div>
+                    <div className="pairs__user-years">{user.age}</div>
                 </div>
-                <div className="pairs-user-distance">
+                <div className="pairs__user-distance">
                     {user.partnerSettings?.distance || 'unknown'}
-                    <span className="pairs-user-distance-text">
+                    <span className="pairs__user-distance-text">
                         miles from you
                     </span>
                 </div>

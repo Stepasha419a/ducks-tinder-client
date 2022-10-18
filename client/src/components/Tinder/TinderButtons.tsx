@@ -46,64 +46,64 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
     const btnFocus = (e: FocusEvent<HTMLButtonElement, any>, color: string) => {
         if(currentTinderUsersIndex && isReturn && color === 'gold') {
             const target = e.target as Element;
-            target.classList.add(`content-btn--active-${color}`)
+            target.classList.add(`content__btn--active-${color}`)
         } else if (color !== 'gold'){
             const target = e.target as Element;
-            target.classList.add(`content-btn--active-${color}`)
+            target.classList.add(`content__btn--active-${color}`)
         }
     }
 
     const btnMouseOut = (e: MouseEvent<HTMLButtonElement, any>, color: string) => {
         const target = e.target as HTMLElement;
-        target.classList.remove(`content-btn--active-${color}`)
+        target.classList.remove(`content__btn--active-${color}`)
         target.blur()
     }
 
     return(
         <>
         {isMinimum ?
-            <div className="content-buttons content-buttons--minimized">
-                <button onClick={() => dislikeUser()} onFocus={(e) => btnFocus(e, 'red')} onMouseOut={(e) => btnMouseOut(e, 'red')} className="content-btn content-btn--large content-btn--red content-btn--minimized">
-                    <div className="content-btn-icon-wrapper content-btn-icon-wrapper--large content-btn-icon-wrapper--minimized">
-                        <FontAwesomeIcon icon={faXmark} className="content-btn-icon content-btn-icon--red content-btn-icon--large"/>
+            <div className="content__buttons content__buttons--minimized">
+                <button onClick={() => dislikeUser()} onFocus={(e) => btnFocus(e, 'red')} onMouseOut={(e) => btnMouseOut(e, 'red')} className="content__btn content__btn--large content__btn--red content__btn--minimized">
+                    <div className="content__btn-icon-wrapper content__btn-icon-wrapper--large content__btn-icon-wrapper--minimized">
+                        <FontAwesomeIcon icon={faXmark} className="content__btn-icon content__btn-icon--red content__btn-icon--large"/>
                     </div>
                 </button>
-                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'blue')} onMouseOut={(e) => btnMouseOut(e, 'blue')} className="content-btn content-btn--small content-btn--blue content-btn--minimized">
-                    <div className="content-btn-icon-wrapper content-btn-icon-wrapper--minimized">
-                        <FontAwesomeIcon icon={faStar} className="content-btn-icon content-btn-icon--blue"/>
+                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'blue')} onMouseOut={(e) => btnMouseOut(e, 'blue')} className="content__btn content__btn--small content__btn--blue content__btn--minimized">
+                    <div className="content__btn-icon-wrapper content__btn-icon-wrapper--minimized">
+                        <FontAwesomeIcon icon={faStar} className="content__btn-icon content__btn-icon--blue"/>
                     </div>
                 </button>
-                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'green')} onMouseOut={(e) => btnMouseOut(e, 'green')} className="content-btn content-btn--large content-btn--green content-btn--minimized">
-                    <div className="content-btn-icon-wrapper content-btn-icon-wrapper--large content-btn-icon-wrapper--minimized">
-                        <FontAwesomeIcon icon={faHeart} className="content-btn-icon content-btn-icon--green"/>
+                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'green')} onMouseOut={(e) => btnMouseOut(e, 'green')} className="content__btn content__btn--large content__btn--green content__btn--minimized">
+                    <div className="content__btn-icon-wrapper content__btn-icon-wrapper--large content__btn-icon-wrapper--minimized">
+                        <FontAwesomeIcon icon={faHeart} className="content__btn-icon content__btn-icon--green"/>
                     </div>
                 </button>
             </div>
         :
-            <div className="content-buttons">
-                <button onClick={() => returnUser()} onFocus={(e) => btnFocus(e, 'gold')} onMouseOut={(e) => btnMouseOut(e, 'gold')} className={`content-btn content-btn--small${(currentTinderUsersIndex && isReturn) ? ' content-btn--gold' : ' content-btn--blocked'}`}>
-                    <div className="content-btn-icon-wrapper">
-                        <FontAwesomeIcon icon={faRotateLeft} className={`content-btn-icon ${(currentTinderUsersIndex && isReturn) ? ' content-btn-icon--gold' : ' content-btn-icon--blocked'}`}/>
+            <div className="content__buttons">
+                <button onClick={() => returnUser()} onFocus={(e) => btnFocus(e, 'gold')} onMouseOut={(e) => btnMouseOut(e, 'gold')} className={`content__btn content__btn--small${(currentTinderUsersIndex && isReturn) ? ' content__btn--gold' : ' content__btn--blocked'}`}>
+                    <div className="content__btn-icon-wrapper">
+                        <FontAwesomeIcon icon={faRotateLeft} className={`content__btn-icon ${(currentTinderUsersIndex && isReturn) ? ' content__btn-icon--gold' : ' content__btn-icon--blocked'}`}/>
                     </div>
                 </button>
-                <button onClick={() => dislikeUser()} onFocus={(e) => btnFocus(e, 'red')} onMouseOut={(e) => btnMouseOut(e, 'red')} className="content-btn content-btn--large content-btn--red">
-                    <div className="content-btn-icon-wrapper content-btn-icon-wrapper--large">
-                        <FontAwesomeIcon icon={faXmark} className="content-btn-icon content-btn-icon--red content-btn-icon--large"/>
+                <button onClick={() => dislikeUser()} onFocus={(e) => btnFocus(e, 'red')} onMouseOut={(e) => btnMouseOut(e, 'red')} className="content__btn content__btn--large content__btn--red">
+                    <div className="content__btn-icon-wrapper content__btn-icon-wrapper--large">
+                        <FontAwesomeIcon icon={faXmark} className="content__btn-icon content__btn-icon--red content__btn-icon--large"/>
                     </div>
                 </button>
-                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'blue')} onMouseOut={(e) => btnMouseOut(e, 'blue')} className="content-btn content-btn--small content-btn--blue">
-                    <div className="content-btn-icon-wrapper">
-                        <FontAwesomeIcon icon={faStar} className="content-btn-icon content-btn-icon--blue"/>
+                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'blue')} onMouseOut={(e) => btnMouseOut(e, 'blue')} className="content__btn content__btn--small content__btn--blue">
+                    <div className="content__btn-icon-wrapper">
+                        <FontAwesomeIcon icon={faStar} className="content__btn-icon content__btn-icon--blue"/>
                     </div>
                 </button>
-                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'green')} onMouseOut={(e) => btnMouseOut(e, 'green')} className="content-btn content-btn--large content-btn--green">
-                    <div className="content-btn-icon-wrapper content-btn-icon-wrapper--large">
-                        <FontAwesomeIcon icon={faHeart} className="content-btn-icon content-btn-icon--green"/>
+                <button onClick={() => likeUser()} onFocus={(e) => btnFocus(e, 'green')} onMouseOut={(e) => btnMouseOut(e, 'green')} className="content__btn content__btn--large content__btn--green">
+                    <div className="content__btn-icon-wrapper content__btn-icon-wrapper--large">
+                        <FontAwesomeIcon icon={faHeart} className="content__btn-icon content__btn-icon--green"/>
                     </div>
                 </button>
-                <button onFocus={(e) => btnFocus(e, 'purple')} onMouseOut={(e) => btnMouseOut(e, 'purple')} className="content-btn content-btn--small content-btn--purple">
-                    <div className="content-btn-icon-wrapper">
-                        <FontAwesomeIcon icon={faBolt} className="content-btn-icon content-btn-icon--purple"/>
+                <button onFocus={(e) => btnFocus(e, 'purple')} onMouseOut={(e) => btnMouseOut(e, 'purple')} className="content__btn content__btn--small content__btn--purple">
+                    <div className="content__btn-icon-wrapper">
+                        <FontAwesomeIcon icon={faBolt} className="content__btn-icon content__btn-icon--purple"/>
                     </div>
                 </button>
             </div>

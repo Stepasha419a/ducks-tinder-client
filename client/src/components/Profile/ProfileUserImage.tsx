@@ -11,26 +11,26 @@ interface ProfileUserImagePropsInterface{
 const ProfileUserImage: React.FC<ProfileUserImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
     return(
         <>
-            <div className="content-slider">
+            <div className="content__slider">
                 <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id}/>
             </div>
-            <div className="content-info content-info--profile">
-                <div className="content-info-descr">
-                    <div className="content-info-descr-name">
+            <div className="content__info content__info--profile">
+                <div className="content__info-descr">
+                    <div className="content__info-descr-name">
                         {currentUser.name}
-                        <span className="content-info-descr-years">
+                        <span className="content__info-descr-years">
                             {currentUser.age}
                         </span>
                     </div>
-                    <div className="content-info-descr-sex">
-                        <FontAwesomeIcon icon={faUser}  className="content-info-descr-sex-icon"/>
+                    <div className="content__info-descr-sex">
+                        <FontAwesomeIcon icon={faUser}  className="content__info-descr-sex-icon"/>
                         {currentUser.sex}
                     </div>
                 </div>
-                <hr className="content-info-separator"/>
-                <div className="content-change-info-wrapper">
-                    <button onClick={() => setIsImageSetting(true)} className="content-change-info">
-                        <span className="content-change-info-text">Edit Info</span>
+                <hr className="content__info-separator"/>
+                <div className="content__change-info-wrapper">
+                    <button onClick={() => setIsImageSetting(true)} className="content__change-info">
+                        <span className="content__change-info-text">Edit Info</span>
                     </button>
                 </div>
             </div>

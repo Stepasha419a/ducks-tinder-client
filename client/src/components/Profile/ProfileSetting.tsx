@@ -98,34 +98,34 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
     }
     
     return (
-        <div className="content-setting">
+        <div className="content__setting">
             {inputValueDirty &&
-                <div className="content-setting-name content-setting-name--error">
+                <div className="content__setting-name content__setting-name--error">
                     {inputValueError}
                 </div>
             }
-            <div className="content-setting-name">
+            <div className="content__setting-name">
                 {formName}
             </div>
-            <div className="content-setting-change">
+            <div className="content__setting-change">
                 {(settingInputName === 'preferSex' && innerObjectName === 'partnerSettings') || (settingInputName === 'sex' && innerObjectName === '') ?
 
                     <div>
-                        <div onClick={() => setInputValue('male')} className={"content-setting-change-input-wrapper " + (inputValue === 'male' ? "content-setting-change-input-wrapper--active" : "") }>
-                            <input name={settingInputName} type="radio" value="male" id={settingInputName + '1'} checked={inputValue === 'male'} className="content-setting-change-input-radio"/>
+                        <div onClick={() => setInputValue('male')} className={"content__setting-change-input-wrapper " + (inputValue === 'male' ? "content__setting-change-input-wrapper--active" : "") }>
+                            <input name={settingInputName} type="radio" value="male" id={settingInputName + '1'} checked={inputValue === 'male'} className="content__setting-change-input-radio"/>
                             <label htmlFor={settingInputName + '1'}>
                                 Male
                             </label>
                             {inputValue === 'male' &&
-                            <FontAwesomeIcon icon={faCheck} className="content-setting-change-checked"/>}
+                            <FontAwesomeIcon icon={faCheck} className="content__setting-change-checked"/>}
                         </div>
-                        <div onClick={() => setInputValue('female')} className={"content-setting-change-input-wrapper " + (inputValue === 'female' ? "content-setting-change-input-wrapper--active" : "") }>
-                            <input name={settingInputName} type="radio" value="female"  id={settingInputName + '2'} checked={inputValue === 'female'} className="content-setting-change-input-radio"/>
+                        <div onClick={() => setInputValue('female')} className={"content__setting-change-input-wrapper " + (inputValue === 'female' ? "content__setting-change-input-wrapper--active" : "") }>
+                            <input name={settingInputName} type="radio" value="female"  id={settingInputName + '2'} checked={inputValue === 'female'} className="content__setting-change-input-radio"/>
                             <label htmlFor={settingInputName + '2'}>
                                 Female
                             </label>
                             {inputValue === 'female' &&
-                            <FontAwesomeIcon icon={faCheck} className="content-setting-change-checked"/>}
+                            <FontAwesomeIcon icon={faCheck} className="content__setting-change-checked"/>}
                         </div>
                     </div>
 
@@ -136,15 +136,15 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
                         onBlur={(() => setInputValueDirty(true))} 
                         value={inputValue} 
                         type="text" 
-                        className="content-setting-change-input"
+                        className="content__setting-change-input"
                     />
                 }
             </div>
-            <div className="content-setting-descr">Your {formName}</div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content-setting-submit-button content-setting-submit-button--no-border-bottom">
+            <div className="content__setting-descr">Your {formName}</div>
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content__setting-submit-button content__setting-submit-button--no-border-bottom">
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings(settingInputName, inputValue, innerObjectName)} className="content-setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings(settingInputName, inputValue, innerObjectName)} className="content__setting-submit-button">
                 Update my {formName}
             </button>
         </div>

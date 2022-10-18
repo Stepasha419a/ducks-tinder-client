@@ -14,28 +14,28 @@ interface DescriptionSettingProps {
 
 const DescriptionSetting: React.FC<DescriptionSettingProps> = ({ submitSettings, inputValueDirty, inputValueError, inputHandler, setInputValueDirty, inputValue, isFormCloseable, cancelHandler, isFormValid }) => {
     return (
-        <div className="content-setting">
+        <div className="content__setting">
             {inputValueDirty &&
-                <div className="content-setting-name content-setting-name--error">
+                <div className="content__setting-name content__setting-name--error">
                     {inputValueError}
                 </div>
             }
-            <div className="content-setting-name">
+            <div className="content__setting-name">
                 Description
             </div>
-            <div className="content-setting-change">
+            <div className="content__setting-change">
                 <textarea 
                     onChange={(e) => inputHandler(e)} 
                     onBlur={(() => setInputValueDirty(true))} 
                     value={inputValue} 
-                    className="content-setting-change-input content-setting-change-textarea"
+                    className="content__setting-change-input content__setting-change-textarea"
                 />
             </div>
-            <div className="content-setting-descr">Your description</div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content-setting-submit-button content-setting-submit-button--no-border-bottom">
+            <div className="content__setting-descr">Your description</div>
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content__setting-submit-button content__setting-submit-button--no-border-bottom">
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings('description', inputValue)} className="content-setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings('description', inputValue)} className="content__setting-submit-button">
                 Update my description
             </button>
         </div>

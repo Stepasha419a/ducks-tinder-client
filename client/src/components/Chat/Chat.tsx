@@ -68,28 +68,28 @@ const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
     return(
         <div className="chat">
             {isConnected ?
-                <div className="chat-container">
-                    <div className="chat-messages">
+                <div className="chat__container">
+                    <div className="chat__messages">
                         {messages.map((message: MessageInterface) => 
                             userMembers.length ? 
                                 <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)} currentUserId={currentUser._id}/> 
                             : 
                                 <div key={message.id}>loading message...</div>
                         )}
-                        <div ref={bottomElementRef} className="chat-messages-end-ref"></div>
+                        <div ref={bottomElementRef} className="chat__messages-end-ref"></div>
                     </div>
-                    <div className="chat-form-wrapper">
-                        <div className="chat-form">
-                            <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="chat-form-input" type="text" />
-                            <button onClick={sendMessage} className="chat-form-button">send</button>
+                    <div className="chat__form-wrapper">
+                        <div className="chat__form">
+                            <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="chat__form-input" type="text" />
+                            <button onClick={sendMessage} className="chat__form-button">send</button>
                         </div>
                     </div>
                 </div>
             :
-                <div className="chat-no-dialogs">
-                    <div className="chat-no-dialogs-inner">
-                        <FontAwesomeIcon icon={faMessage} className="chat-no-dialogs-icon"/>
-                        <div className="chat-no-dialogs-text">
+                <div className="chat__no-dialogs">
+                    <div className="chat__no-dialogs-inner">
+                        <FontAwesomeIcon icon={faMessage} className="chat__no-dialogs-icon"/>
+                        <div className="chat__no-dialogs-text">
                             Choose the dialog
                         </div>
                     </div>

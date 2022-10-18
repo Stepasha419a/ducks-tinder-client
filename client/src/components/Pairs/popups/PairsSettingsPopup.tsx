@@ -33,19 +33,19 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({ pairSorts, clea
     }, [pairSorts])
 
     return(
-        <div className="pairs-popup">
-            <div className="pairs-popup-body">
-                <div className="pairs-popup-content">
-                    <div className="pairs-popup-title">Likes filter</div>
-                    <div onClick={() => setIsSortPopupOpen(false)} className="pairs-popup-close"></div>
-                    <div className="pairs-popup-setting">
-                        <div className="pairs-popup-setting-title">
+        <div className="pairs__popup">
+            <div className="pairs__popup-body">
+                <div className="pairs__popup-content">
+                    <div className="pairs__popup-title">Likes filter</div>
+                    <div onClick={() => setIsSortPopupOpen(false)} className="pairs__popup-close"></div>
+                    <div className="pairs__popup-setting">
+                        <div className="pairs__popup-setting-title">
                             Max distantion
                         </div>
-                        <div className="pairs-popup-setting-value">
+                        <div className="pairs__popup-setting-value">
                             {distanceSetting} km
                         </div>
-                        <div className="pairs-popup-setting-change">
+                        <div className="pairs__popup-setting-change">
                             <InputRange
                                 step={1}
                                 draggableTrack={false}
@@ -58,15 +58,15 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({ pairSorts, clea
                             />
                         </div>
                     </div>
-                    <div className="pairs-popup-hr"></div>
-                    <div className="pairs-popup-setting">
-                        <div className="pairs-popup-setting-title">
+                    <div className="pairs__popup-hr"></div>
+                    <div className="pairs__popup-setting">
+                        <div className="pairs__popup-setting-title">
                             Age range
                         </div>
-                        <div className="pairs-popup-setting-value">
+                        <div className="pairs__popup-setting-value">
                             {ageSetting.min} - {ageSetting.max}
                         </div>
-                        <div className="pairs-popup-setting-change">
+                        <div className="pairs__popup-setting-change">
                             <InputRange
                                 step={1}
                                 draggableTrack={false}
@@ -79,72 +79,72 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({ pairSorts, clea
                             />
                         </div>
                     </div>
-                    <div className="pairs-popup-hr"></div>
-                    <div className="pairs-popup-setting">
-                        <div className="pairs-popup-setting-title">
+                    <div className="pairs__popup-hr"></div>
+                    <div className="pairs__popup-setting">
+                        <div className="pairs__popup-setting-title">
                             Min photo's count
                         </div>
-                        <div className="pairs-popup-setting-change pairs-popup-setting-change--flex">
+                        <div className="pairs__popup-setting-change pairs__popup-setting-change--flex">
                             {arrForLoop.map(item => {
                                 return(
-                                    <div onClick={() => setPhotosCountHandler(item)} key={item} className={`pairs-popup-setting-item${photoCount === item ? ' pairs-popup-setting-item--active' : ''}`}>
+                                    <div onClick={() => setPhotosCountHandler(item)} key={item} className={`pairs__popup-setting-item${photoCount === item ? ' pairs__popup-setting-item--active' : ''}`}>
                                         {item}
                                     </div>
                                 )
                             })}
                         </div>
                     </div>
-                    <div className="pairs-popup-hr"></div>
-                    <div className="pairs-popup-setting">
-                        <div className="pairs-popup-setting-title">
+                    <div className="pairs__popup-hr"></div>
+                    <div className="pairs__popup-setting">
+                        <div className="pairs__popup-setting-title">
                             Interests
                         </div>
-                        <div className="pairs-popup-setting-change pairs-popup-setting-change--flex">
+                        <div className="pairs__popup-setting-change pairs__popup-setting-change--flex">
                             {['music', 'travelling', 'movies'].map(item => {
                                 return(
-                                    <div onClick={() => {pairSorts.interests.includes(item) ? deleteSort(item, 'interests') : addSort(item, 'interests')}} key={item} className={`pairs-popup-setting-item${pairSorts.interests.includes(item) ? ' pairs-popup-setting-item--active' : ''}`}>
+                                    <div onClick={() => {pairSorts.interests.includes(item) ? deleteSort(item, 'interests') : addSort(item, 'interests')}} key={item} className={`pairs__popup-setting-item${pairSorts.interests.includes(item) ? ' pairs__popup-setting-item--active' : ''}`}>
                                         {item}
                                     </div>
                                 )
                             })}
                         </div>
-                        <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="pairs-popup-setting-show-all">Show all</div>
+                        <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="pairs__popup-setting-show-all">Show all</div>
                     </div>
-                    <div className="pairs-popup-hr"></div>
-                    <div onClick={() => {pairSorts.account.includes('identify confirmed') ? deleteSort('identify confirmed', 'account') : addSort('identify confirmed', 'account')}} className="pairs-popup-setting pairs-popup-setting--cursor">
-                        <div className="pairs-popup-setting-change pairs-popup-setting-change--checkbox">
-                            <div className="pairs-popup-setting-descr">
+                    <div className="pairs__popup-hr"></div>
+                    <div onClick={() => {pairSorts.account.includes('identify confirmed') ? deleteSort('identify confirmed', 'account') : addSort('identify confirmed', 'account')}} className="pairs__popup-setting pairs__popup-setting--cursor">
+                        <div className="pairs__popup-setting-change pairs__popup-setting-change--checkbox">
+                            <div className="pairs__popup-setting-descr">
                                 Identify confirmed
                             </div>
-                            <label className="pairs-popup-setting-label">
-                                <input checked={pairSorts.account.includes('identify confirmed')} className="pairs-popup-setting-checkbox" type="checkbox" id="pairs-popup-identify-checkbox" />
-                                <div onClick={() => {pairSorts.account.includes('identify confirmed') ? deleteSort('identify confirmed', 'account') : addSort('identify confirmed', 'account')}} className="pairs-popup-setting-label-checked"></div>
+                            <label className="pairs__popup-setting-label">
+                                <input checked={pairSorts.account.includes('identify confirmed')} className="pairs__popup-setting-checkbox" type="checkbox" id="pairs__popup-identify-checkbox" />
+                                <div onClick={() => {pairSorts.account.includes('identify confirmed') ? deleteSort('identify confirmed', 'account') : addSort('identify confirmed', 'account')}} className="pairs__popup-setting-label-checked"></div>
                             </label>
                         </div> 
                     </div>
-                    <div className="pairs-popup-hr"></div>
-                    <div onClick={() => {pairSorts.account.includes('have interests') ? deleteSort('have interests', 'account') : addSort('have interests', 'account')}} className="pairs-popup-setting pairs-popup-setting--cursor">
-                        <div className="pairs-popup-setting-change pairs-popup-setting-change--checkbox">
-                            <div className="pairs-popup-setting-descr">
+                    <div className="pairs__popup-hr"></div>
+                    <div onClick={() => {pairSorts.account.includes('have interests') ? deleteSort('have interests', 'account') : addSort('have interests', 'account')}} className="pairs__popup-setting pairs__popup-setting--cursor">
+                        <div className="pairs__popup-setting-change pairs__popup-setting-change--checkbox">
+                            <div className="pairs__popup-setting-descr">
                                 Have interests
                             </div>
-                            <label className="pairs-popup-setting-label">
-                                <input checked={pairSorts.account.includes('have interests')} className="pairs-popup-setting-checkbox" type="checkbox" id="pairs-popup-identify-checkbox" />
-                                <div onClick={() => {pairSorts.account.includes('have interests') ? deleteSort('have interests', 'account') : addSort('have interests', 'account')}} className="pairs-popup-setting-label-checked"></div>
+                            <label className="pairs__popup-setting-label">
+                                <input checked={pairSorts.account.includes('have interests')} className="pairs__popup-setting-checkbox" type="checkbox" id="pairs__popup-identify-checkbox" />
+                                <div onClick={() => {pairSorts.account.includes('have interests') ? deleteSort('have interests', 'account') : addSort('have interests', 'account')}} className="pairs__popup-setting-label-checked"></div>
                             </label>
                         </div> 
                     </div>
-                    <div className="pairs-popup-hr"></div>
-                    <div className="pairs-popup-buttons">
-                        <button onClick={() => clearSorts()} className="pairs-popup-btn pairs-popup-btn--border">
+                    <div className="pairs__popup-hr"></div>
+                    <div className="pairs__popup-buttons">
+                        <button onClick={() => clearSorts()} className="pairs__popup-btn pairs__popup-btn--border">
                             Clear
                         </button>
-                        <button onClick={() => setIsSortPopupOpen(false)} className="pairs-popup-btn">
+                        <button onClick={() => setIsSortPopupOpen(false)} className="pairs__popup-btn">
                             Confirm
                         </button>
                     </div>
                 </div>
-                <div onClick={() => setIsSortPopupOpen(false)} className="pairs-popup-close-area"></div>
+                <div onClick={() => setIsSortPopupOpen(false)} className="pairs__popup-close-area"></div>
             </div>
         </div>
     )

@@ -68,44 +68,44 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
 
     return(
         <>
-        <div className="content-setting">
-            <div className="content-setting-name content-setting-name--error">
+        <div className="content__setting">
+            <div className="content__setting-name content__setting-name--error">
                 {inputValueError}
             </div>
-            <div className="content-setting-name">
+            <div className="content__setting-name">
                 Interests
             </div>
-            <div className="content-setting-change">
-                <div className="content-setting-search">
-                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="content-setting-search-input" placeholder="type your interest's name here" type="text"/>
-                    <div className="content-setting-result">
+            <div className="content__setting-change">
+                <div className="content__setting-search">
+                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="content__setting-search-input" placeholder="type your interest's name here" type="text"/>
+                    <div className="content__setting-result">
                         {filteredResults.map(item => {
                             return(
-                                <div onClick={() => addInterest(item)} key={item} className="content-setting-result-item">
+                                <div onClick={() => addInterest(item)} key={item} className="content__setting-result-item">
                                     {item}
-                                    <div className="content-setting-result-item-plus"></div>
+                                    <div className="content__setting-result-item-plus"></div>
                                 </div>
                             )
                         })}
                     </div>
                 </div>
-                <div className="content-setting-interests-title">Your interests</div>
-                <div className="content-setting-interests">
+                <div className="content__setting-interests-title">Your interests</div>
+                <div className="content__setting-interests">
                     {interests.map(item => {
                         return(
-                            <div onClick={() => deleteInterest(item)} key={item} className="content-setting-interests-item">
+                            <div onClick={() => deleteInterest(item)} key={item} className="content__setting-interests-item">
                                 {item}
-                                <div className="content-setting-interests-item-xmark"></div>
+                                <div className="content__setting-interests-item-xmark"></div>
                             </div>
                         )
                     })}
                 </div>
-                <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="pairs-popup-setting-show-all pairs-popup-show-all">Show all</div>
+                <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="pairs__popup-setting-show-all pairs__popup-show-all">Show all</div>
             </div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content-setting-submit-button content-setting-submit-button--no-border-bottom">
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content__setting-submit-button content__setting-submit-button--no-border-bottom">
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings('interests', interests)} className="content-setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings('interests', interests)} className="content__setting-submit-button">
                 Update my interests
             </button>
         </div>

@@ -28,40 +28,40 @@ const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId, image
 
     if(!Array.isArray(images) || images.length <= 0 || images[0] === '') {
         return (
-            <div className="image-slider">
-                <div style={{backgroundImage: `url(${defaultUserPhoto})`}} className={`image-slider-item image-slider-item--default ${imageExtraClassName}`}></div>
+            <div className="image__slider">
+                <div style={{backgroundImage: `url(${defaultUserPhoto})`}} className={`image__slider-item image__slider-item--default ${imageExtraClassName}`}></div>
             </div>
         )
     }
 
     return(
-        <div className="image-slider">
-            <div className="slider-stripes">
+        <div className="image__slider">
+            <div className="slider__stripes">
                 {stripesArray.map(stripe => {
                     return(
-                        <div key={stripe} className={`slider-stripe${stripe === current ? ' slider-stripe--active' : ''}`}></div>
+                        <div key={stripe} className={`slider__stripe${stripe === current ? ' slider__stripe--active' : ''}`}></div>
                     )
                 })}
             </div>
-            <div className="image-slider-arrows">
+            <div className="image__slider-arrows">
                 {current === 0 ? null :
-                <div onClick={prevSlide} className="image-slider-left-arrow-wrapper">
-                    <FontAwesomeIcon icon={faAngleLeft} className="image-slider-left-arrow"/>
+                <div onClick={prevSlide} className="image__slider-left-arrow-wrapper">
+                    <FontAwesomeIcon icon={faAngleLeft} className="image__slider-left-arrow"/>
                 </div>
                 }
                 {current === length - 1 ? null :
-                <div onClick={nextSlide} className="image-slider-rigth-arrow-wrapper">
-                    <FontAwesomeIcon icon={faAngleRight} className="image-slider-right-arrow"/>
+                <div onClick={nextSlide} className="image__slider-rigth-arrow-wrapper">
+                    <FontAwesomeIcon icon={faAngleRight} className="image__slider-right-arrow"/>
                 </div>
                 }
             </div>
 
             {images.map((imageName, index) => {
                 return(
-                    <div key={index} className={index === current ? 'image-slider-item-wrapper--active' : 'image-slider-item-wrapper--hidden'}>
+                    <div key={index} className={index === current ? 'image__slider-item-wrapper--active' : 'image__slider-item-wrapper--hidden'}>
                         <div
                             style={{backgroundImage: `url(http://localhost:5000/${userId}/${index > 0 ? 'gallery' : 'avatar'}/${imageName})`}} 
-                            className={`image-slider-item${' ' + imageExtraClassName}`}>
+                            className={`image__slider-item${' ' + imageExtraClassName}`}>
                         </div>
                     </div>
                 )

@@ -10,19 +10,19 @@ interface ProfilePreviewPropsInterface{
 
 const ProfilePreview: React.FC<ProfilePreviewPropsInterface> = ({currentUser, setIsFullPreviewPageSetting}) => {
     return(
-        <div className="content-preview">
+        <div className="content__preview">
             
-            <div className="content-preview-inner">
-                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName={'image-slider-item--bdrd'}/>
-                <div className="content-preview-info">
-                    <div className="content-preview-info-name">
+            <div className="content__preview-inner">
+                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName={'image__slider-item--bdrd'}/>
+                <div className="content__preview-info">
+                    <div className="content__preview-info-name">
                         {currentUser.name} 
                     </div>
-                    <div className="content-preview-info-years">
+                    <div className="content__preview-info-years">
                         {currentUser.age || 'unknown years'}
                     </div>
                 </div>
-                <button onClick={() => setIsFullPreviewPageSetting(true)} className="content-preview-full">
+                <button onClick={() => setIsFullPreviewPageSetting(true)} className="content__preview-full">
                     <FontAwesomeIcon icon={faCircleInfo} />
                 </button>
             </div>

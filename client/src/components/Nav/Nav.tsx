@@ -34,54 +34,54 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
 
     return(
         <aside className="info">
-            <div className="info-user">
-                <Link className="info-user-person" to='/profile'>
+            <div className="info__user">
+                <Link className="info__user-person" to='/profile'>
                     <Avatar />
-                    <div className="info-user-name">
+                    <div className="info__user-name">
                         {currentUser.name}
                     </div>
                 </Link>
-                <div className="info-review">
-                    <Link className="info-review-link" to='#'>
+                <div className="info__review">
+                    <Link className="info__review-link" to='#'>
                         <FontAwesomeIcon icon={faBriefcase} />
                     </Link>
                 </div>
-                <div className="info-work-mode">
-                    <Link className="info-work-mode-link" to='#'>
+                <div className="info__work-mode">
+                    <Link className="info__work-mode-link" to='#'>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </Link>
                 </div>
             </div>
-            <div className="info-content">
-                <div className="info-content-titles">
-                    <Link onClick={() => setIsPairsOpened(true)} className={'info-content-title ' + (isPairsOpened ? 'info-content-title--active' : '')} to='/'>
+            <div className="info__content">
+                <div className="info__content-titles">
+                    <Link onClick={() => setIsPairsOpened(true)} className={'info__content-title ' + (isPairsOpened ? 'info__content-title--active' : '')} to='/'>
                         Pairs
                     </Link>
-                    <Link onClick={() => setIsPairsOpened(false)} className={'info-content-title ' + (!isPairsOpened ? 'info-content-title--active' : '')} to='/chat'>
+                    <Link onClick={() => setIsPairsOpened(false)} className={'info__content-title ' + (!isPairsOpened ? 'info__content-title--active' : '')} to='/chat'>
                         Messages
                     </Link>
                 </div>
-                <div className="info-content-box">
+                <div className="info__content-box">
                     {isPairsOpened ?
-                        currentUser.pairs.length ? firstPair.name ? <div className="info-content-pairs">
-                                <Link className="info-content-pairs-link" to='/pairs'>
-                                    <div style={{backgroundImage: `url(${firstPair.pictures.avatar ? `http://localhost:5000/${firstPair._id}/avatar/` + firstPair.pictures.avatar : defaultPhoto})`}} className="info-content-pairs-box">
-                                        <div className="info-content-pairs-box-likes-count">
+                        currentUser.pairs.length ? firstPair.name ? <div className="info__content-pairs">
+                                <Link className="info__content-pairs-link" to='/pairs'>
+                                    <div style={{backgroundImage: `url(${firstPair.pictures.avatar ? `http://localhost:5000/${firstPair._id}/avatar/` + firstPair.pictures.avatar : defaultPhoto})`}} className="info__content-pairs-box">
+                                        <div className="info__content-pairs-box-likes-count">
                                             {currentUser.pairs.length}
                                         </div>
-                                        <div className="info-content-pairs-box-likes">
+                                        <div className="info__content-pairs-box-likes">
                                             {currentUser.pairs.length} likes
                                         </div>
-                                        <FontAwesomeIcon icon={faHeartCircleExclamation} className="info-content-pairs-box-icon"/>
+                                        <FontAwesomeIcon icon={faHeartCircleExclamation} className="info__content-pairs-box-icon"/>
                                     </div>
                                 </Link>
                             </div>
                             :
                             <div>loading...</div>
                         :
-                            <div className='info-content-no-pairs'>
-                                <FontAwesomeIcon icon={faHeart} className="info-content-no-pairs-icon"/>
-                                <div className="info-content-no-pairs-text">
+                            <div className='info__content-no-pairs'>
+                                <FontAwesomeIcon icon={faHeart} className="info__content-no-pairs-icon"/>
+                                <div className="info__content-no-pairs-text">
                                     You don't have likes. Like someone to have a like too
                                 </div>
                             </div>

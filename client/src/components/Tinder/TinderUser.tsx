@@ -10,24 +10,24 @@ interface TinderUserProps{
 
 const TinderUser: React.FC<TinderUserProps> = ({currentUser, setIsFullPreview}) => {
     return(
-        <div className="content-user">
-            <div className="content-user-slider">
-                <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName="content-user-slider-image"/>
+        <div className="content__user">
+            <div className="content__user-slider">
+                <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName="content__user-slider-image"/>
             </div>
-            <div onClick={() => setIsFullPreview(true)} className="content-user-descr">
-                <div className="content-user-descr-person">
-                    {currentUser.name} <span className="content-user-descr-years">{currentUser.age}</span>
+            <div onClick={() => setIsFullPreview(true)} className="content__user-descr">
+                <div className="content__user-descr-person">
+                    {currentUser.name} <span className="content__user-descr-years">{currentUser.age}</span>
                 </div>
-                <div className="content-user-descr-place">
-                    <FontAwesomeIcon icon={faHouse} className="content-user-descr-place-icon"/>
-                    <div className="content-user-descr-place-text">
+                <div className="content__user-descr-place">
+                    <FontAwesomeIcon icon={faHouse} className="content__user-descr-place-icon"/>
+                    <div className="content__user-descr-place-text">
                         Lives in {currentUser.partnerSettings.place}
                     </div>
                 </div>
-                <div className="content-user-descr-distance">
-                    <FontAwesomeIcon icon={faLocationDot} className="content-user-descr-distance-icon"/>
+                <div className="content__user-descr-distance">
+                    <FontAwesomeIcon icon={faLocationDot} className="content__user-descr-distance-icon"/>
                     {currentUser.partnerSettings.distance}
-                    <span className="content-user-distance-text">
+                    <span className="content__user-distance-text">
                         km from you
                     </span>
                 </div>

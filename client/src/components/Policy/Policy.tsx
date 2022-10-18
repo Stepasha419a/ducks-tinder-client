@@ -4,19 +4,19 @@ import headerImg from '../../assets/images/auth/img-01.png'
 const Policy = () => {
     return (
         <div className="policy">
-            <header className="policy-header">
+            <header className="policy__header">
                 <div className="container">
-                    <Link to='/' className="policy-header-link">
-                        <img src={headerImg} alt="IMG" className='policy-header-img'/>
-                        <span className="policy-header-text">ducks tinder</span>
+                    <Link to='/' className="policy__header-link">
+                        <img src={headerImg} alt="IMG" className='policy__header-img'/>
+                        <span className="policy__header-text">ducks tinder</span>
                     </Link>
                 </div>
             </header>
-            <hr className="policy-hr"/>
-            <div className="policy-content">
+            <hr className="policy__hr"/>
+            <div className="policy__content">
                 <div className="container">
-                    <h1 className="policy-content-h1">Community Rules</h1>
-                    <p className="policy-content-p">
+                    <h1 className="policy__content-h1">Community Rules</h1>
+                    <p className="policy__content-p">
                         Welcome to the Ducks Tinder community. If you are 
                         honest, kind and respectful towards others, we will 
                         always be glad to see you here. However, if you 

@@ -6,21 +6,21 @@ interface ProfileDialogUploadPropsInterface{
 const ProfileDialogUpload: React.FC<ProfileDialogUploadPropsInterface> = ({onImageChange, setIsDialogUploadOpen}) => {
     return(
         <div className="popup upload">
-            <div className="popup-body upload">
-                <div className="popup-content upload-content">
-                    <div className="upload-close">
-                        <div onClick={() => setIsDialogUploadOpen(false)} className="upload-close-btn"></div>
+            <div className="popup__body upload">
+                <div className="popup__content upload__content">
+                    <div className="upload__close">
+                        <div onClick={() => setIsDialogUploadOpen(false)} className="upload__close-btn"></div>
                     </div>
-                    <div className="upload-title">Upload</div>
-                    <div className="upload-descr">Choose context type</div>
-                    <div className="upload-inputs">
-                        <div className="upload-input-wrapper">
-                            <label htmlFor="upload-input-gallery" className="upload-input-label">
-                                <span className="upload-input-span">
+                    <div className="upload__title">Upload</div>
+                    <div className="upload__descr">Choose context type</div>
+                    <div className="upload__inputs">
+                        <div className="upload__input-wrapper">
+                            <label htmlFor="upload__input-gallery" className="upload__input-label">
+                                <span className="upload__input-span">
                                     Upload from<br/>
-                                    <span className="upload-input-span--bold">Gallery</span>
+                                    <span className="upload__input-span--bold">Gallery</span>
                                 </span>
-                                <input onChange={(e) => onImageChange(e)} accept="image/*" type="file" name="" id="upload-input-gallery" className="upload-input" />
+                                <input onChange={(e) => onImageChange(e)} accept="image/*" type="file" name="" id="upload__input-gallery" className="upload__input" />
                             </label>
                         </div>
                     </div>
