@@ -2146,7 +2146,8 @@ textarea:-ms-input-placeholder { color: #999999; }
   color: #e65050;
 }
 
-.pairs__popup-setting-show-all{
+.pairs__popup-setting-show-all,
+.content__popup-setting-show-all{
   width: 89px;
   font-weight: 600;
   text-transform: uppercase;
@@ -2326,32 +2327,41 @@ textarea:-ms-input-placeholder { color: #999999; }
   font-size: 16px;
 }
 
-.pairs__popup-info-separator{
+.pairs__popup-info-separator,
+.content__popup-info-separator{
   border: 1px solid #0000001f
 }
 
-.pairs__popup-description{
+.pairs__popup-description,
+.content__popup-description{
   font-size: 16px;
   color: #505965;
   padding: 15px;
   line-height: 1.35;
 }
 
-.pairs__popup-interests-title{
+.pairs__popup-interests-title,
+.content__popup-interests-title{
   font-size: 20px;
   font-weight: 600;
   color: #505965;
   margin: 10px 0 0 25px;
 }
 
-.pairs__popup-interests-items{
+.content__popup-interests-title{
+  margin: 10px 0 0 15px;
+}
+
+.pairs__popup-interests-items,
+.content__popup-interests-items{
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   padding: 10px 15px 0;
 }
 
-.pairs__popup-interest{
+.pairs__popup-interest,
+.content__popup-interest{
   border: 2px solid #b9bfc5;
   border-radius: 16px;
   font-weight: 600;
@@ -2364,7 +2374,8 @@ textarea:-ms-input-placeholder { color: #999999; }
   cursor: default;
 }
 
-.pairs__popup-show-all{
+.pairs__popup-show-all,
+.content__popup-show-all{
   margin: 0 auto;
   padding: 10px 0;
 }

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FocusEvent, MouseEvent, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { updateUserThunk } from "../../redux/usersReducer"
+import { createPairThunk, updateUserThunk } from "../../redux/usersReducer"
 
 interface TinderButtonsProps{
     currentTinderUsersIndex: number
@@ -38,7 +38,7 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
     }
 
     const likeUser = () => {
-        dispatch(updateUserThunk({currentUser, inputName: 'pairs', changedData: [...currentUser.pairs, tinderUsers[currentTinderUsersIndex]._id]}) as any)
+        dispatch(createPairThunk({userId: currentUser._id, createUserPairId: tinderUsers[currentTinderUsersIndex]._id}) as any)
         dispatch(updateUserThunk({currentUser, inputName: 'checkedUsers', changedData: [...currentUser.checkedUsers, tinderUsers[currentTinderUsersIndex]._id]}) as any)
         setCurrentTinderUsersIndex(currentTinderUsersIndex + 1)
     }

@@ -100,7 +100,7 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
                         <div className="pairs__popup-interests-items">
                             {interestsForLoop.map(item => {
                             return(
-                                <div key={item} className='pairs-popup-interest'>
+                                <div key={item} className='pairs__popup-interest'>
                                     {item}
                                 </div>
                             )

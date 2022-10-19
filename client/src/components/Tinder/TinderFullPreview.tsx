@@ -1,6 +1,8 @@
 import { faCircleDown, faHouse, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useState } from "react"
 import { IUser } from "../../models/IUser"
+import InterestsListPopup from "../Pairs/popups/InterestsListPopup"
 import ImageSlider from "../Slider/ImageSlider"
 
 interface TinderFullPreviewProps {
@@ -9,6 +11,14 @@ interface TinderFullPreviewProps {
 }
 
 const TinderFullPreview: React.FC<TinderFullPreviewProps> = ({currentUser, setIsFullPreview}) => {
+    const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] = useState(false)
+
+    const interestsForLoop = []
+
+    for (let i = 0; i < 4; i++) {
+        currentUser.interests[i] && interestsForLoop.push(currentUser.interests[i]);
+    }
+
     return(
         <div className="content__user content__user--full">
             <div className="content__user-slider content__user-slider--full">
@@ -37,6 +47,28 @@ const TinderFullPreview: React.FC<TinderFullPreviewProps> = ({currentUser, setIs
                     </div>
                 </div>
             </div>
+            <hr className="content__popup-info-separator"/>
+            <div className="content__popup-description">
+                {currentUser.description}
+            </div>
+            <hr className="content__popup-info-separator"/>
+            <div className="content__popup-interests">
+                <div className="content__popup-interests-title">
+                    Interests
+                </div>
+                <div className="content__popup-interests-items">
+                    {interestsForLoop.map(item => {
+                    return(
+                        <div key={item} className='content__popup-interest'>
+                            {item}
+                        </div>
+                    )
+                    })}
+                </div>
+            </div>
+            <div onClick={() => setIsInterestsListPopupOpen(true)} className="content__popup-setting-show-all content__popup-show-all">Show all</div>
+
+            {isInterestsListPopupOpen && <InterestsListPopup interestsList={currentUser.interests} setIsInterestsListPopupOpen={setIsInterestsListPopupOpen} />}
         </div>
     )
 }

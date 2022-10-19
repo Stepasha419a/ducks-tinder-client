@@ -13,7 +13,7 @@ const InterestsListPopup: React.FC<InterestsListPopupProps> = ({interestsList, s
                     <div className="pairs__popup-sort-items">
                         {interestsList.map(item => {
                             return(
-                                <div key={item} className='pairs-popup-setting-item pairs__popup-setting-item--no-cursor'>{item}</div>
+                                <div key={item} className='pairs__popup-setting-item pairs__popup-setting-item--no-cursor'>{item}</div>
                             )
                         })}
                     </div>

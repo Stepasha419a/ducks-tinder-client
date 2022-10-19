@@ -18,10 +18,10 @@ const Tinder: React.FC = () => {
     useEffect(() => {
         if(!currentTinderUsersIndex) {
             dispatch(getSortedUsersThunk({user: currentUser, type: 'set'}) as any)
-        } else if(currentTinderUsersIndex % 5 === 0) {
+        } else if(currentTinderUsersIndex === tinderUsers.length - 2) {
             dispatch(getSortedUsersThunk({user: currentUser, type: 'add'}) as any)
         }
-    }, [currentUser, dispatch, currentTinderUsersIndex])
+    }, [currentUser, dispatch, currentTinderUsersIndex, tinderUsers.length])
 
     if(!tinderUsers.length) {
         return(

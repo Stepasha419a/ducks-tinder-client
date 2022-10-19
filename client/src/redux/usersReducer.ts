@@ -80,6 +80,8 @@ export const getSortedUsersThunk = createAsyncThunk(
     async function(args: {user: IUser, type: 'set' | 'add'}, {rejectWithValue, dispatch}) {
         try {
             const querySortsObj = makeQuerySortsObj(args.user)
+
+            console.log(querySortsObj)
             
             const response = await usersAPI.getSortedUsers(querySortsObj)
 
@@ -154,11 +156,11 @@ export const getUserPairsThunk = createAsyncThunk(
     }
 )
 
-export const deletePairThunk = createAsyncThunk(
-    'users/deletePair',
+export const createPairThunk = createAsyncThunk(
+    'users/createPair',
     async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
         try {
-            const response = await usersAPI.deletePair(args.userId, args.createUserPairId)
+            const response = await usersAPI.createPair(args.userId, args.createUserPairId)
             
             dispatch(setCurrentUser(response.data))
         } catch (error) {
@@ -168,11 +170,11 @@ export const deletePairThunk = createAsyncThunk(
     }
 )
 
-export const createPairThunk = createAsyncThunk(
-    'users/createPair',
+export const deletePairThunk = createAsyncThunk(
+    'users/deletePair',
     async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
         try {
-            const response = await usersAPI.createPair(args.userId, args.createUserPairId)
+            const response = await usersAPI.deletePair(args.userId, args.createUserPairId)
             
             dispatch(setCurrentUser(response.data))
         } catch (error) {
