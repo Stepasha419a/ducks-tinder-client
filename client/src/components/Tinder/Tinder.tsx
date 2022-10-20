@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { getSortedUsersThunk, updateUserThunk } from "../../redux/usersReducer"
+import { getSortedUserThunk, updateUserThunk } from "../../redux/usersReducer"
 import TinderButtons from "./TinderButtons"
 import TinderFullPreview from "./TinderFullPreview"
 import TinderUser from "./TinderUser"
@@ -13,19 +13,40 @@ const Tinder: React.FC = () => {
     const tinderUsers = useSelector((state: AppStateType) => state.usersPage.tinderUsers)
 
     const [currentTinderUsersIndex, setCurrentTinderUsersIndex] = useState<number>(0)
+    const [requestedUsers, setRequestedUsers] = useState<string[]>([])
     const [isFullPreview, setIsFullPreview] = useState(false)
 
+    console.log(currentTinderUsersIndex)
+
     useEffect(() => {
-        if(!currentTinderUsersIndex) {
-            dispatch(getSortedUsersThunk({user: currentUser, type: 'set'}) as any)
-        } else if(currentTinderUsersIndex === tinderUsers.length - 2) {
-            dispatch(getSortedUsersThunk({user: currentUser, type: 'add'}) as any)
+        if(currentTinderUsersIndex === 0) {
+            dispatch(getSortedUserThunk({user: currentUser}) as any)
+        } else if(currentTinderUsersIndex === requestedUsers.length) {
+            console.log('req')
+            dispatch(getSortedUserThunk({user: currentUser, requestedUsers}) as any)
+        } // eslint-disable-next-line
+    }, [currentTinderUsersIndex])
+
+    useEffect(() => {
+        if(tinderUsers.length) {
+            const ids = []
+            for (const user of tinderUsers) {
+                ids.push(user._id)
+            }
+            setRequestedUsers(ids)
         }
-    }, [currentUser, dispatch, currentTinderUsersIndex, tinderUsers.length])
+    }, [tinderUsers])
+
+    const resetHandler = () => {
+        dispatch(updateUserThunk({currentUser, inputName: "checkedUsers", changedData: []}) as any)
+    }
 
     if(!tinderUsers.length) {
         return(
-            <div>loading</div>
+            <div>
+                loading
+                <button onClick={() => resetHandler()} className="content__reset">reset</button>
+            </div>
         )
     }
 
@@ -33,10 +54,6 @@ const Tinder: React.FC = () => {
         return(
             <div>loading extra users</div>
         )
-    }
-
-    const resetHandler = () => {
-        dispatch(updateUserThunk({currentUser, inputName: "checkedUsers", changedData: []}) as any)
     }
 
     return(

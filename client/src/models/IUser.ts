@@ -67,7 +67,7 @@ export interface IQuerySorts {
     userIds?: string[]
 }
 
-export const makeQuerySortsObj = (user: IUser) => {
+export const makeQuerySortsObj = (user: IUser, requestedUsers?: string[]) => {
     return {
         distance: user.partnerSettings.distance,
         onlyNear: user.partnerSettings.usersOnlyInDistance,
@@ -75,7 +75,7 @@ export const makeQuerySortsObj = (user: IUser) => {
         preferAge: {min: user.partnerSettings.age.from, max: user.partnerSettings.age.to},
         sex: user.sex,
         preferSex: user.partnerSettings.preferSex,
-        userIds: user.checkedUsers?.length ? user.checkedUsers : []
+        userIds: requestedUsers ? requestedUsers : user.checkedUsers?.length ? user.checkedUsers : []
     }
 }
 

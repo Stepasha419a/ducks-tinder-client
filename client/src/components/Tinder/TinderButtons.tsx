@@ -32,6 +32,8 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
     }
 
     const dislikeUser = () => {
+        console.log(currentTinderUsersIndex)
+        console.log(tinderUsers[currentTinderUsersIndex])
         dispatch(updateUserThunk({currentUser, inputName: 'checkedUsers', changedData: [...currentUser.checkedUsers, tinderUsers[currentTinderUsersIndex]._id]}) as any)
         setCurrentTinderUsersIndex(currentTinderUsersIndex + 1)
         setIsReturn(true)

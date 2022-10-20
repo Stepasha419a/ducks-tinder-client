@@ -17,7 +17,7 @@ router.get('/activate/:link', authController.activate)
 router.get('/refresh', authController.refresh)
 
 router.get('/users', authMiddleware, userController.getUsers)
-router.post('/users/sorted', authMiddleware, userController.getSortedUsers)
+router.post('/users/sorted', authMiddleware, userController.getSortedUser)
 router.get('/users/:id', authMiddleware, userController.getOne)
 router.put('/users', authMiddleware, userController.update)
 router.delete('/users/:id', authMiddleware, userController.delete)

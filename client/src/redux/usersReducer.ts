@@ -45,11 +45,7 @@ const usersReducer = createSlice({
             state.pairs = action.payload
         },
         setTinderUsers: (state, action) => {
-            if(action.payload.type === 'set') {
-                state.tinderUsers = action.payload.data
-            } else if(action.payload.type === 'add') {
-                state.tinderUsers = [...state.tinderUsers, ...action.payload.data]
-            }
+            state.tinderUsers = [...state.tinderUsers, ...action.payload.data]
         }
     }
 })
@@ -75,13 +71,11 @@ export const fetchUsersThunk = createAsyncThunk(
     }
 )
 
-export const getSortedUsersThunk = createAsyncThunk(
-    'users/getSortedUsers',
-    async function(args: {user: IUser, type: 'set' | 'add'}, {rejectWithValue, dispatch}) {
+export const getSortedUserThunk = createAsyncThunk(
+    'users/getSortedUser',
+    async function(args: {user: IUser, requestedUsers?: string[]}, {rejectWithValue, dispatch}) {
         try {
-            const querySortsObj = makeQuerySortsObj(args.user)
-
-            console.log(querySortsObj)
+            const querySortsObj = makeQuerySortsObj(args.user, args.requestedUsers)
             
             const response = await usersAPI.getSortedUsers(querySortsObj)
 
@@ -91,7 +85,7 @@ export const getSortedUsersThunk = createAsyncThunk(
 
             const data = await response.data
             
-            dispatch(setTinderUsers({data, type: args.type}))
+            dispatch(setTinderUsers({data}))
 
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);

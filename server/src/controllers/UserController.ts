@@ -14,7 +14,7 @@ class UserController{
         }
     }
 
-    async getSortedUsers(req: any, res: any, next: NextFunction) {
+    async getSortedUser(req: any, res: any, next: NextFunction) {
         try {
             const sorts = req.body
             

@@ -21,7 +21,7 @@ class UserService{
             "partnerSettings.age.to": {$gt: sorts.age - 1},
             "sex": sorts.preferSex,
             "partnerSettings.preferSex": sorts.sex
-        }).limit(5)
+        }).limit(1)
 
         return users
     }
