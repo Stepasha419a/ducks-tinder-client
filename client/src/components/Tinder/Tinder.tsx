@@ -16,15 +16,12 @@ const Tinder: React.FC = () => {
     const [requestedUsers, setRequestedUsers] = useState<string[]>([])
     const [isFullPreview, setIsFullPreview] = useState(false)
 
-    console.log(currentTinderUsersIndex)
-
     useEffect(() => {
-        if(currentTinderUsersIndex === 0) {
+        if(!requestedUsers.length) {
             dispatch(getSortedUserThunk({user: currentUser}) as any)
-        } else if(currentTinderUsersIndex === requestedUsers.length) {
-            console.log('req')
+        } else {
             dispatch(getSortedUserThunk({user: currentUser, requestedUsers}) as any)
-        } // eslint-disable-next-line
+        }// eslint-disable-next-line
     }, [currentTinderUsersIndex])
 
     useEffect(() => {
@@ -33,9 +30,9 @@ const Tinder: React.FC = () => {
             for (const user of tinderUsers) {
                 ids.push(user._id)
             }
-            setRequestedUsers(ids)
+            setRequestedUsers([...currentUser.checkedUsers, ...ids])
         }
-    }, [tinderUsers])
+    }, [tinderUsers, currentUser.checkedUsers])
 
     const resetHandler = () => {
         dispatch(updateUserThunk({currentUser, inputName: "checkedUsers", changedData: []}) as any)

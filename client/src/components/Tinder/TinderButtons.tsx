@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FocusEvent, MouseEvent, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { createPairThunk, updateUserThunk } from "../../redux/usersReducer"
+import { likeUserThunk, updateUserThunk } from "../../redux/usersReducer"
 
 interface TinderButtonsProps{
     currentTinderUsersIndex: number
@@ -32,17 +32,14 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
     }
 
     const dislikeUser = () => {
-        console.log(currentTinderUsersIndex)
-        console.log(tinderUsers[currentTinderUsersIndex])
         dispatch(updateUserThunk({currentUser, inputName: 'checkedUsers', changedData: [...currentUser.checkedUsers, tinderUsers[currentTinderUsersIndex]._id]}) as any)
         setCurrentTinderUsersIndex(currentTinderUsersIndex + 1)
         setIsReturn(true)
     }
 
     const likeUser = () => {
-        dispatch(createPairThunk({userId: currentUser._id, createUserPairId: tinderUsers[currentTinderUsersIndex]._id}) as any)
-        dispatch(updateUserThunk({currentUser, inputName: 'checkedUsers', changedData: [...currentUser.checkedUsers, tinderUsers[currentTinderUsersIndex]._id]}) as any)
-        setCurrentTinderUsersIndex(currentTinderUsersIndex + 1)
+        dispatch(likeUserThunk({currentUser, tinderUser: tinderUsers[currentTinderUsersIndex]}) as any)
+        setCurrentTinderUsersIndex(currentTinderUsersIndex + 1);
     }
 
     const btnFocus = (e: FocusEvent<HTMLButtonElement, any>, color: string) => {

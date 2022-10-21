@@ -120,6 +120,7 @@ export const updateUserThunk = createAsyncThunk(
     async (args: {currentUser: IUser, inputName: string, changedData: String | Number | Boolean | String[] | {from: number, to: number}, innerObjectName?: string}, {rejectWithValue, dispatch}) => {
         try {
             const user = makeUserObject(args)
+            console.log(user)
 
             const response = await usersAPI.updateUser(user)
             
@@ -143,6 +144,25 @@ export const getUserPairsThunk = createAsyncThunk(
 
             dispatch(setPairs(pairs))
 
+        } catch (error) {
+            if(error instanceof Error) rejectWithValue(error.message);
+            rejectWithValue(['unexpected error', error])
+        }
+    }
+)
+
+export const likeUserThunk = createAsyncThunk(
+    'users/likeUser',
+    async (args: {currentUser: IUser, tinderUser: IUser}, {rejectWithValue, dispatch}) => {
+        try {
+            const user = makeUserObject({currentUser: args.currentUser, inputName: 'checkedUsers', changedData: [...args.currentUser.checkedUsers, args.tinderUser._id]})
+
+            const updateResponse = await usersAPI.updateUser(user)
+            
+
+            const response = await usersAPI.createPair(args.currentUser._id, args.tinderUser._id)
+            
+            dispatch(setCurrentUser({...updateResponse.data, pairs: [...response.data.pairs], checkedUsers: [...response.data.checkedUsers]}))
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
             rejectWithValue(['unexpected error', error])
