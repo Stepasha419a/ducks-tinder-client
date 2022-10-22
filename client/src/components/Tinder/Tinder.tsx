@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import { AppStateType } from "../../redux/reduxStore"
 import { getSortedUserThunk, updateUserThunk } from "../../redux/usersReducer"
 import TinderButtons from "./TinderButtons"
 import TinderFullPreview from "./TinderFullPreview"
 import TinderUser from "./TinderUser"
+import TinderUserLoading from "./TinderUserLoading"
 
 const Tinder: React.FC = () => {
     const dispatch = useDispatch()
@@ -40,16 +42,22 @@ const Tinder: React.FC = () => {
 
     if(!tinderUsers.length) {
         return(
-            <div>
-                loading
+            <div className="content">
                 <button onClick={() => resetHandler()} className="content__reset">reset</button>
+                <Link to='/profile' className="content__no-user">
+                    <div className="content__no-user-text">You don't have users currently</div>
+                    <div className="content__no-user-subtext">Click to change your prefer settings to get more opportunities</div>
+                </Link>
             </div>
         )
     }
 
     if(currentTinderUsersIndex === tinderUsers.length) {
         return(
-            <div>loading extra users</div>
+            <div className="content">
+                <button onClick={() => resetHandler()} className="content__reset">reset</button>
+                <TinderUserLoading />
+            </div>
         )
     }
 

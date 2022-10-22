@@ -17,7 +17,8 @@ const usersReducer = createSlice({
         currentUser: {} as IUser,
         notifications: [] as INotification[],
         pairs: [] as IUser[],
-        tinderUsers: [] as IUser[]
+        tinderUsers: [] as IUser[],
+        isReturnUser: false
     },
     reducers: {
         setUsers: (state, action) => {
@@ -46,6 +47,9 @@ const usersReducer = createSlice({
         },
         setTinderUsers: (state, action) => {
             state.tinderUsers = [...state.tinderUsers, ...action.payload.data]
+        },
+        setIsReturnUser: (state, action) => {
+            state.isReturnUser = action.payload
         }
     }
 })
@@ -170,20 +174,6 @@ export const likeUserThunk = createAsyncThunk(
     }
 )
 
-export const createPairThunk = createAsyncThunk(
-    'users/createPair',
-    async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
-        try {
-            const response = await usersAPI.createPair(args.userId, args.createUserPairId)
-            
-            dispatch(setCurrentUser(response.data))
-        } catch (error) {
-            if(error instanceof Error) rejectWithValue(error.message);
-            rejectWithValue(['unexpected error', error])
-        }
-    }
-)
-
 export const deletePairThunk = createAsyncThunk(
     'users/deletePair',
     async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
@@ -243,7 +233,7 @@ export const mixUserImages = createAsyncThunk(
 
 const {setUsers} = usersReducer.actions
 
-export const {setCurrentUser, createNotification, deleteNotification, setPairs, setTinderUsers} = usersReducer.actions
+export const {setCurrentUser, createNotification, deleteNotification, setPairs, setTinderUsers, setIsReturnUser} = usersReducer.actions
 
 export type UsersReducerType = typeof usersReducer
 

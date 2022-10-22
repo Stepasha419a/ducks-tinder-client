@@ -722,6 +722,62 @@ textarea:-ms-input-placeholder { color: #999999; }
   overflow: hidden;
 }
 
+@keyframes user-loading {
+  0% {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+.content__user--loading{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 375px;
+  max-height: 667px;
+  border: 3px solid rgb(214, 214, 214);
+  animation: user-loading 2s;
+}
+
+.content__no-user{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  text-decoration: none;
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+  border: 5px solid rgb(214, 214, 214);
+  border-radius: 24px;
+  transition: .2s;
+}
+
+.content__no-user:hover{
+  background: #fd267815;
+}
+
+.content__no-user-text{
+  font-size: 48px;
+  font-weight: 700;
+  color: #ff4b5d;
+  width: 100%;
+  text-align: center;
+}
+
+.content__no-user-subtext{
+  font-size: 24px;
+  font-weight: 700;
+  color: #a84650b7;
+  width: 100%;
+  text-align: center;
+}
+
 .content__user--full{
   overflow: auto;
   background-color: #fff;
@@ -2747,4 +2803,75 @@ textarea:-ms-input-placeholder { color: #999999; }
     position: static;
     width: 100%;
   }
+}
+
+/* Spinner */
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #ff76aa transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes text-left {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(450px);
+  }
+}
+
+@keyframes text-right {
+  0% {
+    transform: translateX(450px);
+  }
+  100% {
+    transform: translateX(-200px);
+  }
+}
+
+.content__loading-text{
+  width: 100%;
+  font-size: 42px;
+  font-weight: 700;
+  color: #e65050;
+}
+
+.content__loading-text--left{
+  animation: text-left 2s infinite;
+}
+
+.content__loading-text--right{
+  animation: text-right 2s infinite;
 }

@@ -1,9 +1,9 @@
 import { faBolt, faHeart, faRotateLeft, faStar, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { FocusEvent, MouseEvent, useState } from "react"
+import { FocusEvent, MouseEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { likeUserThunk, updateUserThunk } from "../../redux/usersReducer"
+import { likeUserThunk, setIsReturnUser, updateUserThunk } from "../../redux/usersReducer"
 
 interface TinderButtonsProps{
     currentTinderUsersIndex: number
@@ -16,25 +16,24 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
     const tinderUsers = useSelector((state: AppStateType) => state.usersPage.tinderUsers)
-
-    const [isReturn, setIsReturn] = useState(false)
+    const isReturnUser = useSelector((state: AppStateType) => state.usersPage.isReturnUser)
     
     const returnUser = () => {
-        if(currentTinderUsersIndex && isReturn) {
+        if(currentTinderUsersIndex && isReturnUser) {
             const newCheckedUsers = [...currentUser.checkedUsers]
             const index = currentUser.checkedUsers.findIndex(item => item === tinderUsers[currentTinderUsersIndex - 1]._id)
 
             newCheckedUsers.splice(index, 1)
             dispatch(updateUserThunk({currentUser, inputName: 'checkedUsers', changedData: newCheckedUsers}) as any)
             setCurrentTinderUsersIndex(currentTinderUsersIndex - 1)
-            setIsReturn(false)
+            dispatch(setIsReturnUser(false))
         }
     }
 
     const dislikeUser = () => {
         dispatch(updateUserThunk({currentUser, inputName: 'checkedUsers', changedData: [...currentUser.checkedUsers, tinderUsers[currentTinderUsersIndex]._id]}) as any)
         setCurrentTinderUsersIndex(currentTinderUsersIndex + 1)
-        setIsReturn(true)
+        dispatch(setIsReturnUser(true))
     }
 
     const likeUser = () => {
@@ -43,9 +42,9 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
     }
 
     const btnFocus = (e: FocusEvent<HTMLButtonElement, any>, color: string) => {
-        if(currentTinderUsersIndex && isReturn && color === 'gold') {
+        if(currentTinderUsersIndex && isReturnUser && color === 'gold') {
             const target = e.target as Element;
-            target.classList.add(`content__btn--active-${color}`)
+            target.classList.add(`content__btn--active-gold`)
         } else if (color !== 'gold'){
             const target = e.target as Element;
             target.classList.add(`content__btn--active-${color}`)
@@ -80,9 +79,9 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
             </div>
         :
             <div className="content__buttons">
-                <button onClick={() => returnUser()} onFocus={(e) => btnFocus(e, 'gold')} onMouseOut={(e) => btnMouseOut(e, 'gold')} className={`content__btn content__btn--small${(currentTinderUsersIndex && isReturn) ? ' content__btn--gold' : ' content__btn--blocked'}`}>
+                <button onClick={() => returnUser()} onFocus={(e) => btnFocus(e, 'gold')} onMouseOut={(e) => btnMouseOut(e, 'gold')} className={`content__btn content__btn--small${(currentTinderUsersIndex && isReturnUser) ? ' content__btn--gold' : ' content__btn--blocked'}`}>
                     <div className="content__btn-icon-wrapper">
-                        <FontAwesomeIcon icon={faRotateLeft} className={`content__btn-icon ${(currentTinderUsersIndex && isReturn) ? ' content__btn-icon--gold' : ' content__btn-icon--blocked'}`}/>
+                        <FontAwesomeIcon icon={faRotateLeft} className={`content__btn-icon ${(currentTinderUsersIndex && isReturnUser) ? ' content__btn-icon--gold' : ' content__btn-icon--blocked'}`}/>
                     </div>
                 </button>
                 <button onClick={() => dislikeUser()} onFocus={(e) => btnFocus(e, 'red')} onMouseOut={(e) => btnMouseOut(e, 'red')} className="content__btn content__btn--large content__btn--red">
