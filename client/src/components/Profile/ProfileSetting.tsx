@@ -99,7 +99,7 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
     
     return (
         <div className="content__setting">
-            {inputValueDirty &&
+            {inputValueDirty && inputValueError &&
                 <div className="content__setting-name content__setting-name--error">
                     {inputValueError}
                 </div>

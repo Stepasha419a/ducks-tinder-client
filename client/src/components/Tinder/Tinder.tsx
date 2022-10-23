@@ -40,7 +40,7 @@ const Tinder: React.FC = () => {
         dispatch(updateUserThunk({currentUser, inputName: "checkedUsers", changedData: []}) as any)
     }
 
-    if(!tinderUsers.length) {
+    if(!tinderUsers.length || (currentTinderUsersIndex > tinderUsers.length)) {
         return(
             <div className="content">
                 <button onClick={() => resetHandler()} className="content__reset">reset</button>
