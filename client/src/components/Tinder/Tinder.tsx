@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { AppStateType } from "../../redux/reduxStore"
-import { getSortedUserThunk, updateUserThunk } from "../../redux/usersReducer"
+import { getSortedUserThunk, setRequestedUsers, updateUserThunk } from "../../redux/usersReducer"
 import TinderButtons from "./TinderButtons"
 import TinderFullPreview from "./TinderFullPreview"
 import TinderUser from "./TinderUser"
@@ -13,15 +13,15 @@ const Tinder: React.FC = () => {
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
     const tinderUsers = useSelector((state: AppStateType) => state.usersPage.tinderUsers)
+    const currentTinderUsersIndex = useSelector((state: AppStateType) => state.usersPage.currentTinderUsersIndex)
+    const requestedUsers = useSelector((state: AppStateType) => state.usersPage.requestedUsers)
 
-    const [currentTinderUsersIndex, setCurrentTinderUsersIndex] = useState<number>(0)
-    const [requestedUsers, setRequestedUsers] = useState<string[]>([])
     const [isFullPreview, setIsFullPreview] = useState(false)
 
     useEffect(() => {
         if(!requestedUsers.length) {
             dispatch(getSortedUserThunk({user: currentUser}) as any)
-        } else {
+        } else if(currentTinderUsersIndex + 1 > tinderUsers.length) {
             dispatch(getSortedUserThunk({user: currentUser, requestedUsers}) as any)
         }// eslint-disable-next-line
     }, [currentTinderUsersIndex])
@@ -32,9 +32,9 @@ const Tinder: React.FC = () => {
             for (const user of tinderUsers) {
                 ids.push(user._id)
             }
-            setRequestedUsers([...currentUser.checkedUsers, ...ids])
+            dispatch(setRequestedUsers([...currentUser.checkedUsers, ...ids]))
         }
-    }, [tinderUsers, currentUser.checkedUsers])
+    }, [tinderUsers, currentUser.checkedUsers, dispatch])
 
     const resetHandler = () => {
         dispatch(updateUserThunk({currentUser, inputName: "checkedUsers", changedData: []}) as any)
@@ -68,12 +68,12 @@ const Tinder: React.FC = () => {
                 {isFullPreview ?
                 <>
                     <TinderFullPreview currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview}/>
-                    <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} setCurrentTinderUsersIndex={setCurrentTinderUsersIndex} isMinimum/>
+                    <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} isMinimum/>
                 </>
                 :
                 <>
-                    <TinderUser currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview}/>
-                    <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} setCurrentTinderUsersIndex={setCurrentTinderUsersIndex}/>
+                    <TinderUser currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview} />
+                    <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} />
                 </>
                 }
             </div>

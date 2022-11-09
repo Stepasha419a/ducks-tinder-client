@@ -1,8 +1,8 @@
-import { makeQuerySortsObj } from './../models/IUser';
+import { makeDataObject, makeQuerySortsObj } from './../models/IUser';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { usersAPI } from "../api/usersApi";
 import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage";
-import { IUser, makeUserImagesObject, makeUserObject } from "../models/IUser";
+import { IUser, makeUserImagesObject } from "../models/IUser";
 
 interface INotification {
     id: number
@@ -18,7 +18,9 @@ const usersReducer = createSlice({
         notifications: [] as INotification[],
         pairs: [] as IUser[],
         tinderUsers: [] as IUser[],
-        isReturnUser: false
+        isReturnUser: false,
+        requestedUsers: [] as string[],
+        currentTinderUsersIndex: 0
     },
     reducers: {
         setUsers: (state, action) => {
@@ -46,10 +48,16 @@ const usersReducer = createSlice({
             state.pairs = action.payload
         },
         setTinderUsers: (state, action) => {
-            state.tinderUsers = [...state.tinderUsers, ...action.payload.data]
+            state.tinderUsers = [...state.tinderUsers, {...action.payload}]
         },
         setIsReturnUser: (state, action) => {
             state.isReturnUser = action.payload
+        },
+        setRequestedUsers: (state, action) => {
+            state.requestedUsers = [...action.payload]
+        },
+        setCurrentTinderUsersIndex: (state, action) => {
+            state.currentTinderUsersIndex = action.payload
         }
     }
 })
@@ -89,7 +97,7 @@ export const getSortedUserThunk = createAsyncThunk(
 
             const data = await response.data
             
-            dispatch(setTinderUsers({data}))
+            data && dispatch(setTinderUsers(data))
 
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
@@ -123,10 +131,9 @@ export const updateUserThunk = createAsyncThunk(
     'users/updateUser',
     async (args: {currentUser: IUser, inputName: string, changedData: String | Number | Boolean | String[] | {from: number, to: number}, innerObjectName?: string}, {rejectWithValue, dispatch}) => {
         try {
-            const user = makeUserObject(args)
-            console.log(user)
+            const data = makeDataObject(args)
 
-            const response = await usersAPI.updateUser(user)
+            const response = await usersAPI.updateUser(args.currentUser._id, data)
             
             dispatch(setCurrentUser(response.data))
         } catch (error) {
@@ -159,9 +166,9 @@ export const likeUserThunk = createAsyncThunk(
     'users/likeUser',
     async (args: {currentUser: IUser, tinderUser: IUser}, {rejectWithValue, dispatch}) => {
         try {
-            const user = makeUserObject({currentUser: args.currentUser, inputName: 'checkedUsers', changedData: [...args.currentUser.checkedUsers, args.tinderUser._id]})
+            const data = makeDataObject({currentUser: args.currentUser, inputName: 'checkedUsers', changedData: [...args.currentUser.checkedUsers, args.tinderUser._id]})
 
-            const updateResponse = await usersAPI.updateUser(user)
+            const updateResponse = await usersAPI.updateUser(args.currentUser._id, data)
             
 
             const response = await usersAPI.createPair(args.currentUser._id, args.tinderUser._id)
@@ -222,7 +229,7 @@ export const mixUserImages = createAsyncThunk(
         try {
             const userImages = makeUserImagesObject(args)
             
-            const response = await usersAPI.updateUser(userImages)
+            const response = await usersAPI.updateUser(args.currentUser._id, userImages)
             dispatch(setCurrentUser(response.data))
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
@@ -233,7 +240,7 @@ export const mixUserImages = createAsyncThunk(
 
 const {setUsers} = usersReducer.actions
 
-export const {setCurrentUser, createNotification, deleteNotification, setPairs, setTinderUsers, setIsReturnUser} = usersReducer.actions
+export const {setCurrentUser, createNotification, deleteNotification, setPairs, setTinderUsers, setIsReturnUser, setRequestedUsers, setCurrentTinderUsersIndex} = usersReducer.actions
 
 export type UsersReducerType = typeof usersReducer
 

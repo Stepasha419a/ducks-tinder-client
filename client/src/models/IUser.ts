@@ -30,7 +30,6 @@ export interface IUser {
 }
 
 export interface IUserUnrequired {
-    _id: string
     email?: string
     name?: string
     description?: string
@@ -90,18 +89,18 @@ export const interestsList = ['fighting', 'ski', 'football', 'volleyball', 'tenn
 
 export const potentialFields = ['description', 'sex', 'interests', 'place', 'distance', 'preferSex']
 
-export const makeUserObject = (args: {currentUser: IUser | any, inputName: string, changedData: String | Number | Boolean | String[] | {from: number, to: number}, innerObjectName?: string}) => {
+export const makeDataObject = (args: {currentUser: IUser | any, inputName: string, changedData: String | Number | Boolean | String[] | {from: number, to: number}, innerObjectName?: string}) => {
     const {currentUser, inputName, changedData, innerObjectName} = args
     
     if(innerObjectName) {
-        return {_id: currentUser._id, [innerObjectName]: {...currentUser[innerObjectName] as IUser, [inputName]: changedData}}
+        return {[innerObjectName]: {...currentUser[innerObjectName] as IUser, [inputName]: changedData}}
     }
-    return {_id: currentUser._id, [inputName]: changedData}
+    return {[inputName]: changedData}
 }
 
 export const makeUserImagesObject = (args: {currentUser: IUser, images: imageInterface[]}) => {
-    const {currentUser, images} = args
+    const {images} = args
     const parsedImages = images.map(image => image.image)
 
-    return{_id: currentUser._id, pictures: {avatar: parsedImages[0], gallery: parsedImages.slice(1)}}
+    return{pictures: {avatar: parsedImages[0], gallery: parsedImages.slice(1)}}
 }

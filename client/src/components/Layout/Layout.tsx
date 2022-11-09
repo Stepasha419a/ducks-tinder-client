@@ -3,11 +3,12 @@ import { useSelector } from "react-redux"
 import { useNavigate, Outlet, useLocation } from "react-router-dom"
 import { AppStateType } from "../../redux/reduxStore"
 import Nav from "../Nav/Nav"
+import { Socket } from 'socket.io-client'
 
 interface LayoutPropsInterface{
     isPairsOpened: boolean,
     setIsPairsOpened: (setting: boolean) => void
-    socket: MutableRefObject<WebSocket | undefined>
+    socket: MutableRefObject<Socket | undefined>
 }
 
 const Layout: React.FC<LayoutPropsInterface> = ({isPairsOpened, setIsPairsOpened, socket}) => {

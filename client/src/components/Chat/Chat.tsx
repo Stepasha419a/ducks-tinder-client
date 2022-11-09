@@ -2,16 +2,17 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
 import { KeyboardEvent, MutableRefObject, useEffect, useRef, useState } from "react"
 import Message from "./Message/Message"
-import { MessageInterface } from "../../models/IDialog"
+import { IMessage } from "../../models/IDialog"
 import { IUser } from "../../models/IUser"
 import { getUserThunk } from "../../redux/usersReducer"
 import { setIncludedMembersIds } from "../../redux/chatReducer"
 import { isRefElementVisible, scrollToBottom } from "./utils/ChatUtils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMessage } from "@fortawesome/free-solid-svg-icons"
+import { Socket } from 'socket.io-client'
 
 interface ChatPropsInterface{
-    socket: MutableRefObject<WebSocket | undefined>
+    socket: MutableRefObject<Socket | undefined>
 }
 
 const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
@@ -49,13 +50,13 @@ const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
     }, [userMembers])
 
     const sendMessage = async () => {
-        const message = {
-            id: Date.now(),
+        const message: IMessage = {
+            id: Date.now().toString(),
             username: currentUser.name,
             content: value,
             userId: currentUser._id
         }
-        socket.current?.send(JSON.stringify(message))
+        socket.current?.send(message)
         setValue('')
     }
 
@@ -70,7 +71,7 @@ const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
             {isConnected ?
                 <div className="chat__container">
                     <div className="chat__messages">
-                        {messages.map((message: MessageInterface) => 
+                        {messages.map((message: IMessage) => 
                             userMembers.length ? 
                                 <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)} currentUserId={currentUser._id}/> 
                             : 

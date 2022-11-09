@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-export const API_URL = 'http://localhost:5000/api/'
+export const API_URL = 'http://localhost:5000/'
 
 export const instance = axios.create({
     withCredentials: true,
@@ -19,7 +19,7 @@ instance.interceptors.response.use((config: AxiosResponse) => {
     if(error.response.status === 401 && error.config && !error.config._isRetry) {
         originalRequest._isRetry = true
         try {
-            const response = await axios.get(`${API_URL}/refresh`, {withCredentials: true})
+            const response = await axios.get(`${API_URL}/auth/refresh`, {withCredentials: true})
             localStorage.setItem('token', response.data.accessToken)
 
             return instance.request(originalRequest)

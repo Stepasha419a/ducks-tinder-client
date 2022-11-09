@@ -9,11 +9,12 @@ import { MutableRefObject, useEffect, useState } from 'react'
 import { IUser } from '../../models/IUser'
 import { getUserThunk } from '../../redux/usersReducer'
 import defaultPhoto from '../../assets/images/photos/1.jpg'
+import { Socket } from 'socket.io-client'
 
 interface NavPropsInterface{
     isPairsOpened: boolean,
     setIsPairsOpened: (setting: boolean) => void
-    socket: MutableRefObject<WebSocket | undefined>
+    socket: MutableRefObject<Socket | undefined>
 }
 
 const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, socket}) => {

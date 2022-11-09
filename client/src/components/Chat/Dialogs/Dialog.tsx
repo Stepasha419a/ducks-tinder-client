@@ -5,11 +5,12 @@ import { IUser } from "../../../models/IUser"
 import { connectChatThunk, disconnectChatThunk } from "../../../redux/chatReducer"
 import { getUserThunk } from "../../../redux/usersReducer"
 import Avatar from "../../Avatar/Avatar"
+import { Socket } from 'socket.io-client'
 
 interface DialogInterface{
     dialog: IDialog
     dialogCompanionId: string | undefined
-    socket: MutableRefObject<WebSocket | undefined>
+    socket: MutableRefObject<Socket | undefined>
     currentDialogId: string
 }
 

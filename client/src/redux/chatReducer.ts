@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import { Dispatch } from "react";
+import { io } from "socket.io-client";
 import { chatApi } from "../api/chatApi";
-import { IDialog, MessageInterface } from "../models/IDialog";
+import { IDialog, IMessage } from "../models/IDialog";
 import { AppStateType } from "./reduxStore";
 
 const chatReducer = createSlice({
@@ -9,7 +10,7 @@ const chatReducer = createSlice({
     initialState: {
         dialogs: [] as IDialog[],
         isConnected: false,
-        currentMessages: [] as MessageInterface[],
+        currentMessages: [] as IMessage[],
         currentDialogId: '',
         currentMembers: [] as string[],
         includedMembersIds: [] as string[]
@@ -87,30 +88,33 @@ export const connectChatThunk = createAsyncThunk(
     async function(args: {socket: any, dialogId: string}, {rejectWithValue, dispatch, getState}) {
         try {
             const {socket, dialogId} = args
-            socket.current = new WebSocket(`ws://localhost:5001/${dialogId}`)
+            socket.current = io(`http://localhost:5000/chat/socket`, {
+                query: {chatId: dialogId}
+            })
+
+            socket.current.emit('connectChat')
             
-            socket.current.onopen = async () => {
+            socket.current.on('connected', async () => {
                 dispatch(setCurrentDialogId(dialogId))
                 dispatch(setIsConnected(true))
                 const response = await chatApi.getDialog(dialogId)
                 const dialog = await response.data
                 dispatch(setCurrentMessages(dialog.messages))
                 dispatch(setCurrentMembers(dialog.members))
-            }
+            })
     
-            socket.current.onmessage = (event: any) => {
-                const message: MessageInterface = JSON.parse(event.data)
+            socket.current.on('message', (message: IMessage) => {
                 const {chatPage} = getState() as AppStateType
                 sendMessage(message, dispatch, chatPage)
-            }
+            })
 
-            socket.current.onclose = () => {
+            socket.current.on('disconnected', () => {
                 dispatch(setIsConnected(false))
                 dispatch(setCurrentMessages([]))
                 dispatch(setCurrentDialogId(''))
                 dispatch(setCurrentMembers([]))
                 dispatch(setIncludedMembersIds([]))
-            }
+            })
 
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
@@ -125,7 +129,7 @@ export const disconnectChatThunk = createAsyncThunk(
         try {
             const {socket} = args
 
-            socket.current.close()
+            socket.current.emit('disconnectChat')
 
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
@@ -134,7 +138,7 @@ export const disconnectChatThunk = createAsyncThunk(
     }
 )
 
-function sendMessage(message: MessageInterface, dispatch: Dispatch<any>, chatPage: ChatReducerInitialStateType) {
+function sendMessage(message: IMessage, dispatch: Dispatch<any>, chatPage: ChatReducerInitialStateType) {
     dispatch(setCurrentMessages(message))
     const dialogIndex = chatPage.dialogs.findIndex((dialog: IDialog) => dialog._id === chatPage.currentDialogId)
     dispatch(pushMessage({dialogIndex: dialogIndex, message: message}))

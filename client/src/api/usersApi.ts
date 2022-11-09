@@ -23,24 +23,24 @@ export const usersAPI = {
         return instance.get(`users/${id}`)
             .then(res => res)
     },
-    updateUser(user: IUserUnrequired): Promise<AxiosResponse<IUser>> {
-        return instance.put('users', user)
+    updateUser(id: string, data: IUserUnrequired): Promise<AxiosResponse<IUser>> {
+        return instance.put(`users/${id}`, data)
             .then(res => res)
     },
     deleteUser(id: string) {
         return instance.delete(`users/${id}`)
             .then(res => res)
     },
-    createPair(userId: string, createUserPairId: string) {
-        return instance.post(`users/pairs`, {userId, createUserPairId})
+    createPair(userId: string, userPairId: string) {
+        return instance.post(`users/pairs`, {userId, userPairId})
             .then(res => res)
     },
-    deletePair(userId: string, createUserPairId: string) {
-        return instance.put(`users/pairs`, {userId, createUserPairId})
+    deletePair(userId: string, userPairId: string) {
+        return instance.put(`users/pairs`, {userId, userPairId})
             .then(res => res)
     },
     savePicture(picture: any, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {
-        return instance.post(`users/savePicture`, {picture, userId, setting}, {
+        return instance.post(`users/picture`, {picture, userId, setting}, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -48,7 +48,7 @@ export const usersAPI = {
             .then(res => res)
     },
     deletePicture(pictureName: string, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {
-        return instance.put(`users/deletePicture`, {pictureName, userId, setting})
+        return instance.put(`users/picture`, {pictureName, userId, setting})
             .then(res => res)
     }
 }

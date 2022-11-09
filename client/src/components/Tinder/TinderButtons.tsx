@@ -3,15 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FocusEvent, MouseEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
-import { likeUserThunk, setIsReturnUser, updateUserThunk } from "../../redux/usersReducer"
+import { likeUserThunk, setCurrentTinderUsersIndex, setIsReturnUser, updateUserThunk } from "../../redux/usersReducer"
 
 interface TinderButtonsProps{
     currentTinderUsersIndex: number
-    setCurrentTinderUsersIndex: (set: number) => void
     isMinimum?: boolean
 }
 
-const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, setCurrentTinderUsersIndex, isMinimum = false}) => {
+const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, isMinimum = false}) => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
@@ -25,20 +24,20 @@ const TinderButtons: React.FC<TinderButtonsProps> = ({currentTinderUsersIndex, s
 
             newCheckedUsers.splice(index, 1)
             dispatch(updateUserThunk({currentUser, inputName: 'checkedUsers', changedData: newCheckedUsers}) as any)
-            setCurrentTinderUsersIndex(currentTinderUsersIndex - 1)
+            dispatch(setCurrentTinderUsersIndex(currentTinderUsersIndex - 1))
             dispatch(setIsReturnUser(false))
         }
     }
 
     const dislikeUser = () => {
         dispatch(updateUserThunk({currentUser, inputName: 'checkedUsers', changedData: [...currentUser.checkedUsers, tinderUsers[currentTinderUsersIndex]._id]}) as any)
-        setCurrentTinderUsersIndex(currentTinderUsersIndex + 1)
+        dispatch(setCurrentTinderUsersIndex(currentTinderUsersIndex + 1))
         dispatch(setIsReturnUser(true))
     }
 
     const likeUser = () => {
         dispatch(likeUserThunk({currentUser, tinderUser: tinderUsers[currentTinderUsersIndex]}) as any)
-        setCurrentTinderUsersIndex(currentTinderUsersIndex + 1);
+        dispatch(setCurrentTinderUsersIndex(currentTinderUsersIndex + 1))
     }
 
     const btnFocus = (e: FocusEvent<HTMLButtonElement, any>, color: string) => {

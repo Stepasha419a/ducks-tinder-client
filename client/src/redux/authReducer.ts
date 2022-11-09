@@ -82,7 +82,7 @@ export const checkAuthThunk = createAsyncThunk(
     async (_, {rejectWithValue, dispatch}) => {
         try {
             dispatch(setLoading(true))
-            const response = await axios.get<AuthResponse>(`${API_URL}refresh`, {withCredentials: true})
+            const response = await axios.get<AuthResponse>(`${API_URL}auth/refresh`, {withCredentials: true})
             localStorage.setItem('token', response.data.accessToken)
             dispatch(setCurrentUser(response.data.user))
             setAuthData(response.data.user, dispatch)

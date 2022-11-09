@@ -91,14 +91,19 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
                 </div>
                 <div className="content__setting-interests-title">Your interests</div>
                 <div className="content__setting-interests">
-                    {interests.map(item => {
+                    {interests.length ? interests.map(item => {
                         return(
                             <div onClick={() => deleteInterest(item)} key={item} className="content__setting-interests-item">
                                 {item}
                                 <div className="content__setting-interests-item-xmark"></div>
                             </div>
                         )
-                    })}
+                    }) 
+                    :
+                    <div className="content__setting-interests-item">
+                        You don't have interests
+                    </div>
+                    }
                 </div>
                 <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="pairs__popup-setting-show-all pairs__popup-show-all">Show all</div>
             </div>

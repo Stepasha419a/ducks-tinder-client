@@ -16,6 +16,7 @@ import Chat from './components/Chat/Chat';
 import Pairs from './components/Pairs/Pairs';
 import { potentialFields } from './models/IUser';
 import { checkField } from './components/Profile/utils/ProfileUtils';
+import { Socket } from 'socket.io-client'
 
 function App() {
 
@@ -29,7 +30,7 @@ function App() {
 
   const [isPairsOpened, setIsPairsOpened] = useState(true)
 
-  const socket: MutableRefObject<WebSocket | undefined> = useRef()
+  const socket: MutableRefObject<Socket | undefined> = useRef()
 
   useEffect(() => {
     dispatch(checkAuthThunk() as any)

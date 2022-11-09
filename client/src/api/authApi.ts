@@ -10,12 +10,12 @@ export type UserAuthParams = {
 
 export const authAPI = {
     registration(email: string, name: string | undefined, password: string): Promise<AxiosResponse<AuthResponse>> {
-        return instance.post('registration', {email, name, password})
+        return instance.post('auth/registration', {email, name, password})
     },
     login(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
-        return instance.post('login', {email, password})
+        return instance.post('auth/login', {email, password})
     },
     logout(): Promise<void> {
-        return instance.post('logout')
+        return instance.post('auth/logout')
     }
 }

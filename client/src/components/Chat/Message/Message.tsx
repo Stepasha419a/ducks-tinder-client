@@ -1,9 +1,9 @@
-import { MessageInterface } from "../../../models/IDialog"
+import { IMessage } from "../../../models/IDialog"
 import { IUser } from "../../../models/IUser"
 import Avatar from "../../Avatar/Avatar"
 
 interface MessageComponentInterface{
-    message: MessageInterface
+    message: IMessage
     user: IUser | undefined
     currentUserId: string
 }

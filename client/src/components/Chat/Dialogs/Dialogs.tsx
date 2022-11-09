@@ -4,9 +4,10 @@ import { IDialog } from "../../../models/IDialog"
 import { getDialogsThunk } from "../../../redux/chatReducer"
 import { AppStateType } from "../../../redux/reduxStore"
 import Dialog from "./Dialog"
+import { Socket } from 'socket.io-client'
 
 interface DialogsInterface{
-    socket: MutableRefObject<WebSocket | undefined>
+    socket: MutableRefObject<Socket | undefined>
 }
 
 const Dialogs: React.FC<DialogsInterface> = ({socket}) => {
