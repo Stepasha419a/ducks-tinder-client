@@ -1,4 +1,4 @@
-import { IMessage } from "../../../models/IDialog"
+import { IMessage } from "../../../models/IChat"
 import { IUser } from "../../../models/IUser"
 import Avatar from "../../Avatar/Avatar"
 

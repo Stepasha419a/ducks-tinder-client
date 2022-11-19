@@ -2,25 +2,25 @@ import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import { Dispatch } from "react";
 import { io } from "socket.io-client";
 import { chatApi } from "../api/chatApi";
-import { IDialog, IMessage } from "../models/IDialog";
+import { IChat, IMessage } from "../models/IChat";
 import { AppStateType } from "./reduxStore";
 
 const chatReducer = createSlice({
     name: 'chatPage',
     initialState: {
-        dialogs: [] as IDialog[],
+        chats: [] as IChat[],
         isConnected: false,
         currentMessages: [] as IMessage[],
-        currentDialogId: '',
+        currentChatId: '',
         currentMembers: [] as string[],
         includedMembersIds: [] as string[]
     },
     reducers: {
-        setDialogs: (state, action) => {
-            state.dialogs = action.payload
+        setChats: (state, action) => {
+            state.chats = action.payload
         },
         pushMessage: (state, action) => {
-            state.dialogs[action.payload.dialogIndex].messages = [...state.dialogs[action.payload.dialogIndex].messages, action.payload.message]
+            state.chats[action.payload.chatIndex].messages = [...state.chats[action.payload.chatIndex].messages, action.payload.message]
         },
         setIsConnected: (state, action) => {
             state.isConnected = action.payload
@@ -30,8 +30,8 @@ const chatReducer = createSlice({
             else if( Array.isArray(action.payload)) { state.currentMessages = [...state.currentMessages, ...action.payload] }
             else { state.currentMessages = [...state.currentMessages, action.payload] }
         },
-        setCurrentDialogId: (state, action) => {
-            state.currentDialogId = action.payload
+        setCurrentChatId: (state, action) => {
+            state.currentChatId = action.payload
         },
         setCurrentMembers: (state, action) => {
             state.currentMembers = action.payload
@@ -46,19 +46,15 @@ const chatReducer = createSlice({
 const initialState = chatReducer.getInitialState()
 type ChatReducerInitialStateType = typeof initialState
 
-export const getDialogsThunk = createAsyncThunk(
-    'chat/getDialogs',
+export const getChatsThunk = createAsyncThunk(
+    'chat/getChats',
     async function(args: {id: string}, {rejectWithValue, dispatch}) {
         try {
-            const response = await chatApi.getDialogs(args.id)
-
-            if(!response) {
-                throw new Error("Can't get dialogs. Server Error");
-            }
+            const response = await chatApi.getChats(args.id)
 
             const data = await response.data
 
-            dispatch(setDialogs(data))
+            dispatch(setChats(data))
 
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
@@ -67,15 +63,12 @@ export const getDialogsThunk = createAsyncThunk(
     }
 )
 
-export const createDialogThunk = createAsyncThunk(
-    'users/createDialogThunk',
+export const createChatThunk = createAsyncThunk(
+    'users/createChat',
     async (args: {currentUserId: string, otherUserId: string}, {rejectWithValue, dispatch}) => {
         try {
-            const response = await chatApi.createDialog([args.currentUserId, args.otherUserId])
-
-            if(!response) {
-                throw new Error("Can't create dialog. Server Error");
-            }
+            await chatApi.createChat([args.currentUserId, args.otherUserId])
+            
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
             rejectWithValue(['unexpected error', error])
@@ -85,22 +78,22 @@ export const createDialogThunk = createAsyncThunk(
 
 export const connectChatThunk = createAsyncThunk(
     'chat/connectChat',
-    async function(args: {socket: any, dialogId: string}, {rejectWithValue, dispatch, getState}) {
+    async function(args: {socket: any, chatId: string}, {rejectWithValue, dispatch, getState}) {
         try {
-            const {socket, dialogId} = args
+            const {socket, chatId} = args
             socket.current = io(`http://localhost:5000/chat/socket`, {
-                query: {chatId: dialogId}
+                query: {chatId}
             })
 
             socket.current.emit('connectChat')
             
             socket.current.on('connected', async () => {
-                dispatch(setCurrentDialogId(dialogId))
+                dispatch(setCurrentChatId(chatId))
                 dispatch(setIsConnected(true))
-                const response = await chatApi.getDialog(dialogId)
-                const dialog = await response.data
-                dispatch(setCurrentMessages(dialog.messages))
-                dispatch(setCurrentMembers(dialog.members))
+                const response = await chatApi.getChat(chatId)
+                const chat = await response.data
+                dispatch(setCurrentMessages(chat.messages))
+                dispatch(setCurrentMembers(chat.members))
             })
     
             socket.current.on('message', (message: IMessage) => {
@@ -111,7 +104,7 @@ export const connectChatThunk = createAsyncThunk(
             socket.current.on('disconnected', () => {
                 dispatch(setIsConnected(false))
                 dispatch(setCurrentMessages([]))
-                dispatch(setCurrentDialogId(''))
+                dispatch(setCurrentChatId(''))
                 dispatch(setCurrentMembers([]))
                 dispatch(setIncludedMembersIds([]))
             })
@@ -140,10 +133,10 @@ export const disconnectChatThunk = createAsyncThunk(
 
 function sendMessage(message: IMessage, dispatch: Dispatch<any>, chatPage: ChatReducerInitialStateType) {
     dispatch(setCurrentMessages(message))
-    const dialogIndex = chatPage.dialogs.findIndex((dialog: IDialog) => dialog._id === chatPage.currentDialogId)
-    dispatch(pushMessage({dialogIndex: dialogIndex, message: message}))
+    const chatIndex = chatPage.chats.findIndex((chat: IChat) => chat._id === chatPage.currentChatId)
+    dispatch(pushMessage({chatIndex, message: message}))
 }
 
-export const {setDialogs, pushMessage, setIsConnected, setCurrentMessages, setCurrentDialogId, setCurrentMembers, setIncludedMembersIds} = chatReducer.actions
+export const {setChats, pushMessage, setIsConnected, setCurrentMessages, setCurrentChatId, setCurrentMembers, setIncludedMembersIds} = chatReducer.actions
 
 export default chatReducer.reducer

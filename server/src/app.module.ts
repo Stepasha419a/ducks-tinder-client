@@ -22,7 +22,7 @@ import * as path from 'path';
     TokensModule,
     MailModule,
     ChatModule,
-    ConfigModule.forRoot()
+    ConfigModule.forRoot({isGlobal: true})
   ]
 })
 export class AppModule {}

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { IUser } from "../../../models/IUser"
-import { createDialogThunk } from "../../../redux/chatReducer"
+import { createChatThunk } from "../../../redux/chatReducer"
 import { AppStateType } from "../../../redux/reduxStore"
 import { deletePairThunk } from "../../../redux/usersReducer"
 import ImageSlider from "../../Slider/ImageSlider"
@@ -44,7 +44,7 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
     }
 
     const acceptHandler = (userId: string) => {
-        dispatch(createDialogThunk({currentUserId: currentUser._id, otherUserId: currentPair._id}) as any)
+        dispatch(createChatThunk({currentUserId: currentUser._id, otherUserId: currentPair._id}) as any)
         deletePair(userId)
         setCurrentPair({} as IUser)
     }

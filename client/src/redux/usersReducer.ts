@@ -20,7 +20,8 @@ const usersReducer = createSlice({
         tinderUsers: [] as IUser[],
         isReturnUser: false,
         requestedUsers: [] as string[],
-        currentTinderUsersIndex: 0
+        currentTinderUsersIndex: 0,
+        isFailed: false
     },
     reducers: {
         setUsers: (state, action) => {
@@ -58,6 +59,9 @@ const usersReducer = createSlice({
         },
         setCurrentTinderUsersIndex: (state, action) => {
             state.currentTinderUsersIndex = action.payload
+        },
+        setIsFailed: (state, action) => {
+            state.isFailed = action.payload
         }
     }
 })
@@ -100,6 +104,7 @@ export const getSortedUserThunk = createAsyncThunk(
             data && dispatch(setTinderUsers(data))
 
         } catch (error) {
+            dispatch(setIsFailed(true))
             if(error instanceof Error) rejectWithValue(error.message);
             rejectWithValue(['unexpected error', error])
         }
@@ -240,7 +245,7 @@ export const mixUserImages = createAsyncThunk(
 
 const {setUsers} = usersReducer.actions
 
-export const {setCurrentUser, createNotification, deleteNotification, setPairs, setTinderUsers, setIsReturnUser, setRequestedUsers, setCurrentTinderUsersIndex} = usersReducer.actions
+export const {setCurrentUser, createNotification, deleteNotification, setPairs, setTinderUsers, setIsReturnUser, setRequestedUsers, setCurrentTinderUsersIndex, setIsFailed} = usersReducer.actions
 
 export type UsersReducerType = typeof usersReducer
 

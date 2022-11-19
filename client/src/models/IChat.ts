@@ -5,7 +5,7 @@ export interface IMessage{
     username: string
 }
 
-export interface IDialog {
+export interface IChat {
     _id: string
     messages: IMessage[]
     members: string[]

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
 import { KeyboardEvent, MutableRefObject, useEffect, useRef, useState } from "react"
 import Message from "./Message/Message"
-import { IMessage } from "../../models/IDialog"
+import { IMessage } from "../../models/IChat"
 import { IUser } from "../../models/IUser"
 import { getUserThunk } from "../../redux/usersReducer"
 import { setIncludedMembersIds } from "../../redux/chatReducer"
@@ -87,11 +87,11 @@ const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
                     </div>
                 </div>
             :
-                <div className="chat__no-dialogs">
-                    <div className="chat__no-dialogs-inner">
-                        <FontAwesomeIcon icon={faMessage} className="chat__no-dialogs-icon"/>
-                        <div className="chat__no-dialogs-text">
-                            Choose the dialog
+                <div className="chat__no-chats">
+                    <div className="chat__no-chats-inner">
+                        <FontAwesomeIcon icon={faMessage} className="chat__no-chats-icon"/>
+                        <div className="chat__no-chats-text">
+                            Choose the chat
                         </div>
                     </div>
                 </div>

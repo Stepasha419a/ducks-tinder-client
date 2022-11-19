@@ -178,13 +178,13 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .info__content-pairs,
-.info__content-dialogs{
+.info__content-chats{
   margin-top: 20px;
   width: 100%;
 }
 
 .info__content-pairs-item,
-.info__content-dialogs-item{
+.info__content-chats-item{
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -195,18 +195,18 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .info__content-pairs-item:hover,
-.info__content-dialogs-item:hover{
+.info__content-chats-item:hover{
   background-color: rgba(0, 0, 0, 0.171);
 }
 
-.info__content-dialogs-item--active{
+.info__content-chats-item--active{
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   background-color: rgba(0, 0, 0, 0.171);
 }
 
 .info__content-pairs-item-photo,
-.info__content-dialogs-item-photo{
+.info__content-chats-item-photo{
   height: 36px;
   width: 36px;
   border-radius: 50%;
@@ -215,13 +215,13 @@ textarea:-ms-input-placeholder { color: #999999; }
   background-repeat: no-repeat;
 }
 
-.info__content-dialogs-item-photo{
+.info__content-chats-item-photo{
   height: 50px;
   width: 50px;
 }
 
 .info__content-pairs-item-name,
-.info__content-dialogs-item-descr{
+.info__content-chats-item-descr{
   margin-left: 10px;
 }
 
@@ -239,12 +239,12 @@ textarea:-ms-input-placeholder { color: #999999; }
   color: #e65050;
 }
 
-.info__content-dialogs-item-descr-name{
+.info__content-chats-item-descr-name{
   font-weight: 500;
   font-size: 18px;
   margin-bottom: 8px;
 }
-.info__content-dialogs-item-descr-message{
+.info__content-chats-item-descr-message{
   margin-top: 8px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -1865,7 +1865,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   background-color: #d6dadd;
 }
 
-.chat__no-dialogs{
+.chat__no-chats{
   width: 100%;
   height: 100%;
   display: flex;
@@ -1874,7 +1874,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   flex-wrap: wrap;
 }
 
-.chat__no-dialogs-inner{
+.chat__no-chats-inner{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1887,13 +1887,13 @@ textarea:-ms-input-placeholder { color: #999999; }
   padding: 50px;
 }
 
-.chat__no-dialogs-icon{
+.chat__no-chats-icon{
   font-size: 150px;
   color: #e65050;
   width: 100%;
 }
 
-.chat__no-dialogs-text{
+.chat__no-chats-text{
   font-size: 26px;
   color: #af3d3d;
 }

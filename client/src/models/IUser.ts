@@ -24,7 +24,7 @@ export interface IUser {
         avatar: string
         gallery: string[]
     }
-    dialogs: string[]
+    chats: string[]
     pairs: string[],
     checkedUsers: string[]
 }
@@ -52,7 +52,7 @@ export interface IUserUnrequired {
             to?: number
         }
     }
-    dialogs?: string[]
+    chats?: string[]
     checkedUsers?: string[]
 }
 

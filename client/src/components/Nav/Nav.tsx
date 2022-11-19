@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { AppStateType } from '../../redux/reduxStore'
-import Dialogs from '../Chat/Dialogs/Dialogs'
+import Chats from '../Chat/Chats/Chats'
 import Avatar from '../Avatar/Avatar'
 import { MutableRefObject, useEffect, useState } from 'react'
 import { IUser } from '../../models/IUser'
@@ -88,7 +88,7 @@ const Nav: React.FC<NavPropsInterface> = ({isPairsOpened, setIsPairsOpened, sock
                             </div>
 
                     :
-                    <Dialogs socket={socket}/>
+                    <Chats socket={socket}/>
                     }
                 </div>
             </div>

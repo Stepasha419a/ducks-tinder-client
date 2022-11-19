@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
 import { AppStateType } from "../../redux/reduxStore"
 import { getSortedUserThunk, setRequestedUsers, updateUserThunk } from "../../redux/usersReducer"
 import TinderButtons from "./TinderButtons"
 import TinderFullPreview from "./TinderFullPreview"
 import TinderUser from "./TinderUser"
-import TinderUserLoading from "./TinderUserLoading"
+import TinderUserLoading from "./Loading/UserLoading"
+import TinderUserFailed from "./Loading/UserFailed"
 
 const Tinder: React.FC = () => {
     const dispatch = useDispatch()
@@ -15,6 +15,7 @@ const Tinder: React.FC = () => {
     const tinderUsers = useSelector((state: AppStateType) => state.usersPage.tinderUsers)
     const currentTinderUsersIndex = useSelector((state: AppStateType) => state.usersPage.currentTinderUsersIndex)
     const requestedUsers = useSelector((state: AppStateType) => state.usersPage.requestedUsers)
+    const isFailed = useSelector((state: AppStateType) => state.usersPage.isFailed)
 
     const [isFullPreview, setIsFullPreview] = useState(false)
 
@@ -40,14 +41,11 @@ const Tinder: React.FC = () => {
         dispatch(updateUserThunk({currentUser, inputName: "checkedUsers", changedData: []}) as any)
     }
 
-    if(!tinderUsers.length || (currentTinderUsersIndex > tinderUsers.length)) {
+    if(isFailed) {
         return(
             <div className="content">
                 <button onClick={() => resetHandler()} className="content__reset">reset</button>
-                <Link to='/profile' className="content__no-user">
-                    <div className="content__no-user-text">You don't have users currently</div>
-                    <div className="content__no-user-subtext">Click to change your prefer settings to get more opportunities</div>
-                </Link>
+                <TinderUserFailed />
             </div>
         )
     }
@@ -60,6 +58,7 @@ const Tinder: React.FC = () => {
             </div>
         )
     }
+    
 
     return(
         <div className="content">
