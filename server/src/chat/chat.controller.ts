@@ -1,9 +1,10 @@
 import { IChat } from './chat.interface';
 import { ChatService } from './chat.service';
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { CreateChatDto } from './dto/create-chat.dto';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('chat')
+@UseGuards(AuthGuard)
 export class ChatController {
     constructor(private readonly chatService: ChatService) {}
 

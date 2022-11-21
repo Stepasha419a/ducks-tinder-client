@@ -1,8 +1,9 @@
 import { LoginUserDto } from './../users/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './../users/dto/create-user.dto';
-import { Body, Controller, HttpCode, Post, HttpStatus, Get, Param, Req, Res } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, HttpStatus, Get, Param, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { AuthGuard } from './auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -10,8 +11,8 @@ export class AuthController {
 
     @Post('registration')
     @HttpCode(HttpStatus.OK)
-    async registration(@Body() createUserDto: CreateUserDto, @Res() response: Response) {
-        const userData = await this.authService.registration(createUserDto)
+    async registration(@Body() dto: CreateUserDto, @Res() response: Response) {
+        const userData = await this.authService.registration(dto)
 
         response.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
 
@@ -20,8 +21,8 @@ export class AuthController {
 
     @Post('login')
     @HttpCode(HttpStatus.OK)
-    async login(@Res() response: Response, @Body() loginUserDto: LoginUserDto) {
-        const userData = await this.authService.login(loginUserDto, response)
+    async login(@Res() response: Response, @Body() dto: LoginUserDto) {
+        const userData = await this.authService.login(dto, response)
 
         response.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
 
@@ -29,6 +30,7 @@ export class AuthController {
     }
 
     @Post('logout')
+    @UseGuards(AuthGuard)
     @HttpCode(HttpStatus.OK)
     logout(@Req() request: Request) {
         const {refreshToken} = request.cookies

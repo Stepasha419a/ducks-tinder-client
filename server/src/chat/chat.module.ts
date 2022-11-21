@@ -1,3 +1,4 @@
+import { TokensModule } from './../tokens/tokens.module';
 import { UsersModule } from './../users/users.module';
 import { ChatGateway } from './chat.gateway';
 import { Module } from '@nestjs/common';
@@ -13,7 +14,8 @@ import { Chat, ChatSchema } from './chat.model';
     MongooseModule.forFeature([
       {name: Chat.name, schema: ChatSchema}
     ]),
-    UsersModule
+    UsersModule,
+    TokensModule
   ]
 })
 export class ChatModule {}

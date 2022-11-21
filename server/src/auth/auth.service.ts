@@ -78,7 +78,6 @@ export class AuthService {
         const tokenFromDb = await this.tokensService.findToken(refreshToken)
         
         if(!userData || !tokenFromDb) {
-            console.log(refreshToken)
             throw new HttpException('You are not authorized', HttpStatus.BAD_REQUEST)
         }
 

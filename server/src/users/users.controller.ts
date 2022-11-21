@@ -1,15 +1,16 @@
-import { SavePictoreDto } from './dto/save-picture.dto';
-import { User } from './users.model';
-import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { ISorts, IUserDto } from './users.interface';
+import { AuthGuard } from './../auth/auth.guard';
+import { SavePictoreDto } from './dto/save-picture.dto';
+import { UsersService } from './users.service';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UserPairDto } from './dto/user-pair.dto';
 import { DeletePictoreDto } from './dto/delete-picture.dto';
 import { UserDto } from './dto/user.dto';
+import { UserSortsDto } from './dto/user-sorts.dto';
 
 @Controller('users')
+@UseGuards(AuthGuard)
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
@@ -27,8 +28,8 @@ export class UsersController {
 
     @Post('sorted')
     @HttpCode(HttpStatus.OK)
-    getSortedUser(@Body() sorts: ISorts): Promise<UserDto> {
-        return this.usersService.getSorted(sorts)
+    getSortedUser(@Body() dto: UserSortsDto): Promise<UserDto> {
+        return this.usersService.getSorted(dto)
     }
 
     @Post('picture')
@@ -46,20 +47,20 @@ export class UsersController {
 
     @Post('pairs')
     @HttpCode(HttpStatus.OK)
-    createPair(@Body() userPairDto: UserPairDto): Promise<UserDto> {
-        return this.usersService.createPair(userPairDto)
+    createPair(@Body() dto: UserPairDto): Promise<UserDto> {
+        return this.usersService.createPair(dto)
     }
 
     @Put('pairs')
     @HttpCode(HttpStatus.OK)
-    deletePair(@Body() userPairDto: UserPairDto): Promise<UserDto> {
-        return this.usersService.deletePair(userPairDto)
+    deletePair(@Body() dto: UserPairDto): Promise<UserDto> {
+        return this.usersService.deletePair(dto)
     }
 
     @Put(':id')
     @HttpCode(HttpStatus.OK)
-    update(@Body() updateUserDto: UpdateUserDto, @Param('id') id: string): Promise<UserDto> {
-        return this.usersService.update(id, updateUserDto)
+    update(@Body() dto: UpdateUserDto, @Param('id') id: string): Promise<UserDto> {
+        return this.usersService.update(id, dto)
     }
 
     @Delete(':id')

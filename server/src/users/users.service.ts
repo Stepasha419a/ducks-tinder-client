@@ -1,15 +1,15 @@
+import { UpdateUserDto } from './dto/update-user.dto';
 import { SavePictoreDto } from './dto/save-picture.dto';
 import { User, UserDocument } from './users.model';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
-import { ISorts, IUserDto } from './users.interface';
 import { FilesService } from 'src/files/files.service';
 import { UserPairDto } from './dto/user-pair.dto';
 import { DeletePictoreDto } from './dto/delete-picture.dto';
 import { UserDto } from './dto/user.dto';
+import { UserSortsDto } from './dto/user-sorts.dto';
 
 @Injectable()
 export class UsersService {
@@ -32,15 +32,15 @@ export class UsersService {
         return this.userModel.findOne({email})
     }
 
-    async getSorted(sorts: ISorts): Promise<UserDto> {
+    async getSorted(sortsDto: UserSortsDto): Promise<UserDto> {
         const user: User = await this.userModel.findOne({
-            "_id": {$nin: sorts.userIds},
-            "partnerSettings.distance": {$gt: 0, $lt: sorts.distance},
-            "age": {$gt: sorts.preferAge.min - 1, $lt: sorts.preferAge.max + 1}, 
-            "partnerSettings.age.from": {$lt: sorts.age + 1},
-            "partnerSettings.age.to": {$gt: sorts.age - 1},
-            "sex": sorts.preferSex,
-            "partnerSettings.preferSex": sorts.sex
+            "_id": {$nin: sortsDto.userIds},
+            "partnerSettings.distance": {$gt: 0, $lt: sortsDto.distance},
+            "age": {$gt: sortsDto.preferAge.min - 1, $lt: sortsDto.preferAge.max + 1}, 
+            "partnerSettings.age.from": {$lt: sortsDto.age + 1},
+            "partnerSettings.age.to": {$gt: sortsDto.age - 1},
+            "sex": sortsDto.preferSex,
+            "partnerSettings.preferSex": sortsDto.sex
         })
         
         if(!user) throw new HttpException('Such user was not found, try to change settings', HttpStatus.NOT_FOUND);
@@ -72,6 +72,8 @@ export class UsersService {
 
     async delete(id: string): Promise<UserDto> {
         const user = await this.userModel.findByIdAndDelete(id)
+        
+        if(!user) {throw new HttpException('User with such id is not found', HttpStatus.BAD_REQUEST)}
 
         const userData = new UserDto(user)
 

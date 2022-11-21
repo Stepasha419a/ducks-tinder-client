@@ -14,16 +14,6 @@ export interface picturesInterface{
     gallery: string[]
 }
 
-export interface ISorts {
-    distance: number,
-    onlyNear: boolean,
-    age: number,
-    preferAge: {min: number, max: number},
-    sex: 'male' | 'female',
-    preferSex: 'male' | 'female',
-    userIds: string[]
-}
-
 export interface IUserDto {
     _id?: string
     email: string

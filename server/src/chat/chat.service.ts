@@ -4,7 +4,6 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Chat, ChatDocument } from './chat.model';
-import { CreateChatDto } from './dto/create-chat.dto';
 
 @Injectable()
 export class ChatService {
@@ -51,6 +50,8 @@ export class ChatService {
 
     async delete(id: string) {
         const chat = await this.chatModel.findByIdAndDelete(id)
+
+        if(!chat) {throw new HttpException('Chat was not found', HttpStatus.BAD_REQUEST)}
 
         chat.members.forEach(async (memberId: string) => {
             const user = await this.usersService.getOne(memberId)
