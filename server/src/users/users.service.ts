@@ -122,11 +122,11 @@ export class UsersService {
     }
 
     async createPair(userPairDto: UserPairDto): Promise<UserDto> {
-        const user = await this.userModel.findById(userPairDto.userId)
-            .catch(() => {throw new HttpException(`User with such an id ${userPairDto.userId} was not found`, HttpStatus.BAD_REQUEST)})
+        const user = await this.userModel.findById(userPairDto.forUserId)
+            .catch(() => {throw new HttpException(`User with such an id ${userPairDto.forUserId} was not found`, HttpStatus.BAD_REQUEST)})
 
-        const userPair = await this.userModel.findById(userPairDto.userPairId)
-            .catch(() => {throw new HttpException(`User with such an id ${userPairDto.userPairId} was not found`, HttpStatus.BAD_REQUEST)})
+        const userPair = await this.userModel.findById(userPairDto.userId)
+            .catch(() => {throw new HttpException(`User with such an id ${userPairDto.userId} was not found`, HttpStatus.BAD_REQUEST)})
 
         if(!user.pairs.includes(userPair._id)) {
                 user.pairs = [...user.pairs, userPair._id.toString()]
@@ -142,11 +142,11 @@ export class UsersService {
     }
     
     async deletePair(userPairDto: UserPairDto): Promise<UserDto> {
-        const user = await this.userModel.findById(userPairDto.userId)
-            .catch(() => {throw new HttpException(`User with such an id ${userPairDto.userId} was not found`, HttpStatus.BAD_REQUEST)})
+        const user = await this.userModel.findById(userPairDto.forUserId)
+            .catch(() => {throw new HttpException(`User with such an id ${userPairDto.forUserId} was not found`, HttpStatus.BAD_REQUEST)})
             
-        const userPair = await this.userModel.findById(userPairDto.userPairId)
-            .catch(() => {throw new HttpException(`User with such an id ${userPairDto.userPairId} was not found`, HttpStatus.BAD_REQUEST)})
+        const userPair = await this.userModel.findById(userPairDto.userId)
+            .catch(() => {throw new HttpException(`User with such an id ${userPairDto.userId} was not found`, HttpStatus.BAD_REQUEST)})
 
         if(user.pairs.includes(userPair._id)) {
             const memberIdIndex = user.pairs.findIndex((memberId: string) => memberId === userPair._id.toString())

@@ -455,7 +455,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .settings__group-item-setting-change-slider {
-  margin: 20px 15px 30px;
+  margin: 20px 0px 30px;
 }
 
 .input-range{
@@ -2027,6 +2027,9 @@ textarea:-ms-input-placeholder { color: #999999; }
   cursor: pointer;
   transition: .1s;
 }
+.pairs__user--bord{
+  border: 2px solid #ccc;
+}
 
 .pairs__user:hover{
   transform: scale(1.03);
@@ -2175,22 +2178,8 @@ textarea:-ms-input-placeholder { color: #999999; }
   display: flex;
   flex-wrap: wrap;
 }
-
-.pairs__popup-setting-change .input-range{
-  margin: 20px 0 10px;
-}
-
-.pairs__popup-setting-change .input-range__track{
-  height: 4px;
-  border-radius: 4px;
-}
-
-.pairs__popup-setting-change .input-range__slider{
-  bottom: -12px;
-}
-
-.pairs__popup-setting-change .input-range__track--active{
-  background-color: #e65050;
+.pairs__popup-setting-change--margin-top{
+  margin-top: 10px;
 }
 
 .pairs__popup-setting-item,
@@ -2278,8 +2267,6 @@ textarea:-ms-input-placeholder { color: #999999; }
   text-transform: uppercase;
   cursor: pointer;
   transition: .2s;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
 }
 
 .pairs__popup-btn--sorts-list{
@@ -2288,9 +2275,12 @@ textarea:-ms-input-placeholder { color: #999999; }
   margin-top: 10px;
 }
 
-.pairs__popup-btn--border{
+.pairs__popup-btn--left-border{
   border-right: 1px solid rgb(214, 214, 214);
-  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 8px;
+}
+.pairs__popup-btn--right-border{
+  border-bottom-right-radius: 8px;
 }
 
 .pairs__popup-btn:hover{

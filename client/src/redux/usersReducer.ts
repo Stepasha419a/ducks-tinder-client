@@ -176,9 +176,9 @@ export const likeUserThunk = createAsyncThunk(
             const updateResponse = await usersAPI.updateUser(args.currentUser._id, data)
             
 
-            const response = await usersAPI.createPair(args.currentUser._id, args.tinderUser._id)
+            const response = await usersAPI.createPair(args.tinderUser._id, args.currentUser._id)
             
-            dispatch(setCurrentUser({...updateResponse.data, pairs: [...response.data.pairs], checkedUsers: [...response.data.checkedUsers]}))
+            dispatch(setCurrentUser({...updateResponse.data, checkedUsers: [...response.data.checkedUsers]}))
         } catch (error) {
             if(error instanceof Error) rejectWithValue(error.message);
             rejectWithValue(['unexpected error', error])
@@ -188,9 +188,9 @@ export const likeUserThunk = createAsyncThunk(
 
 export const deletePairThunk = createAsyncThunk(
     'users/deletePair',
-    async (args: {userId: string, createUserPairId: string}, {rejectWithValue, dispatch}) => {
+    async (args: {userId: string, deleteForUserId: string}, {rejectWithValue, dispatch}) => {
         try {
-            const response = await usersAPI.deletePair(args.userId, args.createUserPairId)
+            const response = await usersAPI.deletePair(args.userId, args.deleteForUserId)
             
             dispatch(setCurrentUser(response.data))
         } catch (error) {

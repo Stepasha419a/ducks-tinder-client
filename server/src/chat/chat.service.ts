@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import { UsersService } from './../users/users.service';
 import { IChat, IMessage, ISendMessage } from './chat.interface';
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
@@ -68,7 +69,7 @@ export class ChatService {
             .catch(() => {throw new HttpException('Chat was not found', HttpStatus.BAD_REQUEST)})
 
         const newMessage: IMessage = {
-            id: Date.now().toString(),
+            id: v4(),
             content: message.content,
             userId: message.userId
         }

@@ -1,9 +1,9 @@
 import { useState } from "react"
 import Cropper from "react-easy-crop"
-import InputRange from "react-input-range"
 import { useDispatch } from "react-redux"
 import { IUser } from "../../../../models/IUser"
 import { saveUserImage } from "../../../../redux/usersReducer"
+import RangeSlider from "../../../Slider/RangeSlider/RangeSlider"
 import getCroppedImg from "./cropImage.js"
 
 interface ProfileCropImagePropsInterface{
@@ -56,14 +56,13 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                     </div>
                     <div className="crop__inputs">
                         <div className="crop__input-range">
-                            <InputRange
+                            <RangeSlider 
+                                value={zoom} 
+                                setValue={setZoom as any} 
+                                completeValue={() => {}} 
+                                min={1.1} 
+                                max={3}
                                 step={0.01}
-                                draggableTrack={false}
-                                allowSameValues={false}
-                                minValue={1.1}
-                                maxValue={3}
-                                value={zoom}
-                                onChange={zoom => setZoom(zoom as number)}
                             />
                         </div>
                     </div>

@@ -31,12 +31,12 @@ export const usersAPI = {
         return instance.delete(`users/${id}`)
             .then(res => res)
     },
-    createPair(userId: string, userPairId: string) {
-        return instance.post(`users/pairs`, {userId, userPairId})
+    createPair(forUserId: string, userId: string) {
+        return instance.post(`users/pairs`, {forUserId, userId})
             .then(res => res)
     },
-    deletePair(userId: string, userPairId: string) {
-        return instance.put(`users/pairs`, {userId, userPairId})
+    deletePair(forUserId: string, userId: string) {
+        return instance.put(`users/pairs`, {forUserId, userId})
             .then(res => res)
     },
     savePicture(picture: any, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {

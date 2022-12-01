@@ -1,13 +1,13 @@
 import { faAngleRight, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
-import InputRange from "react-input-range"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { IUser, potentialFields } from "../../models/IUser"
 import { logoutThunk } from "../../redux/authReducer"
 import { AppStateType } from "../../redux/reduxStore"
 import { createNotification } from "../../redux/usersReducer"
+import RangeSlider from "../Slider/RangeSlider/RangeSlider"
 import { checkField } from "./utils/ProfileUtils"
 
 interface ProfileSettingsListPropsInterface{
@@ -40,7 +40,7 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
 
     const notifications = useSelector((state: AppStateType) => state.usersPage.notifications)
     
-    const [ageSetting, setAgeSetting] = useState(currentUser.partnerSettings ? 
+    const [ageSetting, setAgeSetting] = useState<{min: number, max: number}>(currentUser.partnerSettings ? 
         {min: currentUser.partnerSettings.age.from, max: currentUser.partnerSettings.age.to}
         :
         {min: 18, max: 24}
@@ -80,6 +80,18 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
         setFormName(formName)
         setSettingInputName(inputName)
         innerObjectName && setInnerObjectName(innerObjectName)
+    }
+
+    const ageHandler = () => {
+        submitSettings('age', currentAgeSetting)
+    }
+
+    const distanceHandler = () => {
+        submitSettings('distance', currentDistanceSetting, 'partnerSettings')
+    }
+
+    const partnerAgeHandler = () => {
+        submitSettings('age', {from: ageSetting.min, to: ageSetting.max}, 'partnerSettings' )
     }
 
     return(
@@ -144,15 +156,12 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                         </div>
                         <div className="settings__group-item-setting">
                             <div className="settings__group-item-setting-change-slider">
-                                <InputRange
-                                    step={1}
-                                    draggableTrack={false}
-                                    allowSameValues={false}
-                                    minValue={18}
-                                    maxValue={100}
-                                    value={currentAgeSetting}
-                                    onChange={age => setCurrentAgeSetting(age as number)}
-                                    onChangeComplete={() => submitSettings('age', currentAgeSetting)}
+                                <RangeSlider 
+                                    value={currentAgeSetting} 
+                                    setValue={setCurrentAgeSetting as any} 
+                                    completeValue={ageHandler as any} 
+                                    min={18} 
+                                    max={100} 
                                 />
                             </div>
                         </div>
@@ -200,15 +209,12 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                         </div>
                         <div className="settings__group-item-setting">
                             <div className="settings__group-item-setting-change-slider">
-                                <InputRange
-                                    step={1}
-                                    draggableTrack={false}
-                                    allowSameValues={false}
-                                    minValue={2}
-                                    maxValue={100}
-                                    value={currentDistanceSetting}
-                                    onChange={dist => setCurrentDistanceSetting(dist as number)}
-                                    onChangeComplete={() => submitSettings('distance', currentDistanceSetting, 'partnerSettings')}
+                                <RangeSlider 
+                                    value={currentDistanceSetting} 
+                                    setValue={setCurrentDistanceSetting as any} 
+                                    completeValue={distanceHandler as any} 
+                                    min={2} 
+                                    max={100} 
                                 />
                             </div>
                             <div className="settings__group-item-setting-descr settings__group-item-setting-descr--relative">
@@ -250,15 +256,13 @@ const ProfileSettingsList: React.FC<ProfileSettingsListPropsInterface> = ({
                         </div>
                         <div className="settings__group-item-setting">
                             <div className="settings__group-item-setting-change-slider">
-                                <InputRange
-                                    step={1}
-                                    draggableTrack={false}
-                                    allowSameValues={false}
-                                    minValue={18}
-                                    maxValue={100}
-                                    value={ageSetting}
-                                    onChange={setAgeSetting as any}
-                                    onChangeComplete={() => submitSettings('age', {from: ageSetting.min, to: ageSetting.max}, 'partnerSettings' )}
+                                <RangeSlider 
+                                    value={ageSetting} 
+                                    setValue={setAgeSetting as any} 
+                                    completeValue={partnerAgeHandler as any} 
+                                    min={18} 
+                                    max={100}
+                                    isMultiple 
                                 />
                             </div>
                         </div>

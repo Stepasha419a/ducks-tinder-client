@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import InputRange from "react-input-range"
+import RangeSlider from "../../Slider/RangeSlider/RangeSlider"
 import { ISorts } from "../utils/PairsUtils"
 
 interface PairsSettingsPopupProps{
@@ -32,6 +32,14 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({ pairSorts, clea
         setPhotoCount(pairSorts.photos)
     }, [pairSorts])
 
+    const distanceHandler = () => {
+        addSort(distanceSetting, 'distance')
+    }
+
+    const ageHandler = () => {
+        addSort(ageSetting, 'age')
+    }
+
     return(
         <div className="pairs__popup">
             <div className="pairs__popup-body">
@@ -45,16 +53,13 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({ pairSorts, clea
                         <div className="pairs__popup-setting-value">
                             {distanceSetting} km
                         </div>
-                        <div className="pairs__popup-setting-change">
-                            <InputRange
-                                step={1}
-                                draggableTrack={false}
-                                allowSameValues={false}
-                                minValue={2}
-                                maxValue={100}
-                                value={distanceSetting}
-                                onChange={setDistanceSetting as any}
-                                onChangeComplete={(value) => addSort(value, 'distance')}
+                        <div className="pairs__popup-setting-change pairs__popup-setting-change--margin-top">
+                            <RangeSlider 
+                                value={distanceSetting} 
+                                setValue={setDistanceSetting as any} 
+                                completeValue={distanceHandler as any} 
+                                min={2} 
+                                max={100}
                             />
                         </div>
                     </div>
@@ -64,18 +69,16 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({ pairSorts, clea
                             Age range
                         </div>
                         <div className="pairs__popup-setting-value">
-                            {ageSetting.min} - {ageSetting.max}
+                            from {ageSetting.min} to {ageSetting.max}
                         </div>
-                        <div className="pairs__popup-setting-change">
-                            <InputRange
-                                step={1}
-                                draggableTrack={false}
-                                allowSameValues={false}
-                                minValue={18}
-                                maxValue={100}
-                                value={ageSetting}
-                                onChange={setAgeSetting as any}
-                                onChangeComplete={(value) => addSort(value, 'age')}
+                        <div className="pairs__popup-setting-change pairs__popup-setting-change--margin-top">
+                            <RangeSlider 
+                                value={ageSetting} 
+                                setValue={setAgeSetting as any} 
+                                completeValue={ageHandler as any} 
+                                min={18} 
+                                max={100}
+                                isMultiple
                             />
                         </div>
                     </div>
@@ -136,10 +139,10 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({ pairSorts, clea
                     </div>
                     <div className="pairs__popup-hr"></div>
                     <div className="pairs__popup-buttons">
-                        <button onClick={() => clearSorts()} className="pairs__popup-btn pairs__popup-btn--border">
+                        <button onClick={() => clearSorts()} className="pairs__popup-btn pairs__popup-btn--left-border">
                             Clear
                         </button>
-                        <button onClick={() => setIsSortPopupOpen(false)} className="pairs__popup-btn">
+                        <button onClick={() => setIsSortPopupOpen(false)} className="pairs__popup-btn pairs__popup-btn--right-border">
                             Confirm
                         </button>
                     </div>
