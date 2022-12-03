@@ -1,7 +1,8 @@
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
-import defaultUserPhoto from "../../assets/images/photos/1.jpg"
+import defaultUserPhoto from "../../../assets/images/photos/1.jpg"
+import styles from "./ImageSlider.module.scss"
 
 interface ImageSliderPropsInterface{
     images: string[] | []
@@ -28,40 +29,40 @@ const ImageSlider: React.FC<ImageSliderPropsInterface> = ({images, userId, image
 
     if(!Array.isArray(images) || images.length <= 0 || images[0] === '') {
         return (
-            <div className="image__slider">
-                <div style={{backgroundImage: `url(${defaultUserPhoto})`}} className={`image__slider-item image__slider-item--default ${imageExtraClassName}`}></div>
+            <div className={styles.slider}>
+                <div style={{backgroundImage: `url(${defaultUserPhoto})`}} className={`${styles.item} ${styles.item_default} ${imageExtraClassName ? styles[`item${imageExtraClassName}`] : ''}`}></div>
             </div>
         )
     }
 
     return(
-        <div className="image__slider">
-            <div className="slider__stripes">
+        <div className={styles.slider}>
+            <div className={styles.stripes}>
                 {stripesArray.map(stripe => {
                     return(
-                        <div key={stripe} className={`slider__stripe${stripe === current ? ' slider__stripe--active' : ''}`}></div>
+                        <div key={stripe} className={`${styles.stripe} ${stripe === current ? styles.stripe_active : ''}`}></div>
                     )
                 })}
             </div>
-            <div className="image__slider-arrows">
+            <div className={styles.arrows}>
                 {current === 0 ? null :
-                <div onClick={prevSlide} className="image__slider-left-arrow-wrapper">
-                    <FontAwesomeIcon icon={faAngleLeft} className="image__slider-left-arrow"/>
+                <div onClick={prevSlide} className={styles.leftArrowWrapper}>
+                    <FontAwesomeIcon icon={faAngleLeft} className={styles.leftArrow}/>
                 </div>
                 }
                 {current === length - 1 ? null :
-                <div onClick={nextSlide} className="image__slider-rigth-arrow-wrapper">
-                    <FontAwesomeIcon icon={faAngleRight} className="image__slider-right-arrow"/>
+                <div onClick={nextSlide} className={styles.rigthArrowWrapper}>
+                    <FontAwesomeIcon icon={faAngleRight} className={styles.rightArrow}/>
                 </div>
                 }
             </div>
 
             {images.map((imageName, index) => {
                 return(
-                    <div key={index} className={index === current ? 'image__slider-item-wrapper--active' : 'image__slider-item-wrapper--hidden'}>
+                    <div key={index} className={index === current ? styles.itemWrapper_active : styles.itemWrapper_hidden}>
                         <div
                             style={{backgroundImage: `url(http://localhost:5000/${userId}/${index > 0 ? 'gallery' : 'avatar'}/${imageName})`}} 
-                            className={`image__slider-item${' ' + imageExtraClassName}`}>
+                            className={`${styles.item} ${imageExtraClassName ? styles[`item${imageExtraClassName}`] : ''}`}>
                         </div>
                     </div>
                 )

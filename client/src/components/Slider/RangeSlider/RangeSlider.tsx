@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react'
-import s from './RangeSlider.module.scss'
+import styles from './RangeSlider.module.scss'
 
 interface IRange{
     min: number 
@@ -40,16 +40,16 @@ const RangeSlider: React.FC<IRangeSlider> = ({value, setValue, completeValue, mi
         <div>
             {isMultiple ? value.min && value.max &&
                 <>
-                    <div className={`${s.rangeSlider} ${s.flat}`} style={style as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>}>
+                    <div className={`${styles.slider} ${styles.flat}`} style={style as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>}>
                         <input value={value.min} onChange={(e) => handleChange(+e.target.value, value.max)} onMouseUp={() => completeValue()} min={min} max={max} step={step} type="range" />
                         <input value={value.max} onChange={(e) => handleChange(value.min, +e.target.value)} onMouseUp={() => completeValue()} min={min} max={max} step={step} type="range" />
-                        <div className={s.rangeSlider__progress}></div>
+                        <div className={styles.slider__progress}></div>
                     </div>
                 </>
             :
-                <div className={`${s.rangeSlider} ${s.flat}`} style={style as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>}>
+                <div className={`${styles.slider} ${styles.flat}`} style={style as DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>}>
                     <input value={value as number} onChange={(e) => setValue(+e.target.value)} onMouseUp={() => completeValue()} min={min} max={max} step={step} type="range"/>
-                    <div className={s.rangeSlider__progress}></div>
+                    <div className={styles.slider__progress}></div>
                 </div>
             }
         </div>

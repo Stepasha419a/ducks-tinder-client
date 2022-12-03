@@ -808,19 +808,6 @@ textarea:-ms-input-placeholder { color: #999999; }
   height: calc(100% - 120px);
 }
 
-.content__user-slider-image{
-  -webkit-box-shadow: inset -30px -200px 45px -60px rgba(0,0,0,1);
-  -moz-box-shadow: inset -30px -200px 45px -60px rgba(0,0,0,1);
-  box-shadow: inset -30px -200px 45px -60px rgba(0,0,0,1);
-}
-
-.content__user-slider-image--full{
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  max-height: 470px;
-}
-
 .content__user-photo--profile{
   background-size: auto 135%;
   -webkit-box-shadow: none;

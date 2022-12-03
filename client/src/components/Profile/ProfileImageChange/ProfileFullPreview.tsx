@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { IUser } from "../../../models/IUser"
 import InterestsListPopup from "../../Pairs/popups/InterestsListPopup"
-import ImageSlider from "../../Slider/ImageSlider"
+import ImageSlider from "../../Slider/ImageSlider/ImageSlider"
 
 interface ProfileFullPreviewPropsInterface{
     currentUser: IUser

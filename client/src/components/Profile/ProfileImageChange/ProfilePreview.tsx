@@ -1,7 +1,7 @@
 import { faCircleInfo, faHouse, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IUser } from "../../../models/IUser"
-import ImageSlider from "../../Slider/ImageSlider"
+import ImageSlider from "../../Slider/ImageSlider/ImageSlider"
 
 interface ProfilePreviewPropsInterface{
     currentUser: IUser
@@ -13,7 +13,7 @@ const ProfilePreview: React.FC<ProfilePreviewPropsInterface> = ({currentUser, se
         <div className="content__preview">
             
             <div className="content__preview-inner">
-                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName={'image__slider-item--bdrd'}/>
+                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName={'_bdrd'}/>
                 
                 <div className="content__preview-info content__user-info content__info-setting">
                     <div className="content__user-descr content__user-descr--full">

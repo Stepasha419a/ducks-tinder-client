@@ -6,7 +6,7 @@ import { IUser } from "../../../models/IUser"
 import { createChatThunk } from "../../../redux/chatReducer"
 import { AppStateType } from "../../../redux/reduxStore"
 import { deletePairThunk } from "../../../redux/usersReducer"
-import ImageSlider from "../../Slider/ImageSlider"
+import ImageSlider from "../../Slider/ImageSlider/ImageSlider"
 import InterestsListPopup from "./InterestsListPopup"
 
 interface PairPopupProps{

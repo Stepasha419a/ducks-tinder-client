@@ -1,7 +1,7 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IUser } from "../../models/IUser"
-import ImageSlider from "../Slider/ImageSlider"
+import ImageSlider from "../Slider/ImageSlider/ImageSlider"
 
 interface ProfileUserImagePropsInterface{
     currentUser: IUser

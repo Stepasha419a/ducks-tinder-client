@@ -1,4 +1,4 @@
-.rangeSlider {
+.slider {
     --primary-color: #ff4458;
   
     --value-offset-y: var(--ticks-gap);
@@ -40,7 +40,6 @@
       var(--max)
     );
     --value-b: var(--value, 0);
-    --text-value-a: var(--text-value, "");
   
     --completed-a: calc(
       (var(--value-a) - var(--min)) / (var(--max) - var(--min)) * 100
@@ -191,17 +190,11 @@
   
           --value: var(--value-a);
           --x-offset: calc(var(--completed-a) * -1%);
-          &::after {
-            content: var(--prefix, "") var(--text-value-a) var(--suffix, "");
-          }
         }
       }
   
       &:nth-of-type(2) {
         --is-left-most: Clamp(0, (var(--value-b) - var(--value-a)) * 99999, 1);
-        & + output {
-          --value: var(--value-b);
-        }
       }
   
       &:only-of-type {
@@ -232,11 +225,6 @@
           )
         );
         transition: all 0.12s ease-out, left 0s;
-  
-        &::after {
-          content: var(--prefix, "") var(--text-value-b) var(--suffix, "");
-          font: var(--value-font);
-        }
       }
     }
 }

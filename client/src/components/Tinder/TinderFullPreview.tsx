@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { IUser } from "../../models/IUser"
 import InterestsListPopup from "../Pairs/popups/InterestsListPopup"
-import ImageSlider from "../Slider/ImageSlider"
+import ImageSlider from "../Slider/ImageSlider/ImageSlider"
 
 interface TinderFullPreviewProps {
     currentUser: IUser
@@ -22,7 +22,7 @@ const TinderFullPreview: React.FC<TinderFullPreviewProps> = ({currentUser, setIs
     return(
         <div className="content__user content__user--full">
             <div className="content__user-slider content__user-slider--full">
-                <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName="content__user-slider-image content__user-slider-image--full"/>
+                <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName="_tinderFull"/>
                 <button onClick={() => setIsFullPreview(false)} className="content__full-preview-close content__user-close-full">
                     <FontAwesomeIcon icon={faCircleDown} className="content__full-preview-close-icon"/>
                 </button>

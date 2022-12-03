@@ -1,7 +1,7 @@
 import { faHouse, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IUser } from "../../models/IUser"
-import ImageSlider from "../Slider/ImageSlider"
+import ImageSlider from "../Slider/ImageSlider/ImageSlider"
 
 interface TinderUserProps{
     currentUser: IUser
@@ -12,7 +12,7 @@ const TinderUser: React.FC<TinderUserProps> = ({currentUser, setIsFullPreview}) 
     return(
         <div className="content__user">
             <div className="content__user-slider">
-                <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName="content__user-slider-image"/>
+                <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName="_tinder"/>
             </div>
             <div onClick={() => setIsFullPreview(true)} className="content__user-descr">
                 <div className="content__user-descr-person">
