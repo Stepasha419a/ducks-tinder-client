@@ -1,11 +1,12 @@
 import { MutableRefObject, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { IChat } from "../../../models/IChat"
-import { IUser } from "../../../models/IUser"
-import { connectChatThunk, disconnectChatThunk } from "../../../redux/chatReducer"
-import { getUserThunk } from "../../../redux/usersReducer"
-import Avatar from "../../Avatar/Avatar"
+import { IChat } from "../../../../models/IChat"
+import { IUser } from "../../../../models/IUser"
+import { connectChatThunk, disconnectChatThunk } from "../../../../redux/chatReducer"
+import { getUserThunk } from "../../../../redux/usersReducer"
+import Avatar from "../../../Avatar/Avatar"
 import { Socket } from 'socket.io-client'
+import styles from './ChatItem.module.scss'
 
 interface ChatInterface{
     chat: IChat
@@ -35,13 +36,13 @@ const ChatItem: React.FC<ChatInterface> = ({chat, chatCompanionId, socket, curre
     }, [chatCompanionId, dispatch])
 
     return(
-        <div onClick={() => connect(chat._id)} className={`info__content-chats-item${currentChatId === chat._id ? ' info__content-chats-item--active': ''}`}>
+        <div onClick={() => connect(chat._id)} className={`${styles.item} ${currentChatId === chat._id ? styles.item_active : ''}`}>
             <Avatar otherUserId={chatCompanionId} imageExtraClassName={'info__content-chats-item-photo'} />
-            <div className="info__content-chats-item-descr">
-                <div className="info__content-chats-item-descr-name">
+            <div className={styles.descr}>
+                <div className={styles.name}>
                     {chatPartner.name}
                 </div>
-                <div className="info__content-chats-item-descr-message">
+                <div className={styles.message}>
                     {chat.messages.length 
                     ? 
                     chat.messages[chat.messages.length - 1]?.userId === chatPartner._id 

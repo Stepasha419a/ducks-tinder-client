@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { IChat } from "../../../models/IChat"
 import { getChatsThunk } from "../../../redux/chatReducer"
 import { AppStateType } from "../../../redux/reduxStore"
-import ChatItem from "./ChatItem"
+import ChatItem from "./ChatItem/ChatItem"
 import { Socket } from 'socket.io-client'
+import styles from './Chats.module.scss'
 
 interface ChatsInterface{
     socket: MutableRefObject<Socket | undefined>
@@ -26,7 +27,7 @@ const Chats: React.FC<ChatsInterface> = ({socket}) => {
     }
 
     return (
-        <div className="info__content-chats">
+        <div className={styles.chats}>
             {chats.map((chat: IChat) => {
                 const chatCompanionId = chat.members.find((memberId: string) => memberId !== currentUser._id)
                 return (

@@ -1,0 +1,162 @@
+.info{
+    max-width: 340px;
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid rgb(214, 214, 214);
+
+    .user{
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: 90px;
+        background-image: linear-gradient(45deg,#fd267a,#ff6036);
+
+        .person{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px;
+            margin-left: 12px;
+            border-radius: 36px;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+            
+            &:hover{
+                background-color: rgba(0, 0, 0, 0.384);
+            }
+
+            .name{
+                font-weight: 500;
+                font-size: 16px;
+                color: #FFFFFF;
+                margin: 0 8px;
+            }
+        }
+
+        .review{
+            position: absolute;
+            top: 25px;
+            right: 15px;
+        }
+
+        .work{
+            position: absolute;
+            top: 25px;
+            right: 71px;
+        }
+
+        .link{
+            height: 40px;
+            width: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #00000052;
+            border-radius: 50%;
+            color: #FFFFFF;
+            transition: all .3s;
+
+            &:hover{
+                background-color: #00000073;
+            }
+        }
+    }
+
+    .titles{
+        margin-top: 10px;
+        display: flex;
+        
+        .title{
+            font-size: 20px;
+            color: #21262e;
+            font-weight: 700;
+            margin-left: 15px;
+            padding: 0 6px;
+            cursor: pointer;
+            text-decoration: none;
+
+            &_active{
+                border-bottom: 3px solid #ff4458;
+            }
+        }
+    }
+
+    .content{
+        margin: 0 20px;
+
+        .pairs{
+            margin-top: 20px;
+            width: 100%;
+
+            .link{
+                display: block;
+                width: 104px;
+                text-decoration: none;
+                transition: .2s;
+            
+                &:hover{
+                    transform: scale(1.1);
+                }
+
+                .content{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-repeat: no-repeat;
+                    background-position: 50% 50%;
+                    background-size: auto 130%;
+                    width: 104px;
+                    height: 120px;
+                    border: 4px solid rgb(248, 230, 127);
+                    border-radius: 4px;
+                    position: relative;
+                    background-color: #ccc;
+
+                    .likes{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 40px;
+                        height: 40px;
+                        background-color: rgb(248, 222, 74);
+                        border-radius: 50%;
+                        font-weight: 500;
+                        color: #fff;
+                        font-size: 18px;
+                    }
+
+                    .text{
+                        position: absolute;
+                        bottom: 3px;
+                        left: 3px;
+                        font-weight: 700;
+                        color: #fff;
+                    }
+
+                    .icon{
+                        position: absolute;
+                        bottom: -18px;
+                        left: 37%;
+                        color: rgb(245, 212, 29);
+                        font-size: 24px;
+                    }
+                }
+            }
+        }
+
+        .noPairs{
+            display: flex;
+            font-weight: 600;
+            color: #505965;
+            padding: 5px;
+            margin-top: 10px;
+
+            .icon{
+                font-size: 38px;
+                margin-right: 10px;
+                color: #e65050;
+            }
+        }
+    }
+}

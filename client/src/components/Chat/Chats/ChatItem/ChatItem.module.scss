@@ -1,0 +1,37 @@
+.item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 4px;
+    border-radius: 36px;
+    cursor: pointer;
+    transition: .3s;
+
+    &_active{
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.171);
+    }
+
+    &:hover{
+        background-color: rgba(0, 0, 0, 0.171);
+    }
+
+    .descr{
+        margin-left: 10px;
+
+        .name{
+            font-weight: 500;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .message{
+            margin-top: 8px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 210px;
+            overflow: hidden;
+        }
+    }
+}
