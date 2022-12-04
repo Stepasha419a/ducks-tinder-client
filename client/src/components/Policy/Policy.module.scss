@@ -1,0 +1,58 @@
+@mixin container{
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.policy{
+    .header{
+        height: 100px;
+
+        .container{
+            @include container;
+
+            .link{
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+
+                .image{
+                    height: 100px;
+                }
+
+                .text{
+                    font-size: 64px;
+                    font-weight: 700;
+                    color: #505965;
+                }
+            }
+        }
+    }
+
+    .hr{
+        height: 1px;
+        background-color: #b9bfc8;
+        border: none;
+    }
+
+    .content{
+        padding: 15px 0;
+
+        .container{
+            @include container;
+
+            .title{
+                font-size: 42px;
+                font-weight: 800;
+            }
+
+            .text{
+                font-size: 16px;
+                line-height: 1.5;
+                color: #505965;
+                padding: 15px 0;
+            }
+        }
+    }
+}

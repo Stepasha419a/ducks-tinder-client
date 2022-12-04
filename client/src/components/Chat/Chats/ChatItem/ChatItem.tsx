@@ -37,7 +37,7 @@ const ChatItem: React.FC<ChatInterface> = ({chat, chatCompanionId, socket, curre
 
     return(
         <div onClick={() => connect(chat._id)} className={`${styles.item} ${currentChatId === chat._id ? styles.item_active : ''}`}>
-            <Avatar otherUserId={chatCompanionId} imageExtraClassName={'info__content-chats-item-photo'} />
+            <Avatar otherUserId={chatCompanionId} imageExtraClassName='_chat' />
             <div className={styles.descr}>
                 <div className={styles.name}>
                     {chatPartner.name}

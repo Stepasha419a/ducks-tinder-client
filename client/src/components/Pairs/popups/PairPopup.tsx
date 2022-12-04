@@ -56,7 +56,7 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
                 <div className="pairs__popup-content pairs__popup-content--pair">
                     <div onClick={() => setCurrentPair({} as IUser)} className="pairs__popup-close"></div>
                     <div className="pairs__popup-slider">
-                        <ImageSlider images={[currentPair.pictures.avatar, ...currentPair.pictures.gallery]} userId={currentPair._id} imageExtraClassName='pairs-popup-slider-image'/>
+                        <ImageSlider images={[currentPair.pictures.avatar, ...currentPair.pictures.gallery]} userId={currentPair._id}/>
                         <div className="pairs__slider-pair-info">
                             <div className="pairs__slider-info">
                                 <div className="pairs__slider-info-name">

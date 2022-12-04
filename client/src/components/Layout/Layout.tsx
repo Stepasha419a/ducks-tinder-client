@@ -4,6 +4,7 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom"
 import { AppStateType } from "../../redux/reduxStore"
 import Nav from "../Nav/Nav"
 import { Socket } from 'socket.io-client'
+import styles from './Layout.module.scss'
 
 interface LayoutPropsInterface{
     isPairsOpened: boolean,
@@ -26,7 +27,7 @@ const Layout: React.FC<LayoutPropsInterface> = ({isPairsOpened, setIsPairsOpened
     if(isAuth) {
         if(url === '/' || url === '/chat' || url === '/pairs') {
             return(
-                <div className="tinder">
+                <div className={styles.tinder}>
                     <Nav isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket}/>
                     <Outlet />
                 </div>

@@ -1,0 +1,58 @@
+.wrapper{
+    display: table;
+    padding: 8px 0;
+    position: relative;
+
+    .container{
+        display: flex;
+        align-items: flex-end;
+        
+        .message{
+            background-color: #fff;
+            padding: 8px;
+            border-radius: 8px;
+            border-bottom-left-radius: 0px;
+
+            &_own{
+                background: linear-gradient(45deg,#ffdeeb,#ff623623)
+            }
+
+            .username{
+                font-weight: 500;
+                font-size: 15px;
+                margin-bottom: 2px;
+            }
+
+            .content{
+                overflow-wrap: break-word;
+                max-width: 584px;
+            }
+
+            .mark{
+                position: absolute;
+                bottom: 8px;
+                left: 36px;
+                width: 12px;
+                height: 12px;
+                background-color: #fff;
+                overflow: hidden;
+
+                &_own{
+                    background: linear-gradient(45deg,#ffdeeb,#ff623600)
+                }
+
+                &::before{
+                    content: "";
+                    display: block;
+                    width: 200%;
+                    height: 200%;
+                    position: absolute;
+                    border-radius: 69%;
+                    bottom: 50px;
+                    left: -16px;
+                    box-shadow: 0px 50px 0 0 #f0f2f4;
+                }
+            }
+        }
+    }
+}

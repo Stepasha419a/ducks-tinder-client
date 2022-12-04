@@ -22,7 +22,7 @@ const ProfileFullPreview: React.FC<ProfileFullPreviewPropsInterface> = ({current
     return(
         <div className="content__full-preview">
             <div className="content__full-preview-slider">
-                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id} imageExtraClassName={'image__slider-item--bdrd-top'}/>
+                <ImageSlider  images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id}/>
                 <button onClick={() => setIsFullPreviewPageSetting(false)} className="content__full-preview-close">
                     <FontAwesomeIcon icon={faCircleDown} className="content__full-preview-close-icon"/>
                 </button>

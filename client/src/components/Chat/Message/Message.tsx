@@ -1,6 +1,7 @@
 import { IMessage } from "../../../models/IChat"
 import { IUser } from "../../../models/IUser"
 import Avatar from "../../Avatar/Avatar"
+import styles from './Message.module.scss'
 
 interface MessageComponentInterface{
     message: IMessage
@@ -10,23 +11,23 @@ interface MessageComponentInterface{
 
 const Message: React.FC<MessageComponentInterface> = ({message, user, currentUserId}) => {
     return(
-        <div className="chat__message-wrapper">
-            <div className="chat__message-container">
+        <div className={styles.wrapper}>
+            <div className={styles.container}>
                 {user?.pictures ? 
-                    <Avatar otherUserId={user._id} imageExtraClassName={'chat__message-avatar'} avatarUrl={user.pictures.avatar}/>
+                    <Avatar otherUserId={user._id} imageExtraClassName='_message' avatarUrl={user.pictures.avatar}/>
                 :
-                    <Avatar showDefaultPhoto imageExtraClassName={'chat__message-avatar'}/>
+                    <Avatar showDefaultPhoto imageExtraClassName='_message'/>
                 }
-                <div className={`chat__message${message.userId === currentUserId ? ' chat__message--own-message' : ''}`}>
+                <div className={`${styles.message} ${message.userId === currentUserId ? styles.message_own : ''}`}>
                     {!(message.userId === currentUserId) &&
-                        <div className="chat__message-username">
+                        <div className={styles.username}>
                             {user?.name}
                         </div>
                     }
-                    <div className="chat__message-content">
+                    <div className={styles.content}>
                         {message.content}
                     </div>
-                    <div className={`chat__message-mark${message.userId === currentUserId ? ' chat__message-mark--own-message' : ''}`}></div>
+                    <div className={`${styles.mark} ${message.userId === currentUserId ? styles.mark_own : ''}`}></div>
                 </div>
             </div>
         </div>

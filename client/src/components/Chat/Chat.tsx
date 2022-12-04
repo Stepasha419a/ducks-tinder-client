@@ -10,6 +10,7 @@ import { isRefElementVisible, scrollToBottom } from "./utils/ChatUtils"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMessage } from "@fortawesome/free-solid-svg-icons"
 import { Socket } from 'socket.io-client'
+import styles from './Chat.module.scss'
 
 interface ChatPropsInterface{
     socket: MutableRefObject<Socket | undefined>
@@ -67,30 +68,30 @@ const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
     }
 
     return(
-        <div className="chat">
+        <div className={styles.chat}>
             {isConnected ?
-                <div className="chat__container">
-                    <div className="chat__messages">
+                <div className={styles.container}>
+                    <div className={styles.messages}>
                         {messages.map((message: IMessage) => 
                             userMembers.length ? 
                                 <Message key={message.id} message={message} user={userMembers.find(item => item._id === message.userId)} currentUserId={currentUser._id}/> 
                             : 
                                 <div key={message.id}>loading message...</div>
                         )}
-                        <div ref={bottomElementRef} className="chat__messages-end-ref"></div>
+                        <div ref={bottomElementRef} className={styles.ref}></div>
                     </div>
-                    <div className="chat__form-wrapper">
-                        <div className="chat__form">
-                            <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className="chat__form-input" type="text" />
-                            <button onClick={sendMessage} className="chat__form-button">send</button>
+                    <div className={styles.wrapper}>
+                        <div className={styles.form}>
+                            <input onKeyPress={(e) => handleKeyPress(e)} value={value} onChange={(e) => setValue(e.target.value)} className={styles.input} type="text" />
+                            <button onClick={sendMessage} className={styles.button}>send</button>
                         </div>
                     </div>
                 </div>
             :
-                <div className="chat__no-chats">
-                    <div className="chat__no-chats-inner">
-                        <FontAwesomeIcon icon={faMessage} className="chat__no-chats-icon"/>
-                        <div className="chat__no-chats-text">
+                <div className={styles.noChats}>
+                    <div className={styles.inner}>
+                        <FontAwesomeIcon icon={faMessage} className={styles.icon}/>
+                        <div className={styles.text}>
                             Choose the chat
                         </div>
                     </div>
