@@ -8,7 +8,7 @@ import { deleteNotification, updateUserThunk } from "../../redux/usersReducer"
 import ProfileUserImage from "./ProfileUserImage"
 import ProfileSettingsList from "./ProfileSettingsList"
 import ProfileSetting from "./ProfileSetting"
-import ProfileImageSetting from "./ProfileImageChange/ProfileImageSetting"
+import ProfileImageSetting from "./ProfileImageChange/ImageSetting/ImageSetting"
 
 const Profile = () => {
 

@@ -1,4 +1,4 @@
-import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage"
+import { imageInterface } from "../components/Profile/ProfileImageChange/ChangeImage/ChangeImage"
 
 export interface IUser {
     _id: string

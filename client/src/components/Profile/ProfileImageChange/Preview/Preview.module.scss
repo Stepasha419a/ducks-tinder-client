@@ -1,0 +1,131 @@
+.preview{
+    height: 100%;
+    padding: 12px;
+
+    .inner{
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: auto 100%;
+        height: calc(100% - 50px);
+        border-radius: 8px;
+        position: relative;
+
+        .info{
+            display: flex;
+            align-items: baseline;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #FFFFFF;
+            padding: 15px;
+
+            .descr{
+                width: 100%;
+                letter-spacing: .7px;
+                bottom: 102px;
+                left: 0;
+
+                .person{
+                    font-size: 36px;
+                    font-weight: 800;
+                    color: #FFFFFF;
+                    text-shadow: 0 1px 1px #0000001f;
+                    margin: 2px 0;
+
+                    .years{
+                        font-size: 28px;
+                        font-weight: 300;
+                    }
+                }
+
+                .place{
+                    color: #fff;
+                    display: flex;
+                    align-items: baseline;
+                    margin: 2px 0;
+
+                    .icon{
+                        font-size: 14px;
+                        color: #fff;
+                        margin-right: 5px;
+                    }
+                }
+
+                .distance{
+                    color: #FFFFFF;
+                    text-shadow: 0 1px 1px #0000001f;
+                    margin: 2px 0;
+
+                    .icon{
+                        margin: 0 5px 0 1px;
+                    }
+
+                    .text{
+                        margin-left: 4px;
+                    }
+                }
+            }
+        }
+
+        .openFullPreview{
+            position: absolute;
+            bottom: 30px;
+            right: 20px;
+            font-size: 24px;
+            color: #FFFFFF;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            transition: .3s;
+
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+  .content__user-descr-place-icon--full{
+    color: #505965;
+  }
+  
+  .content__user-descr-person--full{
+    margin-bottom: 10px;
+    color: #21262e;
+  }
+  
+  .content__user-descr-person--margin{
+    margin: 2px 0;
+  }
+  
+  .content__info-descr-name{
+    color: #21262e;
+  }
+
+  .content__preview-info-name{
+    font-weight: 800;
+    font-size: 36px;
+  }
+  
+  .content__preview-info-years{
+    font-size: 28px;
+    font-weight: 300;
+    margin-left: 8px;
+  }
+  
+  .content__preview-full{
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    font-size: 24px;
+    color: #FFFFFF;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: .3s;
+  }
+  
+  .content__preview-full:hover,
+  .content__full-preview-close:hover{
+    transform: scale(1.1);
+  }

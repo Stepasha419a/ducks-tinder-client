@@ -1,0 +1,117 @@
+@mixin btn {
+    display: block;
+    height: 15px;
+    width: 3px;
+    background: #505965;
+    position: absolute;
+    bottom: 4px;
+    right: 10px;
+    border-radius: 2px;
+}
+
+.popup{
+    position: fixed;
+    z-index: 150;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: all .5s ease 0s;
+
+    .body{
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 10px;
+
+        .content{
+            position: relative;
+            background-color: #FFFFFF;
+            width: 440px;
+            height: 625px;
+            padding: 24px;
+            transition: all .5s ease 0s;
+            border-radius: 8px;
+
+            height: 262px;
+
+            .close{
+                position: relative;
+
+                .btn{
+                    width: 12px;
+                    height: 12px;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    cursor: pointer;
+                    padding: 12px;
+
+                    &::before{
+                        content: '';
+                        @include btn;
+
+                        transform: rotate(-45deg);
+                    }
+
+                    &::after{
+                        content: '';
+                        @include btn;
+
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+
+            .title{
+                font-size: 24px;
+                font-weight: 500;
+                margin-top: 30px;
+                margin-bottom: 10px;
+            }
+
+            .descr{
+                font-size: 16;
+                color: #505965;
+                margin-bottom: 24px;
+            }
+
+            .wrapper{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .input{
+                    background: linear-gradient(45deg,#fd267a,#ff6036);
+                    width: 320px;
+                    border-radius: 16px;
+                    
+                    .label{
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        cursor: pointer;
+                        padding: 20px;
+                        border-radius: 16px;
+
+                        .span{
+                            color: #FFFFFF;
+                            font-size: 14px;
+
+                            .boldSpan{
+                                font-size: 36px;
+                                font-weight: 700;
+                            }
+                        }
+
+                        .input[type="file"] {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

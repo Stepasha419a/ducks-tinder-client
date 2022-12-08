@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux"
 import { IUser } from "../../../../models/IUser"
 import { saveUserImage } from "../../../../redux/usersReducer"
 import RangeSlider from "../../../Slider/RangeSlider/RangeSlider"
-import getCroppedImg from "./cropImage.js"
+import getCroppedImg from "./cropImageScript.js"
+import styles from './CropImage.module.scss'
 
 interface ProfileCropImagePropsInterface{
     currentUser: IUser
@@ -37,11 +38,11 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
     }
 
     return(
-        <div className="popup crop">
-            <div className="popup__body crop__body">
-                <div className="popup__content crop__content">
-                    <div className="crop__title">Redact photo</div>
-                    <div className="crop__image">
+        <div className={styles.popup}>
+            <div className={styles.body}>
+                <div className={styles.content}>
+                    <div className={styles.title}>Redact photo</div>
+                    <div className={styles.image}>
                         <Cropper
                             image={imageURL}
                             crop={crop}
@@ -54,8 +55,8 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                             onCropComplete={cropComplete}
                         />
                     </div>
-                    <div className="crop__inputs">
-                        <div className="crop__input-range">
+                    <div className={styles.wrapper}>
+                        <div className={styles.input}>
                             <RangeSlider 
                                 value={zoom} 
                                 setValue={setZoom as any} 
@@ -66,11 +67,11 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({setIsImageC
                             />
                         </div>
                     </div>
-                    <div className="crop__btns">
-                        <button onClick={() => setIsImageCropOpen(false)} className="crop__button">
+                    <div className={styles.btns}>
+                        <button onClick={() => setIsImageCropOpen(false)} className={styles.btn}>
                             Cancel
                         </button>
-                        <button onClick={() => cropImage(currentUser._id, currentImageCrop)} className="crop__button crop__button--select">
+                        <button onClick={() => cropImage(currentUser._id, currentImageCrop)} className={`${styles.btn} ${styles.btn_select}`}>
                             Select
                         </button>
                     </div>

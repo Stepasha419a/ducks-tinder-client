@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { IUser } from "../../../models/IUser"
-import ProfileChangeImage from "./ProfileChangeImage"
-import ProfileFullPreview from "./ProfileFullPreview"
-import ProfilePreview from "./ProfilePreview"
+import { IUser } from "../../../../models/IUser"
+import ProfileChangeImage from "../ChangeImage/ChangeImage"
+import ProfileFullPreview from "../Preview/FullPreview/FullPreview"
+import ProfilePreview from "../Preview/Preview"
+import styles from './ImageSetting.module.scss'
 
 interface ProfileImageSettingPropsInterface{
     setIsImageSetting: (isImageSetting: boolean) => void
@@ -14,16 +15,16 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({setIs
     const [isFullPreviewPageSetting, setIsFullPreviewPageSetting] = useState(false)
 
     return(
-        <div className="content__change">
+        <div className={styles.change}>
             {isFullPreviewPageSetting ?
                 <ProfileFullPreview currentUser={currentUser} setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}/>
             :
             <>
-                <div className="content__change-btns">
-                    <button onClick={() => setIsPreviewSetting(false)} className={`content__change-button content__change-button--border ${!isPreviewSetting ? 'content__change-button--active' : ''}`}>Change</button>
-                    <button onClick={() => setIsPreviewSetting(true)} className={`content__change-button  ${isPreviewSetting ? 'content__change-button--active' : ''}`}>Preview</button>
+                <div className={styles.btns}>
+                    <button onClick={() => setIsPreviewSetting(false)} className={`${styles.btn} ${styles.btn_border} ${!isPreviewSetting ? styles.btn_active : ''}`}>Change</button>
+                    <button onClick={() => setIsPreviewSetting(true)} className={`${styles.btn}  ${isPreviewSetting ? styles.btn_active : ''}`}>Preview</button>
                 </div>
-                <div className="content__change-panel">
+                <div className={styles.panel}>
                     {isPreviewSetting ?
                         <ProfilePreview currentUser={currentUser} setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}/>
                     :

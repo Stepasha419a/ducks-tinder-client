@@ -2,10 +2,11 @@ import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { IUser } from "../../../models/IUser"
-import { deleteUserImage, mixUserImages } from "../../../redux/usersReducer"
-import ProfileCropImage from "./CropImage/ProfileCropImage"
-import ProfileDialogUpload from "./CropImage/ProfileDialogUpload"
+import { IUser } from "../../../../models/IUser"
+import { deleteUserImage, mixUserImages } from "../../../../redux/usersReducer"
+import ProfileCropImage from "../CropImage/CropImage"
+import ProfileDialogUpload from "../CropImage/DialogUpload/DialogUpload"
+import styles from './ChangeImage.module.scss'
 
 interface ProfileChangeImagePropsInterface{
     currentUser: IUser
@@ -113,21 +114,21 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
     const sortCards = (a: imageInterface, b: imageInterface) => a.order - b.order;
 
     return(
-        <>
-            <div className="content__change-images">
+        <div className={styles.change}>
+            <div className={styles.images}>
                 {images.sort(sortCards).map((imageObj, index) => {
                     if(!imageObj) {
                         return(
-                            <div onClick={() => index === 0 ? openSettingHandler('avatar') : openSettingHandler('gallery')} key={index} className="content__change-images-item">
-                                <div className="content__change-images-col-item-img" />
-                                <button className="content__change-images-col-item-btn--plus">
-                                    <FontAwesomeIcon className="content__change-images-col-item-btn-mark--plus" icon={faPlus}/>
+                            <div onClick={() => index === 0 ? openSettingHandler('avatar') : openSettingHandler('gallery')} key={index} className={styles.item}>
+                                <div className={styles.image} />
+                                <button className={`${styles.btn} ${styles.btn_plus}`}>
+                                    <FontAwesomeIcon className={styles.mark} icon={faPlus}/>
                                 </button>
                             </div>
                         )
                     }
                     return(
-                        <div key={index} className="content__change-images-item">
+                        <div key={index} className={styles.item}>
                             <div 
                                 draggable
                                 onDragStart={(e) => dragStartHangler(e, imageObj)}
@@ -136,10 +137,10 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                                 onDragOver={e => dragOverHangler(e)}
                                 onDrop={e => dropHangler(e, imageObj)} 
                                 style={{backgroundImage: `url(http://localhost:5000/${currentUser._id}/${imageObj.setting}/${imageObj.image})`}} 
-                                className="content__change-images-col-item-img content__change-images-col-item-img--image" 
+                                className={`${styles.image} ${styles.image_has_image}`} 
                             />
-                            <button onClick={() => deleteImageHandler(imageObj.image, currentUser._id, imageObj.setting as 'avatar' | 'gallery')} className="content__change-images-col-item-btn--xmark">
-                                <FontAwesomeIcon className="content__change-images-col-item-btn-mark--xmark" icon={faXmark}/>
+                            <button onClick={() => deleteImageHandler(imageObj.image, currentUser._id, imageObj.setting as 'avatar' | 'gallery')} className={`${styles.btn} ${styles.btn_xmark}`}>
+                                <FontAwesomeIcon className={styles.mark} icon={faXmark}/>
                             </button>
                         </div>
                     )
@@ -147,23 +148,23 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
                 
                 {arrForLoop.map(item => {
                     return(
-                        <div onClick={() => openSettingHandler('gallery')} key={item} className="content__change-images-item">
-                            <div className="content__change-images-col-item-img" />
-                            <button className="content__change-images-col-item-btn--plus">
-                                <FontAwesomeIcon className="content__change-images-col-item-btn-mark--plus" icon={faPlus}/>
+                        <div onClick={() => openSettingHandler('gallery')} key={item} className={styles.item}>
+                            <div className={styles.image} />
+                            <button className={`${styles.btn} ${styles.btn_plus}`}>
+                                <FontAwesomeIcon className={styles.mark} icon={faPlus}/>
                             </button>
                         </div>
                     )
                 })
                 }
             </div>
-            <div className="content__change-descr">
+            <div className={styles.descr}>
                 Add more photos to fill out your profile 
                 <br/>by another 4% and get more likes.
             </div>
-            <div className="content__change-save">
-                <button onClick={() => submitHandler()} className="content__change-save-btn">
-                    <span className="content__change-save-text">Save changes</span>
+            <div className={styles.save}>
+                <button onClick={() => submitHandler()} className={styles.btn}>
+                    <span className={styles.text}>Save changes</span>
                 </button>
             </div>
 
@@ -174,7 +175,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({current
             {isImageCropOpen &&
                 <ProfileCropImage setIsImageCropOpen={setIsImageCropOpen} imageURL={imageURL} currentUser={currentUser} currentImageCrop={currentImageCrop} setCurrentImageCrop={setCurrentImageCrop}/>
             }
-        </>
+        </div>
     )
 }
 

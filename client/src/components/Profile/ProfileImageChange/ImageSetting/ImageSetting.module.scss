@@ -1,0 +1,31 @@
+.change{
+    height: 100%;
+
+    .btns{
+        display: flex;
+        height: 46px;
+        border-bottom: 1px solid #d4d8de;
+
+        .btn{
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 18px;
+
+            &_active{
+                color: #d6002f;
+            }
+
+            &_border{
+                border-right: 1px solid #d4d8de;
+            }
+        }
+    }
+
+    .panel{
+        height: calc(100% - 45px);
+    }
+}

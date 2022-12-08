@@ -1,7 +1,7 @@
 import { makeDataObject, makeQuerySortsObj } from './../models/IUser';
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { usersAPI } from "../api/usersApi";
-import { imageInterface } from "../components/Profile/ProfileImageChange/ProfileChangeImage";
+import { imageInterface } from "../components/Profile/ProfileImageChange/ChangeImage/ChangeImage";
 import { IUser, makeUserImagesObject } from "../models/IUser";
 
 interface INotification {
