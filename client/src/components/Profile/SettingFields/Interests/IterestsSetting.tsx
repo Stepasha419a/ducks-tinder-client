@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
-import { IUser } from "../../../models/IUser"
-import InterestsSettingPopup from "../../Pairs/popups/InterestsSettingPopup"
+import { IUser } from "../../../../models/IUser"
+import InterestsSettingPopup from "../../../Pairs/popups/InterestsSettingPopup"
+import styles from './IterestsSetting.module.scss'
 
 interface InterestsSettingPropsInterface{
     currentUser: IUser
@@ -68,49 +69,49 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({currentUser
 
     return(
         <>
-        <div className="content__setting">
-            <div className="content__setting-name content__setting-name--error">
+        <div className={styles.setting}>
+            <div className={`${styles.name} ${styles.name_error}`}>
                 {inputValueError}
             </div>
-            <div className="content__setting-name">
+            <div className={styles.name}>
                 Interests
             </div>
-            <div className="content__setting-change">
-                <div className="content__setting-search">
-                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className="content__setting-search-input" placeholder="type your interest's name here" type="text"/>
-                    <div className="content__setting-result">
+            <div className={styles.content}>
+                <div className={styles.search}>
+                    <input value={inputValue} onChange={(e) => setInputValue(e.target.value)} className={styles.input} placeholder="type your interest's name here" type="text"/>
+                    <div className={styles.result}>
                         {filteredResults.map(item => {
                             return(
-                                <div onClick={() => addInterest(item)} key={item} className="content__setting-result-item">
+                                <div onClick={() => addInterest(item)} key={item} className={styles.item}>
                                     {item}
-                                    <div className="content__setting-result-item-plus"></div>
+                                    <div className={styles.plus}></div>
                                 </div>
                             )
                         })}
                     </div>
                 </div>
-                <div className="content__setting-interests-title">Your interests</div>
-                <div className="content__setting-interests">
+                <div className={styles.title}>Your interests</div>
+                <div className={styles.interests}>
                     {interests.length ? interests.map(item => {
                         return(
-                            <div onClick={() => deleteInterest(item)} key={item} className="content__setting-interests-item">
+                            <div onClick={() => deleteInterest(item)} key={item} className={styles.item}>
                                 {item}
-                                <div className="content__setting-interests-item-xmark"></div>
+                                <div className={styles.xmark}></div>
                             </div>
                         )
                     }) 
                     :
-                    <div className="content__setting-interests-item">
+                    <div className={styles.item}>
                         You don't have interests
                     </div>
                     }
                 </div>
-                <div onClick={() => setIsInterestsSettingPopupOpen(true)} className="pairs__popup-setting-show-all pairs__popup-show-all">Show all</div>
+                <div onClick={() => setIsInterestsSettingPopupOpen(true)} className={styles.showAll}>Show all</div>
             </div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content__setting-submit-button content__setting-submit-button--no-border-bottom">
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className={`${styles.submit} ${styles.submit_noBorder}`}>
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings('interests', interests)} className="content__setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings('interests', interests)} className={styles.submit}>
                 Update my interests
             </button>
         </div>

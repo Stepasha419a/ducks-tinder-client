@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react"
+import styles from './DescriptionSetting.module.scss'
 
 interface DescriptionSettingProps {
     submitSettings: (inputName: string, changedData: string | number | boolean | string[] | {from: number, to: number}, innerObjectName?: string) => void
@@ -14,28 +15,28 @@ interface DescriptionSettingProps {
 
 const DescriptionSetting: React.FC<DescriptionSettingProps> = ({ submitSettings, inputValueDirty, inputValueError, inputHandler, setInputValueDirty, inputValue, isFormCloseable, cancelHandler, isFormValid }) => {
     return (
-        <div className="content__setting">
+        <div className={styles.setting}>
             {inputValueDirty &&
-                <div className="content__setting-name content__setting-name--error">
+                <div className={`${styles.name} ${styles.name_error}`}>
                     {inputValueError}
                 </div>
             }
-            <div className="content__setting-name">
+            <div className={styles.name}>
                 Description
             </div>
-            <div className="content__setting-change">
+            <div className={styles.wrapper}>
                 <textarea 
                     onChange={(e) => inputHandler(e)} 
                     onBlur={(() => setInputValueDirty(true))} 
                     value={inputValue} 
-                    className="content__setting-change-input content__setting-change-textarea"
+                    className={`${styles.input} ${styles.textarea}`}
                 />
             </div>
-            <div className="content__setting-descr">Your description</div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content__setting-submit-button content__setting-submit-button--no-border-bottom">
+            <div className={styles.title}>Your description</div>
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className={`${styles.submit} ${styles.submit_boBorder}`}>
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings('description', inputValue)} className="content__setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings('description', inputValue)} className={styles.submit}>
                 Update my description
             </button>
         </div>

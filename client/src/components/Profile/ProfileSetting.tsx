@@ -2,8 +2,8 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ChangeEvent, useEffect, useState } from "react"
 import { IUser } from "../../models/IUser"
-import DescriptionSetting from "./SettingFields/DescriptionSetting"
-import InterestsSetting from "./SettingFields/IterestsSetting"
+import DescriptionSetting from "./SettingFields/Description/DescriptionSetting"
+import InterestsSetting from "./SettingFields/Interests/IterestsSetting"
 
 interface ProfileSettingPropsInterface {
     currentUser: IUser
