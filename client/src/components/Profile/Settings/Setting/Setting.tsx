@@ -1,9 +1,10 @@
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { ChangeEvent, useEffect, useState } from "react"
-import { IUser } from "../../models/IUser"
+import { IUser } from "../../../../models/IUser"
 import DescriptionSetting from "./SettingFields/Description/DescriptionSetting"
 import InterestsSetting from "./SettingFields/Interests/IterestsSetting"
+import styles from './Setting.module.scss'
 
 interface ProfileSettingPropsInterface {
     currentUser: IUser
@@ -98,34 +99,34 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
     }
     
     return (
-        <div className="content__setting">
+        <div className={styles.setting}>
             {inputValueDirty && inputValueError &&
-                <div className="content__setting-name content__setting-name--error">
+                <div className={`${styles.name} ${styles.name_error}`}>
                     {inputValueError}
                 </div>
             }
-            <div className="content__setting-name">
+            <div className={styles.name}>
                 {formName}
             </div>
-            <div className="content__setting-change">
+            <div className={styles.content}>
                 {(settingInputName === 'preferSex' && innerObjectName === 'partnerSettings') || (settingInputName === 'sex' && innerObjectName === '') ?
 
                     <div>
-                        <div onClick={() => setInputValue('male')} className={"content__setting-change-input-wrapper " + (inputValue === 'male' ? "content__setting-change-input-wrapper--active" : "") }>
-                            <input name={settingInputName} type="radio" value="male" id={settingInputName + '1'} checked={inputValue === 'male'} className="content__setting-change-input-radio"/>
+                        <div onClick={() => setInputValue('male')} className={styles.inputWrapper}>
+                            <input name={settingInputName} type="radio" value="male" id={settingInputName + '1'} checked={inputValue === 'male'} className={styles.input}/>
                             <label htmlFor={settingInputName + '1'}>
                                 Male
                             </label>
                             {inputValue === 'male' &&
-                            <FontAwesomeIcon icon={faCheck} className="content__setting-change-checked"/>}
+                            <FontAwesomeIcon icon={faCheck} className={styles.icon}/>}
                         </div>
-                        <div onClick={() => setInputValue('female')} className={"content__setting-change-input-wrapper " + (inputValue === 'female' ? "content__setting-change-input-wrapper--active" : "") }>
-                            <input name={settingInputName} type="radio" value="female"  id={settingInputName + '2'} checked={inputValue === 'female'} className="content__setting-change-input-radio"/>
+                        <div onClick={() => setInputValue('female')} className={styles.inputWrapper}>
+                            <input name={settingInputName} type="radio" value="female"  id={settingInputName + '2'} checked={inputValue === 'female'} className={styles.input}/>
                             <label htmlFor={settingInputName + '2'}>
                                 Female
                             </label>
                             {inputValue === 'female' &&
-                            <FontAwesomeIcon icon={faCheck} className="content__setting-change-checked"/>}
+                            <FontAwesomeIcon icon={faCheck} className={styles.icon}/>}
                         </div>
                     </div>
 
@@ -136,15 +137,15 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({currentUser, se
                         onBlur={(() => setInputValueDirty(true))} 
                         value={inputValue} 
                         type="text" 
-                        className="content__setting-change-input"
+                        className={styles.textInput}
                     />
                 }
             </div>
-            <div className="content__setting-descr">Your {formName}</div>
-            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className="content__setting-submit-button content__setting-submit-button--no-border-bottom">
+            <div className={styles.title}>Your {formName}</div>
+            <button disabled={!isFormCloseable} onClick={() => cancelHandler()} className={`${styles.submit} ${styles.submit_noBorder}`}>
                 Cancel
             </button>
-            <button disabled={!isFormValid} onClick={() => submitSettings(settingInputName, inputValue, innerObjectName)} className="content__setting-submit-button">
+            <button disabled={!isFormValid} onClick={() => submitSettings(settingInputName, inputValue, innerObjectName)} className={styles.submit}>
                 Update my {formName}
             </button>
         </div>

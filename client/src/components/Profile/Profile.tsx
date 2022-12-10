@@ -5,9 +5,9 @@ import { faBriefcase, faMagnifyingGlass, faFireFlameCurved } from "@fortawesome/
 import { useState } from "react"
 import { AppStateType } from "../../redux/reduxStore"
 import { deleteNotification, updateUserThunk } from "../../redux/usersReducer"
-import ProfileUserImage from "./ProfileUserImage"
-import ProfileSettingsList from "./ProfileSettingsList"
-import ProfileSetting from "./ProfileSetting"
+import ProfileUserImage from "./UserImage/UserImage"
+import ProfileSettingsList from "./Settings/SettingsList"
+import ProfileSetting from "./Settings/Setting/Setting"
 import ProfileImageSetting from "./ProfileImageChange/ImageSetting/ImageSetting"
 
 const Profile = () => {

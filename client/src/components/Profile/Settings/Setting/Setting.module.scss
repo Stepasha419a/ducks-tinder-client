@@ -1,0 +1,89 @@
+.setting{
+    border-right: 1px solid rgb(214, 214, 214);
+    height: calc(100vh - 90px);
+
+    .name{
+        border-bottom: 1px solid rgb(214, 214, 214);
+        padding: 20px 16px 10px;
+        text-transform: uppercase;
+        color: #505965;
+
+        &_error{
+            color: #c62c1e;
+            border-bottom: none;
+            padding: 25px 16px 0px;
+        }
+    }
+
+    .content{
+        .inputWrapper{
+            position: relative;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid rgb(214, 214, 214);
+            padding: 16px;
+            cursor: pointer;
+
+            .input {
+                position: absolute;
+                z-index: -1;
+                opacity: 0;
+
+                & + label{
+                    cursor: pointer;
+                }
+            }
+
+            .icon{
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                color: #ff4458;
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        .textInput{
+            font-size: 16px;
+            width: 100%;
+            padding: 16px;
+            border-bottom: 1px solid rgb(214, 214, 214);
+            color: #505965;
+            transition: .2s;
+
+            &:focus{
+                border-color: rgb(214, 214, 214);
+                color: #000;
+            }
+        }
+    }
+
+    .title{
+        font-size: 14px;
+        color: #505965;
+        margin: 12px 0;
+        padding: 0 16px;
+    }
+
+    .submit{
+        background-color: #FFFFFF;
+        border-radius: 0;
+        border: 1px solid rgb(214, 214, 214);
+        border-right: none;
+        width: 100%;
+        padding: 16px;
+        cursor: pointer;
+        color: #c62c1e;
+        text-align: left;
+        font-size: 16px;
+
+        &:disabled{
+            background-color: #f0f2f4;
+            cursor: not-allowed;
+        }
+
+        &_noBorder{
+            border-bottom: none;
+        }
+    }
+}

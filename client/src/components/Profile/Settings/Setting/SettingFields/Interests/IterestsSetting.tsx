@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { IUser } from "../../../../models/IUser"
-import InterestsSettingPopup from "../../../Pairs/popups/InterestsSettingPopup"
+import { IUser } from "../../../../../../models/IUser"
+import InterestsSettingPopup from "../../../../../Pairs/popups/InterestsSettingPopup"
 import styles from './IterestsSetting.module.scss'
 
 interface InterestsSettingPropsInterface{

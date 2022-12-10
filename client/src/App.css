@@ -2669,6 +2669,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   font-weight: 700;
   font-size: 15px;
   color: #fff;
+  border: none;
   text-transform: uppercase;
   cursor: pointer;
 
