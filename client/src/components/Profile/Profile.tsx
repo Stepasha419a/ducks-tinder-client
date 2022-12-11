@@ -5,13 +5,13 @@ import { faBriefcase, faMagnifyingGlass, faFireFlameCurved } from "@fortawesome/
 import { useState } from "react"
 import { AppStateType } from "../../redux/reduxStore"
 import { deleteNotification, updateUserThunk } from "../../redux/usersReducer"
-import ProfileUserImage from "./UserImage/UserImage"
-import ProfileSettingsList from "./Settings/SettingsList"
-import ProfileSetting from "./Settings/Setting/Setting"
-import ProfileImageSetting from "./ProfileImageChange/ImageSetting/ImageSetting"
+import UserImage from "./UserImage/UserImage"
+import SettingsList from "./Settings/SettingsList"
+import Setting from "./Settings/Setting/Setting"
+import ImageSetting from "./ProfileImageChange/ImageSetting/ImageSetting"
+import styles from './Profile.module.scss'
 
 const Profile = () => {
-
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
@@ -38,25 +38,25 @@ const Profile = () => {
     }
 
     return (
-        <div className="tinder">
-            <aside className="info info__-gray">
-                <div className="info__user">
-                    <Link className="info__main-link" to='/'>
+        <div className={styles.profile}>
+            <aside className={styles.info}>
+                <div className={styles.links}>
+                    <Link className={styles.mainLink} to='/'>
                         <FontAwesomeIcon icon={faFireFlameCurved}/>
                     </Link>
-                    <div className="info__review">
-                        <Link className="info__review-link" to='#'>
+                    <div className={styles.review}>
+                        <Link className={styles.link} to='#'>
                             <FontAwesomeIcon icon={faBriefcase} />
                         </Link>
                     </div>
-                    <div className="info__work-mode">
-                        <Link className="info__work-mode-link" to='#'>
+                    <div className={styles.work}>
+                        <Link className={styles.link} to='#'>
                             <FontAwesomeIcon icon={faMagnifyingGlass} />
                         </Link>
                     </div>
                 </div>
                 {isUserInfoSetting ? 
-                    <ProfileSetting
+                    <Setting
                         currentUser={currentUser}
                         setIsUserInfoSetting={setIsUserInfoSetting}
                         submitSettings={submitSettings}
@@ -66,7 +66,7 @@ const Profile = () => {
                         setInnerObjectName={setInnerObjectName}
                     />
                 :
-                    <ProfileSettingsList 
+                    <SettingsList 
                         currentUser={currentUser}
                         setIsUserInfoSetting={setIsUserInfoSetting}
                         currentDistanceSetting={currentDistanceSetting}
@@ -80,15 +80,15 @@ const Profile = () => {
                     />
                 }
             </aside>
-            <div className="content">
-                <div className="content__user content__user--profile">
+            <div className={styles.content}>
+                <div className={styles.user}>
                 {isImageSetting ?
-                    <ProfileImageSetting 
+                    <ImageSetting 
                         setIsImageSetting={setIsImageSetting}
                         currentUser={currentUser}
                     />
                 :
-                    <ProfileUserImage 
+                    <UserImage 
                         currentUser={currentUser}
                         setIsImageSetting={setIsImageSetting}
                     />
@@ -96,13 +96,13 @@ const Profile = () => {
                 </div>
             </div>
             {notifications.length ? 
-            <div className='notifications'>
+            <div className={styles.notifications}>
                 {notifications.map(item => {
                     return(
-                        <div onClick={() => closeNotification(item.id)} key={item.id} className={`notification${item.type === 'error' ? ' notification--error' : ''}`}>
+                        <div onClick={() => closeNotification(item.id)} key={item.id} className={`${styles.notification} ${item.type === 'error' ? styles.notification_error : ''}`}>
                             {item.text}
-                            <div className={`notification__mark${item.type === 'error' ? ' notification__mark--error' : ''}`}></div>
-                            <div className="notification__close">click to close</div>
+                            <div className={`${styles.mark} ${item.type === 'error' ? styles.mark_error : ''}`}></div>
+                            <div className={styles.close}>click to close</div>
                         </div>
                     )
                 })

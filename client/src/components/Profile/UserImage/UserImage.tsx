@@ -2,35 +2,36 @@ import { faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IUser } from "../../../models/IUser"
 import ImageSlider from "../../Slider/ImageSlider/ImageSlider"
+import styles from './UserImage.module.scss'
 
-interface ProfileUserImagePropsInterface{
+interface UserImagePropsInterface{
     currentUser: IUser
     setIsImageSetting: (isImageSetting: boolean) => void
 }
 
-const ProfileUserImage: React.FC<ProfileUserImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
+const UserImage: React.FC<UserImagePropsInterface> = ({currentUser, setIsImageSetting}) => {
     return(
         <>
-            <div className="content__slider">
+            <div className={styles.slider}>
                 <ImageSlider images={[currentUser.pictures.avatar, ...currentUser.pictures.gallery]} userId={currentUser._id}/>
             </div>
-            <div className="content__info content__info--profile">
-                <div className="content__info-descr">
-                    <div className="content__info-descr-name">
+            <div className={styles.info}>
+                <div className={styles.descr}>
+                    <div className={styles.name}>
                         {currentUser.name}
-                        <span className="content__info-descr-years">
+                        <span className={styles.years}>
                             {currentUser.age}
                         </span>
                     </div>
-                    <div className="content__info-descr-sex">
-                        <FontAwesomeIcon icon={faUser}  className="content__info-descr-sex-icon"/>
+                    <div className={styles.sex}>
+                        <FontAwesomeIcon icon={faUser}  className={styles.icon}/>
                         {currentUser.sex}
                     </div>
                 </div>
-                <hr className="content__info-separator"/>
-                <div className="content__change-info-wrapper">
-                    <button onClick={() => setIsImageSetting(true)} className="content__change-info">
-                        <span className="content__change-info-text">Edit Info</span>
+                <hr className={styles.separator}/>
+                <div className={styles.edit}>
+                    <button onClick={() => setIsImageSetting(true)} className={styles.btn}>
+                        <span className={styles.text}>Edit Info</span>
                     </button>
                 </div>
             </div>
@@ -38,4 +39,4 @@ const ProfileUserImage: React.FC<ProfileUserImagePropsInterface> = ({currentUser
     )
 }
 
-export default ProfileUserImage
+export default UserImage

@@ -2479,10 +2479,6 @@ textarea:-ms-input-placeholder { color: #999999; }
   animation-duration: 1s;
 }
 
-.notification--active{
-  left: 0px;
-}
-
 .notification--error{
   background-color: #e650505d;
 }
