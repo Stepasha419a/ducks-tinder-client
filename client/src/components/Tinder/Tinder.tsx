@@ -2,11 +2,11 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { AppStateType } from "../../redux/reduxStore"
 import { getSortedUserThunk, setRequestedUsers, updateUserThunk } from "../../redux/usersReducer"
-import TinderButtons from "./TinderButtons"
+import Buttons from "./Buttons/Buttons"
 import TinderFullPreview from "./TinderFullPreview"
 import TinderUser from "./TinderUser"
-import TinderUserLoading from "./Loading/UserLoading"
-import TinderUserFailed from "./Loading/UserFailed"
+import TinderUserLoading from "./UserLoading/Loading/Loading"
+import TinderUserFailed from "./UserLoading/Failed/Failed"
 
 const Tinder: React.FC = () => {
     const dispatch = useDispatch()
@@ -67,12 +67,12 @@ const Tinder: React.FC = () => {
                 {isFullPreview ?
                 <>
                     <TinderFullPreview currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview}/>
-                    <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} isMinimum/>
+                    <Buttons currentTinderUsersIndex={currentTinderUsersIndex} isMinimum/>
                 </>
                 :
                 <>
                     <TinderUser currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview} />
-                    <TinderButtons currentTinderUsersIndex={currentTinderUsersIndex} />
+                    <Buttons currentTinderUsersIndex={currentTinderUsersIndex} />
                 </>
                 }
             </div>

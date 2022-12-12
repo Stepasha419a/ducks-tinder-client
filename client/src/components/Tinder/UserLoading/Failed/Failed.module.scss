@@ -1,0 +1,33 @@
+.failed{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-decoration: none;
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    border: 3px solid rgb(214, 214, 214);
+    border-radius: 24px;
+    transition: .2s;
+
+    &:hover{
+        background: #fd267815;
+    }
+
+    .text{
+        font-size: 48px;
+        font-weight: 700;
+        color: #ff4b5d;
+        width: 100%;
+        text-align: center;
+    }
+
+    .subtext{
+        font-size: 24px;
+        font-weight: 700;
+        color: #a84650b7;
+        width: 100%;
+        text-align: center;
+    }
+}
