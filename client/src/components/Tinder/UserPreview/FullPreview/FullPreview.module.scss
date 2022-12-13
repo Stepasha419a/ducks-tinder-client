@@ -1,0 +1,134 @@
+.preview{
+    height: 100%;
+    background-color: #FFFFFF;
+    overflow: auto;
+    border-radius: 8px;
+
+    &::-webkit-scrollbar{
+        display: none;
+    }
+
+    .slider{
+        height: 470px;
+        position: relative;
+
+        .closeFullPreview{
+            position: absolute;
+            bottom: -20px;
+            right: 18px;
+            font-size: 44px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            transition: .3s;
+
+            &:hover{
+                transform: scale(1.1);
+            }
+
+            .icon{
+                color:  rgba(224, 48, 48, 0.747);
+                background-color: #FFFFFF;
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .info{
+        padding: 15px;
+
+        .descr{
+            width: 100%;
+            letter-spacing: .7px;
+            bottom: 102px;
+            left: 0;
+
+            .person{
+                font-size: 36px;
+                font-weight: 800;
+                text-shadow: 0 1px 1px #0000001f;
+                margin-bottom: 10px;
+                color: #21262e;
+
+                .years{
+                    font-size: 28px;
+                    font-weight: 300;
+                }
+            }
+
+            .place{
+                display: flex;
+                align-items: baseline;
+                font-size: 18px;
+                color: #505965;
+                margin-bottom: 6px;
+
+                .icon{
+                    font-size: 14px;
+                    color: #505965;
+                    margin-right: 5px;
+                }
+            }
+
+            .distance{
+                font-size: 18px;
+                color: #505965;
+
+                .icon{
+                    margin: 0 5px 0 1px;
+                }
+
+                .text{
+                    margin-left: 4px;
+                }
+            }
+        }
+    }
+
+    .separator{
+        border: 1px solid #0000001f
+    }
+
+    .descr{
+        font-size: 16px;
+        color: #505965;
+        padding: 15px;
+        line-height: 1.35;
+    }
+
+    .interests{
+        .title{
+            font-size: 20px;
+            font-weight: 600;
+            color: #505965;
+            margin: 10px 0 0 15px;
+        }
+
+        .items{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            padding: 10px 15px 0;
+
+            .item{
+                border: 2px solid #b9bfc5;
+                border-radius: 16px;
+                font-weight: 600;
+                padding: 5px 20px;
+                margin: 5px;
+                color: #505965;
+            }
+        }
+    }
+
+    .showAll{
+        width: 89px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #e65050;
+        cursor: pointer;
+        margin: 0 auto;
+        padding: 10px 0;
+        margin-bottom: 90px;
+    }
+}

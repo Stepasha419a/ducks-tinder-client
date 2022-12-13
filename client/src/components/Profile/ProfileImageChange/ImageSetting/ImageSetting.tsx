@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { IUser } from "../../../../models/IUser"
 import ProfileChangeImage from "../ChangeImage/ChangeImage"
-import ProfileFullPreview from "../Preview/FullPreview/FullPreview"
-import ProfilePreview from "../Preview/Preview"
+import ProfileFullPreview from "../UserPreview/FullPreview/FullPreview"
+import ProfilePreview from "../UserPreview/Preview/Preview"
 import styles from './ImageSetting.module.scss'
 
 interface ProfileImageSettingPropsInterface{

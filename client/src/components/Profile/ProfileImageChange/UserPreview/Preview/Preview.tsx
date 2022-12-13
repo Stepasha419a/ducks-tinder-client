@@ -1,7 +1,7 @@
 import { faCircleInfo, faHouse, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { IUser } from "../../../../models/IUser"
-import ImageSlider from "../../../Slider/ImageSlider/ImageSlider"
+import { IUser } from "../../../../../models/IUser"
+import ImageSlider from "../../../../Slider/ImageSlider/ImageSlider"
 import styles from './Preview.module.scss'
 
 interface ProfilePreviewPropsInterface{
