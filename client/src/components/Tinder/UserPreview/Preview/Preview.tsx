@@ -1,4 +1,4 @@
-import { faHouse, faLocationDot } from "@fortawesome/free-solid-svg-icons"
+import { faCircleInfo, faHouse, faLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IUser } from "../../../../models/IUser"
 import ImageSlider from "../../../Slider/ImageSlider/ImageSlider"
@@ -31,6 +31,9 @@ const Preview: React.FC<PreviewProps> = ({currentUser, setIsFullPreview}) => {
                     <span className={styles.icon}>
                         km from you
                     </span>
+                </div>
+                <div className={styles.openFullPreview}>
+                    <FontAwesomeIcon icon={faCircleInfo} />
                 </div>
             </div>
         </div>

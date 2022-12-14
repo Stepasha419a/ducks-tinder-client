@@ -56,5 +56,18 @@
                 margin-left: 4px;
             }
         }
+
+        .openFullPreview{
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 24px;
+            color: #FFFFFF;
+            transition: .3s;
+
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
     }
 }

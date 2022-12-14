@@ -1,0 +1,96 @@
+.content{
+    height: 100vh;
+    width: 100%;
+    background-color: #f0f2f4;
+    position: relative;
+
+    .wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100% - 50px);
+        width: 100%;
+
+        .reset{
+            width: 100px;
+            height: 100px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 50px;
+            left: 350px;
+            background-color: transparent;
+        }
+
+        .users{
+            width: 375px;
+            max-height: 667px;
+            height: 100%;
+            position: relative;
+        }
+    }
+
+    .instructions{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        max-width: 800px;
+        width: 100%;
+        margin: 0 auto;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        .toggle{
+            height: 25px;
+            font-size: 16px;
+            font-weight: 800;
+            background-color: #50596559;
+            color: #fff;
+            cursor: pointer;
+            padding: 0 20px;
+            border: none;
+            border-radius: 16px;
+            margin-right: 20px;
+            transition: .2s;
+
+            &:hover{
+                background-color: #505965;
+            }
+        }
+
+        .instruction{
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+
+            .icon{
+                font-size: 20px;
+                color: #5059658f;
+                margin-right: 8px;
+
+                &_rotate{
+                    transform: rotate(90deg);
+                }
+
+                &_space{
+                    width: 70px;
+                    height: 20px;
+                    border: 2px solid #5059658f;
+                    border-radius: 4px;
+                }
+            }
+
+            .text{
+                color: #5059658f;
+                font-weight: 900;
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+        }
+
+        @media screen and (max-width: 1160px) {
+            display: none;
+        }
+    }
+}

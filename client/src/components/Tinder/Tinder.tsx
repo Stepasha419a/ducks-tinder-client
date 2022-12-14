@@ -7,6 +7,9 @@ import FullPreview from "./UserPreview/FullPreview/FullPreview"
 import Preview from "./UserPreview/Preview/Preview"
 import TinderUserLoading from "./UserLoading/Loading/Loading"
 import TinderUserFailed from "./UserLoading/Failed/Failed"
+import styles from './Tinder.module.scss'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faArrowTurnDown, faDownLong, faLeftLong, faRightLong, faUpLong } from "@fortawesome/free-solid-svg-icons"
 
 const Tinder: React.FC = () => {
     const dispatch = useDispatch()
@@ -18,6 +21,7 @@ const Tinder: React.FC = () => {
     const isFailed = useSelector((state: AppStateType) => state.usersPage.isFailed)
 
     const [isFullPreview, setIsFullPreview] = useState(false)
+    const [isInstructionsOpen, setisInstructionsOpen] = useState(true)
 
     useEffect(() => {
         if(!requestedUsers.length) {
@@ -43,8 +47,8 @@ const Tinder: React.FC = () => {
 
     if(isFailed) {
         return(
-            <div className="content">
-                <button onClick={() => resetHandler()} className="content__reset">reset</button>
+            <div className={styles.content}>
+                <button onClick={() => resetHandler()} className={styles.reset}>reset</button>
                 <TinderUserFailed />
             </div>
         )
@@ -52,8 +56,8 @@ const Tinder: React.FC = () => {
 
     if(currentTinderUsersIndex === tinderUsers.length) {
         return(
-            <div className="content">
-                <button onClick={() => resetHandler()} className="content__reset">reset</button>
+            <div className={styles.content}>
+                <button onClick={() => resetHandler()} className={styles.reset}>reset</button>
                 <TinderUserLoading />
             </div>
         )
@@ -61,24 +65,72 @@ const Tinder: React.FC = () => {
     
 
     return(
-        <div className="content">
-            <button onClick={() => resetHandler()} className="content__reset">reset</button>
-            <div className="content__users">
-                {isFullPreview ?
-                <>
-                    <FullPreview currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview}/>
-                    <Buttons currentTinderUsersIndex={currentTinderUsersIndex} isMinimum/>
-                </>
-                :
-                <>
-                    <Preview currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview} />
-                    <Buttons currentTinderUsersIndex={currentTinderUsersIndex} />
-                </>
-                }
+        <div className={styles.content}>
+            <div className={styles.wrapper}>
+                <button onClick={() => resetHandler()} className={styles.reset}>reset</button>
+                <div className={styles.users}>
+                    {isFullPreview ?
+                    <>
+                        <FullPreview currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview}/>
+                        <Buttons currentTinderUsersIndex={currentTinderUsersIndex} isMinimum/>
+                    </>
+                    :
+                    <>
+                        <Preview currentUser={tinderUsers[currentTinderUsersIndex]} setIsFullPreview={setIsFullPreview} />
+                        <Buttons currentTinderUsersIndex={currentTinderUsersIndex} />
+                    </>
+                    }
+                </div>
             </div>
-            <div className="content__instructions">
-
-            </div>
+            {isInstructionsOpen ? 
+                <div className={styles.instructions}>
+                    <button onClick={() => setisInstructionsOpen(false)} className={styles.toggle}>
+                        hide
+                    </button>
+                    <div className={styles.instruction}>
+                        <FontAwesomeIcon icon={faLeftLong} className={styles.icon}/>
+                        <div className={styles.text}>
+                            no
+                        </div>
+                    </div>
+                    <div className={styles.instruction}>
+                        <FontAwesomeIcon icon={faRightLong} className={styles.icon}/>
+                        <div className={styles.text}>
+                            like
+                        </div>
+                    </div>
+                    <div className={styles.instruction}>
+                        <FontAwesomeIcon icon={faUpLong} className={styles.icon}/>
+                        <div className={styles.text}>
+                            open profile
+                        </div>
+                    </div>
+                    <div className={styles.instruction}>
+                        <FontAwesomeIcon icon={faDownLong} className={styles.icon}/>
+                        <div className={styles.text}>
+                            close profile
+                        </div>
+                    </div>
+                    <div className={styles.instruction}>
+                        <FontAwesomeIcon icon={faArrowTurnDown} className={`${styles.icon} ${styles.icon_rotate}`}/>
+                        <div className={styles.text}>
+                            superlike
+                        </div>
+                    </div>
+                    <div className={styles.instruction}>
+                        <div className={`${styles.icon} ${styles.icon_space}`}></div>
+                        <div className={styles.text}>
+                            next
+                        </div>
+                    </div>
+                </div>
+            :
+                <div className={styles.instructions}>
+                    <button onClick={() => setisInstructionsOpen(true)} className={styles.toggle}>
+                        show
+                    </button>
+                </div>
+            }
         </div>
     )
 }
