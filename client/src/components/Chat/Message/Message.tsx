@@ -1,7 +1,7 @@
 import { IMessage } from "../../../models/IChat"
 import { IUser } from "../../../models/IUser"
+import Avatar from "../../Avatar/Avatar"
 import styles from './Message.module.scss'
-import { Avatar } from '../../'
 
 interface MessageComponentInterface{
     message: IMessage
