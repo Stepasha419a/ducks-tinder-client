@@ -13,7 +13,7 @@ interface AvatarInterface{
     avatarUrl?: string
 }
 
-const Avatar: React.FC<AvatarInterface> = ({otherUserId, imageExtraClassName, showDefaultPhoto, avatarUrl}) => {
+export const Avatar: React.FC<AvatarInterface> = ({otherUserId, imageExtraClassName, showDefaultPhoto, avatarUrl}) => {
     const dispatch = useDispatch()
 
     let currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
@@ -42,5 +42,3 @@ const Avatar: React.FC<AvatarInterface> = ({otherUserId, imageExtraClassName, sh
         </div>
     )
 }
-
-export default Avatar

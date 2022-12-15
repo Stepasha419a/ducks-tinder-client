@@ -48,8 +48,10 @@ const Tinder: React.FC = () => {
     if(isFailed) {
         return(
             <div className={styles.content}>
-                <button onClick={() => resetHandler()} className={styles.reset}>reset</button>
-                <TinderUserFailed />
+                <div className={styles.wrapper}>
+                    <button onClick={() => resetHandler()} className={styles.reset}>reset</button>
+                    <TinderUserFailed />
+                </div>
             </div>
         )
     }
@@ -57,8 +59,10 @@ const Tinder: React.FC = () => {
     if(currentTinderUsersIndex === tinderUsers.length) {
         return(
             <div className={styles.content}>
-                <button onClick={() => resetHandler()} className={styles.reset}>reset</button>
-                <TinderUserLoading />
+                <div className={styles.wrapper}>
+                    <button onClick={() => resetHandler()} className={styles.reset}>reset</button>
+                    <TinderUserLoading />
+                </div>
             </div>
         )
     }

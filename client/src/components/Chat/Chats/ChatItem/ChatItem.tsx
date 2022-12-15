@@ -4,7 +4,7 @@ import { IChat } from "../../../../models/IChat"
 import { IUser } from "../../../../models/IUser"
 import { connectChatThunk, disconnectChatThunk } from "../../../../redux/chatReducer"
 import { getUserThunk } from "../../../../redux/usersReducer"
-import Avatar from "../../../Avatar/Avatar"
+import { Avatar } from "../../../"
 import { Socket } from 'socket.io-client'
 import styles from './ChatItem.module.scss'
 

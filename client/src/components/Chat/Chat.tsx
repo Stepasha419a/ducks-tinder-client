@@ -16,7 +16,7 @@ interface ChatPropsInterface{
     socket: MutableRefObject<Socket | undefined>
 }
 
-const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
+export const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
     const dispatch = useDispatch()
 
     const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
@@ -100,5 +100,3 @@ const Chat: React.FC<ChatPropsInterface> = ({socket}) => {
         </div>
     )
 }
-
-export default Chat
