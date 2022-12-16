@@ -22,12 +22,6 @@ export const Profile = () => {
     (state: AppStateType) => state.usersPage.currentUser
   );
 
-  const [currentDistanceSetting, setCurrentDistanceSetting] = useState(
-    currentUser.partnerSettings ? currentUser.partnerSettings.distance : 5
-  );
-  const [currentAgeSetting, setCurrentAgeSetting] = useState(
-    currentUser.age ? currentUser.age : 18
-  );
   const [isUserInfoSetting, setIsUserInfoSetting] = useState(false);
   const [isImageSetting, setIsImageSetting] = useState(false);
   const [formName, setFormName] = useState(''); // name of the title in ProfileSetting
@@ -87,12 +81,7 @@ export const Profile = () => {
           />
         ) : (
           <SettingsList
-            currentUser={currentUser}
             setIsUserInfoSetting={setIsUserInfoSetting}
-            currentDistanceSetting={currentDistanceSetting}
-            setCurrentDistanceSetting={setCurrentDistanceSetting}
-            currentAgeSetting={currentAgeSetting}
-            setCurrentAgeSetting={setCurrentAgeSetting}
             submitSettings={submitSettings}
             setFormName={setFormName}
             setSettingInputName={setSettingInputName}

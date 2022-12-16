@@ -1,0 +1,127 @@
+.group {
+  padding-top: 20px;
+
+  .groupTitle {
+    text-transform: uppercase;
+    color: #505965;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    padding: 8px 16px;
+  }
+
+  .groupDescr {
+    color: #505965;
+    margin: 12px 0;
+    padding: 0 16px;
+  }
+
+  .items {
+    .item {
+      border-bottom: 1px solid rgb(214, 214, 214);
+      background-color: #ffffff;
+      padding: 12px 16px;
+
+      &_pointer {
+        cursor: pointer;
+
+        &:hover .setting,
+        &:hover .openIcon {
+          color: #fd267a !important;
+        }
+      }
+
+      &_error {
+        background-color: #fdd7d7;
+      }
+
+      .descr {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .title {
+          font-size: 18px;
+          font-weight: 400;
+        }
+
+        .setting {
+          color: #505965;
+          transition: 0.2s;
+
+          .openIcon {
+            font-size: 14px;
+            color: #d4d8de;
+            margin-left: 10px;
+            transition: 0.2s;
+          }
+        }
+      }
+
+      .setting {
+        .slider {
+          margin: 20px 0px 10px;
+        }
+
+        .checkbox {
+          position: relative;
+
+          .label {
+            position: absolute;
+            top: -4px;
+            right: 0;
+
+            --width: 48px;
+            --height: 28px;
+            --unactive-color: rgb(121, 121, 121);
+            --active-color: #ff4458;
+            --box-color: #ffffff;
+            --offset: 20px;
+            --duration: 0.3s;
+
+            &:hover {
+              filter: brightness(0.9);
+            }
+          }
+
+          .content {
+            position: relative;
+            width: var(--width);
+            height: var(--height);
+            border-radius: var(--width);
+            background-color: var(--unactive-color);
+            cursor: pointer;
+            transition: var(--duration);
+
+            &::before {
+              --width: 48px;
+              --height: 28px;
+              --box-color: #ffffff;
+              --offset: 2px;
+
+              content: '';
+              position: absolute;
+              top: var(--offset);
+              left: var(--offset);
+              width: calc(var(--height) - 2 * var(--offset));
+              height: calc(var(--height) - 2 * var(--offset));
+              background-color: var(--box-color);
+              border-radius: 50%;
+              transition: var(--duration);
+            }
+          }
+
+          .input {
+            display: none;
+
+            &:checked ~ .content {
+              background-color: var(--active-color);
+            }
+
+            &:checked ~ .content::before {
+              left: calc(var(--width) - var(--height) + var(--offset));
+            }
+          }
+        }
+      }
+    }
+  }
+}
