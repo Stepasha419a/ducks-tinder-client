@@ -1,53 +1,61 @@
-import { MutableRefObject, useEffect, useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Route, Routes, useLocation } from "react-router-dom"
-import { Socket } from "socket.io-client"
-import { Chat } from ".."
-import LoginForm from "../Forms/LoginForm"
-import RegistrationForm from "../Forms/Registration"
-import Layout from "../Layout/Layout"
-import Pairs from "../Pairs/Pairs"
-import Policy from "../Policy/Policy"
-import Profile from "../Profile/Profile"
-import Tinder from "../Tinder/Tinder"
-import { checkAuthThunk } from "../../redux/authReducer"
-import { AppStateType } from "../../redux/reduxStore"
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { Socket } from 'socket.io-client';
+import { Chat, Profile, Tinder } from '..';
+import LoginForm from '../Forms/LoginForm';
+import RegistrationForm from '../Forms/Registration';
+import Layout from '../Layout/Layout';
+import Pairs from '../Pairs/Pairs';
+import Policy from '../Policy/Policy';
+import { checkAuthThunk } from '../../redux/authReducer';
+import { AppStateType } from '../../redux/reduxStore';
 
 const Routing = () => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-    const formError = useSelector((state: AppStateType) => state.authPage.formError)
-  
-    const [isPairsOpened, setIsPairsOpened] = useState(true)
-  
-    const socket: MutableRefObject<Socket | undefined> = useRef()
-  
-    useEffect(() => {
-      dispatch(checkAuthThunk() as any)
-    }, [dispatch])
-    
-    const pathname = useLocation().pathname
-  
-    useEffect(() => {
-      pathname === '/chat' ? setIsPairsOpened(false) : setIsPairsOpened(true);
-    }, [pathname])
-  
-    return (
-      <Routes>
-        <Route path="/login" element={<LoginForm formError={formError}/>}/>
-        <Route path="/reg" element={<RegistrationForm formError={formError}/>}/>
+  const formError = useSelector(
+    (state: AppStateType) => state.authPage.formError
+  );
 
-          <Route path="/" element={<Layout isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} socket={socket} />}>
-            <Route index element={<Tinder />}/>
-            <Route path="profile" element={<Profile />}/>
-            <Route path="chat" element={<Chat socket={socket}/>}/>
-            <Route path="pairs" element={<Pairs />}/>
-            <Route path="policy" element={<Policy />}/>
-            <Route path="*" element={<div>404 NOT FOUND</div>} />
-          </Route>
-        
-      </Routes>
-    );
-}
+  const [isPairsOpened, setIsPairsOpened] = useState(true);
 
-export default Routing
+  const socket: MutableRefObject<Socket | undefined> = useRef();
+
+  useEffect(() => {
+    dispatch(checkAuthThunk() as any);
+  }, [dispatch]);
+
+  const pathname = useLocation().pathname;
+
+  useEffect(() => {
+    pathname === '/chat' ? setIsPairsOpened(false) : setIsPairsOpened(true);
+  }, [pathname]);
+
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginForm formError={formError} />} />
+      <Route path="/reg" element={<RegistrationForm formError={formError} />} />
+
+      <Route
+        path="/"
+        element={
+          <Layout
+            isPairsOpened={isPairsOpened}
+            setIsPairsOpened={setIsPairsOpened}
+            socket={socket}
+          />
+        }
+      >
+        <Route index element={<Tinder />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="chat" element={<Chat socket={socket} />} />
+        <Route path="pairs" element={<Pairs />} />
+        <Route path="policy" element={<Policy />} />
+        <Route path="*" element={<div>404 NOT FOUND</div>} />
+      </Route>
+    </Routes>
+  );
+};
+
+export default Routing;

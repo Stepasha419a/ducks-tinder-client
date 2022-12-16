@@ -44,4 +44,4 @@ export const PairBlock: React.FC<IPairBlock> = ({ firstPair }) => {
   );
 };
 
-export default PairBlock
+export default PairBlock;

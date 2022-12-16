@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { AppStateType } from './redux/reduxStore';
 import Routing from './components/Routing/Routing';
 import './App.css';
+import { Notifications } from './components';
 
 function App() {
   const isLoading = useSelector(
@@ -22,6 +23,8 @@ function App() {
       </div>
 
       <Routing />
+
+      <Notifications />
     </div>
   );
 }

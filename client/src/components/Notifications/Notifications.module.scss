@@ -1,0 +1,73 @@
+@keyframes slidein {
+  from {
+    left: 420px;
+  }
+
+  to {
+    left: 0px;
+  }
+}
+
+.notifications {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  overflow: hidden;
+
+  .notification {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 400px;
+    background-color: #dce6505d;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+    animation-name: slidein;
+    animation-duration: 1s;
+
+    &_active {
+      left: 0px;
+    }
+
+    &_error {
+      background-color: #e650505d;
+    }
+
+    .mark {
+      position: absolute;
+      bottom: 2px;
+      right: -12px;
+      width: 12px;
+      height: 13px;
+      overflow: hidden;
+      background-color: transparent;
+
+      &::before {
+        content: '';
+        display: block;
+        width: 200%;
+        height: 200%;
+        position: absolute;
+        border-radius: 69%;
+        bottom: 50px;
+        left: -16px;
+        box-shadow: 0px 45px 0 0 #dce6505d;
+      }
+
+      &_error::before {
+        box-shadow: 0px 45px 0 0 #e650505d;
+      }
+    }
+
+    .close {
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+      font-size: 12px;
+    }
+  }
+}
