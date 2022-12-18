@@ -1,15 +1,15 @@
-import { useDispatch } from 'react-redux';
 import { logoutThunk } from '../../../../../redux/authReducer';
+import { useAppDispatch } from '../../../../../redux/reduxStore';
 import styles from './LogoutButton.module.scss';
 
 const LoggoutButton = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.group}>
       <div className={styles.items}>
         <div
-          onClick={() => dispatch(logoutThunk() as any)}
+          onClick={() => dispatch(logoutThunk())}
           className={`${styles.item} ${styles.item_button}`}
         >
           <div className={styles.descr}>

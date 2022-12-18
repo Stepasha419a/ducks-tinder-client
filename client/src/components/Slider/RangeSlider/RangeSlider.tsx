@@ -1,7 +1,7 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import styles from './RangeSlider.module.scss';
 
-interface IRange {
+export interface IRange {
   min: number;
   max: number;
 }

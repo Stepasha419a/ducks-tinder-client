@@ -2,7 +2,9 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../redux/reduxStore';
-import RangeSlider from '../../../../Slider/RangeSlider/RangeSlider';
+import RangeSlider, {
+  IRange,
+} from '../../../../Slider/RangeSlider/RangeSlider';
 import styles from './Account.module.scss';
 
 interface IAccount {
@@ -29,9 +31,7 @@ const Account: React.FC<IAccount> = ({
   submitSettings,
   errorFields,
 }) => {
-  const currentUser = useAppSelector(
-    (state) => state.usersPage.currentUser
-  );
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const [currentAgeSetting, setCurrentAgeSetting] = useState(
     currentUser.age ? currentUser.age : 18
@@ -118,8 +118,10 @@ const Account: React.FC<IAccount> = ({
             <div className={styles.slider}>
               <RangeSlider
                 value={currentAgeSetting}
-                setValue={setCurrentAgeSetting as any}
-                completeValue={ageHandler as any}
+                setValue={(value: number | IRange) => {
+                  setCurrentAgeSetting(value as number);
+                }}
+                completeValue={() => ageHandler()}
                 min={18}
                 max={100}
               />

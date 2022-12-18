@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   getSortedUserThunk,
   setRequestedUsers,
@@ -12,36 +11,28 @@ import TinderUserLoading from './UserLoading/Loading/Loading';
 import TinderUserFailed from './UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
 import Instructions from './Instructions/Instructions';
-import { useAppSelector } from '../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
 
 export const Tinder: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const currentUser = useAppSelector(
-    (state) => state.usersPage.currentUser
-  );
-  const tinderUsers = useAppSelector(
-    (state) => state.usersPage.tinderUsers
-  );
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const tinderUsers = useAppSelector((state) => state.usersPage.tinderUsers);
   const currentTinderUsersIndex = useAppSelector(
     (state) => state.usersPage.currentTinderUsersIndex
   );
   const requestedUsers = useAppSelector(
     (state) => state.usersPage.requestedUsers
   );
-  const isFailed = useAppSelector(
-    (state) => state.usersPage.isFailed
-  );
+  const isFailed = useAppSelector((state) => state.usersPage.isFailed);
 
   const [isFullPreview, setIsFullPreview] = useState(false);
 
   useEffect(() => {
     if (!requestedUsers.length) {
-      dispatch(getSortedUserThunk({ user: currentUser }) as any);
+      dispatch(getSortedUserThunk({ user: currentUser }));
     } else if (currentTinderUsersIndex + 1 > tinderUsers.length) {
-      dispatch(
-        getSortedUserThunk({ user: currentUser, requestedUsers }) as any
-      );
+      dispatch(getSortedUserThunk({ user: currentUser, requestedUsers }));
     } // eslint-disable-next-line
   }, [currentTinderUsersIndex]);
 
@@ -61,7 +52,7 @@ export const Tinder: React.FC = () => {
         currentUser,
         inputName: 'checkedUsers',
         changedData: [],
-      }) as any
+      })
     );
   };
 

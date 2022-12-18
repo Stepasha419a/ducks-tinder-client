@@ -12,7 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import { Socket } from 'socket.io-client';
 import styles from './Chat.module.scss';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
+import { useAppSelector } from '../../redux/reduxStore';
 
 interface ChatPropsInterface {
   socket: MutableRefObject<Socket | undefined>;

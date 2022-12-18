@@ -1,10 +1,9 @@
-import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
 import { deleteNotification } from '../../redux/usersReducer';
 import styles from './Notifications.module.scss';
 
 export const Notifications = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const notifications = useAppSelector(
     (state) => state.usersPage.notifications

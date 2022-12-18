@@ -2260,6 +2260,8 @@ textarea:-ms-input-placeholder { color: #999999; }
   height: 60px;
   width: 100%;
   margin-top: 10px;
+  position: sticky;
+  bottom: 0;
 }
 
 .pairs__popup-btn--left-border{

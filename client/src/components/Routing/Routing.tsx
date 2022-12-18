@@ -1,5 +1,4 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { Chat, Profile, Tinder } from '..';
@@ -9,21 +8,19 @@ import Layout from '../Layout/Layout';
 import Pairs from '../Pairs/Pairs';
 import Policy from '../Policy/Policy';
 import { checkAuthThunk } from '../../redux/authReducer';
-import { useAppSelector } from '../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
 
 const Routing = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const formError = useAppSelector(
-    (state) => state.authPage.formError
-  );
+  const formError = useAppSelector((state) => state.authPage.formError);
 
   const [isPairsOpened, setIsPairsOpened] = useState(true);
 
   const socket: MutableRefObject<Socket | undefined> = useRef();
 
   useEffect(() => {
-    dispatch(checkAuthThunk() as any);
+    dispatch(checkAuthThunk());
   }, [dispatch]);
 
   const pathname = useLocation().pathname;
