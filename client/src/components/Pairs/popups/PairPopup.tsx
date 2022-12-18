@@ -1,10 +1,10 @@
 import { faChevronDown, faUser } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useRef, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { IUser } from "../../../models/IUser"
 import { createChatThunk } from "../../../redux/chatReducer"
-import { AppStateType } from "../../../redux/reduxStore"
+import { useAppSelector } from "../../../redux/reduxStore"
 import { deletePairThunk } from "../../../redux/usersReducer"
 import ImageSlider from "../../Slider/ImageSlider/ImageSlider"
 import InterestsListPopup from "./InterestsListPopup"
@@ -17,7 +17,7 @@ interface PairPopupProps{
 const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
     const dispatch = useDispatch()
 
-    const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+    const currentUser = useAppSelector((state) => state.usersPage.currentUser)
 
     const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] = useState(false)
 
@@ -35,7 +35,6 @@ const PairPopup: React.FC<PairPopupProps> = ({currentPair, setCurrentPair}) => {
 
     const deletePair = (userId: string) => {
         dispatch(deletePairThunk({deleteForUserId: userId, userId: currentUser._id}) as any)
-        console.log({userId: currentUser._id, createUserPairId: userId})
     }
 
     const refuseHandler = (userId: string) => {

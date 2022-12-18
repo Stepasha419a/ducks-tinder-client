@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -7,19 +7,19 @@ import {
   faFireFlameCurved,
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { AppStateType } from '../../redux/reduxStore';
 import { updateUserThunk } from '../../redux/usersReducer';
 import UserImage from './UserImage/UserImage';
 import SettingsList from './Settings/SettingsList';
 import Setting from './Settings/Setting/Setting';
 import ImageSetting from './ProfileImageChange/ImageSetting/ImageSetting';
 import styles from './Profile.module.scss';
+import { useAppSelector } from '../../redux/reduxStore';
 
 export const Profile = () => {
   const dispatch = useDispatch();
 
-  const currentUser = useSelector(
-    (state: AppStateType) => state.usersPage.currentUser
+  const currentUser = useAppSelector(
+    (state) => state.usersPage.currentUser
   );
 
   const [isUserInfoSetting, setIsUserInfoSetting] = useState(false);

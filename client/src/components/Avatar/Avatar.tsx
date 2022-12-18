@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { AppStateType } from '../../redux/reduxStore';
 import defaultPhoto from '../../assets/images/photos/1.jpg';
 import { useEffect, useState } from 'react';
-import { getUserThunk } from '../../redux/usersReducer';
 import { IUserUnrequired } from '../../models/IUser';
 import styles from './Avatar.module.scss';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
 
 interface AvatarInterface {
   otherUserId?: string;
@@ -19,21 +17,18 @@ const Avatar: React.FC<AvatarInterface> = ({
   showDefaultPhoto,
   avatarUrl,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  let currentUser = useSelector(
-    (state: AppStateType) => state.usersPage.currentUser
+  const currentUser = useAppSelector(
+    (state) => state.usersPage.currentUser
   );
-  const [otherUser, setOtherUser] = useState(
-    null as (IUserUnrequired & { _id: string }) | null
+
+  const [otherUser, setOtherUser] = useState<(IUserUnrequired & { _id: string }) | null>(
+    null
   );
 
   useEffect(() => {
-    if (otherUserId && !avatarUrl) {
-      dispatch(getUserThunk({ id: otherUserId }) as any).then((res: any) =>
-        setOtherUser(res.payload)
-      );
-    } else if (otherUserId && avatarUrl) {
+    if (otherUserId && avatarUrl) {
       setOtherUser({ _id: otherUserId, pictures: { avatar: avatarUrl } });
     }
   }, [otherUserId, avatarUrl, dispatch]);

@@ -1,27 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit"
-import { Action, combineReducers } from "redux"
-import { ThunkAction } from "redux-thunk"
-import authReducer from "./authReducer"
-import chatReducer from "./chatReducer"
-import usersReducer from "./usersReducer"
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { combineReducers } from 'redux';
+import authReducer from './authReducer';
+import chatReducer from './chatReducer';
+import usersReducer from './usersReducer';
 
 let rootReducer = combineReducers({
-    usersPage: usersReducer,
-    authPage: authReducer,
-    chatPage: chatReducer
-})
-
-type RootReducerType = typeof rootReducer
-export type AppStateType = ReturnType<RootReducerType>
-
-export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
-
-export type BaseThunkType<AT extends Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, AT>
+  usersPage: usersReducer,
+  authPage: authReducer,
+  chatPage: chatReducer,
+});
 
 const store = configureStore({
-    reducer: rootReducer
-})
+  reducer: rootReducer,
+});
 
-export type RootState = ReturnType<typeof store.getState>
+export default store;
 
-export default store
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

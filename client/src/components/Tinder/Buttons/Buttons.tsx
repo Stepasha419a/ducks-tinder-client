@@ -1,8 +1,8 @@
 import { faBolt, faHeart, faRotateLeft, faStar, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { FocusEvent, MouseEvent } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { AppStateType } from "../../../redux/reduxStore"
+import { useDispatch } from "react-redux"
+import { useAppSelector } from "../../../redux/reduxStore"
 import { likeUserThunk, setCurrentTinderUsersIndex, setIsReturnUser, updateUserThunk } from "../../../redux/usersReducer"
 import styles from './Buttons.module.scss'
 
@@ -14,9 +14,9 @@ interface ButtonsProps{
 const Buttons: React.FC<ButtonsProps> = ({currentTinderUsersIndex, isMinimum = false}) => {
     const dispatch = useDispatch()
 
-    const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
-    const tinderUsers = useSelector((state: AppStateType) => state.usersPage.tinderUsers)
-    const isReturnUser = useSelector((state: AppStateType) => state.usersPage.isReturnUser)
+    const currentUser = useAppSelector((state) => state.usersPage.currentUser)
+    const tinderUsers = useAppSelector((state) => state.usersPage.tinderUsers)
+    const isReturnUser = useAppSelector((state) => state.usersPage.isReturnUser)
     
     const returnUser = () => {
         if(currentTinderUsersIndex && isReturnUser) {

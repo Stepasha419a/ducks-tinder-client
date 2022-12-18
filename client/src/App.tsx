@@ -1,14 +1,13 @@
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
-import { AppStateType } from './redux/reduxStore';
 import Routing from './components/Routing/Routing';
 import './App.css';
 import { Notifications } from './components';
+import { useAppSelector } from './redux/reduxStore';
 
 function App() {
-  const isLoading = useSelector(
-    (state: AppStateType) => state.authPage.isLoading
+  const isLoading = useAppSelector(
+    (state) => state.authPage.isLoading
   );
 
   return (

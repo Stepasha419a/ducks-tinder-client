@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { potentialFields } from '../../../models/IUser';
-import { AppStateType } from '../../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
 import { createNotification } from '../../../redux/usersReducer';
 import { checkField } from '../utils/ProfileUtils';
 import Account from './SettingGroups/Account/Account';
@@ -35,13 +34,13 @@ const SettingsList: React.FC<SettingsListPropsInterface> = ({
   setSettingInputName,
   setInnerObjectName,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const currentUser = useSelector(
-    (state: AppStateType) => state.usersPage.currentUser
+  const currentUser = useAppSelector(
+    (state) => state.usersPage.currentUser
   );
-  const notifications = useSelector(
-    (state: AppStateType) => state.usersPage.notifications
+  const notifications = useAppSelector(
+    (state) => state.usersPage.notifications
   );
 
   const [errorFields, setErrorFields] = useState<string[]>([]);
@@ -64,7 +63,7 @@ const SettingsList: React.FC<SettingsListPropsInterface> = ({
     } else {
       setErrorFields([]);
     }
-  }, [currentUser, dispatch]);
+  }, [currentUser]);
 
   useEffect(() => {
     const errorText =

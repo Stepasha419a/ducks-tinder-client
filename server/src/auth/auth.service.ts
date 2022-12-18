@@ -72,13 +72,13 @@ export class AuthService {
 
     async refresh(refreshToken: string) {
         if(!refreshToken) {
-            throw new HttpException('You are not authorized', HttpStatus.BAD_REQUEST)
+            throw new HttpException('You are not authorized', HttpStatus.UNAUTHORIZED)
         }
         const userData = this.tokensService.validateRefreshToken(refreshToken)
         const tokenFromDb = await this.tokensService.findToken(refreshToken)
         
         if(!userData || !tokenFromDb) {
-            throw new HttpException('You are not authorized', HttpStatus.BAD_REQUEST)
+            throw new HttpException('You are not authorized', HttpStatus.UNAUTHORIZED)
         }
 
         const user = await this.usersService.getOne(userData._id) as User & {_id: string}

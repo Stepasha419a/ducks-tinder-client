@@ -1,35 +1,30 @@
 import { MutableRefObject, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
 import { IChat } from "../../../models/IChat"
 import { getChatsThunk } from "../../../redux/chatReducer"
-import { AppStateType } from "../../../redux/reduxStore"
 import ChatItem from "./ChatItem/ChatItem"
 import { Socket } from 'socket.io-client'
 import styles from './Chats.module.scss'
+import { useAppDispatch, useAppSelector } from "../../../redux/reduxStore"
 
 interface ChatsInterface{
     socket: MutableRefObject<Socket | undefined>
 }
 
 const Chats: React.FC<ChatsInterface> = ({socket}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
-    const chats = useSelector((state: AppStateType) => state.chatPage.chats)
-    const currentChatId = useSelector((state: AppStateType) => state.chatPage.currentChatId)
+    const currentUser = useAppSelector((state) => state.usersPage.currentUser)
+    const chats = useAppSelector((state) => state.chatPage.chats)
+    const currentChatId = useAppSelector((state) => state.chatPage.currentChatId)
 
     useEffect(() => {
-        dispatch(getChatsThunk({id: currentUser._id}) as any)
+        dispatch(getChatsThunk(currentUser._id))
     }, [currentUser._id, dispatch])
-
-    if(!chats) {
-        
-    }
 
     return (
         <div className={styles.chats}>
             {chats.map((chat: IChat) => {
-                const chatCompanionId = chat.members.find((memberId: string) => memberId !== currentUser._id)
+                const chatCompanionId = chat.members.find(member => member !== currentUser._id)
                 return (
                     <ChatItem key={chat._id} chat={chat} chatCompanionId={chatCompanionId} socket={socket} currentChatId={currentChatId} />
                 )

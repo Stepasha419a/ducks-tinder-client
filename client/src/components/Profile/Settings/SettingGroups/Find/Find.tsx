@@ -1,8 +1,7 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { AppStateType } from '../../../../../redux/reduxStore';
+import { useAppSelector } from '../../../../../redux/reduxStore';
 import RangeSlider from '../../../../Slider/RangeSlider/RangeSlider';
 import styles from './Find.module.scss';
 
@@ -30,8 +29,8 @@ const Find: React.FC<IFind> = ({
   errorFields,
   submitSettings,
 }) => {
-  const currentUser = useSelector(
-    (state: AppStateType) => state.usersPage.currentUser
+  const currentUser = useAppSelector(
+    (state) => state.usersPage.currentUser
   );
 
   const [ageSetting, setAgeSetting] = useState<{ min: number; max: number }>(

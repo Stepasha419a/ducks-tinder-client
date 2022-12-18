@@ -1,98 +1,57 @@
 @keyframes user-loading {
-    0% {
-      opacity: 0;
-      filter: blur(2px);
-    }
-    100% {
-      opacity: 1;
-      filter: blur(0px);
-    }
+  0% {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+  }
 }
 
 @keyframes text-left {
-    0% {
-      transform: translateX(-200px);
-    }
-    100% {
-      transform: translateX(450px);
-    }
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(450px);
+  }
 }
-  
+
 @keyframes text-right {
-    0% {
-      transform: translateX(450px);
-    }
-    100% {
-      transform: translateX(-200px);
-    }
+  0% {
+    transform: translateX(450px);
+  }
+  100% {
+    transform: translateX(-200px);
+  }
 }
 
-@keyframes lds-ring {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-}
+.loading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-height: 667px;
+  width: 375px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 3px solid rgb(214, 214, 214);
+  animation: user-loading 2s;
 
-.loading{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    max-height: 667px;
-    width: 375px;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 3px solid rgb(214, 214, 214);
-    animation: user-loading 2s;
+  .text {
+    width: 100%;
+    font-size: 42px;
+    font-weight: 700;
+    color: #e65050;
 
-    .text{
-        width: 100%;
-        font-size: 42px;
-        font-weight: 700;
-        color: #e65050;
-
-        &_left{
-            animation: text-left 2s infinite;
-        }
-
-        &_right{
-            animation: text-right 2s infinite;
-        }
+    &_left {
+      animation: text-left 2s infinite;
     }
 
-    .ring {
-        display: inline-block;
-        position: relative;
-        width: 80px;
-        height: 80px;
-        
-        & div {
-            box-sizing: border-box;
-            display: block;
-            position: absolute;
-            width: 64px;
-            height: 64px;
-            margin: 8px;
-            border: 8px solid #fff;
-            border-radius: 50%;
-            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            border-color: #ff76aa transparent transparent transparent;
-        }
-
-        & div:nth-child(1) {
-            animation-delay: -0.45s;
-        }
-
-        & div:nth-child(2) {
-            animation-delay: -0.3s;
-        }
-
-        & div:nth-child(3) {
-            animation-delay: -0.15s;
-        }
+    &_right {
+      animation: text-right 2s infinite;
     }
+  }
 }

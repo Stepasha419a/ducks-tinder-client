@@ -1,12 +1,11 @@
 import { MutableRefObject, useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
 import { IChat } from "../../../../models/IChat"
 import { IUser } from "../../../../models/IUser"
 import { connectChatThunk, disconnectChatThunk } from "../../../../redux/chatReducer"
-import { getUserThunk } from "../../../../redux/usersReducer"
 import { Socket } from 'socket.io-client'
 import styles from './ChatItem.module.scss'
 import Avatar from "../../../Avatar/Avatar"
+import { useAppDispatch, useAppSelector } from "../../../../redux/reduxStore"
 
 interface ChatInterface{
     chat: IChat
@@ -16,28 +15,37 @@ interface ChatInterface{
 }
 
 const ChatItem: React.FC<ChatInterface> = ({chat, chatCompanionId, socket, currentChatId}) => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const [chatPartner, setChatPartner] = useState<IUser>({} as IUser)
+    const chatsUsers = useAppSelector((state) => state.chatPage.chatsUsers)
+
+    const [chatPartner, setChatPartner] = useState<IUser | null>(null)
 
     function connect(chatId: string) {
-        dispatch(disconnectChatThunk({socket}) as any)
-        dispatch(connectChatThunk({socket, chatId}) as any)
+        dispatch(disconnectChatThunk({socket}))
+        dispatch(connectChatThunk({socket, chatId}))
     }
 
     useEffect(() => {
         return () => {
-            dispatch(disconnectChatThunk({socket}) as any)
+            dispatch(disconnectChatThunk({socket}))
         }
     }, [dispatch, socket])
 
     useEffect(() => {
-        dispatch(getUserThunk({id: chatCompanionId as String}) as any).then((res: any) => setChatPartner(res.payload))
-    }, [chatCompanionId, dispatch])
+        let user = chatsUsers.find(user => user._id === chatCompanionId)
+        if(user) {
+            setChatPartner(user)
+        }
+    })
+
+    if(!chatPartner) {
+        return null;
+    }
 
     return(
         <div onClick={() => connect(chat._id)} className={`${styles.item} ${currentChatId === chat._id ? styles.item_active : ''}`}>
-            <Avatar otherUserId={chatCompanionId} imageExtraClassName='_chat' />
+            <Avatar otherUserId={chatCompanionId} imageExtraClassName='_chat' avatarUrl={chatPartner.pictures.avatar}/>
             <div className={styles.descr}>
                 <div className={styles.name}>
                     {chatPartner.name}

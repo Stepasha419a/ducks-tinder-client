@@ -1,5 +1,5 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { Chat, Profile, Tinder } from '..';
@@ -9,13 +9,13 @@ import Layout from '../Layout/Layout';
 import Pairs from '../Pairs/Pairs';
 import Policy from '../Policy/Policy';
 import { checkAuthThunk } from '../../redux/authReducer';
-import { AppStateType } from '../../redux/reduxStore';
+import { useAppSelector } from '../../redux/reduxStore';
 
 const Routing = () => {
   const dispatch = useDispatch();
 
-  const formError = useSelector(
-    (state: AppStateType) => state.authPage.formError
+  const formError = useAppSelector(
+    (state) => state.authPage.formError
   );
 
   const [isPairsOpened, setIsPairsOpened] = useState(true);

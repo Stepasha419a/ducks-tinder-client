@@ -25,27 +25,6 @@
       border-radius: 4px;
       position: relative;
 
-      .likes {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-        background-color: rgb(248, 222, 74);
-        border-radius: 50%;
-        font-weight: 500;
-        color: #fff;
-        font-size: 18px;
-      }
-
-      .text {
-        position: absolute;
-        bottom: 3px;
-        left: 3px;
-        font-weight: 700;
-        color: #fff;
-      }
-
       .icon {
         position: absolute;
         bottom: -18px;

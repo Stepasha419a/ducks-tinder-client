@@ -1,12 +1,11 @@
 import React, { MutableRefObject, useEffect } from "react"
-import { useSelector } from "react-redux"
 import { useNavigate, Outlet, useLocation } from "react-router-dom"
-import { AppStateType } from "../../redux/reduxStore"
 import Nav from "../Nav/Nav"
 import { Socket } from 'socket.io-client'
 import styles from './Layout.module.scss'
 import { potentialFields } from '../../models/IUser';
 import { checkField } from '../../components/Profile/utils/ProfileUtils';
+import { useAppSelector } from "../../redux/reduxStore"
 
 interface LayoutPropsInterface{
     isPairsOpened: boolean,
@@ -18,8 +17,8 @@ const Layout: React.FC<LayoutPropsInterface> = ({isPairsOpened, setIsPairsOpened
     const navigate = useNavigate()
     const url = useLocation().pathname
     
-    const isAuth = useSelector((state: AppStateType) => state.authPage.isAuth)
-    const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+    const isAuth = useAppSelector((state) => state.authPage.isAuth)
+    const currentUser = useAppSelector((state) => state.usersPage.currentUser)
 
     useEffect(() => {
         if(isAuth) {

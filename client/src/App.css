@@ -2601,6 +2601,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   color: #992626;
 }
 .auth-form__validation div{
+  text-align: center;
   margin-bottom: 10px;
 }
 

@@ -1,22 +1,19 @@
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { AppStateType } from '../../../../redux/reduxStore';
 import defaultPhoto from '../../../../assets/images/photos/1.jpg';
 import styles from './PairBlock.module.scss';
 import { IUser } from '../../../../models/IUser';
+import { useAppSelector } from '../../../../redux/reduxStore';
 
 interface IPairBlock {
   firstPair: IUser;
 }
 
 export const PairBlock: React.FC<IPairBlock> = ({ firstPair }) => {
-  const currentUser = useSelector(
-    (state: AppStateType) => state.usersPage.currentUser
-  );
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
-  return firstPair.name ? (
+  return (
     <div className={styles.pairs}>
       <Link className={styles.link} to="/pairs">
         <div
@@ -39,8 +36,6 @@ export const PairBlock: React.FC<IPairBlock> = ({ firstPair }) => {
         </div>
       </Link>
     </div>
-  ) : (
-    <div>loading...</div>
   );
 };
 

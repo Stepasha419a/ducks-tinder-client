@@ -2,16 +2,19 @@ import authImg from '../../assets/images/auth/img-01.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRightLong, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { loginThunk, setFormError } from '../../redux/authReducer';
 import { Link, useNavigate } from 'react-router-dom';
-import { AppStateType } from '../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
 
-const LoginForm = (props: {formError: string}) => {
-  const dispatch = useDispatch()
+interface ILoginForm {
+  formError: string
+}
+
+const LoginForm: React.FC<ILoginForm> = ({formError}) => {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const isAuth = useSelector((state: AppStateType) => state.authPage.isAuth)
+  const isAuth = useAppSelector((state) => state.authPage.isAuth)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -74,10 +77,10 @@ const LoginForm = (props: {formError: string}) => {
     event.preventDefault()
     
     if(!emailError && !passwordError) {
-      dispatch(loginThunk({email, password}) as any)
+      dispatch(loginThunk({email, password}))
     }
   }
-
+  
   return (
     <div className="auth-form">
       <div className="auth-form__container">
@@ -90,9 +93,9 @@ const LoginForm = (props: {formError: string}) => {
               Member Login
             </span>
 
-            {props.formError && 
+            {formError && 
               <span className="auth-form__validation">
-                <div>{props.formError}</div>
+                <div>{formError}</div>
               </span>
             }
 

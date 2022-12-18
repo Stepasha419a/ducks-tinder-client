@@ -1,7 +1,6 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useSelector } from 'react-redux';
-import { AppStateType } from '../../../../../redux/reduxStore';
+import { useAppSelector } from '../../../../../redux/reduxStore';
 import styles from './Nickname.module.scss';
 
 interface INickname {
@@ -9,7 +8,7 @@ interface INickname {
 }
 
 const Nickname: React.FC<INickname> = ({setSettingInput}) => {
-  const currentUser = useSelector((state: AppStateType) => state.usersPage.currentUser)
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser)
 
   return (
     <div className={styles.group}>

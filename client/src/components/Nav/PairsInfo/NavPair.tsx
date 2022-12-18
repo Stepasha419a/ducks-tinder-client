@@ -1,28 +1,19 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { IUser } from '../../../models/IUser';
-import { AppStateType } from '../../../redux/reduxStore';
-import { getUserThunk } from '../../../redux/usersReducer';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
+import { getUserPairsThunk } from '../../../redux/usersReducer';
 import FailedPair from './Failed/FailedPair';
 import PairBlock from './PairBlock/PairBlock';
+import Loading from './Loading/Loading';
 
 const Pair = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const currentUser = useSelector(
-    (state: AppStateType) => state.usersPage.currentUser
-  );
-
-  const [firstPair, setFirstPair] = useState<IUser>({} as IUser);
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const firstPair = useAppSelector((state) => state.usersPage.pairs[0]);
 
   useEffect(() => {
     if (currentUser.pairs.length) {
-      const fetchUser = async (userId: string) => {
-        const data = await dispatch(getUserThunk({ id: userId }) as any);
-        return data.payload;
-      };
-
-      fetchUser(currentUser.pairs[0]).then((data) => setFirstPair(data));
+      dispatch(getUserPairsThunk([currentUser.pairs[0]]));
     }
   }, [currentUser.pairs, dispatch]);
 
@@ -30,7 +21,11 @@ const Pair = () => {
     return <FailedPair />;
   }
 
-  return <PairBlock firstPair={firstPair} />;
+  if (!firstPair) {
+    return <Loading />;
+  }
+
+  return <PairBlock firstPair={firstPair}/>;
 };
 
 export default Pair;

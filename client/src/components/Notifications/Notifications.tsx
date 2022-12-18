@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { AppStateType } from '../../redux/reduxStore';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../redux/reduxStore';
 import { deleteNotification } from '../../redux/usersReducer';
 import styles from './Notifications.module.scss';
 
 export const Notifications = () => {
   const dispatch = useDispatch();
 
-  const notifications = useSelector(
-    (state: AppStateType) => state.usersPage.notifications
+  const notifications = useAppSelector(
+    (state) => state.usersPage.notifications
   );
 
   const closeNotification = (id: number) => {
@@ -29,7 +29,7 @@ export const Notifications = () => {
               item.type === 'error' ? styles.notification_error : ''
             }`}
           >
-            {item.text}
+            <div className={styles.text}>{item.text}</div>
             <div
               className={`${styles.mark} ${
                 item.type === 'error' ? styles.mark_error : ''
