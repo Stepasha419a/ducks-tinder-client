@@ -44,12 +44,6 @@ const usersReducer = createSlice({
       newNotifications.splice(index, 1);
       state.notifications = newNotifications;
     },
-    setPairs: (state, action) => {
-      state.pairs = action.payload;
-    },
-    setTinderUsers: (state, action) => {
-      state.tinderUsers = [...state.tinderUsers, { ...action.payload }];
-    },
     setIsReturnUser: (state, action) => {
       state.isReturnUser = action.payload;
     },
@@ -58,9 +52,6 @@ const usersReducer = createSlice({
     },
     setCurrentTinderUsersIndex: (state, action) => {
       state.currentTinderUsersIndex = action.payload;
-    },
-    setIsFailed: (state, action) => {
-      state.isFailed = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -88,21 +79,39 @@ const usersReducer = createSlice({
       })
       .addCase(getSortedUserThunk.rejected, (state) => {
         state.isFailed = true;
-      });
-    /* .addMatcher(
+      })
+      .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
+        state.currentUser = payload;
+      })
+      .addCase(likeUserThunk.fulfilled, (state, { payload }) => {
+        state.currentUser = payload;
+      })
+      .addCase(saveUserImage.fulfilled, (state, { payload }) => {
+        state.currentUser = payload;
+      })
+      .addCase(deleteUserImage.fulfilled, (state, { payload }) => {
+        state.currentUser = payload;
+      })
+      .addCase(mixUserImages.fulfilled, (state, { payload }) => {
+        if (payload) {
+          state.currentUser = payload;
+        }
+      })
+      .addMatcher(
         (action) => action.type.endsWith('rejected'),
         (state, action) => {
+          console.log(action)
           const signs = action.type.split('/');
           if (signs[0] === 'users' && signs[1] !== 'getSortedUser') {
             const notification: INotification = {
               id: Date.now(),
               type: 'error',
-              text: action.payload,
+              text: `${action.payload} at ${action.type}`,
             };
             state.notifications = [...state.notifications, notification];
           }
         }
-      ); */
+      );
   },
 });
 
@@ -123,9 +132,9 @@ export const fetchUserPair = createAsyncThunk(
       return user;
     } catch (error) {
       if (error instanceof AxiosError) {
-        rejectWithValue(error.message);
+        return rejectWithValue(error.message);
       }
-      rejectWithValue(['unexpected error', error]);
+      return rejectWithValue(['unexpected error', error]);
     }
   }
 );
@@ -141,13 +150,7 @@ export const getSortedUserThunk = createAsyncThunk(
 
       const response = await usersAPI.getSortedUsers(querySortsObj);
 
-      if (!response) {
-        throw new Error("Can't get user. Server Error");
-      }
-
-      const data = await response.data;
-
-      return data;
+      return response.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         return rejectWithValue(error.message);
@@ -171,17 +174,19 @@ export const updateUserThunk = createAsyncThunk(
         | { from: number; to: number };
       innerObjectName?: string;
     },
-    { rejectWithValue, dispatch }
+    { rejectWithValue }
   ) => {
     try {
       const data = makeDataObject(args);
 
       const response = await usersAPI.updateUser(args.currentUser._id, data);
 
-      dispatch(setCurrentUser(response.data));
+      return response.data;
     } catch (error) {
-      if (error instanceof AxiosError) rejectWithValue(error.message);
-      rejectWithValue(['unexpected error', error]);
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
     }
   }
 );
@@ -192,14 +197,16 @@ export const getUserPairsThunk = createAsyncThunk(
     try {
       const pairs = [];
       for await (const pairId of pairsId) {
-        const data = await fetchUserById(pairId);
-        pairs.push(data);
+        const user = await fetchUserById(pairId);
+        pairs.push(user);
       }
 
       return pairs;
     } catch (error) {
-      if (error instanceof AxiosError) rejectWithValue(error.message);
-      rejectWithValue(['unexpected error', error]);
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
     }
   }
 );
@@ -208,7 +215,7 @@ export const likeUserThunk = createAsyncThunk(
   'users/likeUser',
   async (
     args: { currentUser: IUser; tinderUser: IUser },
-    { rejectWithValue, dispatch }
+    { rejectWithValue }
   ) => {
     try {
       const data = makeDataObject({
@@ -217,25 +224,25 @@ export const likeUserThunk = createAsyncThunk(
         changedData: [...args.currentUser.checkedUsers, args.tinderUser._id],
       });
 
-      const updateResponse = await usersAPI.updateUser(
+      const updateUserResponse = await usersAPI.updateUser(
         args.currentUser._id,
         data
       );
 
-      const response = await usersAPI.createPair(
+      const createPairResponse = await usersAPI.createPair(
         args.tinderUser._id,
         args.currentUser._id
       );
 
-      dispatch(
-        setCurrentUser({
-          ...updateResponse.data,
-          checkedUsers: [...response.data.checkedUsers],
-        })
-      );
+      return {
+        ...updateUserResponse.data,
+        checkedUsers: [...createPairResponse.data.checkedUsers],
+      };
     } catch (error) {
-      if (error instanceof AxiosError) rejectWithValue(error.message);
-      rejectWithValue(['unexpected error', error]);
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
     }
   }
 );
@@ -254,8 +261,10 @@ export const deletePairThunk = createAsyncThunk(
 
       return { data: response.data, deletedId: args.deleteForUserId };
     } catch (error) {
-      if (error instanceof AxiosError) rejectWithValue(error.message);
-      rejectWithValue(['unexpected error', error]);
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
     }
   }
 );
@@ -264,7 +273,7 @@ export const saveUserImage = createAsyncThunk(
   'users/saveUserImage',
   async (
     args: { picture: File; userId: string; setting: 'avatar' | 'gallery' },
-    { rejectWithValue, dispatch }
+    { rejectWithValue }
   ) => {
     try {
       const response = await usersAPI.savePicture(
@@ -273,10 +282,12 @@ export const saveUserImage = createAsyncThunk(
         args.setting
       );
 
-      dispatch(setCurrentUser(response.data));
+      return response.data;
     } catch (error) {
-      if (error instanceof AxiosError) rejectWithValue(error.message);
-      rejectWithValue(['unexpected error', error]);
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
     }
   }
 );
@@ -289,7 +300,7 @@ export const deleteUserImage = createAsyncThunk(
       userId: string;
       setting: 'avatar' | 'gallery';
     },
-    { rejectWithValue, dispatch }
+    { rejectWithValue }
   ) => {
     try {
       const response = await usersAPI.deletePicture(
@@ -298,10 +309,12 @@ export const deleteUserImage = createAsyncThunk(
         args.setting
       );
 
-      dispatch(setCurrentUser(response.data));
+      return response.data;
     } catch (error) {
-      if (error instanceof AxiosError) rejectWithValue(error.message);
-      rejectWithValue(['unexpected error', error]);
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
     }
   }
 );
@@ -310,7 +323,7 @@ export const mixUserImages = createAsyncThunk(
   'users/mixUserImages',
   async (
     args: { currentUser: IUser; images: imageInterface[] },
-    { rejectWithValue, dispatch }
+    { rejectWithValue }
   ) => {
     try {
       const userImages = makeUserImagesObject(args);
@@ -319,24 +332,24 @@ export const mixUserImages = createAsyncThunk(
         args.currentUser._id,
         userImages
       );
-      dispatch(setCurrentUser(response.data));
+
+      return response.data;
     } catch (error) {
-      if (error instanceof AxiosError) rejectWithValue(error.message);
-      rejectWithValue(['unexpected error', error]);
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
     }
   }
 );
 
 export const {
   setCurrentUser,
+  setRequestedUsers,
+  setIsReturnUser,
+  setCurrentTinderUsersIndex,
   createNotification,
   deleteNotification,
-  setPairs,
-  setTinderUsers,
-  setIsReturnUser,
-  setRequestedUsers,
-  setCurrentTinderUsersIndex,
-  setIsFailed,
 } = usersReducer.actions;
 
 export type UsersReducerType = typeof usersReducer;
