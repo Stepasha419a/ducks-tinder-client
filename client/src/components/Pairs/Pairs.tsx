@@ -14,7 +14,7 @@ import { ISorts, sortItemBySettings } from './utils/PairsUtils';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
 
-const Pairs: React.FC = () => {
+export const Pairs: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -191,5 +191,3 @@ const Pairs: React.FC = () => {
     </div>
   );
 };
-
-export default Pairs;

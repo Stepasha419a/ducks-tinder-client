@@ -4,7 +4,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import Chats from '../Chat/Chats/Chats';
+import Chats from './Chats/Chats';
 import { MutableRefObject } from 'react';
 import { Socket } from 'socket.io-client';
 import styles from './Nav.module.scss';

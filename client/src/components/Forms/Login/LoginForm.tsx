@@ -1,57 +1,46 @@
-import authImg from '../../assets/images/auth/img-01.png';
+import authImg from '../../../assets/images/auth/img-01.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightLong,
   faEnvelope,
   faLock,
-  faFileText,
 } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { registerThunk } from '../../redux/authReducer';
+import { loginThunk, setFormError } from '../../../redux/authReducer';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
 
-const RegistrationForm = (props: { formError: string }) => {
+interface ILoginForm {
+  formError: string;
+}
+
+export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const isAuth = useAppSelector((state) => state.authPage.isAuth);
 
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [nameDirty, setNameDirty] = useState(false);
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
-  const [nameError, setNameError] = useState("Name can't be empty");
   const [emailError, setEmailError] = useState("Email can't be empty");
   const [passwordError, setPasswordError] = useState("Password can't be empty");
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
-    if (emailError || passwordError || nameError) {
+    if (emailError || passwordError) {
       setIsFormValid(false);
     } else {
       setIsFormValid(true);
     }
-  }, [emailError, passwordError, nameError]);
+  }, [emailError, passwordError]);
 
   useEffect(() => {
     if (isAuth) {
       navigate('/');
     }
   }, [isAuth, navigate]);
-
-  const nameHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-    if (!e.target.value.length) {
-      setNameError("Name can't be empty");
-    } else if (e.target.value.length < 2) {
-      setNameError("Name can't be less than 2");
-    } else {
-      setNameError('');
-    }
-  };
 
   const emailHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -78,14 +67,13 @@ const RegistrationForm = (props: { formError: string }) => {
 
   const blurHandler = (event: ChangeEvent<HTMLInputElement>) => {
     switch (event.target.name) {
-      case 'name':
-        setNameDirty(true);
-        break;
       case 'email':
         setEmailDirty(true);
+        dispatch(setFormError(''));
         break;
       case 'password':
         setPasswordDirty(true);
+        dispatch(setFormError(''));
         break;
     }
   };
@@ -93,8 +81,8 @@ const RegistrationForm = (props: { formError: string }) => {
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!emailError && !passwordError && !nameError) {
-      dispatch(registerThunk({ email, password, name }));
+    if (!emailError && !passwordError) {
+      dispatch(loginThunk({ email, password }));
     }
   };
 
@@ -109,31 +97,13 @@ const RegistrationForm = (props: { formError: string }) => {
             onSubmit={(e) => submitHandler(e as FormEvent<HTMLFormElement>)}
             className="auth-form__form"
           >
-            <span className="auth-form__title">Member Sign Up</span>
+            <span className="auth-form__title">Member Login</span>
 
-            {props.formError && (
+            {formError && (
               <span className="auth-form__validation">
-                <div>{props.formError}</div>
+                <div>{formError}</div>
               </span>
             )}
-
-            <span className="auth-form__validation">
-              {nameDirty && nameError && <div>{nameError}</div>}
-            </span>
-            <div className="auth-form__input-wrap">
-              <input
-                className="auth-form__input"
-                name="name"
-                type="text"
-                placeholder="First name"
-                onBlur={(e) => blurHandler(e)}
-                value={name}
-                onChange={(e) => nameHandler(e)}
-              />
-              <span className="auth-form__symbol-input">
-                <FontAwesomeIcon icon={faFileText} />
-              </span>
-            </div>
 
             <span className="auth-form__validation">
               {emailDirty && emailError && <div>{emailError}</div>}
@@ -180,12 +150,12 @@ const RegistrationForm = (props: { formError: string }) => {
                   (isFormValid ? '' : ' auth-form__disabled-submit-btn')
                 }
               >
-                Sign up
+                Login
               </button>
             </div>
             <div className="text-center p-t-136 auth-form__create-account">
-              <Link className="auth-form__create-account-link" to="/login">
-                Log in your Account &nbsp;
+              <Link className="auth-form__create-account-link" to="/reg">
+                Create your Account &nbsp;
                 <FontAwesomeIcon icon={faArrowRightLong} />
               </Link>
             </div>
@@ -195,5 +165,3 @@ const RegistrationForm = (props: { formError: string }) => {
     </div>
   );
 };
-
-export default RegistrationForm;

@@ -8,11 +8,10 @@ import {
 import Message from './Message/Message';
 import { IMessage } from '../../models/IChat';
 import { isRefElementVisible, scrollToBottom } from './utils/ChatUtils';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMessage } from '@fortawesome/free-solid-svg-icons';
 import { Socket } from 'socket.io-client';
 import styles from './Chat.module.scss';
 import { useAppSelector } from '../../redux/reduxStore';
+import Status from './Status/Status';
 
 interface ChatPropsInterface {
   socket: MutableRefObject<Socket | undefined>;
@@ -22,7 +21,9 @@ export const Chat: React.FC<ChatPropsInterface> = ({ socket }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const messages = useAppSelector((state) => state.chatPage.currentMessages);
   const isConnected = useAppSelector((state) => state.chatPage.isConnected);
-  const currentChatMembers = useAppSelector((state) => state.chatPage.currentChatMembers);
+  const currentChatMembers = useAppSelector(
+    (state) => state.chatPage.currentChatMembers
+  );
 
   const [value, setValue] = useState('');
 
@@ -67,7 +68,9 @@ export const Chat: React.FC<ChatPropsInterface> = ({ socket }) => {
                 <Message
                   key={message.id}
                   message={message}
-                  user={currentChatMembers.find((item) => item._id === message.userId)}
+                  user={currentChatMembers.find(
+                    (item) => item._id === message.userId
+                  )}
                   currentUserId={currentUser._id}
                 />
               ) : (
@@ -92,12 +95,7 @@ export const Chat: React.FC<ChatPropsInterface> = ({ socket }) => {
           </div>
         </div>
       ) : (
-        <div className={styles.noChats}>
-          <div className={styles.inner}>
-            <FontAwesomeIcon icon={faMessage} className={styles.icon} />
-            <div className={styles.text}>Choose the chat</div>
-          </div>
-        </div>
+        <Status />
       )}
     </div>
   );
