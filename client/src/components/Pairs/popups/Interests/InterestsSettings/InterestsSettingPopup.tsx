@@ -1,4 +1,5 @@
-import { interestsList } from '../../../models/IUser';
+import { interestsList } from '../../../../../models/IUser';
+import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
   pairInterests: string[];
@@ -14,15 +15,15 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
   setIsInterestsSettingPopupOpen,
 }) => {
   return (
-    <div className="pairs__popup">
-      <div className="pairs__popup-body">
-        <div className="pairs__popup-content pairs__popup-content--overflow">
-          <div className="pairs__popup-title">Interests</div>
+    <div className={styles.popup}>
+      <div className={styles.body}>
+        <div className={`${styles.content} ${styles.content_overflow}`}>
+          <div className={styles.title}>Interests</div>
           <div
             onClick={() => setIsInterestsSettingPopupOpen(false)}
-            className="pairs__popup-close"
+            className={styles.close}
           ></div>
-          <div className="pairs__popup-sort-items">
+          <div className={styles.items}>
             {interestsList.map((item) => {
               return (
                 <div
@@ -32,10 +33,8 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
                       : addSort(item, 'interests');
                   }}
                   key={item}
-                  className={`pairs__popup-setting-item${
-                    pairInterests.includes(item)
-                      ? ' pairs__popup-setting-item--active'
-                      : ''
+                  className={`${styles.item} ${
+                    pairInterests.includes(item) ? styles.item_active : ''
                   }`}
                 >
                   {item}
@@ -45,14 +44,14 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
           </div>
           <button
             onClick={() => setIsInterestsSettingPopupOpen(false)}
-            className="pairs__popup-btn pairs__popup-btn--sorts-list"
+            className={styles.confirm}
           >
             Confirm
           </button>
         </div>
         <div
           onClick={() => setIsInterestsSettingPopupOpen(false)}
-          className="pairs__popup-close-area"
+          className={styles.closeArea}
         ></div>
       </div>
     </div>

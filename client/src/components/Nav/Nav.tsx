@@ -23,9 +23,7 @@ const Nav: React.FC<NavPropsInterface> = ({
   setIsPairsOpened,
   socket,
 }) => {
-  const currentUser = useAppSelector(
-    (state) => state.usersPage.currentUser
-  );
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   return (
     <aside className={styles.info}>

@@ -6,7 +6,7 @@ const FailedChats = () => {
   return (
     <div className={styles.noPairs}>
       <FontAwesomeIcon icon={faHeart} className={styles.icon} />
-      <div>You don't have chats. Accept some pairs to have a personal chats with them</div>
+      <div>You don't have chats. Accept some pairs to have personal chats with them</div>
     </div>
   );
 };

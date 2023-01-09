@@ -1,0 +1,38 @@
+.pair{
+  width: 244px;
+  height: 305px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: auto 125%;
+  margin: 5px;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  transition: .1s;
+
+  .info{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+
+    .descr{
+      display: flex;
+
+      .years{
+        padding-left: 10px;
+      }
+    }
+
+    .distance{
+      font-size: 18px;
+      font-weight: 300;
+
+      .text{
+        padding-left: 5px;
+      }
+    }
+  }
+}

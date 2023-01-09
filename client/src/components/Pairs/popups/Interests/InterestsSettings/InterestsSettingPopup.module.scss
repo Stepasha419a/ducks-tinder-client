@@ -1,0 +1,121 @@
+.popup {
+  position: fixed;
+  z-index: 150;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease 0s;
+
+  .body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
+
+    .content {
+      position: relative;
+      background-color: #ffffff;
+      width: 440px;
+      height: 600px;
+      transition: all 0.5s ease 0s;
+      border-radius: 8px;
+      z-index: 100;
+
+      &_overflow {
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      .title {
+        font-weight: 600;
+        font-size: 18px;
+        text-align: center;
+        padding-top: 24px;
+        margin-bottom: 20px;
+      }
+
+      .close {
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        cursor: pointer;
+
+        &::before,
+        &::after {
+          content: '';
+          display: block;
+          height: 4px;
+          width: 20px;
+          background-color: #b9bfc5;
+          border-radius: 4px;
+          position: absolute;
+          top: 11px;
+          left: 2px;
+        }
+
+        &::before {
+          transform: rotate(45deg);
+        }
+        &::after {
+          transform: rotate(135deg);
+        }
+      }
+
+      .items {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 10px;
+
+        .item {
+          border: 2px solid #b9bfc5;
+          border-radius: 16px;
+          font-weight: 600;
+          padding: 5px 20px;
+          margin: 5px;
+          color: #505965;
+          cursor: pointer;
+          transition: 0.2s;
+
+          &_active {
+            border-color: #e65050;
+            color: #e65050;
+          }
+        }
+      }
+
+      .confirm {
+        display: block;
+        height: 60px;
+        width: 100%;
+        border: none;
+        background-color: #fff;
+        font-size: 22px;
+        color: #505965;
+        text-transform: uppercase;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+        position: sticky;
+        bottom: 0;
+      }
+    }
+
+    .closeArea {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99;
+      cursor: pointer;
+    }
+  }
+}

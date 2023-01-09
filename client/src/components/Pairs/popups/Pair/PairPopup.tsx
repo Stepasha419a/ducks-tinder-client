@@ -1,12 +1,12 @@
 import { faChevronDown, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
-import { IUser } from '../../../models/IUser';
-import { createChatThunk } from '../../../redux/chatReducer';
-import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
-import { deletePairThunk } from '../../../redux/usersReducer';
-import ImageSlider from '../../Slider/ImageSlider/ImageSlider';
-import InterestsListPopup from './InterestsListPopup';
+import { IUser } from '../../../../models/IUser';
+import { createChatThunk } from '../../../../redux/chatReducer';
+import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
+import { deletePairThunk } from '../../../../redux/usersReducer';
+import ImageSlider from '../../../Slider/ImageSlider/ImageSlider';
+import InterestsListPopup from '../Interests/List/InterestsListPopup';
 
 interface PairPopupProps {
   currentPair: IUser;

@@ -4,43 +4,55 @@ import {
   faArrowRightLong,
   faEnvelope,
   faLock,
+  faFileText,
 } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { loginThunk, setFormError } from '../../../redux/authReducer';
+import { registerThunk } from '../../../redux/authReducer';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
+import styles from './Registration.module.scss';
 
-interface ILoginForm {
-  formError: string;
-}
-
-export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
+export const RegistrationForm = (props: { formError: string }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const isAuth = useAppSelector((state) => state.authPage.isAuth);
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nameDirty, setNameDirty] = useState(false);
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
+  const [nameError, setNameError] = useState("Name can't be empty");
   const [emailError, setEmailError] = useState("Email can't be empty");
   const [passwordError, setPasswordError] = useState("Password can't be empty");
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
-    if (emailError || passwordError) {
+    if (emailError || passwordError || nameError) {
       setIsFormValid(false);
     } else {
       setIsFormValid(true);
     }
-  }, [emailError, passwordError]);
+  }, [emailError, passwordError, nameError]);
 
   useEffect(() => {
     if (isAuth) {
       navigate('/');
     }
   }, [isAuth, navigate]);
+
+  const nameHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+    if (!e.target.value.length) {
+      setNameError("Name can't be empty");
+    } else if (e.target.value.length < 2) {
+      setNameError("Name can't be less than 2");
+    } else {
+      setNameError('');
+    }
+  };
 
   const emailHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -67,13 +79,14 @@ export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
 
   const blurHandler = (event: ChangeEvent<HTMLInputElement>) => {
     switch (event.target.name) {
+      case 'name':
+        setNameDirty(true);
+        break;
       case 'email':
         setEmailDirty(true);
-        dispatch(setFormError(''));
         break;
       case 'password':
         setPasswordDirty(true);
-        dispatch(setFormError(''));
         break;
     }
   };
@@ -81,36 +94,54 @@ export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
   const submitHandler = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!emailError && !passwordError) {
-      dispatch(loginThunk({ email, password }));
+    if (!emailError && !passwordError && !nameError) {
+      dispatch(registerThunk({ email, password, name }));
     }
   };
 
   return (
-    <div className="auth-form">
-      <div className="auth-form__container">
-        <div className="auth-form__wrap">
-          <div className="auth-form__img">
+    <div className={styles.auth}>
+      <div className={styles.container}>
+        <div className={styles.wrapper}>
+          <div className={styles.img}>
             <img src={authImg} alt="IMG" />
           </div>
           <form
             onSubmit={(e) => submitHandler(e as FormEvent<HTMLFormElement>)}
-            className="auth-form__form"
+            className={styles.form}
           >
-            <span className="auth-form__title">Member Login</span>
+            <span className={styles.title}>Member Sign Up</span>
 
-            {formError && (
-              <span className="auth-form__validation">
-                <div>{formError}</div>
+            {props.formError && (
+              <span className={styles.validation}>
+                <div>{props.formError}</div>
               </span>
             )}
 
-            <span className="auth-form__validation">
+            <span className={styles.validation}>
+              {nameDirty && nameError && <div>{nameError}</div>}
+            </span>
+            <div className={styles.inputWrapper}>
+              <input
+                className={styles.input}
+                name="name"
+                type="text"
+                placeholder="First name"
+                onBlur={(e) => blurHandler(e)}
+                value={name}
+                onChange={(e) => nameHandler(e)}
+              />
+              <span className={styles.icon}>
+                <FontAwesomeIcon icon={faFileText} />
+              </span>
+            </div>
+
+            <span className={styles.validation}>
               {emailDirty && emailError && <div>{emailError}</div>}
             </span>
-            <div className="auth-form__input-wrap">
+            <div className={styles.inputWrapper}>
               <input
-                className="auth-form__input"
+                className={styles.input}
                 name="email"
                 type="text"
                 placeholder="Email"
@@ -118,17 +149,17 @@ export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
                 value={email}
                 onChange={(e) => emailHandler(e)}
               />
-              <span className="auth-form__symbol-input">
+              <span className={styles.icon}>
                 <FontAwesomeIcon icon={faEnvelope} />
               </span>
             </div>
 
-            <span className="auth-form__validation">
+            <span className={styles.validation}>
               {passwordDirty && passwordError && <div>{passwordError}</div>}
             </span>
-            <div className="auth-form__input-wrap">
+            <div className={styles.inputWrapper}>
               <input
-                className="auth-form__input"
+                className={styles.input}
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -136,26 +167,26 @@ export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
                 value={password}
                 onChange={(e) => passwordHandler(e)}
               />
-              <span className="auth-form__symbol-input">
+              <span className={styles.icon}>
                 <FontAwesomeIcon icon={faLock} />
               </span>
             </div>
 
-            <div className="auth-form__container-btn">
+            <div className={styles.submit}>
               <button
                 disabled={!isFormValid}
                 type="submit"
                 className={
-                  'auth-form__submit-btn' +
-                  (isFormValid ? '' : ' auth-form__disabled-submit-btn')
+                  `${styles.btn} ` +
+                  (isFormValid ? '' : styles.btn_disabled)
                 }
               >
-                Login
+                Sign up
               </button>
             </div>
-            <div className="text-center p-t-136 auth-form__create-account">
-              <Link className="auth-form__create-account-link" to="/reg">
-                Create your Account &nbsp;
+            <div className={styles.login}>
+              <Link className={styles.link} to="/login">
+                Log in your Account &nbsp;
                 <FontAwesomeIcon icon={faArrowRightLong} />
               </Link>
             </div>

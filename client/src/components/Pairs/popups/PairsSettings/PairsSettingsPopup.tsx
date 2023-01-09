@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import RangeSlider, { IRange } from '../../Slider/RangeSlider/RangeSlider';
-import { ISorts } from '../utils/PairsUtils';
+import RangeSlider, { IRange } from '../../../Slider/RangeSlider/RangeSlider';
+import { ISorts } from '../../utils/PairsUtils';
 
 interface PairsSettingsPopupProps {
   pairSorts: ISorts;

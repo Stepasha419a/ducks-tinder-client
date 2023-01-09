@@ -2,7 +2,7 @@ import { faCircleDown, faHouse, faLocationDot } from "@fortawesome/free-solid-sv
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useState } from "react"
 import { IUser } from "../../../../../models/IUser"
-import InterestsListPopup from "../../../../Pairs/popups/InterestsListPopup"
+import InterestsListPopup from "../../../../Pairs/popups/Interests/List/InterestsListPopup"
 import ImageSlider from "../../../../Slider/ImageSlider/ImageSlider"
 import styles from './FullPreview.module.scss'
 
