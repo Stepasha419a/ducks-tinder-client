@@ -2,7 +2,6 @@ import { ChatService } from './chat.service';
 import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io'
 import { ISendMessage } from './chat.interface';
-import { parseUrl } from './utils/chat.utils';
 
 @WebSocketGateway({namespace: '/chat/socket', cors: '*:*', origin: true})
 export class ChatGateway {
@@ -13,7 +12,7 @@ export class ChatGateway {
 
   @SubscribeMessage('message')
   handleMessage(client: Socket, message: ISendMessage) {
-    const chatId = parseUrl(client.request.url)
+    const chatId = this.chatService.parseUrl(client.request.url)
 
     this.wss.to(chatId).emit('message', message)
     
@@ -22,7 +21,7 @@ export class ChatGateway {
 
   @SubscribeMessage('connectChat')
   handleConnectChat(client: Socket) {
-    const chatId = parseUrl(client.request.url)
+    const chatId = this.chatService.parseUrl(client.request.url)
 
     client.join(chatId)
 
@@ -31,7 +30,7 @@ export class ChatGateway {
 
   @SubscribeMessage('disconnectChat')
   handleDisonnectChat(client: Socket) {
-    const chatId = parseUrl(client.request.url)
+    const chatId = this.chatService.parseUrl(client.request.url)
 
     client.leave(chatId)
 
