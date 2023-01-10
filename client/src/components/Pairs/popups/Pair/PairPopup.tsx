@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
 import { deletePairThunk } from '../../../../redux/usersReducer';
 import ImageSlider from '../../../Slider/ImageSlider/ImageSlider';
 import InterestsListPopup from '../Interests/List/InterestsListPopup';
+import styles from './PairPopup.module.scss';
 
 interface PairPopupProps {
   currentPair: IUser;
@@ -62,14 +63,14 @@ const PairPopup: React.FC<PairPopupProps> = ({
 
   return (
     <>
-      <div className="pairs__popup">
-        <div className="pairs__popup-body">
-          <div className="pairs__popup-content pairs__popup-content--pair">
+      <div className={styles.popup}>
+        <div className={styles.body}>
+          <div className={`${styles.content} ${styles.overflow}`}>
             <div
               onClick={() => setCurrentPair({} as IUser)}
-              className="pairs__popup-close"
+              className={styles.close}
             ></div>
-            <div className="pairs__popup-slider">
+            <div className={styles.slider}>
               <ImageSlider
                 images={[
                   currentPair.pictures.avatar,
@@ -77,54 +78,44 @@ const PairPopup: React.FC<PairPopupProps> = ({
                 ]}
                 userId={currentPair._id}
               />
-              <div className="pairs__slider-pair-info">
-                <div className="pairs__slider-info">
-                  <div className="pairs__slider-info-name">
-                    {currentPair.name}
-                  </div>
-                  <div className="pairs__slider-info-years">
+              <div className={styles.info}>
+                <div className={styles.person}>
+                  <div className={styles.name}>{currentPair.name}</div>
+                  <div className={styles.years}>
                     {currentPair.age || 'unknown years'}
                   </div>
                 </div>
-                <div className="pairs__slider-distance">
+                <div className={styles.distance}>
                   {currentPair.partnerSettings?.distance || 'unknown'} km from
                   you
                 </div>
               </div>
             </div>
-            <div
-              onClick={() => scrollToBottom()}
-              className="pairs__popup-scroll-down"
-            >
+            <div onClick={() => scrollToBottom()} className={styles.scrollDown}>
               <FontAwesomeIcon icon={faChevronDown} />
             </div>
-            <div className="pairs__popup-info">
-              <div className="pairs__popup-info-flex">
-                <div className="pairs__popup-info-name">{currentPair.name}</div>
-                <div className="pairs__popup-info-years">
+            <div className={styles.pair}>
+              <div className={styles.wrapper}>
+                <div className={styles.name}>{currentPair.name}</div>
+                <div className={styles.years}>
                   {currentPair.age || 'unkown years'}
                 </div>
               </div>
-              <div className="pairs__popup-info-sex">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className="pairs__popup-info-sex-icon"
-                />
+              <div className={styles.sex}>
+                <FontAwesomeIcon icon={faUser} className={styles.icon} />
                 {currentPair.sex[0].toUpperCase() + currentPair.sex.slice(1) ||
                   'unkown sex'}
               </div>
             </div>
-            <hr className="pairs__popup-info-separator" />
-            <div className="pairs__popup-description">
-              {currentPair.description}
-            </div>
-            <hr className="pairs__popup-info-separator" />
-            <div className="pairs__popup-interests">
-              <div className="pairs__popup-interests-title">Interests</div>
-              <div className="pairs__popup-interests-items">
+            <hr className={styles.separator} />
+            <div className={styles.description}>{currentPair.description}</div>
+            <hr className={styles.separator} />
+            <div className={styles.interests}>
+              <div className={styles.title}>Interests</div>
+              <div className={styles.items}>
                 {interestsForLoop.map((item) => {
                   return (
-                    <div key={item} className="pairs__popup-interest">
+                    <div key={item} className={styles.item}>
                       {item}
                     </div>
                   );
@@ -133,29 +124,29 @@ const PairPopup: React.FC<PairPopupProps> = ({
             </div>
             <div
               onClick={() => setIsInterestsListPopupOpen(true)}
-              className="pairs__popup-setting-show-all pairs__popup-show-all"
+              className={styles.showAll}
             >
               Show all
             </div>
-            <div className="pairs__popup-setting-btns">
+            <div className={styles.btns}>
               <button
                 onClick={() => refuseHandler(currentPair._id)}
-                className="pairs__popup-setting-btn pairs__popup-setting-btn--border"
+                className={`${styles.btn} ${styles.border}`}
               >
                 Refuse
               </button>
               <button
                 onClick={() => acceptHandler(currentPair._id)}
-                className="pairs__popup-setting-btn"
+                className={styles.btn}
               >
                 Accept
               </button>
             </div>
-            <div ref={bottomElementRef} className="tinder_pairs-popup-bottom" />
+            <div ref={bottomElementRef} />
           </div>
           <div
             onClick={() => setCurrentPair({} as IUser)}
-            className="pairs__popup-close-area"
+            className={styles.closeArea}
           ></div>
         </div>
       </div>

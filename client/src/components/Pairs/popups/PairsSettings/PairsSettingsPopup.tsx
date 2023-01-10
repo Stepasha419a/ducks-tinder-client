@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import RangeSlider, { IRange } from '../../../Slider/RangeSlider/RangeSlider';
 import { ISorts } from '../../utils/PairsUtils';
+import styles from './PairsSettingsPopup.module.scss';
 
 interface PairsSettingsPopupProps {
   pairSorts: ISorts;
@@ -56,20 +57,18 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
   };
 
   return (
-    <div className="pairs__popup">
-      <div className="pairs__popup-body">
-        <div className="pairs__popup-content">
-          <div className="pairs__popup-title">Likes filter</div>
+    <div className={styles.popup}>
+      <div className={styles.body}>
+        <div className={styles.content}>
+          <div className={styles.title}>Likes filter</div>
           <div
             onClick={() => setIsSortPopupOpen(false)}
-            className="pairs__popup-close"
+            className={styles.close}
           ></div>
-          <div className="pairs__popup-setting">
-            <div className="pairs__popup-setting-title">Max distantion</div>
-            <div className="pairs__popup-setting-value">
-              {distanceSetting} km
-            </div>
-            <div className="pairs__popup-setting-change pairs__popup-setting-change--margin-top">
+          <div className={styles.setting}>
+            <div className={styles.name}>Max distantion</div>
+            <div className={styles.value}>{distanceSetting} km</div>
+            <div className={`${styles.change} ${styles.margin}`}>
               <RangeSlider
                 value={distanceSetting}
                 setValue={(value: number | IRange) =>
@@ -81,13 +80,13 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
               />
             </div>
           </div>
-          <div className="pairs__popup-hr"></div>
-          <div className="pairs__popup-setting">
-            <div className="pairs__popup-setting-title">Age range</div>
-            <div className="pairs__popup-setting-value">
+          <div className={styles.separator} />
+          <div className={styles.setting}>
+            <div className={styles.name}>Age range</div>
+            <div className={styles.value}>
               from {ageSetting.min} to {ageSetting.max}
             </div>
-            <div className="pairs__popup-setting-change pairs__popup-setting-change--margin-top">
+            <div className={`${styles.change} ${styles.margin}`}>
               <RangeSlider
                 value={ageSetting}
                 setValue={(value: number | IRange) =>
@@ -100,20 +99,17 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
               />
             </div>
           </div>
-          <div className="pairs__popup-hr"></div>
-          <div className="pairs__popup-setting">
-            <div className="pairs__popup-setting-title">Min photo's count</div>
-            <div className="pairs__popup-setting-change pairs__popup-setting-change--flex">
+          <div className={styles.separator}></div>
+          <div className={styles.setting}>
+            <div className={styles.name}>Min photo's count</div>
+            <div className={`${styles.change} ${styles.flex}`}>
               {arrForLoop.map((item) => {
                 return (
                   <div
                     onClick={() => setPhotosCountHandler(item)}
                     key={item}
-                    className={`pairs__popup-setting-item${
-                      photoCount === item
-                        ? ' pairs__popup-setting-item--active'
-                        : ''
-                    }`}
+                    className={`${styles.item} 
+                      ${photoCount === item ? styles.active : ''}`}
                   >
                     {item}
                   </div>
@@ -121,10 +117,10 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
               })}
             </div>
           </div>
-          <div className="pairs__popup-hr"></div>
-          <div className="pairs__popup-setting">
-            <div className="pairs__popup-setting-title">Interests</div>
-            <div className="pairs__popup-setting-change pairs__popup-setting-change--flex">
+          <div className={styles.separator}></div>
+          <div className={styles.setting}>
+            <div className={styles.name}>Interests</div>
+            <div className={`${styles.change} ${styles.flex}`}>
               {['music', 'travelling', 'movies'].map((item) => {
                 return (
                   <div
@@ -134,10 +130,8 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
                         : addSort(item, 'interests');
                     }}
                     key={item}
-                    className={`pairs__popup-setting-item${
-                      pairSorts.interests.includes(item)
-                        ? ' pairs__popup-setting-item--active'
-                        : ''
+                    className={`${styles.item} ${
+                      pairSorts.interests.includes(item) ? styles.active : ''
                     }`}
                   >
                     {item}
@@ -147,82 +141,66 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
             </div>
             <div
               onClick={() => setIsInterestsSettingPopupOpen(true)}
-              className="pairs__popup-setting-show-all"
+              className={styles.showAll}
             >
               Show all
             </div>
           </div>
-          <div className="pairs__popup-hr"></div>
+          <div className={styles.separator}></div>
           <div
             onClick={() => {
               pairSorts.account.includes('identify confirmed')
                 ? deleteSort('identify confirmed', 'account')
                 : addSort('identify confirmed', 'account');
             }}
-            className="pairs__popup-setting pairs__popup-setting--cursor"
+            className={`${styles.setting} ${styles.pointer}`}
           >
-            <div className="pairs__popup-setting-change pairs__popup-setting-change--checkbox">
-              <div className="pairs__popup-setting-descr">
-                Identify confirmed
-              </div>
-              <label className="pairs__popup-setting-label">
+            <div className={`${styles.change} ${styles.checkbox}`}>
+              <div>Identify confirmed</div>
+              <label>
                 <input
                   checked={pairSorts.account.includes('identify confirmed')}
-                  className="pairs__popup-setting-checkbox"
+                  className={styles.checkbox}
                   type="checkbox"
                   id="pairs__popup-identify-checkbox"
                 />
-                <div
-                  onClick={() => {
-                    pairSorts.account.includes('identify confirmed')
-                      ? deleteSort('identify confirmed', 'account')
-                      : addSort('identify confirmed', 'account');
-                  }}
-                  className="pairs__popup-setting-label-checked"
-                ></div>
+                <div className={styles.checked} />
               </label>
             </div>
           </div>
-          <div className="pairs__popup-hr"></div>
+          <div className={styles.separator}></div>
           <div
             onClick={() => {
               pairSorts.account.includes('have interests')
                 ? deleteSort('have interests', 'account')
                 : addSort('have interests', 'account');
             }}
-            className="pairs__popup-setting pairs__popup-setting--cursor"
+            className={`${styles.setting} ${styles.pointer}`}
           >
-            <div className="pairs__popup-setting-change pairs__popup-setting-change--checkbox">
-              <div className="pairs__popup-setting-descr">Have interests</div>
-              <label className="pairs__popup-setting-label">
+            <div className={`${styles.change} ${styles.checkbox}`}>
+              <div>Have interests</div>
+              <label>
                 <input
                   checked={pairSorts.account.includes('have interests')}
-                  className="pairs__popup-setting-checkbox"
+                  className={styles.checkbox}
                   type="checkbox"
                   id="pairs__popup-identify-checkbox"
                 />
-                <div
-                  onClick={() => {
-                    pairSorts.account.includes('have interests')
-                      ? deleteSort('have interests', 'account')
-                      : addSort('have interests', 'account');
-                  }}
-                  className="pairs__popup-setting-label-checked"
-                ></div>
+                <div className={styles.checked}></div>
               </label>
             </div>
           </div>
-          <div className="pairs__popup-hr"></div>
-          <div className="pairs__popup-buttons">
+          <div className={styles.separator}></div>
+          <div className={styles.btns}>
             <button
               onClick={() => clearSorts()}
-              className="pairs__popup-btn pairs__popup-btn--left-border"
+              className={`${styles.btn} ${styles.leftBorder}`}
             >
               Clear
             </button>
             <button
               onClick={() => setIsSortPopupOpen(false)}
-              className="pairs__popup-btn pairs__popup-btn--right-border"
+              className={`${styles.btn} ${styles.rightBorder}`}
             >
               Confirm
             </button>
@@ -230,7 +208,7 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
         </div>
         <div
           onClick={() => setIsSortPopupOpen(false)}
-          className="pairs__popup-close-area"
+          className={styles.closeArea}
         ></div>
       </div>
     </div>

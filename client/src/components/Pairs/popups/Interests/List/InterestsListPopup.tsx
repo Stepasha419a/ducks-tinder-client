@@ -1,3 +1,5 @@
+import styles from './InterestsListPopup.module.scss'
+
 interface InterestsListPopupProps {
   setIsInterestsListPopupOpen: (setting: boolean) => void;
   interestsList: string[];
@@ -8,20 +10,20 @@ const InterestsListPopup: React.FC<InterestsListPopupProps> = ({
   setIsInterestsListPopupOpen,
 }) => {
   return (
-    <div className="pairs__popup">
-      <div className="pairs__popup-body">
-        <div className="pairs__popup-content pairs__popup-content--overflow">
-          <div className="pairs__popup-title">Interests</div>
+    <div className={styles.popup}>
+      <div className={styles.body}>
+        <div className={`${styles.content} ${styles.overflow}`}>
+          <div className={styles.title}>Interests</div>
           <div
             onClick={() => setIsInterestsListPopupOpen(false)}
-            className="pairs__popup-close"
+            className={styles.close}
           ></div>
-          <div className="pairs__popup-sort-items">
+          <div className={styles.items}>
             {interestsList.map((item) => {
               return (
                 <div
                   key={item}
-                  className="pairs__popup-setting-item pairs__popup-setting-item--no-cursor"
+                  className={styles.item}
                 >
                   {item}
                 </div>
@@ -30,14 +32,14 @@ const InterestsListPopup: React.FC<InterestsListPopupProps> = ({
           </div>
           <button
             onClick={() => setIsInterestsListPopupOpen(false)}
-            className="pairs__popup-btn pairs__popup-btn--sorts-list"
+            className={styles.btn}
           >
             Close
           </button>
         </div>
         <div
           onClick={() => setIsInterestsListPopupOpen(false)}
-          className="pairs__popup-close-area"
+          className={styles.closeArea}
         ></div>
       </div>
     </div>

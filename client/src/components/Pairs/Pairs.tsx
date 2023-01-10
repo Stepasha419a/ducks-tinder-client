@@ -13,6 +13,7 @@ import InterestsSettingPopup from './popups/Interests/InterestsSettings/Interest
 import { ISorts, sortItemBySettings } from './utils/PairsUtils';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
+import styles from './Pairs.module.scss';
 
 export const Pairs: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -95,18 +96,18 @@ export const Pairs: React.FC = () => {
   };
 
   return (
-    <div className="pairs">
-      <div className="pairs__likes">
+    <div className={styles.pairs}>
+      <div className={styles.likes}>
         <FontAwesomeIcon
           icon={faHeartCircleExclamation}
-          className="pairs__likes-icon"
+          className={styles.icon}
         />
         &nbsp;{currentUser.pairs.length} likes
       </div>
-      <div className="pairs__settings">
+      <div className={styles.settings}>
         <div
           onClick={() => setIsSortPopupOpen(true)}
-          className="pairs__setting"
+          className={styles.setting}
         >
           <FontAwesomeIcon icon={faSliders} />
         </div>
@@ -119,9 +120,9 @@ export const Pairs: React.FC = () => {
                   : addSort(item, 'interests');
               }}
               key={item}
-              className={`pairs__setting${
+              className={`${styles.setting} ${
                 pairSorts.interests.includes(item)
-                  ? ' pairs__setting--sort'
+                  ? styles.sort
                   : ''
               }`}
             >
@@ -135,9 +136,9 @@ export const Pairs: React.FC = () => {
               ? deleteSort('have interests', 'account')
               : addSort('have interests', 'account');
           }}
-          className={`pairs__setting${
+          className={`${styles.setting} ${
             pairSorts.account.includes('have interests')
-              ? ' pairs__setting--sort'
+              ? styles.sort
               : ''
           }`}
         >
@@ -150,7 +151,7 @@ export const Pairs: React.FC = () => {
           paddingLeft: `${pairsPaddingWidth}px`,
           paddingRight: `${pairsPaddingWidth}px`,
         }}
-        className="pairs__users"
+        className={styles.users}
       >
         {pairsState.length &&
           pairsState.map((user: IUser) => {

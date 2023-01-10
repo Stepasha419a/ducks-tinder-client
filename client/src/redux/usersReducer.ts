@@ -5,7 +5,7 @@ import { imageInterface } from '../components/Profile/ProfileImageChange/ChangeI
 import { IUser, makeUserImagesObject } from '../models/IUser';
 import { AxiosError } from 'axios';
 
-interface INotification {
+export interface INotification {
   id: number;
   type: string;
   text: string;

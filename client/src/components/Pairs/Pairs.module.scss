@@ -1,0 +1,52 @@
+.pairs {
+  width: 100%;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  position: relative;
+
+  .likes {
+    height: 90px;
+    width: 100%;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    font-size: 24px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+
+    .icon {
+      color: rgb(245, 212, 29);
+      font-size: 32px;
+    }
+  }
+
+  .settings {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+
+    .setting {
+      border: 2px solid rgb(214, 214, 214);
+      border-radius: 16px;
+      font-weight: 600;
+      padding: 5px 10px;
+      margin: 5px;
+      position: relative;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &.sort {
+        border-color: #e65050;
+        color: #e65050;
+      }
+    }
+  }
+
+  .users{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    margin-top: 60px;
+  }
+}
