@@ -1,15 +1,9 @@
 import classNames from 'classnames';
 import { makeImageUrl } from '../helpers';
+import { AvatarProps } from './Avatar.types';
 import styles from './Avatar.module.scss';
 
-interface AvatarInterface {
-  size?: 's' | 'm';
-  userId?: string;
-  extraClassName?: string;
-  avatarUrl?: string;
-}
-
-export const Avatar: React.FC<AvatarInterface> = ({
+export const Avatar: React.FC<AvatarProps> = ({
   size = 's',
   extraClassName,
   avatarUrl,
