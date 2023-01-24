@@ -1,6 +1,6 @@
 import { IMessage } from '../../../models/IChat';
 import { IUser } from '../../../models/IUser';
-import Avatar from '../../Avatar/Avatar';
+import { Avatar } from '../../ui';
 import styles from './Message.module.scss';
 
 interface MessageComponentInterface {
@@ -19,12 +19,12 @@ const Message: React.FC<MessageComponentInterface> = ({
       <div className={styles.container}>
         {user?.pictures ? (
           <Avatar
-            otherUserId={user._id}
-            imageExtraClassName="_message"
+            userId={user._id}
+            extraClassName={styles.avatar}
             avatarUrl={user.pictures.avatar}
           />
         ) : (
-          <Avatar showDefaultPhoto imageExtraClassName="_message" />
+          <Avatar extraClassName="_message" />
         )}
         <div
           className={`${styles.message} ${

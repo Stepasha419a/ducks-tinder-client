@@ -25,8 +25,7 @@ export const Pairs: React.FC = () => {
   const [pairsPaddingWidth, setPairsPaddingWidth] = useState(0);
   const [currentPair, setCurrentPair] = useState<IUser>({} as IUser);
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
-  const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
-    useState(false);
+  const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] = useState(false);
   const [pairSorts, setPairSorts] = useState<ISorts>({
     distance: 100,
     age: { min: 18, max: 100 },
@@ -121,9 +120,7 @@ export const Pairs: React.FC = () => {
               }}
               key={item}
               className={`${styles.setting} ${
-                pairSorts.interests.includes(item)
-                  ? styles.sort
-                  : ''
+                pairSorts.interests.includes(item) ? styles.sort : ''
               }`}
             >
               {item}
@@ -137,9 +134,7 @@ export const Pairs: React.FC = () => {
               : addSort('have interests', 'account');
           }}
           className={`${styles.setting} ${
-            pairSorts.account.includes('have interests')
-              ? styles.sort
-              : ''
+            pairSorts.account.includes('have interests') ? styles.sort : ''
           }`}
         >
           have interests

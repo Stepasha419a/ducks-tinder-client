@@ -6,6 +6,10 @@
     .container{
         display: flex;
         align-items: flex-end;
+
+        .avatar{
+            margin-right: 8px;
+        }
         
         .message{
             background-color: #fff;

@@ -7,8 +7,8 @@ import {
 } from '../../../../redux/chatReducer';
 import { Socket } from 'socket.io-client';
 import styles from './ChatItem.module.scss';
-import Avatar from '../../../Avatar/Avatar';
 import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
+import { Avatar } from '../../../ui';
 
 interface ChatInterface {
   chat: IChat;
@@ -59,8 +59,8 @@ const ChatItem: React.FC<ChatInterface> = ({
       }`}
     >
       <Avatar
-        otherUserId={chatCompanionId}
-        imageExtraClassName="_chat"
+        userId={chatCompanionId}
+        size="m"
         avatarUrl={chatPartner.pictures.avatar}
       />
       <div className={styles.descr}>

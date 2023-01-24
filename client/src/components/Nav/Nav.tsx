@@ -9,8 +9,8 @@ import { MutableRefObject } from 'react';
 import { Socket } from 'socket.io-client';
 import styles from './Nav.module.scss';
 import NavPair from './PairsInfo/NavPair';
-import Avatar from '../Avatar/Avatar';
 import { useAppSelector } from '../../redux/reduxStore';
+import { Avatar } from '../ui';
 
 interface NavPropsInterface {
   isPairsOpened: boolean;
@@ -29,7 +29,7 @@ const Nav: React.FC<NavPropsInterface> = ({
     <aside className={styles.info}>
       <div className={styles.user}>
         <Link className={styles.person} to="/profile">
-          <Avatar />
+          <Avatar userId={currentUser._id} avatarUrl={currentUser.pictures.avatar}/>
           <div className={styles.name}>{currentUser.name}</div>
         </Link>
         <div className={styles.review}>
