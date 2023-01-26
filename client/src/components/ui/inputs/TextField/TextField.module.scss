@@ -1,0 +1,15 @@
+.input {
+  width: 100%;
+  height: 100%;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #666666;
+
+  &.squared { // in progress
+  }
+
+  &.rounded {
+    border-radius: 25px;
+  }
+}
