@@ -1,0 +1,12 @@
+.messages {
+  position: relative;
+  overflow: auto;
+  height: calc(100vh - 50px);
+  margin-left: 14vw;
+  padding-bottom: 8px;
+}
+
+.ref {
+  width: 1px;
+  height: 1px;
+}

@@ -1,0 +1,34 @@
+.wrapper {
+  background-color: #e6e9ec;
+
+  .form {
+    height: 50px;
+    width: 100%;
+    min-width: 200px;
+    max-width: 600px;
+    display: flex;
+    padding: 4px 0;
+    margin-left: 14vw;
+
+    .input {
+      font-size: 20px;
+      padding: 0 10px;
+    }
+
+    .button {
+      width: 100px;
+      height: 42px;
+      border: none;
+      cursor: pointer;
+      background-color: transparent;
+      transition: 0.2s;
+      font-size: 24px;
+      border-radius: 8px;
+      margin-left: 8px;
+
+      &:hover {
+        background-color: #d6dadd;
+      }
+    }
+  }
+}

@@ -9,6 +9,10 @@
   &.squared { // in progress
   }
 
+  &.low-rounded {
+    border-radius: 8px;
+  }
+
   &.rounded {
     border-radius: 25px;
   }

@@ -1,71 +1,12 @@
-.chat{
-    height: 100vh;
+.chat {
+  height: 100vh;
+  width: 100%;
+  background-color: #f0f2f4;
+  position: relative;
+
+  .container {
     width: 100%;
-    background-color: #f0f2f4;
-    overflow: auto;
-    position: relative;
-
-    .container{
-        width: 100%;
-        height: 100%;
-        margin: 0 auto;
-        margin-left: 17.5%;
-
-        .messages{
-            position: relative;
-            padding-bottom: 40px;
-
-            .ref{
-                width: 10px;
-                height: 10px;
-                position: absolute;
-                bottom: 200px;
-                left: 0;
-            }
-        }
-
-        .wrapper{
-            display: flex;
-            justify-content: center;
-            position: fixed;
-            bottom: 0;
-            left: 340px;
-            width: calc(100% - 355px);
-            background-color: #e6e9ec;
-            padding: 0 0 0 14%;
-
-            .form{
-                height: 50px;
-                width: 100%;
-                display: flex;
-                padding: 4px 0;
-
-                .input{
-                    width: 100%;
-                    min-width: 300px;
-                    max-width: 600px;
-                    height: 42px;
-                    padding: 5px;
-                    border-radius: 8px;
-                    font-size: 20px;
-                }
-
-                .button{
-                    width: 100px;
-                    height: 42px;
-                    border: none;
-                    cursor: pointer;
-                    background-color: transparent;
-                    transition: .2s;
-                    font-size: 24px;
-                    border-radius: 8px;
-                    margin-left: 8px;
-
-                    &:hover{
-                        background-color: #d6dadd;
-                    }
-                }
-            }
-        }
-    }
+    height: 100%;
+    margin: 0 auto;
+  }
 }

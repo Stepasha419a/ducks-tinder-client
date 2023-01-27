@@ -3,7 +3,7 @@ import { FC, InputHTMLAttributes } from 'react';
 import styles from './TextField.module.scss';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
-  variant: 'rounded' | 'squared';
+  variant: 'rounded' | 'squared' | 'low-rounded';
   extraClassName?: string;
 }
 

@@ -1,6 +1,7 @@
-import { IMessage } from '../../../models/IChat';
-import { IUser } from '../../../models/IUser';
-import { Avatar } from '../../ui';
+import { FC } from 'react';
+import { IMessage } from '../../../../models/IChat';
+import { IUser } from '../../../../models/IUser';
+import { Avatar } from '../../../ui';
 import styles from './Message.module.scss';
 
 interface MessageComponentInterface {
@@ -9,7 +10,7 @@ interface MessageComponentInterface {
   currentUserId: string;
 }
 
-const Message: React.FC<MessageComponentInterface> = ({
+const Message: FC<MessageComponentInterface> = ({
   message,
   user,
   currentUserId,

@@ -10,6 +10,7 @@ import { loginThunk, setFormError } from '../../../redux/authReducer';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
 import styles from './Login.module.scss';
+import { TextField } from '../../ui';
 
 interface ILoginForm {
   formError: string;
@@ -112,14 +113,15 @@ export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
               )}
             </span>
             <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                name="email"
+              <TextField
                 type="text"
+                name="email"
+                variant="rounded"
                 placeholder="Email"
                 onBlur={(e) => blurHandler(e)}
                 value={email}
                 onChange={(e) => emailHandler(e)}
+                extraClassName={styles.input}
               />
               <span className={styles.icon}>
                 <FontAwesomeIcon icon={faEnvelope} />
@@ -127,17 +129,20 @@ export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
             </div>
 
             <span className={styles.validation}>
-              {passwordDirty && passwordError && <div>{passwordError}</div>}
+              {passwordDirty && passwordError && (
+                <div className={styles.error}>{passwordError}</div>
+              )}
             </span>
             <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
-                name="password"
+              <TextField
                 type="password"
+                name="password"
+                variant="rounded"
                 placeholder="Password"
                 onBlur={(e) => blurHandler(e)}
                 value={password}
                 onChange={(e) => passwordHandler(e)}
+                extraClassName={styles.input}
               />
               <span className={styles.icon}>
                 <FontAwesomeIcon icon={faLock} />
