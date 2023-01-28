@@ -1,5 +1,5 @@
 export const isRefElementVisible = (
-  ref: React.MutableRefObject<HTMLInputElement>
+  ref: React.MutableRefObject<HTMLDivElement | null>
 ) => {
   const rect = ref.current?.lastElementChild?.getBoundingClientRect();
 
@@ -15,7 +15,7 @@ export const isRefElementVisible = (
 };
 
 export const scrollToBottom = (
-  ref: React.MutableRefObject<HTMLInputElement>
+  ref: React.MutableRefObject<HTMLDivElement | null>
 ) => {
   ref.current?.lastElementChild?.scrollIntoView({ behavior: 'smooth' });
 };

@@ -25,9 +25,9 @@ const PairPopup: React.FC<PairPopupProps> = ({
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
 
-  const bottomElementRef = useRef<null | HTMLElement>(
+  const bottomElementRef = useRef<HTMLDivElement | null>(
     null
-  ) as React.MutableRefObject<HTMLInputElement>;
+  )
 
   const interestsForLoop = [];
 

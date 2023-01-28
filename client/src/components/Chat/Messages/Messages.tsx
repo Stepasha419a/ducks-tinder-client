@@ -1,6 +1,5 @@
 import {
   FC,
-  MutableRefObject,
   useEffect,
   useRef,
 } from 'react';
@@ -21,9 +20,9 @@ const Messages: FC<MessagesProps> = ({ currentUser }) => {
   );
   const messages = useAppSelector((state) => state.chatPage.currentMessages);
 
-  const bottomScrollRef = useRef<null | HTMLElement>(
+  const bottomScrollRef = useRef<HTMLDivElement | null>(
     null
-  ) as MutableRefObject<HTMLInputElement>;
+  )
 
   useEffect(() => {
     if (bottomScrollRef.current) {
