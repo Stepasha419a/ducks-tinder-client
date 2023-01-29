@@ -11,6 +11,7 @@ import { registerThunk } from '../../../redux/authReducer';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
 import styles from './Registration.module.scss';
+import { TextField } from '../../ui';
 
 export const RegistrationForm = (props: { formError: string }) => {
   const dispatch = useAppDispatch();
@@ -114,16 +115,19 @@ export const RegistrationForm = (props: { formError: string }) => {
 
             {props.formError && (
               <span className={styles.validation}>
-                <div>{props.formError}</div>
+                <div className={styles.error}>{props.formError}</div>
               </span>
             )}
 
             <span className={styles.validation}>
-              {nameDirty && nameError && <div>{nameError}</div>}
+              {nameDirty && nameError && (
+                <div className={styles.error}>{nameError}</div>
+              )}
             </span>
             <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
+              <TextField
+                variant="rounded"
+                extraClassName={styles.input}
                 name="name"
                 type="text"
                 placeholder="First name"
@@ -137,11 +141,14 @@ export const RegistrationForm = (props: { formError: string }) => {
             </div>
 
             <span className={styles.validation}>
-              {emailDirty && emailError && <div>{emailError}</div>}
+              {emailDirty && emailError && (
+                <div className={styles.error}>{emailError}</div>
+              )}
             </span>
             <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
+              <TextField
+                variant="rounded"
+                extraClassName={styles.input}
                 name="email"
                 type="text"
                 placeholder="Email"
@@ -155,11 +162,14 @@ export const RegistrationForm = (props: { formError: string }) => {
             </div>
 
             <span className={styles.validation}>
-              {passwordDirty && passwordError && <div>{passwordError}</div>}
+              {passwordDirty && passwordError && (
+                <div className={styles.error}>{passwordError}</div>
+              )}
             </span>
             <div className={styles.inputWrapper}>
-              <input
-                className={styles.input}
+              <TextField
+                variant="rounded"
+                extraClassName={styles.input}
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -177,8 +187,7 @@ export const RegistrationForm = (props: { formError: string }) => {
                 disabled={!isFormValid}
                 type="submit"
                 className={
-                  `${styles.btn} ` +
-                  (isFormValid ? '' : styles.btn_disabled)
+                  `${styles.btn} ` + (isFormValid ? '' : styles.btn_disabled)
                 }
               >
                 Sign up
