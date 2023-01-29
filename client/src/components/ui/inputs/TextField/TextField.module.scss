@@ -5,8 +5,10 @@
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
+  border: 1px solid rgb(214, 214, 214);
 
-  &.squared { // in progress
+  &:focus{
+    border-color: rgb(214, 214, 214);;
   }
 
   &.low-rounded {

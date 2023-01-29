@@ -1,14 +1,10 @@
 import classNames from 'classnames';
-import { FC, InputHTMLAttributes } from 'react';
+import { FC } from 'react';
 import styles from './TextField.module.scss';
+import { TextFieldProps } from './TextField.types';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
-  variant: 'rounded' | 'squared' | 'low-rounded';
-  extraClassName?: string;
-}
-
-export const TextField: FC<InputProps> = ({
-  variant,
+export const TextField: FC<TextFieldProps> = ({
+  variant = 'default',
   extraClassName,
   ...props
 }) => {

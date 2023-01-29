@@ -45,14 +45,12 @@
 
         .textInput{
             font-size: 16px;
-            width: 100%;
             padding: 16px;
-            border-bottom: 1px solid rgb(214, 214, 214);
-            color: #505965;
+            border-top: none;
+            border-right: none;
             transition: .2s;
 
             &:focus{
-                border-color: rgb(214, 214, 214);
                 color: #000;
             }
         }

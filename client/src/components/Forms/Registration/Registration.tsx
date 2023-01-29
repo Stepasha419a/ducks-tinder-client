@@ -105,7 +105,7 @@ export const RegistrationForm = (props: { formError: string }) => {
       <div className={styles.container}>
         <div className={styles.wrapper}>
           <div className={styles.img}>
-            <img src={authImg} alt="IMG" />
+            <img draggable={false} src={authImg} alt="IMG" />
           </div>
           <form
             onSubmit={(e) => submitHandler(e as FormEvent<HTMLFormElement>)}
