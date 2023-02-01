@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
-import RangeSlider, { IRange } from '../../../Slider/RangeSlider/RangeSlider';
+import {
+  RangeInput,
+} from '../../../ui/inputs/Range/RangeInput';
+import { RangeInterface } from '../../../ui/inputs/Range/RangeInput.types';
 import { ISorts } from '../../utils/PairsUtils';
 import styles from './PairsSettingsPopup.module.scss';
 
@@ -69,9 +72,9 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
             <div className={styles.name}>Max distantion</div>
             <div className={styles.value}>{distanceSetting} km</div>
             <div className={`${styles.change} ${styles.margin}`}>
-              <RangeSlider
+              <RangeInput
                 value={distanceSetting}
-                setValue={(value: number | IRange) =>
+                setValue={(value: number | RangeInterface) =>
                   setDistanceSetting(value as number)
                 }
                 completeValue={() => distanceHandler()}
@@ -87,10 +90,10 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
               from {ageSetting.min} to {ageSetting.max}
             </div>
             <div className={`${styles.change} ${styles.margin}`}>
-              <RangeSlider
+              <RangeInput
                 value={ageSetting}
-                setValue={(value: number | IRange) =>
-                  setAgeSetting(value as IRange)
+                setValue={(value: number | RangeInterface) =>
+                  setAgeSetting(value as RangeInterface)
                 }
                 completeValue={() => ageHandler()}
                 min={18}

@@ -2,9 +2,10 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../redux/reduxStore';
-import RangeSlider, {
-  IRange,
-} from '../../../../Slider/RangeSlider/RangeSlider';
+import {
+  RangeInput,
+} from '../../../../ui/inputs/Range/RangeInput';
+import { RangeInterface } from '../../../../ui/inputs/Range/RangeInput.types';
 import styles from './Find.module.scss';
 
 interface IFind {
@@ -111,9 +112,9 @@ const Find: React.FC<IFind> = ({
           </div>
           <div className={styles.setting}>
             <div className={styles.slider}>
-              <RangeSlider
+              <RangeInput
                 value={currentDistanceSetting}
-                setValue={(value: number | IRange) =>
+                setValue={(value: number | RangeInterface) =>
                   setCurrentDistanceSetting(value as number)
                 }
                 completeValue={() => distanceHandler()}
@@ -169,10 +170,10 @@ const Find: React.FC<IFind> = ({
           </div>
           <div className={styles.setting}>
             <div className={styles.slider}>
-              <RangeSlider
+              <RangeInput
                 value={ageSetting}
-                setValue={(value: number | IRange) =>
-                  setAgeSetting(value as IRange)
+                setValue={(value: number | RangeInterface) =>
+                  setAgeSetting(value as RangeInterface)
                 }
                 completeValue={() => partnerAgeHandler()}
                 min={18}
