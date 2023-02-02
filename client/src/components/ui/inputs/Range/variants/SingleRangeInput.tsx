@@ -1,10 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-
-interface SingleRangeInputProps {
-  value: number;
-  setValue: (value: number) => void;
-  completeValue: () => void;
-}
+import { SingleRangeInputProps } from '../types/RangeInput.types';
 
 const SingleRangeInput: FC<PropsWithChildren<SingleRangeInputProps>> = ({
   value,

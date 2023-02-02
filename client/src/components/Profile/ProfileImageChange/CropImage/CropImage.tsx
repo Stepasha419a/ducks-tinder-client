@@ -2,13 +2,11 @@ import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 import { IUser } from '../../../../models/IUser';
 import { saveUserImage } from '../../../../redux/usersReducer';
-import {
-  RangeInput,
-} from '../../../ui/inputs/Range/RangeInput';
+import { RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
 import { useAppDispatch } from '../../../../redux/reduxStore';
-import { RangeInterface } from '../../../ui/inputs/Range/RangeInput.types';
+import { RangeValue } from '../../../ui/inputs/Range/types';
 
 interface ProfileCropImagePropsInterface {
   currentUser: IUser;
@@ -75,10 +73,9 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({
             <div className={styles.input}>
               <RangeInput
                 value={zoom}
-                setValue={(value: number | RangeInterface) =>
-                  setZoom(value as number)
+                setValue={(value: RangeValue) =>
+                  setZoom(+value)
                 }
-                completeValue={() => {}}
                 min={1.1}
                 max={3}
                 step={0.01}

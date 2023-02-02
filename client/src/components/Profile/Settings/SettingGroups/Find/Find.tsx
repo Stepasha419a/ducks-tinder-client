@@ -2,10 +2,8 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../redux/reduxStore';
-import {
-  RangeInput,
-} from '../../../../ui/inputs/Range/RangeInput';
-import { RangeInterface } from '../../../../ui/inputs/Range/RangeInput.types';
+import { RangeInput } from '../../../../ui';
+import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range/types';
 import styles from './Find.module.scss';
 
 interface IFind {
@@ -114,8 +112,8 @@ const Find: React.FC<IFind> = ({
             <div className={styles.slider}>
               <RangeInput
                 value={currentDistanceSetting}
-                setValue={(value: number | RangeInterface) =>
-                  setCurrentDistanceSetting(value as number)
+                setValue={(value: RangeValue) =>
+                  setCurrentDistanceSetting(+value)
                 }
                 completeValue={() => distanceHandler()}
                 min={2}
@@ -172,7 +170,7 @@ const Find: React.FC<IFind> = ({
             <div className={styles.slider}>
               <RangeInput
                 value={ageSetting}
-                setValue={(value: number | RangeInterface) =>
+                setValue={(value: RangeValue) =>
                   setAgeSetting(value as RangeInterface)
                 }
                 completeValue={() => partnerAgeHandler()}

@@ -1,12 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
-import { RangeInterface } from '../RangeInput.types';
+import { MultiRangeInputProps } from '../types/RangeInput.types';
 import SingleRangeInput from './SingleRangeInput';
-
-interface MultiRangeInputProps {
-  value: RangeInterface;
-  setValue: (min: number, max: number) => void;
-  completeValue: () => void;
-}
 
 const MultiRangeInput: FC<PropsWithChildren<MultiRangeInputProps>> = ({
   value,

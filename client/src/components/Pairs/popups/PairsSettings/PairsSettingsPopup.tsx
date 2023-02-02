@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import {
-  RangeInput,
-} from '../../../ui/inputs/Range/RangeInput';
-import { RangeInterface } from '../../../ui/inputs/Range/RangeInput.types';
+import { RangeInput } from '../../../ui/';
+import { RangeInterface, RangeValue } from '../../../ui/inputs/Range/types';
 import { ISorts } from '../../utils/PairsUtils';
 import styles from './PairsSettingsPopup.module.scss';
 
@@ -74,8 +72,8 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
             <div className={`${styles.change} ${styles.margin}`}>
               <RangeInput
                 value={distanceSetting}
-                setValue={(value: number | RangeInterface) =>
-                  setDistanceSetting(value as number)
+                setValue={(value: RangeValue) =>
+                  setDistanceSetting(+value)
                 }
                 completeValue={() => distanceHandler()}
                 min={2}
@@ -92,7 +90,7 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
             <div className={`${styles.change} ${styles.margin}`}>
               <RangeInput
                 value={ageSetting}
-                setValue={(value: number | RangeInterface) =>
+                setValue={(value: RangeValue) =>
                   setAgeSetting(value as RangeInterface)
                 }
                 completeValue={() => ageHandler()}
