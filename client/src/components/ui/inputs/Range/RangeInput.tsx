@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { makeRangeStyles } from '../../helpers';
 import styles from './RangeInput.module.scss';
-import { RangeInputProps } from './types/RangeInput.types';
+import { RangeInputProps } from './RangeInput.types';
 import MultiRangeInput from './variants/MultiRangeInput';
 import SingleRangeInput from './variants/SingleRangeInput';
 

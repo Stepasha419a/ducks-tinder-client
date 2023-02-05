@@ -5,7 +5,7 @@ export interface RangeInterface {
   max: number;
 }
 
-export type RangeValue = number | RangeInterface
+export type RangeValue = number | RangeInterface;
 
 export interface RangeInputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: RangeValue | any;

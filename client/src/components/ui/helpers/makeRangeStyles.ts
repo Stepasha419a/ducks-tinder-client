@@ -1,4 +1,4 @@
-import { RangeInterface } from '../inputs/Range/types/RangeInput.types';
+import { RangeInterface } from '../inputs/Range';
 
 export const makeRangeStyles = (
   isMultiple: boolean,
