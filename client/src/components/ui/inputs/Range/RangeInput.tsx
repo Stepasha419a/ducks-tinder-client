@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { makeRangeStyles } from '../../helpers';
 import styles from './RangeInput.module.scss';
 import { RangeInputProps } from './RangeInput.types';
 import MultiRangeInput from './variants/MultiRangeInput';
 import SingleRangeInput from './variants/SingleRangeInput';
 
-export const RangeInput: React.FC<RangeInputProps> = ({
+export const RangeInput: FC<RangeInputProps> = ({
   value,
   setValue,
   completeValue = () => {},
