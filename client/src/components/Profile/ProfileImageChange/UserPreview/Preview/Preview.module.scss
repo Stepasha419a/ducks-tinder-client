@@ -16,7 +16,7 @@
             position: absolute;
             bottom: 20px;
             left: 20px;
-            color: #FFFFFF;
+            color: var(--color--white-100);
             padding: 15px;
 
             .descr{
@@ -27,9 +27,9 @@
 
                 .person{
                     font-size: 36px;
-                    font-weight: 800;
-                    color: #FFFFFF;
-                    text-shadow: 0 1px 1px #0000001f;
+                    font-weight: 700;
+                    color: var(--color--white-100);
+                    text-shadow: 0 1px 1px var(--color--black-90);
                     margin: 2px 0;
 
                     .years{
@@ -39,21 +39,21 @@
                 }
 
                 .place{
-                    color: #fff;
+                    color: var(--color--white-100);
                     display: flex;
                     align-items: baseline;
                     margin: 2px 0;
 
                     .icon{
                         font-size: 14px;
-                        color: #fff;
+                        color: var(--color--white-100);
                         margin-right: 5px;
                     }
                 }
 
                 .distance{
-                    color: #FFFFFF;
-                    text-shadow: 0 1px 1px #0000001f;
+                    color: var(--color--white-100);
+                    text-shadow: 0 1px 1px var(--color--black-90);
                     margin: 2px 0;
 
                     .icon{
@@ -72,7 +72,7 @@
             bottom: 30px;
             right: 20px;
             font-size: 24px;
-            color: #FFFFFF;
+            color: var(--color--white-100);
             cursor: pointer;
             background: transparent;
             border: none;
@@ -86,12 +86,12 @@
 }
 
   .content__user-descr-place-icon--full{
-    color: #505965;
+    color: var(--main-secondary);
   }
   
   .content__user-descr-person--full{
     margin-bottom: 10px;
-    color: #21262e;
+    color: var(--main-primary);
   }
   
   .content__user-descr-person--margin{
@@ -99,11 +99,11 @@
   }
   
   .content__info-descr-name{
-    color: #21262e;
+    color: var(--main-primary);
   }
 
   .content__preview-info-name{
-    font-weight: 800;
+    font-weight: 700;
     font-size: 36px;
   }
   
@@ -118,7 +118,7 @@
     bottom: 30px;
     right: 20px;
     font-size: 24px;
-    color: #FFFFFF;
+    color: var(--color--white-100);
     cursor: pointer;
     background: transparent;
     border: none;

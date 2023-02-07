@@ -1,7 +1,7 @@
 .content{
     height: 100vh;
     width: 100%;
-    background-color: #f0f2f4;
+    background-color: var(--bg-primary);
     position: relative;
 
     .wrapper{
@@ -19,7 +19,6 @@
             position: absolute;
             top: 50px;
             left: 350px;
-            background-color: transparent;
         }
 
         .users{

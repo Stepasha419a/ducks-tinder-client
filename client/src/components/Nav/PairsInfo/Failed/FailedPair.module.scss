@@ -1,13 +1,13 @@
 .noPairs {
   display: flex;
   font-weight: 600;
-  color: #505965;
+  color: var(--main-secondary);
   padding: 5px;
   margin-top: 10px;
 
   .icon {
     font-size: 38px;
     margin-right: 10px;
-    color: #e65050;
+    color: var(--color--red-90);
   }
 }

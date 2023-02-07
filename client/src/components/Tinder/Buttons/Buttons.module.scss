@@ -11,9 +11,9 @@
 
     &_minimized{ // for full user content
         height: 90px;
-        background-color: #fff;
+        background-color: var(--color--white-100);
         justify-content: center;
-        box-shadow: 0px -15px 14px -10px #fff;
+        box-shadow: 0px -15px 14px -10px var(--color--white-100);
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
     }
@@ -23,8 +23,8 @@
         justify-content: center;
         align-items: center;
         background: transparent;
-        color: #FFFFFF;
-        border: 1px solid #FFFFFF;
+        color: var(--color--white-100);
+        border: 1px solid var(--color--white-100);
         border-radius: 50%;
         cursor: pointer;
 
@@ -39,10 +39,10 @@
         }
 
         &_minimized{
-            background: #FFFFFF;
+            background: var(--color--white-100);
             margin: 5px;
-            border-color: #FFFFFF;
-            box-shadow: 0 0 8px 0 #0000001f;
+            border-color: var(--color--white-100);
+            box-shadow: 0 0 8px 0 var(--color--black-90);
             transition: .2s;
 
             &:hover{
@@ -88,7 +88,7 @@
         }
           
         &_red{
-            border-color: #ff4458;
+            border-color: var(--color--red-100);
 
             .icon{
                 color: #ff6574;

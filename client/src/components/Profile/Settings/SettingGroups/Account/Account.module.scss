@@ -3,13 +3,13 @@
 
   .groupTitle {
     text-transform: uppercase;
-    color: #505965;
+    color: var(--main-secondary);
     border-bottom: 1px solid rgb(214, 214, 214);
     padding: 8px 16px;
   }
 
   .groupDescr {
-    color: #505965;
+    color: var(--main-secondary);
     margin: 12px 0;
     padding: 0 16px;
   }
@@ -17,7 +17,7 @@
   .items {
     .item {
       border-bottom: 1px solid rgb(214, 214, 214);
-      background-color: #ffffff;
+      background-color: var(--color--white-100);
       padding: 12px 16px;
 
       &_pointer {
@@ -25,7 +25,7 @@
 
         &:hover .setting,
         &:hover .openIcon {
-          color: #fd267a !important;
+          color: var(--color--pink-100) !important;
         }
       }
 
@@ -43,7 +43,7 @@
           font-weight: 400;
 
           &_link {
-            color: #21262e;
+            color: var(--main-primary);
           }
 
           &_center {
@@ -52,7 +52,7 @@
         }
 
         .setting {
-          color: #505965;
+          color: var(--main-secondary);
           transition: 0.2s;
 
           &_textOverflow {

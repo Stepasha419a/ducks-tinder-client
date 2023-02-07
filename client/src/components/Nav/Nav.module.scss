@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     height: 90px;
-    background-image: linear-gradient(45deg, #fd267a, #ff6036);
+    background-image: linear-gradient(45deg, var(--color--pink-100), var(--color--orange-100));
 
     .person {
       display: flex;
@@ -20,17 +20,17 @@
       border-radius: 36px;
       cursor: pointer;
       transition: 0.3s;
-      text-decoration: none;
 
       &:hover {
         background-color: rgba(0, 0, 0, 0.384);
       }
 
       .name {
-        font-weight: 500;
+        font-weight: 600;
         font-size: 16px;
-        color: #ffffff;
+        color: var(--color--white-100);
         margin: 0 8px;
+        letter-spacing: 0.5px;
       }
     }
 
@@ -54,7 +54,7 @@
       align-items: center;
       background-color: #00000052;
       border-radius: 50%;
-      color: #ffffff;
+      color: var(--color--white-100);
       transition: all 0.3s;
 
       &:hover {
@@ -69,15 +69,14 @@
 
     .title {
       font-size: 20px;
-      color: #21262e;
+      color: var(--main-primary);
       font-weight: 700;
       margin-left: 15px;
       padding: 0 6px;
       cursor: pointer;
-      text-decoration: none;
 
       &_active {
-        border-bottom: 3px solid #ff4458;
+        border-bottom: 3px solid var(--color--red-100);
       }
     }
   }

@@ -3,7 +3,7 @@
 
   .groupTitle {
     text-transform: uppercase;
-    color: #505965;
+    color: var(--main-secondary);
     border-bottom: 1px solid rgb(214, 214, 214);
     padding: 8px 16px;
   }
@@ -11,25 +11,24 @@
   .items {
     .item {
       border-bottom: 1px solid rgb(214, 214, 214);
-      background-color: #ffffff;
+      background-color: var(--color--white-100);
       padding: 12px 16px;
 
       &_link {
         padding: 0;
 
         .icon {
-          color: #505965;
+          color: var(--main-secondary);
           transition: 0.2s;
         }
 
         &:hover .icon {
-          color: #fd267a !important;
+          color: var(--color--pink-100) !important;
         }
 
         .link {
           display: block;
           padding: 12px 16px;
-          text-decoration: none;
         }
       }
 
@@ -43,7 +42,7 @@
           font-weight: 400;
 
           &_link {
-            color: #21262e;
+            color: var(--main-primary);
           }
         }
       }

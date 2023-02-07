@@ -1,5 +1,5 @@
 .wrapper {
-  background-color: #e6e9ec;
+  background-color: var(--color--white-90);
 
   .form {
     height: 50px;
@@ -20,14 +20,13 @@
       height: 42px;
       border: none;
       cursor: pointer;
-      background-color: transparent;
       transition: 0.2s;
       font-size: 24px;
       border-radius: 8px;
       margin-left: 8px;
 
       &:hover {
-        background-color: #d6dadd;
+        background-color: var(--color--white-80);
       }
     }
   }

@@ -22,7 +22,7 @@
 
     .wrapper {
       width: 960px;
-      background: #fff;
+      background: var(--color--white-100);
       border-radius: 10px;
       overflow: hidden;
 
@@ -59,7 +59,7 @@
         }
 
         .validation {
-          font-weight: 500;
+          font-weight: 600;
           font-size: 15px;
           color: #992626;
 
@@ -112,7 +112,7 @@
           .btn {
             font-weight: 700;
             font-size: 15px;
-            color: #fff;
+            color: var(--color--white-100);
             border: none;
             text-transform: uppercase;
             cursor: pointer;
@@ -150,7 +150,6 @@
             font-size: 13px;
             line-height: 1.5;
             color: #666666;
-            text-decoration: none;
           }
         }
       }

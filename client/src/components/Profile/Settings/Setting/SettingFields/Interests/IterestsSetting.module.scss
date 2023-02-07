@@ -6,7 +6,7 @@
         border-bottom: 1px solid rgb(214, 214, 214);
         padding: 20px 16px 10px;
         text-transform: uppercase;
-        color: #505965;
+        color: var(--main-secondary);
 
         &_error{
             color: #c62c1e;
@@ -43,7 +43,7 @@
                     transition: .2s;
 
                     &:hover{
-                      background-color: #fff;
+                      background-color: var(--color--white-100);
                     }
 
                     .plus{
@@ -80,7 +80,7 @@
 
         .title{
             font-size: 16px;
-            color: #505965;
+            color: var(--main-secondary);
             margin: 12px 0;
             padding: 0 16px;
         }
@@ -111,7 +111,7 @@
                 transition: .2s;
 
                 &:hover{
-                    background-color: #fff;
+                    background-color: var(--color--white-100);
                 }
 
                 .xmark{
@@ -141,7 +141,7 @@
                     }
                     
                     &:hover{
-                        background-color: #fff;
+                        background-color: var(--color--white-100);
                     }
                 }
 
@@ -156,7 +156,7 @@
             width: 89px;
             font-weight: 600;
             text-transform: uppercase;
-            color: #e65050;
+            color: var(--color--red-90);
             cursor: pointer;
             width: 100%;
             max-width: 339px;
@@ -165,7 +165,7 @@
     }
 
     .submit{
-        background-color: #FFFFFF;
+        background-color: var(--color--white-100);
         border-radius: 0;
         border: 1px solid rgb(214, 214, 214);
         border-right: none;
@@ -177,7 +177,7 @@
         font-size: 16px;
 
         &:disabled{
-            background-color: #f0f2f4;
+            background-color: var(--bg-primary);
             cursor: not-allowed;
         }
 

@@ -15,7 +15,6 @@
             .link{
                 display: flex;
                 align-items: center;
-                text-decoration: none;
 
                 .image{
                     height: 100px;
@@ -24,7 +23,7 @@
                 .text{
                     font-size: 64px;
                     font-weight: 700;
-                    color: #505965;
+                    color: var(--main-secondary);
                 }
             }
         }
@@ -44,13 +43,13 @@
 
             .title{
                 font-size: 42px;
-                font-weight: 800;
+                font-weight: 700;
             }
 
             .text{
-                font-size: 16px;
+                font-size: 20px;
                 line-height: 1.5;
-                color: #505965;
+                color: var(--main-secondary);
                 padding: 15px 0;
             }
         }

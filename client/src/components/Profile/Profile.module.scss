@@ -7,14 +7,14 @@
     width: 100%;
     height: 100%;
     border-right: 1px solid rgb(214, 214, 214);
-    background-color: #f0f2f4;
+    background-color: var(--bg-primary);
 
     .links {
       position: relative;
       display: flex;
       align-items: center;
       height: 90px;
-      background-image: linear-gradient(45deg, #fd267a, #ff6036);
+      background-image: linear-gradient(45deg, var(--color--pink-100), var(--color--orange-100));
 
       .mainLink {
         display: flex;
@@ -23,10 +23,9 @@
         padding: 4px;
         margin-left: 16px;
         border-radius: 50%;
-        text-decoration: none;
         height: 40px;
         width: 40px;
-        color: #ffffff;
+        color: var(--color--white-100);
         font-size: 24px;
         background-color: rgba(0, 0, 0, 0.384);
         cursor: pointer;
@@ -51,7 +50,7 @@
           align-items: center;
           background-color: #00000052;
           border-radius: 50%;
-          color: #ffffff;
+          color: var(--color--white-100);
           transition: all 0.3s;
 
           &:hover {
@@ -73,7 +72,7 @@
           align-items: center;
           background-color: #00000052;
           border-radius: 50%;
-          color: #ffffff;
+          color: var(--color--white-100);
           transition: all 0.3s;
 
           &:hover {
@@ -90,7 +89,7 @@
     align-items: center;
     height: 100vh;
     width: 100%;
-    background-color: #f0f2f4;
+    background-color: var(--bg-primary);
 
     .user {
       width: 375px;
@@ -99,7 +98,7 @@
       border-radius: 8px;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 0 8px 0 #0000001f;
+      box-shadow: 0 0 8px 0 var(--color--black-90);
     }
   }
 }

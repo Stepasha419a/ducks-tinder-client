@@ -1,6 +1,6 @@
 .preview{
     height: 100%;
-    background-color: #FFFFFF;
+    background-color: var(--color--white-100);
     overflow: auto;
 
     &::-webkit-scrollbar{
@@ -27,7 +27,7 @@
 
             .icon{
                 color:  rgba(224, 48, 48, 0.747);
-                background-color: #FFFFFF;
+                background-color: var(--color--white-100);
                 border-radius: 50%;
             }
         }
@@ -44,10 +44,10 @@
 
             .person{
                 font-size: 36px;
-                font-weight: 800;
-                text-shadow: 0 1px 1px #0000001f;
+                font-weight: 700;
+                text-shadow: 0 1px 1px var(--color--black-90);
                 margin-bottom: 10px;
-                color: #21262e;
+                color: var(--main-primary);
 
                 .years{
                     font-size: 28px;
@@ -59,19 +59,19 @@
                 display: flex;
                 align-items: baseline;
                 font-size: 18px;
-                color: #505965;
+                color: var(--main-secondary);
                 margin-bottom: 6px;
 
                 .icon{
                     font-size: 14px;
-                    color: #505965;
+                    color: var(--main-secondary);
                     margin-right: 5px;
                 }
             }
 
             .distance{
                 font-size: 18px;
-                color: #505965;
+                color: var(--main-secondary);
 
                 .icon{
                     margin: 0 5px 0 1px;
@@ -90,7 +90,7 @@
 
     .descr{
         font-size: 16px;
-        color: #505965;
+        color: var(--main-secondary);
         padding: 15px;
         line-height: 1.35;
     }
@@ -99,7 +99,7 @@
         .title{
             font-size: 20px;
             font-weight: 600;
-            color: #505965;
+            color: var(--main-secondary);
             margin: 10px 0 0 15px;
         }
 
@@ -110,12 +110,12 @@
             padding: 10px 15px 0;
 
             .item{
-                border: 2px solid #b9bfc5;
+                border: 2px solid var(--bg-secondary);
                 border-radius: 16px;
                 font-weight: 600;
                 padding: 5px 20px;
                 margin: 5px;
-                color: #505965;
+                color: var(--main-secondary);
             }
         }
     }
@@ -124,7 +124,7 @@
         width: 89px;
         font-weight: 600;
         text-transform: uppercase;
-        color: #e65050;
+        color: var(--color--red-90);
         cursor: pointer;
         margin: 0 auto;
         padding: 10px 0;

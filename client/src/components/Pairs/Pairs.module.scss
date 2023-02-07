@@ -10,7 +10,7 @@
     width: 100%;
     border-bottom: 1px solid rgb(214, 214, 214);
     font-size: 24px;
-    font-weight: 900;
+    font-weight: 700;
     display: flex;
     align-items: center;
     padding-left: 40px;
@@ -37,8 +37,8 @@
       transition: 0.2s;
 
       &.sort {
-        border-color: #e65050;
-        color: #e65050;
+        border-color: var(--color--red-90);
+        color: var(--color--red-90);
       }
     }
   }

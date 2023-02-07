@@ -5,7 +5,7 @@
 .info{
     max-height: 200px;
     height: 100%;
-    background-color: #FFFFFF;
+    background-color: var(--color--white-100);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     position: relative;
@@ -15,8 +15,8 @@
 
         .name{
             font-size: 36px;
-            font-weight: 800;
-            text-shadow: 0 1px 1px #0000001f;
+            font-weight: 700;
+            text-shadow: 0 1px 1px var(--color--black-90);
 
             .years{
                 font-size: 28px;
@@ -26,7 +26,7 @@
         }
 
         .sex{
-            color: #505965;
+            color: var(--main-secondary);
 
             .icon{
                 height: 16px;
@@ -73,7 +73,7 @@
             }
 
             .text{
-                color: #FFFFFF;
+                color: var(--color--white-100);
                 font-size: 18px;
                 font-weight: 600;
             }

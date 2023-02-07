@@ -17,7 +17,7 @@
 
     .content {
       position: relative;
-      background-color: #ffffff;
+      background-color: var(--color--white-100);
       width: 440px;
       height: 600px;
       transition: all 0.5s ease 0s;
@@ -54,7 +54,7 @@
           display: block;
           height: 4px;
           width: 20px;
-          background-color: #b9bfc5;
+          background-color: var(--bg-secondary);
           border-radius: 4px;
           position: absolute;
           top: 11px;
@@ -75,18 +75,18 @@
         padding: 0 10px;
 
         .item {
-          border: 2px solid #b9bfc5;
+          border: 2px solid var(--bg-secondary);
           border-radius: 16px;
           font-weight: 600;
           padding: 5px 20px;
           margin: 5px;
-          color: #505965;
+          color: var(--main-secondary);
           cursor: pointer;
           transition: 0.2s;
 
           &_active {
-            border-color: #e65050;
-            color: #e65050;
+            border-color: var(--color--red-90);
+            color: var(--color--red-90);
           }
         }
       }
@@ -96,9 +96,9 @@
         height: 60px;
         width: 100%;
         border: none;
-        background-color: #fff;
+        background-color: var(--color--white-100);
         font-size: 22px;
-        color: #505965;
+        color: var(--main-secondary);
         text-transform: uppercase;
         margin-top: 10px;
         cursor: pointer;
@@ -107,7 +107,7 @@
         bottom: 0;
 
         &:hover {
-          color: #e65050;
+          color: var(--color--red-90);
         }
       }
     }

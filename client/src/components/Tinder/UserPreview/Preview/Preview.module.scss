@@ -22,9 +22,9 @@
 
         .person{
             font-size: 36px;
-            font-weight: 800;
-            color: #FFFFFF;
-            text-shadow: 0 1px 1px #0000001f;
+            font-weight: 700;
+            color: var(--color--white-100);
+            text-shadow: 0 1px 1px var(--color--black-90);
 
             .years{
                 font-size: 28px;
@@ -33,20 +33,20 @@
         }
 
         .place{
-            color: #fff;
+            color: var(--color--white-100);
             display: flex;
             align-items: baseline;
 
             .icon{
                 font-size: 14px;
-                color: #fff;
+                color: var(--color--white-100);
                 margin-right: 5px;
             }
         }
 
         .distance{
-            color: #FFFFFF;
-            text-shadow: 0 1px 1px #0000001f;
+            color: var(--color--white-100);
+            text-shadow: 0 1px 1px var(--color--black-90);
 
             .icon{
                 margin: 0 5px 0 1px;
@@ -62,7 +62,7 @@
             bottom: 30px;
             right: 30px;
             font-size: 24px;
-            color: #FFFFFF;
+            color: var(--color--white-100);
             transition: .3s;
 
             &:hover{

@@ -17,7 +17,7 @@
 
         .content{
             position: relative;
-            background-color: #FFFFFF;
+            background-color: var(--color--white-100);
             width: 440px;
             height: 625px;
             padding: 24px;
@@ -26,7 +26,7 @@
 
             .title{
                 font-size: 24px;
-                font-weight: 500;
+                font-weight: 700;
                 color: #000;
                 margin-bottom: 16px;
                 text-align: center;
@@ -53,7 +53,6 @@
                 
                 .btn{
                     border: none;
-                    background-color: transparent;
                     font-size: 18px;
                     font-weight: 300;
                     color: #000;
