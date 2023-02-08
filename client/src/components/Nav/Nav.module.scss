@@ -2,7 +2,7 @@
   max-width: 340px;
   width: 100%;
   height: 100vh;
-  border-right: 1px solid rgb(214, 214, 214);
+  border-right: 1px solid var(--border-main);
 
   .user {
     position: relative;
@@ -52,13 +52,13 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #00000052;
+      background-color: var(--color--black-90);
       border-radius: 50%;
       color: var(--color--white-100);
       transition: all 0.3s;
 
       &:hover {
-        background-color: #00000073;
+        background-color: var(--color--black-80);
       }
     }
   }

@@ -1,15 +1,15 @@
 .setting{
-    border-right: 1px solid rgb(214, 214, 214);
+    border-right: 1px solid var(--border-main);
     height: calc(100vh - 90px);
 
     .name{
-        border-bottom: 1px solid rgb(214, 214, 214);
+        border-bottom: 1px solid var(--border-main);
         padding: 20px 16px 10px;
         text-transform: uppercase;
         color: var(--main-secondary);
 
         &_error{
-            color: #c62c1e;
+            color: var(--danger-light);
             border-bottom: none;
             padding: 25px 16px 0px;
         }
@@ -33,7 +33,7 @@
                 margin: 5px 0;
 
                 .item{
-                    border: 2px solid rgb(214, 214, 214);
+                    border: 2px solid var(--border-main);
                     border-radius: 8px;
                     padding: 5px;
                     padding-right: 20px;
@@ -61,7 +61,7 @@
                             position: absolute;
                             top: 0;
                             right: 0;
-                            background-color: rgb(214, 214, 214);
+                            background-color: var(--border-main);
                             transition: .2s;
                         }
 
@@ -91,17 +91,17 @@
             margin: 5px 0;
             overflow: auto;
             max-height: 200px;
-            background-color: #ececec;
+            background-color: var(--color--white-90);
             padding: 10px;
-            border-top: 2px solid rgb(214, 214, 214);
-            border-bottom: 2px solid rgb(214, 214, 214);
+            border-top: 2px solid var(--border-main);
+            border-bottom: 2px solid var(--border-main);
 
             &::-webkit-scrollbar{
                 display: none;
             }
 
             .item{
-                border: 2px solid rgb(214, 214, 214);
+                border: 2px solid var(--border-main);
                 border-radius: 8px;
                 padding: 5px;
                 padding-right: 20px;
@@ -129,7 +129,7 @@
                         position: absolute;
                         top: 0;
                         right: 0;
-                        background-color: rgb(214, 214, 214);
+                        background-color: var(--border-main);
                         transition: .2s;
                     }
                     
@@ -167,12 +167,12 @@
     .submit{
         background-color: var(--color--white-100);
         border-radius: 0;
-        border: 1px solid rgb(214, 214, 214);
+        border: 1px solid var(--border-main);
         border-right: none;
         width: 100%;
         padding: 16px;
         cursor: pointer;
-        color: #c62c1e;
+        color: var(--danger-light);
         text-align: left;
         font-size: 16px;
 

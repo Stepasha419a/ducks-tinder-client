@@ -14,11 +14,11 @@
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background: #9053c7;
-    background: -webkit-linear-gradient(-135deg, #c850c0, #fcefb4);
-    background: -o-linear-gradient(-135deg, #c850c0, #fcefb4);
-    background: -moz-linear-gradient(-135deg, #c850c0, #fcefb4);
-    background: linear-gradient(-135deg, #c850c0, #fcefb4);
+    background: var(--color--purple-100);
+    background: -webkit-linear-gradient(-135deg, var(--color--purple-90), var(--color--yellow-60));
+    background: -o-linear-gradient(-135deg, var(--color--purple-90), var(--color--yellow-60));
+    background: -moz-linear-gradient(-135deg, var(--color--purple-90), var(--color--yellow-60));
+    background: linear-gradient(-135deg, var(--color--purple-90), var(--color--yellow-60));
 
     .wrapper {
       width: 960px;
@@ -49,7 +49,7 @@
         .title {
           font-weight: 700;
           font-size: 24px;
-          color: #333333;
+          color: var(--main-primary);
           line-height: 1.2;
           text-align: center;
 
@@ -61,7 +61,7 @@
         .validation {
           font-weight: 600;
           font-size: 15px;
-          color: #992626;
+          color: var(--danger-main);
 
           .error {
             text-align: center;
@@ -77,8 +77,8 @@
           margin-bottom: 10px;
 
           .input {
-            color: #666666;
-            background: #e6e6e6;
+            color: var(--main-secondary);
+            background: var(--color--white-90);
             padding: 0 30px 0 68px;
           }
 
@@ -94,7 +94,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            color: #666666;
+            color: var(--main-secondary);
           }
         }
 
@@ -120,7 +120,7 @@
             width: 100%;
             height: 50px;
             border-radius: 25px;
-            background: #57b846;
+            background: var(--color--green-90);
             display: -webkit-box;
             display: -webkit-flex;
             display: -moz-box;
@@ -136,7 +136,7 @@
             transition: all 0.4s;
 
             &_disabled {
-              background: #aaaaaa !important;
+              background: var(--bg-secondary) !important;
               cursor: not-allowed;
             }
           }
@@ -149,7 +149,7 @@
           .link{
             font-size: 13px;
             line-height: 1.5;
-            color: #666666;
+            color: var(--main-secondary);
           }
         }
       }

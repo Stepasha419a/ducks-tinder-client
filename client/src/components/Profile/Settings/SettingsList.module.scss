@@ -1,7 +1,7 @@
 .groups {
   max-height: calc(100vh - 90px);
   overflow: auto;
-  border-right: 1px solid rgb(214, 214, 214);
+  border-right: 1px solid var(--border-main);
   padding-bottom: 50px;
 
   &::-webkit-scrollbar {

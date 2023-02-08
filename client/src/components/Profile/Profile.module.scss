@@ -6,7 +6,7 @@
     max-width: 340px;
     width: 100%;
     height: 100%;
-    border-right: 1px solid rgb(214, 214, 214);
+    border-right: 1px solid var(--border-main);
     background-color: var(--bg-primary);
 
     .links {
@@ -27,12 +27,12 @@
         width: 40px;
         color: var(--color--white-100);
         font-size: 24px;
-        background-color: rgba(0, 0, 0, 0.384);
+        background-color: var(--main-primary);
         cursor: pointer;
         transition: 0.3s;
 
         &:hover {
-          background-color: #000000ad;
+          background-color: var(--color--black-90);
           transform: scale(1.1);
         }
       }
@@ -48,13 +48,13 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #00000052;
+          background-color: var(--color--black-90);
           border-radius: 50%;
           color: var(--color--white-100);
           transition: all 0.3s;
 
           &:hover {
-            background-color: #00000073;
+            background-color: var(--color--black-80);
           }
         }
       }
@@ -70,13 +70,13 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #00000052;
+          background-color: var(--color--black-90);
           border-radius: 50%;
           color: var(--color--white-100);
           transition: all 0.3s;
 
           &:hover {
-            background-color: #00000073;
+            background-color: var(--color--black-80);
           }
         }
       }

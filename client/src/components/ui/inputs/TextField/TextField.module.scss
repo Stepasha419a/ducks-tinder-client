@@ -5,10 +5,10 @@
   font-size: 15px;
   line-height: 1.5;
   color: #666666;
-  border: 1px solid rgb(214, 214, 214);
+  border: 1px solid var(--border-main);
 
   &:focus{
-    border-color: rgb(214, 214, 214);
+    border-color: var(--border-main);
   }
 
   &.low-rounded {

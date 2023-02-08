@@ -27,7 +27,7 @@
             .title{
                 font-size: 24px;
                 font-weight: 700;
-                color: #000;
+                color: var(--color--black-100);
                 margin-bottom: 16px;
                 text-align: center;
             }
@@ -55,12 +55,12 @@
                     border: none;
                     font-size: 18px;
                     font-weight: 300;
-                    color: #000;
+                    color: var(--color--black-100);
                     cursor: pointer;
 
                     &_select{
                         font-weight: 400;
-                        color: #d6002f;
+                        color: var(--color--red-80);
                     }
                 }
             }

@@ -51,7 +51,7 @@
         }
 
         &_blocked{
-            border-color: rgb(214, 214, 214);
+            border-color: var(--border-main);
             cursor: default;
         }
 
@@ -151,7 +151,7 @@
                 }
 
                 &_blocked{
-                    color: rgb(214, 214, 214);
+                    color: var(--border-main);
                 }
 
                 &_gold{

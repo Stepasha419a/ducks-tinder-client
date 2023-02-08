@@ -1,4 +1,4 @@
-.popup{
+.popup {
   position: fixed;
   z-index: 150;
   width: 100%;
@@ -6,33 +6,33 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.4);
-  transition: all .5s ease 0s;
+  transition: all 0.5s ease 0s;
 
-  .body{
+  .body {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 30px 10px;
 
-    .content{
+    .content {
       position: relative;
       background-color: var(--color--white-100);
       width: 440px;
       height: 600px;
-      transition: all .5s ease 0s;
+      transition: all 0.5s ease 0s;
       border-radius: 8px;
       z-index: 100;
 
-      &.overflow{
+      &.overflow {
         overflow: auto;
 
-        &::-webkit-scrollbar{
+        &::-webkit-scrollbar {
           display: none;
         }
       }
 
-      .close{
+      .close {
         width: 24px;
         height: 24px;
         position: absolute;
@@ -41,7 +41,7 @@
         cursor: pointer;
 
         &::before,
-        &::after{
+        &::after {
           content: '';
           display: block;
           height: 4px;
@@ -52,33 +52,33 @@
           top: 11px;
           left: 2px;
         }
-        &::before{
+        &::before {
           transform: rotate(45deg);
         }
-        &::after{
+        &::after {
           transform: rotate(135deg);
         }
       }
 
-      .slider{
+      .slider {
         height: 550px;
 
-        .info{
+        .info {
           position: absolute;
           bottom: 100px;
           left: 20px;
 
-          .person{
+          .person {
             display: flex;
             align-items: baseline;
 
-            .name{
+            .name {
               font-weight: 700;
               font-size: 36px;
               color: var(--color--white-100);
             }
 
-            .years{
+            .years {
               font-size: 28px;
               font-weight: 300;
               margin-left: 8px;
@@ -86,14 +86,14 @@
             }
           }
 
-          .distance{
+          .distance {
             color: var(--color--white-100);
             padding-top: 10px;
           }
         }
       }
 
-      .scrollDown{
+      .scrollDown {
         width: 100%;
         height: 50px;
         font-size: 42px;
@@ -101,22 +101,22 @@
         cursor: pointer;
       }
 
-      .pair{
-        color: #000;
+      .pair {
+        color: var(--color--black-100);
         padding: 10px 16px;
 
-        .wrapper{
+        .wrapper {
           display: flex;
           align-items: center;
           justify-content: center;
           color: var(--main-primary);
 
-          .name{
+          .name {
             font-weight: 700;
             font-size: 36px;
           }
 
-          .years{
+          .years {
             font-size: 28px;
             font-weight: 300;
             margin-left: 8px;
@@ -124,7 +124,7 @@
           }
         }
 
-        .sex{
+        .sex {
           display: flex;
           justify-content: center;
           align-items: baseline;
@@ -132,39 +132,39 @@
           font-size: 20px;
           margin: 8px 0 0 4px;
 
-          .icon{
+          .icon {
             margin-right: 6px;
             font-size: 16px;
           }
         }
       }
 
-      .separator{
-        border: 1px solid #0000001f
+      .separator {
+        border: 1px solid var(--color--black-90);
       }
 
-      .description{
+      .description {
         font-size: 16px;
         color: var(--main-secondary);
         padding: 15px;
         line-height: 1.35;
       }
 
-      .interests{
-        .title{
+      .interests {
+        .title {
           font-size: 20px;
           font-weight: 600;
           color: var(--main-secondary);
           margin: 10px 0 0 25px;
         }
 
-        .items{
+        .items {
           display: flex;
           flex-wrap: wrap;
           align-items: baseline;
           padding: 10px 15px 0;
 
-          .item{
+          .item {
             border: 2px solid var(--bg-secondary);
             border-radius: 16px;
             font-weight: 600;
@@ -175,7 +175,7 @@
         }
       }
 
-      .showAll{
+      .showAll {
         width: 89px;
         font-weight: 600;
         text-transform: uppercase;
@@ -185,11 +185,11 @@
         padding: 10px 0;
       }
 
-      .btns{
+      .btns {
         display: flex;
         border-top: 2px solid var(--color--black-90);
 
-        .btn{
+        .btn {
           border: none;
           background-color: var(--color--white-100);
           width: 50%;
@@ -198,13 +198,13 @@
           font-size: 22px;
           color: var(--main-secondary);
           text-transform: uppercase;
-          transition: .2s;
+          transition: 0.2s;
 
-          &.border{
+          &.border {
             border-right: 2px solid var(--color--black-90);
           }
 
-          &:hover{
+          &:hover {
             color: var(--color--red-90);
           }
         }

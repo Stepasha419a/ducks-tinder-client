@@ -17,9 +17,9 @@
         background-repeat: no-repeat;
         height: 100%;
         width: 100%;
-        border: 4px dashed #b8bbc0;
+        border: 4px dashed var(--color--white-70);
         border-radius: 8px;
-        background-color: #e9ebee;
+        background-color: var(--bg-primary);
         cursor: pointer;
 
         &_has_image {
@@ -57,7 +57,7 @@
           .mark {
             width: 20px;
             height: 20px;
-            color: #d6002f;
+            color: var(--color--red-80);
           }
         }
       }

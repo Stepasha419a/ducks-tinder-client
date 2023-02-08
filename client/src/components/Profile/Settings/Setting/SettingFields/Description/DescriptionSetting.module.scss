@@ -1,15 +1,15 @@
 .setting{
-    border-right: 1px solid rgb(214, 214, 214);
+    border-right: 1px solid var(--border-main);
     height: calc(100vh - 90px);
 
     .name{
-        border-bottom: 1px solid rgb(214, 214, 214);
+        border-bottom: 1px solid var(--border-main);
         padding: 20px 16px 10px;
         text-transform: uppercase;
         color: var(--main-secondary);
 
         &_error{
-            color: #c62c1e;
+            color: var(--danger-light);
             border-bottom: none;
             padding: 25px 16px 0px;
         }
@@ -20,13 +20,13 @@
             font-size: 16px;
             width: 100%;
             padding: 16px;
-            border-bottom: 1px solid rgb(214, 214, 214);
+            border-bottom: 1px solid var(--border-main);
             color: var(--main-secondary);
             transition: .2s;
 
             &:focus{
-                border-color: rgb(214, 214, 214);
-                color: #000;
+                border-color: var(--border-main);
+                color: var(--color--black-100)
             }
         }
 
@@ -46,12 +46,12 @@
     .submit{
         background-color: var(--color--white-100);
         border-radius: 0;
-        border: 1px solid rgb(214, 214, 214);
+        border: 1px solid var(--border-main);
         border-right: none;
         width: 100%;
         padding: 16px;
         cursor: pointer;
-        color: #c62c1e;
+        color: var(--danger-light);
         text-align: left;
         font-size: 16px;
 

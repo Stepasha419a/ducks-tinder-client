@@ -4,7 +4,7 @@
   .groupTitle {
     text-transform: uppercase;
     color: var(--main-secondary);
-    border-bottom: 1px solid rgb(214, 214, 214);
+    border-bottom: 1px solid var(--border-main);
     padding: 8px 16px;
   }
 
@@ -16,7 +16,7 @@
 
   .items {
     .item {
-      border-bottom: 1px solid rgb(214, 214, 214);
+      border-bottom: 1px solid var(--border-main);
       background-color: var(--color--white-100);
       padding: 12px 16px;
 
@@ -45,7 +45,7 @@
 
           .openIcon {
             font-size: 14px;
-            color: #d4d8de;
+            color: var(--color--white-90);
             margin-left: 10px;
             transition: 0.2s;
           }

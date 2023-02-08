@@ -3,12 +3,12 @@
 
   .items {
     .item {
-      border-bottom: 1px solid rgb(214, 214, 214);
+      border-bottom: 1px solid var(--border-main);
       background-color: var(--color--white-100);
       padding: 12px 16px;
 
       &_button {
-        border-top: 1px solid rgb(214, 214, 214);
+        border-top: 1px solid var(--border-main);
         cursor: pointer;
       }
 

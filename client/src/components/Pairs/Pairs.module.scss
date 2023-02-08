@@ -8,7 +8,7 @@
   .likes {
     height: 90px;
     width: 100%;
-    border-bottom: 1px solid rgb(214, 214, 214);
+    border-bottom: 1px solid var(--border-main);
     font-size: 24px;
     font-weight: 700;
     display: flex;
@@ -27,7 +27,7 @@
     margin: 25px 0;
 
     .setting {
-      border: 2px solid rgb(214, 214, 214);
+      border: 2px solid var(--border-main);
       border-radius: 16px;
       font-weight: 600;
       padding: 5px 10px;
