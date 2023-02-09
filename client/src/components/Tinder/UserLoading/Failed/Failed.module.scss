@@ -11,13 +11,13 @@
     transition: .2s;
 
     &:hover{
-        background: #fd267815;
+        background: var(--color--black-pink);
     }
 
     .text{
         font-size: 48px;
         font-weight: 700;
-        color: #ff4b5d;
+        color: var(--color--red-100);
         width: 100%;
         text-align: center;
     }
@@ -25,7 +25,7 @@
     .subtext{
         font-size: 24px;
         font-weight: 700;
-        color: #a84650b7;
+        color: var(--color--brown-60);
         width: 100%;
         text-align: center;
     }

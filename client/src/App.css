@@ -76,7 +76,7 @@ textarea:-ms-input-placeholder { color: #999999; }
   display: flex;
   align-items: center;
   height: 90px;
-  background-image: linear-gradient(45deg,var(--color--pink-100),var(--color--orange-100));
+  background-image: linear-gradient(45deg,var(--color--pink-100),var(--color--orange-90));
 }
 
 .info__user-person,
@@ -1013,54 +1013,54 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .content__btn--active-gold .content__btn-icon-wrapper{
-  background-color: #ecb54d;
+  background-color: var(--color--yellow-100);
 }
 .content__btn--active-red .content__btn-icon-wrapper{
-  background-color: #ff6574;
+  background-color: var(--color--red-70);
 }
 .content__btn--active-blue .content__btn-icon-wrapper{
-  background-color: #429dff;
+  background-color: var(--color--blue-90);
 }
 .content__btn--active-green .content__btn-icon-wrapper{
-  background-color: #31ca8f
+  background-color: var(--color--green-80)
 }
 .content__btn--active-purple .content__btn-icon-wrapper{
-  background-color: #cb78fc;
+  background-color: var(--color--purple-80);
 }
 
 .content__btn--gold{
-  border-color: #cd7105;
+  border-color: var(--color--orange-100);
 }
 .content__btn-icon--gold{
-  color: #ecb54d;
+  color: var(--color--yellow-100);
 }
 
 .content__btn--red{
   border-color: var(--color--red-100);
 }
 .content__btn-icon--red{
-  color: #ff6574;
+  color: var(--color--red-70);
 }
 
 .content__btn--blue{
-  border-color: #1786ff;
+  border-color: var(--color--blue-100);
 }
 .content__btn-icon--blue{
-  color: #429dff;
+  color: var(--color--blue-90);
 }
 
 .content__btn--green{
-  border-color: #129e68;
+  border-color: var(--color--green-100);
 }
 .content__btn-icon--green{
-  color: #31ca8f
+  color: var(--color--green-80)
 }
 
 .content__btn--purple{
-  border-color: #ba52f5;
+  border-color: var(--color--purple-100);
 }
 .content__btn-icon--purple{
-  color: #cb78fc;
+  color: var(--color--purple-80);
 }
 
 .content__btn--minimized{
@@ -1386,7 +1386,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .upload__input-wrapper{
-  background: linear-gradient(45deg,var(--color--pink-100),var(--color--orange-100));
+  background: linear-gradient(45deg,var(--color--pink-100),var(--color--orange-90));
   width: 320px;
   border-radius: 16px;
 }
@@ -2708,7 +2708,7 @@ textarea:-ms-input-placeholder { color: #999999; }
 }
 
 .loading-page{
-  background-image: linear-gradient(45deg,var(--color--pink-100),var(--color--orange-100));
+  background-image: linear-gradient(45deg,var(--color--pink-100),var(--color--orange-90));
   position: absolute;
   top: 0;
   left: 0;

@@ -58,32 +58,32 @@
 
         &_active{
             &_gold .wrapper{
-                background-color: #ecb54d;
+                background-color: var(--color--yellow-100);
             }
 
             &_red .wrapper{
-                background-color: #ff6574;
+                background-color: var(--color--red-70);
             }
 
             &_blue .wrapper{
-                background-color: #429dff;
+                background-color: var(--color--blue-90);
             }
 
             &_green .wrapper{
-                background-color: #31ca8f;
+                background-color: var(--color--green-80);
             }
 
             &_purple .wrapper{
-                background-color: #cb78fc;
+                background-color: var(--color--purple-80);
             }
         }
 
 
         &_gold{
-            border-color: #cd7105;
+            border-color: var(--color--orange-100);
 
             .icon{
-                color: #ecb54d;
+                color: var(--color--yellow-100);
             }
         }
           
@@ -91,31 +91,31 @@
             border-color: var(--color--red-100);
 
             .icon{
-                color: #ff6574;
+                color: var(--color--red-70);
             }
         }
           
         &_blue{
-            border-color: #1786ff;
+            border-color: var(--color--blue-100);
 
             .icon{
-                color: #429dff;
+                color: var(--color--blue-90);
             }
         }
           
         &_green{
-            border-color: #129e68;
+            border-color: var(--color--green-100);
 
             .icon{
-                color: #31ca8f
+                color: var(--color--green-80)
             }
         }
           
         &_purple{
-            border-color: #ba52f5;
+            border-color: var(--color--purple-100);
 
             .icon{
-                color: #cb78fc;
+                color: var(--color--purple-80);
             }
         }
 
@@ -155,23 +155,23 @@
                 }
 
                 &_gold{
-                    color: #ecb54d;
+                    color: var(--color--yellow-100);
                 }
 
                 &_red{
-                    color: #ff6574;
+                    color: var(--color--red-70);
                 }
 
                 &_blue{
-                    color: #429dff;
+                    color: var(--color--blue-90);
                 }
 
                 &_green{
-                    color: #31ca8f
+                    color: var(--color--green-80)
                 }
 
                 &_purple{
-                    color: #cb78fc;
+                    color: var(--color--purple-80);
                 }
             }
         }
