@@ -10,6 +10,10 @@
   cursor: pointer;
   transition: .1s;
 
+  &:hover{
+    scale: 1.01;
+  }
+
   .info{
     position: absolute;
     bottom: 20px;

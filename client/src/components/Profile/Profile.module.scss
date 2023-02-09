@@ -27,12 +27,12 @@
         width: 40px;
         color: var(--color--white-100);
         font-size: 24px;
-        background-color: var(--main-primary);
+        background-color: var(--color--black-80);
         cursor: pointer;
         transition: 0.3s;
 
         &:hover {
-          background-color: var(--color--black-90);
+          background-color: var(--color--black-85);
           transform: scale(1.1);
         }
       }

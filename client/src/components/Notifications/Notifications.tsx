@@ -1,13 +1,13 @@
+import { deleteNotification } from '../../redux/notificationsSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
-import { deleteNotification } from '../../redux/usersReducer';
-import Notification from './Notification/Notification';
+import Notification from '../ui/Notification/Notification/Notification';
 import styles from './Notifications.module.scss';
 
 export const Notifications = () => {
   const dispatch = useAppDispatch();
 
   const notifications = useAppSelector(
-    (state) => state.usersPage.notifications
+    (state) => state.notifications.notifications
   );
 
   const closeNotification = (id: number) => {

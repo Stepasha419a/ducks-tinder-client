@@ -5,17 +5,10 @@ import { imageInterface } from '../components/Profile/ProfileImageChange/ChangeI
 import { IUser, makeUserImagesObject } from '../models/IUser';
 import { AxiosError } from 'axios';
 
-export interface INotification {
-  id: number;
-  type: string;
-  text: string;
-}
-
 const usersReducer = createSlice({
   name: 'users',
   initialState: {
     currentUser: {} as IUser,
-    notifications: [] as INotification[],
     pairs: [] as IUser[],
     tinderUsers: [] as IUser[],
     isReturnUser: false,
@@ -26,23 +19,6 @@ const usersReducer = createSlice({
   reducers: {
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload;
-    },
-    createNotification: (state, action) => {
-      const notification: INotification = {
-        id: Date.now(),
-        type: action.payload.type,
-        text: action.payload.text,
-      };
-
-      state.notifications = [...state.notifications, notification];
-    },
-    deleteNotification: (state, action) => {
-      const index = state.notifications.findIndex(
-        (item) => item.id === action.payload
-      );
-      const newNotifications = [...state.notifications];
-      newNotifications.splice(index, 1);
-      state.notifications = newNotifications;
     },
     setIsReturnUser: (state, action) => {
       state.isReturnUser = action.payload;
@@ -97,21 +73,6 @@ const usersReducer = createSlice({
           state.currentUser = payload;
         }
       })
-      .addMatcher(
-        (action) => action.type.endsWith('rejected'),
-        (state, action) => {
-          console.log(action)
-          const signs = action.type.split('/');
-          if (signs[0] === 'users' && signs[1] !== 'getSortedUser') {
-            const notification: INotification = {
-              id: Date.now(),
-              type: 'error',
-              text: `${action.payload} at ${action.type}`,
-            };
-            state.notifications = [...state.notifications, notification];
-          }
-        }
-      );
   },
 });
 
@@ -348,8 +309,6 @@ export const {
   setRequestedUsers,
   setIsReturnUser,
   setCurrentTinderUsersIndex,
-  createNotification,
-  deleteNotification,
 } = usersReducer.actions;
 
 export type UsersReducerType = typeof usersReducer;

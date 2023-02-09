@@ -22,7 +22,7 @@
       transition: 0.3s;
 
       &:hover {
-        background-color: rgba(0, 0, 0, 0.384);
+        background-color: var(--color--black-80);
       }
 
       .name {

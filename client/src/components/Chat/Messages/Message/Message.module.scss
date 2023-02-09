@@ -42,7 +42,7 @@
         overflow: hidden;
 
         &_own {
-          background: linear-gradient(45deg, var(--color--pink-10), var(--color--black-90));
+          background: linear-gradient(45deg, var(--color--pink-10), #00000000);
         }
 
         &::before {

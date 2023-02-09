@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { potentialFields } from '../../../models/IUser';
+import { createNotification } from '../../../redux/notificationsSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
-import { createNotification } from '../../../redux/usersReducer';
 import { checkField } from '../utils/ProfileUtils';
 import Account from './SettingGroups/Account/Account';
 import Find from './SettingGroups/Find/Find';
@@ -40,7 +40,7 @@ const SettingsList: React.FC<SettingsListPropsInterface> = ({
     (state) => state.usersPage.currentUser
   );
   const notifications = useAppSelector(
-    (state) => state.usersPage.notifications
+    (state) => state.notifications.notifications
   );
 
   const [errorFields, setErrorFields] = useState<string[]>([]);

@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  max-width: 800px;
+  max-width: 850px;
   width: 100%;
   margin: 0 auto;
   -webkit-user-select: none;
@@ -13,7 +13,7 @@
     height: 25px;
     font-size: 16px;
     font-weight: 700;
-    background-color: var(--color--black-70);
+    background-color: var(--color--black-80);
     color: var(--color--white-100);
     cursor: pointer;
     padding: 0 20px;
@@ -34,7 +34,7 @@
 
     .icon {
       font-size: 20px;
-      color: var(--color--black-70);
+      color: var(--color--black-80);
       margin-right: 8px;
 
       &_rotate {
@@ -44,13 +44,13 @@
       &_space {
         width: 70px;
         height: 20px;
-        border: 2px solid var(--color--black-70);
+        border: 2px solid var(--color--black-80);
         border-radius: 4px;
       }
     }
 
     .text {
-      color: var(--color--black-70);
+      color: var(--color--black-80);
       font-weight: 900;
       font-size: 14px;
       text-transform: uppercase;

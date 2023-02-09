@@ -1,12 +1,18 @@
-import { INotification } from "../../../redux/usersReducer";
-import styles from './Notification.module.scss'
+import styles from './Notification.module.scss';
 
-interface NotificationProps{
-  item: INotification,
-  closeNotification: (id: number) => void
+interface NotificationProps {
+  item: {
+    id: number;
+    type: string;
+    text: string;
+  };
+  closeNotification: (id: number) => void;
 }
 
-const Notification: React.FC<NotificationProps> = ({item, closeNotification}) => {
+const Notification: React.FC<NotificationProps> = ({
+  item,
+  closeNotification,
+}) => {
   return (
     <div
       onClick={() => closeNotification(item.id)}
