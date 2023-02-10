@@ -1,6 +1,6 @@
 import { deleteNotification } from '../../redux/notificationsSlice';
 import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
-import Notification from '../ui/Notification/Notification/Notification';
+import { Notification } from '../ui';
 import styles from './Notifications.module.scss';
 
 export const Notifications = () => {
@@ -21,7 +21,7 @@ export const Notifications = () => {
   return (
     <div className={styles.notifications}>
       {notifications.map((item) => (
-        <Notification item={item} closeNotification={closeNotification} />
+        <Notification {...item} closeNotification={closeNotification} />
       ))}
     </div>
   );

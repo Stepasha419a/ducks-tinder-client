@@ -67,7 +67,7 @@ const SettingsList: React.FC<SettingsListPropsInterface> = ({
 
   useEffect(() => {
     const errorText =
-      'You have some empty fields, there are selected with red color';
+      'You have some empty fields, they are selected with red color';
     const result = notifications.find((item) => item.text === errorText);
     if (!result && errorFields.length) {
       dispatch(createNotification({ type: 'error', text: errorText }));

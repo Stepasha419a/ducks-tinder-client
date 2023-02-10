@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export interface INotification {
-  id: number;
-  type: string;
-  text: string;
-}
+import { INotification } from '../components/ui/Notification';
 
 interface InitialState {
   notifications: INotification[];
