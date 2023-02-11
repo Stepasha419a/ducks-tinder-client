@@ -35,7 +35,6 @@ const notificationsSlice = createSlice({
     builder.addMatcher(
       (action) => action.type.endsWith('rejected'),
       (state, action) => {
-        console.log(action);
         const signs = action.type.split('/');
         if (signs[1] !== 'getSortedUser' && signs[1] !== 'disconnectChat') {
           const notification: INotification = {
