@@ -1,87 +1,54 @@
-.setting{
-    border-right: 1px solid var(--border-main);
-    height: calc(100vh - 90px);
+.setting {
+  border-right: 1px solid var(--border-main);
+  height: calc(100vh - 90px);
 
-    .name{
-        border-bottom: 1px solid var(--border-main);
-        padding: 20px 16px 10px;
-        text-transform: uppercase;
-        color: var(--main-secondary);
+  .name {
+    border-bottom: 1px solid var(--border-main);
+    padding: 20px 16px 10px;
+    text-transform: uppercase;
+    color: var(--main-secondary);
 
-        &_error{
-            color: var(--danger-light);
-            border-bottom: none;
-            padding: 25px 16px 0px;
-        }
+    &_error {
+      color: var(--danger-light);
+      border-bottom: none;
+      padding: 25px 16px 0px;
+    }
+  }
+
+  .content {
+    .radioInput {
+      padding: 16px;
+      background-color: var(--color--white-100);
+      border-bottom: 1px solid var(--border-main);
+    }
+  }
+
+  .title {
+    font-size: 14px;
+    color: var(--main-secondary);
+    margin: 12px 0;
+    padding: 0 16px;
+  }
+
+  .submit {
+    background-color: var(--color--white-100);
+    border-radius: 0;
+    border: 1px solid var(--border-main);
+    border-right: none;
+    width: 100%;
+    padding: 16px;
+    cursor: pointer;
+    color: var(--danger-light);
+    text-align: left;
+    font-size: 16px;
+
+    &:disabled {
+      background-color: var(--bg-primary);
+      cursor: not-allowed;
     }
 
-    .content{
-        .inputWrapper{
-            position: relative;
-            background-color: var(--color--white-100);
-            border-bottom: 1px solid var(--border-main);
-            padding: 16px;
-            cursor: pointer;
-
-            .input {
-                position: absolute;
-                z-index: -1;
-                opacity: 0;
-
-                & + label{
-                    cursor: pointer;
-                }
-            }
-
-            .icon{
-                position: absolute;
-                top: 16px;
-                right: 16px;
-                color: var(--color--red-100);
-                width: 20px;
-                height: 20px;
-            }
-        }
-
-        .textInput{
-            font-size: 16px;
-            padding: 16px;
-            border-top: none;
-            border-right: none;
-            transition: .2s;
-
-            &:focus{
-                color: var(--color--black-100)
-            }
-        }
+    &_noBorder {
+      border-bottom: none;
     }
-
-    .title{
-        font-size: 14px;
-        color: var(--main-secondary);
-        margin: 12px 0;
-        padding: 0 16px;
-    }
-
-    .submit{
-        background-color: var(--color--white-100);
-        border-radius: 0;
-        border: 1px solid var(--border-main);
-        border-right: none;
-        width: 100%;
-        padding: 16px;
-        cursor: pointer;
-        color: var(--danger-light);
-        text-align: left;
-        font-size: 16px;
-
-        &:disabled{
-            background-color: var(--bg-primary);
-            cursor: not-allowed;
-        }
-
-        &_noBorder{
-            border-bottom: none;
-        }
-    }
+  }
 }

@@ -1,11 +1,9 @@
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { IUser } from '../../../../models/IUser';
 import DescriptionSetting from './SettingFields/Description/DescriptionSetting';
 import InterestsSetting from './SettingFields/Interests/IterestsSetting';
 import styles from './Setting.module.scss';
-import { TextField } from '../../../ui';
+import { RadioInput, TextField } from '../../../ui';
 
 interface ProfileSettingPropsInterface {
   currentUser: IUser;
@@ -171,40 +169,22 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
           innerObjectName === 'partnerSettings') ||
         (settingInputName === 'sex' && innerObjectName === '') ? (
           <div>
-            <div
-              onClick={() => setInputValue('male')}
-              className={styles.inputWrapper}
-            >
-              <input
-                name={settingInputName}
-                type="radio"
-                value="male"
-                id={settingInputName + '1'}
-                checked={inputValue === 'male'}
-                className={styles.input}
-              />
-              <label htmlFor={settingInputName + '1'}>Male</label>
-              {inputValue === 'male' && (
-                <FontAwesomeIcon icon={faCheck} className={styles.icon} />
-              )}
-            </div>
-            <div
-              onClick={() => setInputValue('female')}
-              className={styles.inputWrapper}
-            >
-              <input
-                name={settingInputName}
-                type="radio"
-                value="female"
-                id={settingInputName + '2'}
-                checked={inputValue === 'female'}
-                className={styles.input}
-              />
-              <label htmlFor={settingInputName + '2'}>Female</label>
-              {inputValue === 'female' && (
-                <FontAwesomeIcon icon={faCheck} className={styles.icon} />
-              )}
-            </div>
+            <RadioInput
+              name={settingInputName}
+              value="male"
+              checked={inputValue === 'male'}
+              onChange={() => setInputValue('male')}
+              text="Male"
+              extraClassName={styles.radioInput}
+            />
+            <RadioInput
+              name={settingInputName}
+              value="female"
+              checked={inputValue === 'female'}
+              onChange={() => setInputValue('female')}
+              text="Female"
+              extraClassName={styles.radioInput}
+            />
           </div>
         ) : (
           <TextField
