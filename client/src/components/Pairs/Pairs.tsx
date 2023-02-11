@@ -5,7 +5,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 import { IUser } from '../../models/IUser';
-import { getUserPairsThunk } from '../../redux/usersReducer';
+import { getUserPairsThunk } from '../../redux/usersSlice';
 import Pair from './Pair/Pair';
 import PairPopup from './popups/Pair/PairPopup';
 import PairsSettingsPopup from './popups/PairsSettings/PairsSettingsPopup';

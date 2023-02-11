@@ -4,7 +4,7 @@ import { IUser } from '../../../../models/IUser';
 import {
   connectChatThunk,
   disconnectChatThunk,
-} from '../../../../redux/chatReducer';
+} from '../../../../redux/chatSlice';
 import { Socket } from 'socket.io-client';
 import styles from './ChatItem.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';

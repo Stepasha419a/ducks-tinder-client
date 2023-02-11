@@ -6,7 +6,7 @@ import {
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { loginThunk, setFormError } from '../../../redux/authReducer';
+import { loginThunk, setFormError } from '../../../redux/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
 import styles from './Login.module.scss';

@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect } from 'react';
 import { IChat } from '../../../models/IChat';
-import { getChatsThunk } from '../../../redux/chatReducer';
+import { getChatsThunk } from '../../../redux/chatSlice';
 import ChatItem from './ChatItem/ChatItem';
 import { Socket } from 'socket.io-client';
 import styles from './Chats.module.scss';

@@ -1,13 +1,13 @@
-import { IUser } from './../models/IUser';
+import { IUser } from '../models/IUser';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Dispatch } from 'react';
 import { io } from 'socket.io-client';
 import { chatApi } from '../api/chatApi';
 import { IChat, IMessage } from '../models/IChat';
 import { RootState } from './reduxStore';
-import { fetchUserById } from './usersReducer';
+import { fetchUserById } from './usersSlice';
 
-const chatReducer = createSlice({
+const chatSlice = createSlice({
   name: 'chatPage',
   initialState: {
     chats: [] as IChat[],
@@ -168,13 +168,13 @@ export const disconnectChatThunk = createAsyncThunk(
   }
 );
 
-const initialState = chatReducer.getInitialState();
-type ChatReducerInitialStateType = typeof initialState;
+const initialState = chatSlice.getInitialState();
+type ChatSliceInitialStateType = typeof initialState;
 
 function sendMessage(
   message: IMessage,
   dispatch: Dispatch<any>,
-  chatPage: ChatReducerInitialStateType
+  chatPage: ChatSliceInitialStateType
 ) {
   dispatch(setCurrentMessages(message));
   const chatIndex = chatPage.chats.findIndex(
@@ -190,6 +190,6 @@ export const {
   setCurrentMessages,
   setCurrentChatId,
   setCurrentChatMembers,
-} = chatReducer.actions;
+} = chatSlice.actions;
 
-export default chatReducer.reducer;
+export default chatSlice.reducer;

@@ -3,7 +3,7 @@ import {
   getSortedUserThunk,
   setRequestedUsers,
   updateUserThunk,
-} from '../../redux/usersReducer';
+} from '../../redux/usersSlice';
 import Buttons from './Buttons/Buttons';
 import FullPreview from './UserPreview/FullPreview/FullPreview';
 import Preview from './UserPreview/Preview/Preview';

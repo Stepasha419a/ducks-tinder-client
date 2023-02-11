@@ -3,9 +3,9 @@ import axios, { AxiosError } from 'axios';
 import { API_URL } from '../api/api';
 import { authAPI, UserAuthParams } from '../api/authApi';
 import { AuthResponse } from '../models/response/AuthResponse';
-import { setCurrentUser } from './usersReducer';
+import { setCurrentUser } from './usersSlice';
 
-const authReducer = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState: {
     isAuth: null as boolean | null,
@@ -129,5 +129,5 @@ export const logoutThunk = createAsyncThunk(
   }
 );
 
-export const { setFormError } = authReducer.actions;
-export default authReducer.reducer;
+export const { setFormError } = authSlice.actions;
+export default authSlice.reducer;

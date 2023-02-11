@@ -1,11 +1,11 @@
-import { makeDataObject, makeQuerySortsObj } from './../models/IUser';
+import { makeDataObject, makeQuerySortsObj } from '../models/IUser';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { usersAPI } from '../api/usersApi';
 import { imageInterface } from '../components/Profile/ProfileImageChange/ChangeImage/ChangeImage';
 import { IUser, makeUserImagesObject } from '../models/IUser';
 import { AxiosError } from 'axios';
 
-const usersReducer = createSlice({
+const usersSlice = createSlice({
   name: 'users',
   initialState: {
     currentUser: {} as IUser,
@@ -309,8 +309,6 @@ export const {
   setRequestedUsers,
   setIsReturnUser,
   setCurrentTinderUsersIndex,
-} = usersReducer.actions;
+} = usersSlice.actions;
 
-export type UsersReducerType = typeof usersReducer;
-
-export default usersReducer.reducer;
+export default usersSlice.reducer;

@@ -6,7 +6,7 @@ import {
   faFireFlameCurved,
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { updateUserThunk } from '../../redux/usersReducer';
+import { updateUserThunk } from '../../redux/usersSlice';
 import UserImage from './UserImage/UserImage';
 import SettingsList from './Settings/SettingsList';
 import Setting from './Settings/Setting/Setting';

@@ -13,7 +13,7 @@ import {
   setCurrentTinderUsersIndex,
   setIsReturnUser,
   updateUserThunk,
-} from '../../../redux/usersReducer';
+} from '../../../redux/usersSlice';
 import styles from './Buttons.module.scss';
 
 interface ButtonsProps {

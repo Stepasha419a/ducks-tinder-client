@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 import { IUser } from '../../../../models/IUser';
-import { saveUserImage } from '../../../../redux/usersReducer';
+import { saveUserImage } from '../../../../redux/usersSlice';
 import { RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
