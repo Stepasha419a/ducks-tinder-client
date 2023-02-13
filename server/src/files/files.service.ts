@@ -28,7 +28,7 @@ export class FilesService {
     savePicture(file: Express.Multer.File, userId: string, setting: 'avatar' | 'gallery'): string {
         try {
             const fileName = uuid.v4() + '.jpg'
-            const filePath = path.resolve(__dirname, '..', `static\\${userId}\\${setting}`, fileName) //path.resolve(`static\\${userId}\\${setting}`, fileName)
+            const filePath = path.resolve(__dirname, '..', `static\\${userId}\\${setting}`, fileName)
 
             writeFile(filePath, file.buffer, () => {})
 

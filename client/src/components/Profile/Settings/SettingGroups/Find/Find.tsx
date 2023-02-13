@@ -2,7 +2,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { useAppSelector } from '../../../../../redux/reduxStore';
-import { RangeInput } from '../../../../ui';
+import { CheckboxInput, RangeInput } from '../../../../ui';
 import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
 import styles from './Find.module.scss';
 
@@ -120,24 +120,18 @@ const Find: React.FC<IFind> = ({
                 max={100}
               />
             </div>
-            <div className={styles.checkbox}>
-              Show people only in this range
-              <label className={styles.label}>
-                <input
-                  checked={currentUser.partnerSettings.usersOnlyInDistance}
-                  onChange={(e) =>
-                    submitSettings(
-                      'usersOnlyInDistance',
-                      e.target.checked,
-                      'partnerSettings'
-                    )
-                  }
-                  type="checkbox"
-                  className={styles.input}
-                />
-                <div className={styles.content}></div>
-              </label>
-            </div>
+            <CheckboxInput
+              checked={currentUser.partnerSettings.usersOnlyInDistance}
+              onChange={() =>
+                submitSettings(
+                  'usersOnlyInDistance',
+                  !currentUser.partnerSettings.usersOnlyInDistance,
+                  'partnerSettings'
+                )
+              }
+              variant="small"
+              text="Show people only in this range"
+            />
           </div>
         </div>
         <div

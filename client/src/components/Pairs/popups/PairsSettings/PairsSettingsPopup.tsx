@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { RangeInput } from '../../../ui/';
+import { CheckboxInput, RangeInput } from '../../../ui/';
 import { RangeInterface, RangeValue } from '../../../ui/inputs/Range';
 import { ISorts } from '../../utils/PairsUtils';
 import styles from './PairsSettingsPopup.module.scss';
@@ -145,50 +145,28 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
               Show all
             </div>
           </div>
-          <div className={styles.separator}></div>
-          <div
-            onClick={() => {
+          <div className={styles.separator} />
+          <CheckboxInput
+            checked={pairSorts.account.includes('identify confirmed')}
+            onChange={() => {
               pairSorts.account.includes('identify confirmed')
                 ? deleteSort('identify confirmed', 'account')
                 : addSort('identify confirmed', 'account');
             }}
-            className={`${styles.setting} ${styles.pointer}`}
-          >
-            <div className={`${styles.change} ${styles.checkbox}`}>
-              <div>Identify confirmed</div>
-              <label>
-                <input
-                  checked={pairSorts.account.includes('identify confirmed')}
-                  className={styles.checkbox}
-                  type="checkbox"
-                  id="pairs__popup-identify-checkbox"
-                />
-                <div className={styles.checked} />
-              </label>
-            </div>
-          </div>
+            text="Identify confirmed"
+            extraClassName={styles.checkboxNew}
+          />
           <div className={styles.separator}></div>
-          <div
-            onClick={() => {
+          <CheckboxInput
+            checked={pairSorts.account.includes('have interests')}
+            onChange={() => {
               pairSorts.account.includes('have interests')
                 ? deleteSort('have interests', 'account')
                 : addSort('have interests', 'account');
             }}
-            className={`${styles.setting} ${styles.pointer}`}
-          >
-            <div className={`${styles.change} ${styles.checkbox}`}>
-              <div>Have interests</div>
-              <label>
-                <input
-                  checked={pairSorts.account.includes('have interests')}
-                  className={styles.checkbox}
-                  type="checkbox"
-                  id="pairs__popup-identify-checkbox"
-                />
-                <div className={styles.checked}></div>
-              </label>
-            </div>
-          </div>
+            text="Have interests"
+            extraClassName={styles.checkboxNew}
+          />
           <div className={styles.separator}></div>
           <div className={styles.btns}>
             <button

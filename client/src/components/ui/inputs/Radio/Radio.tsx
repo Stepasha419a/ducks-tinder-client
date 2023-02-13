@@ -18,7 +18,7 @@ export const RadioInput: FC<PropsWithChildren<RadioInputProps>> = ({
   children,
   ...props
 }) => {
-  const cn = classNames(extraClassName, styles.label);
+  const cn = classNames(styles.label, extraClassName);
 
   return (
     <label className={cn}>
