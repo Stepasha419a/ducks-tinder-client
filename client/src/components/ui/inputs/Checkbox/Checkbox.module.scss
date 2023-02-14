@@ -9,9 +9,6 @@
 
     --width: 48px;
     --height: 28px;
-    --unactive-color: rgb(121, 121, 121);
-    --active-color: var(--color--red-100);
-    --box-color: var(--color--white-100);
     --offset: 20px;
     --duration: 0.3s;
 
@@ -24,7 +21,7 @@
       width: var(--width);
       height: var(--height);
       border-radius: var(--width);
-      background-color: var(--unactive-color);
+      background-color: rgb(121, 121, 121);
       cursor: pointer;
       transition: var(--duration);
 
@@ -40,7 +37,7 @@
         left: var(--offset);
         width: calc(var(--height) - 2 * var(--offset));
         height: calc(var(--height) - 2 * var(--offset));
-        background-color: var(--box-color);
+        background-color: var(--color--white-100);
         border-radius: 50%;
         transition: var(--duration);
       }
@@ -50,7 +47,7 @@
       display: none;
 
       &:checked ~ .icon {
-        background-color: var(--active-color);
+        background-color: var(--color--red-100);
       }
 
       &:checked ~ .icon::before {
