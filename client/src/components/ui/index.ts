@@ -4,3 +4,4 @@ export * from './inputs/Range/RangeInput';
 export { Notification } from './Notification/Notification';
 export { RadioInput } from './inputs/Radio/Radio';
 export { CheckboxInput } from './inputs/Checkbox/Checkbox';
+export { Message } from './Message/Message';
