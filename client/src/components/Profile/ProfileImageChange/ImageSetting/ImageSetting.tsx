@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { IUser } from "../../../../models/IUser"
+import { Button } from "../../../ui"
 import ProfileChangeImage from "../ChangeImage/ChangeImage"
 import ProfileFullPreview from "../UserPreview/FullPreview/FullPreview"
 import ProfilePreview from "../UserPreview/Preview/Preview"
@@ -21,8 +22,8 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({setIs
             :
             <>
                 <div className={styles.btns}>
-                    <button onClick={() => setIsPreviewSetting(false)} className={`${styles.btn} ${styles.btn_border} ${!isPreviewSetting ? styles.btn_active : ''}`}>Change</button>
-                    <button onClick={() => setIsPreviewSetting(true)} className={`${styles.btn}  ${isPreviewSetting ? styles.btn_active : ''}`}>Preview</button>
+                    <Button variant="default" onClick={() => setIsPreviewSetting(false)} extraClassName={[(!isPreviewSetting ? styles.active : ''), styles.border]}>Change</Button>
+                    <Button variant="default" onClick={() => setIsPreviewSetting(true)} extraClassName={isPreviewSetting ? styles.active : ''}>Preview</Button>
                 </div>
                 <div className={styles.panel}>
                     {isPreviewSetting ?

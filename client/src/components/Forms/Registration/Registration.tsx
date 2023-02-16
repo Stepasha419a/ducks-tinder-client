@@ -11,7 +11,7 @@ import { registerThunk } from '../../../redux/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
 import styles from './Registration.module.scss';
-import { TextField } from '../../ui';
+import { Button, TextField } from '../../ui';
 
 export const RegistrationForm = (props: { formError: string }) => {
   const dispatch = useAppDispatch();
@@ -182,17 +182,14 @@ export const RegistrationForm = (props: { formError: string }) => {
               </span>
             </div>
 
-            <div className={styles.submit}>
-              <button
-                disabled={!isFormValid}
-                type="submit"
-                className={
-                  `${styles.btn} ` + (isFormValid ? '' : styles.btn_disabled)
-                }
-              >
-                Sign up
-              </button>
-            </div>
+            <Button
+              type="submit"
+              variant="auth"
+              disabled={!isFormValid}
+              extraClassName={[styles.btn, isFormValid ? '' : styles.disabled]}
+            >
+              Sign up
+            </Button>
             <div className={styles.login}>
               <Link className={styles.link} to="/login">
                 Log in your Account &nbsp;

@@ -78,54 +78,10 @@
 
     .btn {
       height: 40px;
-      border-radius: 24px;
-      background: linear-gradient(
-        90deg,
-        rgba(2, 0, 36, 1) 0%,
-        rgb(255, 111, 44) 0%,
-        rgb(255, 81, 0) 100%
-      );
-      color: var(--color--white-100);
-      z-index: 10;
-      cursor: pointer;
-      border: none;
-      padding: 0 24px;
-      position: relative;
-
-      .text {
-        font-size: 18px;
-        font-weight: 700;
-      }
-
-      &::before {
-        content: '';
-        display: block;
-        opacity: 0;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          rgb(0, 0, 0) 0%,
-          rgb(255, 208, 0) 0%,
-          rgb(255, 171, 44) 100%
-        );
-        transition: opacity 0.5s ease-in-out;
-        border-radius: 24px;
-        z-index: -10;
-      }
-      &:hover::before {
-        opacity: 1;
-      }
+      width: 160px;
     }
   }
 }
-
-/* gradient animation start */
-
-/* gradient animation end */
 
 .content__change-panel {
   height: calc(100% - 45px);

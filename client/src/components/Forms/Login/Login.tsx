@@ -10,7 +10,7 @@ import { loginThunk, setFormError } from '../../../redux/authSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
 import styles from './Login.module.scss';
-import { TextField } from '../../ui';
+import { Button, TextField } from '../../ui';
 
 interface ILoginForm {
   formError: string;
@@ -149,17 +149,14 @@ export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
               </span>
             </div>
 
-            <div className={styles.submit}>
-              <button
-                disabled={!isFormValid}
-                type="submit"
-                className={
-                  `${styles.btn} ` + (isFormValid ? '' : styles.btn_disabled)
-                }
-              >
-                Login
-              </button>
-            </div>
+            <Button
+              type="submit"
+              variant="auth"
+              disabled={!isFormValid}
+              extraClassName={[styles.btn, isFormValid ? '' : styles.disabled]}
+            >
+              Login
+            </Button>
             <div className={styles.registration}>
               <Link className={styles.link} to="/reg">
                 Create your Account &nbsp;

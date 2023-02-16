@@ -3,7 +3,7 @@ import { IUser } from '../../../../models/IUser';
 import DescriptionSetting from './SettingFields/Description/DescriptionSetting';
 import InterestsSetting from './SettingFields/Interests/IterestsSetting';
 import styles from './Setting.module.scss';
-import { RadioInput, TextField } from '../../../ui';
+import { Button, RadioInput, TextField } from '../../../ui';
 
 interface ProfileSettingPropsInterface {
   currentUser: IUser;
@@ -197,22 +197,23 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
         )}
       </div>
       <div className={styles.title}>Your {formName}</div>
-      <button
+      <Button
         disabled={!isFormCloseable}
         onClick={() => cancelHandler()}
-        className={`${styles.submit} ${styles.submit_noBorder}`}
+        variant="setting"
+        extraClassName={styles.noBorder}
       >
         Cancel
-      </button>
-      <button
+      </Button>
+      <Button
         disabled={!isFormValid}
         onClick={() =>
           submitSettings(settingInputName, inputValue, innerObjectName)
         }
-        className={styles.submit}
+        variant="setting"
       >
         Update my {formName}
-      </button>
+      </Button>
     </div>
   );
 };

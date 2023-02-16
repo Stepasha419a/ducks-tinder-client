@@ -22,7 +22,7 @@
       border-bottom: 1px solid var(--border-main);
     }
 
-    .textInput{
+    .textInput {
       padding: 16px;
       border: none;
       border-bottom: 1px solid var(--border-main);
@@ -36,25 +36,7 @@
     padding: 0 16px;
   }
 
-  .submit {
-    background-color: var(--color--white-100);
-    border-radius: 0;
-    border: 1px solid var(--border-main);
-    border-right: none;
-    width: 100%;
-    padding: 16px;
-    cursor: pointer;
-    color: var(--danger-light);
-    text-align: left;
-    font-size: 16px;
-
-    &:disabled {
-      background-color: var(--bg-primary);
-      cursor: not-allowed;
-    }
-
-    &_noBorder {
-      border-bottom: none;
-    }
+  button.noBorder {
+    border-bottom: none;
   }
 }

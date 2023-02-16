@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { IUser } from '../../../../models/IUser';
 import { useAppDispatch } from '../../../../redux/reduxStore';
 import { deleteUserImage, mixUserImages } from '../../../../redux/usersSlice';
+import { Button } from '../../../ui';
 import ProfileCropImage from '../CropImage/CropImage';
 import ProfileDialogUpload from '../CropImage/DialogUpload/DialogUpload';
 import styles from './ChangeImage.module.scss';
@@ -221,9 +222,13 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
         by another 4% and get more likes.
       </div>
       <div className={styles.save}>
-        <button onClick={() => submitHandler()} className={styles.btn}>
-          <span className={styles.text}>Save changes</span>
-        </button>
+        <Button
+          onClick={() => submitHandler()}
+          variant="gradient"
+          extraClassName={styles.btn}
+        >
+          Save changes
+        </Button>
       </div>
 
       {isDialogUploadOpen && (
