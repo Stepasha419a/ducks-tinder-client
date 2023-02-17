@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { IUser } from '../../../../../../models/IUser';
 import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
-import { TextField } from '../../../../../ui';
+import { Button, TextField } from '../../../../../ui';
 import styles from './IterestsSetting.module.scss';
 
 interface InterestsSettingPropsInterface {
@@ -200,20 +200,21 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({
             Show all
           </div>
         </div>
-        <button
+        <Button
           disabled={!isFormCloseable}
           onClick={() => cancelHandler()}
-          className={`${styles.submit} ${styles.submit_noBorder}`}
+          variant="setting"
+          extraClassName={styles.noBorder}
         >
           Cancel
-        </button>
-        <button
+        </Button>
+        <Button
           disabled={!isFormValid}
           onClick={() => submitSettings('interests', interests)}
-          className={styles.submit}
+          variant="setting"
         >
           Update my interests
-        </button>
+        </Button>
       </div>
       {isInterestsSettingPopupOpen && (
         <InterestsSettingPopup

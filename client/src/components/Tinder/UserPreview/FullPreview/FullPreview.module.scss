@@ -12,26 +12,24 @@
         height: 470px;
         position: relative;
 
-        .closeFullPreview{
-            position: absolute;
+        .closeFullPreview {
+            font-size: 44px;
+            height: 44px;
+            width: 44px;
             bottom: -20px;
             right: 18px;
-            font-size: 44px;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            transition: .3s;
-
-            &:hover{
-                transform: scale(1.1);
+            transition: 0.3s;
+      
+            &:hover {
+              transform: scale(1.1);
             }
-
-            .icon{
-                color:  rgba(224, 48, 48, 0.747);
-                background-color: var(--color--white-100);
-                border-radius: 50%;
+      
+            .icon {
+              color: rgba(224, 48, 48, 0.747);
+              background-color: var(--color--white-100);
+              border-radius: 50%;
             }
-        }
+          }
     }
 
     .info{

@@ -7,6 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { Button } from '../../ui';
 import styles from './Instructions.module.scss';
 
 const Instructions = () => {
@@ -15,24 +16,24 @@ const Instructions = () => {
   if (!isInstructionsOpen) {
     return (
       <div className={styles.instructions}>
-        <button
+        <Button
           onClick={() => setisInstructionsOpen(true)}
-          className={styles.toggle}
+          extraClassName={styles.toggle}
         >
           show
-        </button>
+        </Button>
       </div>
     );
   }
 
   return (
     <div className={styles.instructions}>
-      <button
+      <Button
         onClick={() => setisInstructionsOpen(false)}
-        className={styles.toggle}
+        extraClassName={styles.toggle}
       >
         hide
-      </button>
+      </Button>
       <div className={styles.instruction}>
         <FontAwesomeIcon icon={faLeftLong} className={styles.icon} />
         <div className={styles.text}>no</div>

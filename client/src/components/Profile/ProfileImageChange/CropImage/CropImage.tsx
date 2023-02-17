@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 import { IUser } from '../../../../models/IUser';
 import { saveUserImage } from '../../../../redux/usersSlice';
-import { RangeInput } from '../../../ui/';
+import { Button, RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
 import { useAppDispatch } from '../../../../redux/reduxStore';
@@ -81,18 +81,8 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({
             </div>
           </div>
           <div className={styles.btns}>
-            <button
-              onClick={() => setIsImageCropOpen(false)}
-              className={styles.btn}
-            >
-              Cancel
-            </button>
-            <button
-              onClick={() => cropImage(currentUser._id, currentImageCrop)}
-              className={`${styles.btn} ${styles.btn_select}`}
-            >
-              Select
-            </button>
+            <Button onClick={() => setIsImageCropOpen(false)} extraClassName={styles.btn}>Cancel</Button>
+            <Button onClick={() => cropImage(currentUser._id, currentImageCrop)} extraClassName={[styles.btn, styles.select]}>Select</Button>
           </div>
         </div>
       </div>

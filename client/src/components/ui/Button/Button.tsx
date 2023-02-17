@@ -8,11 +8,18 @@ type VariantType =
   | 'setting'
   | 'auth'
   | 'closePopup'
-  | 'mark';
+  | 'mark'
+  | 'tinder';
+
+type SizeType = 'small' | 'large';
+
+type ColorType = 'gold' | 'red' | 'blue' | 'green' | 'purple';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: VariantType;
   extraClassName?: string | string[];
+  size?: SizeType;
+  color?: ColorType;
 }
 
 export const Button: FC<PropsWithChildren<ButtonProps>> = ({

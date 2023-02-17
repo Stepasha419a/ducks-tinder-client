@@ -129,14 +129,12 @@ const PairPopup: React.FC<PairPopupProps> = ({
             </div>
             <div className={styles.btns}>
               <Button
-                variant="default"
                 onClick={() => refuseHandler(currentPair._id)}
                 extraClassName={`${styles.btn} ${styles.border}`}
               >
                 Refuse
               </Button>
               <Button
-                variant="default"
                 onClick={() => acceptHandler(currentPair._id)}
                 extraClassName={styles.btn}
               >

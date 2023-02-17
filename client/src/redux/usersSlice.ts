@@ -4,6 +4,7 @@ import { usersAPI } from '../api/usersApi';
 import { imageInterface } from '../components/Profile/ProfileImageChange/ChangeImage/ChangeImage';
 import { IUser, makeUserImagesObject } from '../models/IUser';
 import { AxiosError } from 'axios';
+import { RootState } from './reduxStore';
 
 const usersSlice = createSlice({
   name: 'users',
@@ -61,6 +62,7 @@ const usersSlice = createSlice({
       })
       .addCase(likeUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+        state.currentTinderUsersIndex++;
       })
       .addCase(saveUserImage.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
@@ -73,6 +75,20 @@ const usersSlice = createSlice({
           state.currentUser = payload;
         }
       })
+      .addCase(returnUserThunk.fulfilled, (state, { payload }) => {
+        if (payload) {
+          state.currentUser = payload;
+          state.currentTinderUsersIndex--;
+          state.isReturnUser = false;
+        }
+      })
+      .addCase(dislikeUserThunk.fulfilled, (state, { payload }) => {
+        if (payload) {
+          state.currentUser = payload;
+          state.currentTinderUsersIndex++;
+          state.isReturnUser = true;
+        }
+      });
   },
 });
 
@@ -172,42 +188,6 @@ export const getUserPairsThunk = createAsyncThunk(
   }
 );
 
-export const likeUserThunk = createAsyncThunk(
-  'users/likeUser',
-  async (
-    args: { currentUser: IUser; tinderUser: IUser },
-    { rejectWithValue }
-  ) => {
-    try {
-      const data = makeDataObject({
-        currentUser: args.currentUser,
-        inputName: 'checkedUsers',
-        changedData: [...args.currentUser.checkedUsers, args.tinderUser._id],
-      });
-
-      const updateUserResponse = await usersAPI.updateUser(
-        args.currentUser._id,
-        data
-      );
-
-      const createPairResponse = await usersAPI.createPair(
-        args.tinderUser._id,
-        args.currentUser._id
-      );
-
-      return {
-        ...updateUserResponse.data,
-        checkedUsers: [...createPairResponse.data.checkedUsers],
-      };
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
-      }
-      return rejectWithValue(['unexpected error', error]);
-    }
-  }
-);
-
 export const deletePairThunk = createAsyncThunk(
   'users/deletePair',
   async (
@@ -294,6 +274,107 @@ export const mixUserImages = createAsyncThunk(
         userImages
       );
 
+      return response.data;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
+    }
+  }
+);
+
+export const likeUserThunk = createAsyncThunk(
+  'users/likeUser',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const { usersPage } = getState() as RootState;
+      const { currentUser, tinderUsers, currentTinderUsersIndex } = usersPage;
+      const tinderUser = tinderUsers[currentTinderUsersIndex];
+
+      const data = makeDataObject({
+        currentUser: currentUser,
+        inputName: 'checkedUsers',
+        changedData: [...currentUser.checkedUsers, tinderUser._id],
+      });
+
+      const updateUserResponse = await usersAPI.updateUser(
+        currentUser._id,
+        data
+      );
+
+      const createPairResponse = await usersAPI.createPair(
+        tinderUser._id,
+        currentUser._id
+      );
+
+      return {
+        ...updateUserResponse.data,
+        checkedUsers: [...createPairResponse.data.checkedUsers],
+      };
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
+    }
+  }
+);
+
+export const returnUserThunk = createAsyncThunk(
+  'users/returnUser',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const { usersPage } = getState() as RootState;
+      const {
+        currentUser,
+        currentTinderUsersIndex,
+        tinderUsers,
+        isReturnUser,
+      } = usersPage;
+      if (currentTinderUsersIndex && isReturnUser) {
+        const newCheckedUsers = [...currentUser.checkedUsers];
+        const index = currentUser.checkedUsers.findIndex(
+          (item) => item === tinderUsers[currentTinderUsersIndex - 1]._id
+        );
+
+        newCheckedUsers.splice(index, 1);
+
+        const data = makeDataObject({
+          currentUser,
+          inputName: 'checkedUsers',
+          changedData: newCheckedUsers,
+        });
+
+        const response = await usersAPI.updateUser(currentUser._id, data);
+
+        return response.data;
+      }
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
+    }
+  }
+);
+
+export const dislikeUserThunk = createAsyncThunk(
+  'users/dislikeUser',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const { usersPage } = getState() as RootState;
+      const { currentUser, currentTinderUsersIndex, tinderUsers } = usersPage;
+      const data = makeDataObject({
+        currentUser,
+        inputName: 'checkedUsers',
+        changedData: [
+          ...currentUser.checkedUsers,
+          tinderUsers[currentTinderUsersIndex]._id,
+        ],
+      });
+
+      const response = await usersAPI.updateUser(currentUser._id, data);
       return response.data;
     } catch (error) {
       if (error instanceof AxiosError) {

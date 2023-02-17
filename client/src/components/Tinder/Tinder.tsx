@@ -12,6 +12,7 @@ import TinderUserFailed from './UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
 import Instructions from './Instructions/Instructions';
 import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
+import { Button } from '../ui';
 
 export const Tinder: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -60,9 +61,9 @@ export const Tinder: React.FC = () => {
     return (
       <div className={styles.content}>
         <div className={styles.wrapper}>
-          <button onClick={() => resetHandler()} className={styles.reset}>
+          <Button onClick={() => resetHandler()} extraClassName={styles.reset}>
             reset
-          </button>
+          </Button>
           <TinderUserFailed />
         </div>
       </div>
@@ -73,9 +74,9 @@ export const Tinder: React.FC = () => {
     return (
       <div className={styles.content}>
         <div className={styles.wrapper}>
-          <button onClick={() => resetHandler()} className={styles.reset}>
+          <Button onClick={() => resetHandler()} extraClassName={styles.reset}>
             reset
-          </button>
+          </Button>
           <TinderUserLoading />
         </div>
       </div>
@@ -85,9 +86,9 @@ export const Tinder: React.FC = () => {
   return (
     <div className={styles.content}>
       <div className={styles.wrapper}>
-        <button onClick={() => resetHandler()} className={styles.reset}>
+        <Button onClick={() => resetHandler()} extraClassName={styles.reset}>
           reset
-        </button>
+        </Button>
         <div className={styles.users}>
           {isFullPreview ? (
             <>

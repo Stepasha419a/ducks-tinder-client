@@ -1,179 +1,171 @@
-.buttons{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 102px;
+.buttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 102px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+
+  &.minimized {
+    // for full user content
+    height: 90px;
+    background-color: var(--color--white-100);
+    justify-content: center;
+    box-shadow: 0px -15px 14px -10px var(--color--white-100);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
+  .small {
+    width: 60px;
+    height: 60px;
+  }
+
+  .large {
+    width: 70px;
+    height: 70px;
+  }
+
+  .minimized {
+    background: var(--color--white-100);
+    margin: 5px;
+    border-color: var(--color--white-100);
+    box-shadow: 0 0 8px 0 var(--color--black-90);
+    transition: 0.2s;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .blocked {
+    border-color: var(--border-main);
+    cursor: default;
+  }
+
+  .active {
+    &.gold .wrapper {
+      background-color: var(--color--yellow-100);
+    }
+
+    &.red .wrapper {
+      background-color: var(--color--red-70);
+    }
+
+    &.blue .wrapper {
+      background-color: var(--color--blue-90);
+    }
+
+    &.green .wrapper {
+      background-color: var(--color--green-80);
+    }
+
+    &.purple .wrapper {
+      background-color: var(--color--purple-80);
+    }
+  }
+
+  .gold {
+    border-color: var(--color--orange-100);
+
+    .icon {
+      color: var(--color--yellow-100);
+    }
+  }
+
+  .red {
+    border-color: var(--color--red-100);
+
+    .icon {
+      color: var(--color--red-70);
+    }
+  }
+
+  .blue {
+    border-color: var(--color--blue-100);
+
+    .icon {
+      color: var(--color--blue-90);
+    }
+  }
+
+  .green {
+    border-color: var(--color--green-100);
+
+    .icon {
+      color: var(--color--green-80);
+    }
+  }
+
+  .purple {
+    border-color: var(--color--purple-100);
+
+    .icon {
+      color: var(--color--purple-80);
+    }
+  }
+
+  .wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 0 10px;
+    width: 50px;
+    height: 50px;
+    padding: 5px;
+    border-radius: 50%;
+    transition: 0.2s;
 
-    &_minimized{ // for full user content
-        height: 90px;
-        background-color: var(--color--white-100);
-        justify-content: center;
-        box-shadow: 0px -15px 14px -10px var(--color--white-100);
-        border-bottom-left-radius: 8px;
-        border-bottom-right-radius: 8px;
+    &.large {
+      width: 60px;
+      height: 60px;
+      
+      .red {
+        width: 28px;
+      }
     }
 
-    .btn{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: transparent;
-        color: var(--color--white-100);
-        border: 1px solid var(--color--white-100);
-        border-radius: 50%;
-        cursor: pointer;
-
-        &_small{
-            width: 60px;
-            height: 60px;
-        }
-
-        &_large{
-            width: 70px;
-            height: 70px;
-        }
-
-        &_minimized{
-            background: var(--color--white-100);
-            margin: 5px;
-            border-color: var(--color--white-100);
-            box-shadow: 0 0 8px 0 var(--color--black-90);
-            transition: .2s;
-
-            &:hover{
-                transform: scale(1.05);
-            }
-        }
-
-        &_blocked{
-            border-color: var(--border-main);
-            cursor: default;
-        }
-
-
-        &_active{
-            &_gold .wrapper{
-                background-color: var(--color--yellow-100);
-            }
-
-            &_red .wrapper{
-                background-color: var(--color--red-70);
-            }
-
-            &_blue .wrapper{
-                background-color: var(--color--blue-90);
-            }
-
-            &_green .wrapper{
-                background-color: var(--color--green-80);
-            }
-
-            &_purple .wrapper{
-                background-color: var(--color--purple-80);
-            }
-        }
-
-
-        &_gold{
-            border-color: var(--color--orange-100);
-
-            .icon{
-                color: var(--color--yellow-100);
-            }
-        }
-          
-        &_red{
-            border-color: var(--color--red-100);
-
-            .icon{
-                color: var(--color--red-70);
-            }
-        }
-          
-        &_blue{
-            border-color: var(--color--blue-100);
-
-            .icon{
-                color: var(--color--blue-90);
-            }
-        }
-          
-        &_green{
-            border-color: var(--color--green-100);
-
-            .icon{
-                color: var(--color--green-80)
-            }
-        }
-          
-        &_purple{
-            border-color: var(--color--purple-100);
-
-            .icon{
-                color: var(--color--purple-80);
-            }
-        }
-
-        .wrapper{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 50px;
-            height: 50px;
-            padding: 5px;
-            border-radius: 50%;
-            transition: .2s;
-
-            &_large{
-                width: 60px;
-                height: 60px;
-            }
-
-            &:hover .icon{
-                transform: scale(1.1);
-            }
-
-            &:hover .icon_blocked{
-                transform: scale(1);
-            }
-
-            .icon{
-                transition: .2s;
-                font-size: 28px;
-
-                &_large{
-                    font-size: 38px;
-                }
-
-                &_blocked{
-                    color: var(--border-main);
-                }
-
-                &_gold{
-                    color: var(--color--yellow-100);
-                }
-
-                &_red{
-                    color: var(--color--red-70);
-                }
-
-                &_blue{
-                    color: var(--color--blue-90);
-                }
-
-                &_green{
-                    color: var(--color--green-80)
-                }
-
-                &_purple{
-                    color: var(--color--purple-80);
-                }
-            }
-        }
+    &:hover .icon {
+      transform: scale(1.1);
     }
+
+    &:hover .blocked {
+      transform: scale(1);
+    }
+
+    .icon {
+      transition: 0.2s;
+      font-size: 28px;
+
+      &.large {
+        font-size: 38px;
+      }
+
+      &.blocked {
+        color: var(--border-main);
+      }
+
+      &.gold {
+        color: var(--color--yellow-100);
+      }
+
+      &.red {
+        color: var(--color--red-70);
+      }
+
+      &.blue {
+        color: var(--color--blue-90);
+      }
+
+      &.green {
+        color: var(--color--green-80);
+      }
+
+      &.purple {
+        color: var(--color--purple-80);
+      }
+    }
+  }
 }

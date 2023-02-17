@@ -1,69 +1,67 @@
-.popup{
-    position: fixed;
-    z-index: 150;
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    transition: all .5s ease 0s;
+.popup {
+  position: fixed;
+  z-index: 150;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease 0s;
 
-    .body{
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 30px 10px;
+  .body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
 
-        .content{
-            position: relative;
-            background-color: var(--color--white-100);
-            width: 440px;
-            height: 625px;
-            padding: 24px;
-            transition: all .5s ease 0s;
-            border-radius: 8px;
+    .content {
+      position: relative;
+      background-color: var(--color--white-100);
+      width: 440px;
+      height: 625px;
+      padding: 24px;
+      transition: all 0.5s ease 0s;
+      border-radius: 8px;
 
-            .title{
-                font-size: 24px;
-                font-weight: 700;
-                color: var(--color--black-100);
-                margin-bottom: 16px;
-                text-align: center;
-            }
+      .title {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--color--black-100);
+        margin-bottom: 16px;
+        text-align: center;
+      }
 
-            .image{
-                width: 392px;
-                height: 430px;
-                position: relative;
-            }
+      .image {
+        width: 392px;
+        height: 430px;
+        position: relative;
+      }
 
-            .wrapper{
-                margin-top: 15px;
+      .wrapper {
+        margin-top: 15px;
 
-                .input{
-                    padding: 10px 40px;
-                }
-            }
-
-            .btns{
-                display: flex;
-                justify-content: space-between;
-                padding: 15px 20px;
-                
-                .btn{
-                    border: none;
-                    font-size: 18px;
-                    font-weight: 300;
-                    color: var(--color--black-100);
-                    cursor: pointer;
-
-                    &_select{
-                        font-weight: 400;
-                        color: var(--color--red-80);
-                    }
-                }
-            }
+        .input {
+          padding: 10px 40px;
         }
+      }
+
+      .btns {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 20px;
+
+        .btn {
+          font-weight: 300;
+          max-width: 100px;
+          color: var(--color--black-100);
+
+          &.select {
+            font-weight: 400;
+            color: var(--color--red-80);
+          }
+        }
+      }
     }
+  }
 }
