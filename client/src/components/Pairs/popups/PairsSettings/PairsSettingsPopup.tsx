@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CheckboxInput, RangeInput } from '../../../ui/';
+import { Button, CheckboxInput, RangeInput } from '../../../ui/';
 import { RangeInterface, RangeValue } from '../../../ui/inputs/Range';
 import { ISorts } from '../../utils/PairsUtils';
 import styles from './PairsSettingsPopup.module.scss';
@@ -169,18 +169,18 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
           />
           <div className={styles.separator}></div>
           <div className={styles.btns}>
-            <button
-              onClick={() => clearSorts()}
-              className={`${styles.btn} ${styles.leftBorder}`}
+            <Button
+              onClick={clearSorts}
+              extraClassName={`${styles.btn} ${styles.leftBorder}`}
             >
               Clear
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => setIsSortPopupOpen(false)}
-              className={`${styles.btn} ${styles.rightBorder}`}
+              extraClassName={`${styles.btn} ${styles.rightBorder}`}
             >
               Confirm
-            </button>
+            </Button>
           </div>
         </div>
         <div

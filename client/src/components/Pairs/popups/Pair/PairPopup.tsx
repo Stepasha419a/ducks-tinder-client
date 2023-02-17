@@ -6,6 +6,7 @@ import { createChatThunk } from '../../../../redux/chatSlice';
 import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
 import { deletePairThunk } from '../../../../redux/usersSlice';
 import ImageSlider from '../../../Slider/ImageSlider/ImageSlider';
+import { Button } from '../../../ui';
 import InterestsListPopup from '../Interests/List/InterestsListPopup';
 import styles from './PairPopup.module.scss';
 
@@ -25,9 +26,7 @@ const PairPopup: React.FC<PairPopupProps> = ({
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
 
-  const bottomElementRef = useRef<HTMLDivElement | null>(
-    null
-  )
+  const bottomElementRef = useRef<HTMLDivElement | null>(null);
 
   const interestsForLoop = [];
 
@@ -129,18 +128,20 @@ const PairPopup: React.FC<PairPopupProps> = ({
               Show all
             </div>
             <div className={styles.btns}>
-              <button
+              <Button
+                variant="default"
                 onClick={() => refuseHandler(currentPair._id)}
-                className={`${styles.btn} ${styles.border}`}
+                extraClassName={`${styles.btn} ${styles.border}`}
               >
                 Refuse
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="default"
                 onClick={() => acceptHandler(currentPair._id)}
-                className={styles.btn}
+                extraClassName={styles.btn}
               >
                 Accept
-              </button>
+              </Button>
             </div>
             <div ref={bottomElementRef} />
           </div>

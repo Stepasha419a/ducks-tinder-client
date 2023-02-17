@@ -24,14 +24,6 @@
       border-radius: 8px;
       z-index: 100;
 
-      &_overflow {
-        overflow: auto;
-
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }
-
       .title {
         font-weight: 600;
         font-size: 18px;
@@ -72,7 +64,13 @@
       .items {
         display: flex;
         flex-wrap: wrap;
+        max-height: calc(100% - 136px);
         padding: 0 10px;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
 
         .item {
           border: 2px solid var(--bg-secondary);
@@ -88,26 +86,6 @@
             border-color: var(--color--red-90);
             color: var(--color--red-90);
           }
-        }
-      }
-
-      .confirm {
-        display: block;
-        height: 60px;
-        width: 100%;
-        border: none;
-        background-color: var(--color--white-100);
-        font-size: 22px;
-        color: var(--main-secondary);
-        text-transform: uppercase;
-        margin-top: 10px;
-        cursor: pointer;
-        transition: 0.2s;
-        position: sticky;
-        bottom: 0;
-
-        &:hover {
-          color: var(--color--red-90);
         }
       }
     }

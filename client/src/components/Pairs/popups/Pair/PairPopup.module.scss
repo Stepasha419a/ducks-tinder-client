@@ -190,15 +190,11 @@
         border-top: 2px solid var(--color--black-90);
 
         .btn {
-          border: none;
-          background-color: var(--color--white-100);
-          width: 50%;
           height: 46px;
-          cursor: pointer;
           font-size: 22px;
-          color: var(--main-secondary);
           text-transform: uppercase;
           transition: 0.2s;
+          font-weight: 400;
 
           &.border {
             border-right: 2px solid var(--color--black-90);

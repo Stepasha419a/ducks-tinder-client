@@ -29,19 +29,10 @@
       }
 
       .btn {
-        width: 28px;
-        height: 28px;
-        border: none;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        position: absolute;
         bottom: 3px;
         right: -6px;
 
-        &_plus {
+        &.plus {
           background-color: var(--color--red-100);
 
           .mark {
@@ -51,7 +42,7 @@
           }
         }
 
-        &_xmark {
+        &.xmark {
           background-color: var(--color--white-100);
 
           .mark {

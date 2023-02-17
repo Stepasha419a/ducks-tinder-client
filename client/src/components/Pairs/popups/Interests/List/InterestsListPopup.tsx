@@ -1,3 +1,4 @@
+import { Button } from '../../../../ui';
 import styles from './InterestsListPopup.module.scss'
 
 interface InterestsListPopupProps {
@@ -12,7 +13,7 @@ const InterestsListPopup: React.FC<InterestsListPopupProps> = ({
   return (
     <div className={styles.popup}>
       <div className={styles.body}>
-        <div className={`${styles.content} ${styles.overflow}`}>
+        <div className={styles.content}>
           <div className={styles.title}>Interests</div>
           <div
             onClick={() => setIsInterestsListPopupOpen(false)}
@@ -30,12 +31,7 @@ const InterestsListPopup: React.FC<InterestsListPopupProps> = ({
               );
             })}
           </div>
-          <button
-            onClick={() => setIsInterestsListPopupOpen(false)}
-            className={styles.btn}
-          >
-            Close
-          </button>
+          <Button variant='closePopup' onClick={() => setIsInterestsListPopupOpen(false)}>Close</Button>
         </div>
         <div
           onClick={() => setIsInterestsListPopupOpen(false)}

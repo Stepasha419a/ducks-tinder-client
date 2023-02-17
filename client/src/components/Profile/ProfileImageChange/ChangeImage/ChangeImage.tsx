@@ -161,9 +161,12 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
                 className={styles.item}
               >
                 <div className={styles.image} />
-                <button className={`${styles.btn} ${styles.btn_plus}`}>
+                <Button
+                  variant="mark"
+                  extraClassName={[styles.btn, styles.plus]}
+                >
                   <FontAwesomeIcon className={styles.mark} icon={faPlus} />
-                </button>
+                </Button>
               </div>
             );
           }
@@ -185,7 +188,8 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
                 }}
                 className={`${styles.image} ${styles.image_has_image}`}
               />
-              <button
+              <Button
+                variant="mark"
                 onClick={() =>
                   deleteImageHandler(
                     imageObj.image,
@@ -193,10 +197,10 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
                     imageObj.setting as 'avatar' | 'gallery'
                   )
                 }
-                className={`${styles.btn} ${styles.btn_xmark}`}
+                extraClassName={[styles.btn, styles.xmark]}
               >
                 <FontAwesomeIcon className={styles.mark} icon={faXmark} />
-              </button>
+              </Button>
             </div>
           );
         })}
@@ -209,9 +213,9 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
               className={styles.item}
             >
               <div className={styles.image} />
-              <button className={`${styles.btn} ${styles.btn_plus}`}>
+              <Button variant="mark" extraClassName={[styles.btn, styles.plus]}>
                 <FontAwesomeIcon className={styles.mark} icon={faPlus} />
-              </button>
+              </Button>
             </div>
           );
         })}

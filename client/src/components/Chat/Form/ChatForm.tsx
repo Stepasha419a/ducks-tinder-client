@@ -2,7 +2,7 @@ import { FC, KeyboardEvent, MutableRefObject, useState } from 'react';
 import { Socket } from 'socket.io-client';
 import { IMessage } from '../../../models/IChat';
 import { IUser } from '../../../models/IUser';
-import { TextField } from '../../ui';
+import { Button, TextField } from '../../ui';
 import styles from './ChatForm.module.scss'
 
 interface ChatFormProps {
@@ -42,9 +42,7 @@ const ChatForm: FC<ChatFormProps> = ({currentUser, socket}) => {
           onChange={(e) => setValue(e.target.value)}
           extraClassName={styles.input}
         />
-        <button onClick={sendMessage} className={styles.button}>
-          send
-        </button>
+        <Button onClick={sendMessage} variant='default' extraClassName={styles.button}>send</Button>
       </div>
     </div>
   );

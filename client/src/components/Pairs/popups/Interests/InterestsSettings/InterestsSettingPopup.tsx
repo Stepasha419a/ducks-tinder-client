@@ -1,4 +1,5 @@
 import { interestsList } from '../../../../../models/IUser';
+import { Button } from '../../../../ui';
 import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
@@ -17,7 +18,7 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
   return (
     <div className={styles.popup}>
       <div className={styles.body}>
-        <div className={`${styles.content} ${styles.content_overflow}`}>
+        <div className={styles.content}>
           <div className={styles.title}>Interests</div>
           <div
             onClick={() => setIsInterestsSettingPopupOpen(false)}
@@ -42,12 +43,7 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
               );
             })}
           </div>
-          <button
-            onClick={() => setIsInterestsSettingPopupOpen(false)}
-            className={styles.confirm}
-          >
-            Confirm
-          </button>
+          <Button variant='closePopup' onClick={() => setIsInterestsSettingPopupOpen(false)}>Confirm</Button>
         </div>
         <div
           onClick={() => setIsInterestsSettingPopupOpen(false)}
