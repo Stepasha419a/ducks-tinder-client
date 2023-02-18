@@ -1,4 +1,4 @@
-import { logoutThunk } from '../../../../../redux/authSlice';
+import { logoutThunk } from '../../../../../redux/auth/auth.thunks';
 import { useAppDispatch } from '../../../../../redux/reduxStore';
 import styles from './LogoutButton.module.scss';
 

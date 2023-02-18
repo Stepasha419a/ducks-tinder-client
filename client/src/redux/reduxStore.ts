@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { combineReducers } from 'redux';
-import authReducer from './authSlice';
+import authReducer from './auth/auth.slice';
 import chatReducer from './chatSlice';
 import notificationsReducer from './notificationsSlice';
 import usersReducer from './users/users.slice';
