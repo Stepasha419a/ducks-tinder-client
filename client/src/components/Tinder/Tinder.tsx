@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
-  getSortedUserThunk,
   setRequestedUsers,
-  updateUserThunk,
-} from '../../redux/usersSlice';
+} from '../../redux/users/users.slice';
 import Buttons from './Buttons/Buttons';
 import FullPreview from './UserPreview/FullPreview/FullPreview';
 import Preview from './UserPreview/Preview/Preview';
@@ -13,6 +11,7 @@ import styles from './Tinder.module.scss';
 import Instructions from './Instructions/Instructions';
 import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
 import { Button } from '../ui';
+import { getSortedUserThunk, updateUserThunk } from '../../redux/users/users.thunks';
 
 export const Tinder: React.FC = () => {
   const dispatch = useAppDispatch();

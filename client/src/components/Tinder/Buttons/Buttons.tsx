@@ -8,7 +8,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FocusEvent, MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
-import { dislikeUserThunk, likeUserThunk, returnUserThunk } from '../../../redux/usersSlice';
+import { dislikeUserThunk, likeUserThunk, returnUserThunk } from '../../../redux/users/users.thunks';
 import { Button } from '../../ui';
 import styles from './Buttons.module.scss';
 
@@ -23,8 +23,6 @@ const Buttons: React.FC<ButtonsProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const tinderUsers = useAppSelector((state) => state.usersPage.tinderUsers);
   const isReturnUser = useAppSelector((state) => state.usersPage.isReturnUser);
 
   const btnFocus = (e: FocusEvent<HTMLButtonElement, any>) => {

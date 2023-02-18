@@ -5,7 +5,7 @@ import { io } from 'socket.io-client';
 import { chatApi } from '../api/chatApi';
 import { IChat, IMessage } from '../models/IChat';
 import { RootState } from './reduxStore';
-import { fetchUserById } from './usersSlice';
+import { fetchUserById } from './users/users.thunks';
 
 const chatSlice = createSlice({
   name: 'chatPage',

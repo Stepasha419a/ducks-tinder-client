@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { IUser } from '../../../../models/IUser';
 import { useAppDispatch } from '../../../../redux/reduxStore';
-import { deleteUserImage, mixUserImages } from '../../../../redux/usersSlice';
+import { deleteUserImage, mixUserImages } from '../../../../redux/users/users.thunks';
 import { Button } from '../../../ui';
 import ProfileCropImage from '../CropImage/CropImage';
 import ProfileDialogUpload from '../CropImage/DialogUpload/DialogUpload';

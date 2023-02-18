@@ -6,13 +6,13 @@ import {
   faFireFlameCurved,
 } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import { updateUserThunk } from '../../redux/usersSlice';
 import UserImage from './UserImage/UserImage';
 import SettingsList from './Settings/SettingsList';
 import Setting from './Settings/Setting/Setting';
 import ImageSetting from './ProfileImageChange/ImageSetting/ImageSetting';
 import styles from './Profile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
+import { updateUserThunk } from '../../redux/users/users.thunks';
 
 export const Profile = () => {
   const dispatch = useAppDispatch();

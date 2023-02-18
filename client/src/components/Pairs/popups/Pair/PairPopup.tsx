@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { IUser } from '../../../../models/IUser';
 import { createChatThunk } from '../../../../redux/chatSlice';
 import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
-import { deletePairThunk } from '../../../../redux/usersSlice';
+import { deletePairThunk } from '../../../../redux/users/users.thunks';
 import ImageSlider from '../../../Slider/ImageSlider/ImageSlider';
 import { Button } from '../../../ui';
 import InterestsListPopup from '../Interests/List/InterestsListPopup';

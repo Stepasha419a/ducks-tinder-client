@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import authReducer from './authSlice';
 import chatReducer from './chatSlice';
 import notificationsReducer from './notificationsSlice';
-import usersReducer from './usersSlice';
+import usersReducer from './users/users.slice';
 
 let rootReducer = combineReducers({
   usersPage: usersReducer,

@@ -5,7 +5,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
 import { IUser } from '../../models/IUser';
-import { getUserPairsThunk } from '../../redux/usersSlice';
 import Pair from './Pair/Pair';
 import PairPopup from './popups/Pair/PairPopup';
 import PairsSettingsPopup from './popups/PairsSettings/PairsSettingsPopup';
@@ -14,6 +13,7 @@ import { ISorts, sortItemBySettings } from './utils/PairsUtils';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
 import styles from './Pairs.module.scss';
+import { getUserPairsThunk } from '../../redux/users/users.thunks';
 
 export const Pairs: React.FC = () => {
   const dispatch = useAppDispatch();

@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
-import { getUserPairsThunk } from '../../../redux/usersSlice';
 import FailedPair from './Failed/FailedPair';
 import PairBlock from './PairBlock/PairBlock';
 import Loading from './Loading/Loading';
+import { getUserPairsThunk } from '../../../redux/users/users.thunks';
 
 const Pair = () => {
   const dispatch = useAppDispatch();

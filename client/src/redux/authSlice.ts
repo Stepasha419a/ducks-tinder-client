@@ -3,7 +3,7 @@ import axios, { AxiosError } from 'axios';
 import { API_URL } from '../api/api';
 import { authAPI, UserAuthParams } from '../api/authApi';
 import { AuthResponse } from '../models/response/AuthResponse';
-import { setCurrentUser } from './usersSlice';
+import { setCurrentUser } from './users/users.slice';
 
 const authSlice = createSlice({
   name: 'auth',
