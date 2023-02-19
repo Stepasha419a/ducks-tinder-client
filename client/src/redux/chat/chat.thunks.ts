@@ -1,65 +1,12 @@
-import { IUser } from '../models/IUser';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { IUser } from '../../models/IUser';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Dispatch } from 'react';
 import { io } from 'socket.io-client';
-import { chatApi } from '../api/chatApi';
-import { IChat, IMessage } from '../models/IChat';
-import { RootState } from './reduxStore';
-import { fetchUserById } from './users/users.thunks';
-
-const chatSlice = createSlice({
-  name: 'chatPage',
-  initialState: {
-    chats: [] as IChat[],
-    chatsUsers: [] as IUser[],
-    isConnected: false,
-    currentMessages: [] as IMessage[],
-    currentChatId: '',
-    currentChatMembers: [] as IUser[],
-  },
-  reducers: {
-    setChats: (state, action) => {
-      state.chats = action.payload;
-    },
-    pushMessage: (state, action) => {
-      state.chats[action.payload.chatIndex].messages = [
-        ...state.chats[action.payload.chatIndex].messages,
-        action.payload.message,
-      ];
-    },
-    setIsConnected: (state, action) => {
-      state.isConnected = action.payload;
-    },
-    setCurrentMessages: (state, action) => {
-      if (action.payload.length === 0) {
-        state.currentMessages = [];
-      } else if (Array.isArray(action.payload)) {
-        state.currentMessages = [...state.currentMessages, ...action.payload];
-      } else {
-        state.currentMessages = [...state.currentMessages, action.payload];
-      }
-    },
-    setCurrentChatId: (state, action) => {
-      state.currentChatId = action.payload;
-    },
-    setCurrentChatMembers: (state, action) => {
-      let chat = action.payload;
-      let members = state.chatsUsers.filter(
-        (user) => user._id === chat?.members[0] || user._id === chat?.members[1]
-      );
-
-      state.currentChatMembers = members;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(getChatsThunk.fulfilled, (state, { payload }) => {
-      if (payload) {
-        state.chats = [...payload.chats];
-        state.chatsUsers = [...payload.allMembers];
-      }
-    });
-  },
-});
+import { chatApi } from '../../api/chatApi';
+import { IChat, IMessage } from '../../models/IChat';
+import { RootState } from '../reduxStore';
+import { fetchUserById } from '../users/users.thunks';
+import { ChatSliceInitialStateType, pushMessage, setCurrentChatId, setCurrentChatMembers, setCurrentMessages, setIsConnected } from './chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
@@ -168,9 +115,6 @@ export const disconnectChatThunk = createAsyncThunk(
   }
 );
 
-const initialState = chatSlice.getInitialState();
-type ChatSliceInitialStateType = typeof initialState;
-
 function sendMessage(
   message: IMessage,
   dispatch: Dispatch<any>,
@@ -182,14 +126,3 @@ function sendMessage(
   );
   dispatch(pushMessage({ chatIndex, message: message }));
 }
-
-export const {
-  setChats,
-  pushMessage,
-  setIsConnected,
-  setCurrentMessages,
-  setCurrentChatId,
-  setCurrentChatMembers,
-} = chatSlice.actions;
-
-export default chatSlice.reducer;

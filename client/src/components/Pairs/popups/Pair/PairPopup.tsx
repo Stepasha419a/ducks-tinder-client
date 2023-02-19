@@ -2,7 +2,7 @@ import { faChevronDown, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
 import { IUser } from '../../../../models/IUser';
-import { createChatThunk } from '../../../../redux/chatSlice';
+import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
 import ImageSlider from '../../../Slider/ImageSlider/ImageSlider';

@@ -1,14 +1,11 @@
 import { MutableRefObject, useEffect, useState } from 'react';
 import { IChat } from '../../../../models/IChat';
 import { IUser } from '../../../../models/IUser';
-import {
-  connectChatThunk,
-  disconnectChatThunk,
-} from '../../../../redux/chatSlice';
 import { Socket } from 'socket.io-client';
 import styles from './ChatItem.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
 import { Avatar } from '../../../ui';
+import { connectChatThunk, disconnectChatThunk } from '../../../../redux/chat/chat.thunks';
 
 interface ChatInterface {
   chat: IChat;

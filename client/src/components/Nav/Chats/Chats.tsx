@@ -1,11 +1,11 @@
 import { MutableRefObject, useEffect } from 'react';
 import { IChat } from '../../../models/IChat';
-import { getChatsThunk } from '../../../redux/chatSlice';
 import ChatItem from './ChatItem/ChatItem';
 import { Socket } from 'socket.io-client';
 import styles from './Chats.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
 import FailedChats from './Failed/FailedChats';
+import { getChatsThunk } from '../../../redux/chat/chat.thunks';
 
 interface ChatsInterface {
   socket: MutableRefObject<Socket | undefined>;
