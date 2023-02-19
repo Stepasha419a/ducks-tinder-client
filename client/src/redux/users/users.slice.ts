@@ -1,18 +1,42 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../../models/IUser';
-import { deletePairThunk, deleteUserImage, dislikeUserThunk, getSortedUserThunk, getUserPairsThunk, likeUserThunk, mixUserImages, returnUserThunk, saveUserImage, updateUserThunk } from './users.thunks';
+import {
+  deletePairThunk,
+  deleteUserImage,
+  dislikeUserThunk,
+  getSortedUserThunk,
+  getUserPairsThunk,
+  likeUserThunk,
+  mixUserImages,
+  returnUserThunk,
+  saveUserImage,
+  updateUserThunk,
+} from './users.thunks';
+
+interface InitialState {
+  currentUser: IUser;
+  pairs: IUser[];
+  tinderUsers: IUser[];
+  isReturnUser: boolean;
+  requestedUsers: string[];
+  currentTinderUsersIndex: number;
+  isFailed: boolean;
+}
+
+const initialState: InitialState = {
+  // auth always set currentUser object after registration/login/refresh
+  currentUser: {} as IUser,
+  pairs: [],
+  tinderUsers: [],
+  isReturnUser: false,
+  requestedUsers: [],
+  currentTinderUsersIndex: 0,
+  isFailed: false,
+};
 
 const usersSlice = createSlice({
   name: 'users',
-  initialState: {
-    currentUser: {} as IUser,
-    pairs: [] as IUser[],
-    tinderUsers: [] as IUser[],
-    isReturnUser: false,
-    requestedUsers: [] as string[],
-    currentTinderUsersIndex: 0,
-    isFailed: false,
-  },
+  initialState,
   reducers: {
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload;

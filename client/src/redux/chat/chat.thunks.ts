@@ -6,7 +6,7 @@ import { chatApi } from '../../api/chatApi';
 import { IChat, IMessage } from '../../models/IChat';
 import { RootState } from '../store';
 import { fetchUserById } from '../users/users.thunks';
-import { ChatSliceInitialStateType, pushMessage, setCurrentChatId, setCurrentChatMembers, setCurrentMessages, setIsConnected } from './chat.slice';
+import { InitialState, pushMessage, setCurrentChatId, setCurrentChatMembers, setCurrentMessages, setIsConnected } from './chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
@@ -118,7 +118,7 @@ export const disconnectChatThunk = createAsyncThunk(
 function sendMessage(
   message: IMessage,
   dispatch: Dispatch<any>,
-  chatPage: ChatSliceInitialStateType
+  chatPage: InitialState
 ) {
   dispatch(setCurrentMessages(message));
   const chatIndex = chatPage.chats.findIndex(

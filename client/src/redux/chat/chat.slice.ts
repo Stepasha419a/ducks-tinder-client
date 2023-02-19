@@ -3,16 +3,27 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IChat, IMessage } from '../../models/IChat';
 import { getChatsThunk } from './chat.thunks';
 
+export interface InitialState {
+  chats: IChat[];
+  chatsUsers: IUser[];
+  isConnected: boolean;
+  currentMessages: IMessage[];
+  currentChatId: string;
+  currentChatMembers: IUser[];
+}
+
+const initialState: InitialState = {
+  chats: [],
+  chatsUsers: [],
+  isConnected: false,
+  currentMessages: [],
+  currentChatId: '',
+  currentChatMembers: [],
+};
+
 const chatSlice = createSlice({
   name: 'chatPage',
-  initialState: {
-    chats: [] as IChat[],
-    chatsUsers: [] as IUser[],
-    isConnected: false,
-    currentMessages: [] as IMessage[],
-    currentChatId: '',
-    currentChatMembers: [] as IUser[],
-  },
+  initialState,
   reducers: {
     setChats: (state, action) => {
       state.chats = action.payload;
@@ -56,9 +67,6 @@ const chatSlice = createSlice({
     });
   },
 });
-
-const initialState = chatSlice.getInitialState();
-export type ChatSliceInitialStateType = typeof initialState;
 
 export const {
   setChats,

@@ -6,13 +6,21 @@ import {
   registerThunk,
 } from './auth.thunks';
 
+interface InitialState {
+  isAuth: boolean | null;
+  isLoading: boolean;
+  formError: string;
+}
+
+const initialState: InitialState = {
+  isAuth: null,
+  isLoading: false,
+  formError: '',
+};
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    isAuth: null as boolean | null,
-    isLoading: false as boolean,
-    formError: '' as string,
-  },
+  initialState,
   reducers: {
     setFormError(state, action) {
       state.formError = action.payload;
