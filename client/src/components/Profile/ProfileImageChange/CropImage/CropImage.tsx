@@ -4,7 +4,7 @@ import { IUser } from '../../../../models/IUser';
 import { Button, RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
-import { useAppDispatch } from '../../../../redux/reduxStore';
+import { useAppDispatch } from '../../../../redux/store';
 import { RangeValue } from '../../../ui/inputs/Range';
 import { saveUserImage } from '../../../../redux/users/users.thunks';
 

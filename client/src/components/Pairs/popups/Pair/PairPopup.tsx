@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
 import { IUser } from '../../../../models/IUser';
 import { createChatThunk } from '../../../../redux/chat/chat.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
 import ImageSlider from '../../../Slider/ImageSlider/ImageSlider';
 import { Button } from '../../../ui';

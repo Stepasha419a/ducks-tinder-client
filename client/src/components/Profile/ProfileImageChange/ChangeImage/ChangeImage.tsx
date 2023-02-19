@@ -2,7 +2,7 @@ import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { IUser } from '../../../../models/IUser';
-import { useAppDispatch } from '../../../../redux/reduxStore';
+import { useAppDispatch } from '../../../../redux/store';
 import { deleteUserImage, mixUserImages } from '../../../../redux/users/users.thunks';
 import { Button } from '../../../ui';
 import ProfileCropImage from '../CropImage/CropImage';

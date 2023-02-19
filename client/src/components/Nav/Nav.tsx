@@ -9,7 +9,7 @@ import { MutableRefObject } from 'react';
 import { Socket } from 'socket.io-client';
 import styles from './Nav.module.scss';
 import NavPair from './PairsInfo/NavPair';
-import { useAppSelector } from '../../redux/reduxStore';
+import { useAppSelector } from '../../redux/store';
 import { Avatar } from '../ui';
 
 interface NavPropsInterface {

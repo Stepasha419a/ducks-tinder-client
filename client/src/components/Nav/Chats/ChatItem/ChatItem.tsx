@@ -3,7 +3,7 @@ import { IChat } from '../../../../models/IChat';
 import { IUser } from '../../../../models/IUser';
 import { Socket } from 'socket.io-client';
 import styles from './ChatItem.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import { Avatar } from '../../../ui';
 import { connectChatThunk, disconnectChatThunk } from '../../../../redux/chat/chat.thunks';
 

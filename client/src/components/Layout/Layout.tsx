@@ -5,7 +5,7 @@ import { Socket } from 'socket.io-client';
 import styles from './Layout.module.scss';
 import { potentialFields } from '../../models/IUser';
 import { checkField } from '../../components/Profile/utils/ProfileUtils';
-import { useAppSelector } from '../../redux/reduxStore';
+import { useAppSelector } from '../../redux/store';
 
 interface LayoutPropsInterface {
   isPairsOpened: boolean;

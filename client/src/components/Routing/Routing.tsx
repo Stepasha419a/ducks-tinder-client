@@ -3,7 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { Socket } from 'socket.io-client';
 import { Chat, Profile, Tinder, LoginForm, RegistrationForm, Pairs, Policy, Layout } from '..';
 import { checkAuthThunk } from '../../redux/auth/auth.thunks';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 const Routing = () => {
   const dispatch = useAppDispatch();

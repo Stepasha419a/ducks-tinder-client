@@ -1,7 +1,7 @@
 import { MutableRefObject } from 'react';
 import { Socket } from 'socket.io-client';
 import styles from './Chat.module.scss';
-import { useAppSelector } from '../../redux/reduxStore';
+import { useAppSelector } from '../../redux/store';
 import Status from './Status/Status';
 import ChatForm from './Form/ChatForm';
 import Messages from './Messages/Messages';

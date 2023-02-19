@@ -4,7 +4,7 @@ import { Dispatch } from 'react';
 import { io } from 'socket.io-client';
 import { chatApi } from '../../api/chatApi';
 import { IChat, IMessage } from '../../models/IChat';
-import { RootState } from '../reduxStore';
+import { RootState } from '../store';
 import { fetchUserById } from '../users/users.thunks';
 import { ChatSliceInitialStateType, pushMessage, setCurrentChatId, setCurrentChatMembers, setCurrentMessages, setIsConnected } from './chat.slice';
 

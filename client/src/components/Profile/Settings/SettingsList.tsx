@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { potentialFields } from '../../../models/IUser';
-import { createNotification } from '../../../redux/notificationsSlice';
-import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
+import { createNotification } from '../../../redux/notifications/notifications.slice';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { checkField } from '../utils/ProfileUtils';
 import Account from './SettingGroups/Account/Account';
 import Find from './SettingGroups/Find/Find';

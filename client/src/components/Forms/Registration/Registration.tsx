@@ -8,7 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import styles from './Registration.module.scss';
 import { Button, TextField } from '../../ui';
 import { registerThunk } from '../../../redux/auth/auth.thunks';

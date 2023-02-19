@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FocusEvent, MouseEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { dislikeUserThunk, likeUserThunk, returnUserThunk } from '../../../redux/users/users.thunks';
 import { Button } from '../../ui';
 import styles from './Buttons.module.scss';

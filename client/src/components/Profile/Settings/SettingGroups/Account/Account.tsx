@@ -1,7 +1,7 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { useAppSelector } from '../../../../../redux/reduxStore';
+import { useAppSelector } from '../../../../../redux/store';
 import { RangeInput } from '../../../../ui';
 import { RangeValue } from '../../../../ui/inputs/Range';
 import styles from './Account.module.scss';

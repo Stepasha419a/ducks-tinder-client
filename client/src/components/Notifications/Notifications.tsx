@@ -1,5 +1,5 @@
-import { deleteNotification } from '../../redux/notificationsSlice';
-import { useAppDispatch, useAppSelector } from '../../redux/reduxStore';
+import { deleteNotification } from '../../redux/notifications/notifications.slice';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { Notification } from '../ui';
 import styles from './Notifications.module.scss';
 

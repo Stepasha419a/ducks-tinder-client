@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { usersAPI } from "../../api/usersApi";
 import { imageInterface } from "../../components/Profile/ProfileImageChange/ChangeImage/ChangeImage";
 import { IUser, makeDataObject, makeQuerySortsObj, makeUserImagesObject } from "../../models/IUser";
-import { RootState } from '../reduxStore';
+import { RootState } from '../store';
 
 export async function fetchUserById(id: string) {
   const response = await usersAPI.getCurrentUser(id);

@@ -1,5 +1,5 @@
 import { logoutThunk } from '../../../../../redux/auth/auth.thunks';
-import { useAppDispatch } from '../../../../../redux/reduxStore';
+import { useAppDispatch } from '../../../../../redux/store';
 import styles from './LogoutButton.module.scss';
 
 const LoggoutButton = () => {

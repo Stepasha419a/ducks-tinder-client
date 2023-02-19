@@ -3,14 +3,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { combineReducers } from 'redux';
 import authReducer from './auth/auth.slice';
 import chatReducer from './chat/chat.slice';
-import notificationsReducer from './notificationsSlice';
+import notificationsReducer from './notifications/notifications.slice';
 import usersReducer from './users/users.slice';
 
 let rootReducer = combineReducers({
   usersPage: usersReducer,
   authPage: authReducer,
   chatPage: chatReducer,
-  notifications: notificationsReducer
+  notifications: notificationsReducer,
 });
 
 const store = configureStore({

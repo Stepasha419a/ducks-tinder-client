@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import defaultPhoto from '../../../../assets/images/photos/1.jpg';
 import styles from './PairBlock.module.scss';
 import { IUser } from '../../../../models/IUser';
-import { useAppSelector } from '../../../../redux/reduxStore';
+import { useAppSelector } from '../../../../redux/store';
 
 interface IPairBlock {
   firstPair: IUser;

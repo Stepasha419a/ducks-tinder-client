@@ -3,7 +3,7 @@ import { IChat } from '../../../models/IChat';
 import ChatItem from './ChatItem/ChatItem';
 import { Socket } from 'socket.io-client';
 import styles from './Chats.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../redux/reduxStore';
+import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import FailedChats from './Failed/FailedChats';
 import { getChatsThunk } from '../../../redux/chat/chat.thunks';
 

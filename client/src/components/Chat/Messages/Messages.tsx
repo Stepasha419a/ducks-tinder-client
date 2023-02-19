@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef } from 'react';
 import { IMessage } from '../../../models/IChat';
 import { IUser } from '../../../models/IUser';
-import { useAppSelector } from '../../../redux/reduxStore';
+import { useAppSelector } from '../../../redux/store';
 import { Message } from '../../ui';
 import { isRefElementVisible, scrollToBottom } from '../utils/ChatUtils';
 import styles from './Messages.module.scss';
