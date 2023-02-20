@@ -13,28 +13,30 @@ import ImageSetting from './ProfileImageChange/ImageSetting/ImageSetting';
 import styles from './Profile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { updateUserThunk } from '../../redux/users/users.thunks';
+import { IUser, PartnerSettings } from '../../models/IUser';
+import { IUserInnerKey, setInnerObjectName } from '../../redux/settings/settings.slice';
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const isUserInfoSetting = useAppSelector(
+    (state) => state.settings.isUserInfoSetting
+  );
 
-  const [isUserInfoSetting, setIsUserInfoSetting] = useState(false);
   const [isImageSetting, setIsImageSetting] = useState(false);
   const [formName, setFormName] = useState(''); // name of the title in ProfileSetting
-  const [settingInputName, setSettingInputName] = useState('');
-  const [innerObjectName, setInnerObjectName] = useState('');
 
   // objectName for inner object in user object if it is
   const submitSettings = (
-    inputName: string,
+    inputName: keyof IUser | keyof PartnerSettings,
     changedData:
       | string
       | number
       | boolean
       | string[]
       | { from: number; to: number },
-    innerObjectName?: string
+    innerObjectName?: IUserInnerKey
   ) => {
     dispatch(
       updateUserThunk({
@@ -44,8 +46,7 @@ export const Profile = () => {
         innerObjectName,
       })
     );
-    setIsUserInfoSetting(false);
-    setInnerObjectName('');
+    dispatch(setInnerObjectName(null));
   };
 
   return (
@@ -69,20 +70,13 @@ export const Profile = () => {
         {isUserInfoSetting ? (
           <Setting
             currentUser={currentUser}
-            setIsUserInfoSetting={setIsUserInfoSetting}
             submitSettings={submitSettings}
             formName={formName}
-            settingInputName={settingInputName}
-            innerObjectName={innerObjectName}
-            setInnerObjectName={setInnerObjectName}
           />
         ) : (
           <SettingsList
-            setIsUserInfoSetting={setIsUserInfoSetting}
             submitSettings={submitSettings}
             setFormName={setFormName}
-            setSettingInputName={setSettingInputName}
-            setInnerObjectName={setInnerObjectName}
           />
         )}
       </aside>

@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import { IUser } from '../../../../../../models/IUser';
+import { IUser, PartnerSettings } from '../../../../../../models/IUser';
+import { IUserInnerKey } from '../../../../../../redux/settings/settings.slice';
 import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
 import { Button, TextField } from '../../../../../ui';
+import { interestsList } from './InterestsSetting.constant';
 import styles from './IterestsSetting.module.scss';
 
 interface InterestsSettingPropsInterface {
@@ -9,14 +11,14 @@ interface InterestsSettingPropsInterface {
   isFormValid: boolean;
   isFormCloseable: boolean;
   submitSettings: (
-    inputName: string,
+    inputName: keyof IUser | keyof PartnerSettings,
     changedData:
       | string
       | number
       | boolean
       | string[]
       | { from: number; to: number },
-    innerObjectName?: string
+    innerObjectName?: IUserInnerKey
   ) => void;
   cancelHandler: () => void;
 }
@@ -26,71 +28,6 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({
   submitSettings,
   cancelHandler,
 }) => {
-  const interestsList = [
-    'fighting',
-    'ski',
-    'football',
-    'volleyball',
-    'tennis',
-    'ping pong',
-    'swimming',
-    'karting',
-    'horse ridding',
-    'hunting',
-    'fishing',
-    'skateboarding',
-    'bicycle',
-    'running',
-    'surfing',
-    'snowboarding',
-    'shooting',
-    'parachuting',
-    'paintball',
-    'bowling',
-    'billiard',
-    'skates',
-    'dancing',
-    'cosplay',
-    'ballet',
-    'room quest',
-    'fitness',
-    'yoga',
-    'meditation',
-    'tourism',
-    'traveling',
-    'hiking',
-    'camping',
-    'cars',
-    'education',
-    'foreign languages',
-    'cards',
-    'poker',
-    'chess',
-    'checkers',
-    'nard',
-    'psychology',
-    'table games',
-    'sport',
-    'blogging',
-    'computer games',
-    'programming',
-    'drawing',
-    '3D drawing',
-    'gardener',
-    'animals',
-    'volunteering',
-    'serials',
-    'books',
-    'movies',
-    'cinema',
-    'food',
-    'cooking',
-    'photo',
-    'design',
-    'writing',
-    'music',
-    'handmade',
-  ];
 
   const [interests, setInterests] = useState(currentUser.interests as string[]);
   const [inputValue, setInputValue] = useState('');

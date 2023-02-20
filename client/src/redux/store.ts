@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import authReducer from './auth/auth.slice';
 import chatReducer from './chat/chat.slice';
 import notificationsReducer from './notifications/notifications.slice';
+import settingsSlice from './settings/settings.slice';
 import usersReducer from './users/users.slice';
 
 let rootReducer = combineReducers({
@@ -11,6 +12,7 @@ let rootReducer = combineReducers({
   authPage: authReducer,
   chatPage: chatReducer,
   notifications: notificationsReducer,
+  settings: settingsSlice
 });
 
 const store = configureStore({

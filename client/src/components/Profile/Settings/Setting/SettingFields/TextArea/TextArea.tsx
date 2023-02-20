@@ -1,17 +1,19 @@
 import { ChangeEvent } from 'react';
+import { IUser, PartnerSettings } from '../../../../../../models/IUser';
+import { IUserInnerKey } from '../../../../../../redux/settings/settings.slice';
 import { Button } from '../../../../../ui';
-import styles from './DescriptionSetting.module.scss';
+import styles from './TextArea.module.scss';
 
-interface DescriptionSettingProps {
+interface TextAreaProps {
   submitSettings: (
-    inputName: string,
+    inputName: keyof IUser | keyof PartnerSettings,
     changedData:
       | string
       | number
       | boolean
       | string[]
       | { from: number; to: number },
-    innerObjectName?: string
+    innerObjectName?: IUserInnerKey
   ) => void;
   inputValueDirty: boolean;
   inputValueError: string;
@@ -25,7 +27,7 @@ interface DescriptionSettingProps {
   isFormValid: boolean;
 }
 
-const DescriptionSetting: React.FC<DescriptionSettingProps> = ({
+const TextArea: React.FC<TextAreaProps> = ({
   submitSettings,
   inputValueDirty,
   inputValueError,
@@ -72,4 +74,4 @@ const DescriptionSetting: React.FC<DescriptionSettingProps> = ({
   );
 };
 
-export default DescriptionSetting;
+export default TextArea;

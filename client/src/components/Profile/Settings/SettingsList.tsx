@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
-import { potentialFields } from '../../../models/IUser';
+import { IUser, PartnerSettings, potentialFields } from '../../../models/IUser';
 import { createNotification } from '../../../redux/notifications/notifications.slice';
+import {
+  IUserInnerKey,
+  setInnerObjectName,
+  setInputName,
+  setIsUserInfoSetting,
+  setValidation,
+  Validation,
+} from '../../../redux/settings/settings.slice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { checkField } from '../utils/ProfileUtils';
 import Account from './SettingGroups/Account/Account';
@@ -11,34 +19,26 @@ import Nickname from './SettingGroups/Nickname/Nickname';
 import styles from './SettingsList.module.scss';
 
 interface SettingsListPropsInterface {
-  setIsUserInfoSetting: (isSetting: boolean) => void;
   submitSettings: (
-    inputName: string,
+    inputName: keyof IUser | keyof PartnerSettings,
     changedData:
       | string
       | number
       | boolean
       | string[]
       | { from: number; to: number },
-    innerObjectName?: string
+    innerObjectName?: IUserInnerKey
   ) => void;
   setFormName: (formName: string) => void;
-  setSettingInputName: (inputName: string) => void;
-  setInnerObjectName: (innerObjectName: string) => void;
 }
 
 const SettingsList: React.FC<SettingsListPropsInterface> = ({
-  setIsUserInfoSetting,
   submitSettings,
   setFormName,
-  setSettingInputName,
-  setInnerObjectName,
 }) => {
   const dispatch = useAppDispatch();
 
-  const currentUser = useAppSelector(
-    (state) => state.usersPage.currentUser
-  );
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const notifications = useAppSelector(
     (state) => state.notifications.notifications
   );
@@ -77,12 +77,15 @@ const SettingsList: React.FC<SettingsListPropsInterface> = ({
   const setSettingInput = (
     formName: string,
     inputName: string,
+    validation?: Validation | null,
     innerObjectName?: string
   ) => {
-    setIsUserInfoSetting(true);
+    dispatch(setIsUserInfoSetting(true));
     setFormName(formName);
-    setSettingInputName(inputName);
-    innerObjectName && setInnerObjectName(innerObjectName);
+    dispatch(setValidation(validation));
+    dispatch(setInputName(inputName as keyof IUser | keyof PartnerSettings));
+    innerObjectName &&
+      dispatch(setInnerObjectName(innerObjectName as 'partnerSettings'));
   };
 
   return (

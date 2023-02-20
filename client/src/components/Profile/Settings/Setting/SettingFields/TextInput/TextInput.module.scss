@@ -1,0 +1,42 @@
+.setting {
+  border-right: 1px solid var(--border-main);
+  height: calc(100vh - 90px);
+
+  .name {
+    border-bottom: 1px solid var(--border-main);
+    padding: 20px 16px 10px;
+    text-transform: uppercase;
+    color: var(--main-secondary);
+
+    &_error {
+      color: var(--danger-light);
+      border-bottom: none;
+      padding: 25px 16px 0px;
+    }
+  }
+
+  .content {
+    .radioInput {
+      padding: 16px;
+      background-color: var(--color--white-100);
+      border-bottom: 1px solid var(--border-main);
+    }
+
+    .textInput {
+      padding: 16px;
+      border: none;
+      border-bottom: 1px solid var(--border-main);
+    }
+  }
+
+  .title {
+    font-size: 14px;
+    color: var(--main-secondary);
+    margin: 12px 0;
+    padding: 0 16px;
+  }
+
+  button.noBorder {
+    border-bottom: none;
+  }
+}

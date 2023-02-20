@@ -1,3 +1,5 @@
+import { PartnerSettings } from './../../models/IUser';
+import { IUserInnerKey } from './../settings/settings.slice';
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { usersAPI } from "../../api/usersApi";
@@ -55,14 +57,14 @@ export const updateUserThunk = createAsyncThunk(
   async (
     args: {
       currentUser: IUser;
-      inputName: string;
+      inputName: keyof IUser | keyof PartnerSettings;
       changedData:
         | String
         | Number
         | Boolean
         | String[]
         | { from: number; to: number };
-      innerObjectName?: string;
+      innerObjectName?: IUserInnerKey;
     },
     { rejectWithValue }
   ) => {

@@ -1,6 +1,8 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { IUser, PartnerSettings } from '../../../../../models/IUser';
+import { IUserInnerKey, Validation } from '../../../../../redux/settings/settings.slice';
 import { useAppSelector } from '../../../../../redux/store';
 import { CheckboxInput, RangeInput } from '../../../../ui';
 import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
@@ -11,17 +13,18 @@ interface IFind {
   setSettingInput: (
     formName: string,
     inputName: string,
+    validation?: Validation | null,
     innerObjectName?: string
   ) => void;
   submitSettings: (
-    inputName: string,
+    inputName: keyof IUser | keyof PartnerSettings,
     changedData:
       | string
       | number
       | boolean
       | string[]
       | { from: number; to: number },
-    innerObjectName?: string
+    innerObjectName?: IUserInnerKey
   ) => void;
 }
 
@@ -81,7 +84,7 @@ const Find: React.FC<IFind> = ({
           </div>
         </div>
         <div
-          onClick={() => setSettingInput('Place', 'place', 'partnerSettings')}
+          onClick={() => setSettingInput('Place', 'place', {}, 'partnerSettings')}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('place') ? styles.item_error : ''
           }`}
@@ -136,7 +139,7 @@ const Find: React.FC<IFind> = ({
         </div>
         <div
           onClick={() =>
-            setSettingInput('Interested in', 'preferSex', 'partnerSettings')
+            setSettingInput('Interested in', 'preferSex', null, 'partnerSettings')
           }
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('preferSex') ? styles.item_error : ''

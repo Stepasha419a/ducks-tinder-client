@@ -1,6 +1,8 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { IUser, PartnerSettings } from '../../../../../models/IUser';
+import { IUserInnerKey, Validation } from '../../../../../redux/settings/settings.slice';
 import { useAppSelector } from '../../../../../redux/store';
 import { RangeInput } from '../../../../ui';
 import { RangeValue } from '../../../../ui/inputs/Range';
@@ -11,17 +13,18 @@ interface IAccount {
   setSettingInput: (
     formName: string,
     inputName: string,
+    validation?: Validation,
     innerObjectName?: string
   ) => void;
   submitSettings: (
-    inputName: string,
+    inputName: keyof IUser | keyof PartnerSettings,
     changedData:
       | string
       | number
       | boolean
       | string[]
       | { from: number; to: number },
-    innerObjectName?: string
+    innerObjectName?: IUserInnerKey
   ) => void;
 }
 
@@ -45,7 +48,7 @@ const Account: React.FC<IAccount> = ({
       <div className={styles.groupTitle}>Account Settings</div>
       <div className={styles.items}>
         <div
-          onClick={() => setSettingInput('Email', 'email')}
+          onClick={() => setSettingInput('Email', 'email', {email: true})}
           className={`${styles.item} ${styles.item_pointer}`}
         >
           <div className={styles.descr}>
