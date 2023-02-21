@@ -1,5 +1,4 @@
 import { IUser, PartnerSettings } from '../../../../models/IUser';
-import TextArea from './SettingFields/TextArea/TextArea';
 import InterestsSetting from './SettingFields/Interests/IterestsSetting';
 import TextInput from './SettingFields/TextInput/TextInput';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
@@ -53,7 +52,7 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
     );
   } else if (settingInputName === 'description') {
     return (
-      <TextArea
+      <Textarea
         inputValueDirty={inputValueDirty}
         inputValueError={inputValueError}
         inputHandler={inputHandler}
@@ -63,9 +62,9 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
         isFormCloseable={isFormCloseable}
         submitSettings={submitSettings}
         cancelHandler={cancelHandler}
-      />
+      /> 
     );
-  } */
+  }*/
 
   if (settingInputName === 'preferSex' || settingInputName === 'sex') {
     return <RadioInputs formName={formName} cancelHandler={cancelHandler} />;

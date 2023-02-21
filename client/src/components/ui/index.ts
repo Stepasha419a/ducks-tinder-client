@@ -6,3 +6,4 @@ export { RadioInput } from './inputs/Radio/Radio';
 export { CheckboxInput } from './inputs/Checkbox/Checkbox';
 export { Message } from './Message/Message';
 export { Button } from './Button/Button';
+export { Textarea } from './inputs/Textarea/Textarea';
