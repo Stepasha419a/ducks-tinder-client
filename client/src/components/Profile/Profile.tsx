@@ -25,7 +25,8 @@ export const Profile = () => {
   );
 
   const [isImageSetting, setIsImageSetting] = useState(false);
-  const [formName, setFormName] = useState(''); // name of the title in ProfileSetting
+  // name of the title in ProfileSetting
+  const [formName, setFormName] = useState('');
 
   // objectName for inner object in user object if it is
   const submitSettings = (
@@ -69,8 +70,6 @@ export const Profile = () => {
         </div>
         {isUserInfoSetting ? (
           <Setting
-            currentUser={currentUser}
-            submitSettings={submitSettings}
             formName={formName}
           />
         ) : (

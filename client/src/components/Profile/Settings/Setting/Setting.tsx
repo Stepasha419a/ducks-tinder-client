@@ -1,32 +1,18 @@
-import { IUser, PartnerSettings } from '../../../../models/IUser';
-import InterestsSetting from './SettingFields/Interests/IterestsSetting';
 import TextInput from './SettingFields/TextInput/TextInput';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import {
-  IUserInnerKey,
   setInnerObjectName,
   setIsUserInfoSetting,
 } from '../../../../redux/settings/settings.slice';
 import RadioInputs from './SettingFields/RadioInputs/RadioInputs';
+import TextareaForm from './SettingFields/TextareaForm/TextareaForm';
+import { useEffect } from 'react';
 
 interface ProfileSettingPropsInterface {
-  currentUser: IUser;
-  submitSettings: (
-    inputName: keyof IUser | keyof PartnerSettings,
-    changedData:
-      | string
-      | number
-      | boolean
-      | string[]
-      | { from: number; to: number },
-    innerObjectName?: IUserInnerKey
-  ) => void;
   formName: string;
 }
 
 const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
-  currentUser,
-  submitSettings,
   formName,
 }) => {
   const dispatch = useAppDispatch();
@@ -40,6 +26,12 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
     dispatch(setIsUserInfoSetting(false));
   };
 
+  useEffect(() => {
+    return () => {
+      dispatch(setIsUserInfoSetting(false));
+    };
+  });
+
   /* if (settingInputName === 'interests') {
     return (
       <InterestsSetting
@@ -50,21 +42,10 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
         cancelHandler={cancelHandler}
       />
     );
-  } else if (settingInputName === 'description') {
-    return (
-      <Textarea
-        inputValueDirty={inputValueDirty}
-        inputValueError={inputValueError}
-        inputHandler={inputHandler}
-        setInputValueDirty={setInputValueDirty}
-        inputValue={inputValue}
-        isFormValid={isFormValid}
-        isFormCloseable={isFormCloseable}
-        submitSettings={submitSettings}
-        cancelHandler={cancelHandler}
-      /> 
-    );
-  }*/
+  } else }*/
+  if (settingInputName === 'description') {
+    return <TextareaForm formName={formName} cancelHandler={cancelHandler} />;
+  }
 
   if (settingInputName === 'preferSex' || settingInputName === 'sex') {
     return <RadioInputs formName={formName} cancelHandler={cancelHandler} />;
