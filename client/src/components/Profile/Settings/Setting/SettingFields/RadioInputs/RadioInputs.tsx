@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
 import { updateUserThunk } from '../../../../../../redux/users/users.thunks';
 import { RadioInput } from '../../../../../ui';
 import SettingWrapper from '../../SettingWrapper/SettingWrapper';
-import styles from '../../Setting.module.scss';
+import styles from './RadioInputs.module.scss';
 
 interface RadioInputsProps {
   formName: string;
@@ -31,8 +31,8 @@ const RadioInputs: React.FC<RadioInputsProps> = ({
 
   const [inputValue, setInputValue] = useState('');
   const [inputValueError, setInputValueError] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
   const [isFormCloseable, setIsFormCloseable] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     if (inputValueError) {
@@ -54,11 +54,11 @@ const RadioInputs: React.FC<RadioInputsProps> = ({
 
   useEffect(() => {
     if (!inputValue) {
-      setIsFormValid(false);
+      setIsFormValid(false)
       setIsFormCloseable(false);
       setInputValueError("Form can't be empty");
     } else {
-      setIsFormValid(true);
+      setIsFormValid(true)
       setIsFormCloseable(true);
       setInputValueError('');
     }

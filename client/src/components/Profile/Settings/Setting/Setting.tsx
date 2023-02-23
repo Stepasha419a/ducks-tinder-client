@@ -7,6 +7,7 @@ import {
 import RadioInputs from './SettingFields/RadioInputs/RadioInputs';
 import TextareaForm from './SettingFields/TextareaForm/TextareaForm';
 import { useEffect } from 'react';
+import InterestsSetting from './SettingFields/Interests/IterestsSetting';
 
 interface ProfileSettingPropsInterface {
   formName: string;
@@ -32,17 +33,9 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
     };
   });
 
-  /* if (settingInputName === 'interests') {
-    return (
-      <InterestsSetting
-        currentUser={currentUser}
-        isFormValid={isFormValid}
-        isFormCloseable={isFormCloseable}
-        submitSettings={submitSettings}
-        cancelHandler={cancelHandler}
-      />
-    );
-  } else }*/
+  if (settingInputName === 'interests') {
+    return <InterestsSetting cancelHandler={cancelHandler} />;
+  }
   if (settingInputName === 'description') {
     return <TextareaForm formName={formName} cancelHandler={cancelHandler} />;
   }

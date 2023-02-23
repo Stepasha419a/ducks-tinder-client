@@ -84,7 +84,7 @@ const Find: React.FC<IFind> = ({
           </div>
         </div>
         <div
-          onClick={() => setSettingInput('Place', 'place', {}, 'partnerSettings')}
+          onClick={() => setSettingInput('Place', 'place', {min: 10, max: 30}, 'partnerSettings')}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('place') ? styles.item_error : ''
           }`}

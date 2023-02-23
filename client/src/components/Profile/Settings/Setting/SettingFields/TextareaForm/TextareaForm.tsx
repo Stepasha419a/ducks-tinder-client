@@ -26,8 +26,8 @@ const TextareaForm: React.FC<TextareaFormProps> = ({
   const [inputValue, setInputValue] = useState('');
   const [inputValueDirty, setInputValueDirty] = useState(false);
   const [inputValueError, setInputValueError] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
   const [isFormCloseable, setIsFormCloseable] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     if (inputValueError) {

@@ -12,9 +12,7 @@ interface SettingWrapperProps {
   isFormCloseable: boolean;
 }
 
-const SettingWrapper: React.FC<
-  PropsWithChildren<SettingWrapperProps>
-> = ({
+const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
   submitSettings,
   cancelHandler,
   formName,

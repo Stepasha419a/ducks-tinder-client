@@ -21,7 +21,7 @@ export const Notifications = () => {
   return (
     <div className={styles.notifications}>
       {notifications.map((item) => (
-        <Notification {...item} closeNotification={closeNotification} />
+        <Notification {...item} closeNotification={closeNotification} key={item.id}/>
       ))}
     </div>
   );

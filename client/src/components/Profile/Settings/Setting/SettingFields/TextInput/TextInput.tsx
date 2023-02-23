@@ -33,8 +33,8 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
   const [inputValue, setInputValue] = useState('');
   const [inputValueDirty, setInputValueDirty] = useState(false);
   const [inputValueError, setInputValueError] = useState('');
-  const [isFormValid, setIsFormValid] = useState(false);
   const [isFormCloseable, setIsFormCloseable] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     if (inputValueError) {
@@ -87,6 +87,15 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
     setInnerObjectName('');
   };
 
+  useEffect(() => {
+    if (!inputValue) {
+      setIsFormCloseable(false);
+      setInputValueError("Form can't be empty");
+    } else {
+      setIsFormCloseable(true);
+    }
+  }, [inputValue]);
+
   return (
     <SettingWrapper
       formName={formName}
@@ -99,7 +108,7 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
     >
       <TextField
         onChange={(e) => inputHandler(e)}
-        onBlur={() => setInputValueDirty(true)}
+        onKeyDown={() => setInputValueDirty(true)}
         value={inputValue}
         type="text"
         extraClassName={styles.textInput}
