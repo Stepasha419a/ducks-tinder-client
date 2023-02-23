@@ -49,7 +49,6 @@ export const Tinder: React.FC = () => {
   const resetHandler = () => {
     dispatch(
       updateUserThunk({
-        currentUser,
         inputName: 'checkedUsers',
         changedData: [],
       })

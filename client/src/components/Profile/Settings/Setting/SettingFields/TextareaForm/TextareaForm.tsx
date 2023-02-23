@@ -3,8 +3,8 @@ import {
   setInnerObjectName,
   setIsUserInfoSetting,
 } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import { updateUserThunk } from '../../../../../../redux/users/users.thunks';
 import { Textarea } from '../../../../../ui';
 import SettingWrapper from '../../SettingWrapper/SettingWrapper';
 import styles from './TextareaForm.module.scss';
@@ -42,31 +42,26 @@ const TextareaForm: React.FC<TextareaFormProps> = ({
   }, [currentUser]);
 
   const submitSettings = () => {
-    dispatch(
-      updateUserThunk({
-        currentUser,
-        inputName: 'description',
-        changedData: inputValue,
-      })
-    );
+    dispatch(submitSettingsThunk({ changedData: inputValue.trim() }));
     dispatch(setIsUserInfoSetting(false));
     setInnerObjectName('');
   };
 
   const inputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const value = e.target.value;
+    const value = e.target.value.replace(/\s+/g, ' ');
+    const length = value.length;
     setInputValueError('');
-    if (validation?.min && validation.max) {
-      if (validation.max < value.length || value.length < validation.min) {
-        setInputValueError(
-          `${formName} has to be more ${validation.min} and less ${validation.max}`
-        );
-      }
-    }
-    if (!value.length) {
+    if (!length) {
       setIsFormCloseable(false);
       setInputValueError(`${formName} can't be empty`);
     } else {
+      if (validation?.min && validation.max) {
+        if (validation.max < length || length < validation.min) {
+          setInputValueError(
+            `${formName} has to be more ${validation.min} and less ${validation.max}`
+          );
+        }
+      }
       !isFormCloseable && setIsFormCloseable(true);
     }
     setInputValue(value);
@@ -84,7 +79,7 @@ const TextareaForm: React.FC<TextareaFormProps> = ({
     >
       <Textarea
         onChange={(e) => inputHandler(e)}
-        onBlur={() => setInputValueDirty(true)}
+        onKeyDown={() => !inputValueDirty && setInputValueDirty(true)}
         value={inputValue}
         extraClassName={styles.textarea}
       />

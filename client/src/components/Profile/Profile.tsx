@@ -14,7 +14,7 @@ import styles from './Profile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { updateUserThunk } from '../../redux/users/users.thunks';
 import { IUser, PartnerSettings } from '../../models/IUser';
-import { IUserInnerKey, setInnerObjectName } from '../../redux/settings/settings.slice';
+import { ChangedData, IUserInnerKey, setInnerObjectName } from '../../redux/settings/settings.slice';
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
@@ -31,17 +31,11 @@ export const Profile = () => {
   // objectName for inner object in user object if it is
   const submitSettings = (
     inputName: keyof IUser | keyof PartnerSettings,
-    changedData:
-      | string
-      | number
-      | boolean
-      | string[]
-      | { from: number; to: number },
+    changedData: ChangedData,
     innerObjectName?: IUserInnerKey
   ) => {
     dispatch(
       updateUserThunk({
-        currentUser,
         inputName,
         changedData,
         innerObjectName,

@@ -30,17 +30,15 @@ const ProfileSetting: React.FC<ProfileSettingPropsInterface> = ({
   useEffect(() => {
     return () => {
       dispatch(setIsUserInfoSetting(false));
+      dispatch(setInnerObjectName(null));
     };
   });
 
   if (settingInputName === 'interests') {
     return <InterestsSetting cancelHandler={cancelHandler} />;
-  }
-  if (settingInputName === 'description') {
+  } else if (settingInputName === 'description') {
     return <TextareaForm formName={formName} cancelHandler={cancelHandler} />;
-  }
-
-  if (settingInputName === 'preferSex' || settingInputName === 'sex') {
+  } else if (settingInputName === 'preferSex' || settingInputName === 'sex') {
     return <RadioInputs formName={formName} cancelHandler={cancelHandler} />;
   }
 

@@ -4,8 +4,8 @@ import {
   setInnerObjectName,
   setIsUserInfoSetting,
 } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import { updateUserThunk } from '../../../../../../redux/users/users.thunks';
 import { RadioInput } from '../../../../../ui';
 import SettingWrapper from '../../SettingWrapper/SettingWrapper';
 import styles from './RadioInputs.module.scss';
@@ -54,25 +54,18 @@ const RadioInputs: React.FC<RadioInputsProps> = ({
 
   useEffect(() => {
     if (!inputValue) {
-      setIsFormValid(false)
+      setIsFormValid(false);
       setIsFormCloseable(false);
       setInputValueError("Form can't be empty");
     } else {
-      setIsFormValid(true)
+      setIsFormValid(true);
       setIsFormCloseable(true);
       setInputValueError('');
     }
   }, [inputValue]);
 
   const submitSettings = () => {
-    dispatch(
-      updateUserThunk({
-        currentUser,
-        inputName: settingInputName!,
-        changedData: inputValue,
-        innerObjectName,
-      })
-    );
+    dispatch(submitSettingsThunk({ changedData: inputValue }));
     dispatch(setIsUserInfoSetting(false));
     setInnerObjectName('');
   };

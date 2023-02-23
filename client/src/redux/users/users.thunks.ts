@@ -1,10 +1,15 @@
 import { PartnerSettings } from './../../models/IUser';
-import { IUserInnerKey } from './../settings/settings.slice';
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
-import { usersAPI } from "../../api/usersApi";
-import { imageInterface } from "../../components/Profile/ProfileImageChange/ChangeImage/ChangeImage";
-import { IUser, makeDataObject, makeQuerySortsObj, makeUserImagesObject } from "../../models/IUser";
+import { ChangedData, IUserInnerKey } from './../settings/settings.slice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { AxiosError } from 'axios';
+import { usersAPI } from '../../api/usersApi';
+import { imageInterface } from '../../components/Profile/ProfileImageChange/ChangeImage/ChangeImage';
+import {
+  IUser,
+  makeDataObject,
+  makeQuerySortsObj,
+  makeUserImagesObject,
+} from '../../models/IUser';
 import { RootState } from '../store';
 
 export async function fetchUserById(id: string) {
@@ -56,22 +61,18 @@ export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
   async (
     args: {
-      currentUser: IUser;
       inputName: keyof IUser | keyof PartnerSettings;
-      changedData:
-        | String
-        | Number
-        | Boolean
-        | String[]
-        | { from: number; to: number };
+      changedData: ChangedData;
       innerObjectName?: IUserInnerKey;
     },
-    { rejectWithValue }
+    { rejectWithValue, getState }
   ) => {
     try {
-      const data = makeDataObject(args);
+      const { usersPage } = getState() as RootState;
+      const { currentUser } = usersPage;
+      const data = makeDataObject({ ...args, currentUser });
 
-      const response = await usersAPI.updateUser(args.currentUser._id, data);
+      const response = await usersAPI.updateUser(currentUser._id, data);
 
       return response.data;
     } catch (error) {

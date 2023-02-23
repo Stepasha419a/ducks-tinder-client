@@ -4,11 +4,11 @@ import {
   setInnerObjectName,
   setIsUserInfoSetting,
 } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import { updateUserThunk } from '../../../../../../redux/users/users.thunks';
 import { TextField } from '../../../../../ui';
 import SettingWrapper from '../../SettingWrapper/SettingWrapper';
-import styles from '../../Setting.module.scss';
+import styles from './TextInput.module.scss';
 
 interface TextInputProps {
   formName: string;
@@ -55,17 +55,20 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
   }, [innerObjectName, currentUser, settingInputName]);
 
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const value = e.target.value.replace(/\s+/g, ' ');
+    const length = value.length;
     setInputValueError('');
-    if (validation?.min && validation.max) {
-      if (validation.max < value.length || value.length < validation.min) {
-        setInputValueError(`${formName} has to be more ${validation.min} and less ${validation.max}`);
-      }
-    }
-    if (!value.length) {
+    if (!length) {
       setIsFormCloseable(false);
       setInputValueError(`${formName} can't be empty`);
     } else {
+      if (validation?.min && validation.max) {
+        if (validation.max < length || length < validation.min) {
+          setInputValueError(
+            `${formName} has to be more ${validation.min} and less ${validation.max}`
+          );
+        }
+      }
       !isFormCloseable && setIsFormCloseable(true);
     }
     if (validation?.email && !regexp.test(String(value).toLowerCase())) {
@@ -75,26 +78,10 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
   };
 
   const submitSettings = () => {
-    dispatch(
-      updateUserThunk({
-        currentUser,
-        inputName: settingInputName!,
-        changedData: inputValue,
-        innerObjectName,
-      })
-    );
+    dispatch(submitSettingsThunk({ changedData: inputValue.trim() }));
     dispatch(setIsUserInfoSetting(false));
     setInnerObjectName('');
   };
-
-  useEffect(() => {
-    if (!inputValue) {
-      setIsFormCloseable(false);
-      setInputValueError("Form can't be empty");
-    } else {
-      setIsFormCloseable(true);
-    }
-  }, [inputValue]);
 
   return (
     <SettingWrapper
@@ -108,7 +95,7 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
     >
       <TextField
         onChange={(e) => inputHandler(e)}
-        onKeyDown={() => setInputValueDirty(true)}
+        onKeyDown={() => !inputValueDirty && setInputValueDirty(true)}
         value={inputValue}
         type="text"
         extraClassName={styles.textInput}

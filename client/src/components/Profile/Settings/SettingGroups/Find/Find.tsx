@@ -2,7 +2,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { IUser, PartnerSettings } from '../../../../../models/IUser';
-import { IUserInnerKey, Validation } from '../../../../../redux/settings/settings.slice';
+import { ChangedData, IUserInnerKey, Validation } from '../../../../../redux/settings/settings.slice';
 import { useAppSelector } from '../../../../../redux/store';
 import { CheckboxInput, RangeInput } from '../../../../ui';
 import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
@@ -18,12 +18,7 @@ interface IFind {
   ) => void;
   submitSettings: (
     inputName: keyof IUser | keyof PartnerSettings,
-    changedData:
-      | string
-      | number
-      | boolean
-      | string[]
-      | { from: number; to: number },
+    changedData: ChangedData,
     innerObjectName?: IUserInnerKey
   ) => void;
 }

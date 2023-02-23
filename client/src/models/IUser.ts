@@ -1,5 +1,5 @@
 import { imageInterface } from '../components/Profile/ProfileImageChange/ChangeImage/ChangeImage';
-import { IUserInnerKey } from '../redux/settings/settings.slice';
+import { ChangedData, IUserInnerKey } from '../redux/settings/settings.slice';
 
 export interface PartnerSettings {
   place: string;
@@ -88,6 +88,37 @@ export const makeQuerySortsObj = (user: IUser, requestedUsers?: string[]) => {
   };
 };
 
+export const makeDataObject = (args: {
+  currentUser: IUser | any;
+  inputName: string;
+  changedData: ChangedData;
+  innerObjectName?: IUserInnerKey;
+}) => {
+  const { currentUser, inputName, changedData, innerObjectName } = args;
+
+  if (innerObjectName) {
+    return {
+      [innerObjectName]: {
+        ...currentUser[innerObjectName],
+        [inputName as keyof PartnerSettings]: changedData,
+      },
+    };
+  }
+  return { [inputName]: changedData };
+};
+
+export const makeUserImagesObject = (args: {
+  currentUser: IUser;
+  images: imageInterface[];
+}) => {
+  const { images } = args;
+  const parsedImages = images.map((image) => image.image);
+
+  return {
+    pictures: { avatar: parsedImages[0], gallery: parsedImages.slice(1) },
+  };
+};
+
 export const interestsList = [
   'fighting',
   'ski',
@@ -162,39 +193,3 @@ export const potentialFields = [
   'distance',
   'preferSex',
 ];
-
-export const makeDataObject = (args: {
-  currentUser: IUser | any;
-  inputName: string;
-  changedData:
-    | String
-    | Number
-    | Boolean
-    | String[]
-    | { from: number; to: number };
-  innerObjectName?: IUserInnerKey;
-}) => {
-  const { currentUser, inputName, changedData, innerObjectName } = args;
-
-  if (innerObjectName) {
-    return {
-      [innerObjectName]: {
-        ...(currentUser[innerObjectName]),
-        [inputName as keyof PartnerSettings]: changedData,
-      },
-    };
-  }
-  return { [inputName]: changedData };
-};
-
-export const makeUserImagesObject = (args: {
-  currentUser: IUser;
-  images: imageInterface[];
-}) => {
-  const { images } = args;
-  const parsedImages = images.map((image) => image.image);
-
-  return {
-    pictures: { avatar: parsedImages[0], gallery: parsedImages.slice(1) },
-  };
-};

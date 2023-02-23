@@ -2,7 +2,11 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { IUser, PartnerSettings } from '../../../../../models/IUser';
-import { IUserInnerKey, Validation } from '../../../../../redux/settings/settings.slice';
+import {
+  ChangedData,
+  IUserInnerKey,
+  Validation,
+} from '../../../../../redux/settings/settings.slice';
 import { useAppSelector } from '../../../../../redux/store';
 import { RangeInput } from '../../../../ui';
 import { RangeValue } from '../../../../ui/inputs/Range';
@@ -18,12 +22,7 @@ interface IAccount {
   ) => void;
   submitSettings: (
     inputName: keyof IUser | keyof PartnerSettings,
-    changedData:
-      | string
-      | number
-      | boolean
-      | string[]
-      | { from: number; to: number },
+    changedData: ChangedData,
     innerObjectName?: IUserInnerKey
   ) => void;
 }
@@ -48,7 +47,9 @@ const Account: React.FC<IAccount> = ({
       <div className={styles.groupTitle}>Account Settings</div>
       <div className={styles.items}>
         <div
-          onClick={() => setSettingInput('Email', 'email', {max: 40, min: 0, email: true})}
+          onClick={() =>
+            setSettingInput('Email', 'email', { max: 40, min: 0, email: true })
+          }
           className={`${styles.item} ${styles.item_pointer}`}
         >
           <div className={styles.descr}>
@@ -63,7 +64,7 @@ const Account: React.FC<IAccount> = ({
           </div>
         </div>
         <div
-          onClick={() => setSettingInput('Name', 'name', {min: 2, max: 14})}
+          onClick={() => setSettingInput('Name', 'name', { min: 2, max: 14 })}
           className={`${styles.item} ${styles.item_pointer}`}
         >
           <div className={styles.descr}>
@@ -78,7 +79,9 @@ const Account: React.FC<IAccount> = ({
           </div>
         </div>
         <div
-          onClick={() => setSettingInput('Description', 'description', {min: 50, max: 400})}
+          onClick={() =>
+            setSettingInput('Description', 'description', { min: 50, max: 400 })
+          }
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('description') ? styles.item_error : ''
           }`}

@@ -3,12 +3,10 @@ import {
   setInnerObjectName,
   setIsUserInfoSetting,
 } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import { updateUserThunk } from '../../../../../../redux/users/users.thunks';
 import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
-import { TextField } from '../../../../../ui';
 import SettingWrapper from '../../SettingWrapper/SettingWrapper';
-import { interestsList } from './InterestsSetting.constant';
 import styles from './IterestsSetting.module.scss';
 
 interface InterestsSettingPropsInterface {
@@ -55,9 +53,7 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({
 
   const submitSettings = () => {
     dispatch(
-      updateUserThunk({
-        currentUser,
-        inputName: 'interests',
+      submitSettingsThunk({
         changedData: interests,
       })
     );

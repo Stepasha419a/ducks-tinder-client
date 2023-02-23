@@ -1,13 +1,22 @@
 import { IUser, PartnerSettings } from './../../models/IUser';
 import { createSlice } from '@reduxjs/toolkit';
 
-export type IUserInnerKey = 'partnerSettings' | null
+export type IUserInnerKey = 'partnerSettings' | null;
 
 export interface Validation {
   min?: number;
   max?: number;
   email?: boolean;
 }
+
+type RangeType = { from: number; to: number }
+
+export type ChangedData =
+  | String
+  | Number
+  | Boolean
+  | String[]
+  | RangeType;
 
 interface InitialState {
   settingInputName: keyof IUser | keyof PartnerSettings | null;

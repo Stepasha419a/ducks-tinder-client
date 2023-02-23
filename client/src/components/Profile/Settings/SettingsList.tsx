@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { IUser, PartnerSettings, potentialFields } from '../../../models/IUser';
 import { createNotification } from '../../../redux/notifications/notifications.slice';
 import {
+  ChangedData,
   IUserInnerKey,
   setInnerObjectName,
   setInputName,
@@ -21,12 +22,7 @@ import styles from './SettingsList.module.scss';
 interface SettingsListPropsInterface {
   submitSettings: (
     inputName: keyof IUser | keyof PartnerSettings,
-    changedData:
-      | string
-      | number
-      | boolean
-      | string[]
-      | { from: number; to: number },
+    changedData: ChangedData,
     innerObjectName?: IUserInnerKey
   ) => void;
   setFormName: (formName: string) => void;

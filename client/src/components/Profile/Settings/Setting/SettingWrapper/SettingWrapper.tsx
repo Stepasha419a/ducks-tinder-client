@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { Button } from '../../../../ui';
-import styles from '../Setting.module.scss';
+import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {
   submitSettings: () => void;
