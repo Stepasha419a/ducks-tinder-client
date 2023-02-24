@@ -1,21 +1,11 @@
 import { useEffect, useState } from 'react';
-import {
-  setInnerObjectName,
-  setIsUserInfoSetting,
-} from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
 import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
 
-interface InterestsFormProps {
-  cancelHandler: () => void;
-}
-
-export const InterestsForm: React.FC<InterestsFormProps> = ({
-  cancelHandler,
-}) => {
+export const InterestsForm = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -57,15 +47,12 @@ export const InterestsForm: React.FC<InterestsFormProps> = ({
         changedData: interests,
       })
     );
-    dispatch(setIsUserInfoSetting(false));
-    setInnerObjectName('');
   };
 
   return (
     <>
       <SettingWrapper
         formName={'Interests'}
-        cancelHandler={cancelHandler}
         inputValueDirty={true}
         inputValueError={inputValueError}
         isFormCloseable={isFormCloseable}

@@ -11,40 +11,15 @@ import SettingsList from './Settings/SettingsList';
 import Setting from './Settings/Setting/Setting';
 import ImageSetting from './ProfileImageChange/ImageSetting/ImageSetting';
 import styles from './Profile.module.scss';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { updateUserThunk } from '../../redux/users/users.thunks';
-import { IUser, PartnerSettings } from '../../models/IUser';
-import {
-  ChangedData,
-  InnerObjectName,
-  setInnerObjectName,
-} from '../../redux/settings/settings.slice';
+import { useAppSelector } from '../../redux/store';
 
 export const Profile = () => {
-  const dispatch = useAppDispatch();
-
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const isUserInfoSetting = useAppSelector(
     (state) => state.settings.isUserInfoSetting
   );
 
   const [isImageSetting, setIsImageSetting] = useState(false);
-
-  // objectName for inner object in user object if it is
-  const submitSettings = (
-    inputName: keyof IUser | keyof PartnerSettings,
-    changedData: ChangedData,
-    innerObjectName?: InnerObjectName
-  ) => {
-    dispatch(
-      updateUserThunk({
-        inputName,
-        changedData,
-        innerObjectName,
-      })
-    );
-    dispatch(setInnerObjectName(null));
-  };
 
   return (
     <div className={styles.profile}>
@@ -64,11 +39,7 @@ export const Profile = () => {
             </Link>
           </div>
         </div>
-        {isUserInfoSetting ? (
-          <Setting />
-        ) : (
-          <SettingsList submitSettings={submitSettings} />
-        )}
+        {isUserInfoSetting ? <Setting /> : <SettingsList />}
       </aside>
       <div className={styles.content}>
         <div className={styles.user}>

@@ -1,12 +1,8 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { IUser, PartnerSettings } from '../../../../../models/IUser';
-import {
-  ChangedData,
-  InnerObjectName,
-  setInput,
-} from '../../../../../redux/settings/settings.slice';
+import { setInput } from '../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { RangeInput } from '../../../../ui';
 import { RangeValue } from '../../../../ui/inputs/Range';
@@ -14,14 +10,9 @@ import styles from './Account.module.scss';
 
 interface IAccount {
   errorFields: string[];
-  submitSettings: (
-    inputName: keyof IUser | keyof PartnerSettings,
-    changedData: ChangedData,
-    innerObjectName?: InnerObjectName
-  ) => void;
 }
 
-const Account: React.FC<IAccount> = ({ submitSettings, errorFields }) => {
+const Account: React.FC<IAccount> = ({ errorFields }) => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
@@ -30,7 +21,12 @@ const Account: React.FC<IAccount> = ({ submitSettings, errorFields }) => {
   );
 
   const ageHandler = () => {
-    submitSettings('age', currentAgeSetting);
+    dispatch(
+      submitSettingsThunk({
+        inputName: 'age',
+        changedData: currentAgeSetting,
+      })
+    );
   };
 
   const SetEmailHandler = () => {
@@ -145,7 +141,7 @@ const Account: React.FC<IAccount> = ({ submitSettings, errorFields }) => {
                 setValue={(value: RangeValue) => {
                   setCurrentAgeSetting(+value);
                 }}
-                completeValue={() => ageHandler()}
+                completeValue={ageHandler}
                 min={18}
                 max={100}
               />

@@ -1,21 +1,11 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import {
-  setInnerObjectName,
-  setIsUserInfoSetting,
-} from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
 import { Textarea } from '../../../../../ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './TextareaForm.module.scss';
 
-interface TextareaFormProps {
-  cancelHandler: () => void;
-}
-
-export const TextareaForm: React.FC<TextareaFormProps> = ({
-  cancelHandler,
-}) => {
+export const TextareaForm = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -42,8 +32,6 @@ export const TextareaForm: React.FC<TextareaFormProps> = ({
 
   const submitSettings = () => {
     dispatch(submitSettingsThunk({ changedData: inputValue.trim() }));
-    dispatch(setIsUserInfoSetting(false));
-    setInnerObjectName('');
   };
 
   const inputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -69,7 +57,6 @@ export const TextareaForm: React.FC<TextareaFormProps> = ({
   return (
     <SettingWrapper
       formName={formName}
-      cancelHandler={cancelHandler}
       inputValueDirty={inputValueDirty}
       inputValueError={inputValueError}
       isFormCloseable={isFormCloseable}

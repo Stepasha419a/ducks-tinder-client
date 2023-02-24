@@ -1,5 +1,6 @@
 import { IUser, PartnerSettings } from './../../models/IUser';
 import { createSlice } from '@reduxjs/toolkit';
+import { submitSettingsThunk } from './settings.thunks';
 
 export interface Validation {
   min?: number;
@@ -57,6 +58,11 @@ const settingSlice = createSlice({
       state.validaton = payload.validation;
       state.isUserInfoSetting = true;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(submitSettingsThunk.pending, (state) => {
+      state.isUserInfoSetting = false;
+    });
   },
 });
 

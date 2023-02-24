@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
-import { IUser, PartnerSettings, potentialFields } from '../../../models/IUser';
+import { potentialFields } from '../../../models/IUser';
 import { createNotification } from '../../../redux/notifications/notifications.slice';
-import {
-  ChangedData,
-  InnerObjectName,
-} from '../../../redux/settings/settings.slice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { checkField } from '../utils/ProfileUtils';
 import Account from './SettingGroups/Account/Account';
@@ -14,17 +10,7 @@ import LoggoutButton from './SettingGroups/LogoutButton/LogoutButton';
 import Nickname from './SettingGroups/Nickname/Nickname';
 import styles from './SettingsList.module.scss';
 
-interface SettingsListPropsInterface {
-  submitSettings: (
-    inputName: keyof IUser | keyof PartnerSettings,
-    changedData: ChangedData,
-    innerObjectName?: InnerObjectName
-  ) => void;
-}
-
-const SettingsList: React.FC<SettingsListPropsInterface> = ({
-  submitSettings,
-}) => {
+const SettingsList = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -65,8 +51,8 @@ const SettingsList: React.FC<SettingsListPropsInterface> = ({
 
   return (
     <div className={styles.groups}>
-      <Account errorFields={errorFields} submitSettings={submitSettings} />
-      <Find errorFields={errorFields} submitSettings={submitSettings} />
+      <Account errorFields={errorFields} />
+      <Find errorFields={errorFields} />
       <Nickname />
       <LinksSettingGroup />
       <LoggoutButton />

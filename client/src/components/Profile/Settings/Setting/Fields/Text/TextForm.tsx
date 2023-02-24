@@ -1,9 +1,5 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { IUser, PartnerSettings } from '../../../../../../models/IUser';
-import {
-  setInnerObjectName,
-  setIsUserInfoSetting,
-} from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
 import { TextField } from '../../../../../ui';
@@ -11,11 +7,7 @@ import SettingWrapper from '../../Wrapper/SettingWrapper';
 import { IMAIL_REGEXP } from './TextForm.constants';
 import styles from './TextForm.module.scss';
 
-interface TextFormProps {
-  cancelHandler: () => void;
-}
-
-export const TextForm: React.FC<TextFormProps> = ({ cancelHandler }) => {
+export const TextForm = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -77,14 +69,11 @@ export const TextForm: React.FC<TextFormProps> = ({ cancelHandler }) => {
 
   const submitSettings = () => {
     dispatch(submitSettingsThunk({ changedData: inputValue.trim() }));
-    dispatch(setIsUserInfoSetting(false));
-    setInnerObjectName('');
   };
 
   return (
     <SettingWrapper
       formName={formName}
-      cancelHandler={cancelHandler}
       inputValueDirty={inputValueDirty}
       inputValueError={inputValueError}
       isFormCloseable={isFormCloseable}

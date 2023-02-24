@@ -1,20 +1,12 @@
 import { useEffect, useState } from 'react';
 import { IUser, PartnerSettings } from '../../../../../../models/IUser';
-import {
-  setInnerObjectName,
-  setIsUserInfoSetting,
-} from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
 import { RadioInput } from '../../../../../ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './RadioForm.module.scss';
 
-interface RadioFormProps {
-  cancelHandler: () => void;
-}
-
-export const RadioForm: React.FC<RadioFormProps> = ({ cancelHandler }) => {
+export const RadioForm = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -63,14 +55,11 @@ export const RadioForm: React.FC<RadioFormProps> = ({ cancelHandler }) => {
 
   const submitSettings = () => {
     dispatch(submitSettingsThunk({ changedData: inputValue }));
-    dispatch(setIsUserInfoSetting(false));
-    setInnerObjectName('');
   };
 
   return (
     <SettingWrapper
       formName={formName}
-      cancelHandler={cancelHandler}
       inputValueDirty={true}
       inputValueError={inputValueError}
       isFormCloseable={isFormCloseable}

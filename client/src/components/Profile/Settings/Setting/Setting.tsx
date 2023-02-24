@@ -13,11 +13,6 @@ const ProfileSetting = () => {
     (state) => state.settings.settingInputName
   );
 
-  const cancelHandler = () => {
-    dispatch(setInnerObjectName(null));
-    dispatch(setIsUserInfoSetting(false));
-  };
-
   useEffect(() => {
     return () => {
       dispatch(setIsUserInfoSetting(false));
@@ -26,14 +21,14 @@ const ProfileSetting = () => {
   });
 
   if (settingInputName === 'interests') {
-    return <InterestsForm cancelHandler={cancelHandler} />;
+    return <InterestsForm />;
   } else if (settingInputName === 'description') {
-    return <TextareaForm cancelHandler={cancelHandler} />;
+    return <TextareaForm />;
   } else if (settingInputName === 'preferSex' || settingInputName === 'sex') {
-    return <RadioForm cancelHandler={cancelHandler} />;
+    return <RadioForm />;
   }
 
-  return <TextForm cancelHandler={cancelHandler} />;
+  return <TextForm />;
 };
 
 export default ProfileSetting;

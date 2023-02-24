@@ -1,10 +1,11 @@
 import { PropsWithChildren } from 'react';
+import { setIsUserInfoSetting } from '../../../../../redux/settings/settings.slice';
+import { useAppDispatch } from '../../../../../redux/store';
 import { Button } from '../../../../ui';
 import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {
   submitSettings: () => void;
-  cancelHandler: () => void;
   formName: string | null;
   inputValueDirty: boolean;
   inputValueError: string;
@@ -14,7 +15,6 @@ interface SettingWrapperProps {
 
 const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
   submitSettings,
-  cancelHandler,
   formName,
   children,
   inputValueDirty,
@@ -22,6 +22,11 @@ const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
   isFormValid,
   isFormCloseable,
 }) => {
+  const dispatch = useAppDispatch();
+  const cancelHandler = () => {
+    dispatch(setIsUserInfoSetting(false));
+  };
+
   return (
     <div className={styles.setting}>
       {inputValueDirty && inputValueError && (
@@ -34,7 +39,7 @@ const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
       <div className={styles.title}>Your {formName}</div>
       <Button
         disabled={!isFormCloseable}
-        onClick={() => cancelHandler()}
+        onClick={cancelHandler}
         variant="setting"
         extraClassName={styles.noBorder}
       >
@@ -42,7 +47,7 @@ const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
       </Button>
       <Button
         disabled={!isFormValid}
-        onClick={() => submitSettings()}
+        onClick={submitSettings}
         variant="setting"
       >
         Update my {formName}

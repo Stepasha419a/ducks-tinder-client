@@ -2,13 +2,19 @@ import { updateUserThunk } from './../users/users.thunks';
 import { RootState } from './../store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { ChangedData } from './settings.slice';
+import {
+  ChangedData,
+  SettingInputName,
+  InnerObjectName,
+} from './settings.slice';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',
   async (
     args: {
       changedData: ChangedData;
+      inputName?: SettingInputName;
+      innerObjectName?: InnerObjectName;
     },
     { rejectWithValue, dispatch, getState }
   ) => {
@@ -18,8 +24,8 @@ export const submitSettingsThunk = createAsyncThunk(
 
       dispatch(
         updateUserThunk({
-          inputName: settingInputName!,
-          innerObjectName,
+          inputName: args.inputName || settingInputName!,
+          innerObjectName: args.innerObjectName || innerObjectName,
           changedData: args.changedData,
         })
       );

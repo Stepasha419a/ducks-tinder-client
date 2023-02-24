@@ -1,12 +1,8 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { IUser, PartnerSettings } from '../../../../../models/IUser';
-import {
-  ChangedData,
-  InnerObjectName,
-  setInput,
-} from '../../../../../redux/settings/settings.slice';
+import { setInput } from '../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { CheckboxInput, RangeInput } from '../../../../ui';
 import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
@@ -14,14 +10,9 @@ import styles from './Find.module.scss';
 
 interface IFind {
   errorFields: string[];
-  submitSettings: (
-    inputName: keyof IUser | keyof PartnerSettings,
-    changedData: ChangedData,
-    innerObjectName?: InnerObjectName
-  ) => void;
 }
 
-const Find: React.FC<IFind> = ({ errorFields, submitSettings }) => {
+const Find: React.FC<IFind> = ({ errorFields }) => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
@@ -39,25 +30,41 @@ const Find: React.FC<IFind> = ({ errorFields, submitSettings }) => {
   );
 
   const partnerAgeHandler = () => {
-    submitSettings(
-      'age',
-      { from: ageSetting.min, to: ageSetting.max },
-      'partnerSettings'
+    dispatch(
+      submitSettingsThunk({
+        inputName: 'age',
+        changedData: { from: ageSetting.min, to: ageSetting.max },
+        innerObjectName: 'partnerSettings',
+      })
+    );
+  };
+  const distanceHandler = () => {
+    dispatch(
+      submitSettingsThunk({
+        inputName: 'distance',
+        changedData: currentDistanceSetting,
+        innerObjectName: 'partnerSettings',
+      })
+    );
+  };
+  const onlyInDistanceHandler = () => {
+    dispatch(
+      submitSettingsThunk({
+        inputName: 'usersOnlyInDistance',
+        changedData: !currentUser.partnerSettings.usersOnlyInDistance,
+        innerObjectName: 'partnerSettings',
+      })
     );
   };
 
-  const distanceHandler = () => {
-    submitSettings('distance', currentDistanceSetting, 'partnerSettings');
-  };
-
-  const SetInterestsHandler = () => {
+  const setInterestsHandler = () => {
     dispatch(
       setInput({
         inputName: 'interests',
       })
     );
   };
-  const SetPlaceHandler = () => {
+  const setPlaceHandler = () => {
     dispatch(
       setInput({
         inputName: 'place',
@@ -66,7 +73,7 @@ const Find: React.FC<IFind> = ({ errorFields, submitSettings }) => {
       })
     );
   };
-  const SetPreferSexHandler = () => {
+  const setPreferSexHandler = () => {
     dispatch(
       setInput({
         formName: 'Interested in',
@@ -82,7 +89,7 @@ const Find: React.FC<IFind> = ({ errorFields, submitSettings }) => {
       <div className={styles.groupTitle}>Find Settings</div>
       <div className={styles.items}>
         <div
-          onClick={SetInterestsHandler}
+          onClick={setInterestsHandler}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('interests') ? styles.item_error : ''
           }`}
@@ -101,7 +108,7 @@ const Find: React.FC<IFind> = ({ errorFields, submitSettings }) => {
           </div>
         </div>
         <div
-          onClick={SetPlaceHandler}
+          onClick={setPlaceHandler}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('place') ? styles.item_error : ''
           }`}
@@ -135,27 +142,21 @@ const Find: React.FC<IFind> = ({ errorFields, submitSettings }) => {
                 setValue={(value: RangeValue) =>
                   setCurrentDistanceSetting(+value)
                 }
-                completeValue={() => distanceHandler()}
+                completeValue={distanceHandler}
                 min={2}
                 max={100}
               />
             </div>
             <CheckboxInput
               checked={currentUser.partnerSettings.usersOnlyInDistance}
-              onChange={() =>
-                submitSettings(
-                  'usersOnlyInDistance',
-                  !currentUser.partnerSettings.usersOnlyInDistance,
-                  'partnerSettings'
-                )
-              }
+              onChange={onlyInDistanceHandler}
               variant="small"
               text="Show people only in this range"
             />
           </div>
         </div>
         <div
-          onClick={SetPreferSexHandler}
+          onClick={setPreferSexHandler}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('preferSex') ? styles.item_error : ''
           }`}
@@ -185,7 +186,7 @@ const Find: React.FC<IFind> = ({ errorFields, submitSettings }) => {
                 setValue={(value: RangeValue) =>
                   setAgeSetting(value as RangeInterface)
                 }
-                completeValue={() => partnerAgeHandler()}
+                completeValue={partnerAgeHandler}
                 min={18}
                 max={100}
                 isMultiple
