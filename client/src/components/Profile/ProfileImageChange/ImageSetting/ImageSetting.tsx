@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IUser } from '../../../../models/IUser';
+import { useAppSelector } from '../../../../redux/store';
 import { Button } from '../../../ui';
 import ProfileChangeImage from '../ChangeImage/ChangeImage';
 import ProfileFullPreview from '../UserPreview/FullPreview/FullPreview';
@@ -8,13 +8,13 @@ import styles from './ImageSetting.module.scss';
 
 interface ProfileImageSettingPropsInterface {
   setIsImageSetting: (isImageSetting: boolean) => void;
-  currentUser: IUser;
 }
 
 const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({
   setIsImageSetting,
-  currentUser,
 }) => {
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);
   const [isFullPreviewPageSetting, setIsFullPreviewPageSetting] =
     useState(false);

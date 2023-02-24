@@ -1,5 +1,9 @@
-import { imageInterface } from '../components/Profile/ProfileImageChange/ChangeImage/ChangeImage';
-import { ChangedData, InnerObjectName } from '../redux/settings/settings.slice';
+export interface ImageInterface {
+  id: number;
+  order: number;
+  image: string;
+  setting: string;
+}
 
 export interface PartnerSettings {
   place: string;
@@ -59,65 +63,20 @@ export interface IUserUnrequired {
   checkedUsers?: string[];
 }
 
+export interface PreferAge {
+  min: number;
+  max: number;
+}
+
 export interface IQuerySorts {
   distance: number;
   onlyNear: boolean;
   age: number;
-  preferAge: { min: number; max: number };
+  preferAge: PreferAge;
   sex: 'male' | 'female';
   preferSex: 'male' | 'female';
   userIds?: string[];
 }
-
-export const makeQuerySortsObj = (user: IUser, requestedUsers?: string[]) => {
-  return {
-    distance: user.partnerSettings.distance,
-    onlyNear: user.partnerSettings.usersOnlyInDistance,
-    age: user.age,
-    preferAge: {
-      min: user.partnerSettings.age.from,
-      max: user.partnerSettings.age.to,
-    },
-    sex: user.sex,
-    preferSex: user.partnerSettings.preferSex,
-    userIds: requestedUsers
-      ? requestedUsers
-      : user.checkedUsers?.length
-      ? user.checkedUsers
-      : [],
-  };
-};
-
-export const makeDataObject = (args: {
-  currentUser: IUser | any;
-  inputName: string;
-  changedData: ChangedData;
-  innerObjectName?: InnerObjectName;
-}) => {
-  const { currentUser, inputName, changedData, innerObjectName } = args;
-
-  if (innerObjectName) {
-    return {
-      [innerObjectName]: {
-        ...currentUser[innerObjectName],
-        [inputName as keyof PartnerSettings]: changedData,
-      },
-    };
-  }
-  return { [inputName]: changedData };
-};
-
-export const makeUserImagesObject = (args: {
-  currentUser: IUser;
-  images: imageInterface[];
-}) => {
-  const { images } = args;
-  const parsedImages = images.map((image) => image.image);
-
-  return {
-    pictures: { avatar: parsedImages[0], gallery: parsedImages.slice(1) },
-  };
-};
 
 export const interestsList = [
   'fighting',
@@ -183,13 +142,4 @@ export const interestsList = [
   'writing',
   'music',
   'handmade',
-];
-
-export const potentialFields = [
-  'description',
-  'sex',
-  'interests',
-  'place',
-  'distance',
-  'preferSex',
 ];

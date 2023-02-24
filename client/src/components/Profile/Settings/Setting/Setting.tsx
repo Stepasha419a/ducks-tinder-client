@@ -1,8 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
-import {
-  setInnerObjectName,
-  setIsUserInfoSetting,
-} from '../../../../redux/settings/settings.slice';
+import { setIsUserInfoSetting } from '../../../../redux/settings/settings.slice';
 import { useEffect } from 'react';
 import { InterestsForm, RadioForm, TextareaForm, TextForm } from './Fields';
 
@@ -16,7 +13,6 @@ const ProfileSetting = () => {
   useEffect(() => {
     return () => {
       dispatch(setIsUserInfoSetting(false));
-      dispatch(setInnerObjectName(null));
     };
   });
 

@@ -1,19 +1,19 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IUser } from '../../../models/IUser';
+import { useAppSelector } from '../../../redux/store';
 import ImageSlider from '../../Slider/ImageSlider/ImageSlider';
 import { Button } from '../../ui';
 import styles from './UserImage.module.scss';
 
 interface UserImagePropsInterface {
-  currentUser: IUser;
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
 const UserImage: React.FC<UserImagePropsInterface> = ({
-  currentUser,
   setIsImageSetting,
 }) => {
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+
   return (
     <>
       <div className={styles.slider}>
@@ -38,7 +38,13 @@ const UserImage: React.FC<UserImagePropsInterface> = ({
         </div>
         <hr className={styles.separator} />
         <div className={styles.edit}>
-          <Button onClick={() => setIsImageSetting(true)} variant="gradient" extraClassName={styles.btn}>Edit Info</Button>
+          <Button
+            onClick={() => setIsImageSetting(true)}
+            variant="gradient"
+            extraClassName={styles.btn}
+          >
+            Edit Info
+          </Button>
         </div>
       </div>
     </>

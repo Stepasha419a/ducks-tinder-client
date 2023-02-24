@@ -14,7 +14,6 @@ import styles from './Profile.module.scss';
 import { useAppSelector } from '../../redux/store';
 
 export const Profile = () => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const isUserInfoSetting = useAppSelector(
     (state) => state.settings.isUserInfoSetting
   );
@@ -46,11 +45,9 @@ export const Profile = () => {
           {isImageSetting ? (
             <ImageSetting
               setIsImageSetting={setIsImageSetting}
-              currentUser={currentUser}
             />
           ) : (
             <UserImage
-              currentUser={currentUser}
               setIsImageSetting={setIsImageSetting}
             />
           )}

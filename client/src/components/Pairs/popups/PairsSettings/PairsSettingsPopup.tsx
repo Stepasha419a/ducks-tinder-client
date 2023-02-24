@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { PreferAge } from '../../../../models/IUser';
 import { Button, CheckboxInput, RangeInput } from '../../../ui/';
 import { RangeInterface, RangeValue } from '../../../ui/inputs/Range';
 import { ISorts } from '../../utils/PairsUtils';
@@ -8,11 +9,11 @@ interface PairsSettingsPopupProps {
   pairSorts: ISorts;
   clearSorts: () => void;
   addSort: (
-    sortSetting: string | number | { min: number; max: number },
+    sortSetting: string | number | PreferAge,
     field: string
   ) => void;
   deleteSort: (
-    sortSetting: string | number | { min: number; max: number },
+    sortSetting: string | number | PreferAge,
     field: string
   ) => void;
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
@@ -28,7 +29,7 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
   setIsSortPopupOpen,
 }) => {
   const [distanceSetting, setDistanceSetting] = useState(pairSorts.distance);
-  const [ageSetting, setAgeSetting] = useState<{ min: number; max: number }>(
+  const [ageSetting, setAgeSetting] = useState<PreferAge>(
     pairSorts.age
   );
   const [photoCount, setPhotoCount] = useState(pairSorts.photos);

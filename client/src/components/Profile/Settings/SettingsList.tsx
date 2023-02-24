@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react';
-import { potentialFields } from '../../../models/IUser';
+import { useEffect } from 'react';
 import { createNotification } from '../../../redux/notifications/notifications.slice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
-import { checkField } from '../utils/ProfileUtils';
 import Account from './SettingGroups/Account/Account';
 import Find from './SettingGroups/Find/Find';
 import LinksSettingGroup from './SettingGroups/Links/LinksSettingGroup';
@@ -13,32 +11,10 @@ import styles from './SettingsList.module.scss';
 const SettingsList = () => {
   const dispatch = useAppDispatch();
 
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const notifications = useAppSelector(
     (state) => state.notifications.notifications
   );
-
-  const [errorFields, setErrorFields] = useState<string[]>([]);
-
-  useEffect(() => {
-    const newErrorFields = [];
-
-    for (let i = 0; i < potentialFields.length; i++) {
-      const field = potentialFields[i];
-
-      let result = checkField(currentUser, field);
-
-      if (result) {
-        newErrorFields.push(field);
-      }
-    }
-
-    if (newErrorFields.length) {
-      setErrorFields(newErrorFields);
-    } else {
-      setErrorFields([]);
-    }
-  }, [currentUser]);
+  const errorFields = useAppSelector(state => state.settings.errorFields)
 
   useEffect(() => {
     const errorText =

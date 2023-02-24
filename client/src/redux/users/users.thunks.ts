@@ -1,16 +1,15 @@
-import { PartnerSettings } from './../../models/IUser';
-import { ChangedData, InnerObjectName } from './../settings/settings.slice';
+import { ImageInterface, PartnerSettings } from './../../models/IUser';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/usersApi';
-import { imageInterface } from '../../components/Profile/ProfileImageChange/ChangeImage/ChangeImage';
+import { IUser } from '../../models/IUser';
+import { RootState } from '../store';
+import { ChangedData, InnerObjectName } from '../settings/settings.interfaces';
 import {
-  IUser,
   makeDataObject,
   makeQuerySortsObj,
   makeUserImagesObject,
-} from '../../models/IUser';
-import { RootState } from '../store';
+} from './utils';
 
 export async function fetchUserById(id: string) {
   const response = await usersAPI.getCurrentUser(id);
@@ -179,7 +178,7 @@ export const deleteUserImage = createAsyncThunk(
 export const mixUserImages = createAsyncThunk(
   'users/mixUserImages',
   async (
-    args: { currentUser: IUser; images: imageInterface[] },
+    args: { currentUser: IUser; images: ImageInterface[] },
     { rejectWithValue }
   ) => {
     try {

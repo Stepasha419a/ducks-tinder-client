@@ -1,6 +1,7 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { PreferAge } from '../../../../../models/IUser';
 import { setInput } from '../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
@@ -16,7 +17,7 @@ const Find: React.FC<IFind> = ({ errorFields }) => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
-  const [ageSetting, setAgeSetting] = useState<{ min: number; max: number }>(
+  const [ageSetting, setAgeSetting] = useState<PreferAge>(
     currentUser.partnerSettings
       ? {
           min: currentUser.partnerSettings.age.from,
@@ -68,7 +69,7 @@ const Find: React.FC<IFind> = ({ errorFields }) => {
     dispatch(
       setInput({
         inputName: 'place',
-        validation: { min: 50, max: 400 },
+        validation: { min: 12, max: 30 },
         innerObjectName: 'partnerSettings',
       })
     );
@@ -164,7 +165,7 @@ const Find: React.FC<IFind> = ({ errorFields }) => {
           <div className={styles.descr}>
             <div className={styles.title}>Interested in</div>
             <div className={styles.setting}>
-              {currentUser.partnerSettings.preferSex || 'empty sex prefer'}
+              {currentUser.partnerSettings.preferSex || 'Empty sex prefer'}
               <FontAwesomeIcon
                 icon={faAngleRight}
                 className={styles.openIcon}

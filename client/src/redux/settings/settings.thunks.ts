@@ -4,9 +4,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import {
   ChangedData,
-  SettingInputName,
   InnerObjectName,
-} from './settings.slice';
+  SettingInputName,
+} from './settings.interfaces';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',

@@ -33,7 +33,7 @@ const Account: React.FC<IAccount> = ({ errorFields }) => {
     dispatch(
       setInput({
         inputName: 'email',
-        validation: { max: 40, min: 0, email: true },
+        validation: { min: 0, max: 40, email: true },
       })
     );
   };

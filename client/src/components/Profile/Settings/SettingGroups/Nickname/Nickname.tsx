@@ -12,7 +12,7 @@ const Nickname = () => {
     dispatch(
       setInput({
         inputName: 'nickname',
-        validation: { min: 6, max: 10 },
+        validation: { min: 6, max: 16 },
       })
     );
   };

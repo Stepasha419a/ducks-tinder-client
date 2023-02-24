@@ -1,9 +1,12 @@
 import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { IUser } from '../../../../models/IUser';
+import { ImageInterface, IUser } from '../../../../models/IUser';
 import { useAppDispatch } from '../../../../redux/store';
-import { deleteUserImage, mixUserImages } from '../../../../redux/users/users.thunks';
+import {
+  deleteUserImage,
+  mixUserImages,
+} from '../../../../redux/users/users.thunks';
 import { Button } from '../../../ui';
 import ProfileCropImage from '../CropImage/CropImage';
 import ProfileDialogUpload from '../CropImage/DialogUpload/DialogUpload';
@@ -12,13 +15,6 @@ import styles from './ChangeImage.module.scss';
 interface ProfileChangeImagePropsInterface {
   currentUser: IUser;
   setIsImageSetting: (isImageSetting: boolean) => void;
-}
-
-export interface imageInterface {
-  id: number;
-  order: number;
-  image: string;
-  setting: string;
 }
 
 const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
@@ -34,8 +30,8 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
     '' as 'avatar' | 'gallery' | ''
   );
 
-  const [images, setImages] = useState([] as imageInterface[]);
-  const [currentImage, setCurrentImage] = useState({} as imageInterface);
+  const [images, setImages] = useState<ImageInterface[]>([]);
+  const [currentImage, setCurrentImage] = useState<ImageInterface | null>(null);
 
   const [imagesChanged, setImagesChanged] = useState(false);
 
@@ -106,7 +102,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
     setIsImageSetting(false);
   };
 
-  const dragStartHangler = (e: any, card: imageInterface) => {
+  const dragStartHangler = (e: any, card: ImageInterface) => {
     setCurrentImage(card);
   };
 
@@ -123,7 +119,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
     e.target.style.opacity = '0.5';
   };
 
-  const dropHangler = (e: any, card: imageInterface) => {
+  const dropHangler = (e: any, card: ImageInterface) => {
     e.preventDefault();
     setImages(
       images.map((image, index) => {
@@ -131,10 +127,10 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
           setImagesChanged(true);
         }
         if (image.id === card.id) {
-          return { ...image, order: currentImage.order };
+          return { ...image, order: currentImage!.order };
         }
 
-        if (image.id === currentImage.id) {
+        if (image.id === currentImage!.id) {
           return { ...image, order: card.order };
         }
         return image;
@@ -143,7 +139,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
     e.target.style.opacity = '1';
   };
 
-  const sortCards = (a: imageInterface, b: imageInterface) => a.order - b.order;
+  const sortCards = (a: ImageInterface, b: ImageInterface) => a.order - b.order;
 
   return (
     <div className={styles.change}>

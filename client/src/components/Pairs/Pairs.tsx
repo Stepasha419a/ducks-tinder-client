@@ -4,7 +4,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
-import { IUser } from '../../models/IUser';
+import { IUser, PreferAge } from '../../models/IUser';
 import Pair from './Pair/Pair';
 import PairPopup from './popups/Pair/PairPopup';
 import PairsSettingsPopup from './popups/PairsSettings/PairsSettingsPopup';
@@ -56,7 +56,7 @@ export const Pairs: React.FC = () => {
   }, [userPairsRef.current?.clientWidth]);
 
   const addSort = (
-    sortSetting: string | number | { min: number; max: number },
+    sortSetting: string | number | PreferAge,
     field: string
   ) => {
     if (field === 'interests' || field === 'account') {
@@ -69,7 +69,7 @@ export const Pairs: React.FC = () => {
   };
 
   const deleteSort = (
-    sortSetting: string | number | { min: number; max: number },
+    sortSetting: string | number | PreferAge,
     field: string
   ) => {
     if (field === 'interests' || field === 'account') {

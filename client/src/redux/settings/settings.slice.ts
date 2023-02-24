@@ -1,19 +1,12 @@
-import { IUser, PartnerSettings } from './../../models/IUser';
 import { createSlice } from '@reduxjs/toolkit';
 import { submitSettingsThunk } from './settings.thunks';
-
-export interface Validation {
-  min?: number;
-  max?: number;
-  email?: boolean;
-}
-
-type RangeType = { from: number; to: number };
-
-export type ChangedData = String | Number | Boolean | String[] | RangeType;
-
-export type InnerObjectName = 'partnerSettings' | null;
-export type SettingInputName = keyof IUser | keyof PartnerSettings | null;
+import { checkUserFields } from './utils';
+import {
+  ErrorField,
+  InnerObjectName,
+  SettingInputName,
+  Validation,
+} from './settings.interfaces';
 
 interface InitialState {
   settingInputName: SettingInputName;
@@ -21,6 +14,7 @@ interface InitialState {
   isUserInfoSetting: boolean;
   validaton: Validation | null;
   formName: string | null;
+  errorFields: ErrorField[];
 }
 
 const initialState: InitialState = {
@@ -29,18 +23,13 @@ const initialState: InitialState = {
   isUserInfoSetting: false,
   validaton: null,
   formName: null,
+  errorFields: [],
 };
 
 const settingSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    setInputName: (state, { payload }) => {
-      state.settingInputName = payload;
-    },
-    setInnerObjectName: (state, { payload }) => {
-      state.innerObjectName = payload;
-    },
     setIsUserInfoSetting: (state, { payload }) => {
       state.isUserInfoSetting = payload;
     },
@@ -58,6 +47,9 @@ const settingSlice = createSlice({
       state.validaton = payload.validation;
       state.isUserInfoSetting = true;
     },
+    checkFields: (state, { payload }) => {
+      state.errorFields = checkUserFields(payload);
+    },
   },
   extraReducers(builder) {
     builder.addCase(submitSettingsThunk.pending, (state) => {
@@ -66,12 +58,7 @@ const settingSlice = createSlice({
   },
 });
 
-export const {
-  setInputName,
-  setInnerObjectName,
-  setIsUserInfoSetting,
-  setValidation,
-  setInput,
-} = settingSlice.actions;
+export const { setIsUserInfoSetting, setValidation, setInput, checkFields } =
+  settingSlice.actions;
 
 export default settingSlice.reducer;

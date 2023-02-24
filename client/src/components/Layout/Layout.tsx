@@ -3,9 +3,9 @@ import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import { Socket } from 'socket.io-client';
 import styles from './Layout.module.scss';
-import { potentialFields } from '../../models/IUser';
-import { checkField } from '../../components/Profile/utils/ProfileUtils';
 import { useAppSelector } from '../../redux/store';
+import { useDispatch } from 'react-redux';
+import { checkFields } from '../../redux/settings/settings.slice';
 
 interface LayoutPropsInterface {
   isPairsOpened: boolean;
@@ -21,19 +21,20 @@ export const Layout: React.FC<LayoutPropsInterface> = ({
   const navigate = useNavigate();
   const url = useLocation().pathname;
 
+  const dispatch = useDispatch();
+
   const isAuth = useAppSelector((state) => state.authPage.isAuth);
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const errorFields = useAppSelector((state) => state.settings.errorFields);
 
   useEffect(() => {
     if (isAuth) {
-      for (const field of potentialFields) {
-        const result = checkField(currentUser, field);
-        if (result) {
-          return navigate('profile');
-        }
+      dispatch(checkFields(currentUser));
+      if (errorFields.length) {
+        return navigate('profile');
       }
     }
-  }, [isAuth, navigate, currentUser]);
+  }, [isAuth, navigate, currentUser, dispatch, errorFields.length]);
 
   useEffect(() => {
     if (isAuth === false) {
