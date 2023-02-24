@@ -6,22 +6,21 @@ import {
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
 import { Textarea } from '../../../../../ui';
-import SettingWrapper from '../../SettingWrapper/SettingWrapper';
+import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './TextareaForm.module.scss';
 
 interface TextareaFormProps {
-  formName: string;
   cancelHandler: () => void;
 }
 
-const TextareaForm: React.FC<TextareaFormProps> = ({
-  formName,
+export const TextareaForm: React.FC<TextareaFormProps> = ({
   cancelHandler,
 }) => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const validation = useAppSelector((state) => state.settings.validaton);
+  const formName = useAppSelector((state) => state.settings.formName);
 
   const [inputValue, setInputValue] = useState('');
   const [inputValueDirty, setInputValueDirty] = useState(false);
@@ -86,5 +85,3 @@ const TextareaForm: React.FC<TextareaFormProps> = ({
     </SettingWrapper>
   );
 };
-
-export default TextareaForm;

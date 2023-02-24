@@ -3,12 +3,7 @@ import { IUser, PartnerSettings, potentialFields } from '../../../models/IUser';
 import { createNotification } from '../../../redux/notifications/notifications.slice';
 import {
   ChangedData,
-  IUserInnerKey,
-  setInnerObjectName,
-  setInputName,
-  setIsUserInfoSetting,
-  setValidation,
-  Validation,
+  InnerObjectName,
 } from '../../../redux/settings/settings.slice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import { checkField } from '../utils/ProfileUtils';
@@ -23,14 +18,12 @@ interface SettingsListPropsInterface {
   submitSettings: (
     inputName: keyof IUser | keyof PartnerSettings,
     changedData: ChangedData,
-    innerObjectName?: IUserInnerKey
+    innerObjectName?: InnerObjectName
   ) => void;
-  setFormName: (formName: string) => void;
 }
 
 const SettingsList: React.FC<SettingsListPropsInterface> = ({
   submitSettings,
-  setFormName,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -70,33 +63,11 @@ const SettingsList: React.FC<SettingsListPropsInterface> = ({
     } // eslint-disable-next-line
   }, [errorFields.length, dispatch]);
 
-  const setSettingInput = (
-    formName: string,
-    inputName: string,
-    validation?: Validation | null,
-    innerObjectName?: string
-  ) => {
-    dispatch(setIsUserInfoSetting(true));
-    setFormName(formName);
-    dispatch(setValidation(validation));
-    dispatch(setInputName(inputName as keyof IUser | keyof PartnerSettings));
-    innerObjectName &&
-      dispatch(setInnerObjectName(innerObjectName as 'partnerSettings'));
-  };
-
   return (
     <div className={styles.groups}>
-      <Account
-        errorFields={errorFields}
-        setSettingInput={setSettingInput}
-        submitSettings={submitSettings}
-      />
-      <Find
-        errorFields={errorFields}
-        setSettingInput={setSettingInput}
-        submitSettings={submitSettings}
-      />
-      <Nickname setSettingInput={setSettingInput} />
+      <Account errorFields={errorFields} submitSettings={submitSettings} />
+      <Find errorFields={errorFields} submitSettings={submitSettings} />
+      <Nickname />
       <LinksSettingGroup />
       <LoggoutButton />
     </div>

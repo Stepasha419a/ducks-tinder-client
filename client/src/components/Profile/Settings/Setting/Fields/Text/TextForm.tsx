@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { IUser, PartnerSettings } from '../../../../../../models/IUser';
 import {
   setInnerObjectName,
@@ -6,19 +6,16 @@ import {
 } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import { RadioInput } from '../../../../../ui';
-import SettingWrapper from '../../SettingWrapper/SettingWrapper';
-import styles from './RadioInputs.module.scss';
+import { TextField } from '../../../../../ui';
+import SettingWrapper from '../../Wrapper/SettingWrapper';
+import { IMAIL_REGEXP } from './TextForm.constants';
+import styles from './TextForm.module.scss';
 
-interface RadioInputsProps {
-  formName: string;
+interface TextFormProps {
   cancelHandler: () => void;
 }
 
-const RadioInputs: React.FC<RadioInputsProps> = ({
-  formName,
-  cancelHandler,
-}) => {
+export const TextForm: React.FC<TextFormProps> = ({ cancelHandler }) => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -28,8 +25,11 @@ const RadioInputs: React.FC<RadioInputsProps> = ({
   const settingInputName = useAppSelector(
     (state) => state.settings.settingInputName
   );
+  const validation = useAppSelector((state) => state.settings.validaton);
+  const formName = useAppSelector((state) => state.settings.formName);
 
   const [inputValue, setInputValue] = useState('');
+  const [inputValueDirty, setInputValueDirty] = useState(false);
   const [inputValueError, setInputValueError] = useState('');
   const [isFormCloseable, setIsFormCloseable] = useState(true);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -52,20 +52,31 @@ const RadioInputs: React.FC<RadioInputsProps> = ({
     );
   }, [innerObjectName, currentUser, settingInputName]);
 
-  useEffect(() => {
-    if (!inputValue) {
-      setIsFormValid(false);
+  const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\s+/g, ' ');
+    const length = value.length;
+    setInputValueError('');
+    if (!length) {
       setIsFormCloseable(false);
-      setInputValueError("Form can't be empty");
+      setInputValueError(`${formName} can't be empty`);
     } else {
-      setIsFormValid(true);
-      setIsFormCloseable(true);
-      setInputValueError('');
+      if (validation?.min && validation.max) {
+        if (validation.max < length || length < validation.min) {
+          setInputValueError(
+            `${formName} has to be more ${validation.min} and less ${validation.max}`
+          );
+        }
+      }
+      !isFormCloseable && setIsFormCloseable(true);
     }
-  }, [inputValue]);
+    if (validation?.email && !IMAIL_REGEXP.test(String(value).toLowerCase())) {
+      setInputValueError('Incorrect email');
+    }
+    setInputValue(value);
+  };
 
   const submitSettings = () => {
-    dispatch(submitSettingsThunk({ changedData: inputValue }));
+    dispatch(submitSettingsThunk({ changedData: inputValue.trim() }));
     dispatch(setIsUserInfoSetting(false));
     setInnerObjectName('');
   };
@@ -74,30 +85,19 @@ const RadioInputs: React.FC<RadioInputsProps> = ({
     <SettingWrapper
       formName={formName}
       cancelHandler={cancelHandler}
-      inputValueDirty={true}
+      inputValueDirty={inputValueDirty}
       inputValueError={inputValueError}
       isFormCloseable={isFormCloseable}
       isFormValid={isFormValid}
       submitSettings={submitSettings}
     >
-      <RadioInput
-        name={settingInputName!}
-        value="male"
-        checked={inputValue === 'male'}
-        onChange={() => setInputValue('male')}
-        text="Male"
-        extraClassName={styles.radioInput}
-      />
-      <RadioInput
-        name={settingInputName!}
-        value="female"
-        checked={inputValue === 'female'}
-        onChange={() => setInputValue('female')}
-        text="Female"
-        extraClassName={styles.radioInput}
+      <TextField
+        onChange={(e) => inputHandler(e)}
+        onKeyDown={() => !inputValueDirty && setInputValueDirty(true)}
+        value={inputValue}
+        type="text"
+        extraClassName={styles.textInput}
       />
     </SettingWrapper>
   );
 };
-
-export default RadioInputs;

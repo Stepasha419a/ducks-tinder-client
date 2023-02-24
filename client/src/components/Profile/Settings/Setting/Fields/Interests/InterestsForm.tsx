@@ -6,14 +6,14 @@ import {
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
 import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
-import SettingWrapper from '../../SettingWrapper/SettingWrapper';
-import styles from './IterestsSetting.module.scss';
+import SettingWrapper from '../../Wrapper/SettingWrapper';
+import styles from './InterestsForm.module.scss';
 
-interface InterestsSettingPropsInterface {
+interface InterestsFormProps {
   cancelHandler: () => void;
 }
 
-const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({
+export const InterestsForm: React.FC<InterestsFormProps> = ({
   cancelHandler,
 }) => {
   const dispatch = useAppDispatch();
@@ -109,5 +109,3 @@ const InterestsSetting: React.FC<InterestsSettingPropsInterface> = ({
     </>
   );
 };
-
-export default InterestsSetting;

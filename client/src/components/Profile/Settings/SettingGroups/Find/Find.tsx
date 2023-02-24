@@ -2,32 +2,27 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { IUser, PartnerSettings } from '../../../../../models/IUser';
-import { ChangedData, IUserInnerKey, Validation } from '../../../../../redux/settings/settings.slice';
-import { useAppSelector } from '../../../../../redux/store';
+import {
+  ChangedData,
+  InnerObjectName,
+  setInput,
+} from '../../../../../redux/settings/settings.slice';
+import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { CheckboxInput, RangeInput } from '../../../../ui';
 import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
 import styles from './Find.module.scss';
 
 interface IFind {
   errorFields: string[];
-  setSettingInput: (
-    formName: string,
-    inputName: string,
-    validation?: Validation | null,
-    innerObjectName?: string
-  ) => void;
   submitSettings: (
     inputName: keyof IUser | keyof PartnerSettings,
     changedData: ChangedData,
-    innerObjectName?: IUserInnerKey
+    innerObjectName?: InnerObjectName
   ) => void;
 }
 
-const Find: React.FC<IFind> = ({
-  setSettingInput,
-  errorFields,
-  submitSettings,
-}) => {
+const Find: React.FC<IFind> = ({ errorFields, submitSettings }) => {
+  const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const [ageSetting, setAgeSetting] = useState<{ min: number; max: number }>(
@@ -55,12 +50,39 @@ const Find: React.FC<IFind> = ({
     submitSettings('distance', currentDistanceSetting, 'partnerSettings');
   };
 
+  const SetInterestsHandler = () => {
+    dispatch(
+      setInput({
+        inputName: 'interests',
+      })
+    );
+  };
+  const SetPlaceHandler = () => {
+    dispatch(
+      setInput({
+        inputName: 'place',
+        validation: { min: 50, max: 400 },
+        innerObjectName: 'partnerSettings',
+      })
+    );
+  };
+  const SetPreferSexHandler = () => {
+    dispatch(
+      setInput({
+        formName: 'Interested in',
+        inputName: 'preferSex',
+        validation: null,
+        innerObjectName: 'partnerSettings',
+      })
+    );
+  };
+
   return (
     <div className={styles.group}>
       <div className={styles.groupTitle}>Find Settings</div>
       <div className={styles.items}>
         <div
-          onClick={() => setSettingInput('Interests', 'interests')}
+          onClick={SetInterestsHandler}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('interests') ? styles.item_error : ''
           }`}
@@ -79,7 +101,7 @@ const Find: React.FC<IFind> = ({
           </div>
         </div>
         <div
-          onClick={() => setSettingInput('Place', 'place', {min: 10, max: 30}, 'partnerSettings')}
+          onClick={SetPlaceHandler}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('place') ? styles.item_error : ''
           }`}
@@ -133,9 +155,7 @@ const Find: React.FC<IFind> = ({
           </div>
         </div>
         <div
-          onClick={() =>
-            setSettingInput('Interested in', 'preferSex', null, 'partnerSettings')
-          }
+          onClick={SetPreferSexHandler}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('preferSex') ? styles.item_error : ''
           }`}

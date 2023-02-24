@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IUser, PartnerSettings } from '../../../../../../models/IUser';
 import {
   setInnerObjectName,
@@ -6,19 +6,15 @@ import {
 } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import { TextField } from '../../../../../ui';
-import SettingWrapper from '../../SettingWrapper/SettingWrapper';
-import styles from './TextInput.module.scss';
+import { RadioInput } from '../../../../../ui';
+import SettingWrapper from '../../Wrapper/SettingWrapper';
+import styles from './RadioForm.module.scss';
 
-interface TextInputProps {
-  formName: string;
+interface RadioFormProps {
   cancelHandler: () => void;
 }
 
-const regexp =
-  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
+export const RadioForm: React.FC<RadioFormProps> = ({ cancelHandler }) => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -28,10 +24,9 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
   const settingInputName = useAppSelector(
     (state) => state.settings.settingInputName
   );
-  const validation = useAppSelector((state) => state.settings.validaton);
+  const formName = useAppSelector((state) => state.settings.formName);
 
   const [inputValue, setInputValue] = useState('');
-  const [inputValueDirty, setInputValueDirty] = useState(false);
   const [inputValueError, setInputValueError] = useState('');
   const [isFormCloseable, setIsFormCloseable] = useState(true);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -54,31 +49,20 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
     );
   }, [innerObjectName, currentUser, settingInputName]);
 
-  const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\s+/g, ' ');
-    const length = value.length;
-    setInputValueError('');
-    if (!length) {
+  useEffect(() => {
+    if (!inputValue) {
+      setIsFormValid(false);
       setIsFormCloseable(false);
-      setInputValueError(`${formName} can't be empty`);
+      setInputValueError("Form can't be empty");
     } else {
-      if (validation?.min && validation.max) {
-        if (validation.max < length || length < validation.min) {
-          setInputValueError(
-            `${formName} has to be more ${validation.min} and less ${validation.max}`
-          );
-        }
-      }
-      !isFormCloseable && setIsFormCloseable(true);
+      setIsFormValid(true);
+      setIsFormCloseable(true);
+      setInputValueError('');
     }
-    if (validation?.email && !regexp.test(String(value).toLowerCase())) {
-      setInputValueError('Incorrect email');
-    }
-    setInputValue(value);
-  };
+  }, [inputValue]);
 
   const submitSettings = () => {
-    dispatch(submitSettingsThunk({ changedData: inputValue.trim() }));
+    dispatch(submitSettingsThunk({ changedData: inputValue }));
     dispatch(setIsUserInfoSetting(false));
     setInnerObjectName('');
   };
@@ -87,21 +71,28 @@ const TextInput: React.FC<TextInputProps> = ({ formName, cancelHandler }) => {
     <SettingWrapper
       formName={formName}
       cancelHandler={cancelHandler}
-      inputValueDirty={inputValueDirty}
+      inputValueDirty={true}
       inputValueError={inputValueError}
       isFormCloseable={isFormCloseable}
       isFormValid={isFormValid}
       submitSettings={submitSettings}
     >
-      <TextField
-        onChange={(e) => inputHandler(e)}
-        onKeyDown={() => !inputValueDirty && setInputValueDirty(true)}
-        value={inputValue}
-        type="text"
-        extraClassName={styles.textInput}
+      <RadioInput
+        name={settingInputName!}
+        value="male"
+        checked={inputValue === 'male'}
+        onChange={() => setInputValue('male')}
+        text="Male"
+        extraClassName={styles.radioInput}
+      />
+      <RadioInput
+        name={settingInputName!}
+        value="female"
+        checked={inputValue === 'female'}
+        onChange={() => setInputValue('female')}
+        text="Female"
+        extraClassName={styles.radioInput}
       />
     </SettingWrapper>
   );
 };
-
-export default TextInput;

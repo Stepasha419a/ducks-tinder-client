@@ -5,7 +5,7 @@ import styles from './SettingWrapper.module.scss';
 interface SettingWrapperProps {
   submitSettings: () => void;
   cancelHandler: () => void;
-  formName: string;
+  formName: string | null;
   inputValueDirty: boolean;
   inputValueError: string;
   isFormValid: boolean;

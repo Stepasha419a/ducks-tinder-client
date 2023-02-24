@@ -1,5 +1,5 @@
 import { imageInterface } from '../components/Profile/ProfileImageChange/ChangeImage/ChangeImage';
-import { ChangedData, IUserInnerKey } from '../redux/settings/settings.slice';
+import { ChangedData, InnerObjectName } from '../redux/settings/settings.slice';
 
 export interface PartnerSettings {
   place: string;
@@ -92,7 +92,7 @@ export const makeDataObject = (args: {
   currentUser: IUser | any;
   inputName: string;
   changedData: ChangedData;
-  innerObjectName?: IUserInnerKey;
+  innerObjectName?: InnerObjectName;
 }) => {
   const { currentUser, inputName, changedData, innerObjectName } = args;
 

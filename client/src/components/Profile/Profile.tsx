@@ -14,7 +14,11 @@ import styles from './Profile.module.scss';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { updateUserThunk } from '../../redux/users/users.thunks';
 import { IUser, PartnerSettings } from '../../models/IUser';
-import { ChangedData, IUserInnerKey, setInnerObjectName } from '../../redux/settings/settings.slice';
+import {
+  ChangedData,
+  InnerObjectName,
+  setInnerObjectName,
+} from '../../redux/settings/settings.slice';
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
@@ -25,14 +29,12 @@ export const Profile = () => {
   );
 
   const [isImageSetting, setIsImageSetting] = useState(false);
-  // name of the title in ProfileSetting
-  const [formName, setFormName] = useState('');
 
   // objectName for inner object in user object if it is
   const submitSettings = (
     inputName: keyof IUser | keyof PartnerSettings,
     changedData: ChangedData,
-    innerObjectName?: IUserInnerKey
+    innerObjectName?: InnerObjectName
   ) => {
     dispatch(
       updateUserThunk({
@@ -63,14 +65,9 @@ export const Profile = () => {
           </div>
         </div>
         {isUserInfoSetting ? (
-          <Setting
-            formName={formName}
-          />
+          <Setting />
         ) : (
-          <SettingsList
-            submitSettings={submitSettings}
-            setFormName={setFormName}
-          />
+          <SettingsList submitSettings={submitSettings} />
         )}
       </aside>
       <div className={styles.content}>

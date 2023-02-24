@@ -4,34 +4,25 @@ import { useState } from 'react';
 import { IUser, PartnerSettings } from '../../../../../models/IUser';
 import {
   ChangedData,
-  IUserInnerKey,
-  Validation,
+  InnerObjectName,
+  setInput,
 } from '../../../../../redux/settings/settings.slice';
-import { useAppSelector } from '../../../../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { RangeInput } from '../../../../ui';
 import { RangeValue } from '../../../../ui/inputs/Range';
 import styles from './Account.module.scss';
 
 interface IAccount {
   errorFields: string[];
-  setSettingInput: (
-    formName: string,
-    inputName: string,
-    validation?: Validation,
-    innerObjectName?: string
-  ) => void;
   submitSettings: (
     inputName: keyof IUser | keyof PartnerSettings,
     changedData: ChangedData,
-    innerObjectName?: IUserInnerKey
+    innerObjectName?: InnerObjectName
   ) => void;
 }
 
-const Account: React.FC<IAccount> = ({
-  setSettingInput,
-  submitSettings,
-  errorFields,
-}) => {
+const Account: React.FC<IAccount> = ({ submitSettings, errorFields }) => {
+  const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const [currentAgeSetting, setCurrentAgeSetting] = useState(
@@ -42,14 +33,44 @@ const Account: React.FC<IAccount> = ({
     submitSettings('age', currentAgeSetting);
   };
 
+  const SetEmailHandler = () => {
+    dispatch(
+      setInput({
+        inputName: 'email',
+        validation: { max: 40, min: 0, email: true },
+      })
+    );
+  };
+  const SetNameHandler = () => {
+    dispatch(
+      setInput({
+        inputName: 'name',
+        validation: { min: 2, max: 14 },
+      })
+    );
+  };
+  const SetDescriptionHandler = () => {
+    dispatch(
+      setInput({
+        inputName: 'description',
+        validation: { min: 50, max: 400 },
+      })
+    );
+  };
+  const SetSexHandler = () => {
+    dispatch(
+      setInput({
+        inputName: 'sex',
+      })
+    );
+  };
+
   return (
     <div className={styles.group}>
       <div className={styles.groupTitle}>Account Settings</div>
       <div className={styles.items}>
         <div
-          onClick={() =>
-            setSettingInput('Email', 'email', { max: 40, min: 0, email: true })
-          }
+          onClick={SetEmailHandler}
           className={`${styles.item} ${styles.item_pointer}`}
         >
           <div className={styles.descr}>
@@ -64,7 +85,7 @@ const Account: React.FC<IAccount> = ({
           </div>
         </div>
         <div
-          onClick={() => setSettingInput('Name', 'name', { min: 2, max: 14 })}
+          onClick={SetNameHandler}
           className={`${styles.item} ${styles.item_pointer}`}
         >
           <div className={styles.descr}>
@@ -79,9 +100,7 @@ const Account: React.FC<IAccount> = ({
           </div>
         </div>
         <div
-          onClick={() =>
-            setSettingInput('Description', 'description', { min: 50, max: 400 })
-          }
+          onClick={SetDescriptionHandler}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('description') ? styles.item_error : ''
           }`}
@@ -98,7 +117,7 @@ const Account: React.FC<IAccount> = ({
           </div>
         </div>
         <div
-          onClick={() => setSettingInput('Sex', 'sex')}
+          onClick={SetSexHandler}
           className={`${styles.item} ${styles.item_pointer} ${
             errorFields.includes('sex') ? styles.item_error : ''
           }`}

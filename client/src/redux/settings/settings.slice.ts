@@ -1,28 +1,25 @@
 import { IUser, PartnerSettings } from './../../models/IUser';
 import { createSlice } from '@reduxjs/toolkit';
 
-export type IUserInnerKey = 'partnerSettings' | null;
-
 export interface Validation {
   min?: number;
   max?: number;
   email?: boolean;
 }
 
-type RangeType = { from: number; to: number }
+type RangeType = { from: number; to: number };
 
-export type ChangedData =
-  | String
-  | Number
-  | Boolean
-  | String[]
-  | RangeType;
+export type ChangedData = String | Number | Boolean | String[] | RangeType;
+
+export type InnerObjectName = 'partnerSettings' | null;
+export type SettingInputName = keyof IUser | keyof PartnerSettings | null;
 
 interface InitialState {
-  settingInputName: keyof IUser | keyof PartnerSettings | null;
-  innerObjectName: IUserInnerKey;
+  settingInputName: SettingInputName;
+  innerObjectName: InnerObjectName;
   isUserInfoSetting: boolean;
   validaton: Validation | null;
+  formName: string | null;
 }
 
 const initialState: InitialState = {
@@ -30,6 +27,7 @@ const initialState: InitialState = {
   innerObjectName: null,
   isUserInfoSetting: false,
   validaton: null,
+  formName: null,
 };
 
 const settingSlice = createSlice({
@@ -48,6 +46,17 @@ const settingSlice = createSlice({
     setValidation: (state, { payload }) => {
       state.validaton = payload;
     },
+    setInput: (state, { payload }) => {
+      if (!payload.formName) {
+        state.formName = payload.inputName;
+      } else {
+        state.formName = payload.formName;
+      }
+      state.innerObjectName = payload.innerObjectName;
+      state.settingInputName = payload.inputName;
+      state.validaton = payload.validation;
+      state.isUserInfoSetting = true;
+    },
   },
 });
 
@@ -56,6 +65,7 @@ export const {
   setInnerObjectName,
   setIsUserInfoSetting,
   setValidation,
+  setInput,
 } = settingSlice.actions;
 
 export default settingSlice.reducer;
