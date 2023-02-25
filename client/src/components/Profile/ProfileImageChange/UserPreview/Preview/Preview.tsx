@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IUser } from '../../../../../models/IUser';
-import ImageSlider from '../../../../Slider/ImageSlider/ImageSlider';
+import { ImageSlider } from '../../../../ImagesSlider/ImageSlider';
 import { Button } from '../../../../ui';
 import styles from './Preview.module.scss';
 
@@ -27,7 +27,7 @@ const ProfilePreview: React.FC<ProfilePreviewPropsInterface> = ({
             ...currentUser.pictures.gallery,
           ]}
           userId={currentUser._id}
-          imageExtraClassName={'_bdrd'}
+          extraClassName={styles.slider}
         />
         <div className={styles.info}>
           <div className={styles.descr}>

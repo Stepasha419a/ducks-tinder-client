@@ -1,7 +1,7 @@
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from '../../../redux/store';
-import ImageSlider from '../../Slider/ImageSlider/ImageSlider';
+import { ImageSlider } from '../../ImagesSlider/ImageSlider';
 import { Button } from '../../ui';
 import styles from './UserImage.module.scss';
 

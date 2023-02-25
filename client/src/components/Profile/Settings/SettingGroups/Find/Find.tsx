@@ -9,13 +9,11 @@ import { CheckboxInput, RangeInput } from '../../../../ui';
 import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
 import styles from './Find.module.scss';
 
-interface IFind {
-  errorFields: string[];
-}
-
-const Find: React.FC<IFind> = ({ errorFields }) => {
+const Find = () => {
   const dispatch = useAppDispatch();
+
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const errorFields = useAppSelector((state) => state.settings.errorFields);
 
   const [ageSetting, setAgeSetting] = useState<PreferAge>(
     currentUser.partnerSettings

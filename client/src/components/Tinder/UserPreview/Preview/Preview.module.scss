@@ -3,12 +3,24 @@
   height: 100%;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
+  z-index: 0;
 
   .slider {
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: auto 100%;
     height: 100%;
+
+    .image{
+      position: relative;
+      z-index: -1;
+    }
+
+    .wrapper {
+      box-shadow: rgb(0 0 0) 0px -205px 55px -65px inset
+    }
+    
+    .arrows{
+      height: 85%;
+    }
   }
 
   .descr {
@@ -49,11 +61,7 @@
       text-shadow: 0 1px 1px var(--color--black-90);
 
       .icon {
-        margin: 0 5px 0 1px;
-      }
-
-      .icon {
-        margin-left: 4px;
+        margin: 0 8px 0 1px;
       }
     }
 

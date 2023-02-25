@@ -1,6 +1,6 @@
 import { IUser } from '../../../models/IUser';
-import defaultPhoto from '../../../assets/images/photos/1.jpg';
 import styles from './Pair.module.scss';
+import { makeImageUrl } from '../../ui/helpers';
 
 interface PairPropsInterface {
   user: IUser;
@@ -12,15 +12,13 @@ const Pair: React.FC<PairPropsInterface> = ({ user, setCurrentPair }) => {
     return <div>loading...</div>;
   }
 
+  const imageUrl = makeImageUrl(user._id, user.pictures.avatar)
+
   return (
     <div
       onClick={() => setCurrentPair(user)}
       style={{
-        backgroundImage: `url(${
-          user.pictures.avatar
-            ? `http://localhost:5000/${user._id}/avatar/` + user.pictures.avatar
-            : defaultPhoto
-        })`,
+        backgroundImage: `url(${imageUrl})`,
       }}
       className={styles.pair}
     >

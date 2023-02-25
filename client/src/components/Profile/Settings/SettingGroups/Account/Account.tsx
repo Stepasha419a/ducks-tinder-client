@@ -8,13 +8,11 @@ import { RangeInput } from '../../../../ui';
 import { RangeValue } from '../../../../ui/inputs/Range';
 import styles from './Account.module.scss';
 
-interface IAccount {
-  errorFields: string[];
-}
-
-const Account: React.FC<IAccount> = ({ errorFields }) => {
+const Account = () => {
   const dispatch = useAppDispatch();
+
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const errorFields = useAppSelector((state) => state.settings.errorFields);
 
   const [currentAgeSetting, setCurrentAgeSetting] = useState(
     currentUser.age ? currentUser.age : 18

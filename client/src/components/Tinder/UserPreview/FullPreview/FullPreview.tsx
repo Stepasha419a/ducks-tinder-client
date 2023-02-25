@@ -6,8 +6,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { IUser } from '../../../../models/IUser';
+import { ImageSlider } from '../../../ImagesSlider/ImageSlider';
 import InterestsListPopup from '../../../Pairs/popups/Interests/List/InterestsListPopup';
-import ImageSlider from '../../../Slider/ImageSlider/ImageSlider';
 import { Button } from '../../../ui';
 import styles from './FullPreview.module.scss';
 
@@ -38,7 +38,7 @@ const FullPreview: React.FC<FullPreviewProps> = ({
             ...currentUser.pictures.gallery,
           ]}
           userId={currentUser._id}
-          imageExtraClassName="_tinderFull"
+          extraClassName={styles.image}
         />
         <Button variant='mark' onClick={() => setIsFullPreview(false)} extraClassName={styles.closeFullPreview}>
           <FontAwesomeIcon icon={faCircleDown} className={styles.icon} />

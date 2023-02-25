@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IUser } from '../../../../models/IUser';
-import ImageSlider from '../../../Slider/ImageSlider/ImageSlider';
+import { ImageSlider } from '../../../ImagesSlider/ImageSlider';
 import { Button } from '../../../ui';
 import styles from './Preview.module.scss';
 
@@ -24,7 +24,9 @@ const Preview: React.FC<PreviewProps> = ({ currentUser, setIsFullPreview }) => {
             ...currentUser.pictures.gallery,
           ]}
           userId={currentUser._id}
-          imageExtraClassName="_tinder"
+          extraClassName={styles.image}
+          extraWrapperClassName={styles.wrapper}
+          arrowsExtraClassName={styles.arrows}
         />
       </div>
       <div onClick={() => setIsFullPreview(true)} className={styles.descr}>
@@ -41,10 +43,7 @@ const Preview: React.FC<PreviewProps> = ({ currentUser, setIsFullPreview }) => {
           {currentUser.partnerSettings.distance}
           <span className={styles.icon}>km from you</span>
         </div>
-        <Button
-          variant="mark"
-          extraClassName={styles.openFullPreview}
-        >
+        <Button variant="mark" extraClassName={styles.openFullPreview}>
           <FontAwesomeIcon icon={faCircleInfo} />
         </Button>
       </div>

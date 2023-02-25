@@ -1,10 +1,10 @@
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import defaultPhoto from '../../../../assets/images/photos/1.jpg';
 import styles from './PairBlock.module.scss';
 import { IUser } from '../../../../models/IUser';
 import { useAppSelector } from '../../../../redux/store';
+import { makeImageUrl } from '../../../ui/helpers';
 
 interface IPairBlock {
   firstPair: IUser;
@@ -13,17 +13,14 @@ interface IPairBlock {
 export const PairBlock: React.FC<IPairBlock> = ({ firstPair }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
+  const imageUrl = makeImageUrl(firstPair._id, firstPair.pictures.avatar)
+
   return (
     <div className={styles.pairs}>
       <Link className={styles.link} to="/pairs">
         <div
           style={{
-            backgroundImage: `url(${
-              firstPair.pictures.avatar
-                ? `http://localhost:5000/${firstPair._id}/avatar/` +
-                  firstPair.pictures.avatar
-                : defaultPhoto
-            })`,
+            backgroundImage: `url(${imageUrl})`,
           }}
           className={styles.content}
         >

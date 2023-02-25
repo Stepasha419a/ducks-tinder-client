@@ -27,8 +27,8 @@ const SettingsList = () => {
 
   return (
     <div className={styles.groups}>
-      <Account errorFields={errorFields} />
-      <Find errorFields={errorFields} />
+      <Account />
+      <Find />
       <Nickname />
       <LinksSettingGroup />
       <LoggoutButton />

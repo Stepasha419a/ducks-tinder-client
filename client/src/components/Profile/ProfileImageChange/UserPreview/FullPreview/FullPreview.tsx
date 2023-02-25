@@ -6,8 +6,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { IUser } from '../../../../../models/IUser';
+import { ImageSlider } from '../../../../ImagesSlider/ImageSlider';
 import InterestsListPopup from '../../../../Pairs/popups/Interests/List/InterestsListPopup';
-import ImageSlider from '../../../../Slider/ImageSlider/ImageSlider';
 import { Button } from '../../../../ui';
 import styles from './FullPreview.module.scss';
 

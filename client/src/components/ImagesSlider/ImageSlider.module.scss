@@ -1,0 +1,34 @@
+.slider {
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  .itemWrapper {
+    &.hidden {
+      display: none;
+      visibility: hidden;
+    }
+
+    &.active {
+      height: 100%;
+      width: 100%;
+      display: block;
+      visibility: visible;
+    }
+  }
+  .item {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    user-select: none;
+
+    &.default {
+      background-size: auto 125%;
+    }
+
+    &.bdrdTop {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+  }
+}
