@@ -1,16 +1,16 @@
-import { MutableRefObject, useEffect, useState } from 'react';
-import { IChat } from '../../../../models/IChat';
-import { IUser } from '../../../../models/IUser';
+import { useEffect, useState } from 'react';
+import { IChat } from '../../../../../models/IChat';
+import { IUser } from '../../../../../models/IUser';
 import { Socket } from 'socket.io-client';
 import styles from './ChatItem.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../../redux/store';
-import { Avatar } from '../../../ui';
-import { connectChatThunk, disconnectChatThunk } from '../../../../redux/chat/chat.thunks';
+import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
+import { Avatar } from '../../../../ui';
+import { connectChatThunk, disconnectChatThunk } from '../../../../../redux/chat/chat.thunks';
 
 interface ChatInterface {
   chat: IChat;
   chatCompanionId: string | undefined;
-  socket: MutableRefObject<Socket | undefined>;
+  socket: Socket | null;
   currentChatId: string;
 }
 

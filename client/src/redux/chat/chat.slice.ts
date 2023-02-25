@@ -2,8 +2,10 @@ import { IUser } from '../../models/IUser';
 import { createSlice } from '@reduxjs/toolkit';
 import { IChat, IMessage } from '../../models/IChat';
 import { getChatsThunk } from './chat.thunks';
+import { Socket } from 'socket.io-client';
 
 export interface InitialState {
+  socket: Socket | null;
   chats: IChat[];
   chatsUsers: IUser[];
   isConnected: boolean;
@@ -13,6 +15,7 @@ export interface InitialState {
 }
 
 const initialState: InitialState = {
+  socket: null,
   chats: [],
   chatsUsers: [],
   isConnected: false,

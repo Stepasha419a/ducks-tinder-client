@@ -1,7 +1,7 @@
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import Preloader from '../../../Preloader/Preloader';
+import Preloader from '../../../../Preloader/Preloader';
 import styles from './Loading.module.scss';
 
 const Loading = () => {

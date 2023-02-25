@@ -19,7 +19,6 @@ export const Message: FC<MessageProps> = ({
 }) => {
   const cnMessage = classNames(styles.message, isOwn && styles.message_own);
   const cnMark = classNames(styles.mark, isOwn && styles.mark_own);
-  console.log(message);
 
   return (
     <div className={styles.wrapper}>

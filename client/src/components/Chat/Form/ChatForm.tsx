@@ -1,16 +1,16 @@
-import { FC, KeyboardEvent, MutableRefObject, useState } from 'react';
-import { Socket } from 'socket.io-client';
+import { FC, KeyboardEvent, useState } from 'react';
 import { IMessage } from '../../../models/IChat';
 import { IUser } from '../../../models/IUser';
+import { useAppSelector } from '../../../redux/store';
 import { Button, TextField } from '../../ui';
-import styles from './ChatForm.module.scss'
+import styles from './ChatForm.module.scss';
 
 interface ChatFormProps {
-  currentUser: IUser
-  socket: MutableRefObject<Socket | undefined>;
+  currentUser: IUser;
 }
 
-const ChatForm: FC<ChatFormProps> = ({currentUser, socket}) => {
+const ChatForm: FC<ChatFormProps> = ({ currentUser }) => {
+  const socket = useAppSelector((state) => state.chatPage.socket);
 
   const [value, setValue] = useState('');
 
@@ -21,10 +21,10 @@ const ChatForm: FC<ChatFormProps> = ({currentUser, socket}) => {
       content: value,
       userId: currentUser._id,
     };
-    socket.current?.send(message);
+    socket!.send(message);
     setValue('');
   };
-  
+
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       sendMessage();
@@ -42,10 +42,16 @@ const ChatForm: FC<ChatFormProps> = ({currentUser, socket}) => {
           onChange={(e) => setValue(e.target.value)}
           extraClassName={styles.input}
         />
-        <Button onClick={sendMessage} variant='default' extraClassName={styles.button}>send</Button>
+        <Button
+          onClick={sendMessage}
+          variant="default"
+          extraClassName={styles.button}
+        >
+          send
+        </Button>
       </div>
     </div>
   );
 };
 
-export default ChatForm
+export default ChatForm;
