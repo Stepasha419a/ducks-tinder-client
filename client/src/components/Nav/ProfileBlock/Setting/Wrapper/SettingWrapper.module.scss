@@ -1,6 +1,7 @@
 .setting {
   border-right: 1px solid var(--border-main);
   height: calc(100vh - 90px);
+  background-color: var(--bg-primary);
 
   .name {
     border-bottom: 1px solid var(--border-main);

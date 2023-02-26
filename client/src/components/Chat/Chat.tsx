@@ -8,7 +8,7 @@ export const Chat = () => {
   const isConnected = useAppSelector((state) => state.chatPage.isConnected);
 
   return (
-    <div className={styles.chat}>
+    <>
       {isConnected ? (
         <>
           <div className={styles.container}>
@@ -19,6 +19,6 @@ export const Chat = () => {
       ) : (
         <Status />
       )}
-    </div>
+    </>
   );
 };

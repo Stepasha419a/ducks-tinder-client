@@ -3,6 +3,7 @@
   overflow: auto;
   border-right: 1px solid var(--border-main);
   padding-bottom: 50px;
+  background-color: var(--bg-primary);
 
   &::-webkit-scrollbar {
     display: none;

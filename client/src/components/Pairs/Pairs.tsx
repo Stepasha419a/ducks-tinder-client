@@ -25,7 +25,8 @@ export const Pairs: React.FC = () => {
   const [pairsPaddingWidth, setPairsPaddingWidth] = useState(0);
   const [currentPair, setCurrentPair] = useState<IUser>({} as IUser);
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
-  const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] = useState(false);
+  const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
+    useState(false);
   const [pairSorts, setPairSorts] = useState<ISorts>({
     distance: 100,
     age: { min: 18, max: 100 },
@@ -55,10 +56,7 @@ export const Pairs: React.FC = () => {
     }
   }, [userPairsRef.current?.clientWidth]);
 
-  const addSort = (
-    sortSetting: string | number | PreferAge,
-    field: string
-  ) => {
+  const addSort = (sortSetting: string | number | PreferAge, field: string) => {
     if (field === 'interests' || field === 'account') {
       const newValue = { [field]: [...pairSorts[field], sortSetting] };
       setPairSorts({ ...pairSorts, ...newValue });
@@ -95,7 +93,7 @@ export const Pairs: React.FC = () => {
   };
 
   return (
-    <div className={styles.pairs}>
+    <>
       <div className={styles.likes}>
         <FontAwesomeIcon
           icon={faHeartCircleExclamation}
@@ -184,6 +182,6 @@ export const Pairs: React.FC = () => {
       {currentPair.name && (
         <PairPopup currentPair={currentPair} setCurrentPair={setCurrentPair} />
       )}
-    </div>
+    </>
   );
 };

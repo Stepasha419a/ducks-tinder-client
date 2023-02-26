@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  setRequestedUsers,
-} from '../../redux/users/users.slice';
+import { setRequestedUsers } from '../../redux/users/users.slice';
 import Buttons from './Buttons/Buttons';
 import FullPreview from './UserPreview/FullPreview/FullPreview';
 import Preview from './UserPreview/Preview/Preview';
@@ -11,7 +9,10 @@ import styles from './Tinder.module.scss';
 import Instructions from './Instructions/Instructions';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { Button } from '../ui';
-import { getSortedUserThunk, updateUserThunk } from '../../redux/users/users.thunks';
+import {
+  getSortedUserThunk,
+  updateUserThunk,
+} from '../../redux/users/users.thunks';
 
 export const Tinder: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -57,32 +58,28 @@ export const Tinder: React.FC = () => {
 
   if (isFailed) {
     return (
-      <div className={styles.content}>
-        <div className={styles.wrapper}>
-          <Button onClick={() => resetHandler()} extraClassName={styles.reset}>
-            reset
-          </Button>
-          <TinderUserFailed />
-        </div>
+      <div className={styles.wrapper}>
+        <Button onClick={() => resetHandler()} extraClassName={styles.reset}>
+          reset
+        </Button>
+        <TinderUserFailed />
       </div>
     );
   }
 
   if (currentTinderUsersIndex === tinderUsers.length) {
     return (
-      <div className={styles.content}>
-        <div className={styles.wrapper}>
-          <Button onClick={() => resetHandler()} extraClassName={styles.reset}>
-            reset
-          </Button>
-          <TinderUserLoading />
-        </div>
+      <div className={styles.wrapper}>
+        <Button onClick={() => resetHandler()} extraClassName={styles.reset}>
+          reset
+        </Button>
+        <TinderUserLoading />
       </div>
     );
   }
 
   return (
-    <div className={styles.content}>
+    <>
       <div className={styles.wrapper}>
         <Button onClick={() => resetHandler()} extraClassName={styles.reset}>
           reset
@@ -111,6 +108,6 @@ export const Tinder: React.FC = () => {
         </div>
       </div>
       <Instructions />
-    </div>
+    </>
   );
 };

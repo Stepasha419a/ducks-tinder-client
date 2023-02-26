@@ -7,15 +7,13 @@ export const Profile = () => {
   const [isImageSetting, setIsImageSetting] = useState(false);
 
   return (
-    <div className={styles.content}>
-      <div className={styles.wrapper}>
-        <div className={styles.user}>
-          {isImageSetting ? (
-            <ImageSetting setIsImageSetting={setIsImageSetting} />
-          ) : (
-            <UserImage setIsImageSetting={setIsImageSetting} />
-          )}
-        </div>
+    <div className={styles.wrapper}>
+      <div className={styles.user}>
+        {isImageSetting ? (
+          <ImageSetting setIsImageSetting={setIsImageSetting} />
+        ) : (
+          <UserImage setIsImageSetting={setIsImageSetting} />
+        )}
       </div>
     </div>
   );

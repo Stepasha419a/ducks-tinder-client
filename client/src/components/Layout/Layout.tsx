@@ -41,7 +41,9 @@ export const Layout = () => {
       return (
         <div className={styles.tinder}>
           <Nav />
-          <Outlet />
+          <div className={styles.content}>
+            <Outlet />
+          </div>
         </div>
       );
     } else {
