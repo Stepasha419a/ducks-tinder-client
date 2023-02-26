@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { API_URL } from '../../api/api';
-import { authAPI, UserAuthParams } from '../../api/authApi';
+import { authAPI, UserAuthParams } from '../../api/auth/auth.api';
 import { AuthResponse } from '../../models/response/AuthResponse';
 import { setCurrentUser } from '../users/users.slice';
 

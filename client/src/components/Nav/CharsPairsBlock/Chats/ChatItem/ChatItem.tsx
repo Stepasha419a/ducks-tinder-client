@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { IChat } from '../../../../../models/IChat';
 import { IUser } from '../../../../../models/IUser';
-import { Socket } from 'socket.io-client';
 import styles from './ChatItem.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { Avatar } from '../../../../ui';
@@ -10,14 +9,12 @@ import { connectChatThunk, disconnectChatThunk } from '../../../../../redux/chat
 interface ChatInterface {
   chat: IChat;
   chatCompanionId: string | undefined;
-  socket: Socket | null;
   currentChatId: string;
 }
 
 const ChatItem: React.FC<ChatInterface> = ({
   chat,
   chatCompanionId,
-  socket,
   currentChatId,
 }) => {
   const dispatch = useAppDispatch();
@@ -27,15 +24,15 @@ const ChatItem: React.FC<ChatInterface> = ({
   const [chatPartner, setChatPartner] = useState<IUser | null>(null);
 
   function connect(chatId: string) {
-    dispatch(disconnectChatThunk({ socket }));
-    dispatch(connectChatThunk({ socket, chatId }));
+    dispatch(disconnectChatThunk());
+    dispatch(connectChatThunk({ chatId }));
   }
 
   useEffect(() => {
     return () => {
-      dispatch(disconnectChatThunk({ socket }));
+      dispatch(disconnectChatThunk());
     };
-  }, [dispatch, socket]);
+  }, [dispatch]);
 
   useEffect(() => {
     let user = chatsUsers.find((user) => user._id === chatCompanionId);

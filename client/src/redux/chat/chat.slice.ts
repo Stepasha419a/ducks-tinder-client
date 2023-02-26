@@ -2,10 +2,8 @@ import { IUser } from '../../models/IUser';
 import { createSlice } from '@reduxjs/toolkit';
 import { IChat, IMessage } from '../../models/IChat';
 import { getChatsThunk } from './chat.thunks';
-import { Socket } from 'socket.io-client';
 
 export interface InitialState {
-  socket: Socket | null;
   chats: IChat[];
   chatsUsers: IUser[];
   isConnected: boolean;
@@ -15,7 +13,6 @@ export interface InitialState {
 }
 
 const initialState: InitialState = {
-  socket: null,
   chats: [],
   chatsUsers: [],
   isConnected: false,
@@ -32,10 +29,12 @@ const chatSlice = createSlice({
       state.chats = action.payload;
     },
     pushMessage: (state, action) => {
-      state.chats[action.payload.chatIndex].messages = [
-        ...state.chats[action.payload.chatIndex].messages,
-        action.payload.message,
-      ];
+      state.chats[action.payload.chatIndex].messages.push(
+        action.payload.message
+      );
+    },
+    pushNewMessage: (state, action) => {
+      state.currentMessages.push(action.payload);
     },
     setIsConnected: (state, action) => {
       state.isConnected = action.payload;
@@ -43,10 +42,8 @@ const chatSlice = createSlice({
     setCurrentMessages: (state, action) => {
       if (action.payload.length === 0) {
         state.currentMessages = [];
-      } else if (Array.isArray(action.payload)) {
-        state.currentMessages = [...state.currentMessages, ...action.payload];
       } else {
-        state.currentMessages = [...state.currentMessages, action.payload];
+        state.currentMessages = state.currentMessages.concat(action.payload);
       }
     },
     setCurrentChatId: (state, action) => {
@@ -74,6 +71,7 @@ const chatSlice = createSlice({
 export const {
   setChats,
   pushMessage,
+  pushNewMessage,
   setIsConnected,
   setCurrentMessages,
   setCurrentChatId,

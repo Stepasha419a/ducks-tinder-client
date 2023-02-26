@@ -1,7 +1,7 @@
 import { ImageInterface, PartnerSettings } from './../../models/IUser';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { usersAPI } from '../../api/usersApi';
+import { usersAPI } from '../../api/users/users.api';
 import { IUser } from '../../models/IUser';
 import { RootState } from '../store';
 import { ChangedData, InnerObjectName } from '../settings/settings.interfaces';

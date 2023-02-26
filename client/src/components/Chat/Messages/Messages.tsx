@@ -1,20 +1,16 @@
-import { FC, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { IMessage } from '../../../models/IChat';
-import { IUser } from '../../../models/IUser';
 import { useAppSelector } from '../../../redux/store';
 import { Message } from '../../ui';
 import { isRefElementVisible, scrollToBottom } from '../utils/ChatUtils';
 import styles from './Messages.module.scss';
 
-interface MessagesProps {
-  currentUser: IUser;
-}
-
-const Messages: FC<MessagesProps> = ({ currentUser }) => {
+const Messages = () => {
   const currentChatMembers = useAppSelector(
     (state) => state.chatPage.currentChatMembers
   );
   const messages = useAppSelector((state) => state.chatPage.currentMessages);
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const bottomScrollRef = useRef<HTMLDivElement | null>(null);
 

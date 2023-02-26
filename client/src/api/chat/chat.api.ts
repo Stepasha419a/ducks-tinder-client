@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
-import { IChat } from "../models/IChat";
-import { instance } from "./api";
+import { IChat } from "../../models/IChat";
+import { instance } from "../api";
 
 export const chatApi = {
     getChats(id: string): Promise<AxiosResponse<IChat[]>> {

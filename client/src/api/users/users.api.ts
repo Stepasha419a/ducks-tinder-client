@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
-import { IQuerySorts, IUser, IUserUnrequired } from "../models/IUser";
-import { instance } from "./api";
+import { IQuerySorts, IUser, IUserUnrequired } from "../../models/IUser";
+import { instance } from "../api";
 
 export type UserType = {
     _id?: string

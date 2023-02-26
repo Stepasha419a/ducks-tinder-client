@@ -12,7 +12,6 @@ const Chats = () => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const chats = useAppSelector((state) => state.chatPage.chats);
   const currentChatId = useAppSelector((state) => state.chatPage.currentChatId);
-  const socket = useAppSelector((state) => state.chatPage.socket);
 
   useEffect(() => {
     dispatch(getChatsThunk(currentUser._id));
@@ -33,7 +32,6 @@ const Chats = () => {
             key={chat._id}
             chat={chat}
             chatCompanionId={chatCompanionId}
-            socket={socket!}
             currentChatId={currentChatId}
           />
         );

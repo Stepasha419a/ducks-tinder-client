@@ -1,20 +1,27 @@
 import { IUser } from '../../models/IUser';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Dispatch } from 'react';
-import { io } from 'socket.io-client';
-import { chatApi } from '../../api/chatApi';
+import { chatApi } from '../../api/chat/chat.api';
+import { chatSocket } from '../../api/chat/chat.socket';
 import { IChat, IMessage } from '../../models/IChat';
 import { RootState } from '../store';
 import { fetchUserById } from '../users/users.thunks';
-import { InitialState, pushMessage, setCurrentChatId, setCurrentChatMembers, setCurrentMessages, setIsConnected } from './chat.slice';
+import {
+  pushNewMessage,
+  pushMessage,
+  setCurrentChatId,
+  setCurrentChatMembers,
+  setCurrentMessages,
+  setIsConnected,
+} from './chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
   async function (id: string, { rejectWithValue, getState }) {
     try {
-      const response = await chatApi.getChats(id);
       const { usersPage } = getState() as RootState;
-      const currentUser = usersPage.currentUser;
+      const { currentUser } = usersPage;
+
+      const response = await chatApi.getChats(id);
 
       const chats = await response.data;
 
@@ -60,18 +67,14 @@ export const createChatThunk = createAsyncThunk(
 export const connectChatThunk = createAsyncThunk(
   'chat/connectChat',
   async function (
-    args: { socket: any; chatId: string },
+    args: { chatId: string },
     { rejectWithValue, dispatch, getState }
   ) {
     try {
-      const { socket, chatId } = args;
-      socket.current = io(`http://localhost:5000/chat/socket`, {
-        query: { chatId },
-      });
+      const { chatId } = args;
+      const socket = chatSocket.connectChat(chatId);
 
-      socket.current.emit('connectChat');
-
-      socket.current.on('connected', async () => {
+      socket.on('connected', async () => {
         dispatch(setCurrentChatId(chatId));
         dispatch(setIsConnected(true));
         const response = await chatApi.getChat(chatId);
@@ -80,12 +83,16 @@ export const connectChatThunk = createAsyncThunk(
         dispatch(setCurrentMessages(chat.messages));
       });
 
-      socket.current.on('message', (message: IMessage) => {
+      socket.on('message', (message: IMessage) => {
         const { chatPage } = getState() as RootState;
-        sendMessage(message, dispatch, chatPage);
+        dispatch(pushNewMessage(message));
+        const chatIndex = chatPage.chats.findIndex(
+          (chat: IChat) => chat._id === chatPage.currentChatId
+        );
+        dispatch(pushMessage({ chatIndex, message: message }));
       });
 
-      socket.current.on('disconnected', () => {
+      socket.on('disconnected', () => {
         dispatch(setIsConnected(false));
         dispatch(setCurrentMessages([]));
         dispatch(setCurrentChatId(''));
@@ -99,13 +106,18 @@ export const connectChatThunk = createAsyncThunk(
   }
 );
 
-export const disconnectChatThunk = createAsyncThunk(
-  'chat/disconnectChat',
-  function (args: { socket: any }, { rejectWithValue }) {
+export const sendMessageThunk = createAsyncThunk(
+  'chat/sendMessage',
+  (content: string, { rejectWithValue, getState }) => {
     try {
-      const { socket } = args;
+      const { usersPage } = getState() as RootState;
+      const { currentUser } = usersPage;
 
-      socket.current.emit('disconnectChat');
+      chatSocket.sendMessage(
+        content,
+        currentUser.name,
+        currentUser._id
+      );
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
@@ -115,14 +127,16 @@ export const disconnectChatThunk = createAsyncThunk(
   }
 );
 
-function sendMessage(
-  message: IMessage,
-  dispatch: Dispatch<any>,
-  chatPage: InitialState
-) {
-  dispatch(setCurrentMessages(message));
-  const chatIndex = chatPage.chats.findIndex(
-    (chat: IChat) => chat._id === chatPage.currentChatId
-  );
-  dispatch(pushMessage({ chatIndex, message: message }));
-}
+export const disconnectChatThunk = createAsyncThunk(
+  'chat/disconnectChat',
+  function (_, { rejectWithValue }) {
+    try {
+      chatSocket.disconnectChat();
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
+    }
+  }
+);

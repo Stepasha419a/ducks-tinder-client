@@ -5,7 +5,6 @@ import ChatForm from './Form/ChatForm';
 import Messages from './Messages/Messages';
 
 export const Chat = () => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const isConnected = useAppSelector((state) => state.chatPage.isConnected);
 
   return (
@@ -13,8 +12,8 @@ export const Chat = () => {
       {isConnected ? (
         <>
           <div className={styles.container}>
-            <Messages currentUser={currentUser} />
-            <ChatForm currentUser={currentUser} />
+            <Messages />
+            <ChatForm />
           </div>
         </>
       ) : (
