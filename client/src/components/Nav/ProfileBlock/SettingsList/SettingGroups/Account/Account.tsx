@@ -1,14 +1,14 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { setInput } from '../../../../../redux/settings/settings.slice';
-import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
-import { RangeInput } from '../../../../ui';
-import { RangeValue } from '../../../../ui/inputs/Range';
+import { setInput } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
+import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
+import { RangeInput } from '../../../../../ui';
+import { RangeValue } from '../../../../../ui/inputs/Range';
 import styles from './Account.module.scss';
 
-const Account = () => {
+export const Account = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -27,7 +27,7 @@ const Account = () => {
     );
   };
 
-  const SetEmailHandler = () => {
+  const setEmailHandler = () => {
     dispatch(
       setInput({
         inputName: 'email',
@@ -35,7 +35,7 @@ const Account = () => {
       })
     );
   };
-  const SetNameHandler = () => {
+  const setNameHandler = () => {
     dispatch(
       setInput({
         inputName: 'name',
@@ -43,7 +43,7 @@ const Account = () => {
       })
     );
   };
-  const SetDescriptionHandler = () => {
+  const setDescriptionHandler = () => {
     dispatch(
       setInput({
         inputName: 'description',
@@ -51,7 +51,7 @@ const Account = () => {
       })
     );
   };
-  const SetSexHandler = () => {
+  const setSexHandler = () => {
     dispatch(
       setInput({
         inputName: 'sex',
@@ -64,8 +64,8 @@ const Account = () => {
       <div className={styles.groupTitle}>Account Settings</div>
       <div className={styles.items}>
         <div
-          onClick={SetEmailHandler}
-          className={`${styles.item} ${styles.item_pointer}`}
+          onClick={setEmailHandler}
+          className={`${styles.item} ${styles.pointer}`}
         >
           <div className={styles.descr}>
             <div className={styles.title}>Email</div>
@@ -79,8 +79,8 @@ const Account = () => {
           </div>
         </div>
         <div
-          onClick={SetNameHandler}
-          className={`${styles.item} ${styles.item_pointer}`}
+          onClick={setNameHandler}
+          className={`${styles.item} ${styles.pointer}`}
         >
           <div className={styles.descr}>
             <div className={styles.title}>Name</div>
@@ -94,9 +94,9 @@ const Account = () => {
           </div>
         </div>
         <div
-          onClick={SetDescriptionHandler}
-          className={`${styles.item} ${styles.item_pointer} ${
-            errorFields.includes('description') ? styles.item_error : ''
+          onClick={setDescriptionHandler}
+          className={`${styles.item} ${styles.pointer} ${
+            errorFields.includes('description') ? styles.error : ''
           }`}
         >
           <div className={styles.descr}>
@@ -111,9 +111,9 @@ const Account = () => {
           </div>
         </div>
         <div
-          onClick={SetSexHandler}
-          className={`${styles.item} ${styles.item_pointer} ${
-            errorFields.includes('sex') ? styles.item_error : ''
+          onClick={setSexHandler}
+          className={`${styles.item} ${styles.pointer} ${
+            errorFields.includes('sex') ? styles.error : ''
           }`}
         >
           <div className={styles.descr}>
@@ -153,5 +153,3 @@ const Account = () => {
     </div>
   );
 };
-
-export default Account;

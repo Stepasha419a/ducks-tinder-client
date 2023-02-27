@@ -1,15 +1,15 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { PreferAge } from '../../../../../models/IUser';
-import { setInput } from '../../../../../redux/settings/settings.slice';
-import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
-import { CheckboxInput, RangeInput } from '../../../../ui';
-import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
+import { PreferAge } from '../../../../../../models/IUser';
+import { setInput } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
+import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
+import { CheckboxInput, RangeInput } from '../../../../../ui';
+import { RangeInterface, RangeValue } from '../../../../../ui/inputs/Range';
 import styles from './Find.module.scss';
 
-const Find = () => {
+export const Find = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -89,8 +89,8 @@ const Find = () => {
       <div className={styles.items}>
         <div
           onClick={setInterestsHandler}
-          className={`${styles.item} ${styles.item_pointer} ${
-            errorFields.includes('interests') ? styles.item_error : ''
+          className={`${styles.item} ${styles.pointer} ${
+            errorFields.includes('interests') ? styles.error : ''
           }`}
         >
           <div className={styles.descr}>
@@ -108,8 +108,8 @@ const Find = () => {
         </div>
         <div
           onClick={setPlaceHandler}
-          className={`${styles.item} ${styles.item_pointer} ${
-            errorFields.includes('place') ? styles.item_error : ''
+          className={`${styles.item} ${styles.pointer} ${
+            errorFields.includes('place') ? styles.error : ''
           }`}
         >
           <div className={styles.descr}>
@@ -125,7 +125,7 @@ const Find = () => {
         </div>
         <div
           className={`${styles.item} ${
-            errorFields.includes('distance') ? styles.item_error : ''
+            errorFields.includes('distance') ? styles.error : ''
           }`}
         >
           <div className={styles.descr}>
@@ -156,8 +156,8 @@ const Find = () => {
         </div>
         <div
           onClick={setPreferSexHandler}
-          className={`${styles.item} ${styles.item_pointer} ${
-            errorFields.includes('preferSex') ? styles.item_error : ''
+          className={`${styles.item} ${styles.pointer} ${
+            errorFields.includes('preferSex') ? styles.error : ''
           }`}
         >
           <div className={styles.descr}>
@@ -201,5 +201,3 @@ const Find = () => {
     </div>
   );
 };
-
-export default Find;

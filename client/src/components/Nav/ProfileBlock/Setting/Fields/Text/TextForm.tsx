@@ -1,22 +1,11 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { IUser, PartnerSettings } from '../../../../../../models/IUser';
-import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { useAppSelector } from '../../../../../../redux/store';
 import { TextField } from '../../../../../ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import { IMAIL_REGEXP } from './TextForm.constants';
 import styles from './TextForm.module.scss';
 
 export const TextForm = () => {
-  const dispatch = useAppDispatch();
-
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const innerObjectName = useAppSelector(
-    (state) => state.settings.innerObjectName
-  );
-  const settingInputName = useAppSelector(
-    (state) => state.settings.settingInputName
-  );
   const validation = useAppSelector((state) => state.settings.validaton);
   const formName = useAppSelector((state) => state.settings.formName);
 
@@ -24,25 +13,6 @@ export const TextForm = () => {
   const [inputValueDirty, setInputValueDirty] = useState(false);
   const [inputValueError, setInputValueError] = useState('');
   const [isFormCloseable, setIsFormCloseable] = useState(true);
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  useEffect(() => {
-    if (inputValueError) {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
-  }, [inputValueError]);
-
-  useEffect(() => {
-    setInputValue(
-      innerObjectName
-        ? currentUser[innerObjectName][
-            settingInputName as keyof PartnerSettings
-          ].toString()
-        : currentUser[settingInputName as keyof IUser].toString()
-    );
-  }, [innerObjectName, currentUser, settingInputName]);
 
   const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\s+/g, ' ');
@@ -67,18 +37,16 @@ export const TextForm = () => {
     setInputValue(value);
   };
 
-  const submitSettings = () => {
-    dispatch(submitSettingsThunk({ changedData: inputValue.trim() }));
-  };
-
   return (
     <SettingWrapper
       formName={formName}
       inputValueDirty={inputValueDirty}
       inputValueError={inputValueError}
       isFormCloseable={isFormCloseable}
-      isFormValid={isFormValid}
-      submitSettings={submitSettings}
+      inputValue={inputValue.trim()}
+      setInputValue={
+        setInputValue as Dispatch<SetStateAction<string | string[]>>
+      }
     >
       <TextField
         onChange={(e) => inputHandler(e)}

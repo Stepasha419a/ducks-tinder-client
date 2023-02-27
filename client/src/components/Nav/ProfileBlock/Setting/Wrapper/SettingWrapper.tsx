@@ -1,30 +1,57 @@
-import { PropsWithChildren } from 'react';
+import { Dispatch, PropsWithChildren, SetStateAction, useEffect } from 'react';
+import {
+  ChangablePartnerSettingsFields,
+  ChangableUserFields,
+} from '../../../../../models/IUser';
 import { setIsUserInfoSetting } from '../../../../../redux/settings/settings.slice';
-import { useAppDispatch } from '../../../../../redux/store';
+import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
+import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { Button } from '../../../../ui';
 import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {
-  submitSettings: () => void;
   formName: string | null;
   inputValueDirty: boolean;
   inputValueError: string;
-  isFormValid: boolean;
   isFormCloseable: boolean;
+  inputValue: string | string[];
+  setInputValue: Dispatch<SetStateAction<string | string[]>>;
 }
 
 const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
-  submitSettings,
   formName,
   children,
   inputValueDirty,
   inputValueError,
-  isFormValid,
   isFormCloseable,
+  inputValue,
+  setInputValue,
 }) => {
   const dispatch = useAppDispatch();
   const cancelHandler = () => {
     dispatch(setIsUserInfoSetting(false));
+  };
+
+  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const innerObjectName = useAppSelector(
+    (state) => state.settings.innerObjectName
+  );
+  const settingInputName = useAppSelector(
+    (state) => state.settings.settingInputName
+  );
+
+  useEffect(() => {
+    setInputValue(
+      innerObjectName
+        ? currentUser[innerObjectName][
+            settingInputName as ChangablePartnerSettingsFields
+          ]
+        : currentUser[settingInputName as ChangableUserFields]
+    );
+  }, [innerObjectName, currentUser, settingInputName, setInputValue]);
+
+  const submitSettings = () => {
+    dispatch(submitSettingsThunk({ changedData: inputValue }));
   };
 
   return (
@@ -46,7 +73,7 @@ const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
         Cancel
       </Button>
       <Button
-        disabled={!isFormValid}
+        disabled={!!(inputValueDirty && inputValueError)}
         onClick={submitSettings}
         variant="setting"
       >

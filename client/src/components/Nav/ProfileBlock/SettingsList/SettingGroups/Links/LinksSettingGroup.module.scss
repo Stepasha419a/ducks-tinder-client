@@ -14,7 +14,7 @@
       background-color: var(--color--white-100);
       padding: 12px 16px;
 
-      &_link {
+      &.link {
         padding: 0;
 
         .icon {
@@ -40,10 +40,7 @@
         .title {
           font-size: 18px;
           font-weight: 400;
-
-          &_link {
-            color: var(--main-primary);
-          }
+          color: var(--main-primary);
         }
       }
     }

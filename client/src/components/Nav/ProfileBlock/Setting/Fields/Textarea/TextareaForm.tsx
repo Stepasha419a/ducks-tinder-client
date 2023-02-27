@@ -1,14 +1,10 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { useAppSelector } from '../../../../../../redux/store';
 import { Textarea } from '../../../../../ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './TextareaForm.module.scss';
 
 export const TextareaForm = () => {
-  const dispatch = useAppDispatch();
-
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const validation = useAppSelector((state) => state.settings.validaton);
   const formName = useAppSelector((state) => state.settings.formName);
 
@@ -16,23 +12,6 @@ export const TextareaForm = () => {
   const [inputValueDirty, setInputValueDirty] = useState(false);
   const [inputValueError, setInputValueError] = useState('');
   const [isFormCloseable, setIsFormCloseable] = useState(true);
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  useEffect(() => {
-    if (inputValueError) {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
-  }, [inputValueError]);
-
-  useEffect(() => {
-    setInputValue(currentUser.description);
-  }, [currentUser]);
-
-  const submitSettings = () => {
-    dispatch(submitSettingsThunk({ changedData: inputValue.trim() }));
-  };
 
   const inputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value.replace(/\s+/g, ' ');
@@ -60,8 +39,10 @@ export const TextareaForm = () => {
       inputValueDirty={inputValueDirty}
       inputValueError={inputValueError}
       isFormCloseable={isFormCloseable}
-      isFormValid={isFormValid}
-      submitSettings={submitSettings}
+      inputValue={inputValue.trim()}
+      setInputValue={
+        setInputValue as Dispatch<SetStateAction<string | string[]>>
+      }
     >
       <Textarea
         onChange={(e) => inputHandler(e)}

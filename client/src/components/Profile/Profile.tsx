@@ -5,7 +5,7 @@ import styles from './Profile.module.scss';
 
 export const Profile = () => {
   const [isImageSetting, setIsImageSetting] = useState(false);
-
+  
   return (
     <div className={styles.wrapper}>
       <div className={styles.user}>

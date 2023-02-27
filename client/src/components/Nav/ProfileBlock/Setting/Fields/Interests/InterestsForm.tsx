@@ -1,29 +1,23 @@
-import { useEffect, useState } from 'react';
-import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useAppSelector } from '../../../../../../redux/store';
 import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
 
 export const InterestsForm = () => {
-  const dispatch = useAppDispatch();
-
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
-  const [interests, setInterests] = useState(currentUser.interests as string[]);
+  const [interests, setInterests] = useState<string[]>(currentUser.interests);
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
   const [isFormCloseable, setIsFormCloseable] = useState(true);
   const [inputValueError, setInputValueError] = useState('');
 
   useEffect(() => {
     if (!interests.length) {
-      setIsFormValid(false);
       setIsFormCloseable(false);
       setInputValueError("Form can't be empty");
     } else {
-      setIsFormValid(true);
       setIsFormCloseable(true);
       setInputValueError('');
     }
@@ -41,14 +35,6 @@ export const InterestsForm = () => {
     setInterests(newInterests);
   };
 
-  const submitSettings = () => {
-    dispatch(
-      submitSettingsThunk({
-        changedData: interests,
-      })
-    );
-  };
-
   return (
     <>
       <SettingWrapper
@@ -56,8 +42,10 @@ export const InterestsForm = () => {
         inputValueDirty={true}
         inputValueError={inputValueError}
         isFormCloseable={isFormCloseable}
-        isFormValid={isFormValid}
-        submitSettings={submitSettings}
+        inputValue={interests}
+        setInputValue={
+          setInterests as Dispatch<SetStateAction<string | string[]>>
+        }
       >
         <div className={styles.title}>Your interests</div>
         <div className={styles.interests}>

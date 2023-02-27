@@ -1,8 +1,8 @@
-import { logoutThunk } from '../../../../../redux/auth/auth.thunks';
-import { useAppDispatch } from '../../../../../redux/store';
+import { logoutThunk } from '../../../../../../redux/auth/auth.thunks';
+import { useAppDispatch } from '../../../../../../redux/store';
 import styles from './LogoutButton.module.scss';
 
-const LoggoutButton = () => {
+export const LoggoutButton = () => {
   const dispatch = useAppDispatch();
 
   return (
@@ -10,10 +10,10 @@ const LoggoutButton = () => {
       <div className={styles.items}>
         <div
           onClick={() => dispatch(logoutThunk())}
-          className={`${styles.item} ${styles.item_button}`}
+          className={`${styles.item} ${styles.button}`}
         >
           <div className={styles.descr}>
-            <div className={`${styles.title} ${styles.title_center}`}>
+            <div className={`${styles.title} ${styles.center}`}>
               Log out
             </div>
           </div>
@@ -22,5 +22,3 @@ const LoggoutButton = () => {
     </div>
   );
 };
-
-export default LoggoutButton;

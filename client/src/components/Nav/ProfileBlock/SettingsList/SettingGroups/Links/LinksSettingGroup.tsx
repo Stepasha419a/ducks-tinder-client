@@ -3,15 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import styles from './LinksSettingGroup.module.scss';
 
-const LinksSettingGroup = () => {
+export const LinksSettingGroup = () => {
   return (
     <div className={styles.group}>
       <div className={styles.groupTitle}>Safety Tips</div>
       <div className={styles.items}>
-        <div className={`${styles.item} ${styles.item_link}`}>
+        <div className={`${styles.item} ${styles.link}`}>
           <Link to="/policy" className={styles.link} target="_blank">
             <div className={styles.descr}>
-              <div className={`${styles.title} ${styles.title_link}`}>
+              <div className={styles.title}>
                 Community Rules
               </div>
               <div className={styles.setting}>
@@ -23,10 +23,10 @@ const LinksSettingGroup = () => {
             </div>
           </Link>
         </div>
-        <div className={`${styles.item} ${styles.item_link}`}>
+        <div className={`${styles.item} ${styles.link}`}>
           <Link to="/policy" className={styles.link} target="_blank">
             <div className={styles.descr}>
-              <div className={`${styles.title} ${styles.title_link}`}>
+              <div className={styles.title}>
                 Security and Policy Development Center
               </div>
               <div className={styles.setting}>
@@ -38,10 +38,10 @@ const LinksSettingGroup = () => {
             </div>
           </Link>
         </div>
-        <div className={`${styles.item} ${styles.item_link}`}>
+        <div className={`${styles.item} ${styles.link}`}>
           <Link to="/policy" className={styles.link} target="_blank">
             <div className={styles.descr}>
-              <div className={`${styles.title} ${styles.title_link}`}>
+              <div className={styles.title}>
                 Safety Tips
               </div>
               <div className={styles.setting}>
@@ -57,5 +57,3 @@ const LinksSettingGroup = () => {
     </div>
   );
 };
-
-export default LinksSettingGroup;

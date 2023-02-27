@@ -20,13 +20,17 @@
       background-color: var(--color--white-100);
       padding: 12px 16px;
 
-      &_pointer {
+      &.pointer {
         cursor: pointer;
 
         &:hover .setting,
         &:hover .openIcon {
           color: var(--color--pink-100) !important;
         }
+      }
+
+      &.error {
+        background-color: var(--danger-red-light);
       }
 
       .descr {
@@ -37,11 +41,26 @@
         .title {
           font-size: 18px;
           font-weight: 400;
+
+          &_link {
+            color: var(--main-primary);
+          }
+
+          &_center {
+            margin: 0 auto;
+          }
         }
 
         .setting {
           color: var(--main-secondary);
           transition: 0.2s;
+
+          &_textOverflow {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 180px;
+          }
 
           .openIcon {
             font-size: 14px;
@@ -49,6 +68,12 @@
             margin-left: 10px;
             transition: 0.2s;
           }
+        }
+      }
+
+      .setting {
+        .slider {
+          margin: 20px 0px 10px;
         }
       }
     }

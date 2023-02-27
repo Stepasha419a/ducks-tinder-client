@@ -20,7 +20,7 @@
       background-color: var(--color--white-100);
       padding: 12px 16px;
 
-      &_pointer {
+      &.pointer {
         cursor: pointer;
 
         &:hover .setting,
@@ -29,7 +29,7 @@
         }
       }
 
-      &_error {
+      &.error {
         background-color: var(--danger-red-light);
       }
 

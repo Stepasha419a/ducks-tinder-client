@@ -63,6 +63,16 @@ export interface IUserUnrequired {
   checkedUsers?: string[];
 }
 
+export type ChangableUserFields =
+  | 'email'
+  | 'name'
+  | 'description'
+  | 'nickname'
+  | 'sex'
+  | 'interests';
+
+export type ChangablePartnerSettingsFields = 'place' | 'preferSex';
+
 export interface PreferAge {
   min: number;
   max: number;

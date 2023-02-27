@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { createNotification } from '../../../../redux/notifications/notifications.slice';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
-import Account from '../SettingGroups/Account/Account';
-import Find from '../SettingGroups/Find/Find';
-import LinksSettingGroup from '../SettingGroups/Links/LinksSettingGroup';
-import LoggoutButton from '../SettingGroups/LogoutButton/LogoutButton';
-import Nickname from '../SettingGroups/Nickname/Nickname';
+import {
+  Account,
+  Find,
+  LinksSettingGroup,
+  LoggoutButton,
+  Nickname,
+} from './settingGroups';
 import styles from './SettingsList.module.scss';
 
 const SettingsList = () => {
@@ -14,7 +16,7 @@ const SettingsList = () => {
   const notifications = useAppSelector(
     (state) => state.notifications.notifications
   );
-  const errorFields = useAppSelector(state => state.settings.errorFields)
+  const errorFields = useAppSelector((state) => state.settings.errorFields);
 
   useEffect(() => {
     const errorText =

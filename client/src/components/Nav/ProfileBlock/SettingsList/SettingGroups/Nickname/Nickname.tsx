@@ -1,10 +1,10 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setInput } from '../../../../../redux/settings/settings.slice';
-import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
+import { setInput } from '../../../../../../redux/settings/settings.slice';
+import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
 import styles from './Nickname.module.scss';
 
-const Nickname = () => {
+export const Nickname = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
@@ -23,7 +23,7 @@ const Nickname = () => {
       <div className={styles.items}>
         <div
           onClick={SetEmailHandler}
-          className={`${styles.item} ${styles.item_pointer}`}
+          className={`${styles.item} ${styles.pointer}`}
         >
           <div className={styles.descr}>
             <div className={styles.title}>Nickname</div>
@@ -44,5 +44,3 @@ const Nickname = () => {
     </div>
   );
 };
-
-export default Nickname;
