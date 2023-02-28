@@ -1,15 +1,15 @@
-import { IUser } from '../../models/IUser';
+import { User } from '../../models/User';
 import { createSlice } from '@reduxjs/toolkit';
-import { IChat, IMessage } from '../../models/IChat';
+import { Chat, Message } from '../../models/Chat';
 import { getChatsThunk } from './chat.thunks';
 
 export interface InitialState {
-  chats: IChat[];
-  chatsUsers: IUser[];
+  chats: Chat[];
+  chatsUsers: User[];
   isConnected: boolean;
-  currentMessages: IMessage[];
+  currentMessages: Message[];
   currentChatId: string;
-  currentChatMembers: IUser[];
+  currentChatMembers: User[];
 }
 
 const initialState: InitialState = {

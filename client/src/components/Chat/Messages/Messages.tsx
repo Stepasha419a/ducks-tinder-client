@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { IMessage } from '../../../models/IChat';
+import { Message } from '../../../models/Chat';
 import { useAppSelector } from '../../../redux/store';
-import { Message } from '../../ui';
+import { ChatMessage } from '../../ui';
 import { isRefElementVisible, scrollToBottom } from '../utils/ChatUtils';
 import styles from './Messages.module.scss';
 
@@ -28,7 +28,7 @@ const Messages = () => {
 
   return (
     <div className={styles.messages} ref={bottomScrollRef}>
-      {messages.map((message: IMessage) => {
+      {messages.map((message: Message) => {
         const chatMember = currentChatMembers.find(
           (item) => item._id === message.userId
         );
@@ -39,7 +39,7 @@ const Messages = () => {
           : chatMember?.pictures.avatar;
 
         return currentChatMembers.length ? (
-          <Message
+          <ChatMessage
             key={message.id}
             isOwn={isOwn}
             message={message}

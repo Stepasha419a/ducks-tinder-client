@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { IQuerySorts, IUser, IUserUnrequired } from "../../models/IUser";
+import { QuerySorts, User, UserUnrequired } from "../../models/User";
 import { instance } from "../api";
 
 export type UserType = {
@@ -11,19 +11,19 @@ export type UserType = {
 }
 
 export const usersAPI = {
-    getUsers(): Promise<AxiosResponse<IUser[]>> {
+    getUsers(): Promise<AxiosResponse<User[]>> {
         return instance.get('users')
             .then(res => res)
     },
-    getSortedUsers(sorts: IQuerySorts): Promise<AxiosResponse<IUser[]>> {
+    getSortedUsers(sorts: QuerySorts): Promise<AxiosResponse<User[]>> {
         return instance.post(`users/sorted`, sorts)
             .then(res => res)
     },
-    getCurrentUser(id: String): Promise<AxiosResponse<IUser>> {
+    getCurrentUser(id: String): Promise<AxiosResponse<User>> {
         return instance.get(`users/${id}`)
             .then(res => res)
     },
-    updateUser(id: string, data: IUserUnrequired): Promise<AxiosResponse<IUser>> {
+    updateUser(id: string, data: UserUnrequired): Promise<AxiosResponse<User>> {
         return instance.put(`users/${id}`, data)
             .then(res => res)
     },
@@ -39,7 +39,7 @@ export const usersAPI = {
         return instance.put(`users/pairs`, {forUserId, userId})
             .then(res => res)
     },
-    savePicture(picture: any, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {
+    savePicture(picture: any, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<User>> {
         return instance.post(`users/picture`, {picture, userId, setting}, {
             headers: {
               'Content-Type': 'multipart/form-data'
@@ -47,7 +47,7 @@ export const usersAPI = {
         })
             .then(res => res)
     },
-    deletePicture(pictureName: string, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<IUser>> {
+    deletePicture(pictureName: string, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<User>> {
         return instance.put(`users/picture`, {pictureName, userId, setting})
             .then(res => res)
     }

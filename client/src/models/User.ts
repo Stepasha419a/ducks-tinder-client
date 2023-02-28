@@ -16,7 +16,7 @@ export interface PartnerSettings {
   };
 }
 
-export interface IUser {
+export interface User {
   _id: string;
   email: string;
   name: string;
@@ -36,7 +36,7 @@ export interface IUser {
   checkedUsers: string[];
 }
 
-export interface IUserUnrequired {
+export interface UserUnrequired {
   email?: string;
   name?: string;
   description?: string;
@@ -63,22 +63,12 @@ export interface IUserUnrequired {
   checkedUsers?: string[];
 }
 
-export type ChangableUserFields =
-  | 'email'
-  | 'name'
-  | 'description'
-  | 'nickname'
-  | 'sex'
-  | 'interests';
-
-export type ChangablePartnerSettingsFields = 'place' | 'preferSex';
-
 export interface PreferAge {
   min: number;
   max: number;
 }
 
-export interface IQuerySorts {
+export interface QuerySorts {
   distance: number;
   onlyNear: boolean;
   age: number;

@@ -4,11 +4,13 @@ import { checkUserFields } from './utils';
 import {
   ErrorField,
   InnerObjectName,
+  KindOfSetting,
   SettingInputName,
   Validation,
 } from './settings.interfaces';
 
 interface InitialState {
+  kindOfSetting: KindOfSetting;
   settingInputName: SettingInputName;
   innerObjectName: InnerObjectName;
   isUserInfoSetting: boolean;
@@ -18,6 +20,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
+  kindOfSetting: null,
   settingInputName: null,
   innerObjectName: null,
   isUserInfoSetting: false,
@@ -46,6 +49,21 @@ const settingSlice = createSlice({
       state.settingInputName = payload.inputName;
       state.validaton = payload.validation;
       state.isUserInfoSetting = true;
+
+      switch (payload.inputName) {
+        case 'interests':
+          state.kindOfSetting = 'select';
+          break;
+        case 'description':
+          state.kindOfSetting = 'textarea';
+          break;
+        case 'sex':
+        case 'preferSex':
+          state.kindOfSetting = 'radio';
+          break;
+        default:
+          state.kindOfSetting = null;
+      }
     },
     checkFields: (state, { payload }) => {
       state.errorFields = checkUserFields(payload);

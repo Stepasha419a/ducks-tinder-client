@@ -1,10 +1,10 @@
-import { IUser } from '../../../models/IUser';
+import { User } from '../../../models/User';
 import styles from './Pair.module.scss';
 import { makeImageUrl } from '../../ui/helpers';
 
 interface PairPropsInterface {
-  user: IUser;
-  setCurrentPair: (pair: IUser) => void;
+  user: User;
+  setCurrentPair: (pair: User) => void;
 }
 
 const Pair: React.FC<PairPropsInterface> = ({ user, setCurrentPair }) => {

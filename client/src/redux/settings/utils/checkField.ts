@@ -1,4 +1,4 @@
-import { IUser } from '../../../models/IUser';
+import { User } from '../../../models/User';
 import { ErrorField } from '../settings.interfaces';
 
 const potentialFields: ErrorField[] = [
@@ -10,7 +10,7 @@ const potentialFields: ErrorField[] = [
   'preferSex',
 ];
 
-function checkField(user: IUser, field: ErrorField) {
+function checkField(user: User, field: ErrorField) {
   switch (field) {
     case 'description':
       if (user.description === '') {
@@ -48,7 +48,7 @@ function checkField(user: IUser, field: ErrorField) {
   }
 }
 
-export function checkUserFields(user: IUser) {
+export function checkUserFields(user: User) {
   return potentialFields.reduce(
     (acc: ErrorField[], field: ErrorField) =>
       checkField(user, field) ? [...acc, field] : acc,

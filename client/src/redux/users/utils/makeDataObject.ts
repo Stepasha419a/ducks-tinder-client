@@ -1,11 +1,11 @@
-import { IUser, PartnerSettings } from '../../../models/IUser';
+import { User, PartnerSettings } from '../../../models/User';
 import {
   ChangedData,
   InnerObjectName,
 } from '../../settings/settings.interfaces';
 
 export function makeDataObject(args: {
-  currentUser: IUser | any;
+  currentUser: User | any;
   inputName: string;
   changedData: ChangedData;
   innerObjectName?: InnerObjectName;

@@ -2,12 +2,12 @@ import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import styles from './PairBlock.module.scss';
-import { IUser } from '../../../../../models/IUser';
+import { User } from '../../../../../models/User';
 import { useAppSelector } from '../../../../../redux/store';
 import { makeImageUrl } from '../../../../ui/helpers';
 
 interface IPairBlock {
-  firstPair: IUser;
+  firstPair: User;
 }
 
 export const PairBlock: React.FC<IPairBlock> = ({ firstPair }) => {

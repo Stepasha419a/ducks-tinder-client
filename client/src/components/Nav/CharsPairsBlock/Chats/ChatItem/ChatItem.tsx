@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { IChat } from '../../../../../models/IChat';
-import { IUser } from '../../../../../models/IUser';
+import { Chat } from '../../../../../models/Chat';
+import { User } from '../../../../../models/User';
 import styles from './ChatItem.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { Avatar } from '../../../../ui';
 import { connectChatThunk, disconnectChatThunk } from '../../../../../redux/chat/chat.thunks';
 
 interface ChatInterface {
-  chat: IChat;
+  chat: Chat;
   chatCompanionId: string | undefined;
   currentChatId: string;
 }
@@ -21,7 +21,7 @@ const ChatItem: React.FC<ChatInterface> = ({
 
   const chatsUsers = useAppSelector((state) => state.chatPage.chatsUsers);
 
-  const [chatPartner, setChatPartner] = useState<IUser | null>(null);
+  const [chatPartner, setChatPartner] = useState<User | null>(null);
 
   function connect(chatId: string) {
     dispatch(disconnectChatThunk());

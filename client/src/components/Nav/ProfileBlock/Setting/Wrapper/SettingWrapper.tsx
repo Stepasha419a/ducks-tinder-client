@@ -2,7 +2,7 @@ import { Dispatch, PropsWithChildren, SetStateAction, useEffect } from 'react';
 import {
   ChangablePartnerSettingsFields,
   ChangableUserFields,
-} from '../../../../../models/IUser';
+} from '../../../../../redux/settings/settings.interfaces';
 import { setIsUserInfoSetting } from '../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/store';

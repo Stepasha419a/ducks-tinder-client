@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import { IUser } from '../../../../models/IUser';
+import { User } from '../../../../models/User';
 import { Button, RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
@@ -9,7 +9,7 @@ import { RangeValue } from '../../../ui/inputs/Range';
 import { saveUserImage } from '../../../../redux/users/users.thunks';
 
 interface ProfileCropImagePropsInterface {
-  currentUser: IUser;
+  currentUser: User;
   setIsImageCropOpen: (setting: boolean) => void;
   imageURL: any;
   currentImageCrop: 'avatar' | 'gallery' | '';

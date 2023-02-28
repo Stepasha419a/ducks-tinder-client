@@ -1,8 +1,8 @@
-import { ImageInterface, PartnerSettings } from './../../models/IUser';
+import { ImageInterface, PartnerSettings } from '../../models/User';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
-import { IUser } from '../../models/IUser';
+import { User } from '../../models/User';
 import { RootState } from '../store';
 import { ChangedData, InnerObjectName } from '../settings/settings.interfaces';
 import {
@@ -38,7 +38,7 @@ export const fetchUserPair = createAsyncThunk(
 export const getSortedUserThunk = createAsyncThunk(
   'users/getSortedUser',
   async function (
-    args: { user: IUser; requestedUsers?: string[] },
+    args: { user: User; requestedUsers?: string[] },
     { rejectWithValue }
   ) {
     try {
@@ -60,7 +60,7 @@ export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
   async (
     args: {
-      inputName: keyof IUser | keyof PartnerSettings;
+      inputName: keyof User | keyof PartnerSettings;
       changedData: ChangedData;
       innerObjectName?: InnerObjectName;
     },
@@ -178,7 +178,7 @@ export const deleteUserImage = createAsyncThunk(
 export const mixUserImages = createAsyncThunk(
   'users/mixUserImages',
   async (
-    args: { currentUser: IUser; images: ImageInterface[] },
+    args: { currentUser: User; images: ImageInterface[] },
     { rejectWithValue }
   ) => {
     try {

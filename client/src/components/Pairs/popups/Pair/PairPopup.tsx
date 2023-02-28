@@ -1,7 +1,7 @@
 import { faChevronDown, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
-import { IUser } from '../../../../models/IUser';
+import { User } from '../../../../models/User';
 import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
@@ -11,8 +11,8 @@ import InterestsListPopup from '../Interests/List/InterestsListPopup';
 import styles from './PairPopup.module.scss';
 
 interface PairPopupProps {
-  currentPair: IUser;
-  setCurrentPair: (pair: IUser) => void;
+  currentPair: User;
+  setCurrentPair: (pair: User) => void;
 }
 
 const PairPopup: React.FC<PairPopupProps> = ({
@@ -46,7 +46,7 @@ const PairPopup: React.FC<PairPopupProps> = ({
 
   const refuseHandler = (userId: string) => {
     deletePair(userId);
-    setCurrentPair({} as IUser);
+    setCurrentPair({} as User);
   };
 
   const acceptHandler = (userId: string) => {
@@ -57,7 +57,7 @@ const PairPopup: React.FC<PairPopupProps> = ({
       })
     );
     deletePair(userId);
-    setCurrentPair({} as IUser);
+    setCurrentPair({} as User);
   };
 
   return (
@@ -66,7 +66,7 @@ const PairPopup: React.FC<PairPopupProps> = ({
         <div className={styles.body}>
           <div className={`${styles.content} ${styles.overflow}`}>
             <div
-              onClick={() => setCurrentPair({} as IUser)}
+              onClick={() => setCurrentPair({} as User)}
               className={styles.close}
             ></div>
             <div className={styles.slider}>
@@ -144,7 +144,7 @@ const PairPopup: React.FC<PairPopupProps> = ({
             <div ref={bottomElementRef} />
           </div>
           <div
-            onClick={() => setCurrentPair({} as IUser)}
+            onClick={() => setCurrentPair({} as User)}
             className={styles.closeArea}
           ></div>
         </div>

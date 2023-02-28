@@ -1,4 +1,4 @@
-import { interestsList } from '../../../../../models/IUser';
+import { interestsList } from '../../../../../models/User';
 import { Button } from '../../../../ui';
 import styles from './InterestsSettingPopup.module.scss';
 

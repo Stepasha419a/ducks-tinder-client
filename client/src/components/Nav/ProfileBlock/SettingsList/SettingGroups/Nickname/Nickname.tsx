@@ -8,7 +8,7 @@ export const Nickname = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
-  const SetEmailHandler = () => {
+  const SetNicknameHandler = () => {
     dispatch(
       setInput({
         inputName: 'nickname',
@@ -22,7 +22,7 @@ export const Nickname = () => {
       <div className={styles.groupTitle}>Internet account</div>
       <div className={styles.items}>
         <div
-          onClick={SetEmailHandler}
+          onClick={SetNicknameHandler}
           className={`${styles.item} ${styles.pointer}`}
         >
           <div className={styles.descr}>

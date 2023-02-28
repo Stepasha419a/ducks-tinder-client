@@ -1,13 +1,13 @@
 import { AxiosResponse } from "axios";
-import { IChat } from "../../models/IChat";
+import { Chat } from "../../models/Chat";
 import { instance } from "../api";
 
 export const chatApi = {
-    getChats(id: string): Promise<AxiosResponse<IChat[]>> {
+    getChats(id: string): Promise<AxiosResponse<Chat[]>> {
         return instance.get(`chat/${id}`)
             .then(res => res)
     },
-    getChat(id: string): Promise<AxiosResponse<IChat>> {
+    getChat(id: string): Promise<AxiosResponse<Chat>> {
         return instance.get(`chat/one/${id}`)
             .then(res => res)
     },

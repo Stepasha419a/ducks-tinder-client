@@ -1,6 +1,6 @@
-import { IUser } from '../../../models/IUser';
+import { User } from '../../../models/User';
 
-export function makeQuerySortsObj(user: IUser, requestedUsers?: string[]) {
+export function makeQuerySortsObj(user: User, requestedUsers?: string[]) {
   return {
     distance: user.partnerSettings.distance,
     onlyNear: user.partnerSettings.usersOnlyInDistance,

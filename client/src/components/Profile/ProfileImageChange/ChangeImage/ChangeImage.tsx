@@ -1,7 +1,7 @@
 import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { ImageInterface, IUser } from '../../../../models/IUser';
+import { ImageInterface, User } from '../../../../models/User';
 import { useAppDispatch } from '../../../../redux/store';
 import {
   deleteUserImage,
@@ -13,7 +13,7 @@ import ProfileDialogUpload from '../CropImage/DialogUpload/DialogUpload';
 import styles from './ChangeImage.module.scss';
 
 interface ProfileChangeImagePropsInterface {
-  currentUser: IUser;
+  currentUser: User;
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 

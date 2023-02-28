@@ -5,14 +5,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { IUser } from '../../../../models/IUser';
+import { User } from '../../../../models/User';
 import { ImageSlider } from '../../../ImagesSlider/ImageSlider';
 import InterestsListPopup from '../../../Pairs/popups/Interests/List/InterestsListPopup';
 import { Button } from '../../../ui';
 import styles from './FullPreview.module.scss';
 
 interface FullPreviewProps {
-  currentUser: IUser;
+  currentUser: User;
   setIsFullPreview: (setting: boolean) => void;
 }
 

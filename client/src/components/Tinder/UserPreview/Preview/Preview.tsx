@@ -4,13 +4,13 @@ import {
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IUser } from '../../../../models/IUser';
+import { User } from '../../../../models/User';
 import { ImageSlider } from '../../../ImagesSlider/ImageSlider';
 import { Button } from '../../../ui';
 import styles from './Preview.module.scss';
 
 interface PreviewProps {
-  currentUser: IUser;
+  currentUser: User;
   setIsFullPreview: (setting: boolean) => void;
 }
 

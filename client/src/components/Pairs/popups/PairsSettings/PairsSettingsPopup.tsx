@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PreferAge } from '../../../../models/IUser';
+import { PreferAge } from '../../../../models/User';
 import { Button, CheckboxInput, RangeInput } from '../../../ui/';
 import { RangeInterface, RangeValue } from '../../../ui/inputs/Range';
 import { ISorts } from '../../utils/PairsUtils';

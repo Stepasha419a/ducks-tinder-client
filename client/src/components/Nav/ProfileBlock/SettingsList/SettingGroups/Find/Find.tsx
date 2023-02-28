@@ -1,7 +1,7 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { PreferAge } from '../../../../../../models/IUser';
+import { PreferAge } from '../../../../../../models/User';
 import { setInput } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';

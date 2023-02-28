@@ -1,12 +1,12 @@
-export interface IMessage{
+export interface Message{
     id: string
     content: string
     userId: string
     username: string
 }
 
-export interface IChat {
+export interface Chat {
     _id: string
-    messages: IMessage[]
+    messages: Message[]
     members: string[]
 }

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { IChat } from '../../../../models/IChat';
+import { Chat } from '../../../../models/Chat';
 import ChatItem from './ChatItem/ChatItem';
 import styles from './Chats.module.scss';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
@@ -23,7 +23,7 @@ const Chats = () => {
 
   return (
     <div className={styles.chats}>
-      {chats.map((chat: IChat) => {
+      {chats.map((chat: Chat) => {
         const chatCompanionId = chat.members.find(
           (member) => member !== currentUser._id
         );

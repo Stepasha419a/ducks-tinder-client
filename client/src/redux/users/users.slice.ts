@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser } from '../../models/IUser';
+import { User } from '../../models/User';
 import {
   deletePairThunk,
   deleteUserImage,
@@ -14,9 +14,9 @@ import {
 } from './users.thunks';
 
 interface InitialState {
-  currentUser: IUser;
-  pairs: IUser[];
-  tinderUsers: IUser[];
+  currentUser: User;
+  pairs: User[];
+  tinderUsers: User[];
   isReturnUser: boolean;
   requestedUsers: string[];
   currentTinderUsersIndex: number;
@@ -25,7 +25,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   // auth always set currentUser object after registration/login/refresh
-  currentUser: {} as IUser,
+  currentUser: {} as User,
   pairs: [],
   tinderUsers: [],
   isReturnUser: false,
@@ -72,7 +72,7 @@ const usersSlice = createSlice({
         state.pairs.filter((pair) => pair._id !== action.payload?.deletedId);
       })
       .addCase(getSortedUserThunk.fulfilled, (state, { payload }) => {
-        state.tinderUsers = [...state.tinderUsers, { ...payload }] as IUser[];
+        state.tinderUsers = [...state.tinderUsers, { ...payload }] as User[];
       })
       .addCase(getSortedUserThunk.rejected, (state) => {
         state.isFailed = true;

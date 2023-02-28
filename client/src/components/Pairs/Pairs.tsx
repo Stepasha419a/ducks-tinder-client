@@ -4,7 +4,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
-import { IUser, PreferAge } from '../../models/IUser';
+import { User, PreferAge } from '../../models/User';
 import Pair from './Pair/Pair';
 import PairPopup from './popups/Pair/PairPopup';
 import PairsSettingsPopup from './popups/PairsSettings/PairsSettingsPopup';
@@ -23,7 +23,7 @@ export const Pairs: React.FC = () => {
   const pairsState = useAppSelector((state) => state.usersPage.pairs);
 
   const [pairsPaddingWidth, setPairsPaddingWidth] = useState(0);
-  const [currentPair, setCurrentPair] = useState<IUser>({} as IUser);
+  const [currentPair, setCurrentPair] = useState<User>({} as User);
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
@@ -147,7 +147,7 @@ export const Pairs: React.FC = () => {
         className={styles.users}
       >
         {pairsState.length &&
-          pairsState.map((user: IUser) => {
+          pairsState.map((user: User) => {
             const isValid = sortItemBySettings(user, pairSorts);
             if (isValid) {
               return (

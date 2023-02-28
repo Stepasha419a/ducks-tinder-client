@@ -1,8 +1,8 @@
-import { IUser } from '../../models/IUser';
+import { User } from '../../models/User';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { chatApi } from '../../api/chat/chat.api';
 import { chatSocket } from '../../api/chat/chat.socket';
-import { IChat, IMessage } from '../../models/IChat';
+import { Chat, Message } from '../../models/Chat';
 import { RootState } from '../store';
 import { fetchUserById } from '../users/users.thunks';
 import {
@@ -25,7 +25,7 @@ export const getChatsThunk = createAsyncThunk(
 
       const chats = await response.data;
 
-      let allMembers: IUser[] = [];
+      let allMembers: User[] = [];
       for await (let chat of chats) {
         for (let member of chat.members) {
           if (member !== id) {
@@ -83,11 +83,11 @@ export const connectChatThunk = createAsyncThunk(
         dispatch(setCurrentMessages(chat.messages));
       });
 
-      socket.on('message', (message: IMessage) => {
+      socket.on('message', (message: Message) => {
         const { chatPage } = getState() as RootState;
         dispatch(pushNewMessage(message));
         const chatIndex = chatPage.chats.findIndex(
-          (chat: IChat) => chat._id === chatPage.currentChatId
+          (chat: Chat) => chat._id === chatPage.currentChatId
         );
         dispatch(pushMessage({ chatIndex, message: message }));
       });

@@ -1,4 +1,4 @@
-import { IUser } from "../../../models/IUser";
+import { User } from "../../../models/User";
 
 export interface ISorts {
     distance: number,
@@ -8,7 +8,7 @@ export interface ISorts {
     account: string[]  
 }
 
-export const sortItemBySettings = (item: IUser, sortSettings: ISorts) => {
+export const sortItemBySettings = (item: User, sortSettings: ISorts) => {
     for (const sortKey in sortSettings) {
         let result = sortPair(item, sortKey, sortSettings)
         if(!result) {
@@ -18,7 +18,7 @@ export const sortItemBySettings = (item: IUser, sortSettings: ISorts) => {
     return true
 }
 
-const sortPair = (item: IUser, sortKey: string, sortSettings: ISorts) => {
+const sortPair = (item: User, sortKey: string, sortSettings: ISorts) => {
     switch (sortKey) {
         case 'distance':
             if(item.partnerSettings.distance > sortSettings.distance) {

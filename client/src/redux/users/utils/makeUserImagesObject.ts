@@ -1,7 +1,7 @@
-import { ImageInterface, IUser } from '../../../models/IUser';
+import { ImageInterface, User } from '../../../models/User';
 
 export function makeUserImagesObject(args: {
-  currentUser: IUser;
+  currentUser: User;
   images: ImageInterface[];
 }) {
   const { images } = args;

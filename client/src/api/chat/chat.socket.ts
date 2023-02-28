@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { IMessage } from '../../models/IChat';
+import { Message } from '../../models/Chat';
 
 interface ChatSocket {
   socket: Socket | null;
@@ -20,7 +20,7 @@ export const chatSocket: ChatSocket = {
     return this.socket;
   },
   sendMessage(content: string, username: string, userId: string) {
-    const message: IMessage = {
+    const message: Message = {
       id: Date.now().toString(),
       username,
       content,
