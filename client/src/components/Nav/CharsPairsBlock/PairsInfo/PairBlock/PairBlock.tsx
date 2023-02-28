@@ -6,11 +6,11 @@ import { User } from '../../../../../models/User';
 import { useAppSelector } from '../../../../../redux/store';
 import { makeImageUrl } from '../../../../ui/helpers';
 
-interface IPairBlock {
+interface PairBlockProps {
   firstPair: User;
 }
 
-export const PairBlock: React.FC<IPairBlock> = ({ firstPair }) => {
+export const PairBlock: React.FC<PairBlockProps> = ({ firstPair }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const imageUrl = makeImageUrl(firstPair._id, firstPair.pictures.avatar)

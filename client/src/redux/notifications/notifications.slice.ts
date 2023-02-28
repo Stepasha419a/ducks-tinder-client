@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { INotification } from '../../components/ui/Notification';
+import { Notification } from '../../models/Notification';
 
 interface InitialState {
-  notifications: INotification[];
+  notifications: Notification[];
 }
 
 const initialState: InitialState = {
@@ -14,7 +14,7 @@ const notificationsSlice = createSlice({
   initialState,
   reducers: {
     createNotification: (state, action) => {
-      const notification: INotification = {
+      const notification: Notification = {
         id: Date.now(),
         type: action.payload.type,
         text: action.payload.text,
@@ -37,7 +37,7 @@ const notificationsSlice = createSlice({
       (state, action) => {
         const signs = action.type.split('/');
         if (signs[1] !== 'getSortedUser' && signs[1] !== 'disconnectChat') {
-          const notification: INotification = {
+          const notification: Notification = {
             id: Date.now(),
             type: 'error',
             text: `${action.payload} at ${action.type}`,

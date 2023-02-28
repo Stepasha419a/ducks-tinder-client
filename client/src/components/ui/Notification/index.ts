@@ -1,1 +1,0 @@
-export type {INotification} from './Notification.types'

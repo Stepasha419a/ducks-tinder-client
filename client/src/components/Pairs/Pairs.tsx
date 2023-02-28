@@ -9,7 +9,7 @@ import Pair from './Pair/Pair';
 import PairPopup from './popups/Pair/PairPopup';
 import PairsSettingsPopup from './popups/PairsSettings/PairsSettingsPopup';
 import InterestsSettingPopup from './popups/Interests/InterestsSettings/InterestsSettingPopup';
-import { ISorts, sortItemBySettings } from './utils/PairsUtils';
+import { Sorts, sortItemBySettings } from './utils/PairsUtils';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import styles from './Pairs.module.scss';
@@ -27,7 +27,7 @@ export const Pairs: React.FC = () => {
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
-  const [pairSorts, setPairSorts] = useState<ISorts>({
+  const [pairSorts, setPairSorts] = useState<Sorts>({
     distance: 100,
     age: { min: 18, max: 100 },
     photos: 1,

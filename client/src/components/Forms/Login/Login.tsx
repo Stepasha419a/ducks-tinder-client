@@ -13,11 +13,11 @@ import styles from './Login.module.scss';
 import { Button, TextField } from '../../ui';
 import { loginThunk } from '../../../redux/auth/auth.thunks';
 
-interface ILoginForm {
+interface LoginFormProps {
   formError: string;
 }
 
-export const LoginForm: React.FC<ILoginForm> = ({ formError }) => {
+export const LoginForm: React.FC<LoginFormProps> = ({ formError }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

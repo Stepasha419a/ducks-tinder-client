@@ -1,9 +1,5 @@
-export interface INotification {
-  id: number;
-  type: 'error' | 'info';
-  text: string;
-}
+import { Notification } from "../../../models/Notification";
 
-export interface NotificationProps extends INotification {
+export interface NotificationProps extends Notification {
   closeNotification: (id: number) => void;
 }

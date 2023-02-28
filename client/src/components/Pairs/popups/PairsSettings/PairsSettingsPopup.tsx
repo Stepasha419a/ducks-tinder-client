@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { PreferAge } from '../../../../models/User';
 import { Button, CheckboxInput, RangeInput } from '../../../ui/';
 import { RangeInterface, RangeValue } from '../../../ui/inputs/Range';
-import { ISorts } from '../../utils/PairsUtils';
+import { Sorts } from '../../utils/PairsUtils';
 import styles from './PairsSettingsPopup.module.scss';
 
 interface PairsSettingsPopupProps {
-  pairSorts: ISorts;
+  pairSorts: Sorts;
   clearSorts: () => void;
   addSort: (
     sortSetting: string | number | PreferAge,
