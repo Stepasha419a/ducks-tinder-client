@@ -1,16 +1,35 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-import { setInput } from '../../../../../../redux/settings/settings.slice';
-import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import { RangeInput } from '../../../../../ui';
-import { RangeValue } from '../../../../../ui/inputs/Range';
-import styles from './Account.module.scss';
+import { FC, useState } from 'react';
+import {
+  ChangedData,
+  InnerObjectName,
+  SettingInputName,
+  Validation,
+} from '../../../../../redux/settings/settings.interfaces';
+import { useAppSelector } from '../../../../../redux/store';
+import { RangeInput } from '../../../../ui';
+import { RangeValue } from '../../../../ui/inputs/Range';
+import styles from '../SettingsList.module.scss';
 
-export const Account = () => {
-  const dispatch = useAppDispatch();
+interface AccoutProps {
+  setInputHandler: (
+    inputName: SettingInputName,
+    validation?: Validation | null,
+    innerObjectName?: InnerObjectName,
+    formName?: string
+  ) => void;
+  updateInputHandler: (
+    inputName: SettingInputName,
+    changedData: ChangedData,
+    innerObjectName?: InnerObjectName
+  ) => void;
+}
 
+export const Account: FC<AccoutProps> = ({
+  setInputHandler,
+  updateInputHandler,
+}) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const errorFields = useAppSelector((state) => state.settings.errorFields);
 
@@ -19,44 +38,20 @@ export const Account = () => {
   );
 
   const ageHandler = () => {
-    dispatch(
-      submitSettingsThunk({
-        inputName: 'age',
-        changedData: currentAgeSetting,
-      })
-    );
+    updateInputHandler('age', currentAgeSetting);
   };
 
   const setEmailHandler = () => {
-    dispatch(
-      setInput({
-        inputName: 'email',
-        validation: { min: 0, max: 40, email: true },
-      })
-    );
+    setInputHandler('email', { min: 0, max: 40, email: true });
   };
   const setNameHandler = () => {
-    dispatch(
-      setInput({
-        inputName: 'name',
-        validation: { min: 2, max: 14 },
-      })
-    );
+    setInputHandler('name', { min: 2, max: 14 });
   };
   const setDescriptionHandler = () => {
-    dispatch(
-      setInput({
-        inputName: 'description',
-        validation: { min: 50, max: 400 },
-      })
-    );
+    setInputHandler('description', { min: 50, max: 400 });
   };
   const setSexHandler = () => {
-    dispatch(
-      setInput({
-        inputName: 'sex',
-      })
-    );
+    setInputHandler('sex');
   };
 
   return (
@@ -101,11 +96,11 @@ export const Account = () => {
         >
           <div className={styles.descr}>
             <div className={styles.title}>Description</div>
-            <div className={`${styles.setting} ${styles.setting_textOverflow}`}>
+            <div className={`${styles.setting} ${styles.textOverflow}`}>
               {currentUser.description || 'Empty description'}
               <FontAwesomeIcon
                 icon={faAngleRight}
-                className={styles.openIcon}
+                className={`${styles.openIcon} ${styles.absolute}`}
               />
             </div>
           </div>

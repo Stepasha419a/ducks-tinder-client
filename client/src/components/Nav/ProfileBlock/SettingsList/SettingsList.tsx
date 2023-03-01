@@ -1,5 +1,13 @@
 import { useEffect } from 'react';
 import { createNotification } from '../../../../redux/notifications/notifications.slice';
+import {
+  ChangedData,
+  InnerObjectName,
+  SettingInputName,
+  Validation,
+} from '../../../../redux/settings/settings.interfaces';
+import { setInput } from '../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../redux/settings/settings.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import {
   Account,
@@ -27,11 +35,47 @@ const SettingsList = () => {
     } // eslint-disable-next-line
   }, [errorFields.length, dispatch]);
 
+  const setInputHandler = (
+    inputName: SettingInputName,
+    validation?: Validation | null,
+    innerObjectName?: InnerObjectName,
+    formName?: string
+  ) => {
+    dispatch(
+      setInput({
+        inputName,
+        validation,
+        innerObjectName,
+        formName,
+      })
+    );
+  };
+
+  const updateInputHandler = (
+    inputName: SettingInputName,
+    changedData: ChangedData,
+    innerObjectName?: InnerObjectName
+  ) => {
+    dispatch(
+      submitSettingsThunk({
+        inputName,
+        changedData,
+        innerObjectName,
+      })
+    );
+  };
+
   return (
     <div className={styles.groups}>
-      <Account />
-      <Find />
-      <Nickname />
+      <Account
+        setInputHandler={setInputHandler}
+        updateInputHandler={updateInputHandler}
+      />
+      <Find
+        setInputHandler={setInputHandler}
+        updateInputHandler={updateInputHandler}
+      />
+      <Nickname setInputHandler={setInputHandler} />
       <LinksSettingGroup />
       <LoggoutButton />
     </div>

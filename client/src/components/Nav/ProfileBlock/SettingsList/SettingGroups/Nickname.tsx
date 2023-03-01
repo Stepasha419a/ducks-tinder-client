@@ -1,20 +1,28 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setInput } from '../../../../../../redux/settings/settings.slice';
-import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import styles from './Nickname.module.scss';
+import { FC } from 'react';
+import {
+  InnerObjectName,
+  SettingInputName,
+  Validation,
+} from '../../../../../redux/settings/settings.interfaces';
+import { useAppSelector } from '../../../../../redux/store';
+import styles from '../SettingsList.module.scss';
 
-export const Nickname = () => {
-  const dispatch = useAppDispatch();
+interface NicknameProps {
+  setInputHandler: (
+    inputName: SettingInputName,
+    validation?: Validation | null,
+    innerObjectName?: InnerObjectName,
+    formName?: string
+  ) => void;
+}
+
+export const Nickname: FC<NicknameProps> = ({ setInputHandler }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const SetNicknameHandler = () => {
-    dispatch(
-      setInput({
-        inputName: 'nickname',
-        validation: { min: 6, max: 16 },
-      })
-    );
+    setInputHandler('nickname', { min: 6, max: 16 });
   };
 
   return (

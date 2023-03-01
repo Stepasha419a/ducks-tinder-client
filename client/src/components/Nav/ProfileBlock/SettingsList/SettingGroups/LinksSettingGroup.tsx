@@ -1,7 +1,7 @@
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import styles from './LinksSettingGroup.module.scss';
+import styles from '../SettingsList.module.scss';
 
 export const LinksSettingGroup = () => {
   return (
@@ -11,9 +11,7 @@ export const LinksSettingGroup = () => {
         <div className={`${styles.item} ${styles.link}`}>
           <Link to="/policy" className={styles.link} target="_blank">
             <div className={styles.descr}>
-              <div className={styles.title}>
-                Community Rules
-              </div>
+              <div className={styles.title}>Community Rules</div>
               <div className={styles.setting}>
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}
@@ -41,9 +39,7 @@ export const LinksSettingGroup = () => {
         <div className={`${styles.item} ${styles.link}`}>
           <Link to="/policy" className={styles.link} target="_blank">
             <div className={styles.descr}>
-              <div className={styles.title}>
-                Safety Tips
-              </div>
+              <div className={styles.title}>Safety Tips</div>
               <div className={styles.setting}>
                 <FontAwesomeIcon
                   icon={faArrowUpRightFromSquare}

@@ -1,5 +1,5 @@
-export { Account } from './Account/Account';
-export { Find } from './Find/Find';
-export { LinksSettingGroup } from './Links/LinksSettingGroup';
-export { LoggoutButton } from './LogoutButton/LogoutButton';
-export { Nickname } from './Nickname/Nickname';
+export { Account } from './Account';
+export { Find } from './Find';
+export { LinksSettingGroup } from './LinksSettingGroup';
+export { LoggoutButton } from './LogoutButton';
+export { Nickname } from './Nickname';

@@ -1,17 +1,36 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-import { PreferAge } from '../../../../../../models/User';
-import { setInput } from '../../../../../../redux/settings/settings.slice';
-import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../../../redux/store';
-import { CheckboxInput, RangeInput } from '../../../../../ui';
-import { RangeInterface, RangeValue } from '../../../../../ui/inputs/Range';
-import styles from './Find.module.scss';
+import { FC, useState } from 'react';
+import { PreferAge } from '../../../../../models/User';
+import {
+  ChangedData,
+  InnerObjectName,
+  SettingInputName,
+  Validation,
+} from '../../../../../redux/settings/settings.interfaces';
+import { useAppSelector } from '../../../../../redux/store';
+import { CheckboxInput, RangeInput } from '../../../../ui';
+import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
+import styles from '../SettingsList.module.scss';
 
-export const Find = () => {
-  const dispatch = useAppDispatch();
+interface FindProps {
+  setInputHandler: (
+    inputName: SettingInputName,
+    validation?: Validation | null,
+    innerObjectName?: InnerObjectName,
+    formName?: string
+  ) => void;
+  updateInputHandler: (
+    inputName: SettingInputName,
+    changedData: ChangedData,
+    innerObjectName?: InnerObjectName
+  ) => void;
+}
 
+export const Find: FC<FindProps> = ({
+  setInputHandler,
+  updateInputHandler,
+}) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const errorFields = useAppSelector((state) => state.settings.errorFields);
 
@@ -29,58 +48,31 @@ export const Find = () => {
   );
 
   const partnerAgeHandler = () => {
-    dispatch(
-      submitSettingsThunk({
-        inputName: 'age',
-        changedData: { from: ageSetting.min, to: ageSetting.max },
-        innerObjectName: 'partnerSettings',
-      })
+    updateInputHandler(
+      'age',
+      { from: ageSetting.min, to: ageSetting.max },
+      'partnerSettings'
     );
   };
   const distanceHandler = () => {
-    dispatch(
-      submitSettingsThunk({
-        inputName: 'distance',
-        changedData: currentDistanceSetting,
-        innerObjectName: 'partnerSettings',
-      })
-    );
+    updateInputHandler('distance', currentDistanceSetting, 'partnerSettings');
   };
   const onlyInDistanceHandler = () => {
-    dispatch(
-      submitSettingsThunk({
-        inputName: 'usersOnlyInDistance',
-        changedData: !currentUser.partnerSettings.usersOnlyInDistance,
-        innerObjectName: 'partnerSettings',
-      })
+    updateInputHandler(
+      'usersOnlyInDistance',
+      !currentUser.partnerSettings.usersOnlyInDistance,
+      'partnerSettings'
     );
   };
 
   const setInterestsHandler = () => {
-    dispatch(
-      setInput({
-        inputName: 'interests',
-      })
-    );
+    setInputHandler('interests');
   };
   const setPlaceHandler = () => {
-    dispatch(
-      setInput({
-        inputName: 'place',
-        validation: { min: 12, max: 30 },
-        innerObjectName: 'partnerSettings',
-      })
-    );
+    setInputHandler('place', { min: 12, max: 30 }, 'partnerSettings');
   };
   const setPreferSexHandler = () => {
-    dispatch(
-      setInput({
-        formName: 'Interested in',
-        inputName: 'preferSex',
-        validation: null,
-        innerObjectName: 'partnerSettings',
-      })
-    );
+    setInputHandler('preferSex', null, 'partnerSettings', 'Interested in');
   };
 
   return (
