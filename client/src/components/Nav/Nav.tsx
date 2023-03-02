@@ -3,9 +3,16 @@ import styles from './Nav.module.scss';
 import Links from './Links/Links';
 import ChatsPairsBlock from './CharsPairsBlock/ChatsPairsBlock';
 import ProfileBlock from './ProfileBlock/ProfileBlock';
+import { useEffect, useState } from 'react';
 
 const Nav = () => {
   const pathname = useLocation().pathname;
+
+  const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
+
+  useEffect(() => {
+    pathname === '/chat' ? setIsPairsOpened(false) : setIsPairsOpened(true);
+  }, [pathname]);
 
   return (
     <aside className={styles.info}>
@@ -13,7 +20,7 @@ const Nav = () => {
       {pathname === '/profile' ? (
         <ProfileBlock />
       ) : (
-        <ChatsPairsBlock />
+        <ChatsPairsBlock isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} />
       )}
     </aside>
   );

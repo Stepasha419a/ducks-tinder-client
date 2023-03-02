@@ -51,7 +51,12 @@ const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
   }, [innerObjectName, currentUser, settingInputName, setInputValue]);
 
   const submitSettings = () => {
-    dispatch(submitSettingsThunk({ changedData: inputValue }));
+    let value = inputValue;
+    if (!Array.isArray(value)) {
+      value = value.trim();
+    }
+
+    dispatch(submitSettingsThunk({ changedData: value }));
   };
 
   return (

@@ -5,7 +5,7 @@ import PairBlock from './PairBlock/PairBlock';
 import Loading from './Loading/Loading';
 import { getUserPairsThunk } from '../../../../redux/users/users.thunks';
 
-const Pair = () => {
+const NavPair = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -28,4 +28,4 @@ const Pair = () => {
   return <PairBlock firstPair={firstPair}/>;
 };
 
-export default Pair;
+export default NavPair;

@@ -20,9 +20,17 @@
       background-size: auto 130%;
       width: 104px;
       height: 120px;
-      border: 4px solid rgb(248, 230, 127);
+      border: 4px solid var(--color--yellow-80);
       border-radius: 4px;
       position: relative;
+
+      .image {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        user-select: none;
+      }
 
       .likes {
         display: flex;
@@ -30,11 +38,12 @@
         align-items: center;
         width: 40px;
         height: 40px;
-        background-color: rgb(248, 222, 74);
+        background-color: var(--color--yellow-90);
         border-radius: 50%;
         font-weight: 600;
         color: var(--color--white-100);
         font-size: 18px;
+        z-index: 0;
       }
 
       .text {

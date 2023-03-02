@@ -43,7 +43,7 @@ export const TextForm = () => {
       inputValueDirty={inputValueDirty}
       inputValueError={inputValueError}
       isFormCloseable={isFormCloseable}
-      inputValue={inputValue.trim()}
+      inputValue={inputValue}
       setInputValue={
         setInputValue as Dispatch<SetStateAction<string | string[]>>
       }

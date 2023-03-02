@@ -1,35 +1,38 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import NavPair from './PairsInfo/NavPair';
 import Chats from './Chats/Chats';
 import styles from './ChatsPairsBlock.module.scss';
+import { FC } from 'react';
+import classNames from 'classnames';
 
-const ChatsPairsBlock = () => {
-  const pathname = useLocation().pathname;
+interface ChatsPairsBlockProps {
+  isPairsOpened: boolean;
+  setIsPairsOpened: (value: boolean) => void;
+}
 
-  useEffect(() => {
-    pathname === '/chat' ? setIsPairsOpened(false) : setIsPairsOpened(true);
-  }, [pathname]);
+const ChatsPairsBlock: FC<ChatsPairsBlockProps> = ({
+  isPairsOpened,
+  setIsPairsOpened,
+}) => {
+  const cnPairs = classNames(
+    styles.title,
+    isPairsOpened && styles.active
+  );
 
-  const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
+  const cnMessages = classNames(
+    styles.title,
+    !isPairsOpened && styles.active
+  );
 
   return (
     <>
       <div className={styles.titles}>
-        <Link
-          onClick={() => setIsPairsOpened(true)}
-          className={`${styles.title} ${
-            isPairsOpened ? styles.title_active : ''
-          }`}
-          to="/"
-        >
+        <Link onClick={() => setIsPairsOpened(true)} className={cnPairs} to="/">
           Pairs
         </Link>
         <Link
           onClick={() => setIsPairsOpened(false)}
-          className={`${styles.title} ${
-            !isPairsOpened ? styles.title_active : ''
-          }`}
+          className={cnMessages}
           to="/chat"
         >
           Messages

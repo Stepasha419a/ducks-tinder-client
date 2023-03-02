@@ -13,17 +13,18 @@ interface PairBlockProps {
 export const PairBlock: React.FC<PairBlockProps> = ({ firstPair }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
-  const imageUrl = makeImageUrl(firstPair._id, firstPair.pictures.avatar)
+  const imageUrl = makeImageUrl(firstPair._id, firstPair.pictures.avatar);
 
   return (
     <div className={styles.pairs}>
       <Link className={styles.link} to="/pairs">
-        <div
-          style={{
-            backgroundImage: `url(${imageUrl})`,
-          }}
-          className={styles.content}
-        >
+        <div className={styles.content}>
+          <img
+            className={styles.image}
+            src={imageUrl}
+            alt="Pair img"
+            draggable="false"
+          />
           <div className={styles.likes}>{currentUser.pairs.length}</div>
           <div className={styles.text}>{currentUser.pairs.length} likes</div>
           <FontAwesomeIcon

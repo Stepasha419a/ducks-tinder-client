@@ -16,13 +16,13 @@ const Messages = () => {
 
   useEffect(() => {
     if (bottomScrollRef.current) {
-      setTimeout(() => scrollToBottom(bottomScrollRef), 50);
+      scrollToBottom(bottomScrollRef);
     }
-  }, [bottomScrollRef]);
+  }, [currentChatMembers]);
 
   useEffect(() => {
     if (bottomScrollRef.current && isRefElementVisible(bottomScrollRef)) {
-      setTimeout(() => scrollToBottom(bottomScrollRef), 50);
+      scrollToBottom(bottomScrollRef, true);
     }
   }, [messages]);
 

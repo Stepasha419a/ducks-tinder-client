@@ -8,7 +8,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FocusEvent, MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../redux/store';
-import { dislikeUserThunk, likeUserThunk, returnUserThunk } from '../../../redux/users/users.thunks';
+import {
+  dislikeUserThunk,
+  likeUserThunk,
+  returnUserThunk,
+} from '../../../redux/users/users.thunks';
 import { Button } from '../../ui';
 import styles from './Buttons.module.scss';
 
@@ -99,7 +103,7 @@ const Buttons: React.FC<ButtonsProps> = ({
     <>
       <div className={`${styles.buttons} ${isMinimum ? styles.minimized : ''}`}>
         {(isMinimum ? newButtonsData.slice(1, 4) : newButtonsData).map(
-          (buttonData) => {
+          (buttonData, index) => {
             return (
               <Button
                 variant="tinder"
@@ -107,6 +111,7 @@ const Buttons: React.FC<ButtonsProps> = ({
                 onFocus={(e) => btnFocus(e)}
                 onMouseOut={(e) => btnMouseOut(e)}
                 extraClassName={buttonData.extraClassName}
+                key={index}
               >
                 <div className={buttonData.cnWrapper}>
                   <FontAwesomeIcon
