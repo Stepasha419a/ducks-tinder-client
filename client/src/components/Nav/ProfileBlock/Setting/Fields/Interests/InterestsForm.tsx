@@ -23,16 +23,12 @@ export const InterestsForm = () => {
     }
   }, [interests.length]);
 
-  const addInterest = (itemName: string) => {
-    const newInterests = [...interests, itemName];
-    setInterests(newInterests);
-  };
-
-  const deleteInterest = (itemName: string) => {
-    const itemNameIndex = interests.findIndex((item) => item === itemName);
-    const newInterests = [...interests];
-    newInterests.splice(itemNameIndex, 1);
-    setInterests(newInterests);
+  const toggleSort = (itemName: string) => {
+    if (interests.includes(itemName)) {
+      setInterests(interests.filter((item) => item !== itemName));
+    } else {
+      setInterests([...interests, itemName]);
+    }
   };
 
   return (
@@ -53,7 +49,7 @@ export const InterestsForm = () => {
             interests.map((item) => {
               return (
                 <div
-                  onClick={() => deleteInterest(item)}
+                  onClick={() => toggleSort(item)}
                   key={item}
                   className={styles.item}
                 >
@@ -76,8 +72,7 @@ export const InterestsForm = () => {
       {isInterestsSettingPopupOpen && (
         <InterestsSettingPopup
           pairInterests={interests}
-          addSort={addInterest}
-          deleteSort={deleteInterest}
+          toggleSort={toggleSort}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
         />
       )}

@@ -1,18 +1,17 @@
+import classNames from 'classnames';
 import { interestsList } from '../../../../../models/User';
 import { Button } from '../../../../ui';
 import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
   pairInterests: string[];
-  addSort: (sort: string, field: string) => void;
-  deleteSort: (sort: string, field: string) => void;
+  toggleSort: (sortSetting: string) => void;
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
 }
 
 const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
   pairInterests,
-  addSort,
-  deleteSort,
+  toggleSort,
   setIsInterestsSettingPopupOpen,
 }) => {
   return (
@@ -26,24 +25,27 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
           ></div>
           <div className={styles.items}>
             {interestsList.map((item) => {
+              const cnItem = classNames(
+                styles.item,
+                pairInterests.includes(item) && styles.item_active
+              );
               return (
                 <div
-                  onClick={() => {
-                    pairInterests.includes(item)
-                      ? deleteSort(item, 'interests')
-                      : addSort(item, 'interests');
-                  }}
+                  onClick={() => toggleSort(item)}
                   key={item}
-                  className={`${styles.item} ${
-                    pairInterests.includes(item) ? styles.item_active : ''
-                  }`}
+                  className={cnItem}
                 >
                   {item}
                 </div>
               );
             })}
           </div>
-          <Button variant='closePopup' onClick={() => setIsInterestsSettingPopupOpen(false)}>Confirm</Button>
+          <Button
+            variant="closePopup"
+            onClick={() => setIsInterestsSettingPopupOpen(false)}
+          >
+            Confirm
+          </Button>
         </div>
         <div
           onClick={() => setIsInterestsSettingPopupOpen(false)}

@@ -12,16 +12,11 @@ const Pair: React.FC<PairPropsInterface> = ({ user, setCurrentPair }) => {
     return <div>loading...</div>;
   }
 
-  const imageUrl = makeImageUrl(user._id, user.pictures.avatar)
+  const imageUrl = makeImageUrl(user._id, user.pictures.avatar);
 
   return (
-    <div
-      onClick={() => setCurrentPair(user)}
-      style={{
-        backgroundImage: `url(${imageUrl})`,
-      }}
-      className={styles.pair}
-    >
+    <div onClick={() => setCurrentPair(user)} className={styles.pair}>
+      <img className={styles.image} src={imageUrl} alt="pair img" />
       <div className={styles.info}>
         <div className={styles.descr}>
           <div className={styles.name}>{user.name}</div>

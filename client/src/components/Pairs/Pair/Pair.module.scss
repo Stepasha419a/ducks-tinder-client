@@ -1,18 +1,21 @@
 .pair{
   width: 244px;
   height: 305px;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: auto 125%;
-  margin: 5px;
   border-radius: 8px;
   position: relative;
   cursor: pointer;
+  overflow: hidden;
   transition: .1s;
 
   &:hover{
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
     scale: 1.01;
+  }
+
+  .image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
   .info{

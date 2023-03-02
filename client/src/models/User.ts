@@ -109,7 +109,7 @@ export const interestsList = [
   'yoga',
   'meditation',
   'tourism',
-  'traveling',
+  'travelling',
   'hiking',
   'camping',
   'cars',

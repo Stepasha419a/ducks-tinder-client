@@ -1,21 +1,17 @@
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { PreferAge } from '../../../../models/User';
 import { Button, CheckboxInput, RangeInput } from '../../../ui/';
 import { RangeInterface, RangeValue } from '../../../ui/inputs/Range';
+import { interestsForLoop } from '../../Pairs.constants';
 import { Sorts } from '../../utils/PairsUtils';
 import styles from './PairsSettingsPopup.module.scss';
 
 interface PairsSettingsPopupProps {
   pairSorts: Sorts;
   clearSorts: () => void;
-  addSort: (
-    sortSetting: string | number | PreferAge,
-    field: string
-  ) => void;
-  deleteSort: (
-    sortSetting: string | number | PreferAge,
-    field: string
-  ) => void;
+  addSort: (sortSetting: string | number | PreferAge, field: string) => void;
+  toggleSort: (sortSetting: string, field: 'account' | 'interests') => void;
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
   setIsSortPopupOpen: (setting: boolean) => void;
 }
@@ -24,14 +20,12 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
   pairSorts,
   clearSorts,
   addSort,
-  deleteSort,
+  toggleSort,
   setIsInterestsSettingPopupOpen,
   setIsSortPopupOpen,
 }) => {
   const [distanceSetting, setDistanceSetting] = useState(pairSorts.distance);
-  const [ageSetting, setAgeSetting] = useState<PreferAge>(
-    pairSorts.age
-  );
+  const [ageSetting, setAgeSetting] = useState<PreferAge>(pairSorts.age);
   const [photoCount, setPhotoCount] = useState(pairSorts.photos);
 
   const arrForLoop = [];
@@ -104,12 +98,15 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
             <div className={styles.name}>Min photo's count</div>
             <div className={`${styles.change} ${styles.flex}`}>
               {arrForLoop.map((item) => {
+                const cnItem = classNames(
+                  styles.item,
+                  photoCount === item && styles.active
+                );
                 return (
                   <div
                     onClick={() => setPhotosCountHandler(item)}
                     key={item}
-                    className={`${styles.item} 
-                      ${photoCount === item ? styles.active : ''}`}
+                    className={cnItem}
                   >
                     {item}
                   </div>
@@ -121,18 +118,16 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
           <div className={styles.setting}>
             <div className={styles.name}>Interests</div>
             <div className={`${styles.change} ${styles.flex}`}>
-              {['music', 'travelling', 'movies'].map((item) => {
+              {interestsForLoop.slice(0, 3).map((item) => {
+                const cnItem = classNames(
+                  styles.item,
+                  pairSorts.interests.includes(item) && styles.active
+                );
                 return (
                   <div
-                    onClick={() => {
-                      pairSorts.interests.includes(item)
-                        ? deleteSort(item, 'interests')
-                        : addSort(item, 'interests');
-                    }}
+                    onClick={() => toggleSort(item, 'interests')}
                     key={item}
-                    className={`${styles.item} ${
-                      pairSorts.interests.includes(item) ? styles.active : ''
-                    }`}
+                    className={cnItem}
                   >
                     {item}
                   </div>
@@ -149,22 +144,14 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
           <div className={styles.separator} />
           <CheckboxInput
             checked={pairSorts.account.includes('identify confirmed')}
-            onChange={() => {
-              pairSorts.account.includes('identify confirmed')
-                ? deleteSort('identify confirmed', 'account')
-                : addSort('identify confirmed', 'account');
-            }}
+            onChange={() => toggleSort('identify confirmed', 'account')}
             text="Identify confirmed"
             extraClassName={styles.checkboxNew}
           />
           <div className={styles.separator}></div>
           <CheckboxInput
             checked={pairSorts.account.includes('have interests')}
-            onChange={() => {
-              pairSorts.account.includes('have interests')
-                ? deleteSort('have interests', 'account')
-                : addSort('have interests', 'account');
-            }}
+            onChange={() => toggleSort('have interests', 'account')}
             text="Have interests"
             extraClassName={styles.checkboxNew}
           />
