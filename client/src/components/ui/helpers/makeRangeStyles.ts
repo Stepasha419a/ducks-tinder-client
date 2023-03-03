@@ -1,17 +1,17 @@
-import { RangeInterface } from '../inputs/Range';
+import { RangeValue } from '../inputs/Range';
 
 export const makeRangeStyles = (
   isMultiple: boolean,
   min: number,
   max: number,
-  value: RangeInterface
+  value: RangeValue
 ) => {
   if (isMultiple) {
     return {
       '--min': min,
       '--max': max,
-      '--value-a': value.min || 18,
-      '--value-b': value.max || 24,
+      '--value-a': value.min,
+      '--value-b': value.max,
       '--suffix': '%',
     };
   }
@@ -19,7 +19,7 @@ export const makeRangeStyles = (
   return {
     '--min': min,
     '--max': max,
-    '--value-a': value,
+    '--value-a': value.value,
     '--suffix': '%',
   };
 };

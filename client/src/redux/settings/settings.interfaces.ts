@@ -30,4 +30,4 @@ export type ChangableUserFields =
 
 export type ChangablePartnerSettingsFields = 'place' | 'preferSex';
 
-export type KindOfSetting = 'textarea' | 'select' | 'radio' | null;
+export type Setting = 'textarea' | 'select' | 'radio' | null;

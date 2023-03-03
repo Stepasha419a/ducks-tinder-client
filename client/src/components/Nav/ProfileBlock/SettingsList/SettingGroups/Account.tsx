@@ -9,7 +9,6 @@ import {
 } from '../../../../../redux/settings/settings.interfaces';
 import { useAppSelector } from '../../../../../redux/store';
 import { RangeInput } from '../../../../ui';
-import { RangeValue } from '../../../../ui/inputs/Range';
 import styles from '../SettingsList.module.scss';
 
 interface AccoutProps {
@@ -130,10 +129,8 @@ export const Account: FC<AccoutProps> = ({
           <div className={styles.setting}>
             <div className={styles.slider}>
               <RangeInput
-                value={currentAgeSetting}
-                setValue={(value: RangeValue) => {
-                  setCurrentAgeSetting(+value);
-                }}
+                value={{value: currentAgeSetting}}
+                setValue={(value) => setCurrentAgeSetting(value.value!)}
                 completeValue={ageHandler}
                 min={18}
                 max={100}

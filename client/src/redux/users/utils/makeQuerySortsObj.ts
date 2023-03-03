@@ -5,10 +5,7 @@ export function makeQuerySortsObj(user: User, requestedUsers?: string[]) {
     distance: user.partnerSettings.distance,
     onlyNear: user.partnerSettings.usersOnlyInDistance,
     age: user.age,
-    preferAge: {
-      min: user.partnerSettings.age.from,
-      max: user.partnerSettings.age.to,
-    },
+    preferAge: { ...user.partnerSettings.age },
     sex: user.sex,
     preferSex: user.partnerSettings.preferSex,
     userIds: requestedUsers

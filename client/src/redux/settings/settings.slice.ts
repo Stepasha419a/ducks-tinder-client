@@ -4,13 +4,13 @@ import { checkUserFields } from './utils';
 import {
   ErrorField,
   InnerObjectName,
-  KindOfSetting,
+  Setting,
   SettingInputName,
   Validation,
 } from './settings.interfaces';
 
 interface InitialState {
-  kindOfSetting: KindOfSetting;
+  setting: Setting;
   settingInputName: SettingInputName;
   innerObjectName: InnerObjectName;
   isUserInfoSetting: boolean;
@@ -20,7 +20,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  kindOfSetting: null,
+  setting: null,
   settingInputName: null,
   innerObjectName: null,
   isUserInfoSetting: false,
@@ -52,17 +52,17 @@ const settingSlice = createSlice({
 
       switch (payload.inputName) {
         case 'interests':
-          state.kindOfSetting = 'select';
+          state.setting = 'select';
           break;
         case 'description':
-          state.kindOfSetting = 'textarea';
+          state.setting = 'textarea';
           break;
         case 'sex':
         case 'preferSex':
-          state.kindOfSetting = 'radio';
+          state.setting = 'radio';
           break;
         default:
-          state.kindOfSetting = null;
+          state.setting = null;
       }
     },
     checkFields: (state, { payload }) => {

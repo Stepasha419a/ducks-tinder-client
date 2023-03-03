@@ -5,13 +5,13 @@ import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
   pairInterests: string[];
-  toggleSort: (sortSetting: string) => void;
+  toggleInterest: (sortSetting: string) => void;
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
 }
 
 const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
   pairInterests,
-  toggleSort,
+  toggleInterest,
   setIsInterestsSettingPopupOpen,
 }) => {
   return (
@@ -31,7 +31,7 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
               );
               return (
                 <div
-                  onClick={() => toggleSort(item)}
+                  onClick={() => toggleInterest(item)}
                   key={item}
                   className={cnItem}
                 >

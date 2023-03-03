@@ -62,7 +62,7 @@ const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
   return (
     <div className={styles.setting}>
       {inputValueDirty && inputValueError && (
-        <div className={`${styles.name} ${styles.name_error}`}>
+        <div className={`${styles.name} ${styles.error}`}>
           {inputValueError}
         </div>
       )}

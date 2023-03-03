@@ -9,7 +9,7 @@
     text-transform: uppercase;
     color: var(--main-secondary);
 
-    &_error {
+    &.error {
       color: var(--danger-light);
       border-bottom: none;
       padding: 25px 16px 0px;

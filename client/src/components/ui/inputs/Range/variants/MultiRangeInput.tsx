@@ -10,27 +10,27 @@ const MultiRangeInput: FC<PropsWithChildren<MultiRangeInputProps>> = ({
   ...props
 }) => {
   const minHandler = (min: number) => {
-    if (min + 2 < value.max) {
-      setValue(min, value.max);
+    if (min + 2 < value.max!) {
+      setValue(min, value.max!);
     }
   };
 
   const maxHandler = (max: number) => {
-    if (value.min + 2 < max) {
-      setValue(value.min, max);
+    if (value.min! + 2 < max) {
+      setValue(value.min!, max);
     }
   };
 
   return (
     <>
       <SingleRangeInput
-        value={value.min}
+        value={value.min!}
         setValue={minHandler}
         completeValue={completeValue}
         {...props}
       />
       <SingleRangeInput
-        value={value.max}
+        value={value.max!}
         setValue={maxHandler}
         completeValue={completeValue}
         {...props}

@@ -5,7 +5,6 @@ import { Button, RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
 import { useAppDispatch } from '../../../../redux/store';
-import { RangeValue } from '../../../ui/inputs/Range';
 import { saveUserImage } from '../../../../redux/users/users.thunks';
 
 interface ProfileCropImagePropsInterface {
@@ -72,8 +71,8 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({
           <div className={styles.wrapper}>
             <div className={styles.input}>
               <RangeInput
-                value={zoom}
-                setValue={(value: RangeValue) => setZoom(+value)}
+                value={{ value: zoom }}
+                setValue={(value) => setZoom(value.value!)}
                 min={1.1}
                 max={3}
                 step={0.01}
@@ -81,8 +80,18 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({
             </div>
           </div>
           <div className={styles.btns}>
-            <Button onClick={() => setIsImageCropOpen(false)} extraClassName={styles.btn}>Cancel</Button>
-            <Button onClick={() => cropImage(currentUser._id, currentImageCrop)} extraClassName={[styles.btn, styles.select]}>Select</Button>
+            <Button
+              onClick={() => setIsImageCropOpen(false)}
+              extraClassName={styles.btn}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={() => cropImage(currentUser._id, currentImageCrop)}
+              extraClassName={[styles.btn, styles.select]}
+            >
+              Select
+            </Button>
           </div>
         </div>
       </div>

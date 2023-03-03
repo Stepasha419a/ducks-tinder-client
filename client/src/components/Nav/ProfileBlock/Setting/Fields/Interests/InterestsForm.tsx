@@ -72,7 +72,7 @@ export const InterestsForm = () => {
       {isInterestsSettingPopupOpen && (
         <InterestsSettingPopup
           pairInterests={interests}
-          toggleSort={toggleSort}
+          toggleInterest={toggleSort}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
         />
       )}

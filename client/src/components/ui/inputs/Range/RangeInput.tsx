@@ -8,18 +8,15 @@ import SingleRangeInput from './variants/SingleRangeInput';
 
 export const RangeInput: FC<RangeInputProps> = ({
   value,
+  min,
+  max,
+  step = 1,
   setValue,
   completeValue = () => {},
   isMultiple = false,
   extraWrapperClassName,
-  ...props
 }) => {
-  const rangeStyles = makeRangeStyles(
-    isMultiple,
-    props.min as number,
-    props.max as number,
-    value
-  );
+  const rangeStyles = makeRangeStyles(isMultiple, min, max, value);
 
   const cnWrapper = classNames(
     styles.slider,
@@ -29,9 +26,13 @@ export const RangeInput: FC<RangeInputProps> = ({
 
   const handleRangeChange = (min: number, max: number) => {
     if (min + 2 < max) {
-      setValue({ min, max });
+      setValue!({ min, max });
     }
   };
+
+  const handleChange = (value: number) => {
+    setValue({value});
+  }
 
   const checkIsMultiple = isMultiple && value.min && value.max;
 
@@ -50,16 +51,20 @@ export const RangeInput: FC<RangeInputProps> = ({
           value={value}
           setValue={handleRangeChange}
           completeValue={completeValue}
-          {...props}
+          min={min}
+          max={max}
+          step={step}
         >
           <div className={styles.slider__progress}></div>
         </MultiRangeInput>
       ) : (
         <SingleRangeInput
-          value={value}
-          setValue={setValue}
+          value={value.value!}
+          setValue={handleChange!}
           completeValue={completeValue}
-          {...props}
+          min={min}
+          max={max}
+          step={step}
         >
           <div className={styles.slider__progress}></div>
         </SingleRangeInput>

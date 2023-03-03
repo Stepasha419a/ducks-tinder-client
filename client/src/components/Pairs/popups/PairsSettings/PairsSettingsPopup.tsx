@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { PreferAge } from '../../../../models/User';
 import { Button, CheckboxInput, RangeInput } from '../../../ui/';
-import { RangeInterface, RangeValue } from '../../../ui/inputs/Range';
 import { interestsForLoop } from '../../Pairs.constants';
 import { Sorts } from '../../utils/PairsUtils';
 import styles from './PairsSettingsPopup.module.scss';
@@ -66,8 +65,8 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
             <div className={styles.value}>{distanceSetting} km</div>
             <div className={`${styles.change} ${styles.margin}`}>
               <RangeInput
-                value={distanceSetting}
-                setValue={(value: RangeValue) => setDistanceSetting(+value)}
+                value={{value: distanceSetting}}
+                setValue={(value) => setDistanceSetting(value.value!)}
                 completeValue={() => distanceHandler()}
                 min={2}
                 max={100}
@@ -78,13 +77,13 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
           <div className={styles.setting}>
             <div className={styles.name}>Age range</div>
             <div className={styles.value}>
-              from {ageSetting.min} to {ageSetting.max}
+              from {ageSetting.from} to {ageSetting.to}
             </div>
             <div className={`${styles.change} ${styles.margin}`}>
               <RangeInput
-                value={ageSetting}
-                setValue={(value: RangeValue) =>
-                  setAgeSetting(value as RangeInterface)
+                value={{ min: ageSetting.from, max: ageSetting.to }}
+                setValue={(value) =>
+                  setAgeSetting({ from: value.min!, to: value.max! })
                 }
                 completeValue={() => ageHandler()}
                 min={18}

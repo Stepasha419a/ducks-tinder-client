@@ -1,1 +1,1 @@
-export type { RangeInterface, RangeValue } from './RangeInput.types';
+export type { RangeValue } from './RangeInput.types';

@@ -6,7 +6,7 @@ import { InterestsForm, RadioForm, TextareaForm, TextForm } from './Fields';
 const ProfileSetting = () => {
   const dispatch = useAppDispatch();
 
-  const kindOfSetting = useAppSelector((state) => state.settings.kindOfSetting);
+  const setting = useAppSelector((state) => state.settings.setting);
 
   useEffect(() => {
     return () => {
@@ -14,11 +14,11 @@ const ProfileSetting = () => {
     };
   });
 
-  if (kindOfSetting === 'select') {
+  if (setting === 'select') {
     return <InterestsForm />;
-  } else if (kindOfSetting === 'textarea') {
+  } else if (setting === 'textarea') {
     return <TextareaForm />;
-  } else if (kindOfSetting === 'radio') {
+  } else if (setting === 'radio') {
     return <RadioForm />;
   }
 

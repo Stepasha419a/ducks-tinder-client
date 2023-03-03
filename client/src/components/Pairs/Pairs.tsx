@@ -103,7 +103,7 @@ export const Pairs = () => {
       {isInterestsSettingPopupOpen && (
         <InterestsSettingPopup
           pairInterests={pairSorts.interests}
-          toggleSort={(item) => toggleSort(item, 'interests')}
+          toggleInterest={(item) => toggleSort(item, 'interests')}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
         />
       )}

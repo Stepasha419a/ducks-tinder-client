@@ -5,15 +5,17 @@ export interface ImageInterface {
   setting: string;
 }
 
+export interface PreferAge {
+  from: number;
+  to: number;
+}
+
 export interface PartnerSettings {
   place: string;
   distance: number;
   usersOnlyInDistance: boolean;
   preferSex: 'male' | 'female';
-  age: {
-    from: number;
-    to: number;
-  };
+  age: PreferAge;
 }
 
 export interface User {
@@ -61,11 +63,6 @@ export interface UserUnrequired {
   };
   chats?: string[];
   checkedUsers?: string[];
-}
-
-export interface PreferAge {
-  min: number;
-  max: number;
 }
 
 export interface QuerySorts {

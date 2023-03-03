@@ -1,8 +1,8 @@
-import { User } from "../../../models/User";
+import { PreferAge, User } from "../../../models/User";
 
 export interface Sorts {
     distance: number,
-    age: {min: number, max: number},
+    age: PreferAge,
     photos: number,
     interests: string[],
     account: string[]  
@@ -26,7 +26,7 @@ const sortPair = (item: User, sortKey: string, sortSettings: Sorts) => {
             }
             return true
         case 'age':
-            if(item.age < sortSettings.age.min || item.age > sortSettings.age.max) {
+            if(item.age < sortSettings.age.from || item.age > sortSettings.age.to) {
                 return false
             }
             return true

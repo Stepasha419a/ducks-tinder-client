@@ -10,7 +10,6 @@ import {
 } from '../../../../../redux/settings/settings.interfaces';
 import { useAppSelector } from '../../../../../redux/store';
 import { CheckboxInput, RangeInput } from '../../../../ui';
-import { RangeInterface, RangeValue } from '../../../../ui/inputs/Range';
 import styles from '../SettingsList.module.scss';
 
 interface FindProps {
@@ -34,25 +33,17 @@ export const Find: FC<FindProps> = ({
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const errorFields = useAppSelector((state) => state.settings.errorFields);
 
-  const [ageSetting, setAgeSetting] = useState<PreferAge>(
-    currentUser.partnerSettings
-      ? {
-          min: currentUser.partnerSettings.age.from,
-          max: currentUser.partnerSettings.age.to,
-        }
-      : { min: 18, max: 24 }
-  );
+  const [ageSetting, setAgeSetting] = useState<PreferAge>({
+    from: currentUser.partnerSettings.age.from,
+    to: currentUser.partnerSettings.age.to,
+  });
 
-  const [currentDistanceSetting, setCurrentDistanceSetting] = useState(
-    currentUser.partnerSettings ? currentUser.partnerSettings.distance : 5
+  const [currentDistanceSetting, setCurrentDistanceSetting] = useState<number>(
+    currentUser.partnerSettings.distance
   );
 
   const partnerAgeHandler = () => {
-    updateInputHandler(
-      'age',
-      { from: ageSetting.min, to: ageSetting.max },
-      'partnerSettings'
-    );
+    updateInputHandler('age', { ...ageSetting }, 'partnerSettings');
   };
   const distanceHandler = () => {
     updateInputHandler('distance', currentDistanceSetting, 'partnerSettings');
@@ -122,17 +113,13 @@ export const Find: FC<FindProps> = ({
         >
           <div className={styles.descr}>
             <div className={styles.title}>Distance</div>
-            <div className={styles.setting}>
-              {currentDistanceSetting || 'Empty distance'} км.
-            </div>
+            <div className={styles.setting}>{currentDistanceSetting} км.</div>
           </div>
           <div className={styles.setting}>
             <div className={styles.slider}>
               <RangeInput
-                value={currentDistanceSetting}
-                setValue={(value: RangeValue) =>
-                  setCurrentDistanceSetting(+value)
-                }
+                value={{ value: currentDistanceSetting }}
+                setValue={(value) => setCurrentDistanceSetting(value.value!)}
                 completeValue={distanceHandler}
                 min={2}
                 max={100}
@@ -155,7 +142,7 @@ export const Find: FC<FindProps> = ({
           <div className={styles.descr}>
             <div className={styles.title}>Interested in</div>
             <div className={styles.setting}>
-              {currentUser.partnerSettings.preferSex || 'Empty sex prefer'}
+              {currentUser.partnerSettings.preferSex}
               <FontAwesomeIcon
                 icon={faAngleRight}
                 className={styles.openIcon}
@@ -167,15 +154,15 @@ export const Find: FC<FindProps> = ({
           <div className={styles.descr}>
             <div className={styles.title}>Partner age</div>
             <div className={styles.setting}>
-              from {ageSetting.min} to {ageSetting.max}
+              from {ageSetting.from} to {ageSetting.to}
             </div>
           </div>
           <div className={styles.setting}>
             <div className={styles.slider}>
               <RangeInput
-                value={ageSetting}
-                setValue={(value: RangeValue) =>
-                  setAgeSetting(value as RangeInterface)
+                value={{ min: ageSetting.from, max: ageSetting.to }}
+                setValue={(value) =>
+                  setAgeSetting({ from: value.min!, to: value.max! })
                 }
                 completeValue={partnerAgeHandler}
                 min={18}
