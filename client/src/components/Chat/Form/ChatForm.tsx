@@ -10,13 +10,15 @@ const ChatForm = () => {
   const [value, setValue] = useState<string>('');
 
   const setValueHandler = (value: string) => {
-    const validatedValue = value.replace(/\s+/g, ' ').trim();
+    const validatedValue = value.replace(/\s+/g, ' ');
     setValue(validatedValue);
   };
 
   const sendMessage = async () => {
-    dispatch(sendMessageThunk(value));
-    setValueHandler('')
+    if (value.trim()) {
+      dispatch(sendMessageThunk(value.trim()));
+      setValueHandler('');
+    }
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -36,10 +38,9 @@ const ChatForm = () => {
           onChange={(e) => setValueHandler(e.target.value)}
           extraClassName={styles.input}
         />
-        {value.length ? (
+        {value.trim().length ? (
           <Button
             onClick={sendMessage}
-            variant="default"
             extraClassName={styles.button}
           >
             send

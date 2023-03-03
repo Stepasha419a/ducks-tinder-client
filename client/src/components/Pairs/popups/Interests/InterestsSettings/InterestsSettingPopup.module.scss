@@ -67,6 +67,7 @@
         max-height: calc(100% - 136px);
         padding: 0 10px;
         overflow: auto;
+        scrollbar-width: none;
 
         &::-webkit-scrollbar {
           display: none;

@@ -44,7 +44,7 @@ export class UsersService {
     const user: User = await this.userModel.findOne({
       _id: { $nin: sortsDto.userIds },
       'partnerSettings.distance': { $gt: 0, $lt: sortsDto.distance },
-      age: { $gt: sortsDto.preferAge.min - 1, $lt: sortsDto.preferAge.max + 1 },
+      age: { $gt: sortsDto.preferAge.from - 1, $lt: sortsDto.preferAge.to + 1 },
       'partnerSettings.age.from': { $lt: sortsDto.age + 1 },
       'partnerSettings.age.to': { $gt: sortsDto.age - 1 },
       sex: sortsDto.preferSex,

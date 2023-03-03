@@ -1,5 +1,6 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { PreferAge } from '../../../../../models/User';
 import {
@@ -72,9 +73,11 @@ export const Find: FC<FindProps> = ({
       <div className={styles.items}>
         <div
           onClick={setInterestsHandler}
-          className={`${styles.item} ${styles.pointer} ${
-            errorFields.includes('interests') ? styles.error : ''
-          }`}
+          className={classNames(
+            styles.item,
+            styles.pointer,
+            errorFields.includes('interests') && styles.error
+          )}
         >
           <div className={styles.descr}>
             <div className={styles.title}>Interests</div>
@@ -91,9 +94,11 @@ export const Find: FC<FindProps> = ({
         </div>
         <div
           onClick={setPlaceHandler}
-          className={`${styles.item} ${styles.pointer} ${
-            errorFields.includes('place') ? styles.error : ''
-          }`}
+          className={classNames(
+            styles.item,
+            styles.pointer,
+            errorFields.includes('place') && styles.error
+          )}
         >
           <div className={styles.descr}>
             <div className={styles.title}>Place</div>
@@ -106,11 +111,7 @@ export const Find: FC<FindProps> = ({
             </div>
           </div>
         </div>
-        <div
-          className={`${styles.item} ${
-            errorFields.includes('distance') ? styles.error : ''
-          }`}
-        >
+        <div className={styles.item}>
           <div className={styles.descr}>
             <div className={styles.title}>Distance</div>
             <div className={styles.setting}>{currentDistanceSetting} км.</div>
@@ -135,9 +136,7 @@ export const Find: FC<FindProps> = ({
         </div>
         <div
           onClick={setPreferSexHandler}
-          className={`${styles.item} ${styles.pointer} ${
-            errorFields.includes('preferSex') ? styles.error : ''
-          }`}
+          className={`${styles.item} ${styles.pointer}`}
         >
           <div className={styles.descr}>
             <div className={styles.title}>Interested in</div>

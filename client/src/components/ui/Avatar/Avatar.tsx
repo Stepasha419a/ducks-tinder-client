@@ -20,7 +20,7 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <div className={cnContainer}>
-      <img className={cn} src={imageUrl} alt="avatar" />
+      <img draggable='false' className={cn} src={imageUrl} alt="avatar" />
     </div>
   );
 };

@@ -1,69 +1,46 @@
-import { useEffect, useState } from 'react';
 import { Chat } from '../../../../../models/Chat';
 import { User } from '../../../../../models/User';
 import styles from './ChatItem.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { Avatar } from '../../../../ui';
-import { connectChatThunk, disconnectChatThunk } from '../../../../../redux/chat/chat.thunks';
+import classNames from 'classnames';
 
 interface ChatInterface {
   chat: Chat;
-  chatCompanionId: string | undefined;
+  chatCompanion: User | undefined;
   currentChatId: string;
+  connect: (chatId: string) => void;
 }
 
 const ChatItem: React.FC<ChatInterface> = ({
   chat,
-  chatCompanionId,
+  chatCompanion,
   currentChatId,
+  connect,
 }) => {
-  const dispatch = useAppDispatch();
-
-  const chatsUsers = useAppSelector((state) => state.chatPage.chatsUsers);
-
-  const [chatPartner, setChatPartner] = useState<User | null>(null);
-
-  function connect(chatId: string) {
-    dispatch(disconnectChatThunk());
-    dispatch(connectChatThunk({ chatId }));
-  }
-
-  useEffect(() => {
-    return () => {
-      dispatch(disconnectChatThunk());
-    };
-  }, [dispatch]);
-
-  useEffect(() => {
-    let user = chatsUsers.find((user) => user._id === chatCompanionId);
-    if (user) {
-      setChatPartner(user);
-    }
-  }, [chatsUsers, chatCompanionId]);
-
-  if (!chatPartner) {
+  if (!chatCompanion) {
     return null;
   }
 
   return (
     <div
       onClick={() => connect(chat._id)}
-      className={`${styles.item} ${
-        currentChatId === chat._id ? styles.item_active : ''
-      }`}
+      className={classNames(
+        styles.item,
+        currentChatId === chat._id && styles.item_active
+      )}
     >
       <Avatar
-        userId={chatCompanionId}
+        userId={chatCompanion._id}
         size="m"
-        avatarUrl={chatPartner.pictures.avatar}
+        avatarUrl={chatCompanion.pictures.avatar}
       />
       <div className={styles.descr}>
-        <div className={styles.name}>{chatPartner.name}</div>
+        <div className={styles.name}>{chatCompanion.name}</div>
         <div className={styles.message}>
           {chat.messages.length
             ? chat.messages[chat.messages.length - 1]?.userId ===
-              chatPartner._id
-              ? `${chatPartner.name}: `
+              chatCompanion._id
+              ? `${chatCompanion.name}: `
               : 'you: '
             : 'send first message'}
 

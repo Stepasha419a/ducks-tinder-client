@@ -32,11 +32,12 @@ export const ImageSlider: React.FC<ImageSliderPropsInterface> = ({
   };
 
   const cnDefault = classNames(styles.item, styles.default, extraClassName);
+  const cnDefaultWrapper = classNames(styles.slider, extraWrapperClassName);
   const cn = classNames(styles.item, extraClassName);
 
   if (!Array.isArray(images) || images.length <= 0 || images[0] === '') {
     return (
-      <div className={styles.slider}>
+      <div className={cnDefaultWrapper}>
         <img
           src={defaultUserPhoto}
           alt="imagesSlider"

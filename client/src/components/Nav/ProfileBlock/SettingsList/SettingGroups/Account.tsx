@@ -1,5 +1,6 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { FC, useState } from 'react';
 import {
   ChangedData,
@@ -89,9 +90,11 @@ export const Account: FC<AccoutProps> = ({
         </div>
         <div
           onClick={setDescriptionHandler}
-          className={`${styles.item} ${styles.pointer} ${
-            errorFields.includes('description') ? styles.error : ''
-          }`}
+          className={classNames(
+            styles.item,
+            styles.pointer,
+            errorFields.includes('description') && styles.error
+          )}
         >
           <div className={styles.descr}>
             <div className={styles.title}>Description</div>
@@ -106,9 +109,7 @@ export const Account: FC<AccoutProps> = ({
         </div>
         <div
           onClick={setSexHandler}
-          className={`${styles.item} ${styles.pointer} ${
-            errorFields.includes('sex') ? styles.error : ''
-          }`}
+          className={`${styles.item} ${styles.pointer}`}
         >
           <div className={styles.descr}>
             <div className={styles.title}>Sex</div>
@@ -129,7 +130,7 @@ export const Account: FC<AccoutProps> = ({
           <div className={styles.setting}>
             <div className={styles.slider}>
               <RangeInput
-                value={{value: currentAgeSetting}}
+                value={{ value: currentAgeSetting }}
                 setValue={(value) => setCurrentAgeSetting(value.value!)}
                 completeValue={ageHandler}
                 min={18}

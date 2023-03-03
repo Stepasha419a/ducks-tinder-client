@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Message } from '../../../models/Chat';
 import { useAppSelector } from '../../../redux/store';
 import { ChatMessage } from '../../ui';
-import { isRefElementVisible, scrollToBottom } from '../utils/ChatUtils';
+import { isRefElementVisible, scrollToBottom } from '../../ui/helpers';
 import styles from './Messages.module.scss';
 
 const Messages = () => {
@@ -12,7 +12,7 @@ const Messages = () => {
   const messages = useAppSelector((state) => state.chatPage.currentMessages);
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
-  const bottomScrollRef = useRef<HTMLDivElement | null>(null);
+  const bottomScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (bottomScrollRef.current) {
@@ -38,7 +38,7 @@ const Messages = () => {
           ? currentUser.pictures.avatar
           : chatMember?.pictures.avatar;
 
-        return currentChatMembers.length ? (
+        return (
           <ChatMessage
             key={message.id}
             isOwn={isOwn}
@@ -46,8 +46,6 @@ const Messages = () => {
             username={username}
             avatar={avatar}
           />
-        ) : (
-          <div key={message.id}>loading message...</div>
         );
       })}
     </div>
