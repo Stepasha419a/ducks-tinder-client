@@ -1,22 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { combineReducers } from 'redux';
 import authReducer from './auth/auth.slice';
 import chatReducer from './chat/chat.slice';
 import notificationsReducer from './notifications/notifications.slice';
 import settingsSlice from './settings/settings.slice';
 import usersReducer from './users/users.slice';
 
-let rootReducer = combineReducers({
-  usersPage: usersReducer,
-  authPage: authReducer,
-  chatPage: chatReducer,
-  notifications: notificationsReducer,
-  settings: settingsSlice
-});
-
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    usersPage: usersReducer,
+    authPage: authReducer,
+    chatPage: chatReducer,
+    notifications: notificationsReducer,
+    settings: settingsSlice,
+  },
 });
 
 export default store;

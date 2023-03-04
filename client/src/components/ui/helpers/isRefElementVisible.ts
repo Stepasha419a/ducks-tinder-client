@@ -2,7 +2,6 @@ export const isRefElementVisible = (
   ref: React.MutableRefObject<HTMLDivElement | null>
 ) => {
   const rect = ref.current?.lastElementChild?.getBoundingClientRect();
-  console.log(rect)
   if (rect) {
     return (
       rect.top >= 0 &&

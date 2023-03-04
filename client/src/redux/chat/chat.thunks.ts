@@ -2,16 +2,13 @@ import { User } from '../../models/User';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { chatApi } from '../../api/chat/chat.api';
 import { chatSocket } from '../../api/chat/chat.socket';
-import { Chat, Message } from '../../models/Chat';
+import { Message } from '../../models/Chat';
 import { RootState } from '../store';
 import { fetchUserById } from '../users/users.thunks';
 import {
+  disconnectChat,
   pushNewMessage,
-  pushMessage,
-  setCurrentChatId,
-  setCurrentChatMembers,
-  setCurrentMessages,
-  setIsConnected,
+  setCurrentChatData,
 } from './chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
@@ -66,37 +63,53 @@ export const createChatThunk = createAsyncThunk(
 
 export const connectChatThunk = createAsyncThunk(
   'chat/connectChat',
-  async function (
-    args: { chatId: string },
-    { rejectWithValue, dispatch, getState }
-  ) {
+  async function (args: { chatId: string }, { rejectWithValue, dispatch }) {
     try {
       const { chatId } = args;
+
       const socket = chatSocket.connectChat(chatId);
 
       socket.on('connected', async () => {
-        dispatch(setCurrentChatId(chatId));
-        dispatch(setIsConnected(true));
         const response = await chatApi.getChat(chatId);
         const chat = await response.data;
-        dispatch(setCurrentChatMembers(chat));
-        dispatch(setCurrentMessages(chat.messages));
+        dispatch(setCurrentChatData(chat));
       });
 
       socket.on('message', (message: Message) => {
-        const { chatPage } = getState() as RootState;
         dispatch(pushNewMessage(message));
-        const chatIndex = chatPage.chats.findIndex(
-          (chat: Chat) => chat._id === chatPage.currentChatId
-        );
-        dispatch(pushMessage({ chatIndex, message: message }));
       });
 
       socket.on('disconnected', () => {
-        dispatch(setIsConnected(false));
-        dispatch(setCurrentMessages([]));
-        dispatch(setCurrentChatId(''));
+        dispatch(disconnectChat());
       });
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
+    }
+  }
+);
+
+export const disconnectChatThunk = createAsyncThunk(
+  'chat/disconnectChat',
+  function (_, { rejectWithValue }) {
+    try {
+      chatSocket.disconnectChat();
+    } catch (error) {
+      if (error instanceof Error) {
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue(['unexpected error', error]);
+    }
+  }
+);
+
+export const closeAllSockets = createAsyncThunk(
+  'chat/closeSocket',
+  async function (_, { rejectWithValue }) {
+    try {
+      chatSocket.closeAllSockets();
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
@@ -113,25 +126,7 @@ export const sendMessageThunk = createAsyncThunk(
       const { usersPage } = getState() as RootState;
       const { currentUser } = usersPage;
 
-      chatSocket.sendMessage(
-        content,
-        currentUser.name,
-        currentUser._id
-      );
-    } catch (error) {
-      if (error instanceof Error) {
-        return rejectWithValue(error.message);
-      }
-      return rejectWithValue(['unexpected error', error]);
-    }
-  }
-);
-
-export const disconnectChatThunk = createAsyncThunk(
-  'chat/disconnectChat',
-  function (_, { rejectWithValue }) {
-    try {
-      chatSocket.disconnectChat();
+      chatSocket.sendMessage(content, currentUser.name, currentUser._id);
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);
