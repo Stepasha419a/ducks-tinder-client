@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../../redux/store';
+import { useAppSelector } from '../../../hooks';
 import Choose from './Choose/Choose';
 import FailedChats from './Failed/NoChats';
 

@@ -10,8 +10,8 @@ import {
   Policy,
   Layout,
 } from '..';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { checkAuthThunk } from '../../redux/auth/auth.thunks';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
 
 const Routing = () => {
   const dispatch = useAppDispatch();

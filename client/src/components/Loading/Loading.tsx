@@ -1,6 +1,6 @@
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppSelector } from '../../redux/store';
+import { useAppSelector } from '../../hooks';
 import styles from './Loading.module.scss';
 
 export const Loading = () => {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAppSelector } from '../../../../redux/store';
+import { useAppSelector } from '../../../../hooks';
 import { Button } from '../../../ui';
 import ProfileChangeImage from '../ChangeImage/ChangeImage';
 import ProfileFullPreview from '../UserPreview/FullPreview/FullPreview';

@@ -1,5 +1,5 @@
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { deleteNotification } from '../../redux/notifications/notifications.slice';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { Notification } from '../ui';
 import styles from './Notifications.module.scss';
 
@@ -21,7 +21,11 @@ export const Notifications = () => {
   return (
     <div className={styles.notifications}>
       {notifications.map((item) => (
-        <Notification {...item} closeNotification={closeNotification} key={item.id}/>
+        <Notification
+          {...item}
+          closeNotification={closeNotification}
+          key={item.id}
+        />
       ))}
     </div>
   );

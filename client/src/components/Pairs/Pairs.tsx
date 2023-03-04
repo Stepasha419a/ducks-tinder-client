@@ -8,11 +8,11 @@ import PairsSettingsPopup from './popups/PairsSettings/PairsSettingsPopup';
 import InterestsSettingPopup from './popups/Interests/InterestsSettings/InterestsSettingPopup';
 import { Sorts, sortItemBySettings } from './utils/PairsUtils';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
 import styles from './Pairs.module.scss';
 import { getUserPairsThunk } from '../../redux/users/users.thunks';
 import Sorting from './Sorting/Sorting';
 import { initialSorts } from './Pairs.constants';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 export const Pairs = () => {
   const dispatch = useAppDispatch();

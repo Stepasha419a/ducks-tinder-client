@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../../../redux/store';
+import { useAppSelector } from '../../../../../../hooks';
 import { RadioInput } from '../../../../../ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './RadioForm.module.scss';

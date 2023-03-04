@@ -1,6 +1,6 @@
-import { useAppSelector } from "../../../redux/store";
-import Setting from './Setting/Setting'
-import SettingsList from './SettingsList/SettingsList'
+import { useAppSelector } from '../../../hooks';
+import Setting from './Setting/Setting';
+import SettingsList from './SettingsList/SettingsList';
 
 const ProfileBlock = () => {
   const isUserInfoSetting = useAppSelector(

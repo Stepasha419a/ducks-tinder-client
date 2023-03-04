@@ -1,6 +1,6 @@
 import { KeyboardEvent, useState } from 'react';
+import { useAppDispatch } from '../../../hooks';
 import { sendMessageThunk } from '../../../redux/chat/chat.thunks';
-import { useAppDispatch } from '../../../redux/store';
 import { Button, TextField } from '../../ui';
 import styles from './ChatForm.module.scss';
 
@@ -39,10 +39,7 @@ const ChatForm = () => {
           extraClassName={styles.input}
         />
         {value.trim().length ? (
-          <Button
-            onClick={sendMessage}
-            extraClassName={styles.button}
-          >
+          <Button onClick={sendMessage} extraClassName={styles.button}>
             send
           </Button>
         ) : null}

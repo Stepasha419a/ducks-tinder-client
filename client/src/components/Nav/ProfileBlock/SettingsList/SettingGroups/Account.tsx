@@ -2,13 +2,13 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FC, useState } from 'react';
+import { useAppSelector } from '../../../../../hooks';
 import {
   ChangedData,
   InnerObjectName,
   SettingInputName,
   Validation,
 } from '../../../../../redux/settings/settings.interfaces';
-import { useAppSelector } from '../../../../../redux/store';
 import { RangeInput } from '../../../../ui';
 import styles from '../SettingsList.module.scss';
 

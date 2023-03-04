@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { createNotification } from '../../../../redux/notifications/notifications.slice';
 import {
   ChangedData,
@@ -8,7 +9,6 @@ import {
 } from '../../../../redux/settings/settings.interfaces';
 import { setInput } from '../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import {
   Account,
   Find,

@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import styles from './Layout.module.scss';
-import { useAppSelector } from '../../redux/store';
 import { useDispatch } from 'react-redux';
 import { checkFields } from '../../redux/settings/settings.slice';
+import { useAppSelector } from '../../hooks';
 
 export const Layout = () => {
   const navigate = useNavigate();

@@ -4,8 +4,8 @@ import { User } from '../../../../models/User';
 import { Button, RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
-import { useAppDispatch } from '../../../../redux/store';
 import { saveUserImage } from '../../../../redux/users/users.thunks';
+import { useAppDispatch } from '../../../../hooks';
 
 interface ProfileCropImagePropsInterface {
   currentUser: User;

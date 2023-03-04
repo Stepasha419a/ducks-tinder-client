@@ -7,12 +7,12 @@ import TinderUserLoading from './UserLoading/Loading/Loading';
 import TinderUserFailed from './UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
 import Instructions from './Instructions/Instructions';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
 import { Button } from '../ui';
 import {
   getSortedUserThunk,
   updateUserThunk,
 } from '../../redux/users/users.thunks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
 export const Tinder: React.FC = () => {
   const dispatch = useAppDispatch();

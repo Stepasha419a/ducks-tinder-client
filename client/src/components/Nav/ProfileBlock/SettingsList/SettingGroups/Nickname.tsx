@@ -1,12 +1,12 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FC } from 'react';
+import { useAppSelector } from '../../../../../hooks';
 import {
   InnerObjectName,
   SettingInputName,
   Validation,
 } from '../../../../../redux/settings/settings.interfaces';
-import { useAppSelector } from '../../../../../redux/store';
 import styles from '../SettingsList.module.scss';
 
 interface NicknameProps {

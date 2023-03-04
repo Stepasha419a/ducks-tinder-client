@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { useAppSelector } from '../../../../../../redux/store';
+import { useAppSelector } from '../../../../../../hooks';
 import { Textarea } from '../../../../../ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './TextareaForm.module.scss';

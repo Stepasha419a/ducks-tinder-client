@@ -8,10 +8,10 @@ import {
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { setFormError } from '../../../redux/auth/auth.slice';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../redux/store';
 import styles from './Login.module.scss';
 import { Button, TextField } from '../../ui';
 import { loginThunk } from '../../../redux/auth/auth.thunks';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 
 interface LoginFormProps {
   formError: string;

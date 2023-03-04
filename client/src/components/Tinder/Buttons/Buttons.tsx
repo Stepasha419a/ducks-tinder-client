@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FocusEvent, MouseEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
 import {
   dislikeUserThunk,
   likeUserThunk,

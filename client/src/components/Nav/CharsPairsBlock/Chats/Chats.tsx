@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Chat } from '../../../../models/Chat';
 import ChatItem from './ChatItem/ChatItem';
 import styles from './Chats.module.scss';
-import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import FailedChats from './Failed/FailedChats';
 import {
   closeAllSockets,
@@ -11,6 +10,7 @@ import {
   getChatsThunk,
 } from '../../../../redux/chat/chat.thunks';
 import Preloader from '../../../Preloader/Preloader';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 
 const Chats = () => {
   const dispatch = useAppDispatch();
@@ -46,27 +46,25 @@ const Chats = () => {
   }
 
   return (
-    <>
-      <div className={styles.chats}>
-        {chats.map((chat: Chat) => {
-          const chatCompanionId = chat.members.find(
-            (member) => member !== currentUser._id
-          );
-          let chatCompanion = chatsUsers.find(
-            (user) => user._id === chatCompanionId
-          );
-          return (
-            <ChatItem
-              key={chat._id}
-              chat={chat}
-              chatCompanion={chatCompanion}
-              currentChatId={currentChatId}
-              connect={connect}
-            />
-          );
-        })}
-      </div>
-    </>
+    <div className={styles.chats}>
+      {chats.map((chat: Chat) => {
+        const chatCompanionId = chat.members.find(
+          (member) => member !== currentUser._id
+        );
+        let chatCompanion = chatsUsers.find(
+          (user) => user._id === chatCompanionId
+        );
+        return (
+          <ChatItem
+            key={chat._id}
+            chat={chat}
+            chatCompanion={chatCompanion}
+            currentChatId={currentChatId}
+            connect={connect}
+          />
+        );
+      })}
+    </div>
   );
 };
 

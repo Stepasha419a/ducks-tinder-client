@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../redux/store';
 import FailedPair from './Failed/FailedPair';
 import PairBlock from './PairBlock/PairBlock';
 import Loading from './Loading/Loading';
 import { getUserPairsThunk } from '../../../../redux/users/users.thunks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 
 const NavPair = () => {
   const dispatch = useAppDispatch();

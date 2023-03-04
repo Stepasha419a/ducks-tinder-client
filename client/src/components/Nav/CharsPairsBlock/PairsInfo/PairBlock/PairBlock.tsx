@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import styles from './PairBlock.module.scss';
 import { User } from '../../../../../models/User';
-import { useAppSelector } from '../../../../../redux/store';
 import { makeImageUrl } from '../../../../ui/helpers';
+import { useAppSelector } from '../../../../../hooks';
 
 interface PairBlockProps {
   firstPair: User;

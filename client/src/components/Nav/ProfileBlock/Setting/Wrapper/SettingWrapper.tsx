@@ -1,11 +1,11 @@
 import { Dispatch, PropsWithChildren, SetStateAction, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../../hooks';
 import {
   ChangablePartnerSettingsFields,
   ChangableUserFields,
 } from '../../../../../redux/settings/settings.interfaces';
 import { setIsUserInfoSetting } from '../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
-import { useAppDispatch, useAppSelector } from '../../../../../redux/store';
 import { Button } from '../../../../ui';
 import styles from './SettingWrapper.module.scss';
 
