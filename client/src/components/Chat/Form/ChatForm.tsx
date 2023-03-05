@@ -23,7 +23,7 @@ const ChatForm = () => {
 
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && value) {
-      value.length && sendMessage();
+      sendMessage();
     }
   };
 

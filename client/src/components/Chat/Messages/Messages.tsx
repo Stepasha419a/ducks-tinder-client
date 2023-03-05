@@ -33,18 +33,15 @@ const Messages = () => {
           (item) => item._id === message.userId
         );
         const isOwn = message.userId === currentUser._id;
-        const username = isOwn ? currentUser.name : chatMember?.name!;
-        const avatar = isOwn
-          ? currentUser.pictures.avatar
-          : chatMember?.pictures.avatar;
+        const messageUser = isOwn ? currentUser : chatMember;
 
         return (
           <ChatMessage
             key={message.id}
             isOwn={isOwn}
             message={message}
-            username={username}
-            avatar={avatar}
+            username={messageUser!.name}
+            avatar={messageUser?.pictures.avatar}
           />
         );
       })}

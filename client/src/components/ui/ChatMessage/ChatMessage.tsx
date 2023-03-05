@@ -17,8 +17,8 @@ export const ChatMessage: FC<MessageProps> = ({
   username,
   avatar,
 }) => {
-  const cnMessage = classNames(styles.message, isOwn && styles.message_own);
-  const cnMark = classNames(styles.mark, isOwn && styles.mark_own);
+  const cnMessage = classNames(styles.message, isOwn && styles.own);
+  const cnMark = classNames(styles.mark, isOwn && styles.own);
 
   return (
     <div className={styles.wrapper}>

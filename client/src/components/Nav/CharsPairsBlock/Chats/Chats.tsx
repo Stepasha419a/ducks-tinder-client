@@ -16,9 +16,10 @@ const Chats = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const { chats, currentChatId, chatsUsers, isLoading } = useAppSelector(
-    (state) => state.chatPage
-  );
+  const chats = useAppSelector((state) => state.chatPage.chats);
+  const currentChatId = useAppSelector((state) => state.chatPage.currentChatId);
+  const chatsUsers = useAppSelector((state) => state.chatPage.chatsUsers);
+  const isLoading = useAppSelector((state) => state.chatPage.isLoading);
 
   useEffect(() => {
     dispatch(getChatsThunk(currentUser._id));

@@ -5,13 +5,14 @@ import {
   faEnvelope,
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { setFormError } from '../../../redux/auth/auth.slice';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import { Button, TextField } from '../../ui';
 import { loginThunk } from '../../../redux/auth/auth.thunks';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
+import { useEffect } from 'react';
+import { EMAIL_REGEXP } from '../constants';
 
 interface LoginFormProps {
   formError: string;
@@ -20,24 +21,13 @@ interface LoginFormProps {
 export const LoginForm: React.FC<LoginFormProps> = ({ formError }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   const isAuth = useAppSelector((state) => state.authPage.isAuth);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailDirty, setEmailDirty] = useState(false);
-  const [passwordDirty, setPasswordDirty] = useState(false);
-  const [emailError, setEmailError] = useState("Email can't be empty");
-  const [passwordError, setPasswordError] = useState("Password can't be empty");
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  useEffect(() => {
-    if (emailError || passwordError) {
-      setIsFormValid(false);
-    } else {
-      setIsFormValid(true);
-    }
-  }, [emailError, passwordError]);
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm({ mode: 'onChange' });
 
   useEffect(() => {
     if (isAuth) {
@@ -45,48 +35,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ formError }) => {
     }
   }, [isAuth, navigate]);
 
-  const emailHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(e.target.value).toLowerCase())) {
-      setEmailError('Incorrect email');
-    } else {
-      setEmailError('');
-    }
-  };
-
-  const passwordHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-    if (e.target.value.length < 6 || e.target.value.length > 30) {
-      setPasswordError('Password has to be more 6 and less 30');
-      if (!e.target.value) {
-        setPasswordError("Password can't be empty");
-      }
-    } else {
-      setPasswordError('');
-    }
-  };
-
-  const blurHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    switch (event.target.name) {
-      case 'email':
-        setEmailDirty(true);
-        dispatch(setFormError(''));
-        break;
-      case 'password':
-        setPasswordDirty(true);
-        dispatch(setFormError(''));
-        break;
-    }
-  };
-
-  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!emailError && !passwordError) {
-      dispatch(loginThunk({ email, password }));
-    }
+  const submitHandler: SubmitHandler<FieldValues> = (data) => {
+    dispatch(loginThunk({ email: data.email, password: data.password }));
   };
 
   return (
@@ -96,72 +46,70 @@ export const LoginForm: React.FC<LoginFormProps> = ({ formError }) => {
           <div className={styles.img}>
             <img draggable={false} src={authImg} alt="IMG" />
           </div>
-          <form
-            onSubmit={(e) => submitHandler(e as FormEvent<HTMLFormElement>)}
-            className={styles.form}
-          >
+          <form onSubmit={handleSubmit(submitHandler)} className={styles.form}>
             <span className={styles.title}>Member Login</span>
-
-            {formError && (
-              <span className={styles.validation}>
-                <div className={styles.error}>{formError}</div>
-              </span>
-            )}
-
-            <span className={styles.validation}>
-              {emailDirty && emailError && (
-                <div className={styles.error}>{emailError}</div>
-              )}
-            </span>
+            <div className={styles.validation}>
+              {Object.values(errors).map((error) => (
+                <div className={styles.error}>{error?.message?.toString()}</div>
+              ))}
+              {formError && <div className={styles.error}>{formError}</div>}
+            </div>
             <div className={styles.inputWrapper}>
               <TextField
                 type="text"
-                name="email"
                 variant="rounded"
                 placeholder="Email"
-                onBlur={(e) => blurHandler(e)}
-                value={email}
-                onChange={(e) => emailHandler(e)}
                 extraClassName={styles.input}
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: { value: EMAIL_REGEXP, message: 'Incorrect email' },
+                  maxLength: {
+                    value: 30,
+                    message: 'Email should be less than 30',
+                  },
+                })}
               />
               <span className={styles.icon}>
                 <FontAwesomeIcon icon={faEnvelope} />
               </span>
             </div>
-
-            <span className={styles.validation}>
-              {passwordDirty && passwordError && (
-                <div className={styles.error}>{passwordError}</div>
-              )}
-            </span>
             <div className={styles.inputWrapper}>
               <TextField
-                type="password"
-                name="password"
+                type="text"
                 variant="rounded"
                 placeholder="Password"
-                onBlur={(e) => blurHandler(e)}
-                value={password}
-                onChange={(e) => passwordHandler(e)}
                 extraClassName={styles.input}
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password should be more than 6',
+                  },
+                  maxLength: {
+                    value: 30,
+                    message: 'Password should be less than 30',
+                  },
+                })}
               />
               <span className={styles.icon}>
                 <FontAwesomeIcon icon={faLock} />
               </span>
             </div>
-
             <Button
               type="submit"
+              disabled={!isValid}
               variant="auth"
-              disabled={!isFormValid}
-              extraClassName={[styles.btn, isFormValid ? '' : styles.disabled]}
+              extraClassName={[styles.btn, isValid ? '' : styles.disabled]}
             >
               Login
             </Button>
             <div className={styles.registration}>
               <Link className={styles.link} to="/reg">
-                Create your Account &nbsp;
-                <FontAwesomeIcon icon={faArrowRightLong} />
+                Create your Account
+                <FontAwesomeIcon
+                  className={styles.icon}
+                  icon={faArrowRightLong}
+                />
               </Link>
             </div>
           </form>

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import defaultUserPhoto from '../../assets/images/photos/default.jpg';
+import { makeImageUrl } from '../ui/helpers';
 import Arrows from './Arrows/Arrows';
 import styles from './ImageSlider.module.scss';
 import Stripes from './Stripes/Stripes';
@@ -59,9 +60,8 @@ export const ImageSlider: React.FC<ImageSliderPropsInterface> = ({
       />
 
       {images.map((imageName, index) => {
-        const url = `http://localhost:5000/${userId}/${
-          index > 0 ? 'gallery' : 'avatar'
-        }/${imageName}`;
+        const dir = index > 0 ? 'gallery' : 'avatar';
+        const url = makeImageUrl(userId, imageName, dir);
         const cnWrapper = classNames(
           styles.itemWrapper,
           index === current ? styles.active : styles.hidden,
