@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { useAppSelector } from '../../../../../../hooks';
-import { EMAIL_REGEXP } from '../../../../../Forms/constants';
+import { EMAIL_REGEXP } from '../../../../../Auth/constants';
 import { TextField } from '../../../../../ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './TextForm.module.scss';

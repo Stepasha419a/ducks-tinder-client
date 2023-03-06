@@ -4,19 +4,17 @@ import {
   Chat,
   Profile,
   Tinder,
-  LoginForm,
-  RegistrationForm,
   Pairs,
   Policy,
   Layout,
+  LoginForm,
+  RegistrationForm,
 } from '..';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { checkAuthThunk } from '../../redux/auth/auth.thunks';
 
 const Routing = () => {
   const dispatch = useAppDispatch();
-
-  const formError = useAppSelector((state) => state.authPage.formError);
 
   useEffect(() => {
     dispatch(checkAuthThunk());
@@ -24,8 +22,8 @@ const Routing = () => {
 
   return (
     <Routes>
-      <Route path="/login" element={<LoginForm formError={formError} />} />
-      <Route path="/reg" element={<RegistrationForm formError={formError} />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/reg" element={<RegistrationForm />} />
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Tinder />} />
