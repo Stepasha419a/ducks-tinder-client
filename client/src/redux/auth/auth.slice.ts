@@ -28,6 +28,12 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(registerThunk.pending, (state) => {
+        state.formError = '';
+      })
+      .addCase(loginThunk.pending, (state) => {
+        state.formError = '';
+      })
       .addCase(registerThunk.fulfilled, (state, { payload }) => {
         localStorage.setItem('token', payload.accessToken);
         state.isAuth = true;

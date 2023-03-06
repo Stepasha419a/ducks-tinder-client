@@ -1,8 +1,8 @@
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes } from 'react';
 
 type VariantType = 'rounded' | 'low-rounded' | 'default';
 
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
-  variant?: VariantType
+  variant?: VariantType;
   extraClassName?: string;
 }

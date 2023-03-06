@@ -1,28 +1,19 @@
+.link {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--main-secondary);
+  position: relative;
+  padding: 10px;
+
+  .icon {
+    position: absolute;
+    top: 13px;
+    right: -10px;
+  }
+}
+
 .form {
   width: 290px;
-
-  .title {
-    font-weight: 700;
-    font-size: 24px;
-    color: var(--main-primary);
-    line-height: 1.2;
-    text-align: center;
-
-    width: 100%;
-    display: block;
-    padding-bottom: 54px;
-  }
-
-  .validation {
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--danger-main);
-
-    .error {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-  }
 
   .inputWrapper {
     position: relative;
@@ -59,25 +50,6 @@
     &.disabled {
       background: var(--bg-secondary) !important;
       cursor: not-allowed;
-    }
-  }
-
-  .navigate {
-    text-align: center;
-    padding-top: 136px;
-
-    .link {
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--main-secondary);
-      position: relative;
-      padding: 10px;
-
-      .icon {
-        position: absolute;
-        top: 13px;
-        right: -10px;
-      }
     }
   }
 }

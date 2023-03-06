@@ -1,10 +1,23 @@
 import styles from './AuthLayout.module.scss';
-import { FC, PropsWithChildren, useEffect } from 'react';
+import { FC, PropsWithChildren, useEffect, ReactNode } from 'react';
 import authImg from '../../../assets/images/auth/img-01.png';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
+import { AuthFieldValues } from '../hooks/useAuthForm';
+import { FieldErrors } from 'react-hook-form';
 
-const AuthLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
+interface AuthLayoutProps {
+  errors: FieldErrors<AuthFieldValues>;
+  title: string;
+  link: ReactNode;
+}
+
+const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
+  errors,
+  title,
+  children,
+  link,
+}) => {
   const navigate = useNavigate();
   const isAuth = useAppSelector((state) => state.authPage.isAuth);
 
@@ -24,7 +37,16 @@ const AuthLayout: FC<PropsWithChildren<{}>> = ({ children }) => {
             src={authImg}
             alt="IMG"
           />
-          {children}
+          <div className={styles.formWrapper}>
+            <span className={styles.title}>{title}</span>
+            <div className={styles.validation}>
+              {Object.values(errors).map((error) => (
+                <div className={styles.error}>{error.message!.toString()}</div>
+              ))}
+            </div>
+            {children}
+            <div className={styles.navigate}>{link}</div>
+          </div>
         </div>
       </div>
     </div>

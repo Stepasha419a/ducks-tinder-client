@@ -33,6 +33,37 @@
         height: 316px;
         max-width: 100%;
       }
+
+      .formWrapper {
+        .title {
+          font-weight: 700;
+          font-size: 24px;
+          color: var(--main-primary);
+          line-height: 1.2;
+          text-align: center;
+
+          width: 100%;
+          display: block;
+          padding-bottom: 54px;
+        }
+
+        .validation {
+          font-weight: 600;
+          font-size: 15px;
+          color: var(--danger-main);
+
+          .error {
+            text-align: center;
+            margin-bottom: 10px;
+          }
+        }
+
+        .navigate {
+          text-align: center;
+          padding-top: 136px;
+          font-size: 12px;
+        }
+      }
     }
   }
 }
