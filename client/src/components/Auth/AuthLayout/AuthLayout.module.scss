@@ -25,8 +25,9 @@
 
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
       justify-content: space-between;
-      padding: 177px 130px 33px 95px;
+      padding: 50px 130px 40px 95px;
 
       img {
         width: 316px;
@@ -35,6 +36,8 @@
       }
 
       .formWrapper {
+        padding-top: 100px;
+
         .title {
           font-weight: 700;
           font-size: 24px;

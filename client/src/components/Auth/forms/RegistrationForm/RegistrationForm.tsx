@@ -36,9 +36,7 @@ export const RegistrationForm = () => {
             extraClassName={styles.input}
             variant="rounded"
           />
-          <span className={styles.icon}>
-            <FontAwesomeIcon icon={faFileText} />
-          </span>
+          <FontAwesomeIcon className={styles.icon} icon={faFileText} />
         </div>
         <div className={styles.inputWrapper}>
           <TextField
@@ -46,9 +44,7 @@ export const RegistrationForm = () => {
             variant="rounded"
             extraClassName={styles.input}
           />
-          <span className={styles.icon}>
-            <FontAwesomeIcon icon={faEnvelope} />
-          </span>
+          <FontAwesomeIcon className={styles.icon} icon={faEnvelope} />
         </div>
         <div className={styles.inputWrapper}>
           <TextField
@@ -56,9 +52,7 @@ export const RegistrationForm = () => {
             variant="rounded"
             extraClassName={styles.input}
           />
-          <span className={styles.icon}>
-            <FontAwesomeIcon icon={faLock} />
-          </span>
+          <FontAwesomeIcon className={styles.icon} icon={faLock} />
         </div>
 
         <Button

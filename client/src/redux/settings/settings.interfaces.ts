@@ -8,7 +8,7 @@ export interface Validation {
 
 export type RangeType = { from: number; to: number };
 
-export type ChangedData = String | Number | Boolean | String[] | RangeType;
+export type ChangedData = string | number | boolean | string[] | RangeType;
 
 export type InnerObjectName = 'partnerSettings' | null;
 export type SettingInputName = keyof User | keyof PartnerSettings | null;

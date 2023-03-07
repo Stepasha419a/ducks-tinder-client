@@ -1,90 +1,47 @@
-import { Dispatch, PropsWithChildren, SetStateAction, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../../hooks';
-import {
-  ChangablePartnerSettingsFields,
-  ChangableUserFields,
-} from '../../../../../redux/settings/settings.interfaces';
-import { setIsUserInfoSetting } from '../../../../../redux/settings/settings.slice';
-import { submitSettingsThunk } from '../../../../../redux/settings/settings.thunks';
+import { PropsWithChildren } from 'react';
+import { FieldErrors } from 'react-hook-form';
 import { Button } from '../../../../ui';
+import { SettingFieldValues } from '../../../interfaces';
 import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {
   formName: string | null;
-  inputValueDirty: boolean;
-  inputValueError: string;
-  isFormCloseable: boolean;
-  inputValue: string | string[];
-  setInputValue: Dispatch<SetStateAction<string | string[]>>;
+  isValid: boolean;
+  errors: FieldErrors<SettingFieldValues>;
+  submitHandler: () => void;
+  cancelHandler: () => void;
 }
 
 const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
   formName,
   children,
-  inputValueDirty,
-  inputValueError,
-  isFormCloseable,
-  inputValue,
-  setInputValue,
+  isValid,
+  errors,
+  submitHandler,
+  cancelHandler,
 }) => {
-  const dispatch = useAppDispatch();
-  const cancelHandler = () => {
-    dispatch(setIsUserInfoSetting(false));
-  };
-
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const innerObjectName = useAppSelector(
-    (state) => state.settings.innerObjectName
-  );
-  const settingInputName = useAppSelector(
-    (state) => state.settings.settingInputName
-  );
-
-  useEffect(() => {
-    setInputValue(
-      innerObjectName
-        ? currentUser[innerObjectName][
-            settingInputName as ChangablePartnerSettingsFields
-          ]
-        : currentUser[settingInputName as ChangableUserFields]
-    );
-  }, [innerObjectName, currentUser, settingInputName, setInputValue]);
-
-  const submitSettings = () => {
-    let value = inputValue;
-    if (!Array.isArray(value)) {
-      value = value.trim();
-    }
-
-    dispatch(submitSettingsThunk({ changedData: value }));
-  };
-
   return (
-    <div className={styles.setting}>
-      {inputValueDirty && inputValueError && (
+    <form onSubmit={submitHandler} className={styles.setting}>
+      {Object.values(errors).map((error) => (
         <div className={`${styles.name} ${styles.error}`}>
-          {inputValueError}
+          {error.message!.toString()}
         </div>
-      )}
+      ))}
       <div className={styles.name}>{formName}</div>
-      <div className={styles.content}>{children}</div>
+      {children}
       <div className={styles.title}>Your {formName}</div>
       <Button
-        disabled={!isFormCloseable}
+        disabled={!isValid}
         onClick={cancelHandler}
         variant="setting"
         extraClassName={styles.noBorder}
       >
         Cancel
       </Button>
-      <Button
-        disabled={!!(inputValueDirty && inputValueError)}
-        onClick={submitSettings}
-        variant="setting"
-      >
+      <Button type="submit" disabled={!isValid} variant="setting">
         Update my {formName}
       </Button>
-    </div>
+    </form>
   );
 };
 

@@ -35,9 +35,7 @@ export const LoginForm = () => {
             variant="rounded"
             extraClassName={styles.input}
           />
-          <span className={styles.icon}>
-            <FontAwesomeIcon icon={faEnvelope} />
-          </span>
+          <FontAwesomeIcon className={styles.icon} icon={faEnvelope} />
         </div>
         <div className={styles.inputWrapper}>
           <TextField
@@ -45,9 +43,7 @@ export const LoginForm = () => {
             variant="rounded"
             extraClassName={styles.input}
           />
-          <span className={styles.icon}>
-            <FontAwesomeIcon icon={faLock} />
-          </span>
+          <FontAwesomeIcon className={styles.icon} icon={faLock} />
         </div>
         <Button
           type="submit"

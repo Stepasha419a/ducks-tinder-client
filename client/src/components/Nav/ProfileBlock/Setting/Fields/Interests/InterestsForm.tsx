@@ -33,7 +33,7 @@ export const InterestsForm = () => {
 
   return (
     <>
-      <SettingWrapper
+      {/* <SettingWrapper
         formName={'Interests'}
         inputValueDirty={true}
         inputValueError={inputValueError}
@@ -75,7 +75,7 @@ export const InterestsForm = () => {
           toggleInterest={toggleSort}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
         />
-      )}
+      )} */}
     </>
   );
 };

@@ -1,50 +1,58 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../../../hooks';
+import { Controller, useController, useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
+import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { RadioInput } from '../../../../../ui';
+import { useDefaultValues } from '../../../../hooks';
+import { SettingFieldValues } from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './RadioForm.module.scss';
 
 export const RadioForm = () => {
+  const dispatch = useAppDispatch();
   const formName = useAppSelector((state) => state.settings.formName);
 
-  const [inputValue, setInputValue] = useState<string>('');
-  const [inputValueError, setInputValueError] = useState('');
-  const [isFormCloseable, setIsFormCloseable] = useState(true);
+  const {
+    control,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<SettingFieldValues>({
+    defaultValues: { input: useDefaultValues() },
+  });
 
-  useEffect(() => {
-    if (!inputValue) {
-      setIsFormCloseable(false);
-      setInputValueError("Form can't be empty");
-    } else {
-      setIsFormCloseable(true);
-      setInputValueError('');
-    }
-  }, [inputValue]);
+  const {
+    field: { value, onChange },
+  } = useController({ name: 'input', control, rules: { required: true } });
+
+  const submitHandler = handleSubmit((data) => {
+    dispatch(submitSettingsThunk({ changedData: data.input }));
+  });
+
+  const cancelHandler = () => {
+    dispatch(setIsUserInfoSetting(false));
+  };
 
   return (
     <SettingWrapper
       formName={formName}
-      inputValueDirty={true}
-      inputValueError={inputValueError}
-      isFormCloseable={isFormCloseable}
-      inputValue={inputValue}
-      setInputValue={
-        setInputValue as Dispatch<SetStateAction<string | string[]>>
-      }
+      errors={errors}
+      isValid={isValid}
+      cancelHandler={cancelHandler}
+      submitHandler={submitHandler}
     >
       <RadioInput
-        name={formName!}
+        onChange={onChange}
+        checked={value === 'male'}
+        name="sex"
         value="male"
-        checked={inputValue === 'male'}
-        onChange={() => setInputValue('male')}
         text="Male"
         extraClassName={styles.radioInput}
       />
       <RadioInput
-        name={formName!}
+        onChange={onChange}
+        checked={value === 'female'}
+        name="sex"
         value="female"
-        checked={inputValue === 'female'}
-        onChange={() => setInputValue('female')}
         text="Female"
         extraClassName={styles.radioInput}
       />

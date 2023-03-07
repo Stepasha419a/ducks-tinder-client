@@ -1,58 +1,44 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
-import { useAppSelector } from '../../../../../../hooks';
-import { EMAIL_REGEXP } from '../../../../../Auth/constants';
+import { useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
+import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { TextField } from '../../../../../ui';
+import { useCurrentValidation, useDefaultValues } from '../../../../hooks';
+import { SettingFieldValues } from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './TextForm.module.scss';
 
 export const TextForm = () => {
-  const validation = useAppSelector((state) => state.settings.validaton);
+  const dispatch = useAppDispatch();
   const formName = useAppSelector((state) => state.settings.formName);
 
-  const [inputValue, setInputValue] = useState('');
-  const [inputValueDirty, setInputValueDirty] = useState(false);
-  const [inputValueError, setInputValueError] = useState('');
-  const [isFormCloseable, setIsFormCloseable] = useState(true);
+  const {
+    register,
+    formState: { errors, isValid },
+    handleSubmit,
+  } = useForm<SettingFieldValues>({
+    defaultValues: { input: useDefaultValues() },
+    mode: 'onChange',
+  });
 
-  const inputHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\s+/g, ' ');
-    const length = value.length;
-    setInputValueError('');
-    if (!length) {
-      setIsFormCloseable(false);
-      setInputValueError(`${formName} can't be empty`);
-    } else {
-      if (validation?.min && validation.max) {
-        if (validation.max < length || length < validation.min) {
-          setInputValueError(
-            `${formName} has to be more ${validation.min} and less ${validation.max}`
-          );
-        }
-      }
-      !isFormCloseable && setIsFormCloseable(true);
-    }
-    if (validation?.email && !EMAIL_REGEXP.test(String(value).toLowerCase())) {
-      setInputValueError('Incorrect email');
-    }
-    setInputValue(value);
+  const submitHandler = handleSubmit((data: SettingFieldValues) => {
+    dispatch(submitSettingsThunk({ changedData: data.input }));
+  });
+
+  const cancelHandler = () => {
+    dispatch(setIsUserInfoSetting(false));
   };
 
   return (
     <SettingWrapper
       formName={formName}
-      inputValueDirty={inputValueDirty}
-      inputValueError={inputValueError}
-      isFormCloseable={isFormCloseable}
-      inputValue={inputValue}
-      setInputValue={
-        setInputValue as Dispatch<SetStateAction<string | string[]>>
-      }
+      errors={errors}
+      isValid={isValid}
+      submitHandler={submitHandler}
+      cancelHandler={cancelHandler}
     >
       <TextField
-        onChange={(e) => inputHandler(e)}
-        onKeyDown={() => !inputValueDirty && setInputValueDirty(true)}
-        value={inputValue}
-        type="text"
+        {...register('input', useCurrentValidation())}
         extraClassName={styles.textInput}
       />
     </SettingWrapper>
