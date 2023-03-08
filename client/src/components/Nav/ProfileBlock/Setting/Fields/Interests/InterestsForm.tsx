@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import { FieldErrors, useFieldArray, useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../../../../../hooks';
 import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
 import { useDefaultValues } from '../../../../hooks';
-import {
-  SettingChangedArrayData,
-  SettingFieldArrayValues,
-} from '../../../../interfaces';
+import { SettingFieldArrayValues } from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
 
@@ -21,60 +18,59 @@ export const InterestsForm = () => {
     formState: { errors, isValid },
     handleSubmit,
     control,
+    reset,
   } = useForm<SettingFieldArrayValues>({
-    defaultValues: { input: useDefaultValues() as SettingChangedArrayData },
+    defaultValues: { input: useDefaultValues() as string[] },
     mode: 'onChange',
   });
 
-  const { fields, remove, append } = useFieldArray({
+  const {
+    field: { value: interests, onChange: setInterests },
+  } = useController({
     name: 'input',
     control,
     rules: {
       required: 'Form is required',
-      minLength: { message: 'You must have at least 4 hobbies', value: 4 },
     },
   });
 
-  const toggleSort = (itemName: string) => {
-    const index = fields.findIndex((item) => item.name === itemName);
-    if (~index) {
-      remove(index);
+  const toggleInterest = (item: string) => {
+    if (interests.includes(item)) {
+      setInterests(interests.filter((interest: string) => interest !== item));
     } else {
-      append({ name: itemName });
+      setInterests([...interests, item]);
     }
   };
 
   const cancelHandler = () => {
+    reset();
     dispatch(setIsUserInfoSetting(false));
   };
 
-  const submitHandler = handleSubmit((data: SettingFieldArrayValues) => {
-    const changedData = data.input.map((item) => item.name);
-    dispatch(submitSettingsThunk({ changedData: changedData }));
+  const submitHandler = handleSubmit((data) => {
+    dispatch(submitSettingsThunk({ changedData: data.input }));
   });
-
-  const arrayErrors = errors.input || {};
 
   return (
     <>
       <SettingWrapper
         formName={'Interests'}
-        errors={arrayErrors as FieldErrors<SettingFieldArrayValues>}
+        errors={errors}
         isValid={isValid}
         cancelHandler={cancelHandler}
         submitHandler={submitHandler}
       >
         <div className={styles.title}>Your interests</div>
         <div className={styles.interests}>
-          {fields.length ? (
-            fields.map((item) => {
+          {interests.length ? (
+            interests.map((item) => {
               return (
                 <div
-                  onClick={() => toggleSort(item.name)}
-                  key={item.id}
+                  onClick={() => toggleInterest(item)}
+                  key={item}
                   className={styles.item}
                 >
-                  {item.name}
+                  {item}
                   <div className={styles.xmark}></div>
                 </div>
               );
@@ -90,14 +86,13 @@ export const InterestsForm = () => {
           Show all
         </div>
       </SettingWrapper>
-      {isInterestsSettingPopupOpen &&
-        {
-          /* <InterestsSettingPopup
-          pairInterests={fields}
-          toggleInterest={toggleSort}
+      {isInterestsSettingPopupOpen && (
+        <InterestsSettingPopup
+          pairInterests={interests}
+          toggleInterest={toggleInterest}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
-        /> */
-        }}
+        />
+      )}
     </>
   );
 };

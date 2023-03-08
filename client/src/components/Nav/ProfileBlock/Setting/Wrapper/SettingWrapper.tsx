@@ -10,9 +10,7 @@ import styles from './SettingWrapper.module.scss';
 interface SettingWrapperProps {
   formName: string | null;
   isValid: boolean;
-  errors:
-    | FieldErrors<SettingFieldValues>
-    | FieldErrors<SettingFieldArrayValues>;
+  errors: FieldErrors<SettingFieldValues | SettingFieldArrayValues>;
   submitHandler: () => void;
   cancelHandler: () => void;
 }
@@ -28,14 +26,15 @@ const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
   return (
     <form onSubmit={submitHandler} className={styles.setting}>
       {Object.values(errors).map((error) => (
-        <div className={`${styles.name} ${styles.error}`}>
-          {error.message!.toString()}
+        <div key={error.message} className={`${styles.name} ${styles.error}`}>
+          {error!.message!.toString()}
         </div>
       ))}
       <div className={styles.name}>{formName}</div>
       {children}
       <div className={styles.title}>Your {formName}</div>
       <Button
+        type="button"
         disabled={!isValid}
         onClick={cancelHandler}
         variant="setting"

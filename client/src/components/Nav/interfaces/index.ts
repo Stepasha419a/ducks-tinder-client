@@ -1,1 +1,4 @@
-export type { SettingFieldValues, SettingChangedArrayData, SettingFieldArrayValues } from './SettingFieldValues.interface';
+export type {
+  SettingFieldValues,
+  SettingFieldArrayValues,
+} from './SettingFieldValues.interface';

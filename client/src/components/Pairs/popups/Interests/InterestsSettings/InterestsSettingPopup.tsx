@@ -5,7 +5,7 @@ import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
   pairInterests: string[];
-  toggleInterest: (itemName: string, index?: number) => void;
+  toggleInterest: (item: string) => void;
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
 }
 
