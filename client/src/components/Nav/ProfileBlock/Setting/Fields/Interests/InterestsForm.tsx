@@ -90,13 +90,14 @@ export const InterestsForm = () => {
           Show all
         </div>
       </SettingWrapper>
-      {isInterestsSettingPopupOpen && (
-        <InterestsSettingPopup
+      {isInterestsSettingPopupOpen &&
+        {
+          /* <InterestsSettingPopup
           pairInterests={fields}
           toggleInterest={toggleSort}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
-        />
-      )}
+        /> */
+        }}
     </>
   );
 };

@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import { InterestItem, interestsList } from '../../../../../models/User';
+import { interestsList } from '../../../../../models/User';
 import { Button } from '../../../../ui';
 import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
-  pairInterests: InterestItem[];
+  pairInterests: string[];
   toggleInterest: (itemName: string, index?: number) => void;
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
 }
@@ -26,7 +26,7 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
           <div className={styles.items}>
             {interestsList.map((interest) => {
               const includedItem = pairInterests.some(
-                (item) => item.name === interest
+                (item) => item === interest
               );
               const cnItem = classNames(
                 styles.item,

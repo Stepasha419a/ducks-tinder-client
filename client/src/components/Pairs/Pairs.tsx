@@ -1,7 +1,7 @@
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
-import { User, PreferAge } from '../../models/User';
+import { User } from '../../models/User';
 import Pair from './Pair/Pair';
 import PairPopup from './popups/Pair/PairPopup';
 import PairsSettingsPopup from './popups/PairsSettings/PairsSettingsPopup';
@@ -13,6 +13,7 @@ import { getUserPairsThunk } from '../../redux/users/users.thunks';
 import Sorting from './Sorting/Sorting';
 import { initialSorts } from './Pairs.constants';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useController, useForm } from 'react-hook-form';
 
 export const Pairs = () => {
   const dispatch = useAppDispatch();
@@ -21,11 +22,14 @@ export const Pairs = () => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const pairsState = useAppSelector((state) => state.usersPage.pairs);
 
+  const { control, handleSubmit, getValues, reset } = useForm<Sorts>({
+    defaultValues: { ...initialSorts },
+  });
+
   const [currentPair, setCurrentPair] = useState<User>({} as User);
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
-  const [pairSorts, setPairSorts] = useState<Sorts>(initialSorts);
 
   useEffect(() => {
     if (!currentUser.pairs.length) {
@@ -37,29 +41,37 @@ export const Pairs = () => {
     dispatch(getUserPairsThunk(currentUser.pairs.slice(1)));
   }, [dispatch, currentUser.pairs]);
 
-  const addSort = (sortSetting: string | number | PreferAge, field: string) => {
-    if (field === 'interests' || field === 'account') {
-      const newValue = { [field]: [...pairSorts[field], sortSetting] };
-      setPairSorts({ ...pairSorts, ...newValue });
+  const {
+    field: { value: interests, onChange: setInterests },
+  } = useController({
+    name: 'interests',
+    control,
+  });
+
+  const {
+    field: { value: account, onChange: setAccount },
+  } = useController({
+    name: 'account',
+    control,
+  });
+
+  const toggleInterest = (item: string) => {
+    if (interests.includes(item)) {
+      setInterests(interests.filter((interest) => interest !== item));
     } else {
-      const newValue = { [field]: sortSetting };
-      setPairSorts({ ...pairSorts, ...newValue });
+      setInterests([...interests, item]);
     }
   };
 
-  const toggleSort = (sortSetting: string, field: 'account' | 'interests') => {
-    if (pairSorts[field].includes(sortSetting)) {
-      setPairSorts({
-        ...pairSorts,
-        [field]: pairSorts[field].filter((item) => item !== sortSetting),
-      });
+  const toggleAccount = (item: string) => {
+    if (account.includes(item)) {
+      setAccount(account.filter((setting) => setting !== item));
     } else {
-      addSort(sortSetting, field);
+      setAccount([...account, item]);
     }
   };
-  const clearSorts = () => {
-    setPairSorts(initialSorts);
-  };
+
+  const submitHandler = handleSubmit(() => setIsSortPopupOpen(false));
 
   return (
     <>
@@ -71,15 +83,17 @@ export const Pairs = () => {
         {currentUser.pairs.length} likes
       </div>
       <Sorting
-        pairSorts={pairSorts}
-        toggleSort={toggleSort}
+        interests={interests}
+        toggleInterest={toggleInterest}
+        account={account}
+        toggleAccount={toggleAccount}
         isSortPopupOpen={isSortPopupOpen}
         setIsSortPopupOpen={setIsSortPopupOpen}
       />
       <div className={styles.users}>
         {pairsState.length &&
           pairsState
-            .filter((user: User) => sortItemBySettings(user, pairSorts))
+            .filter((user: User) => sortItemBySettings(user, getValues()))
             .map((user: User) => {
               return (
                 <Pair
@@ -92,20 +106,23 @@ export const Pairs = () => {
       </div>
       {isSortPopupOpen && (
         <PairsSettingsPopup
-          pairSorts={pairSorts}
-          clearSorts={clearSorts}
-          addSort={addSort}
-          toggleSort={toggleSort}
           setIsSortPopupOpen={setIsSortPopupOpen}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
+          interests={interests}
+          toggleInterest={toggleInterest}
+          account={account}
+          toggleAccount={toggleAccount}
+          control={control}
+          submitHandler={submitHandler}
+          reset={reset}
         />
       )}
       {isInterestsSettingPopupOpen && (
-        {/* <InterestsSettingPopup
-          pairInterests={pairSorts.interests}
-          toggleInterest={(item) => toggleSort(item, 'interests')}
+        <InterestsSettingPopup
+          pairInterests={interests}
+          toggleInterest={toggleInterest}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
-        /> */}
+        />
       )}
       {currentPair.name && (
         <PairPopup currentPair={currentPair} setCurrentPair={setCurrentPair} />

@@ -3,26 +3,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FC } from 'react';
 import { interestsForLoop } from '../Pairs.constants';
-import { Sorts } from '../utils/PairsUtils';
 import styles from './Sorting.module.scss';
 
 interface SortingProps {
-  pairSorts: Sorts;
-  toggleSort: (sortSetting: string, field: 'account' | 'interests') => void;
+  interests: string[];
+  toggleInterest: (item: string) => void;
+  account: string[];
+  toggleAccount: (item: string) => void;
   isSortPopupOpen: boolean;
   setIsSortPopupOpen: (value: boolean) => void;
 }
 
 const Sorting: FC<SortingProps> = ({
-  pairSorts,
-  toggleSort,
+  interests,
+  toggleInterest,
+  account,
+  toggleAccount,
   isSortPopupOpen,
   setIsSortPopupOpen,
 }) => {
   const cnPopupBtn = classNames(styles.sort, isSortPopupOpen && styles.active);
   const cnInterestsBtn = classNames(
     styles.sort,
-    pairSorts.account.includes('have interests') && styles.active
+    account.includes('have interests') && styles.active
   );
 
   return (
@@ -33,11 +36,11 @@ const Sorting: FC<SortingProps> = ({
       {interestsForLoop.map((item) => {
         const cnItem = classNames(
           styles.sort,
-          pairSorts.interests.includes(item) && styles.active
+          interests.includes(item) && styles.active
         );
         return (
           <div
-            onClick={() => toggleSort(item, 'interests')}
+            onClick={() => toggleInterest(item)}
             key={item}
             className={cnItem}
           >
@@ -46,7 +49,7 @@ const Sorting: FC<SortingProps> = ({
         );
       })}
       <div
-        onClick={() => toggleSort('have interests', 'account')}
+        onClick={() => toggleAccount('have interests')}
         className={cnInterestsBtn}
       >
         have interests
