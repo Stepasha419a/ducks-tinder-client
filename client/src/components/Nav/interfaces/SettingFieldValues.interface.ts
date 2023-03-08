@@ -1,5 +1,9 @@
-export type SettingChangedData = string | string[];
+export type SettingChangedArrayData = { name: string }[];
 
 export interface SettingFieldValues {
-  input: SettingChangedData;
+  input: string;
+}
+
+export interface SettingFieldArrayValues {
+  input: SettingChangedArrayData;
 }

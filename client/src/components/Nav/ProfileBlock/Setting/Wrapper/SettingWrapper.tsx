@@ -1,13 +1,18 @@
 import { PropsWithChildren } from 'react';
 import { FieldErrors } from 'react-hook-form';
 import { Button } from '../../../../ui';
-import { SettingFieldValues } from '../../../interfaces';
+import {
+  SettingFieldArrayValues,
+  SettingFieldValues,
+} from '../../../interfaces';
 import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {
   formName: string | null;
   isValid: boolean;
-  errors: FieldErrors<SettingFieldValues>;
+  errors:
+    | FieldErrors<SettingFieldValues>
+    | FieldErrors<SettingFieldArrayValues>;
   submitHandler: () => void;
   cancelHandler: () => void;
 }

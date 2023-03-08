@@ -17,7 +17,7 @@ export const TextForm = () => {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm<SettingFieldValues>({
-    defaultValues: { input: useDefaultValues() },
+    defaultValues: { input: useDefaultValues() as string },
     mode: 'onChange',
   });
 

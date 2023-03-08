@@ -83,7 +83,7 @@
           cursor: pointer;
           transition: 0.2s;
 
-          &_active {
+          &.active {
             border-color: var(--color--red-90);
             color: var(--color--red-90);
           }

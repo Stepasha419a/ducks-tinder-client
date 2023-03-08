@@ -1,4 +1,4 @@
-import { Controller, useController, useForm } from 'react-hook-form';
+import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
 import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
@@ -17,7 +17,7 @@ export const RadioForm = () => {
     formState: { errors, isValid },
     handleSubmit,
   } = useForm<SettingFieldValues>({
-    defaultValues: { input: useDefaultValues() },
+    defaultValues: { input: useDefaultValues() as string },
   });
 
   const {

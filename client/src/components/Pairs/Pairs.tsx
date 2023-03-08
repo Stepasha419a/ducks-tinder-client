@@ -101,11 +101,11 @@ export const Pairs = () => {
         />
       )}
       {isInterestsSettingPopupOpen && (
-        <InterestsSettingPopup
+        {/* <InterestsSettingPopup
           pairInterests={pairSorts.interests}
           toggleInterest={(item) => toggleSort(item, 'interests')}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
-        />
+        /> */}
       )}
       {currentPair.name && (
         <PairPopup currentPair={currentPair} setCurrentPair={setCurrentPair} />

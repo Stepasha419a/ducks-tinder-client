@@ -1,11 +1,11 @@
-import { SettingChangedData } from '../interfaces';
+import { SettingChangedArrayData } from '../interfaces';
 import { useAppSelector } from '../../../hooks';
 import {
   ChangablePartnerSettingsFields,
   ChangableUserFields,
 } from '../../../redux/settings/settings.interfaces';
 
-export function useDefaultValues(): SettingChangedData {
+export function useDefaultValues(): string | SettingChangedArrayData {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const innerObjectName = useAppSelector(
     (state) => state.settings.innerObjectName
@@ -14,9 +14,17 @@ export function useDefaultValues(): SettingChangedData {
     (state) => state.settings.settingInputName
   );
 
-  return innerObjectName
+  let data: string | string[] | SettingChangedArrayData = innerObjectName
     ? currentUser[innerObjectName][
         settingInputName as ChangablePartnerSettingsFields
       ]
     : currentUser[settingInputName as ChangableUserFields];
+
+  if (Array.isArray(data)) {
+    data = data.map((item) => ({
+      name: item,
+    }));
+  }
+
+  return data;
 }

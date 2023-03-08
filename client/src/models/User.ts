@@ -75,6 +75,11 @@ export interface QuerySorts {
   userIds?: string[];
 }
 
+export interface InterestItem {
+  name: string;
+  id: string;
+}
+
 export const interestsList = [
   'fighting',
   'ski',

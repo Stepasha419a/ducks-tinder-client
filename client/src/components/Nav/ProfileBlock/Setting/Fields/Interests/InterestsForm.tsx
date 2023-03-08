@@ -1,59 +1,80 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../../../hooks';
+import { useState } from 'react';
+import { FieldErrors, useFieldArray, useForm } from 'react-hook-form';
+import { useAppDispatch } from '../../../../../../hooks';
+import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
+import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
+import { useDefaultValues } from '../../../../hooks';
+import {
+  SettingChangedArrayData,
+  SettingFieldArrayValues,
+} from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
 
 export const InterestsForm = () => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-
-  const [interests, setInterests] = useState<string[]>(currentUser.interests);
+  const dispatch = useAppDispatch();
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
-  const [isFormCloseable, setIsFormCloseable] = useState(true);
-  const [inputValueError, setInputValueError] = useState('');
 
-  useEffect(() => {
-    if (!interests.length) {
-      setIsFormCloseable(false);
-      setInputValueError("Form can't be empty");
-    } else {
-      setIsFormCloseable(true);
-      setInputValueError('');
-    }
-  }, [interests.length]);
+  const {
+    formState: { errors, isValid },
+    handleSubmit,
+    control,
+  } = useForm<SettingFieldArrayValues>({
+    defaultValues: { input: useDefaultValues() as SettingChangedArrayData },
+    mode: 'onChange',
+  });
+
+  const { fields, remove, append } = useFieldArray({
+    name: 'input',
+    control,
+    rules: {
+      required: 'Form is required',
+      minLength: { message: 'You must have at least 4 hobbies', value: 4 },
+    },
+  });
 
   const toggleSort = (itemName: string) => {
-    if (interests.includes(itemName)) {
-      setInterests(interests.filter((item) => item !== itemName));
+    const index = fields.findIndex((item) => item.name === itemName);
+    if (~index) {
+      remove(index);
     } else {
-      setInterests([...interests, itemName]);
+      append({ name: itemName });
     }
   };
 
+  const cancelHandler = () => {
+    dispatch(setIsUserInfoSetting(false));
+  };
+
+  const submitHandler = handleSubmit((data: SettingFieldArrayValues) => {
+    const changedData = data.input.map((item) => item.name);
+    dispatch(submitSettingsThunk({ changedData: changedData }));
+  });
+
+  const arrayErrors = errors.input || {};
+
   return (
     <>
-      {/* <SettingWrapper
+      <SettingWrapper
         formName={'Interests'}
-        inputValueDirty={true}
-        inputValueError={inputValueError}
-        isFormCloseable={isFormCloseable}
-        inputValue={interests}
-        setInputValue={
-          setInterests as Dispatch<SetStateAction<string | string[]>>
-        }
+        errors={arrayErrors as FieldErrors<SettingFieldArrayValues>}
+        isValid={isValid}
+        cancelHandler={cancelHandler}
+        submitHandler={submitHandler}
       >
         <div className={styles.title}>Your interests</div>
         <div className={styles.interests}>
-          {interests.length ? (
-            interests.map((item) => {
+          {fields.length ? (
+            fields.map((item) => {
               return (
                 <div
-                  onClick={() => toggleSort(item)}
-                  key={item}
+                  onClick={() => toggleSort(item.name)}
+                  key={item.id}
                   className={styles.item}
                 >
-                  {item}
+                  {item.name}
                   <div className={styles.xmark}></div>
                 </div>
               );
@@ -71,11 +92,11 @@ export const InterestsForm = () => {
       </SettingWrapper>
       {isInterestsSettingPopupOpen && (
         <InterestsSettingPopup
-          pairInterests={interests}
+          pairInterests={fields}
           toggleInterest={toggleSort}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
         />
-      )} */}
+      )}
     </>
   );
 };
