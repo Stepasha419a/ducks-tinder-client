@@ -1,6 +1,6 @@
 import styles from './AuthLayout.module.scss';
 import { FC, PropsWithChildren, useEffect, ReactNode } from 'react';
-import authImg from '../../../assets/images/auth/img-01.png';
+import authImg from '../../../assets/images/auth-duck.png';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
 import { AuthFieldValues } from '../hooks/useAuthForm';

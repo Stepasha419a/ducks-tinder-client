@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import defaultUserPhoto from '../../assets/images/photos/default.jpg';
 import { makeImageUrl } from '../ui/helpers';
 import Arrows from './Arrows/Arrows';
 import styles from './ImageSlider.module.scss';
@@ -37,13 +36,10 @@ export const ImageSlider: React.FC<ImageSliderPropsInterface> = ({
   const cn = classNames(styles.item, extraClassName);
 
   if (!Array.isArray(images) || images.length <= 0 || images[0] === '') {
+    const url = makeImageUrl(userId);
     return (
       <div className={cnDefaultWrapper}>
-        <img
-          src={defaultUserPhoto}
-          alt="imagesSlider"
-          className={cnDefault}
-        ></img>
+        <img src={url} alt="imagesSlider" className={cnDefault}></img>
       </div>
     );
   }

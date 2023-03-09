@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import headerImg from '../../assets/images/auth/img-01.png';
+import headerImg from '../../assets/images/auth-duck.png';
 import styles from './Policy.module.scss';
 
 export const Policy = () => {

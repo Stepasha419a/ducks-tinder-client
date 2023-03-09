@@ -1,4 +1,4 @@
-import defaultPhoto from '../../../assets/images/photos/default.jpg';
+import defaultPhoto from '../../../assets/images/default-duck.png';
 
 export const makeImageUrl = (
   userId?: string,
