@@ -106,7 +106,6 @@ export const Pairs = () => {
       </div>
       {isSortPopupOpen && (
         <PairsSettingsPopup
-          setIsSortPopupOpen={setIsSortPopupOpen}
           setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
           interests={interests}
           toggleInterest={toggleInterest}

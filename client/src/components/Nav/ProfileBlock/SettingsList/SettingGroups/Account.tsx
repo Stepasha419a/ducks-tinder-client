@@ -1,7 +1,8 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { Control, useController } from 'react-hook-form';
 import { useAppSelector } from '../../../../../hooks';
 import {
   ChangedData,
@@ -10,6 +11,7 @@ import {
   Validation,
 } from '../../../../../redux/settings/settings.interfaces';
 import { RangeInput } from '../../../../ui';
+import { SettingValues } from '../SettingsList';
 import styles from '../SettingsList.module.scss';
 
 interface AccoutProps {
@@ -24,21 +26,23 @@ interface AccoutProps {
     changedData: ChangedData,
     innerObjectName?: InnerObjectName
   ) => void;
+  control: Control<SettingValues>;
 }
 
 export const Account: FC<AccoutProps> = ({
   setInputHandler,
   updateInputHandler,
+  control,
 }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const errorFields = useAppSelector((state) => state.settings.errorFields);
 
-  const [currentAgeSetting, setCurrentAgeSetting] = useState(
-    currentUser.age ? currentUser.age : 18
-  );
+  const {
+    field: { onChange: setAgeSetting, value: ageSetting },
+  } = useController({ control, name: 'ageSetting' });
 
-  const ageHandler = () => {
-    updateInputHandler('age', currentAgeSetting);
+  const ageSubmitHandler = () => {
+    updateInputHandler('age', ageSetting);
   };
 
   const setEmailHandler = () => {
@@ -125,14 +129,14 @@ export const Account: FC<AccoutProps> = ({
         <div className={styles.item}>
           <div className={styles.descr}>
             <div className={styles.title}>Age</div>
-            <div className={styles.setting}>{currentAgeSetting} years old</div>
+            <div className={styles.setting}>{ageSetting} years old</div>
           </div>
           <div className={styles.setting}>
             <div className={styles.slider}>
               <RangeInput
-                value={{ value: currentAgeSetting }}
-                setValue={(value) => setCurrentAgeSetting(value.value!)}
-                completeValue={ageHandler}
+                value={{ value: ageSetting }}
+                setValue={(value) => setAgeSetting(value.value!)}
+                completeValue={ageSubmitHandler}
                 min={18}
                 max={100}
               />

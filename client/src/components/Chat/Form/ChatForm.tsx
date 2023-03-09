@@ -17,8 +17,8 @@ const ChatForm = () => {
   const sendMessage = handleSubmit((data) => {
     if (data.input.trim()) {
       dispatch(sendMessageThunk(data.input.trim()));
-      reset();
     }
+    reset();
   });
 
   return (

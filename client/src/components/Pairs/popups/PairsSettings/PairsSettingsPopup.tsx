@@ -7,8 +7,7 @@ import styles from './PairsSettingsPopup.module.scss';
 
 interface PairsSettingsPopupProps {
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
-  setIsSortPopupOpen: (setting: boolean) => void;
-  control: Control<Sorts, any>;
+  control: Control<Sorts>;
   submitHandler: () => void;
   interests: string[];
   toggleInterest: (item: string) => void;
@@ -19,7 +18,6 @@ interface PairsSettingsPopupProps {
 
 const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
   setIsInterestsSettingPopupOpen,
-  setIsSortPopupOpen,
   control,
   submitHandler,
   interests,

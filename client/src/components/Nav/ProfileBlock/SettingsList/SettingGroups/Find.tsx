@@ -1,9 +1,9 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { Control, useController } from 'react-hook-form';
 import { useAppSelector } from '../../../../../hooks';
-import { PreferAge } from '../../../../../models/User';
 import {
   ChangedData,
   InnerObjectName,
@@ -11,6 +11,7 @@ import {
   Validation,
 } from '../../../../../redux/settings/settings.interfaces';
 import { CheckboxInput, RangeInput } from '../../../../ui';
+import { SettingValues } from '../SettingsList';
 import styles from '../SettingsList.module.scss';
 
 interface FindProps {
@@ -25,36 +26,32 @@ interface FindProps {
     changedData: ChangedData,
     innerObjectName?: InnerObjectName
   ) => void;
+  control: Control<SettingValues>;
 }
 
 export const Find: FC<FindProps> = ({
   setInputHandler,
   updateInputHandler,
+  control,
 }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const errorFields = useAppSelector((state) => state.settings.errorFields);
 
-  const [ageSetting, setAgeSetting] = useState<PreferAge>({
-    from: currentUser.partnerSettings.age.from,
-    to: currentUser.partnerSettings.age.to,
-  });
-
-  const [currentDistanceSetting, setCurrentDistanceSetting] = useState<number>(
-    currentUser.partnerSettings.distance
-  );
+  const {
+    field: { value: distanceSetting, onChange: setDistanceSetting },
+  } = useController({ name: 'distanceSetting', control });
+  const {
+    field: { value: usersOnlyInDistance, onChange: setUsersOnlyInDistance },
+  } = useController({ name: 'usersOnlyInDistance', control });
+  const {
+    field: { value: preferAgeSetting, onChange: setPreferAgeSetting },
+  } = useController({ name: 'preferAgeSetting', control });
 
   const partnerAgeHandler = () => {
-    updateInputHandler('age', { ...ageSetting }, 'partnerSettings');
+    updateInputHandler('age', preferAgeSetting, 'partnerSettings');
   };
   const distanceHandler = () => {
-    updateInputHandler('distance', currentDistanceSetting, 'partnerSettings');
-  };
-  const onlyInDistanceHandler = () => {
-    updateInputHandler(
-      'usersOnlyInDistance',
-      !currentUser.partnerSettings.usersOnlyInDistance,
-      'partnerSettings'
-    );
+    updateInputHandler('distance', distanceSetting, 'partnerSettings');
   };
 
   const setInterestsHandler = () => {
@@ -114,21 +111,21 @@ export const Find: FC<FindProps> = ({
         <div className={styles.item}>
           <div className={styles.descr}>
             <div className={styles.title}>Distance</div>
-            <div className={styles.setting}>{currentDistanceSetting} км.</div>
+            <div className={styles.setting}>{distanceSetting} км.</div>
           </div>
           <div className={styles.setting}>
             <div className={styles.slider}>
               <RangeInput
-                value={{ value: currentDistanceSetting }}
-                setValue={(value) => setCurrentDistanceSetting(value.value!)}
+                value={{ value: distanceSetting }}
+                setValue={(value) => setDistanceSetting(value.value)}
                 completeValue={distanceHandler}
                 min={2}
                 max={100}
               />
             </div>
             <CheckboxInput
-              checked={currentUser.partnerSettings.usersOnlyInDistance}
-              onChange={onlyInDistanceHandler}
+              checked={usersOnlyInDistance}
+              onChange={setUsersOnlyInDistance}
               variant="small"
               text="Show people only in this range"
             />
@@ -153,15 +150,15 @@ export const Find: FC<FindProps> = ({
           <div className={styles.descr}>
             <div className={styles.title}>Partner age</div>
             <div className={styles.setting}>
-              from {ageSetting.from} to {ageSetting.to}
+              from {preferAgeSetting.from} to {preferAgeSetting.to}
             </div>
           </div>
           <div className={styles.setting}>
             <div className={styles.slider}>
               <RangeInput
-                value={{ min: ageSetting.from, max: ageSetting.to }}
+                value={{ min: preferAgeSetting.from, max: preferAgeSetting.to }}
                 setValue={(value) =>
-                  setAgeSetting({ from: value.min!, to: value.max! })
+                  setPreferAgeSetting({ from: value.min, to: value.max })
                 }
                 completeValue={partnerAgeHandler}
                 min={18}
