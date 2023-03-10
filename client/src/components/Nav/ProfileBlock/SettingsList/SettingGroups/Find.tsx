@@ -1,8 +1,8 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC } from 'react';
-import { Control, useController } from 'react-hook-form';
+import { FC, useState } from 'react';
+import { useController } from 'react-hook-form';
 import { useAppSelector } from '../../../../../hooks';
 import {
   ChangedData,
@@ -11,7 +11,6 @@ import {
   Validation,
 } from '../../../../../redux/settings/settings.interfaces';
 import { CheckboxInput, RangeInput } from '../../../../ui';
-import { SettingValues } from '../SettingsList';
 import styles from '../SettingsList.module.scss';
 
 interface FindProps {
@@ -26,32 +25,34 @@ interface FindProps {
     changedData: ChangedData,
     innerObjectName?: InnerObjectName
   ) => void;
-  control: Control<SettingValues>;
 }
 
 export const Find: FC<FindProps> = ({
   setInputHandler,
   updateInputHandler,
-  control,
 }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const errorFields = useAppSelector((state) => state.settings.errorFields);
 
-  const {
-    field: { value: distanceSetting, onChange: setDistanceSetting },
-  } = useController({ name: 'distanceSetting', control });
-  const {
-    field: { value: usersOnlyInDistance, onChange: setUsersOnlyInDistance },
-  } = useController({ name: 'usersOnlyInDistance', control });
-  const {
-    field: { value: preferAgeSetting, onChange: setPreferAgeSetting },
-  } = useController({ name: 'preferAgeSetting', control });
+  const [distanceSetting, setDistanceSetting] = useState(
+    currentUser.partnerSettings.distance
+  );
+  const [preferAgeSetting, setPreferAgeSetting] = useState(
+    currentUser.partnerSettings.age
+  );
 
   const partnerAgeHandler = () => {
     updateInputHandler('age', preferAgeSetting, 'partnerSettings');
   };
   const distanceHandler = () => {
     updateInputHandler('distance', distanceSetting, 'partnerSettings');
+  };
+  const setUsersOnlyInDistanceHandler = () => {
+    updateInputHandler(
+      'usersOnlyInDistance',
+      !currentUser.partnerSettings.usersOnlyInDistance,
+      'partnerSettings'
+    );
   };
 
   const setInterestsHandler = () => {
@@ -117,15 +118,15 @@ export const Find: FC<FindProps> = ({
             <div className={styles.slider}>
               <RangeInput
                 value={{ value: distanceSetting }}
-                setValue={(value) => setDistanceSetting(value.value)}
+                setValue={(value) => setDistanceSetting(value.value!)}
                 completeValue={distanceHandler}
                 min={2}
                 max={100}
               />
             </div>
             <CheckboxInput
-              checked={usersOnlyInDistance}
-              onChange={setUsersOnlyInDistance}
+              checked={currentUser.partnerSettings.usersOnlyInDistance}
+              onChange={setUsersOnlyInDistanceHandler}
               variant="small"
               text="Show people only in this range"
             />
@@ -158,7 +159,7 @@ export const Find: FC<FindProps> = ({
               <RangeInput
                 value={{ min: preferAgeSetting.from, max: preferAgeSetting.to }}
                 setValue={(value) =>
-                  setPreferAgeSetting({ from: value.min, to: value.max })
+                  setPreferAgeSetting({ from: value.min!, to: value.max! })
                 }
                 completeValue={partnerAgeHandler}
                 min={18}

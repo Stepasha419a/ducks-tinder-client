@@ -1,7 +1,7 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
 import { useAppSelector } from '../../../../../hooks';
 import {
@@ -26,20 +26,16 @@ interface AccoutProps {
     changedData: ChangedData,
     innerObjectName?: InnerObjectName
   ) => void;
-  control: Control<SettingValues>;
 }
 
 export const Account: FC<AccoutProps> = ({
   setInputHandler,
   updateInputHandler,
-  control,
 }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const errorFields = useAppSelector((state) => state.settings.errorFields);
 
-  const {
-    field: { onChange: setAgeSetting, value: ageSetting },
-  } = useController({ control, name: 'ageSetting' });
+  const [ageSetting, setAgeSetting] = useState(currentUser.age);
 
   const ageSubmitHandler = () => {
     updateInputHandler('age', ageSetting);
