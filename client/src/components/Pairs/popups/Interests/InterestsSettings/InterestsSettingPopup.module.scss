@@ -1,104 +1,28 @@
-.popup {
-  position: fixed;
-  z-index: 150;
-  width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  transition: all 0.5s ease 0s;
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: calc(100% - 136px);
+  padding: 0 10px;
+  overflow: auto;
+  scrollbar-width: none;
 
-  .body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px 10px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
-    .content {
-      position: relative;
-      background-color: var(--color--white-100);
-      width: 440px;
-      height: 600px;
-      transition: all 0.5s ease 0s;
-      border-radius: 8px;
-      z-index: 100;
+  .item {
+    border: 2px solid var(--bg-secondary);
+    border-radius: 16px;
+    font-weight: 600;
+    padding: 5px 20px;
+    margin: 5px;
+    color: var(--main-secondary);
+    cursor: pointer;
+    transition: 0.2s;
 
-      .title {
-        font-weight: 600;
-        font-size: 18px;
-        text-align: center;
-        padding-top: 24px;
-        margin-bottom: 20px;
-      }
-
-      .close {
-        width: 24px;
-        height: 24px;
-        position: absolute;
-        top: 24px;
-        right: 24px;
-        cursor: pointer;
-
-        &::before,
-        &::after {
-          content: '';
-          display: block;
-          height: 4px;
-          width: 20px;
-          background-color: var(--bg-secondary);
-          border-radius: 4px;
-          position: absolute;
-          top: 11px;
-          left: 2px;
-        }
-
-        &::before {
-          transform: rotate(45deg);
-        }
-        &::after {
-          transform: rotate(135deg);
-        }
-      }
-
-      .items {
-        display: flex;
-        flex-wrap: wrap;
-        max-height: calc(100% - 136px);
-        padding: 0 10px;
-        overflow: auto;
-        scrollbar-width: none;
-
-        &::-webkit-scrollbar {
-          display: none;
-        }
-
-        .item {
-          border: 2px solid var(--bg-secondary);
-          border-radius: 16px;
-          font-weight: 600;
-          padding: 5px 20px;
-          margin: 5px;
-          color: var(--main-secondary);
-          cursor: pointer;
-          transition: 0.2s;
-
-          &.active {
-            border-color: var(--color--red-90);
-            color: var(--color--red-90);
-          }
-        }
-      }
-    }
-
-    .closeArea {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 99;
-      cursor: pointer;
+    &.active {
+      border-color: var(--color--red-90);
+      color: var(--color--red-90);
     }
   }
 }

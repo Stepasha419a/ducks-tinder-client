@@ -1,5 +1,6 @@
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { useAppSelector } from '../../hooks';
 import styles from './Loading.module.scss';
 
@@ -8,7 +9,7 @@ export const Loading = () => {
 
   return (
     <div
-      className={`${styles.loadingPage} ${isLoading ? '' : styles.invisible}`}
+      className={classNames(styles.loadingPage, !isLoading && styles.invisible)}
     >
       <FontAwesomeIcon icon={faFireFlameCurved} className={styles.icon} />
     </div>

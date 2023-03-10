@@ -7,3 +7,4 @@ export { CheckboxInput } from './inputs/Checkbox/Checkbox';
 export { ChatMessage } from './ChatMessage/ChatMessage';
 export { Button } from './Button/Button';
 export { Textarea } from './inputs/Textarea/Textarea';
+export { Popup } from './Popup/Popup';

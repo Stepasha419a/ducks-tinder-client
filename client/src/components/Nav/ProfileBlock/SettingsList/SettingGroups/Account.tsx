@@ -2,7 +2,6 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FC, useState } from 'react';
-import { Control, useController } from 'react-hook-form';
 import { useAppSelector } from '../../../../../hooks';
 import {
   ChangedData,
@@ -11,7 +10,6 @@ import {
   Validation,
 } from '../../../../../redux/settings/settings.interfaces';
 import { RangeInput } from '../../../../ui';
-import { SettingValues } from '../SettingsList';
 import styles from '../SettingsList.module.scss';
 
 interface AccoutProps {

@@ -2,7 +2,6 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FC, useState } from 'react';
-import { useController } from 'react-hook-form';
 import { useAppSelector } from '../../../../../hooks';
 import {
   ChangedData,

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { PreferAge } from '../../../../models/User';
 import { createNotification } from '../../../../redux/notifications/notifications.slice';
 import {
   ChangedData,
@@ -18,13 +17,6 @@ import {
   Nickname,
 } from './settingGroups';
 import styles from './SettingsList.module.scss';
-
-export interface SettingValues {
-  ageSetting: number;
-  distanceSetting: number;
-  usersOnlyInDistance: boolean;
-  preferAgeSetting: PreferAge;
-}
 
 const SettingsList = () => {
   const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
 import { User } from '../../../../models/User';
-import { Button, RangeInput } from '../../../ui/';
+import { Button, Popup, RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
 import { saveUserImage } from '../../../../redux/users/users.thunks';
@@ -51,51 +51,52 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({
   };
 
   return (
-    <div className={styles.popup}>
-      <div className={styles.body}>
-        <div className={styles.content}>
-          <div className={styles.title}>Redact photo</div>
-          <div className={styles.image}>
-            <Cropper
-              image={imageURL}
-              crop={crop}
-              zoom={zoom}
-              rotation={rotation}
-              aspect={3 / 4}
-              onCropChange={setCrop}
-              onZoomChange={setZoom}
-              onRotationChange={setRotation}
-              onCropComplete={cropComplete}
+    <Popup
+      size="l"
+      title="Redact photo"
+      closeHandler={() => setIsImageCropOpen(false)}
+    >
+      <div className={styles.container}>
+        <div className={styles.image}>
+          <Cropper
+            image={imageURL}
+            crop={crop}
+            zoom={zoom}
+            rotation={rotation}
+            aspect={3 / 4}
+            onCropChange={setCrop}
+            onZoomChange={setZoom}
+            onRotationChange={setRotation}
+            onCropComplete={cropComplete}
+          />
+        </div>
+        <div className={styles.wrapper}>
+          <div className={styles.input}>
+            <RangeInput
+              value={{ value: zoom }}
+              setValue={(value) => setZoom(value.value!)}
+              min={1.1}
+              max={3}
+              step={0.01}
             />
           </div>
-          <div className={styles.wrapper}>
-            <div className={styles.input}>
-              <RangeInput
-                value={{ value: zoom }}
-                setValue={(value) => setZoom(value.value!)}
-                min={1.1}
-                max={3}
-                step={0.01}
-              />
-            </div>
-          </div>
-          <div className={styles.btns}>
-            <Button
-              onClick={() => setIsImageCropOpen(false)}
-              extraClassName={styles.btn}
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={() => cropImage(currentUser._id, currentImageCrop)}
-              extraClassName={[styles.btn, styles.select]}
-            >
-              Select
-            </Button>
-          </div>
+        </div>
+        <div className={styles.btns}>
+          <Button
+            onClick={() => setIsImageCropOpen(false)}
+            extraClassName={styles.btn}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={() => cropImage(currentUser._id, currentImageCrop)}
+            extraClassName={[styles.btn, styles.select]}
+          >
+            Select
+          </Button>
         </div>
       </div>
-    </div>
+    </Popup>
   );
 };
 

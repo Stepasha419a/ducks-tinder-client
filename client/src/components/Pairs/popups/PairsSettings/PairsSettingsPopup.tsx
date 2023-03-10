@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Control, useController, UseFormReset } from 'react-hook-form';
-import { Button, CheckboxInput, RangeInput } from '../../../ui/';
+import { Button, CheckboxInput, Popup, RangeInput } from '../../../ui/';
 import { interestsForLoop } from '../../Pairs.constants';
 import { Sorts } from '../../utils/PairsUtils';
 import styles from './PairsSettingsPopup.module.scss';
@@ -44,122 +44,117 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
   }
 
   return (
-    <div className={styles.popup}>
-      <div className={styles.body}>
-        <form onSubmit={submitHandler} className={styles.content}>
-          <div className={styles.title}>Likes filter</div>
-          <div onClick={submitHandler} className={styles.close}></div>
-          <div className={styles.setting}>
-            <div className={styles.name}>Max distantion</div>
-            <div className={styles.value}>{distance} km</div>
-            <div className={`${styles.change} ${styles.margin}`}>
-              <RangeInput
-                value={{ value: distance }}
-                setValue={(value) => setDistance(value.value!)}
-                min={2}
-                max={100}
-              />
-            </div>
+    <Popup title="Likes filter" closeHandler={submitHandler}>
+      <form onSubmit={submitHandler}>
+        <div className={styles.setting}>
+          <div className={styles.name}>Max distantion</div>
+          <div className={styles.value}>{distance} km</div>
+          <div className={`${styles.change} ${styles.margin}`}>
+            <RangeInput
+              value={{ value: distance }}
+              setValue={(value) => setDistance(value.value!)}
+              min={2}
+              max={100}
+            />
           </div>
-          <div className={styles.separator} />
-          <div className={styles.setting}>
-            <div className={styles.name}>Age range</div>
-            <div className={styles.value}>
-              from {age.from} to {age.to}
-            </div>
-            <div className={`${styles.change} ${styles.margin}`}>
-              <RangeInput
-                value={{ min: age.from, max: age.to }}
-                setValue={(value) =>
-                  setAge({ from: value.min!, to: value.max! })
-                }
-                min={18}
-                max={100}
-                isMultiple
-              />
-            </div>
+        </div>
+        <div className={styles.separator} />
+        <div className={styles.setting}>
+          <div className={styles.name}>Age range</div>
+          <div className={styles.value}>
+            from {age.from} to {age.to}
           </div>
-          <div className={styles.separator}></div>
-          <div className={styles.setting}>
-            <div className={styles.name}>Min photo's count</div>
-            <div className={`${styles.change} ${styles.flex}`}>
-              {arrForLoop.map((item) => {
-                const cnItem = classNames(
-                  styles.item,
-                  photosCount === item && styles.active
-                );
-                return (
-                  <div
-                    onClick={() => setPhotosCount(item)}
-                    key={item}
-                    className={cnItem}
-                  >
-                    {item}
-                  </div>
-                );
-              })}
-            </div>
+          <div className={`${styles.change} ${styles.margin}`}>
+            <RangeInput
+              value={{ min: age.from, max: age.to }}
+              setValue={(value) => setAge({ from: value.min!, to: value.max! })}
+              min={18}
+              max={100}
+              isMultiple
+            />
           </div>
-          <div className={styles.separator}></div>
-          <div className={styles.setting}>
-            <div className={styles.name}>Interests</div>
-            <div className={`${styles.change} ${styles.flex}`}>
-              {interestsForLoop.slice(0, 3).map((item) => {
-                const cnItem = classNames(
-                  styles.item,
-                  interests.includes(item) && styles.active
-                );
-                return (
-                  <div
-                    onClick={() => toggleInterest(item)}
-                    key={item}
-                    className={cnItem}
-                  >
-                    {item}
-                  </div>
-                );
-              })}
-            </div>
-            <div
-              onClick={() => setIsInterestsSettingPopupOpen(true)}
-              className={styles.showAll}
-            >
-              Show all
-            </div>
+        </div>
+        <div className={styles.separator}></div>
+        <div className={styles.setting}>
+          <div className={styles.name}>Min photo's count</div>
+          <div className={`${styles.change} ${styles.flex}`}>
+            {arrForLoop.map((item) => {
+              const cnItem = classNames(
+                styles.item,
+                photosCount === item && styles.active
+              );
+              return (
+                <div
+                  onClick={() => setPhotosCount(item)}
+                  key={item}
+                  className={cnItem}
+                >
+                  {item}
+                </div>
+              );
+            })}
           </div>
-          <div className={styles.separator} />
+        </div>
+        <div className={styles.separator}></div>
+        <div className={styles.setting}>
+          <div className={styles.name}>Interests</div>
+          <div className={`${styles.change} ${styles.flex}`}>
+            {interestsForLoop.slice(0, 3).map((item) => {
+              const cnItem = classNames(
+                styles.item,
+                interests.includes(item) && styles.active
+              );
+              return (
+                <div
+                  onClick={() => toggleInterest(item)}
+                  key={item}
+                  className={cnItem}
+                >
+                  {item}
+                </div>
+              );
+            })}
+          </div>
+          <div
+            onClick={() => setIsInterestsSettingPopupOpen(true)}
+            className={styles.showAll}
+          >
+            Show all
+          </div>
+        </div>
+        <div className={styles.separator} />
+        <div className={`${styles.setting} ${styles.checkbox}`}>
           <CheckboxInput
             checked={account.includes('identify confirmed')}
             onChange={() => toggleAccount('identify confirmed')}
             text="Identify confirmed"
-            extraClassName={styles.checkboxNew}
           />
-          <div className={styles.separator}></div>
+        </div>
+        <div className={styles.separator}></div>
+        <div className={`${styles.setting} ${styles.checkbox}`}>
           <CheckboxInput
             checked={account.includes('have interests')}
             onChange={() => toggleAccount('have interests')}
             text="Have interests"
-            extraClassName={styles.checkboxNew}
           />
-          <div className={styles.separator}></div>
-          <div className={styles.btns}>
-            <Button
-              onClick={() => reset()}
-              extraClassName={`${styles.btn} ${styles.leftBorder}`}
-            >
-              Clear
-            </Button>
-            <Button
-              type="submit"
-              extraClassName={`${styles.btn} ${styles.rightBorder}`}
-            >
-              Confirm
-            </Button>
-          </div>
-        </form>
-        <div onClick={submitHandler} className={styles.closeArea}></div>
-      </div>
-    </div>
+        </div>
+        <div className={styles.separator}></div>
+        <div className={styles.btns}>
+          <Button
+            onClick={() => reset()}
+            extraClassName={`${styles.btn} ${styles.leftBorder}`}
+          >
+            Clear
+          </Button>
+          <Button
+            type="submit"
+            extraClassName={`${styles.btn} ${styles.rightBorder}`}
+          >
+            Confirm
+          </Button>
+        </div>
+      </form>
+    </Popup>
   );
 };
 

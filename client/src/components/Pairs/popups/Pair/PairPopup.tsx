@@ -6,7 +6,7 @@ import { User } from '../../../../models/User';
 import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
 import { ImageSlider } from '../../../ImagesSlider/ImageSlider';
-import { Button } from '../../../ui';
+import { Button, Popup } from '../../../ui';
 import InterestsListPopup from '../Interests/List/InterestsListPopup';
 import styles from './PairPopup.module.scss';
 
@@ -62,93 +62,83 @@ const PairPopup: React.FC<PairPopupProps> = ({
 
   return (
     <>
-      <div className={styles.popup}>
-        <div className={styles.body}>
-          <div className={`${styles.content} ${styles.overflow}`}>
-            <div
-              onClick={() => setCurrentPair({} as User)}
-              className={styles.close}
-            ></div>
-            <div className={styles.slider}>
-              <ImageSlider
-                images={[
-                  currentPair.pictures.avatar,
-                  ...currentPair.pictures.gallery,
-                ]}
-                userId={currentPair._id}
-              />
-              <div className={styles.info}>
-                <div className={styles.person}>
-                  <div className={styles.name}>{currentPair.name}</div>
-                  <div className={styles.years}>
-                    {currentPair.age || 'unknown years'}
-                  </div>
-                </div>
-                <div className={styles.distance}>
-                  {currentPair.partnerSettings?.distance || 'unknown'} km from
-                  you
-                </div>
+      <Popup
+        closeHandler={() => setCurrentPair({} as User)}
+        extraClassName={styles.overflow}
+      >
+        <div className={styles.slider}>
+          <ImageSlider
+            images={[
+              currentPair.pictures.avatar,
+              ...currentPair.pictures.gallery,
+            ]}
+            userId={currentPair._id}
+          />
+          <div className={styles.info}>
+            <div className={styles.person}>
+              <div className={styles.name}>{currentPair.name}</div>
+              <div className={styles.years}>
+                {currentPair.age || 'unknown years'}
               </div>
             </div>
-            <div onClick={() => scrollToBottom()} className={styles.scrollDown}>
-              <FontAwesomeIcon icon={faChevronDown} />
+            <div className={styles.distance}>
+              {currentPair.partnerSettings?.distance || 'unknown'} km from you
             </div>
-            <div className={styles.pair}>
-              <div className={styles.wrapper}>
-                <div className={styles.name}>{currentPair.name}</div>
-                <div className={styles.years}>
-                  {currentPair.age || 'unkown years'}
-                </div>
-              </div>
-              <div className={styles.sex}>
-                <FontAwesomeIcon icon={faUser} className={styles.icon} />
-                {currentPair.sex[0].toUpperCase() + currentPair.sex.slice(1) ||
-                  'unkown sex'}
-              </div>
-            </div>
-            <hr className={styles.separator} />
-            <div className={styles.description}>{currentPair.description}</div>
-            <hr className={styles.separator} />
-            <div className={styles.interests}>
-              <div className={styles.title}>Interests</div>
-              <div className={styles.items}>
-                {interestsForLoop.map((item) => {
-                  return (
-                    <div key={item} className={styles.item}>
-                      {item}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-            <div
-              onClick={() => setIsInterestsListPopupOpen(true)}
-              className={styles.showAll}
-            >
-              Show all
-            </div>
-            <div className={styles.btns}>
-              <Button
-                onClick={() => refuseHandler(currentPair._id)}
-                extraClassName={`${styles.btn} ${styles.border}`}
-              >
-                Refuse
-              </Button>
-              <Button
-                onClick={() => acceptHandler(currentPair._id)}
-                extraClassName={styles.btn}
-              >
-                Accept
-              </Button>
-            </div>
-            <div ref={bottomElementRef} />
           </div>
-          <div
-            onClick={() => setCurrentPair({} as User)}
-            className={styles.closeArea}
-          ></div>
         </div>
-      </div>
+        <div onClick={() => scrollToBottom()} className={styles.scrollDown}>
+          <FontAwesomeIcon icon={faChevronDown} />
+        </div>
+        <div className={styles.pair}>
+          <div className={styles.wrapper}>
+            <div className={styles.name}>{currentPair.name}</div>
+            <div className={styles.years}>
+              {currentPair.age || 'unkown years'}
+            </div>
+          </div>
+          <div className={styles.sex}>
+            <FontAwesomeIcon icon={faUser} className={styles.icon} />
+            {currentPair.sex[0].toUpperCase() + currentPair.sex.slice(1) ||
+              'unkown sex'}
+          </div>
+        </div>
+        <hr className={styles.separator} />
+        <div className={styles.description}>{currentPair.description}</div>
+        <hr className={styles.separator} />
+        <div className={styles.interests}>
+          <div className={styles.title}>Interests</div>
+          <div className={styles.items}>
+            {interestsForLoop.map((item) => {
+              return (
+                <div key={item} className={styles.item}>
+                  {item}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div
+          onClick={() => setIsInterestsListPopupOpen(true)}
+          className={styles.showAll}
+        >
+          Show all
+        </div>
+        <div className={styles.btns}>
+          <Button
+            onClick={() => refuseHandler(currentPair._id)}
+            extraClassName={`${styles.btn} ${styles.border}`}
+          >
+            Refuse
+          </Button>
+          <Button
+            onClick={() => acceptHandler(currentPair._id)}
+            extraClassName={styles.btn}
+          >
+            Accept
+          </Button>
+        </div>
+        <div ref={bottomElementRef} />
+      </Popup>
       {isInterestsListPopupOpen && (
         <InterestsListPopup
           interestsList={currentPair.interests}
