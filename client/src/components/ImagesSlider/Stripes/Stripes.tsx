@@ -8,16 +8,16 @@ interface StripesProps {
 }
 
 const Stripes: FC<StripesProps> = ({ current, length }) => {
-  const stripesArr = Array.from(Array(length).keys());
+  const stripesArr = [...new Array(length)];
   return (
     <div className={styles.stripes}>
-      {stripesArr.map((stripe) => {
+      {stripesArr.map((_, i) => {
         const cnStripe = classNames(
           styles.stripe,
-          stripe === current ? styles.active : ''
+          i === current ? styles.active : ''
         );
 
-        return <div key={stripe} className={cnStripe}></div>;
+        return <div key={i} className={cnStripe}></div>;
       })}
     </div>
   );

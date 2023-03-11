@@ -93,10 +93,7 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
     setIsImageCropOpen(true);
   };
 
-  let arrForLoop = [];
-  for (let i = 0; i < 9 - currentUser.pictures.gallery.length - 1; i++) {
-    arrForLoop.push(i);
-  }
+  const emptyPhotoFieldsForLoop = [...new Array(8 - currentUser.pictures.gallery.length)];
 
   const submitHandler = () => {
     setIsImageSetting(false);
@@ -201,11 +198,11 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
           );
         })}
 
-        {arrForLoop.map((item) => {
+        {emptyPhotoFieldsForLoop.map((_, i) => {
           return (
             <div
               onClick={() => openSettingHandler('gallery')}
-              key={item}
+              key={i}
               className={styles.item}
             >
               <div className={styles.image} />

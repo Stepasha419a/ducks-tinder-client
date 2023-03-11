@@ -38,10 +38,7 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
     field: { value: photosCount, onChange: setPhotosCount },
   } = useController({ name: 'photos', control });
 
-  const arrForLoop = [];
-  for (let i = 1; i <= 9; i++) {
-    arrForLoop.push(i);
-  }
+  const photosCountArrForLoop = [...new Array(9)];
 
   return (
     <Popup title="Likes filter" closeHandler={submitHandler}>
@@ -78,18 +75,19 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
         <div className={styles.setting}>
           <div className={styles.name}>Min photo's count</div>
           <div className={`${styles.change} ${styles.flex}`}>
-            {arrForLoop.map((item) => {
+            {photosCountArrForLoop.map((_, i) => {
+              const content = i + 1;
               const cnItem = classNames(
                 styles.item,
-                photosCount === item && styles.active
+                photosCount === content && styles.active
               );
               return (
                 <div
-                  onClick={() => setPhotosCount(item)}
-                  key={item}
+                  onClick={() => setPhotosCount(content)}
+                  key={i}
                   className={cnItem}
                 >
-                  {item}
+                  {content}
                 </div>
               );
             })}

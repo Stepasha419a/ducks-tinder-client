@@ -10,10 +10,9 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
   children,
   title,
   closeHandler,
-  extraClassName,
   size = 'm',
 }) => {
-  const cn = classNames(styles.content, styles[size], extraClassName);
+  const cn = classNames(styles.content, styles[size]);
 
   return ReactDOM.createPortal(
     <div className={styles.popup}>
