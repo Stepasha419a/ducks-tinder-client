@@ -1,11 +1,9 @@
-import { faChevronDown, faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { User } from '../../../../models/User';
 import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
-import { ImageSlider } from '../../../ImagesSlider/ImageSlider';
+import { Preview } from '../../../Preview/Preview';
 import { Button, Popup } from '../../../ui';
 import InterestsListPopup from '../Interests/List/InterestsListPopup';
 import styles from './PairPopup.module.scss';
@@ -33,10 +31,6 @@ const PairPopup: React.FC<PairPopupProps> = ({
   for (let i = 0; i < 4; i++) {
     currentPair.interests[i] && interestsForLoop.push(currentPair.interests[i]);
   }
-
-  const scrollToBottom = () => {
-    bottomElementRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const deletePair = (userId: string) => {
     dispatch(
@@ -66,63 +60,7 @@ const PairPopup: React.FC<PairPopupProps> = ({
         closeHandler={() => setCurrentPair({} as User)}
         extraClassName={styles.overflow}
       >
-        <div className={styles.slider}>
-          <ImageSlider
-            images={[
-              currentPair.pictures.avatar,
-              ...currentPair.pictures.gallery,
-            ]}
-            userId={currentPair._id}
-          />
-          <div className={styles.info}>
-            <div className={styles.person}>
-              <div className={styles.name}>{currentPair.name}</div>
-              <div className={styles.years}>
-                {currentPair.age || 'unknown years'}
-              </div>
-            </div>
-            <div className={styles.distance}>
-              {currentPair.partnerSettings?.distance || 'unknown'} km from you
-            </div>
-          </div>
-        </div>
-        <div onClick={() => scrollToBottom()} className={styles.scrollDown}>
-          <FontAwesomeIcon icon={faChevronDown} />
-        </div>
-        <div className={styles.pair}>
-          <div className={styles.wrapper}>
-            <div className={styles.name}>{currentPair.name}</div>
-            <div className={styles.years}>
-              {currentPair.age || 'unkown years'}
-            </div>
-          </div>
-          <div className={styles.sex}>
-            <FontAwesomeIcon icon={faUser} className={styles.icon} />
-            {currentPair.sex[0].toUpperCase() + currentPair.sex.slice(1) ||
-              'unkown sex'}
-          </div>
-        </div>
-        <hr className={styles.separator} />
-        <div className={styles.description}>{currentPair.description}</div>
-        <hr className={styles.separator} />
-        <div className={styles.interests}>
-          <div className={styles.title}>Interests</div>
-          <div className={styles.items}>
-            {interestsForLoop.map((item) => {
-              return (
-                <div key={item} className={styles.item}>
-                  {item}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div
-          onClick={() => setIsInterestsListPopupOpen(true)}
-          className={styles.showAll}
-        >
-          Show all
-        </div>
+        <Preview user={currentPair} isFull extraClassName={styles.padding} />
         <div className={styles.btns}>
           <Button
             onClick={() => refuseHandler(currentPair._id)}

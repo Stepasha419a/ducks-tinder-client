@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../../hooks';
+import { Preview } from '../../../Preview/Preview';
 import { Button } from '../../../ui';
 import ProfileChangeImage from '../ChangeImage/ChangeImage';
-import ProfileFullPreview from '../UserPreview/FullPreview/FullPreview';
-import ProfilePreview from '../UserPreview/Preview/Preview';
 import styles from './ImageSetting.module.scss';
 
 interface ProfileImageSettingPropsInterface {
@@ -22,9 +21,10 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({
   return (
     <div className={styles.change}>
       {isFullPreviewPageSetting ? (
-        <ProfileFullPreview
-          currentUser={currentUser}
-          setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}
+        <Preview
+          user={currentUser}
+          setIsFullPreview={setIsFullPreviewPageSetting}
+          isFull
         />
       ) : (
         <>
@@ -47,9 +47,9 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({
           </div>
           <div className={styles.panel}>
             {isPreviewSetting ? (
-              <ProfilePreview
-                currentUser={currentUser}
-                setIsFullPreviewPageSetting={setIsFullPreviewPageSetting}
+              <Preview
+                user={currentUser}
+                setIsFullPreview={setIsFullPreviewPageSetting}
               />
             ) : (
               <ProfileChangeImage

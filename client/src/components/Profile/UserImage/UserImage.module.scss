@@ -1,50 +1,21 @@
-.slider{
-    height: 467px;
+.padding {
+  padding-bottom: 127px;
 }
 
-.info{
-    max-height: 200px;
-    height: 100%;
-    background-color: var(--color--white-100);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    position: relative;
+.edit {
+  width: 100%;
+  height: 127px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color--white-100);
+  box-shadow: 0px -15px 14px -10px var(--color--white-100);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  padding: 20px;
 
-    .descr{
-        padding: 10px 16px;
-
-        .name{
-            font-size: 36px;
-            font-weight: 700;
-            text-shadow: 0 1px 1px var(--color--black-90);
-
-            .years{
-                font-size: 28px;
-                font-weight: 300;
-                padding-left: 8px;
-            }
-        }
-
-        .sex{
-            color: var(--main-secondary);
-
-            .icon{
-                height: 16px;
-                margin-right: 6px;
-            }
-        }
-    }
-
-    .separator{
-        border: 1px solid var(--color--black-90);
-    }
-
-    .edit{
-        padding: 10px 16px;
-
-        .btn{
-            height: 47px;
-            margin-top: 43px;
-        }
-    }
+  .btn {
+    height: 47px;
+    margin-top: 43px;
+  }
 }

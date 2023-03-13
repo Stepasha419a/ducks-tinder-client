@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { setRequestedUsers } from '../../redux/users/users.slice';
 import Buttons from './Buttons/Buttons';
-import FullPreview from './UserPreview/FullPreview/FullPreview';
-import Preview from './UserPreview/Preview/Preview';
 import TinderUserLoading from './UserLoading/Loading/Loading';
 import TinderUserFailed from './UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
@@ -13,6 +11,7 @@ import {
   updateUserThunk,
 } from '../../redux/users/users.thunks';
 import { useAppDispatch, useAppSelector } from '../../hooks';
+import { Preview } from '../Preview/Preview';
 
 export const Tinder: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -87,9 +86,11 @@ export const Tinder: React.FC = () => {
         <div className={styles.users}>
           {isFullPreview ? (
             <>
-              <FullPreview
-                currentUser={tinderUsers[currentTinderUsersIndex]}
+              <Preview
+                user={tinderUsers[currentTinderUsersIndex]}
                 setIsFullPreview={setIsFullPreview}
+                extraClassName={styles.padding}
+                isFull
               />
               <Buttons
                 currentTinderUsersIndex={currentTinderUsersIndex}
@@ -99,8 +100,9 @@ export const Tinder: React.FC = () => {
           ) : (
             <>
               <Preview
-                currentUser={tinderUsers[currentTinderUsersIndex]}
+                user={tinderUsers[currentTinderUsersIndex]}
                 setIsFullPreview={setIsFullPreview}
+                isShadow
               />
               <Buttons currentTinderUsersIndex={currentTinderUsersIndex} />
             </>

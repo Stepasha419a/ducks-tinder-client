@@ -1,7 +1,5 @@
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from '../../../hooks';
-import { ImageSlider } from '../../ImagesSlider/ImageSlider';
+import { Preview } from '../../Preview/Preview';
 import { Button } from '../../ui';
 import styles from './UserImage.module.scss';
 
@@ -16,36 +14,20 @@ const UserImage: React.FC<UserImagePropsInterface> = ({
 
   return (
     <>
-      <div className={styles.slider}>
-        <ImageSlider
-          images={[
-            currentUser.pictures.avatar,
-            ...currentUser.pictures.gallery,
-          ]}
-          userId={currentUser._id}
-        />
-      </div>
-      <div className={styles.info}>
-        <div className={styles.descr}>
-          <div className={styles.name}>
-            {currentUser.name}
-            <span className={styles.years}>{currentUser.age}</span>
-          </div>
-          <div className={styles.sex}>
-            <FontAwesomeIcon icon={faUser} className={styles.icon} />
-            {currentUser.sex}
-          </div>
-        </div>
-        <hr className={styles.separator} />
-        <div className={styles.edit}>
-          <Button
-            onClick={() => setIsImageSetting(true)}
-            variant="gradient"
-            extraClassName={styles.btn}
-          >
-            Edit Info
-          </Button>
-        </div>
+      <Preview
+        user={currentUser}
+        isFull
+        extraClassName={styles.padding}
+        setIsFullPreview={() => setIsImageSetting(true)}
+      />
+      <div className={styles.edit}>
+        <Button
+          onClick={() => setIsImageSetting(true)}
+          variant="gradient"
+          extraClassName={styles.btn}
+        >
+          Edit Info
+        </Button>
       </div>
     </>
   );
