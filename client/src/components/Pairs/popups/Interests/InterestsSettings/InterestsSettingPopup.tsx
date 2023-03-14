@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { interestsList } from '../../../../../models/User';
+import { interestsList } from '../../../../../models/User/User';
 import { Button, Popup } from '../../../../ui';
 import styles from './InterestsSettingPopup.module.scss';
 

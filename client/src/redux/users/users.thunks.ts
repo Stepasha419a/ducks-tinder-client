@@ -1,8 +1,8 @@
-import { ImageInterface, PartnerSettings } from '../../models/User';
+import { ImageInterface, PartnerSettings } from '../../models/User/User';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
-import { User } from '../../models/User';
+import { User } from '../../models/User/User';
 import { RootState } from '../store';
 import { ChangedData, InnerObjectName } from '../settings/settings.interfaces';
 import {
@@ -18,22 +18,6 @@ export async function fetchUserById(id: string) {
 
   return user;
 }
-
-export const fetchUserPair = createAsyncThunk(
-  'users/fetchUserPair',
-  async function (id: string, { rejectWithValue }) {
-    try {
-      const user = await fetchUserById(id);
-
-      return user;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
-      }
-      return rejectWithValue(['unexpected error', error]);
-    }
-  }
-);
 
 export const getSortedUserThunk = createAsyncThunk(
   'users/getSortedUser',

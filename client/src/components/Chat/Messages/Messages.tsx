@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../../hooks';
-import { Message } from '../../../models/Chat';
+import { Message } from '../../../models/Chat/Chat';
 import { ChatMessage } from '../../ui';
 import { isRefElementVisible, scrollToBottom } from '../../ui/helpers';
 import styles from './Messages.module.scss';

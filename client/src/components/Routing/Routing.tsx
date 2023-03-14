@@ -4,7 +4,7 @@ import {
   Chat,
   Profile,
   Tinder,
-  Pairs,
+  PairsPage,
   Policy,
   Layout,
   LoginForm,
@@ -29,7 +29,7 @@ const Routing = () => {
         <Route index element={<Tinder />} />
         <Route path="profile" element={<Profile />} />
         <Route path="chat" element={<Chat />} />
-        <Route path="pairs" element={<Pairs />} />
+        <Route path="pairs" element={<PairsPage />} />
         <Route path="policy" element={<Policy />} />
         <Route path="*" element={<div>404 NOT FOUND</div>} />
       </Route>

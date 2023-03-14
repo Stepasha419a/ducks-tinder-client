@@ -1,4 +1,4 @@
-import { ImageInterface, User } from '../../../models/User';
+import { ImageInterface, User } from '../../../models/User/User';
 
 export function makeUserImagesObject(args: {
   currentUser: User;

@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { Chat } from "../../models/Chat";
+import { Chat } from "../../models/Chat/Chat";
 import { instance } from "../api";
 
 export const chatApi = {

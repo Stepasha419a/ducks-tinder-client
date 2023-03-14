@@ -1,4 +1,4 @@
-import { User, PartnerSettings } from '../../../models/User';
+import { User, PartnerSettings } from '../../../models/User/User';
 import {
   ChangedData,
   InnerObjectName,

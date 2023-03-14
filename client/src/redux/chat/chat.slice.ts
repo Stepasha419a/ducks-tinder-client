@@ -1,6 +1,6 @@
-import { User } from '../../models/User';
+import { User } from '../../models/User/User';
 import { createSlice } from '@reduxjs/toolkit';
-import { Chat, Message } from '../../models/Chat';
+import { Chat, Message } from '../../models/Chat/Chat';
 import {
   getChatsThunk,
   connectChatThunk,

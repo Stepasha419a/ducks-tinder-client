@@ -1,4 +1,4 @@
-import { User } from '../../../models/User';
+import { User } from '../../../models/User/User';
 import { ErrorField } from '../settings.interfaces';
 
 const potentialFields: ErrorField[] = [

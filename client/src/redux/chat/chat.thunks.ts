@@ -1,8 +1,8 @@
-import { User } from '../../models/User';
+import { User } from '../../models/User/User';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { chatApi } from '../../api/chat/chat.api';
 import { chatSocket } from '../../api/chat/chat.socket';
-import { Message } from '../../models/Chat';
+import { Message } from '../../models/Chat/Chat';
 import { RootState } from '../store';
 import { fetchUserById } from '../users/users.thunks';
 import {

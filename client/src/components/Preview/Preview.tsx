@@ -6,7 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { User } from '../../models/User';
+import { User } from '../../models/User/User';
 import { ImageSlider } from '../ImagesSlider/ImageSlider';
 import { Button } from '../ui';
 import { useState } from 'react';
@@ -31,6 +31,8 @@ export const Preview: React.FC<PreviewPropsInterface> = ({
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
 
+  const isSetIsFullPreview = Boolean(setIsFullPreview.length);
+
   const interestsForLoop = [];
 
   for (let i = 0; i < 4; i++) {
@@ -49,7 +51,7 @@ export const Preview: React.FC<PreviewPropsInterface> = ({
           extraWrapperClassName={classNames(isShadow && styles.wrapper)}
           arrowsExtraClassName={styles.arrows}
         />
-        {isFull && (
+        {isFull && isSetIsFullPreview && (
           <Button
             variant="mark"
             onClick={() => setIsFullPreview(false)}

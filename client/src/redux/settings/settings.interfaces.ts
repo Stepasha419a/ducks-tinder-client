@@ -1,4 +1,4 @@
-import { User, PartnerSettings } from '../../models/User';
+import { User, PartnerSettings } from '../../models/User/User';
 
 export interface Validation {
   min?: number;

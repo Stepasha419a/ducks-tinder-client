@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { QuerySorts, User, UserUnrequired } from "../../models/User";
+import { QuerySorts, User, UserUnrequired } from "../../models/User/User";
 import { instance } from "../api";
 
 export type UserType = {

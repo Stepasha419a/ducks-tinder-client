@@ -2,7 +2,7 @@ import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../../hooks';
-import { ImageInterface, User } from '../../../../models/User';
+import { ImageInterface, User } from '../../../../models/User/User';
 import {
   deleteUserImage,
   mixUserImages,

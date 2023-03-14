@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { User } from '../../../../models/User';
+import { User } from '../../../../models/User/User';
 import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
 import { Preview } from '../../../Preview/Preview';

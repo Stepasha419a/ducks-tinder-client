@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import { User } from '../../../../models/User';
+import { User } from '../../../../models/User/User';
 import { Button, Popup, RangeInput } from '../../../ui/';
 import getCroppedImg from './cropImageScript.js';
 import styles from './CropImage.module.scss';
