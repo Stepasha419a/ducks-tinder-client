@@ -1,4 +1,4 @@
-import { Button, Popup } from '../../../../ui';
+import { Button, Popup } from '../../ui';
 import styles from './InterestsListPopup.module.scss';
 
 interface InterestsListPopupProps {
@@ -6,7 +6,7 @@ interface InterestsListPopupProps {
   interestsList: string[];
 }
 
-const InterestsListPopup: React.FC<InterestsListPopupProps> = ({
+export const InterestsListPopup: React.FC<InterestsListPopupProps> = ({
   interestsList,
   setIsInterestsListPopupOpen,
 }) => {
@@ -33,5 +33,3 @@ const InterestsListPopup: React.FC<InterestsListPopupProps> = ({
     </Popup>
   );
 };
-
-export default InterestsListPopup;

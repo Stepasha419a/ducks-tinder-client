@@ -3,7 +3,7 @@ import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../../../../../hooks';
 import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
-import InterestsSettingPopup from '../../../../../Pairs/popups/Interests/InterestsSettings/InterestsSettingPopup';
+import { InterestsSettingPopup } from '../../../../../popups';
 import { useDefaultValues } from '../../../../hooks';
 import { SettingFieldArrayValues } from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';

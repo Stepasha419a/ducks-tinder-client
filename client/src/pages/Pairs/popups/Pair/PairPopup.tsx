@@ -3,9 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { User } from '../../../../models/User/User';
 import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
-import { Preview } from '../../../Preview/Preview';
-import { Button, Popup } from '../../../ui';
-import InterestsListPopup from '../Interests/List/InterestsListPopup';
+import { InterestsListPopup } from '../../../../components/popups';
+import { Preview } from '../../../../components/Preview/Preview';
+import { Button, Popup } from '../../../../components/ui';
 import styles from './PairPopup.module.scss';
 
 interface PairPopupProps {
@@ -58,6 +58,7 @@ const PairPopup: React.FC<PairPopupProps> = ({
     <>
       <Popup
         closeHandler={() => setCurrentPair({} as User)}
+        size='l'
         extraClassName={styles.overflow}
       >
         <Preview user={currentPair} isFull extraClassName={styles.padding} />

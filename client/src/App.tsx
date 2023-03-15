@@ -1,4 +1,4 @@
-import Routing from './components/Routing/Routing';
+import Routing from './pages/Routing/Routing';
 import { Loading, Notifications } from './components';
 
 function App() {

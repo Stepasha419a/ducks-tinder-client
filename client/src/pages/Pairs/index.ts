@@ -1,0 +1,1 @@
+export { PairsPage } from './PairsPage';

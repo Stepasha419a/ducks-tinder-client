@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { interestsList } from '../../../../../models/User/User';
-import { Button, Popup } from '../../../../ui';
+import { interestsList } from '../../../models/User/User';
+import { Button, Popup } from '../../ui';
 import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
@@ -9,7 +9,7 @@ interface InterestsSettingPopupProps {
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
 }
 
-const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
+export const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
   pairInterests,
   toggleInterest,
   setIsInterestsSettingPopupOpen,
@@ -43,5 +43,3 @@ const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
     </Popup>
   );
 };
-
-export default InterestsSettingPopup;

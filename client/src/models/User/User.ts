@@ -80,6 +80,8 @@ export interface InterestItem {
   id: string;
 }
 
+export const interestsForLoop = ['music', 'travelling', 'movies', 'sport'];
+
 export const interestsList = [
   'fighting',
   'ski',

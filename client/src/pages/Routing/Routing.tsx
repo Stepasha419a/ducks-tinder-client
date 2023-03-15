@@ -4,14 +4,14 @@ import {
   Chat,
   Profile,
   Tinder,
-  PairsPage,
   Policy,
   Layout,
   LoginForm,
   RegistrationForm,
-} from '..';
+} from '../../components';
 import { useAppDispatch } from '../../hooks';
 import { checkAuthThunk } from '../../redux/auth/auth.thunks';
+import { PairsPage } from '../Pairs';
 
 const Routing = () => {
   const dispatch = useAppDispatch();

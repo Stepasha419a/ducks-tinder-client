@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { initialSorts, PairSorts } from '../../../../models/Sorts/Sorts';
-import { interestsForLoop } from '../../Pairs.constants';
-import InterestsSettingPopup from '../../popups/Interests/InterestsSettings/InterestsSettingPopup';
+import { interestsForLoop } from '../../../../models/User/User';
+import { InterestsSettingPopup } from '../../../../components/popups';
 import PairsSettingsPopup from '../../popups/PairsSettings/PairsSettingsPopup';
 import styles from './Sorting.module.scss';
 

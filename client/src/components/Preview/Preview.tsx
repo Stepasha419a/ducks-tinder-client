@@ -11,7 +11,7 @@ import { ImageSlider } from '../ImagesSlider/ImageSlider';
 import { Button } from '../ui';
 import { useState } from 'react';
 import styles from './Preview.module.scss';
-import InterestsListPopup from '../Pairs/popups/Interests/List/InterestsListPopup';
+import { InterestsListPopup } from '../popups';
 
 interface PreviewPropsInterface {
   user: User;
