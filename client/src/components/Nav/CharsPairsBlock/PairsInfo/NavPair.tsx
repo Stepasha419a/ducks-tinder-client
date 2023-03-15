@@ -12,10 +12,8 @@ const NavPair = () => {
   const firstPair = useAppSelector((state) => state.usersPage.pairs[0]);
 
   useEffect(() => {
-    if (currentUser.pairs.length) {
-      dispatch(getUserPairsThunk([currentUser.pairs[0]]));
-    }
-  }, [currentUser.pairs, dispatch]);
+    dispatch(getUserPairsThunk(currentUser.pairs));
+  }, [dispatch, currentUser.pairs]);
 
   if (!currentUser.pairs.length) {
     return <FailedPair />;
@@ -25,7 +23,7 @@ const NavPair = () => {
     return <Loading />;
   }
 
-  return <PairBlock firstPair={firstPair}/>;
+  return <PairBlock firstPair={firstPair} />;
 };
 
 export default NavPair;

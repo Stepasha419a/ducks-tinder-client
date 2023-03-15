@@ -1,6 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { FC, useEffect, useState } from 'react';
-import { getUserPairsThunk } from '../../../../redux/users/users.thunks';
+import { useAppSelector } from '../../../../hooks';
+import { FC, useState } from 'react';
 import styles from './Pairs.module.scss';
 import { User } from '../../../../models/User/User';
 import Pair from './Pair/Pair';
@@ -14,16 +13,10 @@ interface PairsProps {
 }
 
 export const Pairs: FC<PairsProps> = ({ sorts }) => {
-  const dispatch = useAppDispatch();
-
   const pairsState = useAppSelector((state) => state.usersPage.pairs);
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const [currentPair, setCurrentPair] = useState<User>({} as User);
-
-  useEffect(() => {
-    dispatch(getUserPairsThunk(currentUser.pairs.slice(1)));
-  }, [dispatch, currentUser.pairs]);
 
   if (!currentUser.pairs.length) {
     return (

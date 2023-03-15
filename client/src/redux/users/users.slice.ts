@@ -54,21 +54,12 @@ const usersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getUserPairsThunk.fulfilled, (state, action) => {
-        // always returns an array
-        if (Array.isArray(action.payload)) {
-          if (
-            state.pairs[0] &&
-            state.pairs[0]?._id !== action.payload[0]?._id
-          ) {
-            state.pairs = [state.pairs[0], ...action.payload];
-          } else {
-            state.pairs = [...action.payload];
-          }
-        }
+        state.pairs = [...action.payload];
       })
       .addCase(deletePairThunk.fulfilled, (state, action) => {
         state.currentUser = action.payload?.data;
 
+        console.log(action.payload);
         state.pairs.filter((pair) => pair._id !== action.payload?.deletedId);
       })
       .addCase(getSortedUserThunk.fulfilled, (state, { payload }) => {
