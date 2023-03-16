@@ -1,17 +1,17 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Message } from '../../../models/Chat/Chat';
-import { Avatar } from '../Avatar/Avatar';
-import styles from './ChatMessage.module.scss';
+import { Avatar } from '../../../../../components/ui';
+import { Message as MessageType } from '../../../../../models/Chat/Chat';
+import styles from './Message.module.scss';
 
 interface MessageProps {
   isOwn: boolean;
-  message: Message;
+  message: MessageType;
   username: string;
   avatar?: string;
 }
 
-export const ChatMessage: FC<MessageProps> = ({
+export const Message: FC<MessageProps> = ({
   isOwn,
   message,
   username,

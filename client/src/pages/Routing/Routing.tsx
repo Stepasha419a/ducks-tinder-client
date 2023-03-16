@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import {
-  Chat,
   Profile,
   Tinder,
   Layout,
@@ -10,6 +9,7 @@ import {
 } from '../../components';
 import { useAppDispatch } from '../../hooks';
 import { checkAuthThunk } from '../../redux/auth/auth.thunks';
+import { Chat } from '../Chat/Chat';
 import { PairsPage } from '../Pairs';
 import { Policy } from '../Policy';
 

@@ -1,8 +1,8 @@
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../../hooks';
 import Choose from './Choose/Choose';
 import FailedChats from './Failed/NoChats';
 
-const Status = () => {
+export const Status = () => {
   const chats = useAppSelector((state) => state.chatPage.chats);
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
   const isConnected = useAppSelector((state) => state.chatPage.isConnected);
@@ -13,5 +13,3 @@ const Status = () => {
 
   return chats.length ? <Choose isConnected={isConnected} /> : <></>;
 };
-
-export default Status;

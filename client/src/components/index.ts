@@ -1,4 +1,3 @@
-export { Chat } from './Chat/Chat';
 export { Tinder } from './Tinder/Tinder';
 export { Profile } from './Profile/Profile';
 export { Notifications } from './Notifications/Notifications';

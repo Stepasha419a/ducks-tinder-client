@@ -1,11 +1,15 @@
 import { useEffect, useRef } from 'react';
-import { useAppSelector } from '../../../hooks';
-import { Message } from '../../../models/Chat/Chat';
-import { ChatMessage } from '../../ui';
-import { isRefElementVisible, scrollToBottom } from '../../ui/helpers';
+import {
+  isRefElementVisible,
+  scrollToBottom,
+} from '../../../../components/ui/helpers';
+import { useAppSelector } from '../../../../hooks';
+import { Message as MessageType } from '../../../../models/Chat/Chat';
+
+import { Message } from './Message/Message';
 import styles from './Messages.module.scss';
 
-const Messages = () => {
+export const Messages = () => {
   const currentChatMembers = useAppSelector(
     (state) => state.chatPage.currentChatMembers
   );
@@ -28,7 +32,7 @@ const Messages = () => {
 
   return (
     <div className={styles.messages} ref={bottomScrollRef}>
-      {messages.map((message: Message) => {
+      {messages.map((message: MessageType) => {
         const chatMember = currentChatMembers.find(
           (item) => item._id === message.userId
         );
@@ -36,7 +40,7 @@ const Messages = () => {
         const messageUser = isOwn ? currentUser : chatMember;
 
         return (
-          <ChatMessage
+          <Message
             key={message.id}
             isOwn={isOwn}
             message={message}
@@ -48,5 +52,3 @@ const Messages = () => {
     </div>
   );
 };
-
-export default Messages;

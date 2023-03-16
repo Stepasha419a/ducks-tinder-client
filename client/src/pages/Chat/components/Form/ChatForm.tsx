@@ -1,10 +1,10 @@
 import { useForm } from 'react-hook-form';
-import { useAppDispatch } from '../../../hooks';
-import { sendMessageThunk } from '../../../redux/chat/chat.thunks';
-import { Button, TextField } from '../../ui';
+import { Button, TextField } from '../../../../components/ui';
+import { useAppDispatch } from '../../../../hooks';
+import { sendMessageThunk } from '../../../../redux/chat/chat.thunks';
 import styles from './ChatForm.module.scss';
 
-const ChatForm = () => {
+export const ChatForm = () => {
   const dispatch = useAppDispatch();
 
   const {
@@ -40,5 +40,3 @@ const ChatForm = () => {
     </div>
   );
 };
-
-export default ChatForm;

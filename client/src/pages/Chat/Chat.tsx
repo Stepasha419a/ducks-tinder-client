@@ -1,8 +1,5 @@
-import styles from './Chat.module.scss';
-import Status from './Status/Status';
-import ChatForm from './Form/ChatForm';
-import Messages from './Messages/Messages';
 import { useAppSelector } from '../../hooks';
+import { ChatForm, Messages, Status } from './components';
 
 export const Chat = () => {
   const isConnected = useAppSelector((state) => state.chatPage.isConnected);
@@ -11,10 +8,10 @@ export const Chat = () => {
     <>
       <Status />
       {isConnected && (
-        <div className={styles.container}>
+        <>
           <Messages />
           <ChatForm />
-        </div>
+        </>
       )}
     </>
   );
