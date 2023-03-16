@@ -1,17 +1,13 @@
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import {
-  Profile,
-  Tinder,
-  Layout,
-  LoginForm,
-  RegistrationForm,
-} from '../../components';
+import { Profile, Tinder, Layout } from '../../components';
 import { useAppDispatch } from '../../hooks';
 import { checkAuthThunk } from '../../redux/auth/auth.thunks';
 import { Chat } from '../Chat/Chat';
+import { Login } from '../Login';
 import { PairsPage } from '../Pairs';
 import { Policy } from '../Policy';
+import { Registration } from '../Registration';
 
 const Routing = () => {
   const dispatch = useAppDispatch();
@@ -22,8 +18,8 @@ const Routing = () => {
 
   return (
     <Routes>
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/reg" element={<RegistrationForm />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/reg" element={<Registration />} />
 
       <Route path="/" element={<Layout />}>
         <Route index element={<Tinder />} />
