@@ -4,7 +4,6 @@ import {
   Chat,
   Profile,
   Tinder,
-  Policy,
   Layout,
   LoginForm,
   RegistrationForm,
@@ -12,6 +11,7 @@ import {
 import { useAppDispatch } from '../../hooks';
 import { checkAuthThunk } from '../../redux/auth/auth.thunks';
 import { PairsPage } from '../Pairs';
+import { Policy } from '../Policy';
 
 const Routing = () => {
   const dispatch = useAppDispatch();
