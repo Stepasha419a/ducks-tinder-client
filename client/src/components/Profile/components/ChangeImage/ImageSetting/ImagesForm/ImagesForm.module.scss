@@ -1,0 +1,79 @@
+.change {
+  .images {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 8px 4px;
+
+    .item {
+      width: 114px;
+      height: 160px;
+      padding-bottom: 8px;
+      position: relative;
+
+      .image {
+        background-position: 50% 79.5455%;
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 100%;
+        border: 4px dashed var(--color--white-70);
+        border-radius: 8px;
+        background-color: var(--bg-primary);
+        cursor: pointer;
+
+        &_has_image {
+          border: none;
+          cursor: grab;
+        }
+      }
+
+      .btn {
+        bottom: 3px;
+        right: -6px;
+
+        &.plus {
+          background-color: var(--color--red-100);
+
+          .mark {
+            width: 12px;
+            height: 12px;
+            color: var(--color--white-100);
+          }
+        }
+
+        &.xmark {
+          background-color: var(--color--white-100);
+
+          .mark {
+            width: 20px;
+            height: 20px;
+            color: var(--color--red-80);
+          }
+        }
+      }
+    }
+  }
+
+  .descr {
+    text-align: center;
+    padding: 0 16px;
+    margin: 10px 0 14px;
+    color: var(--main-secondary);
+    font-size: 14px;
+  }
+
+  .save {
+    padding: 10px 0 8px;
+    text-align: center;
+
+    .btn {
+      height: 40px;
+      width: 160px;
+    }
+  }
+}
+
+.content__change-panel {
+  height: calc(100% - 45px);
+}

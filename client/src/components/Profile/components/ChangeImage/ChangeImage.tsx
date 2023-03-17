@@ -8,16 +8,16 @@ import {
   mixUserImages,
 } from '../../../../redux/users/users.thunks';
 import { Button } from '../../../ui';
-import ProfileCropImage from '../CropImage/CropImage';
-import ProfileDialogUpload from '../CropImage/DialogUpload/DialogUpload';
+import ProfileCropImage from './CropImage/CropImage';
+import ProfileDialogUpload from './CropImage/DialogUpload/DialogUpload';
 import styles from './ChangeImage.module.scss';
 
-interface ProfileChangeImagePropsInterface {
+interface ChangeImageProps {
   currentUser: User;
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
-const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
+export const ChangeImage: React.FC<ChangeImageProps> = ({
   currentUser,
   setIsImageSetting,
 }) => {
@@ -93,7 +93,9 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
     setIsImageCropOpen(true);
   };
 
-  const emptyPhotoFieldsForLoop = [...new Array(8 - currentUser.pictures.gallery.length)];
+  const emptyPhotoFieldsForLoop = [
+    ...new Array(8 - currentUser.pictures.gallery.length),
+  ];
 
   const submitHandler = () => {
     setIsImageSetting(false);
@@ -247,5 +249,3 @@ const ProfileChangeImage: React.FC<ProfileChangeImagePropsInterface> = ({
     </div>
   );
 };
-
-export default ProfileChangeImage;

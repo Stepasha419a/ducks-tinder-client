@@ -1,15 +1,13 @@
-import { useAppSelector } from '../../../hooks';
-import { Preview } from '../../Preview/Preview';
-import { Button } from '../../ui';
+import { useAppSelector } from '../../../../hooks';
+import { Preview } from '../../../Preview/Preview';
+import { Button } from '../../../ui';
 import styles from './UserImage.module.scss';
 
-interface UserImagePropsInterface {
+interface UserImageProps {
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
-const UserImage: React.FC<UserImagePropsInterface> = ({
-  setIsImageSetting,
-}) => {
+export const UserImage: React.FC<UserImageProps> = ({ setIsImageSetting }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   return (
@@ -32,5 +30,3 @@ const UserImage: React.FC<UserImagePropsInterface> = ({
     </>
   );
 };
-
-export default UserImage;

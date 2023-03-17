@@ -1,4 +1,11 @@
-export const createImage = (url) =>
+export interface PixelCrop {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
+export const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image();
     image.addEventListener('load', () => resolve(image));
@@ -7,14 +14,14 @@ export const createImage = (url) =>
     image.src = url;
   });
 
-export function getRadianAngle(degreeValue) {
+export function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180;
 }
 
 /**
  * Returns the new bounding area of a rotated rectangle.
  */
-export function rotateSize(width, height, rotation) {
+export function rotateSize(width: number, height: number, rotation: number) {
   const rotRad = getRadianAngle(rotation);
 
   return {
@@ -29,8 +36,8 @@ export function rotateSize(width, height, rotation) {
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  */
 export default async function getCroppedImg(
-  imageSrc,
-  pixelCrop,
+  imageSrc: string,
+  pixelCrop: PixelCrop,
   rotation = 0,
   flip = { horizontal: false, vertical: false }
 ) {
@@ -84,10 +91,13 @@ export default async function getCroppedImg(
   // return canvas.toDataURL('image/jpeg');
 
   // As a blob
-  return new Promise((resolve, reject) => {
-    canvas.toBlob((file) => {
-      file.name = 'cropped.jpeg';
-      resolve({ picture: file, url: URL.createObjectURL(file) });
+  return new Promise((resolve) => {
+    canvas.toBlob((file: Blob | null) => {
+      Object.assign(file!, { name: 'cropped.jpeg' });
+      resolve({
+        picture: file,
+        url: URL.createObjectURL(file!),
+      });
     }, 'image/jpeg');
   });
 }

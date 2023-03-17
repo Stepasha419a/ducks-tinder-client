@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import { useAppSelector } from '../../../../hooks';
-import { Preview } from '../../../Preview/Preview';
-import { Button } from '../../../ui';
-import ProfileChangeImage from '../ChangeImage/ChangeImage';
+import { useAppSelector } from '../../../../../hooks';
+import { Preview } from '../../../../Preview/Preview';
+import { Button } from '../../../../ui';
+import { ImagesForm } from './ImagesForm/ImagesForm';
 import styles from './ImageSetting.module.scss';
 
-interface ProfileImageSettingPropsInterface {
+interface ImageSettingProps {
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
-const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({
-  setIsImageSetting,
-}) => {
+export const ImageSetting: React.FC<ImageSettingProps> = ({ setIsImageSetting }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);
@@ -52,7 +50,7 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({
                 setIsFullPreview={setIsFullPreviewPageSetting}
               />
             ) : (
-              <ProfileChangeImage
+              <ImagesForm
                 currentUser={currentUser}
                 setIsImageSetting={setIsImageSetting}
               />
@@ -63,5 +61,3 @@ const ProfileImageSetting: React.FC<ProfileImageSettingPropsInterface> = ({
     </div>
   );
 };
-
-export default ProfileImageSetting;
