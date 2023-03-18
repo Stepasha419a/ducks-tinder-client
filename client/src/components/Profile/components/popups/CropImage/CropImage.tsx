@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import Cropper from 'react-easy-crop';
 import { User } from '../../../../../models/User/User';
 import { Button, Popup, RangeInput } from '../../../../ui';
@@ -7,7 +7,7 @@ import styles from './CropImage.module.scss';
 import { saveUserImage } from '../../../../../redux/users/users.thunks';
 import { useAppDispatch } from '../../../../../hooks';
 
-interface ProfileCropImagePropsInterface {
+interface CropImageProps {
   currentUser: User;
   setIsImageCropOpen: (setting: boolean) => void;
   imageURL: any;
@@ -15,7 +15,7 @@ interface ProfileCropImagePropsInterface {
   setCurrentImageCrop: (setting: 'avatar' | 'gallery' | '') => void;
 }
 
-const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({
+export const CropImage: FC<CropImageProps> = ({
   setIsImageCropOpen,
   imageURL,
   currentUser,
@@ -101,5 +101,3 @@ const ProfileCropImage: React.FC<ProfileCropImagePropsInterface> = ({
     </Popup>
   );
 };
-
-export default ProfileCropImage;

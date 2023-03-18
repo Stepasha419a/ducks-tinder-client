@@ -1,12 +1,12 @@
-import { Popup } from '../../../../../ui';
+import { Popup } from '../../../../ui';
 import styles from './DialogUpload.module.scss';
 
-interface ProfileDialogUploadPropsInterface {
+interface DialogUploadProps {
   onImageChange: (e: any) => void;
   setIsDialogUploadOpen: (setting: boolean) => void;
 }
 
-const ProfileDialogUpload: React.FC<ProfileDialogUploadPropsInterface> = ({
+export const DialogUpload: React.FC<DialogUploadProps> = ({
   onImageChange,
   setIsDialogUploadOpen,
 }) => {
@@ -36,5 +36,3 @@ const ProfileDialogUpload: React.FC<ProfileDialogUploadPropsInterface> = ({
     </Popup>
   );
 };
-
-export default ProfileDialogUpload;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useAppSelector } from '../../../../../hooks';
-import { Preview } from '../../../../Preview/Preview';
-import { Button } from '../../../../ui';
+import { useAppSelector } from '../../../../hooks';
+import { Preview } from '../../../Preview/Preview';
+import { Button } from '../../../ui';
 import { ImagesForm } from './ImagesForm/ImagesForm';
 import styles from './ImageSetting.module.scss';
 

@@ -1,23 +1,23 @@
 import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../../hooks';
-import { ImageInterface, User } from '../../../../models/User/User';
+import { useEffect, useState, FC } from 'react';
+import { useAppDispatch } from '../../../../../hooks';
+import { ImageInterface, User } from '../../../../../models/User/User';
 import {
   deleteUserImage,
   mixUserImages,
-} from '../../../../redux/users/users.thunks';
-import { Button } from '../../../ui';
-import ProfileCropImage from './CropImage/CropImage';
-import ProfileDialogUpload from './CropImage/DialogUpload/DialogUpload';
-import styles from './ChangeImage.module.scss';
+} from '../../../../../redux/users/users.thunks';
+import { Button } from '../../../../ui';
+import { CropImage } from '../../popups/CropImage/CropImage';
+import { DialogUpload } from '../../popups/DialogUpload/DialogUpload';
+import styles from './ImagesForm.module.scss';
 
-interface ChangeImageProps {
+interface ImagesFormProps {
   currentUser: User;
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
-export const ChangeImage: React.FC<ChangeImageProps> = ({
+export const ImagesForm: FC<ImagesFormProps> = ({
   currentUser,
   setIsImageSetting,
 }) => {
@@ -231,14 +231,14 @@ export const ChangeImage: React.FC<ChangeImageProps> = ({
       </div>
 
       {isDialogUploadOpen && (
-        <ProfileDialogUpload
+        <DialogUpload
           onImageChange={onImageChange}
           setIsDialogUploadOpen={setIsDialogUploadOpen}
         />
       )}
 
       {isImageCropOpen && (
-        <ProfileCropImage
+        <CropImage
           setIsImageCropOpen={setIsImageCropOpen}
           imageURL={imageURL}
           currentUser={currentUser}
