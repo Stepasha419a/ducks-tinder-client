@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import Cropper from 'react-easy-crop';
-import { User } from '../../../../../models/User/User';
+import { PicturesVariants, User } from '../../../../../models/User/User';
 import { Button, Popup, RangeInput } from '../../../../ui';
 import getCroppedImg, { PixelCrop } from './cropImageScript';
 import styles from './CropImage.module.scss';
@@ -11,8 +11,8 @@ interface CropImageProps {
   currentUser: User;
   setIsImageCropOpen: (setting: boolean) => void;
   imageURL: any;
-  currentImageCrop: 'avatar' | 'gallery' | '';
-  setCurrentImageCrop: (setting: 'avatar' | 'gallery' | '') => void;
+  currentImageCrop: PicturesVariants | '';
+  setCurrentImageCrop: (setting: PicturesVariants | '') => void;
 }
 
 export const CropImage: FC<CropImageProps> = ({
@@ -36,7 +36,7 @@ export const CropImage: FC<CropImageProps> = ({
 
   const cropImage = async (
     userId: string,
-    setting: 'avatar' | 'gallery' | ''
+    setting: PicturesVariants | ''
   ) => {
     try {
       const { picture }: any = await getCroppedImg(

@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { QuerySorts, User, UserUnrequired } from "../../models/User/User";
+import { PicturesVariants, QuerySorts, User, UserUnrequired } from "../../models/User/User";
 import { instance } from "../api";
 
 export type UserType = {
@@ -39,7 +39,7 @@ export const usersAPI = {
         return instance.put(`users/pairs`, {forUserId, userId})
             .then(res => res)
     },
-    savePicture(picture: any, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<User>> {
+    savePicture(picture: any, userId: string, setting: PicturesVariants): Promise<AxiosResponse<User>> {
         return instance.post(`users/picture`, {picture, userId, setting}, {
             headers: {
               'Content-Type': 'multipart/form-data'
@@ -47,7 +47,7 @@ export const usersAPI = {
         })
             .then(res => res)
     },
-    deletePicture(pictureName: string, userId: string, setting: 'avatar' | 'gallery'): Promise<AxiosResponse<User>> {
+    deletePicture(pictureName: string, userId: string, setting: PicturesVariants): Promise<AxiosResponse<User>> {
         return instance.put(`users/picture`, {pictureName, userId, setting})
             .then(res => res)
     }

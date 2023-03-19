@@ -18,6 +18,18 @@ export interface PartnerSettings {
   age: PreferAge;
 }
 
+interface PicturesInterface {
+  avatar: string;
+  gallery: string[];
+}
+
+export enum PicturesEnum {
+  avatar = 'avatar',
+  gallery = 'gallery',
+}
+
+export type PicturesVariants = keyof PicturesInterface;
+
 export interface User {
   _id: string;
   email: string;
@@ -29,10 +41,7 @@ export interface User {
   isActivated: boolean;
   interests: string[];
   partnerSettings: PartnerSettings;
-  pictures: {
-    avatar: string;
-    gallery: string[];
-  };
+  pictures: PicturesInterface;
   chats: string[];
   pairs: string[];
   checkedUsers: string[];

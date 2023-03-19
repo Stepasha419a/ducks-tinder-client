@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
+import { PicturesEnum } from '../../models/User/User';
 import { makeImageUrl } from '../ui/helpers';
 import Arrows from './Arrows/Arrows';
 import styles from './ImageSlider.module.scss';
@@ -56,7 +57,7 @@ export const ImageSlider: React.FC<ImageSliderPropsInterface> = ({
       />
 
       {images.map((imageName, index) => {
-        const dir = index > 0 ? 'gallery' : 'avatar';
+        const dir = index === 0 ? PicturesEnum.avatar : PicturesEnum.gallery;
         const url = makeImageUrl(userId, imageName, dir);
         const cnWrapper = classNames(
           styles.itemWrapper,

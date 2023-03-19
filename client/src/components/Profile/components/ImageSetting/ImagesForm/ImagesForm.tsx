@@ -2,7 +2,12 @@ import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState, FC } from 'react';
 import { useAppDispatch } from '../../../../../hooks';
-import { ImageInterface, User } from '../../../../../models/User/User';
+import {
+  ImageInterface,
+  PicturesEnum,
+  PicturesVariants,
+  User,
+} from '../../../../../models/User/User';
 import {
   deleteUserImage,
   mixUserImages,
@@ -27,7 +32,7 @@ export const ImagesForm: FC<ImagesFormProps> = ({
   const [isDialogUploadOpen, setIsDialogUploadOpen] = useState(false);
   const [imageURL, setImageURL] = useState({});
   const [currentImageCrop, setCurrentImageCrop] = useState(
-    '' as 'avatar' | 'gallery' | ''
+    '' as PicturesVariants | ''
   );
 
   const [images, setImages] = useState<ImageInterface[]>([]);
@@ -42,14 +47,14 @@ export const ImagesForm: FC<ImagesFormProps> = ({
           id: 0,
           order: 0,
           image: currentUser.pictures.avatar,
-          setting: 'avatar',
+          setting: PicturesEnum.avatar,
         },
         ...currentUser.pictures.gallery.map((image, index) => {
           return {
             id: index + 1,
             order: index + 1,
             image: image,
-            setting: 'gallery',
+            setting: PicturesEnum.gallery,
           };
         }),
       ]);
@@ -62,7 +67,7 @@ export const ImagesForm: FC<ImagesFormProps> = ({
             id: index + 1,
             order: index + 1,
             image: image,
-            setting: 'gallery',
+            setting: PicturesEnum.gallery,
           };
         }),
       ]);
@@ -73,7 +78,7 @@ export const ImagesForm: FC<ImagesFormProps> = ({
     setImagesChanged(false);
   }, [imagesChanged, dispatch, currentUser, images]);
 
-  const openSettingHandler = (setting: 'avatar' | 'gallery' | '') => {
+  const openSettingHandler = (setting: PicturesVariants) => {
     setCurrentImageCrop(setting);
     setIsDialogUploadOpen(true);
   };
@@ -81,7 +86,7 @@ export const ImagesForm: FC<ImagesFormProps> = ({
   const deleteImageHandler = (
     pictureName: string,
     userId: string,
-    setting: 'avatar' | 'gallery'
+    setting: PicturesVariants
   ) => {
     dispatch(deleteUserImage({ pictureName, userId, setting }));
   };
@@ -149,8 +154,8 @@ export const ImagesForm: FC<ImagesFormProps> = ({
               <div
                 onClick={() =>
                   index === 0
-                    ? openSettingHandler('avatar')
-                    : openSettingHandler('gallery')
+                    ? openSettingHandler(PicturesEnum.avatar)
+                    : openSettingHandler(PicturesEnum.gallery)
                 }
                 key={index}
                 className={styles.item}
@@ -189,7 +194,7 @@ export const ImagesForm: FC<ImagesFormProps> = ({
                   deleteImageHandler(
                     imageObj.image,
                     currentUser._id,
-                    imageObj.setting as 'avatar' | 'gallery'
+                    imageObj.setting as PicturesVariants
                   )
                 }
                 extraClassName={[styles.btn, styles.xmark]}
@@ -203,7 +208,7 @@ export const ImagesForm: FC<ImagesFormProps> = ({
         {emptyPhotoFieldsForLoop.map((_, i) => {
           return (
             <div
-              onClick={() => openSettingHandler('gallery')}
+              onClick={() => openSettingHandler(PicturesEnum.gallery)}
               key={i}
               className={styles.item}
             >

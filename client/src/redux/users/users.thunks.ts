@@ -1,4 +1,8 @@
-import { ImageInterface, PartnerSettings } from '../../models/User/User';
+import {
+  ImageInterface,
+  PartnerSettings,
+  PicturesVariants,
+} from '../../models/User/User';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
@@ -112,7 +116,7 @@ export const deletePairThunk = createAsyncThunk(
 export const saveUserImage = createAsyncThunk(
   'users/saveUserImage',
   async (
-    args: { picture: File; userId: string; setting: 'avatar' | 'gallery' },
+    args: { picture: File; userId: string; setting: PicturesVariants },
     { rejectWithValue }
   ) => {
     try {
@@ -138,7 +142,7 @@ export const deleteUserImage = createAsyncThunk(
     args: {
       pictureName: string;
       userId: string;
-      setting: 'avatar' | 'gallery';
+      setting: PicturesVariants;
     },
     { rejectWithValue }
   ) => {
