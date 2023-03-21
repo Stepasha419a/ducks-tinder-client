@@ -1,4 +1,5 @@
 import { DragEvent, FC, useEffect, useState } from 'react';
+import { makeImageUrl } from '../../../../../../components/ui/helpers';
 import { useAppDispatch } from '../../../../../../hooks';
 import {
   ImageInterface,
@@ -10,7 +11,6 @@ import {
   deleteUserImage,
   mixUserImages,
 } from '../../../../../../redux/users/users.thunks';
-import { makeImageUrl } from '../../../../../ui/helpers';
 import { parseImages } from '../../../../utils';
 import { Card } from '../Card/Card';
 import styles from './UserImages.module.scss';

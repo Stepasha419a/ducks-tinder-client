@@ -1,10 +1,10 @@
 import { useState, FC, ChangeEvent } from 'react';
 import { PicturesVariants, User } from '../../../../../models/User/User';
-import { Button } from '../../../../ui';
 import { DialogUpload } from '../../popups';
 import { CropImage } from '../../popups/CropImage/CropImage';
 import { UserImages } from './UserImages/UserImages';
 import styles from './ImagesForm.module.scss';
+import { Button } from '../../../../../components/ui';
 
 interface ImagesFormProps {
   currentUser: User;

@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import Cropper from 'react-easy-crop';
 import { PicturesVariants, User } from '../../../../../models/User/User';
-import { Button, Popup, RangeInput } from '../../../../ui';
 import getCroppedImg, {
   PixelCrop,
   ReturnGetCroppedImg,
@@ -9,6 +8,7 @@ import getCroppedImg, {
 import styles from './CropImage.module.scss';
 import { saveUserImage } from '../../../../../redux/users/users.thunks';
 import { useAppDispatch } from '../../../../../hooks';
+import { Button, Popup, RangeInput } from '../../../../../components/ui';
 
 interface CropImageProps {
   currentUser: User;
