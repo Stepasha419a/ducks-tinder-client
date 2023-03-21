@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from '../../models/User/User';
 import {
+  dislikeUserThunk,
+  likeUserThunk,
+  returnUserThunk,
+} from '../tinder/tinder.thunks';
+import {
   deletePairThunk,
   deleteUserImage,
-  dislikeUserThunk,
-  getSortedUserThunk,
   getUserPairsThunk,
-  likeUserThunk,
   mixUserImages,
-  returnUserThunk,
   saveUserImage,
   updateUserThunk,
 } from './users.thunks';
@@ -16,22 +17,12 @@ import {
 interface InitialState {
   currentUser: User;
   pairs: User[];
-  tinderUsers: User[];
-  isReturnUser: boolean;
-  requestedUsers: string[];
-  currentTinderUsersIndex: number;
-  isFailed: boolean;
 }
 
 const initialState: InitialState = {
   // auth always set currentUser object after registration/login/refresh
   currentUser: {} as User,
   pairs: [],
-  tinderUsers: [],
-  isReturnUser: false,
-  requestedUsers: [],
-  currentTinderUsersIndex: 0,
-  isFailed: false,
 };
 
 const usersSlice = createSlice({
@@ -40,15 +31,6 @@ const usersSlice = createSlice({
   reducers: {
     setCurrentUser: (state, action) => {
       state.currentUser = action.payload;
-    },
-    setIsReturnUser: (state, action) => {
-      state.isReturnUser = action.payload;
-    },
-    setRequestedUsers: (state, action) => {
-      state.requestedUsers = [...action.payload];
-    },
-    setCurrentTinderUsersIndex: (state, action) => {
-      state.currentTinderUsersIndex = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -62,18 +44,8 @@ const usersSlice = createSlice({
         console.log(action.payload);
         state.pairs.filter((pair) => pair._id !== action.payload?.deletedId);
       })
-      .addCase(getSortedUserThunk.fulfilled, (state, { payload }) => {
-        state.tinderUsers = [...state.tinderUsers, { ...payload }] as User[];
-      })
-      .addCase(getSortedUserThunk.rejected, (state) => {
-        state.isFailed = true;
-      })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
-      })
-      .addCase(likeUserThunk.fulfilled, (state, { payload }) => {
-        state.currentUser = payload;
-        state.currentTinderUsersIndex++;
       })
       .addCase(saveUserImage.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
@@ -86,28 +58,18 @@ const usersSlice = createSlice({
           state.currentUser = payload;
         }
       })
+      .addCase(likeUserThunk.fulfilled, (state, { payload }) => {
+        state.currentUser = payload;
+      })
       .addCase(returnUserThunk.fulfilled, (state, { payload }) => {
-        if (payload) {
-          state.currentUser = payload;
-          state.currentTinderUsersIndex--;
-          state.isReturnUser = false;
-        }
+        state.currentUser = payload!;
       })
       .addCase(dislikeUserThunk.fulfilled, (state, { payload }) => {
-        if (payload) {
-          state.currentUser = payload;
-          state.currentTinderUsersIndex++;
-          state.isReturnUser = true;
-        }
+        state.currentUser = payload;
       });
   },
 });
 
-export const {
-  setCurrentUser,
-  setRequestedUsers,
-  setIsReturnUser,
-  setCurrentTinderUsersIndex,
-} = usersSlice.actions;
+export const { setCurrentUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

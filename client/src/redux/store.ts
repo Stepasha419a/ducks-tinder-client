@@ -1,17 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './auth/auth.slice';
-import chatReducer from './chat/chat.slice';
-import notificationsReducer from './notifications/notifications.slice';
+import authSlice from './auth/auth.slice';
+import chatSlice from './chat/chat.slice';
+import notificationsSlice from './notifications/notifications.slice';
 import settingsSlice from './settings/settings.slice';
-import usersReducer from './users/users.slice';
+import tinderSlice from './tinder/tinder.slice';
+import usersSlice from './users/users.slice';
 
 const store = configureStore({
   reducer: {
-    usersPage: usersReducer,
-    authPage: authReducer,
-    chatPage: chatReducer,
-    notifications: notificationsReducer,
+    usersPage: usersSlice,
+    authPage: authSlice,
+    chatPage: chatSlice,
+    notifications: notificationsSlice,
     settings: settingsSlice,
+    tinderPage: tinderSlice,
   },
 });
 

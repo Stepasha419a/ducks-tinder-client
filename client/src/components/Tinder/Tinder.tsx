@@ -1,30 +1,28 @@
 import { useEffect, useState } from 'react';
-import { setRequestedUsers } from '../../redux/users/users.slice';
 import Buttons from './Buttons/Buttons';
 import TinderUserLoading from './UserLoading/Loading/Loading';
 import TinderUserFailed from './UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
 import Instructions from './Instructions/Instructions';
 import { Button } from '../ui';
-import {
-  getSortedUserThunk,
-  updateUserThunk,
-} from '../../redux/users/users.thunks';
+import { updateUserThunk } from '../../redux/users/users.thunks';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Preview } from '../Preview/Preview';
+import { getSortedUserThunk } from '../../redux/tinder/tinder.thunks';
+import { setRequestedUsers } from '../../redux/tinder/tinder.slice';
 
 export const Tinder: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const tinderUsers = useAppSelector((state) => state.usersPage.tinderUsers);
+  const tinderUsers = useAppSelector((state) => state.tinderPage.tinderUsers);
   const currentTinderUsersIndex = useAppSelector(
-    (state) => state.usersPage.currentTinderUsersIndex
+    (state) => state.tinderPage.currentTinderUsersIndex
   );
   const requestedUsers = useAppSelector(
-    (state) => state.usersPage.requestedUsers
+    (state) => state.tinderPage.requestedUsers
   );
-  const isFailed = useAppSelector((state) => state.usersPage.isFailed);
+  const isFailed = useAppSelector((state) => state.tinderPage.isFailed);
 
   const [isFullPreview, setIsFullPreview] = useState(false);
 

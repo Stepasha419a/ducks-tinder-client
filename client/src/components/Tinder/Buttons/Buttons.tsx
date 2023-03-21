@@ -12,7 +12,7 @@ import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '../../../redux/users/users.thunks';
+} from '../../../redux/tinder/tinder.thunks';
 import { Button } from '../../ui';
 import styles from './Buttons.module.scss';
 
@@ -27,7 +27,7 @@ const Buttons: React.FC<ButtonsProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const isReturnUser = useAppSelector((state) => state.usersPage.isReturnUser);
+  const isReturnUser = useAppSelector((state) => state.tinderPage.isReturnUser);
 
   const btnFocus = (e: FocusEvent<HTMLButtonElement, any>) => {
     const target = e.target as Element;
