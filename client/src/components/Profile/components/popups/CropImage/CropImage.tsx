@@ -2,7 +2,10 @@ import { FC, useState } from 'react';
 import Cropper from 'react-easy-crop';
 import { PicturesVariants, User } from '../../../../../models/User/User';
 import { Button, Popup, RangeInput } from '../../../../ui';
-import getCroppedImg, { PixelCrop } from './cropImageScript';
+import getCroppedImg, {
+  PixelCrop,
+  ReturnGetCroppedImg,
+} from './cropImageScript';
 import styles from './CropImage.module.scss';
 import { saveUserImage } from '../../../../../redux/users/users.thunks';
 import { useAppDispatch } from '../../../../../hooks';
@@ -10,17 +13,17 @@ import { useAppDispatch } from '../../../../../hooks';
 interface CropImageProps {
   currentUser: User;
   setIsImageCropOpen: (setting: boolean) => void;
-  imageURL: any;
-  currentImageCrop: PicturesVariants | '';
-  setCurrentImageCrop: (setting: PicturesVariants | '') => void;
+  imageURL: string;
+  setting: PicturesVariants | '';
+  setSetting: (setting: PicturesVariants | '') => void;
 }
 
 export const CropImage: FC<CropImageProps> = ({
   setIsImageCropOpen,
   imageURL,
   currentUser,
-  currentImageCrop,
-  setCurrentImageCrop,
+  setting,
+  setSetting,
 }) => {
   const dispatch = useAppDispatch();
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -30,23 +33,30 @@ export const CropImage: FC<CropImageProps> = ({
     null
   );
 
-  const cropComplete = (croppedArea: any, croppedAreaPixels: any) => {
+  const cropComplete = (
+    croppedArea: PixelCrop,
+    croppedAreaPixels: PixelCrop
+  ) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
-  const cropImage = async (
-    userId: string,
-    setting: PicturesVariants | ''
-  ) => {
+  const cropImage = async (userId: string, setting: PicturesVariants | '') => {
     try {
-      const { picture }: any = await getCroppedImg(
+      const croppedImageData: ReturnGetCroppedImg | null = await getCroppedImg(
         imageURL,
         croppedAreaPixels!,
         rotation
       );
-      setting && dispatch(saveUserImage({ picture, userId, setting } as any));
+      setting &&
+        dispatch(
+          saveUserImage({
+            picture: croppedImageData!.picture,
+            userId,
+            setting,
+          })
+        );
       setIsImageCropOpen(false);
-      setCurrentImageCrop('');
+      setSetting('');
     } catch (error) {
       console.log(error);
     }
@@ -59,29 +69,26 @@ export const CropImage: FC<CropImageProps> = ({
       closeHandler={() => setIsImageCropOpen(false)}
     >
       <div className={styles.container}>
-        <div className={styles.image}>
-          <Cropper
-            image={imageURL}
-            crop={crop}
-            zoom={zoom}
-            rotation={rotation}
-            aspect={3 / 4}
-            onCropChange={setCrop}
-            onZoomChange={setZoom}
-            onRotationChange={setRotation}
-            onCropComplete={cropComplete}
-          />
-        </div>
+        <Cropper
+          image={imageURL}
+          crop={crop}
+          zoom={zoom}
+          rotation={rotation}
+          aspect={3 / 4}
+          onCropChange={setCrop}
+          onZoomChange={setZoom}
+          onRotationChange={setRotation}
+          onCropComplete={cropComplete}
+          classes={{ containerClassName: styles.cropper }}
+        />
         <div className={styles.wrapper}>
-          <div className={styles.input}>
-            <RangeInput
-              value={{ value: zoom }}
-              setValue={(value) => setZoom(value.value!)}
-              min={1.1}
-              max={3}
-              step={0.01}
-            />
-          </div>
+          <RangeInput
+            value={{ value: zoom }}
+            setValue={(value) => setZoom(value.value!)}
+            min={1.1}
+            max={3}
+            step={0.01}
+          />
         </div>
         <div className={styles.btns}>
           <Button
@@ -91,7 +98,7 @@ export const CropImage: FC<CropImageProps> = ({
             Cancel
           </Button>
           <Button
-            onClick={() => cropImage(currentUser._id, currentImageCrop)}
+            onClick={() => cropImage(currentUser._id, setting)}
             extraClassName={[styles.btn, styles.select]}
           >
             Select

@@ -5,6 +5,11 @@ export interface PixelCrop {
   height: number;
 }
 
+export interface ReturnGetCroppedImg {
+  picture: Blob,
+  url: string
+}
+
 export const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image();
@@ -40,7 +45,7 @@ export default async function getCroppedImg(
   pixelCrop: PixelCrop,
   rotation = 0,
   flip = { horizontal: false, vertical: false }
-) {
+): Promise<ReturnGetCroppedImg | null> {
   const image = await createImage(imageSrc);
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
@@ -95,7 +100,7 @@ export default async function getCroppedImg(
     canvas.toBlob((file: Blob | null) => {
       Object.assign(file!, { name: 'cropped.jpeg' });
       resolve({
-        picture: file,
+        picture: file!,
         url: URL.createObjectURL(file!),
       });
     }, 'image/jpeg');

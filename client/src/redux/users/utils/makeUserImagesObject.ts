@@ -1,13 +1,9 @@
-import { ImageInterface, User } from '../../../models/User/User';
+import { ImageInterface } from '../../../models/User/User';
 
-export function makeUserImagesObject(args: {
-  currentUser: User;
-  images: ImageInterface[];
-}) {
-  const { images } = args;
-  const parsedImages = images.map((image) => image.image);
+export function makeUserImagesObject(images: ImageInterface[]) {
+  const imagesUrl = images.map((image) => image.image);
 
   return {
-    pictures: { avatar: parsedImages[0], gallery: parsedImages.slice(1) },
+    pictures: { avatar: imagesUrl[0], gallery: imagesUrl.slice(1) },
   };
 }

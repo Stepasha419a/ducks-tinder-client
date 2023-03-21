@@ -1,7 +1,7 @@
 .container {
   padding: 24px;
 
-  .image {
+  .cropper {
     width: 392px;
     height: 430px;
     position: relative;
@@ -9,10 +9,7 @@
 
   .wrapper {
     margin-top: 15px;
-
-    .input {
-      padding: 10px 40px;
-    }
+    padding: 10px 40px;
   }
 
   .btns {

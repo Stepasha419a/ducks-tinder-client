@@ -1,8 +1,7 @@
 export interface ImageInterface {
   id: number;
-  order: number;
   image: string;
-  setting: string;
+  setting: PicturesVariants;
 }
 
 export interface PreferAge {
@@ -18,7 +17,7 @@ export interface PartnerSettings {
   age: PreferAge;
 }
 
-interface PicturesInterface {
+export interface PicturesInterface {
   avatar: string;
   gallery: string[];
 }

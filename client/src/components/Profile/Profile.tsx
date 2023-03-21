@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { UserImage } from './components';
-import { ImageSetting } from './components/ImageSetting/ImageSetting';
+import { ImageSetting, UserImage } from './components';
 import styles from './Profile.module.scss';
 
 export const Profile = () => {

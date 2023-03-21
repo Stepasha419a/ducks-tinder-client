@@ -1,0 +1,10 @@
+.images {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 8px 4px;
+
+  .lowOpacity {
+    opacity: 0.5;
+  }
+}
