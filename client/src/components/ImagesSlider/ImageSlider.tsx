@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useState } from 'react';
 import { PicturesEnum } from '../../models/User/User';
-import { makeImageUrl } from '../ui/helpers';
+import { makeImageUrl } from '../../shared/helpers';
 import Arrows from './Arrows/Arrows';
 import styles from './ImageSlider.module.scss';
 import Stripes from './Stripes/Stripes';

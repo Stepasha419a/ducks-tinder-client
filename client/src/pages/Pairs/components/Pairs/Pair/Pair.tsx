@@ -1,7 +1,7 @@
 import { User } from '../../../../../models/User/User';
 import styles from './Pair.module.scss';
-import { makeImageUrl } from '../../../../../components/ui/helpers';
 import PairPopup from '../../../popups/Pair/PairPopup';
+import { makeImageUrl } from '../../../../../shared/helpers';
 
 interface PairPropsInterface {
   user: User;

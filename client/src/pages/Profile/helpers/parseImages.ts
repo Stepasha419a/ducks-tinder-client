@@ -1,4 +1,8 @@
-import { ImageInterface, PicturesEnum, PicturesInterface } from '../../../models/User/User';
+import {
+  ImageInterface,
+  PicturesEnum,
+  PicturesInterface,
+} from '../../../models/User/User';
 
 export function parseImages(pictures: PicturesInterface): ImageInterface[] {
   return Object.values(pictures).reduce(

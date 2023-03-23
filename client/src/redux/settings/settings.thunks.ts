@@ -2,11 +2,7 @@ import { updateUserThunk } from './../users/users.thunks';
 import { RootState } from './../store';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import {
-  ChangedData,
-  InnerObjectName,
-  SettingInputName,
-} from './settings.interfaces';
+import { ChangedData, InnerObjectName, SettingInputName } from '../../models/User/User';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',

@@ -1,11 +1,7 @@
 import { User } from '../../../models/User/User';
-import { ErrorField } from '../settings.interfaces';
+import { ErrorField } from '../../../shared/interfaces';
 
-const potentialFields: ErrorField[] = [
-  'description',
-  'interests',
-  'place',
-];
+const potentialFields: ErrorField[] = ['description', 'interests', 'place'];
 
 function checkField(user: User, field: ErrorField) {
   switch (field) {

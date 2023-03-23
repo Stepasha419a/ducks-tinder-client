@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Notification } from '../../models/Notification/Notification';
+import { Notification } from '../../shared/interfaces';
 
 interface InitialState {
   notifications: Notification[];

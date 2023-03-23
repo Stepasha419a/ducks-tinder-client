@@ -1,11 +1,11 @@
-import { RangeValue } from '../inputs/Range';
+import { RangeValue } from './../RangeInput.types';
 
-export const makeRangeStyles = (
+export function makeRangeStyles(
   isMultiple: boolean,
   min: number,
   max: number,
   value: RangeValue
-) => {
+) {
   if (isMultiple) {
     return {
       '--min': min,
@@ -22,4 +22,4 @@ export const makeRangeStyles = (
     '--value-a': value.value,
     '--suffix': '%',
   };
-};
+}

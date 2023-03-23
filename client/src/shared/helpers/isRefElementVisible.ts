@@ -1,6 +1,6 @@
-export const isRefElementVisible = (
+export function isRefElementVisible(
   ref: React.MutableRefObject<HTMLDivElement | null>
-) => {
+) {
   const rect = ref.current?.lastElementChild?.getBoundingClientRect();
   if (rect) {
     return (
@@ -11,4 +11,4 @@ export const isRefElementVisible = (
       rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
   }
-};
+}

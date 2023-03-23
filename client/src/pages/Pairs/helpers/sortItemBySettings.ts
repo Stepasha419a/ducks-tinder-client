@@ -1,7 +1,6 @@
-import { PairSorts } from '../interfaces/PairSorts';
-import { User } from '../../../models/User/User';
+import { PairSorts, User } from '../../../models/User/User';
 
-export const sortItemBySettings = (item: User, sortSettings: PairSorts) => {
+export function sortItemBySettings(item: User, sortSettings: PairSorts) {
   for (const sortKey in sortSettings) {
     let result = sortPair(item, sortKey, sortSettings);
     if (!result) {
@@ -9,9 +8,9 @@ export const sortItemBySettings = (item: User, sortSettings: PairSorts) => {
     }
   }
   return true;
-};
+}
 
-const sortPair = (item: User, sortKey: string, sortSettings: PairSorts) => {
+function sortPair(item: User, sortKey: string, sortSettings: PairSorts) {
   switch (sortKey) {
     case 'distance':
       if (item.partnerSettings.distance > sortSettings.distance) {
@@ -47,4 +46,4 @@ const sortPair = (item: User, sortKey: string, sortSettings: PairSorts) => {
       }
       return true;
   }
-};
+}

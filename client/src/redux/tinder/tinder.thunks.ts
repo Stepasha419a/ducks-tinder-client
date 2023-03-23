@@ -2,9 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
 import { User } from '../../models/User/User';
+import { makeDataObject } from '../../shared/helpers';
 import { RootState } from '../store';
-import { makeDataObject } from '../users/utils';
-import { makeQuerySortsObj } from './utils';
+import { makeQuerySortsObj } from './helpers';
 
 export const getSortedUserThunk = createAsyncThunk(
   'users/getSortedUser',

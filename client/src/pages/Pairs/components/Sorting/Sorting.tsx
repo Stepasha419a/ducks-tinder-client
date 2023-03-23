@@ -6,9 +6,11 @@ import { useController, useForm } from 'react-hook-form';
 import { InterestsSettingPopup } from '../../../../components/popups';
 import PairsSettingsPopup from '../../popups/PairsSettings/PairsSettingsPopup';
 import styles from './Sorting.module.scss';
-import { PairSorts } from '../../interfaces';
-import { INITIAL_SORTS } from '../../constants';
-import { INTERESTS_FOR_LOOP } from '../../../../models/User/constants';
+import {
+  INITIAL_SORTS,
+  INTERESTS_FOR_LOOP,
+} from '../../../../shared/constants';
+import { PairSorts } from '../../../../models/User/User';
 
 interface SortingProps {
   setSorts: (sorts: PairSorts) => void;

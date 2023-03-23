@@ -1,13 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { InnerObjectName, SettingInputName } from '../../models/User/User';
+import { ErrorField, Setting, Validation } from '../../shared/interfaces';
+import { checkUserFields } from './helpers';
 import { submitSettingsThunk } from './settings.thunks';
-import { checkUserFields } from './utils';
-import {
-  ErrorField,
-  InnerObjectName,
-  Setting,
-  SettingInputName,
-  Validation,
-} from './settings.interfaces';
 
 interface InitialState {
   setting: Setting;

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import { makeImageUrl } from '../helpers';
 import { AvatarProps } from './Avatar.types';
 import styles from './Avatar.module.scss';
+import { makeImageUrl } from '../../../shared/helpers';
 
 export const Avatar: React.FC<AvatarProps> = ({
   size = 's',
@@ -20,7 +20,7 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   return (
     <div className={cnContainer}>
-      <img draggable='false' className={cn} src={imageUrl} alt="avatar" />
+      <img draggable="false" className={cn} src={imageUrl} alt="avatar" />
     </div>
   );
 };

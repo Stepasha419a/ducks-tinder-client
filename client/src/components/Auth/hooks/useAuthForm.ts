@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { loginThunk, registerThunk } from '../../../redux/auth/auth.thunks';
-import { EMAIL_REGEXP } from '../constants';
+import { EMAIL_REGEXP } from '../../../shared/constants';
 
 export interface AuthFieldValues {
   email: string;

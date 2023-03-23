@@ -7,8 +7,8 @@ import {
   ChangedData,
   InnerObjectName,
   SettingInputName,
-  Validation,
-} from '../../../../../redux/settings/settings.interfaces';
+} from '../../../../../models/User/User';
+import { Validation } from '../../../../../shared/interfaces';
 import { CheckboxInput, RangeInput } from '../../../../ui';
 import styles from '../SettingsList.module.scss';
 

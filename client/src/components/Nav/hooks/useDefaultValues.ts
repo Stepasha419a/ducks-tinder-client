@@ -2,7 +2,7 @@ import { useAppSelector } from '../../../hooks';
 import {
   ChangablePartnerSettingsFields,
   ChangableUserFields,
-} from '../../../redux/settings/settings.interfaces';
+} from '../../../shared/interfaces';
 
 export function useDefaultValues(): string | string[] {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);

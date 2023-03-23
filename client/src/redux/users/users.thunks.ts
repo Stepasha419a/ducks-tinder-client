@@ -1,5 +1,7 @@
 import {
+  ChangedData,
   ImageInterface,
+  InnerObjectName,
   PartnerSettings,
   PicturesVariants,
 } from '../../models/User/User';
@@ -8,8 +10,8 @@ import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
 import { User } from '../../models/User/User';
 import { RootState } from '../store';
-import { ChangedData, InnerObjectName } from '../settings/settings.interfaces';
-import { makeDataObject, makeUserImagesObject } from './utils';
+import { makeUserImagesObject } from './helpers';
+import { makeDataObject } from '../../shared/helpers/makeDataObject';
 
 export async function fetchUserById(id: string) {
   const response = await usersAPI.getCurrentUser(id);

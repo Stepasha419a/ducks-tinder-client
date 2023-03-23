@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { Control, useController, UseFormReset } from 'react-hook-form';
-import { PairSorts } from '../../interfaces/PairSorts';
 import { Button, CheckboxInput, Popup, RangeInput } from '../../../../components/ui';
 import styles from './PairsSettingsPopup.module.scss';
-import { INTERESTS_FOR_LOOP } from '../../../../models/User/constants';
+import { INTERESTS_FOR_LOOP } from '../../../../shared/constants';
+import { PairSorts } from '../../../../models/User/User';
 
 interface PairsSettingsPopupProps {
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
+import { PairSorts } from '../../models/User/User';
+import { INITIAL_SORTS } from '../../shared/constants';
 import { Likes, Pairs, Sorting } from './components';
-import { INITIAL_SORTS } from './constants';
-import { PairSorts } from './interfaces';
 
 export const PairsPage = () => {
   const [sorts, setSorts] = useState<PairSorts>(INITIAL_SORTS);

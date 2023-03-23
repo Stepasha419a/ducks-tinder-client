@@ -1,12 +1,11 @@
 import { useAppSelector } from '../../../../hooks';
 import { FC, useState } from 'react';
 import styles from './Pairs.module.scss';
-import { User } from '../../../../models/User/User';
+import { PairSorts, User } from '../../../../models/User/User';
 import Pair from './Pair/Pair';
-import { sortItemBySettings } from '../../utils/PairsUtils';
-import { PairSorts } from '../../interfaces/PairSorts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { sortItemBySettings } from '../../helpers';
 
 interface PairsProps {
   sorts: PairSorts;

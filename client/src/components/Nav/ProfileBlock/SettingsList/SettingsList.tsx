@@ -1,14 +1,10 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { ChangedData, InnerObjectName, SettingInputName } from '../../../../models/User/User';
 import { createNotification } from '../../../../redux/notifications/notifications.slice';
-import {
-  ChangedData,
-  InnerObjectName,
-  SettingInputName,
-  Validation,
-} from '../../../../redux/settings/settings.interfaces';
 import { setInput } from '../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../redux/settings/settings.thunks';
+import { Validation } from '../../../../shared/interfaces';
 import {
   Account,
   Find,

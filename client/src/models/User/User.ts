@@ -1,12 +1,9 @@
+import { Range } from '../../shared/interfaces';
+
 export interface ImageInterface {
   id: number;
   image: string;
   setting: PicturesVariants;
-}
-
-export interface PreferAge {
-  from: number;
-  to: number;
 }
 
 export interface PartnerSettings {
@@ -14,7 +11,7 @@ export interface PartnerSettings {
   distance: number;
   usersOnlyInDistance: boolean;
   preferSex: 'male' | 'female';
-  age: PreferAge;
+  age: Range;
 }
 
 export interface PicturesInterface {
@@ -73,11 +70,19 @@ export interface UserUnrequired {
   checkedUsers?: string[];
 }
 
+export interface PairSorts {
+  distance: number;
+  age: Range;
+  photos: number;
+  interests: string[];
+  account: string[];
+}
+
 export interface QuerySorts {
   distance: number;
   onlyNear: boolean;
   age: number;
-  preferAge: PreferAge;
+  preferAge: Range;
   sex: 'male' | 'female';
   preferSex: 'male' | 'female';
   userIds?: string[];
@@ -87,3 +92,8 @@ export interface InterestItem {
   name: string;
   id: string;
 }
+
+export type ChangedData = string | number | boolean | string[] | Range;
+
+export type InnerObjectName = 'partnerSettings' | null;
+export type SettingInputName = keyof User | keyof PartnerSettings | null;

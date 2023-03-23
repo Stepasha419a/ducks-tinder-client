@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
-import { makeRangeStyles } from '../../helpers';
+import { makeRangeStyles } from './helpers';
 import styles from './RangeInput.module.scss';
 import { RangeInputProps } from './RangeInput.types';
 import MultiRangeInput from './variants/MultiRangeInput';
@@ -31,8 +31,8 @@ export const RangeInput: FC<RangeInputProps> = ({
   };
 
   const handleChange = (value: number) => {
-    setValue({value});
-  }
+    setValue({ value });
+  };
 
   const checkIsMultiple = isMultiple && value.min && value.max;
 

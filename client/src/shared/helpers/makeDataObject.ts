@@ -1,8 +1,9 @@
-import { User, PartnerSettings } from '../../../models/User/User';
 import {
+  User,
+  PartnerSettings,
   ChangedData,
   InnerObjectName,
-} from '../../settings/settings.interfaces';
+} from '../../models/User/User';
 
 export function makeDataObject(args: {
   currentUser: User | any;

@@ -1,4 +1,4 @@
-import { PairSorts } from "../interfaces";
+import { PairSorts } from '../../models/User/User';
 
 export const INITIAL_SORTS: PairSorts = {
   distance: 100,

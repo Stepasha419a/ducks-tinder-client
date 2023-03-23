@@ -1,7 +1,7 @@
 import { RegisterOptions } from 'react-hook-form';
 import { useAppSelector } from '../../../hooks';
-import { Validation } from '../../../redux/settings/settings.interfaces';
-import { EMAIL_REGEXP } from '../../Auth/constants';
+import { EMAIL_REGEXP } from '../../../shared/constants';
+import { Validation } from '../../../shared/interfaces';
 import { SettingFieldValues } from '../interfaces';
 
 export function useCurrentValidation():

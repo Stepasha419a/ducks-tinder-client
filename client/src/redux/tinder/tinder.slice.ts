@@ -46,16 +46,13 @@ const tinderSlice = createSlice({
         state.isFailed = true;
       })
       .addCase(likeUserThunk.fulfilled, (state) => {
-        //state.currentUser = payload;
         state.currentTinderUsersIndex++;
       })
       .addCase(returnUserThunk.fulfilled, (state) => {
-        //state.currentUser = payload;
         state.currentTinderUsersIndex--;
         state.isReturnUser = false;
       })
       .addCase(dislikeUserThunk.fulfilled, (state) => {
-        //state.currentUser = payload;
         state.currentTinderUsersIndex++;
         state.isReturnUser = true;
       });
