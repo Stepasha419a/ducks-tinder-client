@@ -4,7 +4,7 @@ import styles from './Pairs.module.scss';
 import { User } from '../../../../models/User/User';
 import Pair from './Pair/Pair';
 import { sortItemBySettings } from '../../utils/PairsUtils';
-import { PairSorts } from '../../../../models/Sorts/Sorts';
+import { PairSorts } from '../../interfaces/PairSorts';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 

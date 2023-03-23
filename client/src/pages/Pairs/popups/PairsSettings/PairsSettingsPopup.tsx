@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { Control, useController, UseFormReset } from 'react-hook-form';
-import { PairSorts } from '../../../../models/Sorts/Sorts';
-import { interestsForLoop } from '../../../../models/User/User';
+import { PairSorts } from '../../interfaces/PairSorts';
 import { Button, CheckboxInput, Popup, RangeInput } from '../../../../components/ui';
 import styles from './PairsSettingsPopup.module.scss';
+import { INTERESTS_FOR_LOOP } from '../../../../models/User/constants';
 
 interface PairsSettingsPopupProps {
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
@@ -97,7 +97,7 @@ const PairsSettingsPopup: React.FC<PairsSettingsPopupProps> = ({
         <div className={styles.setting}>
           <div className={styles.name}>Interests</div>
           <div className={`${styles.change} ${styles.flex}`}>
-            {interestsForLoop.slice(0, 3).map((item) => {
+            {INTERESTS_FOR_LOOP.slice(0, 3).map((item) => {
               const cnItem = classNames(
                 styles.item,
                 interests.includes(item) && styles.active

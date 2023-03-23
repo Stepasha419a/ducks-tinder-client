@@ -49,7 +49,7 @@ export const Preview: React.FC<PreviewPropsInterface> = ({
           userId={user._id}
           extraClassName={styles.image}
           extraWrapperClassName={classNames(isShadow && styles.wrapper)}
-          arrowsExtraClassName={styles.arrows}
+          arrowsExtraClassName={classNames(isShadow && styles.arrows)}
         />
         {isFull && isSetIsFullPreview && (
           <Button

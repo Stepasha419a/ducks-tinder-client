@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { interestsList } from '../../../models/User/User';
+import { INTERESTS_LIST } from '../../../models/User/constants';
 import { Button, Popup } from '../../ui';
 import styles from './InterestsSettingPopup.module.scss';
 
@@ -20,7 +20,7 @@ export const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
       closeHandler={() => setIsInterestsSettingPopupOpen(false)}
     >
       <div className={styles.items}>
-        {interestsList.map((interest) => {
+        {INTERESTS_LIST.map((interest) => {
           const includedItem = pairInterests.some((item) => item === interest);
           const cnItem = classNames(styles.item, includedItem && styles.active);
           return (

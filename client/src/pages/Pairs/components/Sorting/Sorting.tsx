@@ -3,11 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
-import { initialSorts, PairSorts } from '../../../../models/Sorts/Sorts';
-import { interestsForLoop } from '../../../../models/User/User';
 import { InterestsSettingPopup } from '../../../../components/popups';
 import PairsSettingsPopup from '../../popups/PairsSettings/PairsSettingsPopup';
 import styles from './Sorting.module.scss';
+import { PairSorts } from '../../interfaces';
+import { INITIAL_SORTS } from '../../constants';
+import { INTERESTS_FOR_LOOP } from '../../../../models/User/constants';
 
 interface SortingProps {
   setSorts: (sorts: PairSorts) => void;
@@ -19,7 +20,7 @@ export const Sorting: FC<SortingProps> = ({ setSorts }) => {
     useState(false);
 
   const { control, handleSubmit, reset } = useForm<PairSorts>({
-    defaultValues: { ...initialSorts },
+    defaultValues: { ...INITIAL_SORTS },
   });
 
   const {
@@ -79,7 +80,7 @@ export const Sorting: FC<SortingProps> = ({ setSorts }) => {
         <div onClick={() => setIsSortPopupOpen(true)} className={cnPopupBtn}>
           <FontAwesomeIcon className={styles.icon} icon={faSliders} />
         </div>
-        {interestsForLoop.map((item) => {
+        {INTERESTS_FOR_LOOP.map((item) => {
           const cnItem = classNames(
             styles.sort,
             interests.includes(item) && styles.active

@@ -1,4 +1,4 @@
-import { PairSorts } from '../../../models/Sorts/Sorts';
+import { PairSorts } from '../interfaces/PairSorts';
 import { User } from '../../../models/User/User';
 
 export const sortItemBySettings = (item: User, sortSettings: PairSorts) => {
