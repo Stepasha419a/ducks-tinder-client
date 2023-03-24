@@ -1,6 +1,6 @@
 import { Preview } from '../../../../components/Preview/Preview';
-import { Button } from '../../../../components/ui';
 import { useAppSelector } from '../../../../hooks';
+import { Button } from '../../../../shared/ui';
 import styles from './UserImage.module.scss';
 
 interface UserImageProps {

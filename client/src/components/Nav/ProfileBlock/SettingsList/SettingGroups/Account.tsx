@@ -5,7 +5,7 @@ import { FC, useState } from 'react';
 import { useAppSelector } from '../../../../../hooks';
 import { ChangedData, InnerObjectName, SettingInputName } from '../../../../../models/User/User';
 import { Validation } from '../../../../../shared/interfaces';
-import { RangeInput } from '../../../../ui';
+import { RangeInput } from '../../../../../shared/ui';
 import styles from '../SettingsList.module.scss';
 
 interface AccoutProps {

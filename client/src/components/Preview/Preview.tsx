@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { User } from '../../models/User/User';
 import { ImageSlider } from '../ImagesSlider/ImageSlider';
-import { Button } from '../ui';
+import { Button } from '../../shared/ui';
 import { useState } from 'react';
 import styles from './Preview.module.scss';
 import { InterestsListPopup } from '../popups';

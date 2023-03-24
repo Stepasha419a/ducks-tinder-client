@@ -8,7 +8,7 @@ import getCroppedImg, {
 import styles from './CropImage.module.scss';
 import { saveUserImage } from '../../../../../redux/users/users.thunks';
 import { useAppDispatch } from '../../../../../hooks';
-import { Button, Popup, RangeInput } from '../../../../../components/ui';
+import { Button, Popup, RangeInput } from '../../../../../shared/ui';
 
 interface CropImageProps {
   currentUser: User;

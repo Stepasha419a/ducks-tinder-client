@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import styles from '../AuthForm.module.scss';
 import AuthLayout from '../../AuthLayout/AuthLayout';
-import { Button, TextField } from '../../../ui';
+import { Button, TextField } from '../../../../shared/ui';
 import { useAuthForm } from '../../hooks';
 
 export const RegistrationForm = () => {

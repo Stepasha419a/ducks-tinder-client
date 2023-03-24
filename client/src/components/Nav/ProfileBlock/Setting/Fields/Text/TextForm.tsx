@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
 import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
-import { TextField } from '../../../../../ui';
+import { TextField } from '../../../../../../shared/ui';
 import { useCurrentValidation, useDefaultValues } from '../../../../hooks';
 import { SettingFieldValues } from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';

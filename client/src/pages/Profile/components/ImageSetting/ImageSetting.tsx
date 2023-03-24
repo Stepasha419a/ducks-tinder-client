@@ -4,7 +4,7 @@ import { ImagesForm } from './ImagesForm/ImagesForm';
 import styles from './ImageSetting.module.scss';
 import classNames from 'classnames';
 import { Preview } from '../../../../components/Preview/Preview';
-import { Button } from '../../../../components/ui';
+import { Button } from '../../../../shared/ui';
 
 interface ImageSettingProps {
   setIsImageSetting: (isImageSetting: boolean) => void;

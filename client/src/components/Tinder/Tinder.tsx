@@ -4,7 +4,7 @@ import TinderUserLoading from './UserLoading/Loading/Loading';
 import TinderUserFailed from './UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
 import Instructions from './Instructions/Instructions';
-import { Button } from '../ui';
+import { Button } from '../../shared/ui';
 import { updateUserThunk } from '../../redux/users/users.thunks';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Preview } from '../Preview/Preview';

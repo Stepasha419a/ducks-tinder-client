@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { deleteNotification } from '../../redux/notifications/notifications.slice';
-import { Notification } from '../ui';
+import { Notification } from '../../shared/ui';
 import styles from './Notifications.module.scss';
 
 export const Notifications = () => {

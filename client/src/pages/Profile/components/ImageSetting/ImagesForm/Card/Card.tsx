@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Card.module.scss';
 import { FC, HTMLAttributes } from 'react';
 import classNames from 'classnames';
-import { Button } from '../../../../../../components/ui';
+import { Button } from '../../../../../../shared/ui';
 
 interface CardProps extends HTMLAttributes<HTMLImageElement> {
   src?: string;

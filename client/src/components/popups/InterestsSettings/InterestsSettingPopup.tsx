@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { INTERESTS_LIST } from '../../../shared/constants';
-import { Button, Popup } from '../../ui';
+import { Button, Popup } from '../../../shared/ui';
 import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {

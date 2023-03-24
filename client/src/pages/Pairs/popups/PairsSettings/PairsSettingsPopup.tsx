@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Control, useController, UseFormReset } from 'react-hook-form';
-import { Button, CheckboxInput, Popup, RangeInput } from '../../../../components/ui';
+import { Button, CheckboxInput, Popup, RangeInput } from '../../../../shared/ui';
 import styles from './PairsSettingsPopup.module.scss';
 import { INTERESTS_FOR_LOOP } from '../../../../shared/constants';
 import { PairSorts } from '../../../../models/User/User';

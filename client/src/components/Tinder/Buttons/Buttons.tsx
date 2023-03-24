@@ -13,7 +13,7 @@ import {
   likeUserThunk,
   returnUserThunk,
 } from '../../../redux/tinder/tinder.thunks';
-import { Button } from '../../ui';
+import { Button } from '../../../shared/ui';
 import styles from './Buttons.module.scss';
 
 interface ButtonsProps {

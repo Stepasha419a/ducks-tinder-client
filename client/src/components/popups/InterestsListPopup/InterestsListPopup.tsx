@@ -1,4 +1,4 @@
-import { Button, Popup } from '../../ui';
+import { Button, Popup } from '../../../shared/ui';
 import styles from './InterestsListPopup.module.scss';
 
 interface InterestsListPopupProps {

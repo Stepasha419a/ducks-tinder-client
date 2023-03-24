@@ -1,4 +1,4 @@
-import { Popup } from '../../../../../components/ui';
+import { Popup } from '../../../../../shared/ui';
 import styles from './DialogUpload.module.scss';
 
 interface DialogUploadProps {

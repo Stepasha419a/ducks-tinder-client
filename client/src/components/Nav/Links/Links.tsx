@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
-import { Avatar } from '../../ui';
+import { Avatar } from '../../../shared/ui';
 import styles from './Links.module.scss';
 
 interface LinksProps {

@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
-import { Textarea } from '../../../../../ui';
+import { Textarea } from '../../../../../../shared/ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './TextareaForm.module.scss';
 import { useCurrentValidation, useDefaultValues } from '../../../../hooks';

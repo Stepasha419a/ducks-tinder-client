@@ -5,7 +5,7 @@ import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
 import { InterestsListPopup } from '../../../../components/popups';
 import { Preview } from '../../../../components/Preview/Preview';
-import { Button, Popup } from '../../../../components/ui';
+import { Button, Popup } from '../../../../shared/ui';
 import styles from './PairPopup.module.scss';
 
 interface PairPopupProps {

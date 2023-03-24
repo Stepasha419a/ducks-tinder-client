@@ -9,7 +9,7 @@ import {
   SettingInputName,
 } from '../../../../../models/User/User';
 import { Validation } from '../../../../../shared/interfaces';
-import { CheckboxInput, RangeInput } from '../../../../ui';
+import { CheckboxInput, RangeInput } from '../../../../../shared/ui';
 import styles from '../SettingsList.module.scss';
 
 interface FindProps {

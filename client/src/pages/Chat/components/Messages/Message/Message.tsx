@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Avatar } from '../../../../../components/ui';
+import { Avatar } from '../../../../../shared/ui';
 import { Message as MessageType } from '../../../../../models/Chat/Chat';
 import styles from './Message.module.scss';
 
