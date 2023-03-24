@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { Button } from '../../../shared/ui';
+import { Button } from '../../../../shared/ui';
 import styles from './Instructions.module.scss';
 
 const Instructions = () => {

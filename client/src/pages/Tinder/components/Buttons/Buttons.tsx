@@ -7,13 +7,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FocusEvent, MouseEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '../../../redux/tinder/tinder.thunks';
-import { Button } from '../../../shared/ui';
+} from '../../../../redux/tinder/tinder.thunks';
+import { Button } from '../../../../shared/ui';
 import styles from './Buttons.module.scss';
 
 interface ButtonsProps {
@@ -29,12 +29,12 @@ const Buttons: React.FC<ButtonsProps> = ({
 
   const isReturnUser = useAppSelector((state) => state.tinderPage.isReturnUser);
 
-  const btnFocus = (e: FocusEvent<HTMLButtonElement, any>) => {
+  const btnFocus = (e: FocusEvent<HTMLButtonElement>) => {
     const target = e.target as Element;
     target.classList.add(styles.active);
   };
 
-  const btnMouseOut = (e: MouseEvent<HTMLButtonElement, any>) => {
+  const btnMouseOut = (e: MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLElement;
     target.classList.remove(styles.active);
     target.blur();

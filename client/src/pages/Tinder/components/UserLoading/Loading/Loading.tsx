@@ -1,4 +1,4 @@
-import Preloader from '../../../Preloader/Preloader'
+import Preloader from '../../../../../components/Preloader/Preloader'
 import styles from './Loading.module.scss'
 
 const TinderUserLoading = () => {

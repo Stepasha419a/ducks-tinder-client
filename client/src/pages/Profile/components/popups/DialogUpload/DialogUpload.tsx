@@ -1,8 +1,9 @@
+import { ChangeEvent } from 'react';
 import { Popup } from '../../../../../shared/ui';
 import styles from './DialogUpload.module.scss';
 
 interface DialogUploadProps {
-  onImageChange: (e: any) => void;
+  onImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
   setIsDialogUploadOpen: (setting: boolean) => void;
 }
 

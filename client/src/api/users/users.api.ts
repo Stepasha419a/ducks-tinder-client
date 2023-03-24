@@ -39,7 +39,7 @@ export const usersAPI = {
         return instance.put(`users/pairs`, {forUserId, userId})
             .then(res => res)
     },
-    savePicture(picture: any, userId: string, setting: PicturesVariants): Promise<AxiosResponse<User>> {
+    savePicture(picture: Blob, userId: string, setting: PicturesVariants): Promise<AxiosResponse<User>> {
         return instance.post(`users/picture`, {picture, userId, setting}, {
             headers: {
               'Content-Type': 'multipart/form-data'

@@ -1,4 +1,4 @@
-export { Tinder } from './Tinder/Tinder';
+export { Tinder } from '../pages/Tinder/Tinder';
 export { Notifications } from './Notifications/Notifications';
 export { Layout } from './Layout/Layout';
 export { Loading } from './Loading/Loading';

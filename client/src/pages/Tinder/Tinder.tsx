@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import Buttons from './Buttons/Buttons';
-import TinderUserLoading from './UserLoading/Loading/Loading';
-import TinderUserFailed from './UserLoading/Failed/Failed';
+import Buttons from './components/Buttons/Buttons';
+import TinderUserLoading from './components/UserLoading/Loading/Loading';
+import TinderUserFailed from './components/UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
-import Instructions from './Instructions/Instructions';
+import Instructions from './components/Instructions/Instructions';
 import { Button } from '../../shared/ui';
 import { updateUserThunk } from '../../redux/users/users.thunks';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { Preview } from '../Preview/Preview';
+import { Preview } from '../../components/Preview/Preview';
 import { getSortedUserThunk } from '../../redux/tinder/tinder.thunks';
 import { setRequestedUsers } from '../../redux/tinder/tinder.slice';
 

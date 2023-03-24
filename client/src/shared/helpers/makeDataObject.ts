@@ -6,7 +6,7 @@ import {
 } from '../../models/User/User';
 
 export function makeDataObject(args: {
-  currentUser: User | any;
+  currentUser: User;
   inputName: string;
   changedData: ChangedData;
   innerObjectName?: InnerObjectName;
