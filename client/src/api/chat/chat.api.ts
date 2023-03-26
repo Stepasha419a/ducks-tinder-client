@@ -1,18 +1,15 @@
-import { AxiosResponse } from "axios";
-import { Chat } from "../../models/Chat/Chat";
-import { instance } from "../api";
+import { AxiosResponse } from 'axios';
+import { Chat } from '../../models/Chat/Chat';
+import { instance } from '../api';
 
 export const chatApi = {
-    getChats(id: string): Promise<AxiosResponse<Chat[]>> {
-        return instance.get(`chat/${id}`)
-            .then(res => res)
-    },
-    getChat(id: string): Promise<AxiosResponse<Chat>> {
-        return instance.get(`chat/one/${id}`)
-            .then(res => res)
-    },
-    createChat(ids: string[]): Promise<AxiosResponse<string[]>> {
-        return instance.post(`chat/`, ids)
-            .then(res => res)
-    }
-}
+  async getChats(id: string): Promise<AxiosResponse<Chat[]>> {
+    return instance.get(`chat/${id}`);
+  },
+  async getChat(id: string): Promise<AxiosResponse<Chat>> {
+    return instance.get(`chat/one/${id}`);
+  },
+  async createChat(ids: string[]): Promise<AxiosResponse<string[]>> {
+    return instance.post(`chat/`, ids);
+  },
+};
