@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -57,7 +56,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
           filename: `assets/images/[name].[hash][ext]`,
@@ -69,10 +68,6 @@ module.exports = {
         generator: {
           filename: 'assets/fonts/[name][ext]',
         },
-      },
-      {
-        test: /\.svg$/i,
-        type: 'asset',
       },
       {
         test: /.tsx?$/i,
@@ -95,7 +90,6 @@ module.exports = {
       logo: './public/favicon.ico',
       manifest: './public/manifest.json',
     }),
-    new MiniCssExtractPlugin(),
     new ReactRefreshWebpackPlugin({
       overlay: false,
     }),
