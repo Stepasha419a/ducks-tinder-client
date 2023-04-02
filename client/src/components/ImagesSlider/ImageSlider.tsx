@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useState } from 'react';
-import { PicturesEnum } from '../../models/User/User';
+import { PicturesEnum } from '../../shared/api/interfaces';
 import { makeImageUrl } from '../../shared/helpers';
 import Arrows from './Arrows/Arrows';
 import styles from './ImageSlider.module.scss';

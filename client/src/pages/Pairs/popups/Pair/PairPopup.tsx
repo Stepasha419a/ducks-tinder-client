@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { User } from '../../../../models/User/User';
+import { User } from '../../../../shared/api/interfaces';
 import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
 import { InterestsListPopup } from '../../../../components/popups';

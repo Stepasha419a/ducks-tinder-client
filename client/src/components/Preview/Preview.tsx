@@ -6,7 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { User } from '../../models/User/User';
+import { User } from '../../shared/api/interfaces';
 import { ImageSlider } from '../ImagesSlider/ImageSlider';
 import { Button } from '../../shared/ui';
 import { useState } from 'react';

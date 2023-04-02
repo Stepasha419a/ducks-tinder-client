@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import Cropper from 'react-easy-crop';
-import { PicturesVariants, User } from '../../../../../models/User/User';
+import { PicturesVariants, User } from '../../../../../shared/api/interfaces';
 import getCroppedImg, {
   PixelCrop,
   ReturnGetCroppedImg,

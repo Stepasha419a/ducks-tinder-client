@@ -1,4 +1,4 @@
-import { PairSorts, User } from '../../../models/User/User';
+import { PairSorts, User } from '../../../shared/api/interfaces';
 
 export function sortItemBySettings(item: User, sortSettings: PairSorts) {
   for (const sortKey in sortSettings) {

@@ -1,5 +1,5 @@
 import { useState, FC, ChangeEvent } from 'react';
-import { PicturesVariants, User } from '../../../../../models/User/User';
+import { PicturesVariants, User } from '../../../../../shared/api/interfaces';
 import { DialogUpload } from '../../popups';
 import { CropImage } from '../../popups/CropImage/CropImage';
 import { UserImages } from './UserImages/UserImages';

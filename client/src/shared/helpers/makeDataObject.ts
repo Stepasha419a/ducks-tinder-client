@@ -3,7 +3,7 @@ import {
   PartnerSettings,
   ChangedData,
   InnerObjectName,
-} from '../../models/User/User';
+} from '../api/interfaces';
 
 export function makeDataObject(args: {
   currentUser: User;

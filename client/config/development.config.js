@@ -5,9 +5,9 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
+  target: 'web',
   stats: 'errors-warnings',
   mode: 'development',
-  bail: true,
   devtool: 'inline-source-map',
   entry: './src/index.tsx',
   output: {

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { Chat } from '../../models/Chat/Chat';
-import { instance } from '../api';
+import { instance } from '../../shared/api';
+import { Chat } from '../../shared/api/interfaces';
 
 export const chatApi = {
   async getChats(id: string): Promise<AxiosResponse<Chat[]>> {

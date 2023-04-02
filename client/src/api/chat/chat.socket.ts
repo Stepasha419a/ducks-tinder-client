@@ -1,5 +1,5 @@
 import { io, Socket } from 'socket.io-client';
-import { Message } from '../../models/Chat/Chat';
+import { Message } from '../../shared/api/interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;

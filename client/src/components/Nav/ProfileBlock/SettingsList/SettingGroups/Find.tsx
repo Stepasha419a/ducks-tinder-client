@@ -7,7 +7,7 @@ import {
   ChangedData,
   InnerObjectName,
   SettingInputName,
-} from '../../../../../models/User/User';
+} from '../../../../../shared/api/interfaces';
 import { Validation } from '../../../../../shared/interfaces';
 import { CheckboxInput, RangeInput } from '../../../../../shared/ui';
 import styles from '../SettingsList.module.scss';

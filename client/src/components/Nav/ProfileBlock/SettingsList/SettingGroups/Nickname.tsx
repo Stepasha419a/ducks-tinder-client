@@ -2,7 +2,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FC } from 'react';
 import { useAppSelector } from '../../../../../hooks';
-import { InnerObjectName, SettingInputName } from '../../../../../models/User/User';
+import { InnerObjectName, SettingInputName } from '../../../../../shared/api/interfaces';
 import { Validation } from '../../../../../shared/interfaces';
 import styles from '../SettingsList.module.scss';
 

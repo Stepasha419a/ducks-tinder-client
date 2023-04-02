@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { PairSorts } from '../../models/User/User';
+import { PairSorts } from '../../shared/api/interfaces';
 import { INITIAL_SORTS } from '../../shared/constants';
 import { Likes, Pairs, Sorting } from './components';
 

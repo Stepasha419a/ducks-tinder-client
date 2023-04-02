@@ -1,5 +1,5 @@
 import defaultPhoto from '../../assets/images/default-duck.png';
-import { PicturesEnum, PicturesVariants } from '../../models/User/User';
+import { PicturesEnum, PicturesVariants } from '../api/interfaces';
 
 export function makeImageUrl(
   userId?: string,

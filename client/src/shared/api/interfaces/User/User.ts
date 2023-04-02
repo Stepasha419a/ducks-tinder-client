@@ -1,4 +1,4 @@
-import { Range } from '../../shared/interfaces';
+import { Range } from '../../../interfaces';
 
 export interface ImageInterface {
   id: number;

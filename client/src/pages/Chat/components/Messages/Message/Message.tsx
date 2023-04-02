@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC } from 'react';
 import { Avatar } from '../../../../../shared/ui';
-import { Message as MessageType } from '../../../../../models/Chat/Chat';
+import { Message as MessageType } from '../../../../../shared/api/interfaces';
 import styles from './Message.module.scss';
 
 interface MessageProps {

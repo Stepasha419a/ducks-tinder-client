@@ -1,5 +1,4 @@
-import { Chat } from '../../../../../models/Chat/Chat';
-import { User } from '../../../../../models/User/User';
+import { User, Chat } from '../../../../../shared/api/interfaces';
 import styles from './ChatItem.module.scss';
 import { Avatar } from '../../../../../shared/ui';
 import classNames from 'classnames';

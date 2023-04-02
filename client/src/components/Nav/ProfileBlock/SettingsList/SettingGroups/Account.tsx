@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FC, useState } from 'react';
 import { useAppSelector } from '../../../../../hooks';
-import { ChangedData, InnerObjectName, SettingInputName } from '../../../../../models/User/User';
+import { ChangedData, InnerObjectName, SettingInputName } from '../../../../../shared/api/interfaces';
 import { Validation } from '../../../../../shared/interfaces';
 import { RangeInput } from '../../../../../shared/ui';
 import styles from '../SettingsList.module.scss';

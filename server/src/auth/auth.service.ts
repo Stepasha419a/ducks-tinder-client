@@ -33,7 +33,7 @@ export class AuthService {
 
         this.filesService.makeUserDir(user._id.toString())
 
-        await this.mailService.sendMail(createUserDto.email, `${(process.env.API_URL)}/api/activate/${activationLink}`, createUserDto.name)
+        await this.mailService.sendMail(createUserDto.email, `${(process.env.API_URL)}/apiactivate/${activationLink}`, createUserDto.name)
             .catch(() => {
                 throw new HttpException('This email does not exist', HttpStatus.BAD_REQUEST);
             })

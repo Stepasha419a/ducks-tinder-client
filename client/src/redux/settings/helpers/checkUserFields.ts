@@ -1,4 +1,4 @@
-import { User } from '../../../models/User/User';
+import { User } from '../../../shared/api/interfaces';
 import { ErrorField } from '../../../shared/interfaces';
 
 const potentialFields: ErrorField[] = ['description', 'interests', 'place'];

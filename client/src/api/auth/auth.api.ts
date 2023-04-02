@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { AuthResponse } from '../../models/response/AuthResponse';
-import { instance } from '../api';
+import { instance } from '../../shared/api';
+import { AuthResponse } from '../../shared/api/interfaces';
 
 export type UserAuthParams = {
   email: string;

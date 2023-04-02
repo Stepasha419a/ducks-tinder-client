@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
-import { User } from '../../models/User/User';
+import { User } from '../../shared/api/interfaces';
 import { makeDataObject } from '../../shared/helpers';
 import { RootState } from '../store';
 import { makeQuerySortsObj } from './helpers';

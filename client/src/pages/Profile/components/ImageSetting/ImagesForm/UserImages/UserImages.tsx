@@ -5,7 +5,7 @@ import {
   PicturesEnum,
   PicturesVariants,
   User,
-} from '../../../../../../models/User/User';
+} from '../../../../../../shared/api/interfaces';
 import {
   deleteUserImage,
   mixUserImages,

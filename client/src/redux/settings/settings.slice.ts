@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { InnerObjectName, SettingInputName } from '../../models/User/User';
+import { InnerObjectName, SettingInputName } from '../../shared/api/interfaces';
 import { ErrorField, Setting, Validation } from '../../shared/interfaces';
 import { checkUserFields } from './helpers';
 import { submitSettingsThunk } from './settings.thunks';

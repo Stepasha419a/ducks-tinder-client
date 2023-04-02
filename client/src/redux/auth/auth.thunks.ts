@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
-import { API_URL } from '../../api/api';
 import { authAPI, UserAuthParams } from '../../api/auth/auth.api';
-import { AuthResponse } from '../../models/response/AuthResponse';
+import { API_URL } from '../../shared/api';
+import { AuthResponse } from '../../shared/api/interfaces';
 import { setCurrentUser } from '../users/users.slice';
 
 export const registerThunk = createAsyncThunk(

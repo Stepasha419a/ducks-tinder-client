@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Chat } from '../../../../models/Chat/Chat';
+import { Chat } from '../../../../shared/api/interfaces';
 import ChatItem from './ChatItem/ChatItem';
 import styles from './Chats.module.scss';
 import FailedChats from './Failed/FailedChats';

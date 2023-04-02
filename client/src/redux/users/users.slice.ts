@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from '../../models/User/User';
+import { User } from '../../shared/api/interfaces';
 import {
   dislikeUserThunk,
   likeUserThunk,

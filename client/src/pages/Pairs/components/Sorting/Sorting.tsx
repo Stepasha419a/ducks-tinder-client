@@ -10,7 +10,7 @@ import {
   INITIAL_SORTS,
   INTERESTS_FOR_LOOP,
 } from '../../../../shared/constants';
-import { PairSorts } from '../../../../models/User/User';
+import { PairSorts } from '../../../../shared/api/interfaces';
 
 interface SortingProps {
   setSorts: (sorts: PairSorts) => void;

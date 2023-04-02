@@ -4,11 +4,11 @@ import {
   InnerObjectName,
   PartnerSettings,
   PicturesVariants,
-} from '../../models/User/User';
+  User,
+} from '../../shared/api/interfaces';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
-import { User } from '../../models/User/User';
 import { RootState } from '../store';
 import { makeUserImagesObject } from './helpers';
 import { makeDataObject } from '../../shared/helpers/makeDataObject';

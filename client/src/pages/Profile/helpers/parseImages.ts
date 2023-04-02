@@ -2,7 +2,7 @@ import {
   ImageInterface,
   PicturesEnum,
   PicturesInterface,
-} from '../../../models/User/User';
+} from '../../../shared/api/interfaces';
 
 export function parseImages(pictures: PicturesInterface): ImageInterface[] {
   return Object.values(pictures).reduce(

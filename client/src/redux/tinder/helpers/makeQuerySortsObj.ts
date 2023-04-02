@@ -1,4 +1,4 @@
-import { User } from '../../../models/User/User';
+import { User } from '../../../shared/api/interfaces';
 
 export function makeQuerySortsObj(user: User, requestedUsers?: string[]) {
   return {
