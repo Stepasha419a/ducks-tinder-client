@@ -11,6 +11,7 @@
     "axios": "^0.27.2",
     "browserslist": "^4.18.1",
     "classnames": "^2.3.2",
+    "eslint-config-airbnb": "^19.0.4",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-easy-crop": "^4.5.0",
@@ -23,12 +24,6 @@
   },
   "scripts": {
     "start": "webpack serve --config config/development.config.js"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -55,10 +50,17 @@
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.31",
     "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/parser": "^5.57.0",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
     "eslint": "^8.37.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-webpack-plugin": "^4.0.0",
     "favicons-webpack-plugin": "^6.0.0",
     "fork-ts-checker-webpack-plugin": "^8.0.0",
     "html-webpack-plugin": "^5.5.0",

@@ -3,6 +3,7 @@ const HtmlWebPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const EslintWebpackPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   target: 'web',
@@ -14,7 +15,7 @@ module.exports = {
     filename: 'js/[name].bundle.js',
     chunkFilename: 'js/[name].chunk.js',
     path: path.resolve(__dirname, '..', 'dist'),
-    assetModuleFilename: `media/[name].[hash][ext]`,
+    assetModuleFilename: 'media/[name].[hash][ext]',
     clean: true,
   },
   cache: {
@@ -59,7 +60,7 @@ module.exports = {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
-          filename: `assets/images/[name].[hash][ext]`,
+          filename: 'assets/images/[name].[hash][ext]',
         },
       },
       {
@@ -94,6 +95,13 @@ module.exports = {
       overlay: false,
     }),
     new ForkTsCheckerWebpackPlugin(),
+    new EslintWebpackPlugin({
+      context: '../',
+      emitWarning: true,
+      failOnError: false,
+      extensions: ['ts', 'tsx'],
+      overrideConfigFile: './.eslintrc',
+    }),
   ],
   optimization: {
     usedExports: true,
