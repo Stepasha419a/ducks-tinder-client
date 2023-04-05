@@ -1,6 +1,6 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { instance } from '../../shared/api';
-import { Chat } from '../../shared/api/interfaces';
+import type { Chat } from '../../shared/api/interfaces';
 
 export const chatApi = {
   async getChats(id: string): Promise<AxiosResponse<Chat[]>> {
@@ -10,6 +10,6 @@ export const chatApi = {
     return instance.get(`chat/one/${id}`);
   },
   async createChat(ids: string[]): Promise<AxiosResponse<string[]>> {
-    return instance.post(`chat/`, ids);
+    return instance.post('chat/', ids);
   },
 };

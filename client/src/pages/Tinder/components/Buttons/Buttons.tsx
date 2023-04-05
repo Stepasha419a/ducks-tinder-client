@@ -6,7 +6,7 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FocusEvent, MouseEvent } from 'react';
+import type { FC, FocusEvent, MouseEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import {
   dislikeUserThunk,
@@ -21,7 +21,7 @@ interface ButtonsProps {
   isMinimum?: boolean;
 }
 
-const Buttons: React.FC<ButtonsProps> = ({
+const Buttons: FC<ButtonsProps> = ({
   currentTinderUsersIndex,
   isMinimum = false,
 }) => {
@@ -29,12 +29,12 @@ const Buttons: React.FC<ButtonsProps> = ({
 
   const isReturnUser = useAppSelector((state) => state.tinderPage.isReturnUser);
 
-  const btnFocus = (e: FocusEvent<HTMLButtonElement>) => {
+  const btnFocus = (e: FocusEvent<HTMLButtonElement>): void => {
     const target = e.target as Element;
     target.classList.add(styles.active);
   };
 
-  const btnMouseOut = (e: MouseEvent<HTMLButtonElement>) => {
+  const btnMouseOut = (e: MouseEvent<HTMLButtonElement>): void => {
     const target = e.target as HTMLElement;
     target.classList.remove(styles.active);
     target.blur();

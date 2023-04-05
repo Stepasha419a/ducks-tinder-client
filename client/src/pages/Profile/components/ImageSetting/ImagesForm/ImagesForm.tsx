@@ -1,5 +1,9 @@
-import { useState, FC, ChangeEvent } from 'react';
-import { PicturesVariants, User } from '../../../../../shared/api/interfaces';
+import type { FC, ChangeEvent } from 'react';
+import { useState } from 'react';
+import type {
+  PicturesVariants,
+  User,
+} from '../../../../../shared/api/interfaces';
 import { DialogUpload } from '../../popups';
 import { CropImage } from '../../popups/CropImage/CropImage';
 import { UserImages } from './UserImages/UserImages';
@@ -20,19 +24,19 @@ export const ImagesForm: FC<ImagesFormProps> = ({
   const [imageURL, setImageURL] = useState('');
   const [setting, setSetting] = useState<PicturesVariants | ''>('');
 
-  const openSettingHandler = (setting: PicturesVariants) => {
-    setSetting(setting);
+  const openSettingHandler = (variant: PicturesVariants): void => {
+    setSetting(variant);
     setIsDialogUploadOpen(true);
   };
 
-  const onImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onImageChange = (e: ChangeEvent<HTMLInputElement>): void => {
     setIsDialogUploadOpen(false);
     const image = e.target.files![0];
     setImageURL(URL.createObjectURL(image));
     setIsImageCropOpen(true);
   };
 
-  const submitHandler = () => {
+  const submitHandler = (): void => {
     setIsImageSetting(false);
   };
 

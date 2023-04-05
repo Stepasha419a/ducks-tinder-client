@@ -1,13 +1,16 @@
-export interface PixelCrop {
-  x: number;
-  y: number;
+interface SidesCrop {
   width: number;
   height: number;
 }
 
+export interface PixelCrop extends SidesCrop {
+  x: number;
+  y: number;
+}
+
 export interface ReturnGetCroppedImg {
-  picture: Blob,
-  url: string
+  picture: Blob;
+  url: string;
 }
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>
@@ -19,14 +22,18 @@ export const createImage = (url: string): Promise<HTMLImageElement> =>
     image.src = url;
   });
 
-export function getRadianAngle(degreeValue: number) {
+export function getRadianAngle(degreeValue: number): number {
   return (degreeValue * Math.PI) / 180;
 }
 
 /**
  * Returns the new bounding area of a rotated rectangle.
  */
-export function rotateSize(width: number, height: number, rotation: number) {
+export function rotateSize(
+  width: number,
+  height: number,
+  rotation: number
+): SidesCrop {
   const rotRad = getRadianAngle(rotation);
 
   return {

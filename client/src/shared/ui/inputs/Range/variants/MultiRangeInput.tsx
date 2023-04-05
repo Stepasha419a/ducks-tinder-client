@@ -1,5 +1,5 @@
-import { FC, PropsWithChildren } from 'react';
-import { MultiRangeInputProps } from '../RangeInput.types';
+import type { FC, PropsWithChildren } from 'react';
+import type { MultiRangeInputProps } from '../RangeInput.types';
 import SingleRangeInput from './SingleRangeInput';
 
 const MultiRangeInput: FC<PropsWithChildren<MultiRangeInputProps>> = ({
@@ -9,13 +9,13 @@ const MultiRangeInput: FC<PropsWithChildren<MultiRangeInputProps>> = ({
   children,
   ...props
 }) => {
-  const minHandler = (min: number) => {
+  const minHandler = (min: number): void => {
     if (min + 2 < value.max!) {
       setValue(min, value.max!);
     }
   };
 
-  const maxHandler = (max: number) => {
+  const maxHandler = (max: number): void => {
     if (value.min! + 2 < max) {
       setValue(value.min!, max);
     }

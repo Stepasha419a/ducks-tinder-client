@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from '../../shared/api/interfaces';
+import type { User } from '../../shared/api/interfaces';
 import {
   dislikeUserThunk,
   likeUserThunk,
@@ -41,7 +41,6 @@ const usersSlice = createSlice({
       .addCase(deletePairThunk.fulfilled, (state, action) => {
         state.currentUser = action.payload?.data;
 
-        console.log(action.payload);
         state.pairs.filter((pair) => pair._id !== action.payload?.deletedId);
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {

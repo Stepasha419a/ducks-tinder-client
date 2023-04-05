@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import type { ChangeEvent, FC } from 'react';
 import { Popup } from '../../../../../shared/ui';
 import styles from './DialogUpload.module.scss';
 
@@ -7,7 +7,7 @@ interface DialogUploadProps {
   setIsDialogUploadOpen: (setting: boolean) => void;
 }
 
-export const DialogUpload: React.FC<DialogUploadProps> = ({
+export const DialogUpload: FC<DialogUploadProps> = ({
   onImageChange,
   setIsDialogUploadOpen,
 }) => {

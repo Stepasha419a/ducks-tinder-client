@@ -1,9 +1,10 @@
+import type { ReactElement } from 'react';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from '../../../../hooks';
 import styles from './Likes.module.scss';
 
-export const Likes = () => {
+export const Likes = (): ReactElement => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   return (

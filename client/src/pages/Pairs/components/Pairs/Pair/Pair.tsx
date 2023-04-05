@@ -1,4 +1,5 @@
-import { User } from '../../../../../shared/api/interfaces';
+import type { FC } from 'react';
+import type { User } from '../../../../../shared/api/interfaces';
 import styles from './Pair.module.scss';
 import PairPopup from '../../../popups/Pair/PairPopup';
 import { makeImageUrl } from '../../../../../shared/helpers';
@@ -9,7 +10,7 @@ interface PairPropsInterface {
   isCurrent: boolean;
 }
 
-const Pair: React.FC<PairPropsInterface> = ({
+const Pair: FC<PairPropsInterface> = ({
   user,
   setCurrentPair,
   isCurrent,

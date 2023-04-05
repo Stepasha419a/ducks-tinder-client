@@ -1,15 +1,15 @@
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC } from 'react';
+import type { FC } from 'react';
 import styles from './Choose.module.scss';
 
-interface ChooseProps{
+interface ChooseProps {
   isConnected: boolean;
 }
 
-const Choose: FC<ChooseProps> = ({isConnected}) => {
-  const cn = classNames(styles.choose, !isConnected && styles.visible)
+const Choose: FC<ChooseProps> = ({ isConnected }) => {
+  const cn = classNames(styles.choose, !isConnected && styles.visible);
 
   return (
     <div className={cn}>

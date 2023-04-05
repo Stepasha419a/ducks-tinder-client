@@ -1,16 +1,33 @@
+import type { BaseSyntheticEvent, FormEventHandler } from 'react';
 import { useEffect } from 'react';
+import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { loginThunk, registerThunk } from '../../../redux/auth/auth.thunks';
 import { EMAIL_REGEXP } from '../../../shared/constants';
+import type { TextFieldProps } from '../../../shared/ui/inputs/TextField/TextField.types';
 
-export interface AuthFieldValues {
+// complicated interface, no need to use it as the truth
+export interface AuthFieldValues extends BaseSyntheticEvent {
   email: string;
   password: string;
   name?: string;
 }
 
-export function useAuthForm(isRegisterForm: boolean = false) {
+interface AuthFormReturn {
+  fields: {
+    email: TextFieldProps;
+    password: TextFieldProps;
+    name?: TextFieldProps;
+  };
+  validation: {
+    errors: FieldErrors<AuthFieldValues>;
+    isValid: boolean;
+  };
+  submitHandler: FormEventHandler<HTMLFormElement>;
+}
+
+export function useAuthForm(isRegisterForm: boolean = false): AuthFormReturn {
   const dispatch = useAppDispatch();
   const formError = useAppSelector((state) => state.authPage.formError);
 
@@ -64,7 +81,7 @@ export function useAuthForm(isRegisterForm: boolean = false) {
     }),
   };
 
-  const nameFieldProps = isRegisterForm && {
+  const nameFieldProps = {
     type: 'text',
     placeholder: 'First name',
     ...register('name', {
@@ -74,11 +91,10 @@ export function useAuthForm(isRegisterForm: boolean = false) {
     }),
   };
 
-  return {
+  const props: AuthFormReturn = {
     fields: {
       email: emailFieldProps,
       password: passwordFieldProps,
-      name: nameFieldProps,
     },
     validation: {
       errors,
@@ -86,4 +102,10 @@ export function useAuthForm(isRegisterForm: boolean = false) {
     },
     submitHandler,
   };
+
+  if (isRegisterForm) {
+    props.fields.name = nameFieldProps;
+  }
+
+  return props;
 }

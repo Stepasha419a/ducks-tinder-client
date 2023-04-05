@@ -1,12 +1,12 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { instance } from '../../shared/api';
-import { AuthResponse } from '../../shared/api/interfaces';
+import type { AuthResponse } from '../../shared/api/interfaces';
 
-export type UserAuthParams = {
+export interface UserAuthParams {
   email: string;
   name?: string;
   password: string;
-};
+}
 
 export const authAPI = {
   async registration(

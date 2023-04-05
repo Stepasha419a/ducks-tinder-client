@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { User } from '../../shared/api/interfaces';
+import type { User } from '../../shared/api/interfaces';
 import {
   dislikeUserThunk,
   getSortedUserThunk,

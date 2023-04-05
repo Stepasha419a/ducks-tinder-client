@@ -1,19 +1,18 @@
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 import { instance } from '../../shared/api';
-import {
+import type {
   PicturesVariants,
   QuerySorts,
   User,
   UserUnrequired,
 } from '../../shared/api/interfaces';
 
-export type UserType = {
+export interface UserType {
   _id?: string;
-
   name: string;
   description: string;
   picture: string;
-};
+}
 
 export const usersAPI = {
   async getUsers(): Promise<AxiosResponse<User[]>> {
@@ -21,16 +20,16 @@ export const usersAPI = {
   },
 
   async getSortedUsers(sorts: QuerySorts): Promise<AxiosResponse<User[]>> {
-    return instance.post(`users/sorted`, sorts);
+    return instance.post('users/sorted', sorts);
   },
 
-  async getCurrentUser(id: String): Promise<AxiosResponse<User>> {
+  async getCurrentUser(id: string): Promise<AxiosResponse<User>> {
     return instance.get(`users/${id}`);
   },
 
   async updateUser(
     id: string,
-    data: UserUnrequired
+    data: UserUnrequired,
   ): Promise<AxiosResponse<User>> {
     return instance.put(`users/${id}`, data);
   },
@@ -41,39 +40,39 @@ export const usersAPI = {
 
   async createPair(
     forUserId: string,
-    userId: string
+    userId: string,
   ): Promise<AxiosResponse<User>> {
-    return instance.post(`users/pairs`, { forUserId, userId });
+    return instance.post('users/pairs', { forUserId, userId });
   },
 
   async deletePair(
     forUserId: string,
-    userId: string
+    userId: string,
   ): Promise<AxiosResponse<User>> {
-    return instance.put(`users/pairs`, { forUserId, userId });
+    return instance.put('users/pairs', { forUserId, userId });
   },
 
   async savePicture(
     picture: Blob,
     userId: string,
-    setting: PicturesVariants
+    setting: PicturesVariants,
   ): Promise<AxiosResponse<User>> {
     return instance.post(
-      `users/picture`,
+      'users/picture',
       { picture, userId, setting },
       {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
-      }
+      },
     );
   },
 
   async deletePicture(
     pictureName: string,
     userId: string,
-    setting: PicturesVariants
+    setting: PicturesVariants,
   ): Promise<AxiosResponse<User>> {
-    return instance.put(`users/picture`, { pictureName, userId, setting });
+    return instance.put('users/picture', { pictureName, userId, setting });
   },
 };

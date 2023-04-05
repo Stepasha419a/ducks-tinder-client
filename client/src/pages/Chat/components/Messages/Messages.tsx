@@ -1,6 +1,7 @@
+import type { ReactElement } from 'react';
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '../../../../hooks';
-import { Message as MessageType } from '../../../../shared/api/interfaces';
+import type { Message as MessageInterface } from '../../../../shared/api/interfaces';
 import {
   isRefElementVisible,
   scrollToBottom,
@@ -9,7 +10,7 @@ import {
 import { Message } from './Message/Message';
 import styles from './Messages.module.scss';
 
-export const Messages = () => {
+export const Messages = (): ReactElement => {
   const currentChatMembers = useAppSelector(
     (state) => state.chatPage.currentChatMembers
   );
@@ -32,7 +33,7 @@ export const Messages = () => {
 
   return (
     <div className={styles.messages} ref={bottomScrollRef}>
-      {messages.map((message: MessageType) => {
+      {messages.map((message: MessageInterface) => {
         const chatMember = currentChatMembers.find(
           (item) => item._id === message.userId
         );

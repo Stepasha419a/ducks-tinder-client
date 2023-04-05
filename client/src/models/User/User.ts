@@ -1,4 +1,4 @@
-import { Range } from '../../../interfaces';
+import type { Range } from '../../shared/interfaces';
 
 export interface ImageInterface {
   id: number;
@@ -19,6 +19,8 @@ export interface PicturesInterface {
   gallery: string[];
 }
 
+// don't know why it's wrong
+// eslint-disable-next-line no-shadow
 export enum PicturesEnum {
   avatar = 'avatar',
   gallery = 'gallery',
@@ -77,6 +79,8 @@ export interface PairSorts {
   interests: string[];
   account: string[];
 }
+
+export type PairSortsKey = keyof PairSorts;
 
 export interface QuerySorts {
   distance: number;

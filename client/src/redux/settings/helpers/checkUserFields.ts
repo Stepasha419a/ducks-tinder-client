@@ -1,9 +1,11 @@
-import { User } from '../../../shared/api/interfaces';
-import { ErrorField } from '../../../shared/interfaces';
+import type { User } from '../../../shared/api/interfaces';
+import type { ErrorField } from '../../../shared/interfaces';
 
 const potentialFields: ErrorField[] = ['description', 'interests', 'place'];
 
-function checkField(user: User, field: ErrorField) {
+type CheckingErrorField = 'description' | 'interests' | 'place';
+
+function checkField(user: User, field: ErrorField): CheckingErrorField | boolean {
   switch (field) {
     case 'description':
       if (user.description === '') {
@@ -20,13 +22,14 @@ function checkField(user: User, field: ErrorField) {
         return 'place';
       }
       return false;
+    default:
+      return false;
   }
 }
 
-export function checkUserFields(user: User) {
+export function checkUserFields(user: User): ErrorField[] {
   return potentialFields.reduce(
-    (acc: ErrorField[], field: ErrorField) =>
-      checkField(user, field) ? [...acc, field] : acc,
+    (acc: ErrorField[], field: ErrorField) => (checkField(user, field) ? [...acc, field] : acc),
     []
   );
 }

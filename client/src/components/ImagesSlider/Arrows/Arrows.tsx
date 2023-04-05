@@ -1,7 +1,7 @@
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC } from 'react';
+import type { FC } from 'react';
 import styles from './Arrows.module.scss';
 
 interface ArrowsProps {

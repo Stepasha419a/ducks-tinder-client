@@ -1,6 +1,11 @@
-import { ImageInterface } from '../../../shared/api/interfaces';
+import type {
+  ImageInterface,
+  PicturesInterface,
+} from '../../../shared/api/interfaces';
 
-export function makeUserImagesObject(images: ImageInterface[]) {
+export function makeUserImagesObject(images: ImageInterface[]): {
+  pictures: PicturesInterface;
+} {
   const imagesUrl = images.map((image) => image.image);
 
   return {

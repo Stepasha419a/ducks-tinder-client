@@ -1,14 +1,15 @@
+import type { ReactElement } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
 import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { RadioInput } from '../../../../../../shared/ui';
 import { useDefaultValues } from '../../../../hooks';
-import { SettingFieldValues } from '../../../../interfaces';
+import type { SettingFieldValues } from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './RadioForm.module.scss';
 
-export const RadioForm = () => {
+export const RadioForm = (): ReactElement => {
   const dispatch = useAppDispatch();
   const formName = useAppSelector((state) => state.settings.formName);
 
@@ -28,7 +29,7 @@ export const RadioForm = () => {
     dispatch(submitSettingsThunk({ changedData: data.input }));
   });
 
-  const cancelHandler = () => {
+  const cancelHandler = (): void => {
     dispatch(setIsUserInfoSetting(false));
   };
 

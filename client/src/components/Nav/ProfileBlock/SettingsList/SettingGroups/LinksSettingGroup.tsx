@@ -1,9 +1,10 @@
+import type { ReactElement } from 'react';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import styles from '../SettingsList.module.scss';
 
-export const LinksSettingGroup = () => {
+export const LinksSettingGroup = (): ReactElement => {
   return (
     <div className={styles.group}>
       <div className={styles.groupTitle}>Safety Tips</div>

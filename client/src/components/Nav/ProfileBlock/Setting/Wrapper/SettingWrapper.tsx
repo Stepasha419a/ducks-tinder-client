@@ -1,7 +1,7 @@
-import { PropsWithChildren } from 'react';
-import { FieldErrors } from 'react-hook-form';
+import type { FC, PropsWithChildren } from 'react';
+import type { FieldErrors } from 'react-hook-form';
 import { Button } from '../../../../../shared/ui';
-import {
+import type {
   SettingFieldArrayValues,
   SettingFieldValues,
 } from '../../../interfaces';
@@ -15,7 +15,7 @@ interface SettingWrapperProps {
   cancelHandler: () => void;
 }
 
-const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
+const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   formName,
   children,
   isValid,
@@ -27,7 +27,7 @@ const SettingWrapper: React.FC<PropsWithChildren<SettingWrapperProps>> = ({
     <form onSubmit={submitHandler} className={styles.setting}>
       {Object.values(errors).map((error) => (
         <div key={error.message} className={`${styles.name} ${styles.error}`}>
-          {error!.message!.toString()}
+          {error.message!.toString()}
         </div>
       ))}
       <div className={styles.name}>{formName}</div>

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Notification } from '../../shared/interfaces';
+import type { Notification } from '../../shared/interfaces';
 
 interface InitialState {
   notifications: Notification[];
@@ -34,13 +34,13 @@ const notificationsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(
       (action) => action.type.endsWith('rejected'),
-      (state, action) => {
-        const signs = action.type.split('/');
+      (state, { payload, type }: { payload: string; type: string }) => {
+        const signs = type.split('/');
         if (signs[1] !== 'getSortedUser' && signs[1] !== 'disconnectChat') {
           const notification: Notification = {
             id: Date.now(),
             type: 'error',
-            text: `${action.payload} at ${action.type}`,
+            text: `${payload} at ${type}`,
           };
           state.notifications = [...state.notifications, notification];
         }

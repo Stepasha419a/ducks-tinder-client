@@ -1,8 +1,9 @@
+import type { FC } from 'react';
 import { useState } from 'react';
+import classNames from 'classnames';
 import { useAppSelector } from '../../../../hooks';
 import { ImagesForm } from './ImagesForm/ImagesForm';
 import styles from './ImageSetting.module.scss';
-import classNames from 'classnames';
 import { Preview } from '../../../../components/Preview/Preview';
 import { Button } from '../../../../shared/ui';
 
@@ -10,9 +11,7 @@ interface ImageSettingProps {
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
-export const ImageSetting: React.FC<ImageSettingProps> = ({
-  setIsImageSetting,
-}) => {
+export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);

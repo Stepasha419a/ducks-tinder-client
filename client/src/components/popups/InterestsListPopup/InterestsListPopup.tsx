@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Button, Popup } from '../../../shared/ui';
 import styles from './InterestsListPopup.module.scss';
 
@@ -6,7 +7,7 @@ interface InterestsListPopupProps {
   interestsList: string[];
 }
 
-export const InterestsListPopup: React.FC<InterestsListPopupProps> = ({
+export const InterestsListPopup: FC<InterestsListPopupProps> = ({
   interestsList,
   setIsInterestsListPopupOpen,
 }) => {

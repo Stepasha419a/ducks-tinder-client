@@ -1,5 +1,6 @@
-import { io, Socket } from 'socket.io-client';
-import { Message } from '../../shared/api/interfaces';
+import type { Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
+import type { Message } from '../../shared/api/interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;
@@ -14,7 +15,7 @@ export const chatSocket: ChatSocket = {
   _socket: null,
   _sockets: new Set(),
   connectChat(chatId: string) {
-    this._socket = io(`http://localhost:5000/chat/socket`, {
+    this._socket = io('http://localhost:5000/chat/socket', {
       query: { chatId },
     });
 

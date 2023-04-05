@@ -1,8 +1,9 @@
 import classNames from 'classnames';
+import type { FC } from 'react';
 import styles from './Notification.module.scss';
-import { NotificationProps } from './Notification.types';
+import type { NotificationProps } from './Notification.types';
 
-export const Notification: React.FC<NotificationProps> = ({
+export const Notification: FC<NotificationProps> = ({
   id,
   type,
   text,
@@ -10,7 +11,7 @@ export const Notification: React.FC<NotificationProps> = ({
 }) => {
   const notificationCn = classNames(
     styles.notification,
-    type === 'error' && styles.notification_error
+    type === 'error' && styles.notification_error,
   );
   const markCn = classNames(styles.mark, type === 'error' && styles.mark_error);
 

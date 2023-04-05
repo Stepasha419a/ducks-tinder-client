@@ -1,9 +1,9 @@
+import type { FC } from 'react';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FC } from 'react';
 import { useAppSelector } from '../../../../../hooks';
-import { InnerObjectName, SettingInputName } from '../../../../../shared/api/interfaces';
-import { Validation } from '../../../../../shared/interfaces';
+import type { InnerObjectName, SettingInputName } from '../../../../../shared/api/interfaces';
+import type { Validation } from '../../../../../shared/interfaces';
 import styles from '../SettingsList.module.scss';
 
 interface NicknameProps {
@@ -18,7 +18,7 @@ interface NicknameProps {
 export const Nickname: FC<NicknameProps> = ({ setInputHandler }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
-  const SetNicknameHandler = () => {
+  const SetNicknameHandler = (): void => {
     setInputHandler('nickname', { min: 6, max: 16 });
   };
 

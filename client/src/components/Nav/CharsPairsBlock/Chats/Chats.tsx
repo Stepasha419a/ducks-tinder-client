@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { Chat } from '../../../../shared/api/interfaces';
+import type { ReactElement } from 'react';
+import type { Chat } from '../../../../shared/api/interfaces';
 import ChatItem from './ChatItem/ChatItem';
 import styles from './Chats.module.scss';
 import FailedChats from './Failed/FailedChats';
@@ -12,7 +13,7 @@ import {
 import Preloader from '../../../Preloader/Preloader';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 
-const Chats = () => {
+const Chats = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -31,9 +32,9 @@ const Chats = () => {
     };
   }, [dispatch]);
 
-  function connect(chatId: string) {
+  function connect(chatId: string): void {
     if (chatId !== currentChatId) {
-      currentChatId && dispatch(disconnectChatThunk());
+      if (currentChatId) dispatch(disconnectChatThunk());
       dispatch(connectChatThunk({ chatId }));
     }
   }
@@ -52,7 +53,7 @@ const Chats = () => {
         const chatCompanionId = chat.members.find(
           (member) => member !== currentUser._id
         );
-        let chatCompanion = chatsUsers.find(
+        const chatCompanion = chatsUsers.find(
           (user) => user._id === chatCompanionId
         );
         return (

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import styles from './Button.module.scss';
-import { ButtonProps } from './Button.types';
+import type { ButtonProps } from './Button.types';
 
 export const Button: FC<PropsWithChildren<ButtonProps>> = ({
   children,

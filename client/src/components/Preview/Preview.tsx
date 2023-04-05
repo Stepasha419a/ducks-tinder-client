@@ -1,3 +1,5 @@
+import type { FC } from 'react';
+import { useState } from 'react';
 import {
   faCircleDown,
   faCircleInfo,
@@ -6,10 +8,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { User } from '../../shared/api/interfaces';
+import type { User } from '../../shared/api/interfaces';
 import { ImageSlider } from '../ImagesSlider/ImageSlider';
 import { Button } from '../../shared/ui';
-import { useState } from 'react';
 import styles from './Preview.module.scss';
 import { InterestsListPopup } from '../popups';
 
@@ -21,7 +22,7 @@ interface PreviewPropsInterface {
   extraClassName?: string;
 }
 
-export const Preview: React.FC<PreviewPropsInterface> = ({
+export const Preview: FC<PreviewPropsInterface> = ({
   user,
   setIsFullPreview = () => {},
   isFull = false,
@@ -36,7 +37,7 @@ export const Preview: React.FC<PreviewPropsInterface> = ({
   const interestsForLoop = [];
 
   for (let i = 0; i < 4; i++) {
-    user.interests[i] && interestsForLoop.push(user.interests[i]);
+    if (user.interests[i]) interestsForLoop.push(user.interests[i]);
   }
 
   const cn = classNames(styles.preview, extraClassName, isFull && styles.full);

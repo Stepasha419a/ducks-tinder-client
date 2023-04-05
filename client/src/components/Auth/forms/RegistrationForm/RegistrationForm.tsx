@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightLong,
@@ -11,7 +12,7 @@ import AuthLayout from '../../AuthLayout/AuthLayout';
 import { Button, TextField } from '../../../../shared/ui';
 import { useAuthForm } from '../../hooks';
 
-export const RegistrationForm = () => {
+export const RegistrationForm = (): ReactElement => {
   const {
     fields: { name, email, password },
     validation: { errors, isValid },

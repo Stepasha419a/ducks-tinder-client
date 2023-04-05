@@ -1,8 +1,9 @@
+import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import headerImg from '../../assets/images/auth-duck.png';
 import styles from './Policy.module.scss';
 
-export const Policy = () => {
+export const Policy = (): ReactElement => {
   return (
     <div className={styles.policy}>
       <header className={styles.header}>

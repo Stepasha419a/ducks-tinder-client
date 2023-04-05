@@ -1,8 +1,8 @@
-import { updateUserThunk } from './../users/users.thunks';
-import { RootState } from './../store';
-import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { ChangedData, InnerObjectName, SettingInputName } from '../../shared/api/interfaces';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { updateUserThunk } from '../users/users.thunks';
+import type { RootState } from '../store';
+import type { ChangedData, InnerObjectName, SettingInputName } from '../../shared/api/interfaces';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',
@@ -20,8 +20,8 @@ export const submitSettingsThunk = createAsyncThunk(
 
       dispatch(
         updateUserThunk({
-          inputName: args.inputName || settingInputName!,
-          innerObjectName: args.innerObjectName || innerObjectName,
+          inputName: args.inputName ?? settingInputName!,
+          innerObjectName: args.innerObjectName ?? innerObjectName,
           changedData: args.changedData,
         })
       );

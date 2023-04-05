@@ -1,9 +1,10 @@
-import { setIsUserInfoSetting } from '../../../../redux/settings/settings.slice';
 import { useEffect } from 'react';
+import type { ReactElement } from 'react';
+import { setIsUserInfoSetting } from '../../../../redux/settings/settings.slice';
 import { InterestsForm, RadioForm, TextareaForm, TextForm } from './Fields';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 
-const ProfileSetting = () => {
+const ProfileSetting = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const setting = useAppSelector((state) => state.settings.setting);
@@ -16,9 +17,11 @@ const ProfileSetting = () => {
 
   if (setting === 'select') {
     return <InterestsForm />;
-  } else if (setting === 'textarea') {
+  }
+  if (setting === 'textarea') {
     return <TextareaForm />;
-  } else if (setting === 'radio') {
+  }
+  if (setting === 'radio') {
     return <RadioForm />;
   }
 

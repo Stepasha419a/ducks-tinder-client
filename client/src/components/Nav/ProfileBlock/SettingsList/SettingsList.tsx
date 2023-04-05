@@ -1,10 +1,15 @@
+import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { ChangedData, InnerObjectName, SettingInputName } from '../../../../shared/api/interfaces';
+import type { Validation } from '../../../../shared/interfaces';
+import type {
+  ChangedData,
+  InnerObjectName,
+  SettingInputName,
+} from '../../../../shared/api/interfaces';
 import { createNotification } from '../../../../redux/notifications/notifications.slice';
 import { setInput } from '../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../redux/settings/settings.thunks';
-import { Validation } from '../../../../shared/interfaces';
 import {
   Account,
   Find,
@@ -14,7 +19,7 @@ import {
 } from './settingGroups';
 import styles from './SettingsList.module.scss';
 
-const SettingsList = () => {
+const SettingsList = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const notifications = useAppSelector(
@@ -36,7 +41,7 @@ const SettingsList = () => {
     validation?: Validation | null,
     innerObjectName?: InnerObjectName,
     formName?: string
-  ) => {
+  ): void => {
     dispatch(
       setInput({
         inputName,
@@ -51,7 +56,7 @@ const SettingsList = () => {
     inputName: SettingInputName,
     changedData: ChangedData,
     innerObjectName?: InnerObjectName
-  ) => {
+  ): void => {
     dispatch(
       submitSettingsThunk({
         inputName,

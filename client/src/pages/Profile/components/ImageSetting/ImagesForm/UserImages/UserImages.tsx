@@ -1,11 +1,12 @@
-import { DragEvent, FC, useEffect, useState } from 'react';
+import type { DragEvent, FC } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../../../../hooks';
-import {
+import type {
   ImageInterface,
-  PicturesEnum,
   PicturesVariants,
   User,
 } from '../../../../../../shared/api/interfaces';
+import { PicturesEnum } from '../../../../../../shared/api/interfaces';
 import {
   deleteUserImage,
   mixUserImages,
@@ -36,28 +37,28 @@ export const UserImages: FC<UserImagesProps> = ({
   const deleteImageHandler = (
     pictureName: string,
     setting: PicturesVariants
-  ) => {
+  ): void => {
     dispatch(deleteUserImage({ pictureName, setting }));
   };
 
   const dragStartHangler = (
     e: DragEvent<HTMLDivElement>,
     card: ImageInterface
-  ) => {
+  ): void => {
     (e.target as HTMLDivElement).classList.add(styles.drag);
     setCurrentImage(card);
   };
 
-  const dragEndHangler = (e: DragEvent<HTMLDivElement>) => {
+  const dragEndHangler = (e: DragEvent<HTMLDivElement>): void => {
     (e.target as HTMLDivElement).classList.remove(styles.lowOpacity);
   };
 
-  const dragOverHangler = (e: DragEvent<HTMLDivElement>) => {
+  const dragOverHangler = (e: DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
     (e.target as HTMLDivElement).classList.add(styles.lowOpacity);
   };
 
-  const dropHangler = (e: DragEvent<HTMLDivElement>, card: ImageInterface) => {
+  const dropHangler = (e: DragEvent<HTMLDivElement>, card: ImageInterface): void => {
     const cardIndex = images.findIndex((item) => item.id === card.id);
     const currentIndex = images.findIndex(
       (item) => item.id === currentImage!.id
@@ -93,7 +94,7 @@ export const UserImages: FC<UserImagesProps> = ({
             buttonHandler={() =>
               deleteImageHandler(
                 imageObj.image,
-                imageObj.setting as PicturesVariants
+                imageObj.setting
               )
             }
             onDragStart={(e) => dragStartHangler(e, imageObj)}

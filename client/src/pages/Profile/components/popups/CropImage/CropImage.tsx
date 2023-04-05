@@ -1,10 +1,12 @@
-import { FC, useState } from 'react';
+import type { FC } from 'react';
+import { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import { PicturesVariants, User } from '../../../../../shared/api/interfaces';
-import getCroppedImg, {
-  PixelCrop,
-  ReturnGetCroppedImg,
-} from './cropImageScript';
+import type {
+  PicturesVariants,
+  User,
+} from '../../../../../shared/api/interfaces';
+import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
+import getCroppedImg from './cropImageScript';
 import styles from './CropImage.module.scss';
 import { saveUserImage } from '../../../../../redux/users/users.thunks';
 import { useAppDispatch } from '../../../../../hooks';
@@ -35,31 +37,31 @@ export const CropImage: FC<CropImageProps> = ({
 
   const cropComplete = (
     croppedArea: PixelCrop,
-    croppedAreaPixels: PixelCrop
-  ) => {
-    setCroppedAreaPixels(croppedAreaPixels);
+    croppedPixels: PixelCrop
+  ): void => {
+    setCroppedAreaPixels(croppedPixels);
   };
 
-  const cropImage = async (userId: string, setting: PicturesVariants | '') => {
-    try {
-      const croppedImageData: ReturnGetCroppedImg | null = await getCroppedImg(
-        imageURL,
-        croppedAreaPixels!,
-        rotation
+  const cropImage = async (
+    userId: string,
+    variant: PicturesVariants | ''
+  ): Promise<void> => {
+    const croppedImageData: ReturnGetCroppedImg | null = await getCroppedImg(
+      imageURL,
+      croppedAreaPixels!,
+      rotation
+    );
+    if (variant) {
+      dispatch(
+        saveUserImage({
+          picture: croppedImageData!.picture,
+          userId,
+          setting: variant,
+        })
       );
-      setting &&
-        dispatch(
-          saveUserImage({
-            picture: croppedImageData!.picture,
-            userId,
-            setting,
-          })
-        );
-      setIsImageCropOpen(false);
-      setSetting('');
-    } catch (error) {
-      console.log(error);
     }
+    setIsImageCropOpen(false);
+    setSetting('');
   };
 
   return (

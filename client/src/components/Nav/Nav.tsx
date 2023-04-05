@@ -1,17 +1,18 @@
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import type { ReactElement } from 'react';
 import styles from './Nav.module.scss';
 import Links from './Links/Links';
 import ChatsPairsBlock from './CharsPairsBlock/ChatsPairsBlock';
 import ProfileBlock from './ProfileBlock/ProfileBlock';
-import { useEffect, useState } from 'react';
 
-const Nav = () => {
-  const pathname = useLocation().pathname;
+const Nav = (): ReactElement => {
+  const { pathname } = useLocation();
 
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
 
   useEffect(() => {
-    pathname === '/chat' ? setIsPairsOpened(false) : setIsPairsOpened(true);
+    setIsPairsOpened(!(pathname === '/chat'));
   }, [pathname]);
 
   return (
@@ -20,7 +21,10 @@ const Nav = () => {
       {pathname === '/profile' ? (
         <ProfileBlock />
       ) : (
-        <ChatsPairsBlock isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} />
+        <ChatsPairsBlock
+          isPairsOpened={isPairsOpened}
+          setIsPairsOpened={setIsPairsOpened}
+        />
       )}
     </aside>
   );

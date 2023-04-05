@@ -1,7 +1,8 @@
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { forwardRef, InputHTMLAttributes, PropsWithChildren } from 'react';
+import type { InputHTMLAttributes, PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 import styles from './Radio.module.scss';
 
 interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -23,7 +24,7 @@ export const RadioInput = forwardRef<
       {text}
       {props.checked && (
         <div className={styles.icon}>
-          {children ? children : <FontAwesomeIcon icon={faCheck} />}
+          {children ?? <FontAwesomeIcon icon={faCheck} />}
         </div>
       )}
     </label>

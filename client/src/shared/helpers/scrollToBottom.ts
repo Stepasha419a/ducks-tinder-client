@@ -1,7 +1,9 @@
+import type { MutableRefObject } from 'react';
+
 export function scrollToBottom(
-  ref: React.MutableRefObject<HTMLDivElement | null>,
-  behaviour?: boolean
-) {
+  ref: MutableRefObject<HTMLDivElement | null>,
+  behaviour?: boolean,
+): void {
   if (ref.current && !behaviour) {
     ref.current.scrollTop = ref.current.scrollHeight;
   } else {

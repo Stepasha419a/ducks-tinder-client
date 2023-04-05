@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch } from '../../../../../../hooks';
@@ -5,11 +6,11 @@ import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { InterestsSettingPopup } from '../../../../../popups';
 import { useDefaultValues } from '../../../../hooks';
-import { SettingFieldArrayValues } from '../../../../interfaces';
+import type { SettingFieldArrayValues } from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
 
-export const InterestsForm = () => {
+export const InterestsForm = (): ReactElement => {
   const dispatch = useAppDispatch();
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
@@ -34,7 +35,7 @@ export const InterestsForm = () => {
     },
   });
 
-  const toggleInterest = (item: string) => {
+  const toggleInterest = (item: string): void => {
     if (interests.includes(item)) {
       setInterests(interests.filter((interest: string) => interest !== item));
     } else {
@@ -42,7 +43,7 @@ export const InterestsForm = () => {
     }
   };
 
-  const cancelHandler = () => {
+  const cancelHandler = (): void => {
     reset();
     dispatch(setIsUserInfoSetting(false));
   };

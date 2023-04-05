@@ -1,10 +1,10 @@
-import styles from './Popup.module.scss';
-import { FC, PropsWithChildren } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import { PopupProps } from './Popup.types';
+import styles from './Popup.module.scss';
+import type { PopupProps } from './Popup.types';
 
-const portal = document.getElementById('portal');
+const portalElement = document.getElementById('portal');
 
 export const Popup: FC<PropsWithChildren<PopupProps>> = ({
   children,
@@ -25,6 +25,6 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
         <div onClick={closeHandler} className={styles.closeArea}></div>
       </div>
     </div>,
-    portal!
+    portalElement!,
   );
 };

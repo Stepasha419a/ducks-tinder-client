@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import type { InputHTMLAttributes } from 'react';
 
 type VariantType = 'rounded' | 'low-rounded' | 'default';
 

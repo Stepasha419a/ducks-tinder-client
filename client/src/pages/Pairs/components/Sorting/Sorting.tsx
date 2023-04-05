@@ -1,7 +1,8 @@
+import type { FC } from 'react';
+import { useState } from 'react';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC, useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { InterestsSettingPopup } from '../../../../components/popups';
 import PairsSettingsPopup from '../../popups/PairsSettings/PairsSettingsPopup';
@@ -10,7 +11,7 @@ import {
   INITIAL_SORTS,
   INTERESTS_FOR_LOOP,
 } from '../../../../shared/constants';
-import { PairSorts } from '../../../../shared/api/interfaces';
+import type { PairSorts } from '../../../../shared/api/interfaces';
 
 interface SortingProps {
   setSorts: (sorts: PairSorts) => void;
@@ -39,7 +40,7 @@ export const Sorting: FC<SortingProps> = ({ setSorts }) => {
     control,
   });
 
-  const toggleInterest = (item: string) => {
+  const toggleInterest = (item: string): void => {
     if (interests.includes(item)) {
       setInterests(interests.filter((interest) => interest !== item));
     } else {
@@ -47,7 +48,7 @@ export const Sorting: FC<SortingProps> = ({ setSorts }) => {
     }
   };
 
-  const toggleAccount = (item: string) => {
+  const toggleAccount = (item: string): void => {
     if (account.includes(item)) {
       setAccount(account.filter((setting) => setting !== item));
     } else {
@@ -60,12 +61,12 @@ export const Sorting: FC<SortingProps> = ({ setSorts }) => {
     setIsSortPopupOpen(false);
   });
 
-  const forcedToggleInterest = (item: string) => {
+  const forcedToggleInterest = (item: string): void => {
     toggleInterest(item);
     submitHandler();
   };
 
-  const forcedToggleAccount = (item: string) => {
+  const forcedToggleAccount = (item: string): void => {
     toggleAccount(item);
     submitHandler();
   };

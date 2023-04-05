@@ -1,14 +1,15 @@
+import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
-import Nav from '../Nav/Nav';
-import styles from './Layout.module.scss';
 import { useDispatch } from 'react-redux';
+import Nav from '../Nav/Nav';
 import { checkFields } from '../../redux/settings/settings.slice';
 import { useAppSelector } from '../../hooks';
+import styles from './Layout.module.scss';
 
-export const Layout = () => {
+export const Layout = (): ReactElement | null => {
   const navigate = useNavigate();
-  const url = useLocation().pathname;
+  const { pathname } = useLocation();
 
   const dispatch = useDispatch();
 
@@ -33,10 +34,10 @@ export const Layout = () => {
 
   if (isAuth) {
     if (
-      url === '/' ||
-      url === '/chat' ||
-      url === '/pairs' ||
-      url === '/profile'
+      pathname === '/' ||
+      pathname === '/chat' ||
+      pathname === '/pairs' ||
+      pathname === '/profile'
     ) {
       return (
         <div className={styles.tinder}>
@@ -46,10 +47,8 @@ export const Layout = () => {
           </div>
         </div>
       );
-    } else {
-      return <Outlet />;
     }
-  } else {
-    return null;
+    return <Outlet />;
   }
+  return null;
 };

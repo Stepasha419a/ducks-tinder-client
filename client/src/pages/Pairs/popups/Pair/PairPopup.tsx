@@ -1,6 +1,7 @@
+import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { User } from '../../../../shared/api/interfaces';
+import type { User } from '../../../../shared/api/interfaces';
 import { createChatThunk } from '../../../../redux/chat/chat.thunks';
 import { deletePairThunk } from '../../../../redux/users/users.thunks';
 import { InterestsListPopup } from '../../../../components/popups';
@@ -13,10 +14,7 @@ interface PairPopupProps {
   setCurrentPair: (pair: User) => void;
 }
 
-const PairPopup: React.FC<PairPopupProps> = ({
-  currentPair,
-  setCurrentPair,
-}) => {
+const PairPopup: FC<PairPopupProps> = ({ currentPair, setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -29,21 +27,21 @@ const PairPopup: React.FC<PairPopupProps> = ({
   const interestsForLoop = [];
 
   for (let i = 0; i < 4; i++) {
-    currentPair.interests[i] && interestsForLoop.push(currentPair.interests[i]);
+    if (currentPair.interests[i]) interestsForLoop.push(currentPair.interests[i]);
   }
 
-  const deletePair = (userId: string) => {
+  const deletePair = (userId: string): void => {
     dispatch(
       deletePairThunk({ deleteForUserId: userId, userId: currentUser._id })
     );
   };
 
-  const refuseHandler = (userId: string) => {
+  const refuseHandler = (userId: string): void => {
     deletePair(userId);
     setCurrentPair({} as User);
   };
 
-  const acceptHandler = (userId: string) => {
+  const acceptHandler = (userId: string): void => {
     dispatch(
       createChatThunk({
         currentUserId: currentUser._id,
@@ -58,7 +56,7 @@ const PairPopup: React.FC<PairPopupProps> = ({
     <>
       <Popup
         closeHandler={() => setCurrentPair({} as User)}
-        size='l'
+        size="l"
         extraClassName={styles.overflow}
       >
         <Preview user={currentPair} isFull extraClassName={styles.padding} />

@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { Preview } from '../../../../components/Preview/Preview';
 import { useAppSelector } from '../../../../hooks';
 import { Button } from '../../../../shared/ui';
@@ -7,7 +8,7 @@ interface UserImageProps {
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
-export const UserImage: React.FC<UserImageProps> = ({ setIsImageSetting }) => {
+export const UserImage: FC<UserImageProps> = ({ setIsImageSetting }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   return (

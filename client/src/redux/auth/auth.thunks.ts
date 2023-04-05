@@ -1,8 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
-import { authAPI, UserAuthParams } from '../../api/auth/auth.api';
+import type { UserAuthParams } from '../../api/auth/auth.api';
+import { authAPI } from '../../api/auth/auth.api';
 import { API_URL } from '../../shared/api';
-import { AuthResponse } from '../../shared/api/interfaces';
+import type { AuthResponse } from '../../shared/api/interfaces';
 import { setCurrentUser } from '../users/users.slice';
 
 export const registerThunk = createAsyncThunk(
@@ -55,7 +56,6 @@ export const checkAuthThunk = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log(error);
         return rejectWithValue({
           message: error.message,
           status: error.response?.status,

@@ -1,10 +1,11 @@
-import styles from './AuthLayout.module.scss';
-import { FC, PropsWithChildren, useEffect, ReactNode } from 'react';
-import authImg from '../../../assets/images/auth-duck.png';
+import type { FC, PropsWithChildren, ReactNode } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { FieldErrors } from 'react-hook-form';
 import { useAppSelector } from '../../../hooks';
-import { AuthFieldValues } from '../hooks/useAuthForm';
-import { FieldErrors } from 'react-hook-form';
+import type { AuthFieldValues } from '../hooks/useAuthForm';
+import authImg from '../../../assets/images/auth-duck.png';
+import styles from './AuthLayout.module.scss';
 
 interface AuthLayoutProps {
   errors: FieldErrors<AuthFieldValues>;
@@ -40,8 +41,10 @@ const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
           <div className={styles.formWrapper}>
             <span className={styles.title}>{title}</span>
             <div className={styles.validation}>
-              {Object.values(errors).map((error) => (
-                <div className={styles.error}>{error.message!.toString()}</div>
+              {Object.values(errors).map((error, i) => (
+                <div key={i} className={styles.error}>
+                  {error.message?.toString()}
+                </div>
               ))}
             </div>
             {children}

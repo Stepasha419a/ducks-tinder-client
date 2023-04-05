@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import Buttons from './components/Buttons/Buttons';
 import TinderUserLoading from './components/UserLoading/Loading/Loading';
@@ -11,7 +12,7 @@ import { Preview } from '../../components/Preview/Preview';
 import { getSortedUserThunk } from '../../redux/tinder/tinder.thunks';
 import { setRequestedUsers } from '../../redux/tinder/tinder.slice';
 
-export const Tinder: React.FC = () => {
+export const Tinder: FC = () => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -44,7 +45,7 @@ export const Tinder: React.FC = () => {
     }
   }, [tinderUsers, currentUser.checkedUsers, dispatch]);
 
-  const resetHandler = () => {
+  const resetHandler = (): void => {
     dispatch(
       updateUserThunk({
         inputName: 'checkedUsers',

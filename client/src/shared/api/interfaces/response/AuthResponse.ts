@@ -1,7 +1,7 @@
-import { User } from "../User/User"
+import type { User } from '../../../../models/User/User';
 
 export interface AuthResponse {
-    accessToken: string
-    refreshToken: string
-    user: User
+  accessToken: string;
+  refreshToken: string;
+  user: User;
 }

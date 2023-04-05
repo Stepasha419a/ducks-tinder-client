@@ -1,17 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
-import { User } from '../../shared/api/interfaces';
+import type { User } from '../../shared/api/interfaces';
 import { makeDataObject } from '../../shared/helpers';
-import { RootState } from '../store';
+import type { RootState } from '../store';
 import { makeQuerySortsObj } from './helpers';
 
 export const getSortedUserThunk = createAsyncThunk(
   'users/getSortedUser',
-  async function (
+  async (
     args: { user: User; requestedUsers?: string[] },
-    { rejectWithValue }
-  ) {
+    { rejectWithValue },
+  ) => {
     try {
       const querySortsObj = makeQuerySortsObj(args.user, args.requestedUsers);
 
@@ -24,7 +24,7 @@ export const getSortedUserThunk = createAsyncThunk(
       }
       return rejectWithValue(['unexpected error', error]);
     }
-  }
+  },
 );
 
 export const likeUserThunk = createAsyncThunk(
@@ -37,19 +37,19 @@ export const likeUserThunk = createAsyncThunk(
       const tinderUser = tinderUsers[currentTinderUsersIndex];
 
       const data = makeDataObject({
-        currentUser: currentUser,
+        currentUser,
         inputName: 'checkedUsers',
         changedData: [...currentUser.checkedUsers, tinderUser._id],
       });
 
       const updateUserResponse = await usersAPI.updateUser(
         currentUser._id,
-        data
+        data,
       );
 
       const createPairResponse = await usersAPI.createPair(
         tinderUser._id,
-        currentUser._id
+        currentUser._id,
       );
 
       return {
@@ -62,7 +62,7 @@ export const likeUserThunk = createAsyncThunk(
       }
       return rejectWithValue(['unexpected error', error]);
     }
-  }
+  },
 );
 
 export const returnUserThunk = createAsyncThunk(
@@ -76,7 +76,7 @@ export const returnUserThunk = createAsyncThunk(
       if (currentTinderUsersIndex && isReturnUser) {
         const newCheckedUsers = [...currentUser.checkedUsers];
         const index = currentUser.checkedUsers.findIndex(
-          (item) => item === tinderUsers[currentTinderUsersIndex - 1]._id
+          (item) => item === tinderUsers[currentTinderUsersIndex - 1]._id,
         );
 
         newCheckedUsers.splice(index, 1);
@@ -97,7 +97,7 @@ export const returnUserThunk = createAsyncThunk(
       }
       return rejectWithValue(['unexpected error', error]);
     }
-  }
+  },
 );
 
 export const dislikeUserThunk = createAsyncThunk(
@@ -125,5 +125,5 @@ export const dislikeUserThunk = createAsyncThunk(
       }
       return rejectWithValue(['unexpected error', error]);
     }
-  }
+  },
 );

@@ -1,4 +1,8 @@
-import {
+import type { AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
+import type {
   ChangedData,
   ImageInterface,
   InnerObjectName,
@@ -6,17 +10,14 @@ import {
   PicturesVariants,
   User,
 } from '../../shared/api/interfaces';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { usersAPI } from '../../api/users/users.api';
-import { RootState } from '../store';
 import { makeUserImagesObject } from './helpers';
 import { makeDataObject } from '../../shared/helpers/makeDataObject';
 
-export async function fetchUserById(id: string) {
+export async function fetchUserById(id: string): Promise<User> {
   const response = await usersAPI.getCurrentUser(id);
 
-  const user = await response.data;
+  const user = response.data;
 
   return user;
 }
@@ -52,11 +53,11 @@ export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
   async (pairsId: string[], { rejectWithValue }) => {
     try {
-      const pairs = [];
-      for await (const pairId of pairsId) {
-        const user = await fetchUserById(pairId);
-        pairs.push(user);
-      }
+      const pairs = await Promise.all(
+        pairsId.map(async (pairId) => fetchUserById(pairId))
+      ).then((results) => results.map(
+        (result: PromiseSettledResult<AxiosResponse<User, any>> | any) => result
+      ));
 
       return pairs;
     } catch (error) {

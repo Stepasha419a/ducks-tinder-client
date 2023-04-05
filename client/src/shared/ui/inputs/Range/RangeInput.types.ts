@@ -1,8 +1,8 @@
-export type RangeValue = {
+export interface RangeValue {
   min?: number;
   max?: number;
   value?: number;
-};
+}
 
 export interface RangeInputProps {
   value: RangeValue;
@@ -31,4 +31,12 @@ export interface MultiRangeInputProps {
   step?: number;
   setValue: (min: number, max: number) => void;
   completeValue: () => void;
+}
+
+export interface RangeStyles {
+  '--min': number;
+  '--max': number;
+  '--value-a': number;
+  '--value-b'?: number;
+  '--suffix': '%';
 }

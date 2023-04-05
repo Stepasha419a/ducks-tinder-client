@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import classNames from 'classnames';
 import { INTERESTS_LIST } from '../../../shared/constants';
 import { Button, Popup } from '../../../shared/ui';
@@ -9,7 +10,7 @@ interface InterestsSettingPopupProps {
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
 }
 
-export const InterestsSettingPopup: React.FC<InterestsSettingPopupProps> = ({
+export const InterestsSettingPopup: FC<InterestsSettingPopupProps> = ({
   pairInterests,
   toggleInterest,
   setIsInterestsSettingPopupOpen,

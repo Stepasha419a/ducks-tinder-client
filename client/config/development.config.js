@@ -100,7 +100,7 @@ module.exports = {
       emitWarning: true,
       failOnError: false,
       extensions: ['ts', 'tsx'],
-      overrideConfigFile: './.eslintrc',
+      overrideConfigFile: './.eslintrc.js',
     }),
   ],
   optimization: {

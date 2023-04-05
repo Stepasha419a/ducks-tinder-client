@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Tinder, Layout } from '../../components';
@@ -10,7 +11,7 @@ import { Policy } from '../Policy';
 import { Profile } from '../Profile';
 import { Registration } from '../Registration';
 
-const Routing = () => {
+const Routing = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

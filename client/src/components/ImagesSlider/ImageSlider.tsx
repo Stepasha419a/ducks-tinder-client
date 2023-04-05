@@ -1,5 +1,6 @@
-import classNames from 'classnames';
+import type { FC } from 'react';
 import { useState } from 'react';
+import classNames from 'classnames';
 import { PicturesEnum } from '../../shared/api/interfaces';
 import { makeImageUrl } from '../../shared/helpers';
 import Arrows from './Arrows/Arrows';
@@ -14,7 +15,7 @@ interface ImageSliderPropsInterface {
   arrowsExtraClassName?: string;
 }
 
-export const ImageSlider: React.FC<ImageSliderPropsInterface> = ({
+export const ImageSlider: FC<ImageSliderPropsInterface> = ({
   images,
   userId,
   extraClassName = '',
@@ -22,13 +23,13 @@ export const ImageSlider: React.FC<ImageSliderPropsInterface> = ({
   arrowsExtraClassName = '',
 }) => {
   const [current, setCurrent] = useState<number>(0);
-  const length = images.length;
+  const { length } = images;
 
-  const prevSlide = () => {
+  const prevSlide = (): void => {
     setCurrent(current === 0 ? 0 : current - 1);
   };
 
-  const nextSlide = () => {
+  const nextSlide = (): void => {
     setCurrent(current === length - 1 ? length - 1 : current + 1);
   };
 
@@ -62,7 +63,7 @@ export const ImageSlider: React.FC<ImageSliderPropsInterface> = ({
         const cnWrapper = classNames(
           styles.itemWrapper,
           index === current ? styles.active : styles.hidden,
-          extraWrapperClassName
+          extraWrapperClassName,
         );
 
         return (

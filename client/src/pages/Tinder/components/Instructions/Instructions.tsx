@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react';
+import { useState } from 'react';
 import {
   faArrowTurnDown,
   faDownLong,
@@ -6,11 +8,10 @@ import {
   faUpLong,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
 import { Button } from '../../../../shared/ui';
 import styles from './Instructions.module.scss';
 
-const Instructions = () => {
+const Instructions = (): ReactElement => {
   const [isInstructionsOpen, setisInstructionsOpen] = useState(true);
 
   if (!isInstructionsOpen) {

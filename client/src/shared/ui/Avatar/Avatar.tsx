@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { AvatarProps } from './Avatar.types';
+import type { FC } from 'react';
+import type { AvatarProps } from './Avatar.types';
 import styles from './Avatar.module.scss';
 import { makeImageUrl } from '../../../shared/helpers';
 
-export const Avatar: React.FC<AvatarProps> = ({
+export const Avatar: FC<AvatarProps> = ({
   size = 's',
   extraClassName,
   avatarUrl,
@@ -14,7 +15,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   const cnContainer = classNames(
     styles.container,
     styles[size],
-    extraClassName
+    extraClassName,
   );
   const cn = classNames(styles.image, styles[size]);
 

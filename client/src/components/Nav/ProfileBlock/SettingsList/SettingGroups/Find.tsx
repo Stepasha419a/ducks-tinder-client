@@ -1,14 +1,15 @@
+import type { FC } from 'react';
+import { useState } from 'react';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC, useState } from 'react';
 import { useAppSelector } from '../../../../../hooks';
-import {
+import type {
   ChangedData,
   InnerObjectName,
   SettingInputName,
 } from '../../../../../shared/api/interfaces';
-import { Validation } from '../../../../../shared/interfaces';
+import type { Validation } from '../../../../../shared/interfaces';
 import { CheckboxInput, RangeInput } from '../../../../../shared/ui';
 import styles from '../SettingsList.module.scss';
 
@@ -40,13 +41,13 @@ export const Find: FC<FindProps> = ({
     currentUser.partnerSettings.age
   );
 
-  const partnerAgeHandler = () => {
+  const partnerAgeHandler = (): void => {
     updateInputHandler('age', preferAgeSetting, 'partnerSettings');
   };
-  const distanceHandler = () => {
+  const distanceHandler = (): void => {
     updateInputHandler('distance', distanceSetting, 'partnerSettings');
   };
-  const setUsersOnlyInDistanceHandler = () => {
+  const setUsersOnlyInDistanceHandler = (): void => {
     updateInputHandler(
       'usersOnlyInDistance',
       !currentUser.partnerSettings.usersOnlyInDistance,
@@ -54,13 +55,13 @@ export const Find: FC<FindProps> = ({
     );
   };
 
-  const setInterestsHandler = () => {
+  const setInterestsHandler = (): void => {
     setInputHandler('interests');
   };
-  const setPlaceHandler = () => {
+  const setPlaceHandler = (): void => {
     setInputHandler('place', { min: 12, max: 30 }, 'partnerSettings');
   };
-  const setPreferSexHandler = () => {
+  const setPreferSexHandler = (): void => {
     setInputHandler('preferSex', null, 'partnerSettings', 'Interested in');
   };
 

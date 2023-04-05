@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import FailedPair from './Failed/FailedPair';
 import PairBlock from './PairBlock/PairBlock';
@@ -5,7 +6,7 @@ import Loading from './Loading/Loading';
 import { getUserPairsThunk } from '../../../../redux/users/users.thunks';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 
-const NavPair = () => {
+const NavPair = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);

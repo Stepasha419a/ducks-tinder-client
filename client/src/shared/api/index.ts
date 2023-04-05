@@ -1,1 +1,1 @@
-export { instance, API_URL } from './api';
+export { instance, API_URL } from './instance';

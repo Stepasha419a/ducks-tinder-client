@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { chatApi } from '../../api/chat/chat.api';
 import { chatSocket } from '../../api/chat/chat.socket';
-import { Message, User } from '../../shared/api/interfaces';
-import { RootState } from '../store';
+import type { Message, User } from '../../shared/api/interfaces';
+import type { RootState } from '../store';
 import { fetchUserById } from '../users/users.thunks';
 import {
   disconnectChat,
@@ -12,18 +12,20 @@ import {
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
-  async function (id: string, { rejectWithValue, getState }) {
+  async (id: string, { rejectWithValue, getState }) => {
     try {
       const { usersPage } = getState() as RootState;
       const { currentUser } = usersPage;
 
       const response = await chatApi.getChats(id);
 
-      const chats = await response.data;
+      const chats = response.data;
 
-      let allMembers: User[] = [];
-      for await (let chat of chats) {
-        for (let member of chat.members) {
+      const allMembers: User[] = [];
+
+      // TODO: do this server endpoint
+      for await (const chat of chats) {
+        for (const member of chat.members) {
           if (member !== id) {
             const user = await fetchUserById(member);
             allMembers.push(user);
@@ -62,7 +64,7 @@ export const createChatThunk = createAsyncThunk(
 
 export const connectChatThunk = createAsyncThunk(
   'chat/connectChat',
-  async function (args: { chatId: string }, { rejectWithValue, dispatch }) {
+  async (args: { chatId: string }, { rejectWithValue, dispatch }) => {
     try {
       const { chatId } = args;
 
@@ -70,7 +72,7 @@ export const connectChatThunk = createAsyncThunk(
 
       socket.on('connected', async () => {
         const response = await chatApi.getChat(chatId);
-        const chat = await response.data;
+        const chat = response.data;
         dispatch(setCurrentChatData(chat));
       });
 
@@ -92,7 +94,7 @@ export const connectChatThunk = createAsyncThunk(
 
 export const disconnectChatThunk = createAsyncThunk(
   'chat/disconnectChat',
-  function (_, { rejectWithValue }) {
+  (_, { rejectWithValue }) => {
     try {
       chatSocket.disconnectChat();
     } catch (error) {
@@ -106,7 +108,7 @@ export const disconnectChatThunk = createAsyncThunk(
 
 export const closeAllSockets = createAsyncThunk(
   'chat/closeSocket',
-  async function (_, { rejectWithValue }) {
+  async (_, { rejectWithValue }) => {
     try {
       chatSocket.closeAllSockets();
     } catch (error) {

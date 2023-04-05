@@ -5,12 +5,13 @@ import {
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import type { ReactElement } from 'react';
 import styles from '../AuthForm.module.scss';
 import { Button, TextField } from '../../../../shared/ui';
 import AuthLayout from '../../AuthLayout/AuthLayout';
 import { useAuthForm } from '../../hooks';
 
-export const LoginForm = () => {
+export const LoginForm = (): ReactElement => {
   const {
     fields: { email, password },
     validation: { errors, isValid },

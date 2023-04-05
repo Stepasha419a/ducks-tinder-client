@@ -1,5 +1,5 @@
+import type { FC } from 'react';
 import classNames from 'classnames';
-import { FC } from 'react';
 import styles from './Stripes.module.scss';
 
 interface StripesProps {

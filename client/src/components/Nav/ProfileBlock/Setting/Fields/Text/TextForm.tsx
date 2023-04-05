@@ -1,14 +1,15 @@
+import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
 import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { TextField } from '../../../../../../shared/ui';
 import { useCurrentValidation, useDefaultValues } from '../../../../hooks';
-import { SettingFieldValues } from '../../../../interfaces';
+import type { SettingFieldValues } from '../../../../interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './TextForm.module.scss';
 
-export const TextForm = () => {
+export const TextForm = (): ReactElement => {
   const dispatch = useAppDispatch();
   const formName = useAppSelector((state) => state.settings.formName);
 
@@ -25,7 +26,7 @@ export const TextForm = () => {
     dispatch(submitSettingsThunk({ changedData: data.input }));
   });
 
-  const cancelHandler = () => {
+  const cancelHandler = (): void => {
     dispatch(setIsUserInfoSetting(false));
   };
 

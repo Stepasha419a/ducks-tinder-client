@@ -1,8 +1,9 @@
-import { faCommentSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from './NoChats.module.scss'
+import type { ReactElement } from 'react';
+import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './NoChats.module.scss';
 
-const NoChats = () => {
+const NoChats = (): ReactElement => {
   return (
     <div className={styles.noChats}>
       <div className={styles.inner}>

@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
+import type { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { makeRangeStyles } from './helpers';
 import styles from './RangeInput.module.scss';
-import { RangeInputProps } from './RangeInput.types';
+import type { RangeInputProps } from './RangeInput.types';
 import MultiRangeInput from './variants/MultiRangeInput';
 import SingleRangeInput from './variants/SingleRangeInput';
 
@@ -21,20 +21,21 @@ export const RangeInput: FC<RangeInputProps> = ({
   const cnWrapper = classNames(
     styles.slider,
     styles.flat,
-    extraWrapperClassName
+    extraWrapperClassName,
   );
 
-  const handleRangeChange = (min: number, max: number) => {
-    if (min + 2 < max) {
-      setValue!({ min, max });
+  const handleRangeChange = (firstValue: number, secondValue: number): void => {
+    if (firstValue + 2 < secondValue) {
+      setValue({ min: firstValue, max: secondValue });
     }
   };
 
-  const handleChange = (value: number) => {
-    setValue({ value });
+  const handleChange = (currentValue: number): void => {
+    setValue({ value: currentValue });
   };
 
-  const checkIsMultiple = isMultiple && value.min && value.max;
+  const checkIsMultiple =
+    isMultiple && Boolean(value.min) && Boolean(value.max);
 
   return (
     <div
@@ -60,7 +61,7 @@ export const RangeInput: FC<RangeInputProps> = ({
       ) : (
         <SingleRangeInput
           value={value.value!}
-          setValue={handleChange!}
+          setValue={handleChange}
           completeValue={completeValue}
           min={min}
           max={max}

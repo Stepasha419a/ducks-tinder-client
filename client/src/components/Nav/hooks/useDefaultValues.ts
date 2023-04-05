@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../../hooks';
-import {
+import type {
   ChangablePartnerSettingsFields,
   ChangableUserFields,
 } from '../../../shared/interfaces';
@@ -16,6 +16,6 @@ export function useDefaultValues(): string | string[] {
   return innerObjectName
     ? currentUser[innerObjectName][
         settingInputName as ChangablePartnerSettingsFields
-      ]
+    ]
     : currentUser[settingInputName as ChangableUserFields];
 }

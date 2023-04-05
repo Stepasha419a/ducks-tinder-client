@@ -1,10 +1,11 @@
+import type { FC } from 'react';
+import { useState } from 'react';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { FC, useState } from 'react';
 import { useAppSelector } from '../../../../../hooks';
-import { ChangedData, InnerObjectName, SettingInputName } from '../../../../../shared/api/interfaces';
-import { Validation } from '../../../../../shared/interfaces';
+import type { ChangedData, InnerObjectName, SettingInputName } from '../../../../../shared/api/interfaces';
+import type { Validation } from '../../../../../shared/interfaces';
 import { RangeInput } from '../../../../../shared/ui';
 import styles from '../SettingsList.module.scss';
 
@@ -31,20 +32,20 @@ export const Account: FC<AccoutProps> = ({
 
   const [ageSetting, setAgeSetting] = useState(currentUser.age);
 
-  const ageSubmitHandler = () => {
+  const ageSubmitHandler = (): void => {
     updateInputHandler('age', ageSetting);
   };
 
-  const setEmailHandler = () => {
+  const setEmailHandler = (): void => {
     setInputHandler('email', { min: 0, max: 40, email: true });
   };
-  const setNameHandler = () => {
+  const setNameHandler = (): void => {
     setInputHandler('name', { min: 2, max: 14 });
   };
-  const setDescriptionHandler = () => {
+  const setDescriptionHandler = (): void => {
     setInputHandler('description', { min: 50, max: 400 });
   };
-  const setSexHandler = () => {
+  const setSexHandler = (): void => {
     setInputHandler('sex');
   };
 

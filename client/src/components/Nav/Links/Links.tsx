@@ -1,10 +1,10 @@
+import type { FC } from 'react';
 import {
   faBriefcase,
   faFireFlameCurved,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../../hooks';
 import { Avatar } from '../../../shared/ui';

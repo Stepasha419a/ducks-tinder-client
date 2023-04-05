@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
 import { Textarea } from '../../../../../../shared/ui';
@@ -6,9 +7,9 @@ import styles from './TextareaForm.module.scss';
 import { useCurrentValidation, useDefaultValues } from '../../../../hooks';
 import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
 import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
-import { SettingFieldValues } from '../../../../interfaces';
+import type { SettingFieldValues } from '../../../../interfaces';
 
-export const TextareaForm = () => {
+export const TextareaForm = (): ReactElement => {
   const dispatch = useAppDispatch();
   const formName = useAppSelector((state) => state.settings.formName);
 
@@ -25,7 +26,7 @@ export const TextareaForm = () => {
     dispatch(submitSettingsThunk({ changedData: data.input }));
   });
 
-  const cancelHandler = () => {
+  const cancelHandler = (): void => {
     dispatch(setIsUserInfoSetting(false));
   };
 

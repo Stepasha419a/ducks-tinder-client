@@ -1,8 +1,9 @@
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import type { FC } from 'react';
 import styles from './PairBlock.module.scss';
-import { User } from '../../../../../shared/api/interfaces';
+import type { User } from '../../../../../shared/api/interfaces';
 import { useAppSelector } from '../../../../../hooks';
 import { makeImageUrl } from '../../../../../shared/helpers';
 
@@ -10,7 +11,7 @@ interface PairBlockProps {
   firstPair: User;
 }
 
-export const PairBlock: React.FC<PairBlockProps> = ({ firstPair }) => {
+export const PairBlock: FC<PairBlockProps> = ({ firstPair }) => {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
 
   const imageUrl = makeImageUrl(firstPair._id, firstPair.pictures.avatar);

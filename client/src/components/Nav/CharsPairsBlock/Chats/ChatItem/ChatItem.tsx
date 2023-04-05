@@ -1,7 +1,8 @@
-import { User, Chat } from '../../../../../shared/api/interfaces';
+import type { FC } from 'react';
+import classNames from 'classnames';
+import type { User, Chat } from '../../../../../shared/api/interfaces';
 import styles from './ChatItem.module.scss';
 import { Avatar } from '../../../../../shared/ui';
-import classNames from 'classnames';
 
 interface ChatInterface {
   chat: Chat;
@@ -10,7 +11,7 @@ interface ChatInterface {
   connect: (chatId: string) => void;
 }
 
-const ChatItem: React.FC<ChatInterface> = ({
+const ChatItem: FC<ChatInterface> = ({
   chat,
   chatCompanion,
   currentChatId,
@@ -19,6 +20,13 @@ const ChatItem: React.FC<ChatInterface> = ({
   if (!chatCompanion) {
     return null;
   }
+
+  const isCompanion =
+    chat.messages[chat.messages.length - 1]?.userId === chatCompanion._id;
+
+  const username = isCompanion ? `${chatCompanion.name}: ` : 'you: ';
+
+  const messageName = chat.messages.length ? username : 'send first message';
 
   return (
     <div
@@ -36,13 +44,7 @@ const ChatItem: React.FC<ChatInterface> = ({
       <div className={styles.descr}>
         <div className={styles.name}>{chatCompanion.name}</div>
         <div className={styles.message}>
-          {chat.messages.length
-            ? chat.messages[chat.messages.length - 1]?.userId ===
-              chatCompanion._id
-              ? `${chatCompanion.name}: `
-              : 'you: '
-            : 'send first message'}
-
+          {messageName}
           {chat.messages[chat.messages.length - 1]?.content}
         </div>
       </div>
