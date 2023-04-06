@@ -24,15 +24,13 @@ interface PreviewPropsInterface {
 
 export const Preview: FC<PreviewPropsInterface> = ({
   user,
-  setIsFullPreview = () => {},
+  setIsFullPreview = null,
   isFull = false,
   isShadow = false,
   extraClassName,
 }) => {
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
-
-  const isSetIsFullPreview = Boolean(setIsFullPreview.length);
 
   const interestsForLoop = [];
 
@@ -52,7 +50,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
           extraWrapperClassName={classNames(isShadow && styles.wrapper)}
           arrowsExtraClassName={classNames(isShadow && styles.arrows)}
         />
-        {isFull && isSetIsFullPreview && (
+        {isFull && setIsFullPreview && (
           <Button
             variant="mark"
             onClick={() => setIsFullPreview(false)}
@@ -62,7 +60,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
           </Button>
         )}
       </div>
-      <div onClick={() => setIsFullPreview(true)} className={styles.descr}>
+      <div onClick={() => setIsFullPreview && setIsFullPreview(true)} className={styles.descr}>
         <div className={styles.person}>
           {user.name} <span className={styles.years}>{user.age}</span>
         </div>
@@ -75,7 +73,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
           {user.partnerSettings.distance}
           <span className={styles.text}>km from you</span>
         </div>
-        {!isFull && (
+        {!isFull && setIsFullPreview && (
           <Button
             variant="mark"
             onClick={() => setIsFullPreview(true)}

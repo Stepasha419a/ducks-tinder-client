@@ -1,4 +1,3 @@
-import type { AxiosResponse } from 'axios';
 import { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
@@ -55,9 +54,7 @@ export const getUserPairsThunk = createAsyncThunk(
     try {
       const pairs = await Promise.all(
         pairsId.map(async (pairId) => fetchUserById(pairId))
-      ).then((results) => results.map(
-        (result: PromiseSettledResult<AxiosResponse<User, any>> | any) => result
-      ));
+      ).then((results) => results.map((result) => result));
 
       return pairs;
     } catch (error) {

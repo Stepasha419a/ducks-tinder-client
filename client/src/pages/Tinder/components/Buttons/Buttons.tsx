@@ -91,7 +91,6 @@ const Buttons: FC<ButtonsProps> = ({
       cnIcon: `${styles.icon} ${styles.green}`,
     },
     {
-      onClick: () => {},
       extraClassName: [styles.btn, styles.small, styles.purple],
       cnWrapper: styles.wrapper,
       icon: faBolt,
@@ -107,7 +106,7 @@ const Buttons: FC<ButtonsProps> = ({
             return (
               <Button
                 variant="tinder"
-                onClick={buttonData.onClick}
+                onClick={() => buttonData.onClick && buttonData.onClick()}
                 onFocus={(e) => btnFocus(e)}
                 onMouseOut={(e) => btnMouseOut(e)}
                 extraClassName={buttonData.extraClassName}

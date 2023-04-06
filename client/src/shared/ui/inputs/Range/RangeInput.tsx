@@ -12,7 +12,7 @@ export const RangeInput: FC<RangeInputProps> = ({
   max,
   step = 1,
   setValue,
-  completeValue = () => {},
+  completeValue = null,
   isMultiple = false,
   extraWrapperClassName,
 }) => {
@@ -51,7 +51,7 @@ export const RangeInput: FC<RangeInputProps> = ({
         <MultiRangeInput
           value={value}
           setValue={handleRangeChange}
-          completeValue={completeValue}
+          completeValue={() => completeValue && completeValue()}
           min={min}
           max={max}
           step={step}
@@ -62,7 +62,7 @@ export const RangeInput: FC<RangeInputProps> = ({
         <SingleRangeInput
           value={value.value!}
           setValue={handleChange}
-          completeValue={completeValue}
+          completeValue={() => completeValue && completeValue()}
           min={min}
           max={max}
           step={step}

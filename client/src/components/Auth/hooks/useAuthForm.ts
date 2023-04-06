@@ -27,7 +27,7 @@ interface AuthFormReturn {
   submitHandler: FormEventHandler<HTMLFormElement>;
 }
 
-export function useAuthForm(isRegisterForm: boolean = false): AuthFormReturn {
+export function useAuthForm(isRegisterForm = false): AuthFormReturn {
   const dispatch = useAppDispatch();
   const formError = useAppSelector((state) => state.authPage.formError);
 

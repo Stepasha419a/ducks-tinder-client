@@ -7,7 +7,6 @@ export const CheckboxInput: FC<CheckboxProps> = ({
   variant = 'full',
   text,
   extraClassName,
-  children,
   ...props
 }) => {
   const cn = classNames(styles.label, styles[variant], extraClassName);

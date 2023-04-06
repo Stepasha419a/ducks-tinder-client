@@ -12,5 +12,5 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const cn = classNames(styles.textarea, extraClassName);
 
     return <textarea ref={ref} className={cn} {...props} />;
-  },
+  }
 );

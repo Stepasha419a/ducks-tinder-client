@@ -10,7 +10,7 @@ export function makeDataObject(args: {
   inputName: string;
   changedData: ChangedData;
   innerObjectName?: InnerObjectName;
-}): any {
+}) {
   const { currentUser, inputName, changedData, innerObjectName } = args;
 
   if (innerObjectName) {
