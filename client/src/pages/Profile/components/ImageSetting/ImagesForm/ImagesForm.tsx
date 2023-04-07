@@ -53,7 +53,7 @@ export const ImagesForm: FC<ImagesFormProps> = ({
       </div>
       <div className={styles.save}>
         <Button
-          onClick={() => submitHandler()}
+          onClick={submitHandler}
           variant="gradient"
           extraClassName={styles.btn}
         >

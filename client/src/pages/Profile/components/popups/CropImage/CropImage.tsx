@@ -42,21 +42,18 @@ export const CropImage: FC<CropImageProps> = ({
     setCroppedAreaPixels(croppedPixels);
   };
 
-  const cropImage = async (
-    userId: string,
-    variant: PicturesVariants | ''
-  ): Promise<void> => {
+  const submitHandler = async (): Promise<void> => {
     const croppedImageData: ReturnGetCroppedImg | null = await getCroppedImg(
       imageURL,
       croppedAreaPixels!,
       rotation
     );
-    if (variant) {
+    if (setting) {
       dispatch(
         saveUserImage({
           picture: croppedImageData!.picture,
-          userId,
-          setting: variant,
+          userId: currentUser._id,
+          setting,
         })
       );
     }
@@ -100,7 +97,7 @@ export const CropImage: FC<CropImageProps> = ({
             Cancel
           </Button>
           <Button
-            onClick={() => cropImage(currentUser._id, setting)}
+            onClick={submitHandler}
             extraClassName={[styles.btn, styles.select]}
           >
             Select

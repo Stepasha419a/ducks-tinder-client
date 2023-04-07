@@ -12,7 +12,7 @@ const SingleRangeInput: FC<PropsWithChildren<SingleRangeInputProps>> = ({
     <input
       value={value}
       onChange={(e) => setValue(+e.target.value)}
-      onMouseUp={() => completeValue()}
+      onMouseUp={completeValue}
       type="range"
       {...props}
     />

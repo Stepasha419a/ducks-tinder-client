@@ -106,7 +106,7 @@ const Buttons: FC<ButtonsProps> = ({
             return (
               <Button
                 variant="tinder"
-                onClick={() => buttonData.onClick && buttonData.onClick()}
+                onClick={buttonData.onClick}
                 onFocus={(e) => btnFocus(e)}
                 onMouseOut={(e) => btnMouseOut(e)}
                 extraClassName={buttonData.extraClassName}
