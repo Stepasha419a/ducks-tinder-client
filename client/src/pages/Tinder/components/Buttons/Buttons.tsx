@@ -42,7 +42,7 @@ const Buttons: FC<ButtonsProps> = ({
 
   const newButtonsData = [
     {
-      onClick: () => dispatch(returnUserThunk()),
+      onClick: async () => dispatch(returnUserThunk()),
       extraClassName: [
         styles.btn,
         styles.small,
@@ -55,7 +55,7 @@ const Buttons: FC<ButtonsProps> = ({
       }`,
     },
     {
-      onClick: () => dispatch(dislikeUserThunk()),
+      onClick: async () => dispatch(dislikeUserThunk()),
       extraClassName: [
         styles.btn,
         styles.large,
@@ -67,7 +67,7 @@ const Buttons: FC<ButtonsProps> = ({
       cnIcon: `${styles.icon} ${styles.red} ${styles.large}`,
     },
     {
-      onClick: () => dispatch(likeUserThunk()),
+      onClick: async () => dispatch(likeUserThunk()),
       extraClassName: [
         styles.btn,
         styles.small,
@@ -79,7 +79,7 @@ const Buttons: FC<ButtonsProps> = ({
       cnIcon: `${styles.icon} ${styles.blue}`,
     },
     {
-      onClick: () => dispatch(likeUserThunk()),
+      onClick: async () => dispatch(likeUserThunk()),
       extraClassName: [
         styles.btn,
         styles.large,

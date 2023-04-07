@@ -45,7 +45,7 @@ const PairsSettingsPopup: FC<PairsSettingsPopupProps> = ({
     field: { value: photosCount, onChange: setPhotosCount },
   } = useController({ name: 'photos', control });
 
-  const photosCountArrForLoop = [...new Array(9)];
+  const photosCountArrForLoop: undefined[] = [...new Array(9) as undefined[]];
 
   return (
     <Popup title="Likes filter" closeHandler={submitHandler}>

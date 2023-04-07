@@ -20,7 +20,7 @@ const NavPair = (): ReactElement => {
     return <FailedPair />;
   }
 
-  if (!firstPair) {
+  if (!firstPair.name) {
     return <Loading />;
   }
 

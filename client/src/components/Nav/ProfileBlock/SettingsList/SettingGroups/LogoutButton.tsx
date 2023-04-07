@@ -10,7 +10,7 @@ export const LoggoutButton = (): ReactElement => {
     <div className={styles.group}>
       <div className={styles.items}>
         <div
-          onClick={() => dispatch(logoutThunk())}
+          onClick={async () => dispatch(logoutThunk())}
           className={`${styles.item} ${styles.pointer} ${styles.border}`}
         >
           <div className={styles.descr}>

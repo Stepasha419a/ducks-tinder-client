@@ -1,3 +1,4 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { User } from '../../shared/api/interfaces';
 import {
@@ -29,8 +30,8 @@ const usersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    setCurrentUser: (state, action) => {
-      state.currentUser = action.payload;
+    setCurrentUser: (state, { payload }: PayloadAction<User>) => {
+      state.currentUser = payload;
     },
   },
   extraReducers: (builder) => {
@@ -39,9 +40,9 @@ const usersSlice = createSlice({
         state.pairs = [...action.payload];
       })
       .addCase(deletePairThunk.fulfilled, (state, action) => {
-        state.currentUser = action.payload?.data;
+        state.currentUser = action.payload.data;
 
-        state.pairs.filter((pair) => pair._id !== action.payload?.deletedId);
+        state.pairs.filter((pair) => pair._id !== action.payload.deletedId);
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
@@ -53,9 +54,7 @@ const usersSlice = createSlice({
         state.currentUser = payload;
       })
       .addCase(mixUserImages.fulfilled, (state, { payload }) => {
-        if (payload) {
-          state.currentUser = payload;
-        }
+        state.currentUser = payload;
       })
       .addCase(likeUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;

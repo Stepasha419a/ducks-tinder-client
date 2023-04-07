@@ -5,16 +5,19 @@ import type {
 import { PicturesEnum } from '../../../shared/api/interfaces';
 
 export function parseImages(pictures: PicturesInterface): ImageInterface[] {
-  return Object.values(pictures).reduce(
-    (acc, cur, i) =>
-      Array.isArray(cur)
+  return Object.values(pictures).reduce<ImageInterface[]>(
+    (acc: ImageInterface[], current: string | string[], i) =>
+      Array.isArray(current)
         ? [
-          ...acc,
-          ...cur.map((image, index) => {
-            return { id: index + 1, image, setting: PicturesEnum.gallery };
-          }),
-        ]
-        : [...acc, { id: i, image: cur, setting: PicturesEnum.avatar }],
+            ...acc,
+            ...current.map((image: string, index) => {
+              return { id: index + 1, image, setting: PicturesEnum.gallery };
+            }),
+          ]
+        : ([
+            ...acc,
+            { id: i, image: current, setting: PicturesEnum.avatar },
+          ]),
     []
   );
 }

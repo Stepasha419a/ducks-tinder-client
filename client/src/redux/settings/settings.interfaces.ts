@@ -1,0 +1,19 @@
+import type { InnerObjectName, SettingInputName } from "../../models/User/User";
+import type { ErrorField, Setting, Validation } from "../../shared/interfaces";
+
+export interface SettingsInitialState {
+  setting: Setting;
+  settingInputName: SettingInputName;
+  innerObjectName: InnerObjectName;
+  isUserInfoSetting: boolean;
+  validaton: Validation | null;
+  formName: string | null;
+  errorFields: ErrorField[];
+}
+
+export interface SetInputPayload {
+  inputName: SettingInputName;
+  formName: string;
+  innerObjectName: InnerObjectName;
+  validation: Validation | null;
+}

@@ -5,6 +5,10 @@ import { useAppDispatch } from '../../../../hooks';
 import { sendMessageThunk } from '../../../../redux/chat/chat.thunks';
 import styles from './ChatForm.module.scss';
 
+interface ChatFormValues {
+  input: string;
+}
+
 export const ChatForm = (): ReactElement => {
   const dispatch = useAppDispatch();
 
@@ -13,7 +17,7 @@ export const ChatForm = (): ReactElement => {
     formState: { isValid },
     handleSubmit,
     reset,
-  } = useForm({ mode: 'onChange' });
+  } = useForm<ChatFormValues>({ mode: 'onChange' });
 
   const sendMessage = handleSubmit((data) => {
     if (data.input.trim()) {

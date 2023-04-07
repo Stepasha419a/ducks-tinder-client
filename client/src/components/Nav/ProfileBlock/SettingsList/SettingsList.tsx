@@ -38,9 +38,9 @@ const SettingsList = (): ReactElement => {
 
   const setInputHandler = (
     inputName: SettingInputName,
-    validation?: Validation | null,
-    innerObjectName?: InnerObjectName,
-    formName?: string
+    validation: Validation | null = null,
+    innerObjectName: InnerObjectName = null,
+    formName = ''
   ): void => {
     dispatch(
       setInput({

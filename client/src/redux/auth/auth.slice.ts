@@ -1,3 +1,4 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import {
   checkAuthThunk,
@@ -18,14 +19,12 @@ const initialState: InitialState = {
   formError: '',
 };
 
+type AuthMatcherPayload = { status: string; message: string } | string;
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    setFormError(state, action) {
-      state.formError = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerThunk.pending, (state) => {
@@ -54,12 +53,12 @@ const authSlice = createSlice({
         state.isAuth = false;
       })
       .addMatcher(
-        (action) => action.type.endsWith('rejected'),
-        (state, action) => {
+        (action: PayloadAction) => action.type.endsWith('rejected'),
+        (state, action: PayloadAction<AuthMatcherPayload>) => {
           if (action.type.split('/')[0] === 'auth') {
             state.isLoading = false;
             state.isAuth = false;
-            if (!action.payload.status) {
+            if (typeof action.payload === 'string') {
               // not status => not auth check, just form error
               state.formError = action.payload;
             }
@@ -69,5 +68,4 @@ const authSlice = createSlice({
   },
 });
 
-export const { setFormError } = authSlice.actions;
 export default authSlice.reducer;

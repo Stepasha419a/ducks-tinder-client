@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
-import type { FieldErrors } from 'react-hook-form';
+import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Button } from '../../../../../shared/ui';
 import type {
   SettingFieldArrayValues,
@@ -23,9 +23,10 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   submitHandler,
   cancelHandler,
 }) => {
+  console.log(errors)
   return (
     <form onSubmit={submitHandler} className={styles.setting}>
-      {Object.values(errors).map((error) => (
+      {Object.values(errors).map((error: FieldError) => (
         <div key={error.message} className={`${styles.name} ${styles.error}`}>
           {error.message!.toString()}
         </div>

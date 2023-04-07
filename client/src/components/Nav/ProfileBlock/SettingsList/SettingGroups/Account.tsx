@@ -109,7 +109,7 @@ export const Account: FC<AccoutProps> = ({
           <div className={styles.descr}>
             <div className={styles.title}>Sex</div>
             <div className={styles.setting}>
-              {currentUser.sex || 'Empty sex'}
+              {currentUser.sex}
               <FontAwesomeIcon
                 icon={faAngleRight}
                 className={styles.openIcon}

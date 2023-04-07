@@ -1,20 +1,15 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { InnerObjectName, SettingInputName } from '../../shared/api/interfaces';
-import type { ErrorField, Setting, Validation } from '../../shared/interfaces';
+import type { User } from '../../shared/api/interfaces';
+import type { Validation } from '../../shared/interfaces';
 import { checkUserFields } from './helpers';
+import type {
+  SetInputPayload,
+  SettingsInitialState,
+} from './settings.interfaces';
 import { submitSettingsThunk } from './settings.thunks';
 
-interface InitialState {
-  setting: Setting;
-  settingInputName: SettingInputName;
-  innerObjectName: InnerObjectName;
-  isUserInfoSetting: boolean;
-  validaton: Validation | null;
-  formName: string | null;
-  errorFields: ErrorField[];
-}
-
-const initialState: InitialState = {
+const initialState: SettingsInitialState = {
   setting: null,
   settingInputName: null,
   innerObjectName: null,
@@ -28,13 +23,13 @@ const settingSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    setIsUserInfoSetting: (state, { payload }) => {
+    setIsUserInfoSetting: (state, { payload }: PayloadAction<boolean>) => {
       state.isUserInfoSetting = payload;
     },
-    setValidation: (state, { payload }) => {
+    setValidation: (state, { payload }: PayloadAction<Validation | null>) => {
       state.validaton = payload;
     },
-    setInput: (state, { payload }) => {
+    setInput: (state, { payload }: PayloadAction<SetInputPayload>) => {
       if (!payload.formName) {
         state.formName = payload.inputName;
       } else {
@@ -60,7 +55,7 @@ const settingSlice = createSlice({
           state.setting = null;
       }
     },
-    checkFields: (state, { payload }) => {
+    checkFields: (state, { payload }: PayloadAction<User>) => {
       state.errorFields = checkUserFields(payload);
     },
   },

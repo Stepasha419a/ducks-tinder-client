@@ -1,3 +1,5 @@
+import type { CreateNotification } from './../../shared/interfaces/Notification';
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Notification } from '../../shared/interfaces';
 
@@ -13,11 +15,14 @@ const notificationsSlice = createSlice({
   name: 'notifications',
   initialState,
   reducers: {
-    createNotification: (state, action) => {
+    createNotification: (
+      state,
+      { payload }: PayloadAction<CreateNotification>
+    ) => {
       const notification: Notification = {
         id: Date.now(),
-        type: action.payload.type,
-        text: action.payload.text,
+        type: payload.type,
+        text: payload.text,
       };
 
       state.notifications = [...state.notifications, notification];
@@ -33,7 +38,7 @@ const notificationsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      (action) => action.type.endsWith('rejected'),
+      (action: PayloadAction) => action.type.endsWith('rejected'),
       (state, { payload, type }: { payload: string; type: string }) => {
         const signs = type.split('/');
         if (signs[1] !== 'getSortedUser' && signs[1] !== 'disconnectChat') {

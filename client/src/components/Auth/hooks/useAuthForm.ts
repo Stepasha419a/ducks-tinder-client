@@ -81,16 +81,6 @@ export function useAuthForm(isRegisterForm = false): AuthFormReturn {
     }),
   };
 
-  const nameFieldProps = {
-    type: 'text',
-    placeholder: 'First name',
-    ...register('name', {
-      required: 'Name is required',
-      minLength: { value: 2, message: 'Name must be more than 2' },
-      maxLength: { value: 14, message: 'Name must be less than 14' },
-    }),
-  };
-
   const props: AuthFormReturn = {
     fields: {
       email: emailFieldProps,
@@ -104,7 +94,15 @@ export function useAuthForm(isRegisterForm = false): AuthFormReturn {
   };
 
   if (isRegisterForm) {
-    props.fields.name = nameFieldProps;
+    props.fields.name = {
+      type: 'text',
+      placeholder: 'First name',
+      ...register('name', {
+        required: 'Name is required',
+        minLength: { value: 2, message: 'Name must be more than 2' },
+        maxLength: { value: 14, message: 'Name must be less than 14' },
+      }),
+    };
   }
 
   return props;

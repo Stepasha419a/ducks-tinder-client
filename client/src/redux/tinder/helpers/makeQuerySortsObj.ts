@@ -5,7 +5,7 @@ export function makeQuerySortsObj(
   requestedUsers?: string[]
 ): QuerySorts {
   const userIds =
-    requestedUsers ?? user.checkedUsers?.length ? user.checkedUsers : [];
+    requestedUsers ?? user.checkedUsers.length ? user.checkedUsers : [];
   return {
     distance: user.partnerSettings.distance,
     onlyNear: user.partnerSettings.usersOnlyInDistance,

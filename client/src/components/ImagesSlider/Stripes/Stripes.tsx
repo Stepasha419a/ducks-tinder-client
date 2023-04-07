@@ -8,7 +8,7 @@ interface StripesProps {
 }
 
 const Stripes: FC<StripesProps> = ({ current, length }) => {
-  const stripesArr = [...new Array(length)];
+  const stripesArr: undefined[] = [...new Array(length) as undefined[]];
   return (
     <div className={styles.stripes}>
       {stripesArr.map((_, i) => {

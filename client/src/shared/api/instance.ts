@@ -1,5 +1,6 @@
-import type { AxiosResponse, AxiosRequestConfig } from 'axios';
+import type { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
 import axios from 'axios';
+import type { AuthResponse } from './interfaces';
 
 export const API_URL = 'http://localhost:5000/';
 
@@ -15,17 +16,20 @@ instance.interceptors.request.use((config: AxiosRequestConfig) => {
   return config;
 });
 
+interface AxiosEditedConfig extends AxiosResponse {
+  _isRetry?: boolean;
+}
+
 instance.interceptors.response.use(
-  (config: AxiosResponse) => config,
-  async (error) => {
-    const originalRequest = error.config;
+  (config: AxiosEditedConfig) => config,
+  async (error: AxiosError) => {
+    const originalRequest = error.config as AxiosEditedConfig;
     if (
-      error.response.status === 401 &&
-      error.config &&
-      !error.config._isRetry
+      error.response?.status === 401 &&
+      !(error.config as AxiosEditedConfig)._isRetry
     ) {
       originalRequest._isRetry = true;
-      const response = await axios.get(`${API_URL}/auth/refresh`, {
+      const response = await axios.get<AuthResponse>(`${API_URL}/auth/refresh`, {
         withCredentials: true,
       });
       localStorage.setItem('token', response.data.accessToken);

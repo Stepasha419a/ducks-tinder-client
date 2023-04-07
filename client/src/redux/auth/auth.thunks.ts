@@ -20,7 +20,7 @@ export const registerThunk = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error instanceof AxiosError) {
-        return rejectWithValue(error.response?.data.message);
+        return rejectWithValue(error.message);
       }
       return rejectWithValue(['unexpected error', error]);
     }
@@ -37,7 +37,7 @@ export const loginThunk = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error instanceof AxiosError) {
-        return rejectWithValue(error.response?.data.message);
+        return rejectWithValue(error.message);
       }
       return rejectWithValue(['unexpected error', error]);
     }

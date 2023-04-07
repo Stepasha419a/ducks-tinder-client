@@ -1,3 +1,4 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { User } from '../../shared/api/interfaces';
 import {
@@ -27,14 +28,14 @@ const tinderSlice = createSlice({
   name: 'tinder',
   initialState,
   reducers: {
-    setIsReturnUser: (state, action) => {
-      state.isReturnUser = action.payload;
+    setIsReturnUser: (state, { payload }: PayloadAction<boolean>) => {
+      state.isReturnUser = payload;
     },
-    setRequestedUsers: (state, action) => {
-      state.requestedUsers = [...action.payload];
+    setRequestedUsers: (state, { payload }: PayloadAction<string[]>) => {
+      state.requestedUsers = [...payload];
     },
-    setCurrentTinderUsersIndex: (state, action) => {
-      state.currentTinderUsersIndex = action.payload;
+    setCurrentTinderUsersIndex: (state, { payload }: PayloadAction<number>) => {
+      state.currentTinderUsersIndex = payload;
     },
   },
   extraReducers: (builder) => {

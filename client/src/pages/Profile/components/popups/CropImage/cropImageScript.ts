@@ -13,7 +13,7 @@ export interface ReturnGetCroppedImg {
   url: string;
 }
 
-export const createImage = (url: string): Promise<HTMLImageElement> =>
+export const createImage = async (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image();
     image.addEventListener('load', () => resolve(image));

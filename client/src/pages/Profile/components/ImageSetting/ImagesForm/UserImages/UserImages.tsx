@@ -77,8 +77,8 @@ export const UserImages: FC<UserImagesProps> = ({
     (e.target as HTMLInputElement).classList.remove(styles.lowOpacity);
   };
 
-  const emptyFieldsForLoop = [
-    ...new Array(8 - currentUser.pictures.gallery.length),
+  const emptyFieldsForLoop: undefined[] = [
+    ...new Array(8 - currentUser.pictures.gallery.length) as undefined[],
   ];
 
   return (
