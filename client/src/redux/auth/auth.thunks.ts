@@ -1,5 +1,6 @@
+import type { AxiosErrorResponse } from './../../shared/api/interfaces/AxiosErrorResponse';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import type { UserAuthParams } from '../../api/auth/auth.api';
 import { authAPI } from '../../api/auth/auth.api';
 import { API_URL } from '../../shared/api';
@@ -18,11 +19,13 @@ export const registerThunk = createAsyncThunk(
 
       dispatch(setCurrentUser(response.data.user));
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -35,11 +38,13 @@ export const loginThunk = createAsyncThunk(
 
       dispatch(setCurrentUser(response.data.user));
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -54,14 +59,13 @@ export const checkAuthThunk = createAsyncThunk(
 
       dispatch(setCurrentUser(response.data.user));
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue({
-          message: error.message,
-          status: error.response?.status,
-        });
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -71,11 +75,13 @@ export const logoutThunk = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       await authAPI.logout();
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );

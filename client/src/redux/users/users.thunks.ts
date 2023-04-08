@@ -1,7 +1,8 @@
-import { AxiosError } from 'axios';
+import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import type {
+  AxiosErrorResponse,
   ChangedData,
   ImageInterface,
   InnerObjectName,
@@ -39,11 +40,13 @@ export const updateUserThunk = createAsyncThunk(
       const response = await usersAPI.updateUser(currentUser._id, data);
 
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -57,11 +60,13 @@ export const getUserPairsThunk = createAsyncThunk(
       ).then((results) => results.map((result) => result));
 
       return pairs;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -79,11 +84,13 @@ export const deletePairThunk = createAsyncThunk(
       );
 
       return { data: response.data, deletedId: args.deleteForUserId };
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -102,11 +109,13 @@ export const saveUserImage = createAsyncThunk(
       );
 
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -133,11 +142,13 @@ export const deleteUserImage = createAsyncThunk(
       );
 
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );
@@ -157,11 +168,13 @@ export const mixUserImages = createAsyncThunk(
       );
 
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   }
 );

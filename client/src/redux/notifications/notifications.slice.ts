@@ -39,13 +39,13 @@ const notificationsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(
       (action: PayloadAction) => action.type.endsWith('rejected'),
-      (state, { payload, type }: { payload: string; type: string }) => {
-        const signs = type.split('/');
+      (state, action: PayloadAction<string>) => {
+        const signs = action.type.split('/');
         if (signs[1] !== 'getSortedUser' && signs[1] !== 'disconnectChat') {
           const notification: Notification = {
             id: Date.now(),
             type: 'error',
-            text: `${payload} at ${type}`,
+            text: `${action.payload || 'error occurred'} at ${action.type}`,
           };
           state.notifications = [...state.notifications, notification];
         }

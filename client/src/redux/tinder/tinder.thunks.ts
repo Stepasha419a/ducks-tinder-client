@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
+import axios from 'axios';
 import { usersAPI } from '../../api/users/users.api';
-import type { User } from '../../shared/api/interfaces';
+import type { AxiosErrorResponse, User } from '../../shared/api/interfaces';
 import { makeDataObject } from '../../shared/helpers';
 import type { RootState } from '../store';
 import { makeQuerySortsObj } from './helpers';
@@ -18,11 +18,13 @@ export const getSortedUserThunk = createAsyncThunk(
       const response = await usersAPI.getSortedUsers(querySortsObj);
 
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   },
 );
@@ -56,11 +58,13 @@ export const likeUserThunk = createAsyncThunk(
         ...updateUserResponse.data,
         checkedUsers: [...createPairResponse.data.checkedUsers],
       };
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   },
 );
@@ -91,11 +95,13 @@ export const returnUserThunk = createAsyncThunk(
 
         return response.data;
       }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   },
 );
@@ -119,11 +125,13 @@ export const dislikeUserThunk = createAsyncThunk(
 
       const response = await usersAPI.updateUser(currentUser._id, data);
       return response.data;
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        return rejectWithValue(error.message);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(
+          (error as AxiosErrorResponse).response!.data.message
+        );
       }
-      return rejectWithValue(['unexpected error', error]);
+      return rejectWithValue((error as Error).message);
     }
   },
 );

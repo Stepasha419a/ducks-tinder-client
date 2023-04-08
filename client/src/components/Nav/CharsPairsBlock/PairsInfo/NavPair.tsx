@@ -20,7 +20,9 @@ const NavPair = (): ReactElement => {
     return <FailedPair />;
   }
 
-  if (!firstPair.name) {
+  // throws errors because firstPair on refresh it's just an empty {}
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (!firstPair?.name) {
     return <Loading />;
   }
 

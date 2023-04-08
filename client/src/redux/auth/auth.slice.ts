@@ -19,8 +19,6 @@ const initialState: InitialState = {
   formError: '',
 };
 
-type AuthMatcherPayload = { status: string; message: string } | string;
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -54,12 +52,15 @@ const authSlice = createSlice({
       })
       .addMatcher(
         (action: PayloadAction) => action.type.endsWith('rejected'),
-        (state, action: PayloadAction<AuthMatcherPayload>) => {
+        (state, action: PayloadAction<string>) => {
           if (action.type.split('/')[0] === 'auth') {
+            // if it's auth error (refresh request) => set unauthorized
             state.isLoading = false;
             state.isAuth = false;
-            if (typeof action.payload === 'string') {
-              // not status => not auth check, just form error
+
+            const thunkName = action.type.split('/')[1];
+            // if it's auth form error => set error message
+            if (thunkName === 'loginUser' || thunkName === 'registerUser') {
               state.formError = action.payload;
             }
           }

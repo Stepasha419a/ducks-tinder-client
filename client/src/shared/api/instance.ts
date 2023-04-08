@@ -22,7 +22,7 @@ interface AxiosEditedConfig extends AxiosResponse {
 
 instance.interceptors.response.use(
   (config: AxiosEditedConfig) => config,
-  async (error: AxiosError) => {
+  async (error: AxiosError<{message: string; status: string}>) => {
     const originalRequest = error.config as AxiosEditedConfig;
     if (
       error.response?.status === 401 &&
