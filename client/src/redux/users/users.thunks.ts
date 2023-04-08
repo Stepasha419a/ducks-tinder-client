@@ -1,8 +1,6 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import type {
-  AxiosErrorResponse,
   ChangedData,
   ImageInterface,
   InnerObjectName,
@@ -13,6 +11,7 @@ import type {
 import { usersAPI } from '../../api/users/users.api';
 import { makeUserImagesObject } from './helpers';
 import { makeDataObject } from '../../shared/helpers/makeDataObject';
+import { returnErrorMessage } from '../../shared/helpers';
 
 export async function fetchUserById(id: string): Promise<User> {
   const response = await usersAPI.getCurrentUser(id);
@@ -41,12 +40,7 @@ export const updateUserThunk = createAsyncThunk(
 
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -61,12 +55,7 @@ export const getUserPairsThunk = createAsyncThunk(
 
       return pairs;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -85,12 +74,7 @@ export const deletePairThunk = createAsyncThunk(
 
       return { data: response.data, deletedId: args.deleteForUserId };
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -110,12 +94,7 @@ export const saveUserImage = createAsyncThunk(
 
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -143,12 +122,7 @@ export const deleteUserImage = createAsyncThunk(
 
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -169,12 +143,7 @@ export const mixUserImages = createAsyncThunk(
 
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );

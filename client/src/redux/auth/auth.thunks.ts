@@ -1,4 +1,3 @@
-import type { AxiosErrorResponse } from './../../shared/api/interfaces/AxiosErrorResponse';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { UserAuthParams } from '../../api/auth/auth.api';
@@ -6,6 +5,7 @@ import { authAPI } from '../../api/auth/auth.api';
 import { API_URL } from '../../shared/api';
 import type { AuthResponse } from '../../shared/api/interfaces';
 import { setCurrentUser } from '../users/users.slice';
+import { returnErrorMessage } from '../../shared/helpers';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',
@@ -20,12 +20,7 @@ export const registerThunk = createAsyncThunk(
       dispatch(setCurrentUser(response.data.user));
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -39,12 +34,7 @@ export const loginThunk = createAsyncThunk(
       dispatch(setCurrentUser(response.data.user));
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -60,12 +50,7 @@ export const checkAuthThunk = createAsyncThunk(
       dispatch(setCurrentUser(response.data.user));
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -76,12 +61,7 @@ export const logoutThunk = createAsyncThunk(
     try {
       await authAPI.logout();
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );

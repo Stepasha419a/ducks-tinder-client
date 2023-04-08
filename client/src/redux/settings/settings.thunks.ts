@@ -1,8 +1,8 @@
-import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { updateUserThunk } from '../users/users.thunks';
 import type { RootState } from '../store';
-import type { AxiosErrorResponse, ChangedData, InnerObjectName, SettingInputName } from '../../shared/api/interfaces';
+import type { ChangedData, InnerObjectName, SettingInputName } from '../../shared/api/interfaces';
+import { returnErrorMessage } from '../../shared/helpers';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',
@@ -26,12 +26,7 @@ export const submitSettingsThunk = createAsyncThunk(
         })
       );
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );

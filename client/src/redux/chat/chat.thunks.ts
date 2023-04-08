@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { chatApi } from '../../api/chat/chat.api';
 import { chatSocket } from '../../api/chat/chat.socket';
-import type { AxiosErrorResponse, Message, User } from '../../shared/api/interfaces';
+import type { Message, User } from '../../shared/api/interfaces';
+import { returnErrorMessage } from '../../shared/helpers';
 import type { RootState } from '../store';
 import { fetchUserById } from '../users/users.thunks';
 import {
@@ -38,12 +38,7 @@ export const getChatsThunk = createAsyncThunk(
 
       return { chats, allMembers };
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -57,12 +52,7 @@ export const createChatThunk = createAsyncThunk(
     try {
       await chatApi.createChat([args.currentUserId, args.otherUserId]);
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -89,12 +79,7 @@ export const connectChatThunk = createAsyncThunk(
         dispatch(disconnectChat());
       });
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -105,12 +90,7 @@ export const disconnectChatThunk = createAsyncThunk(
     try {
       chatSocket.disconnectChat();
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -121,12 +101,7 @@ export const closeAllSockets = createAsyncThunk(
     try {
       chatSocket.closeAllSockets();
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
@@ -140,12 +115,7 @@ export const sendMessageThunk = createAsyncThunk(
 
       chatSocket.sendMessage(content, currentUser.name, currentUser._id);
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   }
 );

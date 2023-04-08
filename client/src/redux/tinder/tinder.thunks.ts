@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { usersAPI } from '../../api/users/users.api';
-import type { AxiosErrorResponse, User } from '../../shared/api/interfaces';
-import { makeDataObject } from '../../shared/helpers';
+import type { User } from '../../shared/api/interfaces';
+import { makeDataObject, returnErrorMessage } from '../../shared/helpers';
 import type { RootState } from '../store';
 import { makeQuerySortsObj } from './helpers';
 
@@ -19,12 +18,7 @@ export const getSortedUserThunk = createAsyncThunk(
 
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   },
 );
@@ -59,12 +53,7 @@ export const likeUserThunk = createAsyncThunk(
         checkedUsers: [...createPairResponse.data.checkedUsers],
       };
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   },
 );
@@ -96,12 +85,7 @@ export const returnUserThunk = createAsyncThunk(
         return response.data;
       }
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   },
 );
@@ -126,12 +110,7 @@ export const dislikeUserThunk = createAsyncThunk(
       const response = await usersAPI.updateUser(currentUser._id, data);
       return response.data;
     } catch (error: unknown) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(
-          (error as AxiosErrorResponse).response!.data.message
-        );
-      }
-      return rejectWithValue((error as Error).message);
+      return rejectWithValue(returnErrorMessage(error));
     }
   },
 );
