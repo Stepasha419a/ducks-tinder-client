@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '@hooks';
 import { ChatForm, Messages, Status } from './components';
 
 export const Chat = (): ReactElement => {

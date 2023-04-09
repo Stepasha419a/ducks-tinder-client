@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import type { FC } from 'react';
 import styles from './PairBlock.module.scss';
-import type { User } from '../../../../../shared/api/interfaces';
-import { useAppSelector } from '../../../../../hooks';
-import { makeImageUrl } from '../../../../../shared/helpers';
+import type { User } from '@shared/api/interfaces';
+import { useAppSelector } from '@hooks';
+import { makeImageUrl } from '@shared/helpers';
 
 interface PairBlockProps {
   firstPair: User;

@@ -6,8 +6,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../../hooks';
-import { Avatar } from '../../../shared/ui';
+import { useAppSelector } from '@hooks';
+import { Avatar } from '@shared/ui';
 import styles from './Links.module.scss';
 
 interface LinksProps {

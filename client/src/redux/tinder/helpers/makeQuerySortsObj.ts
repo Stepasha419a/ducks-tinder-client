@@ -1,4 +1,4 @@
-import type { QuerySorts, User } from '../../../shared/api/interfaces';
+import type { QuerySorts, User } from '@shared/api/interfaces';
 
 export function makeQuerySortsObj(
   user: User,

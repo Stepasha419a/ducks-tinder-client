@@ -2,9 +2,9 @@ import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Nav from '../Nav/Nav';
-import { checkFields } from '../../redux/settings/settings.slice';
-import { useAppSelector } from '../../hooks';
+import { Nav } from '@components';
+import { checkFields } from '@redux/settings/settings.slice';
+import { useAppSelector } from '@hooks';
 import styles from './Layout.module.scss';
 
 export const Layout = (): ReactElement | null => {

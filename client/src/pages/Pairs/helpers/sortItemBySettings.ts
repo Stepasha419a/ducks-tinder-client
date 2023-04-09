@@ -2,7 +2,7 @@ import type {
   PairSorts,
   PairSortsKey,
   User,
-} from '../../../shared/api/interfaces';
+} from '@shared/api/interfaces';
 
 export function sortItemBySettings(
   item: User,

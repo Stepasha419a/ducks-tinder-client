@@ -1,2 +1,2 @@
-export { makeDataObject } from '../../../shared/helpers/makeDataObject';
+export { makeDataObject } from '@shared/helpers/makeDataObject';
 export { makeUserImagesObject } from './makeUserImagesObject';

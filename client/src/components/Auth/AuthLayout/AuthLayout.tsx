@@ -2,9 +2,9 @@ import type { FC, PropsWithChildren, ReactNode } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { FieldErrors } from 'react-hook-form';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '@hooks';
+import authImg from '@images/auth-duck.png';
 import type { AuthFieldValues } from '../hooks/useAuthForm';
-import authImg from '../../../assets/images/auth-duck.png';
 import styles from './AuthLayout.module.scss';
 
 interface AuthLayoutProps {

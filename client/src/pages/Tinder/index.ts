@@ -1,0 +1,1 @@
+export { Tinder } from './Tinder';

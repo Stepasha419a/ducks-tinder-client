@@ -1,7 +1,7 @@
 import type { RegisterOptions } from 'react-hook-form';
-import { useAppSelector } from '../../../hooks';
-import { EMAIL_REGEXP } from '../../../shared/constants';
-import type { Validation } from '../../../shared/interfaces';
+import { useAppSelector } from '@hooks';
+import { EMAIL_REGEXP } from '@shared/constants';
+import type { Validation } from '@shared/interfaces';
 import type { SettingFieldValues } from '../interfaces';
 
 export function useCurrentValidation():

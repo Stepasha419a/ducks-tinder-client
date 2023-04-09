@@ -1,3 +1,4 @@
+import type { ReactElement } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightLong,
@@ -5,9 +6,8 @@ import {
   faLock,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import type { ReactElement } from 'react';
+import { Button, TextField } from '@shared/ui';
 import styles from '../AuthForm.module.scss';
-import { Button, TextField } from '../../../../shared/ui';
 import AuthLayout from '../../AuthLayout/AuthLayout';
 import { useAuthForm } from '../../hooks';
 

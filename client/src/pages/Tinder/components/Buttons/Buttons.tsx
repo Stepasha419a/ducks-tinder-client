@@ -7,13 +7,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC, FocusEvent, MouseEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '../../../../redux/tinder/tinder.thunks';
-import { Button } from '../../../../shared/ui';
+} from '@redux/tinder/tinder.thunks';
+import { Button } from '@shared/ui';
 import styles from './Buttons.module.scss';
 
 interface ButtonsProps {

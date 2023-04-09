@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { RootState } from '../store';
+import type { RootState } from '@redux/store';
 import type {
   ChangedData,
   ImageInterface,
@@ -7,11 +7,11 @@ import type {
   PartnerSettings,
   PicturesVariants,
   User,
-} from '../../shared/api/interfaces';
-import { usersAPI } from '../../api/users/users.api';
+} from '@shared/api/interfaces';
+import { usersAPI } from '@api/users/users.api';
 import { makeUserImagesObject } from './helpers';
-import { makeDataObject } from '../../shared/helpers/makeDataObject';
-import { returnErrorMessage } from '../../shared/helpers';
+import { makeDataObject } from '@shared/helpers/makeDataObject';
+import { returnErrorMessage } from '@shared/helpers';
 
 export async function fetchUserById(id: string): Promise<User> {
   const response = await usersAPI.getCurrentUser(id);

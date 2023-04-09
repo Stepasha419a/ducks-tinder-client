@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import Preloader from '../../../../../components/Preloader/Preloader';
+import { Preloader } from '@components';
 import styles from './Loading.module.scss';
 
 const TinderUserLoading = (): ReactElement => {

@@ -1,11 +1,11 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { User } from '../../shared/api/interfaces';
+import type { User } from '@shared/api/interfaces';
 import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '../tinder/tinder.thunks';
+} from '@redux/tinder/tinder.thunks';
 import {
   deletePairThunk,
   deleteUserImage,

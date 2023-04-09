@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, TextField } from '../../../../shared/ui';
-import { useAppDispatch } from '../../../../hooks';
-import { sendMessageThunk } from '../../../../redux/chat/chat.thunks';
+import { Button, TextField } from '@shared/ui';
+import { useAppDispatch } from '@hooks';
+import { sendMessageThunk } from '@redux/chat/chat.thunks';
 import styles from './ChatForm.module.scss';
 
 interface ChatFormValues {

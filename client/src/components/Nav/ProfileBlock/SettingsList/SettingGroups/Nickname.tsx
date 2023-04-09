@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppSelector } from '../../../../../hooks';
-import type { InnerObjectName, SettingInputName } from '../../../../../shared/api/interfaces';
-import type { Validation } from '../../../../../shared/interfaces';
+import { useAppSelector } from '@hooks';
+import type { InnerObjectName, SettingInputName } from '@shared/api/interfaces';
+import type { Validation } from '@shared/interfaces';
 import styles from '../SettingsList.module.scss';
 
 interface NicknameProps {

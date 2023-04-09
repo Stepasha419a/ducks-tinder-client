@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { User } from '../../shared/api/interfaces';
+import type { User } from '@shared/api/interfaces';
 import {
   dislikeUserThunk,
   getSortedUserThunk,

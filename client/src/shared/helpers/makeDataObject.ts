@@ -3,7 +3,7 @@ import type {
   PartnerSettings,
   ChangedData,
   InnerObjectName,
-} from '../api/interfaces';
+} from '@shared/api/interfaces';
 
 export function makeDataObject(args: {
   currentUser: User;

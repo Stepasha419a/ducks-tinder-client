@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import type { FC } from 'react';
 import type { AvatarProps } from './Avatar.types';
 import styles from './Avatar.module.scss';
-import { makeImageUrl } from '../../../shared/helpers';
+import { makeImageUrl } from '@shared/helpers';
 
 export const Avatar: FC<AvatarProps> = ({
   size = 's',

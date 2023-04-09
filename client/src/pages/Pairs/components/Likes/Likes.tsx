@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '@hooks';
 import styles from './Likes.module.scss';
 
 export const Likes = (): ReactElement => {

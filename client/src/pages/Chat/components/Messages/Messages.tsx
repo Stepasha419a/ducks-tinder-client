@@ -1,11 +1,11 @@
 import type { ReactElement } from 'react';
 import { useEffect, useRef } from 'react';
-import { useAppSelector } from '../../../../hooks';
-import type { Message as MessageInterface } from '../../../../shared/api/interfaces';
+import { useAppSelector } from '@hooks';
+import type { Message as MessageInterface } from '@shared/api/interfaces';
 import {
   isRefElementVisible,
   scrollToBottom,
-} from '../../../../shared/helpers';
+} from '@shared/helpers';
 
 import { Message } from './Message/Message';
 import styles from './Messages.module.scss';

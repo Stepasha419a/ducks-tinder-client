@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useAppSelector } from '../../../../hooks';
+import { useAppSelector } from '@hooks';
 import Choose from './Choose/Choose';
 import FailedChats from './Failed/NoChats';
 

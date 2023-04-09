@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import type { ReactElement } from 'react';
-import type { Chat } from '../../../../shared/api/interfaces';
+import type { Chat } from '@shared/api/interfaces';
 import ChatItem from './ChatItem/ChatItem';
 import styles from './Chats.module.scss';
 import FailedChats from './Failed/FailedChats';
@@ -9,9 +9,9 @@ import {
   connectChatThunk,
   disconnectChatThunk,
   getChatsThunk,
-} from '../../../../redux/chat/chat.thunks';
-import Preloader from '../../../Preloader/Preloader';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
+} from '@redux/chat/chat.thunks';
+import { Preloader } from '@components';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 const Chats = (): ReactElement => {
   const dispatch = useAppDispatch();

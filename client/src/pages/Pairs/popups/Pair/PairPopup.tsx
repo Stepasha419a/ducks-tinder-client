@@ -1,12 +1,11 @@
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import type { User } from '../../../../shared/api/interfaces';
-import { createChatThunk } from '../../../../redux/chat/chat.thunks';
-import { deletePairThunk } from '../../../../redux/users/users.thunks';
-import { InterestsListPopup } from '../../../../components/popups';
-import { Preview } from '../../../../components/Preview/Preview';
-import { Button, Popup } from '../../../../shared/ui';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import type { User } from '@shared/api/interfaces';
+import { createChatThunk } from '@redux/chat/chat.thunks';
+import { deletePairThunk } from '@redux/users/users.thunks';
+import { Preview, InterestsListPopup } from '@components';
+import { Button, Popup } from '@shared/ui';
 import styles from './PairPopup.module.scss';
 
 interface PairPopupProps {

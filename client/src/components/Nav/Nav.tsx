@@ -6,7 +6,7 @@ import Links from './Links/Links';
 import ChatsPairsBlock from './CharsPairsBlock/ChatsPairsBlock';
 import ProfileBlock from './ProfileBlock/ProfileBlock';
 
-const Nav = (): ReactElement => {
+export const Nav = (): ReactElement => {
   const { pathname } = useLocation();
 
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
@@ -29,5 +29,3 @@ const Nav = (): ReactElement => {
     </aside>
   );
 };
-
-export default Nav;

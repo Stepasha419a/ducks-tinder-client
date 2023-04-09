@@ -1,15 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { chatApi } from '../../api/chat/chat.api';
-import { chatSocket } from '../../api/chat/chat.socket';
-import type { Message, User } from '../../shared/api/interfaces';
-import { returnErrorMessage } from '../../shared/helpers';
-import type { RootState } from '../store';
-import { fetchUserById } from '../users/users.thunks';
+import { chatApi } from '@api/chat/chat.api';
+import { chatSocket } from '@api/chat/chat.socket';
+import type { Message, User } from '@shared/api/interfaces';
+import { returnErrorMessage } from '@shared/helpers';
+import type { RootState } from '@redux/store';
+import { fetchUserById } from '@redux/users/users.thunks';
 import {
   disconnectChat,
   pushNewMessage,
   setCurrentChatData,
-} from './chat.slice';
+} from '@redux/chat/chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',

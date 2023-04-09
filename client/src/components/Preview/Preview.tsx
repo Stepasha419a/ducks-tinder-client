@@ -8,11 +8,10 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import type { User } from '../../shared/api/interfaces';
-import { ImageSlider } from '../ImagesSlider/ImageSlider';
-import { Button } from '../../shared/ui';
+import type { User } from '@shared/api/interfaces';
+import { ImageSlider, InterestsListPopup } from '@components';
+import { Button } from '@shared/ui';
 import styles from './Preview.module.scss';
-import { InterestsListPopup } from '../popups';
 
 interface PreviewPropsInterface {
   user: User;
@@ -60,7 +59,10 @@ export const Preview: FC<PreviewPropsInterface> = ({
           </Button>
         )}
       </div>
-      <div onClick={() => setIsFullPreview && setIsFullPreview(true)} className={styles.descr}>
+      <div
+        onClick={() => setIsFullPreview && setIsFullPreview(true)}
+        className={styles.descr}
+      >
         <div className={styles.person}>
           {user.name} <span className={styles.years}>{user.age}</span>
         </div>

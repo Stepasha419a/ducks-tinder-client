@@ -1,6 +1,6 @@
 import type { AxiosResponse } from 'axios';
-import { instance } from '../../shared/api';
-import type { Chat } from '../../shared/api/interfaces';
+import { instance } from '@shared/api';
+import type { Chat } from '@shared/api/interfaces';
 
 export const chatApi = {
   async getChats(id: string): Promise<AxiosResponse<Chat[]>> {

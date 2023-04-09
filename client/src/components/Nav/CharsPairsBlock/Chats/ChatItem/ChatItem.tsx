@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
-import type { User, Chat } from '../../../../../shared/api/interfaces';
+import type { User, Chat } from '@shared/api/interfaces';
 import styles from './ChatItem.module.scss';
-import { Avatar } from '../../../../../shared/ui';
+import { Avatar } from '@shared/ui';
 
 interface ChatInterface {
   chat: Chat;

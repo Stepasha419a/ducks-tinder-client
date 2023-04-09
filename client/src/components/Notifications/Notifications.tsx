@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { deleteNotification } from '../../redux/notifications/notifications.slice';
-import { Notification } from '../../shared/ui';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { deleteNotification } from '@redux/notifications/notifications.slice';
+import { Notification } from '@shared/ui';
 import styles from './Notifications.module.scss';
 
 export const Notifications = (): ReactElement | null => {

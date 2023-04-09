@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
-import { Avatar } from '../../../../../shared/ui';
-import type { Message as MessageType } from '../../../../../shared/api/interfaces';
+import { Avatar } from '@shared/ui';
+import type { Message as MessageType } from '@shared/api/interfaces';
 import styles from './Message.module.scss';
 
 interface MessageProps {

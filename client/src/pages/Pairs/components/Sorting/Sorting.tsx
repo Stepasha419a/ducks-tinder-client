@@ -4,14 +4,14 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useController, useForm } from 'react-hook-form';
-import { InterestsSettingPopup } from '../../../../components/popups';
+import { InterestsSettingPopup } from '@components';
 import PairsSettingsPopup from '../../popups/PairsSettings/PairsSettingsPopup';
 import styles from './Sorting.module.scss';
 import {
   INITIAL_SORTS,
   INTERESTS_FOR_LOOP,
-} from '../../../../shared/constants';
-import type { PairSorts } from '../../../../shared/api/interfaces';
+} from '@shared/constants';
+import type { PairSorts } from '@shared/api/interfaces';
 
 interface SortingProps {
   setSorts: (sorts: PairSorts) => void;

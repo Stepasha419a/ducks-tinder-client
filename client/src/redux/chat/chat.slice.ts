@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { Chat, Message } from '../../shared/api/interfaces';
+import type { Chat, Message } from '@shared/api/interfaces';
 import type { ChatInitialState, GetChatsThunkPayload } from './chat.interfaces';
 import {
   getChatsThunk,

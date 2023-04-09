@@ -1,6 +1,6 @@
-import defaultPhoto from '../../assets/images/default-duck.png';
-import type { PicturesVariants } from '../api/interfaces';
-import { PicturesEnum } from '../api/interfaces';
+import defaultPhoto from '@images/default-duck.png';
+import type { PicturesVariants } from '@shared/api/interfaces';
+import { PicturesEnum } from '@shared/api/interfaces';
 
 export function makeImageUrl(
   userId?: string,

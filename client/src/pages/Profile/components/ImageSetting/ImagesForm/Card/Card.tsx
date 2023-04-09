@@ -2,7 +2,7 @@ import type { FC, HTMLAttributes } from 'react';
 import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { Button } from '../../../../../../shared/ui';
+import { Button } from '@shared/ui';
 import styles from './Card.module.scss';
 
 interface CardProps extends HTMLAttributes<HTMLImageElement> {

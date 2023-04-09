@@ -1,11 +1,11 @@
 import type { AxiosResponse } from 'axios';
-import { instance } from '../../shared/api';
+import { instance } from '@shared/api';
 import type {
   PicturesVariants,
   QuerySorts,
   User,
   UserUnrequired,
-} from '../../shared/api/interfaces';
+} from '@shared/api/interfaces';
 
 export interface UserType {
   _id?: string;

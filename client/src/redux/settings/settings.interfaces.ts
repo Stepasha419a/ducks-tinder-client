@@ -1,5 +1,8 @@
-import type { InnerObjectName, SettingInputName } from "../../shared/api/interfaces/User/User";
-import type { ErrorField, Setting, Validation } from "../../shared/interfaces";
+import type {
+  InnerObjectName,
+  SettingInputName,
+} from '@shared/api/interfaces/User/User';
+import type { ErrorField, Setting, Validation } from '@shared/interfaces';
 
 export interface SettingsInitialState {
   setting: Setting;

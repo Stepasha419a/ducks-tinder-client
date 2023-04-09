@@ -1,6 +1,6 @@
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
-import type { Message } from '../../shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;

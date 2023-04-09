@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import headerImg from '../../assets/images/auth-duck.png';
+import headerImg from '@images/auth-duck.png';
 import styles from './Policy.module.scss';
 
 export const Policy = (): ReactElement => {

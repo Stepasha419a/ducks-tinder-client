@@ -3,12 +3,12 @@ import { useState } from 'react';
 import type {
   PicturesVariants,
   User,
-} from '../../../../../shared/api/interfaces';
+} from '@shared/api/interfaces';
+import { Button } from '@shared/ui';
 import { DialogUpload } from '../../popups';
 import { CropImage } from '../../popups/CropImage/CropImage';
 import { UserImages } from './UserImages/UserImages';
 import styles from './ImagesForm.module.scss';
-import { Button } from '../../../../../shared/ui';
 
 interface ImagesFormProps {
   currentUser: User;

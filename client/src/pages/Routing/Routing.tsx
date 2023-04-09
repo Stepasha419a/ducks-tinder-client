@@ -1,15 +1,18 @@
 import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Tinder, Layout } from '../../components';
-import { useAppDispatch } from '../../hooks';
-import { checkAuthThunk } from '../../redux/auth/auth.thunks';
-import { Chat } from '../Chat/Chat';
-import { Login } from '../Login';
-import { PairsPage } from '../Pairs';
-import { Policy } from '../Policy';
-import { Profile } from '../Profile';
-import { Registration } from '../Registration';
+import { Layout } from '@components';
+import { useAppDispatch } from '@hooks';
+import { checkAuthThunk } from '@redux/auth/auth.thunks';
+import {
+  Login,
+  Registration,
+  Tinder,
+  Profile,
+  Chat,
+  PairsPage,
+  Policy,
+} from '@pages';
 
 const Routing = (): ReactElement => {
   const dispatch = useAppDispatch();

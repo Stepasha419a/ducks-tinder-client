@@ -4,13 +4,13 @@ import Cropper from 'react-easy-crop';
 import type {
   PicturesVariants,
   User,
-} from '../../../../../shared/api/interfaces';
+} from '@shared/api/interfaces';
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';
 import styles from './CropImage.module.scss';
-import { saveUserImage } from '../../../../../redux/users/users.thunks';
-import { useAppDispatch } from '../../../../../hooks';
-import { Button, Popup, RangeInput } from '../../../../../shared/ui';
+import { saveUserImage } from '@redux/users/users.thunks';
+import { useAppDispatch } from '@hooks';
+import { Button, Popup, RangeInput } from '@shared/ui';
 
 interface CropImageProps {
   currentUser: User;

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import type { ReactElement } from 'react';
-import { setIsUserInfoSetting } from '../../../../redux/settings/settings.slice';
+import { setIsUserInfoSetting } from '@redux/settings/settings.slice';
 import { InterestsForm, RadioForm, TextareaForm, TextForm } from './Fields';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 
 const ProfileSetting = (): ReactElement => {
   const dispatch = useAppDispatch();

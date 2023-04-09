@@ -1,8 +1,8 @@
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '@hooks';
 import type {
   ChangablePartnerSettingsFields,
   ChangableUserFields,
-} from '../../../shared/interfaces';
+} from '@shared/interfaces';
 
 export function useDefaultValues(): string | string[] {
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);

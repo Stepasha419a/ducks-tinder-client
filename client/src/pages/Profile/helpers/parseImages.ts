@@ -1,8 +1,8 @@
 import type {
   ImageInterface,
   PicturesInterface,
-} from '../../../shared/api/interfaces';
-import { PicturesEnum } from '../../../shared/api/interfaces';
+} from '@shared/api/interfaces';
+import { PicturesEnum } from '@shared/api/interfaces';
 
 export function parseImages(pictures: PicturesInterface): ImageInterface[] {
   return Object.values(pictures).reduce<ImageInterface[]>(

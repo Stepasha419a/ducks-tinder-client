@@ -2,10 +2,10 @@ import type { BaseSyntheticEvent, FormEventHandler } from 'react';
 import { useEffect } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { loginThunk, registerThunk } from '../../../redux/auth/auth.thunks';
-import { EMAIL_REGEXP } from '../../../shared/constants';
-import type { TextFieldProps } from '../../../shared/ui/inputs/TextField/TextField.types';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { loginThunk, registerThunk } from '@redux/auth/auth.thunks';
+import { EMAIL_REGEXP } from '@shared/constants';
+import type { TextFieldProps } from '@shared/ui/inputs/TextField/TextField.types';
 
 // complicated interface, no need to use it as the truth
 export interface AuthFieldValues extends BaseSyntheticEvent {

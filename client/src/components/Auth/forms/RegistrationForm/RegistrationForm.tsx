@@ -7,10 +7,10 @@ import {
   faFileText,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
-import styles from '../AuthForm.module.scss';
+import { Button, TextField } from '@shared/ui';
 import AuthLayout from '../../AuthLayout/AuthLayout';
-import { Button, TextField } from '../../../../shared/ui';
 import { useAuthForm } from '../../hooks';
+import styles from '../AuthForm.module.scss';
 
 export const RegistrationForm = (): ReactElement => {
   const {

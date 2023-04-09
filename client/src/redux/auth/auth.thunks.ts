@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import type { UserAuthParams } from '../../api/auth/auth.api';
-import { authAPI } from '../../api/auth/auth.api';
-import { API_URL } from '../../shared/api';
-import type { AuthResponse } from '../../shared/api/interfaces';
+import type { UserAuthParams } from '@api/auth/auth.api';
+import { authAPI } from '@api/auth/auth.api';
+import { API_URL } from '@shared/api';
+import type { AuthResponse } from '@shared/api/interfaces';
+import { returnErrorMessage } from '@shared/helpers';
 import { setCurrentUser } from '../users/users.slice';
-import { returnErrorMessage } from '../../shared/helpers';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',

@@ -13,8 +13,17 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": false,
-    "jsx": "react-jsx"
-  },
-  "include": ["src"]
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "paths": {
+      "@images/*": ["./assets/images/*"],
+      "@shared/*": ["./shared/*"],
+      "@redux/*": ["./redux/*"],
+      "@api/*": ["./api/*"],
+      "@pages": ["./pages/index"],
+      "@components": ["./components/index"],
+      "@hooks": ["./hooks/index"]
+    }
+  }
 }

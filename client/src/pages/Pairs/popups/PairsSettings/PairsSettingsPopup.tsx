@@ -7,10 +7,10 @@ import {
   CheckboxInput,
   Popup,
   RangeInput,
-} from '../../../../shared/ui';
+} from '@shared/ui';
 import styles from './PairsSettingsPopup.module.scss';
-import { INTERESTS_FOR_LOOP } from '../../../../shared/constants';
-import type { PairSorts } from '../../../../shared/api/interfaces';
+import { INTERESTS_FOR_LOOP } from '@shared/constants';
+import type { PairSorts } from '@shared/api/interfaces';
 
 interface PairsSettingsPopupProps {
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;

@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { User } from '../../shared/api/interfaces';
-import type { Validation } from '../../shared/interfaces';
+import type { User } from '@shared/api/interfaces';
+import type { Validation } from '@shared/interfaces';
 import { checkUserFields } from './helpers';
 import type {
   SetInputPayload,

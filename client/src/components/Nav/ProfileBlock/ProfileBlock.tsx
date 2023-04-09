@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { useAppSelector } from '../../../hooks';
+import { useAppSelector } from '@hooks';
 import Setting from './Setting/Setting';
 import SettingsList from './SettingsList/SettingsList';
 

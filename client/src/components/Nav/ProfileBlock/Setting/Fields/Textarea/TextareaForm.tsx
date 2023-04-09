@@ -1,13 +1,13 @@
 import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
-import { Textarea } from '../../../../../../shared/ui';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { Textarea } from '@shared/ui';
+import { submitSettingsThunk } from '@redux/settings/settings.thunks';
+import { setIsUserInfoSetting } from '@redux/settings/settings.slice';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
-import styles from './TextareaForm.module.scss';
 import { useCurrentValidation, useDefaultValues } from '../../../../hooks';
-import { submitSettingsThunk } from '../../../../../../redux/settings/settings.thunks';
-import { setIsUserInfoSetting } from '../../../../../../redux/settings/settings.slice';
 import type { SettingFieldValues } from '../../../../interfaces';
+import styles from './TextareaForm.module.scss';
 
 export const TextareaForm = (): ReactElement => {
   const dispatch = useAppDispatch();

@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from 'react';
 import type { FieldErrors, FieldError } from 'react-hook-form';
-import { Button } from '../../../../../shared/ui';
+import { Button } from '@shared/ui';
 import type {
   SettingFieldArrayValues,
   SettingFieldValues,

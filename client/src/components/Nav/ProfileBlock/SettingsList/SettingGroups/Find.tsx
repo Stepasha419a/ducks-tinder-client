@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { useAppSelector } from '../../../../../hooks';
+import { useAppSelector } from '@hooks';
 import type {
   ChangedData,
   InnerObjectName,
   SettingInputName,
-} from '../../../../../shared/api/interfaces';
-import type { Validation } from '../../../../../shared/interfaces';
-import { CheckboxInput, RangeInput } from '../../../../../shared/ui';
+} from '@shared/api/interfaces';
+import type { Validation } from '@shared/interfaces';
+import { CheckboxInput, RangeInput } from '@shared/ui';
 import styles from '../SettingsList.module.scss';
 
 interface FindProps {
