@@ -1,4 +1,4 @@
-import type { User } from '../../../../models/User/User';
+import type { User } from '../User/User';
 
 export interface AuthResponse {
   accessToken: string;
