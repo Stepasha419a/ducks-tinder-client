@@ -6,7 +6,7 @@ import { returnErrorMessage } from '../../shared/helpers';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',
-  async (
+  (
     args: {
       changedData: ChangedData;
       inputName?: SettingInputName;

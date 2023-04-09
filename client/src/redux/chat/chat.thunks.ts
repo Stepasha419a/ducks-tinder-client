@@ -59,7 +59,7 @@ export const createChatThunk = createAsyncThunk(
 
 export const connectChatThunk = createAsyncThunk(
   'chat/connectChat',
-  async (args: { chatId: string }, { rejectWithValue, dispatch }) => {
+  (args: { chatId: string }, { rejectWithValue, dispatch }) => {
     try {
       const { chatId } = args;
 
@@ -97,7 +97,7 @@ export const disconnectChatThunk = createAsyncThunk(
 
 export const closeAllSockets = createAsyncThunk(
   'chat/closeSocket',
-  async (_, { rejectWithValue }) => {
+  (_, { rejectWithValue }) => {
     try {
       chatSocket.closeAllSockets();
     } catch (error: unknown) {
