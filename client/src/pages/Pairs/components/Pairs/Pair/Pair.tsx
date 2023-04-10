@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { User } from '@shared/api/interfaces';
 import styles from './Pair.module.scss';
-import PairPopup from '../../../popups/Pair/PairPopup';
+import { PairPopup } from '@/pages/Pairs/popups';
 import { makeImageUrl } from '@shared/helpers';
 
 interface PairPropsInterface {
@@ -10,11 +10,7 @@ interface PairPropsInterface {
   isCurrent: boolean;
 }
 
-const Pair: FC<PairPropsInterface> = ({
-  user,
-  setCurrentPair,
-  isCurrent,
-}) => {
+const Pair: FC<PairPropsInterface> = ({ user, setCurrentPair, isCurrent }) => {
   if (!user.name) {
     return <div>loading...</div>;
   }

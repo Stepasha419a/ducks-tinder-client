@@ -13,7 +13,7 @@ interface PairPopupProps {
   setCurrentPair: (pair: User) => void;
 }
 
-const PairPopup: FC<PairPopupProps> = ({ currentPair, setCurrentPair }) => {
+export const PairPopup: FC<PairPopupProps> = ({ currentPair, setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.usersPage.currentUser);
@@ -84,5 +84,3 @@ const PairPopup: FC<PairPopupProps> = ({ currentPair, setCurrentPair }) => {
     </>
   );
 };
-
-export default PairPopup;

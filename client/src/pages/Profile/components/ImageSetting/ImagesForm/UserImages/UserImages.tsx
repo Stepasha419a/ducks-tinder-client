@@ -12,7 +12,7 @@ import {
   mixUserImages,
 } from '@redux/users/users.thunks';
 import { makeImageUrl } from '@shared/helpers';
-import { parseImages } from '../../../../helpers';
+import { parseImages } from '@/pages/Profile/helpers';
 import { Card } from '../Card/Card';
 import styles from './UserImages.module.scss';
 

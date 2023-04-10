@@ -23,7 +23,7 @@ interface PairsSettingsPopupProps {
   reset: UseFormReset<PairSorts>;
 }
 
-const PairsSettingsPopup: FC<PairsSettingsPopupProps> = ({
+export const PairsSettingsPopup: FC<PairsSettingsPopupProps> = ({
   setIsInterestsSettingPopupOpen,
   control,
   submitHandler,
@@ -162,5 +162,3 @@ const PairsSettingsPopup: FC<PairsSettingsPopupProps> = ({
     </Popup>
   );
 };
-
-export default PairsSettingsPopup;

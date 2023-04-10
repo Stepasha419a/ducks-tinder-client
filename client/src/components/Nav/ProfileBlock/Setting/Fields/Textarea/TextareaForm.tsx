@@ -5,8 +5,8 @@ import { Textarea } from '@shared/ui';
 import { submitSettingsThunk } from '@redux/settings/settings.thunks';
 import { setIsUserInfoSetting } from '@redux/settings/settings.slice';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
-import { useCurrentValidation, useDefaultValues } from '../../../../hooks';
-import type { SettingFieldValues } from '../../../../interfaces';
+import { useCurrentValidation, useDefaultValues } from 'components/Nav/hooks';
+import type { SettingFieldValues } from 'components/Nav/interfaces';
 import styles from './TextareaForm.module.scss';
 
 export const TextareaForm = (): ReactElement => {

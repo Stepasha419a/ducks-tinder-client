@@ -5,8 +5,8 @@ import { useAppDispatch } from '@hooks';
 import { setIsUserInfoSetting } from '@redux/settings/settings.slice';
 import { submitSettingsThunk } from '@redux/settings/settings.thunks';
 import { InterestsSettingPopup } from '@components';
-import { useDefaultValues } from '../../../../hooks';
-import type { SettingFieldArrayValues } from '../../../../interfaces';
+import { useDefaultValues } from 'components/Nav/hooks';
+import type { SettingFieldArrayValues } from 'components/Nav/interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
 

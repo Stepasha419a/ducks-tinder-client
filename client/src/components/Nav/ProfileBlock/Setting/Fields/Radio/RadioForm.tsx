@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { setIsUserInfoSetting } from '@redux/settings/settings.slice';
 import { submitSettingsThunk } from '@redux/settings/settings.thunks';
 import { RadioInput } from '@shared/ui';
-import { useDefaultValues } from '../../../../hooks';
-import type { SettingFieldValues } from '../../../../interfaces';
+import { useDefaultValues } from 'components/Nav/hooks';
+import type { SettingFieldValues } from 'components/Nav/interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './RadioForm.module.scss';
 
