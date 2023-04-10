@@ -21,7 +21,7 @@
       "@images/*": ["./assets/images/*"],
       "@shared/*": ["./shared/*"],
       "@redux/*": ["./redux/*"],
-      "@pages": ["./pages/index"],
+      "@pages/*": ["./pages/*"],
       "@components": ["./components/index"],
       "@hooks": ["./hooks/index"]
     }

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import Routing from './pages/Routing/Routing';
 import { Loading, Notifications } from '@components';
+import Routing from '@pages/index';
 
 function App(): ReactElement {
   return (

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { User } from '@shared/api/interfaces';
 import styles from './Pair.module.scss';
-import { PairPopup } from '@/pages/Pairs/popups';
+import { PairPopup } from '@pages/Pairs/popups';
 import { makeImageUrl } from '@shared/helpers';
 
 interface PairPropsInterface {
