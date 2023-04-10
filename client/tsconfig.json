@@ -21,7 +21,6 @@
       "@images/*": ["./assets/images/*"],
       "@shared/*": ["./shared/*"],
       "@redux/*": ["./redux/*"],
-      "@api/*": ["./api/*"],
       "@pages": ["./pages/index"],
       "@components": ["./components/index"],
       "@hooks": ["./hooks/index"]

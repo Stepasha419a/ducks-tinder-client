@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { usersAPI } from '@api/users/users.api';
 import type { User } from '@shared/api/interfaces';
+import { usersAPI } from '@shared/api/users/users.api';
 import { makeDataObject, returnErrorMessage } from '@shared/helpers';
 import type { RootState } from '@redux/store';
 import { makeQuerySortsObj } from './helpers';

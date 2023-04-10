@@ -8,10 +8,10 @@ import type {
   PicturesVariants,
   User,
 } from '@shared/api/interfaces';
-import { usersAPI } from '@api/users/users.api';
-import { makeUserImagesObject } from './helpers';
+import { usersAPI } from '@shared/api/users/users.api';
 import { makeDataObject } from '@shared/helpers/makeDataObject';
 import { returnErrorMessage } from '@shared/helpers';
+import { makeUserImagesObject } from './helpers';
 
 export async function fetchUserById(id: string): Promise<User> {
   const response = await usersAPI.getCurrentUser(id);
