@@ -6,7 +6,7 @@ import {
   getChatsThunk,
   connectChatThunk,
   closeAllSockets,
-} from './chat.thunks';
+} from '../chat.thunks';
 
 const initialState: ChatInitialState = {
   chats: [],

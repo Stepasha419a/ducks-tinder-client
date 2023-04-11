@@ -5,7 +5,7 @@ import type { UserAuthParams } from '@shared/api/auth/auth.api';
 import { authAPI } from '@shared/api/auth/auth.api';
 import { API_URL } from '@shared/api';
 import { returnErrorMessage } from '@shared/helpers';
-import { setCurrentUser } from '../users/users.slice';
+import { setCurrentUser } from '../../users/model/users.slice';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',
