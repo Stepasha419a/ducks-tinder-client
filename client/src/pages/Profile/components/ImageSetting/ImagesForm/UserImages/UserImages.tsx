@@ -10,7 +10,7 @@ import { PicturesEnum } from '@shared/api/interfaces';
 import {
   deleteUserImage,
   mixUserImages,
-} from '@redux/users/users.thunks';
+} from '@entities/users/model/users.thunks';
 import { makeImageUrl } from '@shared/helpers';
 import { parseImages } from '@pages/Profile/helpers';
 import { Card } from '../Card/Card';

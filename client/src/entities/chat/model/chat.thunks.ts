@@ -3,13 +3,13 @@ import type { Message, User } from '@shared/api/interfaces';
 import { chatApi } from '@shared/api/chat/chat.api';
 import { chatSocket } from '@shared/api/chat/chat.socket';
 import { returnErrorMessage } from '@shared/helpers';
-import type { RootState } from '@redux/store';
-import { fetchUserById } from '@redux/users/users.thunks';
+import type { RootState } from '@app/store';
+import { fetchUserById } from '@entities/users/model/users.thunks';
 import {
   disconnectChat,
   pushNewMessage,
   setCurrentChatData,
-} from '@redux/chat/chat.slice';
+} from '@entities/chat/model/chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',

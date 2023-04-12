@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { setIsUserInfoSetting } from '@redux/settings/settings.slice';
-import { submitSettingsThunk } from '@redux/settings/settings.thunks';
+import { setIsUserInfoSetting } from '@entities/settings/model/settings.slice';
+import { submitSettingsThunk } from '@entities/settings/model/settings.thunks';
 import { RadioInput } from '@shared/ui';
 import { useDefaultValues } from 'components/Nav/hooks';
 import type { SettingFieldValues } from 'components/Nav/interfaces';

@@ -7,9 +7,9 @@ import type {
   InnerObjectName,
   SettingInputName,
 } from '@shared/api/interfaces';
-import { createNotification } from '@redux/notifications/notifications.slice';
-import { setInput } from '@redux/settings/settings.slice';
-import { submitSettingsThunk } from '@redux/settings/settings.thunks';
+import { createNotification } from '@entities/notifications/model/notifications.slice';
+import { setInput } from '@entities/settings/model/settings.slice';
+import { submitSettingsThunk } from '@entities/settings/model/settings.thunks';
 import {
   Account,
   Find,

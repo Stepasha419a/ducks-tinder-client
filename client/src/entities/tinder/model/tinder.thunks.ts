@@ -2,14 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { User } from '@shared/api/interfaces';
 import { usersAPI } from '@shared/api/users/users.api';
 import { makeDataObject, returnErrorMessage } from '@shared/helpers';
-import type { RootState } from '@redux/store';
+import type { RootState } from '@app/store';
 import { makeQuerySortsObj } from './helpers';
 
 export const getSortedUserThunk = createAsyncThunk(
   'users/getSortedUser',
   async (
     args: { user: User; requestedUsers?: string[] },
-    { rejectWithValue },
+    { rejectWithValue }
   ) => {
     try {
       const querySortsObj = makeQuerySortsObj(args.user, args.requestedUsers);
@@ -20,7 +20,7 @@ export const getSortedUserThunk = createAsyncThunk(
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
-  },
+  }
 );
 
 export const likeUserThunk = createAsyncThunk(
@@ -40,12 +40,12 @@ export const likeUserThunk = createAsyncThunk(
 
       const updateUserResponse = await usersAPI.updateUser(
         currentUser._id,
-        data,
+        data
       );
 
       const createPairResponse = await usersAPI.createPair(
         tinderUser._id,
-        currentUser._id,
+        currentUser._id
       );
 
       return {
@@ -55,7 +55,7 @@ export const likeUserThunk = createAsyncThunk(
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
-  },
+  }
 );
 
 export const returnUserThunk = createAsyncThunk(
@@ -69,7 +69,7 @@ export const returnUserThunk = createAsyncThunk(
       if (currentTinderUsersIndex && isReturnUser) {
         const newCheckedUsers = [...currentUser.checkedUsers];
         const index = currentUser.checkedUsers.findIndex(
-          (item) => item === tinderUsers[currentTinderUsersIndex - 1]._id,
+          (item) => item === tinderUsers[currentTinderUsersIndex - 1]._id
         );
 
         newCheckedUsers.splice(index, 1);
@@ -87,7 +87,7 @@ export const returnUserThunk = createAsyncThunk(
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
-  },
+  }
 );
 
 export const dislikeUserThunk = createAsyncThunk(
@@ -112,5 +112,5 @@ export const dislikeUserThunk = createAsyncThunk(
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
-  },
+  }
 );

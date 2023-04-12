@@ -9,7 +9,7 @@ import {
   connectChatThunk,
   disconnectChatThunk,
   getChatsThunk,
-} from '@redux/chat/chat.thunks';
+} from '@entities/chat/model/chat.thunks';
 import { Preloader } from '@components';
 import { useAppDispatch, useAppSelector } from '@hooks';
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import type { ReactElement } from 'react';
-import { setIsUserInfoSetting } from '@redux/settings/settings.slice';
+import { setIsUserInfoSetting } from '@entities/settings/model/settings.slice';
 import { InterestsForm, RadioForm, TextareaForm, TextForm } from './Fields';
 import { useAppDispatch, useAppSelector } from '@hooks';
 

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Nav } from '@components';
-import { checkFields } from '@redux/settings/settings.slice';
+import { checkFields } from '@entities/settings/model/settings.slice';
 import { useAppSelector } from '@hooks';
 import styles from './Layout.module.scss';
 

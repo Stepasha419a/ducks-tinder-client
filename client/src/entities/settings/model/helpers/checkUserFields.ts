@@ -5,7 +5,10 @@ const potentialFields: ErrorField[] = ['description', 'interests', 'place'];
 
 type CheckingErrorField = 'description' | 'interests' | 'place';
 
-function checkField(user: User, field: ErrorField): CheckingErrorField | boolean {
+function checkField(
+  user: User,
+  field: ErrorField
+): CheckingErrorField | boolean {
   switch (field) {
     case 'description':
       if (user.description === '') {
@@ -29,7 +32,8 @@ function checkField(user: User, field: ErrorField): CheckingErrorField | boolean
 
 export function checkUserFields(user: User): ErrorField[] {
   return potentialFields.reduce(
-    (acc: ErrorField[], field: ErrorField) => (checkField(user, field) ? [...acc, field] : acc),
+    (acc: ErrorField[], field: ErrorField) =>
+      checkField(user, field) ? [...acc, field] : acc,
     []
   );
 }

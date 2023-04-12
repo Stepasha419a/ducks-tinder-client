@@ -12,7 +12,7 @@ import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '@redux/tinder/tinder.thunks';
+} from '@entities/tinder/model/tinder.thunks';
 import { Button } from '@shared/ui';
 import styles from './Buttons.module.scss';
 

@@ -18,9 +18,10 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"],
+      "@app/*": ["./application/*"],
       "@images/*": ["./assets/images/*"],
       "@shared/*": ["./shared/*"],
-      "@redux/*": ["./redux/*"],
+      "@entities/*": ["./entities/*"],
       "@pages/*": ["./pages/*"],
       "@components": ["./components/index"],
       "@hooks": ["./hooks/index"]

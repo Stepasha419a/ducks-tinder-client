@@ -5,7 +5,7 @@ import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '@redux/tinder/tinder.thunks';
+} from '@entities/tinder/model/tinder.thunks';
 import {
   deletePairThunk,
   deleteUserImage,

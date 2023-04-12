@@ -6,11 +6,11 @@ import TinderUserFailed from './components/UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
 import Instructions from './components/Instructions/Instructions';
 import { Button } from '@shared/ui';
-import { updateUserThunk } from '@redux/users/users.thunks';
+import { updateUserThunk } from '@entities/users/model/users.thunks';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { Preview } from '@components';
-import { getSortedUserThunk } from '@redux/tinder/tinder.thunks';
-import { setRequestedUsers } from '@redux/tinder/tinder.slice';
+import { getSortedUserThunk } from '@entities/tinder/model/tinder.thunks';
+import { setRequestedUsers } from '@entities/tinder/model/tinder.slice';
 
 export const Tinder: FC = () => {
   const dispatch = useAppDispatch();

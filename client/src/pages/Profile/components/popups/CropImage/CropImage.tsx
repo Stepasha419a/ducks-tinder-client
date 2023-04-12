@@ -8,7 +8,7 @@ import type {
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';
 import styles from './CropImage.module.scss';
-import { saveUserImage } from '@redux/users/users.thunks';
+import { saveUserImage } from '@entities/users/model/users.thunks';
 import { useAppDispatch } from '@hooks';
 import { Button, Popup, RangeInput } from '@shared/ui';
 
