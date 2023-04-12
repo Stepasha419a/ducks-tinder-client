@@ -3,14 +3,14 @@ import { useEffect } from 'react';
 import FailedPair from './Failed/FailedPair';
 import PairBlock from './PairBlock/PairBlock';
 import Loading from './Loading/Loading';
-import { getUserPairsThunk } from '@entities/users/model/users.thunks';
+import { getUserPairsThunk } from '@entities/user/model';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 const NavPair = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const firstPair = useAppSelector((state) => state.usersPage.pairs[0]);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const firstPair = useAppSelector((state) => state.user.pairs[0]);
 
   useEffect(() => {
     dispatch(getUserPairsThunk(currentUser.pairs));

@@ -11,8 +11,8 @@ const initialState: InitialState = {
   notifications: [],
 };
 
-const notificationsSlice = createSlice({
-  name: 'notifications',
+const notificationSlice = createSlice({
+  name: 'notificationSlice',
   initialState,
   reducers: {
     createNotification: (
@@ -55,6 +55,6 @@ const notificationsSlice = createSlice({
 });
 
 export const { createNotification, deleteNotification } =
-  notificationsSlice.actions;
+  notificationSlice.actions;
 
-export default notificationsSlice.reducer;
+export const notificationReducer = notificationSlice.reducer;

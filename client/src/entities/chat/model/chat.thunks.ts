@@ -4,19 +4,19 @@ import { chatApi } from '@shared/api/chat/chat.api';
 import { chatSocket } from '@shared/api/chat/chat.socket';
 import { returnErrorMessage } from '@shared/helpers';
 import type { RootState } from '@app/store';
-import { fetchUserById } from '@entities/users/model/users.thunks';
+import { fetchUserById } from '@entities/user/model';
 import {
   disconnectChat,
   pushNewMessage,
   setCurrentChatData,
-} from '@entities/chat/model/chat.slice';
+} from '@entities/chat/model';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
   async (id: string, { rejectWithValue, getState }) => {
     try {
-      const { usersPage } = getState() as RootState;
-      const { currentUser } = usersPage;
+      const { user } = getState() as RootState;
+      const { currentUser } = user;
 
       const response = await chatApi.getChats(id);
 
@@ -28,8 +28,8 @@ export const getChatsThunk = createAsyncThunk(
       for await (const chat of chats) {
         for (const member of chat.members) {
           if (member !== id) {
-            const user = await fetchUserById(member);
-            allMembers.push(user);
+            const chatMember = await fetchUserById(member);
+            allMembers.push(chatMember);
           }
         }
       }
@@ -110,8 +110,8 @@ export const sendMessageThunk = createAsyncThunk(
   'chat/sendMessage',
   (content: string, { rejectWithValue, getState }) => {
     try {
-      const { usersPage } = getState() as RootState;
-      const { currentUser } = usersPage;
+      const { user } = getState() as RootState;
+      const { currentUser } = user;
 
       chatSocket.sendMessage(content, currentUser.name, currentUser._id);
     } catch (error: unknown) {

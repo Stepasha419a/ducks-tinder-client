@@ -1,14 +1,11 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import type {
-  PicturesVariants,
-  User,
-} from '@shared/api/interfaces';
+import type { PicturesVariants, User } from '@shared/api/interfaces';
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';
 import styles from './CropImage.module.scss';
-import { saveUserImage } from '@entities/users/model/users.thunks';
+import { saveUserImageThunk } from '@entities/user/model';
 import { useAppDispatch } from '@hooks';
 import { Button, Popup, RangeInput } from '@shared/ui';
 
@@ -50,7 +47,7 @@ export const CropImage: FC<CropImageProps> = ({
     );
     if (setting) {
       dispatch(
-        saveUserImage({
+        saveUserImageThunk({
           picture: croppedImageData!.picture,
           userId: currentUser._id,
           setting,

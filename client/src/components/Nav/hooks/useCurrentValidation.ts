@@ -7,9 +7,9 @@ import type { SettingFieldValues } from '../interfaces';
 export function useCurrentValidation():
   | RegisterOptions<SettingFieldValues, 'input'>
   | undefined {
-  const formName = useAppSelector((state) => state.settings.formName)!;
+  const formName = useAppSelector((state) => state.setting.formName)!;
   const validation: Validation | null = useAppSelector(
-    (state) => state.settings.validaton
+    (state) => state.setting.validaton
   );
 
   return {

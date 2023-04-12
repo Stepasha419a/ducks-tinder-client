@@ -15,7 +15,7 @@ interface LinksProps {
 }
 
 const Links: FC<LinksProps> = ({ pathname }) => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
     <div className={styles.links}>

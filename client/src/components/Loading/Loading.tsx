@@ -6,7 +6,7 @@ import { useAppSelector } from '@hooks';
 import styles from './Loading.module.scss';
 
 export const Loading = (): ReactElement => {
-  const isLoading = useAppSelector((state) => state.authPage.isLoading);
+  const isLoading = useAppSelector((state) => state.auth.isLoading);
 
   return (
     <div

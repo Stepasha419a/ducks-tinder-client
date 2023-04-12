@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, TextField } from '@shared/ui';
 import { useAppDispatch } from '@hooks';
-import { sendMessageThunk } from '@entities/chat/model/chat.thunks';
+import { sendMessageThunk } from '@entities/chat/model';
 import styles from './ChatForm.module.scss';
 
 interface ChatFormValues {

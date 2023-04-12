@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { useAppDispatch } from '@hooks';
-import { logoutThunk } from '@entities/auth/model/auth.thunks';
+import { logoutThunk } from '@entities/auth/model';
 import styles from '../SettingsList.module.scss';
 
 export const LoggoutButton = (): ReactElement => {

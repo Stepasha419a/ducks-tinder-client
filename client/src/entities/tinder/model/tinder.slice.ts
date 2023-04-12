@@ -28,14 +28,8 @@ const tinderSlice = createSlice({
   name: 'tinder',
   initialState,
   reducers: {
-    setIsReturnUser: (state, { payload }: PayloadAction<boolean>) => {
-      state.isReturnUser = payload;
-    },
     setRequestedUsers: (state, { payload }: PayloadAction<string[]>) => {
       state.requestedUsers = [...payload];
-    },
-    setCurrentTinderUsersIndex: (state, { payload }: PayloadAction<number>) => {
-      state.currentTinderUsersIndex = payload;
     },
   },
   extraReducers: (builder) => {
@@ -60,10 +54,6 @@ const tinderSlice = createSlice({
   },
 });
 
-export const {
-  setRequestedUsers,
-  setIsReturnUser,
-  setCurrentTinderUsersIndex,
-} = tinderSlice.actions;
+export const { setRequestedUsers } = tinderSlice.actions;
 
-export default tinderSlice.reducer;
+export const tinderReducer = tinderSlice.reducer;

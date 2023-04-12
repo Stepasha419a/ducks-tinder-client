@@ -9,18 +9,18 @@ import {
   connectChatThunk,
   disconnectChatThunk,
   getChatsThunk,
-} from '@entities/chat/model/chat.thunks';
+} from '@entities/chat/model';
 import { Preloader } from '@components';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 const Chats = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const chats = useAppSelector((state) => state.chatPage.chats);
-  const currentChatId = useAppSelector((state) => state.chatPage.currentChatId);
-  const chatsUsers = useAppSelector((state) => state.chatPage.chatsUsers);
-  const isLoading = useAppSelector((state) => state.chatPage.isLoading);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const chats = useAppSelector((state) => state.chat.chats);
+  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
+  const chatsUsers = useAppSelector((state) => state.chat.chatsUsers);
+  const isLoading = useAppSelector((state) => state.chat.isLoading);
 
   useEffect(() => {
     dispatch(getChatsThunk(currentUser._id));

@@ -7,9 +7,9 @@ import type {
   InnerObjectName,
   SettingInputName,
 } from '@shared/api/interfaces';
-import { createNotification } from '@entities/notifications/model/notifications.slice';
-import { setInput } from '@entities/settings/model/settings.slice';
-import { submitSettingsThunk } from '@entities/settings/model/settings.thunks';
+import { createNotification } from '@entities/notification/model';
+import { setInput } from '@entities/setting/model';
+import { submitSettingsThunk } from '@entities/setting/model';
 import {
   Account,
   Find,
@@ -23,9 +23,9 @@ const SettingsList = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const notifications = useAppSelector(
-    (state) => state.notifications.notifications
+    (state) => state.notification.notifications
   );
-  const errorFields = useAppSelector((state) => state.settings.errorFields);
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   useEffect(() => {
     const errorText =

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { loginThunk, registerThunk } from '@entities/auth/model/auth.thunks';
+import { loginThunk, registerThunk } from '@entities/auth/model';
 import { EMAIL_REGEXP } from '@shared/constants';
 import type { TextFieldProps } from '@shared/ui/inputs/TextField/TextField.types';
 
@@ -29,7 +29,7 @@ interface AuthFormReturn {
 
 export function useAuthForm(isRegisterForm = false): AuthFormReturn {
   const dispatch = useAppDispatch();
-  const formError = useAppSelector((state) => state.authPage.formError);
+  const formError = useAppSelector((state) => state.auth.formError);
 
   const {
     register,

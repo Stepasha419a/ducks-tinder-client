@@ -1,13 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { User } from '@shared/api/interfaces';
-import type { Validation } from '@shared/interfaces';
 import { checkUserFields } from './helpers';
 import type {
   SetInputPayload,
   SettingsInitialState,
-} from './settings.interfaces';
-import { submitSettingsThunk } from './settings.thunks';
+} from './setting.interfaces';
+import { submitSettingsThunk } from './setting.thunks';
 
 const initialState: SettingsInitialState = {
   setting: null,
@@ -20,14 +19,11 @@ const initialState: SettingsInitialState = {
 };
 
 const settingSlice = createSlice({
-  name: 'settings',
+  name: 'settingReducer',
   initialState,
   reducers: {
     setIsUserInfoSetting: (state, { payload }: PayloadAction<boolean>) => {
       state.isUserInfoSetting = payload;
-    },
-    setValidation: (state, { payload }: PayloadAction<Validation | null>) => {
-      state.validaton = payload;
     },
     setInput: (state, { payload }: PayloadAction<SetInputPayload>) => {
       if (!payload.formName) {
@@ -66,7 +62,7 @@ const settingSlice = createSlice({
   },
 });
 
-export const { setIsUserInfoSetting, setValidation, setInput, checkFields } =
+export const { setIsUserInfoSetting, setInput, checkFields } =
   settingSlice.actions;
 
-export default settingSlice.reducer;
+export const settingReducer = settingSlice.reducer;

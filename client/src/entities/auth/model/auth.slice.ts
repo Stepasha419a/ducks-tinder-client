@@ -20,7 +20,7 @@ const initialState: InitialState = {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: 'authSlice',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -69,4 +69,4 @@ const authSlice = createSlice({
   },
 });
 
-export default authSlice.reducer;
+export const authReducer = authSlice.reducer;

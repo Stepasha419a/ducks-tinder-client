@@ -5,17 +5,17 @@ import type {
 } from '@shared/interfaces';
 
 export function useDefaultValues(): string | string[] {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
   const innerObjectName = useAppSelector(
-    (state) => state.settings.innerObjectName
+    (state) => state.setting.innerObjectName
   );
   const settingInputName = useAppSelector(
-    (state) => state.settings.settingInputName
+    (state) => state.setting.settingInputName
   );
 
   return innerObjectName
     ? currentUser[innerObjectName][
         settingInputName as ChangablePartnerSettingsFields
-    ]
+      ]
     : currentUser[settingInputName as ChangableUserFields];
 }

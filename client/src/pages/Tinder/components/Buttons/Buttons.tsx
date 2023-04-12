@@ -12,7 +12,7 @@ import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '@entities/tinder/model/tinder.thunks';
+} from '@entities/tinder/model';
 import { Button } from '@shared/ui';
 import styles from './Buttons.module.scss';
 
@@ -27,7 +27,7 @@ const Buttons: FC<ButtonsProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const isReturnUser = useAppSelector((state) => state.tinderPage.isReturnUser);
+  const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
 
   const btnFocus = (e: FocusEvent<HTMLButtonElement>): void => {
     const target = e.target as Element;

@@ -5,7 +5,7 @@ import { useAppSelector } from '@hooks';
 import styles from './Likes.module.scss';
 
 export const Likes = (): ReactElement => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
     <div className={styles.likes}>

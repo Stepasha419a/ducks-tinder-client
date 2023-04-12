@@ -2,8 +2,8 @@ import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import type { User } from '@shared/api/interfaces';
-import { createChatThunk } from '@entities/chat/model/chat.thunks';
-import { deletePairThunk } from '@entities/users/model/users.thunks';
+import { createChatThunk } from '@entities/chat/model';
+import { deletePairThunk } from '@entities/user/model';
 import { Preview, InterestsListPopup } from '@components';
 import { Button, Popup } from '@shared/ui';
 import styles from './PairPopup.module.scss';
@@ -16,7 +16,7 @@ interface PairPopupProps {
 export const PairPopup: FC<PairPopupProps> = ({ currentPair, setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);

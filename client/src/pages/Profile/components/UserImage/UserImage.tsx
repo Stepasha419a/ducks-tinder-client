@@ -9,7 +9,7 @@ interface UserImageProps {
 }
 
 export const UserImage: FC<UserImageProps> = ({ setIsImageSetting }) => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
     <>

@@ -20,7 +20,7 @@ const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
   link,
 }) => {
   const navigate = useNavigate();
-  const isAuth = useAppSelector((state) => state.authPage.isAuth);
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
 
   useEffect(() => {
     if (isAuth) {

@@ -31,8 +31,8 @@ export const Find: FC<FindProps> = ({
   setInputHandler,
   updateInputHandler,
 }) => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const errorFields = useAppSelector((state) => state.settings.errorFields);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const [distanceSetting, setDistanceSetting] = useState(
     currentUser.partnerSettings.distance

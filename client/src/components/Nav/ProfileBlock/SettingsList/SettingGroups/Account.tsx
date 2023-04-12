@@ -27,15 +27,15 @@ export const Account: FC<AccoutProps> = ({
   setInputHandler,
   updateInputHandler,
 }) => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const errorFields = useAppSelector((state) => state.settings.errorFields);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const [ageSetting, setAgeSetting] = useState(currentUser.age);
 
   const ageSubmitHandler = (): void => {
     updateInputHandler('age', ageSetting);
   };
-
+  
   const setEmailHandler = (): void => {
     setInputHandler('email', { min: 0, max: 40, email: true });
   };

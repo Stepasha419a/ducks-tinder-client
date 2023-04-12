@@ -32,8 +32,8 @@ export const updateUserThunk = createAsyncThunk(
     { rejectWithValue, getState }
   ) => {
     try {
-      const { usersPage } = getState() as RootState;
-      const { currentUser } = usersPage;
+      const { user } = getState() as RootState;
+      const { currentUser } = user;
       const data = makeDataObject({ ...args, currentUser });
 
       const response = await usersAPI.updateUser(currentUser._id, data);
@@ -79,7 +79,7 @@ export const deletePairThunk = createAsyncThunk(
   }
 );
 
-export const saveUserImage = createAsyncThunk(
+export const saveUserImageThunk = createAsyncThunk(
   'users/saveUserImage',
   async (
     args: { picture: Blob; userId: string; setting: PicturesVariants },
@@ -109,10 +109,10 @@ export const deleteUserImage = createAsyncThunk(
     { rejectWithValue, getState }
   ) => {
     try {
-      const { usersPage } = getState() as RootState;
+      const { user } = getState() as RootState;
       const {
         currentUser: { _id },
-      } = usersPage;
+      } = user;
 
       const response = await usersAPI.deletePicture(
         args.pictureName,

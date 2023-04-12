@@ -16,7 +16,7 @@ interface NicknameProps {
 }
 
 export const Nickname: FC<NicknameProps> = ({ setInputHandler }) => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const SetNicknameHandler = (): void => {
     setInputHandler('nickname', { min: 6, max: 16 });

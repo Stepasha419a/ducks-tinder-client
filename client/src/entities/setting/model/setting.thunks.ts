@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateUserThunk } from '@entities/users/model/users.thunks';
+import { updateUserThunk } from '@entities/user/model';
 import type { RootState } from '@app/store';
 import type {
   ChangedData,
@@ -19,8 +19,8 @@ export const submitSettingsThunk = createAsyncThunk(
     { rejectWithValue, dispatch, getState }
   ) => {
     try {
-      const { settings } = getState() as RootState;
-      const { settingInputName, innerObjectName } = settings;
+      const { setting } = getState() as RootState;
+      const { settingInputName, innerObjectName } = setting;
 
       dispatch(
         updateUserThunk({

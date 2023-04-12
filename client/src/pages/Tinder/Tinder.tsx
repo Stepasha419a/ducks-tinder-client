@@ -6,24 +6,24 @@ import TinderUserFailed from './components/UserLoading/Failed/Failed';
 import styles from './Tinder.module.scss';
 import Instructions from './components/Instructions/Instructions';
 import { Button } from '@shared/ui';
-import { updateUserThunk } from '@entities/users/model/users.thunks';
+import { updateUserThunk } from '@entities/user/model';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { Preview } from '@components';
-import { getSortedUserThunk } from '@entities/tinder/model/tinder.thunks';
-import { setRequestedUsers } from '@entities/tinder/model/tinder.slice';
+import { getSortedUserThunk } from '@entities/tinder/model';
+import { setRequestedUsers } from '@entities/tinder/model';
 
 export const Tinder: FC = () => {
   const dispatch = useAppDispatch();
 
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const tinderUsers = useAppSelector((state) => state.tinderPage.tinderUsers);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const tinderUsers = useAppSelector((state) => state.tinder.tinderUsers);
   const currentTinderUsersIndex = useAppSelector(
-    (state) => state.tinderPage.currentTinderUsersIndex
+    (state) => state.tinder.currentTinderUsersIndex
   );
   const requestedUsers = useAppSelector(
-    (state) => state.tinderPage.requestedUsers
+    (state) => state.tinder.requestedUsers
   );
-  const isFailed = useAppSelector((state) => state.tinderPage.isFailed);
+  const isFailed = useAppSelector((state) => state.tinder.isFailed);
 
   const [isFullPreview, setIsFullPreview] = useState(false);
 
@@ -35,6 +35,7 @@ export const Tinder: FC = () => {
     } // eslint-disable-next-line
   }, [currentTinderUsersIndex]);
 
+  // TODO: move this logic to the thunk
   useEffect(() => {
     if (tinderUsers.length) {
       const ids = [];

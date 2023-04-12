@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Nav } from '@components';
-import { checkFields } from '@entities/settings/model/settings.slice';
+import { checkFields } from '@entities/setting/model';
 import { useAppSelector } from '@hooks';
 import styles from './Layout.module.scss';
 
@@ -13,9 +13,9 @@ export const Layout = (): ReactElement | null => {
 
   const dispatch = useDispatch();
 
-  const isAuth = useAppSelector((state) => state.authPage.isAuth);
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
-  const errorFields = useAppSelector((state) => state.settings.errorFields);
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   useEffect(() => {
     if (isAuth) {

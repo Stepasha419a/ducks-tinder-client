@@ -1,16 +1,16 @@
-import authSlice from '@entities/auth/model/auth.slice';
-import chatSlice from '@entities/chat/model/chat.slice';
-import notificationsSlice from '@entities/notifications/model/notifications.slice';
-import settingsSlice from '@entities/settings/model/settings.slice';
-import tinderSlice from '@entities/tinder/model/tinder.slice';
-import usersSlice from '@entities/users/model/users.slice';
+import { authReducer } from '@entities/auth';
+import { chatReducer } from '@entities/chat';
+import { notificationReducer } from '@entities/notification';
+import { settingReducer } from '@entities/setting';
+import { tinderReducer } from '@entities/tinder';
+import { userReducer } from '@entities/user';
 import { combineReducers } from '@reduxjs/toolkit';
 
 export const rootReducer = combineReducers({
-  usersPage: usersSlice,
-  authPage: authSlice,
-  chatPage: chatSlice,
-  notifications: notificationsSlice,
-  settings: settingsSlice,
-  tinderPage: tinderSlice,
+  user: userReducer,
+  auth: authReducer,
+  chat: chatReducer,
+  notification: notificationReducer,
+  setting: settingReducer,
+  tinder: tinderReducer,
 });

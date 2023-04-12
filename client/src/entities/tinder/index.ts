@@ -1,0 +1,1 @@
+export { tinderReducer } from './model';

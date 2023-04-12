@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { deleteNotification } from '@entities/notifications/model/notifications.slice';
+import { deleteNotification } from '@entities/notification/model';
 import { Notification } from '@shared/ui';
 import styles from './Notifications.module.scss';
 
@@ -8,7 +8,7 @@ export const Notifications = (): ReactElement | null => {
   const dispatch = useAppDispatch();
 
   const notifications = useAppSelector(
-    (state) => state.notifications.notifications
+    (state) => state.notification.notifications
   );
 
   const closeNotification = (id: number): void => {

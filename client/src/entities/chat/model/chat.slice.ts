@@ -19,7 +19,7 @@ const initialState: ChatInitialState = {
 };
 
 const chatSlice = createSlice({
-  name: 'chatPage',
+  name: 'chatSlice',
   initialState,
   reducers: {
     pushNewMessage: (state, { payload }: PayloadAction<Message>) => {
@@ -68,4 +68,4 @@ const chatSlice = createSlice({
 export const { pushNewMessage, setCurrentChatData, disconnectChat } =
   chatSlice.actions;
 
-export default chatSlice.reducer;
+export const chatReducer = chatSlice.reducer;

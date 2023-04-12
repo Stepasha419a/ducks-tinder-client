@@ -5,15 +5,15 @@ import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '@entities/tinder/model/tinder.thunks';
+} from '@entities/tinder/model';
 import {
   deletePairThunk,
   deleteUserImage,
   getUserPairsThunk,
   mixUserImages,
-  saveUserImage,
+  saveUserImageThunk,
   updateUserThunk,
-} from './users.thunks';
+} from './user.thunks';
 
 interface InitialState {
   currentUser: User;
@@ -26,8 +26,8 @@ const initialState: InitialState = {
   pairs: [],
 };
 
-const usersSlice = createSlice({
-  name: 'users',
+const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
     setCurrentUser: (state, { payload }: PayloadAction<User>) => {
@@ -47,7 +47,7 @@ const usersSlice = createSlice({
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       })
-      .addCase(saveUserImage.fulfilled, (state, { payload }) => {
+      .addCase(saveUserImageThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       })
       .addCase(deleteUserImage.fulfilled, (state, { payload }) => {
@@ -68,6 +68,6 @@ const usersSlice = createSlice({
   },
 });
 
-export const { setCurrentUser } = usersSlice.actions;
+export const { setCurrentUser } = userSlice.actions;
 
-export default usersSlice.reducer;
+export const userReducer = userSlice.reducer;

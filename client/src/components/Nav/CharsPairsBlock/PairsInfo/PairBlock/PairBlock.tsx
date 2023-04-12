@@ -12,7 +12,7 @@ interface PairBlockProps {
 }
 
 export const PairBlock: FC<PairBlockProps> = ({ firstPair }) => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const imageUrl = makeImageUrl(firstPair._id, firstPair.pictures.avatar);
 

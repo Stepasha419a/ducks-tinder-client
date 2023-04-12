@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import type { ReactElement } from 'react';
-import { setIsUserInfoSetting } from '@entities/settings/model/settings.slice';
+import { setIsUserInfoSetting } from '@entities/setting/model';
 import { InterestsForm, RadioForm, TextareaForm, TextForm } from './Fields';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 const ProfileSetting = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const setting = useAppSelector((state) => state.settings.setting);
+  const setting = useAppSelector((state) => state.setting.setting);
 
   useEffect(() => {
     return () => {

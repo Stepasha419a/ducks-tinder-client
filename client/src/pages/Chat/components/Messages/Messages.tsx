@@ -12,10 +12,10 @@ import styles from './Messages.module.scss';
 
 export const Messages = (): ReactElement => {
   const currentChatMembers = useAppSelector(
-    (state) => state.chatPage.currentChatMembers
+    (state) => state.chat.currentChatMembers
   );
-  const messages = useAppSelector((state) => state.chatPage.currentMessages);
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const messages = useAppSelector((state) => state.chat.currentMessages);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const bottomScrollRef = useRef<HTMLDivElement>(null);
 

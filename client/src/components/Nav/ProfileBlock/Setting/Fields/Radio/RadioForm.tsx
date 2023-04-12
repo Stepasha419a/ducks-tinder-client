@@ -1,8 +1,8 @@
 import type { ReactElement } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { setIsUserInfoSetting } from '@entities/settings/model/settings.slice';
-import { submitSettingsThunk } from '@entities/settings/model/settings.thunks';
+import { setIsUserInfoSetting } from '@entities/setting/model';
+import { submitSettingsThunk } from '@entities/setting/model';
 import { RadioInput } from '@shared/ui';
 import { useDefaultValues } from 'components/Nav/hooks';
 import type { SettingFieldValues } from 'components/Nav/interfaces';
@@ -11,7 +11,7 @@ import styles from './RadioForm.module.scss';
 
 export const RadioForm = (): ReactElement => {
   const dispatch = useAppDispatch();
-  const formName = useAppSelector((state) => state.settings.formName);
+  const formName = useAppSelector((state) => state.setting.formName);
 
   const {
     control,

@@ -13,8 +13,8 @@ interface PairsProps {
 }
 
 export const Pairs: FC<PairsProps> = ({ sorts }) => {
-  const pairsState = useAppSelector((state) => state.usersPage.pairs);
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const pairsState = useAppSelector((state) => state.user.pairs);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const [currentPair, setCurrentPair] = useState<User>({} as User);
 

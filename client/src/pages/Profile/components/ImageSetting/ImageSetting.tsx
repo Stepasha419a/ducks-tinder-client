@@ -12,7 +12,7 @@ interface ImageSettingProps {
 }
 
 export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
-  const currentUser = useAppSelector((state) => state.usersPage.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);
   const [isFullPreviewPageSetting, setIsFullPreviewPageSetting] =

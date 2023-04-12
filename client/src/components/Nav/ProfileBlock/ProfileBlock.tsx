@@ -5,7 +5,7 @@ import SettingsList from './SettingsList/SettingsList';
 
 const ProfileBlock = (): ReactElement => {
   const isUserInfoSetting = useAppSelector(
-    (state) => state.settings.isUserInfoSetting
+    (state) => state.setting.isUserInfoSetting
   );
 
   return isUserInfoSetting ? <Setting /> : <SettingsList />;

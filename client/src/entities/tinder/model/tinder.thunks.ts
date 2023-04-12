@@ -27,9 +27,9 @@ export const likeUserThunk = createAsyncThunk(
   'users/likeUser',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const { usersPage, tinderPage } = getState() as RootState;
-      const { currentUser } = usersPage;
-      const { tinderUsers, currentTinderUsersIndex } = tinderPage;
+      const { user, tinder } = getState() as RootState;
+      const { currentUser } = user;
+      const { tinderUsers, currentTinderUsersIndex } = tinder;
       const tinderUser = tinderUsers[currentTinderUsersIndex];
 
       const data = makeDataObject({
@@ -62,9 +62,9 @@ export const returnUserThunk = createAsyncThunk(
   'users/returnUser',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const { usersPage, tinderPage } = getState() as RootState;
-      const { currentUser } = usersPage;
-      const { currentTinderUsersIndex, tinderUsers, isReturnUser } = tinderPage;
+      const { user, tinder } = getState() as RootState;
+      const { currentUser } = user;
+      const { currentTinderUsersIndex, tinderUsers, isReturnUser } = tinder;
 
       if (currentTinderUsersIndex && isReturnUser) {
         const newCheckedUsers = [...currentUser.checkedUsers];
@@ -94,9 +94,9 @@ export const dislikeUserThunk = createAsyncThunk(
   'users/dislikeUser',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const { usersPage, tinderPage } = getState() as RootState;
-      const { currentUser } = usersPage;
-      const { tinderUsers, currentTinderUsersIndex } = tinderPage;
+      const { user, tinder } = getState() as RootState;
+      const { currentUser } = user;
+      const { tinderUsers, currentTinderUsersIndex } = tinder;
 
       const data = makeDataObject({
         currentUser,
