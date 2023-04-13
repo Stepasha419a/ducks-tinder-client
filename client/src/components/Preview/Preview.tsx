@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { User } from '@shared/api/interfaces';
 import { ImageSlider, InterestsListPopup } from '@components';
-import { Button } from '@shared/ui';
+import { Button, ListItem } from '@shared/ui';
 import styles from './Preview.module.scss';
 
 interface PreviewPropsInterface {
@@ -94,11 +94,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
             <div className={styles.title}>Interests</div>
             <div className={styles.items}>
               {interestsForLoop.map((item) => {
-                return (
-                  <div key={item} className={styles.item}>
-                    {item}
-                  </div>
-                );
+                return <ListItem key={item}>{item}</ListItem>;
               })}
             </div>
           </div>

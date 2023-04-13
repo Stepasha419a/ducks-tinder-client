@@ -1,7 +1,6 @@
 import type { FC } from 'react';
-import classNames from 'classnames';
 import { INTERESTS_LIST } from '@shared/constants';
-import { Button, Popup } from '@shared/ui';
+import { Button, ListItem, Popup } from '@shared/ui';
 import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
@@ -23,15 +22,11 @@ export const InterestsSettingPopup: FC<InterestsSettingPopupProps> = ({
       <div className={styles.items}>
         {INTERESTS_LIST.map((interest) => {
           const includedItem = pairInterests.some((item) => item === interest);
-          const cnItem = classNames(styles.item, includedItem && styles.active);
+          console.log(includedItem)
           return (
-            <div
-              onClick={() => toggleInterest(interest)}
-              key={interest}
-              className={cnItem}
-            >
+            <ListItem onClick={() => toggleInterest(interest)} isActive={includedItem} key={interest}>
               {interest}
-            </div>
+            </ListItem>
           );
         })}
       </div>

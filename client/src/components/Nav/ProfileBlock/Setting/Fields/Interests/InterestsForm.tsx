@@ -9,6 +9,7 @@ import { useDefaultValues } from 'components/Nav/hooks';
 import type { SettingFieldArrayValues } from 'components/Nav/interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
+import { ListItem } from '@shared/ui';
 
 export const InterestsForm = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -66,14 +67,9 @@ export const InterestsForm = (): ReactElement => {
           {interests.length ? (
             interests.map((item) => {
               return (
-                <div
-                  onClick={() => toggleInterest(item)}
-                  key={item}
-                  className={styles.item}
-                >
+                <ListItem onClick={() => toggleInterest(item)} key={item} extraClassName={styles.item} xmark>
                   {item}
-                  <div className={styles.xmark}></div>
-                </div>
+                </ListItem>
               );
             })
           ) : (

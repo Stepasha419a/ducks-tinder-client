@@ -1,13 +1,7 @@
 import type { FC } from 'react';
 import type { Control, UseFormReset } from 'react-hook-form';
 import { useController } from 'react-hook-form';
-import classNames from 'classnames';
-import {
-  Button,
-  CheckboxInput,
-  Popup,
-  RangeInput,
-} from '@shared/ui';
+import { Button, CheckboxInput, ListItem, Popup, RangeInput } from '@shared/ui';
 import styles from './PairsSettingsPopup.module.scss';
 import { INTERESTS_FOR_LOOP } from '@shared/constants';
 import type { PairSorts } from '@shared/api/interfaces';
@@ -45,7 +39,7 @@ export const PairsSettingsPopup: FC<PairsSettingsPopupProps> = ({
     field: { value: photosCount, onChange: setPhotosCount },
   } = useController({ name: 'photos', control });
 
-  const photosCountArrForLoop: undefined[] = [...new Array(9) as undefined[]];
+  const photosCountArrForLoop: undefined[] = [...(new Array(9) as undefined[])];
 
   return (
     <Popup title="Likes filter" closeHandler={submitHandler}>
@@ -84,18 +78,14 @@ export const PairsSettingsPopup: FC<PairsSettingsPopupProps> = ({
           <div className={`${styles.change} ${styles.flex}`}>
             {photosCountArrForLoop.map((_, i) => {
               const content = i + 1;
-              const cnItem = classNames(
-                styles.item,
-                photosCount === content && styles.active
-              );
               return (
-                <div
+                <ListItem
                   onClick={() => setPhotosCount(content)}
+                  isActive={photosCount === content}
                   key={i}
-                  className={cnItem}
                 >
                   {content}
-                </div>
+                </ListItem>
               );
             })}
           </div>
@@ -105,18 +95,14 @@ export const PairsSettingsPopup: FC<PairsSettingsPopupProps> = ({
           <div className={styles.name}>Interests</div>
           <div className={`${styles.change} ${styles.flex}`}>
             {INTERESTS_FOR_LOOP.slice(0, 3).map((item) => {
-              const cnItem = classNames(
-                styles.item,
-                interests.includes(item) && styles.active
-              );
               return (
-                <div
+                <ListItem
                   onClick={() => toggleInterest(item)}
+                  isActive={interests.includes(item)}
                   key={item}
-                  className={cnItem}
                 >
                   {item}
-                </div>
+                </ListItem>
               );
             })}
           </div>

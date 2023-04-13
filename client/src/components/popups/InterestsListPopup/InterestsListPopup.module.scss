@@ -11,15 +11,4 @@
   &::-webkit-scrollbar {
     display: none;
   }
-
-  .item {
-    height: 33px;
-    border: 2px solid var(--bg-secondary);
-    border-radius: 16px;
-    font-weight: 600;
-    padding: 5px 20px;
-    margin: 5px;
-    color: var(--main-secondary);
-    transition: 0.2s;
-  }
 }

@@ -2,13 +2,13 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { useController, useForm } from 'react-hook-form';
 import { InterestsSettingPopup } from '@components';
 import { PairsSettingsPopup } from '@pages/Pairs/popups';
 import styles from './Sorting.module.scss';
 import { INITIAL_SORTS, INTERESTS_FOR_LOOP } from '@shared/constants';
 import type { PairSorts } from '@shared/api/interfaces';
+import { ListItem } from '@shared/ui';
 
 interface SortingProps {
   setSorts: (sorts: PairSorts) => void;
@@ -68,39 +68,35 @@ export const Sorting: FC<SortingProps> = ({ setSorts }) => {
     submitHandler();
   };
 
-  const cnPopupBtn = classNames(styles.sort, isSortPopupOpen && styles.active);
-  const cnInterestsBtn = classNames(
-    styles.sort,
-    account.includes('have interests') && styles.active
-  );
-
   return (
     <>
       <div className={styles.sorting}>
-        <div onClick={() => setIsSortPopupOpen(true)} className={cnPopupBtn}>
+        <ListItem
+          onClick={() => setIsSortPopupOpen(true)}
+          isActive={isSortPopupOpen}
+          extraClassName={styles.item}
+        >
           <FontAwesomeIcon className={styles.icon} icon={faSliders} />
-        </div>
+        </ListItem>
         {INTERESTS_FOR_LOOP.map((item) => {
-          const cnItem = classNames(
-            styles.sort,
-            interests.includes(item) && styles.active
-          );
           return (
-            <div
+            <ListItem
               onClick={() => forcedToggleInterest(item)}
+              isActive={interests.includes(item)}
+              extraClassName={styles.item}
               key={item}
-              className={cnItem}
             >
               {item}
-            </div>
+            </ListItem>
           );
         })}
-        <div
+        <ListItem
           onClick={() => forcedToggleAccount('have interests')}
-          className={cnInterestsBtn}
+          isActive={account.includes('have interests')}
+          extraClassName={styles.item}
         >
           have interests
-        </div>
+        </ListItem>
       </div>
       {isSortPopupOpen && (
         <PairsSettingsPopup
