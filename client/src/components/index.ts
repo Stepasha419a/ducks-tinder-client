@@ -5,5 +5,4 @@ export { Loading } from './Loading/Loading';
 export { LoginForm, RegistrationForm } from './Auth';
 export { Preview } from './Preview/Preview';
 export { InterestsListPopup, InterestsSettingPopup } from './popups/index';
-export { Preloader } from './Preloader/Preloader';
 export { ImageSlider } from './ImagesSlider/ImageSlider';

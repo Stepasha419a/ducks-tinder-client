@@ -1,20 +1,20 @@
-import type { FC } from 'react';
-import classNames from 'classnames';
-import type { User, Chat } from '@shared/api/interfaces';
-import styles from './ChatItem.module.scss';
 import { Avatar } from '@shared/ui';
+import classNames from 'classnames';
+import type { Chat, User } from '@shared/api/interfaces';
+import type { FC } from 'react';
+import styles from './ChatItem.module.scss';
 
 interface ChatInterface {
   chat: Chat;
   chatCompanion: User | undefined;
-  currentChatId: string;
+  isActive: boolean;
   connect: (chatId: string) => void;
 }
 
-const ChatItem: FC<ChatInterface> = ({
+export const ChatItem: FC<ChatInterface> = ({
   chat,
   chatCompanion,
-  currentChatId,
+  isActive,
   connect,
 }) => {
   if (!chatCompanion) {
@@ -31,10 +31,7 @@ const ChatItem: FC<ChatInterface> = ({
   return (
     <div
       onClick={() => connect(chat._id)}
-      className={classNames(
-        styles.item,
-        currentChatId === chat._id && styles.item_active
-      )}
+      className={classNames(styles.item, isActive && styles.item_active)}
     >
       <Avatar
         userId={chatCompanion._id}
@@ -51,5 +48,3 @@ const ChatItem: FC<ChatInterface> = ({
     </div>
   );
 };
-
-export default ChatItem;

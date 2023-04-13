@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import type { ReactElement } from 'react';
 import styles from './Nav.module.scss';
 import Links from './Links/Links';
-import ChatsPairsBlock from './CharsPairsBlock/ChatsPairsBlock';
+import ChatsPairsBlock from './ChatsPairsBlock/ChatsPairsBlock';
 import ProfileBlock from './ProfileBlock/ProfileBlock';
 
 export const Nav = (): ReactElement => {

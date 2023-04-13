@@ -1,19 +1,18 @@
+import type { FC, ReactElement } from 'react';
 import { useEffect } from 'react';
-import type { ReactElement } from 'react';
 import type { Chat } from '@shared/api/interfaces';
-import ChatItem from './ChatItem/ChatItem';
-import styles from './Chats.module.scss';
-import FailedChats from './Failed/FailedChats';
-import {
-  closeAllSockets,
-  connectChatThunk,
-  disconnectChatThunk,
-  getChatsThunk,
-} from '@entities/chat/model';
-import { Preloader } from '@components';
 import { useAppDispatch, useAppSelector } from '@hooks';
+import { getChatsThunk } from '@entities/chat/model';
+import { Preloader } from '@shared/ui';
+import FailedChats from './Failed/FailedChats';
+import styles from './ChatList.module.scss';
+import { ChatItem } from './ChatItem/ChatItem';
 
-const Chats = (): ReactElement => {
+interface ChatListProps {
+  connect(chatId: string): void;
+}
+
+export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
   const dispatch = useAppDispatch();
 
   const currentUser = useAppSelector((state) => state.user.currentUser);
@@ -25,19 +24,6 @@ const Chats = (): ReactElement => {
   useEffect(() => {
     dispatch(getChatsThunk(currentUser._id));
   }, [currentUser._id, currentUser.chats.length, chats.length, dispatch]);
-
-  useEffect(() => {
-    return () => {
-      dispatch(closeAllSockets());
-    };
-  }, [dispatch]);
-
-  function connect(chatId: string): void {
-    if (chatId !== currentChatId) {
-      if (currentChatId) dispatch(disconnectChatThunk());
-      dispatch(connectChatThunk({ chatId }));
-    }
-  }
 
   if (!currentUser.chats.length) {
     return <FailedChats />;
@@ -56,12 +42,13 @@ const Chats = (): ReactElement => {
         const chatCompanion = chatsUsers.find(
           (user) => user._id === chatCompanionId
         );
+        const isActive = currentChatId === chat._id;
         return (
           <ChatItem
             key={chat._id}
             chat={chat}
             chatCompanion={chatCompanion}
-            currentChatId={currentChatId}
+            isActive={isActive}
             connect={connect}
           />
         );
@@ -69,5 +56,3 @@ const Chats = (): ReactElement => {
     </div>
   );
 };
-
-export default Chats;

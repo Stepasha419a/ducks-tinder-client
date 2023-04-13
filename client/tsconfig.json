@@ -19,12 +19,13 @@
     "paths": {
       "@/*": ["./*"],
       "@app/*": ["./application/*"],
-      "@images/*": ["./assets/images/*"],
-      "@shared/*": ["./shared/*"],
-      "@entities/*": ["./entities/*"],
       "@pages/*": ["./pages/*"],
       "@components": ["./components/index"],
-      "@hooks": ["./hooks/index"]
+      "@hooks": ["./hooks/index"],
+      "@features/*": ["./features/*"],
+      "@entities/*": ["./entities/*"],
+      "@shared/*": ["./shared/*"],
+      "@images/*": ["./assets/images/*"]
     }
   }
 }

@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { Preloader } from '@components';
+import { Preloader } from '@shared/ui';
 import styles from './Loading.module.scss';
 
 const Loading = (): ReactElement => {
