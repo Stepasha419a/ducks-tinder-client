@@ -1,1 +1,5 @@
-export { notificationReducer, createNotification, deleteNotification } from './notification.slice';
+export {
+  notificationReducer,
+  createNotification,
+  deleteNotification,
+} from './notification.slice';

@@ -6,7 +6,7 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { FC, FocusEvent, MouseEvent } from 'react';
+import type { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
   dislikeUserThunk,
@@ -29,26 +29,14 @@ const Buttons: FC<ButtonsProps> = ({
 
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
 
-  const btnFocus = (e: FocusEvent<HTMLButtonElement>): void => {
-    const target = e.target as Element;
-    target.classList.add(styles.active);
-  };
-
-  const btnMouseOut = (e: MouseEvent<HTMLButtonElement>): void => {
-    const target = e.target as HTMLElement;
-    target.classList.remove(styles.active);
-    target.blur();
-  };
-
   const newButtonsData = [
     {
-      onClick: async () => dispatch(returnUserThunk()),
+      onClick: async () => isReturnUser && dispatch(returnUserThunk()),
       extraClassName: [
         styles.btn,
         styles.small,
         currentTinderUsersIndex && isReturnUser ? styles.gold : styles.blocked,
       ],
-      cnWrapper: styles.wrapper,
       icon: faRotateLeft,
       cnIcon: `${styles.icon} ${
         currentTinderUsersIndex && isReturnUser ? styles.gold : styles.blocked
@@ -62,7 +50,6 @@ const Buttons: FC<ButtonsProps> = ({
         styles.red,
         isMinimum ? styles.minimized : '',
       ],
-      cnWrapper: `${styles.wrapper} ${styles.large}`,
       icon: faXmark,
       cnIcon: `${styles.icon} ${styles.red} ${styles.large}`,
     },
@@ -74,7 +61,6 @@ const Buttons: FC<ButtonsProps> = ({
         styles.blue,
         isMinimum ? styles.minimized : '',
       ],
-      cnWrapper: styles.wrapper,
       icon: faStar,
       cnIcon: `${styles.icon} ${styles.blue}`,
     },
@@ -86,13 +72,11 @@ const Buttons: FC<ButtonsProps> = ({
         styles.green,
         isMinimum ? styles.minimized : '',
       ],
-      cnWrapper: `${styles.wrapper} ${styles.large}`,
       icon: faHeart,
       cnIcon: `${styles.icon} ${styles.green}`,
     },
     {
       extraClassName: [styles.btn, styles.small, styles.purple],
-      cnWrapper: styles.wrapper,
       icon: faBolt,
       cnIcon: `${styles.icon} ${styles.purple}`,
     },
@@ -107,17 +91,14 @@ const Buttons: FC<ButtonsProps> = ({
               <Button
                 variant="tinder"
                 onClick={buttonData.onClick}
-                onFocus={(e) => btnFocus(e)}
-                onMouseOut={(e) => btnMouseOut(e)}
                 extraClassName={buttonData.extraClassName}
                 key={index}
               >
-                <div className={buttonData.cnWrapper}>
-                  <FontAwesomeIcon
-                    icon={buttonData.icon}
-                    className={buttonData.cnIcon}
-                  />
-                </div>
+                <div className={styles.background} />
+                <FontAwesomeIcon
+                  icon={buttonData.icon}
+                  className={buttonData.cnIcon}
+                />
               </Button>
             );
           }

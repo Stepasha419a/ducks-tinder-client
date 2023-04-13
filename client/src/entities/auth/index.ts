@@ -1,1 +1,1 @@
-export { authReducer } from './model/auth.slice';
+export { authReducer } from './model';
