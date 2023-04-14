@@ -24,7 +24,7 @@ export const ImageSlider: FC<ImageSliderPropsInterface> = ({
   arrowsExtraClassName = '',
 }) => {
   const [current, setCurrent] = useState<number>(0);
-  const images = [...picturesObj.gallery, picturesObj.avatar]
+  const images = [picturesObj.avatar, ...picturesObj.gallery];
   const length = images.length;
 
   const prevSlide = (): void => {

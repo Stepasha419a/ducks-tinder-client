@@ -1,10 +1,10 @@
-import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import type { ReactElement } from 'react';
-import styles from './Nav.module.scss';
-import Links from './Links/Links';
+import { useLocation } from 'react-router-dom';
+import { UserLinks } from '@entities/user/components';
 import ChatsPairsBlock from './ChatsPairsBlock/ChatsPairsBlock';
 import ProfileBlock from './ProfileBlock/ProfileBlock';
+import styles from './Nav.module.scss';
 
 export const Nav = (): ReactElement => {
   const { pathname } = useLocation();
@@ -17,7 +17,7 @@ export const Nav = (): ReactElement => {
 
   return (
     <aside className={styles.info}>
-      <Links pathname={pathname} />
+      <UserLinks />
       {pathname === '/profile' ? (
         <ProfileBlock />
       ) : (

@@ -1,30 +1,31 @@
-import type { FC } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   faBriefcase,
   faFireFlameCurved,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
-import { useAppSelector } from '@hooks';
 import { Avatar } from '@shared/ui';
-import styles from './Links.module.scss';
+import { useAppSelector } from '@hooks';
+import styles from './UserLinks.module.scss';
+import classNames from 'classnames';
 
-interface LinksProps {
-  pathname: string;
-}
+export const UserLinks = () => {
+  const { pathname } = useLocation();
 
-const Links: FC<LinksProps> = ({ pathname }) => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
     <div className={styles.links}>
       {pathname === '/profile' ? (
-        <Link className={`${styles.mainLink} ${styles.main}`} to="/">
+        <Link className={classNames(styles.mainLink, styles.main)} to="/">
           <FontAwesomeIcon icon={faFireFlameCurved} />
         </Link>
       ) : (
-        <Link className={`${styles.mainLink} ${styles.person}`} to="/profile">
+        <Link
+          className={classNames(styles.mainLink, styles.person)}
+          to="/profile"
+        >
           <Avatar
             userId={currentUser._id}
             avatarUrl={currentUser.pictures.avatar}
@@ -45,5 +46,3 @@ const Links: FC<LinksProps> = ({ pathname }) => {
     </div>
   );
 };
-
-export default Links;
