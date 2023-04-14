@@ -15,6 +15,7 @@ export const UserLinks = () => {
 
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
+  //TODO: relocate it into Nav widget ui folder, when it'll be ready for it (leave only user avatar&name)
   return (
     <div className={styles.links}>
       {pathname === '/profile' ? (

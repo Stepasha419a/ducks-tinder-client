@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import NavPair from './PairsInfo/NavPair';
-import styles from './ChatsPairsBlock.module.scss';
+import { PairLink } from '@entities/user/components';
 import { OpenChatList } from '@features/chat';
+import styles from './ChatsPairsBlock.module.scss';
 
 interface ChatsPairsBlockProps {
   isPairsOpened: boolean;
@@ -33,7 +33,7 @@ const ChatsPairsBlock: FC<ChatsPairsBlockProps> = ({
         </Link>
       </div>
       <div className={styles.content}>
-        {isPairsOpened ? <NavPair /> : <OpenChatList />}
+        {isPairsOpened ? <PairLink /> : <OpenChatList />}
       </div>
     </>
   );

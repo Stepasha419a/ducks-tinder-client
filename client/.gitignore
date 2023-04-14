@@ -3,6 +3,7 @@
 /src/react-app-env.d.ts
 dist
 .env
+.vscode
 
 # dependencies
 /node_modules

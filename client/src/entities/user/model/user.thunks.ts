@@ -49,6 +49,7 @@ export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
   async (pairsId: string[], { rejectWithValue }) => {
     try {
+      // TODO: do this server endpoint
       const pairs = await Promise.all(
         pairsId.map(async (pairId) => fetchUserById(pairId))
       ).then((results) => results.map((result) => result));
