@@ -9,7 +9,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { User } from '@shared/api/interfaces';
-import { ImageSlider, InterestsListPopup } from '@components';
+import { InterestsListPopup } from '@components';
+import { ImageSlider } from '@shared/ui';
 import { Button, ListItem } from '@shared/ui';
 import styles from './Preview.module.scss';
 
@@ -43,7 +44,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
     <div className={cn}>
       <div className={classNames(styles.slider)}>
         <ImageSlider
-          images={[user.pictures.avatar, ...user.pictures.gallery]}
+          picturesObj={user.pictures}
           userId={user._id}
           extraClassName={styles.image}
           extraWrapperClassName={classNames(isShadow && styles.wrapper)}

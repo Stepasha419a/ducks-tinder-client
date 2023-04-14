@@ -1,14 +1,15 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
+import type { PicturesInterface } from '@shared/api/interfaces';
 import { PicturesEnum } from '@shared/api/interfaces';
 import { makeImageUrl } from '@shared/helpers';
 import Arrows from './Arrows/Arrows';
-import styles from './ImageSlider.module.scss';
 import Stripes from './Stripes/Stripes';
+import styles from './ImageSlider.module.scss';
 
 interface ImageSliderPropsInterface {
-  images: string[] | [];
+  picturesObj: PicturesInterface;
   userId: string;
   extraClassName?: string;
   extraWrapperClassName?: string;
@@ -16,14 +17,15 @@ interface ImageSliderPropsInterface {
 }
 
 export const ImageSlider: FC<ImageSliderPropsInterface> = ({
-  images,
+  picturesObj,
   userId,
   extraClassName = '',
   extraWrapperClassName = '',
   arrowsExtraClassName = '',
 }) => {
   const [current, setCurrent] = useState<number>(0);
-  const { length } = images;
+  const images = [...picturesObj.gallery, picturesObj.avatar]
+  const length = images.length;
 
   const prevSlide = (): void => {
     setCurrent(current === 0 ? 0 : current - 1);
@@ -63,7 +65,7 @@ export const ImageSlider: FC<ImageSliderPropsInterface> = ({
         const cnWrapper = classNames(
           styles.itemWrapper,
           index === current ? styles.active : styles.hidden,
-          extraWrapperClassName,
+          extraWrapperClassName
         );
 
         return (
