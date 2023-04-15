@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from '@hooks';
 import type { InnerObjectName, SettingInputName } from '@shared/api/interfaces';
 import type { Validation } from '@shared/interfaces';
-import styles from '../SettingsList.module.scss';
+import { SettingGroup } from '@shared/ui';
+import styles from './SettingsGroup.module.scss';
 
 interface NicknameProps {
   setInputHandler: (
@@ -23,29 +24,23 @@ export const Nickname: FC<NicknameProps> = ({ setInputHandler }) => {
   };
 
   return (
-    <div className={styles.group}>
-      <div className={styles.groupTitle}>Internet account</div>
-      <div className={styles.items}>
-        <div
-          onClick={SetNicknameHandler}
-          className={`${styles.item} ${styles.pointer}`}
-        >
-          <div className={styles.descr}>
-            <div className={styles.title}>Nickname</div>
-            <div className={styles.setting}>
-              {currentUser.nickname || 'unknown'}
-              <FontAwesomeIcon
-                icon={faAngleRight}
-                className={styles.openIcon}
-              />
-            </div>
+    <SettingGroup
+      title="Internet account"
+      descr="Create a username, share it and start searching for couples on Tinder
+      around the world."
+    >
+      <div
+        onClick={SetNicknameHandler}
+        className={`${styles.item} ${styles.pointer}`}
+      >
+        <div className={styles.descr}>
+          <div className={styles.title}>Nickname</div>
+          <div className={styles.setting}>
+            {currentUser.nickname || 'unknown'}
+            <FontAwesomeIcon icon={faAngleRight} className={styles.openIcon} />
           </div>
         </div>
       </div>
-      <div className={styles.groupDescr}>
-        Create a username, share it and start searching for couples on Tinder
-        around the world.
-      </div>
-    </div>
+    </SettingGroup>
   );
 };

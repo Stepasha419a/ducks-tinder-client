@@ -14,9 +14,9 @@ import {
   Account,
   Find,
   LinksSettingGroup,
-  LoggoutButton,
+  LogoutButton,
   Nickname,
-} from './settingGroups';
+} from '@entities/setting/components';
 import styles from './SettingsList.module.scss';
 
 const SettingsList = (): ReactElement => {
@@ -78,7 +78,7 @@ const SettingsList = (): ReactElement => {
       />
       <Nickname setInputHandler={setInputHandler} />
       <LinksSettingGroup />
-      <LoggoutButton />
+      <LogoutButton />
     </div>
   );
 };

@@ -1,0 +1,16 @@
+.group {
+  padding-top: 20px;
+
+  .groupTitle {
+    text-transform: uppercase;
+    color: var(--main-secondary);
+    border-bottom: 1px solid var(--border-main);
+    padding: 8px 16px;
+  }
+
+  .groupDescr {
+    color: var(--main-secondary);
+    margin: 12px 0;
+    padding: 0 16px;
+  }
+}
