@@ -23,7 +23,6 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   submitHandler,
   cancelHandler,
 }) => {
-  console.log(errors)
   return (
     <form onSubmit={submitHandler} className={styles.setting}>
       {Object.values(errors).map((error: FieldError) => (

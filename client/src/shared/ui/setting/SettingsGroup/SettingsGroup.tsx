@@ -1,12 +1,12 @@
 import type { FC, PropsWithChildren } from 'react';
-import styles from './SettingGroup.module.scss';
+import styles from './SettingsGroup.module.scss';
 
-interface SettingGroupProps {
+interface SettingsGroupProps {
   title?: string;
   descr?: string;
 }
 
-export const SettingGroup: FC<PropsWithChildren<SettingGroupProps>> = ({
+export const SettingsGroup: FC<PropsWithChildren<SettingsGroupProps>> = ({
   children,
   title,
   descr,

@@ -1,150 +1,64 @@
-.item {
-  border-bottom: 1px solid var(--border-main);
-  background-color: var(--color--white-100);
-  padding: 12px 16px;
+.slider {
+  margin: 20px 0px 10px;
+}
 
-  &.pointer {
+.checkbox {
+  position: relative;
+
+  .label {
+    position: absolute;
+    top: -4px;
+    right: 0;
+
+    --width: 48px;
+    --height: 28px;
+    --unactive-color: rgb(121, 121, 121);
+    --active-color: var(--color--red-100);
+    --box-color: var(--color--white-100);
+    --offset: 20px;
+    --duration: 0.3s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  .content {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--width);
+    background-color: var(--unactive-color);
     cursor: pointer;
+    transition: var(--duration);
 
-    &:hover .setting,
-    &:hover .openIcon {
-      color: var(--color--pink-100) !important;
+    &::before {
+      --width: 48px;
+      --height: 28px;
+      --box-color: var(--color--white-100);
+      --offset: 2px;
+
+      content: '';
+      position: absolute;
+      top: var(--offset);
+      left: var(--offset);
+      width: calc(var(--height) - 2 * var(--offset));
+      height: calc(var(--height) - 2 * var(--offset));
+      background-color: var(--box-color);
+      border-radius: 50%;
+      transition: var(--duration);
     }
   }
 
-  &.error {
-    background-color: var(--danger-red-light);
-  }
+  .input {
+    display: none;
 
-  &.link {
-    padding: 0;
-
-    .icon {
-      color: var(--main-secondary);
-      transition: 0.2s;
+    &:checked ~ .content {
+      background-color: var(--active-color);
     }
 
-    &:hover .icon {
-      color: var(--color--pink-100) !important;
-    }
-
-    .link {
-      display: block;
-      padding: 12px 16px;
-    }
-  }
-
-  &.border {
-    border-top: 1px solid var(--border-main);
-  }
-
-  .descr {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .title {
-      font-size: 18px;
-      font-weight: 400;
-
-      &.center {
-        margin: 0 auto;
-      }
-    }
-
-    .setting {
-      color: var(--main-secondary);
-      transition: 0.2s;
-      position: relative;
-
-      &.textOverflow {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        max-width: 160px;
-        padding-right: 12px;
-      }
-
-      .openIcon {
-        font-size: 14px;
-        color: var(--color--white-90);
-        margin-left: 10px;
-        transition: 0.2s;
-
-        &.absolute {
-          position: absolute;
-          top: 2px;
-          right: 0px;
-          z-index: 1;
-        }
-      }
-    }
-  }
-
-  .setting {
-    .slider {
-      margin: 20px 0px 10px;
-    }
-
-    .checkbox {
-      position: relative;
-
-      .label {
-        position: absolute;
-        top: -4px;
-        right: 0;
-
-        --width: 48px;
-        --height: 28px;
-        --unactive-color: rgb(121, 121, 121);
-        --active-color: var(--color--red-100);
-        --box-color: var(--color--white-100);
-        --offset: 20px;
-        --duration: 0.3s;
-
-        &:hover {
-          filter: brightness(0.9);
-        }
-      }
-
-      .content {
-        position: relative;
-        width: var(--width);
-        height: var(--height);
-        border-radius: var(--width);
-        background-color: var(--unactive-color);
-        cursor: pointer;
-        transition: var(--duration);
-
-        &::before {
-          --width: 48px;
-          --height: 28px;
-          --box-color: var(--color--white-100);
-          --offset: 2px;
-
-          content: '';
-          position: absolute;
-          top: var(--offset);
-          left: var(--offset);
-          width: calc(var(--height) - 2 * var(--offset));
-          height: calc(var(--height) - 2 * var(--offset));
-          background-color: var(--box-color);
-          border-radius: 50%;
-          transition: var(--duration);
-        }
-      }
-
-      .input {
-        display: none;
-
-        &:checked ~ .content {
-          background-color: var(--active-color);
-        }
-
-        &:checked ~ .content::before {
-          left: calc(var(--width) - var(--height) + var(--offset));
-        }
-      }
+    &:checked ~ .content::before {
+      left: calc(var(--width) - var(--height) + var(--offset));
     }
   }
 }

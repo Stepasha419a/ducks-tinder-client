@@ -1,11 +1,8 @@
 import type { FC } from 'react';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from '@hooks';
 import type { InnerObjectName, SettingInputName } from '@shared/api/interfaces';
 import type { Validation } from '@shared/interfaces';
-import { SettingGroup } from '@shared/ui';
-import styles from './SettingsGroup.module.scss';
+import { SettingThumbnail, SettingsGroup } from '@shared/ui';
 
 interface NicknameProps {
   setInputHandler: (
@@ -24,23 +21,17 @@ export const Nickname: FC<NicknameProps> = ({ setInputHandler }) => {
   };
 
   return (
-    <SettingGroup
+    <SettingsGroup
       title="Internet account"
       descr="Create a username, share it and start searching for couples on Tinder
       around the world."
     >
-      <div
-        onClick={SetNicknameHandler}
-        className={`${styles.item} ${styles.pointer}`}
-      >
-        <div className={styles.descr}>
-          <div className={styles.title}>Nickname</div>
-          <div className={styles.setting}>
-            {currentUser.nickname || 'unknown'}
-            <FontAwesomeIcon icon={faAngleRight} className={styles.openIcon} />
-          </div>
-        </div>
-      </div>
-    </SettingGroup>
+      <SettingThumbnail
+        clickHandler={SetNicknameHandler}
+        title="Nickname"
+        value={currentUser.nickname || 'unknown'}
+        isPointer
+      />
+    </SettingsGroup>
   );
 };

@@ -1,8 +1,5 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { useAppSelector } from '@hooks';
 import type {
   ChangedData,
@@ -10,7 +7,12 @@ import type {
   SettingInputName,
 } from '@shared/api/interfaces';
 import type { Validation } from '@shared/interfaces';
-import { CheckboxInput, RangeInput, SettingGroup } from '@shared/ui';
+import {
+  CheckboxInput,
+  RangeInput,
+  SettingThumbnail,
+  SettingsGroup,
+} from '@shared/ui';
 import styles from './SettingsGroup.module.scss';
 
 interface FindProps {
@@ -66,102 +68,69 @@ export const Find: FC<FindProps> = ({
   };
 
   return (
-    <SettingGroup
+    <SettingsGroup
       title="Find Settings"
       descr="When the local profiles are over, you will be able to switch to the
     Global Mode for dating people from all over the world."
     >
-      <div
-        onClick={setInterestsHandler}
-        className={classNames(
-          styles.item,
-          styles.pointer,
-          errorFields.includes('interests') && styles.error
-        )}
-      >
-        <div className={styles.descr}>
-          <div className={styles.title}>Interests</div>
-          <div className={styles.setting}>
-            {!currentUser.interests.length
-              ? 'Empty interests'
-              : `${currentUser.interests[0]} and so on...`}
-            <FontAwesomeIcon icon={faAngleRight} className={styles.openIcon} />
-          </div>
-        </div>
-      </div>
-      <div
-        onClick={setPlaceHandler}
-        className={classNames(
-          styles.item,
-          styles.pointer,
-          errorFields.includes('place') && styles.error
-        )}
-      >
-        <div className={styles.descr}>
-          <div className={styles.title}>Place</div>
-          <div className={styles.setting}>
-            {currentUser.partnerSettings.place || 'Empty place'}
-            <FontAwesomeIcon icon={faAngleRight} className={styles.openIcon} />
-          </div>
-        </div>
-      </div>
-      <div className={styles.item}>
-        <div className={styles.descr}>
-          <div className={styles.title}>Distance</div>
-          <div className={styles.setting}>{distanceSetting} км.</div>
-        </div>
-        <div className={styles.setting}>
-          <div className={styles.slider}>
-            <RangeInput
-              value={{ value: distanceSetting }}
-              setValue={(value) => setDistanceSetting(value.value!)}
-              completeValue={distanceHandler}
-              min={2}
-              max={100}
-            />
-          </div>
-          <CheckboxInput
-            checked={currentUser.partnerSettings.usersOnlyInDistance}
-            onChange={setUsersOnlyInDistanceHandler}
-            variant="small"
-            text="Show people only in this range"
+      <SettingThumbnail
+        clickHandler={setInterestsHandler}
+        title="Interests"
+        value={
+          !currentUser.interests.length
+            ? 'Empty interests'
+            : `${currentUser.interests[0]} and so on...`
+        }
+        isPointer
+        isError={errorFields.includes('interests')}
+      />
+      <SettingThumbnail
+        clickHandler={setPlaceHandler}
+        title="Place"
+        value={currentUser.partnerSettings.place || 'Empty place'}
+        isPointer
+        isError={errorFields.includes('place')}
+      />
+      <SettingThumbnail title="Distance" value={`${distanceSetting} км.`}>
+        <div className={styles.slider}>
+          <RangeInput
+            value={{ value: distanceSetting }}
+            setValue={(value) => setDistanceSetting(value.value!)}
+            completeValue={distanceHandler}
+            min={2}
+            max={100}
           />
         </div>
-      </div>
-      <div
-        onClick={setPreferSexHandler}
-        className={`${styles.item} ${styles.pointer}`}
+        <CheckboxInput
+          checked={currentUser.partnerSettings.usersOnlyInDistance}
+          onChange={setUsersOnlyInDistanceHandler}
+          variant="small"
+          text="Show people only in this range"
+        />
+      </SettingThumbnail>
+      <SettingThumbnail
+        clickHandler={setPreferSexHandler}
+        title="Interested in"
+        value={currentUser.partnerSettings.preferSex}
+        isPointer
+      />
+      <SettingThumbnail
+        title="Partner age"
+        value={`from ${preferAgeSetting.from} to ${preferAgeSetting.to}`}
       >
-        <div className={styles.descr}>
-          <div className={styles.title}>Interested in</div>
-          <div className={styles.setting}>
-            {currentUser.partnerSettings.preferSex}
-            <FontAwesomeIcon icon={faAngleRight} className={styles.openIcon} />
-          </div>
+        <div className={styles.slider}>
+          <RangeInput
+            value={{ min: preferAgeSetting.from, max: preferAgeSetting.to }}
+            setValue={(value) =>
+              setPreferAgeSetting({ from: value.min!, to: value.max! })
+            }
+            completeValue={partnerAgeHandler}
+            min={18}
+            max={100}
+            isMultiple
+          />
         </div>
-      </div>
-      <div className={styles.item}>
-        <div className={styles.descr}>
-          <div className={styles.title}>Partner age</div>
-          <div className={styles.setting}>
-            from {preferAgeSetting.from} to {preferAgeSetting.to}
-          </div>
-        </div>
-        <div className={styles.setting}>
-          <div className={styles.slider}>
-            <RangeInput
-              value={{ min: preferAgeSetting.from, max: preferAgeSetting.to }}
-              setValue={(value) =>
-                setPreferAgeSetting({ from: value.min!, to: value.max! })
-              }
-              completeValue={partnerAgeHandler}
-              min={18}
-              max={100}
-              isMultiple
-            />
-          </div>
-        </div>
-      </div>
-    </SettingGroup>
+      </SettingThumbnail>
+    </SettingsGroup>
   );
 };

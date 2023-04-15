@@ -1,8 +1,5 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { useAppSelector } from '@hooks';
 import type {
   ChangedData,
@@ -10,7 +7,7 @@ import type {
   SettingInputName,
 } from '@shared/api/interfaces';
 import type { Validation } from '@shared/interfaces';
-import { RangeInput, SettingGroup } from '@shared/ui';
+import { RangeInput, SettingThumbnail, SettingsGroup } from '@shared/ui';
 import styles from './SettingsGroup.module.scss';
 
 interface AccountProps {
@@ -54,82 +51,47 @@ export const Account: FC<AccountProps> = ({
   };
 
   return (
-    <SettingGroup
+    <SettingsGroup
       title="Account Settings"
       descr="Verified email address helps to protect your account"
     >
-      <div
-        onClick={setEmailHandler}
-        className={`${styles.item} ${styles.pointer}`}
-      >
-        <div className={styles.descr}>
-          <div className={styles.title}>Email</div>
-          <div className={styles.setting}>
-            {currentUser.email}
-            <FontAwesomeIcon icon={faAngleRight} className={styles.openIcon} />
-          </div>
+      <SettingThumbnail
+        clickHandler={setEmailHandler}
+        title="Email"
+        value={currentUser.email}
+        isPointer
+      />
+      <SettingThumbnail
+        clickHandler={setNameHandler}
+        title="Name"
+        value={currentUser.name}
+        isPointer
+      />
+      <SettingThumbnail
+        clickHandler={setDescriptionHandler}
+        title="Description"
+        value={currentUser.description || 'Empty description'}
+        isPointer
+        isError={errorFields.includes('description')}
+        isOverflow
+      />
+      <SettingThumbnail
+        clickHandler={setSexHandler}
+        title="Sex"
+        value={currentUser.sex}
+        isPointer
+      />
+      <SettingThumbnail title="Age" value={`${ageSetting} years old`}>
+        <div className={styles.slider}>
+          <RangeInput
+            value={{ value: ageSetting }}
+            setValue={(value) => setAgeSetting(value.value!)}
+            completeValue={ageSubmitHandler}
+            min={18}
+            max={100}
+          />
         </div>
-      </div>
-      <div
-        onClick={setNameHandler}
-        className={`${styles.item} ${styles.pointer}`}
-      >
-        <div className={styles.descr}>
-          <div className={styles.title}>Name</div>
-          <div className={styles.setting}>
-            {currentUser.name}
-            <FontAwesomeIcon icon={faAngleRight} className={styles.openIcon} />
-          </div>
-        </div>
-      </div>
-      <div
-        onClick={setDescriptionHandler}
-        className={classNames(
-          styles.item,
-          styles.pointer,
-          errorFields.includes('description') && styles.error
-        )}
-      >
-        <div className={styles.descr}>
-          <div className={styles.title}>Description</div>
-          <div className={`${styles.setting} ${styles.textOverflow}`}>
-            {currentUser.description || 'Empty description'}
-            <FontAwesomeIcon
-              icon={faAngleRight}
-              className={`${styles.openIcon} ${styles.absolute}`}
-            />
-          </div>
-        </div>
-      </div>
-      <div
-        onClick={setSexHandler}
-        className={`${styles.item} ${styles.pointer}`}
-      >
-        <div className={styles.descr}>
-          <div className={styles.title}>Sex</div>
-          <div className={styles.setting}>
-            {currentUser.sex}
-            <FontAwesomeIcon icon={faAngleRight} className={styles.openIcon} />
-          </div>
-        </div>
-      </div>
-      <div className={styles.item}>
-        <div className={styles.descr}>
-          <div className={styles.title}>Age</div>
-          <div className={styles.setting}>{ageSetting} years old</div>
-        </div>
-        <div className={styles.setting}>
-          <div className={styles.slider}>
-            <RangeInput
-              value={{ value: ageSetting }}
-              setValue={(value) => setAgeSetting(value.value!)}
-              completeValue={ageSubmitHandler}
-              min={18}
-              max={100}
-            />
-          </div>
-        </div>
-      </div>
-    </SettingGroup>
+      </SettingThumbnail>
+    </SettingsGroup>
   );
 };
