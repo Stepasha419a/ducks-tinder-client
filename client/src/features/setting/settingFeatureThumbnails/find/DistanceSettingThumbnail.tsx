@@ -1,0 +1,58 @@
+import { SettingThumbnail } from '@entities/setting/components';
+import { submitSettingsThunk } from '@entities/setting/model';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import styles from '../SettingFeatureThumbnails.module.scss';
+import { useState } from 'react';
+import { CheckboxInput, RangeInput } from '@shared/ui';
+
+export const DistanceSettingThumbnail = () => {
+  const dispatch = useAppDispatch();
+
+  const distance = useAppSelector(
+    (state) => state.user.currentUser.partnerSettings.distance
+  );
+  const usersOnlyInDistance = useAppSelector(
+    (state) => state.user.currentUser.partnerSettings.usersOnlyInDistance
+  );
+
+  const [distanceSetting, setDistanceSetting] = useState(distance);
+
+  const distanceHandler = (): void => {
+    dispatch(
+      submitSettingsThunk({
+        inputName: 'distance',
+        changedData: distanceSetting,
+        innerObjectName: 'partnerSettings',
+      })
+    );
+  };
+  const setUsersOnlyInDistanceHandler = (): void => {
+    dispatch(
+      submitSettingsThunk({
+        inputName: 'usersOnlyInDistance',
+        changedData: !usersOnlyInDistance,
+        innerObjectName: 'partnerSettings',
+      })
+    );
+  };
+
+  return (
+    <SettingThumbnail title="Distance" value={`${distanceSetting} км.`}>
+      <div className={styles.slider}>
+        <RangeInput
+          value={{ value: distanceSetting }}
+          setValue={(value) => setDistanceSetting(value.value!)}
+          completeValue={distanceHandler}
+          min={2}
+          max={100}
+        />
+      </div>
+      <CheckboxInput
+        checked={usersOnlyInDistance}
+        onChange={setUsersOnlyInDistanceHandler}
+        variant="small"
+        text="Show people only in this range"
+      />
+    </SettingThumbnail>
+  );
+};

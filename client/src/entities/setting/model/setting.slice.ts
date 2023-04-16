@@ -13,7 +13,7 @@ const initialState: SettingsInitialState = {
   settingInputName: null,
   innerObjectName: null,
   isUserInfoSetting: false,
-  validaton: null,
+  validation: null,
   formName: null,
   errorFields: [],
 };
@@ -31,9 +31,9 @@ const settingSlice = createSlice({
       } else {
         state.formName = payload.formName;
       }
-      state.innerObjectName = payload.innerObjectName;
+      state.innerObjectName = payload.innerObjectName || null;
       state.settingInputName = payload.inputName;
-      state.validaton = payload.validation;
+      state.validation = payload.validation || null;
       state.isUserInfoSetting = true;
 
       switch (payload.inputName) {

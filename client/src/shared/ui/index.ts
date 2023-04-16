@@ -10,4 +10,3 @@ export { Popup } from './Popup/Popup';
 export { ListItem } from './ListItem/ListItem';
 export { Preloader } from './Preloader/Preloader';
 export { ImageSlider } from './ImagesSlider/ImageSlider';
-export { SettingsGroup, SettingThumbnail, LinkThumbnail } from './setting';

@@ -9,14 +9,14 @@ export interface SettingsInitialState {
   settingInputName: SettingInputName;
   innerObjectName: InnerObjectName;
   isUserInfoSetting: boolean;
-  validaton: Validation | null;
+  validation: Validation | null;
   formName: string | null;
   errorFields: ErrorField[];
 }
 
 export interface SetInputPayload {
   inputName: SettingInputName;
-  formName: string;
-  innerObjectName: InnerObjectName;
-  validation: Validation | null;
+  formName?: string;
+  innerObjectName?: InnerObjectName;
+  validation?: Validation | null;
 }

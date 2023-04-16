@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { LinkThumbnail, SettingsGroup } from '@shared/ui';
+import { LinkThumbnail, SettingsGroup } from '@entities/setting/components';
 
 export const LinksSettingGroup = (): ReactElement => {
   return (

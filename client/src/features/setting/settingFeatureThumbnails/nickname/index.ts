@@ -1,0 +1,1 @@
+export { NicknameSettingThumbnail } from './NicknameSettingThumbnail';

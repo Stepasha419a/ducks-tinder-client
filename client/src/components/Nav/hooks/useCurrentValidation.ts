@@ -9,7 +9,7 @@ export function useCurrentValidation():
   | undefined {
   const formName = useAppSelector((state) => state.setting.formName)!;
   const validation: Validation | null = useAppSelector(
-    (state) => state.setting.validaton
+    (state) => state.setting.validation
   );
 
   return {

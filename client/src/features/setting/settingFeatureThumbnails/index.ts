@@ -1,14 +1,15 @@
-export { SettingsList } from './SettingsList/SettingsList';
 export {
   InterestsSettingThumbnail,
   PlaceSettingThumbnail,
   DistanceSettingThumbnail,
   PreferSexSettingThumbnail,
   PartnerAgeSettingThumbnail,
+} from './find';
+export {
   EmailSettingThumbnail,
   NameSettingThumbnail,
   DescriptionSettingThumbnail,
   SexSettingThumbnail,
   AgeSettingThumbnail,
-} from './settingFeatureThumbnails';
-export { LogoutButton } from './LogoutButton/LogoutButton';
+} from './account';
+export { NicknameSettingThumbnail } from './nickname';
