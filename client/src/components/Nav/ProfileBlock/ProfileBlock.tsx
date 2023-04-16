@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { useAppSelector } from '@hooks';
 import Setting from './Setting/Setting';
-import SettingsList from './SettingsList/SettingsList';
+import { SettingsList } from '@features/setting/';
 
 const ProfileBlock = (): ReactElement => {
   const isUserInfoSetting = useAppSelector(

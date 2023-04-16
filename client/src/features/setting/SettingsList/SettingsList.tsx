@@ -1,15 +1,13 @@
 import type { ReactElement } from 'react';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch } from '@hooks';
 import type { Validation } from '@shared/interfaces';
 import type {
   ChangedData,
   InnerObjectName,
   SettingInputName,
 } from '@shared/api/interfaces';
-import { createNotification } from '@entities/notification/model';
-import { setInput } from '@entities/setting/model';
-import { submitSettingsThunk } from '@entities/setting/model';
+import { logoutThunk } from '@entities/auth/model';
+import { setInput, submitSettingsThunk } from '@entities/setting/model';
 import {
   Account,
   Find,
@@ -19,22 +17,8 @@ import {
 } from '@entities/setting/components';
 import styles from './SettingsList.module.scss';
 
-const SettingsList = (): ReactElement => {
+export const SettingsList = (): ReactElement => {
   const dispatch = useAppDispatch();
-
-  const notifications = useAppSelector(
-    (state) => state.notification.notifications
-  );
-  const errorFields = useAppSelector((state) => state.setting.errorFields);
-
-  useEffect(() => {
-    const errorText =
-      'You have some empty fields, they are selected with red color';
-    const result = notifications.find((item) => item.text === errorText);
-    if (!result && errorFields.length) {
-      dispatch(createNotification({ type: 'error', text: errorText }));
-    } // eslint-disable-next-line
-  }, [errorFields.length, dispatch]);
 
   const setInputHandler = (
     inputName: SettingInputName,
@@ -66,6 +50,8 @@ const SettingsList = (): ReactElement => {
     );
   };
 
+  const logoutHandler = async () => dispatch(logoutThunk());
+
   return (
     <div className={styles.groups}>
       <Account
@@ -78,9 +64,7 @@ const SettingsList = (): ReactElement => {
       />
       <Nickname setInputHandler={setInputHandler} />
       <LinksSettingGroup />
-      <LogoutButton />
+      <LogoutButton logout={logoutHandler} />
     </div>
   );
 };
-
-export default SettingsList;

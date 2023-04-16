@@ -1,15 +1,15 @@
-import type { ReactElement } from 'react';
-import { useAppDispatch } from '@hooks';
-import { logoutThunk } from '@entities/auth/model';
+import type { FC, ReactElement } from 'react';
 import { SettingThumbnail, SettingsGroup } from '@shared/ui';
 
-export const LogoutButton = (): ReactElement => {
-  const dispatch = useAppDispatch();
+interface LogoutButtonProps {
+  logout(): void;
+}
 
+export const LogoutButton: FC<LogoutButtonProps> = ({logout}): ReactElement => {
   return (
     <SettingsGroup>
       <SettingThumbnail
-        clickHandler={async () => dispatch(logoutThunk())}
+        clickHandler={logout}
         title='Log out'
         isPointer
         isLogout

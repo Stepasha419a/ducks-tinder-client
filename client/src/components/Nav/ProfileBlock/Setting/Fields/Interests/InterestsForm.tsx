@@ -67,13 +67,20 @@ export const InterestsForm = (): ReactElement => {
           {interests.length ? (
             interests.map((item) => {
               return (
-                <ListItem onClick={() => toggleInterest(item)} key={item} extraClassName={styles.item} xmark>
+                <ListItem
+                  onClick={() => toggleInterest(item)}
+                  key={item}
+                  extraClassName={styles.item}
+                  xmark
+                >
                   {item}
                 </ListItem>
               );
             })
           ) : (
-            <div className={styles.item}>You don't have interests</div>
+            <ListItem extraClassName={styles.item}>
+              You don't have interests
+            </ListItem>
           )}
         </div>
         <div
