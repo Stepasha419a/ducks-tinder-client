@@ -1,16 +1,19 @@
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { useController, useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@hooks';
-import { setIsUserInfoSetting } from '@entities/setting/model';
-import { submitSettingsThunk } from '@entities/setting/model';
+import { useAppSelector } from '@hooks';
+import type { ChangedData } from '@shared/api/interfaces';
 import { RadioInput } from '@shared/ui';
 import { useDefaultValues } from 'components/Nav/hooks';
 import type { SettingFieldValues } from 'components/Nav/interfaces';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './RadioForm.module.scss';
 
-export const RadioForm = (): ReactElement => {
-  const dispatch = useAppDispatch();
+interface RadioFormProps{
+  cancelFormHandler(): void;
+  submitFormHandler(changedData: ChangedData): void;
+}
+
+export const RadioForm: FC<RadioFormProps> = ({cancelFormHandler, submitFormHandler}): ReactElement => {
   const formName = useAppSelector((state) => state.setting.formName);
 
   const {
@@ -25,13 +28,11 @@ export const RadioForm = (): ReactElement => {
     field: { value, onChange },
   } = useController({ name: 'input', control, rules: { required: true } });
 
-  const submitHandler = handleSubmit((data) => {
-    dispatch(submitSettingsThunk({ changedData: data.input }));
+  const submitHandler = handleSubmit((data: SettingFieldValues) => {
+    submitFormHandler(data.input);
   });
 
-  const cancelHandler = (): void => {
-    dispatch(setIsUserInfoSetting(false));
-  };
+  const cancelHandler = (): void => cancelFormHandler();
 
   return (
     <SettingWrapper

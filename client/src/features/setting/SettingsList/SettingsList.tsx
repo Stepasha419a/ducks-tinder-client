@@ -17,6 +17,7 @@ import {
 } from '@entities/setting/components';
 import styles from './SettingsList.module.scss';
 
+// TODO: decompose it into nav's components
 export const SettingsList = (): ReactElement => {
   const dispatch = useAppDispatch();
 

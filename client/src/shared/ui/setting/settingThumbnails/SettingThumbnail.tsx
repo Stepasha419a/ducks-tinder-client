@@ -15,6 +15,7 @@ interface SettingThumbnailProps {
   clickHandler?: () => void;
 }
 
+// TODO: use it into setting entity, create custom features for every setting field
 export const SettingThumbnail: FC<PropsWithChildren<SettingThumbnailProps>> = ({
   clickHandler,
   children,

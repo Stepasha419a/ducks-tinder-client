@@ -1,16 +1,19 @@
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppSelector } from '@hooks';
+import type { ChangedData } from '@shared/api/interfaces';
 import { Textarea } from '@shared/ui';
-import { submitSettingsThunk } from '@entities/setting/model';
-import { setIsUserInfoSetting } from '@entities/setting/model';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import { useCurrentValidation, useDefaultValues } from 'components/Nav/hooks';
 import type { SettingFieldValues } from 'components/Nav/interfaces';
 import styles from './TextareaForm.module.scss';
 
-export const TextareaForm = (): ReactElement => {
-  const dispatch = useAppDispatch();
+interface TextareaFormProps{
+  cancelFormHandler(): void;
+  submitFormHandler(changedData: ChangedData): void;
+}
+
+export const TextareaForm: FC<TextareaFormProps> = ({cancelFormHandler, submitFormHandler}): ReactElement => {
   const formName = useAppSelector((state) => state.setting.formName);
 
   const {
@@ -23,12 +26,10 @@ export const TextareaForm = (): ReactElement => {
   });
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
-    dispatch(submitSettingsThunk({ changedData: data.input }));
+    submitFormHandler(data.input);
   });
 
-  const cancelHandler = (): void => {
-    dispatch(setIsUserInfoSetting(false));
-  };
+  const cancelHandler = (): void => cancelFormHandler();
 
   return (
     <SettingWrapper

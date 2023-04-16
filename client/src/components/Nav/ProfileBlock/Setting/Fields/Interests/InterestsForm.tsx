@@ -1,18 +1,20 @@
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
-import { useAppDispatch } from '@hooks';
-import { setIsUserInfoSetting } from '@entities/setting/model';
-import { submitSettingsThunk } from '@entities/setting/model';
 import { InterestsSettingPopup } from '@components';
 import { useDefaultValues } from 'components/Nav/hooks';
 import type { SettingFieldArrayValues } from 'components/Nav/interfaces';
+import type { ChangedData } from '@shared/api/interfaces';
+import { ListItem } from '@shared/ui';
 import SettingWrapper from '../../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
-import { ListItem } from '@shared/ui';
 
-export const InterestsForm = (): ReactElement => {
-  const dispatch = useAppDispatch();
+interface InterestsFormProps{
+  cancelFormHandler(): void;
+  submitFormHandler(changedData: ChangedData): void;
+}
+
+export const InterestsForm: FC<InterestsFormProps> = ({cancelFormHandler, submitFormHandler}): ReactElement => {
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
 
@@ -46,11 +48,11 @@ export const InterestsForm = (): ReactElement => {
 
   const cancelHandler = (): void => {
     reset();
-    dispatch(setIsUserInfoSetting(false));
+    cancelFormHandler()
   };
 
   const submitHandler = handleSubmit((data) => {
-    dispatch(submitSettingsThunk({ changedData: data.input }));
+    submitFormHandler(data.input);
   });
 
   return (
