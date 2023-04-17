@@ -7,4 +7,5 @@ export {
   deletePairThunk,
   fetchUserById,
   getUserPairsThunk,
+  getUserFirstPairThunk,
 } from './user.thunks';

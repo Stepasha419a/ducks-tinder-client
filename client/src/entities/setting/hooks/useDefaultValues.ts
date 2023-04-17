@@ -1,7 +1,7 @@
 import { useAppSelector } from '@hooks';
 import type {
-  ChangablePartnerSettingsFields,
-  ChangableUserFields,
+  ChangeablePartnerSettingsFields,
+  ChangeableUserFields,
 } from '@shared/interfaces';
 
 export function useDefaultValues(): string | string[] {
@@ -15,7 +15,7 @@ export function useDefaultValues(): string | string[] {
 
   return innerObjectName
     ? currentUser[innerObjectName][
-        settingInputName as ChangablePartnerSettingsFields
+        settingInputName as ChangeablePartnerSettingsFields
       ]
-    : currentUser[settingInputName as ChangableUserFields];
+    : currentUser[settingInputName as ChangeableUserFields];
 }

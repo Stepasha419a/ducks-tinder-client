@@ -45,6 +45,19 @@ export const updateUserThunk = createAsyncThunk(
   }
 );
 
+export const getUserFirstPairThunk = createAsyncThunk(
+  'users/getUserFirstPair',
+  async (pairId: string, { rejectWithValue }) => {
+    try {
+      const pair = await fetchUserById(pairId);
+
+      return pair;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
   async (pairsId: string[], { rejectWithValue }) => {

@@ -2,19 +2,22 @@ import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { InterestsSettingPopup } from '@components';
-import { useDefaultValues } from 'components/Nav/hooks';
+import { useDefaultValues } from '@entities/setting/hooks';
 import type { SettingFieldArrayValues } from '@entities/setting/model/setting.interfaces';
 import type { ChangedData } from '@shared/api/interfaces';
 import { ListItem } from '@shared/ui';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
 
-interface InterestsFormProps{
+interface InterestsFormProps {
   cancelFormHandler(): void;
   submitFormHandler(changedData: ChangedData): void;
 }
 
-export const InterestsForm: FC<InterestsFormProps> = ({cancelFormHandler, submitFormHandler}): ReactElement => {
+export const InterestsForm: FC<InterestsFormProps> = ({
+  cancelFormHandler,
+  submitFormHandler,
+}): ReactElement => {
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
 
@@ -48,7 +51,7 @@ export const InterestsForm: FC<InterestsFormProps> = ({cancelFormHandler, submit
 
   const cancelHandler = (): void => {
     reset();
-    cancelFormHandler()
+    cancelFormHandler();
   };
 
   const submitHandler = handleSubmit((data) => {

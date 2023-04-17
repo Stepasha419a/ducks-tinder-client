@@ -1,22 +1,22 @@
 import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 import { PairLink } from '@entities/user/components';
 import { OpenChatList } from '@features/chat';
 import styles from './ChatsPairsBlock.module.scss';
 
-interface ChatsPairsBlockProps {
-  isPairsOpened: boolean;
-  setIsPairsOpened: (value: boolean) => void;
-}
+export const ChatsPairsBlock: FC = () => {
+  const { pathname } = useLocation();
 
-const ChatsPairsBlock: FC<ChatsPairsBlockProps> = ({
-  isPairsOpened,
-  setIsPairsOpened,
-}) => {
+  const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
+
   const cnPairs = classNames(styles.title, isPairsOpened && styles.active);
-
   const cnMessages = classNames(styles.title, !isPairsOpened && styles.active);
+
+  useEffect(() => {
+    setIsPairsOpened(!(pathname === '/chat'));
+  }, [pathname]);
 
   return (
     <>
@@ -38,5 +38,3 @@ const ChatsPairsBlock: FC<ChatsPairsBlockProps> = ({
     </>
   );
 };
-
-export default ChatsPairsBlock;

@@ -1,22 +1,31 @@
 import type { FC } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import type { PairSorts, User } from '@shared/api/interfaces';
 import Pair from './Pair/Pair';
 import { sortItemBySettings } from '../../helpers';
 import styles from './Pairs.module.scss';
+import { getUserPairsThunk } from '@entities/user/model';
 
 interface PairsProps {
   sorts: PairSorts;
 }
 
 export const Pairs: FC<PairsProps> = ({ sorts }) => {
+  const dispatch = useAppDispatch();
+
+  const pairs = useAppSelector((state) => state.user.currentUser.pairs);
   const pairsState = useAppSelector((state) => state.user.pairs);
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
   const [currentPair, setCurrentPair] = useState<User>({} as User);
+
+  useEffect(() => {
+    dispatch(getUserPairsThunk(pairs));
+  }, [dispatch, pairs]);
 
   if (!currentUser.pairs.length) {
     return (

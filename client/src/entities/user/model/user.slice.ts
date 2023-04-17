@@ -9,6 +9,7 @@ import {
 import {
   deletePairThunk,
   deleteUserImage,
+  getUserFirstPairThunk,
   getUserPairsThunk,
   mixUserImages,
   saveUserImageThunk,
@@ -36,6 +37,9 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getUserFirstPairThunk.fulfilled, (state, action) => {
+        state.pairs = [action.payload];
+      })
       .addCase(getUserPairsThunk.fulfilled, (state, action) => {
         state.pairs = [...action.payload];
       })

@@ -1,4 +1,4 @@
-export type ChangableUserFields =
+export type ChangeableUserFields =
   | 'email'
   | 'name'
   | 'description'

@@ -4,7 +4,7 @@ import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { makeImageUrl } from '@shared/helpers';
 import { useEffect } from 'react';
-import { getUserPairsThunk } from '../../model';
+import { getUserFirstPairThunk } from '../../model';
 import FailedPair from './Failed/FailedPair';
 import Loading from './Loading/Loading';
 import styles from './PairLink.module.scss';
@@ -12,14 +12,17 @@ import styles from './PairLink.module.scss';
 export const PairLink = () => {
   const dispatch = useAppDispatch();
 
+  const firstPairId = useAppSelector(
+    (state) => state.user.currentUser.pairs[0]
+  );
   const firstPair = useAppSelector((state) => state.user.pairs[0]);
-  const pairs = useAppSelector((state) => state.user.currentUser.pairs);
-  const pairsLength = pairs.length;
+  const pairsLength = useAppSelector(
+    (state) => state.user.currentUser.pairs
+  ).length;
 
-  // TODO: relocate it into Pairs page logic, it's unnecessary to do all requests for one pair image
   useEffect(() => {
-    dispatch(getUserPairsThunk(pairs));
-  }, [dispatch, pairs]);
+    dispatch(getUserFirstPairThunk(firstPairId));
+  }, [dispatch, firstPairId]);
 
   if (!pairsLength) {
     return <FailedPair />;

@@ -3,17 +3,20 @@ import { useController, useForm } from 'react-hook-form';
 import { useAppSelector } from '@hooks';
 import type { ChangedData } from '@shared/api/interfaces';
 import { RadioInput } from '@shared/ui';
-import { useDefaultValues } from 'components/Nav/hooks';
+import { useDefaultValues } from '@entities/setting/hooks';
 import type { SettingFieldValues } from '@entities/setting/model/setting.interfaces';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import styles from './RadioForm.module.scss';
 
-interface RadioFormProps{
+interface RadioFormProps {
   cancelFormHandler(): void;
   submitFormHandler(changedData: ChangedData): void;
 }
 
-export const RadioForm: FC<RadioFormProps> = ({cancelFormHandler, submitFormHandler}): ReactElement => {
+export const RadioForm: FC<RadioFormProps> = ({
+  cancelFormHandler,
+  submitFormHandler,
+}): ReactElement => {
   const formName = useAppSelector((state) => state.setting.formName);
 
   const {

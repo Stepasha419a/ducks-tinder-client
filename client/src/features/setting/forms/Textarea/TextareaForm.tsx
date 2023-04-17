@@ -4,16 +4,22 @@ import { useAppSelector } from '@hooks';
 import type { ChangedData } from '@shared/api/interfaces';
 import { Textarea } from '@shared/ui';
 import SettingWrapper from '../Wrapper/SettingWrapper';
-import { useCurrentValidation, useDefaultValues } from 'components/Nav/hooks';
+import {
+  useCurrentValidation,
+  useDefaultValues,
+} from '@entities/setting/hooks';
 import type { SettingFieldValues } from '@entities/setting/model/setting.interfaces';
 import styles from './TextareaForm.module.scss';
 
-interface TextareaFormProps{
+interface TextareaFormProps {
   cancelFormHandler(): void;
   submitFormHandler(changedData: ChangedData): void;
 }
 
-export const TextareaForm: FC<TextareaFormProps> = ({cancelFormHandler, submitFormHandler}): ReactElement => {
+export const TextareaForm: FC<TextareaFormProps> = ({
+  cancelFormHandler,
+  submitFormHandler,
+}): ReactElement => {
   const formName = useAppSelector((state) => state.setting.formName);
 
   const {

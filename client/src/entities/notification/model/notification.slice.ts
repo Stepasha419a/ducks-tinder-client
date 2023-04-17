@@ -41,7 +41,11 @@ const notificationSlice = createSlice({
       (action: PayloadAction) => action.type.endsWith('rejected'),
       (state, action: PayloadAction<string>) => {
         const signs = action.type.split('/');
-        if (signs[1] !== 'getSortedUser' && signs[1] !== 'disconnectChat') {
+        if (
+          signs[1] !== 'getSortedUser' &&
+          signs[1] !== 'disconnectChat' &&
+          signs[1] !== 'getUserFirstPair'
+        ) {
           const notification: Notification = {
             id: Date.now(),
             type: 'error',

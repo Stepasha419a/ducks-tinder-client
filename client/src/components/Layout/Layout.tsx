@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Nav } from '@components';
+import { Nav } from '@widgets';
 import { checkFields } from '@entities/setting/model';
 import { useAppSelector } from '@hooks';
 import styles from './Layout.module.scss';

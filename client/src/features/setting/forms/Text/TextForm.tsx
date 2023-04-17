@@ -3,7 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useAppSelector } from '@hooks';
 import type { ChangedData } from '@shared/api/interfaces';
 import { TextField } from '@shared/ui';
-import { useCurrentValidation, useDefaultValues } from 'components/Nav/hooks';
+import {
+  useCurrentValidation,
+  useDefaultValues,
+} from '@entities/setting/hooks';
 import type { SettingFieldValues } from '@entities/setting/model/setting.interfaces';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import styles from './TextForm.module.scss';
