@@ -7,8 +7,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar } from '@shared/ui';
 import { useAppSelector } from '@hooks';
-import styles from './UserLinks.module.scss';
 import classNames from 'classnames';
+import styles from './UserLinks.module.scss';
 
 export const UserLinks = () => {
   const { pathname } = useLocation();

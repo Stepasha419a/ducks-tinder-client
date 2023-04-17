@@ -4,8 +4,8 @@ import { useAppSelector } from '@hooks';
 import type { ChangedData } from '@shared/api/interfaces';
 import { RadioInput } from '@shared/ui';
 import { useDefaultValues } from 'components/Nav/hooks';
-import type { SettingFieldValues } from 'components/Nav/interfaces';
-import SettingWrapper from '../../Wrapper/SettingWrapper';
+import type { SettingFieldValues } from '@entities/setting/model/setting.interfaces';
+import SettingWrapper from '../Wrapper/SettingWrapper';
 import styles from './RadioForm.module.scss';
 
 interface RadioFormProps{

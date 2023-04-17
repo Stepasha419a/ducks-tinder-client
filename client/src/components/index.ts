@@ -1,4 +1,4 @@
-export { Nav } from './Nav/Nav';
+export { Nav } from '../widgets/Nav/Nav';
 export { Notifications } from './Notifications/Notifications';
 export { Layout } from './Layout/Layout';
 export { Loading } from './Loading/Loading';

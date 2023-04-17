@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { InterestsSettingPopup } from '@components';
 import { useDefaultValues } from 'components/Nav/hooks';
-import type { SettingFieldArrayValues } from 'components/Nav/interfaces';
+import type { SettingFieldArrayValues } from '@entities/setting/model/setting.interfaces';
 import type { ChangedData } from '@shared/api/interfaces';
 import { ListItem } from '@shared/ui';
-import SettingWrapper from '../../Wrapper/SettingWrapper';
+import SettingWrapper from '../Wrapper/SettingWrapper';
 import styles from './InterestsForm.module.scss';
 
 interface InterestsFormProps{

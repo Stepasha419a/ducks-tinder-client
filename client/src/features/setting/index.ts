@@ -1,4 +1,3 @@
-export { SettingsList } from './SettingsList/SettingsList';
 export {
   InterestsSettingThumbnail,
   PlaceSettingThumbnail,
@@ -10,5 +9,7 @@ export {
   DescriptionSettingThumbnail,
   SexSettingThumbnail,
   AgeSettingThumbnail,
+  NicknameSettingThumbnail,
 } from './settingFeatureThumbnails';
 export { LogoutButton } from './LogoutButton/LogoutButton';
+export { InterestsForm, RadioForm, TextForm, TextareaForm } from './forms';

@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
-import { UserLinks } from '@entities/user/components';
-import ChatsPairsBlock from './ChatsPairsBlock/ChatsPairsBlock';
-import ProfileBlock from './ProfileBlock/ProfileBlock';
+import ChatsPairsBlock from '../../components/Nav/ChatsPairsBlock/ChatsPairsBlock';
+import { ProfileBlock, UserLinks } from './components';
 import styles from './Nav.module.scss';
 
 export const Nav = (): ReactElement => {

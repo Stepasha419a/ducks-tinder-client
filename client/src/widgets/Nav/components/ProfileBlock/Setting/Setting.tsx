@@ -5,10 +5,15 @@ import {
   submitSettingsThunk,
 } from '@entities/setting/model';
 import type { ChangedData } from '@shared/api/interfaces';
-import { InterestsForm, RadioForm, TextareaForm, TextForm } from './Fields';
+import {
+  InterestsForm,
+  RadioForm,
+  TextareaForm,
+  TextForm,
+} from '@features/setting';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
-const ProfileSetting = (): ReactElement => {
+export const Setting = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const setting = useAppSelector((state) => state.setting.setting);
@@ -59,5 +64,3 @@ const ProfileSetting = (): ReactElement => {
     />
   );
 };
-
-export default ProfileSetting;

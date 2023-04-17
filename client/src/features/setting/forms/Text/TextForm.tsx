@@ -2,18 +2,21 @@ import type { FC, ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppSelector } from '@hooks';
 import type { ChangedData } from '@shared/api/interfaces';
-import { Textarea } from '@shared/ui';
-import SettingWrapper from '../../Wrapper/SettingWrapper';
+import { TextField } from '@shared/ui';
 import { useCurrentValidation, useDefaultValues } from 'components/Nav/hooks';
-import type { SettingFieldValues } from 'components/Nav/interfaces';
-import styles from './TextareaForm.module.scss';
+import type { SettingFieldValues } from '@entities/setting/model/setting.interfaces';
+import SettingWrapper from '../Wrapper/SettingWrapper';
+import styles from './TextForm.module.scss';
 
-interface TextareaFormProps{
+interface TextFormProps {
   cancelFormHandler(): void;
   submitFormHandler(changedData: ChangedData): void;
 }
 
-export const TextareaForm: FC<TextareaFormProps> = ({cancelFormHandler, submitFormHandler}): ReactElement => {
+export const TextForm: FC<TextFormProps> = ({
+  cancelFormHandler,
+  submitFormHandler,
+}): ReactElement => {
   const formName = useAppSelector((state) => state.setting.formName);
 
   const {
@@ -34,14 +37,14 @@ export const TextareaForm: FC<TextareaFormProps> = ({cancelFormHandler, submitFo
   return (
     <SettingWrapper
       formName={formName}
-      isValid={isValid}
       errors={errors}
+      isValid={isValid}
       submitHandler={submitHandler}
       cancelHandler={cancelHandler}
     >
-      <Textarea
+      <TextField
         {...register('input', useCurrentValidation())}
-        extraClassName={styles.textarea}
+        extraClassName={styles.textInput}
       />
     </SettingWrapper>
   );
