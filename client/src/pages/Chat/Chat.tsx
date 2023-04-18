@@ -1,6 +1,8 @@
 import type { ReactElement } from 'react';
 import { useAppSelector } from '@hooks';
-import { ChatForm, Messages, Status } from './components';
+import { Messages } from '@entities/chat/components';
+import { ChatForm } from '@features/chat';
+import { Status } from './components';
 
 export const Chat = (): ReactElement => {
   const isConnected = useAppSelector((state) => state.chat.isConnected);

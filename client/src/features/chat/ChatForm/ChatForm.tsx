@@ -20,8 +20,9 @@ export const ChatForm = (): ReactElement => {
   } = useForm<ChatFormValues>({ mode: 'onChange' });
 
   const sendMessage = handleSubmit((data) => {
-    if (data.input.trim()) {
-      dispatch(sendMessageThunk(data.input.trim()));
+    const trimmedValue = data.input.trim();
+    if (trimmedValue) {
+      dispatch(sendMessageThunk(trimmedValue));
     }
     reset();
   });
