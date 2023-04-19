@@ -1,1 +1,0 @@
-export { sortItemBySettings } from './sortItemBySettings';

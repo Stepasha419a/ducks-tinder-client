@@ -4,6 +4,9 @@ dist
 .env
 .vscode
 
+# dev mutations for window to test much easily
+/src/application/dev
+
 # dependencies
 /node_modules
 /.pnp

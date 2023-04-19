@@ -1,19 +1,20 @@
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppSelector } from '@hooks';
 import styles from './Likes.module.scss';
 
-export const Likes = (): ReactElement => {
-  const currentUser = useAppSelector((state) => state.user.currentUser);
+interface LikesProps {
+  value: number;
+}
 
+export const Likes: FC<LikesProps> = ({value}): ReactElement => {
   return (
     <div className={styles.likes}>
       <FontAwesomeIcon
         icon={faHeartCircleExclamation}
         className={styles.icon}
       />
-      {currentUser.pairs.length} likes
+      {value} likes
     </div>
   );
 };

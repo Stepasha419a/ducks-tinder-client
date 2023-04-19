@@ -3,18 +3,18 @@ import { useState } from 'react';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useController, useForm } from 'react-hook-form';
-import { InterestsSettingPopup } from '@components';
-import { PairsSettingsPopup } from '@pages/Pairs/popups';
-import styles from './Sorting.module.scss';
 import { INITIAL_SORTS, INTERESTS_FOR_LOOP } from '@shared/constants';
 import type { PairSorts } from '@shared/api/interfaces';
 import { ListItem } from '@shared/ui';
+import { PairsSettingsPopup } from './PairsSettingsPopup/PairsSettingsPopup';
+import { InterestsSettingPopup } from '@/entities/user/components';
+import styles from './SortPairs.module.scss';
 
-interface SortingProps {
+interface SortPairsProps {
   setSorts: (sorts: PairSorts) => void;
 }
 
-export const Sorting: FC<SortingProps> = ({ setSorts }) => {
+export const SortPairs: FC<SortPairsProps> = ({ setSorts }) => {
   const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);

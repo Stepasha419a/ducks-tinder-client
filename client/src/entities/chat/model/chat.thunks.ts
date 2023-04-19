@@ -45,12 +45,11 @@ export const getChatsThunk = createAsyncThunk(
 
 export const createChatThunk = createAsyncThunk(
   'chat/createChat',
-  async (
-    args: { currentUserId: string; otherUserId: string },
-    { rejectWithValue }
-  ) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
-      await chatApi.createChat([args.currentUserId, args.otherUserId]);
+      const { user } = getState() as RootState;
+      const { currentUser, currentPair } = user;
+      await chatApi.createChat([currentUser._id, currentPair!._id]);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

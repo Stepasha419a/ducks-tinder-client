@@ -18,12 +18,14 @@ import {
 
 interface InitialState {
   currentUser: User;
+  currentPair: User | null;
   pairs: User[];
 }
 
 const initialState: InitialState = {
   // auth always set currentUser object after registration/login/refresh
   currentUser: {} as User,
+  currentPair: null,
   pairs: [],
 };
 
@@ -33,6 +35,9 @@ const userSlice = createSlice({
   reducers: {
     setCurrentUser: (state, { payload }: PayloadAction<User>) => {
       state.currentUser = payload;
+    },
+    setCurrentPair: (state, { payload }: PayloadAction<User | null>) => {
+      state.currentPair = payload;
     },
   },
   extraReducers: (builder) => {
@@ -47,6 +52,7 @@ const userSlice = createSlice({
         state.currentUser = action.payload.data;
 
         state.pairs.filter((pair) => pair._id !== action.payload.deletedId);
+        state.currentPair = null;
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
@@ -72,6 +78,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setCurrentUser } = userSlice.actions;
+export const { setCurrentUser, setCurrentPair } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

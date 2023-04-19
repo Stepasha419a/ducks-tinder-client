@@ -60,11 +60,13 @@ export const getUserFirstPairThunk = createAsyncThunk(
 
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
-  async (pairsId: string[], { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
       // TODO: do this server endpoint
+      const { user } = getState() as RootState;
+      const { currentUser } = user;
       const pairs = await Promise.all(
-        pairsId.map(async (pairId) => fetchUserById(pairId))
+        currentUser.pairs.map(async (pairId) => fetchUserById(pairId))
       ).then((results) => results.map((result) => result));
 
       return pairs;
@@ -76,17 +78,16 @@ export const getUserPairsThunk = createAsyncThunk(
 
 export const deletePairThunk = createAsyncThunk(
   'users/deletePair',
-  async (
-    args: { userId: string; deleteForUserId: string },
-    { rejectWithValue }
-  ) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
+      const { user } = getState() as RootState;
+      const { currentUser, currentPair } = user;
       const response = await usersAPI.deletePair(
-        args.userId,
-        args.deleteForUserId
+        currentUser._id,
+        currentPair!._id
       );
 
-      return { data: response.data, deletedId: args.deleteForUserId };
+      return { data: response.data, deletedId: currentPair!._id };
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

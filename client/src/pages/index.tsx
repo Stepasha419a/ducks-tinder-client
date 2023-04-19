@@ -9,7 +9,7 @@ import { Login } from '@pages/Login';
 import { Registration } from '@pages/Registration';
 import { Tinder } from '@pages/Tinder';
 import { Profile } from '@pages/Profile';
-import { Chat } from '@pages/Chat';
+import { ChatPage } from '@pages/Chat';
 import { PairsPage } from '@pages/Pairs';
 import { Policy } from '@pages/Policy';
 
@@ -28,7 +28,7 @@ const Routing = (): ReactElement => {
       <Route path={ROUTES.main} element={<Layout />}>
         <Route index element={<Tinder />} />
         <Route path={ROUTES.profile} element={<Profile />} />
-        <Route path={ROUTES.chat} element={<Chat />} />
+        <Route path={ROUTES.chat} element={<ChatPage />} />
         <Route path={ROUTES.pairs} element={<PairsPage />} />
         <Route path={ROUTES.policy} element={<Policy />} />
         <Route path={ROUTES.notFound} element={<div>404 NOT FOUND</div>} />

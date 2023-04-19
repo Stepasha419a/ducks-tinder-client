@@ -35,7 +35,6 @@ export const Layout = (): ReactElement | null => {
   if (isAuth) {
     if (
       pathname === '/' ||
-      pathname === '/chat' ||
       pathname === '/pairs' ||
       pathname === '/profile'
     ) {
