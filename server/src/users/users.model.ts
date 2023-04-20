@@ -3,57 +3,57 @@ import { Document } from 'mongoose';
 import { partnerSettingsDefault, picturesDefault } from './users.constants';
 import { IPartnerSettings, picturesInterface } from './users.interface';
 
-export type UserDocument = User & Document
+export type UserDocument = User & Document;
 
 @Schema()
 export class User {
-  @Prop({required: true, unique: true})
-  email: string
+  @Prop({ required: true, unique: true })
+  email: string;
 
-  @Prop({required: true})
-  password: string
+  @Prop({ required: true })
+  password: string;
 
-  @Prop({required: true})
-  name: string
+  @Prop({ required: true })
+  name: string;
 
-  @Prop({default: ''})
-  description: string
-
-  @Prop()
-  nickname: string
+  @Prop({ default: '' })
+  description: string;
 
   @Prop()
-  picture: string
-
-  @Prop({default: false})
-  isActivated: boolean
+  nickname: string;
 
   @Prop()
-  activationLink: string
+  picture: string;
 
-  @Prop({default: 18})
-  age: number
+  @Prop({ default: false })
+  isActivated: boolean;
 
-  @Prop({default: 'male'})
-  sex: 'male' | 'female'
+  @Prop()
+  activationLink: string;
 
-  @Prop({default: []})
-  interests: string[]
+  @Prop({ default: 18 })
+  age: number;
 
-  @Prop({type: {} as IPartnerSettings, default: partnerSettingsDefault})
-  partnerSettings
+  @Prop({ default: 'male' })
+  sex: 'male' | 'female';
 
-  @Prop({type: {} as picturesInterface, default: picturesDefault})
-  pictures
+  @Prop({ default: [] })
+  interests: string[];
 
-  @Prop({default: []})
-  chats: string[]
+  @Prop({ type: {} as IPartnerSettings, default: partnerSettingsDefault })
+  partnerSettings;
 
-  @Prop({default: []})
-  pairs: string[]
+  @Prop({ type: {} as picturesInterface, default: picturesDefault })
+  pictures;
 
-  @Prop({default: []})
-  checkedUsers: string[]
+  @Prop({ default: [] })
+  chats: string[];
+
+  @Prop({ default: [] })
+  pairs: string[];
+
+  @Prop({ default: [] })
+  checkedUsers: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

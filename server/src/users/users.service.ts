@@ -5,7 +5,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { FilesService } from 'src/files/files.service';
+import { FilesService } from '../files/files.service';
 import { UserPairDto } from './dto/user-pair.dto';
 import { DeletePictoreDto } from './dto/delete-picture.dto';
 import { UserDto } from './dto/user.dto';
