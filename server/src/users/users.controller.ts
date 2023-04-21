@@ -2,7 +2,20 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from './../auth/auth.guard';
 import { SavePictoreDto } from './dto/save-picture.dto';
 import { UsersService } from './users.service';
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UserPairDto } from './dto/user-pair.dto';
 import { DeletePictoreDto } from './dto/delete-picture.dto';
@@ -12,60 +25,66 @@ import { UserSortsDto } from './dto/user-sorts.dto';
 @Controller('users')
 @UseGuards(AuthGuard)
 export class UsersController {
-    constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) {}
 
-    @Get()
-    @HttpCode(HttpStatus.OK)
-    getAll(): Promise<UserDto[]> {
-        return this.usersService.getAll()
-    }
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  getAll(): Promise<UserDto[]> {
+    return this.usersService.getAll();
+  }
 
-    @Get(':id')
-    @HttpCode(HttpStatus.OK)
-    getOne(@Param('id') id): Promise<UserDto> {
-        return this.usersService.getOne(id)
-    }
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
+  getOne(@Param('id') id): Promise<UserDto> {
+    return this.usersService.getOne(id);
+  }
 
-    @Post('sorted')
-    @HttpCode(HttpStatus.OK)
-    getSortedUser(@Body() dto: UserSortsDto): Promise<UserDto> {
-        return this.usersService.getSorted(dto)
-    }
+  @Post('sorted')
+  @HttpCode(HttpStatus.OK)
+  getSortedUser(@Body() dto: UserSortsDto): Promise<UserDto> {
+    return this.usersService.getSorted(dto);
+  }
 
-    @Post('picture')
-    @HttpCode(HttpStatus.OK)
-    @UseInterceptors(FileInterceptor('picture'))
-    savePicture(@Body() dto: SavePictoreDto, @UploadedFile() picture: Express.Multer.File): Promise<UserDto> {
-        return this.usersService.savePicture(dto, picture)
-    }
+  @Post('picture')
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(FileInterceptor('picture'))
+  savePicture(
+    @Body() dto: SavePictoreDto,
+    @UploadedFile() picture: Express.Multer.File,
+  ): Promise<UserDto> {
+    return this.usersService.savePicture(dto, picture);
+  }
 
-    @Put('picture')
-    @HttpCode(HttpStatus.OK)
-    deletePicture(@Body() dto: DeletePictoreDto): Promise<UserDto> {
-        return this.usersService.deletePicture(dto)
-    }
+  @Put('picture')
+  @HttpCode(HttpStatus.OK)
+  deletePicture(@Body() dto: DeletePictoreDto): Promise<UserDto> {
+    return this.usersService.deletePicture(dto);
+  }
 
-    @Post('pairs')
-    @HttpCode(HttpStatus.OK)
-    createPair(@Body() dto: UserPairDto): Promise<UserDto> {
-        return this.usersService.createPair(dto)
-    }
+  @Post('pairs')
+  @HttpCode(HttpStatus.OK)
+  createPair(@Body() dto: UserPairDto): Promise<UserDto> {
+    return this.usersService.createPair(dto);
+  }
 
-    @Put('pairs')
-    @HttpCode(HttpStatus.OK)
-    deletePair(@Body() dto: UserPairDto): Promise<UserDto> {
-        return this.usersService.deletePair(dto)
-    }
+  @Put('pairs')
+  @HttpCode(HttpStatus.OK)
+  deletePair(@Body() dto: UserPairDto): Promise<UserDto> {
+    return this.usersService.deletePair(dto);
+  }
 
-    @Put(':id')
-    @HttpCode(HttpStatus.OK)
-    update(@Body() dto: UpdateUserDto, @Param('id') id: string): Promise<UserDto> {
-        return this.usersService.update(id, dto)
-    }
+  @Put(':id')
+  @HttpCode(HttpStatus.OK)
+  update(
+    @Body() dto: UpdateUserDto,
+    @Param('id') id: string,
+  ): Promise<UserDto> {
+    return this.usersService.update(id, dto);
+  }
 
-    @Delete(':id')
-    @HttpCode(HttpStatus.OK)
-    delete(@Param('id') id: string): Promise<UserDto> {
-        return this.usersService.delete(id)
-    }
+  @Delete(':id')
+  @HttpCode(HttpStatus.OK)
+  delete(@Param('id') id: string): Promise<UserDto> {
+    return this.usersService.delete(id);
+  }
 }

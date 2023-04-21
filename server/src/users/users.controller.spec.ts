@@ -30,7 +30,7 @@ describe('UsersController', () => {
       .useValue(mockAuthGuard)
       .compile();
 
-    controller = await moduleRef.resolve<UsersController>(UsersController);
+    controller = await moduleRef.get<UsersController>(UsersController);
   });
 
   it('should be defined', () => {

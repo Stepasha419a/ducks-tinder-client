@@ -26,10 +26,7 @@ export class UsersService {
     const user = await this.userModel.findById(id);
 
     if (!user) {
-      throw new HttpException(
-        'Such user was not found',
-        HttpStatus.NOT_FOUND,
-      );
+      throw new HttpException('Such user was not found', HttpStatus.NOT_FOUND);
     }
 
     const userData = new UserDto(user);
