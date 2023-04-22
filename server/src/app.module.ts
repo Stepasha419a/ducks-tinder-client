@@ -1,4 +1,4 @@
-import {MongooseModule} from '@nestjs/mongoose'
+import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { Module } from '@nestjs/common';
 import { FilesModule } from './files/files.module';
@@ -14,15 +14,15 @@ import * as path from 'path';
   imports: [
     ServeStaticModule.forRoot({
       rootPath: path.resolve(__dirname, 'static'),
-    }), 
-    MongooseModule.forRoot("mongodb://localhost/ducks-db"),
-    UsersModule, 
-    FilesModule, 
-    AuthModule, 
+    }),
+    MongooseModule.forRoot('mongodb://localhost/ducks-db'),
+    UsersModule,
+    FilesModule,
+    AuthModule,
     TokensModule,
     MailModule,
     ChatModule,
-    ConfigModule.forRoot({isGlobal: true})
-  ]
+    ConfigModule.forRoot({ isGlobal: true }),
+  ],
 })
 export class AppModule {}
