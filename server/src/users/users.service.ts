@@ -1,5 +1,5 @@
-import { UpdateUserDto } from './dto/update-user.dto';
-import { SavePictoreDto } from './dto/save-picture.dto';
+import { UpdateUserDto } from './dto/updated-user.dto';
+import { SavePictureDto } from './dto/save-picture.dto';
 import { User, UserDocument } from './users.model';
 import { CreateUserDto } from './dto/create-user.dto';
 import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
@@ -98,7 +98,7 @@ export class UsersService {
   }
 
   async savePicture(
-    dto: SavePictoreDto,
+    dto: SavePictureDto,
     picture: Express.Multer.File,
   ): Promise<UserDto> {
     const fileName = this.filesService.savePicture(

@@ -6,7 +6,7 @@ import {
   partnerSettingsDefault,
   picturesDefault,
 } from '../src/users/users.constants';
-import { UpdateUserDto } from '../src/users/dto/update-user.dto';
+import { UpdateUserDto } from '../src/users/dto/updated-user.dto';
 import { getModelToken } from '@nestjs/mongoose';
 import { User } from '../src/users/users.model';
 import { FilesService } from '../src/files/files.service';
@@ -23,7 +23,7 @@ describe('UsersController (e2e)', () => {
     name: 'stepa',
   };
 
-  const expectedUserCreateDto = {
+  const expectedUserDto = {
     email: '123@mail.ru',
     name: 'stepa',
   };
@@ -63,7 +63,7 @@ describe('UsersController (e2e)', () => {
       Promise.resolve({ ...getUserData(receivedUserCreateDto), ...dto, id }),
     ),
     findByIdAndDelete: jest.fn((id: string) =>
-      Promise.resolve({ ...getUserData(expectedUserCreateDto), id }),
+      Promise.resolve({ ...getUserData(expectedUserDto), id }),
     ),
   };
 
@@ -85,10 +85,12 @@ describe('UsersController (e2e)', () => {
     await app.init();
   });
 
-  it('/users/:id (GET)', () => {
-    request(app.getHttpServer())
+  it('/users/:id (GET)', async () => {
+    const response = await request(app.getHttpServer())
       .get('/users/sdfhsdghj34259034578923')
       .expect(200);
+
+    expect(response.body).toEqual(getUserData(expectedUserDto));
   });
 
   it('/users/:id (PUT)', async () => {
@@ -100,7 +102,15 @@ describe('UsersController (e2e)', () => {
     expect(response.body).toEqual(getUserData(updateUserDto));
   });
 
-  afterEach(async () => {
+  it('/users/:id (DELETE)', async () => {
+    const response = await request(app.getHttpServer())
+      .delete('/users/sdfhsdghj34259034578923')
+      .expect(200);
+
+    expect(response.body).toEqual(getUserData(expectedUserDto));
+  });
+
+  afterAll(async () => {
     await app.close();
   });
 });

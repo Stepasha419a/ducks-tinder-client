@@ -1,12 +1,12 @@
 import { Test } from '@nestjs/testing';
-import { UsersService } from './users.service';
-import { User } from './users.model';
+import { UsersService } from '../users.service';
+import { User } from '../users.model';
 import { getModelToken } from '@nestjs/mongoose';
-import { FilesService } from '../files/files.service';
-import { FilesModule } from '../files/files.module';
-import { CreateUserDto } from './dto/create-user.dto';
-import { partnerSettingsDefault, picturesDefault } from './users.constants';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { FilesService } from '../../files/files.service';
+import { FilesModule } from '../../files/files.module';
+import { CreateUserDto } from '../dto/create-user.dto';
+import { partnerSettingsDefault, picturesDefault } from '../users.constants';
+import { UpdateUserDto } from '../dto/updated-user.dto';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -17,7 +17,7 @@ describe('UsersService', () => {
     name: 'stepa',
   };
 
-  const expectedUserCreateDto = {
+  const expectedUserDto = {
     email: '123@mail.ru',
     name: 'stepa',
   };
@@ -55,7 +55,7 @@ describe('UsersService', () => {
       Promise.resolve({ ...getUserData(receivedUserCreateDto), ...dto, id }),
     ),
     findByIdAndDelete: jest.fn((id: string) =>
-      Promise.resolve({ ...getUserData(expectedUserCreateDto), id }),
+      Promise.resolve({ ...getUserData(expectedUserDto), id }),
     ),
   };
   const mockFilesService = {};
@@ -81,13 +81,13 @@ describe('UsersService', () => {
 
   it('should create a new user record and return that', async () => {
     expect(await service.create(receivedUserCreateDto)).toEqual(
-      getUserData(expectedUserCreateDto),
+      getUserData(expectedUserDto),
     );
   });
 
   it('should get a user by id and return that', async () => {
     expect(await service.getOne('sdfhsdghj34259034578923')).toEqual(
-      getUserData(expectedUserCreateDto),
+      getUserData(expectedUserDto),
     );
   });
 
@@ -105,7 +105,7 @@ describe('UsersService', () => {
 
   it('should delete a user and return that', async () => {
     expect(await service.delete('sdfhsdghj34259034578923')).toEqual(
-      getUserData(expectedUserCreateDto),
+      getUserData(expectedUserDto),
     );
   });
 });

@@ -1,4 +1,4 @@
-import { picturesInterface } from './../users.interface';
+import { picturesInterface } from '../users.interface';
 import { IPartnerSettings } from '../users.interface';
 
 export class UpdateUserDto {

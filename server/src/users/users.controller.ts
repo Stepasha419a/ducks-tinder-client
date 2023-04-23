@@ -1,6 +1,6 @@
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto/updated-user.dto';
 import { AuthGuard } from './../auth/auth.guard';
-import { SavePictoreDto } from './dto/save-picture.dto';
+import { SavePictureDto } from './dto/save-picture.dto';
 import { UsersService } from './users.service';
 import {
   Body,
@@ -18,7 +18,7 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UserPairDto } from './dto/user-pair.dto';
-import { DeletePictoreDto } from './dto/delete-picture.dto';
+import { DeletePictureDto } from './dto/delete-picture.dto';
 import { UserDto } from './dto/user.dto';
 import { UserSortsDto } from './dto/user-sorts.dto';
 
@@ -49,7 +49,7 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(FileInterceptor('picture'))
   savePicture(
-    @Body() dto: SavePictoreDto,
+    @Body() dto: SavePictureDto,
     @UploadedFile() picture: Express.Multer.File,
   ): Promise<UserDto> {
     return this.usersService.savePicture(dto, picture);
@@ -57,7 +57,7 @@ export class UsersController {
 
   @Put('picture')
   @HttpCode(HttpStatus.OK)
-  deletePicture(@Body() dto: DeletePictoreDto): Promise<UserDto> {
+  deletePicture(@Body() dto: DeletePictureDto): Promise<UserDto> {
     return this.usersService.deletePicture(dto);
   }
 
