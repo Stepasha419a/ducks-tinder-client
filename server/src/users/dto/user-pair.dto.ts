@@ -1,4 +1,4 @@
 export class UserPairDto {
-    readonly forUserId: string
-    readonly userId: string
+  readonly forUserId: string;
+  readonly userId: string;
 }

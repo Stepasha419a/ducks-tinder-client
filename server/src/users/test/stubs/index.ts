@@ -1,1 +1,1 @@
-export { userDataStub } from './user-data.stub';
+export { userStub } from './user.stub';

@@ -2,12 +2,13 @@ import { Test } from '@nestjs/testing';
 import { UsersController } from '../users.controller';
 import { UsersService } from '../users.service';
 import { AuthGuard } from '../../auth/auth.guard';
-import { userDataStub } from './stubs';
+import { userStub } from './stubs';
 import { IUserDto } from '../users.interface';
 import { UserSortsDto } from '../dto/user-sorts.dto';
 import { UpdateUserDto } from '../dto/updated-user.dto';
 import { SavePictureDto } from '../dto/save-picture.dto';
 import { DeletePictureDto } from '../dto/delete-picture.dto';
+import { UserPairDto } from '../dto/user-pair.dto';
 
 jest.mock('../users.service');
 
@@ -40,15 +41,15 @@ describe('UsersController', () => {
     let user: IUserDto;
 
     beforeEach(async () => {
-      user = await usersController.getOne(userDataStub()._id);
+      user = await usersController.getOne(userStub()._id);
     });
 
     it('should call usersService', () => {
-      expect(usersService.getOne).toBeCalledWith(userDataStub()._id);
+      expect(usersService.getOne).toBeCalledWith(userStub()._id);
     });
 
     it('should return a user', async () => {
-      expect(user).toEqual(userDataStub());
+      expect(user).toEqual(userStub());
     });
   });
 
@@ -61,18 +62,15 @@ describe('UsersController', () => {
         name: 'John',
         email: 'email123123@gmail.com',
       };
-      user = await usersController.update(updateUserDto, userDataStub()._id);
+      user = await usersController.update(updateUserDto, userStub()._id);
     });
 
     it('should call usersService', () => {
-      expect(usersService.update).toBeCalledWith(
-        userDataStub()._id,
-        updateUserDto,
-      );
+      expect(usersService.update).toBeCalledWith(userStub()._id, updateUserDto);
     });
 
     it('should return an updated user', () => {
-      expect(user).toEqual(userDataStub());
+      expect(user).toEqual(userStub());
     });
   });
 
@@ -80,15 +78,15 @@ describe('UsersController', () => {
     let user: IUserDto;
 
     beforeEach(async () => {
-      user = await usersController.delete(userDataStub()._id);
+      user = await usersController.delete(userStub()._id);
     });
 
     it('should call usersService', () => {
-      expect(usersService.delete).toBeCalledWith(userDataStub()._id);
+      expect(usersService.delete).toBeCalledWith(userStub()._id);
     });
 
     it('should return a deleted user', () => {
-      expect(user).toEqual(userDataStub());
+      expect(user).toEqual(userStub());
     });
   });
 
@@ -114,7 +112,7 @@ describe('UsersController', () => {
     });
 
     it('should return a sorted user', () => {
-      expect(user).toEqual(userDataStub());
+      expect(user).toEqual(userStub());
     });
   });
 
@@ -124,7 +122,7 @@ describe('UsersController', () => {
 
     beforeEach(async () => {
       savePictureDto = {
-        userId: userDataStub()._id,
+        userId: userStub()._id,
         setting: 'avatar',
       };
       user = await usersController.savePicture(
@@ -138,29 +136,71 @@ describe('UsersController', () => {
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userDataStub());
+      expect(user).toEqual(userStub());
     });
   });
 
   describe('when deletePicture is called', () => {
     let user: IUserDto;
-    let deletePictureDtoStub: DeletePictureDto;
+    let deletePictureDto: DeletePictureDto;
 
     beforeEach(async () => {
-      deletePictureDtoStub = {
+      deletePictureDto = {
         userId: 'sdfhsdghj34259034578923',
         pictureName: 'randomPictureName',
         setting: 'avatar',
       };
-      user = await usersController.deletePicture(deletePictureDtoStub);
+      user = await usersController.deletePicture(deletePictureDto);
     });
 
     it('should call usersService', () => {
-      expect(usersService.deletePicture).toBeCalledWith(deletePictureDtoStub);
+      expect(usersService.deletePicture).toBeCalledWith(deletePictureDto);
     });
 
     it('should return an updated user', () => {
-      expect(user).toEqual(userDataStub());
+      expect(user).toEqual(userStub());
+    });
+  });
+
+  describe('when createPair is called', () => {
+    let user: IUserDto;
+    let UserPairDto: UserPairDto;
+
+    beforeEach(async () => {
+      UserPairDto = {
+        forUserId: '6456456456456',
+        userId: 'sdfhsdghj34259034578923',
+      };
+      user = await usersController.createPair(UserPairDto);
+    });
+
+    it('should call usersService', () => {
+      expect(usersService.createPair).toBeCalledWith(UserPairDto);
+    });
+
+    it('should return a user', () => {
+      expect(user).toEqual(userStub());
+    });
+  });
+
+  describe('when deletePair is called', () => {
+    let user: IUserDto;
+    let UserPairDto: UserPairDto;
+
+    beforeEach(async () => {
+      UserPairDto = {
+        forUserId: '6456456456456',
+        userId: 'sdfhsdghj34259034578923',
+      };
+      user = await usersController.deletePair(UserPairDto);
+    });
+
+    it('should call usersService', () => {
+      expect(usersService.deletePair).toBeCalledWith(UserPairDto);
+    });
+
+    it('should return a user', () => {
+      expect(user).toEqual(userStub());
     });
   });
 });

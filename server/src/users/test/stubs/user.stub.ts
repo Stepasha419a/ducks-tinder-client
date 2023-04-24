@@ -1,7 +1,7 @@
 import { partnerSettingsDefault, picturesDefault } from '../../users.constants';
 import { IUserDto } from '../../users.interface';
 
-export const userDataStub = (): IUserDto => ({
+export const userStub = (): IUserDto => ({
   _id: 'sdfhsdghj34259034578923',
   email: '123@mail.ru',
   name: 'stepa',

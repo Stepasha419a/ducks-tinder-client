@@ -7,7 +7,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { FilesService } from '../files/files.service';
 import { UserPairDto } from './dto/user-pair.dto';
-import { DeletePictoreDto } from './dto/delete-picture.dto';
+import { DeletePictureDto } from './dto/delete-picture.dto';
 import { UserDto } from './dto/user.dto';
 import { UserSortsDto } from './dto/user-sorts.dto';
 
@@ -17,10 +17,6 @@ export class UsersService {
     @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
     private readonly filesService: FilesService,
   ) {}
-
-  async getAll(): Promise<UserDto[]> {
-    return this.userModel.find();
-  }
 
   async getOne(id: string): Promise<UserDto> {
     const user = await this.userModel.findById(id);
@@ -124,7 +120,7 @@ export class UsersService {
     return userData;
   }
 
-  async deletePicture(dto: DeletePictoreDto): Promise<UserDto> {
+  async deletePicture(dto: DeletePictureDto): Promise<UserDto> {
     const user = await this.userModel.findById(dto.userId);
 
     if (!user.pictures[dto.setting])

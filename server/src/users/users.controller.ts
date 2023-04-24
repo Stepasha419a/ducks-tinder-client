@@ -27,12 +27,6 @@ import { UserSortsDto } from './dto/user-sorts.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Get()
-  @HttpCode(HttpStatus.OK)
-  getAll(): Promise<UserDto[]> {
-    return this.usersService.getAll();
-  }
-
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   getOne(@Param('id') id): Promise<UserDto> {

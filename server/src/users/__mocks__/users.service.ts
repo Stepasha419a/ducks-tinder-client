@@ -1,10 +1,12 @@
-import { userDataStub } from '../test/stubs';
+import { userStub } from '../test/stubs';
 
 export const UsersService = jest.fn().mockReturnValue({
-  getOne: jest.fn().mockResolvedValue(userDataStub()),
-  update: jest.fn().mockResolvedValue(userDataStub()),
-  delete: jest.fn().mockResolvedValue(userDataStub()),
-  getSorted: jest.fn().mockResolvedValue(userDataStub()),
-  savePicture: jest.fn().mockResolvedValue(userDataStub()),
-  deletePicture: jest.fn().mockResolvedValue(userDataStub()),
+  getOne: jest.fn().mockResolvedValue(userStub()),
+  update: jest.fn().mockResolvedValue(userStub()),
+  delete: jest.fn().mockResolvedValue(userStub()),
+  getSorted: jest.fn().mockResolvedValue(userStub()),
+  savePicture: jest.fn().mockResolvedValue(userStub()),
+  deletePicture: jest.fn().mockResolvedValue(userStub()),
+  createPair: jest.fn().mockResolvedValue(userStub()),
+  deletePair: jest.fn().mockResolvedValue(userStub()),
 });
