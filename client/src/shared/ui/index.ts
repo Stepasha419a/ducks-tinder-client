@@ -1,7 +1,6 @@
 export { Avatar } from './Avatar/Avatar';
 export { TextField } from './inputs/TextField/TextField';
 export { RangeInput } from './inputs/Range/RangeInput';
-export { Notification } from './Notification/Notification';
 export { RadioInput } from './inputs/Radio/Radio';
 export { CheckboxInput } from './inputs/Checkbox/Checkbox';
 export { Button } from './Button/Button';

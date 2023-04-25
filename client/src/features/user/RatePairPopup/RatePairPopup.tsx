@@ -1,10 +1,9 @@
 import type { FC } from 'react';
 import { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { InterestsListPopup } from '@components';
 import { Popup } from '@shared/ui';
 import { setCurrentPair } from '@entities/user/model/user.slice';
-import { Preview } from '@entities/user/components';
+import { InterestsListPopup, Preview } from '@entities/user/components';
 import { AcceptPair } from '../AcceptPair/AcceptPair';
 import { RefusePair } from '../RefusePair/RefusePair';
 import styles from './RatePairPopup.module.scss';

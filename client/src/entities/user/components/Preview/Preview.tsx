@@ -9,9 +9,9 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { User } from '@shared/api/interfaces';
-import { InterestsListPopup } from '@components';
 import { ImageSlider } from '@shared/ui';
 import { Button, ListItem } from '@shared/ui';
+import { InterestsListPopup } from '../InterestsListPopup/InterestsListPopup';
 import styles from './Preview.module.scss';
 
 interface PreviewPropsInterface {
