@@ -3,9 +3,9 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { useAppSelector } from '@hooks';
 import { ImagesForm } from './ImagesForm/ImagesForm';
-import styles from './ImageSetting.module.scss';
-import { Preview } from '@components';
 import { Button } from '@shared/ui';
+import { Preview } from '@entities/user/components';
+import styles from './ImageSetting.module.scss';
 
 interface ImageSettingProps {
   setIsImageSetting: (isImageSetting: boolean) => void;

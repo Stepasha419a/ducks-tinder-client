@@ -9,4 +9,4 @@ export {
   getUserPairsThunk,
   getUserFirstPairThunk,
 } from './user.thunks';
-export { selectUserPairs } from './user.selectors';
+export { selectUserPairs, selectUserChatsInfo } from './user.selectors';

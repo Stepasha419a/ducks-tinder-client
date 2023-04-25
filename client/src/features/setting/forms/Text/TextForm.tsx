@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAppSelector } from '@hooks';
-import type { ChangedData } from '@shared/api/interfaces';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import { TextField } from '@shared/ui';
 import {
   useCurrentValidation,
@@ -9,18 +9,22 @@ import {
 } from '@entities/setting/hooks';
 import type { SettingFieldValues } from '@entities/setting/model/setting.interfaces';
 import SettingWrapper from '../Wrapper/SettingWrapper';
+import {
+  setIsUserInfoSetting,
+  submitSettingsThunk,
+} from '@entities/setting/model';
 import styles from './TextForm.module.scss';
 
-interface TextFormProps {
-  cancelFormHandler(): void;
-  submitFormHandler(changedData: ChangedData): void;
-}
+export const TextForm: FC = (): ReactElement => {
+  const dispatch = useAppDispatch();
 
-export const TextForm: FC<TextFormProps> = ({
-  cancelFormHandler,
-  submitFormHandler,
-}): ReactElement => {
   const formName = useAppSelector((state) => state.setting.formName);
+
+  useEffect(() => {
+    return () => {
+      dispatch(setIsUserInfoSetting(false));
+    };
+  });
 
   const {
     register,
@@ -31,11 +35,13 @@ export const TextForm: FC<TextFormProps> = ({
     mode: 'onChange',
   });
 
-  const submitHandler = handleSubmit((data: SettingFieldValues) => {
-    submitFormHandler(data.input);
-  });
+  const cancelHandler = (): void => {
+    dispatch(setIsUserInfoSetting(false));
+  };
 
-  const cancelHandler = (): void => cancelFormHandler();
+  const submitHandler = handleSubmit((data: SettingFieldValues) => {
+    dispatch(submitSettingsThunk({ changedData: data.input }));
+  });
 
   return (
     <SettingWrapper

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { deletePairThunk } from '@/entities/user/model';
+import { deletePairThunk } from '@entities/user/model';
 import { useAppDispatch } from '@hooks';
 import { Button } from '@shared/ui';
 import styles from './RefusePair.module.scss';

@@ -8,3 +8,11 @@ export const selectUserPairs = createSelector(
   ],
   (pairIds, pairs) => ({ pairIds, pairs })
 );
+
+export const selectUserChatsInfo = createSelector(
+  [
+    (state: RootState) => state.user.currentUser._id,
+    (state: RootState) => state.user.currentUser.chats.length,
+  ],
+  (currentUserId, chatsLength) => ({ currentUserId, chatsLength })
+);

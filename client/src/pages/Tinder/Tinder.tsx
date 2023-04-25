@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import Buttons from './components/Buttons/Buttons';
 import TinderUserLoading from './components/UserLoading/Loading/Loading';
 import TinderUserFailed from './components/UserLoading/Failed/Failed';
-import styles from './Tinder.module.scss';
 import Instructions from './components/Instructions/Instructions';
 import { Button } from '@shared/ui';
 import { updateUserThunk } from '@entities/user/model';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { Preview } from '@components';
 import { getSortedUserThunk } from '@entities/tinder/model';
 import { setRequestedUsers } from '@entities/tinder/model';
+import { Preview } from '@entities/user/components';
+import styles from './Tinder.module.scss';
 
 export const Tinder: FC = () => {
   const dispatch = useAppDispatch();
@@ -20,9 +20,7 @@ export const Tinder: FC = () => {
   const currentTinderUsersIndex = useAppSelector(
     (state) => state.tinder.currentTinderUsersIndex
   );
-  const requestedUsers = useAppSelector(
-    (state) => state.tinder.requestedUsers
-  );
+  const requestedUsers = useAppSelector((state) => state.tinder.requestedUsers);
   const isFailed = useAppSelector((state) => state.tinder.isFailed);
 
   const [isFullPreview, setIsFullPreview] = useState(false);

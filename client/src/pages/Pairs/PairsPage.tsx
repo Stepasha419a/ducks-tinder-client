@@ -4,10 +4,10 @@ import { useState } from 'react';
 import type { PairSorts } from '@shared/api/interfaces';
 import { INITIAL_SORTS } from '@shared/constants';
 import { SortPairs } from '@features/user';
-import { useAppDispatch, useAppSelector } from '@/hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import { getUserPairsThunk } from '@entities/user/model';
 import { Likes } from './components/Likes/Likes';
-import { Pairs } from '@/widgets';
+import { Pairs } from '@widgets';
 
 export const PairsPage = (): ReactElement => {
   const dispatch = useAppDispatch();

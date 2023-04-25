@@ -9,3 +9,18 @@ export const selectUserChat = createSelector(
   ],
   (_id, name, avatar) => ({ _id, name, avatar })
 );
+
+export const selectChatList = createSelector(
+  [
+    (state: RootState) => state.chat.chats,
+    (state: RootState) => state.chat.currentChatId,
+    (state: RootState) => state.chat.chatsUsers,
+    (state: RootState) => state.chat.isLoading,
+  ],
+  (chats, currentChatId, chatsUsers, isLoading) => ({
+    chats,
+    currentChatId,
+    chatsUsers,
+    isLoading,
+  })
+);

@@ -7,7 +7,7 @@ import { INITIAL_SORTS, INTERESTS_FOR_LOOP } from '@shared/constants';
 import type { PairSorts } from '@shared/api/interfaces';
 import { ListItem } from '@shared/ui';
 import { PairsSettingsPopup } from './PairsSettingsPopup/PairsSettingsPopup';
-import { InterestsSettingPopup } from '@/entities/user/components';
+import { InterestsSettingPopup } from '@entities/user/components';
 import styles from './SortPairs.module.scss';
 
 interface SortPairsProps {

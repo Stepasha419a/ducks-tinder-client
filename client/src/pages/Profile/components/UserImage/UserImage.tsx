@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { Preview } from '@components';
 import { useAppSelector } from '@hooks';
 import { Button } from '@shared/ui';
+import { Preview } from '@entities/user/components';
 import styles from './UserImage.module.scss';
 
 interface UserImageProps {

@@ -11,4 +11,4 @@ export {
   getChatsThunk,
   sendMessageThunk,
 } from './chat.thunks';
-export { selectUserChat } from './chat.selectors';
+export { selectUserChat, selectChatList } from './chat.selectors';
