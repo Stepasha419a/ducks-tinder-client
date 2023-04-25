@@ -7,7 +7,8 @@ import { SortPairs } from '@features/user';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { getUserPairsThunk } from '@entities/user/model';
 import { Likes } from './components/Likes/Likes';
-import { Pairs } from '@widgets';
+import { Nav, Pairs } from '@widgets';
+import styles from './PairsPage.module.scss';
 
 export const PairsPage = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -21,10 +22,13 @@ export const PairsPage = (): ReactElement => {
   }, [dispatch, pairIds]);
 
   return (
-    <>
-      <Likes value={pairIds.length} />
-      <SortPairs setSorts={setSorts} />
-      <Pairs sorts={sorts} />
-    </>
+    <div className={styles.main}>
+      <Nav />
+      <div className={styles.content}>
+        <Likes value={pairIds.length} />
+        <SortPairs setSorts={setSorts} />
+        <Pairs sorts={sorts} />
+      </div>
+    </div>
   );
 };

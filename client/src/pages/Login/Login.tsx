@@ -1,6 +1,9 @@
 import type { ReactElement } from 'react';
-import { LoginForm } from '@components';
+import { LoginForm } from '@features/auth';
+import { WithNoAlreadyAuthRedirect } from '@/entities/auth/hocs';
 
-export const Login = (): ReactElement => {
+const Login = (): ReactElement => {
   return <LoginForm />;
 };
+
+export default WithNoAlreadyAuthRedirect(Login);

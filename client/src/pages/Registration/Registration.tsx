@@ -1,6 +1,9 @@
 import type { ReactElement } from 'react';
-import { RegistrationForm } from '@components';
+import { RegistrationForm } from '@features/auth';
+import { WithNoAlreadyAuthRedirect } from '@/entities/auth/hocs';
 
-export const Registration = (): ReactElement => {
+const Registration = (): ReactElement => {
   return <RegistrationForm />;
 };
+
+export default WithNoAlreadyAuthRedirect(Registration);

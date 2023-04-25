@@ -1,10 +1,7 @@
 import type { FC, PropsWithChildren, ReactNode } from 'react';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import type { FieldErrors } from 'react-hook-form';
-import { useAppSelector } from '@hooks';
+import type { AuthFieldValues } from '@entities/auth/hooks/useAuthForm';
 import authImg from '@images/auth-duck.png';
-import type { AuthFieldValues } from '../hooks/useAuthForm';
 import styles from './AuthLayout.module.scss';
 
 interface AuthLayoutProps {
@@ -13,21 +10,12 @@ interface AuthLayoutProps {
   link: ReactNode;
 }
 
-const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
+export const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
   errors,
   title,
   children,
   link,
 }) => {
-  const navigate = useNavigate();
-  const isAuth = useAppSelector((state) => state.auth.isAuth);
-
-  useEffect(() => {
-    if (isAuth) {
-      navigate('/');
-    }
-  }, [isAuth, navigate]);
-
   return (
     <div className={styles.auth}>
       <div className={styles.container}>
@@ -55,5 +43,3 @@ const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
     </div>
   );
 };
-
-export default AuthLayout;

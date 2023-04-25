@@ -33,11 +33,7 @@ export const Layout = (): ReactElement | null => {
   }, [isAuth, navigate]);
 
   if (isAuth) {
-    if (
-      pathname === '/' ||
-      pathname === '/pairs' ||
-      pathname === '/profile'
-    ) {
+    if (pathname === '/' || pathname === '/profile') {
       return (
         <div className={styles.tinder}>
           <Nav />
