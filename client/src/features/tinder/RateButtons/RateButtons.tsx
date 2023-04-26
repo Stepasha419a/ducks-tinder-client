@@ -14,20 +14,19 @@ import {
   returnUserThunk,
 } from '@entities/tinder/model';
 import { Button } from '@shared/ui';
-import styles from './Buttons.module.scss';
+import styles from './RateButtons.module.scss';
 
-interface ButtonsProps {
-  currentTinderUsersIndex: number;
+interface RateButtonsProps {
   isMinimum?: boolean;
 }
 
-const Buttons: FC<ButtonsProps> = ({
-  currentTinderUsersIndex,
-  isMinimum = false,
-}) => {
+export const RateButtons: FC<RateButtonsProps> = ({ isMinimum = false }) => {
   const dispatch = useAppDispatch();
 
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
+  const currentTinderUsersIndex = useAppSelector(
+    (state) => state.tinder.currentTinderUsersIndex
+  );
 
   const newButtonsData = [
     {
@@ -107,5 +106,3 @@ const Buttons: FC<ButtonsProps> = ({
     </>
   );
 };
-
-export default Buttons;

@@ -11,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '@shared/ui';
 import styles from './Instructions.module.scss';
 
-const Instructions = (): ReactElement => {
+export const Instructions = (): ReactElement => {
   const [isInstructionsOpen, setisInstructionsOpen] = useState(true);
 
   if (!isInstructionsOpen) {
@@ -65,5 +65,3 @@ const Instructions = (): ReactElement => {
     </div>
   );
 };
-
-export default Instructions;

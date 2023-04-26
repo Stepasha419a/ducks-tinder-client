@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { Preloader } from '@shared/ui';
 import styles from './Loading.module.scss';
 
-const TinderUserLoading = (): ReactElement => {
+export const Loading = (): ReactElement => {
   return (
     <div className={styles.loading}>
       <div className={`${styles.text} ${styles.text_left}`}>loading...</div>
@@ -11,5 +11,3 @@ const TinderUserLoading = (): ReactElement => {
     </div>
   );
 };
-
-export default TinderUserLoading;

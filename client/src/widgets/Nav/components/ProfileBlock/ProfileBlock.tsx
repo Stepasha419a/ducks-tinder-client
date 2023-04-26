@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { Setting } from './Setting/Setting';
 import { SettingsList } from './SettingsList/SettingsList';
-import { createNotification } from '@/entities/notification/model';
+import { createNotification } from '@entities/notification/model';
 
 // TODO: relocate add error field logic into Profile path
 export const ProfileBlock = (): ReactElement => {

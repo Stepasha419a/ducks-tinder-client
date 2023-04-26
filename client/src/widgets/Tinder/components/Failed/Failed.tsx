@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Failed.module.scss';
 
-const Failed = (): ReactElement => {
+export const Failed = (): ReactElement => {
   return (
     <Link to="/profile" className={styles.failed}>
       <div className={styles.text}>You don't have users currently</div>
@@ -12,5 +12,3 @@ const Failed = (): ReactElement => {
     </Link>
   );
 };
-
-export default Failed;

@@ -1,0 +1,18 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 50px);
+  width: 100%;
+
+  .padding {
+    padding-bottom: 90px;
+  }
+
+  .users {
+    width: 375px;
+    max-height: 667px;
+    height: 100%;
+    position: relative;
+  }
+}

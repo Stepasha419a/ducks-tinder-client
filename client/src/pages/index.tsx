@@ -7,7 +7,7 @@ import { checkAuthThunk } from '@entities/auth/model';
 import { ROUTES } from '@shared/constants/routes';
 import Login from '@pages/Login';
 import Registration from '@pages/Registration';
-import { Tinder } from '@pages/Tinder';
+import { TinderPage } from '@pages/Tinder';
 import { Profile } from '@pages/Profile';
 import { ChatPage } from '@pages/Chat';
 import { PairsPage } from '@pages/Pairs';
@@ -26,7 +26,7 @@ const Routing = (): ReactElement => {
       <Route path={ROUTES.registration} element={<Registration />} />
 
       <Route path={ROUTES.main} element={<Layout />}>
-        <Route index element={<Tinder />} />
+        <Route index element={<TinderPage />} />
         <Route path={ROUTES.profile} element={<Profile />} />
         <Route path={ROUTES.chat} element={<ChatPage />} />
         <Route path={ROUTES.pairs} element={<PairsPage />} />

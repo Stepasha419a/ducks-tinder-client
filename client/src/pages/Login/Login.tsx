@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { LoginForm } from '@features/auth';
-import { WithNoAlreadyAuthRedirect } from '@/entities/auth/hocs';
+import { WithNoAlreadyAuthRedirect } from '@entities/auth/hocs';
 
 const Login = (): ReactElement => {
   return <LoginForm />;
