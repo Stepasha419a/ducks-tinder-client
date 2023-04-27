@@ -7,21 +7,18 @@ import type {
   User,
 } from '@shared/api/interfaces';
 import { PicturesEnum } from '@shared/api/interfaces';
-import {
-  deleteUserImage,
-  mixUserImages,
-} from '@entities/user/model';
+import { deleteUserImage, mixUserImages } from '@entities/user/model';
 import { makeImageUrl } from '@shared/helpers';
-import { parseImages } from '@pages/Profile/helpers';
-import { Card } from '../Card/Card';
-import styles from './UserImages.module.scss';
+import { parseImages } from '@features/user/ImagesForm/helpers';
+import { Card } from './Card/Card';
+import styles from './UserImagesDND.module.scss';
 
 interface UserImagesProps {
   currentUser: User;
   openSettingHandler: (setting: PicturesVariants) => void;
 }
 
-export const UserImages: FC<UserImagesProps> = ({
+export const UserImagesDND: FC<UserImagesProps> = ({
   currentUser,
   openSettingHandler,
 }) => {
@@ -41,7 +38,7 @@ export const UserImages: FC<UserImagesProps> = ({
     dispatch(deleteUserImage({ pictureName, setting }));
   };
 
-  const dragStartHangler = (
+  const dragStartHandler = (
     e: DragEvent<HTMLDivElement>,
     card: ImageInterface
   ): void => {
@@ -49,16 +46,19 @@ export const UserImages: FC<UserImagesProps> = ({
     setCurrentImage(card);
   };
 
-  const dragEndHangler = (e: DragEvent<HTMLDivElement>): void => {
+  const dragEndHandler = (e: DragEvent<HTMLDivElement>): void => {
     (e.target as HTMLDivElement).classList.remove(styles.lowOpacity);
   };
 
-  const dragOverHangler = (e: DragEvent<HTMLDivElement>): void => {
+  const dragOverHandler = (e: DragEvent<HTMLDivElement>): void => {
     e.preventDefault();
     (e.target as HTMLDivElement).classList.add(styles.lowOpacity);
   };
 
-  const dropHangler = (e: DragEvent<HTMLDivElement>, card: ImageInterface): void => {
+  const dropHandler = (
+    e: DragEvent<HTMLDivElement>,
+    card: ImageInterface
+  ): void => {
     const cardIndex = images.findIndex((item) => item.id === card.id);
     const currentIndex = images.findIndex(
       (item) => item.id === currentImage!.id
@@ -78,7 +78,7 @@ export const UserImages: FC<UserImagesProps> = ({
   };
 
   const emptyFieldsForLoop: undefined[] = [
-    ...new Array(8 - currentUser.pictures.gallery.length) as undefined[],
+    ...(new Array(8 - currentUser.pictures.gallery.length) as undefined[]),
   ];
 
   return (
@@ -92,16 +92,13 @@ export const UserImages: FC<UserImagesProps> = ({
           <Card
             key={imageObj.id}
             buttonHandler={() =>
-              deleteImageHandler(
-                imageObj.image,
-                imageObj.setting
-              )
+              deleteImageHandler(imageObj.image, imageObj.setting)
             }
-            onDragStart={(e) => dragStartHangler(e, imageObj)}
-            onDragLeave={(e) => dragEndHangler(e)}
-            onDragEnd={(e) => dragEndHangler(e)}
-            onDragOver={(e) => dragOverHangler(e)}
-            onDrop={(e) => dropHangler(e, imageObj)}
+            onDragStart={(e) => dragStartHandler(e, imageObj)}
+            onDragLeave={(e) => dragEndHandler(e)}
+            onDragEnd={(e) => dragEndHandler(e)}
+            onDragOver={(e) => dragOverHandler(e)}
+            onDrop={(e) => dropHandler(e, imageObj)}
             src={makeImageUrl(
               currentUser._id,
               imageObj.image,

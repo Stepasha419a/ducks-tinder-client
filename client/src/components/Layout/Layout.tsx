@@ -1,15 +1,13 @@
 import type { ReactElement } from 'react';
 import { useEffect } from 'react';
-import { useNavigate, Outlet, useLocation } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { Nav } from '@widgets';
 import { checkFields } from '@entities/setting/model';
 import { useAppSelector } from '@hooks';
-import styles from './Layout.module.scss';
 
+// TODO: create withAuth HOC and withCheckedFields HOC instead of it
 export const Layout = (): ReactElement | null => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const dispatch = useDispatch();
 
@@ -33,16 +31,6 @@ export const Layout = (): ReactElement | null => {
   }, [isAuth, navigate]);
 
   if (isAuth) {
-    if (pathname === '/profile') {
-      return (
-        <div className={styles.tinder}>
-          <Nav />
-          <div className={styles.content}>
-            <Outlet />
-          </div>
-        </div>
-      );
-    }
     return <Outlet />;
   }
   return null;

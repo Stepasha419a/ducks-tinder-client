@@ -1,0 +1,13 @@
+.btns {
+  display: flex;
+  height: 46px;
+  border-bottom: 1px solid var(--color--white-80);
+
+  .active {
+    color: var(--color--red-80);
+  }
+
+  .border {
+    border-right: 1px solid var(--color--white-80);
+  }
+}

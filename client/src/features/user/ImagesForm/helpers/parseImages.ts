@@ -1,7 +1,4 @@
-import type {
-  ImageInterface,
-  PicturesInterface,
-} from '@shared/api/interfaces';
+import type { ImageInterface, PicturesInterface } from '@shared/api/interfaces';
 import { PicturesEnum } from '@shared/api/interfaces';
 
 export function parseImages(pictures: PicturesInterface): ImageInterface[] {
@@ -14,10 +11,7 @@ export function parseImages(pictures: PicturesInterface): ImageInterface[] {
               return { id: index + 1, image, setting: PicturesEnum.gallery };
             }),
           ]
-        : ([
-            ...acc,
-            { id: i, image: current, setting: PicturesEnum.avatar },
-          ]),
+        : [...acc, { id: i, image: current, setting: PicturesEnum.avatar }],
     []
   );
 }
