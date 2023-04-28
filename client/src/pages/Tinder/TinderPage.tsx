@@ -1,9 +1,10 @@
-import type { FC } from 'react';
+import type { FC, ReactElement } from 'react';
 import { Nav, Tinder } from '@widgets';
 import { Instructions } from './components';
+import { WithAuthRedirect } from '@entities/auth/hocs';
 import styles from './Tinder.module.scss';
 
-export const TinderPage: FC = () => {
+const TinderPage: FC = (): ReactElement => {
   return (
     <div className={styles.main}>
       <Nav />
@@ -14,3 +15,5 @@ export const TinderPage: FC = () => {
     </div>
   );
 };
+
+export default WithAuthRedirect(TinderPage);

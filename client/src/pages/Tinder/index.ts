@@ -1,1 +1,1 @@
-export { TinderPage } from './TinderPage';
+export { default } from './TinderPage';

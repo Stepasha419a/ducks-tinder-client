@@ -1,1 +1,1 @@
-export { PairsPage } from './PairsPage';
+export { default } from './PairsPage';

@@ -1,9 +1,10 @@
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import headerImg from '@images/auth-duck.png';
-import styles from './Policy.module.scss';
+import { WithAuthRedirect } from '@/entities/auth/hocs';
+import styles from './PolicyPage.module.scss';
 
-export const Policy = (): ReactElement => {
+const PolicyPage: FC = (): ReactElement => {
   return (
     <div className={styles.policy}>
       <header className={styles.header}>
@@ -35,3 +36,5 @@ export const Policy = (): ReactElement => {
     </div>
   );
 };
+
+export default WithAuthRedirect(PolicyPage);

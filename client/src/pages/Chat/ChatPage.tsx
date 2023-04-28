@@ -1,8 +1,9 @@
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { Chat, Nav } from '@widgets';
+import { WithAuthRedirect } from '@entities/auth/hocs';
 import styles from './ChatPage.module.scss';
 
-export const ChatPage = (): ReactElement => {
+const ChatPage: FC = (): ReactElement => {
   return (
     <div className={styles.main}>
       <Nav />
@@ -10,3 +11,5 @@ export const ChatPage = (): ReactElement => {
     </div>
   );
 };
+
+export default WithAuthRedirect(ChatPage);

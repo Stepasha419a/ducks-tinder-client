@@ -24,14 +24,5 @@ export const Layout = (): ReactElement | null => {
     }
   }, [isAuth, navigate, currentUser, dispatch, errorFields.length]);
 
-  useEffect(() => {
-    if (isAuth === false) {
-      navigate('/login');
-    }
-  }, [isAuth, navigate]);
-
-  if (isAuth) {
-    return <Outlet />;
-  }
-  return null;
+  return <Outlet />;
 };

@@ -1,10 +1,11 @@
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { ImageSetting, Nav } from '@widgets';
 import { UserImage } from './components';
-import styles from './Profile.module.scss';
+import { WithAuthRedirect } from '@/entities/auth/hocs';
+import styles from './ProfilePage.module.scss';
 
-export const Profile = (): ReactElement => {
+const ProfilePage: FC = (): ReactElement => {
   const [isImageSetting, setIsImageSetting] = useState(false);
 
   return (
@@ -24,3 +25,5 @@ export const Profile = (): ReactElement => {
     </div>
   );
 };
+
+export default WithAuthRedirect(ProfilePage);
