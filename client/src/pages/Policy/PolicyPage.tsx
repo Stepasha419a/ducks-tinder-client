@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import headerImg from '@images/auth-duck.png';
-import { WithAuthRedirect } from '@/entities/auth/hocs';
+import { withHocs } from '@hocs';
 import styles from './PolicyPage.module.scss';
 
 const PolicyPage: FC = (): ReactElement => {
@@ -37,4 +37,4 @@ const PolicyPage: FC = (): ReactElement => {
   );
 };
 
-export default WithAuthRedirect(PolicyPage);
+export default withHocs(PolicyPage);

@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui';
+import { Button } from '@shared/ui';
 import { useAppDispatch } from '@hooks';
 import { updateUserThunk } from '@entities/user/model';
 import styles from './ResetCheckedUsers.module.scss';

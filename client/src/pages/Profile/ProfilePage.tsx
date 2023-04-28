@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { ImageSetting, Nav } from '@widgets';
 import { UserImage } from './components';
-import { WithAuthRedirect } from '@/entities/auth/hocs';
+import { withHocs } from '@hocs';
 import styles from './ProfilePage.module.scss';
 
 const ProfilePage: FC = (): ReactElement => {
@@ -26,4 +26,4 @@ const ProfilePage: FC = (): ReactElement => {
   );
 };
 
-export default WithAuthRedirect(ProfilePage);
+export default withHocs(ProfilePage);

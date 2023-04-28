@@ -1,5 +1,5 @@
-import { useAppSelector } from '@/hooks';
 import type { FC } from 'react';
+import { useAppSelector } from '@hooks';
 import { Navigate } from 'react-router-dom';
 
 export const WithAuthRedirect = <P extends object>(Component: FC<P>): FC<P> => {

@@ -1,7 +1,6 @@
 import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from '@components';
 import { useAppDispatch } from '@hooks';
 import { checkAuthThunk } from '@entities/auth/model';
 import { ROUTES } from '@shared/constants/routes';
@@ -25,14 +24,12 @@ const Routing = (): ReactElement => {
       <Route path={ROUTES.login} element={<Login />} />
       <Route path={ROUTES.registration} element={<Registration />} />
 
-      <Route path={ROUTES.main} element={<Layout />}>
-        <Route index element={<TinderPage />} />
-        <Route path={ROUTES.profile} element={<ProfilePage />} />
-        <Route path={ROUTES.chat} element={<ChatPage />} />
-        <Route path={ROUTES.pairs} element={<PairsPage />} />
-        <Route path={ROUTES.policy} element={<PolicyPage />} />
-        <Route path={ROUTES.notFound} element={<div>404 NOT FOUND</div>} />
-      </Route>
+      <Route index element={<TinderPage />} />
+      <Route path={ROUTES.profile} element={<ProfilePage />} />
+      <Route path={ROUTES.chat} element={<ChatPage />} />
+      <Route path={ROUTES.pairs} element={<PairsPage />} />
+      <Route path={ROUTES.policy} element={<PolicyPage />} />
+      <Route path={ROUTES.notFound} element={<div>404 NOT FOUND</div>} />
     </Routes>
   );
 };

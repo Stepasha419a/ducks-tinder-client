@@ -24,6 +24,7 @@
       "@widgets": ["./widgets/index"],
       "@components": ["./components/index"],
       "@hooks": ["./hooks/index"],
+      "@hocs": ["./hocs/index"],
       "@features/*": ["./features/*"],
       "@entities/*": ["./entities/*"],
       "@shared/*": ["./shared/*"],

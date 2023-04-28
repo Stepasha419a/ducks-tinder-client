@@ -6,8 +6,8 @@ import { SortPairs } from '@features/user';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { getUserPairsThunk } from '@entities/user/model';
 import { Nav, Pairs } from '@widgets';
-import { WithAuthRedirect } from '@entities/auth/hocs';
 import { Likes } from './components/Likes/Likes';
+import { withHocs } from '@hocs';
 import styles from './PairsPage.module.scss';
 
 const PairsPage: FC = (): ReactElement => {
@@ -33,4 +33,4 @@ const PairsPage: FC = (): ReactElement => {
   );
 };
 
-export default WithAuthRedirect(PairsPage);
+export default withHocs(PairsPage);
