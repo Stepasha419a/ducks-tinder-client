@@ -4,9 +4,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { useNavigate } from 'react-router-dom';
 import { checkFields } from '@entities/setting/model';
 
-export const WithCheckedFields = <P extends Record<string, unknown>>(
-  Component: FC<P>
-) => {
+export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
   const Wrapper = (props: P): ReactElement<P> => {
     const navigate = useNavigate();
 
