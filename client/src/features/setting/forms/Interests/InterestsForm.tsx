@@ -1,5 +1,4 @@
 import type { FC, ReactElement } from 'react';
-import { useEffect } from 'react';
 import { useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { useDefaultValues } from '@entities/setting/hooks';
@@ -19,12 +18,6 @@ export const InterestsForm: FC = (): ReactElement => {
 
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
-
-  useEffect(() => {
-    return () => {
-      dispatch(setIsUserInfoSetting(false));
-    };
-  });
 
   const {
     formState: { errors, isValid },

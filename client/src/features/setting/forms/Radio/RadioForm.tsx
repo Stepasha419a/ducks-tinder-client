@@ -1,5 +1,4 @@
 import type { FC, ReactElement } from 'react';
-import { useEffect } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { RadioInput } from '@shared/ui';
@@ -16,12 +15,6 @@ export const RadioForm: FC = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const formName = useAppSelector((state) => state.setting.formName);
-
-  useEffect(() => {
-    return () => {
-      dispatch(setIsUserInfoSetting(false));
-    };
-  });
 
   const {
     control,

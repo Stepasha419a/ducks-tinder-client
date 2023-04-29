@@ -1,5 +1,4 @@
 import type { FC, ReactElement } from 'react';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { TextField } from '@shared/ui';
@@ -19,12 +18,6 @@ export const TextForm: FC = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const formName = useAppSelector((state) => state.setting.formName);
-
-  useEffect(() => {
-    return () => {
-      dispatch(setIsUserInfoSetting(false));
-    };
-  });
 
   const {
     register,
