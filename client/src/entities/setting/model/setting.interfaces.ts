@@ -16,7 +16,7 @@ export interface SettingsInitialState {
 
 export interface SetInputPayload {
   inputName: SettingInputName;
-  formName?: string;
+  formName?: string | null;
   innerObjectName?: InnerObjectName;
   validation?: Validation | null;
 }

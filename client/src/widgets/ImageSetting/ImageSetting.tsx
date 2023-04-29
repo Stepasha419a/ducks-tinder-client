@@ -1,7 +1,6 @@
-import type { ChangeEvent, FC } from 'react';
+import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppSelector } from '@hooks';
-import type { PicturesVariants } from '@shared/api/interfaces';
 import { CropImage, DialogUpload, ImagesForm } from '@features/user';
 import { Preview } from '@entities/user/components';
 import { Tabs } from './components';
@@ -11,36 +10,25 @@ interface ImageSettingProps {
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
-//TODO: decompose all logic to the self popups, there is necessary to think about creating profileReducer to contain settingsReducer also 
 export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
+  const isDialogUploadOpen = useAppSelector(
+    (state) => state.user.profileSetting.isDialogUploadOpen
+  );
+  const isImageCropOpen = useAppSelector(
+    (state) => state.user.profileSetting.isImageCropOpen
+  );
 
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);
-  const [isFullPreviewPageSetting, setIsFullPreviewPageSetting] =
+  const [isFullPreviewSetting, setIsFullPreviewSetting] =
     useState(false);
-  const [isImageCropOpen, setIsImageCropOpen] = useState(false);
-  const [isDialogUploadOpen, setIsDialogUploadOpen] = useState(false);
-  const [imageURL, setImageURL] = useState('');
-  const [setting, setSetting] = useState<PicturesVariants | ''>('');
-
-  const openSettingHandler = (variant: PicturesVariants): void => {
-    setSetting(variant);
-    setIsDialogUploadOpen(true);
-  };
-
-  const onImageChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setIsDialogUploadOpen(false);
-    const image = e.target.files![0];
-    setImageURL(URL.createObjectURL(image));
-    setIsImageCropOpen(true);
-  };
 
   return (
     <div className={styles.change}>
-      {isFullPreviewPageSetting ? (
+      {isFullPreviewSetting ? (
         <Preview
           user={currentUser}
-          setIsFullPreview={setIsFullPreviewPageSetting}
+          setIsFullPreview={setIsFullPreviewSetting}
           isFull
         />
       ) : (
@@ -53,33 +41,19 @@ export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
             {isPreviewSetting ? (
               <Preview
                 user={currentUser}
-                setIsFullPreview={setIsFullPreviewPageSetting}
+                setIsFullPreview={setIsFullPreviewSetting}
               />
             ) : (
               <ImagesForm
                 currentUser={currentUser}
                 setIsImageSetting={setIsImageSetting}
-                openSettingHandler={openSettingHandler}
               />
             )}
           </div>
         </>
       )}
-      {isDialogUploadOpen && (
-        <DialogUpload
-          onImageChange={onImageChange}
-          setIsDialogUploadOpen={setIsDialogUploadOpen}
-        />
-      )}
-      {isImageCropOpen && (
-        <CropImage
-          setIsImageCropOpen={setIsImageCropOpen}
-          imageURL={imageURL}
-          currentUser={currentUser}
-          setting={setting}
-          setSetting={setSetting}
-        />
-      )}
+      {isDialogUploadOpen && <DialogUpload />}
+      {isImageCropOpen && <CropImage />}
     </div>
   );
 };

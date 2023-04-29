@@ -25,18 +25,24 @@ const settingSlice = createSlice({
     setIsUserInfoSetting: (state, { payload }: PayloadAction<boolean>) => {
       state.isUserInfoSetting = payload;
     },
-    setInput: (state, { payload }: PayloadAction<SetInputPayload>) => {
-      if (!payload.formName) {
-        state.formName = payload.inputName;
-      } else {
-        state.formName = payload.formName;
-      }
-      state.innerObjectName = payload.innerObjectName || null;
-      state.settingInputName = payload.inputName;
-      state.validation = payload.validation || null;
+    setInput: (
+      state,
+      {
+        payload: {
+          inputName,
+          innerObjectName,
+          formName,
+          validation,
+        },
+      }: PayloadAction<SetInputPayload>
+    ) => {
+      state.formName = formName || inputName;
+      state.innerObjectName = innerObjectName || null;
+      state.settingInputName = inputName;
+      state.validation = validation || null;
       state.isUserInfoSetting = true;
 
-      switch (payload.inputName) {
+      switch (inputName) {
         case 'interests':
           state.setting = 'select';
           break;

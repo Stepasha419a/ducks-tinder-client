@@ -97,14 +97,16 @@ export const deletePairThunk = createAsyncThunk(
 export const saveUserImageThunk = createAsyncThunk(
   'users/saveUserImage',
   async (
-    args: { picture: Blob; userId: string; setting: PicturesVariants },
-    { rejectWithValue }
+    args: { picture: Blob; pictureVariant: PicturesVariants },
+    { rejectWithValue, getState }
   ) => {
     try {
+      const { user } = getState() as RootState;
+      const currentUserId = user.currentUser._id;
       const response = await usersAPI.savePicture(
         args.picture,
-        args.userId,
-        args.setting
+        currentUserId,
+        args.pictureVariant
       );
 
       return response.data;

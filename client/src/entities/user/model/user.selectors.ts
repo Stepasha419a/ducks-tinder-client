@@ -16,3 +16,11 @@ export const selectUserChatsInfo = createSelector(
   ],
   (currentUserId, chatsLength) => ({ currentUserId, chatsLength })
 );
+
+export const selectCropImage = createSelector(
+  [
+    (state: RootState) => state.user.profileSetting.pictureVariant,
+    (state: RootState) => state.user.profileSetting.imageURL,
+  ],
+  (pictureVariant, imageURL) => ({ pictureVariant, imageURL })
+);

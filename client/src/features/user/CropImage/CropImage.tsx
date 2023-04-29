@@ -1,33 +1,24 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import type { PicturesVariants, User } from '@shared/api/interfaces';
+import {
+  saveUserImageThunk,
+  selectCropImage,
+  setIsImageCropOpen,
+} from '@entities/user/model';
+import { useAppDispatch, useAppSelector } from '@hooks';
+import { Button, Popup, RangeInput } from '@shared/ui';
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';
 import styles from './CropImage.module.scss';
-import { saveUserImageThunk } from '@entities/user/model';
-import { useAppDispatch } from '@hooks';
-import { Button, Popup, RangeInput } from '@shared/ui';
 
-interface CropImageProps {
-  currentUser: User;
-  setIsImageCropOpen: (setting: boolean) => void;
-  imageURL: string;
-  setting: PicturesVariants | '';
-  setSetting: (setting: PicturesVariants | '') => void;
-}
-
-export const CropImage: FC<CropImageProps> = ({
-  setIsImageCropOpen,
-  imageURL,
-  currentUser,
-  setting,
-  setSetting,
-}) => {
+export const CropImage: FC = () => {
   const dispatch = useAppDispatch();
+
+  const { imageURL, pictureVariant } = useAppSelector(selectCropImage);
+
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [rotation, setRotation] = useState(0);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<PixelCrop | null>(
     null
   );
@@ -41,39 +32,33 @@ export const CropImage: FC<CropImageProps> = ({
 
   const submitHandler = async (): Promise<void> => {
     const croppedImageData: ReturnGetCroppedImg | null = await getCroppedImg(
-      imageURL,
-      croppedAreaPixels!,
-      rotation
+      imageURL!,
+      croppedAreaPixels!
     );
-    if (setting) {
+    if (pictureVariant) {
       dispatch(
         saveUserImageThunk({
           picture: croppedImageData!.picture,
-          userId: currentUser._id,
-          setting,
+          pictureVariant,
         })
       );
     }
-    setIsImageCropOpen(false);
-    setSetting('');
   };
 
   return (
     <Popup
       size="l"
       title="Redact photo"
-      closeHandler={() => setIsImageCropOpen(false)}
+      closeHandler={() => dispatch(setIsImageCropOpen(false))}
     >
       <div className={styles.container}>
         <Cropper
-          image={imageURL}
+          image={imageURL!}
           crop={crop}
           zoom={zoom}
-          rotation={rotation}
           aspect={3 / 4}
           onCropChange={setCrop}
           onZoomChange={setZoom}
-          onRotationChange={setRotation}
           onCropComplete={cropComplete}
           classes={{ containerClassName: styles.cropper }}
         />
@@ -88,7 +73,7 @@ export const CropImage: FC<CropImageProps> = ({
         </div>
         <div className={styles.btns}>
           <Button
-            onClick={() => setIsImageCropOpen(false)}
+            onClick={() => dispatch(setIsImageCropOpen(false))}
             extraClassName={styles.btn}
           >
             Cancel

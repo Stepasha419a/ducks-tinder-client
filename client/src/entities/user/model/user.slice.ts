@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { User } from '@shared/api/interfaces';
+import type { PicturesVariants, User } from '@shared/api/interfaces';
 import {
   dislikeUserThunk,
   likeUserThunk,
@@ -20,6 +20,12 @@ interface InitialState {
   currentUser: User;
   currentPair: User | null;
   pairs: User[];
+  profileSetting: {
+    pictureVariant: PicturesVariants | null;
+    imageURL: string | null;
+    isImageCropOpen: boolean;
+    isDialogUploadOpen: boolean;
+  };
 }
 
 const initialState: InitialState = {
@@ -27,6 +33,12 @@ const initialState: InitialState = {
   currentUser: {} as User,
   currentPair: null,
   pairs: [],
+  profileSetting: {
+    pictureVariant: null,
+    imageURL: null,
+    isDialogUploadOpen: false,
+    isImageCropOpen: false,
+  },
 };
 
 const userSlice = createSlice({
@@ -38,6 +50,23 @@ const userSlice = createSlice({
     },
     setCurrentPair: (state, { payload }: PayloadAction<User | null>) => {
       state.currentPair = payload;
+    },
+    setIsDialogUploadOpen: (state, { payload }: PayloadAction<boolean>) => {
+      state.profileSetting.isDialogUploadOpen = payload;
+    },
+    setIsImageCropOpen: (state, { payload }: PayloadAction<boolean>) => {
+      state.profileSetting.isImageCropOpen = payload;
+    },
+    setPictureVariant: (
+      state,
+      { payload }: PayloadAction<PicturesVariants | null>
+    ) => {
+      state.profileSetting.pictureVariant = payload;
+    },
+    setImageChange: (state, { payload }: PayloadAction<string | null>) => {
+      state.profileSetting.isDialogUploadOpen = false;
+      state.profileSetting.imageURL = payload;
+      state.profileSetting.isImageCropOpen = true;
     },
   },
   extraReducers: (builder) => {
@@ -59,6 +88,9 @@ const userSlice = createSlice({
       })
       .addCase(saveUserImageThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+        state.profileSetting.isImageCropOpen = false;
+        state.profileSetting.pictureVariant = null;
+        state.profileSetting.imageURL = null;
       })
       .addCase(deleteUserImage.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
@@ -78,6 +110,13 @@ const userSlice = createSlice({
   },
 });
 
-export const { setCurrentUser, setCurrentPair } = userSlice.actions;
+export const {
+  setCurrentUser,
+  setCurrentPair,
+  setIsDialogUploadOpen,
+  setIsImageCropOpen,
+  setPictureVariant,
+  setImageChange,
+} = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

@@ -1,4 +1,12 @@
-export { userReducer, setCurrentUser, setCurrentPair } from './user.slice';
+export {
+  userReducer,
+  setCurrentUser,
+  setCurrentPair,
+  setIsDialogUploadOpen,
+  setIsImageCropOpen,
+  setPictureVariant,
+  setImageChange,
+} from './user.slice';
 export {
   updateUserThunk,
   saveUserImageThunk,
@@ -9,4 +17,8 @@ export {
   getUserPairsThunk,
   getUserFirstPairThunk,
 } from './user.thunks';
-export { selectUserPairs, selectUserChatsInfo } from './user.selectors';
+export {
+  selectUserPairs,
+  selectUserChatsInfo,
+  selectCropImage,
+} from './user.selectors';

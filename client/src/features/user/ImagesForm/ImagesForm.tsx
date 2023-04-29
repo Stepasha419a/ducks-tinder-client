@@ -2,21 +2,28 @@ import type { FC } from 'react';
 import type { PicturesVariants, User } from '@shared/api/interfaces';
 import { Button } from '@shared/ui';
 import { UserImagesDND } from './UserImagesDND/UserImagesDND';
+import { setIsDialogUploadOpen, setPictureVariant } from '@entities/user/model';
+import { useAppDispatch } from '@hooks';
 import styles from './ImagesForm.module.scss';
 
 interface ImagesFormProps {
   currentUser: User;
   setIsImageSetting: (isImageSetting: boolean) => void;
-  openSettingHandler: (variant: PicturesVariants) => void;
 }
 
 export const ImagesForm: FC<ImagesFormProps> = ({
   currentUser,
   setIsImageSetting,
-  openSettingHandler,
 }) => {
+  const dispatch = useAppDispatch();
+
   const submitHandler = (): void => {
     setIsImageSetting(false);
+  };
+
+  const openSettingHandler = (variant: PicturesVariants): void => {
+    dispatch(setPictureVariant(variant));
+    dispatch(setIsDialogUploadOpen(true));
   };
 
   return (

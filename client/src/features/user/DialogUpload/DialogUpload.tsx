@@ -1,34 +1,34 @@
 import type { ChangeEvent, FC } from 'react';
 import { Popup } from '@shared/ui';
+import { setImageChange, setIsDialogUploadOpen } from '@entities/user/model';
+import { useAppDispatch } from '@/hooks';
+import { createFileUrl } from '@/shared/helpers';
 import styles from './DialogUpload.module.scss';
 
-interface DialogUploadProps {
-  onImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  setIsDialogUploadOpen: (setting: boolean) => void;
-}
+export const DialogUpload: FC = () => {
+  const dispatch = useAppDispatch();
 
-export const DialogUpload: FC<DialogUploadProps> = ({
-  onImageChange,
-  setIsDialogUploadOpen,
-}) => {
+  const handleImage = (e: ChangeEvent<HTMLInputElement>): void => {
+    dispatch(setImageChange(createFileUrl(e.target.files![0])));
+  };
+
   return (
-    <Popup size="s" closeHandler={() => setIsDialogUploadOpen(false)}>
+    <Popup size="s" closeHandler={() => dispatch(setIsDialogUploadOpen(false))}>
       <div className={styles.title}>Upload</div>
       <div className={styles.descr}>Choose context type</div>
       <div className={styles.wrapper}>
         <div className={styles.input}>
-          <label htmlFor="upload__input-gallery" className={styles.label}>
+          <label className={styles.label}>
             <span className={styles.span}>
               Upload from
               <br />
               <span className={styles.boldSpan}>Gallery</span>
             </span>
             <input
-              onChange={(e) => onImageChange(e)}
+              onChange={(e) => handleImage(e)}
               accept="image/*"
               type="file"
               name=""
-              id="upload__input-gallery"
               className={styles.input}
             />
           </label>
