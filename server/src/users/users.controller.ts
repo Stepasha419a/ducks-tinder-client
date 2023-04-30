@@ -40,7 +40,7 @@ export class UsersController {
   }
 
   @Post('picture')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('picture'))
   savePicture(
     @Body() dto: SavePictureDto,

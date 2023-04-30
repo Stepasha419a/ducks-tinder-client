@@ -1,4 +1,3 @@
-import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { Module } from '@nestjs/common';
 import { FilesModule } from './files/files.module';
@@ -8,21 +7,22 @@ import { ConfigModule } from '@nestjs/config';
 import { MailModule } from './mail/mail.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { ChatModule } from './chat/chat.module';
+import { DatabaseModule } from './database/database.module';
 import * as path from 'path';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     ServeStaticModule.forRoot({
       rootPath: path.resolve(path.resolve(__dirname, '..', 'static')),
     }),
-    MongooseModule.forRoot('mongodb://localhost/ducks-db'),
     UsersModule,
     FilesModule,
     AuthModule,
     TokensModule,
     MailModule,
     ChatModule,
-    ConfigModule.forRoot({ isGlobal: true }),
+    DatabaseModule,
   ],
 })
 export class AppModule {}

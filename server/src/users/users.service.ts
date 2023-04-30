@@ -97,7 +97,7 @@ export class UsersService {
     dto: SavePictureDto,
     picture: Express.Multer.File,
   ): Promise<UserDto> {
-    const fileName = this.filesService.savePicture(
+    const fileName = await this.filesService.savePicture(
       picture,
       dto.userId,
       dto.setting,

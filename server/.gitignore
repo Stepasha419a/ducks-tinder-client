@@ -3,6 +3,8 @@
 /node_modules
 /static
 
+.env
+
 # Logs
 logs
 *.log

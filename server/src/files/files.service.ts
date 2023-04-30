@@ -9,6 +9,7 @@ import {
   writeFile,
 } from 'fs';
 import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
+import { ensureDir } from 'fs-extra';
 
 @Injectable()
 export class FilesService {
@@ -39,22 +40,22 @@ export class FilesService {
     }
   }
 
-  savePicture(
+  async savePicture(
     file: Express.Multer.File,
     userId: string,
     setting: 'avatar' | 'gallery',
-  ): string {
+  ): Promise<string> {
     try {
       const fileName = uuid.v4() + '.jpg';
-      const filePath = path.resolve(
+      const folderPath = path.resolve(
         __dirname,
         '..',
         '..',
         `static\\${userId}\\${setting}`,
-        fileName,
       );
+      await ensureDir(folderPath);
 
-      writeFile(filePath, file.buffer, () => null);
+      writeFile(`${folderPath}/${fileName}`, file.buffer, () => null);
 
       return fileName;
     } catch (error) {

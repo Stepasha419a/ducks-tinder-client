@@ -1,4 +1,4 @@
-import { FilesModule } from './../files/files.module';
+import { FilesModule } from '../files/files.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
