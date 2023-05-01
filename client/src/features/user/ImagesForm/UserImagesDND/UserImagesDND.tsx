@@ -1,84 +1,26 @@
-import type { DragEvent, FC } from 'react';
-import { useEffect, useState } from 'react';
-import { useAppDispatch } from '@hooks';
-import type {
-  ImageInterface,
-  PicturesVariants,
-  User,
-} from '@shared/api/interfaces';
+import type { FC } from 'react';
+import { useAppSelector } from '@hooks';
+import type { PicturesVariants } from '@shared/api/interfaces';
 import { PicturesEnum } from '@shared/api/interfaces';
-import { deleteUserImage, mixUserImages } from '@entities/user/model';
+import { selectImagesDND } from '@entities/user/model';
 import { makeImageUrl } from '@shared/helpers';
-import { parseImages } from '@features/user/ImagesForm/helpers';
+import { useImagesDragAndDrop } from '@features/user/ImagesForm/lib';
 import { Card } from './Card/Card';
 import styles from './UserImagesDND.module.scss';
 
 interface UserImagesProps {
-  currentUser: User;
   openSettingHandler: (setting: PicturesVariants) => void;
 }
 
-export const UserImagesDND: FC<UserImagesProps> = ({
-  currentUser,
-  openSettingHandler,
-}) => {
-  const dispatch = useAppDispatch();
+export const UserImagesDND: FC<UserImagesProps> = ({ openSettingHandler }) => {
+  const { currentUserId, pictures } = useAppSelector(selectImagesDND);
 
-  const [currentImage, setCurrentImage] = useState<ImageInterface | null>(null);
-  const [images, setImages] = useState<ImageInterface[]>([]);
-
-  useEffect(() => {
-    setImages(parseImages(currentUser.pictures));
-  }, [currentUser.pictures]);
-
-  const deleteImageHandler = (
-    pictureName: string,
-    setting: PicturesVariants
-  ): void => {
-    dispatch(deleteUserImage({ pictureName, setting }));
-  };
-
-  const dragStartHandler = (
-    e: DragEvent<HTMLDivElement>,
-    card: ImageInterface
-  ): void => {
-    (e.target as HTMLDivElement).classList.add(styles.drag);
-    setCurrentImage(card);
-  };
-
-  const dragEndHandler = (e: DragEvent<HTMLDivElement>): void => {
-    (e.target as HTMLDivElement).classList.remove(styles.lowOpacity);
-  };
-
-  const dragOverHandler = (e: DragEvent<HTMLDivElement>): void => {
-    e.preventDefault();
-    (e.target as HTMLDivElement).classList.add(styles.lowOpacity);
-  };
-
-  const dropHandler = (
-    e: DragEvent<HTMLDivElement>,
-    card: ImageInterface
-  ): void => {
-    const cardIndex = images.findIndex((item) => item.id === card.id);
-    const currentIndex = images.findIndex(
-      (item) => item.id === currentImage!.id
-    );
-
-    if (cardIndex !== currentIndex) {
-      setImages((prev) => {
-        [prev[cardIndex], prev[currentIndex]] = [
-          prev[currentIndex],
-          prev[cardIndex],
-        ];
-        dispatch(mixUserImages({ currentUser, images: prev }));
-        return prev;
-      });
-    }
-    (e.target as HTMLInputElement).classList.remove(styles.lowOpacity);
-  };
+  const { images, handleDeleteImage, getDNDProps } = useImagesDragAndDrop(
+    styles.lowOpacity
+  );
 
   const emptyFieldsForLoop: undefined[] = [
-    ...(new Array(8 - currentUser.pictures.gallery.length) as undefined[]),
+    ...(new Array(8 - pictures.gallery.length) as undefined[]),
   ];
 
   return (
@@ -92,18 +34,10 @@ export const UserImagesDND: FC<UserImagesProps> = ({
           <Card
             key={imageObj.id}
             buttonHandler={() =>
-              deleteImageHandler(imageObj.image, imageObj.setting)
+              handleDeleteImage(imageObj.image, imageObj.setting)
             }
-            onDragStart={(e) => dragStartHandler(e, imageObj)}
-            onDragLeave={(e) => dragEndHandler(e)}
-            onDragEnd={(e) => dragEndHandler(e)}
-            onDragOver={(e) => dragOverHandler(e)}
-            onDrop={(e) => dropHandler(e, imageObj)}
-            src={makeImageUrl(
-              currentUser._id,
-              imageObj.image,
-              imageObj.setting
-            )}
+            src={makeImageUrl(currentUserId, imageObj.image, imageObj.setting)}
+            {...getDNDProps(imageObj)}
           />
         );
       })}

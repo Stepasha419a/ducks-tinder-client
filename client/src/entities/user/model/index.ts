@@ -21,4 +21,5 @@ export {
   selectUserPairs,
   selectUserChatsInfo,
   selectCropImage,
+  selectImagesDND,
 } from './user.selectors';

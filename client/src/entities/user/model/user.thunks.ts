@@ -146,18 +146,13 @@ export const deleteUserImage = createAsyncThunk(
 
 export const mixUserImages = createAsyncThunk(
   'users/mixUserImages',
-  async (
-    args: { currentUser: User; images: ImageInterface[] },
-    { rejectWithValue }
-  ) => {
+  async (images: ImageInterface[], { rejectWithValue, getState }) => {
     try {
-      const userImages = makeUserImagesObject(args.images);
+      const { user } = getState() as RootState;
+      const currentUserId = user.currentUser._id;
 
-      const response = await usersAPI.updateUser(
-        args.currentUser._id,
-        userImages
-      );
-
+      const userImages = makeUserImagesObject(images);
+      const response = await usersAPI.updateUser(currentUserId, userImages);
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

@@ -24,3 +24,11 @@ export const selectCropImage = createSelector(
   ],
   (pictureVariant, imageURL) => ({ pictureVariant, imageURL })
 );
+
+export const selectImagesDND = createSelector(
+  [
+    (state: RootState) => state.user.currentUser._id,
+    (state: RootState) => state.user.currentUser.pictures,
+  ],
+  (currentUserId, pictures) => ({ currentUserId, pictures })
+);

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { PicturesVariants, User } from '@shared/api/interfaces';
+import type { PicturesVariants } from '@shared/api/interfaces';
 import { Button } from '@shared/ui';
 import { UserImagesDND } from './UserImagesDND/UserImagesDND';
 import { setIsDialogUploadOpen, setPictureVariant } from '@entities/user/model';
@@ -7,12 +7,10 @@ import { useAppDispatch } from '@hooks';
 import styles from './ImagesForm.module.scss';
 
 interface ImagesFormProps {
-  currentUser: User;
   setIsImageSetting: (isImageSetting: boolean) => void;
 }
 
 export const ImagesForm: FC<ImagesFormProps> = ({
-  currentUser,
   setIsImageSetting,
 }) => {
   const dispatch = useAppDispatch();
@@ -28,10 +26,7 @@ export const ImagesForm: FC<ImagesFormProps> = ({
 
   return (
     <div className={styles.change}>
-      <UserImagesDND
-        currentUser={currentUser}
-        openSettingHandler={openSettingHandler}
-      />
+      <UserImagesDND openSettingHandler={openSettingHandler} />
       <div className={styles.descr}>
         Add more photos to fill out your profile
         <br />

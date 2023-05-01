@@ -45,7 +45,6 @@ export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
               />
             ) : (
               <ImagesForm
-                currentUser={currentUser}
                 setIsImageSetting={setIsImageSetting}
               />
             )}
