@@ -1,1 +1,0 @@
-export { withHocs } from './withHocs';

@@ -19,7 +19,7 @@ const initialState: SettingsInitialState = {
 };
 
 const settingSlice = createSlice({
-  name: 'settingReducer',
+  name: 'settingSlice',
   initialState,
   reducers: {
     setIsUserInfoSetting: (state, { payload }: PayloadAction<boolean>) => {

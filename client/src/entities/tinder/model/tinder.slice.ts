@@ -25,7 +25,7 @@ const initialState: InitialState = {
 };
 
 const tinderSlice = createSlice({
-  name: 'tinder',
+  name: 'tinderSlice',
   initialState,
   reducers: {
     setRequestedUsers: (state, { payload }: PayloadAction<string[]>) => {

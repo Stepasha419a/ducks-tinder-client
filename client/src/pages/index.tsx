@@ -1,8 +1,5 @@
 import type { ReactElement } from 'react';
-import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useAppDispatch } from '@hooks';
-import { checkAuthThunk } from '@entities/auth/model';
 import { ROUTES } from '@shared/constants/routes';
 import Login from '@pages/Login';
 import Registration from '@pages/Registration';
@@ -13,12 +10,6 @@ import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
 
 const Routing = (): ReactElement => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(checkAuthThunk());
-  }, [dispatch]);
-
   return (
     <Routes>
       <Route path={ROUTES.login} element={<Login />} />

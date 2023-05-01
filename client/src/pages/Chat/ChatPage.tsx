@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react';
 import { Chat, Nav } from '@widgets';
-import { withHocs } from '@hocs';
+import { withPrivatePageHocs } from '@shared/hocs';
 import styles from './ChatPage.module.scss';
 
 const ChatPage: FC = (): ReactElement => {
@@ -12,4 +12,4 @@ const ChatPage: FC = (): ReactElement => {
   );
 };
 
-export default withHocs(ChatPage);
+export default withPrivatePageHocs(ChatPage);

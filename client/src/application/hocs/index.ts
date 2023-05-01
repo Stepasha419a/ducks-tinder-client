@@ -1,0 +1,1 @@
+export { WithBrowserRouter } from './BrowserRouter';

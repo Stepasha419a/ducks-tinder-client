@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { ImageSetting, Nav } from '@widgets';
 import { UserImage } from './components';
-import { withHocs } from '@hocs';
+import { withPrivatePageHocs } from '@shared/hocs';
 import styles from './ProfilePage.module.scss';
 
 const ProfilePage: FC = (): ReactElement => {
@@ -26,4 +26,4 @@ const ProfilePage: FC = (): ReactElement => {
   );
 };
 
-export default withHocs(ProfilePage);
+export default withPrivatePageHocs(ProfilePage);

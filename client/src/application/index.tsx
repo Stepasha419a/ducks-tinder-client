@@ -2,6 +2,8 @@ import type { ReactElement } from 'react';
 import Routing from '@pages/index';
 import { Loading } from '@entities/auth/components';
 import { Notifications } from '@entities/notification/components';
+import { withAppHocs } from '@shared/hocs/withAppHocs';
+import './styles/index.scss';
 
 function App(): ReactElement {
   return (
@@ -13,4 +15,4 @@ function App(): ReactElement {
   );
 }
 
-export default App;
+export default withAppHocs(App);

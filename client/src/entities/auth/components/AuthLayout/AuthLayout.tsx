@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren, ReactNode } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import type { AuthFieldValues } from '@entities/auth/hooks/useAuthForm';
-import authImg from '@images/auth-duck.png';
+import authImg from '@shared/assets/images/auth-duck.png';
 import styles from './AuthLayout.module.scss';
 
 interface AuthLayoutProps {

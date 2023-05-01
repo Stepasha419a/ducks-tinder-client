@@ -27,8 +27,7 @@
       "@hocs": ["./hocs/index"],
       "@features/*": ["./features/*"],
       "@entities/*": ["./entities/*"],
-      "@shared/*": ["./shared/*"],
-      "@images/*": ["./assets/images/*"]
+      "@shared/*": ["./shared/*"]
     }
   }
 }

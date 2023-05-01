@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import { Nav, Tinder } from '@widgets';
 import { Instructions } from './components';
-import { withHocs } from '@hocs';
+import { withPrivatePageHocs } from '@shared/hocs';
 import styles from './Tinder.module.scss';
 
 const TinderPage: FC = (): ReactElement => {
@@ -16,4 +16,4 @@ const TinderPage: FC = (): ReactElement => {
   );
 };
 
-export default withHocs(TinderPage);
+export default withPrivatePageHocs(TinderPage);

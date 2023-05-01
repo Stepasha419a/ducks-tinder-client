@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { getUserPairsThunk } from '@entities/user/model';
 import { Nav, Pairs } from '@widgets';
 import { Likes } from './components/Likes/Likes';
-import { withHocs } from '@hocs';
+import { withPrivatePageHocs } from '@shared/hocs';
 import styles from './PairsPage.module.scss';
 
 const PairsPage: FC = (): ReactElement => {
@@ -33,4 +33,4 @@ const PairsPage: FC = (): ReactElement => {
   );
 };
 
-export default withHocs(PairsPage);
+export default withPrivatePageHocs(PairsPage);

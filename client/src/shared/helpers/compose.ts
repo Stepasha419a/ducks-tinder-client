@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FC } from 'react';
 
-export function compose<P>(...funcs: Array<(Component: FC<P>) => FC<P>>) {
-  return function (arg: FC<P>): FC<P> {
-    return funcs.reduce(
-      (acc: FC<P>, func: (Component: FC<P>) => FC<P>) => func(acc),
-      arg
-    );
+type Func = (Component: FC) => FC;
+
+export function compose(...funcs: Array<Func>): Func {
+  return function composedFunc(arg: FC): FC {
+    return funcs.reduceRight((acc: FC, fn: Func) => fn(acc), arg);
   };
 }

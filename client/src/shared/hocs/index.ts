@@ -1,0 +1,1 @@
+export { withPrivatePageHocs } from './withPrivatePageHocs';
