@@ -1,27 +1,34 @@
 import type { FC } from 'react';
-import { useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import type { PicturesVariants } from '@shared/api/interfaces';
 import { PicturesEnum } from '@shared/api/interfaces';
-import { selectImagesDND } from '@entities/user/model';
-import { makeImageUrl } from '@shared/helpers';
-import { useImagesDragAndDrop } from '@features/user/ImagesForm/lib';
-import { Card } from './Card/Card';
-import styles from './UserImagesDND.module.scss';
+import {
+  selectImagesDND,
+  setIsDialogUploadOpen,
+  setPictureVariant,
+} from '@entities/user/model';
+import { createEmptyArray, makeImageUrl } from '@shared/helpers';
+import { Card } from './components';
+import { useImagesDragAndDrop } from './lib';
+import styles from './ImagesDND.module.scss';
 
-interface UserImagesProps {
-  openSettingHandler: (setting: PicturesVariants) => void;
-}
+export const ImagesDND: FC = () => {
+  const dispatch = useAppDispatch();
 
-export const UserImagesDND: FC<UserImagesProps> = ({ openSettingHandler }) => {
   const { currentUserId, pictures } = useAppSelector(selectImagesDND);
 
   const { images, handleDeleteImage, getDNDProps } = useImagesDragAndDrop(
     styles.lowOpacity
   );
 
-  const emptyFieldsForLoop: undefined[] = [
-    ...(new Array(8 - pictures.gallery.length) as undefined[]),
-  ];
+  const openSettingHandler = (variant: PicturesVariants): void => {
+    dispatch(setPictureVariant(variant));
+    dispatch(setIsDialogUploadOpen(true));
+  };
+
+  const emptyFieldsForLoop: undefined[] = createEmptyArray(
+    8 - pictures.gallery.length
+  );
 
   return (
     <div className={styles.images}>

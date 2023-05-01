@@ -1,8 +1,8 @@
 import type { ChangeEvent, FC } from 'react';
 import { Popup } from '@shared/ui';
 import { setImageChange, setIsDialogUploadOpen } from '@entities/user/model';
-import { useAppDispatch } from '@/hooks';
-import { createFileUrl } from '@/shared/helpers';
+import { useAppDispatch } from '@hooks';
+import { createFileUrl } from '@shared/helpers';
 import styles from './DialogUpload.module.scss';
 
 export const DialogUpload: FC = () => {

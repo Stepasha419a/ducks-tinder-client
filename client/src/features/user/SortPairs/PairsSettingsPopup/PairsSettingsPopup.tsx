@@ -5,6 +5,7 @@ import { Button, CheckboxInput, ListItem, Popup, RangeInput } from '@shared/ui';
 import styles from './PairsSettingsPopup.module.scss';
 import { INTERESTS_FOR_LOOP } from '@shared/constants';
 import type { PairSorts } from '@shared/api/interfaces';
+import { createEmptyArray } from '@/shared/helpers';
 
 interface PairsSettingsPopupProps {
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
@@ -39,7 +40,7 @@ export const PairsSettingsPopup: FC<PairsSettingsPopupProps> = ({
     field: { value: photosCount, onChange: setPhotosCount },
   } = useController({ name: 'photos', control });
 
-  const photosCountArrForLoop: undefined[] = [...(new Array(9) as undefined[])];
+  const photosCountArrForLoop: undefined[] = createEmptyArray(9);
 
   return (
     <Popup title="Likes filter" closeHandler={submitHandler}>

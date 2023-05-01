@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppSelector } from '@hooks';
-import { CropImage, DialogUpload, ImagesForm } from '@features/user';
+import { CropImage, DialogUpload, ImagesDND } from '@features/user';
 import { Preview } from '@entities/user/components';
-import { Tabs } from './components';
+import { ImagesFormWrapper, Tabs } from './components';
 import styles from './ImageSetting.module.scss';
 
 interface ImageSettingProps {
@@ -20,8 +20,7 @@ export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
   );
 
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);
-  const [isFullPreviewSetting, setIsFullPreviewSetting] =
-    useState(false);
+  const [isFullPreviewSetting, setIsFullPreviewSetting] = useState(false);
 
   return (
     <div className={styles.change}>
@@ -44,9 +43,9 @@ export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
                 setIsFullPreview={setIsFullPreviewSetting}
               />
             ) : (
-              <ImagesForm
-                setIsImageSetting={setIsImageSetting}
-              />
+              <ImagesFormWrapper setIsImageSetting={setIsImageSetting}>
+                <ImagesDND />
+              </ImagesFormWrapper>
             )}
           </div>
         </>

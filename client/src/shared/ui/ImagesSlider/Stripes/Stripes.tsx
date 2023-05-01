@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
 import styles from './Stripes.module.scss';
+import { createEmptyArray } from '@/shared/helpers';
 
 interface StripesProps {
   current: number;
@@ -8,7 +9,7 @@ interface StripesProps {
 }
 
 const Stripes: FC<StripesProps> = ({ current, length }) => {
-  const stripesArr: undefined[] = [...new Array(length) as undefined[]];
+  const stripesArr: undefined[] = createEmptyArray(length);
   return (
     <div className={styles.stripes}>
       {stripesArr.map((_, i) => {

@@ -7,7 +7,7 @@ import {
   TextForm,
 } from '@features/setting';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { setIsUserInfoSetting } from '@/entities/setting/model';
+import { setIsUserInfoSetting } from '@entities/setting/model';
 
 export const Setting = (): ReactElement => {
   const dispatch = useAppDispatch();
