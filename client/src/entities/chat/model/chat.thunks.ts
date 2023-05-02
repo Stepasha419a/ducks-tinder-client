@@ -3,7 +3,6 @@ import type { Message, User } from '@shared/api/interfaces';
 import { chatApi } from '@shared/api/chat/chat.api';
 import { chatSocket } from '@shared/api/chat/chat.socket';
 import { returnErrorMessage } from '@shared/helpers';
-import type { RootState } from '@app/store';
 import { fetchUserById } from '@entities/user/model';
 import {
   disconnectChat,

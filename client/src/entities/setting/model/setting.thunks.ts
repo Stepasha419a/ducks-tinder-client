@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { updateUserThunk } from '@entities/user/model';
-import type { RootState } from '@app/store';
 import type {
   ChangedData,
   InnerObjectName,

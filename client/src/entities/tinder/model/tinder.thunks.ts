@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { User } from '@shared/api/interfaces';
 import { usersAPI } from '@shared/api/users/users.api';
 import { makeDataObject, returnErrorMessage } from '@shared/helpers';
-import type { RootState } from '@app/store';
 import { makeQuerySortsObj } from './helpers';
 
 export const getSortedUserThunk = createAsyncThunk(

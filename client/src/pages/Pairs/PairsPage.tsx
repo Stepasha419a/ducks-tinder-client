@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 import { getUserPairsThunk } from '@entities/user/model';
 import { Nav, Pairs } from '@widgets';
 import { Likes } from './components/Likes/Likes';
-import { withPrivatePageHocs } from '@shared/hocs';
+import { withPrivatePageHocs } from '@hocs';
 import styles from './PairsPage.module.scss';
 
 const PairsPage: FC = (): ReactElement => {

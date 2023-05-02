@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { ImageSetting, Nav } from '@widgets';
 import { UserImage } from './components';
-import { withPrivatePageHocs } from '@shared/hocs';
+import { withPrivatePageHocs } from '@hocs';
 import styles from './ProfilePage.module.scss';
 
 const ProfilePage: FC = (): ReactElement => {
