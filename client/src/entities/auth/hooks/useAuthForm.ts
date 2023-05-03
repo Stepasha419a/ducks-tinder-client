@@ -11,7 +11,7 @@ import type { TextFieldProps } from '@shared/ui/inputs/TextField/TextField.types
 export interface AuthFieldValues extends BaseSyntheticEvent {
   email: string;
   password: string;
-  name?: string;
+  name: string;
 }
 
 interface AuthFormReturn {

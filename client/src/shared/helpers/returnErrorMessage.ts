@@ -1,5 +1,10 @@
+import type { AxiosError } from 'axios';
 import axios from 'axios';
-import type { AxiosErrorResponse } from '@shared/api/interfaces';
+
+export type AxiosErrorResponse = AxiosError<{
+  message: string;
+  statusCode: number;
+}>;
 
 export function returnErrorMessage(error: unknown) {
   return axios.isAxiosError(error)

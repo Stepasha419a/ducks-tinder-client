@@ -14,7 +14,7 @@ interface ChatSocket {
 export const chatSocket: ChatSocket = {
   _socket: null,
   _sockets: new Set(),
-  connectChat(chatId: string) {
+  connectChat(chatId: string): Socket {
     this._socket = io('http://localhost:5000/chat/socket', {
       query: { chatId },
     });
@@ -23,9 +23,10 @@ export const chatSocket: ChatSocket = {
 
     this._sockets.add(this._socket);
 
+    // TODO: fix this return by adding some idk, methods that require callbacks on every event
     return this._socket;
   },
-  sendMessage(content: string, username: string, userId: string) {
+  sendMessage(content: string, username: string, userId: string): void {
     const message: Message = {
       id: Date.now().toString(),
       username,
@@ -34,12 +35,12 @@ export const chatSocket: ChatSocket = {
     };
     this._socket!.send(message);
   },
-  disconnectChat() {
+  disconnectChat(): void {
     if (this._socket) {
       this._socket.emit('disconnectChat');
     }
   },
-  closeAllSockets() {
+  closeAllSockets(): void {
     this._sockets.forEach((socket) => {
       socket.close();
       this._sockets.delete(socket);

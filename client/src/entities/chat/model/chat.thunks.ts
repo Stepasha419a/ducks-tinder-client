@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { Message, User } from '@shared/api/interfaces';
-import { chatApi } from '@shared/api/chat/chat.api';
-import { chatSocket } from '@shared/api/chat/chat.socket';
+import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { fetchUserById } from '@entities/user/model';
 import {
@@ -17,7 +16,7 @@ export const getChatsThunk = createAsyncThunk(
       const { user } = getState() as RootState;
       const { currentUser } = user;
 
-      const response = await chatApi.getChats(id);
+      const response = await chatService.getChats(id);
 
       const chats = response.data;
 
@@ -48,7 +47,7 @@ export const createChatThunk = createAsyncThunk(
     try {
       const { user } = getState() as RootState;
       const { currentUser, currentPair } = user;
-      await chatApi.createChat([currentUser._id, currentPair!._id]);
+      await chatService.createChat([currentUser._id, currentPair!._id]);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -61,10 +60,10 @@ export const connectChatThunk = createAsyncThunk(
     try {
       const { chatId } = args;
 
-      const socket = chatSocket.connectChat(chatId);
+      const socket = chatService.connectChat(chatId);
 
       socket.on('connected', async () => {
-        const response = await chatApi.getChat(chatId);
+        const response = await chatService.getChat(chatId);
         const chat = response.data;
         dispatch(setCurrentChatData(chat));
       });
@@ -86,7 +85,7 @@ export const disconnectChatThunk = createAsyncThunk(
   'chat/disconnectChat',
   (_, { rejectWithValue }) => {
     try {
-      chatSocket.disconnectChat();
+      chatService.disconnectChat();
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -97,7 +96,7 @@ export const closeAllSockets = createAsyncThunk(
   'chat/closeSocket',
   (_, { rejectWithValue }) => {
     try {
-      chatSocket.closeAllSockets();
+      chatService.closeAllSockets();
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -111,7 +110,7 @@ export const sendMessageThunk = createAsyncThunk(
       const { user } = getState() as RootState;
       const { currentUser } = user;
 
-      chatSocket.sendMessage(content, currentUser.name, currentUser._id);
+      chatService.sendMessage(content, currentUser.name, currentUser._id);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

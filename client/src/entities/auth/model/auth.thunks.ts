@@ -1,17 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import type { AuthResponse } from '@shared/api/interfaces';
-import type { UserAuthParams } from '@shared/api/auth/auth.api';
-import { authAPI } from '@shared/api/auth/auth.api';
+import { authService } from '@/shared/api/services';
 import { API_URL } from '@shared/api';
+import type {
+  AuthResponse,
+  LoginParams,
+  RegistrationParams,
+} from '@shared/api/services/auth';
 import { returnErrorMessage } from '@shared/helpers';
 import { setCurrentUser } from '@entities/user/model';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',
-  async (params: UserAuthParams, { rejectWithValue, dispatch }) => {
+  async (params: RegistrationParams, { rejectWithValue, dispatch }) => {
     try {
-      const response = await authAPI.registration(
+      const response = await authService.registration(
         params.email,
         params.name,
         params.password
@@ -27,9 +30,9 @@ export const registerThunk = createAsyncThunk(
 
 export const loginThunk = createAsyncThunk(
   'auth/loginUser',
-  async (params: UserAuthParams, { rejectWithValue, dispatch }) => {
+  async (params: LoginParams, { rejectWithValue, dispatch }) => {
     try {
-      const response = await authAPI.login(params.email, params.password);
+      const response = await authService.login(params.email, params.password);
 
       dispatch(setCurrentUser(response.data.user));
       return response.data;
@@ -43,6 +46,8 @@ export const checkAuthThunk = createAsyncThunk(
   'auth/checkAuth',
   async (_, { rejectWithValue, dispatch }) => {
     try {
+
+      // TODO: decompose it into authService
       const response = await axios.get<AuthResponse>(`${API_URL}auth/refresh`, {
         withCredentials: true,
       });
@@ -59,7 +64,7 @@ export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await authAPI.logout();
+      await authService.logout();
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

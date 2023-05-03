@@ -7,13 +7,13 @@ import type {
   PicturesVariants,
   User,
 } from '@shared/api/interfaces';
-import { usersAPI } from '@shared/api/users/users.api';
+import { userService } from '@shared/api/services';
 import { makeDataObject } from '@shared/helpers/makeDataObject';
 import { returnErrorMessage } from '@shared/helpers';
 import { makeUserImagesObject } from './helpers';
 
 export async function fetchUserById(id: string): Promise<User> {
-  const response = await usersAPI.getCurrentUser(id);
+  const response = await userService.getUser(id);
 
   const user = response.data;
 
@@ -35,7 +35,7 @@ export const updateUserThunk = createAsyncThunk(
       const { currentUser } = user;
       const data = makeDataObject({ ...args, currentUser });
 
-      const response = await usersAPI.updateUser(currentUser._id, data);
+      const response = await userService.updateUser(currentUser._id, data);
 
       return response.data;
     } catch (error: unknown) {
@@ -81,7 +81,7 @@ export const deletePairThunk = createAsyncThunk(
     try {
       const { user } = getState() as RootState;
       const { currentUser, currentPair } = user;
-      const response = await usersAPI.deletePair(
+      const response = await userService.deletePair(
         currentUser._id,
         currentPair!._id
       );
@@ -102,7 +102,7 @@ export const saveUserImageThunk = createAsyncThunk(
     try {
       const { user } = getState() as RootState;
       const currentUserId = user.currentUser._id;
-      const response = await usersAPI.savePicture(
+      const response = await userService.savePicture(
         args.picture,
         currentUserId,
         args.pictureVariant
@@ -130,7 +130,7 @@ export const deleteUserImage = createAsyncThunk(
         currentUser: { _id },
       } = user;
 
-      const response = await usersAPI.deletePicture(
+      const response = await userService.deletePicture(
         args.pictureName,
         _id,
         args.setting
@@ -151,7 +151,7 @@ export const mixUserImages = createAsyncThunk(
       const currentUserId = user.currentUser._id;
 
       const userImages = makeUserImagesObject(images);
-      const response = await usersAPI.updateUser(currentUserId, userImages);
+      const response = await userService.updateUser(currentUserId, userImages);
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { User } from '@shared/api/interfaces';
-import { usersAPI } from '@shared/api/users/users.api';
+import { userService } from '@shared/api/services';
 import { makeDataObject, returnErrorMessage } from '@shared/helpers';
 import { makeQuerySortsObj } from './helpers';
 
@@ -13,7 +13,7 @@ export const getSortedUserThunk = createAsyncThunk(
     try {
       const querySortsObj = makeQuerySortsObj(args.user, args.requestedUsers);
 
-      const response = await usersAPI.getSortedUsers(querySortsObj);
+      const response = await userService.getSortedUser(querySortsObj);
 
       return response.data;
     } catch (error: unknown) {
@@ -37,12 +37,12 @@ export const likeUserThunk = createAsyncThunk(
         changedData: [...currentUser.checkedUsers, tinderUser._id],
       });
 
-      const updateUserResponse = await usersAPI.updateUser(
+      const updateUserResponse = await userService.updateUser(
         currentUser._id,
         data
       );
 
-      const createPairResponse = await usersAPI.createPair(
+      const createPairResponse = await userService.createPair(
         tinderUser._id,
         currentUser._id
       );
@@ -79,7 +79,7 @@ export const returnUserThunk = createAsyncThunk(
           changedData: newCheckedUsers,
         });
 
-        const response = await usersAPI.updateUser(currentUser._id, data);
+        const response = await userService.updateUser(currentUser._id, data);
 
         return response.data;
       }
@@ -106,7 +106,7 @@ export const dislikeUserThunk = createAsyncThunk(
         ],
       });
 
-      const response = await usersAPI.updateUser(currentUser._id, data);
+      const response = await userService.updateUser(currentUser._id, data);
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
