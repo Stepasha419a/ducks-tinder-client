@@ -6,7 +6,7 @@ import {
   useCurrentValidation,
   useDefaultValues,
 } from '@entities/setting/hooks';
-import type { SettingFieldValues } from '@entities/setting/model/setting.interfaces';
+import type { SettingFieldValues } from '@entities/setting/model';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import {
   setIsUserInfoSetting,

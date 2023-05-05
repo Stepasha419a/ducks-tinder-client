@@ -14,7 +14,7 @@ export const AcceptPair: FC = () => {
   };
 
   return (
-    <Button onClick={() => handleAccept()} extraClassName={styles.btn}>
+    <Button onClick={handleAccept} extraClassName={styles.btn}>
       Accept
     </Button>
   );

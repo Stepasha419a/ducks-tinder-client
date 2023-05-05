@@ -4,11 +4,11 @@ import type { User } from '@shared/api/interfaces';
 import { checkUserFields } from './helpers';
 import type {
   SetInputPayload,
-  SettingsInitialState,
+  SettingInitialState,
 } from './setting.interfaces';
 import { submitSettingsThunk } from './setting.thunks';
 
-const initialState: SettingsInitialState = {
+const initialState: SettingInitialState = {
   setting: null,
   settingInputName: null,
   innerObjectName: null,

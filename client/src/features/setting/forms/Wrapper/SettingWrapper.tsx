@@ -4,7 +4,7 @@ import { Button } from '@shared/ui';
 import type {
   SettingFieldArrayValues,
   SettingFieldValues,
-} from '@entities/setting/model/setting.interfaces';
+} from '@entities/setting/model';
 import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {

@@ -4,8 +4,9 @@ export const selectUserPairs = createSelector(
   [
     (state: RootState) => state.user.currentUser.pairs,
     (state: RootState) => state.user.pairs,
+    (state: RootState) => state.user.pairSorts,
   ],
-  (pairIds, pairs) => ({ pairIds, pairs })
+  (pairIds, pairs, pairSorts) => ({ pairIds, pairs, pairSorts })
 );
 
 export const selectUserChatsInfo = createSelector(

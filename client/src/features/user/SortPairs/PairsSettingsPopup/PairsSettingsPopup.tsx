@@ -2,8 +2,8 @@ import type { FC } from 'react';
 import type { Control, UseFormReset } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import type { PairSorts } from '@entities/user/model';
+import { INTERESTS_FOR_LOOP } from '@entities/user/model';
 import { Button, CheckboxInput, ListItem, Popup, RangeInput } from '@shared/ui';
-import { INTERESTS_FOR_LOOP } from '@shared/constants';
 import { createEmptyArray } from '@/shared/helpers';
 import styles from './PairsSettingsPopup.module.scss';
 

@@ -1,8 +1,13 @@
 import { useAppSelector } from '@hooks';
-import type {
-  ChangeablePartnerSettingsFields,
-  ChangeableUserFields,
-} from '../model/setting.interfaces';
+
+export type ChangeablePartnerSettingsFields = 'place' | 'preferSex';
+export type ChangeableUserFields =
+  | 'email'
+  | 'name'
+  | 'description'
+  | 'nickname'
+  | 'sex'
+  | 'interests';
 
 export function useDefaultValues(): string | string[] {
   const currentUser = useAppSelector((state) => state.user.currentUser);

@@ -3,19 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from '@hooks';
 import type { User } from '@shared/api/interfaces';
-import type { PairSorts } from '@entities/user/model';
 import { selectUserPairs } from '@entities/user/model';
 import { sortItemBySettings } from '../../model/helpers';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
 
 interface PairsListProps {
-  sorts: PairSorts;
   setCurrentPair: (user: User) => void;
 }
 
-export const PairsList: FC<PairsListProps> = ({ sorts, setCurrentPair }) => {
-  const { pairIds, pairs } = useAppSelector(selectUserPairs);
+export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
+  const { pairIds, pairs, pairSorts } = useAppSelector(selectUserPairs);
 
   if (!pairIds.length) {
     return (
@@ -29,7 +27,7 @@ export const PairsList: FC<PairsListProps> = ({ sorts, setCurrentPair }) => {
   return (
     <div className={styles.pairs}>
       {pairs
-        .filter((user: User) => sortItemBySettings(user, sorts))
+        .filter((user: User) => sortItemBySettings(user, pairSorts))
         .map((user: User) => {
           const handleCurrentPair = () => {
             setCurrentPair(user);

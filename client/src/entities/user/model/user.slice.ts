@@ -15,24 +15,15 @@ import {
   saveUserImageThunk,
   updateUserThunk,
 } from './user.thunks';
+import type { PairSorts, UserInitialState } from './user.interfaces';
+import { INITIAL_SORTS } from './user.constants';
 
-interface InitialState {
-  currentUser: User;
-  currentPair: User | null;
-  pairs: User[];
-  profileSetting: {
-    pictureVariant: PicturesVariants | null;
-    imageURL: string | null;
-    isImageCropOpen: boolean;
-    isDialogUploadOpen: boolean;
-  };
-}
-
-const initialState: InitialState = {
+const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh
   currentUser: {} as User,
   currentPair: null,
   pairs: [],
+  pairSorts: INITIAL_SORTS,
   profileSetting: {
     pictureVariant: null,
     imageURL: null,
@@ -50,6 +41,9 @@ const userSlice = createSlice({
     },
     setCurrentPair: (state, { payload }: PayloadAction<User | null>) => {
       state.currentPair = payload;
+    },
+    setPairSorts: (state, { payload }: PayloadAction<PairSorts>) => {
+      state.pairSorts = payload;
     },
     setIsDialogUploadOpen: (state, { payload }: PayloadAction<boolean>) => {
       state.profileSetting.isDialogUploadOpen = payload;
@@ -113,6 +107,7 @@ const userSlice = createSlice({
 export const {
   setCurrentUser,
   setCurrentPair,
+  setPairSorts,
   setIsDialogUploadOpen,
   setIsImageCropOpen,
   setPictureVariant,

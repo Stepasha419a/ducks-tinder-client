@@ -3,7 +3,7 @@ import { useController, useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { RadioInput } from '@shared/ui';
 import { useDefaultValues } from '@entities/setting/hooks';
-import type { SettingFieldValues } from '@entities/setting/model/setting.interfaces';
+import type { SettingFieldValues } from '@entities/setting/model';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import {
   setIsUserInfoSetting,

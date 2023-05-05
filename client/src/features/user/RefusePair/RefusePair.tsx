@@ -12,7 +12,7 @@ export const RefusePair: FC = () => {
   };
 
   return (
-    <Button onClick={() => handleRefuse()} extraClassName={styles.btn}>
+    <Button onClick={handleRefuse} extraClassName={styles.btn}>
       Refuse
     </Button>
   );

@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { useController, useForm } from 'react-hook-form';
 import { useDefaultValues } from '@entities/setting/hooks';
-import type { SettingFieldArrayValues } from '@entities/setting/model/setting.interfaces';
+import type { SettingFieldArrayValues } from '@entities/setting/model';
 import { ListItem } from '@shared/ui';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import { InterestsSettingPopup } from '@entities/user/components';

@@ -22,7 +22,7 @@ export type ErrorField =
   | 'distance'
   | 'preferSex';
 
-export interface SettingsInitialState {
+export interface SettingInitialState {
   setting: Setting;
   settingInputName: SettingInputName;
   innerObjectName: InnerObjectName;
@@ -46,13 +46,3 @@ export interface SettingFieldValues {
 export interface SettingFieldArrayValues {
   input: string[];
 }
-
-export type ChangeablePartnerSettingsFields = 'place' | 'preferSex';
-
-export type ChangeableUserFields =
-  | 'email'
-  | 'name'
-  | 'description'
-  | 'nickname'
-  | 'sex'
-  | 'interests';
