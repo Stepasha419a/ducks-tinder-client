@@ -1,4 +1,4 @@
-import type { PairSorts } from '@shared/api/interfaces';
+import type { PairSorts } from './user.interfaces';
 
 export const INITIAL_SORTS: PairSorts = {
   distance: 100,

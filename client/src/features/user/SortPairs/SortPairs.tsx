@@ -1,10 +1,11 @@
 import type { FC } from 'react';
 import { useState } from 'react';
+import type { PairSorts } from '@entities/user/model';
+import { INITIAL_SORTS } from '@entities/user/model';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useController, useForm } from 'react-hook-form';
-import { INITIAL_SORTS, INTERESTS_FOR_LOOP } from '@shared/constants';
-import type { PairSorts } from '@shared/api/interfaces';
+import { INTERESTS_FOR_LOOP } from '@shared/constants';
 import { ListItem } from '@shared/ui';
 import { PairsSettingsPopup } from './PairsSettingsPopup/PairsSettingsPopup';
 import { InterestsSettingPopup } from '@entities/user/components';

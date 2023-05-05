@@ -1,8 +1,9 @@
 import type { FC } from 'react';
-import type { PairSorts, User } from '@shared/api/interfaces';
+import type { User } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { PairsList } from '@entities/user/components';
+import type { PairSorts } from '@entities/user/model';
 import { setCurrentPair } from '@entities/user/model';
+import { PairsList } from '@entities/user/components';
 import { RatePairPopup } from '@features/user';
 
 interface PairsProps {

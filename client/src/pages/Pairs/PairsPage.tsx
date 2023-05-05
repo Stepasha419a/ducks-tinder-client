@@ -1,10 +1,9 @@
 import type { FC, ReactElement } from 'react';
 import { useEffect, useState } from 'react';
-import type { PairSorts } from '@shared/api/interfaces';
-import { INITIAL_SORTS } from '@shared/constants';
 import { SortPairs } from '@features/user';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { getUserPairsThunk } from '@entities/user/model';
+import type { PairSorts } from '@entities/user/model';
+import { INITIAL_SORTS, getUserPairsThunk } from '@entities/user/model';
 import { Nav, Pairs } from '@widgets';
 import { Likes } from './components/Likes/Likes';
 import { withPrivatePageHocs } from '@hocs';

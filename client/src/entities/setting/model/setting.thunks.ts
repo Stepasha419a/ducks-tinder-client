@@ -1,11 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { updateUserThunk } from '@entities/user/model';
-import type {
-  ChangedData,
-  InnerObjectName,
-  SettingInputName,
-} from '@shared/api/interfaces';
+import type { ChangedData, InnerObjectName } from '@shared/api/interfaces';
 import { returnErrorMessage } from '@shared/helpers';
+import type { SettingInputName } from './setting.interfaces';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',

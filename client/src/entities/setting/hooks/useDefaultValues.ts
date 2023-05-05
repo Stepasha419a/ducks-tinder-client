@@ -2,7 +2,7 @@ import { useAppSelector } from '@hooks';
 import type {
   ChangeablePartnerSettingsFields,
   ChangeableUserFields,
-} from '@shared/interfaces';
+} from '../model/setting.interfaces';
 
 export function useDefaultValues(): string | string[] {
   const currentUser = useAppSelector((state) => state.user.currentUser);

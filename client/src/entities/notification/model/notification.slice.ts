@@ -1,7 +1,9 @@
-import type { CreateNotification } from '@shared/interfaces/Notification';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { Notification } from '@shared/interfaces';
+import type {
+  CreateNotification,
+  Notification,
+} from './notification.interfaces';
 
 interface InitialState {
   notifications: Notification[];

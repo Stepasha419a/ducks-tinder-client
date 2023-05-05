@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type {
   ChangedData,
-  ImageInterface,
   InnerObjectName,
   PartnerSettings,
   PicturesVariants,
@@ -10,6 +9,7 @@ import type {
 import { userService } from '@shared/api/services';
 import { makeDataObject } from '@shared/helpers/makeDataObject';
 import { returnErrorMessage } from '@shared/helpers';
+import type { ImageInterface } from './user.interfaces';
 import { makeUserImagesObject } from './helpers';
 
 export async function fetchUserById(id: string): Promise<User> {

@@ -1,8 +1,5 @@
-import type {
-  PairSorts,
-  PairSortsKey,
-  User,
-} from '@shared/api/interfaces';
+import type { User } from '@shared/api/interfaces';
+import type { PairSorts, PairSortsKey } from '../user.interfaces';
 
 export function sortItemBySettings(
   item: User,

@@ -1,4 +1,5 @@
-import type { ImageInterface, PicturesInterface } from '@shared/api/interfaces';
+import type { ImageInterface } from '@entities/user/model';
+import type { PicturesInterface } from '@shared/api/interfaces';
 import { PicturesEnum } from '@shared/api/interfaces';
 
 export function parseImages(pictures: PicturesInterface): ImageInterface[] {

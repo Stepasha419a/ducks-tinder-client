@@ -1,7 +1,5 @@
-import type {
-  ImageInterface,
-  PicturesInterface,
-} from '@shared/api/interfaces';
+import type { PicturesInterface } from '@shared/api/interfaces';
+import type { ImageInterface } from '../user.interfaces';
 
 export function makeUserImagesObject(images: ImageInterface[]): {
   pictures: PicturesInterface;

@@ -1,11 +1,11 @@
 import type { FC } from 'react';
 import type { Control, UseFormReset } from 'react-hook-form';
 import { useController } from 'react-hook-form';
+import type { PairSorts } from '@entities/user/model';
 import { Button, CheckboxInput, ListItem, Popup, RangeInput } from '@shared/ui';
-import styles from './PairsSettingsPopup.module.scss';
 import { INTERESTS_FOR_LOOP } from '@shared/constants';
-import type { PairSorts } from '@shared/api/interfaces';
 import { createEmptyArray } from '@/shared/helpers';
+import styles from './PairsSettingsPopup.module.scss';
 
 interface PairsSettingsPopupProps {
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;

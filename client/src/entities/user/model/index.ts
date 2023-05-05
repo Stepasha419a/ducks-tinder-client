@@ -23,3 +23,9 @@ export {
   selectCropImage,
   selectImagesDND,
 } from './user.selectors';
+export type {
+  ImageInterface,
+  PairSorts,
+  PairSortsKey,
+} from './user.interfaces';
+export { INITIAL_SORTS } from './user.constants';

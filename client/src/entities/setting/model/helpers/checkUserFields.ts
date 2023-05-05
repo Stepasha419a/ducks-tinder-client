@@ -1,5 +1,5 @@
 import type { User } from '@shared/api/interfaces';
-import type { ErrorField } from '@shared/interfaces';
+import type { ErrorField } from '../setting.interfaces';
 
 const potentialFields: ErrorField[] = ['description', 'interests', 'place'];
 

@@ -1,10 +1,4 @@
-import type { Range } from '@shared/interfaces';
-
-export interface ImageInterface {
-  id: number;
-  image: string;
-  setting: PicturesVariants;
-}
+export type Range = { from: number; to: number };
 
 export interface PartnerSettings {
   place: string;
@@ -19,8 +13,6 @@ export interface PicturesInterface {
   gallery: string[];
 }
 
-// don't know why it's wrong
-// eslint-disable-next-line no-shadow
 export enum PicturesEnum {
   avatar = 'avatar',
   gallery = 'gallery',
@@ -45,7 +37,18 @@ export interface User {
   checkedUsers: string[];
 }
 
-export interface UserUnrequired {
+interface PartialPartnerSettings {
+  place?: string;
+  distance?: number;
+  usersOnlyInDistance?: boolean;
+  preferSex?: 'male' | 'female';
+  age?: {
+    from?: number;
+    to?: number;
+  };
+}
+
+export interface PartialUser {
   email?: string;
   name?: string;
   description?: string;
@@ -58,29 +61,10 @@ export interface UserUnrequired {
     avatar?: string;
     gallery?: string[];
   };
-  partnerSettings?: {
-    place?: string;
-    distance?: number;
-    usersOnlyInDistance?: boolean;
-    preferSex?: 'male' | 'female';
-    age?: {
-      from?: number;
-      to?: number;
-    };
-  };
+  partnerSettings?: PartialPartnerSettings;
   chats?: string[];
   checkedUsers?: string[];
 }
-
-export interface PairSorts {
-  distance: number;
-  age: Range;
-  photos: number;
-  interests: string[];
-  account: string[];
-}
-
-export type PairSortsKey = keyof PairSorts;
 
 export interface QuerySorts {
   distance: number;
@@ -92,12 +76,6 @@ export interface QuerySorts {
   userIds?: string[];
 }
 
-export interface InterestItem {
-  name: string;
-  id: string;
-}
-
 export type ChangedData = string | number | boolean | string[] | Range;
 
 export type InnerObjectName = 'partnerSettings' | null;
-export type SettingInputName = keyof User | keyof PartnerSettings | null;

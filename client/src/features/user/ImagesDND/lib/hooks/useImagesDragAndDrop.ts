@@ -1,8 +1,9 @@
 import type { DragEvent } from 'react';
 import { useState, useEffect } from 'react';
-import type { ImageInterface, PicturesVariants } from '@shared/api/interfaces';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import type { ImageInterface } from '@entities/user/model';
 import { deleteUserImage, mixUserImages } from '@entities/user/model';
+import type { PicturesVariants } from '@shared/api/interfaces';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import { parseImages } from '../helpers';
 
 export function useImagesDragAndDrop(styleName: string) {

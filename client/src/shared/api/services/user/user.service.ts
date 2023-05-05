@@ -3,7 +3,7 @@ import type {
   PicturesVariants,
   QuerySorts,
   User,
-  UserUnrequired,
+  PartialUser,
 } from '@shared/api/interfaces';
 
 export const userService = {
@@ -15,7 +15,7 @@ export const userService = {
     return instance.get<User>(`users/${id}`);
   },
 
-  async updateUser(id: string, data: UserUnrequired) {
+  async updateUser(id: string, data: PartialUser) {
     return instance.put<User>(`users/${id}`, data);
   },
 
