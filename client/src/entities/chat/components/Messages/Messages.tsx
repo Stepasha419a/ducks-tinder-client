@@ -1,8 +1,6 @@
 import type { ReactElement } from 'react';
-import { useEffect, useRef } from 'react';
-import { useAppSelector } from '@hooks';
+import { useAppSelector, useScrollToBottom } from '@hooks';
 import type { Message as MessageInterface } from '@shared/api/interfaces';
-import { isRefElementVisible, scrollToBottom } from '@shared/helpers';
 import { Message } from './Message/Message';
 import styles from './Messages.module.scss';
 import { selectUserChat } from '../../model';
@@ -14,19 +12,7 @@ export const Messages = (): ReactElement => {
   const messages = useAppSelector((state) => state.chat.currentMessages);
   const currentUserChatObj = useAppSelector(selectUserChat);
 
-  const bottomScrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (bottomScrollRef.current) {
-      scrollToBottom(bottomScrollRef);
-    }
-  }, [currentChatMembers]);
-
-  useEffect(() => {
-    if (bottomScrollRef.current && isRefElementVisible(bottomScrollRef)) {
-      scrollToBottom(bottomScrollRef, true);
-    }
-  }, [messages]);
+  const bottomScrollRef = useScrollToBottom([currentChatMembers], [messages]);
 
   return (
     <div className={styles.messages} ref={bottomScrollRef}>
