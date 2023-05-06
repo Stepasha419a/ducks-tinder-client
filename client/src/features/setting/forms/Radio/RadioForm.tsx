@@ -1,40 +1,19 @@
 import type { FC, ReactElement } from 'react';
-import { useController, useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@hooks';
 import { RadioInput } from '@shared/ui';
-import { useDefaultValues } from '@entities/setting/hooks';
-import type { SettingFieldValues } from '@entities/setting/model';
 import SettingWrapper from '../Wrapper/SettingWrapper';
-import {
-  setIsUserInfoSetting,
-  submitSettingsThunk,
-} from '@entities/setting/model';
 import styles from './RadioForm.module.scss';
+import { useRadioForm } from '../lib';
 
 export const RadioForm: FC = (): ReactElement => {
-  const dispatch = useAppDispatch();
-
-  const formName = useAppSelector((state) => state.setting.formName);
-
   const {
-    control,
-    formState: { errors, isValid },
-    handleSubmit,
-  } = useForm<SettingFieldValues>({
-    defaultValues: { input: useDefaultValues() as string },
-  });
-
-  const {
-    field: { value, onChange },
-  } = useController({ name: 'input', control, rules: { required: true } });
-
-  const cancelHandler = (): void => {
-    dispatch(setIsUserInfoSetting(false));
-  };
-
-  const submitHandler = handleSubmit((data: SettingFieldValues) => {
-    dispatch(submitSettingsThunk({ changedData: data.input }));
-  });
+    formName,
+    errors,
+    isValid,
+    value,
+    onChange,
+    cancelHandler,
+    submitHandler,
+  } = useRadioForm();
 
   return (
     <SettingWrapper
