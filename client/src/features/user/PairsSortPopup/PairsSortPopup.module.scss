@@ -1,6 +1,7 @@
 .setting {
   position: relative;
-  padding: 0 24px 10px;
+  padding: 10px 24px 10px;
+  border-bottom: 1px solid var(--border-main);
 
   &.checkbox {
     height: 53px;
@@ -19,7 +20,7 @@
 
   .value {
     position: absolute;
-    top: 4px;
+    top: 14px;
     right: 24px;
     color: var(--main-secondary);
   }
@@ -36,10 +37,9 @@
   }
 }
 
-.separator {
-  width: 100%;
-  height: 1px;
-  background-color: var(--border-main);
+.noRadius {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
 }
 
 .showAll {

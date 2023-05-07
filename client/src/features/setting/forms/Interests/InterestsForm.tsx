@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { ListItem } from '@shared/ui';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import { InterestsSettingPopup } from '@entities/user/components';
+import { useSelectForm } from '../../lib';
 import styles from './InterestsForm.module.scss';
-import { useSelectForm } from '../lib';
 
 export const InterestsForm: FC = (): ReactElement => {
   const {

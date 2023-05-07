@@ -23,6 +23,7 @@ export {
   selectUserChatsInfo,
   selectCropImage,
   selectImagesDND,
+  selectPairLink,
 } from './user.selectors';
 export type {
   ImageInterface,

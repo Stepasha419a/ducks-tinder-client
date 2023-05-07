@@ -1,9 +1,10 @@
 import type { FC } from 'react';
+import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@hooks';
 import type { User } from '@shared/api/interfaces';
-import { selectUserPairs } from '@entities/user/model';
+import { getUserPairsThunk, selectUserPairs } from '@entities/user/model';
 import { sortItemBySettings } from '../../model/helpers';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
@@ -13,7 +14,13 @@ interface PairsListProps {
 }
 
 export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
+  const dispatch = useAppDispatch();
+
   const { pairIds, pairs, pairSorts } = useAppSelector(selectUserPairs);
+
+  useEffect(() => {
+    dispatch(getUserPairsThunk());
+  }, [dispatch, pairIds]);
 
   if (!pairIds.length) {
     return (

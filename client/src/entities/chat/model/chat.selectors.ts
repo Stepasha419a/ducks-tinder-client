@@ -5,8 +5,10 @@ export const selectUserChat = createSelector(
     (state: RootState) => state.user.currentUser._id,
     (state: RootState) => state.user.currentUser.name,
     (state: RootState) => state.user.currentUser.pictures.avatar,
+    (state: RootState) => state.chat.currentMessages,
+    (state: RootState) => state.chat.currentChatMembers,
   ],
-  (_id, name, avatar) => ({ _id, name, avatar })
+  (_id, name, avatar, messages, currentChatMembers) => ({currentChatUserObj: { _id, name, avatar }, messages, currentChatMembers})
 );
 
 export const selectChatList = createSelector(

@@ -7,7 +7,7 @@
   cursor: pointer;
   transition: 0.3s;
 
-  &_active {
+  &.active {
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     background-color: rgba(0, 0, 0, 0.171);

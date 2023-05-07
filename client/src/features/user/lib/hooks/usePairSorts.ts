@@ -1,14 +1,15 @@
 import type { PairSorts } from '@entities/user/model';
-import { setPairSorts } from '@entities/user/model';
 import { INITIAL_SORTS } from '@entities/user/model';
-import { useAppDispatch } from '@shared/hooks';
+import { setPairSorts } from '@entities/user/model';
+import { useAppDispatch, useAppSelector } from '@shared/hooks';
 import { useController, useForm } from 'react-hook-form';
 
 export function usePairSorts() {
   const dispatch = useAppDispatch();
+  const pairSorts = useAppSelector((state) => state.user.pairSorts);
 
   const { control, handleSubmit, reset } = useForm<PairSorts>({
-    defaultValues: { ...INITIAL_SORTS },
+    defaultValues: pairSorts,
   });
 
   const {
@@ -55,6 +56,10 @@ export function usePairSorts() {
     submitHandler();
   };
 
+  const handleReset = () => {
+    reset(INITIAL_SORTS);
+  };
+
   return {
     control,
     submitHandler,
@@ -64,6 +69,6 @@ export function usePairSorts() {
     interests,
     toggleInterest,
     forcedToggleInterest,
-    reset,
+    handleReset,
   };
 }

@@ -31,7 +31,7 @@ export const ChatItem: FC<ChatInterface> = ({
   return (
     <div
       onClick={() => connect(chat._id)}
-      className={classNames(styles.item, isActive && styles.item_active)}
+      className={classNames(styles.item, isActive && styles.active)}
     >
       <Avatar
         userId={chatCompanion._id}

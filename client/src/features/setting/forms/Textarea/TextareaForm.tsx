@@ -1,8 +1,8 @@
 import type { FC, ReactElement } from 'react';
 import { Textarea } from '@shared/ui';
 import SettingWrapper from '../Wrapper/SettingWrapper';
+import { useTextForm } from '../../lib';
 import styles from './TextareaForm.module.scss';
-import { useTextForm } from '../lib';
 
 export const TextareaForm: FC = (): ReactElement => {
   const {

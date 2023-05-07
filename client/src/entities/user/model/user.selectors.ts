@@ -32,3 +32,16 @@ export const selectImagesDND = createSelector(
   ],
   (currentUserId, pictures) => ({ currentUserId, pictures })
 );
+
+export const selectPairLink = createSelector(
+  [
+    (state: RootState) => state.user.currentUser.pairs[0],
+    (state: RootState) => state.user.pairs[0],
+    (state: RootState) => state.user.currentUser.pairs.length,
+  ],
+  (firstPairId, firstPair, pairsLength) => ({
+    firstPairId,
+    firstPair,
+    pairsLength,
+  })
+);

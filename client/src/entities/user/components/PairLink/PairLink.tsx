@@ -4,7 +4,7 @@ import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { makeImageUrl } from '@shared/helpers';
 import { useEffect } from 'react';
-import { getUserFirstPairThunk } from '../../model';
+import { getUserFirstPairThunk, selectPairLink } from '../../model';
 import FailedPair from './Failed/FailedPair';
 import Loading from './Loading/Loading';
 import styles from './PairLink.module.scss';
@@ -12,13 +12,8 @@ import styles from './PairLink.module.scss';
 export const PairLink = () => {
   const dispatch = useAppDispatch();
 
-  const firstPairId = useAppSelector(
-    (state) => state.user.currentUser.pairs[0]
-  );
-  const firstPair = useAppSelector((state) => state.user.pairs[0]);
-  const pairsLength = useAppSelector(
-    (state) => state.user.currentUser.pairs
-  ).length;
+  const { firstPairId, firstPair, pairsLength } =
+    useAppSelector(selectPairLink);
 
   useEffect(() => {
     dispatch(getUserFirstPairThunk(firstPairId));

@@ -11,8 +11,9 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
   title,
   closeHandler,
   size = 'm',
+  extraClassName,
 }) => {
-  const cn = classNames(styles.content, styles[size]);
+  const cn = classNames(styles.content, styles[size], extraClassName);
 
   return ReactDOM.createPortal(
     <div className={styles.popup}>
@@ -25,6 +26,6 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
         <div onClick={closeHandler} className={styles.closeArea}></div>
       </div>
     </div>,
-    portalElement!,
+    portalElement!
   );
 };

@@ -22,7 +22,6 @@ export const InterestsSettingPopup: FC<InterestsSettingPopupProps> = ({
       <div className={styles.items}>
         {INTERESTS_LIST.map((interest) => {
           const includedItem = pairInterests.some((item) => item === interest);
-          console.log(includedItem);
           return (
             <ListItem
               onClick={() => toggleInterest(interest)}
