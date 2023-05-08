@@ -36,14 +36,11 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
       {pairs
         .filter((user: User) => sortItemBySettings(user, pairSorts))
         .map((user: User) => {
-          const handleCurrentPair = () => {
-            setCurrentPair(user);
-          };
           return (
             <Pair
               key={user._id}
               user={user}
-              setCurrentPair={handleCurrentPair}
+              setCurrentPair={() => setCurrentPair(user)}
             />
           );
         })}

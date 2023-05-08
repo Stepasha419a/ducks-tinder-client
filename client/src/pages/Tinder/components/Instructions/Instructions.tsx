@@ -12,13 +12,13 @@ import { Button } from '@shared/ui';
 import styles from './Instructions.module.scss';
 
 export const Instructions = (): ReactElement => {
-  const [isInstructionsOpen, setisInstructionsOpen] = useState(true);
+  const [isInstructionsOpen, setIsInstructionsOpen] = useState(true);
 
   if (!isInstructionsOpen) {
     return (
       <div className={styles.instructions}>
         <Button
-          onClick={() => setisInstructionsOpen(true)}
+          onClick={() => setIsInstructionsOpen(true)}
           extraClassName={styles.toggle}
         >
           show
@@ -30,7 +30,7 @@ export const Instructions = (): ReactElement => {
   return (
     <div className={styles.instructions}>
       <Button
-        onClick={() => setisInstructionsOpen(false)}
+        onClick={() => setIsInstructionsOpen(false)}
         extraClassName={styles.toggle}
       >
         hide

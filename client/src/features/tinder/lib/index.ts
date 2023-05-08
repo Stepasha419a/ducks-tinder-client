@@ -1,0 +1,1 @@
+export { useRateButtons } from './hooks';

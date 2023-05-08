@@ -1,6 +1,4 @@
 export { RatePairPopup } from './RatePairPopup/RatePairPopup';
-export { RefusePair } from './RefusePair/RefusePair';
-export { AcceptPair } from './AcceptPair/AcceptPair';
 export { SortPairsItems } from './SortPairsItems/SortPairsItems';
 export { CropImage } from './CropImage/CropImage';
 export { DialogUpload } from './DialogUpload/DialogUpload';

@@ -1,12 +1,12 @@
 import type { FC } from 'react';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { Popup } from '@shared/ui';
+import { Button, Popup } from '@shared/ui';
 import { setCurrentPair } from '@entities/user/model/user.slice';
 import { InterestsListPopup, Preview } from '@entities/user/components';
-import { AcceptPair } from '../AcceptPair/AcceptPair';
-import { RefusePair } from '../RefusePair/RefusePair';
 import styles from './RatePairPopup.module.scss';
+import { createChatThunk } from '@/entities/chat/model';
+import { deletePairThunk } from '@/entities/user/model';
 
 export const RatePairPopup: FC = () => {
   const dispatch = useAppDispatch();
@@ -16,14 +16,14 @@ export const RatePairPopup: FC = () => {
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
 
-  const bottomElementRef = useRef<HTMLDivElement | null>(null);
+  const handleAccept = (): void => {
+    dispatch(createChatThunk());
+    dispatch(deletePairThunk());
+  };
 
-  const interestsForLoop = [];
-
-  for (let i = 0; i < 4; i++) {
-    if (currentPair.interests[i])
-      interestsForLoop.push(currentPair.interests[i]);
-  }
+  const handleRefuse = (): void => {
+    dispatch(deletePairThunk());
+  };
 
   return (
     <>
@@ -34,10 +34,13 @@ export const RatePairPopup: FC = () => {
       >
         <Preview user={currentPair} isFull extraClassName={styles.padding} />
         <div className={styles.btns}>
-          <AcceptPair />
-          <RefusePair />
+          <Button onClick={handleAccept} extraClassName={styles.btn}>
+            Accept
+          </Button>
+          <Button onClick={handleRefuse} extraClassName={styles.btn}>
+            Refuse
+          </Button>
         </div>
-        <div ref={bottomElementRef} />
       </Popup>
       {isInterestsListPopupOpen && (
         <InterestsListPopup

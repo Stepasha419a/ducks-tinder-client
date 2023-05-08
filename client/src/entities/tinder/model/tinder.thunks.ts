@@ -1,21 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { User } from '@shared/api/interfaces';
 import { userService } from '@shared/api/services';
 import { makeDataObject, returnErrorMessage } from '@shared/helpers';
 import { makeQuerySortsObj } from './helpers';
 
 export const getSortedUserThunk = createAsyncThunk(
   'users/getSortedUser',
-  async (
-    args: { user: User; requestedUsers?: string[] },
-    { rejectWithValue }
-  ) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
-      const querySortsObj = makeQuerySortsObj(args.user, args.requestedUsers);
+      const { user, tinder } = getState() as RootState;
+      const currentUser = user.currentUser;
+      const requestedUsers = tinder.requestedUsers;
+
+      const querySortsObj = makeQuerySortsObj(currentUser, requestedUsers);
 
       const response = await userService.getSortedUser(querySortsObj);
 
-      return response.data;
+      return { tinderUser: response.data, checkedUsers: currentUser.checkedUsers };
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -37,20 +37,14 @@ export const likeUserThunk = createAsyncThunk(
         changedData: [...currentUser.checkedUsers, tinderUser._id],
       });
 
+      await userService.createPair(tinderUser._id, currentUser._id);
+
       const updateUserResponse = await userService.updateUser(
         currentUser._id,
         data
       );
 
-      const createPairResponse = await userService.createPair(
-        tinderUser._id,
-        currentUser._id
-      );
-
-      return {
-        ...updateUserResponse.data,
-        checkedUsers: [...createPairResponse.data.checkedUsers],
-      };
+      return updateUserResponse.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
