@@ -6,15 +6,15 @@ import styles from './Messages.module.scss';
 import { selectUserChat } from '../../model';
 
 export const Messages = (): ReactElement => {
-  const { currentChatUserObj, messages, currentChatMembers } =
+  const { currentChatUserObj, messages, currentChat } =
     useAppSelector(selectUserChat);
 
-  const bottomScrollRef = useScrollToBottom([currentChatMembers], [messages]);
+  const bottomScrollRef = useScrollToBottom([], [messages]);
 
   return (
     <div className={styles.messages} ref={bottomScrollRef}>
       {messages.map((message: MessageInterface) => {
-        const chatMember = currentChatMembers.find(
+        const chatMember = currentChat!.members.find(
           (item) => item._id === message.userId
         )!;
         const isOwn = message.userId === currentChatUserObj._id;

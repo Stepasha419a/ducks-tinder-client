@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react';
 import { useEffect } from 'react';
-import type { Chat } from '@shared/api/interfaces';
+import type { ChatWithUsers } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { getChatsThunk, selectChatList } from '@entities/chat/model';
 import { Preloader } from '@shared/ui';
@@ -17,8 +17,7 @@ export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
   const dispatch = useAppDispatch();
 
   const { currentUserId, chatsLength } = useAppSelector(selectUserChatsInfo);
-  const { chats, currentChatId, chatsUsers, isLoading } =
-    useAppSelector(selectChatList);
+  const { chats, currentChatId, isLoading } = useAppSelector(selectChatList);
 
   useEffect(() => {
     dispatch(getChatsThunk(currentUserId));
@@ -34,12 +33,9 @@ export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
 
   return (
     <div className={styles.chats}>
-      {chats.map((chat: Chat) => {
-        const chatCompanionId = chat.members.find(
-          (member) => member !== currentUserId
-        );
-        const chatCompanion = chatsUsers.find(
-          (user) => user._id === chatCompanionId
+      {chats.map((chat: ChatWithUsers) => {
+        const chatCompanion = chat.members.find(
+          (member) => member._id !== currentUserId
         );
         const isActive = currentChatId === chat._id;
         return (

@@ -1,85 +1,84 @@
-import { v4 } from 'uuid';
 import { UsersService } from './../users/users.service';
-import { IChat, IMessage, ISendMessage } from './chat.interface';
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { ChatType } from './chat.interfaces';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Chat, ChatDocument } from './chat.model';
+import { ChatToUsers, ChatToUsersDocument } from './models/chat-to-users.model';
+import { Message, MessageDocument } from './models/message.model';
+import { ChatUserDto } from './dto/chat-user.dto';
+import { MessageDto } from './dto/message.dto';
 
 @Injectable()
 export class ChatService {
-    constructor(
-        @InjectModel(Chat.name) private readonly chatModel: Model<ChatDocument>,
-        private readonly usersService: UsersService
-    ) {}
+  constructor(
+    @InjectModel(Chat.name) private readonly chatModel: Model<ChatDocument>,
+    @InjectModel(ChatToUsers.name)
+    private readonly chatToUsersModel: Model<ChatToUsersDocument>,
+    @InjectModel(Message.name)
+    private readonly messageModel: Model<MessageDocument>,
+    private readonly usersService: UsersService,
+  ) {}
 
-    async getAll(userId: string): Promise<IChat[]> {
-        const user = await this.usersService.getOne(userId)
-        const chats = [] as IChat[]
+  async getAll(userId: string) {
+    const user = await this.usersService.getOne(userId);
 
-        for await (let chatId of user.chats) {
-            const chat = await this.chatModel.findById(chatId)
-            chats.push({_id: chat._id.toString(), messages: chat.messages, members: chat.members})
-        }
+    const chats = await this.chatToUsersModel
+      .find({ user: user._id })
+      .select('_id');
 
-        return chats
-    }
+    chats.map(async ({ _id: chatId }) => {
+      const chatRelation = await this.chatToUsersModel.find({
+        user: { $ne: user._id },
+      });
+      console.log(chatRelation);
+    });
 
-    async getOne(id: string): Promise<IChat> {
-        const chat = await this.chatModel.findById(id)
-            .catch(() => {throw new HttpException('Chat was not found', HttpStatus.BAD_REQUEST)})
-            
-        return chat
-    }
+    const members = await this.chatToUsersModel
+      .find({ user: user._id })
+      .populate({
+        path: 'user',
+        select: 'name pictures.avatar nickname _id',
+      })
+      .populate({ path: 'chat', select: '_id' });
 
-    async create(members: string[]): Promise<IChat> {
-        const chatCandidate = await this.chatModel.findOne({members: members})
-        const chatCandidateReversedIDs = await this.chatModel.findOne({members: members.reverse()})
-        if(chatCandidate || chatCandidateReversedIDs) {
-            throw new HttpException('The chat with such members already exists', HttpStatus.BAD_REQUEST)
-        }
+    return members;
+  }
 
-        const chat = await this.chatModel.create({members: members})
+  async getOne(id: string): Promise<ChatType> {
+    const chat = await this.chatModel.findById(id);
 
-        members.forEach(async (memberId) => {
-            const user = await this.usersService.getOne(memberId)
-            await this.usersService.update(memberId, {chats: [...user.chats, chat._id.toString()]})
-        })
+    const members = (
+      await this.chatToUsersModel
+        .find({ chat: chat._id })
+        .populate({ path: 'user', select: 'name pictures.avatar nickname _id' })
+        .select('user -_id')
+    ).map((user) => new ChatUserDto(user.user));
 
-        return chat
-    }
+    const messages = (
+      await this.messageModel
+        .find({ chat: chat._id })
+        .select('content user _id')
+    ).map((message) => new MessageDto(message));
 
-    async delete(id: string) {
-        const chat = await this.chatModel.findByIdAndDelete(id)
+    const fullChat = { _id: chat._id, members, messages };
 
-        if(!chat) {throw new HttpException('Chat was not found', HttpStatus.BAD_REQUEST)}
+    return fullChat;
+  }
 
-        chat.members.forEach(async (memberId: string) => {
-            const user = await this.usersService.getOne(memberId)
-            const index = user.chats.findIndex((item: any) => item === id)
-            user.chats.splice(index, 1)
-            await this.usersService.update(memberId, {chats: user.chats})
-        })
+  async create(members: string[]) /* : Promise<IChat> */ {
+    const chat = await this.chatModel.create({ members: members });
 
-        return chat
-    }
-    
-    async sendMessage(chatId: string, message: ISendMessage) {
-        const chat = await this.chatModel.findById(chatId)
-            .catch(() => {throw new HttpException('Chat was not found', HttpStatus.BAD_REQUEST)})
+    members.forEach(async (memberId) => {
+      await this.chatToUsersModel.create({ user: memberId, chat: chat._id });
+    });
 
-        const newMessage: IMessage = {
-            id: v4(),
-            content: message.content,
-            userId: message.userId
-        }
+    return chat;
+  }
 
-        await this.chatModel.findByIdAndUpdate(chatId, {messages: [...chat.messages, newMessage]}, {new: true})
-    }
+  parseUrl(url: string) {
+    const newStr = url.slice(url.indexOf('=') + 1);
 
-    parseUrl (url: string) {
-        const newStr = url.slice(url.indexOf('=') + 1)
-        
-        return newStr.slice(0, newStr.indexOf('&'))
-    }
+    return newStr.slice(0, newStr.indexOf('&'));
+  }
 }

@@ -1,8 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Message, User } from '@shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
-import { fetchUserById } from '@entities/user/model';
 import {
   disconnectChat,
   pushNewMessage,
@@ -11,30 +10,11 @@ import {
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
-  async (id: string, { rejectWithValue, getState }) => {
+  async (id: string, { rejectWithValue }) => {
     try {
-      const { user } = getState() as RootState;
-      const { currentUser } = user;
+      const { data: chats } = await chatService.getChats(id);
 
-      const response = await chatService.getChats(id);
-
-      const chats = response.data;
-
-      const allMembers: User[] = [];
-
-      // TODO: do this server endpoint
-      for await (const chat of chats) {
-        for (const member of chat.members) {
-          if (member !== id) {
-            const chatMember = await fetchUserById(member);
-            allMembers.push(chatMember);
-          }
-        }
-      }
-
-      allMembers.push(currentUser);
-
-      return { chats, allMembers };
+      return chats;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

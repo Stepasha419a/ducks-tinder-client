@@ -29,6 +29,26 @@ export class UsersService {
     return userData;
   }
 
+  async getMany(ids: string[]): Promise<UserDto[]> {
+    const users = [];
+
+    for await (const id of ids) {
+      const user = await this.userModel.findById(id);
+
+      if (!user) {
+        throw new HttpException(
+          'Such user was not found',
+          HttpStatus.NOT_FOUND,
+        );
+      }
+
+      const userData = new UserDto(user);
+      users.push(userData);
+    }
+
+    return users;
+  }
+
   async getByEmail(email: string): Promise<UserDto> {
     return this.userModel.findOne({ email });
   }

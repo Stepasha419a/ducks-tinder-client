@@ -1,20 +1,23 @@
 import type { Socket } from 'socket.io-client';
 import { instance } from '@shared/api';
-import type { Chat } from '@shared/api/interfaces';
+import type { Chat, ChatWithUsers, User } from '@shared/api/interfaces';
 import { chatSocket } from './chat.socket';
 
 export const chatService = {
-  async getChats(id: string) {
-    return instance.get<Chat[]>(`chat/${id}`);
+  async getChats(userId: string) {
+    return instance.get<ChatWithUsers[]>(`chat/${userId}`);
   },
-  async getChat(id: string) {
-    return instance.get<Chat>(`chat/one/${id}`);
+  async getChat(chatId: string) {
+    return instance.get<Chat>(`chat/one/${chatId}`);
   },
-  async createChat(ids: string[]) {
-    return instance.post<string[]>('chat/', ids);
+  async getChatMembers(chatId: string) {
+    return instance.get<User[]>(`chat/members/${chatId}`);
   },
-  connectChat(id: string): Socket {
-    return chatSocket.connectChat(id);
+  async createChat(userIds: string[]) {
+    return instance.post<string[]>('chat/', userIds);
+  },
+  connectChat(chatId: string): Socket {
+    return chatSocket.connectChat(chatId);
   },
   sendMessage(content: string, username: string, userId: string): void {
     chatSocket.sendMessage(content, username, userId);

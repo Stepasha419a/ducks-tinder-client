@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { Chat, Message } from '@shared/api/interfaces';
-import type { ChatInitialState, GetChatsThunkPayload } from './chat.interfaces';
+import type { Chat, ChatWithUsers, Message } from '@shared/api/interfaces';
+import type { ChatInitialState } from './chat.interfaces';
 import {
   getChatsThunk,
   connectChatThunk,
@@ -10,12 +10,10 @@ import {
 
 const initialState: ChatInitialState = {
   chats: [],
-  chatsUsers: [],
   isConnected: false,
   isLoading: false,
   currentMessages: [],
   currentChatId: '',
-  currentChatMembers: [],
 };
 
 const chatSlice = createSlice({
@@ -33,9 +31,6 @@ const chatSlice = createSlice({
       const chat: Chat = payload;
       state.currentChatId = chat._id;
       state.isConnected = true;
-      state.currentChatMembers = state.chatsUsers.filter(
-        (user) => user._id === chat.members[0] || user._id === chat.members[1]
-      );
       state.currentMessages = chat.messages;
       state.isLoading = false;
     },
@@ -49,9 +44,8 @@ const chatSlice = createSlice({
     builder
       .addCase(
         getChatsThunk.fulfilled,
-        (state, { payload }: PayloadAction<GetChatsThunkPayload>) => {
-          state.chats = [...payload.chats];
-          state.chatsUsers = [...payload.allMembers];
+        (state, { payload }: PayloadAction<ChatWithUsers[]>) => {
+          state.chats = payload;
         }
       )
       .addCase(connectChatThunk.pending, (state) => {

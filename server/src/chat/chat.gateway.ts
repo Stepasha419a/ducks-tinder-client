@@ -1,39 +1,47 @@
+import { MessageService } from './services/message.service';
 import { ChatService } from './chat.service';
-import { SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import { Server, Socket } from 'socket.io'
-import { ISendMessage } from './chat.interface';
+import {
+  SubscribeMessage,
+  WebSocketGateway,
+  WebSocketServer,
+} from '@nestjs/websockets';
+import { Server, Socket } from 'socket.io';
+import { ISendMessage } from './chat.interfaces';
 
-@WebSocketGateway({namespace: '/chat/socket', cors: '*:*', origin: true})
+@WebSocketGateway({ namespace: '/chat/socket', cors: '*:*', origin: true })
 export class ChatGateway {
-  constructor(private readonly chatService: ChatService) {}
-  
+  constructor(
+    private readonly chatService: ChatService,
+    private readonly messageService: MessageService,
+  ) {}
+
   @WebSocketServer()
-  wss: Server
+  wss: Server;
 
   @SubscribeMessage('message')
   handleMessage(client: Socket, message: ISendMessage) {
-    const chatId = this.chatService.parseUrl(client.request.url)
+    const chatId = this.chatService.parseUrl(client.request.url);
 
-    this.wss.to(chatId).emit('message', message)
-    
-    this.chatService.sendMessage(chatId, message)
+    this.wss.to(chatId).emit('message', message);
+
+    this.messageService.sendMessage(chatId, message);
   }
 
   @SubscribeMessage('connectChat')
   handleConnectChat(client: Socket) {
-    const chatId = this.chatService.parseUrl(client.request.url)
+    const chatId = this.chatService.parseUrl(client.request.url);
 
-    client.join(chatId)
+    client.join(chatId);
 
-    client.emit('connected', chatId)
+    client.emit('connected', chatId);
   }
 
   @SubscribeMessage('disconnectChat')
-  handleDisonnectChat(client: Socket) {
-    const chatId = this.chatService.parseUrl(client.request.url)
+  handleDisconnectChat(client: Socket) {
+    const chatId = this.chatService.parseUrl(client.request.url);
 
-    client.leave(chatId)
+    client.leave(chatId);
 
-    client.emit('disconnected', chatId)
+    client.emit('disconnected', chatId);
   }
 }

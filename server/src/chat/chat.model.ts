@@ -1,16 +1,13 @@
-import { IMessage } from './chat.interface';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose, { Document } from 'mongoose';
+import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+import { Transform } from 'class-transformer';
 
-export type ChatDocument = Chat & Document
+export type ChatDocument = Chat & Document;
 
 @Schema()
 export class Chat {
-  @Prop({default:[]})
-  messages: IMessage[]
-
-  @Prop({required: true})
-  members: string[]
+  @Transform(({ value }) => value.toString())
+  _id: string;
 }
 
 export const ChatSchema = SchemaFactory.createForClass(Chat);
