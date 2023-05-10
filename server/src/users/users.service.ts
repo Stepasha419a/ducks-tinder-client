@@ -88,12 +88,46 @@ export class UsersService {
   }
 
   async update(id: string, userDto: UpdateUserDto): Promise<UserDto> {
-    const user = await this.prismaService.user.update({
+    // dto without interests to update user fields (interest = relation)
+    const updateUserDto = { ...userDto, interests: undefined };
+
+    const user = await this.prismaService.user.findUnique({
       where: { id },
-      data: userDto,
+      include: {
+        userToInterests: {
+          select: { interest: { select: { name: true, id: true } } },
+        },
+      },
     });
 
-    const userData = new UserDto(user);
+    if (userDto.interests.length) {
+      await this.prismaService.userToInterests.deleteMany({
+        where: { userId: user.id },
+      });
+      await Promise.all(
+        userDto.interests.map(async (interest) => {
+          const interestFromDB = await this.prismaService.interest.findUnique({
+            where: { name: interest },
+          });
+          if (!interestFromDB) {
+            throw new NotFoundException('Interest was not found');
+          }
+          await this.prismaService.userToInterests.create({
+            data: { userId: user.id, interestId: interestFromDB.id },
+          });
+        }),
+      );
+    }
+
+    const updatedUser = await this.prismaService.user.update({
+      where: { id },
+      data: { ...updateUserDto },
+      include: {
+        userToInterests: { select: { interest: { select: { name: true } } } },
+      },
+    });
+
+    const userData = new UserDto(updatedUser);
 
     return userData;
   }
@@ -200,7 +234,9 @@ export class UsersService {
               age: true,
               description: true,
               distance: true,
-              interests: { select: { id: true, name: true } },
+              userToInterests: {
+                select: { interest: { select: { name: true } } },
+              },
               pictures: { select: { name: true, order: true } },
             },
           },
@@ -245,7 +281,9 @@ export class UsersService {
               age: true,
               description: true,
               distance: true,
-              interests: { select: { id: true, name: true } },
+              userToInterests: {
+                select: { interest: { select: { name: true } } },
+              },
               pictures: { select: { name: true, order: true } },
             },
           },

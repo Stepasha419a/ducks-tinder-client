@@ -1,4 +1,5 @@
 import { User } from 'prisma';
+import { UsersMapper } from '../users.mapper';
 
 export class UserDto {
   id;
@@ -9,14 +10,14 @@ export class UserDto {
   isActivated;
   age;
   sex;
-  interests;
-  pictures;
   place;
   distance;
   usersOnlyInDistance;
   preferSex;
   preferAgeFrom;
   preferAgeTo;
+  interests;
+  pictures;
 
   constructor(model: User) {
     this.id = model.id;
@@ -27,13 +28,13 @@ export class UserDto {
     this.isActivated = model.isActivated;
     this.age = model.age;
     this.sex = model.sex;
-    this.interests = model.interests;
     this.place = model.place;
     this.distance = model.distance;
     this.usersOnlyInDistance = model.usersOnlyInDistance;
     this.preferSex = model.preferSex;
     this.preferAgeFrom = model.preferAgeFrom;
     this.preferAgeTo = model.preferAgeTo;
+    this.interests = UsersMapper.mapInterests(model.userToInterests);
     this.pictures = model.pictures;
   }
 }

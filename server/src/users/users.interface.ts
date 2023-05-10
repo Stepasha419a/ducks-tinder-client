@@ -1,20 +1,28 @@
-export interface IPartnerSettings {
-  place: string;
+/* type SexType = 'male' | 'female' | null; */
+
+export interface PictureInterface {
+  name: string;
+  order: number;
+}
+
+export interface PairsReturn {
+  id: string;
+  name: string;
+  age: number;
+  description: string;
   distance: number;
-  usersOnlyInDistance: boolean;
-  preferSex: 'male' | 'female' | '';
-  age: {
-    from: number;
-    to: number;
+  interests: [];
+  pictures: PictureInterface[];
+}
+
+export interface UserToInterestsRelation {
+  interest: {
+    id: string;
+    name: string;
   };
 }
 
-export interface picturesInterface {
-  avatar: string;
-  gallery: string[];
-}
-
-export interface IUserDto {
+/* export interface ReturnUser {
   id?: string;
   email: string;
   name: string;
@@ -22,14 +30,16 @@ export interface IUserDto {
   nickname: string;
   isActivated: boolean;
   age: number;
-  sex: string;
+  sex: SexType;
   interests: string[];
-  partnerSettings: IPartnerSettings;
-  pictures: picturesInterface;
-  chats: string[];
-  pairs: string[];
-  checkedUsers: string[];
-}
+  place: string;
+  distance: number;
+  usersOnlyInDistance: boolean;
+  preferSex: SexType;
+  preferAgeFrom: number;
+  preferAgeTo: number;
+  pictures: PictureInterface[];
+} */
 
 export interface IUserPassDto {
   id: string;
