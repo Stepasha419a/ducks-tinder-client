@@ -1,25 +1,33 @@
+import { PrismaService } from './../prisma/prisma.service';
 import { UpdateUserDto } from './dto/updated-user.dto';
 import { SavePictureDto } from './dto/save-picture.dto';
-import { User, UserDocument } from './users.model';
 import { CreateUserDto } from './dto/create-user.dto';
-import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import {
+  HttpException,
+  Injectable,
+  HttpStatus,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { FilesService } from '../files/files.service';
 import { UserPairDto } from './dto/user-pair.dto';
 import { DeletePictureDto } from './dto/delete-picture.dto';
 import { UserDto } from './dto/user.dto';
 import { UserSortsDto } from './dto/user-sorts.dto';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(User.name) private readonly userModel: Model<UserDocument>,
+    private readonly prismaService: PrismaService,
     private readonly filesService: FilesService,
   ) {}
 
   async getOne(id: string): Promise<UserDto> {
-    const user = await this.userModel.findById(id);
+    const user = await this.prismaService.user.findUnique({
+      where: { id },
+      include: { pictures: { select: { name: true, order: true } } },
+    });
 
     if (!user) {
       throw new HttpException('Such user was not found', HttpStatus.NOT_FOUND);
@@ -29,39 +37,31 @@ export class UsersService {
     return userData;
   }
 
-  async getMany(ids: string[]): Promise<UserDto[]> {
-    const users = [];
-
-    for await (const id of ids) {
-      const user = await this.userModel.findById(id);
-
-      if (!user) {
-        throw new HttpException(
-          'Such user was not found',
-          HttpStatus.NOT_FOUND,
-        );
-      }
-
-      const userData = new UserDto(user);
-      users.push(userData);
-    }
-
-    return users;
-  }
-
-  async getByEmail(email: string): Promise<UserDto> {
-    return this.userModel.findOne({ email });
+  async getByEmail(email: string): Promise<User> {
+    return this.prismaService.user.findUnique({
+      where: { email },
+      include: { pictures: { select: { name: true, order: true } } },
+    });
   }
 
   async getSorted(sortsDto: UserSortsDto): Promise<UserDto> {
-    const user: User = await this.userModel.findOne({
-      _id: { $nin: sortsDto.userIds },
-      'partnerSettings.distance': { $gt: 0, $lt: sortsDto.distance },
-      age: { $gt: sortsDto.preferAge.from - 1, $lt: sortsDto.preferAge.to + 1 },
-      'partnerSettings.age.from': { $lt: sortsDto.age + 1 },
-      'partnerSettings.age.to': { $gt: sortsDto.age - 1 },
-      sex: sortsDto.preferSex,
-      'partnerSettings.preferSex': sortsDto.sex,
+    const user: User = await this.prismaService.user.findFirst({
+      where: {
+        id: { notIn: sortsDto.userIds },
+        distance: { gt: 0, lte: sortsDto.distance },
+        age: {
+          gt: sortsDto.preferAgeFrom - 1,
+          lt: sortsDto.preferAgeTo + 1,
+        },
+        preferAgeFrom: {
+          lt: sortsDto.age + 1,
+        },
+        preferAgeTo: {
+          gt: sortsDto.age - 1,
+        },
+        sex: sortsDto.preferSex,
+        preferSex: sortsDto.sex,
+      },
     });
 
     if (!user) {
@@ -77,7 +77,10 @@ export class UsersService {
   }
 
   async create(userDto: CreateUserDto): Promise<UserDto> {
-    const user = await this.userModel.create(userDto);
+    const user = await this.prismaService.user.create({
+      data: userDto,
+      include: { pictures: { select: { name: true, order: true } } },
+    });
 
     const userData = new UserDto(user);
 
@@ -85,28 +88,10 @@ export class UsersService {
   }
 
   async update(id: string, userDto: UpdateUserDto): Promise<UserDto> {
-    const user = await this.userModel.findByIdAndUpdate(id, userDto, {
-      new: true,
+    const user = await this.prismaService.user.update({
+      where: { id },
+      data: userDto,
     });
-
-    if (userDto.pictures) {
-      this.filesService.changePicturesDir(user._id, user.pictures.avatar);
-    }
-
-    const userData = new UserDto(user);
-
-    return userData;
-  }
-
-  async delete(id: string): Promise<UserDto> {
-    const user = await this.userModel.findByIdAndDelete(id);
-
-    if (!user) {
-      throw new HttpException(
-        'User with such id is not found',
-        HttpStatus.BAD_REQUEST,
-      );
-    }
 
     const userData = new UserDto(user);
 
@@ -115,132 +100,133 @@ export class UsersService {
 
   async savePicture(
     dto: SavePictureDto,
-    picture: Express.Multer.File,
+    pictureFile: Express.Multer.File,
   ): Promise<UserDto> {
-    const fileName = await this.filesService.savePicture(
-      picture,
-      dto.userId,
-      dto.setting,
-    );
-
-    const user = await this.userModel.findById(dto.userId);
-
-    if (dto.setting === 'avatar') {
-      user.pictures.avatar = fileName;
-    } else {
-      user.pictures.gallery.push(fileName);
-    }
-
-    const newUser = await this.userModel.findByIdAndUpdate(user._id, user, {
-      new: true,
+    const user = await this.prismaService.user.findUnique({
+      where: { id: dto.userId },
+      include: { pictures: true },
     });
 
-    const userData = new UserDto(newUser);
+    if (!user) {
+      throw new NotFoundException();
+    }
+
+    if (user.pictures.length > 8) {
+      throw new BadRequestException('you have max pictures count');
+    }
+
+    const fileName = await this.filesService.savePicture(
+      pictureFile,
+      dto.userId,
+    );
+
+    await this.prismaService.picture.create({
+      data: { name: fileName, userId: user.id, order: user.pictures.length },
+    });
+
+    const updatedUser = await this.prismaService.user.findUnique({
+      where: { id: user.id },
+      include: { pictures: { select: { name: true, order: true } } },
+    });
+
+    const userData = new UserDto(updatedUser);
 
     return userData;
   }
 
   async deletePicture(dto: DeletePictureDto): Promise<UserDto> {
-    const user = await this.userModel.findById(dto.userId);
-
-    if (!user.pictures[dto.setting])
-      throw new HttpException(
-        'Pictures were not found',
-        HttpStatus.BAD_REQUEST,
-      );
-
-    if (dto.setting === 'gallery') {
-      if (!user.pictures.gallery.includes(dto.pictureName))
-        throw new HttpException(
-          `Picture with such a name ${dto.pictureName} was not found`,
-          HttpStatus.BAD_REQUEST,
-        );
-      const fileName = this.filesService.deletePicture(
-        dto.pictureName,
-        dto.userId,
-        dto.setting,
-      );
-      const fileIndex = user.pictures.gallery.indexOf(fileName);
-
-      user.pictures.gallery.splice(fileIndex, 1);
-    } else {
-      this.filesService.deletePicture(dto.pictureName, dto.userId, dto.setting);
-      user.pictures.avatar = '';
-    }
-
-    const newUser = await this.userModel.findByIdAndUpdate(user._id, user, {
-      new: true,
+    const picture = await this.prismaService.picture.findFirst({
+      where: { ...dto },
     });
 
-    const userData = new UserDto(newUser);
+    if (!picture) {
+      throw new NotFoundException();
+    }
 
-    return userData;
+    await this.filesService.deletePicture(picture.name, picture.userId);
+
+    await this.prismaService.picture.delete({ where: { id: picture.id } });
+    const user = await this.prismaService.user.findUnique({
+      where: { id: picture.userId },
+      include: { pictures: true },
+    });
+
+    await Promise.all(
+      user.pictures
+        .filter((pictureItem) => pictureItem.order > picture.order)
+        .map(async (pictureItem) => {
+          return this.prismaService.picture.update({
+            where: { id: pictureItem.id },
+            data: { order: pictureItem.order - 1 },
+          });
+        }),
+    );
+
+    const updatedUser = await this.prismaService.user.findUnique({
+      where: { id: user.id },
+      include: { pictures: { select: { name: true, order: true } } },
+    });
+
+    return new UserDto(updatedUser);
   }
 
-  async createPair(userPairDto: UserPairDto): Promise<UserDto> {
-    const user = await this.userModel
-      .findById(userPairDto.forUserId)
-      .catch(() => {
-        throw new HttpException(
-          `User with such an id ${userPairDto.forUserId} was not found`,
-          HttpStatus.BAD_REQUEST,
-        );
-      });
+  async createPair(userPairDto: UserPairDto) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userPairDto.userId },
+      include: { pairFor: { select: { userPairId: true } } },
+    });
 
-    const userPair = await this.userModel
-      .findById(userPairDto.userId)
-      .catch(() => {
-        throw new HttpException(
-          `User with such an id ${userPairDto.userId} was not found`,
-          HttpStatus.BAD_REQUEST,
-        );
-      });
+    const userPair = await this.prismaService.user.findUnique({
+      where: { id: userPairDto.userPairId },
+    });
 
-    if (!user.pairs.includes(userPair._id)) {
-      user.pairs = [...user.pairs, userPair._id.toString()];
-
-      await this.userModel.findByIdAndUpdate(user._id, user, { new: true });
-    } else {
+    if (user.pairFor.find((pair) => pair.userPairId == userPair.id)) {
       throw new HttpException(
         'Pair with such an id already exists',
         HttpStatus.BAD_REQUEST,
       );
     }
+    await this.prismaService.pair.create({
+      data: { userId: user.id, userPairId: userPair.id },
+    });
+    const updatedPairs = (
+      await this.prismaService.pair.findMany({
+        where: { userId: user.id },
+        select: {
+          userPair: {
+            select: {
+              id: true,
+              name: true,
+              age: true,
+              description: true,
+              distance: true,
+              interests: { select: { id: true, name: true } },
+              pictures: { select: { name: true, order: true } },
+            },
+          },
+        },
+      })
+    ).map((pair) => pair.userPair);
 
-    const userData = new UserDto(user);
-
-    return userData;
+    return updatedPairs;
   }
 
-  async deletePair(userPairDto: UserPairDto): Promise<UserDto> {
-    const user = await this.userModel
-      .findById(userPairDto.forUserId)
-      .catch(() => {
-        throw new HttpException(
-          `User with such an id ${userPairDto.forUserId} was not found`,
-          HttpStatus.BAD_REQUEST,
-        );
-      });
+  async deletePair(userPairDto: UserPairDto) {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: userPairDto.userId },
+      include: { pairFor: { select: { userPairId: true, id: true } } },
+    });
 
-    const userPair = await this.userModel
-      .findById(userPairDto.userId)
-      .catch(() => {
-        throw new HttpException(
-          `User with such an id ${userPairDto.userId} was not found`,
-          HttpStatus.BAD_REQUEST,
-        );
-      });
+    const userPair = await this.prismaService.user.findUnique({
+      where: { id: userPairDto.userPairId },
+    });
 
-    if (user.pairs.includes(userPair._id)) {
-      const memberIdIndex = user.pairs.findIndex(
-        (memberId: string) => memberId === userPair._id.toString(),
-      );
+    const deletedPair = user.pairFor.find(
+      (pair) => pair.userPairId === userPair.id,
+    );
 
-      const newUserPairs = [...user.pairs];
-      newUserPairs.splice(memberIdIndex, 1);
-
-      user.pairs = [...newUserPairs];
-      await this.userModel.findByIdAndUpdate(user._id, user, { new: true });
+    if (deletedPair) {
+      await this.prismaService.pair.delete({ where: { id: deletedPair.id } });
     } else {
       throw new HttpException(
         'Pair with such an id was not found',
@@ -248,8 +234,25 @@ export class UsersService {
       );
     }
 
-    const userData = new UserDto(user);
+    const updatedPairs = (
+      await this.prismaService.pair.findMany({
+        where: { userId: user.id },
+        select: {
+          userPair: {
+            select: {
+              id: true,
+              name: true,
+              age: true,
+              description: true,
+              distance: true,
+              interests: { select: { id: true, name: true } },
+              pictures: { select: { name: true, order: true } },
+            },
+          },
+        },
+      })
+    ).map((pair) => pair.userPair);
 
-    return userData;
+    return updatedPairs;
   }
 }

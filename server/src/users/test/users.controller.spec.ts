@@ -37,22 +37,6 @@ describe('UsersController', () => {
     });
   });
 
-  describe('when getOne is called', () => {
-    let user: IUserDto;
-
-    beforeEach(async () => {
-      user = await usersController.getOne(userStub()._id);
-    });
-
-    it('should call usersService', () => {
-      expect(usersService.getOne).toBeCalledWith(userStub()._id);
-    });
-
-    it('should return a user', async () => {
-      expect(user).toEqual(userStub());
-    });
-  });
-
   describe('when update is called', () => {
     let user: IUserDto;
     let updateUserDto: UpdateUserDto;
@@ -62,11 +46,11 @@ describe('UsersController', () => {
         name: 'John',
         email: 'email123123@gmail.com',
       };
-      user = await usersController.update(updateUserDto, userStub()._id);
+      user = await usersController.update(updateUserDto, userStub().id);
     });
 
     it('should call usersService', () => {
-      expect(usersService.update).toBeCalledWith(userStub()._id, updateUserDto);
+      expect(usersService.update).toBeCalledWith(userStub().id, updateUserDto);
     });
 
     it('should return an updated user', () => {
@@ -78,11 +62,11 @@ describe('UsersController', () => {
     let user: IUserDto;
 
     beforeEach(async () => {
-      user = await usersController.delete(userStub()._id);
+      user = await usersController.delete(userStub().id);
     });
 
     it('should call usersService', () => {
-      expect(usersService.delete).toBeCalledWith(userStub()._id);
+      expect(usersService.delete).toBeCalledWith(userStub().id);
     });
 
     it('should return a deleted user', () => {
@@ -122,7 +106,7 @@ describe('UsersController', () => {
 
     beforeEach(async () => {
       savePictureDto = {
-        userId: userStub()._id,
+        userId: userStub().id,
         setting: 'avatar',
       };
       user = await usersController.savePicture(

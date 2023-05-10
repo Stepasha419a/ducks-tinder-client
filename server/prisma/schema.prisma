@@ -1,0 +1,122 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String   @id @default(uuid())
+  password            String
+  email               String   @unique
+  name                String
+  description         String?
+  nickname            String?
+  isActivated         Boolean  @default(false)
+  activationLink      String   @default(uuid())
+  age                 Int?
+  sex                 String?
+  place               String?
+  distance            Int?
+  usersOnlyInDistance Boolean  @default(false)
+  preferSex           String?
+  preferAgeFrom       Int?
+  preferAgeTo         Int?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  token       Token?
+  pictures    Picture[]
+  interests   Interest[]
+  pairFor     Pair[]         @relation("PairFor")
+  pairs       Pair[]         @relation("Pairs")
+  messages    Message[]
+  checked     CheckedUsers[] @relation("Checked") // who was checked by him (he checked user1, user2)
+  wasChecked  CheckedUsers[] @relation("WasChecked") // who checked him (he was checked by user3, user4)
+  chatToUsers ChatToUsers[]
+
+  @@map("users")
+}
+
+model Token {
+  user         User     @relation(fields: [id], references: [id])
+  id           String   @id
+  refreshToken String?  @unique
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("tokens")
+}
+
+model Picture {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  order     Int
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("pictures")
+}
+
+model Interest {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("interests")
+}
+
+model Pair {
+  id         String @id @default(uuid())
+  user       User   @relation("PairFor", fields: [userId], references: [id])
+  userId     String
+  userPair   User   @relation("Pairs", fields: [userPairId], references: [id])
+  userPairId String
+
+  @@map("pairs")
+}
+
+model Message {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  chat   Chat   @relation(fields: [chatId], references: [id])
+  chatId String
+
+  @@map("messages")
+}
+
+model ChatToUsers {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  chat   Chat   @relation(fields: [chatId], references: [id])
+  chatId String
+
+  @@map("chat-to-users")
+}
+
+model Chat {
+  id          String        @id @default(uuid())
+  messages    Message[]
+  chatToUsers ChatToUsers[]
+
+  @@map("chats")
+}
+
+model CheckedUsers {
+  id            String @id @default(uuid())
+  user          User   @relation("Checked", fields: [userId], references: [id])
+  userId        String
+  checkedUser   User   @relation("WasChecked", fields: [checkedUserId], references: [id])
+  checkedUserId String
+
+  @@map("checked-users")
+}

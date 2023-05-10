@@ -1,35 +1,39 @@
-import { IUserDto } from '../users.interface';
+import { User } from 'prisma';
 
 export class UserDto {
+  id;
   email;
   name;
   description;
   nickname;
-  _id;
   isActivated;
   age;
   sex;
   interests;
-  partnerSettings;
   pictures;
-  chats;
-  pairs;
-  checkedUsers;
+  place;
+  distance;
+  usersOnlyInDistance;
+  preferSex;
+  preferAgeFrom;
+  preferAgeTo;
 
-  constructor(model: IUserDto) {
+  constructor(model: User) {
+    this.id = model.id;
     this.email = model.email;
     this.name = model.name;
     this.description = model.description;
     this.nickname = model.nickname;
-    this._id = model._id;
     this.isActivated = model.isActivated;
     this.age = model.age;
     this.sex = model.sex;
     this.interests = model.interests;
-    this.partnerSettings = model.partnerSettings;
+    this.place = model.place;
+    this.distance = model.distance;
+    this.usersOnlyInDistance = model.usersOnlyInDistance;
+    this.preferSex = model.preferSex;
+    this.preferAgeFrom = model.preferAgeFrom;
+    this.preferAgeTo = model.preferAgeTo;
     this.pictures = model.pictures;
-    this.chats = model.chats;
-    this.pairs = model.pairs;
-    this.checkedUsers = model.checkedUsers;
   }
 }

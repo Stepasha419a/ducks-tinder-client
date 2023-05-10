@@ -5,8 +5,6 @@ import { UsersService } from './users.service';
 import {
   Body,
   Controller,
-  Delete,
-  Get,
   HttpCode,
   HttpStatus,
   Param,
@@ -26,12 +24,6 @@ import { UserSortsDto } from './dto/user-sorts.dto';
 @UseGuards(AuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  @Get(':id')
-  @HttpCode(HttpStatus.OK)
-  getOne(@Param('id') id): Promise<UserDto> {
-    return this.usersService.getOne(id);
-  }
 
   @Post('sorted')
   @HttpCode(HttpStatus.OK)
@@ -57,13 +49,13 @@ export class UsersController {
 
   @Post('pairs')
   @HttpCode(HttpStatus.OK)
-  createPair(@Body() dto: UserPairDto): Promise<UserDto> {
+  createPair(@Body() dto: UserPairDto) {
     return this.usersService.createPair(dto);
   }
 
   @Put('pairs')
   @HttpCode(HttpStatus.OK)
-  deletePair(@Body() dto: UserPairDto): Promise<UserDto> {
+  deletePair(@Body() dto: UserPairDto) {
     return this.usersService.deletePair(dto);
   }
 
@@ -74,11 +66,5 @@ export class UsersController {
     @Param('id') id: string,
   ): Promise<UserDto> {
     return this.usersService.update(id, dto);
-  }
-
-  @Delete(':id')
-  @HttpCode(HttpStatus.OK)
-  delete(@Param('id') id: string): Promise<UserDto> {
-    return this.usersService.delete(id);
   }
 }

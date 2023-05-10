@@ -47,12 +47,12 @@ describe('UsersController', () => {
     it('should return a user', async () => {
       const result = await dbConnection
         .collection('users')
-        .insertOne({ ...userStub(), _id: undefined });
+        .insertOne({ ...userStub() });
       userId = result.insertedId.toString();
 
       const response = await request(httpServer).get(`/users/${userId}`);
       expect(response.status).toBe(200);
-      expect(response.body).toEqual({ ...userStub(), _id: userId });
+      expect(response.body).toEqual({ ...userStub(), id: userId });
     });
   });
 
@@ -74,7 +74,7 @@ describe('UsersController', () => {
         .send(userSortsDto);
 
       expect(response.status).toBe(200);
-      expect(response.body).toEqual({ ...user, _id: userId });
+      expect(response.body).toEqual({ ...user, id: userId });
     });
   });
 
@@ -89,7 +89,7 @@ describe('UsersController', () => {
       const result = await dbConnection
         .collection('users')
         .findOne({ email: userStub().email });
-      userId = result._id.toString();
+      userId = result.id.toString();
 
       const response = await request(httpServer)
         .post('/users/picture')
@@ -103,7 +103,7 @@ describe('UsersController', () => {
       expect(response.status).toBe(201);
       expect(response.body).toEqual({
         ...user,
-        _id: userId.toString(),
+        id: userId.toString(),
         pictures: { ...user.pictures, avatar: response.body.pictures.avatar },
       });
     });
@@ -116,7 +116,7 @@ describe('UsersController', () => {
       const result = await dbConnection
         .collection('users')
         .findOne({ email: userStub().email });
-      userId = result._id.toString();
+      userId = result.id.toString();
 
       const deletePictureDto: DeletePictureDto = {
         userId,
@@ -131,7 +131,7 @@ describe('UsersController', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
         ...user,
-        _id: userId.toString(),
+        id: userId.toString(),
         pictures: { ...user.pictures, avatar: '' },
       });
     });

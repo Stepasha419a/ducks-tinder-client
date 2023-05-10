@@ -1,11 +1,11 @@
-import { IUserPassDto } from "../users.interface"
+import { IUserPassDto } from '../users.interface';
 
-export class UserPassDto{
-    _id
-    email
+export class UserPassDto {
+  id;
+  email;
 
-    constructor(model: IUserPassDto) {
-        this._id = model._id
-        this.email = model.email
-    }
+  constructor(model: IUserPassDto) {
+    this.id = model.id;
+    this.email = model.email;
+  }
 }

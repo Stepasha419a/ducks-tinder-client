@@ -1,12 +1,12 @@
-import { MessageType } from '../chat.interfaces';
+import { MessageType } from '../chats.interfaces';
 
 export class MessageDto implements MessageType {
-  _id: string;
+  id: string;
   content: string;
   user: string;
 
   constructor(model) {
-    this._id = model._id;
+    this.id = model.id;
     this.content = model.content;
     this.user = model.user;
   }

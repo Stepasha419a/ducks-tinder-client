@@ -1,18 +1,18 @@
 export interface MessageType {
-  _id: string;
+  id: string;
   content: string;
   user: string;
 }
 
 export interface ChatUser {
-  _id: string;
+  id: string;
   name: string;
   nickname: string;
   pictures: { avatar: string };
 }
 
 export interface ChatType {
-  _id: string;
+  id: string;
   members: ChatUser[];
   messages: MessageType[];
 }

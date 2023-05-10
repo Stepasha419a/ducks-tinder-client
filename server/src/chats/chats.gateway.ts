@@ -1,18 +1,18 @@
-import { MessageService } from './services/message.service';
-import { ChatService } from './chat.service';
+import { MessagesService } from './services/messages.service';
+import { ChatsService } from './chats.service';
 import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { ISendMessage } from './chat.interfaces';
+import { ISendMessage } from './chats.interfaces';
 
 @WebSocketGateway({ namespace: '/chat/socket', cors: '*:*', origin: true })
-export class ChatGateway {
+export class ChatsGateway {
   constructor(
-    private readonly chatService: ChatService,
-    private readonly messageService: MessageService,
+    private readonly chatService: ChatsService,
+    private readonly messagesService: MessagesService,
   ) {}
 
   @WebSocketServer()
@@ -24,7 +24,7 @@ export class ChatGateway {
 
     this.wss.to(chatId).emit('message', message);
 
-    this.messageService.sendMessage(chatId, message);
+    this.messagesService.sendMessage(chatId, message);
   }
 
   @SubscribeMessage('connectChat')

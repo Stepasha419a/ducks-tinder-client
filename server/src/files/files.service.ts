@@ -43,7 +43,6 @@ export class FilesService {
   async savePicture(
     file: Express.Multer.File,
     userId: string,
-    setting: 'avatar' | 'gallery',
   ): Promise<string> {
     try {
       const fileName = uuid.v4() + '.jpg';
@@ -51,7 +50,7 @@ export class FilesService {
         __dirname,
         '..',
         '..',
-        `static\\${userId}\\${setting}`,
+        `static\\${userId}`,
       );
       await ensureDir(folderPath);
 
@@ -63,17 +62,13 @@ export class FilesService {
     }
   }
 
-  deletePicture(
-    fileName: string,
-    userId: string,
-    setting: 'avatar' | 'gallery',
-  ): string {
+  deletePicture(fileName: string, userId: string): string {
     try {
       const filePath = path.resolve(
         __dirname,
         '..',
         '..',
-        `static\\${userId}\\${setting}`,
+        `static\\${userId}`,
         fileName,
       );
 

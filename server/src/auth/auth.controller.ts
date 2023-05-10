@@ -11,6 +11,7 @@ import {
   Req,
   Res,
   UseGuards,
+  Patch,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { AuthGuard } from './auth.guard';
@@ -45,13 +46,17 @@ export class AuthController {
     response.json(userData);
   }
 
-  @Post('logout')
+  @Patch('logout')
   @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.OK)
-  logout(@Req() request: Request) {
+  async logout(@Req() request: Request, @Res() response: Response) {
     const { refreshToken } = request.cookies;
 
-    return this.authService.logout(refreshToken);
+    response.clearCookie('refreshToken');
+
+    await this.authService.logout(refreshToken);
+
+    response.end();
   }
 
   @Get('refresh')

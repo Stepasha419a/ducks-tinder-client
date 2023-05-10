@@ -1,13 +1,13 @@
-import { ChatUser } from '../chat.interfaces';
+import { ChatUser } from '../chats.interfaces';
 
 export class ChatUserDto implements ChatUser {
-  _id: string;
+  id: string;
   name: string;
   nickname: string;
   pictures: { avatar: string };
 
   constructor(model) {
-    this._id = model._id;
+    this.id = model.id;
     this.name = model.name;
     this.nickname = model.nickname;
     this.pictures = model.pictures;

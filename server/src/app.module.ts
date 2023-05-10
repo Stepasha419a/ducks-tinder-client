@@ -6,8 +6,8 @@ import { TokensModule } from './tokens/tokens.module';
 import { ConfigModule } from '@nestjs/config';
 import { MailModule } from './mail/mail.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { ChatModule } from './chat/chat.module';
-import { DatabaseModule } from './database/database.module';
+import { ChatsModule } from './chats/chats.module';
+import { PrismaModule } from './prisma/prisma.module';
 import * as path from 'path';
 
 @Module({
@@ -16,13 +16,13 @@ import * as path from 'path';
     ServeStaticModule.forRoot({
       rootPath: path.resolve(path.resolve(__dirname, '..', 'static')),
     }),
+    PrismaModule,
     UsersModule,
     FilesModule,
     AuthModule,
     TokensModule,
     MailModule,
-    ChatModule,
-    DatabaseModule,
+    ChatsModule,
   ],
 })
 export class AppModule {}

@@ -34,7 +34,7 @@ describe('UsersController (e2e)', () => {
   };
 
   const getUserData = (dto) => ({
-    _id: 'sdfhsdghj34259034578923',
+    id: 'sdfhsdghj34259034578923',
     description: '',
     isActivated: false,
     age: 18,

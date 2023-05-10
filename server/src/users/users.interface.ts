@@ -15,7 +15,7 @@ export interface picturesInterface {
 }
 
 export interface IUserDto {
-  _id?: string;
+  id?: string;
   email: string;
   name: string;
   description: string;
@@ -32,6 +32,6 @@ export interface IUserDto {
 }
 
 export interface IUserPassDto {
-  _id: string;
+  id: string;
   email: string;
 }
