@@ -6,7 +6,7 @@ import {
   partnerSettingsDefault,
   picturesDefault,
 } from '../src/users/users.constants';
-import { UpdateUserDto } from '../src/users/dto/updated-user.dto';
+import { UpdateUserDto } from '../src/users/dto/update-user.dto';
 import { getModelToken } from '@nestjs/mongoose';
 import { User } from '../src/users/users.model';
 import { FilesService } from '../src/files/files.service';

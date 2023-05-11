@@ -1,15 +1,8 @@
 import * as uuid from 'uuid';
 import * as path from 'path';
-import {
-  unlinkSync,
-  mkdirSync,
-  rmSync,
-  readdirSync,
-  renameSync,
-  writeFile,
-} from 'fs';
-import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
+import { unlinkSync, mkdirSync, readdirSync, renameSync, writeFile } from 'fs';
 import { ensureDir } from 'fs-extra';
+import { Injectable, BadRequestException } from '@nestjs/common';
 
 @Injectable()
 export class FilesService {
@@ -25,18 +18,7 @@ export class FilesService {
         path.resolve(__dirname, '..', '..', 'static', userId, 'gallery'),
       );
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
-    }
-  }
-
-  deleteUserDir(userId: string) {
-    try {
-      rmSync(path.resolve(__dirname, '..', '..', 'static', userId), {
-        recursive: true,
-        force: true,
-      });
-    } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -58,7 +40,7 @@ export class FilesService {
 
       return fileName;
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -76,7 +58,7 @@ export class FilesService {
 
       return fileName;
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+      throw new BadRequestException(error.message);
     }
   }
 
@@ -102,7 +84,7 @@ export class FilesService {
         `${storageName}\\avatar\\${newAvatarImageName}`,
       );
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.BAD_REQUEST);
+      throw new BadRequestException(error.message);
     }
   }
 }

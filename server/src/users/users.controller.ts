@@ -1,6 +1,4 @@
-import { UpdateUserDto } from './dto/updated-user.dto';
-import { AuthGuard } from './../auth/auth.guard';
-import { SavePictureDto } from './dto/save-picture.dto';
+import { AuthGuard } from '../auth/auth.guard';
 import { UsersService } from './users.service';
 import {
   Body,
@@ -10,15 +8,21 @@ import {
   Param,
   Post,
   Put,
+  Patch,
   UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { UserPairDto } from './dto/user-pair.dto';
-import { DeletePictureDto } from './dto/delete-picture.dto';
-import { UserDto } from './dto/user.dto';
-import { UserSortsDto } from './dto/user-sorts.dto';
+import { ReturnPairs } from './users.interface';
+import {
+  DeletePictureDto,
+  SavePictureDto,
+  UpdateUserDto,
+  UserDto,
+  UserPairDto,
+  UserSortsDto,
+} from './dto';
 
 @Controller('users')
 @UseGuards(AuthGuard)
@@ -49,22 +53,19 @@ export class UsersController {
 
   @Post('pairs')
   @HttpCode(HttpStatus.OK)
-  createPair(@Body() dto: UserPairDto) {
+  createPair(@Body() dto: UserPairDto): Promise<ReturnPairs[]> {
     return this.usersService.createPair(dto);
   }
 
   @Put('pairs')
   @HttpCode(HttpStatus.OK)
-  deletePair(@Body() dto: UserPairDto) {
+  deletePair(@Body() dto: UserPairDto): Promise<ReturnPairs[]> {
     return this.usersService.deletePair(dto);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @HttpCode(HttpStatus.OK)
-  update(
-    @Body() dto: UpdateUserDto,
-    @Param('id') id: string,
-  ): Promise<UserDto> {
-    return this.usersService.update(id, dto);
+  patch(@Body() dto: UpdateUserDto, @Param('id') id: string): Promise<UserDto> {
+    return this.usersService.patch(id, dto);
   }
 }

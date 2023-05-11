@@ -1,19 +1,17 @@
-import { LoginUserDto } from './../users/dto/login-user.dto';
-import { CreateUserDto } from './../users/dto/create-user.dto';
-import { UsersService } from './../users/users.service';
-import {
-  Injectable,
-  HttpException,
-  HttpStatus,
-  UnauthorizedException,
-} from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import { v4 } from 'uuid';
-import { UserDto } from '../users/dto/user.dto';
+import {
+  Injectable,
+  UnauthorizedException,
+  BadRequestException,
+  NotFoundException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { TokensService } from '../tokens/tokens.service';
 import { MailService } from '../mail/mail.service';
-import { UserPassDto } from '../users/dto/user-pass.dto';
-import { User } from '@prisma/client';
+import { UsersService } from '../users/users.service';
+import { UserDto, CreateUserDto } from '../users/dto';
+import { LoginUserDto, UserTokenDto } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +24,7 @@ export class AuthService {
   async registration(createUserDto: CreateUserDto) {
     const candidate = await this.usersService.getByEmail(createUserDto.email);
     if (candidate) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      throw new BadRequestException('User already exists');
     }
 
     const hashPassword = await bcrypt.hash(createUserDto.password, 7);
@@ -44,29 +42,20 @@ export class AuthService {
         createUserDto.name,
       )
       .catch(() => {
-        throw new HttpException(
-          'This email does not exist',
-          HttpStatus.BAD_REQUEST,
-        );
+        throw new BadRequestException('This email does not exist');
       });
 
-    const userDto = new UserDto(user);
-    const userPassDto = new UserPassDto({ id: user.id, email: user.email });
-    const tokens = this.tokensService.generateTokens({ ...userPassDto });
-    await this.tokensService.saveToken(userDto.id, tokens.refreshToken);
+    const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
+    const tokens = this.tokensService.generateTokens({ ...userTokenDto });
+    await this.tokensService.saveToken(user.id, tokens.refreshToken);
 
-    return { ...tokens, user: userDto };
+    return { ...tokens, user };
   }
 
   async login(loginUserDto: LoginUserDto) {
-    const user = (await this.usersService.getByEmail(
-      loginUserDto.email,
-    )) as User;
+    const user = await this.usersService.getByEmail(loginUserDto.email);
     if (!user) {
-      throw new HttpException(
-        'The user with such an email is not found',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new NotFoundException('The user with such an email is not found');
     }
 
     const isPassEquals = await bcrypt.compare(
@@ -74,12 +63,12 @@ export class AuthService {
       user.password,
     );
     if (!isPassEquals) {
-      throw new HttpException('Incorrect password', HttpStatus.BAD_REQUEST);
+      throw new ForbiddenException('Incorrect password');
     }
 
     const userDto = new UserDto(user);
-    const userPassDto = new UserPassDto({ id: user.id, email: user.email });
-    const tokens = this.tokensService.generateTokens({ ...userPassDto });
+    const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
+    const tokens = this.tokensService.generateTokens({ ...userTokenDto });
     await this.tokensService.saveToken(userDto.id, tokens.refreshToken);
 
     return { ...tokens, user: userDto };
@@ -96,29 +85,22 @@ export class AuthService {
 
   async refresh(refreshToken: string) {
     if (!refreshToken) {
-      throw new HttpException(
-        'You are not authorized',
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw new UnauthorizedException('You are not authorized');
     }
     const userData = this.tokensService.validateRefreshToken(refreshToken);
     const tokenFromDb = await this.tokensService.findToken(refreshToken);
 
     if (!userData || !tokenFromDb) {
-      throw new HttpException(
-        'You are not authorized',
-        HttpStatus.UNAUTHORIZED,
-      );
+      throw new UnauthorizedException('You are not authorized');
     }
 
     const user = await this.usersService.getOne(userData.id);
 
-    const userDto = new UserDto(user);
-    const userPassDto = new UserPassDto({ id: user.id, email: user.email });
+    const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
 
-    const tokens = this.tokensService.generateTokens({ ...userPassDto });
-    await this.tokensService.saveToken(userDto.id, tokens.refreshToken);
+    const tokens = this.tokensService.generateTokens({ ...userTokenDto });
+    await this.tokensService.saveToken(user.id, tokens.refreshToken);
 
-    return { ...tokens, user: userDto };
+    return { ...tokens, user };
   }
 }

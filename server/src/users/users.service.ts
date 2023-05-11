@@ -1,20 +1,22 @@
-import { PrismaService } from './../prisma/prisma.service';
-import { UpdateUserDto } from './dto/updated-user.dto';
-import { SavePictureDto } from './dto/save-picture.dto';
-import { CreateUserDto } from './dto/create-user.dto';
+import { PrismaService } from '../prisma/prisma.service';
 import {
-  HttpException,
   Injectable,
-  HttpStatus,
   NotFoundException,
   BadRequestException,
 } from '@nestjs/common';
 import { FilesService } from '../files/files.service';
-import { UserPairDto } from './dto/user-pair.dto';
-import { DeletePictureDto } from './dto/delete-picture.dto';
-import { UserDto } from './dto/user.dto';
-import { UserSortsDto } from './dto/user-sorts.dto';
 import { User } from '@prisma/client';
+import { UsersMapper } from './users.mapper';
+import { ReturnPairs } from './users.interface';
+import {
+  UpdateUserDto,
+  UserSortsDto,
+  UserDto,
+  DeletePictureDto,
+  UserPairDto,
+  SavePictureDto,
+  CreateUserDto,
+} from './dto';
 
 @Injectable()
 export class UsersService {
@@ -26,11 +28,14 @@ export class UsersService {
   async getOne(id: string): Promise<UserDto> {
     const user = await this.prismaService.user.findUnique({
       where: { id },
-      include: { pictures: { select: { name: true, order: true } } },
+      include: {
+        pictures: { select: { name: true, order: true } },
+        userToInterests: { select: { interest: { select: { name: true } } } },
+      },
     });
 
     if (!user) {
-      throw new HttpException('Such user was not found', HttpStatus.NOT_FOUND);
+      throw new NotFoundException('Such user was not found');
     }
 
     const userData = new UserDto(user);
@@ -40,7 +45,10 @@ export class UsersService {
   async getByEmail(email: string): Promise<User> {
     return this.prismaService.user.findUnique({
       where: { email },
-      include: { pictures: { select: { name: true, order: true } } },
+      include: {
+        pictures: { select: { name: true, order: true } },
+        userToInterests: { select: { interest: { select: { name: true } } } },
+      },
     });
   }
 
@@ -62,12 +70,15 @@ export class UsersService {
         sex: sortsDto.preferSex,
         preferSex: sortsDto.sex,
       },
+      include: {
+        pictures: { select: { name: true, order: true } },
+        userToInterests: { select: { interest: { select: { name: true } } } },
+      },
     });
 
     if (!user) {
-      throw new HttpException(
+      throw new NotFoundException(
         'Such user was not found, try to change settings',
-        HttpStatus.NOT_FOUND,
       );
     }
 
@@ -79,7 +90,10 @@ export class UsersService {
   async create(userDto: CreateUserDto): Promise<UserDto> {
     const user = await this.prismaService.user.create({
       data: userDto,
-      include: { pictures: { select: { name: true, order: true } } },
+      include: {
+        pictures: { select: { name: true, order: true } },
+        userToInterests: { select: { interest: { select: { name: true } } } },
+      },
     });
 
     const userData = new UserDto(user);
@@ -87,7 +101,7 @@ export class UsersService {
     return userData;
   }
 
-  async update(id: string, userDto: UpdateUserDto): Promise<UserDto> {
+  async patch(id: string, userDto: UpdateUserDto): Promise<UserDto> {
     // dto without interests to update user fields (interest = relation)
     const updateUserDto = { ...userDto, interests: undefined };
 
@@ -100,20 +114,20 @@ export class UsersService {
       },
     });
 
-    if (userDto.interests.length) {
+    if (
+      userDto.interests &&
+      (userDto.interests.length || userDto.interests.length === 0)
+    ) {
+      const existingInterests = await this.prismaService.interest.findMany({
+        where: { name: { in: userDto.interests } },
+      });
       await this.prismaService.userToInterests.deleteMany({
         where: { userId: user.id },
       });
       await Promise.all(
-        userDto.interests.map(async (interest) => {
-          const interestFromDB = await this.prismaService.interest.findUnique({
-            where: { name: interest },
-          });
-          if (!interestFromDB) {
-            throw new NotFoundException('Interest was not found');
-          }
+        existingInterests.map(async (interest) => {
           await this.prismaService.userToInterests.create({
-            data: { userId: user.id, interestId: interestFromDB.id },
+            data: { userId: user.id, interestId: interest.id },
           });
         }),
       );
@@ -160,7 +174,10 @@ export class UsersService {
 
     const updatedUser = await this.prismaService.user.findUnique({
       where: { id: user.id },
-      include: { pictures: { select: { name: true, order: true } } },
+      include: {
+        pictures: { select: { name: true, order: true } },
+        userToInterests: { select: { interest: { select: { name: true } } } },
+      },
     });
 
     const userData = new UserDto(updatedUser);
@@ -198,13 +215,16 @@ export class UsersService {
 
     const updatedUser = await this.prismaService.user.findUnique({
       where: { id: user.id },
-      include: { pictures: { select: { name: true, order: true } } },
+      include: {
+        pictures: { select: { name: true, order: true } },
+        userToInterests: { select: { interest: { select: { name: true } } } },
+      },
     });
 
     return new UserDto(updatedUser);
   }
 
-  async createPair(userPairDto: UserPairDto) {
+  async createPair(userPairDto: UserPairDto): Promise<ReturnPairs[]> {
     const user = await this.prismaService.user.findUnique({
       where: { id: userPairDto.userId },
       include: { pairFor: { select: { userPairId: true } } },
@@ -215,10 +235,7 @@ export class UsersService {
     });
 
     if (user.pairFor.find((pair) => pair.userPairId == userPair.id)) {
-      throw new HttpException(
-        'Pair with such an id already exists',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new BadRequestException('Pair with such an id already exists');
     }
     await this.prismaService.pair.create({
       data: { userId: user.id, userPairId: userPair.id },
@@ -242,7 +259,7 @@ export class UsersService {
           },
         },
       })
-    ).map((pair) => pair.userPair);
+    ).map((pair) => UsersMapper.mapUserPair(pair));
 
     return updatedPairs;
   }
@@ -264,10 +281,7 @@ export class UsersService {
     if (deletedPair) {
       await this.prismaService.pair.delete({ where: { id: deletedPair.id } });
     } else {
-      throw new HttpException(
-        'Pair with such an id was not found',
-        HttpStatus.BAD_REQUEST,
-      );
+      throw new BadRequestException('Pair with such an id was not found');
     }
 
     const updatedPairs = (
@@ -289,7 +303,7 @@ export class UsersService {
           },
         },
       })
-    ).map((pair) => pair.userPair);
+    ).map((pair) => UsersMapper.mapUserPair(pair));
 
     return updatedPairs;
   }

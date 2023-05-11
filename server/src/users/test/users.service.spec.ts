@@ -6,7 +6,7 @@ import { FilesService } from '../../files/files.service';
 import { FilesModule } from '../../files/files.module';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { partnerSettingsDefault, picturesDefault } from '../users.constants';
-import { UpdateUserDto } from '../dto/updated-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
 
 describe('UsersService', () => {
   let service: UsersService;
