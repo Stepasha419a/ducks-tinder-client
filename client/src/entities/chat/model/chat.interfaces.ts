@@ -1,4 +1,4 @@
-import type { ChatWithUsers, Message, User } from '@shared/api/interfaces';
+import type { ChatWithUsers, Message } from '@shared/api/interfaces';
 
 export interface ChatInitialState {
   chats: ChatWithUsers[];

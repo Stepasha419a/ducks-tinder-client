@@ -22,7 +22,12 @@
     "socket.io-client": "^4.5.3"
   },
   "scripts": {
-    "start": "webpack serve --config config/development.config.js"
+    "start": "webpack serve --config config/development.config.js",
+    "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
+    "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
+    "lint": "eslint ./src/**/*{.ts,.tsx,.js,.jsx}",
+    "lint:fix": "eslint ./src/**/*{.ts,.tsx,.js,.jsx} --fix",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -41,6 +46,8 @@
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
@@ -61,6 +68,7 @@
     "fork-ts-checker-webpack-plugin": "^8.0.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^29.5.0",
+    "prettier": "^2.8.8",
     "sass": "^1.58.3",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
@@ -120,5 +128,10 @@
       "jest-watch-typeahead/testname"
     ],
     "resetMocks": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": ".husky/pre-commit"
+    }
   }
 }

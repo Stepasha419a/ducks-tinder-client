@@ -1,7 +1,6 @@
-import { partnerSettingsDefault, picturesDefault } from '../../users.constants';
-import { IUserDto } from '../../users.interface';
+import { UserDto } from '../../dto/user.dto';
 
-export const userStub = (): IUserDto => ({
+export const userStub = (): UserDto => ({
   id: 'sdfhsdghj34259034578923',
   email: '123@mail.ru',
   name: 'stepa',
@@ -11,9 +10,16 @@ export const userStub = (): IUserDto => ({
   sex: 'male',
   nickname: '',
   interests: [],
-  partnerSettings: partnerSettingsDefault,
-  pictures: picturesDefault,
-  chats: [],
-  pairs: [],
-  checkedUsers: [],
+  place: '',
+  distance: 2,
+  usersOnlyInDistance: false,
+  preferSex: 'female',
+  preferAgeFrom: 18,
+  preferAgeTo: 20,
+  pictures: [
+    {
+      name: '123.jpg',
+      order: 0,
+    },
+  ],
 });

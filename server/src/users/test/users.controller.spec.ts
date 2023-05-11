@@ -5,7 +5,7 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { userStub } from './stubs';
 import { IUserDto } from '../users.interface';
 import { UserSortsDto } from '../dto/user-sorts.dto';
-import { UpdateUserDto } from '../dto/updated-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
 import { SavePictureDto } from '../dto/save-picture.dto';
 import { DeletePictureDto } from '../dto/delete-picture.dto';
 import { UserPairDto } from '../dto/user-pair.dto';

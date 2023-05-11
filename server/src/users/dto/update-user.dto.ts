@@ -12,4 +12,5 @@ export class UpdateUserDto {
   preferSex?: 'male' | 'female' | '';
   preferAgeFrom?: number;
   preferAgeTo?: number;
+  interests?: string[];
 }
