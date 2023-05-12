@@ -1,3 +1,3 @@
 export class CreateChatDto {
-    readonly members: string[]
+  readonly members: string[];
 }

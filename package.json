@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Stepasha419a/ducks-tinder#readme",
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
-    "@commitlint/config-conventional": "^17.6.3"
+    "@commitlint/config-conventional": "^17.6.3",
+    "husky": "^8.0.3",
+    "win-node-env": "^0.6.1"
   }
 }
