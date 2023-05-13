@@ -14,7 +14,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ReturnPairs } from './users.interface';
+import { ShortUser } from './users.interface';
 import {
   DeletePictureDto,
   SavePictureDto,
@@ -31,7 +31,7 @@ export class UsersController {
 
   @Post('sorted')
   @HttpCode(HttpStatus.OK)
-  getSortedUser(@Body() dto: UserSortsDto): Promise<UserDto> {
+  getSortedUser(@Body() dto: UserSortsDto): Promise<ShortUser> {
     return this.usersService.getSorted(dto);
   }
 
@@ -53,13 +53,13 @@ export class UsersController {
 
   @Post('pairs')
   @HttpCode(HttpStatus.OK)
-  createPair(@Body() dto: UserPairDto): Promise<ReturnPairs[]> {
+  createPair(@Body() dto: UserPairDto): Promise<ShortUser[]> {
     return this.usersService.createPair(dto);
   }
 
   @Put('pairs')
   @HttpCode(HttpStatus.OK)
-  deletePair(@Body() dto: UserPairDto): Promise<ReturnPairs[]> {
+  deletePair(@Body() dto: UserPairDto): Promise<ShortUser[]> {
     return this.usersService.deletePair(dto);
   }
 

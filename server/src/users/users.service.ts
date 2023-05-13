@@ -7,7 +7,7 @@ import {
 import { FilesService } from '../files/files.service';
 import { User } from '@prisma/client';
 import { UsersMapper } from './users.mapper';
-import { ReturnPairs } from './users.interface';
+import { ShortUser } from './users.interface';
 import {
   UpdateUserDto,
   UserSortsDto,
@@ -52,8 +52,8 @@ export class UsersService {
     });
   }
 
-  async getSorted(sortsDto: UserSortsDto): Promise<UserDto> {
-    const user: User = await this.prismaService.user.findFirst({
+  async getSorted(sortsDto: UserSortsDto): Promise<ShortUser> {
+    const user = await this.prismaService.user.findFirst({
       where: {
         id: { notIn: sortsDto.userIds },
         distance: { gt: 0, lte: sortsDto.distance },
@@ -70,9 +70,16 @@ export class UsersService {
         sex: sortsDto.preferSex,
         preferSex: sortsDto.sex,
       },
-      include: {
+      select: {
+        id: true,
+        name: true,
+        age: true,
+        description: true,
+        distance: true,
+        userToInterests: {
+          select: { interest: { select: { name: true } } },
+        },
         pictures: { select: { name: true, order: true } },
-        userToInterests: { select: { interest: { select: { name: true } } } },
       },
     });
 
@@ -109,7 +116,7 @@ export class UsersService {
       where: { id },
       include: {
         userToInterests: {
-          select: { interest: { select: { name: true, id: true } } },
+          select: { interest: { select: { name: true } } },
         },
       },
     });
@@ -224,7 +231,7 @@ export class UsersService {
     return new UserDto(updatedUser);
   }
 
-  async createPair(userPairDto: UserPairDto): Promise<ReturnPairs[]> {
+  async createPair(userPairDto: UserPairDto): Promise<ShortUser[]> {
     const user = await this.prismaService.user.findUnique({
       where: { id: userPairDto.userId },
       include: { pairFor: { select: { userPairId: true } } },

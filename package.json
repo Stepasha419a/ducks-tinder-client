@@ -1,18 +1,12 @@
 {
   "name": "ducks-tinder",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stepasha419a/ducks-tinder.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "stepasha419a",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Stepasha419a/ducks-tinder/issues"
   },
@@ -20,7 +14,6 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
-    "husky": "^8.0.3",
-    "win-node-env": "^0.6.1"
+    "husky": "^8.0.3"
   }
 }

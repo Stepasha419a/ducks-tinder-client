@@ -3,7 +3,7 @@ export interface PictureInterface {
   order: number;
 }
 
-export interface ReturnPairs {
+export interface ShortUser {
   id: string;
   name: string;
   age: number;
