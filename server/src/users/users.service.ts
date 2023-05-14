@@ -1,3 +1,4 @@
+import { UsersSelector } from './utils/users.selector';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   Injectable,
@@ -6,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { FilesService } from '../files/files.service';
 import { User } from '@prisma/client';
-import { UsersMapper } from './users.mapper';
+import { UsersMapper } from './utils';
 import { ShortUser } from './users.interface';
 import {
   UpdateUserDto,
@@ -28,10 +29,7 @@ export class UsersService {
   async getOne(id: string): Promise<UserDto> {
     const user = await this.prismaService.user.findUnique({
       where: { id },
-      include: {
-        pictures: { select: { name: true, order: true } },
-        userToInterests: { select: { interest: { select: { name: true } } } },
-      },
+      include: UsersSelector.selectUser(),
     });
 
     if (!user) {
@@ -45,10 +43,7 @@ export class UsersService {
   async getByEmail(email: string): Promise<User> {
     return this.prismaService.user.findUnique({
       where: { email },
-      include: {
-        pictures: { select: { name: true, order: true } },
-        userToInterests: { select: { interest: { select: { name: true } } } },
-      },
+      include: UsersSelector.selectUser(),
     });
   }
 
@@ -70,17 +65,7 @@ export class UsersService {
         sex: sortsDto.preferSex,
         preferSex: sortsDto.sex,
       },
-      select: {
-        id: true,
-        name: true,
-        age: true,
-        description: true,
-        distance: true,
-        userToInterests: {
-          select: { interest: { select: { name: true } } },
-        },
-        pictures: { select: { name: true, order: true } },
-      },
+      select: UsersSelector.selectShortUser(),
     });
 
     if (!user) {
@@ -97,10 +82,7 @@ export class UsersService {
   async create(userDto: CreateUserDto): Promise<UserDto> {
     const user = await this.prismaService.user.create({
       data: userDto,
-      include: {
-        pictures: { select: { name: true, order: true } },
-        userToInterests: { select: { interest: { select: { name: true } } } },
-      },
+      include: UsersSelector.selectUser(),
     });
 
     const userData = new UserDto(user);
@@ -143,9 +125,7 @@ export class UsersService {
     const updatedUser = await this.prismaService.user.update({
       where: { id },
       data: { ...updateUserDto },
-      include: {
-        userToInterests: { select: { interest: { select: { name: true } } } },
-      },
+      include: UsersSelector.selectUser(),
     });
 
     const userData = new UserDto(updatedUser);
@@ -181,10 +161,7 @@ export class UsersService {
 
     const updatedUser = await this.prismaService.user.findUnique({
       where: { id: user.id },
-      include: {
-        pictures: { select: { name: true, order: true } },
-        userToInterests: { select: { interest: { select: { name: true } } } },
-      },
+      include: UsersSelector.selectUser(),
     });
 
     const userData = new UserDto(updatedUser);
@@ -222,10 +199,7 @@ export class UsersService {
 
     const updatedUser = await this.prismaService.user.findUnique({
       where: { id: user.id },
-      include: {
-        pictures: { select: { name: true, order: true } },
-        userToInterests: { select: { interest: { select: { name: true } } } },
-      },
+      include: UsersSelector.selectUser(),
     });
 
     return new UserDto(updatedUser);
@@ -252,17 +226,7 @@ export class UsersService {
         where: { userId: user.id },
         select: {
           userPair: {
-            select: {
-              id: true,
-              name: true,
-              age: true,
-              description: true,
-              distance: true,
-              userToInterests: {
-                select: { interest: { select: { name: true } } },
-              },
-              pictures: { select: { name: true, order: true } },
-            },
+            select: UsersSelector.selectShortUser(),
           },
         },
       })
@@ -271,7 +235,7 @@ export class UsersService {
     return updatedPairs;
   }
 
-  async deletePair(userPairDto: UserPairDto) {
+  async deletePair(userPairDto: UserPairDto): Promise<ShortUser[]> {
     const user = await this.prismaService.user.findUnique({
       where: { id: userPairDto.userId },
       include: { pairFor: { select: { userPairId: true, id: true } } },
@@ -296,17 +260,7 @@ export class UsersService {
         where: { userId: user.id },
         select: {
           userPair: {
-            select: {
-              id: true,
-              name: true,
-              age: true,
-              description: true,
-              distance: true,
-              userToInterests: {
-                select: { interest: { select: { name: true } } },
-              },
-              pictures: { select: { name: true, order: true } },
-            },
+            select: UsersSelector.selectShortUser(),
           },
         },
       })

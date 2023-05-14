@@ -1,5 +1,5 @@
 import { User } from 'prisma';
-import { UsersMapper } from '../users.mapper';
+import { UsersMapper } from '../utils';
 
 export class UserDto {
   id;

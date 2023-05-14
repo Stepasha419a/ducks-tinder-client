@@ -1,5 +1,5 @@
-import { UserToInterestsRelation } from './users.interface';
-import { UserDto } from './dto/user.dto';
+import { UserToInterestsRelation } from '../users.interface';
+import { UserDto } from '../dto';
 
 export class UsersMapper {
   static mapInterests(userToInterests: UserToInterestsRelation[]) {

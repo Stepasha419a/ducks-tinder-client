@@ -1,6 +1,7 @@
 {
   "extends": ["@commitlint/config-conventional"],
   "rules": {
-    "type-enum": [2, "always", ["feature", "bugfix", "refactor", "test"]]
+    "type-enum": [2, "always", ["feature", "bugfix", "refactor", "test"]],
+    "header-max-length": [0]
   }
 }
