@@ -221,7 +221,7 @@ export class UsersService {
     await this.prismaService.pair.create({
       data: { userId: user.id, userPairId: userPair.id },
     });
-    const updatedPairs = (
+    const updatedPairs = UsersMapper.mapUserPairs(
       await this.prismaService.pair.findMany({
         where: { userId: user.id },
         select: {
@@ -229,8 +229,8 @@ export class UsersService {
             select: UsersSelector.selectShortUser(),
           },
         },
-      })
-    ).map((pair) => UsersMapper.mapUserPair(pair));
+      }),
+    );
 
     return updatedPairs;
   }
@@ -255,7 +255,7 @@ export class UsersService {
       throw new BadRequestException('Pair with such an id was not found');
     }
 
-    const updatedPairs = (
+    const updatedPairs = UsersMapper.mapUserPairs(
       await this.prismaService.pair.findMany({
         where: { userId: user.id },
         select: {
@@ -263,8 +263,8 @@ export class UsersService {
             select: UsersSelector.selectShortUser(),
           },
         },
-      })
-    ).map((pair) => UsersMapper.mapUserPair(pair));
+      }),
+    );
 
     return updatedPairs;
   }

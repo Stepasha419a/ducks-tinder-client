@@ -1,12 +1,15 @@
-import { UserToInterestsRelation } from '../users.interface';
+import { ShortUser, UserToInterestsRelation } from '../users.interface';
 import { UserDto } from '../dto';
 
 export class UsersMapper {
   static mapInterests(userToInterests: UserToInterestsRelation[]) {
-    return userToInterests.map((interest) => interest.interest.name);
+    return (
+      userToInterests &&
+      userToInterests.map((interest) => interest.interest.name)
+    );
   }
 
-  static mapUserPair(pair) {
-    return new UserDto(pair.userPair);
+  static mapUserPairs(pairs): ShortUser[] {
+    return pairs.map((pair) => new UserDto(pair.userPair));
   }
 }

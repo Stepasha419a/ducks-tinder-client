@@ -22,4 +22,6 @@ export const userStub = (): UserDto => ({
       order: 0,
     },
   ],
+  pairs: [],
+  pairsCount: 0,
 });

@@ -18,6 +18,8 @@ export class UserDto {
   preferAgeTo;
   interests;
   pictures;
+  pairs;
+  pairsCount;
 
   constructor(model: User) {
     this.id = model.id;
@@ -36,5 +38,7 @@ export class UserDto {
     this.preferAgeTo = model.preferAgeTo;
     this.interests = UsersMapper.mapInterests(model.userToInterests);
     this.pictures = model.pictures;
+    this.pairs = model.pairFor && UsersMapper.mapUserPairs(model.pairFor);
+    this.pairsCount = model._count?.pairFor;
   }
 }
