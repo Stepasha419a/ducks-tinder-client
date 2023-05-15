@@ -205,6 +205,19 @@ export class UsersService {
     return new UserDto(updatedUser);
   }
 
+  async getPairs(id: string): Promise<ShortUser[]> {
+    return UsersMapper.mapUserPairs(
+      await this.prismaService.pair.findMany({
+        where: { userId: id },
+        select: {
+          userPair: {
+            select: UsersSelector.selectShortUser(),
+          },
+        },
+      }),
+    );
+  }
+
   async createPair(userPairDto: UserPairDto): Promise<ShortUser[]> {
     const user = await this.prismaService.user.findUnique({
       where: { id: userPairDto.userId },

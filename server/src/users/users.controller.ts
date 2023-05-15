@@ -9,6 +9,7 @@ import {
   Post,
   Put,
   Patch,
+  Get,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -49,6 +50,12 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   deletePicture(@Body() dto: DeletePictureDto): Promise<UserDto> {
     return this.usersService.deletePicture(dto);
+  }
+
+  @Get('pairs/:id')
+  @HttpCode(HttpStatus.OK)
+  getPairs(@Param('id') id: string): Promise<ShortUser[]> {
+    return this.usersService.getPairs(id);
   }
 
   @Post('pairs')
