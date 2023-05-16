@@ -10,7 +10,7 @@ export class UsersSelector {
 
   private static selectInterests() {
     return {
-      userToInterests: { select: { interest: { select: { name: true } } } },
+      interests: { select: { name: true } },
     };
   }
 

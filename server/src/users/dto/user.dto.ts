@@ -36,7 +36,7 @@ export class UserDto {
     this.preferSex = model.preferSex;
     this.preferAgeFrom = model.preferAgeFrom;
     this.preferAgeTo = model.preferAgeTo;
-    this.interests = UsersMapper.mapInterests(model.userToInterests);
+    this.interests = model.interests;
     this.pictures = model.pictures;
     this.pairs = model.pairFor && UsersMapper.mapUserPairs(model.pairFor);
     this.pairsCount = model._count?.pairFor;

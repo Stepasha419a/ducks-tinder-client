@@ -97,9 +97,7 @@ export class UsersService {
     const user = await this.prismaService.user.findUnique({
       where: { id },
       include: {
-        userToInterests: {
-          select: { interest: { select: { name: true } } },
-        },
+        interests: true,
       },
     });
 
@@ -110,13 +108,20 @@ export class UsersService {
       const existingInterests = await this.prismaService.interest.findMany({
         where: { name: { in: userDto.interests } },
       });
-      await this.prismaService.userToInterests.deleteMany({
-        where: { userId: user.id },
-      });
+      // TODO: do this with comparison
+      await Promise.all(
+        user.interests.map(async (interest) => {
+          await this.prismaService.user.update({
+            where: { id: user.id },
+            data: { interests: { disconnect: { id: interest.id } } },
+          });
+        }),
+      );
       await Promise.all(
         existingInterests.map(async (interest) => {
-          await this.prismaService.userToInterests.create({
-            data: { userId: user.id, interestId: interest.id },
+          await this.prismaService.user.update({
+            where: { id: user.id },
+            data: { interests: { connect: { id: interest.id } } },
           });
         }),
       );
