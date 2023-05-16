@@ -3,13 +3,17 @@ export interface PictureInterface {
   order: number;
 }
 
+interface InterestInterface {
+  name: string;
+}
+
 export interface ShortUser {
   id: string;
   name: string;
   age: number;
   description: string;
   distance: number;
-  interests: [];
+  interests: InterestInterface[];
   pictures: PictureInterface[];
 }
 

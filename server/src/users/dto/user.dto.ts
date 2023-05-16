@@ -1,5 +1,4 @@
 import { User } from 'prisma';
-import { UsersMapper } from '../utils';
 
 export class UserDto {
   id;
@@ -38,7 +37,7 @@ export class UserDto {
     this.preferAgeTo = model.preferAgeTo;
     this.interests = model.interests;
     this.pictures = model.pictures;
-    this.pairs = model.pairFor && UsersMapper.mapUserPairs(model.pairFor);
+    this.pairs = model.pairs;
     this.pairsCount = model._count?.pairFor;
   }
 }

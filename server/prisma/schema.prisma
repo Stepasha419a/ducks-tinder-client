@@ -32,8 +32,8 @@ model User {
 
   token       Token?
   pictures    Picture[]
-  pairFor     Pair[]         @relation("PairFor")
-  pairs       Pair[]         @relation("Pairs")
+  pairFor     User[]         @relation(name: "Pairs")
+  pairs       User[]         @relation(name: "Pairs")
   messages    Message[]
   checked     CheckedUsers[] @relation("Checked") // who was checked by him (he checked user1, user2)
   wasChecked  CheckedUsers[] @relation("WasChecked") // who checked him (he was checked by user3, user4)
@@ -71,16 +71,6 @@ model Interest {
   users User[]
 
   @@map("interests")
-}
-
-model Pair {
-  id         String @id @default(uuid())
-  user       User   @relation("PairFor", fields: [userId], references: [id])
-  userId     String
-  userPair   User   @relation("Pairs", fields: [userPairId], references: [id])
-  userPairId String
-
-  @@map("pairs")
 }
 
 model Message {

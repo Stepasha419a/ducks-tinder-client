@@ -16,9 +16,9 @@ export class UsersSelector {
 
   private static selectFirstPairPicture() {
     return {
-      pairFor: {
+      pairs: {
         take: 1,
-        select: { userPair: { select: this.selectPictures(1) } },
+        select: this.selectPictures(1),
       },
     };
   }

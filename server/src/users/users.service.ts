@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { FilesService } from '../files/files.service';
 import { User } from '@prisma/client';
-import { UsersMapper } from './utils';
 import { ShortUser } from './users.interface';
 import {
   UpdateUserDto,
@@ -211,79 +210,68 @@ export class UsersService {
   }
 
   async getPairs(id: string): Promise<ShortUser[]> {
-    return UsersMapper.mapUserPairs(
-      await this.prismaService.pair.findMany({
-        where: { userId: id },
+    return (
+      await this.prismaService.user.findUnique({
+        where: { id },
         select: {
-          userPair: {
+          pairs: {
             select: UsersSelector.selectShortUser(),
           },
         },
-      }),
-    );
+      })
+    ).pairs;
   }
 
   async createPair(userPairDto: UserPairDto): Promise<ShortUser[]> {
     const user = await this.prismaService.user.findUnique({
       where: { id: userPairDto.userId },
-      include: { pairFor: { select: { userPairId: true } } },
+      include: { pairs: { select: { id: true } } },
     });
-
     const userPair = await this.prismaService.user.findUnique({
       where: { id: userPairDto.userPairId },
     });
 
-    if (user.pairFor.find((pair) => pair.userPairId == userPair.id)) {
-      throw new BadRequestException('Pair with such an id already exists');
+    if (!userPair) {
+      throw new NotFoundException('User with such id does not exist');
     }
-    await this.prismaService.pair.create({
-      data: { userId: user.id, userPairId: userPair.id },
-    });
-    const updatedPairs = UsersMapper.mapUserPairs(
-      await this.prismaService.pair.findMany({
-        where: { userId: user.id },
-        select: {
-          userPair: {
-            select: UsersSelector.selectShortUser(),
-          },
-        },
-      }),
-    );
 
-    return updatedPairs;
+    if (user.pairs.find((pair) => pair.id == userPairDto.userPairId)) {
+      throw new NotFoundException('Pair with such an id already exists');
+    }
+    return (
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: { pairs: { connect: { id: userPair.id } } },
+        select: { pairs: { select: UsersSelector.selectShortUser() } },
+      })
+    ).pairs;
   }
 
   async deletePair(userPairDto: UserPairDto): Promise<ShortUser[]> {
     const user = await this.prismaService.user.findUnique({
       where: { id: userPairDto.userId },
-      include: { pairFor: { select: { userPairId: true, id: true } } },
+      include: { pairs: { select: { id: true } } },
     });
-
     const userPair = await this.prismaService.user.findUnique({
       where: { id: userPairDto.userPairId },
     });
 
-    const deletedPair = user.pairFor.find(
-      (pair) => pair.userPairId === userPair.id,
-    );
+    const deletedPair = user.pairs.find((pair) => pair.id === userPair.id);
 
     if (deletedPair) {
-      await this.prismaService.pair.delete({ where: { id: deletedPair.id } });
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: { pairs: { disconnect: { id: deletedPair.id } } },
+      });
     } else {
-      throw new BadRequestException('Pair with such an id was not found');
+      throw new NotFoundException('Pair with such an id was not found');
     }
 
-    const updatedPairs = UsersMapper.mapUserPairs(
-      await this.prismaService.pair.findMany({
-        where: { userId: user.id },
-        select: {
-          userPair: {
-            select: UsersSelector.selectShortUser(),
-          },
-        },
-      }),
-    );
-
-    return updatedPairs;
+    return (
+      await this.prismaService.user.findUnique({
+        where: { id: user.id },
+        select: { pairs: { select: UsersSelector.selectShortUser() } },
+      })
+    ).pairs;
   }
 }
