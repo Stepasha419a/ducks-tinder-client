@@ -1,34 +1,22 @@
 export class UsersSelector {
-  private static selectPictures(take?: number) {
-    return {
-      pictures: {
-        take: take || undefined,
-        select: { name: true, order: true },
-      },
-    };
-  }
-
-  private static selectInterests() {
-    return {
-      interests: { select: { name: true } },
-    };
-  }
-
-  private static selectFirstPairPicture() {
-    return {
-      pairs: {
-        take: 1,
-        select: this.selectPictures(1),
-      },
-    };
-  }
-
   static selectUser() {
     return {
       _count: { select: { pairFor: true } },
-      ...this.selectInterests(),
-      ...this.selectPictures(),
-      ...this.selectFirstPairPicture(),
+      interests: { select: { name: true } },
+      pictures: {
+        select: { name: true, order: true },
+        orderBy: { order: 'asc' as 'asc' | 'desc' },
+      },
+      pairs: {
+        take: 1,
+        select: {
+          pictures: {
+            take: 1,
+            select: { name: true, order: true },
+            orderBy: { order: 'asc' as 'asc' | 'desc' },
+          },
+        },
+      },
     };
   }
 
@@ -39,8 +27,11 @@ export class UsersSelector {
       age: true,
       description: true,
       distance: true,
-      ...this.selectInterests(),
-      ...this.selectPictures(),
+      interests: { select: { name: true } },
+      pictures: {
+        select: { name: true, order: true },
+        orderBy: { order: 'asc' as 'asc' | 'desc' },
+      },
     };
   }
 }
