@@ -5,7 +5,7 @@ import { Module } from '@nestjs/common';
 import { ChatsController } from './chats.controller';
 import { ChatsService } from './chats.service';
 import { MessagesService } from './services/messages.service';
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { PrismaModule } from 'prisma/prisma.module';
 
 @Module({
   controllers: [ChatsController],

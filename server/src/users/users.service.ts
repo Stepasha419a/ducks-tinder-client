@@ -16,6 +16,7 @@ import {
   UserPairDto,
   SavePictureDto,
   CreateUserDto,
+  MixPicturesDto,
 } from './dto';
 
 @Injectable()
@@ -200,6 +201,40 @@ export class UsersService {
           });
         }),
     );
+
+    const updatedUser = await this.prismaService.user.findUnique({
+      where: { id: user.id },
+      include: UsersSelector.selectUser(),
+    });
+
+    return new UserDto(updatedUser);
+  }
+
+  async mixPictures(dto: MixPicturesDto): Promise<UserDto> {
+    const user = await this.prismaService.user.findUnique({
+      where: { id: dto.userId },
+      include: { pictures: true },
+    });
+    if (!user) {
+      throw new NotFoundException('Such user was not found');
+    }
+
+    const mixPicture = user.pictures.find((pic) => pic.order === dto.mixOrder);
+    const withPicture = user.pictures.find(
+      (pic) => pic.order === dto.withOrder,
+    );
+    if (!mixPicture || !withPicture) {
+      throw new NotFoundException();
+    }
+
+    await this.prismaService.picture.update({
+      where: { id: mixPicture.id },
+      data: { order: dto.withOrder },
+    });
+    await this.prismaService.picture.update({
+      where: { id: withPicture.id },
+      data: { order: dto.mixOrder },
+    });
 
     const updatedUser = await this.prismaService.user.findUnique({
       where: { id: user.id },

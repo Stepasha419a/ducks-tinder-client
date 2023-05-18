@@ -23,6 +23,7 @@ import {
   UserDto,
   UserPairDto,
   UserSortsDto,
+  MixPicturesDto,
 } from './dto';
 
 @Controller('users')
@@ -50,6 +51,12 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   deletePicture(@Body() dto: DeletePictureDto): Promise<UserDto> {
     return this.usersService.deletePicture(dto);
+  }
+
+  @Put('picture/mix')
+  @HttpCode(HttpStatus.OK)
+  mixPictures(@Body() dto: MixPicturesDto): Promise<UserDto> {
+    return this.usersService.mixPictures(dto);
   }
 
   @Get('pairs/:id')

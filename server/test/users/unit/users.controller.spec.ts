@@ -4,12 +4,15 @@ import { UsersService } from 'users/users.service';
 import { UsersServiceMock } from '../mocks/users.service-mock';
 import { AuthGuard } from 'auth/auth.guard';
 import { shortUserStub, userStub } from '../stubs';
-import { UserSortsDto } from 'users/dto/user-sorts.dto';
-import { UpdateUserDto } from 'users/dto/update-user.dto';
-import { SavePictureDto } from 'users/dto/save-picture.dto';
-import { DeletePictureDto } from 'users/dto/delete-picture.dto';
-import { UserPairDto } from 'users/dto/user-pair.dto';
-import { UserDto } from 'users/dto';
+import {
+  UserDto,
+  UserSortsDto,
+  UpdateUserDto,
+  SavePictureDto,
+  DeletePictureDto,
+  MixPicturesDto,
+  UserPairDto,
+} from 'users/dto';
 import { ShortUser } from 'users/users.interface';
 
 describe('UsersController', () => {
@@ -124,6 +127,28 @@ describe('UsersController', () => {
 
     it('should call usersService', () => {
       expect(usersService.deletePicture).toBeCalledWith(deletePictureDto);
+    });
+
+    it('should return a user', () => {
+      expect(user).toEqual(userStub());
+    });
+  });
+
+  describe('when mixPictures is called', () => {
+    let user: UserDto;
+    let mixPicturesDto: MixPicturesDto;
+
+    beforeEach(async () => {
+      mixPicturesDto = {
+        userId: userStub().id,
+        mixOrder: 0,
+        withOrder: 1,
+      };
+      user = await usersController.mixPictures(mixPicturesDto);
+    });
+
+    it('should call usersService', () => {
+      expect(usersService.mixPictures).toBeCalledWith(mixPicturesDto);
     });
 
     it('should return a user', () => {
