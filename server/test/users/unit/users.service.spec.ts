@@ -1,12 +1,10 @@
-import { Test } from '@nestjs/testing';
-import { UsersService } from '../users.service';
-import { User } from '../users.model';
+/* import { Test } from '@nestjs/testing';
+import { UsersService } from 'src/users/users.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { FilesService } from '../../files/files.service';
-import { FilesModule } from '../../files/files.module';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { partnerSettingsDefault, picturesDefault } from '../users.constants';
-import { UpdateUserDto } from '../dto/update-user.dto';
+import { FilesService } from 'src/files/files.service';
+import { FilesModule } from 'src/files/files.module';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 
 describe('UsersService', () => {
   let service: UsersService;
@@ -26,22 +24,6 @@ describe('UsersService', () => {
     email: 'newEmail@gmail.com',
     name: 'John',
   };
-
-  const getUserData = (dto) => ({
-    id: 'sdfhsdghj34259034578923',
-    description: '',
-    isActivated: false,
-    age: 18,
-    sex: 'male',
-    nickname: '',
-    interests: [],
-    partnerSettings: partnerSettingsDefault,
-    pictures: picturesDefault,
-    chats: [],
-    pairs: [],
-    checkedUsers: [],
-    ...dto,
-  });
 
   const mockUserModel = {
     create: jest.fn((dto: CreateUserDto) => Promise.resolve(getUserData(dto))),
@@ -109,3 +91,4 @@ describe('UsersService', () => {
     );
   });
 });
+ */

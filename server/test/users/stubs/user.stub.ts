@@ -1,9 +1,9 @@
-import { UserDto } from '../../dto/user.dto';
+import { UserDto } from '../../../src/users/dto/user.dto';
 
 export const userStub = (): UserDto => ({
   id: 'sdfhsdghj34259034578923',
   email: '123@mail.ru',
-  name: 'stepa',
+  name: 'Jason',
   description: '',
   isActivated: false,
   age: 18,

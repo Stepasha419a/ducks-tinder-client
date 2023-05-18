@@ -1,16 +1,16 @@
 import { Test } from '@nestjs/testing';
-import { UsersController } from '../users.controller';
-import { UsersService } from '../users.service';
-import { AuthGuard } from '../../auth/auth.guard';
-import { userStub } from './stubs';
-import { IUserDto } from '../users.interface';
-import { UserSortsDto } from '../dto/user-sorts.dto';
-import { UpdateUserDto } from '../dto/update-user.dto';
-import { SavePictureDto } from '../dto/save-picture.dto';
-import { DeletePictureDto } from '../dto/delete-picture.dto';
-import { UserPairDto } from '../dto/user-pair.dto';
-
-jest.mock('../users.service');
+import { UsersController } from 'users/users.controller';
+import { UsersService } from 'users/users.service';
+import { UsersServiceMock } from '../mocks/users.service-mock';
+import { AuthGuard } from 'auth/auth.guard';
+import { shortUserStub, userStub } from '../stubs';
+import { UserSortsDto } from 'users/dto/user-sorts.dto';
+import { UpdateUserDto } from 'users/dto/update-user.dto';
+import { SavePictureDto } from 'users/dto/save-picture.dto';
+import { DeletePictureDto } from 'users/dto/delete-picture.dto';
+import { UserPairDto } from 'users/dto/user-pair.dto';
+import { UserDto } from 'users/dto';
+import { ShortUser } from 'users/users.interface';
 
 describe('UsersController', () => {
   let usersController: UsersController;
@@ -25,6 +25,8 @@ describe('UsersController', () => {
     })
       .overrideGuard(AuthGuard)
       .useValue(mockAuthGuard)
+      .overrideProvider(UsersService)
+      .useValue(UsersServiceMock())
       .compile();
 
     usersController = await moduleRef.get<UsersController>(UsersController);
@@ -37,8 +39,8 @@ describe('UsersController', () => {
     });
   });
 
-  describe('when update is called', () => {
-    let user: IUserDto;
+  describe('when patch is called', () => {
+    let user: UserDto;
     let updateUserDto: UpdateUserDto;
 
     beforeEach(async () => {
@@ -46,36 +48,20 @@ describe('UsersController', () => {
         name: 'John',
         email: 'email123123@gmail.com',
       };
-      user = await usersController.update(updateUserDto, userStub().id);
+      user = await usersController.patch(updateUserDto, userStub().id);
     });
 
     it('should call usersService', () => {
-      expect(usersService.update).toBeCalledWith(userStub().id, updateUserDto);
+      expect(usersService.patch).toBeCalledWith(userStub().id, updateUserDto);
     });
 
-    it('should return an updated user', () => {
-      expect(user).toEqual(userStub());
-    });
-  });
-
-  describe('when delete is called', () => {
-    let user: IUserDto;
-
-    beforeEach(async () => {
-      user = await usersController.delete(userStub().id);
-    });
-
-    it('should call usersService', () => {
-      expect(usersService.delete).toBeCalledWith(userStub().id);
-    });
-
-    it('should return a deleted user', () => {
+    it('should return a user', () => {
       expect(user).toEqual(userStub());
     });
   });
 
   describe('when getSorted is called', () => {
-    let user: IUserDto;
+    let user: ShortUser;
     let sortedUserDto: UserSortsDto;
 
     beforeEach(async () => {
@@ -83,7 +69,8 @@ describe('UsersController', () => {
         distance: 100,
         onlyNear: true,
         age: 20,
-        preferAge: { from: 18, to: 25 },
+        preferAgeFrom: 18,
+        preferAgeTo: 25,
         sex: 'male',
         preferSex: 'female',
         userIds: [],
@@ -95,19 +82,18 @@ describe('UsersController', () => {
       expect(usersService.getSorted).toBeCalledWith(sortedUserDto);
     });
 
-    it('should return a sorted user', () => {
-      expect(user).toEqual(userStub());
+    it('should return a short user', () => {
+      expect(user).toEqual(shortUserStub());
     });
   });
 
   describe('when savePicture is called', () => {
-    let user: IUserDto;
+    let user: UserDto;
     let savePictureDto: SavePictureDto;
 
     beforeEach(async () => {
       savePictureDto = {
         userId: userStub().id,
-        setting: 'avatar',
       };
       user = await usersController.savePicture(
         savePictureDto,
@@ -125,14 +111,13 @@ describe('UsersController', () => {
   });
 
   describe('when deletePicture is called', () => {
-    let user: IUserDto;
+    let user: UserDto;
     let deletePictureDto: DeletePictureDto;
 
     beforeEach(async () => {
       deletePictureDto = {
-        userId: 'sdfhsdghj34259034578923',
-        pictureName: 'randomPictureName',
-        setting: 'avatar',
+        userId: userStub().id,
+        order: 0,
       };
       user = await usersController.deletePicture(deletePictureDto);
     });
@@ -141,40 +126,40 @@ describe('UsersController', () => {
       expect(usersService.deletePicture).toBeCalledWith(deletePictureDto);
     });
 
-    it('should return an updated user', () => {
+    it('should return a user', () => {
       expect(user).toEqual(userStub());
     });
   });
 
   describe('when createPair is called', () => {
-    let user: IUserDto;
+    let users: ShortUser[];
     let UserPairDto: UserPairDto;
 
     beforeEach(async () => {
       UserPairDto = {
-        forUserId: '6456456456456',
-        userId: 'sdfhsdghj34259034578923',
+        userId: '6456456456456',
+        userPairId: userStub().id,
       };
-      user = await usersController.createPair(UserPairDto);
+      users = await usersController.createPair(UserPairDto);
     });
 
     it('should call usersService', () => {
       expect(usersService.createPair).toBeCalledWith(UserPairDto);
     });
 
-    it('should return a user', () => {
-      expect(user).toEqual(userStub());
+    it('should return an array of short users', () => {
+      expect(users).toEqual([shortUserStub()]);
     });
   });
 
   describe('when deletePair is called', () => {
-    let user: IUserDto;
+    let user: ShortUser[];
     let UserPairDto: UserPairDto;
 
     beforeEach(async () => {
       UserPairDto = {
-        forUserId: '6456456456456',
-        userId: 'sdfhsdghj34259034578923',
+        userId: '6456456456456',
+        userPairId: userStub().id,
       };
       user = await usersController.deletePair(UserPairDto);
     });
@@ -183,8 +168,8 @@ describe('UsersController', () => {
       expect(usersService.deletePair).toBeCalledWith(UserPairDto);
     });
 
-    it('should return a user', () => {
-      expect(user).toEqual(userStub());
+    it('should return an array of short users', () => {
+      expect(user).toEqual([shortUserStub()]);
     });
   });
 });

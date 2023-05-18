@@ -1,6 +1,6 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
-import { IUserPassDto } from 'src/users/users.interface';
+import { IUserPassDto } from 'users/users.interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()

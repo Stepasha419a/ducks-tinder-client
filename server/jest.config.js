@@ -1,4 +1,5 @@
 module.exports = {
+  roots: ['<rootDir>'],
   moduleFileExtensions: ['js', 'json', 'ts'],
   testRegex: '.(e2e-)?spec.ts$',
   transform: {
@@ -7,4 +8,5 @@ module.exports = {
   collectCoverageFrom: ['**/*.(t|j)s'],
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
+  moduleDirectories: ['node_modules', 'src'],
 };

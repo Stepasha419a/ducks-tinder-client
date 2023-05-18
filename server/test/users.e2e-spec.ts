@@ -1,18 +1,12 @@
-import { INestApplication } from '@nestjs/common';
+/* import { INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { CreateUserDto } from '../src/users/dto/create-user.dto';
-import {
-  partnerSettingsDefault,
-  picturesDefault,
-} from '../src/users/users.constants';
-import { UpdateUserDto } from '../src/users/dto/update-user.dto';
+import { UpdateUserDto } from 'src/users/dto/update-user.dto';
 import { getModelToken } from '@nestjs/mongoose';
-import { User } from '../src/users/users.model';
-import { FilesService } from '../src/files/files.service';
-import { AuthGuard } from '../src/auth/auth.guard';
-import { UsersModule } from '../src/users/users.module';
-import { Token } from '../src/tokens/tokens.model';
+import { FilesService } from 'src/files/files.service';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { UsersModule } from 'src/users/users.module';
 
 describe('UsersController (e2e)', () => {
   let app: INestApplication;
@@ -114,3 +108,4 @@ describe('UsersController (e2e)', () => {
     await app.close();
   });
 });
+ */

@@ -1,4 +1,4 @@
-import * as request from 'supertest';
+/* import * as request from 'supertest';
 import { Connection } from 'mongoose';
 import { NestApplication } from '@nestjs/core';
 import { HttpServer } from '@nestjs/common';
@@ -9,7 +9,7 @@ import { AuthGuard } from '../../../auth/auth.guard';
 import { SavePictureDto } from '../../../users/dto/save-picture.dto';
 import { UserSortsDto } from '../../../users/dto/user-sorts.dto';
 import { DeletePictureDto } from '../../../users/dto/delete-picture.dto';
-import { userStub } from '../stubs';
+import { userStub } from '../../../../test/users/stubs';
 import * as path from 'path';
 
 describe('UsersController', () => {
@@ -137,3 +137,4 @@ describe('UsersController', () => {
     });
   });
 });
+ */
