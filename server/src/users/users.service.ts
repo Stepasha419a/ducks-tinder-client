@@ -176,7 +176,7 @@ export class UsersService {
 
   async deletePicture(dto: DeletePictureDto): Promise<UserDto> {
     const picture = await this.prismaService.picture.findFirst({
-      where: { ...dto },
+      where: dto,
     });
 
     if (!picture) {

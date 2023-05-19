@@ -2,34 +2,26 @@ import { Test } from '@nestjs/testing';
 import { UsersService } from 'users/users.service';
 import { FilesService } from 'files/files.service';
 import { FilesModule } from 'files/files.module';
-import { CreateUserDto, UpdateUserDto, UserDto, UserSortsDto } from 'users/dto';
-import { shortUserStub, userStub } from '../stubs';
 import { PrismaModule } from 'prisma/prisma.module';
-import { UsersPrismaMock } from '../mocks/users.prisma-mock';
 import { PrismaService } from 'prisma/prisma.service';
-import { UsersSelector } from 'users/utils';
 import { User } from '@prisma/client';
 import { ShortUser } from 'users/users.interface';
+import {
+  CreateUserDto,
+  DeletePictureDto,
+  SavePictureDto,
+  UpdateUserDto,
+  UserDto,
+  UserSortsDto,
+} from 'users/dto';
+import { UsersSelector } from 'users/utils';
+import { clearMockHistory } from '../../common/utils';
+import { UsersPrismaMock } from '../mocks/users.prisma-mock';
+import { FilesServiceMock } from '../mocks/files.service-mock';
+import { shortUserStub, userStub } from '../stubs';
 
 describe('UsersService', () => {
   let service: UsersService;
-
-  /* const mockUserModel = {
-    create: jest.fn((dto: CreateUserDto) => Promise.resolve(getUserData(dto))),
-    findById: jest.fn((id: string) =>
-      Promise.resolve({ ...getUserData(receivedUserCreateDto), id }),
-    ),
-    findOne: jest.fn((field: Record<string, unknown>) =>
-      Promise.resolve({ ...getUserData(receivedUserCreateDto), ...field }),
-    ),
-    findByIdAndUpdate: jest.fn((id: string, dto: UpdateUserDto) =>
-      Promise.resolve({ ...getUserData(receivedUserCreateDto), ...dto, id }),
-    ),
-    findByIdAndDelete: jest.fn((id: string) =>
-      Promise.resolve({ ...getUserData(expectedUserDto), id }),
-    ),
-  }; */
-  const mockFilesService = {};
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -37,12 +29,17 @@ describe('UsersService', () => {
       imports: [FilesModule, PrismaModule],
     })
       .overrideProvider(FilesService)
-      .useValue(mockFilesService)
+      .useValue(FilesServiceMock)
       .overrideProvider(PrismaService)
       .useValue(UsersPrismaMock)
       .compile();
 
     service = moduleRef.get<UsersService>(UsersService);
+  });
+
+  beforeEach(() => {
+    clearMockHistory(UsersPrismaMock);
+    clearMockHistory(FilesServiceMock);
   });
 
   describe('when service is ready', () => {
@@ -58,7 +55,7 @@ describe('UsersService', () => {
       user = await service.getOne(userStub().id);
     });
 
-    it('should call findUnique', async () => {
+    it('should call find unique', async () => {
       expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(1);
       expect(UsersPrismaMock.user.findUnique).toBeCalledWith({
         where: { id: userStub().id },
@@ -78,11 +75,10 @@ describe('UsersService', () => {
       user = await service.getByEmail(userStub().email);
     });
 
-    it('should call findUnique', async () => {
-      // it was called before
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(3);
+    it('should call find unique', async () => {
+      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(1);
       expect(UsersPrismaMock.user.findUnique).toBeCalledWith({
-        where: { id: userStub().id },
+        where: { email: userStub().email },
         include: UsersSelector.selectUser(),
       });
     });
@@ -130,8 +126,7 @@ describe('UsersService', () => {
       user = await service.getSorted(userSortsDto);
     });
 
-    it('should call findFirst', async () => {
-      // it was called before
+    it('should call find first', async () => {
       expect(UsersPrismaMock.user.findFirst).toBeCalledTimes(1);
       expect(UsersPrismaMock.user.findFirst).toBeCalledWith(
         findFirstCalledWith,
@@ -169,7 +164,6 @@ describe('UsersService', () => {
     });
   });
 
-  // TODO: finish that
   describe('when patch is called', () => {
     let user: UserDto;
     let updateUserDto: UpdateUserDto;
@@ -191,9 +185,18 @@ describe('UsersService', () => {
     });
 
     it('should call update user', async () => {
-      expect(UsersPrismaMock.user.update).toBeCalledTimes(4);
+      expect(UsersPrismaMock.user.update).toBeCalledTimes(3);
       expect(UsersPrismaMock.user.update).toHaveBeenNthCalledWith(1, {
         where: { id: userStub().id },
+        data: {
+          interests: {
+            disconnect: {
+              id: '456456',
+            },
+          },
+        },
+      });
+      expect(UsersPrismaMock.user.update).toHaveBeenNthCalledWith(2, {
         data: {
           interests: {
             connect: {
@@ -201,46 +204,114 @@ describe('UsersService', () => {
             },
           },
         },
-      });
-      expect(UsersPrismaMock.user.update).toHaveBeenNthCalledWith(2, {
-        data: {
-          email: 'email123123@gmail.com',
-          interests: undefined,
-          name: 'John',
-        },
-        include: UsersSelector.selectUser(),
         where: {
           id: 'sdfhsdghj34259034578923',
         },
       });
     });
 
-    /* it('should return a user', async () => {
+    it('should return a user', async () => {
       expect(user).toEqual(userStub());
-    }); */
+    });
   });
 
-  /* it('should get a user by id and return that', async () => {
-    expect(await service.getOne('sdfhsdghj34259034578923')).toEqual(
-      getUserData(expectedUserDto),
-    );
+  describe('when save picture is called', () => {
+    let user: UserDto;
+    let savePictureDto: SavePictureDto;
+
+    beforeEach(async () => {
+      savePictureDto = {
+        userId: userStub().id,
+      };
+      user = await service.savePicture(savePictureDto, {
+        fieldname: '123123',
+      } as Express.Multer.File);
+    });
+
+    it('should call find unique', async () => {
+      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(2);
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { id: userStub().id },
+        include: { pictures: true },
+      });
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
+        where: { id: userStub().id },
+        include: UsersSelector.selectUser(),
+      });
+    });
+
+    it('should call create picture', async () => {
+      expect(UsersPrismaMock.picture.create).toBeCalledTimes(1);
+      expect(UsersPrismaMock.picture.create).toBeCalledWith({
+        data: {
+          name: 'picture-name',
+          userId: user.id,
+          order: user.pictures.length,
+        },
+      });
+    });
+
+    it('should return a user', async () => {
+      expect(user).toEqual(userStub());
+    });
   });
 
-  it('should get a user by email and return its dirty object', async () => {
-    expect(await service.getByEmail('123@mail.ru')).toEqual(
-      getUserData(receivedUserCreateDto),
-    );
-  });
+  describe('when delete picture is called', () => {
+    let user: UserDto;
+    let deletePictureDto: DeletePictureDto;
 
-  it('should update a user and return that', async () => {
-    expect(
-      await service.update('sdfhsdghj34259034578923', updateUserDto),
-    ).toEqual(getUserData(updateUserDto));
-  });
+    beforeEach(async () => {
+      deletePictureDto = {
+        userId: userStub().id,
+        order: 0,
+      };
+      user = await service.deletePicture(deletePictureDto);
+    });
 
-  it('should delete a user and return that', async () => {
-    expect(await service.delete('sdfhsdghj34259034578923')).toEqual(
-      getUserData(expectedUserDto),
-    );
-  }); */
+    it('should call picture find first', async () => {
+      expect(UsersPrismaMock.picture.findFirst).toBeCalledTimes(1);
+      expect(UsersPrismaMock.picture.findFirst).toBeCalledWith({
+        where: deletePictureDto,
+      });
+    });
+
+    it('should call files-service delete picture', async () => {
+      expect(FilesServiceMock.deletePicture).toBeCalledTimes(1);
+      expect(FilesServiceMock.deletePicture).toBeCalledWith(
+        'picture-name',
+        userStub().id,
+      );
+    });
+
+    it('should call picture delete', async () => {
+      expect(UsersPrismaMock.picture.delete).toBeCalledTimes(1);
+      expect(UsersPrismaMock.picture.delete).toBeCalledWith({
+        where: { id: '123123' },
+      });
+    });
+
+    it('should call picture update', async () => {
+      expect(UsersPrismaMock.picture.update).toBeCalledTimes(1);
+      expect(UsersPrismaMock.picture.update).toBeCalledWith({
+        where: { id: '456456' },
+        data: { order: 0 },
+      });
+    });
+
+    it('should call user find unique', async () => {
+      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(2);
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { id: userStub().id },
+        include: { pictures: true },
+      });
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
+        where: { id: userStub().id },
+        include: UsersSelector.selectUser(),
+      });
+    });
+
+    it('should return a user', async () => {
+      expect(user).toEqual(userStub());
+    });
+  });
 });

@@ -9,7 +9,7 @@ export const userStub = (): UserDto => ({
   age: 18,
   sex: 'male',
   nickname: '',
-  interests: [],
+  interests: [{ id: '456456', name: 'programming' }],
   place: '',
   distance: 2,
   usersOnlyInDistance: false,
@@ -18,8 +18,14 @@ export const userStub = (): UserDto => ({
   preferAgeTo: 20,
   pictures: [
     {
+      id: '123123',
       name: '123.jpg',
       order: 0,
+    },
+    {
+      id: '456456',
+      name: '456.jpg',
+      order: 1,
     },
   ],
   pairs: [],
