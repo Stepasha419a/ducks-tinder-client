@@ -1,3 +1,4 @@
+import { UserSelect } from 'prisma';
 import { userStub, shortUserStub } from '../stubs';
 
 export const UsersPrismaMock = {
@@ -5,9 +6,14 @@ export const UsersPrismaMock = {
     create: jest
       .fn()
       .mockResolvedValue({ ...userStub(), _count: { pairFor: 0 } }),
-    findUnique: jest
-      .fn()
-      .mockResolvedValue({ ...userStub(), _count: { pairFor: 0 } }),
+    findUnique: jest.fn((select: UserSelect) => {
+      // delete pair unit service test requires equality between input and prisma-find ids
+      // => returning pair id which was provided to the service dto
+      if (select?.where?.id === '34545656') {
+        return { ...userStub(), id: '34545656', _count: { pairFor: 0 } };
+      }
+      return { ...userStub(), _count: { pairFor: 0 } };
+    }),
     findFirst: jest.fn().mockResolvedValue(shortUserStub()),
     update: jest
       .fn()

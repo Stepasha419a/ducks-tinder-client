@@ -28,6 +28,16 @@ export const userStub = (): UserDto => ({
       order: 1,
     },
   ],
-  pairs: [],
+  pairs: [
+    {
+      id: '34545656',
+      name: 'Janet',
+      age: 23,
+      description: null,
+      distance: 80,
+      interests: [],
+      pictures: [],
+    },
+  ],
   pairsCount: 0,
 });

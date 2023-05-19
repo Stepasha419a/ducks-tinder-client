@@ -9,9 +9,11 @@ import { ShortUser } from 'users/users.interface';
 import {
   CreateUserDto,
   DeletePictureDto,
+  MixPicturesDto,
   SavePictureDto,
   UpdateUserDto,
   UserDto,
+  UserPairDto,
   UserSortsDto,
 } from 'users/dto';
 import { UsersSelector } from 'users/utils';
@@ -312,6 +314,155 @@ describe('UsersService', () => {
 
     it('should return a user', async () => {
       expect(user).toEqual(userStub());
+    });
+  });
+
+  describe('when mix pictures is called', () => {
+    let user: UserDto;
+    let mixPicturesDto: MixPicturesDto;
+
+    beforeEach(async () => {
+      mixPicturesDto = {
+        userId: userStub().id,
+        mixOrder: 0,
+        withOrder: 1,
+      };
+      user = await service.mixPictures(mixPicturesDto);
+    });
+
+    it('should call user find unique', async () => {
+      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(2);
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { id: userStub().id },
+        include: { pictures: true },
+      });
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
+        where: { id: userStub().id },
+        include: UsersSelector.selectUser(),
+      });
+    });
+
+    it('should call picture update', async () => {
+      expect(UsersPrismaMock.picture.update).toBeCalledTimes(2);
+      expect(UsersPrismaMock.picture.update).toHaveBeenNthCalledWith(1, {
+        where: { id: '123123' },
+        data: { order: mixPicturesDto.withOrder },
+      });
+      expect(UsersPrismaMock.picture.update).toHaveBeenNthCalledWith(2, {
+        where: { id: '456456' },
+        data: { order: mixPicturesDto.mixOrder },
+      });
+    });
+
+    it('should return a user', async () => {
+      expect(user).toEqual(userStub());
+    });
+  });
+
+  describe('when get pairs is called', () => {
+    let pairs: ShortUser[];
+
+    beforeEach(async () => {
+      pairs = await service.getPairs(userStub().id);
+    });
+
+    it('should call user find unique', async () => {
+      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(1);
+      expect(UsersPrismaMock.user.findUnique).toBeCalledWith({
+        where: { id: userStub().id },
+        select: {
+          pairs: {
+            select: UsersSelector.selectShortUser(),
+          },
+        },
+      });
+    });
+
+    it('should return pairs', async () => {
+      expect(pairs).toEqual(userStub().pairs);
+    });
+  });
+
+  describe('when create pair is called', () => {
+    let pairs: ShortUser[];
+    let userPairDto: UserPairDto;
+
+    beforeEach(async () => {
+      userPairDto = {
+        userId: userStub().id,
+        userPairId: '123123',
+      };
+      pairs = await service.createPair(userPairDto);
+    });
+
+    it('should call user find unique', async () => {
+      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(2);
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { id: userPairDto.userId },
+        include: { pairs: { select: { id: true } } },
+      });
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
+        where: { id: userPairDto.userPairId },
+      });
+    });
+
+    it('should call user update', async () => {
+      expect(UsersPrismaMock.user.update).toBeCalledTimes(1);
+      expect(UsersPrismaMock.user.update).toBeCalledWith({
+        where: { id: userPairDto.userId },
+        // connect to userPairDto.userId - userPairDto.userId
+        // because find unique returns equal objects
+        data: { pairs: { connect: { id: userPairDto.userId } } },
+        select: {
+          pairs: {
+            select: UsersSelector.selectShortUser(),
+          },
+        },
+      });
+    });
+
+    it('should return pairs', async () => {
+      expect(pairs).toEqual(userStub().pairs);
+    });
+  });
+
+  describe('when delete pair is called', () => {
+    let pairs: ShortUser[];
+    let userPairDto: UserPairDto;
+
+    beforeEach(async () => {
+      userPairDto = {
+        userId: userStub().id,
+        userPairId: '34545656',
+      };
+      pairs = await service.deletePair(userPairDto);
+    });
+
+    it('should call user find unique', async () => {
+      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(3);
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { id: userPairDto.userId },
+        include: { pairs: { select: { id: true } } },
+      });
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
+        where: { id: userPairDto.userPairId },
+      });
+      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(3, {
+        where: { id: userPairDto.userId },
+        select: { pairs: { select: UsersSelector.selectShortUser() } },
+      });
+    });
+
+    it('should call user update', async () => {
+      expect(UsersPrismaMock.user.update).toBeCalledTimes(1);
+      expect(UsersPrismaMock.user.update).toBeCalledWith({
+        where: { id: userPairDto.userId },
+        data: { pairs: { disconnect: { id: userPairDto.userPairId } } },
+      });
+    });
+
+    it('should return pairs', async () => {
+      expect(pairs).toEqual(userStub().pairs);
     });
   });
 });
