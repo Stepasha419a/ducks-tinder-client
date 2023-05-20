@@ -11,7 +11,7 @@ oAuth2Client.setCredentials({ refresh_token: process.env.REFRESH_TOKEN });
 
 @Injectable()
 export class MailService {
-  async activate(link: string) {}
+  //async activate(link: string) {}
 
   public async sendMail(to: string, link: string, name: string) {
     try {

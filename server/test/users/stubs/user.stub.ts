@@ -9,7 +9,7 @@ export const userStub = (): UserDto => ({
   age: 18,
   sex: 'male',
   nickname: '',
-  interests: [{ id: '456456', name: 'programming' }],
+  interests: [{ id: 'interest-id-1', name: 'programming' }],
   place: '',
   distance: 2,
   usersOnlyInDistance: false,

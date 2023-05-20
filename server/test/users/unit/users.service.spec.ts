@@ -6,24 +6,28 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { User } from '@prisma/client';
 import { ShortUser } from 'users/users.interface';
-import {
-  CreateUserDto,
-  DeletePictureDto,
-  MixPicturesDto,
-  SavePictureDto,
-  UpdateUserDto,
-  UserDto,
-  UserPairDto,
-  UserSortsDto,
-} from 'users/dto';
+import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/utils';
 import { clearMockHistory } from '../../common/utils';
 import { UsersPrismaMock } from '../mocks/users.prisma-mock';
 import { FilesServiceMock } from '../mocks/files.service-mock';
 import { shortUserStub, userStub } from '../stubs';
+import {
+  CREATE_USER_DTO,
+  CREATE_USER_PAIR_DTO,
+  DELETE_PICTURE_DTO,
+  DELETE_USER_PAIR_DTO,
+  MIX_PICTURES_DTO,
+  SAVE_PICTURE_DTO,
+  UPDATE_USER_DTO,
+  USER_SORTS_DTO,
+} from '../values/users-const.dto';
+import { GET_SORTED_FIND_FIRST_CALLED } from '../values/users-const.expect';
 
 describe('UsersService', () => {
   let service: UsersService;
+  let prismaService: PrismaService;
+  let filesService: FilesService;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -31,17 +35,19 @@ describe('UsersService', () => {
       imports: [FilesModule, PrismaModule],
     })
       .overrideProvider(FilesService)
-      .useValue(FilesServiceMock)
+      .useValue(FilesServiceMock())
       .overrideProvider(PrismaService)
-      .useValue(UsersPrismaMock)
+      .useValue(UsersPrismaMock())
       .compile();
 
     service = moduleRef.get<UsersService>(UsersService);
+    prismaService = moduleRef.get<PrismaService>(PrismaService);
+    filesService = moduleRef.get<FilesService>(FilesService);
   });
 
   beforeEach(() => {
-    clearMockHistory(UsersPrismaMock);
-    clearMockHistory(FilesServiceMock);
+    clearMockHistory(prismaService);
+    clearMockHistory(filesService);
   });
 
   describe('when service is ready', () => {
@@ -58,8 +64,8 @@ describe('UsersService', () => {
     });
 
     it('should call find unique', async () => {
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(1);
-      expect(UsersPrismaMock.user.findUnique).toBeCalledWith({
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userStub().id },
         include: UsersSelector.selectUser(),
       });
@@ -78,8 +84,8 @@ describe('UsersService', () => {
     });
 
     it('should call find unique', async () => {
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(1);
-      expect(UsersPrismaMock.user.findUnique).toBeCalledWith({
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
         where: { email: userStub().email },
         include: UsersSelector.selectUser(),
       });
@@ -92,46 +98,15 @@ describe('UsersService', () => {
 
   describe('when get sorted is called', () => {
     let user: ShortUser;
-    let userSortsDto: UserSortsDto;
-    let findFirstCalledWith;
 
     beforeEach(async () => {
-      userSortsDto = {
-        distance: 100,
-        onlyNear: true,
-        age: 20,
-        preferAgeFrom: 18,
-        preferAgeTo: 25,
-        sex: 'male',
-        preferSex: 'female',
-        userIds: [],
-      };
-      findFirstCalledWith = {
-        where: {
-          id: { notIn: userSortsDto.userIds },
-          distance: { gt: 0, lte: userSortsDto.distance },
-          age: {
-            gt: userSortsDto.preferAgeFrom - 1,
-            lt: userSortsDto.preferAgeTo + 1,
-          },
-          preferAgeFrom: {
-            lt: userSortsDto.age + 1,
-          },
-          preferAgeTo: {
-            gt: userSortsDto.age - 1,
-          },
-          sex: userSortsDto.preferSex,
-          preferSex: userSortsDto.sex,
-        },
-        select: UsersSelector.selectShortUser(),
-      };
-      user = await service.getSorted(userSortsDto);
+      user = await service.getSorted(USER_SORTS_DTO);
     });
 
     it('should call find first', async () => {
-      expect(UsersPrismaMock.user.findFirst).toBeCalledTimes(1);
-      expect(UsersPrismaMock.user.findFirst).toBeCalledWith(
-        findFirstCalledWith,
+      expect(prismaService.user.findFirst).toBeCalledTimes(1);
+      expect(prismaService.user.findFirst).toBeCalledWith(
+        GET_SORTED_FIND_FIRST_CALLED,
       );
     });
 
@@ -142,21 +117,15 @@ describe('UsersService', () => {
 
   describe('when create is called', () => {
     let user: UserDto;
-    let createUserDto: CreateUserDto;
 
     beforeEach(async () => {
-      createUserDto = {
-        email: userStub().email,
-        password: '123123123',
-        name: userStub().name,
-      };
-      user = await service.create(createUserDto);
+      user = await service.create(CREATE_USER_DTO);
     });
 
     it('should call create user', async () => {
-      expect(UsersPrismaMock.user.create).toBeCalledTimes(1);
-      expect(UsersPrismaMock.user.create).toBeCalledWith({
-        data: createUserDto,
+      expect(prismaService.user.create).toBeCalledTimes(1);
+      expect(prismaService.user.create).toBeCalledWith({
+        data: CREATE_USER_DTO,
         include: UsersSelector.selectUser(),
       });
     });
@@ -168,46 +137,40 @@ describe('UsersService', () => {
 
   describe('when patch is called', () => {
     let user: UserDto;
-    let updateUserDto: UpdateUserDto;
 
     beforeEach(async () => {
-      updateUserDto = {
-        name: 'John',
-        email: 'email123123@gmail.com',
-        interests: ['traveling'],
-      };
-      user = await service.patch(userStub().id, updateUserDto);
+      user = await service.patch(userStub().id, UPDATE_USER_DTO);
     });
 
     it('should call find many interests', async () => {
-      expect(UsersPrismaMock.interest.findMany).toBeCalledTimes(1);
-      expect(UsersPrismaMock.interest.findMany).toBeCalledWith({
-        where: { name: { in: updateUserDto.interests } },
+      expect(prismaService.interest.findMany).toBeCalledTimes(1);
+      expect(prismaService.interest.findMany).toBeCalledWith({
+        where: { name: { in: UPDATE_USER_DTO.interests } },
       });
     });
 
     it('should call update user', async () => {
-      expect(UsersPrismaMock.user.update).toBeCalledTimes(3);
-      expect(UsersPrismaMock.user.update).toHaveBeenNthCalledWith(1, {
+      expect(prismaService.user.update).toBeCalledTimes(3);
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
         where: { id: userStub().id },
         data: {
           interests: {
             disconnect: {
-              id: '456456',
+              id: 'interest-id-1',
             },
           },
         },
       });
-      expect(UsersPrismaMock.user.update).toHaveBeenNthCalledWith(2, {
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(2, {
         data: {
           interests: {
             connect: {
-              id: '123123',
+              id: 'interest-id-2',
             },
           },
         },
         where: {
-          id: 'sdfhsdghj34259034578923',
+          id: userStub().id,
         },
       });
     });
@@ -219,36 +182,40 @@ describe('UsersService', () => {
 
   describe('when save picture is called', () => {
     let user: UserDto;
-    let savePictureDto: SavePictureDto;
 
     beforeEach(async () => {
-      savePictureDto = {
-        userId: userStub().id,
-      };
-      user = await service.savePicture(savePictureDto, {
+      user = await service.savePicture(SAVE_PICTURE_DTO, {
         fieldname: '123123',
       } as Express.Multer.File);
     });
 
     it('should call find unique', async () => {
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(2);
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
+      expect(prismaService.user.findUnique).toBeCalledTimes(2);
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
         where: { id: userStub().id },
         include: { pictures: true },
       });
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
         where: { id: userStub().id },
         include: UsersSelector.selectUser(),
       });
     });
 
+    it('should call files-service save picture', async () => {
+      expect(filesService.savePicture).toBeCalledTimes(1);
+      expect(filesService.savePicture).toBeCalledWith(
+        { fieldname: '123123' },
+        userStub().id,
+      );
+    });
+
     it('should call create picture', async () => {
-      expect(UsersPrismaMock.picture.create).toBeCalledTimes(1);
-      expect(UsersPrismaMock.picture.create).toBeCalledWith({
+      expect(prismaService.picture.create).toBeCalledTimes(1);
+      expect(prismaService.picture.create).toBeCalledWith({
         data: {
           name: 'picture-name',
-          userId: user.id,
-          order: user.pictures.length,
+          userId: userStub().id,
+          order: userStub().pictures.length,
         },
       });
     });
@@ -260,53 +227,48 @@ describe('UsersService', () => {
 
   describe('when delete picture is called', () => {
     let user: UserDto;
-    let deletePictureDto: DeletePictureDto;
 
     beforeEach(async () => {
-      deletePictureDto = {
-        userId: userStub().id,
-        order: 0,
-      };
-      user = await service.deletePicture(deletePictureDto);
+      user = await service.deletePicture(DELETE_PICTURE_DTO);
     });
 
     it('should call picture find first', async () => {
-      expect(UsersPrismaMock.picture.findFirst).toBeCalledTimes(1);
-      expect(UsersPrismaMock.picture.findFirst).toBeCalledWith({
-        where: deletePictureDto,
+      expect(prismaService.picture.findFirst).toBeCalledTimes(1);
+      expect(prismaService.picture.findFirst).toBeCalledWith({
+        where: DELETE_PICTURE_DTO,
       });
     });
 
     it('should call files-service delete picture', async () => {
-      expect(FilesServiceMock.deletePicture).toBeCalledTimes(1);
-      expect(FilesServiceMock.deletePicture).toBeCalledWith(
+      expect(filesService.deletePicture).toBeCalledTimes(1);
+      expect(filesService.deletePicture).toBeCalledWith(
         'picture-name',
         userStub().id,
       );
     });
 
     it('should call picture delete', async () => {
-      expect(UsersPrismaMock.picture.delete).toBeCalledTimes(1);
-      expect(UsersPrismaMock.picture.delete).toBeCalledWith({
-        where: { id: '123123' },
+      expect(prismaService.picture.delete).toBeCalledTimes(1);
+      expect(prismaService.picture.delete).toBeCalledWith({
+        where: { id: userStub().pictures[0].id },
       });
     });
 
     it('should call picture update', async () => {
-      expect(UsersPrismaMock.picture.update).toBeCalledTimes(1);
-      expect(UsersPrismaMock.picture.update).toBeCalledWith({
-        where: { id: '456456' },
+      expect(prismaService.picture.update).toBeCalledTimes(1);
+      expect(prismaService.picture.update).toBeCalledWith({
+        where: { id: userStub().pictures[1].id },
         data: { order: 0 },
       });
     });
 
     it('should call user find unique', async () => {
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(2);
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
+      expect(prismaService.user.findUnique).toBeCalledTimes(2);
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
         where: { id: userStub().id },
         include: { pictures: true },
       });
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
         where: { id: userStub().id },
         include: UsersSelector.selectUser(),
       });
@@ -319,38 +281,32 @@ describe('UsersService', () => {
 
   describe('when mix pictures is called', () => {
     let user: UserDto;
-    let mixPicturesDto: MixPicturesDto;
 
     beforeEach(async () => {
-      mixPicturesDto = {
-        userId: userStub().id,
-        mixOrder: 0,
-        withOrder: 1,
-      };
-      user = await service.mixPictures(mixPicturesDto);
+      user = await service.mixPictures(MIX_PICTURES_DTO);
     });
 
     it('should call user find unique', async () => {
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(2);
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
+      expect(prismaService.user.findUnique).toBeCalledTimes(2);
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
         where: { id: userStub().id },
         include: { pictures: true },
       });
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
         where: { id: userStub().id },
         include: UsersSelector.selectUser(),
       });
     });
 
     it('should call picture update', async () => {
-      expect(UsersPrismaMock.picture.update).toBeCalledTimes(2);
-      expect(UsersPrismaMock.picture.update).toHaveBeenNthCalledWith(1, {
-        where: { id: '123123' },
-        data: { order: mixPicturesDto.withOrder },
+      expect(prismaService.picture.update).toBeCalledTimes(2);
+      expect(prismaService.picture.update).toHaveBeenNthCalledWith(1, {
+        where: { id: userStub().pictures[0].id },
+        data: { order: MIX_PICTURES_DTO.withOrder },
       });
-      expect(UsersPrismaMock.picture.update).toHaveBeenNthCalledWith(2, {
-        where: { id: '456456' },
-        data: { order: mixPicturesDto.mixOrder },
+      expect(prismaService.picture.update).toHaveBeenNthCalledWith(2, {
+        where: { id: userStub().pictures[1].id },
+        data: { order: MIX_PICTURES_DTO.mixOrder },
       });
     });
 
@@ -367,8 +323,8 @@ describe('UsersService', () => {
     });
 
     it('should call user find unique', async () => {
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(1);
-      expect(UsersPrismaMock.user.findUnique).toBeCalledWith({
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userStub().id },
         select: {
           pairs: {
@@ -385,34 +341,29 @@ describe('UsersService', () => {
 
   describe('when create pair is called', () => {
     let pairs: ShortUser[];
-    let userPairDto: UserPairDto;
 
     beforeEach(async () => {
-      userPairDto = {
-        userId: userStub().id,
-        userPairId: '123123',
-      };
-      pairs = await service.createPair(userPairDto);
+      pairs = await service.createPair(CREATE_USER_PAIR_DTO);
     });
 
     it('should call user find unique', async () => {
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(2);
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
-        where: { id: userPairDto.userId },
+      expect(prismaService.user.findUnique).toBeCalledTimes(2);
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { id: CREATE_USER_PAIR_DTO.userId },
         include: { pairs: { select: { id: true } } },
       });
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
-        where: { id: userPairDto.userPairId },
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
+        where: { id: CREATE_USER_PAIR_DTO.userPairId },
       });
     });
 
     it('should call user update', async () => {
-      expect(UsersPrismaMock.user.update).toBeCalledTimes(1);
-      expect(UsersPrismaMock.user.update).toBeCalledWith({
-        where: { id: userPairDto.userId },
+      expect(prismaService.user.update).toBeCalledTimes(1);
+      expect(prismaService.user.update).toBeCalledWith({
+        where: { id: CREATE_USER_PAIR_DTO.userId },
         // connect to userPairDto.userId - userPairDto.userId
         // because find unique returns equal objects
-        data: { pairs: { connect: { id: userPairDto.userId } } },
+        data: { pairs: { connect: { id: CREATE_USER_PAIR_DTO.userId } } },
         select: {
           pairs: {
             select: UsersSelector.selectShortUser(),
@@ -428,36 +379,33 @@ describe('UsersService', () => {
 
   describe('when delete pair is called', () => {
     let pairs: ShortUser[];
-    let userPairDto: UserPairDto;
 
     beforeEach(async () => {
-      userPairDto = {
-        userId: userStub().id,
-        userPairId: '34545656',
-      };
-      pairs = await service.deletePair(userPairDto);
+      pairs = await service.deletePair(DELETE_USER_PAIR_DTO);
     });
 
     it('should call user find unique', async () => {
-      expect(UsersPrismaMock.user.findUnique).toBeCalledTimes(3);
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(1, {
-        where: { id: userPairDto.userId },
+      expect(prismaService.user.findUnique).toBeCalledTimes(3);
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { id: DELETE_USER_PAIR_DTO.userId },
         include: { pairs: { select: { id: true } } },
       });
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(2, {
-        where: { id: userPairDto.userPairId },
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
+        where: { id: DELETE_USER_PAIR_DTO.userPairId },
       });
-      expect(UsersPrismaMock.user.findUnique).toHaveBeenNthCalledWith(3, {
-        where: { id: userPairDto.userId },
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(3, {
+        where: { id: DELETE_USER_PAIR_DTO.userId },
         select: { pairs: { select: UsersSelector.selectShortUser() } },
       });
     });
 
     it('should call user update', async () => {
-      expect(UsersPrismaMock.user.update).toBeCalledTimes(1);
-      expect(UsersPrismaMock.user.update).toBeCalledWith({
-        where: { id: userPairDto.userId },
-        data: { pairs: { disconnect: { id: userPairDto.userPairId } } },
+      expect(prismaService.user.update).toBeCalledTimes(1);
+      expect(prismaService.user.update).toBeCalledWith({
+        where: { id: DELETE_USER_PAIR_DTO.userId },
+        data: {
+          pairs: { disconnect: { id: DELETE_USER_PAIR_DTO.userPairId } },
+        },
       });
     });
 

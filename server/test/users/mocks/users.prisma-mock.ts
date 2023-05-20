@@ -1,7 +1,7 @@
 import { UserSelect } from 'prisma';
 import { userStub, shortUserStub } from '../stubs';
 
-export const UsersPrismaMock = {
+export const UsersPrismaMock = jest.fn().mockReturnValue({
   user: {
     create: jest
       .fn()
@@ -22,7 +22,7 @@ export const UsersPrismaMock = {
   interest: {
     findMany: jest
       .fn()
-      .mockResolvedValue([{ id: '123123', name: 'traveling' }]),
+      .mockResolvedValue([{ id: 'interest-id-2', name: 'traveling' }]),
   },
   picture: {
     create: jest.fn(),
@@ -35,4 +35,4 @@ export const UsersPrismaMock = {
     update: jest.fn(),
     delete: jest.fn(),
   },
-};
+});

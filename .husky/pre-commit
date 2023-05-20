@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-cd client && npm run lint
-# TODO: fix that cd ../server && npm run lint
+cd client && npm run lint:fix
+cd ../server && npm run lint:fix
