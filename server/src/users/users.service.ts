@@ -100,6 +100,9 @@ export class UsersService {
         interests: true,
       },
     });
+    if (!user) {
+      throw new NotFoundException('Such user was not found');
+    }
 
     if (
       userDto.interests &&

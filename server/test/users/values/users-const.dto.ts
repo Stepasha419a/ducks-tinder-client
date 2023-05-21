@@ -27,9 +27,9 @@ export const CREATE_USER_DTO: CreateUserDto = {
 };
 
 export const UPDATE_USER_DTO: UpdateUserDto = {
-  name: 'John',
+  name: 'William',
   email: 'email123123@gmail.com',
-  interests: ['traveling'],
+  interests: ['traveling', 'ski'],
 };
 
 export const SAVE_PICTURE_DTO: SavePictureDto = {

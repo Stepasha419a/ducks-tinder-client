@@ -12,7 +12,10 @@ import * as path from 'path';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
+    }),
     ServeStaticModule.forRoot({
       rootPath: path.resolve(path.resolve(__dirname, '..', 'static')),
     }),

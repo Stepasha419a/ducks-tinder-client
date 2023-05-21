@@ -12,10 +12,10 @@ import {
 export class MailController {
   constructor(private readonly mailService: MailService) {}
 
-  @Get(':link')
+  /* @Get(':link')
   @HttpCode(HttpStatus.OK)
   @Redirect(process.env.CLIENT_URL, 301)
   activate(@Param('link') link: string) {
     return this.mailService.activate(link);
-  }
+  } */
 }
