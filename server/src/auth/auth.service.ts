@@ -1,14 +1,11 @@
 import * as bcrypt from 'bcryptjs';
-import { v4 } from 'uuid';
 import {
   Injectable,
   UnauthorizedException,
   BadRequestException,
-  NotFoundException,
   ForbiddenException,
 } from '@nestjs/common';
 import { TokensService } from '../tokens/tokens.service';
-import { MailService } from '../mail/mail.service';
 import { UsersService } from '../users/users.service';
 import { UserDto, CreateUserDto } from '../users/dto';
 import { LoginUserDto, UserTokenDto } from './dto';
@@ -18,7 +15,6 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly tokensService: TokensService,
-    private readonly mailService: MailService,
   ) {}
 
   async registration(createUserDto: CreateUserDto) {
@@ -28,26 +24,14 @@ export class AuthService {
     }
 
     const hashPassword = await bcrypt.hash(createUserDto.password, 7);
-    const activationLink = v4();
 
     const user = await this.usersService.create({
       ...createUserDto,
       password: hashPassword,
     });
 
-    await this.mailService
-      .sendMail(
-        createUserDto.email,
-        `${process.env.API_URL}/apiactivate/${activationLink}`,
-        createUserDto.name,
-      )
-      .catch(() => {
-        throw new BadRequestException('This email does not exist');
-      });
-
     const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
-    const tokens = this.tokensService.generateTokens({ ...userTokenDto });
-    await this.tokensService.saveToken(user.id, tokens.refreshToken);
+    const tokens = await this.tokensService.generateTokens({ ...userTokenDto });
 
     return { ...tokens, user };
   }
@@ -55,7 +39,7 @@ export class AuthService {
   async login(loginUserDto: LoginUserDto) {
     const user = await this.usersService.getByEmail(loginUserDto.email);
     if (!user) {
-      throw new NotFoundException('The user with such an email is not found');
+      throw new ForbiddenException('Incorrect email or password');
     }
 
     const isPassEquals = await bcrypt.compare(
@@ -63,13 +47,12 @@ export class AuthService {
       user.password,
     );
     if (!isPassEquals) {
-      throw new ForbiddenException('Incorrect password');
+      throw new ForbiddenException('Incorrect email or password');
     }
 
     const userDto = new UserDto(user);
     const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
-    const tokens = this.tokensService.generateTokens({ ...userTokenDto });
-    await this.tokensService.saveToken(userDto.id, tokens.refreshToken);
+    const tokens = await this.tokensService.generateTokens({ ...userTokenDto });
 
     return { ...tokens, user: userDto };
   }
@@ -87,20 +70,20 @@ export class AuthService {
     if (!refreshToken) {
       throw new UnauthorizedException('You are not authorized');
     }
-    const userData = this.tokensService.validateRefreshToken(refreshToken);
-    const tokenFromDb = await this.tokensService.findToken(refreshToken);
 
-    if (!userData || !tokenFromDb) {
+    const userData = await this.tokensService.validateRefreshToken(
+      refreshToken,
+    );
+    if (!userData) {
       throw new UnauthorizedException('You are not authorized');
     }
 
     const user = await this.usersService.getOne(userData.id);
-
-    const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
-
-    const tokens = this.tokensService.generateTokens({ ...userTokenDto });
-    await this.tokensService.saveToken(user.id, tokens.refreshToken);
-
+    const userTokenDto = new UserTokenDto({
+      id: user.id,
+      email: user.email,
+    });
+    const tokens = await this.tokensService.generateTokens({ ...userTokenDto });
     return { ...tokens, user };
   }
 }

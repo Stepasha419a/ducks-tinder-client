@@ -5,35 +5,31 @@ import {
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
+import { UsersService } from 'users/users.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private readonly tokensService: TokensService) {}
+  constructor(
+    private readonly tokensService: TokensService,
+    private readonly usersService: UsersService,
+  ) {}
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    const request = context.switchToHttp().getRequest();
-    try {
-      const bearer = request.headers.authorization.split(' ')[0];
-      const token = request.headers.authorization.split(' ')[1];
+  async canActivate(context: ExecutionContext) {
+    const req = context.switchToHttp().getRequest();
+    const { accessToken } = req.cookies;
 
-      if (bearer !== 'Bearer' || !token) {
-        throw new UnauthorizedException({ message: 'User is not authorized' });
-      }
-
-      const user = this.tokensService.validateAccessToken(token);
-
-      if (!user) {
-        throw new UnauthorizedException({ message: 'User is not authorized' });
-      }
-
-      request.user = user;
-
-      return true;
-    } catch (error) {
-      throw new UnauthorizedException({ message: 'User is not authorized' });
+    const userData = this.tokensService.validateAccessToken(accessToken);
+    if (!userData) {
+      throw new UnauthorizedException();
     }
+
+    const user = await this.usersService.getOne(userData.id);
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
+    req.user = user;
+
+    return true;
   }
 }

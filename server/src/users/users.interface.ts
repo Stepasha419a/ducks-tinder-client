@@ -23,8 +23,3 @@ export interface UserToInterestsRelation {
     name: string;
   };
 }
-
-export interface IUserPassDto {
-  id: string;
-  email: string;
-}
