@@ -54,46 +54,43 @@ describe('UsersController', () => {
       ],
     });
 
+    await prismaClient.user.update({
+      where: { email: '456@gmail.com' },
+      data: {
+        pictures: {
+          createMany: {
+            data: [
+              { name: 'picture-name', order: 0 },
+              { name: 'picture-name', order: 1 },
+              { name: 'picture-name', order: 2 },
+              { name: 'picture-name', order: 3 },
+              { name: 'picture-name', order: 4 },
+              { name: 'picture-name', order: 5 },
+              { name: 'picture-name', order: 6 },
+              { name: 'picture-name', order: 7 },
+              { name: 'picture-name', order: 8 },
+            ],
+          },
+        },
+      },
+      include: UsersSelector.selectUser(),
+    }),
+      await prismaClient.interest.createMany({
+        data: [{ name: 'traveling' }, { name: 'ski' }],
+      });
+
+    currentUser = new UserDto(
+      await prismaClient.user.findUnique({
+        where: { email: '123@gmail.com' },
+        include: UsersSelector.selectUser(),
+      }),
+    );
+
     users = (
       await prismaClient.user.findMany({
         include: UsersSelector.selectUser(),
       })
     ).map((user) => new UserDto(user));
-
-    users[1] = new UserDto(
-      await prismaClient.user.update({
-        where: { id: users[1].id },
-        data: {
-          pictures: {
-            createMany: {
-              data: [
-                { name: `picture-${users[1].id}`, order: 0 },
-                { name: `picture-${users[1].id}`, order: 1 },
-                { name: `picture-${users[1].id}`, order: 2 },
-                { name: `picture-${users[1].id}`, order: 3 },
-                { name: `picture-${users[1].id}`, order: 4 },
-                { name: `picture-${users[1].id}`, order: 5 },
-                { name: `picture-${users[1].id}`, order: 6 },
-                { name: `picture-${users[1].id}`, order: 7 },
-                { name: `picture-${users[1].id}`, order: 8 },
-              ],
-            },
-          },
-        },
-        include: UsersSelector.selectUser(),
-      }),
-    );
-
-    await prismaClient.interest.createMany({
-      data: [{ name: 'traveling' }, { name: 'ski' }],
-    });
-
-    currentUser = new UserDto(
-      await prismaClient.user.findUnique({
-        where: { id: users[0].id },
-        include: UsersSelector.selectUser(),
-      }),
-    );
 
     httpServer = app.getHttpServer();
   });
@@ -382,6 +379,21 @@ describe('UsersController', () => {
   });
 
   describe('users/pairs (POST)', () => {
+    describe('when users/pairs/:id (GET) is called to check empty array of pairs', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer).get(
+          `/users/pairs/${currentUser.id}`,
+        );
+      });
+
+      it('should return an empty array of pairs', async () => {
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual([]);
+      });
+    });
+
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -442,7 +454,7 @@ describe('UsersController', () => {
 
       beforeAll(async () => {
         response = await request(httpServer)
-          .post('/users/pairs')
+          .post('/users/pairs/')
           .send({ userId: currentUser.id, userPairId: users[1].id });
       });
 
@@ -450,6 +462,110 @@ describe('UsersController', () => {
         expect(response.status).toBe(404);
         expect(response.body.message).toEqual(
           'Pair with such an id already exists',
+        );
+      });
+    });
+  });
+
+  describe('users/pairs/:id (GET)', () => {
+    describe('when it is called correctly', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer).get(
+          `/users/pairs/${currentUser.id}`,
+        );
+      });
+
+      it('should return a user', async () => {
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual([
+          {
+            id: users[1].id,
+            name: users[1].name,
+            description: users[1].description,
+            distance: users[1].distance,
+            interests: users[1].interests,
+            age: users[1].age,
+            pictures: users[1].pictures,
+          },
+        ]);
+      });
+    });
+
+    describe('when there is no such user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer).get('/users/pairs/wrong-id');
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+  });
+
+  describe('users/pairs (PUT)', () => {
+    describe('when it is called correctly', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer)
+          .put('/users/pairs/')
+          .send({ userId: currentUser.id, userPairId: users[1].id });
+      });
+
+      it('should return an empty array of pairs', async () => {
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual([]);
+      });
+    });
+
+    describe('when there is no such user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer)
+          .put('/users/pairs/')
+          .send({ userId: 'wrong-id', userPairId: users[1].id });
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+
+    describe('when there is no such user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer)
+          .put('/users/pairs/')
+          .send({ userId: currentUser.id, userPairId: 'wrong-id' });
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+
+    describe('when such pair does not exist', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer)
+          .put('/users/pairs/')
+          .send({ userId: users[1].id, userPairId: currentUser.id });
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual(
+          'Pair with such an id was not found',
         );
       });
     });
