@@ -68,14 +68,14 @@ export class AuthService {
 
   async refresh(refreshToken: string) {
     if (!refreshToken) {
-      throw new UnauthorizedException('You are not authorized');
+      throw new UnauthorizedException();
     }
 
     const userData = await this.tokensService.validateRefreshToken(
       refreshToken,
     );
     if (!userData) {
-      throw new UnauthorizedException('You are not authorized');
+      throw new UnauthorizedException();
     }
 
     const user = await this.usersService.getOne(userData.id);

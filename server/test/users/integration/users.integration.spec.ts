@@ -3,7 +3,6 @@ import { NestApplication } from '@nestjs/core';
 import { HttpServer } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'app.module';
-import { AuthGuard } from 'auth/auth.guard';
 import prismaClient from '../../prisma-client/prisma-client';
 import { newUserStub } from '../stubs';
 import {
@@ -15,22 +14,25 @@ import {
 import * as path from 'path';
 import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/utils';
+import { AccessTokenGuard } from 'common/guards';
 
-describe('UsersController', () => {
+describe('users-integration', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
 
   let users: UserDto[];
   let currentUser: UserDto;
 
-  const mockAuthGuard = jest.fn().mockReturnValue(true);
+  const mockAccessTokenGuard = {
+    canActivate: jest.fn().mockReturnValue(true),
+  };
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
     })
-      .overrideGuard(AuthGuard)
-      .useValue(mockAuthGuard)
+      .overrideProvider(AccessTokenGuard)
+      .useValue(mockAccessTokenGuard)
       .compile();
 
     app = moduleRef.createNestApplication();

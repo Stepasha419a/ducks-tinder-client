@@ -1,4 +1,3 @@
-import { AuthService } from './auth.service';
 import {
   Body,
   Controller,
@@ -8,19 +7,20 @@ import {
   Get,
   Req,
   Res,
-  UseGuards,
   Patch,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { AuthGuard } from './auth.guard';
+import { Public } from 'common/decorators';
+import { ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
+import { AuthService } from './auth.service';
 import { CreateUserDto, UserDto } from 'users/dto';
 import { LoginUserDto } from './dto';
-import { ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Public()
   @Post('registration')
   @HttpCode(HttpStatus.OK)
   async registration(
@@ -33,6 +33,7 @@ export class AuthController {
     return res.json(userData.user);
   }
 
+  @Public()
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(
@@ -46,7 +47,6 @@ export class AuthController {
   }
 
   @Patch('logout')
-  @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.OK)
   async logout(@Req() req: Request, @Res() res: Response): Promise<void> {
     const { refreshToken } = req.cookies;
@@ -57,6 +57,7 @@ export class AuthController {
     res.end();
   }
 
+  @Public()
   @Get('refresh')
   @HttpCode(HttpStatus.OK)
   async refresh(

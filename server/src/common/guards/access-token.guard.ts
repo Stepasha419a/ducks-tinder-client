@@ -1,24 +1,40 @@
-import { TokensService } from '../tokens/tokens.service';
+import { Reflector } from '@nestjs/core';
 import {
   Injectable,
   CanActivate,
   ExecutionContext,
   UnauthorizedException,
 } from '@nestjs/common';
+import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
+import { IS_PUBLIC_KEY } from 'common/constants';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AccessTokenGuard implements CanActivate {
   constructor(
+    private readonly reflector: Reflector,
     private readonly tokensService: TokensService,
     private readonly usersService: UsersService,
   ) {}
 
   async canActivate(context: ExecutionContext) {
-    const req = context.switchToHttp().getRequest();
-    const { accessToken } = req.cookies;
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    if (isPublic) {
+      return true;
+    }
 
-    const userData = this.tokensService.validateAccessToken(accessToken);
+    const req = context.switchToHttp().getRequest();
+    const cookies = req.cookies;
+    if (!cookies?.accessToken) {
+      throw new UnauthorizedException();
+    }
+
+    const userData = this.tokensService.validateAccessToken(
+      cookies.accessToken,
+    );
     if (!userData) {
       throw new UnauthorizedException();
     }

@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { UsersController } from 'users/users.controller';
 import { UsersService } from 'users/users.service';
 import { UsersServiceMock } from '../mocks/users.service-mock';
-import { AuthGuard } from 'auth/auth.guard';
+import { AccessTokenGuard } from 'common/guards';
 import { shortUserStub, userStub } from '../stubs';
 import { UserDto } from 'users/dto';
 import { ShortUser } from 'users/users.interface';
@@ -17,19 +17,19 @@ import {
 } from '../values/users-const.dto';
 import { clearMockHistory } from '../../common/utils';
 
-describe('UsersController', () => {
+describe('users-controller', () => {
   let usersController: UsersController;
   let usersService: UsersService;
 
-  const mockAuthGuard = jest.fn(() => true);
+  const mockAccessTokenGuard = jest.fn().mockReturnValue(true);
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [UsersService],
     })
-      .overrideGuard(AuthGuard)
-      .useValue(mockAuthGuard)
+      .overrideGuard(AccessTokenGuard)
+      .useValue(mockAccessTokenGuard)
       .overrideProvider(UsersService)
       .useValue(UsersServiceMock())
       .compile();

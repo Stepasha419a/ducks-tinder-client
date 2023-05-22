@@ -1,9 +1,7 @@
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ChatsService } from './chats.service';
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('chat')
-@UseGuards(AuthGuard)
 export class ChatsController {
   constructor(private readonly chatsService: ChatsService) {}
 

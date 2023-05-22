@@ -1,4 +1,3 @@
-import { AuthGuard } from '../auth/auth.guard';
 import { UsersService } from './users.service';
 import {
   Body,
@@ -11,7 +10,6 @@ import {
   Patch,
   Get,
   UploadedFile,
-  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -27,7 +25,6 @@ import {
 } from './dto';
 
 @Controller('users')
-@UseGuards(AuthGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 

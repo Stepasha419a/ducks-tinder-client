@@ -24,7 +24,7 @@ import {
 } from '../values/users-const.dto';
 import { GET_SORTED_FIND_FIRST_CALLED } from '../values/users-const.expect';
 
-describe('UsersService', () => {
+describe('users-service', () => {
   let service: UsersService;
   let prismaService: PrismaService;
   let filesService: FilesService;
