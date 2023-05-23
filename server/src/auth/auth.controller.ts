@@ -24,8 +24,8 @@ export class AuthController {
   @Post('registration')
   @HttpCode(HttpStatus.OK)
   async registration(
-    @Body() dto: CreateUserDto,
     @Res() res: Response,
+    @Body() dto: CreateUserDto,
   ): Promise<Response<UserDto>> {
     const userData = await this.authService.registration(dto);
     this.setCookies(res, userData.refreshToken, userData.accessToken);
@@ -48,13 +48,16 @@ export class AuthController {
 
   @Patch('logout')
   @HttpCode(HttpStatus.OK)
-  async logout(@Req() req: Request, @Res() res: Response): Promise<void> {
+  async logout(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<Response<void>> {
     const { refreshToken } = req.cookies;
 
     this.clearCookies(res);
     await this.authService.logout(refreshToken);
 
-    res.end();
+    return res.end();
   }
 
   @Public()

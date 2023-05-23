@@ -16,6 +16,7 @@ import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/utils';
 import { AccessTokenGuard } from 'common/guards';
 
+// TODO: rewrite it to make all the tests independent of each others
 describe('users-integration', () => {
   let httpServer: HttpServer;
   let app: NestApplication;

@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { UsersController } from 'users/users.controller';
 import { UsersService } from 'users/users.service';
-import { UsersServiceMock } from '../mocks/users.service-mock';
+import { UsersServiceMock } from '../mocks/users.service.mock';
 import { AccessTokenGuard } from 'common/guards';
 import { shortUserStub, userStub } from '../stubs';
 import { UserDto } from 'users/dto';
@@ -34,8 +34,8 @@ describe('users-controller', () => {
       .useValue(UsersServiceMock())
       .compile();
 
-    usersController = await moduleRef.get<UsersController>(UsersController);
-    usersService = await moduleRef.get<UsersService>(UsersService);
+    usersController = moduleRef.get<UsersController>(UsersController);
+    usersService = moduleRef.get<UsersService>(UsersService);
   });
 
   beforeEach(() => {

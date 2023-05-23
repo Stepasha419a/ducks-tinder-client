@@ -9,6 +9,7 @@ import { TokensService } from '../tokens/tokens.service';
 import { UsersService } from '../users/users.service';
 import { UserDto, CreateUserDto } from '../users/dto';
 import { LoginUserDto, UserTokenDto } from './dto';
+import { UserData } from './auth.interface';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
     private readonly tokensService: TokensService,
   ) {}
 
-  async registration(createUserDto: CreateUserDto) {
+  async registration(createUserDto: CreateUserDto): Promise<UserData> {
     const candidate = await this.usersService.getByEmail(createUserDto.email);
     if (candidate) {
       throw new BadRequestException('User already exists');
@@ -36,7 +37,7 @@ export class AuthService {
     return { ...tokens, user };
   }
 
-  async login(loginUserDto: LoginUserDto) {
+  async login(loginUserDto: LoginUserDto): Promise<UserData> {
     const user = await this.usersService.getByEmail(loginUserDto.email);
     if (!user) {
       throw new ForbiddenException('Incorrect email or password');
@@ -57,16 +58,15 @@ export class AuthService {
     return { ...tokens, user: userDto };
   }
 
-  async logout(refreshToken: string) {
+  async logout(refreshToken: string): Promise<void> {
     if (!refreshToken) {
       throw new UnauthorizedException();
     }
 
-    const token = await this.tokensService.removeToken(refreshToken);
-    return token;
+    await this.tokensService.removeToken(refreshToken);
   }
 
-  async refresh(refreshToken: string) {
+  async refresh(refreshToken: string): Promise<UserData> {
     if (!refreshToken) {
       throw new UnauthorizedException();
     }

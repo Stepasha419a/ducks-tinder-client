@@ -9,8 +9,8 @@ import { ShortUser } from 'users/users.interface';
 import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/utils';
 import { clearMockHistory } from '../../common/utils';
-import { UsersPrismaMock } from '../mocks/users.prisma-mock';
-import { FilesServiceMock } from '../mocks/files.service-mock';
+import { UsersPrismaMock } from '../mocks/users.prisma.mock';
+import { FilesServiceMock } from '../mocks/files.service.mock';
 import { shortUserStub, userStub } from '../stubs';
 import {
   CREATE_USER_DTO,
