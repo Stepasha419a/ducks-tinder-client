@@ -155,7 +155,7 @@ describe('auth-controller', () => {
       expect(responseMock.end).toBeCalledTimes(1);
     });
 
-    it('should return a response', () => {
+    it('should return undefined', () => {
       expect(response).toEqual(undefined);
     });
   });
