@@ -8,7 +8,6 @@ import { User } from '@prisma/client';
 import { ShortUser } from 'users/users.interface';
 import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/utils';
-import { clearMockHistory } from '../../common/utils';
 import { UsersPrismaMock } from '../mocks/users.prisma.mock';
 import { FilesServiceMock } from '../mocks/files.service.mock';
 import { shortUserStub, userStub } from '../stubs';
@@ -21,8 +20,8 @@ import {
   SAVE_PICTURE_DTO,
   UPDATE_USER_DTO,
   USER_SORTS_DTO,
-} from '../values/users-const.dto';
-import { GET_SORTED_FIND_FIRST_CALLED } from '../values/users-const.expect';
+} from '../values/users.const.dto';
+import { GET_SORTED_FIND_FIRST_CALLED } from '../values/users.const.expect';
 
 describe('users-service', () => {
   let service: UsersService;
@@ -46,8 +45,7 @@ describe('users-service', () => {
   });
 
   beforeEach(() => {
-    clearMockHistory(prismaService);
-    clearMockHistory(filesService);
+    jest.clearAllMocks();
   });
 
   describe('when service is ready', () => {

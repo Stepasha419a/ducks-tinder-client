@@ -1,5 +1,5 @@
 import { UsersSelector } from 'users/utils';
-import { USER_SORTS_DTO } from './users-const.dto';
+import { USER_SORTS_DTO } from './users.const.dto';
 
 export const GET_SORTED_FIND_FIRST_CALLED = {
   where: {

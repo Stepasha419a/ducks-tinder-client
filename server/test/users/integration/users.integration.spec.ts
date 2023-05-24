@@ -10,7 +10,7 @@ import {
   USER_SORTS_DTO,
   DELETE_PICTURE_DTO,
   MIX_PICTURES_DTO,
-} from '../values/users-const.dto';
+} from '../values/users.const.dto';
 import * as path from 'path';
 import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/utils';

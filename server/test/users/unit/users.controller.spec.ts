@@ -14,8 +14,7 @@ import {
   SAVE_PICTURE_DTO,
   UPDATE_USER_DTO,
   USER_SORTS_DTO,
-} from '../values/users-const.dto';
-import { clearMockHistory } from '../../common/utils';
+} from '../values/users.const.dto';
 
 describe('users-controller', () => {
   let usersController: UsersController;
@@ -39,7 +38,7 @@ describe('users-controller', () => {
   });
 
   beforeEach(() => {
-    clearMockHistory(usersService);
+    jest.clearAllMocks();
   });
 
   describe('when controller is ready', () => {
