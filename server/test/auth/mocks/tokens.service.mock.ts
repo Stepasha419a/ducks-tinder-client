@@ -1,4 +1,4 @@
-import { userStub } from '../../users/stubs';
+import { userStub } from 'test/users/stubs';
 import { userDataStub } from '../stubs';
 
 export const TokensServiceMock = jest.fn().mockReturnValue({

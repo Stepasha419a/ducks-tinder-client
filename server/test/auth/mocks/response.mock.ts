@@ -1,4 +1,4 @@
-import { userStub } from '../../users/stubs';
+import { userStub } from 'test/users/stubs';
 
 export const ResponseMock = jest.fn().mockReturnValue({
   cookie: jest.fn(),

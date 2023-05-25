@@ -1,4 +1,4 @@
-import { userStub } from '../../users/stubs';
+import { userStub } from 'test/users/stubs';
 
 export const userDataStub = () => ({
   user: userStub(),

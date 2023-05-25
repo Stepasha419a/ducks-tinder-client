@@ -1,5 +1,5 @@
 import { CreateUserDto } from 'users/dto';
-import { userStub } from '../../users/stubs';
+import { userStub } from 'test/users/stubs';
 import { LoginUserDto } from 'auth/dto';
 
 export const CREATE_USER_DTO: CreateUserDto = {

@@ -7,7 +7,7 @@ import { UserDto } from 'users/dto';
 import { CREATE_USER_DTO, LOGIN_USER_DTO } from '../values/auth.const.dto';
 import { Response } from 'express';
 import { RequestMock, ResponseMock } from '../mocks';
-import { userStub } from '../../users/stubs';
+import { userStub } from 'test/users/stubs';
 import { userDataStub } from '../stubs';
 import { ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
 

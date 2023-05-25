@@ -1,4 +1,4 @@
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from 'prisma/prisma.service';
 import { ChatsService } from '../chats.service';
 import { Injectable } from '@nestjs/common';
 import { ISendMessage } from '../chats.interfaces';

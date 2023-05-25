@@ -1,4 +1,4 @@
-import { UserDto } from '../../../src/users/dto/user.dto';
+import { UserDto } from 'users/dto';
 
 export const userStub = (): UserDto => ({
   id: 'sdfhsdghj34259034578923',

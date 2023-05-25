@@ -3,7 +3,7 @@ import { NestApplication } from '@nestjs/core';
 import { HttpServer } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'app.module';
-import prismaClient from '../../prisma-client/prisma-client';
+import prismaClient from 'test/prisma-client';
 import { newUserStub } from '../stubs';
 import {
   UPDATE_USER_DTO,
@@ -13,16 +13,13 @@ import {
 } from '../values/users.const.dto';
 import * as path from 'path';
 import { UserDto } from 'users/dto';
-import { UsersSelector } from 'users/utils';
 import { AccessTokenGuard } from 'common/guards';
+import { prepareAfter, prepareBefore } from './preparations';
 
 // TODO: rewrite it to make all the tests independent of each others
-describe('users-integration', () => {
+describe('users-e2e', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
-
-  let users: UserDto[];
-  let currentUser: UserDto;
 
   const mockAccessTokenGuard = {
     canActivate: jest.fn().mockReturnValue(true),
@@ -40,84 +37,26 @@ describe('users-integration', () => {
     await app.init();
     await prismaClient.$connect();
 
-    await prismaClient.user.createMany({
-      data: [
-        { email: '123@gmail.com', password: '123123', name: 'Jason' },
-        {
-          email: '456@gmail.com',
-          password: '456456',
-          name: 'Loren',
-          age: 20,
-          distance: 50,
-          preferAgeFrom: 18,
-          preferAgeTo: 28,
-          preferSex: 'male',
-          sex: 'female',
-        },
-      ],
-    });
-
-    await prismaClient.user.update({
-      where: { email: '456@gmail.com' },
-      data: {
-        pictures: {
-          createMany: {
-            data: [
-              { name: 'picture-name', order: 0 },
-              { name: 'picture-name', order: 1 },
-              { name: 'picture-name', order: 2 },
-              { name: 'picture-name', order: 3 },
-              { name: 'picture-name', order: 4 },
-              { name: 'picture-name', order: 5 },
-              { name: 'picture-name', order: 6 },
-              { name: 'picture-name', order: 7 },
-              { name: 'picture-name', order: 8 },
-            ],
-          },
-        },
-      },
-      include: UsersSelector.selectUser(),
-    }),
-      await prismaClient.interest.createMany({
-        data: [{ name: 'traveling' }, { name: 'ski' }],
-      });
-
-    currentUser = new UserDto(
-      await prismaClient.user.findUnique({
-        where: { email: '123@gmail.com' },
-        include: UsersSelector.selectUser(),
-      }),
-    );
-
-    users = (
-      await prismaClient.user.findMany({
-        include: UsersSelector.selectUser(),
-      })
-    ).map((user) => new UserDto(user));
-
     httpServer = app.getHttpServer();
-  });
-
-  afterEach(async () => {
-    currentUser = new UserDto(
-      await prismaClient.user.findUnique({
-        where: { id: users[0].id },
-        include: UsersSelector.selectUser(),
-      }),
-    );
   });
 
   afterAll(async () => {
     await app.close();
-    await prismaClient.$transaction([
-      prismaClient.picture.deleteMany(),
-      prismaClient.user.deleteMany(),
-      prismaClient.interest.deleteMany(),
-    ]);
     await prismaClient.$disconnect();
   });
 
   describe('users/:id (PATCH)', () => {
+    let currentUser: UserDto;
+
+    beforeAll(async () => {
+      const values = await prepareBefore();
+      currentUser = values.currentUser;
+    });
+
+    afterAll(async () => {
+      await prepareAfter();
+    });
+
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -166,6 +105,17 @@ describe('users-integration', () => {
   });
 
   describe('users/sorted (POST)', () => {
+    let users: UserDto[];
+
+    beforeAll(async () => {
+      const values = await prepareBefore();
+      users = values.users;
+    });
+
+    afterAll(async () => {
+      await prepareAfter();
+    });
+
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -208,6 +158,19 @@ describe('users-integration', () => {
   });
 
   describe('users/picture (POST)', () => {
+    let users: UserDto[];
+    let currentUser: UserDto;
+
+    beforeAll(async () => {
+      const values = await prepareBefore();
+      users = values.users;
+      currentUser = values.currentUser;
+    });
+
+    afterAll(async () => {
+      await prepareAfter();
+    });
+
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -278,6 +241,27 @@ describe('users-integration', () => {
   });
 
   describe('users/picture (PUT)', () => {
+    let currentUser: UserDto;
+
+    beforeAll(async () => {
+      const values = await prepareBefore();
+      currentUser = values.currentUser;
+
+      currentUser = (
+        await request(httpServer)
+          .post('/users/picture')
+          .field('userId', currentUser.id)
+          .attach(
+            'picture',
+            path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
+          )
+      ).body;
+    });
+
+    afterAll(async () => {
+      await prepareAfter();
+    });
+
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -313,6 +297,17 @@ describe('users-integration', () => {
   });
 
   describe('users/picture/mix (PUT)', () => {
+    let users: UserDto[];
+
+    beforeAll(async () => {
+      const values = await prepareBefore();
+      users = values.users;
+    });
+
+    afterAll(async () => {
+      await prepareAfter();
+    });
+
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -382,6 +377,19 @@ describe('users-integration', () => {
   });
 
   describe('users/pairs (POST)', () => {
+    let users: UserDto[];
+    let currentUser: UserDto;
+
+    beforeAll(async () => {
+      const values = await prepareBefore();
+      users = values.users;
+      currentUser = values.currentUser;
+    });
+
+    afterAll(async () => {
+      await prepareAfter();
+    });
+
     describe('when users/pairs/:id (GET) is called to check empty array of pairs', () => {
       let response: request.Response;
 
@@ -471,6 +479,26 @@ describe('users-integration', () => {
   });
 
   describe('users/pairs/:id (GET)', () => {
+    let users: UserDto[];
+    let currentUser: UserDto;
+
+    beforeAll(async () => {
+      const values = await prepareBefore();
+      users = values.users;
+      currentUser = values.currentUser;
+
+      currentUser = new UserDto(
+        await prismaClient.user.update({
+          where: { id: currentUser.id },
+          data: { pairs: { connect: { id: users[1].id } } },
+        }),
+      );
+    });
+
+    afterAll(async () => {
+      await prepareAfter();
+    });
+
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -511,6 +539,26 @@ describe('users-integration', () => {
   });
 
   describe('users/pairs (PUT)', () => {
+    let users: UserDto[];
+    let currentUser: UserDto;
+
+    beforeAll(async () => {
+      const values = await prepareBefore();
+      users = values.users;
+      currentUser = values.currentUser;
+
+      currentUser = new UserDto(
+        await prismaClient.user.update({
+          where: { id: currentUser.id },
+          data: { pairs: { connect: { id: users[1].id } } },
+        }),
+      );
+    });
+
+    afterAll(async () => {
+      await prepareAfter();
+    });
+
     describe('when it is called correctly', () => {
       let response: request.Response;
 

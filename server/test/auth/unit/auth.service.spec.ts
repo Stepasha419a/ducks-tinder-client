@@ -9,7 +9,7 @@ import { CREATE_USER_DTO, LOGIN_USER_DTO } from '../values/auth.const.dto';
 import { userDataStub } from '../stubs';
 import { TokensServiceMock, UsersServiceMock } from '../mocks';
 import { ConfigModule } from '@nestjs/config';
-import { userStub } from '../../users/stubs';
+import { userStub } from 'test/users/stubs';
 
 describe('auth-service', () => {
   let authService: AuthService;
