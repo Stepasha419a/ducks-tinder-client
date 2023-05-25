@@ -24,6 +24,7 @@ import {
   MixPicturesDto,
 } from './dto';
 
+// TODO: refactor it with req.user
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}

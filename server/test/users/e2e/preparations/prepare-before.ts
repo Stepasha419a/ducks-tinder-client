@@ -6,8 +6,14 @@ export async function prepareBefore() {
   await prismaClient.$transaction([
     prismaClient.user.createMany({
       data: [
-        { email: '123@gmail.com', password: '123123', name: 'Jason' },
         {
+          id: 'current-user-id',
+          email: '123@gmail.com',
+          password: '123123',
+          name: 'Jason',
+        },
+        {
+          id: 'second-user-id',
           email: '456@gmail.com',
           password: '456456',
           name: 'Loren',
@@ -46,13 +52,17 @@ export async function prepareBefore() {
     }),
   ]);
 
-  const users = (
-    await prismaClient.user.findMany({
+  const currentUser = new UserDto(
+    await prismaClient.user.findUnique({
+      where: { email: '123@gmail.com' },
       include: UsersSelector.selectUser(),
-    })
-  ).map((user) => new UserDto(user));
-
-  const currentUser = users[0];
-
-  return { users, currentUser };
+    }),
+  );
+  const secondUser = new UserDto(
+    await prismaClient.user.findUnique({
+      where: { email: '456@gmail.com' },
+      include: UsersSelector.selectUser(),
+    }),
+  );
+  return { currentUser, secondUser };
 }

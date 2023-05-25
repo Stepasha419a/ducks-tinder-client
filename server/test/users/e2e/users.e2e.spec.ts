@@ -16,10 +16,12 @@ import { UserDto } from 'users/dto';
 import { AccessTokenGuard } from 'common/guards';
 import { prepareAfter, prepareBefore } from './preparations';
 
-// TODO: rewrite it to make all the tests independent of each others
 describe('users-e2e', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
+
+  let currentUser: UserDto;
+  let secondUser: UserDto;
 
   const mockAccessTokenGuard = {
     canActivate: jest.fn().mockReturnValue(true),
@@ -37,26 +39,25 @@ describe('users-e2e', () => {
     await app.init();
     await prismaClient.$connect();
 
+    const users = await prepareBefore();
+    currentUser = users.currentUser;
+    secondUser = users.secondUser;
+
     httpServer = app.getHttpServer();
   });
 
   afterAll(async () => {
+    await prepareAfter();
     await app.close();
     await prismaClient.$disconnect();
   });
 
+  beforeEach(async () => {
+    await prepareAfter();
+    await prepareBefore();
+  });
+
   describe('users/:id (PATCH)', () => {
-    let currentUser: UserDto;
-
-    beforeAll(async () => {
-      const values = await prepareBefore();
-      currentUser = values.currentUser;
-    });
-
-    afterAll(async () => {
-      await prepareAfter();
-    });
-
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -105,17 +106,6 @@ describe('users-e2e', () => {
   });
 
   describe('users/sorted (POST)', () => {
-    let users: UserDto[];
-
-    beforeAll(async () => {
-      const values = await prepareBefore();
-      users = values.users;
-    });
-
-    afterAll(async () => {
-      await prepareAfter();
-    });
-
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -128,12 +118,12 @@ describe('users-e2e', () => {
       it('should return a user', async () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
-          id: users[1].id,
-          age: users[1].age,
-          description: users[1].description,
-          distance: users[1].distance,
-          name: users[1].name,
-          pictures: users[1].pictures,
+          id: secondUser.id,
+          age: secondUser.age,
+          description: secondUser.description,
+          distance: secondUser.distance,
+          name: secondUser.name,
+          pictures: secondUser.pictures,
           interests: [],
         });
       });
@@ -145,7 +135,10 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .post('/users/sorted')
-          .send({ ...USER_SORTS_DTO, userIds: [users[0].id, users[1].id] });
+          .send({
+            ...USER_SORTS_DTO,
+            userIds: [currentUser.id, secondUser.id],
+          });
       });
 
       it('should throw an error', async () => {
@@ -158,19 +151,6 @@ describe('users-e2e', () => {
   });
 
   describe('users/picture (POST)', () => {
-    let users: UserDto[];
-    let currentUser: UserDto;
-
-    beforeAll(async () => {
-      const values = await prepareBefore();
-      users = values.users;
-      currentUser = values.currentUser;
-    });
-
-    afterAll(async () => {
-      await prepareAfter();
-    });
-
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -226,7 +206,7 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .post('/users/picture')
-          .field('userId', users[1].id)
+          .field('userId', secondUser.id)
           .attach(
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
@@ -241,12 +221,7 @@ describe('users-e2e', () => {
   });
 
   describe('users/picture (PUT)', () => {
-    let currentUser: UserDto;
-
     beforeAll(async () => {
-      const values = await prepareBefore();
-      currentUser = values.currentUser;
-
       currentUser = (
         await request(httpServer)
           .post('/users/picture')
@@ -256,10 +231,6 @@ describe('users-e2e', () => {
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
           )
       ).body;
-    });
-
-    afterAll(async () => {
-      await prepareAfter();
     });
 
     describe('when it is called correctly', () => {
@@ -297,34 +268,23 @@ describe('users-e2e', () => {
   });
 
   describe('users/picture/mix (PUT)', () => {
-    let users: UserDto[];
-
-    beforeAll(async () => {
-      const values = await prepareBefore();
-      users = values.users;
-    });
-
-    afterAll(async () => {
-      await prepareAfter();
-    });
-
     describe('when it is called correctly', () => {
       let response: request.Response;
 
       beforeAll(async () => {
         response = await request(httpServer)
           .put('/users/picture/mix')
-          .send({ ...MIX_PICTURES_DTO, userId: users[1].id });
+          .send({ ...MIX_PICTURES_DTO, userId: secondUser.id });
       });
 
       it('should return a user', async () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual({
-          ...users[1],
+          ...secondUser,
           pictures: [
-            { ...users[1].pictures[1], order: 0 },
-            { ...users[1].pictures[0], order: 1 },
-            ...users[1].pictures.slice(2),
+            { ...secondUser.pictures[1], order: 0 },
+            { ...secondUser.pictures[0], order: 1 },
+            ...secondUser.pictures.slice(2),
           ],
         });
       });
@@ -351,7 +311,7 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .put('/users/picture/mix')
-          .send({ mixOrder: 10, withOrder: 1, userId: users[1].id });
+          .send({ mixOrder: 10, withOrder: 1, userId: secondUser.id });
       });
 
       it('should throw an error', async () => {
@@ -366,7 +326,7 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .put('/users/picture/mix')
-          .send({ mixOrder: 1, withOrder: 10, userId: users[1].id });
+          .send({ mixOrder: 1, withOrder: 10, userId: secondUser.id });
       });
 
       it('should throw an error', async () => {
@@ -377,19 +337,6 @@ describe('users-e2e', () => {
   });
 
   describe('users/pairs (POST)', () => {
-    let users: UserDto[];
-    let currentUser: UserDto;
-
-    beforeAll(async () => {
-      const values = await prepareBefore();
-      users = values.users;
-      currentUser = values.currentUser;
-    });
-
-    afterAll(async () => {
-      await prepareAfter();
-    });
-
     describe('when users/pairs/:id (GET) is called to check empty array of pairs', () => {
       let response: request.Response;
 
@@ -411,20 +358,20 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .post('/users/pairs')
-          .send({ userId: currentUser.id, userPairId: users[1].id });
+          .send({ userId: currentUser.id, userPairId: secondUser.id });
       });
 
       it('should return a user', async () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual([
           {
-            id: users[1].id,
-            name: users[1].name,
-            description: users[1].description,
-            distance: users[1].distance,
-            interests: users[1].interests,
-            age: users[1].age,
-            pictures: users[1].pictures,
+            id: secondUser.id,
+            name: secondUser.name,
+            description: secondUser.description,
+            distance: secondUser.distance,
+            interests: secondUser.interests,
+            age: secondUser.age,
+            pictures: secondUser.pictures,
           },
         ]);
       });
@@ -436,7 +383,7 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .post('/users/pairs')
-          .send({ userId: 'wrong-id', userPairId: users[1].id });
+          .send({ userId: 'wrong-id', userPairId: secondUser.id });
       });
 
       it('should throw an error', async () => {
@@ -464,9 +411,13 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        await prismaClient.user.update({
+          where: { id: currentUser.id },
+          data: { pairs: { connect: { id: secondUser.id } } },
+        });
         response = await request(httpServer)
           .post('/users/pairs/')
-          .send({ userId: currentUser.id, userPairId: users[1].id });
+          .send({ userId: currentUser.id, userPairId: secondUser.id });
       });
 
       it('should throw an error', async () => {
@@ -479,24 +430,13 @@ describe('users-e2e', () => {
   });
 
   describe('users/pairs/:id (GET)', () => {
-    let users: UserDto[];
-    let currentUser: UserDto;
-
     beforeAll(async () => {
-      const values = await prepareBefore();
-      users = values.users;
-      currentUser = values.currentUser;
-
       currentUser = new UserDto(
         await prismaClient.user.update({
           where: { id: currentUser.id },
-          data: { pairs: { connect: { id: users[1].id } } },
+          data: { pairs: { connect: { id: secondUser.id } } },
         }),
       );
-    });
-
-    afterAll(async () => {
-      await prepareAfter();
     });
 
     describe('when it is called correctly', () => {
@@ -512,13 +452,13 @@ describe('users-e2e', () => {
         expect(response.status).toBe(200);
         expect(response.body).toEqual([
           {
-            id: users[1].id,
-            name: users[1].name,
-            description: users[1].description,
-            distance: users[1].distance,
-            interests: users[1].interests,
-            age: users[1].age,
-            pictures: users[1].pictures,
+            id: secondUser.id,
+            name: secondUser.name,
+            description: secondUser.description,
+            distance: secondUser.distance,
+            interests: secondUser.interests,
+            age: secondUser.age,
+            pictures: secondUser.pictures,
           },
         ]);
       });
@@ -539,24 +479,13 @@ describe('users-e2e', () => {
   });
 
   describe('users/pairs (PUT)', () => {
-    let users: UserDto[];
-    let currentUser: UserDto;
-
     beforeAll(async () => {
-      const values = await prepareBefore();
-      users = values.users;
-      currentUser = values.currentUser;
-
       currentUser = new UserDto(
         await prismaClient.user.update({
           where: { id: currentUser.id },
-          data: { pairs: { connect: { id: users[1].id } } },
+          data: { pairs: { connect: { id: secondUser.id } } },
         }),
       );
-    });
-
-    afterAll(async () => {
-      await prepareAfter();
     });
 
     describe('when it is called correctly', () => {
@@ -565,7 +494,7 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .put('/users/pairs/')
-          .send({ userId: currentUser.id, userPairId: users[1].id });
+          .send({ userId: currentUser.id, userPairId: secondUser.id });
       });
 
       it('should return an empty array of pairs', async () => {
@@ -580,7 +509,7 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .put('/users/pairs/')
-          .send({ userId: 'wrong-id', userPairId: users[1].id });
+          .send({ userId: 'wrong-id', userPairId: secondUser.id });
       });
 
       it('should throw an error', async () => {
@@ -610,7 +539,7 @@ describe('users-e2e', () => {
       beforeAll(async () => {
         response = await request(httpServer)
           .put('/users/pairs/')
-          .send({ userId: users[1].id, userPairId: currentUser.id });
+          .send({ userId: secondUser.id, userPairId: currentUser.id });
       });
 
       it('should throw an error', async () => {
