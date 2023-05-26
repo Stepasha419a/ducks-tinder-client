@@ -27,7 +27,7 @@ export async function prepareBefore() {
       ],
     }),
     prismaClient.user.update({
-      where: { email: '456@gmail.com' },
+      where: { id: 'second-user-id' },
       data: {
         pictures: {
           createMany: {
@@ -48,19 +48,22 @@ export async function prepareBefore() {
       include: UsersSelector.selectUser(),
     }),
     prismaClient.interest.createMany({
-      data: [{ name: 'traveling' }, { name: 'ski' }],
+      data: [
+        { id: 'interest-id-1', name: 'traveling' },
+        { id: 'interest-id-2', name: 'ski' },
+      ],
     }),
   ]);
 
   const currentUser = new UserDto(
     await prismaClient.user.findUnique({
-      where: { email: '123@gmail.com' },
+      where: { id: 'current-user-id' },
       include: UsersSelector.selectUser(),
     }),
   );
   const secondUser = new UserDto(
     await prismaClient.user.findUnique({
-      where: { email: '456@gmail.com' },
+      where: { id: 'second-user-id' },
       include: UsersSelector.selectUser(),
     }),
   );

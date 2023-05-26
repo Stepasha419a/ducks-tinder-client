@@ -75,16 +75,23 @@ describe('users-e2e', () => {
       });
 
       it('should return a user', async () => {
+        const user = response.body;
         expect(response.status).toBe(200);
-        expect(response.body).toEqual({
+
+        // to equal interest items by another way
+        expect({ ...user, interests: undefined }).toEqual({
           ...newUserStub(),
           id: currentUser.id,
           email: UPDATE_USER_DTO.email,
           name: UPDATE_USER_DTO.name,
-          interests: [
-            { name: UPDATE_USER_DTO.interests[0] },
-            { name: UPDATE_USER_DTO.interests[1] },
-          ],
+          interests: undefined,
+        });
+        expect(user.interests.length).toEqual(2);
+        expect(user.interests).toContainEqual({
+          name: UPDATE_USER_DTO.interests[0],
+        });
+        expect(user.interests).toContainEqual({
+          name: UPDATE_USER_DTO.interests[1],
         });
       });
     });
