@@ -1,8 +1,9 @@
 version: '3.5'
 
+name: 'ducks-tinder'
 services:
   postgres:
-    container_name: integration-tests-prisma
+    container_name: postgres-tests
     image: postgres:13
     restart: always
     environment:

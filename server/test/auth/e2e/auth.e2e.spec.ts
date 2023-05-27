@@ -8,14 +8,16 @@ import prismaClient from 'test/prisma-client';
 import { newUserStub, userStub } from 'test/users/stubs';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { prepareAfter, prepareBefore } from './preparations';
+import { authUserStub } from '../stubs';
 
 describe('auth-e2e', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
 
   const jwtTokensPayload = {
-    email: 'authUser@gmail.com',
-    id: 'auth-current-user-id',
+    email: authUserStub().email,
+    id: authUserStub().id,
   };
   const configService = new ConfigService();
   const jwtService = new JwtService();
@@ -36,40 +38,14 @@ describe('auth-e2e', () => {
   });
 
   afterAll(async () => {
-    await prismaClient.$transaction([
-      prismaClient.token.deleteMany({
-        where: {
-          user: { email: { in: ['authUser@gmail.com', '789@gmail.com'] } },
-        },
-      }),
-      prismaClient.user.deleteMany({
-        where: { email: { in: ['authUser@gmail.com', '789@gmail.com'] } },
-      }),
-    ]);
+    await prepareAfter();
     await app.close();
     await prismaClient.$disconnect();
   });
 
   beforeEach(async () => {
-    await prismaClient.$transaction([
-      prismaClient.token.deleteMany({
-        where: {
-          user: { email: { in: ['authUser@gmail.com', '789@gmail.com'] } },
-        },
-      }),
-      prismaClient.user.deleteMany({
-        where: { email: { in: ['authUser@gmail.com', '789@gmail.com'] } },
-      }),
-    ]);
-    await prismaClient.user.create({
-      data: {
-        id: 'auth-current-user-id',
-        email: 'authUser@gmail.com',
-        name: userStub().name,
-        password:
-          '$2a$07$HQtmk3r9h1Gg1YiOLO67duUs3GPDg5.KKCtPSm/152gqIALiRvs6q',
-      },
-    });
+    await prepareAfter();
+    await prepareBefore();
   });
 
   describe('auth/registration (POST)', () => {
@@ -105,10 +81,14 @@ describe('auth-e2e', () => {
 
       beforeAll(async () => {
         response = await request(httpServer).post('/auth/registration').send({
-          email: 'authUser@gmail.com',
+          email: authUserStub().email,
           password: '123123123',
           name: userStub().name,
         });
+      });
+
+      it('should not have cookies', () => {
+        expect(response.headers['set-cookie']).toBeUndefined();
       });
 
       it('should throw an error', () => {
@@ -124,7 +104,7 @@ describe('auth-e2e', () => {
 
       beforeAll(async () => {
         response = await request(httpServer).post('/auth/login').send({
-          email: 'authUser@gmail.com',
+          email: authUserStub().email,
           password: '123123123',
         });
       });
@@ -132,8 +112,8 @@ describe('auth-e2e', () => {
       it('should return a user', () => {
         expect(response.body).toEqual({
           ...newUserStub(),
-          id: 'auth-current-user-id',
-          email: 'authUser@gmail.com',
+          id: authUserStub().id,
+          email: authUserStub().email,
           name: userStub().name,
         });
       });
@@ -155,6 +135,10 @@ describe('auth-e2e', () => {
         });
       });
 
+      it('should not have cookies', () => {
+        expect(response.headers['set-cookie']).toBeUndefined();
+      });
+
       it('should throw an error', () => {
         expect(response.status).toBe(403);
         expect(response.body.message).toEqual('Incorrect email or password');
@@ -166,9 +150,13 @@ describe('auth-e2e', () => {
 
       beforeAll(async () => {
         response = await request(httpServer).post('/auth/login').send({
-          email: 'authUser@gmail.com',
+          email: authUserStub().email,
           password: 'wrong-password',
         });
+      });
+
+      it('should not have cookies', () => {
+        expect(response.headers['set-cookie']).toBeUndefined();
       });
 
       it('should throw an error', () => {
@@ -193,7 +181,7 @@ describe('auth-e2e', () => {
         await prismaClient.token.create({
           data: {
             refreshToken,
-            user: { connect: { id: 'auth-current-user-id' } },
+            user: { connect: { id: authUserStub().id } },
           },
         });
 
@@ -243,7 +231,7 @@ describe('auth-e2e', () => {
         await prismaClient.token.create({
           data: {
             refreshToken,
-            user: { connect: { id: 'auth-current-user-id' } },
+            user: { connect: { id: authUserStub().id } },
           },
         });
 
@@ -251,6 +239,10 @@ describe('auth-e2e', () => {
           .patch('/auth/logout')
           .send({})
           .set('Cookie', [`refreshToken=${refreshToken}`]);
+      });
+
+      it('should not have cookies', () => {
+        expect(response.headers['set-cookie']).toBeUndefined();
       });
 
       it('should throw an error', () => {
@@ -264,6 +256,10 @@ describe('auth-e2e', () => {
 
       beforeAll(async () => {
         response = await request(httpServer).patch('/auth/logout').send({});
+      });
+
+      it('should not have cookies', () => {
+        expect(response.headers['set-cookie']).toBeUndefined();
       });
 
       it('should throw an error', () => {
@@ -289,7 +285,7 @@ describe('auth-e2e', () => {
         await prismaClient.token.create({
           data: {
             refreshToken,
-            user: { connect: { id: 'auth-current-user-id' } },
+            user: { connect: { id: authUserStub().id } },
           },
         });
 
@@ -310,8 +306,8 @@ describe('auth-e2e', () => {
       it('should return a user', () => {
         expect(response.body).toEqual({
           ...newUserStub(),
-          id: 'auth-current-user-id',
-          email: 'authUser@gmail.com',
+          id: authUserStub().id,
+          email: authUserStub().email,
           name: userStub().name,
         });
       });
@@ -327,9 +323,12 @@ describe('auth-e2e', () => {
         });
 
         response = await request(httpServer)
-          .patch('/auth/logout')
-          .send({})
+          .get('/auth/refresh')
           .set('Cookie', [`accessToken=${accessToken}`]);
+      });
+
+      it('should not have cookies', () => {
+        expect(response.headers['set-cookie']).toBeUndefined();
       });
 
       it('should throw an error', () => {
@@ -349,19 +348,28 @@ describe('auth-e2e', () => {
         await prismaClient.token.create({
           data: {
             refreshToken,
-            user: { connect: { id: 'auth-current-user-id' } },
+            user: { connect: { id: authUserStub().id } },
           },
         });
 
         response = await request(httpServer)
-          .patch('/auth/logout')
-          .send({})
+          .get('/auth/refresh')
           .set('Cookie', [`refreshToken=${refreshToken}`]);
       });
 
-      it('should throw an error', () => {
-        expect(response.status).toEqual(401);
-        expect(response.body.message).toEqual('Unauthorized');
+      it('should set jwt tokens in cookies', () => {
+        expect(response.headers['set-cookie']).toBeDefined();
+        expect(response.headers['set-cookie'][0]).toBeDefined();
+        expect(response.headers['set-cookie'][1]).toBeDefined();
+      });
+
+      it('should return a user', () => {
+        expect(response.body).toEqual({
+          ...newUserStub(),
+          id: authUserStub().id,
+          email: authUserStub().email,
+          name: userStub().name,
+        });
       });
     });
 
@@ -369,7 +377,11 @@ describe('auth-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
-        response = await request(httpServer).patch('/auth/logout').send({});
+        response = await request(httpServer).get('/auth/refresh');
+      });
+
+      it('should not have cookies', () => {
+        expect(response.headers['set-cookie']).toBeUndefined();
       });
 
       it('should throw an error', () => {
