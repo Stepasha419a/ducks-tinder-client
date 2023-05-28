@@ -1,4 +1,5 @@
 import * as request from 'supertest';
+import * as cookieParser from 'cookie-parser';
 import { NestApplication } from '@nestjs/core';
 import { HttpServer } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
@@ -7,14 +8,16 @@ import prismaClient from 'test/prisma-client';
 import { newUserStub } from '../stubs';
 import {
   UPDATE_USER_DTO,
-  USER_SORTS_DTO,
   DELETE_PICTURE_DTO,
   MIX_PICTURES_DTO,
 } from '../values/users.const.dto';
 import * as path from 'path';
 import { UserDto } from 'users/dto';
-import { AccessTokenGuard } from 'common/guards';
-import { prepareAfter, prepareBefore } from './preparations';
+import {
+  prepareAccessTokens,
+  prepareAfter,
+  prepareBefore,
+} from './preparations';
 
 describe('users-e2e', () => {
   let httpServer: HttpServer;
@@ -23,19 +26,15 @@ describe('users-e2e', () => {
   let currentUser: UserDto;
   let secondUser: UserDto;
 
-  const mockAccessTokenGuard = {
-    canActivate: jest.fn().mockReturnValue(true),
-  };
-
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
-    })
-      .overrideProvider(AccessTokenGuard)
-      .useValue(mockAccessTokenGuard)
-      .compile();
+    }).compile();
 
     app = moduleRef.createNestApplication();
+
+    app.use(cookieParser());
+
     await app.init();
     await prismaClient.$connect();
 
@@ -62,6 +61,8 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .patch(`/users/${currentUser.id}`)
           .send({
@@ -71,7 +72,8 @@ describe('users-e2e', () => {
               'wrong-interest-1',
               'wrong-interest-2',
             ],
-          });
+          })
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should return a user', async () => {
@@ -100,9 +102,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .patch('/users/wrong-id')
-          .send({ name: 'William' });
+          .send({ name: 'William' })
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -110,16 +115,45 @@ describe('users-e2e', () => {
         expect(response.body.message).toEqual('Such user was not found');
       });
     });
-  });
 
-  describe('users/sorted (POST)', () => {
-    describe('when it is called correctly', () => {
+    describe('when there is no access token', () => {
       let response: request.Response;
 
       beforeAll(async () => {
         response = await request(httpServer)
-          .post('/users/sorted')
-          .send(USER_SORTS_DTO);
+          .patch(`/users/${currentUser.id}`)
+          .send({ name: 'William' });
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
+      });
+    });
+  });
+
+  describe('users/sorted (GET)', () => {
+    describe('when it is called correctly', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.user.update({
+          where: { id: 'current-user-id' },
+          data: {
+            age: 18,
+            distance: 90,
+            preferAgeFrom: 18,
+            preferAgeTo: 26,
+            sex: 'male',
+            preferSex: 'female',
+          },
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .get('/users/sorted')
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should return a user', async () => {
@@ -140,35 +174,49 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
-          .post('/users/sorted')
-          .send({
-            ...USER_SORTS_DTO,
-            userIds: [currentUser.id, secondUser.id],
-          });
+          .get('/users/sorted')
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
         expect(response.status).toBe(404);
-        expect(response.body.message).toEqual(
-          'Such user was not found, try to change settings',
-        );
+        expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+
+    describe('when there is no access token', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer).get('/users/sorted');
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
       });
     });
   });
 
+  // TODO: write an empty accessToken test after req.user refactoring
   describe('users/picture (POST)', () => {
     describe('when it is called correctly', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .post('/users/picture')
           .field('userId', currentUser.id)
           .attach(
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
-          );
+          )
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should return a user', async () => {
@@ -192,13 +240,16 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .post('/users/picture')
           .field('userId', 'wrong-id')
           .attach(
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
-          );
+          )
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -211,13 +262,16 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { secondUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .post('/users/picture')
           .field('userId', secondUser.id)
           .attach(
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
-          );
+          )
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -229,6 +283,8 @@ describe('users-e2e', () => {
 
   describe('users/picture (PUT)', () => {
     beforeAll(async () => {
+      const { currentUserAccessToken } = prepareAccessTokens();
+
       currentUser = (
         await request(httpServer)
           .post('/users/picture')
@@ -237,6 +293,7 @@ describe('users-e2e', () => {
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
           )
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`])
       ).body;
     });
 
@@ -244,9 +301,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/picture')
-          .send({ ...DELETE_PICTURE_DTO, userId: currentUser.id });
+          .send({ ...DELETE_PICTURE_DTO, userId: currentUser.id })
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should return a user', async () => {
@@ -262,14 +322,50 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/picture')
-          .send({ order: 1, userId: currentUser.id });
+          .send({ order: 0, userId: currentUser.id })
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
         expect(response.status).toBe(404);
         expect(response.body.message).toEqual('Not Found');
+      });
+    });
+
+    describe('when there is no such user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .put('/users/picture')
+          .send({ order: 0, userId: currentUser.id })
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+
+    describe('when there is no access token', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer)
+          .put('/users/picture')
+          .send({ order: 0, userId: currentUser.id });
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
       });
     });
   });
@@ -279,9 +375,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { secondUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/picture/mix')
-          .send({ ...MIX_PICTURES_DTO, userId: secondUser.id });
+          .send({ ...MIX_PICTURES_DTO, userId: secondUser.id })
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
       });
 
       it('should return a user', async () => {
@@ -301,9 +400,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/picture/mix')
-          .send({ ...MIX_PICTURES_DTO, userId: 'wrong-id' });
+          .send({ ...MIX_PICTURES_DTO, userId: 'wrong-id' })
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -316,9 +418,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { secondUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/picture/mix')
-          .send({ mixOrder: 10, withOrder: 1, userId: secondUser.id });
+          .send({ mixOrder: 10, withOrder: 1, userId: secondUser.id })
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -331,9 +436,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { secondUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/picture/mix')
-          .send({ mixOrder: 1, withOrder: 10, userId: secondUser.id });
+          .send({ mixOrder: 1, withOrder: 10, userId: secondUser.id })
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -341,31 +449,34 @@ describe('users-e2e', () => {
         expect(response.body.message).toEqual('Not Found');
       });
     });
-  });
 
-  describe('users/pairs (POST)', () => {
-    describe('when users/pairs/:id (GET) is called to check empty array of pairs', () => {
-      let response: request.Response;
-
-      beforeAll(async () => {
-        response = await request(httpServer).get(
-          `/users/pairs/${currentUser.id}`,
-        );
-      });
-
-      it('should return an empty array of pairs', async () => {
-        expect(response.status).toBe(200);
-        expect(response.body).toEqual([]);
-      });
-    });
-
-    describe('when it is called correctly', () => {
+    describe('when there is no access token', () => {
       let response: request.Response;
 
       beforeAll(async () => {
         response = await request(httpServer)
+          .put('/users/picture/mix')
+          .send({ mixOrder: 1, withOrder: 10, userId: secondUser.id });
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
+      });
+    });
+  });
+
+  describe('users/pairs (POST)', () => {
+    describe('when it is called correctly', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
           .post('/users/pairs')
-          .send({ userId: currentUser.id, userPairId: secondUser.id });
+          .send({ userId: currentUser.id, userPairId: secondUser.id })
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should return a user', async () => {
@@ -388,9 +499,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .post('/users/pairs')
-          .send({ userId: 'wrong-id', userPairId: secondUser.id });
+          .send({ userId: 'wrong-id', userPairId: secondUser.id })
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -403,9 +517,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .post('/users/pairs')
-          .send({ userId: currentUser.id, userPairId: 'wrong-id' });
+          .send({ userId: currentUser.id, userPairId: 'wrong-id' })
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -422,9 +539,13 @@ describe('users-e2e', () => {
           where: { id: currentUser.id },
           data: { pairs: { connect: { id: secondUser.id } } },
         });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .post('/users/pairs/')
-          .send({ userId: currentUser.id, userPairId: secondUser.id });
+          .send({ userId: currentUser.id, userPairId: secondUser.id })
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -432,6 +553,21 @@ describe('users-e2e', () => {
         expect(response.body.message).toEqual(
           'Pair with such an id already exists',
         );
+      });
+    });
+
+    describe('when there is no access token', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer)
+          .post('/users/pairs')
+          .send({ userId: currentUser.id, userPairId: secondUser.id });
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
       });
     });
   });
@@ -450,9 +586,11 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
-        response = await request(httpServer).get(
-          `/users/pairs/${currentUser.id}`,
-        );
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .get(`/users/pairs/${currentUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should return a user', async () => {
@@ -471,16 +609,52 @@ describe('users-e2e', () => {
       });
     });
 
+    describe('when there is no pairs', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { secondUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .get(`/users/pairs/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+      });
+
+      it('should return an empty array of pairs', async () => {
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual([]);
+      });
+    });
+
     describe('when there is no such user', () => {
       let response: request.Response;
 
       beforeAll(async () => {
-        response = await request(httpServer).get('/users/pairs/wrong-id');
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .get('/users/pairs/wrong-id')
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
         expect(response.status).toBe(404);
         expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+
+    describe('when there is no access token', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer).get(
+          `/users/pairs/${secondUser.id}`,
+        );
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
       });
     });
   });
@@ -499,9 +673,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/pairs/')
-          .send({ userId: currentUser.id, userPairId: secondUser.id });
+          .send({ userId: currentUser.id, userPairId: secondUser.id })
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should return an empty array of pairs', async () => {
@@ -514,9 +691,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/pairs/')
-          .send({ userId: 'wrong-id', userPairId: secondUser.id });
+          .send({ userId: 'wrong-id', userPairId: secondUser.id })
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -529,9 +709,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/pairs/')
-          .send({ userId: currentUser.id, userPairId: 'wrong-id' });
+          .send({ userId: currentUser.id, userPairId: 'wrong-id' })
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -544,9 +727,12 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
+        const { secondUserAccessToken } = prepareAccessTokens();
+
         response = await request(httpServer)
           .put('/users/pairs/')
-          .send({ userId: secondUser.id, userPairId: currentUser.id });
+          .send({ userId: secondUser.id, userPairId: currentUser.id })
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
       });
 
       it('should throw an error', async () => {
@@ -554,6 +740,21 @@ describe('users-e2e', () => {
         expect(response.body.message).toEqual(
           'Pair with such an id was not found',
         );
+      });
+    });
+
+    describe('when there is no access token', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer)
+          .put('/users/pairs/')
+          .send({ userId: currentUser.id, userPairId: secondUser.id });
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
       });
     });
   });

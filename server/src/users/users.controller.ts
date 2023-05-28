@@ -11,16 +11,17 @@ import {
   Get,
   UploadedFile,
   UseInterceptors,
+  Req,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ShortUser } from './users.interface';
+import { UserRequest } from 'common/types';
 import {
   DeletePictureDto,
   SavePictureDto,
   UpdateUserDto,
   UserDto,
   UserPairDto,
-  UserSortsDto,
   MixPicturesDto,
 } from './dto';
 
@@ -29,10 +30,10 @@ import {
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post('sorted')
+  @Get('sorted')
   @HttpCode(HttpStatus.OK)
-  getSortedUser(@Body() dto: UserSortsDto): Promise<ShortUser> {
-    return this.usersService.getSorted(dto);
+  getSortedUser(@Req() req: UserRequest): Promise<ShortUser> {
+    return this.usersService.getSorted(req.user);
   }
 
   @Post('picture')

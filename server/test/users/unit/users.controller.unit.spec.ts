@@ -13,7 +13,7 @@ import {
   MIX_PICTURES_DTO,
   SAVE_PICTURE_DTO,
   UPDATE_USER_DTO,
-  USER_SORTS_DTO,
+  USER_SORTS_DATA,
 } from '../values/users.const.dto';
 
 describe('users-controller', () => {
@@ -66,12 +66,16 @@ describe('users-controller', () => {
   describe('when getSorted is called', () => {
     let user: ShortUser;
 
+    const RequestMock = jest.fn().mockReturnValue({
+      user: USER_SORTS_DATA,
+    });
+
     beforeEach(async () => {
-      user = await usersController.getSortedUser(USER_SORTS_DTO);
+      user = await usersController.getSortedUser(RequestMock());
     });
 
     it('should call usersService', () => {
-      expect(usersService.getSorted).toBeCalledWith(USER_SORTS_DTO);
+      expect(usersService.getSorted).toBeCalledWith(USER_SORTS_DATA);
     });
 
     it('should return a short user', () => {

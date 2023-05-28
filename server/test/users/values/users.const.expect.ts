@@ -1,22 +1,22 @@
 import { UsersSelector } from 'users/utils';
-import { USER_SORTS_DTO } from './users.const.dto';
+import { USER_SORTS_DATA } from './users.const.dto';
 
 export const GET_SORTED_FIND_FIRST_CALLED = {
   where: {
-    id: { notIn: USER_SORTS_DTO.userIds },
-    distance: { gt: 0, lte: USER_SORTS_DTO.distance },
+    id: { notIn: USER_SORTS_DATA.userIds },
+    distance: { gt: 0, lte: USER_SORTS_DATA.distance },
     age: {
-      gt: USER_SORTS_DTO.preferAgeFrom - 1,
-      lt: USER_SORTS_DTO.preferAgeTo + 1,
+      gte: USER_SORTS_DATA.preferAgeFrom,
+      lte: USER_SORTS_DATA.preferAgeTo,
     },
     preferAgeFrom: {
-      lt: USER_SORTS_DTO.age + 1,
+      lte: USER_SORTS_DATA.age,
     },
     preferAgeTo: {
-      gt: USER_SORTS_DTO.age - 1,
+      gte: USER_SORTS_DATA.age,
     },
-    sex: USER_SORTS_DTO.preferSex,
-    preferSex: USER_SORTS_DTO.sex,
+    sex: USER_SORTS_DATA.preferSex,
+    preferSex: USER_SORTS_DATA.sex,
   },
   select: UsersSelector.selectShortUser(),
 };

@@ -19,7 +19,7 @@ import {
   MIX_PICTURES_DTO,
   SAVE_PICTURE_DTO,
   UPDATE_USER_DTO,
-  USER_SORTS_DTO,
+  USER_SORTS_DATA,
 } from '../values/users.const.dto';
 import { GET_SORTED_FIND_FIRST_CALLED } from '../values/users.const.expect';
 
@@ -27,6 +27,8 @@ describe('users-service', () => {
   let service: UsersService;
   let prismaService: PrismaService;
   let filesService: FilesService;
+
+  const usersPrismaMock = UsersPrismaMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -36,7 +38,7 @@ describe('users-service', () => {
       .overrideProvider(FilesService)
       .useValue(FilesServiceMock())
       .overrideProvider(PrismaService)
-      .useValue(UsersPrismaMock())
+      .useValue(usersPrismaMock)
       .compile();
 
     service = moduleRef.get<UsersService>(UsersService);
@@ -96,9 +98,20 @@ describe('users-service', () => {
 
   describe('when get sorted is called', () => {
     let user: ShortUser;
+    const oldMockFn = usersPrismaMock.user.findUnique;
+
+    beforeAll(() => {
+      usersPrismaMock.user.findUnique = jest.fn(() => {
+        return { checked: [] };
+      });
+    });
+
+    afterAll(() => {
+      usersPrismaMock.user.findUnique = oldMockFn;
+    });
 
     beforeEach(async () => {
-      user = await service.getSorted(USER_SORTS_DTO);
+      user = await service.getSorted(USER_SORTS_DATA);
     });
 
     it('should call find first', async () => {

@@ -5,11 +5,11 @@ import {
   SavePictureDto,
   UpdateUserDto,
   UserPairDto,
-  UserSortsDto,
 } from 'users/dto';
 import { userStub } from '../stubs';
 
-export const USER_SORTS_DTO: UserSortsDto = {
+export const USER_SORTS_DATA = {
+  ...userStub(),
   distance: 100,
   onlyNear: true,
   age: 20,
@@ -18,6 +18,10 @@ export const USER_SORTS_DTO: UserSortsDto = {
   sex: 'male',
   preferSex: 'female',
   userIds: [],
+  password: '123123123',
+  activationLink: 'asd456',
+  createdAt: new Date('2022-08-19'),
+  updatedAt: new Date('2022-08-20'),
 };
 
 export const CREATE_USER_DTO: CreateUserDto = {

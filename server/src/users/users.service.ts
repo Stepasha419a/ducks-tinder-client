@@ -10,7 +10,6 @@ import { User } from '@prisma/client';
 import { ShortUser } from './users.interface';
 import {
   UpdateUserDto,
-  UserSortsDto,
   UserDto,
   DeletePictureDto,
   UserPairDto,
@@ -47,36 +46,41 @@ export class UsersService {
     });
   }
 
-  async getSorted(sortsDto: UserSortsDto): Promise<ShortUser> {
-    const user = await this.prismaService.user.findFirst({
+  async getSorted(user: User): Promise<ShortUser> {
+    const checkedUserIds = (
+      await this.prismaService.user.findUnique({
+        where: { id: user.id },
+        select: { checked: { select: { checkedUserId: true } } },
+      })
+    ).checked.map((user) => user.checkedUserId);
+
+    const sortedUser = await this.prismaService.user.findFirst({
       where: {
-        id: { notIn: sortsDto.userIds },
-        distance: { gt: 0, lte: sortsDto.distance },
+        id: { notIn: checkedUserIds },
+        distance: { gt: 0, lte: user.distance },
         age: {
-          gt: sortsDto.preferAgeFrom - 1,
-          lt: sortsDto.preferAgeTo + 1,
+          gte: user.preferAgeFrom,
+          lte: user.preferAgeTo,
         },
         preferAgeFrom: {
-          lt: sortsDto.age + 1,
+          lte: user.age,
         },
         preferAgeTo: {
-          gt: sortsDto.age - 1,
+          gte: user.age,
         },
-        sex: sortsDto.preferSex,
-        preferSex: sortsDto.sex,
+        sex: user.preferSex,
+        preferSex: user.sex,
       },
       select: UsersSelector.selectShortUser(),
     });
 
-    if (!user) {
+    if (!sortedUser) {
       throw new NotFoundException(
         'Such user was not found, try to change settings',
       );
     }
 
-    const userData = new UserDto(user);
-
-    return userData;
+    return new UserDto(sortedUser);
   }
 
   async create(userDto: CreateUserDto): Promise<UserDto> {
@@ -145,6 +149,7 @@ export class UsersService {
     dto: SavePictureDto,
     pictureFile: Express.Multer.File,
   ): Promise<UserDto> {
+    console.log(dto);
     const user = await this.prismaService.user.findUnique({
       where: { id: dto.userId },
       include: { pictures: true },
