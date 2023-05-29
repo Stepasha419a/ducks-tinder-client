@@ -4,7 +4,6 @@ import {
   Controller,
   HttpCode,
   HttpStatus,
-  Param,
   Post,
   Put,
   Patch,
@@ -18,17 +17,21 @@ import { ShortUser } from './users.interface';
 import { UserRequest } from 'common/types';
 import {
   DeletePictureDto,
-  SavePictureDto,
   UpdateUserDto,
   UserDto,
   UserPairDto,
   MixPicturesDto,
 } from './dto';
 
-// TODO: refactor it with req.user
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
+
+  @Patch()
+  @HttpCode(HttpStatus.OK)
+  patch(@Req() req: UserRequest, @Body() dto: UpdateUserDto): Promise<UserDto> {
+    return this.usersService.patch(req.user, dto);
+  }
 
   @Get('sorted')
   @HttpCode(HttpStatus.OK)
@@ -40,45 +43,51 @@ export class UsersController {
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('picture'))
   savePicture(
-    @Body() dto: SavePictureDto,
+    @Req() req: UserRequest,
     @UploadedFile() picture: Express.Multer.File,
   ): Promise<UserDto> {
-    return this.usersService.savePicture(dto, picture);
+    return this.usersService.savePicture(req.user, picture);
   }
 
   @Put('picture')
   @HttpCode(HttpStatus.OK)
-  deletePicture(@Body() dto: DeletePictureDto): Promise<UserDto> {
-    return this.usersService.deletePicture(dto);
+  deletePicture(
+    @Req() req: UserRequest,
+    @Body() dto: DeletePictureDto,
+  ): Promise<UserDto> {
+    return this.usersService.deletePicture(req.user, dto);
   }
 
   @Put('picture/mix')
   @HttpCode(HttpStatus.OK)
-  mixPictures(@Body() dto: MixPicturesDto): Promise<UserDto> {
-    return this.usersService.mixPictures(dto);
+  mixPictures(
+    @Req() req: UserRequest,
+    @Body() dto: MixPicturesDto,
+  ): Promise<UserDto> {
+    return this.usersService.mixPictures(req.user, dto);
   }
 
-  @Get('pairs/:id')
+  @Get('pairs')
   @HttpCode(HttpStatus.OK)
-  getPairs(@Param('id') id: string): Promise<ShortUser[]> {
-    return this.usersService.getPairs(id);
+  getPairs(@Req() req: UserRequest): Promise<ShortUser[]> {
+    return this.usersService.getPairs(req.user);
   }
 
   @Post('pairs')
   @HttpCode(HttpStatus.OK)
-  createPair(@Body() dto: UserPairDto): Promise<ShortUser[]> {
-    return this.usersService.createPair(dto);
+  createPair(
+    @Req() req: UserRequest,
+    @Body() dto: UserPairDto,
+  ): Promise<ShortUser[]> {
+    return this.usersService.createPair(req.user, dto);
   }
 
   @Put('pairs')
   @HttpCode(HttpStatus.OK)
-  deletePair(@Body() dto: UserPairDto): Promise<ShortUser[]> {
-    return this.usersService.deletePair(dto);
-  }
-
-  @Patch(':id')
-  @HttpCode(HttpStatus.OK)
-  patch(@Body() dto: UpdateUserDto, @Param('id') id: string): Promise<UserDto> {
-    return this.usersService.patch(id, dto);
+  deletePair(
+    @Req() req: UserRequest,
+    @Body() dto: UserPairDto,
+  ): Promise<ShortUser[]> {
+    return this.usersService.deletePair(req.user, dto);
   }
 }

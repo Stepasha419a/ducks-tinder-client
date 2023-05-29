@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { UsersController } from 'users/users.controller';
 import { UsersService } from 'users/users.service';
-import { UsersServiceMock } from '../mocks/users.service.mock';
+import { RequestMock, UsersServiceMock } from '../mocks';
 import { AccessTokenGuard } from 'common/guards';
 import { shortUserStub, userStub } from '../stubs';
 import { UserDto } from 'users/dto';
@@ -11,7 +11,6 @@ import {
   DELETE_PICTURE_DTO,
   DELETE_USER_PAIR_DTO,
   MIX_PICTURES_DTO,
-  SAVE_PICTURE_DTO,
   UPDATE_USER_DTO,
   USER_SORTS_DATA,
 } from '../values/users.const.dto';
@@ -21,6 +20,7 @@ describe('users-controller', () => {
   let usersService: UsersService;
 
   const mockAccessTokenGuard = jest.fn().mockReturnValue(true);
+  const requestMock = RequestMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -51,11 +51,14 @@ describe('users-controller', () => {
     let user: UserDto;
 
     beforeEach(async () => {
-      user = await usersController.patch(UPDATE_USER_DTO, userStub().id);
+      user = await usersController.patch(requestMock, UPDATE_USER_DTO);
     });
 
     it('should call usersService', () => {
-      expect(usersService.patch).toBeCalledWith(userStub().id, UPDATE_USER_DTO);
+      expect(usersService.patch).toBeCalledWith(
+        requestMock.user,
+        UPDATE_USER_DTO,
+      );
     });
 
     it('should return a user', () => {
@@ -88,13 +91,13 @@ describe('users-controller', () => {
 
     beforeEach(async () => {
       user = await usersController.savePicture(
-        SAVE_PICTURE_DTO,
+        requestMock,
         {} as Express.Multer.File,
       );
     });
 
     it('should call usersService', () => {
-      expect(usersService.savePicture).toBeCalledWith(SAVE_PICTURE_DTO, {});
+      expect(usersService.savePicture).toBeCalledWith(requestMock.user, {});
     });
 
     it('should return a user', () => {
@@ -106,11 +109,17 @@ describe('users-controller', () => {
     let user: UserDto;
 
     beforeEach(async () => {
-      user = await usersController.deletePicture(DELETE_PICTURE_DTO);
+      user = await usersController.deletePicture(
+        requestMock,
+        DELETE_PICTURE_DTO,
+      );
     });
 
     it('should call usersService', () => {
-      expect(usersService.deletePicture).toBeCalledWith(DELETE_PICTURE_DTO);
+      expect(usersService.deletePicture).toBeCalledWith(
+        requestMock.user,
+        DELETE_PICTURE_DTO,
+      );
     });
 
     it('should return a user', () => {
@@ -122,11 +131,14 @@ describe('users-controller', () => {
     let user: UserDto;
 
     beforeEach(async () => {
-      user = await usersController.mixPictures(MIX_PICTURES_DTO);
+      user = await usersController.mixPictures(requestMock, MIX_PICTURES_DTO);
     });
 
     it('should call usersService', () => {
-      expect(usersService.mixPictures).toBeCalledWith(MIX_PICTURES_DTO);
+      expect(usersService.mixPictures).toBeCalledWith(
+        requestMock.user,
+        MIX_PICTURES_DTO,
+      );
     });
 
     it('should return a user', () => {
@@ -138,11 +150,17 @@ describe('users-controller', () => {
     let users: ShortUser[];
 
     beforeEach(async () => {
-      users = await usersController.createPair(CREATE_USER_PAIR_DTO);
+      users = await usersController.createPair(
+        requestMock,
+        CREATE_USER_PAIR_DTO,
+      );
     });
 
     it('should call usersService', () => {
-      expect(usersService.createPair).toBeCalledWith(CREATE_USER_PAIR_DTO);
+      expect(usersService.createPair).toBeCalledWith(
+        requestMock.user,
+        CREATE_USER_PAIR_DTO,
+      );
     });
 
     it('should return an array of short users', () => {
@@ -154,11 +172,17 @@ describe('users-controller', () => {
     let user: ShortUser[];
 
     beforeEach(async () => {
-      user = await usersController.deletePair(DELETE_USER_PAIR_DTO);
+      user = await usersController.deletePair(
+        requestMock,
+        DELETE_USER_PAIR_DTO,
+      );
     });
 
     it('should call usersService', () => {
-      expect(usersService.deletePair).toBeCalledWith(DELETE_USER_PAIR_DTO);
+      expect(usersService.deletePair).toBeCalledWith(
+        requestMock.user,
+        DELETE_USER_PAIR_DTO,
+      );
     });
 
     it('should return an array of short users', () => {

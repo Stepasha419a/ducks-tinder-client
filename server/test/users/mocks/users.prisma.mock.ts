@@ -28,10 +28,24 @@ export const UsersPrismaMock = jest.fn().mockReturnValue({
     create: jest.fn(),
     findFirst: jest.fn().mockResolvedValue({
       id: '123123',
-      name: 'picture-name',
+      name: '123.jpg',
       userId: userStub().id,
       order: 0,
     }),
+    findMany: jest.fn().mockResolvedValue([
+      {
+        id: '123123',
+        name: '123.jpg',
+        userId: userStub().id,
+        order: 0,
+      },
+      {
+        id: '456456',
+        name: '456.jpg',
+        userId: userStub().id,
+        order: 1,
+      },
+    ]),
     update: jest.fn(),
     delete: jest.fn(),
   },

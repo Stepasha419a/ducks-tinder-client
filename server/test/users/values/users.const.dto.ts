@@ -2,7 +2,6 @@ import {
   CreateUserDto,
   DeletePictureDto,
   MixPicturesDto,
-  SavePictureDto,
   UpdateUserDto,
   UserPairDto,
 } from 'users/dto';
@@ -36,27 +35,19 @@ export const UPDATE_USER_DTO: UpdateUserDto = {
   interests: ['traveling', 'ski'],
 };
 
-export const SAVE_PICTURE_DTO: SavePictureDto = {
-  userId: userStub().id,
-};
-
 export const DELETE_PICTURE_DTO: DeletePictureDto = {
-  userId: userStub().id,
   order: 0,
 };
 
 export const MIX_PICTURES_DTO: MixPicturesDto = {
-  userId: userStub().id,
   mixOrder: 0,
   withOrder: 1,
 };
 
 export const CREATE_USER_PAIR_DTO: UserPairDto = {
-  userId: userStub().id,
   userPairId: '123123',
 };
 
 export const DELETE_USER_PAIR_DTO: UserPairDto = {
-  userId: userStub().id,
   userPairId: '34545656',
 };

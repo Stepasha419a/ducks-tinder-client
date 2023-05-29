@@ -64,7 +64,7 @@ describe('users-e2e', () => {
         const { currentUserAccessToken } = prepareAccessTokens();
 
         response = await request(httpServer)
-          .patch(`/users/${currentUser.id}`)
+          .patch('/users')
           .send({
             ...UPDATE_USER_DTO,
             interests: [
@@ -105,7 +105,7 @@ describe('users-e2e', () => {
         const { wrongUserAccessToken } = prepareAccessTokens();
 
         response = await request(httpServer)
-          .patch('/users/wrong-id')
+          .patch('/users')
           .send({ name: 'William' })
           .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
@@ -121,7 +121,7 @@ describe('users-e2e', () => {
 
       beforeAll(async () => {
         response = await request(httpServer)
-          .patch(`/users/${currentUser.id}`)
+          .patch('/users')
           .send({ name: 'William' });
       });
 
@@ -589,7 +589,7 @@ describe('users-e2e', () => {
         const { currentUserAccessToken } = prepareAccessTokens();
 
         response = await request(httpServer)
-          .get(`/users/pairs/${currentUser.id}`)
+          .get('/users/pairs')
           .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
@@ -616,7 +616,7 @@ describe('users-e2e', () => {
         const { secondUserAccessToken } = prepareAccessTokens();
 
         response = await request(httpServer)
-          .get(`/users/pairs/${secondUser.id}`)
+          .get('/users/pairs')
           .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
       });
 
@@ -633,7 +633,7 @@ describe('users-e2e', () => {
         const { wrongUserAccessToken } = prepareAccessTokens();
 
         response = await request(httpServer)
-          .get('/users/pairs/wrong-id')
+          .get('/users/pairs')
           .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
@@ -647,9 +647,7 @@ describe('users-e2e', () => {
       let response: request.Response;
 
       beforeAll(async () => {
-        response = await request(httpServer).get(
-          `/users/pairs/${secondUser.id}`,
-        );
+        response = await request(httpServer).get('/users/pairs');
       });
 
       it('should throw an error', async () => {
