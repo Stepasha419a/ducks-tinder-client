@@ -45,16 +45,21 @@ export class UsersService {
   }
 
   async getSorted(user: User): Promise<ShortUser> {
-    const checkedUserIds = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: { checked: { select: { checkedUserId: true } } },
-      })
-    ).checked.map((user) => user.checkedUserId);
+    const wasCheckedUserIds = await this.prismaService.user.findUnique({
+      where: { id: user.id },
+      select: {
+        checked: { select: { id: true } },
+        wasChecked: { select: { id: true } },
+      },
+    });
+    const checkedIds = wasCheckedUserIds.checked.map((checked) => checked.id);
+    const wasCheckedIds = wasCheckedUserIds.wasChecked.map(
+      (wasChecked) => wasChecked.id,
+    );
 
     const sortedUser = await this.prismaService.user.findFirst({
       where: {
-        id: { notIn: checkedUserIds },
+        id: { notIn: [...checkedIds, ...wasCheckedIds] },
         distance: { gt: 0, lte: user.distance },
         age: {
           gte: user.preferAgeFrom,
@@ -240,7 +245,134 @@ export class UsersService {
     ).pairs;
   }
 
-  async createPair(user: User, userPairDto: UserPairDto): Promise<ShortUser[]> {
+  async likeUser(user: User, userPairId: string) {
+    const userPair = await this.prismaService.user.findUnique({
+      where: { id: userPairId },
+    });
+    if (!userPair) {
+      throw new NotFoundException('Such user was not found');
+    }
+
+    const wasCheckedUserIds = await this.prismaService.user.findUnique({
+      where: { id: user.id },
+      select: {
+        checked: { select: { id: true } },
+        wasChecked: { select: { id: true } },
+      },
+    });
+    const checkedIds = wasCheckedUserIds.checked.map((checked) => checked.id);
+    const wasCheckedIds = wasCheckedUserIds.wasChecked.map(
+      (wasChecked) => wasChecked.id,
+    );
+
+    const isSomeonePairForAnotherOne = [...checkedIds, ...wasCheckedIds].find(
+      (userId) => userId == user.id || userId == userPairId,
+    );
+
+    if (isSomeonePairForAnotherOne) {
+      throw new BadRequestException(
+        'Pair with such an id already exists or such user is already checked',
+      );
+    }
+    await this.prismaService.user.update({
+      where: { id: userPairId },
+      data: {
+        pairs: { connect: { id: user.id } },
+      },
+    });
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: { checked: { connect: { id: userPairId } } },
+    });
+  }
+
+  async dislikeUser(user: User, userPairId: string) {
+    const wasCheckedUserIds = await this.prismaService.user.findUnique({
+      where: { id: user.id },
+      select: {
+        checked: { select: { id: true } },
+        wasChecked: { select: { id: true } },
+      },
+    });
+    const checkedIds = wasCheckedUserIds.checked.map((checked) => checked.id);
+    const wasCheckedIds = wasCheckedUserIds.wasChecked.map(
+      (wasChecked) => wasChecked.id,
+    );
+    if (
+      [...checkedIds, ...wasCheckedIds].find((userId) => userId === userPairId)
+    ) {
+      throw new BadRequestException('User is already checked');
+    }
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: { checked: { connect: { id: userPairId } } },
+    });
+  }
+
+  async returnUser(user: User, userPairId: string) {
+    const checked = (
+      await this.prismaService.user.findUnique({
+        where: { id: user.id },
+        select: { checked: { select: { id: true } } },
+      })
+    ).checked;
+
+    const pairs = (
+      await this.prismaService.user.findUnique({
+        where: { id: user.id },
+        select: { pairs: { select: { id: true } } },
+      })
+    ).pairs;
+
+    if (
+      checked.find((checked) => checked.id === userPairId) &&
+      !pairs.find((pair) => pair.id === userPairId)
+    ) {
+      throw new NotFoundException('Pair with such an id already exists');
+    }
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        checked: { disconnect: { id: userPairId } },
+      },
+    });
+  }
+
+  async removeAllPairs(user: User) {
+    const pairs = (
+      await this.prismaService.user.findUnique({
+        where: { id: user.id },
+        select: { pairFor: { select: { id: true } } },
+      })
+    ).pairFor;
+    await Promise.all(
+      pairs.map(async (pair) => {
+        await this.prismaService.user.update({
+          where: { id: pair.id },
+          data: { pairs: { disconnect: { id: user.id } } },
+        });
+      }),
+    );
+    const checked = (
+      await this.prismaService.user.findUnique({
+        where: { id: user.id },
+        select: { checked: { select: { id: true } } },
+      })
+    ).checked;
+    await Promise.all(
+      checked.map(async (checkedUser) => {
+        await this.prismaService.user.update({
+          where: { id: user.id },
+          data: { checked: { disconnect: { id: checkedUser.id } } },
+        });
+      }),
+    );
+  }
+
+  // in progress (waiting for chats)
+  /* async acceptPair(user: User, userPairDto: UserPairDto): Promise<ShortUser[]> {
     const pairs = (
       await this.prismaService.user.findUnique({
         where: { id: user.id },
@@ -261,7 +393,10 @@ export class UsersService {
     }
     const updatedUser = await this.prismaService.user.update({
       where: { id: user.id },
-      data: { pairs: { connect: { id: userPair.id } } },
+      data: {
+        pairs: { connect: { id: userPair.id } },
+        checked: { connect: { id: userPair.id } },
+      },
       select: {
         pairs: {
           select: UsersSelector.selectShortUser(),
@@ -270,7 +405,7 @@ export class UsersService {
     });
 
     return updatedUser.pairs;
-  }
+  } */
 
   async deletePair(user: User, userPairDto: UserPairDto): Promise<ShortUser[]> {
     const pairs = (

@@ -32,11 +32,11 @@ model User {
 
   token       Token?
   pictures    Picture[]
-  pairFor     User[]         @relation(name: "Pairs")
-  pairs       User[]         @relation(name: "Pairs")
+  pairFor     User[]        @relation(name: "Pairs")
+  pairs       User[]        @relation(name: "Pairs")
   messages    Message[]
-  checked     CheckedUsers[] @relation("Checked") // who was checked by him (he checked user1, user2)
-  wasChecked  CheckedUsers[] @relation("WasChecked") // who checked him (he was checked by user3, user4)
+  checked     User[]        @relation(name: "Checked") // who was checked by him (he checked user1, user2)
+  wasChecked  User[]        @relation(name: "Checked") // who checked him (he was checked by user3, user4)
   chatToUsers ChatToUsers[]
   interests   Interest[]
 
@@ -99,14 +99,4 @@ model Chat {
   chatToUsers ChatToUsers[]
 
   @@map("chats")
-}
-
-model CheckedUsers {
-  id            String @id @default(uuid())
-  user          User   @relation("Checked", fields: [userId], references: [id])
-  userId        String
-  checkedUser   User   @relation("WasChecked", fields: [checkedUserId], references: [id])
-  checkedUserId String
-
-  @@map("checked-users")
 }

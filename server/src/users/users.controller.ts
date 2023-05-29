@@ -11,6 +11,7 @@ import {
   UploadedFile,
   UseInterceptors,
   Req,
+  Param,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ShortUser } from './users.interface';
@@ -67,19 +68,28 @@ export class UsersController {
     return this.usersService.mixPictures(req.user, dto);
   }
 
+  @Post('like/:id')
+  @HttpCode(HttpStatus.OK)
+  likeUser(@Req() req: UserRequest, @Param('id') id: string) {
+    return this.usersService.likeUser(req.user, id);
+  }
+
+  @Post('dislike/:id')
+  @HttpCode(HttpStatus.OK)
+  dislikeUser(@Req() req: UserRequest, @Param('id') id: string) {
+    return this.usersService.dislikeUser(req.user, id);
+  }
+
+  @Post('return/:id')
+  @HttpCode(HttpStatus.OK)
+  returnUser(@Req() req: UserRequest, @Param('id') id: string) {
+    return this.usersService.returnUser(req.user, id);
+  }
+
   @Get('pairs')
   @HttpCode(HttpStatus.OK)
   getPairs(@Req() req: UserRequest): Promise<ShortUser[]> {
     return this.usersService.getPairs(req.user);
-  }
-
-  @Post('pairs')
-  @HttpCode(HttpStatus.OK)
-  createPair(
-    @Req() req: UserRequest,
-    @Body() dto: UserPairDto,
-  ): Promise<ShortUser[]> {
-    return this.usersService.createPair(req.user, dto);
   }
 
   @Put('pairs')
@@ -90,4 +100,20 @@ export class UsersController {
   ): Promise<ShortUser[]> {
     return this.usersService.deletePair(req.user, dto);
   }
+
+  @Post('removeAllPairs')
+  @HttpCode(HttpStatus.OK)
+  removeAllParis(@Req() req: UserRequest) {
+    return this.usersService.removeAllPairs(req.user);
+  }
+
+  // TODO: finish it when finish with chats logic
+  /* @Post('pairs')
+  @HttpCode(HttpStatus.OK)
+  acceptPair(
+    @Req() req: UserRequest,
+    @Body() dto: UserPairDto,
+  ): Promise<ShortUser[]> {
+    return this.usersService.acceptPair(req.user, dto);
+  } */
 }
