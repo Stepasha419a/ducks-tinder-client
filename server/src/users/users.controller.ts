@@ -80,10 +80,10 @@ export class UsersController {
     return this.usersService.dislikeUser(req.user, id);
   }
 
-  @Post('return/:id')
+  @Put('return')
   @HttpCode(HttpStatus.OK)
-  returnUser(@Req() req: UserRequest, @Param('id') id: string) {
-    return this.usersService.returnUser(req.user, id);
+  returnUser(@Req() req: UserRequest) {
+    return this.usersService.returnUser(req.user);
   }
 
   @Get('pairs')
@@ -101,6 +101,7 @@ export class UsersController {
     return this.usersService.deletePair(req.user, dto);
   }
 
+  // for dev
   @Post('removeAllPairs')
   @HttpCode(HttpStatus.OK)
   removeAllParis(@Req() req: UserRequest) {

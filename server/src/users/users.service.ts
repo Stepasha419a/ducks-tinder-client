@@ -311,10 +311,35 @@ export class UsersService {
     });
   }
 
-  async returnUser(user: User, userPairId: string) {
-    console.log('return user' + user + userPairId);
+  async returnUser(user: User) {
+    const pairIds = (
+      await this.prismaService.user.findUnique({
+        where: { id: user.id },
+        select: { pairFor: { select: { id: true } } },
+      })
+    ).pairFor.map((pair) => pair.id);
+
+    const checkedUser = await this.prismaService.checkedUsers.findFirst({
+      where: {
+        wasCheckedId: user.id,
+        checked: { id: { notIn: pairIds } },
+      },
+    });
+    if (!checkedUser) {
+      throw new NotFoundException();
+    }
+
+    await this.prismaService.checkedUsers.delete({
+      where: {
+        checkedId_wasCheckedId: {
+          checkedId: checkedUser.checkedId,
+          wasCheckedId: checkedUser.wasCheckedId,
+        },
+      },
+    });
   }
 
+  // for dev
   async removeAllPairs(user: User) {
     const pairs = (
       await this.prismaService.user.findUnique({
