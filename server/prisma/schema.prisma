@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:root@localhost:5432/ducks-tinder"
 }
 
 model User {
@@ -32,15 +32,30 @@ model User {
 
   token       Token?
   pictures    Picture[]
-  pairFor     User[]        @relation(name: "Pairs")
-  pairs       User[]        @relation(name: "Pairs")
   messages    Message[]
-  checked     User[]        @relation(name: "Checked") // who was checked by him (he checked user1, user2)
-  wasChecked  User[]        @relation(name: "Checked") // who checked him (he was checked by user3, user4)
   chatToUsers ChatToUsers[]
   interests   Interest[]
 
+  pairFor User[] @relation(name: "Pairs")
+  pairs   User[] @relation(name: "Pairs")
+
+  checked    CheckedUsers[] @relation(name: "Checked")
+  wasChecked CheckedUsers[] @relation(name: "WasChecked")
+
   @@map("users")
+}
+
+model CheckedUsers {
+  checked      User   @relation(name: "Checked", fields: [checkedId], references: [id])
+  checkedId    String
+  wasChecked   User   @relation(name: "WasChecked", fields: [wasCheckedId], references: [id])
+  wasCheckedId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@id([checkedId, wasCheckedId])
+  @@map("checked-users")
 }
 
 model Token {
