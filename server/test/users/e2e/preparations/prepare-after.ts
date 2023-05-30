@@ -5,6 +5,11 @@ export async function prepareAfter() {
     prismaClient.picture.deleteMany({
       where: { user: { id: { in: ['current-user-id', 'second-user-id'] } } },
     }),
+    prismaClient.checkedUsers.deleteMany({
+      where: {
+        OR: [{ checkedId: 'current-user-id' }, { checkedId: 'second-user-id' }],
+      },
+    }),
     prismaClient.user.deleteMany({
       where: { id: { in: ['current-user-id', 'second-user-id'] } },
     }),

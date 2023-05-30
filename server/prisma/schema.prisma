@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:root@localhost:5432/ducks-tinder"
+  url      = env("DATABASE_URL")
 }
 
 model User {

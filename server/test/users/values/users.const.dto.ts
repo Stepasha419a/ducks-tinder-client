@@ -44,10 +44,6 @@ export const MIX_PICTURES_DTO: MixPicturesDto = {
   withOrder: 1,
 };
 
-export const CREATE_USER_PAIR_DTO: UserPairDto = {
-  userPairId: '123123',
-};
-
 export const DELETE_USER_PAIR_DTO: UserPairDto = {
   userPairId: '34545656',
 };

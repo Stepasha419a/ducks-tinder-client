@@ -19,6 +19,13 @@ export const UsersPrismaMock = jest.fn().mockReturnValue({
       .fn()
       .mockResolvedValue({ ...userStub(), _count: { pairFor: 0 } }),
   },
+  checkedUsers: {
+    findUnique: jest.fn().mockResolvedValue(userStub()),
+    findMany: jest.fn().mockResolvedValue([]),
+    findFirst: jest.fn(),
+    create: jest.fn(),
+    delete: jest.fn(),
+  },
   interest: {
     findMany: jest
       .fn()

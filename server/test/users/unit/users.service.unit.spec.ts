@@ -12,7 +12,6 @@ import { UsersPrismaMock, FilesServiceMock } from '../mocks';
 import { requestUserStub, shortUserStub, userStub } from '../stubs';
 import {
   CREATE_USER_DTO,
-  CREATE_USER_PAIR_DTO,
   DELETE_PICTURE_DTO,
   DELETE_USER_PAIR_DTO,
   MIX_PICTURES_DTO,
@@ -112,6 +111,22 @@ describe('users-service', () => {
       user = await service.getSorted(USER_SORTS_DATA);
     });
 
+    it('should call checked users find many', async () => {
+      expect(prismaService.checkedUsers.findMany).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.findMany).toBeCalledWith({
+        where: {
+          OR: [
+            { checkedId: shortUserStub().id },
+            { wasCheckedId: shortUserStub().id },
+          ],
+        },
+        select: {
+          checked: { select: { id: true } },
+          wasChecked: { select: { id: true } },
+        },
+      });
+    });
+
     it('should call find first', async () => {
       expect(prismaService.user.findFirst).toBeCalledTimes(1);
       expect(prismaService.user.findFirst).toBeCalledWith(
@@ -207,11 +222,6 @@ describe('users-service', () => {
 
     it('should call find unique', async () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      /* 
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
-        where: { id: userStub().id },
-        include: { pictures: true },
-      }); */
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userStub().id },
         include: UsersSelector.selectUser(),
@@ -324,6 +334,156 @@ describe('users-service', () => {
     });
   });
 
+  describe('when like user is called', () => {
+    let response;
+
+    beforeEach(async () => {
+      response = await service.likeUser(requestUserStub(), '34545656');
+    });
+
+    it('should call user find unique', () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
+        where: { id: '34545656' },
+      });
+    });
+
+    it('should call checkedUsers find many', () => {
+      expect(prismaService.checkedUsers.findMany).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.findMany).toBeCalledWith({
+        where: {
+          OR: [{ checkedId: requestUserStub().id }, { checkedId: '34545656' }],
+        },
+        select: {
+          checked: { select: { id: true } },
+          wasChecked: { select: { id: true } },
+        },
+      });
+    });
+
+    it('should call user update', () => {
+      expect(prismaService.user.update).toBeCalledTimes(1);
+      expect(prismaService.user.update).toBeCalledWith({
+        where: { id: '34545656' },
+        data: {
+          pairs: { connect: { id: requestUserStub().id } },
+        },
+      });
+    });
+
+    it('should call checkedUsers create', () => {
+      expect(prismaService.checkedUsers.create).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.create).toBeCalledWith({
+        data: { wasCheckedId: requestUserStub().id, checkedId: '34545656' },
+      });
+    });
+
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
+    });
+  });
+
+  describe('when dislike user is called', () => {
+    let response;
+
+    beforeEach(async () => {
+      response = await service.dislikeUser(requestUserStub(), '34545656');
+    });
+
+    it('should call user find unique', () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
+        where: { id: '34545656' },
+      });
+    });
+
+    it('should call checkedUsers find many', () => {
+      expect(prismaService.checkedUsers.findMany).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.findMany).toBeCalledWith({
+        where: {
+          OR: [{ checkedId: requestUserStub().id }, { checkedId: '34545656' }],
+        },
+        select: {
+          checked: { select: { id: true } },
+          wasChecked: { select: { id: true } },
+        },
+      });
+    });
+
+    it('should call checkedUsers create', () => {
+      expect(prismaService.checkedUsers.create).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.create).toBeCalledWith({
+        data: { wasCheckedId: requestUserStub().id, checkedId: '34545656' },
+      });
+    });
+
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
+    });
+  });
+
+  describe('when return user is called', () => {
+    let response;
+
+    let oldUserFindUniqueMock;
+    let oldCheckedUsersFindFirstMock;
+
+    beforeAll(() => {
+      oldUserFindUniqueMock = prismaService.user.findUnique;
+      oldCheckedUsersFindFirstMock = prismaService.checkedUsers.findFirst;
+      prismaService.user.findUnique = jest
+        .fn()
+        .mockResolvedValue({ pairFor: [{ id: userStub().id }] });
+      prismaService.checkedUsers.findFirst = jest.fn().mockResolvedValue({
+        checkedId: userStub().id,
+        wasCheckedId: requestUserStub().id,
+      });
+    });
+
+    beforeEach(async () => {
+      response = await service.returnUser(requestUserStub());
+    });
+
+    afterAll(() => {
+      prismaService.user.findUnique = oldUserFindUniqueMock;
+      prismaService.checkedUsers.findFirst = oldCheckedUsersFindFirstMock;
+    });
+
+    it('should call user find unique', () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
+        where: { id: requestUserStub().id },
+        select: { pairFor: { select: { id: true } } },
+      });
+    });
+
+    it('should call checkedUsers find first', () => {
+      expect(prismaService.checkedUsers.findFirst).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.findFirst).toBeCalledWith({
+        where: {
+          wasCheckedId: requestUserStub().id,
+          checked: { id: { notIn: [userStub().id] } },
+        },
+      });
+    });
+
+    it('should call checkedUsers delete', () => {
+      expect(prismaService.checkedUsers.delete).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.delete).toBeCalledWith({
+        where: {
+          checkedId_wasCheckedId: {
+            checkedId: userStub().id,
+            wasCheckedId: requestUserStub().id,
+          },
+        },
+      });
+    });
+
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
+    });
+  });
+
   describe('when get pairs is called', () => {
     let pairs: ShortUser[];
 
@@ -335,44 +495,6 @@ describe('users-service', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(1);
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userStub().id },
-        select: {
-          pairs: {
-            select: UsersSelector.selectShortUser(),
-          },
-        },
-      });
-    });
-
-    it('should return pairs', async () => {
-      expect(pairs).toEqual(userStub().pairs);
-    });
-  });
-
-  describe('when create pair is called', () => {
-    let pairs: ShortUser[];
-
-    beforeEach(async () => {
-      pairs = await service.createPair(requestUserStub(), CREATE_USER_PAIR_DTO);
-    });
-
-    it('should call user find unique', async () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(2);
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
-        where: { id: requestUserStub().id },
-        select: { pairs: { select: { id: true } } },
-      });
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
-        where: { id: CREATE_USER_PAIR_DTO.userPairId },
-      });
-    });
-
-    it('should call user update', async () => {
-      expect(prismaService.user.update).toBeCalledTimes(1);
-      expect(prismaService.user.update).toBeCalledWith({
-        where: { id: requestUserStub().id },
-        // connect to userPairDto.userId - userPairDto.userId
-        // because find unique returns equal objects
-        data: { pairs: { connect: { id: requestUserStub().id } } },
         select: {
           pairs: {
             select: UsersSelector.selectShortUser(),

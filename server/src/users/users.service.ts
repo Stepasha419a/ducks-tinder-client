@@ -230,19 +230,6 @@ export class UsersService {
     return new UserDto(updatedUser);
   }
 
-  async getPairs(user: User): Promise<ShortUser[]> {
-    return (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: {
-          pairs: {
-            select: UsersSelector.selectShortUser(),
-          },
-        },
-      })
-    ).pairs;
-  }
-
   async likeUser(user: User, userPairId: string) {
     if (user.id === userPairId) {
       throw new BadRequestException('You can not like yourself');
@@ -291,6 +278,13 @@ export class UsersService {
       throw new BadRequestException('You can not dislike yourself');
     }
 
+    const userPair = await this.prismaService.user.findUnique({
+      where: { id: userPairId },
+    });
+    if (!userPair) {
+      throw new NotFoundException('Such user was not found');
+    }
+
     const checkedUsers = await this.prismaService.checkedUsers.findMany({
       where: { OR: [{ checkedId: user.id }, { checkedId: userPairId }] },
       select: {
@@ -337,6 +331,19 @@ export class UsersService {
         },
       },
     });
+  }
+
+  async getPairs(user: User): Promise<ShortUser[]> {
+    return (
+      await this.prismaService.user.findUnique({
+        where: { id: user.id },
+        select: {
+          pairs: {
+            select: UsersSelector.selectShortUser(),
+          },
+        },
+      })
+    ).pairs;
   }
 
   // for dev

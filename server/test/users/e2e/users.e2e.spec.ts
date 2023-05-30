@@ -56,7 +56,7 @@ describe('users-e2e', () => {
     await prepareBefore();
   });
 
-  describe('users/:id (PATCH)', () => {
+  describe('users (PATCH)', () => {
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -201,7 +201,6 @@ describe('users-e2e', () => {
     });
   });
 
-  // TODO: write an empty accessToken test after req.user refactoring
   describe('users/picture (POST)', () => {
     describe('when it is called correctly', () => {
       let response: request.Response;
@@ -211,7 +210,6 @@ describe('users-e2e', () => {
 
         response = await request(httpServer)
           .post('/users/picture')
-          .field('userId', currentUser.id)
           .attach(
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
@@ -244,7 +242,6 @@ describe('users-e2e', () => {
 
         response = await request(httpServer)
           .post('/users/picture')
-          .field('userId', 'wrong-id')
           .attach(
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
@@ -266,7 +263,6 @@ describe('users-e2e', () => {
 
         response = await request(httpServer)
           .post('/users/picture')
-          .field('userId', secondUser.id)
           .attach(
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
@@ -279,6 +275,9 @@ describe('users-e2e', () => {
         expect(response.body.message).toEqual('You have max pictures count');
       });
     });
+
+    // e2e test for no access token always fails because of
+    // https://stackoverflow.com/questions/71682239/supertest-failing-with-econnreset
   });
 
   describe('users/picture (PUT)', () => {
@@ -288,7 +287,6 @@ describe('users-e2e', () => {
       currentUser = (
         await request(httpServer)
           .post('/users/picture')
-          .field('userId', currentUser.id)
           .attach(
             'picture',
             path.resolve(__dirname, '..', 'stubs', 'test-image.jpg'),
@@ -466,7 +464,7 @@ describe('users-e2e', () => {
     });
   });
 
-  describe('users/pairs (POST)', () => {
+  describe('users/like/:id (POST)', () => {
     describe('when it is called correctly', () => {
       let response: request.Response;
 
@@ -474,24 +472,146 @@ describe('users-e2e', () => {
         const { currentUserAccessToken } = prepareAccessTokens();
 
         response = await request(httpServer)
-          .post('/users/pairs')
-          .send({ userId: currentUser.id, userPairId: secondUser.id })
+          .post(`/users/like/${secondUser.id}`)
           .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
-      it('should return a user', async () => {
+      it('should return an empty object', async () => {
         expect(response.status).toBe(200);
-        expect(response.body).toEqual([
-          {
-            id: secondUser.id,
-            name: secondUser.name,
-            description: secondUser.description,
-            distance: secondUser.distance,
-            interests: secondUser.interests,
-            age: secondUser.age,
-            pictures: secondUser.pictures,
+        expect(response.body).toEqual({});
+      });
+    });
+
+    describe('when user tries to like himself', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/like/${currentUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual('You can not like yourself');
+      });
+    });
+
+    describe('when second user is already checked by current user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: secondUser.id,
+            wasCheckedId: currentUser.id,
           },
-        ]);
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/like/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual(
+          'Pair with such an id already exists or such user is already checked',
+        );
+      });
+    });
+
+    describe('when current user is already checked by second user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: currentUser.id,
+            wasCheckedId: secondUser.id,
+          },
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/like/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual(
+          'Pair with such an id already exists or such user is already checked',
+        );
+      });
+    });
+
+    describe('when second user is already pair for current user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.user.update({
+          where: { id: currentUser.id },
+          data: {
+            pairs: { connect: { id: secondUser.id } },
+          },
+        });
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: currentUser.id,
+            wasCheckedId: secondUser.id,
+          },
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/like/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual(
+          'Pair with such an id already exists or such user is already checked',
+        );
+      });
+    });
+
+    describe('when current user is already pair for second user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.user.update({
+          where: { id: secondUser.id },
+          data: {
+            pairs: { connect: { id: currentUser.id } },
+          },
+        });
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: secondUser.id,
+            wasCheckedId: currentUser.id,
+          },
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/like/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual(
+          'Pair with such an id already exists or such user is already checked',
+        );
       });
     });
 
@@ -502,8 +622,7 @@ describe('users-e2e', () => {
         const { wrongUserAccessToken } = prepareAccessTokens();
 
         response = await request(httpServer)
-          .post('/users/pairs')
-          .send({ userId: 'wrong-id', userPairId: secondUser.id })
+          .post(`/users/like/${secondUser.id}`)
           .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
       });
 
@@ -520,8 +639,7 @@ describe('users-e2e', () => {
         const { currentUserAccessToken } = prepareAccessTokens();
 
         response = await request(httpServer)
-          .post('/users/pairs')
-          .send({ userId: currentUser.id, userPairId: 'wrong-id' })
+          .post('/users/like/wrong-id')
           .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
       });
 
@@ -531,38 +649,13 @@ describe('users-e2e', () => {
       });
     });
 
-    describe('when they are already paired => already exist', () => {
-      let response: request.Response;
-
-      beforeAll(async () => {
-        await prismaClient.user.update({
-          where: { id: currentUser.id },
-          data: { pairs: { connect: { id: secondUser.id } } },
-        });
-
-        const { currentUserAccessToken } = prepareAccessTokens();
-
-        response = await request(httpServer)
-          .post('/users/pairs/')
-          .send({ userId: currentUser.id, userPairId: secondUser.id })
-          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
-      });
-
-      it('should throw an error', async () => {
-        expect(response.status).toBe(404);
-        expect(response.body.message).toEqual(
-          'Pair with such an id already exists',
-        );
-      });
-    });
-
     describe('when there is no access token', () => {
       let response: request.Response;
 
       beforeAll(async () => {
-        response = await request(httpServer)
-          .post('/users/pairs')
-          .send({ userId: currentUser.id, userPairId: secondUser.id });
+        response = await request(httpServer).post(
+          `/users/like/${secondUser.id}`,
+        );
       });
 
       it('should throw an error', async () => {
@@ -572,7 +665,298 @@ describe('users-e2e', () => {
     });
   });
 
-  describe('users/pairs/:id (GET)', () => {
+  describe('users/dislike/:id (POST)', () => {
+    describe('when it is called correctly', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/dislike/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should return an empty object', async () => {
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({});
+      });
+    });
+
+    describe('when user tries to like himself', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/dislike/${currentUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual('You can not dislike yourself');
+      });
+    });
+
+    describe('when second user is already checked by current user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: secondUser.id,
+            wasCheckedId: currentUser.id,
+          },
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/dislike/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual('User is already checked');
+      });
+    });
+
+    describe('when current user is already checked by second user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: currentUser.id,
+            wasCheckedId: secondUser.id,
+          },
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/dislike/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual('User is already checked');
+      });
+    });
+
+    describe('when second user is already pair for current user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.user.update({
+          where: { id: currentUser.id },
+          data: {
+            pairs: { connect: { id: secondUser.id } },
+          },
+        });
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: currentUser.id,
+            wasCheckedId: secondUser.id,
+          },
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/dislike/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual('User is already checked');
+      });
+    });
+
+    describe('when current user is already pair for second user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.user.update({
+          where: { id: secondUser.id },
+          data: {
+            pairs: { connect: { id: currentUser.id } },
+          },
+        });
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: secondUser.id,
+            wasCheckedId: currentUser.id,
+          },
+        });
+
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/dislike/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(400);
+        expect(response.body.message).toEqual('User is already checked');
+      });
+    });
+
+    describe('when there is no such user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post(`/users/dislike/${secondUser.id}`)
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+
+    describe('when there is no such user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { currentUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .post('/users/dislike/wrong-id')
+          .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+
+    describe('when there is no access token', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer).post(
+          `/users/dislike/${secondUser.id}`,
+        );
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
+      });
+    });
+  });
+
+  describe('users/return (PUT)', () => {
+    describe('when it is called correctly', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.checkedUsers.create({
+          data: {
+            checkedId: currentUser.id,
+            wasCheckedId: secondUser.id,
+          },
+        });
+
+        // second user has required fields to find user
+        const { secondUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .put('/users/return')
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+      });
+
+      it('should return an empty object', async () => {
+        expect(response.status).toBe(200);
+        expect(response.body).toEqual({});
+      });
+    });
+
+    describe('when there is no such user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { wrongUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .put('/users/return')
+          .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Such user was not found');
+      });
+    });
+
+    describe('when there is no such checked user', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        const { secondUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .put('/users/return')
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Not Found');
+      });
+    });
+
+    describe('when user is already liked (=paired)', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        await prismaClient.user.update({
+          where: { id: secondUser.id },
+          data: {
+            pairs: { connect: { id: currentUser.id } },
+          },
+        });
+
+        const { secondUserAccessToken } = prepareAccessTokens();
+
+        response = await request(httpServer)
+          .put('/users/return')
+          .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(404);
+        expect(response.body.message).toEqual('Not Found');
+      });
+    });
+
+    describe('when there is no access token', () => {
+      let response: request.Response;
+
+      beforeAll(async () => {
+        response = await request(httpServer).put('/users/return');
+      });
+
+      it('should throw an error', async () => {
+        expect(response.status).toBe(401);
+        expect(response.body.message).toEqual('Unauthorized');
+      });
+    });
+  });
+
+  describe('users/pairs (GET)', () => {
     beforeAll(async () => {
       currentUser = new UserDto(
         await prismaClient.user.update({

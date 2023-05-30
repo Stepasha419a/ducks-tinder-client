@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 cd server
-#npm run test
+npm run test
 npm run lint:fix
 
 cd ../client

@@ -3,11 +3,10 @@ import { UsersController } from 'users/users.controller';
 import { UsersService } from 'users/users.service';
 import { RequestMock, UsersServiceMock } from '../mocks';
 import { AccessTokenGuard } from 'common/guards';
-import { shortUserStub, userStub } from '../stubs';
+import { newUserStub, shortUserStub, userStub } from '../stubs';
 import { UserDto } from 'users/dto';
 import { ShortUser } from 'users/users.interface';
 import {
-  CREATE_USER_PAIR_DTO,
   DELETE_PICTURE_DTO,
   DELETE_USER_PAIR_DTO,
   MIX_PICTURES_DTO,
@@ -146,25 +145,79 @@ describe('users-controller', () => {
     });
   });
 
-  describe('when createPair is called', () => {
-    let users: ShortUser[];
+  describe('when likeUser is called', () => {
+    let response;
 
     beforeEach(async () => {
-      users = await usersController.createPair(
+      response = await usersController.likeUser(requestMock, newUserStub().id);
+    });
+
+    it('should call usersService', () => {
+      expect(usersService.likeUser).toBeCalledTimes(1);
+      expect(usersService.likeUser).toBeCalledWith(
+        requestMock.user,
+        newUserStub().id,
+      );
+    });
+
+    it('should return empty object', () => {
+      expect(response).toEqual({});
+    });
+  });
+
+  describe('when dislikeUser is called', () => {
+    let response;
+
+    beforeEach(async () => {
+      response = await usersController.dislikeUser(
         requestMock,
-        CREATE_USER_PAIR_DTO,
+        newUserStub().id,
       );
     });
 
     it('should call usersService', () => {
-      expect(usersService.createPair).toBeCalledWith(
+      expect(usersService.dislikeUser).toBeCalledTimes(1);
+      expect(usersService.dislikeUser).toBeCalledWith(
         requestMock.user,
-        CREATE_USER_PAIR_DTO,
+        newUserStub().id,
       );
     });
 
+    it('should return empty object', () => {
+      expect(response).toEqual({});
+    });
+  });
+
+  describe('when returnUser is called', () => {
+    let response;
+
+    beforeEach(async () => {
+      response = await usersController.returnUser(requestMock);
+    });
+
+    it('should call usersService', () => {
+      expect(usersService.returnUser).toBeCalledTimes(1);
+      expect(usersService.returnUser).toBeCalledWith(requestMock.user);
+    });
+
+    it('should return empty object', () => {
+      expect(response).toEqual({});
+    });
+  });
+
+  describe('when getPairs is called', () => {
+    let user: ShortUser[];
+
+    beforeEach(async () => {
+      user = await usersController.getPairs(requestMock);
+    });
+
+    it('should call usersService', () => {
+      expect(usersService.getPairs).toBeCalledWith(requestMock.user);
+    });
+
     it('should return an array of short users', () => {
-      expect(users).toEqual([shortUserStub()]);
+      expect(user).toEqual([shortUserStub()]);
     });
   });
 

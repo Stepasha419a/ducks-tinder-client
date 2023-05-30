@@ -7,6 +7,8 @@ export const UsersServiceMock = jest.fn().mockReturnValue({
   deletePicture: jest.fn().mockResolvedValue(userStub()),
   mixPictures: jest.fn().mockResolvedValue(userStub()),
   getPairs: jest.fn().mockResolvedValue([shortUserStub()]),
-  createPair: jest.fn().mockResolvedValue([shortUserStub()]),
   deletePair: jest.fn().mockResolvedValue([shortUserStub()]),
+  likeUser: jest.fn().mockResolvedValue({}),
+  dislikeUser: jest.fn().mockResolvedValue({}),
+  returnUser: jest.fn().mockResolvedValue({}),
 });
