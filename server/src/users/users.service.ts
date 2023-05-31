@@ -1,4 +1,4 @@
-import { UsersSelector } from './utils/users.selector';
+import { UsersSelector } from './users.selector';
 import { PrismaService } from '../prisma/prisma.service';
 import {
   Injectable,

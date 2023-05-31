@@ -1,3 +1,4 @@
+import { CommandBus, CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
 import { UsersController } from 'users/users.controller';
 import { UsersService } from 'users/users.service';
@@ -13,27 +14,34 @@ import {
   UPDATE_USER_DTO,
   USER_SORTS_DATA,
 } from '../values/users.const.dto';
+import { PatchUserCommand } from 'users/commands/patch-user/patch-user.command';
 
 describe('users-controller', () => {
   let usersController: UsersController;
   let usersService: UsersService;
+  let commandBus: CommandBus;
 
   const mockAccessTokenGuard = jest.fn().mockReturnValue(true);
   const requestMock = RequestMock();
+  const usersServiceMock = UsersServiceMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [UsersService],
+      imports: [CqrsModule],
     })
       .overrideGuard(AccessTokenGuard)
       .useValue(mockAccessTokenGuard)
       .overrideProvider(UsersService)
-      .useValue(UsersServiceMock())
+      .useValue(usersServiceMock)
+      .overrideProvider(CommandBus)
+      .useValue(usersServiceMock)
       .compile();
 
     usersController = moduleRef.get<UsersController>(UsersController);
     usersService = moduleRef.get<UsersService>(UsersService);
+    commandBus = moduleRef.get<CommandBus>(CommandBus);
   });
 
   beforeEach(() => {
@@ -48,15 +56,15 @@ describe('users-controller', () => {
 
   describe('when patch is called', () => {
     let user: UserDto;
+    usersServiceMock.execute = jest.fn().mockResolvedValue(userStub());
 
     beforeEach(async () => {
       user = await usersController.patch(requestMock, UPDATE_USER_DTO);
     });
 
     it('should call usersService', () => {
-      expect(usersService.patch).toBeCalledWith(
-        requestMock.user,
-        UPDATE_USER_DTO,
+      expect(commandBus.execute).toBeCalledWith(
+        new PatchUserCommand(requestMock.user, UPDATE_USER_DTO),
       );
     });
 

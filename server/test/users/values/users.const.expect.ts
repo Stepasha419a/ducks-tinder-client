@@ -1,4 +1,4 @@
-import { UsersSelector } from 'users/utils';
+import { UsersSelector } from 'users/users.selector';
 import { USER_SORTS_DATA } from './users.const.dto';
 
 export const GET_SORTED_FIND_FIRST_CALLED = {

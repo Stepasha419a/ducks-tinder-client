@@ -23,15 +23,22 @@ import {
   UserPairDto,
   MixPicturesDto,
 } from './dto';
+import { CommandBus } from '@nestjs/cqrs';
+import { PatchUserCommand } from './commands/patch-user/patch-user.command';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly commandBus: CommandBus,
+  ) {}
 
   @Patch()
   @HttpCode(HttpStatus.OK)
   patch(@Req() req: UserRequest, @Body() dto: UpdateUserDto): Promise<UserDto> {
-    return this.usersService.patch(req.user, dto);
+    return this.commandBus.execute<PatchUserCommand, UserDto>(
+      new PatchUserCommand(req.user, dto),
+    );
   }
 
   @Get('sorted')
@@ -70,19 +77,19 @@ export class UsersController {
 
   @Post('like/:id')
   @HttpCode(HttpStatus.OK)
-  likeUser(@Req() req: UserRequest, @Param('id') id: string) {
+  likeUser(@Req() req: UserRequest, @Param('id') id: string): Promise<void> {
     return this.usersService.likeUser(req.user, id);
   }
 
   @Post('dislike/:id')
   @HttpCode(HttpStatus.OK)
-  dislikeUser(@Req() req: UserRequest, @Param('id') id: string) {
+  dislikeUser(@Req() req: UserRequest, @Param('id') id: string): Promise<void> {
     return this.usersService.dislikeUser(req.user, id);
   }
 
   @Put('return')
   @HttpCode(HttpStatus.OK)
-  returnUser(@Req() req: UserRequest) {
+  returnUser(@Req() req: UserRequest): Promise<void> {
     return this.usersService.returnUser(req.user);
   }
 

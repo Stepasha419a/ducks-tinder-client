@@ -1,4 +1,4 @@
-import { UsersSelector } from 'users/utils';
+import { UsersSelector } from 'users/users.selector';
 import prismaClient from 'test/prisma-client';
 import { UserDto } from 'users/dto';
 

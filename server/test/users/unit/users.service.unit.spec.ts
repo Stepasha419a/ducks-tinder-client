@@ -7,7 +7,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { User } from '@prisma/client';
 import { ShortUser } from 'users/users.interface';
 import { UserDto } from 'users/dto';
-import { UsersSelector } from 'users/utils';
+import { UsersSelector } from 'users/users.selector';
 import { UsersPrismaMock, FilesServiceMock } from '../mocks';
 import { requestUserStub, shortUserStub, userStub } from '../stubs';
 import {
@@ -15,7 +15,6 @@ import {
   DELETE_PICTURE_DTO,
   DELETE_USER_PAIR_DTO,
   MIX_PICTURES_DTO,
-  UPDATE_USER_DTO,
   USER_SORTS_DATA,
 } from '../values/users.const.dto';
 import { GET_SORTED_FIND_FIRST_CALLED } from '../values/users.const.expect';
@@ -151,51 +150,6 @@ describe('users-service', () => {
       expect(prismaService.user.create).toBeCalledWith({
         data: CREATE_USER_DTO,
         include: UsersSelector.selectUser(),
-      });
-    });
-
-    it('should return a user', async () => {
-      expect(user).toEqual(userStub());
-    });
-  });
-
-  describe('when patch is called', () => {
-    let user: UserDto;
-
-    beforeEach(async () => {
-      user = await service.patch(requestUserStub(), UPDATE_USER_DTO);
-    });
-
-    it('should call find many interests', async () => {
-      expect(prismaService.interest.findMany).toBeCalledTimes(1);
-      expect(prismaService.interest.findMany).toBeCalledWith({
-        where: { name: { in: UPDATE_USER_DTO.interests } },
-      });
-    });
-
-    it('should call update user', async () => {
-      expect(prismaService.user.update).toBeCalledTimes(3);
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
-        where: { id: userStub().id },
-        data: {
-          interests: {
-            disconnect: {
-              id: 'interest-id-1',
-            },
-          },
-        },
-      });
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(2, {
-        data: {
-          interests: {
-            connect: {
-              id: 'interest-id-2',
-            },
-          },
-        },
-        where: {
-          id: userStub().id,
-        },
       });
     });
 
