@@ -14,7 +14,7 @@ import {
   UPDATE_USER_DTO,
   USER_SORTS_DATA,
 } from '../values/users.const.dto';
-import { PatchUserCommand } from 'users/commands/patch-user/patch-user.command';
+import { GetSortedCommand, PatchUserCommand } from 'users/commands';
 
 describe('users-controller', () => {
   let usersController: UsersController;
@@ -56,13 +56,17 @@ describe('users-controller', () => {
 
   describe('when patch is called', () => {
     let user: UserDto;
-    usersServiceMock.execute = jest.fn().mockResolvedValue(userStub());
+
+    beforeAll(() => {
+      usersServiceMock.execute.mockClear();
+      usersServiceMock.execute = jest.fn().mockResolvedValue(userStub());
+    });
 
     beforeEach(async () => {
       user = await usersController.patch(requestMock, UPDATE_USER_DTO);
     });
 
-    it('should call usersService', () => {
+    it('should call commandBus', () => {
       expect(commandBus.execute).toBeCalledWith(
         new PatchUserCommand(requestMock.user, UPDATE_USER_DTO),
       );
@@ -76,6 +80,11 @@ describe('users-controller', () => {
   describe('when getSorted is called', () => {
     let user: ShortUser;
 
+    beforeAll(() => {
+      usersServiceMock.execute.mockClear();
+      usersServiceMock.execute = jest.fn().mockResolvedValue(shortUserStub());
+    });
+
     const RequestMock = jest.fn().mockReturnValue({
       user: USER_SORTS_DATA,
     });
@@ -84,8 +93,10 @@ describe('users-controller', () => {
       user = await usersController.getSortedUser(RequestMock());
     });
 
-    it('should call usersService', () => {
-      expect(usersService.getSorted).toBeCalledWith(USER_SORTS_DATA);
+    it('should call commandBus', () => {
+      expect(commandBus.execute).toBeCalledWith(
+        new GetSortedCommand(RequestMock().user),
+      );
     });
 
     it('should return a short user', () => {

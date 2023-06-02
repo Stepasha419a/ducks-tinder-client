@@ -1,3 +1,7 @@
-import { PatchUserHandler } from './patch-user';
+export { PatchUserCommand } from './patch-user';
+export { GetSortedCommand } from './get-sorted';
 
-export const UsersCommandHandlers = [PatchUserHandler];
+import { PatchUserHandler } from './patch-user';
+import { GetSortedHandler } from './get-sorted';
+
+export const UsersCommandHandlers = [PatchUserHandler, GetSortedHandler];

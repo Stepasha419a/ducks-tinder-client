@@ -44,46 +44,6 @@ export class UsersService {
     });
   }
 
-  async getSorted(user: User): Promise<ShortUser> {
-    const checkedUsers = await this.prismaService.checkedUsers.findMany({
-      where: { OR: [{ checkedId: user.id }, { wasCheckedId: user.id }] },
-      select: {
-        checked: { select: { id: true } },
-        wasChecked: { select: { id: true } },
-      },
-    });
-    const checkedIds = checkedUsers.map((user) => user.checked.id);
-    const wasCheckedIds = checkedUsers.map((user) => user.wasChecked.id);
-
-    const sortedUser = await this.prismaService.user.findFirst({
-      where: {
-        id: { notIn: [...checkedIds, ...wasCheckedIds] },
-        distance: { gt: 0, lte: user.distance },
-        age: {
-          gte: user.preferAgeFrom,
-          lte: user.preferAgeTo,
-        },
-        preferAgeFrom: {
-          lte: user.age,
-        },
-        preferAgeTo: {
-          gte: user.age,
-        },
-        sex: user.preferSex,
-        preferSex: user.sex,
-      },
-      select: UsersSelector.selectShortUser(),
-    });
-
-    if (!sortedUser) {
-      throw new NotFoundException(
-        'Such user was not found, try to change settings',
-      );
-    }
-
-    return new UserDto(sortedUser);
-  }
-
   async create(userDto: CreateUserDto): Promise<UserDto> {
     const user = await this.prismaService.user.create({
       data: userDto,

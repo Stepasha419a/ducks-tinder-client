@@ -142,8 +142,6 @@ describe('users/picture (PUT)', () => {
     });
 
     it('should throw an error', async () => {
-      console.log(currentUser);
-      console.log(response.body);
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Not Found');
     });

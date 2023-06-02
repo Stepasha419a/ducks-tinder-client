@@ -9,15 +9,13 @@ import { ShortUser } from 'users/users.interface';
 import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/users.selector';
 import { UsersPrismaMock, FilesServiceMock } from '../mocks';
-import { requestUserStub, shortUserStub, userStub } from '../stubs';
+import { requestUserStub, userStub } from '../stubs';
 import {
   CREATE_USER_DTO,
   DELETE_PICTURE_DTO,
   DELETE_USER_PAIR_DTO,
   MIX_PICTURES_DTO,
-  USER_SORTS_DATA,
 } from '../values/users.const.dto';
-import { GET_SORTED_FIND_FIRST_CALLED } from '../values/users.const.expect';
 
 describe('users-service', () => {
   let service: UsersService;
@@ -89,52 +87,6 @@ describe('users-service', () => {
 
     it('should return a user', async () => {
       expect(user).toEqual({ ...userStub(), _count: { pairFor: 0 } });
-    });
-  });
-
-  describe('when get sorted is called', () => {
-    let user: ShortUser;
-    const oldMockFn = usersPrismaMock.user.findUnique;
-
-    beforeAll(() => {
-      usersPrismaMock.user.findUnique = jest.fn(() => {
-        return { checked: [] };
-      });
-    });
-
-    afterAll(() => {
-      usersPrismaMock.user.findUnique = oldMockFn;
-    });
-
-    beforeEach(async () => {
-      user = await service.getSorted(USER_SORTS_DATA);
-    });
-
-    it('should call checked users find many', async () => {
-      expect(prismaService.checkedUsers.findMany).toBeCalledTimes(1);
-      expect(prismaService.checkedUsers.findMany).toBeCalledWith({
-        where: {
-          OR: [
-            { checkedId: shortUserStub().id },
-            { wasCheckedId: shortUserStub().id },
-          ],
-        },
-        select: {
-          checked: { select: { id: true } },
-          wasChecked: { select: { id: true } },
-        },
-      });
-    });
-
-    it('should call find first', async () => {
-      expect(prismaService.user.findFirst).toBeCalledTimes(1);
-      expect(prismaService.user.findFirst).toBeCalledWith(
-        GET_SORTED_FIND_FIRST_CALLED,
-      );
-    });
-
-    it('should return a short user', async () => {
-      expect(user).toEqual(shortUserStub());
     });
   });
 

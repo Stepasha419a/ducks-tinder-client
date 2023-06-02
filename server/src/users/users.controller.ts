@@ -24,7 +24,7 @@ import {
   MixPicturesDto,
 } from './dto';
 import { CommandBus } from '@nestjs/cqrs';
-import { PatchUserCommand } from './commands/patch-user';
+import { PatchUserCommand, GetSortedCommand } from './commands';
 
 @Controller('users')
 export class UsersController {
@@ -44,7 +44,7 @@ export class UsersController {
   @Get('sorted')
   @HttpCode(HttpStatus.OK)
   getSortedUser(@Req() req: UserRequest): Promise<ShortUser> {
-    return this.usersService.getSorted(req.user);
+    return this.commandBus.execute(new GetSortedCommand(req.user));
   }
 
   @Post('picture')
