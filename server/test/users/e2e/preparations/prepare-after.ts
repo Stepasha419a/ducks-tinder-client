@@ -1,22 +1,17 @@
 import prismaClient from 'test/prisma-client';
 
-export async function prepareAfter() {
+export async function prepareAfter(currentUserId, secondUserId) {
   await prismaClient.$transaction([
     prismaClient.picture.deleteMany({
-      where: { user: { id: { in: ['current-user-id', 'second-user-id'] } } },
+      where: { user: { id: { in: [currentUserId, secondUserId] } } },
     }),
     prismaClient.checkedUsers.deleteMany({
       where: {
-        OR: [{ checkedId: 'current-user-id' }, { checkedId: 'second-user-id' }],
+        OR: [{ checkedId: currentUserId }, { checkedId: secondUserId }],
       },
     }),
     prismaClient.user.deleteMany({
-      where: { id: { in: ['current-user-id', 'second-user-id'] } },
-    }),
-    prismaClient.interest.deleteMany({
-      where: {
-        id: { in: ['interest-id-1', 'interest-id-2'] },
-      },
+      where: { id: { in: [currentUserId, secondUserId] } },
     }),
   ]);
 }

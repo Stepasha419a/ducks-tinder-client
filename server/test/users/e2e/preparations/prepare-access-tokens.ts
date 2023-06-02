@@ -4,11 +4,11 @@ import { JwtService } from '@nestjs/jwt';
 const jwtService = new JwtService();
 const configService = new ConfigService();
 
-export function prepareAccessTokens() {
+export function prepareAccessTokens(currentUserId, secondUserId) {
   const currentUserAccessToken = jwtService.sign(
     {
-      id: 'current-user-id',
-      email: '123@gmail.com',
+      id: currentUserId,
+      email: `${currentUserId}@gmail.com`,
     },
     {
       expiresIn: '15m',
@@ -18,8 +18,8 @@ export function prepareAccessTokens() {
 
   const secondUserAccessToken = jwtService.sign(
     {
-      id: 'second-user-id',
-      email: '456@gmail.com',
+      id: secondUserId,
+      email: `${secondUserId}@gmail.com`,
     },
     {
       expiresIn: '15m',

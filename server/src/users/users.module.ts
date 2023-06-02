@@ -4,10 +4,10 @@ import { FilesModule } from '../files/files.module';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { PrismaModule } from '../prisma/prisma.module';
-import { PatchUserHandler } from './commands/patch-user/patch-user.handler';
+import { UsersCommandHandlers } from './commands';
 
 @Module({
-  providers: [UsersService, PatchUserHandler],
+  providers: [UsersService, ...UsersCommandHandlers],
   controllers: [UsersController],
   imports: [PrismaModule, CqrsModule, FilesModule],
   exports: [UsersService],

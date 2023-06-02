@@ -24,7 +24,7 @@ import {
   MixPicturesDto,
 } from './dto';
 import { CommandBus } from '@nestjs/cqrs';
-import { PatchUserCommand } from './commands/patch-user/patch-user.command';
+import { PatchUserCommand } from './commands/patch-user';
 
 @Controller('users')
 export class UsersController {
