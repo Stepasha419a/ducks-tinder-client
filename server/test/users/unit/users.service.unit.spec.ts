@@ -1,21 +1,28 @@
 import { Test } from '@nestjs/testing';
+import { CommandBus, CqrsModule } from '@nestjs/cqrs';
+import { User } from '@prisma/client';
 import { UsersService } from 'users/users.service';
 import { FilesService } from 'files/files.service';
 import { FilesModule } from 'files/files.module';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { User } from '@prisma/client';
 import { ShortUser } from 'users/users.interface';
 import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/users.selector';
-import { UsersPrismaMock, FilesServiceMock } from '../mocks';
-import { requestUserStub, userStub } from '../stubs';
+import { UsersPrismaMock, FilesServiceMock, CommandBusMock } from '../mocks';
+import { requestUserStub, shortUserStub, userStub } from '../stubs';
 import {
   CREATE_USER_DTO,
   DELETE_PICTURE_DTO,
   DELETE_USER_PAIR_DTO,
   MIX_PICTURES_DTO,
+  UPDATE_USER_DTO,
 } from '../values/users.const.dto';
+import {
+  GetSortedCommand,
+  PatchUserCommand,
+  SavePictureCommand,
+} from 'users/commands';
 
 describe('users-service', () => {
   let service: UsersService;
@@ -23,16 +30,19 @@ describe('users-service', () => {
   let filesService: FilesService;
 
   const usersPrismaMock = UsersPrismaMock();
+  const commandBusMock = CommandBusMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [UsersService],
-      imports: [FilesModule, PrismaModule],
+      imports: [CqrsModule, FilesModule, PrismaModule],
     })
       .overrideProvider(FilesService)
       .useValue(FilesServiceMock())
       .overrideProvider(PrismaService)
       .useValue(usersPrismaMock)
+      .overrideProvider(CommandBus)
+      .useValue(commandBusMock)
       .compile();
 
     service = moduleRef.get<UsersService>(UsersService);
@@ -110,8 +120,61 @@ describe('users-service', () => {
     });
   });
 
+  describe('when patch is called', () => {
+    let user: ShortUser;
+
+    beforeAll(() => {
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue(userStub());
+    });
+
+    beforeEach(async () => {
+      user = await service.patch(requestUserStub(), UPDATE_USER_DTO);
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
+      );
+    });
+
+    it('should return a short user', async () => {
+      expect(user).toEqual(userStub());
+    });
+  });
+
+  describe('when get sorted is called', () => {
+    let user: ShortUser;
+
+    beforeAll(() => {
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue(shortUserStub());
+    });
+
+    beforeEach(async () => {
+      user = await service.getSorted(requestUserStub());
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new GetSortedCommand(requestUserStub()),
+      );
+    });
+
+    it('should return a short user', async () => {
+      expect(user).toEqual(shortUserStub());
+    });
+  });
+
   describe('when save picture is called', () => {
     let user: UserDto;
+
+    beforeAll(() => {
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue(userStub());
+    });
 
     beforeEach(async () => {
       user = await service.savePicture(requestUserStub(), {
@@ -119,38 +182,13 @@ describe('users-service', () => {
       } as Express.Multer.File);
     });
 
-    it('should call pictures find many', () => {
-      expect(prismaService.picture.findMany).toBeCalledTimes(1);
-      expect(prismaService.picture.findMany).toBeCalledWith({
-        where: { userId: requestUserStub().id },
-      });
-    });
-
-    it('should call find unique', async () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      expect(prismaService.user.findUnique).toBeCalledWith({
-        where: { id: userStub().id },
-        include: UsersSelector.selectUser(),
-      });
-    });
-
-    it('should call files-service save picture', async () => {
-      expect(filesService.savePicture).toBeCalledTimes(1);
-      expect(filesService.savePicture).toBeCalledWith(
-        { fieldname: '123123' },
-        userStub().id,
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new SavePictureCommand(requestUserStub(), {
+          fieldname: '123123',
+        } as Express.Multer.File),
       );
-    });
-
-    it('should call create picture', async () => {
-      expect(prismaService.picture.create).toBeCalledTimes(1);
-      expect(prismaService.picture.create).toBeCalledWith({
-        data: {
-          name: 'picture-name',
-          userId: userStub().id,
-          order: userStub().pictures.length,
-        },
-      });
     });
 
     it('should return a user', async () => {

@@ -1,4 +1,3 @@
-import { CommandBus, CqrsModule } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
 import { UsersController } from 'users/users.controller';
 import { UsersService } from 'users/users.service';
@@ -14,12 +13,10 @@ import {
   UPDATE_USER_DTO,
   USER_SORTS_DATA,
 } from '../values/users.const.dto';
-import { GetSortedCommand, PatchUserCommand } from 'users/commands';
 
 describe('users-controller', () => {
   let usersController: UsersController;
   let usersService: UsersService;
-  let commandBus: CommandBus;
 
   const mockAccessTokenGuard = jest.fn().mockReturnValue(true);
   const requestMock = RequestMock();
@@ -29,19 +26,15 @@ describe('users-controller', () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [UsersService],
-      imports: [CqrsModule],
     })
       .overrideGuard(AccessTokenGuard)
       .useValue(mockAccessTokenGuard)
       .overrideProvider(UsersService)
       .useValue(usersServiceMock)
-      .overrideProvider(CommandBus)
-      .useValue(usersServiceMock)
       .compile();
 
     usersController = moduleRef.get<UsersController>(UsersController);
     usersService = moduleRef.get<UsersService>(UsersService);
-    commandBus = moduleRef.get<CommandBus>(CommandBus);
   });
 
   beforeEach(() => {
@@ -57,18 +50,14 @@ describe('users-controller', () => {
   describe('when patch is called', () => {
     let user: UserDto;
 
-    beforeAll(() => {
-      usersServiceMock.execute.mockClear();
-      usersServiceMock.execute = jest.fn().mockResolvedValue(userStub());
-    });
-
     beforeEach(async () => {
       user = await usersController.patch(requestMock, UPDATE_USER_DTO);
     });
 
-    it('should call commandBus', () => {
-      expect(commandBus.execute).toBeCalledWith(
-        new PatchUserCommand(requestMock.user, UPDATE_USER_DTO),
+    it('should call usersService', () => {
+      expect(usersService.patch).toBeCalledWith(
+        requestMock.user,
+        UPDATE_USER_DTO,
       );
     });
 
@@ -80,11 +69,6 @@ describe('users-controller', () => {
   describe('when getSorted is called', () => {
     let user: ShortUser;
 
-    beforeAll(() => {
-      usersServiceMock.execute.mockClear();
-      usersServiceMock.execute = jest.fn().mockResolvedValue(shortUserStub());
-    });
-
     const RequestMock = jest.fn().mockReturnValue({
       user: USER_SORTS_DATA,
     });
@@ -93,10 +77,8 @@ describe('users-controller', () => {
       user = await usersController.getSortedUser(RequestMock());
     });
 
-    it('should call commandBus', () => {
-      expect(commandBus.execute).toBeCalledWith(
-        new GetSortedCommand(RequestMock().user),
-      );
+    it('should call usersService', () => {
+      expect(usersService.getSorted).toBeCalledWith(RequestMock().user);
     });
 
     it('should return a short user', () => {

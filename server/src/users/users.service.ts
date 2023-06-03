@@ -7,7 +7,13 @@ import {
 } from '@nestjs/common';
 import { FilesService } from '../files/files.service';
 import { User } from '@prisma/client';
+import { CommandBus } from '@nestjs/cqrs';
 import { ShortUser } from './users.interface';
+import {
+  GetSortedCommand,
+  PatchUserCommand,
+  SavePictureCommand,
+} from './commands';
 import {
   UpdateUserDto,
   UserDto,
@@ -21,6 +27,7 @@ import {
 export class UsersService {
   constructor(
     private readonly prismaService: PrismaService,
+    private readonly commandBus: CommandBus,
     private readonly filesService: FilesService,
   ) {}
 
@@ -53,78 +60,19 @@ export class UsersService {
     return new UserDto(user);
   }
 
-  async patch(user: User, userDto: UpdateUserDto): Promise<UserDto> {
-    // dto without interests to update user fields (interest = relation)
-    const updateUserDto = { ...userDto, interests: undefined };
+  async patch(user: User, dto: UpdateUserDto): Promise<UserDto> {
+    return this.commandBus.execute(new PatchUserCommand(user, dto));
+  }
 
-    const interests = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: {
-          interests: true,
-        },
-      })
-    ).interests;
-
-    if (
-      userDto.interests &&
-      (userDto.interests.length || userDto.interests.length === 0)
-    ) {
-      const existingInterests = await this.prismaService.interest.findMany({
-        where: { name: { in: userDto.interests } },
-      });
-      // TODO: do this with comparison
-      await Promise.all(
-        interests.map(async (interest) => {
-          await this.prismaService.user.update({
-            where: { id: user.id },
-            data: { interests: { disconnect: { id: interest.id } } },
-          });
-        }),
-      );
-      await Promise.all(
-        existingInterests.map(async (interest) => {
-          await this.prismaService.user.update({
-            where: { id: user.id },
-            data: { interests: { connect: { id: interest.id } } },
-          });
-        }),
-      );
-    }
-
-    const updatedUser = await this.prismaService.user.update({
-      where: { id: user.id },
-      data: { ...updateUserDto },
-      include: UsersSelector.selectUser(),
-    });
-
-    return new UserDto(updatedUser);
+  async getSorted(user: User): Promise<ShortUser> {
+    return this.commandBus.execute(new GetSortedCommand(user));
   }
 
   async savePicture(
     user: User,
-    pictureFile: Express.Multer.File,
+    picture: Express.Multer.File,
   ): Promise<UserDto> {
-    const pictures = await this.prismaService.picture.findMany({
-      where: { userId: user.id },
-    });
-
-    if (pictures.length > 8) {
-      throw new BadRequestException('You have max pictures count');
-    }
-
-    const fileName = await this.filesService.savePicture(pictureFile, user.id);
-
-    await this.prismaService.picture.create({
-      data: { name: fileName, userId: user.id, order: pictures.length },
-    });
-
-    const updatedUser = await this.prismaService.user.findUnique({
-      where: { id: user.id },
-      include: UsersSelector.selectUser(),
-    });
-
-    return new UserDto(updatedUser);
+    return this.commandBus.execute(new SavePictureCommand(user, picture));
   }
 
   async deletePicture(user: User, dto: DeletePictureDto): Promise<UserDto> {

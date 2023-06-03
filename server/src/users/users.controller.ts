@@ -23,28 +23,21 @@ import {
   UserPairDto,
   MixPicturesDto,
 } from './dto';
-import { CommandBus } from '@nestjs/cqrs';
-import { PatchUserCommand, GetSortedCommand } from './commands';
 
 @Controller('users')
 export class UsersController {
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly commandBus: CommandBus,
-  ) {}
+  constructor(private readonly usersService: UsersService) {}
 
   @Patch()
   @HttpCode(HttpStatus.OK)
   patch(@Req() req: UserRequest, @Body() dto: UpdateUserDto): Promise<UserDto> {
-    return this.commandBus.execute<PatchUserCommand, UserDto>(
-      new PatchUserCommand(req.user, dto),
-    );
+    return this.usersService.patch(req.user, dto);
   }
 
   @Get('sorted')
   @HttpCode(HttpStatus.OK)
   getSortedUser(@Req() req: UserRequest): Promise<ShortUser> {
-    return this.commandBus.execute(new GetSortedCommand(req.user));
+    return this.usersService.getSorted(req.user);
   }
 
   @Post('picture')
