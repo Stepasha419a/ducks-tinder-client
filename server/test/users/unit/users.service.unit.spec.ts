@@ -9,7 +9,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { ShortUser } from 'users/users.interface';
 import { UserDto } from 'users/dto';
 import { UsersSelector } from 'users/users.selector';
-import { UsersPrismaMock, FilesServiceMock, CommandBusMock } from '../mocks';
+import { UsersPrismaMock, CommandBusMock, FilesServiceMock } from '../mocks';
 import { requestUserStub, shortUserStub, userStub } from '../stubs';
 import {
   CREATE_USER_DTO,
@@ -19,6 +19,7 @@ import {
   UPDATE_USER_DTO,
 } from '../values/users.const.dto';
 import {
+  DeletePictureCommand,
   GetSortedCommand,
   PatchUserCommand,
   SavePictureCommand,
@@ -27,7 +28,6 @@ import {
 describe('users-service', () => {
   let service: UsersService;
   let prismaService: PrismaService;
-  let filesService: FilesService;
 
   const usersPrismaMock = UsersPrismaMock();
   const commandBusMock = CommandBusMock();
@@ -47,7 +47,6 @@ describe('users-service', () => {
 
     service = moduleRef.get<UsersService>(UsersService);
     prismaService = moduleRef.get<PrismaService>(PrismaService);
-    filesService = moduleRef.get<FilesService>(FilesService);
   });
 
   beforeEach(() => {
@@ -199,46 +198,20 @@ describe('users-service', () => {
   describe('when delete picture is called', () => {
     let user: UserDto;
 
+    beforeAll(() => {
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue(userStub());
+    });
+
     beforeEach(async () => {
       user = await service.deletePicture(requestUserStub(), DELETE_PICTURE_DTO);
     });
 
-    it('should call picture find first', async () => {
-      expect(prismaService.picture.findFirst).toBeCalledTimes(1);
-      expect(prismaService.picture.findFirst).toBeCalledWith({
-        where: DELETE_PICTURE_DTO,
-      });
-    });
-
-    it('should call files-service delete picture', async () => {
-      expect(filesService.deletePicture).toBeCalledTimes(1);
-      expect(filesService.deletePicture).toBeCalledWith(
-        '123.jpg',
-        userStub().id,
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new DeletePictureCommand(requestUserStub(), DELETE_PICTURE_DTO),
       );
-    });
-
-    it('should call picture delete', async () => {
-      expect(prismaService.picture.delete).toBeCalledTimes(1);
-      expect(prismaService.picture.delete).toBeCalledWith({
-        where: { id: userStub().pictures[0].id },
-      });
-    });
-
-    it('should call picture update', async () => {
-      expect(prismaService.picture.update).toBeCalledTimes(1);
-      expect(prismaService.picture.update).toBeCalledWith({
-        where: { id: userStub().pictures[1].id },
-        data: { order: 0 },
-      });
-    });
-
-    it('should call user find unique', async () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      expect(prismaService.user.findUnique).toBeCalledWith({
-        where: { id: userStub().id },
-        include: UsersSelector.selectUser(),
-      });
     });
 
     it('should return a user', async () => {

@@ -20,7 +20,6 @@ describe('users-controller', () => {
 
   const mockAccessTokenGuard = jest.fn().mockReturnValue(true);
   const requestMock = RequestMock();
-  const usersServiceMock = UsersServiceMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -30,7 +29,7 @@ describe('users-controller', () => {
       .overrideGuard(AccessTokenGuard)
       .useValue(mockAccessTokenGuard)
       .overrideProvider(UsersService)
-      .useValue(usersServiceMock)
+      .useValue(UsersServiceMock())
       .compile();
 
     usersController = moduleRef.get<UsersController>(UsersController);
@@ -54,7 +53,7 @@ describe('users-controller', () => {
       user = await usersController.patch(requestMock, UPDATE_USER_DTO);
     });
 
-    it('should call usersService', () => {
+    it('should call usersService patch', () => {
       expect(usersService.patch).toBeCalledWith(
         requestMock.user,
         UPDATE_USER_DTO,
@@ -77,7 +76,7 @@ describe('users-controller', () => {
       user = await usersController.getSortedUser(RequestMock());
     });
 
-    it('should call usersService', () => {
+    it('should call usersService get sorted', () => {
       expect(usersService.getSorted).toBeCalledWith(RequestMock().user);
     });
 
@@ -96,7 +95,7 @@ describe('users-controller', () => {
       );
     });
 
-    it('should call usersService', () => {
+    it('should call usersService save picture', () => {
       expect(usersService.savePicture).toBeCalledWith(requestMock.user, {});
     });
 
@@ -115,7 +114,8 @@ describe('users-controller', () => {
       );
     });
 
-    it('should call usersService', () => {
+    it('should call usersService delete picture', () => {
+      expect(usersService.deletePicture).toBeCalledTimes(1);
       expect(usersService.deletePicture).toBeCalledWith(
         requestMock.user,
         DELETE_PICTURE_DTO,

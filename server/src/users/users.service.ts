@@ -10,6 +10,7 @@ import { User } from '@prisma/client';
 import { CommandBus } from '@nestjs/cqrs';
 import { ShortUser } from './users.interface';
 import {
+  DeletePictureCommand,
   GetSortedCommand,
   PatchUserCommand,
   SavePictureCommand,
@@ -76,38 +77,7 @@ export class UsersService {
   }
 
   async deletePicture(user: User, dto: DeletePictureDto): Promise<UserDto> {
-    const picture = await this.prismaService.picture.findFirst({
-      where: dto,
-    });
-
-    if (!picture) {
-      throw new NotFoundException();
-    }
-
-    await this.filesService.deletePicture(picture.name, picture.userId);
-
-    await this.prismaService.picture.delete({ where: { id: picture.id } });
-    const pictures = await this.prismaService.picture.findMany({
-      where: { userId: user.id },
-    });
-
-    await Promise.all(
-      pictures
-        .filter((pictureItem) => pictureItem.order > picture.order)
-        .map(async (pictureItem) => {
-          return this.prismaService.picture.update({
-            where: { id: pictureItem.id },
-            data: { order: pictureItem.order - 1 },
-          });
-        }),
-    );
-
-    const updatedUser = await this.prismaService.user.findUnique({
-      where: { id: user.id },
-      include: UsersSelector.selectUser(),
-    });
-
-    return new UserDto(updatedUser);
+    return this.commandBus.execute(new DeletePictureCommand(user, dto));
   }
 
   async mixPictures(user: User, dto: MixPicturesDto): Promise<UserDto> {
