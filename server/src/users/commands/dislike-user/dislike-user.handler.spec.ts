@@ -3,18 +3,18 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersPrismaMock } from 'test/users/mocks';
 import { requestUserStub } from 'test/users/stubs';
-import { LikeUserHandler } from './like-user.handler';
-import { LikeUserCommand } from './like-user.command';
+import { DislikeUserCommand } from './dislike-user.command';
+import { DislikeUserHandler } from './dislike-user.handler';
 
-describe('when like user is called', () => {
+describe('when dislike user is called', () => {
   let prismaService: PrismaService;
-  let likeUserHandler: LikeUserHandler;
+  let dislikeUserHandler: DislikeUserHandler;
 
   const usersPrismaMock = UsersPrismaMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [LikeUserHandler],
+      providers: [DislikeUserHandler],
       imports: [PrismaModule],
     })
       .overrideProvider(PrismaService)
@@ -22,7 +22,7 @@ describe('when like user is called', () => {
       .compile();
 
     prismaService = moduleRef.get<PrismaService>(PrismaService);
-    likeUserHandler = moduleRef.get<LikeUserHandler>(LikeUserHandler);
+    dislikeUserHandler = moduleRef.get<DislikeUserHandler>(DislikeUserHandler);
   });
 
   beforeEach(() => {
@@ -32,8 +32,8 @@ describe('when like user is called', () => {
   let response;
 
   beforeEach(async () => {
-    response = await likeUserHandler.execute(
-      new LikeUserCommand(requestUserStub(), '34545656'),
+    response = await dislikeUserHandler.execute(
+      new DislikeUserCommand(requestUserStub(), '34545656'),
     );
   });
 
@@ -53,16 +53,6 @@ describe('when like user is called', () => {
       select: {
         checked: { select: { id: true } },
         wasChecked: { select: { id: true } },
-      },
-    });
-  });
-
-  it('should call user update', () => {
-    expect(prismaService.user.update).toBeCalledTimes(1);
-    expect(prismaService.user.update).toBeCalledWith({
-      where: { id: '34545656' },
-      data: {
-        pairs: { connect: { id: requestUserStub().id } },
       },
     });
   });

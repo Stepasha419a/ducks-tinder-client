@@ -9,7 +9,7 @@ import { MixPicturesCommand } from './mix-pictures.command';
 export class MixPicturesHandler implements ICommandHandler<MixPicturesCommand> {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(command: MixPicturesCommand) {
+  async execute(command: MixPicturesCommand): Promise<UserDto> {
     const { user, dto } = command;
 
     const pictures = await this.prismaService.picture.findMany({

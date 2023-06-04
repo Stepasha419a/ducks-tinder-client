@@ -4,6 +4,7 @@ export { SavePictureCommand } from './save-picture';
 export { DeletePictureCommand } from './delete-picture';
 export { MixPicturesCommand } from './mix-pictures';
 export { LikeUserCommand } from './like-user';
+export { DislikeUserCommand } from './dislike-user';
 
 import { PatchUserHandler } from './patch-user';
 import { GetSortedHandler } from './get-sorted';
@@ -11,6 +12,7 @@ import { SavePictureHandler } from './save-picture';
 import { DeletePictureHandler } from './delete-picture';
 import { MixPicturesHandler } from './mix-pictures';
 import { LikeUserHandler } from './like-user';
+import { DislikeUserHandler } from './dislike-user';
 
 export const UsersCommandHandlers = [
   PatchUserHandler,
@@ -19,4 +21,5 @@ export const UsersCommandHandlers = [
   DeletePictureHandler,
   MixPicturesHandler,
   LikeUserHandler,
+  DislikeUserHandler,
 ];

@@ -1,16 +1,13 @@
 import { UsersSelector } from './users.selector';
 import { PrismaService } from '../prisma/prisma.service';
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { FilesService } from '../files/files.service';
 import { User } from '@prisma/client';
 import { CommandBus } from '@nestjs/cqrs';
 import { ShortUser } from './users.interface';
 import {
   DeletePictureCommand,
+  DislikeUserCommand,
   GetSortedCommand,
   LikeUserCommand,
   MixPicturesCommand,
@@ -91,35 +88,7 @@ export class UsersService {
   }
 
   async dislikeUser(user: User, userPairId: string) {
-    if (user.id === userPairId) {
-      throw new BadRequestException('You can not dislike yourself');
-    }
-
-    const userPair = await this.prismaService.user.findUnique({
-      where: { id: userPairId },
-    });
-    if (!userPair) {
-      throw new NotFoundException('Such user was not found');
-    }
-
-    const checkedUsers = await this.prismaService.checkedUsers.findMany({
-      where: { OR: [{ checkedId: user.id }, { checkedId: userPairId }] },
-      select: {
-        checked: { select: { id: true } },
-        wasChecked: { select: { id: true } },
-      },
-    });
-    const checkedIds = checkedUsers.map((user) => user.checked.id);
-    const wasCheckedIds = checkedUsers.map((user) => user.wasChecked.id);
-    if (
-      [...checkedIds, ...wasCheckedIds].find((userId) => userId === userPairId)
-    ) {
-      throw new BadRequestException('User is already checked');
-    }
-
-    await this.prismaService.checkedUsers.create({
-      data: { wasCheckedId: user.id, checkedId: userPairId },
-    });
+    return this.commandBus.execute(new DislikeUserCommand(user, userPairId));
   }
 
   async returnUser(user: User) {

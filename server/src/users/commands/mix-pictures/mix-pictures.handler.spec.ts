@@ -1,11 +1,10 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { FilesServiceMock, UsersPrismaMock } from 'test/users/mocks';
+import { UsersPrismaMock } from 'test/users/mocks';
 import { UserDto } from 'users/dto';
 import { requestUserStub, userStub } from 'test/users/stubs';
 import { UsersSelector } from 'users/users.selector';
-import { FilesService } from 'files/files.service';
 import { MixPicturesHandler } from './mix-pictures.handler';
 import { MixPicturesCommand } from './mix-pictures.command';
 import { MIX_PICTURES_DTO } from 'test/users/values/users.const.dto';
@@ -21,8 +20,6 @@ describe('when mix pictures is called', () => {
       providers: [MixPicturesHandler],
       imports: [PrismaModule],
     })
-      .overrideProvider(FilesService)
-      .useValue(FilesServiceMock())
       .overrideProvider(PrismaService)
       .useValue(usersPrismaMock)
       .compile();

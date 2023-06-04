@@ -1,17 +1,17 @@
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { PrismaService } from 'prisma/prisma.service';
-import { LikeUserCommand } from './like-user.command';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { DislikeUserCommand } from './dislike-user.command';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 
-@CommandHandler(LikeUserCommand)
-export class LikeUserHandler implements ICommandHandler<LikeUserCommand> {
+@CommandHandler(DislikeUserCommand)
+export class DislikeUserHandler implements ICommandHandler<DislikeUserCommand> {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(command: LikeUserCommand): Promise<void> {
+  async execute(command: DislikeUserCommand): Promise<void> {
     const { user, userPairId } = command;
 
     if (user.id === userPairId) {
-      throw new BadRequestException('You can not like yourself');
+      throw new BadRequestException('You can not dislike yourself');
     }
 
     const userPair = await this.prismaService.user.findUnique({
@@ -30,22 +30,11 @@ export class LikeUserHandler implements ICommandHandler<LikeUserCommand> {
     });
     const checkedIds = checkedUsers.map((user) => user.checked.id);
     const wasCheckedIds = checkedUsers.map((user) => user.wasChecked.id);
-
-    const isSomeonePairForAnotherOne = [...checkedIds, ...wasCheckedIds].find(
-      (userId) => userId == user.id || userId == userPairId,
-    );
-
-    if (isSomeonePairForAnotherOne) {
-      throw new BadRequestException(
-        'Pair with such an id already exists or such user is already checked',
-      );
+    if (
+      [...checkedIds, ...wasCheckedIds].find((userId) => userId === userPairId)
+    ) {
+      throw new BadRequestException('User is already checked');
     }
-    await this.prismaService.user.update({
-      where: { id: userPairId },
-      data: {
-        pairs: { connect: { id: user.id } },
-      },
-    });
 
     await this.prismaService.checkedUsers.create({
       data: { wasCheckedId: user.id, checkedId: userPairId },
