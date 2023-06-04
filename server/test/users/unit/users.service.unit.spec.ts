@@ -21,6 +21,7 @@ import {
 import {
   DeletePictureCommand,
   GetSortedCommand,
+  MixPicturesCommand,
   PatchUserCommand,
   SavePictureCommand,
 } from 'users/commands';
@@ -222,28 +223,20 @@ describe('users-service', () => {
   describe('when mix pictures is called', () => {
     let user: UserDto;
 
+    beforeAll(() => {
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue(userStub());
+    });
+
     beforeEach(async () => {
       user = await service.mixPictures(requestUserStub(), MIX_PICTURES_DTO);
     });
 
-    it('should call user find unique', async () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      expect(prismaService.user.findUnique).toBeCalledWith({
-        where: { id: userStub().id },
-        include: UsersSelector.selectUser(),
-      });
-    });
-
-    it('should call picture update', async () => {
-      expect(prismaService.picture.update).toBeCalledTimes(2);
-      expect(prismaService.picture.update).toHaveBeenNthCalledWith(1, {
-        where: { id: userStub().pictures[0].id },
-        data: { order: MIX_PICTURES_DTO.withOrder },
-      });
-      expect(prismaService.picture.update).toHaveBeenNthCalledWith(2, {
-        where: { id: userStub().pictures[1].id },
-        data: { order: MIX_PICTURES_DTO.mixOrder },
-      });
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new MixPicturesCommand(requestUserStub(), MIX_PICTURES_DTO),
+      );
     });
 
     it('should return a user', async () => {

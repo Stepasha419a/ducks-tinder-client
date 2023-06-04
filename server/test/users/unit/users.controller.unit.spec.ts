@@ -96,6 +96,7 @@ describe('users-controller', () => {
     });
 
     it('should call usersService save picture', () => {
+      expect(usersService.savePicture).toBeCalledTimes(1);
       expect(usersService.savePicture).toBeCalledWith(requestMock.user, {});
     });
 
