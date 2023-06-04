@@ -21,6 +21,7 @@ import {
 import {
   DeletePictureCommand,
   GetSortedCommand,
+  LikeUserCommand,
   MixPicturesCommand,
   PatchUserCommand,
   SavePictureCommand,
@@ -247,48 +248,23 @@ describe('users-service', () => {
   describe('when like user is called', () => {
     let response;
 
+    beforeAll(() => {
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue(undefined);
+    });
+
     beforeEach(async () => {
       response = await service.likeUser(requestUserStub(), '34545656');
     });
 
-    it('should call user find unique', () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      expect(prismaService.user.findUnique).toBeCalledWith({
-        where: { id: '34545656' },
-      });
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new LikeUserCommand(requestUserStub(), '34545656'),
+      );
     });
 
-    it('should call checkedUsers find many', () => {
-      expect(prismaService.checkedUsers.findMany).toBeCalledTimes(1);
-      expect(prismaService.checkedUsers.findMany).toBeCalledWith({
-        where: {
-          OR: [{ checkedId: requestUserStub().id }, { checkedId: '34545656' }],
-        },
-        select: {
-          checked: { select: { id: true } },
-          wasChecked: { select: { id: true } },
-        },
-      });
-    });
-
-    it('should call user update', () => {
-      expect(prismaService.user.update).toBeCalledTimes(1);
-      expect(prismaService.user.update).toBeCalledWith({
-        where: { id: '34545656' },
-        data: {
-          pairs: { connect: { id: requestUserStub().id } },
-        },
-      });
-    });
-
-    it('should call checkedUsers create', () => {
-      expect(prismaService.checkedUsers.create).toBeCalledTimes(1);
-      expect(prismaService.checkedUsers.create).toBeCalledWith({
-        data: { wasCheckedId: requestUserStub().id, checkedId: '34545656' },
-      });
-    });
-
-    it('should return undefined', () => {
+    it('should return undefined', async () => {
       expect(response).toEqual(undefined);
     });
   });
