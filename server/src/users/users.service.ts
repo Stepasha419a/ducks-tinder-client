@@ -8,6 +8,7 @@ import { ShortUser } from './users.interface';
 import {
   DeletePictureCommand,
   DislikeUserCommand,
+  GetPairsCommand,
   GetSortedCommand,
   LikeUserCommand,
   MixPicturesCommand,
@@ -97,16 +98,7 @@ export class UsersService {
   }
 
   async getPairs(user: User): Promise<ShortUser[]> {
-    return (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: {
-          pairs: {
-            select: UsersSelector.selectShortUser(),
-          },
-        },
-      })
-    ).pairs;
+    return this.commandBus.execute(new GetPairsCommand(user));
   }
 
   // for dev

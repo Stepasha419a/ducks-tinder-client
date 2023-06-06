@@ -322,24 +322,24 @@ describe('users-service', () => {
   describe('when get pairs is called', () => {
     let pairs: ShortUser[];
 
+    beforeAll(() => {
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue([shortUserStub()]);
+    });
+
     beforeEach(async () => {
       pairs = await service.getPairs(requestUserStub());
     });
 
-    it('should call user find unique', async () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      expect(prismaService.user.findUnique).toBeCalledWith({
-        where: { id: userStub().id },
-        select: {
-          pairs: {
-            select: UsersSelector.selectShortUser(),
-          },
-        },
-      });
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new ReturnUserCommand(requestUserStub()),
+      );
     });
 
-    it('should return pairs', async () => {
-      expect(pairs).toEqual(userStub().pairs);
+    it('should return undefined', async () => {
+      expect(pairs).toEqual([shortUserStub()]);
     });
   });
 

@@ -6,6 +6,7 @@ export { MixPicturesCommand } from './mix-pictures';
 export { LikeUserCommand } from './like-user';
 export { DislikeUserCommand } from './dislike-user';
 export { ReturnUserCommand } from './return-user';
+export { GetPairsCommand } from './get-pairs';
 
 import { PatchUserHandler } from './patch-user';
 import { GetSortedHandler } from './get-sorted';
@@ -15,6 +16,7 @@ import { MixPicturesHandler } from './mix-pictures';
 import { LikeUserHandler } from './like-user';
 import { DislikeUserHandler } from './dislike-user';
 import { ReturnUserHandler } from './return-user';
+import { GetPairsHandler } from './get-pairs';
 
 export const UsersCommandHandlers = [
   PatchUserHandler,
@@ -25,4 +27,5 @@ export const UsersCommandHandlers = [
   LikeUserHandler,
   DislikeUserHandler,
   ReturnUserHandler,
+  GetPairsHandler,
 ];
