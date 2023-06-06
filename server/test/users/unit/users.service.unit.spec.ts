@@ -25,6 +25,7 @@ import {
   LikeUserCommand,
   MixPicturesCommand,
   PatchUserCommand,
+  ReturnUserCommand,
   SavePictureCommand,
 } from 'users/commands';
 
@@ -297,61 +298,23 @@ describe('users-service', () => {
   describe('when return user is called', () => {
     let response;
 
-    let oldUserFindUniqueMock;
-    let oldCheckedUsersFindFirstMock;
-
     beforeAll(() => {
-      oldUserFindUniqueMock = prismaService.user.findUnique;
-      oldCheckedUsersFindFirstMock = prismaService.checkedUsers.findFirst;
-      prismaService.user.findUnique = jest
-        .fn()
-        .mockResolvedValue({ pairFor: [{ id: userStub().id }] });
-      prismaService.checkedUsers.findFirst = jest.fn().mockResolvedValue({
-        checkedId: userStub().id,
-        wasCheckedId: requestUserStub().id,
-      });
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue(undefined);
     });
 
     beforeEach(async () => {
       response = await service.returnUser(requestUserStub());
     });
 
-    afterAll(() => {
-      prismaService.user.findUnique = oldUserFindUniqueMock;
-      prismaService.checkedUsers.findFirst = oldCheckedUsersFindFirstMock;
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new ReturnUserCommand(requestUserStub()),
+      );
     });
 
-    it('should call user find unique', () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      expect(prismaService.user.findUnique).toBeCalledWith({
-        where: { id: requestUserStub().id },
-        select: { pairFor: { select: { id: true } } },
-      });
-    });
-
-    it('should call checkedUsers find first', () => {
-      expect(prismaService.checkedUsers.findFirst).toBeCalledTimes(1);
-      expect(prismaService.checkedUsers.findFirst).toBeCalledWith({
-        where: {
-          wasCheckedId: requestUserStub().id,
-          checked: { id: { notIn: [userStub().id] } },
-        },
-      });
-    });
-
-    it('should call checkedUsers delete', () => {
-      expect(prismaService.checkedUsers.delete).toBeCalledTimes(1);
-      expect(prismaService.checkedUsers.delete).toBeCalledWith({
-        where: {
-          checkedId_wasCheckedId: {
-            checkedId: userStub().id,
-            wasCheckedId: requestUserStub().id,
-          },
-        },
-      });
-    });
-
-    it('should return undefined', () => {
+    it('should return undefined', async () => {
       expect(response).toEqual(undefined);
     });
   });

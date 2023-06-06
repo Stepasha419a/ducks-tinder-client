@@ -22,6 +22,7 @@ import {
   CreateUserDto,
   MixPicturesDto,
 } from './dto';
+import { ReturnUserCommand } from './commands/return-user';
 
 @Injectable()
 export class UsersService {
@@ -91,32 +92,8 @@ export class UsersService {
     return this.commandBus.execute(new DislikeUserCommand(user, userPairId));
   }
 
-  async returnUser(user: User) {
-    const pairIds = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: { pairFor: { select: { id: true } } },
-      })
-    ).pairFor.map((pair) => pair.id);
-
-    const checkedUser = await this.prismaService.checkedUsers.findFirst({
-      where: {
-        wasCheckedId: user.id,
-        checked: { id: { notIn: pairIds } },
-      },
-    });
-    if (!checkedUser) {
-      throw new NotFoundException();
-    }
-
-    await this.prismaService.checkedUsers.delete({
-      where: {
-        checkedId_wasCheckedId: {
-          checkedId: checkedUser.checkedId,
-          wasCheckedId: checkedUser.wasCheckedId,
-        },
-      },
-    });
+  async returnUser(user: User): Promise<void> {
+    return this.commandBus.execute(new ReturnUserCommand(user));
   }
 
   async getPairs(user: User): Promise<ShortUser[]> {
