@@ -20,7 +20,6 @@ import {
   DeletePictureDto,
   UpdateUserDto,
   UserDto,
-  UserPairDto,
   MixPicturesDto,
 } from './dto';
 
@@ -92,13 +91,13 @@ export class UsersController {
     return this.usersService.getPairs(req.user);
   }
 
-  @Put('pairs')
+  @Put('pairs/:id')
   @HttpCode(HttpStatus.OK)
   deletePair(
     @Req() req: UserRequest,
-    @Body() dto: UserPairDto,
+    @Param('id') userPairId: string,
   ): Promise<ShortUser[]> {
-    return this.usersService.deletePair(req.user, dto);
+    return this.usersService.deletePair(req.user, userPairId);
   }
 
   // for dev

@@ -7,6 +7,7 @@ export { LikeUserCommand } from './like-user';
 export { DislikeUserCommand } from './dislike-user';
 export { ReturnUserCommand } from './return-user';
 export { GetPairsCommand } from './get-pairs';
+export { DeletePairCommand } from './delete-pair';
 
 import { PatchUserHandler } from './patch-user';
 import { GetSortedHandler } from './get-sorted';
@@ -17,6 +18,7 @@ import { LikeUserHandler } from './like-user';
 import { DislikeUserHandler } from './dislike-user';
 import { ReturnUserHandler } from './return-user';
 import { GetPairsHandler } from './get-pairs';
+import { DeletePairHandler } from './delete-pair';
 
 export const UsersCommandHandlers = [
   PatchUserHandler,
@@ -28,4 +30,5 @@ export const UsersCommandHandlers = [
   DislikeUserHandler,
   ReturnUserHandler,
   GetPairsHandler,
+  DeletePairHandler,
 ];

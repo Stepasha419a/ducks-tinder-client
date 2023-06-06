@@ -6,6 +6,7 @@ import { User } from '@prisma/client';
 import { CommandBus } from '@nestjs/cqrs';
 import { ShortUser } from './users.interface';
 import {
+  DeletePairCommand,
   DeletePictureCommand,
   DislikeUserCommand,
   GetPairsCommand,
@@ -19,7 +20,6 @@ import {
   UpdateUserDto,
   UserDto,
   DeletePictureDto,
-  UserPairDto,
   CreateUserDto,
   MixPicturesDto,
 } from './dto';
@@ -158,40 +158,7 @@ export class UsersService {
     return updatedUser.pairs;
   } */
 
-  async deletePair(user: User, userPairDto: UserPairDto): Promise<ShortUser[]> {
-    const pairs = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: { pairs: { select: { id: true } } },
-      })
-    ).pairs;
-
-    const userPair = await this.prismaService.user.findUnique({
-      where: { id: userPairDto.userPairId },
-    });
-
-    if (!userPair) {
-      throw new NotFoundException('Such user was not found');
-    }
-
-    const deletedPair = pairs.find((pair) => pair.id === userPair.id);
-
-    if (deletedPair) {
-      await this.prismaService.user.update({
-        where: { id: user.id },
-        data: { pairs: { disconnect: { id: deletedPair.id } } },
-      });
-    } else {
-      throw new NotFoundException('Pair with such an id was not found');
-    }
-
-    const updatedPairs = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: { pairs: { select: UsersSelector.selectShortUser() } },
-      })
-    ).pairs;
-
-    return updatedPairs;
+  async deletePair(user: User, userPairId: string): Promise<ShortUser[]> {
+    return this.commandBus.execute(new DeletePairCommand(user, userPairId));
   }
 }

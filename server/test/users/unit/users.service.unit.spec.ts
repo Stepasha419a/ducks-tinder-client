@@ -14,11 +14,11 @@ import { requestUserStub, shortUserStub, userStub } from '../stubs';
 import {
   CREATE_USER_DTO,
   DELETE_PICTURE_DTO,
-  DELETE_USER_PAIR_DTO,
   MIX_PICTURES_DTO,
   UPDATE_USER_DTO,
 } from '../values/users.const.dto';
 import {
+  DeletePairCommand,
   DeletePictureCommand,
   DislikeUserCommand,
   GetSortedCommand,
@@ -338,45 +338,33 @@ describe('users-service', () => {
       );
     });
 
-    it('should return undefined', async () => {
+    it('should return an array of pairs', async () => {
       expect(pairs).toEqual([shortUserStub()]);
     });
   });
 
   describe('when delete pair is called', () => {
     let pairs: ShortUser[];
+    const userPairId = '34545656';
+
+    beforeAll(() => {
+      commandBusMock.execute.mockClear();
+      commandBusMock.execute = jest.fn().mockResolvedValue([shortUserStub()]);
+    });
 
     beforeEach(async () => {
-      pairs = await service.deletePair(requestUserStub(), DELETE_USER_PAIR_DTO);
+      pairs = await service.deletePair(requestUserStub(), userPairId);
     });
 
-    it('should call user find unique', async () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(3);
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
-        where: { id: requestUserStub().id },
-        select: { pairs: { select: { id: true } } },
-      });
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
-        where: { id: DELETE_USER_PAIR_DTO.userPairId },
-      });
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(3, {
-        where: { id: requestUserStub().id },
-        select: { pairs: { select: UsersSelector.selectShortUser() } },
-      });
+    it('should call command bus execute', () => {
+      expect(commandBusMock.execute).toBeCalledTimes(1);
+      expect(commandBusMock.execute).toBeCalledWith(
+        new DeletePairCommand(requestUserStub(), userPairId),
+      );
     });
 
-    it('should call user update', async () => {
-      expect(prismaService.user.update).toBeCalledTimes(1);
-      expect(prismaService.user.update).toBeCalledWith({
-        where: { id: requestUserStub().id },
-        data: {
-          pairs: { disconnect: { id: DELETE_USER_PAIR_DTO.userPairId } },
-        },
-      });
-    });
-
-    it('should return pairs', async () => {
-      expect(pairs).toEqual(userStub().pairs);
+    it('should return an array of pairs', async () => {
+      expect(pairs).toEqual([shortUserStub()]);
     });
   });
 });

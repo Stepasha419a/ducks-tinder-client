@@ -66,8 +66,7 @@ describe('users/pairs (PUT)', () => {
       const { currentUserAccessToken } = prepareReadyAccessTokens();
 
       response = await request(httpServer)
-        .put('/users/pairs/')
-        .send({ userId: currentUserId, userPairId: secondUserId })
+        .put(`/users/pairs/${secondUserId}`)
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
@@ -84,8 +83,7 @@ describe('users/pairs (PUT)', () => {
       const { wrongUserAccessToken } = prepareReadyAccessTokens();
 
       response = await request(httpServer)
-        .put('/users/pairs/')
-        .send({ userId: 'wrong-id', userPairId: secondUserId })
+        .put(`/users/pairs/${secondUserId}`)
         .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
     });
 
@@ -102,8 +100,7 @@ describe('users/pairs (PUT)', () => {
       const { currentUserAccessToken } = prepareReadyAccessTokens();
 
       response = await request(httpServer)
-        .put('/users/pairs/')
-        .send({ userId: currentUserId, userPairId: 'wrong-id' })
+        .put('/users/pairs/wrong-id')
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
@@ -120,8 +117,7 @@ describe('users/pairs (PUT)', () => {
       const { secondUserAccessToken } = prepareReadyAccessTokens();
 
       response = await request(httpServer)
-        .put('/users/pairs/')
-        .send({ userId: secondUser.id, userPairId: currentUserId })
+        .put(`/users/pairs/${currentUserId}`)
         .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
     });
 
@@ -137,9 +133,7 @@ describe('users/pairs (PUT)', () => {
     let response: request.Response;
 
     beforeAll(async () => {
-      response = await request(httpServer)
-        .put('/users/pairs/')
-        .send({ userId: currentUserId, userPairId: secondUserId });
+      response = await request(httpServer).put(`/users/pairs/${secondUserId}`);
     });
 
     it('should throw an error', async () => {

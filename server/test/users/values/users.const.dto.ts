@@ -3,7 +3,6 @@ import {
   DeletePictureDto,
   MixPicturesDto,
   UpdateUserDto,
-  UserPairDto,
 } from 'users/dto';
 import { userStub } from '../stubs';
 
@@ -42,8 +41,4 @@ export const DELETE_PICTURE_DTO: DeletePictureDto = {
 export const MIX_PICTURES_DTO: MixPicturesDto = {
   mixOrder: 0,
   withOrder: 1,
-};
-
-export const DELETE_USER_PAIR_DTO: UserPairDto = {
-  userPairId: '34545656',
 };

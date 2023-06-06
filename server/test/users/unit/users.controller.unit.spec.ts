@@ -8,7 +8,6 @@ import { UserDto } from 'users/dto';
 import { ShortUser } from 'users/users.interface';
 import {
   DELETE_PICTURE_DTO,
-  DELETE_USER_PAIR_DTO,
   MIX_PICTURES_DTO,
   UPDATE_USER_DTO,
   USER_SORTS_DATA,
@@ -225,18 +224,16 @@ describe('users-controller', () => {
 
   describe('when deletePair is called', () => {
     let user: ShortUser[];
+    const userPairId = '34545656';
 
     beforeEach(async () => {
-      user = await usersController.deletePair(
-        requestMock,
-        DELETE_USER_PAIR_DTO,
-      );
+      user = await usersController.deletePair(requestMock, userPairId);
     });
 
     it('should call usersService', () => {
       expect(usersService.deletePair).toBeCalledWith(
         requestMock.user,
-        DELETE_USER_PAIR_DTO,
+        userPairId,
       );
     });
 
