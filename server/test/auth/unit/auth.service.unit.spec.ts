@@ -12,7 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { userStub } from 'test/users/stubs';
 import { CommandBus, CqrsModule } from '@nestjs/cqrs';
 import { CREATE_USER_DTO } from 'test/users/values/users.const.dto';
-import { LoginCommand, RegisterCommand } from 'auth/commands';
+import { LoginCommand, LogoutCommand, RegisterCommand } from 'auth/commands';
 
 describe('auth-service', () => {
   let authService: AuthService;
@@ -119,17 +119,23 @@ describe('auth-service', () => {
   describe('when logout is called', () => {
     let response;
 
+    beforeAll(() => {
+      jest.clearAllMocks();
+      commandBus.execute = jest.fn().mockResolvedValue(undefined);
+    });
+
     beforeEach(async () => {
       response = await authService.logout(userDataStub().refreshToken);
     });
 
-    it('should call tokensService removeToken', () => {
-      expect(tokensService.removeToken).toBeCalledWith(
-        userDataStub().refreshToken,
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new LogoutCommand(userDataStub().refreshToken),
       );
     });
 
-    it('should return undefined', () => {
+    it('should return undefined', async () => {
       expect(response).toEqual(undefined);
     });
   });

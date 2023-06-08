@@ -5,7 +5,7 @@ import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto';
 import { LoginUserDto, UserTokenDto } from './dto';
 import { UserData } from './auth.interface';
-import { LoginCommand, RegisterCommand } from './commands';
+import { LoginCommand, LogoutCommand, RegisterCommand } from './commands';
 
 @Injectable()
 export class AuthService {
@@ -24,11 +24,7 @@ export class AuthService {
   }
 
   async logout(refreshToken: string): Promise<void> {
-    if (!refreshToken) {
-      throw new UnauthorizedException();
-    }
-
-    await this.tokensService.removeToken(refreshToken);
+    return this.commandBus.execute(new LogoutCommand(refreshToken));
   }
 
   async refresh(refreshToken: string): Promise<UserData> {
