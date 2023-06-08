@@ -12,12 +12,16 @@ import { ConfigModule } from '@nestjs/config';
 import { userStub } from 'test/users/stubs';
 import { CommandBus, CqrsModule } from '@nestjs/cqrs';
 import { CREATE_USER_DTO } from 'test/users/values/users.const.dto';
-import { LoginCommand, LogoutCommand, RegisterCommand } from 'auth/commands';
+import {
+  LoginCommand,
+  LogoutCommand,
+  RefreshCommand,
+  RegisterCommand,
+} from 'auth/commands';
 
 describe('auth-service', () => {
   let authService: AuthService;
   let usersService: UsersService;
-  let tokensService: TokensService;
   let commandBus: CommandBus;
 
   beforeAll(async () => {
@@ -43,7 +47,6 @@ describe('auth-service', () => {
 
     authService = moduleRef.get<AuthService>(AuthService);
     usersService = moduleRef.get<UsersService>(UsersService);
-    tokensService = moduleRef.get<TokensService>(TokensService);
     commandBus = moduleRef.get<CommandBus>(CommandBus);
   });
 
@@ -143,28 +146,23 @@ describe('auth-service', () => {
   describe('when refresh is called', () => {
     let userData: UserData;
 
+    beforeAll(() => {
+      jest.clearAllMocks();
+      commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
+    });
+
     beforeEach(async () => {
       userData = await authService.refresh(userDataStub().refreshToken);
     });
 
-    it('should call tokensService validateRefreshToken', () => {
-      expect(tokensService.validateRefreshToken).toBeCalledWith(
-        userDataStub().refreshToken,
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new RefreshCommand(userDataStub().refreshToken),
       );
     });
 
-    it('should call usersService getOne', () => {
-      expect(usersService.getOne).toBeCalledWith(userStub().id);
-    });
-
-    it('should call tokensService generateTokens', () => {
-      expect(tokensService.generateTokens).toBeCalledWith({
-        id: userStub().id,
-        email: userStub().email,
-      });
-    });
-
-    it('should return userData', () => {
+    it('should return user data', async () => {
       expect(userData).toEqual(userDataStub());
     });
   });
