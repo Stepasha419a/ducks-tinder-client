@@ -1,6 +1,7 @@
 import { Test } from '@nestjs/testing';
+import { userStub } from 'test/users/stubs';
 import { UserData } from 'auth/auth.interface';
-import { CREATE_USER_DTO } from 'test/auth/values/auth.const.dto';
+import { LOGIN_USER_DTO } from 'test/auth/values/auth.const.dto';
 import { UsersService } from 'users/users.service';
 import { TokensServiceMock, UsersServiceMock } from 'test/auth/mocks';
 import { TokensService } from 'tokens/tokens.service';
@@ -8,18 +9,17 @@ import { userDataStub } from 'test/auth/stubs';
 import { UsersModule } from 'users/users.module';
 import { TokensModule } from 'tokens/tokens.module';
 import { ConfigModule } from '@nestjs/config';
-import { userStub } from 'test/users/stubs';
-import { RegisterHandler } from './register.handler';
-import { RegisterCommand } from './register.command';
+import { LoginHandler } from './login.handler';
+import { LoginCommand } from './login.command';
 
-describe('when registration is called', () => {
+describe('when login is called', () => {
   let usersService: UsersService;
   let tokensService: TokensService;
-  let registerHandler: RegisterHandler;
+  let loginHandler: LoginHandler;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [RegisterHandler],
+      providers: [LoginHandler],
       imports: [
         ConfigModule.forRoot({
           isGlobal: true,
@@ -37,35 +37,18 @@ describe('when registration is called', () => {
 
     usersService = moduleRef.get<UsersService>(UsersService);
     tokensService = moduleRef.get<TokensService>(TokensService);
-    registerHandler = moduleRef.get<RegisterHandler>(RegisterHandler);
-
-    usersService.getByEmail = jest.fn().mockResolvedValue(undefined);
-  });
-
-  afterAll(() => {
-    usersService.getByEmail = jest.fn().mockResolvedValue({
-      ...userStub(),
-      _count: { pairFor: 0 },
-      password: '$2a$07$HQtmk3r9h1Gg1YiOLO67duUs3GPDg5.KKCtPSm/152gqIALiRvs6q',
-    });
+    loginHandler = moduleRef.get<LoginHandler>(LoginHandler);
   });
 
   let userData: UserData;
 
   beforeEach(async () => {
     jest.clearAllMocks();
-    userData = await registerHandler.execute(
-      new RegisterCommand(CREATE_USER_DTO),
-    );
+    userData = await loginHandler.execute(new LoginCommand(LOGIN_USER_DTO));
   });
 
   it('should call usersService getByEmail', () => {
-    expect(usersService.getByEmail).toBeCalledWith(CREATE_USER_DTO.email);
-  });
-
-  it('should call usersService create', () => {
-    // password is custom with bcrypt
-    expect(usersService.create).toBeCalledTimes(1);
+    expect(usersService.getByEmail).toBeCalledWith(LOGIN_USER_DTO.email);
   });
 
   it('should call tokensService generateTokens', () => {

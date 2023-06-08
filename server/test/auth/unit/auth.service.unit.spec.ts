@@ -12,7 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { userStub } from 'test/users/stubs';
 import { CommandBus, CqrsModule } from '@nestjs/cqrs';
 import { CREATE_USER_DTO } from 'test/users/values/users.const.dto';
-import { RegisterCommand } from 'auth/commands';
+import { LoginCommand, RegisterCommand } from 'auth/commands';
 
 describe('auth-service', () => {
   let authService: AuthService;
@@ -95,22 +95,23 @@ describe('auth-service', () => {
   describe('when login is called', () => {
     let userData: UserData;
 
+    beforeAll(() => {
+      jest.clearAllMocks();
+      commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
+    });
+
     beforeEach(async () => {
       userData = await authService.login(LOGIN_USER_DTO);
     });
 
-    it('should call usersService getByEmail', () => {
-      expect(usersService.getByEmail).toBeCalledWith(LOGIN_USER_DTO.email);
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new LoginCommand(LOGIN_USER_DTO),
+      );
     });
 
-    it('should call tokensService generateTokens', () => {
-      expect(tokensService.generateTokens).toBeCalledWith({
-        id: userStub().id,
-        email: userStub().email,
-      });
-    });
-
-    it('should return userData', () => {
+    it('should return user data', async () => {
       expect(userData).toEqual(userDataStub());
     });
   });
