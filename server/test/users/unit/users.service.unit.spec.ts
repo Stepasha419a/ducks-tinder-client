@@ -32,9 +32,7 @@ import {
 describe('users-service', () => {
   let service: UsersService;
   let prismaService: PrismaService;
-
-  const usersPrismaMock = UsersPrismaMock();
-  const commandBusMock = CommandBusMock();
+  let commandBus: CommandBus;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -44,13 +42,14 @@ describe('users-service', () => {
       .overrideProvider(FilesService)
       .useValue(FilesServiceMock())
       .overrideProvider(PrismaService)
-      .useValue(usersPrismaMock)
+      .useValue(UsersPrismaMock())
       .overrideProvider(CommandBus)
-      .useValue(commandBusMock)
+      .useValue(CommandBusMock())
       .compile();
 
     service = moduleRef.get<UsersService>(UsersService);
     prismaService = moduleRef.get<PrismaService>(PrismaService);
+    commandBus = moduleRef.get<CommandBus>(CommandBus);
   });
 
   beforeEach(() => {
@@ -127,8 +126,7 @@ describe('users-service', () => {
     let user: ShortUser;
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
     });
 
     beforeEach(async () => {
@@ -136,8 +134,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
       );
     });
@@ -151,8 +149,7 @@ describe('users-service', () => {
     let user: ShortUser;
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue(shortUserStub());
+      commandBus.execute = jest.fn().mockResolvedValue(shortUserStub());
     });
 
     beforeEach(async () => {
@@ -160,8 +157,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new GetSortedCommand(requestUserStub()),
       );
     });
@@ -175,8 +172,7 @@ describe('users-service', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
     });
 
     beforeEach(async () => {
@@ -186,8 +182,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new SavePictureCommand(requestUserStub(), {
           fieldname: '123123',
         } as Express.Multer.File),
@@ -203,8 +199,7 @@ describe('users-service', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
     });
 
     beforeEach(async () => {
@@ -212,8 +207,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new DeletePictureCommand(requestUserStub(), DELETE_PICTURE_DTO),
       );
     });
@@ -227,8 +222,7 @@ describe('users-service', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
     });
 
     beforeEach(async () => {
@@ -236,8 +230,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new MixPicturesCommand(requestUserStub(), MIX_PICTURES_DTO),
       );
     });
@@ -251,8 +245,7 @@ describe('users-service', () => {
     let response;
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue(undefined);
+      commandBus.execute = jest.fn().mockResolvedValue(undefined);
     });
 
     beforeEach(async () => {
@@ -260,8 +253,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new LikeUserCommand(requestUserStub(), '34545656'),
       );
     });
@@ -275,8 +268,7 @@ describe('users-service', () => {
     let response;
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue(undefined);
+      commandBus.execute = jest.fn().mockResolvedValue(undefined);
     });
 
     beforeEach(async () => {
@@ -284,8 +276,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new DislikeUserCommand(requestUserStub(), '34545656'),
       );
     });
@@ -299,8 +291,7 @@ describe('users-service', () => {
     let response;
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue(undefined);
+      commandBus.execute = jest.fn().mockResolvedValue(undefined);
     });
 
     beforeEach(async () => {
@@ -308,8 +299,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new ReturnUserCommand(requestUserStub()),
       );
     });
@@ -323,8 +314,7 @@ describe('users-service', () => {
     let pairs: ShortUser[];
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue([shortUserStub()]);
+      commandBus.execute = jest.fn().mockResolvedValue([shortUserStub()]);
     });
 
     beforeEach(async () => {
@@ -332,8 +322,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new ReturnUserCommand(requestUserStub()),
       );
     });
@@ -348,8 +338,7 @@ describe('users-service', () => {
     const userPairId = '34545656';
 
     beforeAll(() => {
-      commandBusMock.execute.mockClear();
-      commandBusMock.execute = jest.fn().mockResolvedValue([shortUserStub()]);
+      commandBus.execute = jest.fn().mockResolvedValue([shortUserStub()]);
     });
 
     beforeEach(async () => {
@@ -357,8 +346,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBusMock.execute).toBeCalledTimes(1);
-      expect(commandBusMock.execute).toBeCalledWith(
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
         new DeletePairCommand(requestUserStub(), userPairId),
       );
     });

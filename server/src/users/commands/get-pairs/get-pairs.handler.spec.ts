@@ -8,11 +8,9 @@ import { GetPairsCommand } from './get-pairs.command';
 import { ShortUser } from 'users/users.interface';
 import { UsersSelector } from 'users/users.selector';
 
-describe('when dislike user is called', () => {
+describe('when get pairs is called', () => {
   let prismaService: PrismaService;
   let getPairsHandler: GetPairsHandler;
-
-  const usersPrismaMock = UsersPrismaMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -20,7 +18,7 @@ describe('when dislike user is called', () => {
       imports: [PrismaModule],
     })
       .overrideProvider(PrismaService)
-      .useValue(usersPrismaMock)
+      .useValue(UsersPrismaMock())
       .compile();
 
     prismaService = moduleRef.get<PrismaService>(PrismaService);

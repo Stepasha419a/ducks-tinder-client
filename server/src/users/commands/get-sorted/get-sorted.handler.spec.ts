@@ -14,11 +14,6 @@ describe('when get sorted is called', () => {
   let prismaService: PrismaService;
   let getSortedHandler: GetSortedHandler;
 
-  const usersPrismaMock = UsersPrismaMock();
-  usersPrismaMock.user.findUnique = jest.fn(() => {
-    return { checked: [] };
-  });
-
   const RequestMock = jest.fn().mockReturnValue({
     user: USER_SORTS_DATA,
   });
@@ -31,11 +26,15 @@ describe('when get sorted is called', () => {
       imports: [FilesModule, PrismaModule],
     })
       .overrideProvider(PrismaService)
-      .useValue(usersPrismaMock)
+      .useValue(UsersPrismaMock())
       .compile();
 
     getSortedHandler = moduleRef.get<GetSortedHandler>(GetSortedHandler);
     prismaService = moduleRef.get<PrismaService>(PrismaService);
+
+    prismaService.user.findUnique = jest.fn().mockResolvedValue(() => ({
+      checked: [],
+    }));
   });
 
   beforeEach(() => {

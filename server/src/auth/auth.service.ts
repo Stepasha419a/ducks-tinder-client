@@ -1,8 +1,8 @@
+import { CommandBus } from '@nestjs/cqrs';
 import * as bcrypt from 'bcryptjs';
 import {
   Injectable,
   UnauthorizedException,
-  BadRequestException,
   ForbiddenException,
 } from '@nestjs/common';
 import { TokensService } from '../tokens/tokens.service';
@@ -10,31 +10,18 @@ import { UsersService } from '../users/users.service';
 import { UserDto, CreateUserDto } from '../users/dto';
 import { LoginUserDto, UserTokenDto } from './dto';
 import { UserData } from './auth.interface';
+import { RegisterCommand } from './commands';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly tokensService: TokensService,
+    private readonly commandBus: CommandBus,
   ) {}
 
-  async registration(createUserDto: CreateUserDto): Promise<UserData> {
-    const candidate = await this.usersService.getByEmail(createUserDto.email);
-    if (candidate) {
-      throw new BadRequestException('User already exists');
-    }
-
-    const hashPassword = await bcrypt.hash(createUserDto.password, 7);
-
-    const user = await this.usersService.create({
-      ...createUserDto,
-      password: hashPassword,
-    });
-
-    const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
-    const tokens = await this.tokensService.generateTokens({ ...userTokenDto });
-
-    return { ...tokens, user };
+  async registration(dto: CreateUserDto): Promise<UserData> {
+    return this.commandBus.execute(new RegisterCommand(dto));
   }
 
   async login(loginUserDto: LoginUserDto): Promise<UserData> {

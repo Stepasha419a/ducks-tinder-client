@@ -13,15 +13,13 @@ describe('when patch is called', () => {
   let prismaService: PrismaService;
   let patchUserHandler: PatchUserHandler;
 
-  const usersPrismaMock = UsersPrismaMock();
-
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [PatchUserHandler],
       imports: [FilesModule, PrismaModule],
     })
       .overrideProvider(PrismaService)
-      .useValue(usersPrismaMock)
+      .useValue(UsersPrismaMock())
       .compile();
 
     patchUserHandler = moduleRef.get<PatchUserHandler>(PatchUserHandler);

@@ -13,15 +13,13 @@ describe('when mix pictures is called', () => {
   let prismaService: PrismaService;
   let mixPicturesHandler: MixPicturesHandler;
 
-  const usersPrismaMock = UsersPrismaMock();
-
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [MixPicturesHandler],
       imports: [PrismaModule],
     })
       .overrideProvider(PrismaService)
-      .useValue(usersPrismaMock)
+      .useValue(UsersPrismaMock())
       .compile();
 
     prismaService = moduleRef.get<PrismaService>(PrismaService);

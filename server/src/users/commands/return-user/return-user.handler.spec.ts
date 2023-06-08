@@ -6,11 +6,9 @@ import { requestUserStub, userStub } from 'test/users/stubs';
 import { ReturnUserHandler } from './return-user.handler';
 import { ReturnUserCommand } from './return-user.command';
 
-describe('when like user is called', () => {
+describe('when return user is called', () => {
   let prismaService: PrismaService;
   let returnUserHandler: ReturnUserHandler;
-
-  const usersPrismaMock = UsersPrismaMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -18,7 +16,7 @@ describe('when like user is called', () => {
       imports: [PrismaModule],
     })
       .overrideProvider(PrismaService)
-      .useValue(usersPrismaMock)
+      .useValue(UsersPrismaMock())
       .compile();
 
     prismaService = moduleRef.get<PrismaService>(PrismaService);

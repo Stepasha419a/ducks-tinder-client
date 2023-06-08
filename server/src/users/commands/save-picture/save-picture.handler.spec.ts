@@ -15,8 +15,6 @@ describe('when save picture is called', () => {
   let filesService: FilesService;
   let savePictureHandler: SavePictureHandler;
 
-  const usersPrismaMock = UsersPrismaMock();
-
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [SavePictureHandler],
@@ -25,7 +23,7 @@ describe('when save picture is called', () => {
       .overrideProvider(FilesService)
       .useValue(FilesServiceMock())
       .overrideProvider(PrismaService)
-      .useValue(usersPrismaMock)
+      .useValue(UsersPrismaMock())
       .compile();
 
     prismaService = moduleRef.get<PrismaService>(PrismaService);

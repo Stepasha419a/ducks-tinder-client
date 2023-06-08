@@ -8,11 +8,9 @@ import { UsersSelector } from 'users/users.selector';
 import { DeletePairHandler } from './delete-pair.handler';
 import { DeletePairCommand } from './delete-pair.command';
 
-describe('when dislike user is called', () => {
+describe('when delete pair is called', () => {
   let prismaService: PrismaService;
   let deletePairHandler: DeletePairHandler;
-
-  const usersPrismaMock = UsersPrismaMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -20,7 +18,7 @@ describe('when dislike user is called', () => {
       imports: [PrismaModule],
     })
       .overrideProvider(PrismaService)
-      .useValue(usersPrismaMock)
+      .useValue(UsersPrismaMock())
       .compile();
 
     prismaService = moduleRef.get<PrismaService>(PrismaService);

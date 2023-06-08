@@ -1,7 +1,6 @@
 import { UsersSelector } from './users.selector';
 import { PrismaService } from '../prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { FilesService } from '../files/files.service';
 import { User } from '@prisma/client';
 import { CommandBus } from '@nestjs/cqrs';
 import { ShortUser } from './users.interface';
@@ -30,7 +29,6 @@ export class UsersService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly commandBus: CommandBus,
-    private readonly filesService: FilesService,
   ) {}
 
   async getOne(id: string): Promise<UserDto> {
