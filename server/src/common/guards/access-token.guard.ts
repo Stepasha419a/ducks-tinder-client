@@ -39,7 +39,7 @@ export class AccessTokenGuard implements CanActivate {
       throw new UnauthorizedException();
     }
 
-    const user = await this.usersService.getOne(userData.id);
+    const user = await this.usersService.getUser(userData.id);
 
     req.user = user;
 

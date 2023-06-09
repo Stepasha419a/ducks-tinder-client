@@ -54,8 +54,8 @@ describe('when refresh is called', () => {
     );
   });
 
-  it('should call usersService getOne', () => {
-    expect(usersService.getOne).toBeCalledWith(userStub().id);
+  it('should call usersService getUser', () => {
+    expect(usersService.getUser).toBeCalledWith(userStub().id);
   });
 
   it('should call tokensService generateTokens', () => {

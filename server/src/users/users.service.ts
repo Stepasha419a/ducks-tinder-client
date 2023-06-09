@@ -1,6 +1,6 @@
 import { UsersSelector } from './users.selector';
 import { PrismaService } from '../prisma/prisma.service';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { CommandBus } from '@nestjs/cqrs';
 import { ShortUser } from './users.interface';
@@ -23,6 +23,7 @@ import {
   MixPicturesDto,
 } from './dto';
 import { ReturnUserCommand } from './commands/return-user';
+import { GetUserCommand } from './commands/get-user';
 
 @Injectable()
 export class UsersService {
@@ -31,17 +32,8 @@ export class UsersService {
     private readonly commandBus: CommandBus,
   ) {}
 
-  async getOne(id: string): Promise<UserDto> {
-    const user = await this.prismaService.user.findUnique({
-      where: { id },
-      include: UsersSelector.selectUser(),
-    });
-
-    if (!user) {
-      throw new NotFoundException('Such user was not found');
-    }
-
-    return new UserDto(user);
+  async getUser(id: string): Promise<UserDto> {
+    return this.commandBus.execute(new GetUserCommand(id));
   }
 
   async getByEmail(email: string): Promise<User> {

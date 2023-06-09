@@ -22,6 +22,7 @@ import {
   DeletePictureCommand,
   DislikeUserCommand,
   GetSortedCommand,
+  GetUserCommand,
   LikeUserCommand,
   MixPicturesCommand,
   PatchUserCommand,
@@ -62,22 +63,25 @@ describe('users-service', () => {
     });
   });
 
-  describe('when get one is called', () => {
+  describe('when get user is called', () => {
     let user: UserDto;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+    });
+
     beforeEach(async () => {
-      user = await service.getOne(userStub().id);
+      user = await service.getUser(userStub().id);
     });
 
-    it('should call find unique', async () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      expect(prismaService.user.findUnique).toBeCalledWith({
-        where: { id: userStub().id },
-        include: UsersSelector.selectUser(),
-      });
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new GetUserCommand(userStub().id),
+      );
     });
 
-    it('should return a user', async () => {
+    it('should return a short user', async () => {
       expect(user).toEqual(userStub());
     });
   });

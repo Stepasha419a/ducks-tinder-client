@@ -10,7 +10,7 @@ export class ChatsService {
   ) {}
 
   async getAll(userId: string) {
-    const user = await this.usersService.getOne(userId);
+    const user = await this.usersService.getUser(userId);
 
     const chats = await this.prismaService.chat.findMany({
       where: { chatToUsers: { some: { userId: user.id } } },

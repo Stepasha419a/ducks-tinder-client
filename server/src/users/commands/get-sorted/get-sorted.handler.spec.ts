@@ -1,5 +1,4 @@
 import { Test } from '@nestjs/testing';
-import { FilesModule } from 'files/files.module';
 import { ShortUser } from 'users/users.interface';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
@@ -23,7 +22,7 @@ describe('when get sorted is called', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [GetSortedHandler],
-      imports: [FilesModule, PrismaModule],
+      imports: [PrismaModule],
     })
       .overrideProvider(PrismaService)
       .useValue(UsersPrismaMock())
