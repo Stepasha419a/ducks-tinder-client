@@ -9,6 +9,7 @@ export { ReturnUserCommand } from './return-user';
 export { GetPairsCommand } from './get-pairs';
 export { DeletePairCommand } from './delete-pair';
 export { GetUserCommand } from './get-user';
+export { GetUserByEmailCommand } from './get-user-by-email';
 
 import { PatchUserHandler } from './patch-user';
 import { GetSortedHandler } from './get-sorted';
@@ -21,6 +22,7 @@ import { ReturnUserHandler } from './return-user';
 import { GetPairsHandler } from './get-pairs';
 import { DeletePairHandler } from './delete-pair';
 import { GetUserHandler } from './get-user';
+import { GetUserByEmailHandler } from './get-user-by-email';
 
 export const UsersCommandHandlers = [
   PatchUserHandler,
@@ -34,4 +36,5 @@ export const UsersCommandHandlers = [
   GetPairsHandler,
   DeletePairHandler,
   GetUserHandler,
+  GetUserByEmailHandler,
 ];

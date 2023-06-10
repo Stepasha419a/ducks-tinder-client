@@ -10,6 +10,7 @@ import {
   DislikeUserCommand,
   GetPairsCommand,
   GetSortedCommand,
+  GetUserByEmailCommand,
   LikeUserCommand,
   MixPicturesCommand,
   PatchUserCommand,
@@ -36,11 +37,8 @@ export class UsersService {
     return this.commandBus.execute(new GetUserCommand(id));
   }
 
-  async getByEmail(email: string): Promise<User> {
-    return this.prismaService.user.findUnique({
-      where: { email },
-      include: UsersSelector.selectUser(),
-    });
+  async getUserByEmail(email: string): Promise<User> {
+    return this.commandBus.execute(new GetUserByEmailCommand(email));
   }
 
   async create(userDto: CreateUserDto): Promise<UserDto> {

@@ -18,7 +18,7 @@ export class LoginHandler implements ICommandHandler<LoginCommand> {
   async execute(command: LoginCommand): Promise<UserData> {
     const { dto } = command;
 
-    const user = await this.usersService.getByEmail(dto.email);
+    const user = await this.usersService.getUserByEmail(dto.email);
     if (!user) {
       throw new ForbiddenException('Incorrect email or password');
     }

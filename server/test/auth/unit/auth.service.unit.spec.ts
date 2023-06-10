@@ -67,11 +67,11 @@ describe('auth-service', () => {
       jest.clearAllMocks();
       commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
 
-      usersService.getByEmail = jest.fn().mockResolvedValue(undefined);
+      usersService.getUserByEmail = jest.fn().mockResolvedValue(undefined);
     });
 
     afterAll(() => {
-      usersService.getByEmail = jest.fn().mockResolvedValue({
+      usersService.getUserByEmail = jest.fn().mockResolvedValue({
         ...userStub(),
         _count: { pairFor: 0 },
         password:

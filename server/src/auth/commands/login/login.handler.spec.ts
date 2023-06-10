@@ -47,8 +47,8 @@ describe('when login is called', () => {
     userData = await loginHandler.execute(new LoginCommand(LOGIN_USER_DTO));
   });
 
-  it('should call usersService getByEmail', () => {
-    expect(usersService.getByEmail).toBeCalledWith(LOGIN_USER_DTO.email);
+  it('should call usersService getUserByEmail', () => {
+    expect(usersService.getUserByEmail).toBeCalledWith(LOGIN_USER_DTO.email);
   });
 
   it('should call tokensService generateTokens', () => {

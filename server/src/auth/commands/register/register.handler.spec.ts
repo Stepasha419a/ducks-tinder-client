@@ -39,11 +39,11 @@ describe('when registration is called', () => {
     tokensService = moduleRef.get<TokensService>(TokensService);
     registerHandler = moduleRef.get<RegisterHandler>(RegisterHandler);
 
-    usersService.getByEmail = jest.fn().mockResolvedValue(undefined);
+    usersService.getUserByEmail = jest.fn().mockResolvedValue(undefined);
   });
 
   afterAll(() => {
-    usersService.getByEmail = jest.fn().mockResolvedValue({
+    usersService.getUserByEmail = jest.fn().mockResolvedValue({
       ...userStub(),
       _count: { pairFor: 0 },
       password: '$2a$07$HQtmk3r9h1Gg1YiOLO67duUs3GPDg5.KKCtPSm/152gqIALiRvs6q',
@@ -59,8 +59,8 @@ describe('when registration is called', () => {
     );
   });
 
-  it('should call usersService getByEmail', () => {
-    expect(usersService.getByEmail).toBeCalledWith(CREATE_USER_DTO.email);
+  it('should call usersService getUserByEmail', () => {
+    expect(usersService.getUserByEmail).toBeCalledWith(CREATE_USER_DTO.email);
   });
 
   it('should call usersService create', () => {
