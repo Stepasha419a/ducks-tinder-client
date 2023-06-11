@@ -1,8 +1,10 @@
-import { ConfigService } from '@nestjs/config';
-import { PrismaService } from '../prisma/prisma.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { CommandBus } from '@nestjs/cqrs';
+import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserTokenDto } from 'auth/dto';
+import { GenerateTokensCommand } from './commands';
 
 @Injectable()
 export class TokensService {
@@ -10,22 +12,11 @@ export class TokensService {
     private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
+    private readonly commandBus: CommandBus,
   ) {}
 
   public async generateTokens(payload: UserTokenDto) {
-    const accessToken = this.jwtService.sign(payload, {
-      expiresIn: '15m',
-      secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
-    });
-    const refreshToken = this.jwtService.sign(payload, {
-      expiresIn: '7d',
-      secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-    });
-    await this.saveRefreshToken(payload.id, refreshToken);
-    return {
-      accessToken,
-      refreshToken,
-    };
+    return this.commandBus.execute(new GenerateTokensCommand(payload));
   }
 
   public async removeToken(refreshToken: string) {
@@ -69,20 +60,5 @@ export class TokensService {
     } catch (error) {
       return null;
     }
-  }
-
-  private async saveRefreshToken(userId: string, refreshToken: string) {
-    const tokenData = await this.prismaService.token.findUnique({
-      where: { id: userId },
-    });
-    if (tokenData) {
-      return this.prismaService.token.update({
-        where: { id: tokenData.id },
-        data: { refreshToken },
-      });
-    }
-    return this.prismaService.token.create({
-      data: { id: userId, refreshToken },
-    });
   }
 }

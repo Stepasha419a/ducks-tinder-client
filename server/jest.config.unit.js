@@ -11,5 +11,6 @@ module.exports = {
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     'test/(.*)': '<rootDir>/test/$1',
+    'tokens/(.*)': '<rootDir>/src/tokens/$1',
   },
 };

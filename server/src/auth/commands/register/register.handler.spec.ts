@@ -65,7 +65,7 @@ describe('when registration is called', () => {
 
   it('should call usersService create', () => {
     // password is custom with bcrypt
-    expect(usersService.create).toBeCalledTimes(1);
+    expect(usersService.createUser).toBeCalledTimes(1);
   });
 
   it('should call tokensService generateTokens', () => {
