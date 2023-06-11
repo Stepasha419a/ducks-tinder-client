@@ -2,14 +2,11 @@ import { Test } from '@nestjs/testing';
 import { CommandBus, CqrsModule } from '@nestjs/cqrs';
 import { User } from '@prisma/client';
 import { UsersService } from 'users/users.service';
-import { FilesService } from 'files/files.service';
-import { FilesModule } from 'files/files.module';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ShortUser } from 'users/users.interface';
 import { UserDto } from 'users/dto';
-import { UsersSelector } from 'users/users.selector';
-import { UsersPrismaMock, CommandBusMock, FilesServiceMock } from '../mocks';
+import { UsersPrismaMock, CommandBusMock } from '../mocks';
 import { requestUserStub, shortUserStub, userStub } from '../stubs';
 import {
   CREATE_USER_DTO,
@@ -18,6 +15,7 @@ import {
   UPDATE_USER_DTO,
 } from '../values/users.const.dto';
 import {
+  CreateUserCommand,
   DeletePairCommand,
   DeletePictureCommand,
   DislikeUserCommand,
@@ -33,16 +31,13 @@ import {
 
 describe('users-service', () => {
   let service: UsersService;
-  let prismaService: PrismaService;
   let commandBus: CommandBus;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [UsersService],
-      imports: [CqrsModule, FilesModule, PrismaModule],
+      imports: [CqrsModule, PrismaModule],
     })
-      .overrideProvider(FilesService)
-      .useValue(FilesServiceMock())
       .overrideProvider(PrismaService)
       .useValue(UsersPrismaMock())
       .overrideProvider(CommandBus)
@@ -50,7 +45,6 @@ describe('users-service', () => {
       .compile();
 
     service = moduleRef.get<UsersService>(UsersService);
-    prismaService = moduleRef.get<PrismaService>(PrismaService);
     commandBus = moduleRef.get<CommandBus>(CommandBus);
   });
 
@@ -110,19 +104,22 @@ describe('users-service', () => {
     });
   });
 
-  describe('when create is called', () => {
+  describe('when create user is called', () => {
     let user: UserDto;
 
-    beforeEach(async () => {
-      user = await service.create(CREATE_USER_DTO);
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
     });
 
-    it('should call create user', async () => {
-      expect(prismaService.user.create).toBeCalledTimes(1);
-      expect(prismaService.user.create).toBeCalledWith({
-        data: CREATE_USER_DTO,
-        include: UsersSelector.selectUser(),
-      });
+    beforeEach(async () => {
+      user = await service.createUser(CREATE_USER_DTO);
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new CreateUserCommand(CREATE_USER_DTO),
+      );
     });
 
     it('should return a user', async () => {

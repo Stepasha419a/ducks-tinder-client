@@ -24,7 +24,7 @@ export class RegisterHandler implements ICommandHandler<RegisterCommand> {
 
     const hashPassword = await bcrypt.hash(dto.password, 7);
 
-    const user = await this.usersService.create({
+    const user = await this.usersService.createUser({
       ...dto,
       password: hashPassword,
     });

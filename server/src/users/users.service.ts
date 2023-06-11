@@ -1,10 +1,10 @@
-import { UsersSelector } from './users.selector';
 import { PrismaService } from '../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { CommandBus } from '@nestjs/cqrs';
 import { ShortUser } from './users.interface';
 import {
+  CreateUserCommand,
   DeletePairCommand,
   DeletePictureCommand,
   DislikeUserCommand,
@@ -41,13 +41,8 @@ export class UsersService {
     return this.commandBus.execute(new GetUserByEmailCommand(email));
   }
 
-  async create(userDto: CreateUserDto): Promise<UserDto> {
-    const user = await this.prismaService.user.create({
-      data: userDto,
-      include: UsersSelector.selectUser(),
-    });
-
-    return new UserDto(user);
+  async createUser(dto: CreateUserDto): Promise<UserDto> {
+    return this.commandBus.execute(new CreateUserCommand(dto));
   }
 
   async patch(user: User, dto: UpdateUserDto): Promise<UserDto> {
