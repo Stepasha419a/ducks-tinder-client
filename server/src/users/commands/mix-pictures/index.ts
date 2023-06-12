@@ -1,2 +1,2 @@
 export { MixPicturesCommand } from './mix-pictures.command';
-export { MixPicturesHandler } from './mix-pictures.handler';
+export { MixPicturesCommandHandler } from './mix-pictures.command-handler';

@@ -1,2 +1,2 @@
 export { PatchUserCommand } from './patch-user.command';
-export { PatchUserHandler } from './patch-user.handler';
+export { PatchUserCommandHandler } from './patch-user.command-handler';

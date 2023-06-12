@@ -1,2 +1,2 @@
 export { SavePictureCommand } from './save-picture.command';
-export { SavePictureHandler } from './save-picture.handler';
+export { SavePictureCommandHandler } from './save-picture.command-handler';

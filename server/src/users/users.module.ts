@@ -4,10 +4,11 @@ import { FilesModule } from '../files/files.module';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { PrismaModule } from '../prisma/prisma.module';
-import { UsersCommandHandlers } from './commands';
+import { UserCommandHandlers } from './commands';
+import { UserQueryHandlers } from './queries';
 
 @Module({
-  providers: [UsersService, ...UsersCommandHandlers],
+  providers: [UsersService, ...UserCommandHandlers, ...UserQueryHandlers],
   controllers: [UsersController],
   imports: [PrismaModule, CqrsModule, FilesModule],
   exports: [UsersService],

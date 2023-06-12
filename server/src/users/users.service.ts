@@ -1,21 +1,25 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ShortUser } from './users.interface';
 import {
   CreateUserCommand,
   DeletePairCommand,
   DeletePictureCommand,
   DislikeUserCommand,
-  GetPairsCommand,
-  GetSortedCommand,
-  GetUserByEmailCommand,
   LikeUserCommand,
   MixPicturesCommand,
   PatchUserCommand,
   SavePictureCommand,
+  ReturnUserCommand,
 } from './commands';
+import {
+  GetPairsQuery,
+  GetSortedQuery,
+  GetUserByEmailQuery,
+  GetUserQuery,
+} from './queries';
 import {
   UpdateUserDto,
   UserDto,
@@ -23,22 +27,21 @@ import {
   CreateUserDto,
   MixPicturesDto,
 } from './dto';
-import { ReturnUserCommand } from './commands/return-user';
-import { GetUserCommand } from './commands/get-user';
 
 @Injectable()
 export class UsersService {
   constructor(
     private readonly prismaService: PrismaService,
     private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
   ) {}
 
   async getUser(id: string): Promise<UserDto> {
-    return this.commandBus.execute(new GetUserCommand(id));
+    return this.queryBus.execute(new GetUserQuery(id));
   }
 
   async getUserByEmail(email: string): Promise<User> {
-    return this.commandBus.execute(new GetUserByEmailCommand(email));
+    return this.queryBus.execute(new GetUserByEmailQuery(email));
   }
 
   async createUser(dto: CreateUserDto): Promise<UserDto> {
@@ -50,7 +53,7 @@ export class UsersService {
   }
 
   async getSorted(user: User): Promise<ShortUser> {
-    return this.commandBus.execute(new GetSortedCommand(user));
+    return this.queryBus.execute(new GetSortedQuery(user));
   }
 
   async savePicture(
@@ -81,7 +84,7 @@ export class UsersService {
   }
 
   async getPairs(user: User): Promise<ShortUser[]> {
-    return this.commandBus.execute(new GetPairsCommand(user));
+    return this.queryBus.execute(new GetPairsQuery(user));
   }
 
   // for dev

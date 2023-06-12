@@ -1,2 +1,2 @@
 export { DeletePairCommand } from './delete-pair.command';
-export { DeletePairHandler } from './delete-pair.handler';
+export { DeletePairCommandHandler } from './delete-pair.command-handler';

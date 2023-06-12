@@ -1,12 +1,12 @@
 import { Test } from '@nestjs/testing';
-import { CommandBus, CqrsModule } from '@nestjs/cqrs';
+import { CommandBus, CqrsModule, QueryBus } from '@nestjs/cqrs';
 import { User } from '@prisma/client';
 import { UsersService } from 'users/users.service';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ShortUser } from 'users/users.interface';
 import { UserDto } from 'users/dto';
-import { UsersPrismaMock, CommandBusMock } from '../mocks';
+import { UsersPrismaMock, CommandBusMock, QueryBusMock } from '../mocks';
 import { requestUserStub, shortUserStub, userStub } from '../stubs';
 import {
   CREATE_USER_DTO,
@@ -19,19 +19,23 @@ import {
   DeletePairCommand,
   DeletePictureCommand,
   DislikeUserCommand,
-  GetSortedCommand,
-  GetUserByEmailCommand,
-  GetUserCommand,
   LikeUserCommand,
   MixPicturesCommand,
   PatchUserCommand,
   ReturnUserCommand,
   SavePictureCommand,
 } from 'users/commands';
+import {
+  GetPairsQuery,
+  GetSortedQuery,
+  GetUserByEmailQuery,
+  GetUserQuery,
+} from 'users/queries';
 
 describe('users-service', () => {
   let service: UsersService;
   let commandBus: CommandBus;
+  let queryBus: QueryBus;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -42,10 +46,13 @@ describe('users-service', () => {
       .useValue(UsersPrismaMock())
       .overrideProvider(CommandBus)
       .useValue(CommandBusMock())
+      .overrideProvider(QueryBus)
+      .useValue(QueryBusMock())
       .compile();
 
     service = moduleRef.get<UsersService>(UsersService);
     commandBus = moduleRef.get<CommandBus>(CommandBus);
+    queryBus = moduleRef.get<QueryBus>(QueryBus);
   });
 
   beforeEach(() => {
@@ -62,7 +69,7 @@ describe('users-service', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+      queryBus.execute = jest.fn().mockResolvedValue(userStub());
     });
 
     beforeEach(async () => {
@@ -70,10 +77,8 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBus.execute).toBeCalledTimes(1);
-      expect(commandBus.execute).toBeCalledWith(
-        new GetUserCommand(userStub().id),
-      );
+      expect(queryBus.execute).toBeCalledTimes(1);
+      expect(queryBus.execute).toBeCalledWith(new GetUserQuery(userStub().id));
     });
 
     it('should return a short user', async () => {
@@ -85,7 +90,7 @@ describe('users-service', () => {
     let user: User;
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+      queryBus.execute = jest.fn().mockResolvedValue(userStub());
     });
 
     beforeEach(async () => {
@@ -93,9 +98,9 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBus.execute).toBeCalledTimes(1);
-      expect(commandBus.execute).toBeCalledWith(
-        new GetUserByEmailCommand(userStub().email),
+      expect(queryBus.execute).toBeCalledTimes(1);
+      expect(queryBus.execute).toBeCalledWith(
+        new GetUserByEmailQuery(userStub().email),
       );
     });
 
@@ -154,7 +159,7 @@ describe('users-service', () => {
     let user: ShortUser;
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(shortUserStub());
+      queryBus.execute = jest.fn().mockResolvedValue(shortUserStub());
     });
 
     beforeEach(async () => {
@@ -162,9 +167,9 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBus.execute).toBeCalledTimes(1);
-      expect(commandBus.execute).toBeCalledWith(
-        new GetSortedCommand(requestUserStub()),
+      expect(queryBus.execute).toBeCalledTimes(1);
+      expect(queryBus.execute).toBeCalledWith(
+        new GetSortedQuery(requestUserStub()),
       );
     });
 
@@ -319,7 +324,7 @@ describe('users-service', () => {
     let pairs: ShortUser[];
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue([shortUserStub()]);
+      queryBus.execute = jest.fn().mockResolvedValue([shortUserStub()]);
     });
 
     beforeEach(async () => {
@@ -327,9 +332,9 @@ describe('users-service', () => {
     });
 
     it('should call command bus execute', () => {
-      expect(commandBus.execute).toBeCalledTimes(1);
-      expect(commandBus.execute).toBeCalledWith(
-        new ReturnUserCommand(requestUserStub()),
+      expect(queryBus.execute).toBeCalledTimes(1);
+      expect(queryBus.execute).toBeCalledWith(
+        new GetPairsQuery(requestUserStub()),
       );
     });
 

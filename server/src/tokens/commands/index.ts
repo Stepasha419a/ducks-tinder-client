@@ -1,5 +1,5 @@
 export { GenerateTokensCommand } from './generate-tokens';
 
-import { GenerateTokensHandler } from './generate-tokens';
+import { GenerateTokensCommandHandler } from './generate-tokens';
 
-export const TokenHandlers = [GenerateTokensHandler];
+export const TokenHandlers = [GenerateTokensCommandHandler];

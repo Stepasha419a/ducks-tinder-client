@@ -1,2 +1,2 @@
 export { LikeUserCommand } from './like-user.command';
-export { LikeUserHandler } from './like-user.handler';
+export { LikeUserCommandHandler } from './like-user.command-handler';

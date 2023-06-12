@@ -1,2 +1,2 @@
 export { DeletePictureCommand } from './delete-picture.command';
-export { DeletePictureHandler } from './delete-picture.handler';
+export { DeletePictureCommandHandler } from './delete-picture.command-handler';

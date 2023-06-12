@@ -1,2 +1,2 @@
 export { ReturnUserCommand } from './return-user.command';
-export { ReturnUserHandler } from './return-user.handler';
+export { ReturnUserCommandHandler } from './return-user.command-handler';

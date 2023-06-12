@@ -1,2 +1,2 @@
 export { DislikeUserCommand } from './dislike-user.command';
-export { DislikeUserHandler } from './dislike-user.handler';
+export { DislikeUserCommandHandler } from './dislike-user.command-handler';

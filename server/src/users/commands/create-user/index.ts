@@ -1,2 +1,2 @@
 export { CreateUserCommand } from './create-user.command';
-export { CreateUserHandler } from './create-user.handler';
+export { CreateUserCommandHandler } from './create-user.command-handler';
