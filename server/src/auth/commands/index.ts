@@ -3,14 +3,14 @@ export { LoginCommand } from './login';
 export { LogoutCommand } from './logout';
 export { RefreshCommand } from './refresh';
 
-import { RegisterHandler } from './register';
-import { LoginHandler } from './login';
-import { LogoutHandler } from './logout';
-import { RefreshHandler } from './refresh';
+import { RegisterCommandHandler } from './register';
+import { LoginCommandHandler } from './login';
+import { LogoutCommandHandler } from './logout';
+import { RefreshCommandHandler } from './refresh';
 
 export const AuthCommandHandlers = [
-  RegisterHandler,
-  LoginHandler,
-  LogoutHandler,
-  RefreshHandler,
+  RegisterCommandHandler,
+  LoginCommandHandler,
+  LogoutCommandHandler,
+  RefreshCommandHandler,
 ];

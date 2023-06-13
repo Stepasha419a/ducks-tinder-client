@@ -1,2 +1,2 @@
 export { RegisterCommand } from './register.command';
-export { RegisterHandler } from './register.handler';
+export { RegisterCommandHandler } from './register.command-handler';

@@ -7,7 +7,7 @@ import { UserData } from 'auth/auth.interface';
 import { RefreshCommand } from './refresh.command';
 
 @CommandHandler(RefreshCommand)
-export class RefreshHandler {
+export class RefreshCommandHandler {
   constructor(
     private readonly usersService: UsersService,
     private readonly tokensService: TokensService,

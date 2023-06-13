@@ -1,2 +1,2 @@
 export { LoginCommand } from './login.command';
-export { LoginHandler } from './login.handler';
+export { LoginCommandHandler } from './login.command-handler';

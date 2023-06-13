@@ -1,15 +1,17 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { CommandBus } from '@nestjs/cqrs';
-import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserTokenDto } from 'auth/dto';
-import { GenerateTokensCommand, RemoveTokenCommand } from './commands';
+import {
+  GenerateTokensCommand,
+  RemoveTokenCommand,
+  ValidateRefreshTokenCommand,
+} from './commands';
 
 @Injectable()
 export class TokensService {
   constructor(
-    private readonly prismaService: PrismaService,
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
     private readonly commandBus: CommandBus,
@@ -24,21 +26,7 @@ export class TokensService {
   }
 
   public async validateRefreshToken(token: string) {
-    try {
-      const existingRefreshToken = await this.prismaService.token.findUnique({
-        where: { refreshToken: token },
-      });
-      if (!existingRefreshToken) {
-        throw new UnauthorizedException();
-      }
-
-      const userData = this.jwtService.verify(token, {
-        secret: this.configService.get<string>('JWT_REFRESH_SECRET'),
-      });
-      return userData;
-    } catch (error) {
-      return null;
-    }
+    return this.commandBus.execute(new ValidateRefreshTokenCommand(token));
   }
 
   public validateAccessToken(token: string) {

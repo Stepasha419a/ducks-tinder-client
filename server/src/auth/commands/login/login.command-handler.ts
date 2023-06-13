@@ -9,7 +9,7 @@ import { UserDto } from 'users/dto';
 import { UserTokenDto } from 'auth/dto';
 
 @CommandHandler(LoginCommand)
-export class LoginHandler implements ICommandHandler<LoginCommand> {
+export class LoginCommandHandler implements ICommandHandler<LoginCommand> {
   constructor(
     private readonly usersService: UsersService,
     private readonly tokensService: TokensService,

@@ -5,16 +5,16 @@ import { userDataStub } from 'test/auth/stubs';
 import { UsersModule } from 'users/users.module';
 import { TokensModule } from 'tokens/tokens.module';
 import { ConfigModule } from '@nestjs/config';
-import { LogoutHandler } from './logout.handler';
+import { LogoutCommandHandler } from './logout.command-handler';
 import { LogoutCommand } from './logout.command';
 
 describe('when logout is called', () => {
   let tokensService: TokensService;
-  let logoutHandler: LogoutHandler;
+  let logoutCommandHandler: LogoutCommandHandler;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [LogoutHandler],
+      providers: [LogoutCommandHandler],
       imports: [
         ConfigModule.forRoot({
           isGlobal: true,
@@ -29,14 +29,15 @@ describe('when logout is called', () => {
       .compile();
 
     tokensService = moduleRef.get<TokensService>(TokensService);
-    logoutHandler = moduleRef.get<LogoutHandler>(LogoutHandler);
+    logoutCommandHandler =
+      moduleRef.get<LogoutCommandHandler>(LogoutCommandHandler);
   });
 
   let response;
 
   beforeEach(async () => {
     jest.clearAllMocks();
-    response = await logoutHandler.execute(
+    response = await logoutCommandHandler.execute(
       new LogoutCommand(userDataStub().refreshToken),
     );
   });

@@ -8,7 +8,9 @@ import { UserTokenDto } from 'auth/dto';
 import { RegisterCommand } from './register.command';
 
 @CommandHandler(RegisterCommand)
-export class RegisterHandler implements ICommandHandler<RegisterCommand> {
+export class RegisterCommandHandler
+  implements ICommandHandler<RegisterCommand>
+{
   constructor(
     private readonly usersService: UsersService,
     private readonly tokensService: TokensService,
