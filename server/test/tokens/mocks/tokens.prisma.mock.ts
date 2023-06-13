@@ -3,5 +3,6 @@ export const TokensPrismaMock = jest.fn().mockReturnValue({
     findUnique: jest.fn(),
     update: jest.fn(),
     create: jest.fn(),
+    delete: jest.fn(),
   },
 });

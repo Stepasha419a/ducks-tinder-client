@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from 'prisma/prisma.module';
 import { USER_TOKEN_DTO } from '../values/tokens.const.dto';
 import { TokensService } from 'tokens/tokens.service';
-import { GenerateTokensCommand } from 'tokens/commands';
+import { GenerateTokensCommand, RemoveTokenCommand } from 'tokens/commands';
 import { tokensStub } from '../stubs';
 
 describe('users-service', () => {
@@ -60,6 +60,29 @@ describe('users-service', () => {
 
     it('should return tokens', async () => {
       expect(tokens).toEqual(tokensStub());
+    });
+  });
+
+  describe('when remove token is called', () => {
+    let response;
+
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(tokensStub());
+    });
+
+    beforeEach(async () => {
+      response = await tokensService.removeToken(tokensStub().refreshToken);
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new RemoveTokenCommand(tokensStub().refreshToken),
+      );
+    });
+
+    it('should return payload data (as tokensStub to check)', async () => {
+      expect(response).toEqual(tokensStub());
     });
   });
 });

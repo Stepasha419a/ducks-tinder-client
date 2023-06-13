@@ -4,7 +4,7 @@ import { CommandBus } from '@nestjs/cqrs';
 import { PrismaService } from '../prisma/prisma.service';
 import { JwtService } from '@nestjs/jwt';
 import { UserTokenDto } from 'auth/dto';
-import { GenerateTokensCommand } from './commands';
+import { GenerateTokensCommand, RemoveTokenCommand } from './commands';
 
 @Injectable()
 export class TokensService {
@@ -20,17 +20,7 @@ export class TokensService {
   }
 
   public async removeToken(refreshToken: string) {
-    const existingRefreshToken = await this.prismaService.token.findUnique({
-      where: { refreshToken },
-    });
-    if (!existingRefreshToken) {
-      throw new UnauthorizedException();
-    }
-
-    const tokenData = await this.prismaService.token.delete({
-      where: { refreshToken },
-    });
-    return tokenData;
+    return this.commandBus.execute(new RemoveTokenCommand(refreshToken));
   }
 
   public async validateRefreshToken(token: string) {
