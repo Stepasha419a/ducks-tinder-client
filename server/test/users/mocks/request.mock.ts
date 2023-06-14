@@ -1,5 +1,5 @@
-import { userStub } from '../stubs';
+import { requestUserStub } from '../stubs';
 
 export const RequestMock = jest.fn().mockReturnValue({
-  user: userStub(),
+  user: requestUserStub(),
 });

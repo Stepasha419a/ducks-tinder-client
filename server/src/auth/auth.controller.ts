@@ -12,13 +12,19 @@ import {
 import { Request, Response } from 'express';
 import { Public } from 'common/decorators';
 import { ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
-import { AuthService } from './auth.service';
 import { CreateUserDto, UserDto } from 'users/dto';
 import { LoginUserDto } from './dto';
+import { CommandBus } from '@nestjs/cqrs';
+import {
+  LoginCommand,
+  LogoutCommand,
+  RefreshCommand,
+  RegisterCommand,
+} from './commands';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly commandBus: CommandBus) {}
 
   @Public()
   @Post('registration')
@@ -27,7 +33,7 @@ export class AuthController {
     @Res() res: Response,
     @Body() dto: CreateUserDto,
   ): Promise<Response<UserDto>> {
-    const userData = await this.authService.registration(dto);
+    const userData = await this.commandBus.execute(new RegisterCommand(dto));
     this.setCookies(res, userData.refreshToken, userData.accessToken);
 
     return res.json(userData.user);
@@ -40,7 +46,7 @@ export class AuthController {
     @Res() res: Response,
     @Body() dto: LoginUserDto,
   ): Promise<Response<UserDto>> {
-    const userData = await this.authService.login(dto);
+    const userData = await this.commandBus.execute(new LoginCommand(dto));
     this.setCookies(res, userData.refreshToken, userData.accessToken);
 
     return res.json(userData.user);
@@ -55,7 +61,7 @@ export class AuthController {
     const { refreshToken } = req.cookies;
 
     this.clearCookies(res);
-    await this.authService.logout(refreshToken);
+    await this.commandBus.execute(new LogoutCommand(refreshToken));
 
     return res.end();
   }
@@ -69,7 +75,9 @@ export class AuthController {
   ): Promise<Response<UserDto>> {
     const { refreshToken } = req.cookies;
 
-    const userData = await this.authService.refresh(refreshToken);
+    const userData = await this.commandBus.execute(
+      new RefreshCommand(refreshToken),
+    );
     this.setCookies(res, userData.refreshToken, userData.accessToken);
 
     return res.json(userData.user);

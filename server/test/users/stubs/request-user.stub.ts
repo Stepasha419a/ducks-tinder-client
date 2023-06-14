@@ -21,7 +21,7 @@ export const requestUserStub = (): User => {
     preferAgeTo: userStubObj.preferAgeTo,
     usersOnlyInDistance: userStubObj.usersOnlyInDistance,
     preferSex: userStubObj.preferSex,
-    createdAt: new Date('2022-06-03'),
-    updatedAt: new Date('2022-04-06'),
+    createdAt: new Date('2022-08-19'),
+    updatedAt: new Date('2022-08-20'),
   };
 };

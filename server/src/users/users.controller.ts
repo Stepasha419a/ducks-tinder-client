@@ -1,4 +1,3 @@
-import { UsersService } from './users.service';
 import {
   Body,
   Controller,
@@ -22,21 +21,36 @@ import {
   UserDto,
   MixPicturesDto,
 } from './dto';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import {
+  DeletePairCommand,
+  DeletePictureCommand,
+  DislikeUserCommand,
+  LikeUserCommand,
+  MixPicturesCommand,
+  PatchUserCommand,
+  ReturnUserCommand,
+  SavePictureCommand,
+} from './commands';
+import { GetPairsQuery, GetSortedQuery } from './queries';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   @Patch()
   @HttpCode(HttpStatus.OK)
   patch(@Req() req: UserRequest, @Body() dto: UpdateUserDto): Promise<UserDto> {
-    return this.usersService.patch(req.user, dto);
+    return this.commandBus.execute(new PatchUserCommand(req.user, dto));
   }
 
   @Get('sorted')
   @HttpCode(HttpStatus.OK)
   getSortedUser(@Req() req: UserRequest): Promise<ShortUser> {
-    return this.usersService.getSorted(req.user);
+    return this.queryBus.execute(new GetSortedQuery(req.user));
   }
 
   @Post('picture')
@@ -46,7 +60,7 @@ export class UsersController {
     @Req() req: UserRequest,
     @UploadedFile() picture: Express.Multer.File,
   ): Promise<UserDto> {
-    return this.usersService.savePicture(req.user, picture);
+    return this.commandBus.execute(new SavePictureCommand(req.user, picture));
   }
 
   @Put('picture')
@@ -55,7 +69,7 @@ export class UsersController {
     @Req() req: UserRequest,
     @Body() dto: DeletePictureDto,
   ): Promise<UserDto> {
-    return this.usersService.deletePicture(req.user, dto);
+    return this.commandBus.execute(new DeletePictureCommand(req.user, dto));
   }
 
   @Put('picture/mix')
@@ -64,31 +78,39 @@ export class UsersController {
     @Req() req: UserRequest,
     @Body() dto: MixPicturesDto,
   ): Promise<UserDto> {
-    return this.usersService.mixPictures(req.user, dto);
+    return this.commandBus.execute(new MixPicturesCommand(req.user, dto));
   }
 
   @Post('like/:id')
   @HttpCode(HttpStatus.OK)
-  likeUser(@Req() req: UserRequest, @Param('id') id: string): Promise<void> {
-    return this.usersService.likeUser(req.user, id);
+  likeUser(
+    @Req() req: UserRequest,
+    @Param('id') userPairId: string,
+  ): Promise<void> {
+    return this.commandBus.execute(new LikeUserCommand(req.user, userPairId));
   }
 
   @Post('dislike/:id')
   @HttpCode(HttpStatus.OK)
-  dislikeUser(@Req() req: UserRequest, @Param('id') id: string): Promise<void> {
-    return this.usersService.dislikeUser(req.user, id);
+  dislikeUser(
+    @Req() req: UserRequest,
+    @Param('id') userPairId: string,
+  ): Promise<void> {
+    return this.commandBus.execute(
+      new DislikeUserCommand(req.user, userPairId),
+    );
   }
 
   @Put('return')
   @HttpCode(HttpStatus.OK)
   returnUser(@Req() req: UserRequest): Promise<void> {
-    return this.usersService.returnUser(req.user);
+    return this.commandBus.execute(new ReturnUserCommand(req.user));
   }
 
   @Get('pairs')
   @HttpCode(HttpStatus.OK)
   getPairs(@Req() req: UserRequest): Promise<ShortUser[]> {
-    return this.usersService.getPairs(req.user);
+    return this.queryBus.execute(new GetPairsQuery(req.user));
   }
 
   @Put('pairs/:id')
@@ -97,14 +119,7 @@ export class UsersController {
     @Req() req: UserRequest,
     @Param('id') userPairId: string,
   ): Promise<ShortUser[]> {
-    return this.usersService.deletePair(req.user, userPairId);
-  }
-
-  // for dev
-  @Post('removeAllPairs')
-  @HttpCode(HttpStatus.OK)
-  removeAllParis(@Req() req: UserRequest) {
-    return this.usersService.removeAllPairs(req.user);
+    return this.commandBus.execute(new DeletePairCommand(req.user, userPairId));
   }
 
   // TODO: finish it when finish with chats logic

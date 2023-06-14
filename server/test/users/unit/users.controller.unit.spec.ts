@@ -1,9 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { UsersController } from 'users/users.controller';
-import { UsersService } from 'users/users.service';
-import { RequestMock, UsersServiceMock } from '../mocks';
+import { CommandBusMock, QueryBusMock, RequestMock } from '../mocks';
 import { AccessTokenGuard } from 'common/guards';
-import { newUserStub, shortUserStub, userStub } from '../stubs';
+import { requestUserStub, shortUserStub, userStub } from '../stubs';
 import { UserDto } from 'users/dto';
 import { ShortUser } from 'users/users.interface';
 import {
@@ -12,10 +11,23 @@ import {
   UPDATE_USER_DTO,
   USER_SORTS_DATA,
 } from '../values/users.const.dto';
+import { CommandBus, CqrsModule, QueryBus } from '@nestjs/cqrs';
+import {
+  DeletePairCommand,
+  DeletePictureCommand,
+  DislikeUserCommand,
+  LikeUserCommand,
+  MixPicturesCommand,
+  PatchUserCommand,
+  ReturnUserCommand,
+  SavePictureCommand,
+} from 'users/commands';
+import { GetPairsQuery, GetSortedQuery } from 'users/queries';
 
 describe('users-controller', () => {
   let usersController: UsersController;
-  let usersService: UsersService;
+  let commandBus: CommandBus;
+  let queryBus: QueryBus;
 
   const mockAccessTokenGuard = jest.fn().mockReturnValue(true);
   const requestMock = RequestMock();
@@ -23,16 +35,19 @@ describe('users-controller', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [UsersService],
+      imports: [CqrsModule],
     })
       .overrideGuard(AccessTokenGuard)
       .useValue(mockAccessTokenGuard)
-      .overrideProvider(UsersService)
-      .useValue(UsersServiceMock())
+      .overrideProvider(CommandBus)
+      .useValue(CommandBusMock())
+      .overrideProvider(QueryBus)
+      .useValue(QueryBusMock())
       .compile();
 
     usersController = moduleRef.get<UsersController>(UsersController);
-    usersService = moduleRef.get<UsersService>(UsersService);
+    commandBus = moduleRef.get<CommandBus>(CommandBus);
+    queryBus = moduleRef.get<QueryBus>(QueryBus);
   });
 
   beforeEach(() => {
@@ -48,14 +63,18 @@ describe('users-controller', () => {
   describe('when patch is called', () => {
     let user: UserDto;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+    });
+
     beforeEach(async () => {
       user = await usersController.patch(requestMock, UPDATE_USER_DTO);
     });
 
-    it('should call usersService patch', () => {
-      expect(usersService.patch).toBeCalledWith(
-        requestMock.user,
-        UPDATE_USER_DTO,
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
       );
     });
 
@@ -71,12 +90,19 @@ describe('users-controller', () => {
       user: USER_SORTS_DATA,
     });
 
+    beforeAll(() => {
+      queryBus.execute = jest.fn().mockResolvedValue(shortUserStub());
+    });
+
     beforeEach(async () => {
       user = await usersController.getSortedUser(RequestMock());
     });
 
-    it('should call usersService get sorted', () => {
-      expect(usersService.getSorted).toBeCalledWith(RequestMock().user);
+    it('should call command bus execute', () => {
+      expect(queryBus.execute).toBeCalledTimes(1);
+      expect(queryBus.execute).toBeCalledWith(
+        new GetSortedQuery(USER_SORTS_DATA),
+      );
     });
 
     it('should return a short user', () => {
@@ -87,16 +113,23 @@ describe('users-controller', () => {
   describe('when savePicture is called', () => {
     let user: UserDto;
 
-    beforeEach(async () => {
-      user = await usersController.savePicture(
-        requestMock,
-        {} as Express.Multer.File,
-      );
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
     });
 
-    it('should call usersService save picture', () => {
-      expect(usersService.savePicture).toBeCalledTimes(1);
-      expect(usersService.savePicture).toBeCalledWith(requestMock.user, {});
+    beforeEach(async () => {
+      user = await usersController.savePicture(requestMock, {
+        fieldname: '123123',
+      } as Express.Multer.File);
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new SavePictureCommand(requestUserStub(), {
+          fieldname: '123123',
+        } as Express.Multer.File),
+      );
     });
 
     it('should return a user', () => {
@@ -107,6 +140,10 @@ describe('users-controller', () => {
   describe('when deletePicture is called', () => {
     let user: UserDto;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+    });
+
     beforeEach(async () => {
       user = await usersController.deletePicture(
         requestMock,
@@ -114,11 +151,10 @@ describe('users-controller', () => {
       );
     });
 
-    it('should call usersService delete picture', () => {
-      expect(usersService.deletePicture).toBeCalledTimes(1);
-      expect(usersService.deletePicture).toBeCalledWith(
-        requestMock.user,
-        DELETE_PICTURE_DTO,
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new DeletePictureCommand(requestUserStub(), DELETE_PICTURE_DTO),
       );
     });
 
@@ -130,14 +166,18 @@ describe('users-controller', () => {
   describe('when mixPictures is called', () => {
     let user: UserDto;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+    });
+
     beforeEach(async () => {
       user = await usersController.mixPictures(requestMock, MIX_PICTURES_DTO);
     });
 
-    it('should call usersService', () => {
-      expect(usersService.mixPictures).toBeCalledWith(
-        requestMock.user,
-        MIX_PICTURES_DTO,
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new MixPicturesCommand(requestUserStub(), MIX_PICTURES_DTO),
       );
     });
 
@@ -148,77 +188,95 @@ describe('users-controller', () => {
 
   describe('when likeUser is called', () => {
     let response;
+    const userPairId = '34545656';
 
-    beforeEach(async () => {
-      response = await usersController.likeUser(requestMock, newUserStub().id);
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(undefined);
     });
 
-    it('should call usersService', () => {
-      expect(usersService.likeUser).toBeCalledTimes(1);
-      expect(usersService.likeUser).toBeCalledWith(
-        requestMock.user,
-        newUserStub().id,
+    beforeEach(async () => {
+      response = await usersController.likeUser(requestMock, userPairId);
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new LikeUserCommand(requestUserStub(), userPairId),
       );
     });
 
-    it('should return empty object', () => {
-      expect(response).toEqual({});
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
     });
   });
 
   describe('when dislikeUser is called', () => {
     let response;
+    const userPairId = '34545656';
+
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(undefined);
+    });
 
     beforeEach(async () => {
-      response = await usersController.dislikeUser(
-        requestMock,
-        newUserStub().id,
+      response = await usersController.dislikeUser(requestMock, userPairId);
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new DislikeUserCommand(requestUserStub(), userPairId),
       );
     });
 
-    it('should call usersService', () => {
-      expect(usersService.dislikeUser).toBeCalledTimes(1);
-      expect(usersService.dislikeUser).toBeCalledWith(
-        requestMock.user,
-        newUserStub().id,
-      );
-    });
-
-    it('should return empty object', () => {
-      expect(response).toEqual({});
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
     });
   });
 
   describe('when returnUser is called', () => {
     let response;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(undefined);
+    });
+
     beforeEach(async () => {
       response = await usersController.returnUser(requestMock);
     });
 
-    it('should call usersService', () => {
-      expect(usersService.returnUser).toBeCalledTimes(1);
-      expect(usersService.returnUser).toBeCalledWith(requestMock.user);
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new ReturnUserCommand(requestUserStub()),
+      );
     });
 
-    it('should return empty object', () => {
-      expect(response).toEqual({});
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
     });
   });
 
   describe('when getPairs is called', () => {
-    let user: ShortUser[];
+    let users: ShortUser[];
 
-    beforeEach(async () => {
-      user = await usersController.getPairs(requestMock);
+    beforeAll(() => {
+      queryBus.execute = jest.fn().mockResolvedValue([shortUserStub()]);
     });
 
-    it('should call usersService', () => {
-      expect(usersService.getPairs).toBeCalledWith(requestMock.user);
+    beforeEach(async () => {
+      users = await usersController.getPairs(requestMock);
+    });
+
+    it('should call command bus execute', () => {
+      expect(queryBus.execute).toBeCalledTimes(1);
+      expect(queryBus.execute).toBeCalledWith(
+        new GetPairsQuery(requestUserStub()),
+      );
     });
 
     it('should return an array of short users', () => {
-      expect(user).toEqual([shortUserStub()]);
+      expect(users).toEqual([shortUserStub()]);
     });
   });
 
@@ -226,14 +284,18 @@ describe('users-controller', () => {
     let user: ShortUser[];
     const userPairId = '34545656';
 
-    beforeEach(async () => {
-      user = await usersController.deletePair(requestMock, userPairId);
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue([shortUserStub()]);
     });
 
-    it('should call usersService', () => {
-      expect(usersService.deletePair).toBeCalledWith(
-        requestMock.user,
-        userPairId,
+    beforeEach(async () => {
+      user = await usersController.deletePair(RequestMock(), userPairId);
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new DeletePairCommand(requestUserStub(), userPairId),
       );
     });
 

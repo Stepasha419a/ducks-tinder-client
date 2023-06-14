@@ -1,19 +1,24 @@
 import { Test } from '@nestjs/testing';
 import { AuthController } from 'auth/auth.controller';
-import { AuthService } from 'auth/auth.service';
 import { AccessTokenGuard } from 'common/guards';
-import { AuthServiceMock } from '../mocks/auth.service.mock';
 import { UserDto } from 'users/dto';
 import { CREATE_USER_DTO, LOGIN_USER_DTO } from '../values/auth.const.dto';
 import { Response } from 'express';
-import { RequestMock, ResponseMock } from '../mocks';
+import { CommandBusMock, RequestMock, ResponseMock } from '../mocks';
 import { userStub } from 'test/users/stubs';
 import { userDataStub } from '../stubs';
 import { ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
+import { CommandBus, CqrsModule } from '@nestjs/cqrs';
+import {
+  LoginCommand,
+  LogoutCommand,
+  RefreshCommand,
+  RegisterCommand,
+} from 'auth/commands';
 
 describe('auth-controller', () => {
   let authController: AuthController;
-  let authService: AuthService;
+  let commandBus: CommandBus;
 
   const mockAccessTokenGuard = jest.fn().mockReturnValue(true);
   const responseMock = ResponseMock();
@@ -22,16 +27,16 @@ describe('auth-controller', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [AuthController],
-      providers: [AuthService],
+      imports: [CqrsModule],
     })
       .overrideGuard(AccessTokenGuard)
       .useValue(mockAccessTokenGuard)
-      .overrideProvider(AuthService)
-      .useValue(AuthServiceMock())
+      .overrideProvider(CommandBus)
+      .useValue(CommandBusMock())
       .compile();
 
     authController = moduleRef.get<AuthController>(AuthController);
-    authService = moduleRef.get<AuthService>(AuthService);
+    commandBus = moduleRef.get<CommandBus>(CommandBus);
   });
 
   beforeEach(() => {
@@ -47,12 +52,19 @@ describe('auth-controller', () => {
   describe('when registration is called', () => {
     let user: Response<UserDto>;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
+    });
+
     beforeEach(async () => {
       user = await authController.registration(responseMock, CREATE_USER_DTO);
     });
 
-    it('should call authService', () => {
-      expect(authService.registration).toBeCalledWith(CREATE_USER_DTO);
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new RegisterCommand(CREATE_USER_DTO),
+      );
     });
 
     it('should call response cookie', () => {
@@ -89,12 +101,19 @@ describe('auth-controller', () => {
   describe('when login is called', () => {
     let user: Response<UserDto>;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
+    });
+
     beforeEach(async () => {
       user = await authController.login(responseMock, LOGIN_USER_DTO);
     });
 
-    it('should call authService', () => {
-      expect(authService.login).toBeCalledWith(LOGIN_USER_DTO);
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new LoginCommand(LOGIN_USER_DTO),
+      );
     });
 
     it('should call response cookie', () => {
@@ -131,12 +150,19 @@ describe('auth-controller', () => {
   describe('when logout is called', () => {
     let response: Response;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(undefined);
+    });
+
     beforeEach(async () => {
       response = await authController.logout(requestMock, responseMock);
     });
 
-    it('should call authService', () => {
-      expect(authService.logout).toBeCalledWith(userDataStub().refreshToken);
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new LogoutCommand(userDataStub().refreshToken),
+      );
     });
 
     it('should call response clearCookie', () => {
@@ -163,12 +189,19 @@ describe('auth-controller', () => {
   describe('when refresh is called', () => {
     let user: Response<UserDto>;
 
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
+    });
+
     beforeEach(async () => {
       user = await authController.refresh(requestMock, responseMock);
     });
 
-    it('should call authService', () => {
-      expect(authService.refresh).toBeCalledWith(userDataStub().refreshToken);
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new RefreshCommand(userDataStub().refreshToken),
+      );
     });
 
     it('should call response cookie', () => {
