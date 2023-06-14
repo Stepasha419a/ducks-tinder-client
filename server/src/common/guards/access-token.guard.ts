@@ -32,7 +32,7 @@ export class AccessTokenGuard implements CanActivate {
       throw new UnauthorizedException();
     }
 
-    const userData = this.tokensService.validateAccessToken(
+    const userData = await this.tokensService.validateAccessToken(
       cookies.accessToken,
     );
     if (!userData) {

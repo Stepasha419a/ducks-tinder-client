@@ -1,21 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { CommandBus } from '@nestjs/cqrs';
-import { JwtService } from '@nestjs/jwt';
 import { UserTokenDto } from 'auth/dto';
 import {
   GenerateTokensCommand,
   RemoveTokenCommand,
+  ValidateAccessTokenCommand,
   ValidateRefreshTokenCommand,
 } from './commands';
 
 @Injectable()
 export class TokensService {
-  constructor(
-    private readonly jwtService: JwtService,
-    private readonly configService: ConfigService,
-    private readonly commandBus: CommandBus,
-  ) {}
+  constructor(private readonly commandBus: CommandBus) {}
 
   public async generateTokens(payload: UserTokenDto) {
     return this.commandBus.execute(new GenerateTokensCommand(payload));
@@ -30,13 +25,6 @@ export class TokensService {
   }
 
   public validateAccessToken(token: string) {
-    try {
-      const userData = this.jwtService.verify(token, {
-        secret: this.configService.get<string>('JWT_ACCESS_SECRET'),
-      });
-      return userData;
-    } catch (error) {
-      return null;
-    }
+    return this.commandBus.execute(new ValidateAccessTokenCommand(token));
   }
 }

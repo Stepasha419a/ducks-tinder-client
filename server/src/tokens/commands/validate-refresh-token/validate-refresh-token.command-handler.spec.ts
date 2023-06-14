@@ -12,7 +12,7 @@ import { ValidateRefreshTokenCommandHandler } from './validate-refresh-token.com
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-describe('when generateTokens is called', () => {
+describe('when validateRefreshToken is called', () => {
   let prismaService: PrismaService;
   let jwtService: JwtService;
   let configService: ConfigService;
