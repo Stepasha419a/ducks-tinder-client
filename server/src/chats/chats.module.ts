@@ -1,15 +1,21 @@
-import { TokensModule } from '../tokens/tokens.module';
-import { UsersModule } from '../users/users.module';
 import { ChatsGateway } from './chats.gateway';
 import { Module } from '@nestjs/common';
 import { ChatsController } from './chats.controller';
 import { ChatsService } from './chats.service';
 import { MessagesService } from './services/messages.service';
 import { PrismaModule } from 'prisma/prisma.module';
+import { CqrsModule } from '@nestjs/cqrs';
+import { ChatCommandHandlers } from './commands';
 
 @Module({
   controllers: [ChatsController],
-  providers: [ChatsService, ChatsGateway, MessagesService],
-  imports: [PrismaModule, UsersModule, TokensModule],
+  providers: [
+    ChatsService,
+    ChatsGateway,
+    MessagesService,
+    ...ChatCommandHandlers,
+  ],
+  imports: [PrismaModule, CqrsModule],
+  exports: [ChatsService],
 })
 export class ChatsModule {}

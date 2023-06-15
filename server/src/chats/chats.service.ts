@@ -1,15 +1,17 @@
-import { PrismaService } from '../prisma/prisma.service';
-import { UsersService } from '../users/users.service';
+import { Chat } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
+import { CommandBus } from '@nestjs/cqrs';
+import { CreateChatCommand } from './commands/create-chat/create-chat.command';
 
 @Injectable()
 export class ChatsService {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly usersService: UsersService,
-  ) {}
+  constructor(private readonly commandBus: CommandBus) {}
 
-  async getAll(userId: string) {
+  async create(memberIds: string[]): Promise<Chat> {
+    return this.commandBus.execute(new CreateChatCommand(memberIds));
+  }
+
+  /* async getAll(userId: string) {
     const user = await this.usersService.getUser(userId);
 
     const chats = await this.prismaService.chat.findMany({
@@ -29,12 +31,12 @@ export class ChatsService {
         path: 'user',
         select: 'name pictures.avatar nickname _id',
       })
-      .populate({ path: 'chat', select: '_id' }); */
+      .populate({ path: 'chat', select: '_id' });
 
-    /* return members; */
+    return members;
   }
 
-  async getOne(id: string) /* : Promise<ChatType> */ {
+  async getOne(id: string): Promise<ChatType> {
     const chat = await this.prismaService.chat.findUnique({
       where: { id },
     });
@@ -54,25 +56,8 @@ export class ChatsService {
 
     const fullChat = { _id: chat._id, members, messages };
 
-    return fullChat; */
-  }
-
-  async create(members: string[]) /* : Promise<IChat> */ {
-    const chat = await this.prismaService.chat.create({ data: {} });
-
-    const chatToUsers = members.map(async (memberId) => {
-      return this.prismaService.chatToUsers.create({
-        data: { chatId: chat.id, userId: memberId },
-      });
-    });
-
-    const createdChat = await this.prismaService.chat.findUnique({
-      where: { id: chat.id },
-      include: { chatToUsers: { include: { user: true } } },
-    });
-
-    return createdChat;
-  }
+    return fullChat;
+  } */
 
   parseUrl(url: string) {
     const newStr = url.slice(url.indexOf('=') + 1);

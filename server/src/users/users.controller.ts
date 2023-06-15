@@ -23,12 +23,14 @@ import {
 } from './dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
+  AcceptPairCommand,
   DeletePairCommand,
   DeletePictureCommand,
   DislikeUserCommand,
   LikeUserCommand,
   MixPicturesCommand,
   PatchUserCommand,
+  RemoveAllPairsCommand,
   ReturnUserCommand,
   SavePictureCommand,
 } from './commands';
@@ -113,6 +115,15 @@ export class UsersController {
     return this.queryBus.execute(new GetPairsQuery(req.user));
   }
 
+  @Post('pairs/:id')
+  @HttpCode(HttpStatus.OK)
+  acceptPair(
+    @Req() req: UserRequest,
+    @Param('id') userPairId: string,
+  ): Promise<ShortUser[]> {
+    return this.commandBus.execute(new AcceptPairCommand(req.user, userPairId));
+  }
+
   @Put('pairs/:id')
   @HttpCode(HttpStatus.OK)
   deletePair(
@@ -120,6 +131,13 @@ export class UsersController {
     @Param('id') userPairId: string,
   ): Promise<ShortUser[]> {
     return this.commandBus.execute(new DeletePairCommand(req.user, userPairId));
+  }
+
+  // for dev
+  @Post('removeAllPairs')
+  @HttpCode(HttpStatus.OK)
+  removeAllPairs(@Req() req: UserRequest) {
+    return this.commandBus.execute(new RemoveAllPairsCommand(req.user));
   }
 
   // TODO: finish it when finish with chats logic

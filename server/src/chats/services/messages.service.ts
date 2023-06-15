@@ -11,8 +11,7 @@ export class MessagesService {
   ) {}
 
   async sendMessage(chatId: string, message: ISendMessage) {
-    const chat = await this.chatsService.getOne(chatId);
-
+    //const chat = await this.chatsService.getOne(chatId);
     /* await this.messageModel.create({
       chat: chat._id,
       content: message.content,

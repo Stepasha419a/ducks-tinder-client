@@ -24,7 +24,6 @@ export class DeletePairCommandHandler
     const userPair = await this.prismaService.user.findUnique({
       where: { id: userPairId },
     });
-
     if (!userPair) {
       throw new NotFoundException('Such user was not found');
     }

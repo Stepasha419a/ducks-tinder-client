@@ -6,11 +6,12 @@ import { UsersService } from './users.service';
 import { PrismaModule } from '../prisma/prisma.module';
 import { UserCommandHandlers } from './commands';
 import { UserQueryHandlers } from './queries';
+import { ChatsModule } from 'chats/chats.module';
 
 @Module({
   providers: [UsersService, ...UserCommandHandlers, ...UserQueryHandlers],
   controllers: [UsersController],
-  imports: [PrismaModule, CqrsModule, FilesModule],
+  imports: [PrismaModule, CqrsModule, FilesModule, ChatsModule],
   exports: [UsersService],
 })
 export class UsersModule {}
