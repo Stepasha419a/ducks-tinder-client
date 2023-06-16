@@ -21,6 +21,7 @@ import {
   PatchUserCommand,
   ReturnUserCommand,
   SavePictureCommand,
+  AcceptPairCommand,
 } from 'users/commands';
 import { GetPairsQuery, GetSortedQuery } from 'users/queries';
 
@@ -296,6 +297,30 @@ describe('users-controller', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
         new DeletePairCommand(requestUserStub(), userPairId),
+      );
+    });
+
+    it('should return an array of short users', () => {
+      expect(user).toEqual([shortUserStub()]);
+    });
+  });
+
+  describe('when acceptPair is called', () => {
+    let user: ShortUser[];
+    const userPairId = '34545656';
+
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue([shortUserStub()]);
+    });
+
+    beforeEach(async () => {
+      user = await usersController.acceptPair(RequestMock(), userPairId);
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new AcceptPairCommand(requestUserStub(), userPairId),
       );
     });
 

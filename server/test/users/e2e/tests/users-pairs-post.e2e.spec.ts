@@ -11,10 +11,10 @@ import {
   prepareBefore,
 } from '../preparations';
 
-const currentUserId = 'users_pairs_put_current_user_id';
-const secondUserId = 'users_pairs_put_second_user_id';
+const currentUserId = 'users_pairs_post_current_user_id';
+const secondUserId = 'users_pairs_post_second_user_id';
 
-describe('users/pairs/:id (PUT)', () => {
+describe('users/pairs/:id (POST)', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
 
@@ -39,6 +39,20 @@ describe('users/pairs/:id (PUT)', () => {
   });
 
   afterAll(async () => {
+    await prismaClient.chat.deleteMany({
+      where: {
+        users: {
+          every: {
+            id: {
+              in: [
+                'users_pairs_post_current_user_id',
+                'users_pairs_post_second_user_id',
+              ],
+            },
+          },
+        },
+      },
+    });
     await prepareAfter(currentUserId, secondUserId);
 
     await app.close();
@@ -62,7 +76,7 @@ describe('users/pairs/:id (PUT)', () => {
       const { currentUserAccessToken } = prepareReadyAccessTokens();
 
       response = await request(httpServer)
-        .put(`/users/pairs/${secondUserId}`)
+        .post(`/users/pairs/${secondUserId}`)
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
@@ -72,64 +86,11 @@ describe('users/pairs/:id (PUT)', () => {
     });
   });
 
-  describe('when there is no such user', () => {
-    let response: request.Response;
-
-    beforeAll(async () => {
-      const { wrongUserAccessToken } = prepareReadyAccessTokens();
-
-      response = await request(httpServer)
-        .put(`/users/pairs/${secondUserId}`)
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
-    });
-
-    it('should throw an error', async () => {
-      expect(response.status).toBe(404);
-      expect(response.body.message).toEqual('Such user was not found');
-    });
-  });
-
-  describe('when there is no such user', () => {
-    let response: request.Response;
-
-    beforeAll(async () => {
-      const { currentUserAccessToken } = prepareReadyAccessTokens();
-
-      response = await request(httpServer)
-        .put('/users/pairs/wrong-id')
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
-    });
-
-    it('should throw an error', async () => {
-      expect(response.status).toBe(404);
-      expect(response.body.message).toEqual('Such user was not found');
-    });
-  });
-
-  describe('when such pair does not exist', () => {
-    let response: request.Response;
-
-    beforeAll(async () => {
-      const { secondUserAccessToken } = prepareReadyAccessTokens();
-
-      response = await request(httpServer)
-        .put(`/users/pairs/${currentUserId}`)
-        .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
-    });
-
-    it('should throw an error', async () => {
-      expect(response.status).toBe(404);
-      expect(response.body.message).toEqual(
-        'Pair with such an id was not found',
-      );
-    });
-  });
-
   describe('when there is no access token', () => {
     let response: request.Response;
 
     beforeAll(async () => {
-      response = await request(httpServer).put(`/users/pairs/${secondUserId}`);
+      response = await request(httpServer).post(`/users/pairs/${secondUserId}`);
     });
 
     it('should throw an error', async () => {
