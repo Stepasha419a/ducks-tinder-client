@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
-import { TokensServiceMock } from 'test/auth/mocks';
+import { TokensServiceMock } from 'auth/test/mocks';
 import { TokensService } from 'tokens/tokens.service';
-import { userDataStub } from 'test/auth/stubs';
+import { userDataStub } from 'auth/test/stubs';
 import { UsersModule } from 'users/users.module';
 import { TokensModule } from 'tokens/tokens.module';
 import { ConfigModule } from '@nestjs/config';

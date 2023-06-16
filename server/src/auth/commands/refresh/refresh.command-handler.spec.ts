@@ -4,11 +4,11 @@ import { UsersService } from 'users/users.service';
 import { UsersModule } from 'users/users.module';
 import { TokensService } from 'tokens/tokens.service';
 import { TokensModule } from 'tokens/tokens.module';
-import { TokensServiceMock, UsersServiceMock } from 'test/auth/mocks';
+import { TokensServiceMock, UsersServiceMock } from 'auth/test/mocks';
 import { UserData } from 'auth/auth.interface';
 import { RefreshCommand } from './refresh.command';
-import { userDataStub } from 'test/auth/stubs';
-import { userStub } from 'test/users/stubs';
+import { userDataStub } from 'auth/test/stubs';
+import { userStub } from 'users/test/stubs';
 import { RefreshCommandHandler } from './refresh.command-handler';
 
 describe('when refresh is called', () => {

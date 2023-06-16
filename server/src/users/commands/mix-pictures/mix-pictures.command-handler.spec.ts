@@ -1,13 +1,13 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { UsersPrismaMock } from 'test/users/mocks';
+import { UsersPrismaMock } from 'users/test/mocks';
 import { UserDto } from 'users/dto';
-import { requestUserStub, userStub } from 'test/users/stubs';
+import { requestUserStub, userStub } from 'users/test/stubs';
 import { UsersSelector } from 'users/users.selector';
 import { MixPicturesCommandHandler } from './mix-pictures.command-handler';
 import { MixPicturesCommand } from './mix-pictures.command';
-import { MIX_PICTURES_DTO } from 'test/users/values/users.const.dto';
+import { MIX_PICTURES_DTO } from 'users/test/values/users.const.dto';
 
 describe('when mix pictures is called', () => {
   let prismaService: PrismaService;

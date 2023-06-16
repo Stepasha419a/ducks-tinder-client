@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { ChatsServiceMock, UsersPrismaMock } from 'test/users/mocks';
-import { requestUserStub, userStub } from 'test/users/stubs';
+import { ChatsServiceMock, UsersPrismaMock } from 'users/test/mocks';
+import { requestUserStub, userStub } from 'users/test/stubs';
 import { ShortUser } from 'users/users.interface';
 import { UsersSelector } from 'users/users.selector';
 import { AcceptPairCommandHandler } from './accept-pair.command-handler';

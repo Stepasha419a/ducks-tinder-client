@@ -1,11 +1,11 @@
 import { Test } from '@nestjs/testing';
-import { userStub } from 'test/users/stubs';
+import { userStub } from 'users/test/stubs';
 import { UserData } from 'auth/auth.interface';
-import { LOGIN_USER_DTO } from 'test/auth/values/auth.const.dto';
+import { LOGIN_USER_DTO } from 'auth/test/values/auth.const.dto';
 import { UsersService } from 'users/users.service';
-import { TokensServiceMock, UsersServiceMock } from 'test/auth/mocks';
+import { TokensServiceMock, UsersServiceMock } from 'auth/test/mocks';
 import { TokensService } from 'tokens/tokens.service';
-import { userDataStub } from 'test/auth/stubs';
+import { userDataStub } from 'auth/test/stubs';
 import { UsersModule } from 'users/users.module';
 import { TokensModule } from 'tokens/tokens.module';
 import { ConfigModule } from '@nestjs/config';

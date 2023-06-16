@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { UsersPrismaMock } from 'test/users/mocks';
-import { requestUserStub, userStub } from 'test/users/stubs';
+import { UsersPrismaMock } from 'users/test/mocks';
+import { requestUserStub, userStub } from 'users/test/stubs';
 import { ReturnUserCommandHandler } from './return-user.command-handler';
 import { ReturnUserCommand } from './return-user.command';
 

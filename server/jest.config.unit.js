@@ -1,7 +1,7 @@
 module.exports = {
   roots: ['<rootDir>'],
   moduleFileExtensions: ['js', 'json', 'ts'],
-  testRegex: '.(unit|handler).spec.ts$',
+  testRegex: '(command-handler|controller|service).spec.ts$',
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },
@@ -9,8 +9,4 @@ module.exports = {
   coverageDirectory: '../coverage',
   testEnvironment: 'node',
   moduleDirectories: ['node_modules', 'src'],
-  moduleNameMapper: {
-    'test/(.*)': '<rootDir>/test/$1',
-    'tokens/(.*)': '<rootDir>/src/tokens/$1',
-  },
 };

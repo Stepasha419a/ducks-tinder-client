@@ -1,10 +1,10 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { userStub } from 'test/users/stubs';
+import { userStub } from 'users/test/stubs';
 import { CreateChatCommand } from './create-chat.command';
 import { CreateChatCommandHandler } from './create-chat.command-handler';
-import { ChatsPrismaMock } from 'test/chats/mocks';
+import { ChatsPrismaMock } from 'chats/test/mocks';
 
 describe('when accept pair is called', () => {
   let prismaService: PrismaService;

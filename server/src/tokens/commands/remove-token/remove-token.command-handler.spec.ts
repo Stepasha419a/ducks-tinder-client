@@ -1,10 +1,10 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { TokensPrismaMock } from 'test/tokens/mocks';
+import { TokensPrismaMock } from 'tokens/test/mocks';
 import { RemoveTokenCommandHandler } from './remove-token.command-handler';
 import { RemoveTokenCommand } from './remove-token.command';
-import { tokensStub } from 'test/tokens/stubs';
+import { tokensStub } from 'tokens/test/stubs';
 
 describe('when generateTokens is called', () => {
   let prismaService: PrismaService;

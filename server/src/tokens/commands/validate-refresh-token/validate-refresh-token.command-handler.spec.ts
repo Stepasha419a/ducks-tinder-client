@@ -5,8 +5,8 @@ import {
   ConfigServiceMock,
   JwtServiceMock,
   TokensPrismaMock,
-} from 'test/tokens/mocks';
-import { tokensStub } from 'test/tokens/stubs';
+} from 'tokens/test/mocks';
+import { tokensStub } from 'tokens/test/stubs';
 import { ValidateRefreshTokenCommand } from './validate-refresh-token.command';
 import { ValidateRefreshTokenCommandHandler } from './validate-refresh-token.command-handler';
 import { JwtModule, JwtService } from '@nestjs/jwt';

@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { UsersPrismaMock } from 'test/users/mocks';
-import { requestUserStub } from 'test/users/stubs';
+import { UsersPrismaMock } from 'users/test/mocks';
+import { requestUserStub } from 'users/test/stubs';
 import { DislikeUserCommand } from './dislike-user.command';
 import { DislikeUserCommandHandler } from './dislike-user.command-handler';
 

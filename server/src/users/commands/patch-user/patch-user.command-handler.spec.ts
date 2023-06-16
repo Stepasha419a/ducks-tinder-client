@@ -2,12 +2,12 @@ import { Test } from '@nestjs/testing';
 import { FilesModule } from 'files/files.module';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { UsersPrismaMock } from 'test/users/mocks';
+import { UsersPrismaMock } from 'users/test/mocks';
 import { UserDto } from 'users/dto';
 import { PatchUserCommandHandler } from './patch-user.command-handler';
 import { PatchUserCommand } from './patch-user.command';
-import { requestUserStub, userStub } from 'test/users/stubs';
-import { UPDATE_USER_DTO } from 'test/users/values/users.const.dto';
+import { requestUserStub, userStub } from 'users/test/stubs';
+import { UPDATE_USER_DTO } from 'users/test/values/users.const.dto';
 
 describe('when patch is called', () => {
   let prismaService: PrismaService;

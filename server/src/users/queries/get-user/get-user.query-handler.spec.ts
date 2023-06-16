@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { UsersPrismaMock } from 'test/users/mocks';
-import { userStub } from 'test/users/stubs';
+import { UsersPrismaMock } from 'users/test/mocks';
+import { userStub } from 'users/test/stubs';
 import { GetUserQueryHandler } from './get-user.query-handler';
 import { GetUserQuery } from './get-user.query';
 import { UserDto } from 'users/dto';

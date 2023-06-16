@@ -1,12 +1,12 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { UsersPrismaMock } from 'test/users/mocks';
-import { userStub } from 'test/users/stubs';
+import { UsersPrismaMock } from 'users/test/mocks';
+import { userStub } from 'users/test/stubs';
 import { UsersSelector } from 'users/users.selector';
 import { CreateUserCommandHandler } from './create-user.command-handler';
 import { CreateUserCommand } from './create-user.command';
-import { CREATE_USER_DTO } from 'test/auth/values/auth.const.dto';
+import { CREATE_USER_DTO } from 'auth/test/values/auth.const.dto';
 import { UserDto } from 'users/dto';
 
 describe('when delete pair is called', () => {

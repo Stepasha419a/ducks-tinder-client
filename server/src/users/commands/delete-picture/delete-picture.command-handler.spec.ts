@@ -4,11 +4,11 @@ import { ShortUser } from 'users/users.interface';
 import { FilesService } from 'files/files.service';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { FilesServiceMock, UsersPrismaMock } from 'test/users/mocks';
-import { DELETE_PICTURE_DTO } from 'test/users/values/users.const.dto';
+import { FilesServiceMock, UsersPrismaMock } from 'users/test/mocks';
+import { DELETE_PICTURE_DTO } from 'users/test/values/users.const.dto';
 import { DeletePictureCommandHandler } from './delete-picture.command-handler';
 import { DeletePictureCommand } from './delete-picture.command';
-import { requestUserStub, userStub } from 'test/users/stubs';
+import { requestUserStub, userStub } from 'users/test/stubs';
 import { UsersSelector } from 'users/users.selector';
 
 describe('when delete picture is called', () => {

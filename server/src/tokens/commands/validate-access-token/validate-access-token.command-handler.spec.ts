@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
-import { ConfigServiceMock, JwtServiceMock } from 'test/tokens/mocks';
-import { tokensStub } from 'test/tokens/stubs';
+import { ConfigServiceMock, JwtServiceMock } from 'tokens/test/mocks';
+import { tokensStub } from 'tokens/test/stubs';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ValidateAccessTokenCommand } from './validate-access-token.command';

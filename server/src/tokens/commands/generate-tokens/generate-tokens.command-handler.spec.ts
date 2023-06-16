@@ -3,14 +3,14 @@ import { GenerateTokensCommandHandler } from './generate-tokens.command-handler'
 import { PrismaModule } from 'prisma/prisma.module';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { GenerateTokensCommand } from './generate-tokens.command';
-import { USER_TOKEN_DTO } from 'test/tokens/values/tokens.const.dto';
+import { USER_TOKEN_DTO } from 'tokens/test/values/tokens.const.dto';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PrismaService } from 'prisma/prisma.service';
 import {
   ConfigServiceMock,
   JwtServiceMock,
   TokensPrismaMock,
-} from 'test/tokens/mocks';
+} from 'tokens/test/mocks';
 
 describe('when generateTokens is called', () => {
   let prismaService: PrismaService;
