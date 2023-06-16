@@ -1,17 +1,14 @@
-import { Controller } from '@nestjs/common';
-import { ChatsService } from './chats.service';
+import { Controller, Get, Req } from '@nestjs/common';
+import { QueryBus } from '@nestjs/cqrs';
+import { UserRequest } from 'common/types';
+import { GetChatsQuery } from './queries';
 
-@Controller('chat')
+@Controller('chats')
 export class ChatsController {
-  constructor(private readonly chatsService: ChatsService) {}
+  constructor(private readonly queryBus: QueryBus) {}
 
-  /* @Get(':userId')
-  getAll(@Param('userId') userId) {
-    return this.chatsService.getAll(userId);
+  @Get()
+  getChats(@Req() req: UserRequest) {
+    return this.queryBus.execute(new GetChatsQuery(req.user));
   }
-
-  @Get('one/:id')
-  getOne(@Param('id') id) /* : Promise<IChat> {
-    return this.chatsService.getOne(id);
-  } */
 }

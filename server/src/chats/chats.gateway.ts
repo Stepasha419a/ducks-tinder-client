@@ -1,4 +1,3 @@
-import { MessagesService } from './services/messages.service';
 import { ChatsService } from './chats.service';
 import {
   SubscribeMessage,
@@ -6,19 +5,15 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
-import { ISendMessage } from './chats.interfaces';
 
 @WebSocketGateway({ namespace: '/chat/socket', cors: '*:*', origin: true })
 export class ChatsGateway {
-  constructor(
-    private readonly chatService: ChatsService,
-    private readonly messagesService: MessagesService,
-  ) {}
+  constructor(private readonly chatService: ChatsService) {}
 
   @WebSocketServer()
   wss: Server;
 
-  @SubscribeMessage('message')
+  /* @SubscribeMessage('message')
   handleMessage(client: Socket, message: ISendMessage) {
     const chatId = this.chatService.parseUrl(client.request.url);
 
@@ -43,5 +38,5 @@ export class ChatsGateway {
     client.leave(chatId);
 
     client.emit('disconnected', chatId);
-  }
+  } */
 }

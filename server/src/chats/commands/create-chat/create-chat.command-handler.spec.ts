@@ -6,7 +6,7 @@ import { CreateChatCommand } from './create-chat.command';
 import { CreateChatCommandHandler } from './create-chat.command-handler';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 
-describe('when accept pair is called', () => {
+describe('when create chat is called', () => {
   let prismaService: PrismaService;
   let createChatCommandHandler: CreateChatCommandHandler;
 

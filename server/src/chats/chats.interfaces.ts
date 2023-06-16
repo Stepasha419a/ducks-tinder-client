@@ -1,4 +1,4 @@
-export interface MessageType {
+/* export interface MessageType {
   id: string;
   content: string;
   user: string;
@@ -21,4 +21,18 @@ export interface ISendMessage {
   username: string;
   content: string;
   userId: string;
+} */
+
+import { ShortUser } from 'users/users.interface';
+
+export interface Message {
+  id: string;
+  text: string;
+  userId: string;
+}
+
+export interface ShortChat {
+  id: string;
+  users: ShortUser[];
+  messages: Message[];
 }
