@@ -8,18 +8,26 @@ import styles from '../SettingFeatureThumbnails.module.scss';
 export const PartnerAgeSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
-  const preferAge = useAppSelector(
-    (state) => state.user.currentUser.partnerSettings.age
+  const preferAgeFrom = useAppSelector(
+    (state) => state.user.currentUser.preferAgeFrom
+  );
+  const preferAgeTo = useAppSelector(
+    (state) => state.user.currentUser.preferAgeTo
   );
 
-  const [preferAgeSetting, setPreferAgeSetting] = useState(preferAge);
+  const [preferAgeSetting, setPreferAgeSetting] = useState({
+    preferAgeFrom,
+    preferAgeTo,
+  });
 
   const partnerAgeHandler = (): void => {
     dispatch(
       submitSettingsThunk({
         inputName: 'age',
-        changedData: preferAgeSetting,
-        innerObjectName: 'partnerSettings',
+        changedData: {
+          preferAgeFrom: preferAgeSetting.preferAgeFrom,
+          preferAgeTo: preferAgeSetting.preferAgeTo,
+        },
       })
     );
   };
@@ -27,13 +35,19 @@ export const PartnerAgeSettingThumbnail = () => {
   return (
     <SettingThumbnail
       title="Partner age"
-      value={`from ${preferAgeSetting.from} to ${preferAgeSetting.to}`}
+      value={`from ${preferAgeSetting.preferAgeFrom} to ${preferAgeSetting.preferAgeTo}`}
     >
       <div className={styles.slider}>
         <RangeInput
-          value={{ min: preferAgeSetting.from, max: preferAgeSetting.to }}
+          value={{
+            min: preferAgeSetting.preferAgeFrom,
+            max: preferAgeSetting.preferAgeTo,
+          }}
           setValue={(value) =>
-            setPreferAgeSetting({ from: value.min!, to: value.max! })
+            setPreferAgeSetting({
+              preferAgeFrom: value.min!,
+              preferAgeTo: value.max!,
+            })
           }
           completeValue={partnerAgeHandler}
           min={18}

@@ -5,7 +5,7 @@ import { useAppSelector } from '@/shared/hooks';
 import styles from './LikesCount.module.scss';
 
 export const LikesCount: FC = (): ReactElement => {
-  const likes = useAppSelector((state) => state.user.currentUser.pairs).length;
+  const likes = useAppSelector((state) => state.user.pairs).length;
 
   return (
     <div className={styles.likes}>

@@ -1,15 +1,14 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
-import type { PicturesInterface } from '@shared/api/interfaces';
-import { PicturesEnum } from '@shared/api/interfaces';
 import { makeImageUrl } from '@shared/helpers';
+import type { Picture } from '@shared/api/interfaces';
 import Arrows from './Arrows/Arrows';
 import Stripes from './Stripes/Stripes';
 import styles from './ImageSlider.module.scss';
 
 interface ImageSliderPropsInterface {
-  picturesObj: PicturesInterface;
+  picturesObj: Picture[];
   userId: string;
   extraClassName?: string;
   extraWrapperClassName?: string;
@@ -24,7 +23,7 @@ export const ImageSlider: FC<ImageSliderPropsInterface> = ({
   arrowsExtraClassName = '',
 }) => {
   const [current, setCurrent] = useState<number>(0);
-  const images = [picturesObj.avatar, ...picturesObj.gallery];
+  const images = [...picturesObj];
   const length = images.length;
 
   const prevSlide = (): void => {
@@ -39,7 +38,7 @@ export const ImageSlider: FC<ImageSliderPropsInterface> = ({
   const cnDefaultWrapper = classNames(styles.slider, extraWrapperClassName);
   const cn = classNames(styles.item, extraClassName);
 
-  if (!Array.isArray(images) || images.length <= 0 || images[0] === '') {
+  if (!Array.isArray(images) || images.length <= 0) {
     const url = makeImageUrl(userId);
     return (
       <div className={cnDefaultWrapper}>
@@ -59,9 +58,8 @@ export const ImageSlider: FC<ImageSliderPropsInterface> = ({
         arrowsExtraClassName={arrowsExtraClassName}
       />
 
-      {images.map((imageName, index) => {
-        const dir = index === 0 ? PicturesEnum.avatar : PicturesEnum.gallery;
-        const url = makeImageUrl(userId, imageName, dir);
+      {images.map((image, index) => {
+        const url = makeImageUrl(userId, image.name);
         const cnWrapper = classNames(
           styles.itemWrapper,
           index === current ? styles.active : styles.hidden,

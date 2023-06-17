@@ -27,7 +27,7 @@ export const createChatThunk = createAsyncThunk(
     try {
       const { user } = getState() as RootState;
       const { currentUser, currentPair } = user;
-      await chatService.createChat([currentUser._id, currentPair!._id]);
+      await chatService.createChat([currentUser.id, currentPair!.id]);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -90,7 +90,7 @@ export const sendMessageThunk = createAsyncThunk(
       const { user } = getState() as RootState;
       const { currentUser } = user;
 
-      chatService.sendMessage(content, currentUser.name, currentUser._id);
+      chatService.sendMessage(content, currentUser.name, currentUser.id);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

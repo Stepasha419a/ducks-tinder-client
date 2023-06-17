@@ -5,7 +5,6 @@ export {
   setPairSorts,
   setIsDialogUploadOpen,
   setIsImageCropOpen,
-  setPictureVariant,
   setImageChange,
 } from './user.slice';
 export {
@@ -14,22 +13,10 @@ export {
   deleteUserImage,
   mixUserImages,
   deletePairThunk,
-  fetchUserById,
   getUserPairsThunk,
-  getUserFirstPairThunk,
 } from './user.thunks';
-export {
-  selectUserPairs,
-  selectUserChatsInfo,
-  selectCropImage,
-  selectImagesDND,
-  selectPairLink,
-} from './user.selectors';
-export type {
-  ImageInterface,
-  PairSorts,
-  PairSortsKey,
-} from './user.interfaces';
+export { selectCropImage, selectImagesDND } from './user.selectors';
+export type { PairSorts, PairSortsKey } from './user.interfaces';
 export {
   INITIAL_SORTS,
   INTERESTS_FOR_LOOP,

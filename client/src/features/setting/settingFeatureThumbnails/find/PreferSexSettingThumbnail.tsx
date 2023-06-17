@@ -5,9 +5,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 export const PreferSexSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
-  const preferSex = useAppSelector(
-    (state) => state.user.currentUser.partnerSettings.preferSex
-  );
+  const preferSex = useAppSelector((state) => state.user.currentUser.preferSex);
 
   const setInputHandler = (): void => {
     dispatch(

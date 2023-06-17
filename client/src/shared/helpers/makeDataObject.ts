@@ -1,6 +1,5 @@
 import type {
   User,
-  PartnerSettings,
   ChangedData,
   InnerObjectName,
 } from '@shared/api/interfaces';
@@ -11,15 +10,6 @@ export function makeDataObject(args: {
   changedData: ChangedData;
   innerObjectName?: InnerObjectName;
 }) {
-  const { currentUser, inputName, changedData, innerObjectName } = args;
-
-  if (innerObjectName) {
-    return {
-      [innerObjectName]: {
-        ...currentUser[innerObjectName],
-        [inputName as keyof PartnerSettings]: changedData,
-      },
-    };
-  }
+  const { inputName, changedData } = args;
   return { [inputName]: changedData };
 }

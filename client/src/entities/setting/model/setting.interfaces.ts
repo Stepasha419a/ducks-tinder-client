@@ -1,8 +1,4 @@
-import type {
-  InnerObjectName,
-  PartnerSettings,
-  User,
-} from '@shared/api/interfaces';
+import type { InnerObjectName, Interest, User } from '@shared/api/interfaces';
 
 export interface Validation {
   min?: number;
@@ -10,7 +6,7 @@ export interface Validation {
   email?: boolean;
 }
 
-export type SettingInputName = keyof User | keyof PartnerSettings | null;
+export type SettingInputName = keyof User | null;
 
 type Setting = 'textarea' | 'select' | 'radio' | null;
 
@@ -43,6 +39,6 @@ export interface SettingFieldValues {
   input: string;
 }
 
-export interface SettingFieldArrayValues {
-  input: string[];
+export interface SettingFieldInterestArray {
+  input: Interest[];
 }

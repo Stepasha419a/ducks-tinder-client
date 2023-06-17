@@ -1,1 +1,0 @@
-export { makeQuerySortsObj } from './makeQuerySortsObj';

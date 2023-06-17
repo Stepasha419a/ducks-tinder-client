@@ -21,7 +21,7 @@ function checkField(
       }
       return false;
     case 'place':
-      if (user.partnerSettings.place === '') {
+      if (user.place === '') {
         return 'place';
       }
       return false;

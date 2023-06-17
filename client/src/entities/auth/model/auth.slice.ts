@@ -31,19 +31,16 @@ const authSlice = createSlice({
       .addCase(loginThunk.pending, (state) => {
         state.formError = '';
       })
-      .addCase(registerThunk.fulfilled, (state, { payload }) => {
-        localStorage.setItem('token', payload.accessToken);
+      .addCase(registerThunk.fulfilled, (state) => {
         state.isAuth = true;
       })
-      .addCase(loginThunk.fulfilled, (state, { payload }) => {
-        localStorage.setItem('token', payload.accessToken);
+      .addCase(loginThunk.fulfilled, (state) => {
         state.isAuth = true;
       })
       .addCase(checkAuthThunk.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(checkAuthThunk.fulfilled, (state, { payload }) => {
-        localStorage.setItem('token', payload.accessToken);
+      .addCase(checkAuthThunk.fulfilled, (state) => {
         state.isLoading = false;
         state.isAuth = true;
       })

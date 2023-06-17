@@ -1,25 +1,17 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { useAppDispatch, useAppSelector } from '@hooks';
 import { makeImageUrl } from '@shared/helpers';
-import { useEffect } from 'react';
-import { getUserFirstPairThunk, selectPairLink } from '../../model';
 import FailedPair from './Failed/FailedPair';
 import Loading from './Loading/Loading';
 import styles from './PairLink.module.scss';
+import { useAppSelector } from '@/shared/hooks';
 
 export const PairLink = () => {
-  const dispatch = useAppDispatch();
+  const firstPair = useAppSelector((state) => state.user.pairs[0]);
+  const pairsCount = useAppSelector((state) => state.user.pairsCount);
 
-  const { firstPairId, firstPair, pairsLength } =
-    useAppSelector(selectPairLink);
-
-  useEffect(() => {
-    dispatch(getUserFirstPairThunk(firstPairId));
-  }, [dispatch, firstPairId]);
-
-  if (!pairsLength) {
+  if (!pairsCount) {
     return <FailedPair />;
   }
 
@@ -29,7 +21,7 @@ export const PairLink = () => {
     return <Loading />;
   }
 
-  const imageUrl = makeImageUrl(firstPair._id, firstPair.pictures.avatar);
+  const imageUrl = makeImageUrl(firstPair.id, firstPair.pictures[0].name);
 
   return (
     <div className={styles.pairs}>
@@ -41,8 +33,8 @@ export const PairLink = () => {
             alt="Pair img"
             draggable="false"
           />
-          <div className={styles.likes}>{pairsLength}</div>
-          <div className={styles.text}>{pairsLength} likes</div>
+          <div className={styles.likes}>{pairsCount}</div>
+          <div className={styles.text}>{pairsCount} likes</div>
           <FontAwesomeIcon
             icon={faHeartCircleExclamation}
             className={styles.icon}

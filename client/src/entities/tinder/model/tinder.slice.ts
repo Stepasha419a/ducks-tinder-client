@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { User } from '@shared/api/interfaces';
+import type { ShortUser } from '@shared/api/interfaces';
 import {
   dislikeUserThunk,
   getSortedUserThunk,
@@ -8,7 +8,7 @@ import {
 } from './tinder.thunks';
 
 interface InitialState {
-  tinderUsers: User[];
+  tinderUsers: ShortUser[];
   isReturnUser: boolean;
   requestedUsers: string[];
   currentTinderUsersIndex: number;
@@ -30,14 +30,7 @@ const tinderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getSortedUserThunk.fulfilled, (state, { payload }) => {
-        state.tinderUsers = [
-          ...state.tinderUsers,
-          payload.tinderUser,
-        ] as User[];
-        state.requestedUsers = [
-          ...payload.checkedUsers,
-          payload.tinderUser._id,
-        ];
+        state.tinderUsers = [...state.tinderUsers, payload] as ShortUser[];
       })
       .addCase(getSortedUserThunk.rejected, (state) => {
         state.isFailed = true;

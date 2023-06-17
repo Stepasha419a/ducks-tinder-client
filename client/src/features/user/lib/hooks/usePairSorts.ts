@@ -1,3 +1,4 @@
+import type { Interest } from '@/shared/api/interfaces';
 import type { PairSorts } from '@entities/user/model';
 import { INITIAL_SORTS } from '@entities/user/model';
 import { setPairSorts } from '@entities/user/model';
@@ -26,9 +27,9 @@ export function usePairSorts() {
     control,
   });
 
-  const toggleInterest = (item: string): void => {
+  const toggleInterest = (item: Interest): void => {
     if (interests.includes(item)) {
-      setInterests(interests.filter((interest) => interest !== item));
+      setInterests(interests.filter((interest) => interest.name !== item.name));
     } else {
       setInterests([...interests, item]);
     }
@@ -46,7 +47,7 @@ export function usePairSorts() {
     dispatch(setPairSorts(data));
   });
 
-  const forcedToggleInterest = (item: string): void => {
+  const forcedToggleInterest = (item: Interest): void => {
     toggleInterest(item);
     submitHandler();
   };

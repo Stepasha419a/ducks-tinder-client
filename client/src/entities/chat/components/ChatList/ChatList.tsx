@@ -6,7 +6,6 @@ import { getChatsThunk, selectChatList } from '@entities/chat/model';
 import { Preloader } from '@shared/ui';
 import FailedChats from './Failed/FailedChats';
 import { ChatItem } from './ChatItem/ChatItem';
-import { selectUserChatsInfo } from '@entities/user/model';
 import styles from './ChatList.module.scss';
 
 interface ChatListProps {
@@ -16,8 +15,9 @@ interface ChatListProps {
 export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const { currentUserId, chatsLength } = useAppSelector(selectUserChatsInfo);
+  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
   const { chats, currentChatId, isLoading } = useAppSelector(selectChatList);
+  const chatsLength = chats.length;
 
   useEffect(() => {
     dispatch(getChatsThunk(currentUserId));
@@ -35,12 +35,12 @@ export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
     <div className={styles.chats}>
       {chats.map((chat: ChatWithUsers) => {
         const chatCompanion = chat.members.find(
-          (member) => member._id !== currentUserId
+          (member) => member.id !== currentUserId
         );
-        const isActive = currentChatId === chat._id;
+        const isActive = currentChatId === chat.id;
         return (
           <ChatItem
-            key={chat._id}
+            key={chat.id}
             chat={chat}
             chatCompanion={chatCompanion}
             isActive={isActive}

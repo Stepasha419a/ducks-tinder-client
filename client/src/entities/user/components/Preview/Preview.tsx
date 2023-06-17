@@ -8,14 +8,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import type { User } from '@shared/api/interfaces';
+import type { ShortUser, User } from '@shared/api/interfaces';
 import { ImageSlider } from '@shared/ui';
 import { Button, ListItem } from '@shared/ui';
 import { InterestsListPopup } from '../InterestsListPopup/InterestsListPopup';
 import styles from './Preview.module.scss';
 
 interface PreviewPropsInterface {
-  user: User;
+  user: User | ShortUser;
   setIsFullPreview?: (setting: boolean) => void;
   isFull?: boolean;
   isShadow?: boolean;
@@ -45,7 +45,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
       <div className={classNames(styles.slider)}>
         <ImageSlider
           picturesObj={user.pictures}
-          userId={user._id}
+          userId={user.id}
           extraClassName={styles.image}
           extraWrapperClassName={classNames(isShadow && styles.wrapper)}
           arrowsExtraClassName={classNames(isShadow && styles.arrows)}
@@ -69,11 +69,11 @@ export const Preview: FC<PreviewPropsInterface> = ({
         </div>
         <div className={styles.place}>
           <FontAwesomeIcon icon={faHouse} className={styles.icon} />
-          <div>Lives in {user.partnerSettings.place}</div>
+          {/* <div>Lives in {user.place}</div> */}
         </div>
         <div className={styles.distance}>
           <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-          {user.partnerSettings.distance}
+          {user.distance}
           <span className={styles.text}>km from you</span>
         </div>
         {!isFull && setIsFullPreview && (
@@ -95,7 +95,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
             <div className={styles.title}>Interests</div>
             <div className={styles.items}>
               {interestsForLoop.map((item) => {
-                return <ListItem key={item}>{item}</ListItem>;
+                return <ListItem key={item.name}>{item.name}</ListItem>;
               })}
             </div>
           </div>

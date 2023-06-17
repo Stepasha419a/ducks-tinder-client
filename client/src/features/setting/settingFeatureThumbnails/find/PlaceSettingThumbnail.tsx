@@ -6,7 +6,7 @@ export const PlaceSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
   const place = useAppSelector(
-    (state) => state.user.currentUser.partnerSettings.place
+    (state) => state.user.currentUser.place
   );
   const errorFields = useAppSelector((state) => state.setting.errorFields);
 

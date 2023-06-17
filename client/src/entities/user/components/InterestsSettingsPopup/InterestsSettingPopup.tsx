@@ -1,11 +1,12 @@
 import type { FC } from 'react';
 import { Button, ListItem, Popup } from '@shared/ui';
 import { INTERESTS_LIST } from '../../model';
+import type { Interest } from '@/shared/api/interfaces';
 import styles from './InterestsSettingPopup.module.scss';
 
 interface InterestsSettingPopupProps {
-  pairInterests: string[];
-  toggleInterest: (item: string) => void;
+  pairInterests: Interest[];
+  toggleInterest: (item: Interest) => void;
   setIsInterestsSettingPopupOpen: (setting: boolean) => void;
 }
 
@@ -21,10 +22,12 @@ export const InterestsSettingPopup: FC<InterestsSettingPopupProps> = ({
     >
       <div className={styles.items}>
         {INTERESTS_LIST.map((interest) => {
-          const includedItem = pairInterests.some((item) => item === interest);
+          const includedItem = pairInterests.some(
+            (item) => item.name === interest
+          );
           return (
             <ListItem
-              onClick={() => toggleInterest(interest)}
+              onClick={() => toggleInterest({ name: interest })}
               isActive={includedItem}
               key={interest}
             >

@@ -2,29 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import type {
   ChangedData,
   InnerObjectName,
-  PartnerSettings,
-  PicturesVariants,
   User,
 } from '@shared/api/interfaces';
 import { userService } from '@shared/api/services';
 import { makeDataObject } from '@shared/helpers/makeDataObject';
 import { returnErrorMessage } from '@shared/helpers';
-import type { ImageInterface } from './user.interfaces';
-import { makeUserImagesObject } from './helpers';
-
-export async function fetchUserById(id: string): Promise<User> {
-  const response = await userService.getUser(id);
-
-  const user = response.data;
-
-  return user;
-}
 
 export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
   async (
     args: {
-      inputName: keyof User | keyof PartnerSettings;
+      inputName: keyof User;
       changedData: ChangedData;
       innerObjectName?: InnerObjectName;
     },
@@ -35,7 +23,7 @@ export const updateUserThunk = createAsyncThunk(
       const { currentUser } = user;
       const data = makeDataObject({ ...args, currentUser });
 
-      const response = await userService.updateUser(currentUser._id, data);
+      const response = await userService.updateUser(data);
 
       return response.data;
     } catch (error: unknown) {
@@ -44,31 +32,13 @@ export const updateUserThunk = createAsyncThunk(
   }
 );
 
-export const getUserFirstPairThunk = createAsyncThunk(
-  'users/getUserFirstPair',
-  async (pairId: string, { rejectWithValue }) => {
-    try {
-      const pair = await fetchUserById(pairId);
-
-      return pair;
-    } catch (error: unknown) {
-      return rejectWithValue(returnErrorMessage(error));
-    }
-  }
-);
-
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      // TODO: do this server endpoint
-      const { user } = getState() as RootState;
-      const { currentUser } = user;
-      const pairs = await Promise.all(
-        currentUser.pairs.map(async (pairId) => fetchUserById(pairId))
-      ).then((results) => results.map((result) => result));
+      const response = await userService.getPairs();
 
-      return pairs;
+      return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -80,13 +50,10 @@ export const deletePairThunk = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { user } = getState() as RootState;
-      const { currentUser, currentPair } = user;
-      const response = await userService.deletePair(
-        currentUser._id,
-        currentPair!._id
-      );
+      const { currentPair } = user;
+      const response = await userService.deletePair(currentPair!.id);
 
-      return { data: response.data, deletedId: currentPair!._id };
+      return { data: response.data, deletedId: currentPair!.id };
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -95,18 +62,9 @@ export const deletePairThunk = createAsyncThunk(
 
 export const saveUserImageThunk = createAsyncThunk(
   'users/saveUserImage',
-  async (
-    args: { picture: Blob; pictureVariant: PicturesVariants },
-    { rejectWithValue, getState }
-  ) => {
+  async (picture: Blob, { rejectWithValue }) => {
     try {
-      const { user } = getState() as RootState;
-      const currentUserId = user.currentUser._id;
-      const response = await userService.savePicture(
-        args.picture,
-        currentUserId,
-        args.pictureVariant
-      );
+      const response = await userService.savePicture(picture);
 
       return response.data;
     } catch (error: unknown) {
@@ -117,24 +75,9 @@ export const saveUserImageThunk = createAsyncThunk(
 
 export const deleteUserImage = createAsyncThunk(
   'users/deleteUserImage',
-  async (
-    args: {
-      pictureName: string;
-      setting: PicturesVariants;
-    },
-    { rejectWithValue, getState }
-  ) => {
+  async (order: number, { rejectWithValue }) => {
     try {
-      const { user } = getState() as RootState;
-      const {
-        currentUser: { _id },
-      } = user;
-
-      const response = await userService.deletePicture(
-        args.pictureName,
-        _id,
-        args.setting
-      );
+      const response = await userService.deletePicture(order);
 
       return response.data;
     } catch (error: unknown) {
@@ -145,13 +88,12 @@ export const deleteUserImage = createAsyncThunk(
 
 export const mixUserImages = createAsyncThunk(
   'users/mixUserImages',
-  async (images: ImageInterface[], { rejectWithValue, getState }) => {
+  async (args: { order: number; withOrder: number }, { rejectWithValue }) => {
     try {
-      const { user } = getState() as RootState;
-      const currentUserId = user.currentUser._id;
-
-      const userImages = makeUserImagesObject(images);
-      const response = await userService.updateUser(currentUserId, userImages);
+      const response = await userService.mixPictures(
+        args.order,
+        args.withOrder
+      );
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

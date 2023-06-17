@@ -1,10 +1,10 @@
 import type { FC } from 'react';
-import type { User } from '@shared/api/interfaces';
+import type { ShortUser } from '@shared/api/interfaces';
 import { makeImageUrl } from '@shared/helpers';
 import styles from './Pair.module.scss';
 
 interface PairPropsInterface {
-  user: User;
+  user: ShortUser;
   setCurrentPair: () => void;
 }
 
@@ -13,7 +13,7 @@ const Pair: FC<PairPropsInterface> = ({ user, setCurrentPair }) => {
     return <div>loading...</div>;
   }
 
-  const imageUrl = makeImageUrl(user._id, user.pictures.avatar);
+  const imageUrl = makeImageUrl(user.id, user.pictures[0].name);
 
   return (
     <div onClick={setCurrentPair} className={styles.pair}>
@@ -24,7 +24,7 @@ const Pair: FC<PairPropsInterface> = ({ user, setCurrentPair }) => {
           <div className={styles.years}>{user.age}</div>
         </div>
         <div className={styles.distance}>
-          {user.partnerSettings.distance || 'unknown'}
+          {user.distance || 'unknown'}
           <span className={styles.text}>miles from you</span>
         </div>
       </div>

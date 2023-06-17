@@ -15,7 +15,7 @@ import styles from './CropImage.module.scss';
 export const CropImage: FC = () => {
   const dispatch = useAppDispatch();
 
-  const { imageURL, pictureVariant } = useAppSelector(selectCropImage);
+  const { imageURL } = useAppSelector(selectCropImage);
 
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
@@ -35,14 +35,7 @@ export const CropImage: FC = () => {
       imageURL!,
       croppedAreaPixels!
     );
-    if (pictureVariant) {
-      dispatch(
-        saveUserImageThunk({
-          picture: croppedImageData!.picture,
-          pictureVariant,
-        })
-      );
-    }
+    dispatch(saveUserImageThunk(croppedImageData!.picture));
   };
 
   return (

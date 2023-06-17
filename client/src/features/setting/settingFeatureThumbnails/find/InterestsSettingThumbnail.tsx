@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 export const InterestsSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
-  const interests = useAppSelector(state => state.user.currentUser.interests)
-  const errorFields = useAppSelector(state => state.setting.errorFields)
+  const interests = useAppSelector((state) => state.user.currentUser.interests);
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const setInputHandler = (): void => {
     dispatch(
@@ -23,7 +23,7 @@ export const InterestsSettingThumbnail = () => {
       value={
         !interests.length
           ? 'Empty interests'
-          : `${interests[0]} and so on...`
+          : `${interests[0].name} and so on...`
       }
       isPointer
       isError={errorFields.includes('interests')}

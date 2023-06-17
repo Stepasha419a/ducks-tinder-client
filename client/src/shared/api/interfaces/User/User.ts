@@ -1,27 +1,16 @@
 export type Range = { from: number; to: number };
 
-export interface PartnerSettings {
-  place: string;
-  distance: number;
-  usersOnlyInDistance: boolean;
-  preferSex: 'male' | 'female';
-  age: Range;
+export interface Picture {
+  name: string;
+  order: number;
 }
 
-export interface PicturesInterface {
-  avatar: string;
-  gallery: string[];
+export interface Interest {
+  name: string;
 }
-
-export enum PicturesEnum {
-  avatar = 'avatar',
-  gallery = 'gallery',
-}
-
-export type PicturesVariants = keyof PicturesInterface;
 
 export interface User {
-  _id: string;
+  id: string;
   email: string;
   name: string;
   description: string;
@@ -29,23 +18,24 @@ export interface User {
   age: number;
   sex: 'male' | 'female';
   isActivated: boolean;
-  interests: string[];
-  partnerSettings: PartnerSettings;
-  pictures: PicturesInterface;
-  chats: string[];
-  pairs: string[];
-  checkedUsers: string[];
+  interests: Interest[];
+  place: string;
+  distance: number;
+  usersOnlyInDistance: boolean;
+  preferSex: 'male' | 'female';
+  preferAgeFrom: number;
+  preferAgeTo: number;
+  pictures: Picture[];
 }
 
-interface PartialPartnerSettings {
-  place?: string;
-  distance?: number;
-  usersOnlyInDistance?: boolean;
-  preferSex?: 'male' | 'female';
-  age?: {
-    from?: number;
-    to?: number;
-  };
+export interface ShortUser {
+  id: string;
+  name: string;
+  age: number;
+  description: string;
+  distance: number;
+  interests: Interest[];
+  pictures: Picture[];
 }
 
 export interface PartialUser {
@@ -57,25 +47,33 @@ export interface PartialUser {
   sex?: 'male' | 'female';
   isActivated?: boolean;
   interests?: string[];
-  pictures?: {
-    avatar?: string;
-    gallery?: string[];
-  };
-  partnerSettings?: PartialPartnerSettings;
-  chats?: string[];
-  checkedUsers?: string[];
+  place?: string;
+  distance?: number;
+  usersOnlyInDistance?: boolean;
+  preferSex?: 'male' | 'female';
+  preferAgeFrom?: number;
+  preferAgeTo?: number;
 }
 
 export interface QuerySorts {
   distance: number;
   onlyNear: boolean;
   age: number;
-  preferAge: Range;
+  preferAgeFrom: number;
+  preferAgeTo: number;
   sex: 'male' | 'female';
   preferSex: 'male' | 'female';
   userIds?: string[];
 }
 
-export type ChangedData = string | number | boolean | string[] | Range;
+type PreferAgeType = { preferAgeFrom: number; preferAgeTo: number };
+
+export type ChangedData =
+  | string
+  | number
+  | boolean
+  | Interest[]
+  | Range
+  | PreferAgeType;
 
 export type InnerObjectName = 'partnerSettings' | null;

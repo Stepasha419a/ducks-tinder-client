@@ -22,7 +22,7 @@ export const ChatItem: FC<ChatInterface> = ({
   }
 
   const isCompanion =
-    chat.messages[chat.messages.length - 1]?.userId === chatCompanion._id;
+    chat.messages[chat.messages.length - 1]?.userId === chatCompanion.id;
 
   const username = isCompanion ? `${chatCompanion.name}: ` : 'you: ';
 
@@ -30,13 +30,13 @@ export const ChatItem: FC<ChatInterface> = ({
 
   return (
     <div
-      onClick={() => connect(chat._id)}
+      onClick={() => connect(chat.id)}
       className={classNames(styles.item, isActive && styles.active)}
     >
       <Avatar
-        userId={chatCompanion._id}
+        userId={chatCompanion.id}
         size="m"
-        avatarUrl={chatCompanion.pictures.avatar}
+        avatarUrl={chatCompanion.pictures[0].name}
       />
       <div className={styles.descr}>
         <div className={styles.name}>{chatCompanion.name}</div>

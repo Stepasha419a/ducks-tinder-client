@@ -1,40 +1,19 @@
 import { instance } from '@shared/api';
-import type {
-  PicturesVariants,
-  QuerySorts,
-  User,
-  PartialUser,
-} from '@shared/api/interfaces';
+import type { User, PartialUser, ShortUser } from '@shared/api/interfaces';
 
 export const userService = {
-  async getSortedUser(sorts: QuerySorts) {
-    return instance.post<User>('users/sorted', sorts);
+  async getSortedUser() {
+    return instance.post<ShortUser>('users/sorted');
   },
 
-  async getUser(id: string) {
-    return instance.get<User>(`users/${id}`);
+  async updateUser(data: PartialUser) {
+    return instance.patch<User>('users', data);
   },
 
-  async updateUser(id: string, data: PartialUser) {
-    return instance.put<User>(`users/${id}`, data);
-  },
-
-  async deleteUser(id: string) {
-    return instance.delete<User>(`users/${id}`);
-  },
-
-  async createPair(forUserId: string, userId: string) {
-    return instance.post<User>('users/pairs', { forUserId, userId });
-  },
-
-  async deletePair(forUserId: string, userId: string) {
-    return instance.put<User>('users/pairs', { forUserId, userId });
-  },
-
-  async savePicture(picture: Blob, userId: string, setting: PicturesVariants) {
+  async savePicture(picture: Blob) {
     return instance.post<User>(
       'users/picture',
-      { picture, userId, setting },
+      { picture },
       {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -43,15 +22,40 @@ export const userService = {
     );
   },
 
-  async deletePicture(
-    pictureName: string,
-    userId: string,
-    setting: PicturesVariants
-  ) {
+  async deletePicture(order: number) {
     return instance.put<User>('users/picture', {
-      pictureName,
-      userId,
-      setting,
+      order,
     });
+  },
+
+  async mixPictures(mixOrder: number, withOrder: number) {
+    return instance.put<User>('users/picture/mix', {
+      mixOrder,
+      withOrder,
+    });
+  },
+
+  async getPairs() {
+    return instance.get<ShortUser[]>('users/pairs');
+  },
+
+  async acceptPair(pairId: string) {
+    return instance.post<ShortUser[]>(`users/pairs/${pairId}`);
+  },
+
+  async deletePair(pairId: string) {
+    return instance.put<ShortUser[]>(`users/pairs/${pairId}`);
+  },
+
+  async likeUser(userId: string) {
+    return instance.post<undefined>(`users/like/${userId}`);
+  },
+
+  async dislikeUser(userId: string) {
+    return instance.post<undefined>(`users/dislike/${userId}`);
+  },
+
+  async returnUser() {
+    return instance.post<undefined>('users/return');
   },
 };

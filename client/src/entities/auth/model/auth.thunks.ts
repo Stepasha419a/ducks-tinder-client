@@ -3,12 +3,12 @@ import axios from 'axios';
 import { authService } from '@/shared/api/services';
 import { API_URL } from '@shared/api';
 import type {
-  AuthResponse,
   LoginParams,
   RegistrationParams,
 } from '@shared/api/services/auth';
 import { returnErrorMessage } from '@shared/helpers';
 import { setCurrentUser } from '@entities/user/model';
+import type { User } from '@shared/api/interfaces';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',
@@ -20,7 +20,7 @@ export const registerThunk = createAsyncThunk(
         params.password
       );
 
-      dispatch(setCurrentUser(response.data.user));
+      dispatch(setCurrentUser(response.data));
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -34,7 +34,7 @@ export const loginThunk = createAsyncThunk(
     try {
       const response = await authService.login(params.email, params.password);
 
-      dispatch(setCurrentUser(response.data.user));
+      dispatch(setCurrentUser(response.data));
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -46,13 +46,12 @@ export const checkAuthThunk = createAsyncThunk(
   'auth/checkAuth',
   async (_, { rejectWithValue, dispatch }) => {
     try {
-
       // TODO: decompose it into authService
-      const response = await axios.get<AuthResponse>(`${API_URL}auth/refresh`, {
+      const response = await axios.get<User>(`${API_URL}auth/refresh`, {
         withCredentials: true,
       });
 
-      dispatch(setCurrentUser(response.data.user));
+      dispatch(setCurrentUser(response.data));
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { User } from '@shared/api/interfaces';
+import type { ShortUser } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { setCurrentPair } from '@entities/user/model';
 import { PairsList } from '@entities/user/components';
@@ -10,7 +10,7 @@ export const Pairs: FC = () => {
 
   const currentPair = useAppSelector((state) => state.user.currentPair);
 
-  const handleSetCurrentPair = (user: User) => {
+  const handleSetCurrentPair = (user: ShortUser) => {
     dispatch(setCurrentPair(user));
   };
 

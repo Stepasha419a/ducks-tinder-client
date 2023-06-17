@@ -3,26 +3,27 @@ import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import type { User } from '@shared/api/interfaces';
-import { getUserPairsThunk, selectUserPairs } from '@entities/user/model';
+import type { ShortUser } from '@shared/api/interfaces';
+import { getUserPairsThunk } from '@entities/user/model';
 import { sortItemBySettings } from '../../model/helpers';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
 
 interface PairsListProps {
-  setCurrentPair: (user: User) => void;
+  setCurrentPair: (user: ShortUser) => void;
 }
 
 export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
-  const { pairIds, pairs, pairSorts } = useAppSelector(selectUserPairs);
+  const pairs = useAppSelector((state) => state.user.pairs);
+  const pairSorts = useAppSelector((state) => state.user.pairSorts);
 
   useEffect(() => {
     dispatch(getUserPairsThunk());
-  }, [dispatch, pairIds]);
+  }, [dispatch]);
 
-  if (!pairIds.length) {
+  if (!pairs.length) {
     return (
       <div className={styles.noPairs}>
         <FontAwesomeIcon icon={faHeart} className={styles.icon} />
@@ -34,11 +35,11 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   return (
     <div className={styles.pairs}>
       {pairs
-        .filter((user: User) => sortItemBySettings(user, pairSorts))
-        .map((user: User) => {
+        .filter((user: ShortUser) => sortItemBySettings(user, pairSorts))
+        .map((user: ShortUser) => {
           return (
             <Pair
-              key={user._id}
+              key={user.id}
               user={user}
               setCurrentPair={() => setCurrentPair(user)}
             />

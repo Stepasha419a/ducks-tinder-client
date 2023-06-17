@@ -1,8 +1,8 @@
-import type { User } from '@shared/api/interfaces';
+import type { ShortUser } from '@shared/api/interfaces';
 import type { PairSorts, PairSortsKey } from '../user.interfaces';
 
 export function sortItemBySettings(
-  item: User,
+  item: ShortUser,
   sortSettings: PairSorts
 ): boolean {
   for (const sortKey in sortSettings) {
@@ -15,13 +15,13 @@ export function sortItemBySettings(
 }
 
 function sortPair(
-  item: User,
+  item: ShortUser,
   sortKey: PairSortsKey,
   sortSettings: PairSorts
 ): boolean {
   switch (sortKey) {
     case 'distance':
-      if (item.partnerSettings.distance > sortSettings.distance) {
+      if (item.distance > sortSettings.distance) {
         return false;
       }
       return true;
@@ -31,7 +31,7 @@ function sortPair(
       }
       return true;
     case 'photos':
-      if (1 + item.pictures.gallery.length < sortSettings.photos) {
+      if (1 + item.pictures.length < sortSettings.photos) {
         return false;
       }
       return true;
@@ -40,9 +40,9 @@ function sortPair(
         if (accountSetting === 'have interests' && !item.interests.length) {
           return false;
         }
-        if (accountSetting === 'identify confirmed' && !item.isActivated) {
+        /* if (accountSetting === 'identify confirmed' && !item.isActivated) {
           return false;
-        }
+        } */
       }
       return true;
     case 'interests':

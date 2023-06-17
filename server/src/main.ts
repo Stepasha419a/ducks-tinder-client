@@ -9,7 +9,7 @@ async function start() {
 
   app.enableCors({
     origin: true,
-    methods: 'GET,PUT,POST,DELETE',
+    methods: 'GET,PUT,POST,DELETE,PATCH',
     credentials: true,
   });
 

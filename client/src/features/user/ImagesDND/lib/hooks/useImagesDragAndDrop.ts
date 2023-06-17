@@ -1,10 +1,8 @@
 import type { DragEvent } from 'react';
 import { useState, useEffect } from 'react';
-import type { ImageInterface } from '@entities/user/model';
+import type { Picture } from '@shared/api/interfaces';
 import { deleteUserImage, mixUserImages } from '@entities/user/model';
-import type { PicturesVariants } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { parseImages } from '../helpers';
 
 export function useImagesDragAndDrop(styleName: string) {
   const dispatch = useAppDispatch();
@@ -13,21 +11,18 @@ export function useImagesDragAndDrop(styleName: string) {
     (state) => state.user.currentUser.pictures
   );
 
-  const [currentImage, setCurrentImage] = useState<ImageInterface | null>(null);
-  const [images, setImages] = useState<ImageInterface[]>([]);
+  const [currentImage, setCurrentImage] = useState<Picture | null>(null);
+  const [images, setImages] = useState<Picture[]>([]);
 
   useEffect(() => {
-    setImages(parseImages(userPictures));
+    setImages(userPictures);
   }, [userPictures]);
 
-  const handleDeleteImage = (
-    pictureName: string,
-    setting: PicturesVariants
-  ): void => {
-    dispatch(deleteUserImage({ pictureName, setting }));
+  const handleDeleteImage = (order: number): void => {
+    dispatch(deleteUserImage(order));
   };
 
-  const getDNDProps = (imageObj: ImageInterface) => ({
+  const getDNDProps = (imageObj: Picture) => ({
     onDragStart(): void {
       setCurrentImage(imageObj);
     },
@@ -42,18 +37,18 @@ export function useImagesDragAndDrop(styleName: string) {
       (e.target as HTMLImageElement).classList.add(styleName);
     },
     onDrop(e: DragEvent): void {
-      const cardIndex = images.findIndex((item) => item.id === imageObj.id);
+      const cardIndex = images.findIndex(
+        (item) => item.order === imageObj.order
+      );
       const currentIndex = images.findIndex(
-        (item) => item.id === currentImage!.id
+        (item) => item.order === currentImage!.order
       );
 
       if (cardIndex !== currentIndex) {
         setImages((prev) => {
-          [prev[cardIndex], prev[currentIndex]] = [
-            prev[currentIndex],
-            prev[cardIndex],
-          ];
-          dispatch(mixUserImages(prev));
+          dispatch(
+            mixUserImages({ order: cardIndex, withOrder: currentIndex })
+          );
           return prev;
         });
       }

@@ -22,14 +22,14 @@ const chatSlice = createSlice({
   reducers: {
     pushNewMessage: (state, { payload }: PayloadAction<Message>) => {
       const index = state.chats.findIndex(
-        (chat) => chat._id === state.currentChatId
+        (chat) => chat.id === state.currentChatId
       );
       state.chats[index].messages.push(payload);
       state.currentMessages.push(payload);
     },
     setCurrentChatData: (state, { payload }: PayloadAction<Chat>) => {
       const chat: Chat = payload;
-      state.currentChatId = chat._id;
+      state.currentChatId = chat.id;
       state.isConnected = true;
       state.currentMessages = chat.messages;
       state.isLoading = false;

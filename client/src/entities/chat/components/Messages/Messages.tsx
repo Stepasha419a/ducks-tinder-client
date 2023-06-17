@@ -15,13 +15,13 @@ export const Messages = (): ReactElement => {
     <div className={styles.messages} ref={bottomScrollRef}>
       {messages.map((message: MessageInterface) => {
         const chatMember = currentChat!.members.find(
-          (item) => item._id === message.userId
+          (item) => item.id === message.userId
         )!;
         const isOwn = message.userId === currentChatUserObj._id;
         const name = isOwn ? currentChatUserObj.name : chatMember.name;
         const avatar = isOwn
-          ? currentChatUserObj.avatar
-          : chatMember.pictures.avatar;
+          ? currentChatUserObj.avatar.name
+          : chatMember.pictures[0].name;
         return (
           <Message
             key={message.id}

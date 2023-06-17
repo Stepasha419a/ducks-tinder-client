@@ -1,12 +1,6 @@
 import type { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import type { PicturesVariants } from '@shared/api/interfaces';
-import { PicturesEnum } from '@shared/api/interfaces';
-import {
-  selectImagesDND,
-  setIsDialogUploadOpen,
-  setPictureVariant,
-} from '@entities/user/model';
+import { selectImagesDND, setIsDialogUploadOpen } from '@entities/user/model';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
 import { useImagesDragAndDrop } from './lib';
@@ -21,40 +15,26 @@ export const ImagesDND: FC = () => {
     styles.lowOpacity
   );
 
-  const openSettingHandler = (variant: PicturesVariants): void => {
-    dispatch(setPictureVariant(variant));
+  const openSettingHandler = (): void => {
     dispatch(setIsDialogUploadOpen(true));
   };
 
-  const emptyFieldsForLoop: undefined[] = createEmptyArray(
-    8 - pictures.gallery.length
-  );
+  const emptyFieldsForLoop: undefined[] = createEmptyArray(9 - pictures.length);
 
   return (
     <div className={styles.images}>
-      {images.map((imageObj, i) => {
-        if (!imageObj.image) {
-          const setting = i === 0 ? PicturesEnum.avatar : PicturesEnum.gallery;
-          return <Card key={i} handler={() => openSettingHandler(setting)} />;
-        }
+      {images.map((imageObj) => {
         return (
           <Card
-            key={imageObj.id}
-            buttonHandler={() =>
-              handleDeleteImage(imageObj.image, imageObj.setting)
-            }
-            src={makeImageUrl(currentUserId, imageObj.image, imageObj.setting)}
+            key={imageObj.order}
+            buttonHandler={() => handleDeleteImage(imageObj.order)}
+            src={makeImageUrl(currentUserId, imageObj.name)}
             {...getDNDProps(imageObj)}
           />
         );
       })}
       {emptyFieldsForLoop.map((_, i) => {
-        return (
-          <Card
-            key={i}
-            handler={() => openSettingHandler(PicturesEnum.gallery)}
-          />
-        );
+        return <Card key={i} handler={openSettingHandler} />;
       })}
     </div>
   );
