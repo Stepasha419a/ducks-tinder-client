@@ -30,7 +30,7 @@ export const Message: FC<MessageProps> = ({
         />
         <div className={cnMessage}>
           {!isOwn && <div className={styles.username}>{username}</div>}
-          <div className={styles.content}>{message.content}</div>
+          <div className={styles.content}>{message.text}</div>
           <div className={cnMark}></div>
         </div>
       </div>

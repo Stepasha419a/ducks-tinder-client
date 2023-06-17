@@ -3,7 +3,7 @@ import type { User, PartialUser, ShortUser } from '@shared/api/interfaces';
 
 export const userService = {
   async getSortedUser() {
-    return instance.post<ShortUser>('users/sorted');
+    return instance.get<ShortUser>('users/sorted');
   },
 
   async updateUser(data: PartialUser) {

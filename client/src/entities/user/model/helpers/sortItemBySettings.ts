@@ -40,9 +40,9 @@ function sortPair(
         if (accountSetting === 'have interests' && !item.interests.length) {
           return false;
         }
-        /* if (accountSetting === 'identify confirmed' && !item.isActivated) {
+        if (accountSetting === 'identify confirmed' && !item.isActivated) {
           return false;
-        } */
+        }
       }
       return true;
     case 'interests':

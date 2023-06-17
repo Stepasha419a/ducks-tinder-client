@@ -30,7 +30,7 @@ const tinderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getSortedUserThunk.fulfilled, (state, { payload }) => {
-        state.tinderUsers = [...state.tinderUsers, payload] as ShortUser[];
+        state.tinderUsers = [...state.tinderUsers, payload];
       })
       .addCase(getSortedUserThunk.rejected, (state) => {
         state.isFailed = true;

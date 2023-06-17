@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { ShortUser, User } from '@shared/api/interfaces';
 import { returnUserThunk } from '@entities/tinder/model';
 import {
+  acceptPairThunk,
   deletePairThunk,
   deleteUserImage,
   getUserPairsThunk,
@@ -57,8 +58,12 @@ const userSlice = createSlice({
       .addCase(getUserPairsThunk.fulfilled, (state, action) => {
         state.pairs = action.payload;
       })
-      .addCase(deletePairThunk.fulfilled, (state, action) => {
-        state.pairs.filter((pair) => pair.id !== action.payload.deletedId);
+      .addCase(acceptPairThunk.fulfilled, (state, { payload }) => {
+        state.pairs = payload;
+        state.currentPair = null;
+      })
+      .addCase(deletePairThunk.fulfilled, (state, { payload }) => {
+        state.pairs = payload;
         state.currentPair = null;
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {

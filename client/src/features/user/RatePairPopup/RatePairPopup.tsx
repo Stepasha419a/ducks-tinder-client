@@ -5,7 +5,6 @@ import { Button, Popup } from '@shared/ui';
 import { setCurrentPair } from '@entities/user/model/user.slice';
 import { InterestsListPopup, Preview } from '@entities/user/components';
 import styles from './RatePairPopup.module.scss';
-import { createChatThunk } from '@/entities/chat/model';
 import { deletePairThunk } from '@/entities/user/model';
 
 export const RatePairPopup: FC = () => {
@@ -17,7 +16,6 @@ export const RatePairPopup: FC = () => {
     useState(false);
 
   const handleAccept = (): void => {
-    dispatch(createChatThunk());
     dispatch(deletePairThunk());
   };
 

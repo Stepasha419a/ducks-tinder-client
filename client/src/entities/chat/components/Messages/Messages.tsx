@@ -14,8 +14,8 @@ export const Messages = (): ReactElement => {
   return (
     <div className={styles.messages} ref={bottomScrollRef}>
       {messages.map((message: MessageInterface) => {
-        const chatMember = currentChat!.members.find(
-          (item) => item.id === message.userId
+        const chatMember = currentChat!.users.find(
+          (user) => user.id === message.userId
         )!;
         const isOwn = message.userId === currentChatUserObj._id;
         const name = isOwn ? currentChatUserObj.name : chatMember.name;

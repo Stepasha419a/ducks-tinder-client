@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { Chat, ChatWithUsers, Message } from '@shared/api/interfaces';
+import type { Chat, Message, ShortChat } from '@shared/api/interfaces';
 import type { ChatInitialState } from './chat.interfaces';
 import {
   getChatsThunk,
@@ -44,7 +44,7 @@ const chatSlice = createSlice({
     builder
       .addCase(
         getChatsThunk.fulfilled,
-        (state, { payload }: PayloadAction<ChatWithUsers[]>) => {
+        (state, { payload }: PayloadAction<ShortChat[]>) => {
           state.chats = payload;
         }
       )

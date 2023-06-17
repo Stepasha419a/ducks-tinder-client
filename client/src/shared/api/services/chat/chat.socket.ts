@@ -1,6 +1,6 @@
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
-import type { Message } from '@shared/api/interfaces';
+import type { SendMessage } from '@shared/api/interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;
@@ -26,11 +26,9 @@ export const chatSocket: ChatSocket = {
     // TODO: fix this return by adding some idk, methods that require callbacks on every event
     return this._socket;
   },
-  sendMessage(content: string, username: string, userId: string): void {
-    const message: Message = {
-      id: Date.now().toString(),
-      username,
-      content,
+  sendMessage(text: string, userId: string): void {
+    const message: SendMessage = {
+      text,
       userId,
     };
     this._socket!.send(message);

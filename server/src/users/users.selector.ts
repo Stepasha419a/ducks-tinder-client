@@ -27,6 +27,8 @@ export class UsersSelector {
       age: true,
       description: true,
       distance: true,
+      place: true,
+      isActivated: true,
       interests: { select: { name: true } },
       pictures: {
         select: { name: true, order: true },

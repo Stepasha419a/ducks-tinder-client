@@ -1,28 +1,24 @@
-import type { Picture, User } from '../User/User';
+import type { ShortUser } from '../User/User';
+
+export interface SendMessage {
+  text: string;
+  userId: string;
+}
 
 export interface Message {
   id: string;
-  content: string;
+  text: string;
   userId: string;
-  username: string;
 }
 
 export interface Chat {
   id: string;
   messages: Message[];
-  members: string[];
+  users: ShortUser[];
 }
 
-export interface ChatUser
-  extends Pick<User, 'id' | 'pictures' | 'name' | 'nickname'> {
-  pictures: Picture[];
-  name: string;
-  id: string;
-  nickname: string;
-}
-
-export interface ChatWithUsers {
+export interface ShortChat {
   id: string;
   messages: Message[];
-  members: ChatUser[];
+  users: ShortUser[];
 }

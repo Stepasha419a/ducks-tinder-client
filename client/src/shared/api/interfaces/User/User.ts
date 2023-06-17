@@ -34,6 +34,8 @@ export interface ShortUser {
   age: number;
   description: string;
   distance: number;
+  place: string;
+  isActivated: boolean;
   interests: Interest[];
   pictures: Picture[];
 }

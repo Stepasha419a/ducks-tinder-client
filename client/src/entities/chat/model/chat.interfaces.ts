@@ -1,7 +1,7 @@
-import type { ChatWithUsers, Message } from '@shared/api/interfaces';
+import type { Message, ShortChat } from '@shared/api/interfaces';
 
 export interface ChatInitialState {
-  chats: ChatWithUsers[];
+  chats: ShortChat[];
   isConnected: boolean;
   isLoading: boolean;
   currentMessages: Message[];

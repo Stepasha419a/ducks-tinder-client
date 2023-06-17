@@ -45,6 +45,21 @@ export const getUserPairsThunk = createAsyncThunk(
   }
 );
 
+export const acceptPairThunk = createAsyncThunk(
+  'users/acceptPair',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const { user } = getState() as RootState;
+      const { currentPair } = user;
+      const response = await userService.acceptPair(currentPair!.id);
+
+      return response.data;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
 export const deletePairThunk = createAsyncThunk(
   'users/deletePair',
   async (_, { rejectWithValue, getState }) => {
@@ -53,7 +68,7 @@ export const deletePairThunk = createAsyncThunk(
       const { currentPair } = user;
       const response = await userService.deletePair(currentPair!.id);
 
-      return { data: response.data, deletedId: currentPair!.id };
+      return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

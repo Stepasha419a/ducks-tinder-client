@@ -80,6 +80,8 @@ describe('users/pairs (GET)', () => {
           distance: secondUser.distance,
           interests: secondUser.interests,
           age: secondUser.age,
+          place: secondUser.place,
+          isActivated: secondUser.isActivated,
           pictures: secondUser.pictures,
         },
       ]);

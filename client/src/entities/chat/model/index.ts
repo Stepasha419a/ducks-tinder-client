@@ -6,7 +6,6 @@ export {
 export {
   closeAllSockets,
   connectChatThunk,
-  createChatThunk,
   disconnectChatThunk,
   getChatsThunk,
   sendMessageThunk,

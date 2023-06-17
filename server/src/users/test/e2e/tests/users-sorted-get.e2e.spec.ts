@@ -98,6 +98,8 @@ describe('users/sorted (GET)', () => {
         description: secondUser.description,
         distance: secondUser.distance,
         name: secondUser.name,
+        place: secondUser.place,
+        isActivated: secondUser.isActivated,
         pictures: secondUser.pictures,
         interests: [],
       });

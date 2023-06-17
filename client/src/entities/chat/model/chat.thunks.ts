@@ -10,24 +10,11 @@ import {
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
-  async (id: string, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const { data: chats } = await chatService.getChats(id);
+      const { data: chats } = await chatService.getChats();
 
       return chats;
-    } catch (error: unknown) {
-      return rejectWithValue(returnErrorMessage(error));
-    }
-  }
-);
-
-export const createChatThunk = createAsyncThunk(
-  'chat/createChat',
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      const { user } = getState() as RootState;
-      const { currentUser, currentPair } = user;
-      await chatService.createChat([currentUser.id, currentPair!.id]);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

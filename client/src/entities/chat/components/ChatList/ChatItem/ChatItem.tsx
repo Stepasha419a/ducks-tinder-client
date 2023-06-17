@@ -1,12 +1,12 @@
 import { Avatar } from '@shared/ui';
 import classNames from 'classnames';
-import type { ChatUser, ChatWithUsers } from '@shared/api/interfaces';
+import type { Chat, ShortUser } from '@shared/api/interfaces';
 import type { FC } from 'react';
 import styles from './ChatItem.module.scss';
 
 interface ChatInterface {
-  chat: ChatWithUsers;
-  chatCompanion: ChatUser | undefined;
+  chat: Chat;
+  chatCompanion: ShortUser | undefined;
   isActive: boolean;
   connect: (chatId: string) => void;
 }
@@ -36,13 +36,13 @@ export const ChatItem: FC<ChatInterface> = ({
       <Avatar
         userId={chatCompanion.id}
         size="m"
-        avatarUrl={chatCompanion.pictures[0].name}
+        avatarUrl={chatCompanion.pictures[0]?.name}
       />
       <div className={styles.descr}>
         <div className={styles.name}>{chatCompanion.name}</div>
         <div className={styles.message}>
           {messageName}
-          {chat.messages[chat.messages.length - 1]?.content}
+          {chat.messages[chat.messages.length - 1]?.text}
         </div>
       </div>
     </div>
