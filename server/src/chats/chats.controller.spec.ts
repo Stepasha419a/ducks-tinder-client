@@ -5,8 +5,8 @@ import { requestUserStub } from 'users/test/stubs';
 import { CqrsModule, QueryBus } from '@nestjs/cqrs';
 import { ChatsController } from './chats.controller';
 import { shortChatStub } from './test/stubs';
-import { ShortChat } from './chats.interfaces';
-import { GetChatsQuery } from './queries';
+import { FullChat, ShortChat } from './chats.interfaces';
+import { GetChatQuery, GetChatsQuery } from './queries';
 
 describe('chats-controller', () => {
   let chatsController: ChatsController;
@@ -59,6 +59,30 @@ describe('chats-controller', () => {
 
     it('should return an array of chats', () => {
       expect(chats).toEqual([shortChatStub()]);
+    });
+  });
+
+  describe('when get chat is called', () => {
+    let chat: FullChat;
+
+    beforeAll(() => {
+      queryBus.execute = jest.fn().mockResolvedValue(shortChatStub());
+    });
+
+    beforeEach(async () => {
+      chat = await chatsController.getChat(RequestMock(), shortChatStub().id);
+    });
+
+    it('should call query bus execute', () => {
+      expect(queryBus.execute).toBeCalledTimes(1);
+      expect(queryBus.execute).toBeCalledWith(
+        new GetChatQuery(requestUserStub(), shortChatStub().id),
+      );
+    });
+
+    it('should return a full chat', () => {
+      // to reduce stubs - short chat
+      expect(chat).toEqual(shortChatStub());
     });
   });
 });

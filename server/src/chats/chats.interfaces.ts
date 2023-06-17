@@ -31,6 +31,14 @@ export interface Message {
   userId: string;
 }
 
+// has all messages
+export interface FullChat {
+  id: string;
+  users: ShortUser[];
+  messages: Message[];
+}
+
+// has only latest message
 export interface ShortChat {
   id: string;
   users: ShortUser[];
