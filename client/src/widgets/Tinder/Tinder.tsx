@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { Preview } from '@entities/user/components';
-import { RateButtons, ResetCheckedUsers } from '@features/tinder';
+import { RateButtons } from '@features/tinder';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { getSortedUserThunk, selectTinderData } from '@entities/tinder/model';
 import { Failed, Loading } from './components';
@@ -22,7 +22,6 @@ export const Tinder: FC = () => {
   if (isFailed) {
     return (
       <div className={styles.wrapper}>
-        <ResetCheckedUsers />
         <Failed />
       </div>
     );
@@ -31,7 +30,6 @@ export const Tinder: FC = () => {
   if (currentTinderUsersIndex === tinderUsers.length) {
     return (
       <div className={styles.wrapper}>
-        <ResetCheckedUsers />
         <Loading />
       </div>
     );
@@ -39,7 +37,6 @@ export const Tinder: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <ResetCheckedUsers />
       <div className={styles.users}>
         {isFullPreview ? (
           <>

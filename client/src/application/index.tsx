@@ -1,3 +1,4 @@
+import '@app/dev'; // dev (to fetch server dev methods from window object)
 import type { ReactElement } from 'react';
 import Routing from '@pages/index';
 import { Loading } from '@entities/auth/components';

@@ -24,6 +24,7 @@ export class ReturnUserCommandHandler
         wasCheckedId: user.id,
         checked: { id: { notIn: pairIds } },
       },
+      orderBy: { createdAt: 'desc' },
     });
     if (!checkedUser) {
       throw new NotFoundException();

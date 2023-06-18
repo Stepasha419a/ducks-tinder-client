@@ -4,4 +4,7 @@ export const ChatsPrismaMock = jest.fn().mockReturnValue({
     findFirst: jest.fn(),
     findMany: jest.fn(),
   },
+  message: {
+    create: jest.fn(),
+  },
 });

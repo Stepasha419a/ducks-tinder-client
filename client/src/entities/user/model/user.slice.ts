@@ -1,7 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { ShortUser, User } from '@shared/api/interfaces';
-import { returnUserThunk } from '@entities/tinder/model';
 import {
   acceptPairThunk,
   deletePairThunk,
@@ -80,9 +79,6 @@ const userSlice = createSlice({
       .addCase(mixUserImages.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       })
-      .addCase(returnUserThunk.fulfilled, (state, { payload }) => {
-        state.currentUser = payload!;
-      });
   },
 });
 

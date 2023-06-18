@@ -72,6 +72,7 @@ describe('when return user is called', () => {
         wasCheckedId: requestUserStub().id,
         checked: { id: { notIn: [userStub().id] } },
       },
+      orderBy: { createdAt: 'desc' },
     });
   });
 
