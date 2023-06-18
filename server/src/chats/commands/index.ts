@@ -1,4 +1,10 @@
 export { CreateChatCommand } from './create-chat';
-import { CreateChatCommandHandler } from './create-chat';
+export { SendMessageCommand } from './send-message';
 
-export const ChatCommandHandlers = [CreateChatCommandHandler];
+import { CreateChatCommandHandler } from './create-chat';
+import { SendMessageCommandHandler } from './send-message';
+
+export const ChatCommandHandlers = [
+  CreateChatCommandHandler,
+  SendMessageCommandHandler,
+];

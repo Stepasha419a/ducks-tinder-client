@@ -36,11 +36,11 @@ export const InterestsForm: FC = (): ReactElement => {
               return (
                 <ListItem
                   onClick={() => toggleItem(item)}
-                  key={item.name}
+                  key={item}
                   extraClassName={styles.item}
                   xmark
                 >
-                  {item.name}
+                  {item}
                 </ListItem>
               );
             })

@@ -31,8 +31,8 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
         {INTERESTS_FOR_LOOP.map((item) => {
           return (
             <ListItem
-              onClick={() => forcedToggleInterest({ name: item })}
-              isActive={interests.includes({ name: item })}
+              onClick={() => forcedToggleInterest(item)}
+              isActive={interests.includes(item)}
               extraClassName={styles.item}
               key={item}
             >

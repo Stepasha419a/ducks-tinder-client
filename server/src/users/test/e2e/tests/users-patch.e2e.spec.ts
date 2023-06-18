@@ -102,12 +102,10 @@ describe('users (PATCH)', () => {
         interests: undefined,
       });
       expect(user.interests.length).toEqual(2);
-      expect(user.interests).toContainEqual({
-        name: UPDATE_USER_DTO.interests[0],
-      });
-      expect(user.interests).toContainEqual({
-        name: UPDATE_USER_DTO.interests[1],
-      });
+      expect(user.interests).toEqual([
+        UPDATE_USER_DTO.interests[0],
+        UPDATE_USER_DTO.interests[1],
+      ]);
     });
   });
 

@@ -13,6 +13,6 @@ export const authService = {
     return instance.post<User>('auth/login', { email, password });
   },
   async logout() {
-    return instance.post('auth/logout');
+    return instance.patch('auth/logout');
   },
 };

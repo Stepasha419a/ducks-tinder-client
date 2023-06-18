@@ -23,40 +23,4 @@ export class UsersService {
   async createUser(dto: CreateUserDto): Promise<UserDto> {
     return this.commandBus.execute(new CreateUserCommand(dto));
   }
-
-  // in progress (waiting for chats)
-  /* async acceptPair(user: User, userPairDto: UserPairDto): Promise<ShortUser[]> {
-    const pairs = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: { pairs: { select: { id: true } } },
-      })
-    ).pairs;
-
-    const userPair = await this.prismaService.user.findUnique({
-      where: { id: userPairDto.userPairId },
-    });
-
-    if (!userPair) {
-      throw new NotFoundException('Such user was not found');
-    }
-
-    if (pairs.find((pair) => pair.id == userPairDto.userPairId)) {
-      throw new NotFoundException('Pair with such an id already exists');
-    }
-    const updatedUser = await this.prismaService.user.update({
-      where: { id: user.id },
-      data: {
-        pairs: { connect: { id: userPair.id } },
-        checked: { connect: { id: userPair.id } },
-      },
-      select: {
-        pairs: {
-          select: UsersSelector.selectShortUser(),
-        },
-      },
-    });
-
-    return updatedUser.pairs;
-  } */
 }

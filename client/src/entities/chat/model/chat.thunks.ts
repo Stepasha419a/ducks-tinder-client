@@ -74,10 +74,11 @@ export const sendMessageThunk = createAsyncThunk(
   'chat/sendMessage',
   (content: string, { rejectWithValue, getState }) => {
     try {
-      const { user } = getState() as RootState;
+      const { user, chat } = getState() as RootState;
       const { currentUser } = user;
+      const { currentChatId } = chat;
 
-      chatService.sendMessage(content, currentUser.name, currentUser.id);
+      chatService.sendMessage(content, currentUser.id, currentChatId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

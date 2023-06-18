@@ -2,6 +2,7 @@ import type { ShortUser } from '../User/User';
 
 export interface SendMessage {
   text: string;
+  chatId: string;
   userId: string;
 }
 

@@ -1,4 +1,4 @@
-import type { InnerObjectName, Interest, User } from '@shared/api/interfaces';
+import type { InnerObjectName, User } from '@shared/api/interfaces';
 
 export interface Validation {
   min?: number;
@@ -39,6 +39,6 @@ export interface SettingFieldValues {
   input: string;
 }
 
-export interface SettingFieldInterestArray {
-  input: Interest[];
+export interface SettingFieldArrayValues {
+  input: string[];
 }

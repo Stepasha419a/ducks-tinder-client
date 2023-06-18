@@ -19,17 +19,18 @@ export const chatSocket: ChatSocket = {
       query: { chatId },
     });
 
-    this._socket.emit('connectChat');
+    this._socket.emit('connectChat', chatId);
 
     this._sockets.add(this._socket);
 
     // TODO: fix this return by adding some idk, methods that require callbacks on every event
     return this._socket;
   },
-  sendMessage(text: string, userId: string): void {
+  sendMessage(text: string, userId: string, chatId: string): void {
     const message: SendMessage = {
       text,
       userId,
+      chatId,
     };
     this._socket!.send(message);
   },

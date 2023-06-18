@@ -13,12 +13,7 @@ export const UserImage: FC<UserImageProps> = ({ setIsImageSetting }) => {
 
   return (
     <>
-      <Preview
-        user={currentUser}
-        isFull
-        extraClassName={styles.padding}
-        setIsFullPreview={() => setIsImageSetting(true)}
-      />
+      <Preview user={currentUser} isFull extraClassName={styles.padding} />
       <div className={styles.edit}>
         <Button
           onClick={() => setIsImageSetting(true)}

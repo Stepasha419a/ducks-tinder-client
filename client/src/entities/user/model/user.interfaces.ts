@@ -1,10 +1,10 @@
-import type { Interest, Range, ShortUser, User } from '@shared/api/interfaces';
+import type { Range, ShortUser, User } from '@shared/api/interfaces';
 
 export interface PairSorts {
   distance: number;
   age: Range;
   photos: number;
-  interests: Interest[];
+  interests: string[];
   account: string[];
 }
 

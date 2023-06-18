@@ -28,7 +28,7 @@ export const UserLinks = () => {
         >
           <Avatar
             userId={currentUser.id}
-            avatarUrl={currentUser.pictures[0].name}
+            avatarUrl={currentUser.pictures[0]?.name}
           />
           <div className={styles.name}>{currentUser.name}</div>
         </Link>

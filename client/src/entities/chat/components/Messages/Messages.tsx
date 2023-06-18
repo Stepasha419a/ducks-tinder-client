@@ -20,8 +20,8 @@ export const Messages = (): ReactElement => {
         const isOwn = message.userId === currentChatUserObj._id;
         const name = isOwn ? currentChatUserObj.name : chatMember.name;
         const avatar = isOwn
-          ? currentChatUserObj.avatar.name
-          : chatMember.pictures[0].name;
+          ? currentChatUserObj.avatar?.name
+          : chatMember.pictures[0]?.name;
         return (
           <Message
             key={message.id}

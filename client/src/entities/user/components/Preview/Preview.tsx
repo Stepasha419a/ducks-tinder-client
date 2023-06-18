@@ -95,7 +95,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
             <div className={styles.title}>Interests</div>
             <div className={styles.items}>
               {interestsForLoop.map((item) => {
-                return <ListItem key={item.name}>{item.name}</ListItem>;
+                return <ListItem key={item}>{item}</ListItem>;
               })}
             </div>
           </div>

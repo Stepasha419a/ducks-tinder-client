@@ -139,14 +139,4 @@ export class UsersController {
   removeAllPairs(@Req() req: UserRequest) {
     return this.commandBus.execute(new RemoveAllPairsCommand(req.user));
   }
-
-  // TODO: finish it when finish with chats logic
-  /* @Post('pairs')
-  @HttpCode(HttpStatus.OK)
-  acceptPair(
-    @Req() req: UserRequest,
-    @Body() dto: UserPairDto,
-  ): Promise<ShortUser[]> {
-    return this.usersService.acceptPair(req.user, dto);
-  } */
 }

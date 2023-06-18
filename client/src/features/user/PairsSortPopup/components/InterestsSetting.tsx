@@ -1,12 +1,11 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { INTERESTS_FOR_LOOP } from '@entities/user/model';
 import { ListItem } from '@shared/ui';
-import type { Interest } from '@shared/api/interfaces';
 import styles from '../PairsSortPopup.module.scss';
 
 interface InterestsSettingProps {
-  interests: Interest[];
-  toggleInterest: (item: Interest) => void;
+  interests: string[];
+  toggleInterest: (item: string) => void;
   setIsInterestsSettingPopupOpen: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -22,8 +21,8 @@ export const InterestsSetting: FC<InterestsSettingProps> = ({
         {INTERESTS_FOR_LOOP.slice(0, 3).map((item) => {
           return (
             <ListItem
-              onClick={() => toggleInterest({ name: item })}
-              isActive={interests.includes({ name: item })}
+              onClick={() => toggleInterest(item)}
+              isActive={interests.includes(item)}
               key={item}
             >
               {item}

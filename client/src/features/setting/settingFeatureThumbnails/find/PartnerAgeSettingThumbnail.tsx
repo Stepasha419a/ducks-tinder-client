@@ -21,15 +21,21 @@ export const PartnerAgeSettingThumbnail = () => {
   });
 
   const partnerAgeHandler = (): void => {
-    dispatch(
-      submitSettingsThunk({
-        inputName: 'age',
-        changedData: {
-          preferAgeFrom: preferAgeSetting.preferAgeFrom,
-          preferAgeTo: preferAgeSetting.preferAgeTo,
-        },
-      })
-    );
+    if (preferAgeSetting.preferAgeFrom !== preferAgeFrom) {
+      dispatch(
+        submitSettingsThunk({
+          inputName: 'preferAgeFrom',
+          changedData: preferAgeSetting.preferAgeFrom,
+        })
+      );
+    } else if (preferAgeSetting.preferAgeTo !== preferAgeTo) {
+      dispatch(
+        submitSettingsThunk({
+          inputName: 'preferAgeTo',
+          changedData: preferAgeSetting.preferAgeTo,
+        })
+      );
+    }
   };
 
   return (

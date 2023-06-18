@@ -1,11 +1,10 @@
 import { useController, useForm } from 'react-hook-form';
 import { useDefaultValues } from '@entities/setting/hooks';
-import type { SettingFieldInterestArray } from '@entities/setting/model';
+import type { SettingFieldArrayValues } from '@entities/setting/model';
 import {
   submitSettingsThunk,
   setIsUserInfoSetting,
 } from '@entities/setting/model';
-import type { Interest } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
 
 export function useSelectForm() {
@@ -18,8 +17,8 @@ export function useSelectForm() {
     handleSubmit,
     control,
     reset,
-  } = useForm<SettingFieldInterestArray>({
-    defaultValues: { input: useDefaultValues() as Interest[] },
+  } = useForm<SettingFieldArrayValues>({
+    defaultValues: { input: useDefaultValues() as string[] },
     mode: 'onChange',
   });
 
@@ -33,11 +32,9 @@ export function useSelectForm() {
     },
   });
 
-  const toggleItem = (item: Interest): void => {
+  const toggleItem = (item: string): void => {
     if (items.includes(item)) {
-      setItems(
-        items.filter((interest: Interest) => interest.name !== item.name)
-      );
+      setItems(items.filter((interest: string) => interest !== item));
     } else {
       setItems([...items, item]);
     }
@@ -48,7 +45,7 @@ export function useSelectForm() {
     reset();
   };
 
-  const submitHandler = handleSubmit((data: SettingFieldInterestArray) => {
+  const submitHandler = handleSubmit((data: SettingFieldArrayValues) => {
     dispatch(submitSettingsThunk({ changedData: data.input }));
   });
 

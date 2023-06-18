@@ -13,8 +13,8 @@ export const chatService = {
   connectChat(chatId: string): Socket {
     return chatSocket.connectChat(chatId);
   },
-  sendMessage(content: string, username: string, userId: string): void {
-    chatSocket.sendMessage(content, username, userId);
+  sendMessage(content: string, userId: string, chatId: string): void {
+    chatSocket.sendMessage(content, userId, chatId);
   },
   disconnectChat(): void {
     chatSocket.disconnectChat();

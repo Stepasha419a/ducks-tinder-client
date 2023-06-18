@@ -1,42 +1,46 @@
-import { ChatsService } from './chats.service';
+import { CommandBus } from '@nestjs/cqrs';
+import { Server, Socket } from 'socket.io';
+import { ConnectedSocket, MessageBody } from '@nestjs/websockets';
 import {
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Server, Socket } from 'socket.io';
+import { SendMessageDto } from './dto';
+import { SendMessageCommand } from './commands';
 
 @WebSocketGateway({ namespace: '/chat/socket', cors: '*:*', origin: true })
 export class ChatsGateway {
-  constructor(private readonly chatService: ChatsService) {}
+  constructor(private readonly commandBus: CommandBus) {}
 
   @WebSocketServer()
   wss: Server;
 
-  /* @SubscribeMessage('message')
-  handleMessage(client: Socket, message: ISendMessage) {
-    const chatId = this.chatService.parseUrl(client.request.url);
-
-    this.wss.to(chatId).emit('message', message);
-
-    this.messagesService.sendMessage(chatId, message);
-  }
-
   @SubscribeMessage('connectChat')
-  handleConnectChat(client: Socket) {
-    const chatId = this.chatService.parseUrl(client.request.url);
-
+  handleConnectChat(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() chatId: string,
+  ) {
     client.join(chatId);
 
     client.emit('connected', chatId);
   }
 
   @SubscribeMessage('disconnectChat')
-  handleDisconnectChat(client: Socket) {
-    const chatId = this.chatService.parseUrl(client.request.url);
+  handleDisconnectChat(@ConnectedSocket() client: Socket) {
+    const newStr = client.request.url.slice(
+      client.request.url.indexOf('=') + 1,
+    );
+    const chatId = newStr.slice(0, newStr.indexOf('&'));
 
     client.leave(chatId);
-
     client.emit('disconnected', chatId);
-  } */
+  }
+
+  @SubscribeMessage('message')
+  async handleMessage(@MessageBody() dto: SendMessageDto) {
+    const message = await this.commandBus.execute(new SendMessageCommand(dto));
+
+    this.wss.to(dto.chatId).emit('message', message);
+  }
 }

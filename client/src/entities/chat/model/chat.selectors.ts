@@ -1,10 +1,12 @@
+import type { Picture } from '@/shared/api/interfaces';
 import { createSelector } from '@reduxjs/toolkit';
 
 export const selectUserChat = createSelector(
   [
     (state: RootState) => state.user.currentUser.id,
     (state: RootState) => state.user.currentUser.name,
-    (state: RootState) => state.user.currentUser.pictures[0],
+    (state: RootState) =>
+      state.user.currentUser.pictures[0] as Picture | undefined,
     (state: RootState) => state.chat.currentMessages,
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,

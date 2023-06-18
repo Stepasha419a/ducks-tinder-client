@@ -48,6 +48,10 @@ describe('when get user by email is called', () => {
   });
 
   it('should return a user', async () => {
-    expect(user).toEqual({ ...userStub(), _count: { pairFor: 0 } });
+    expect(user).toEqual({
+      ...userStub(),
+      _count: { pairFor: 0 },
+      interests: [{ id: 'interest-id-1', name: 'programming' }],
+    });
   });
 });

@@ -56,6 +56,6 @@ export const userService = {
   },
 
   async returnUser() {
-    return instance.post<undefined>('users/return');
+    return instance.put<undefined>('users/return');
   },
 };

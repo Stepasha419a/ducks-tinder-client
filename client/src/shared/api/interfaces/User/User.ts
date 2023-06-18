@@ -5,10 +5,6 @@ export interface Picture {
   order: number;
 }
 
-export interface Interest {
-  name: string;
-}
-
 export interface User {
   id: string;
   email: string;
@@ -18,7 +14,7 @@ export interface User {
   age: number;
   sex: 'male' | 'female';
   isActivated: boolean;
-  interests: Interest[];
+  interests: string[];
   place: string;
   distance: number;
   usersOnlyInDistance: boolean;
@@ -36,7 +32,7 @@ export interface ShortUser {
   distance: number;
   place: string;
   isActivated: boolean;
-  interests: Interest[];
+  interests: string[];
   pictures: Picture[];
 }
 
@@ -68,14 +64,6 @@ export interface QuerySorts {
   userIds?: string[];
 }
 
-type PreferAgeType = { preferAgeFrom: number; preferAgeTo: number };
-
-export type ChangedData =
-  | string
-  | number
-  | boolean
-  | Interest[]
-  | Range
-  | PreferAgeType;
+export type ChangedData = string | string[] | number | boolean;
 
 export type InnerObjectName = 'partnerSettings' | null;
