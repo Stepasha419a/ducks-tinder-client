@@ -57,6 +57,7 @@ describe('auth-controller', () => {
 
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
+      responseMock.json = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
@@ -106,6 +107,7 @@ describe('auth-controller', () => {
 
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
+      responseMock.json = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
@@ -194,6 +196,7 @@ describe('auth-controller', () => {
 
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
+      responseMock.json = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {

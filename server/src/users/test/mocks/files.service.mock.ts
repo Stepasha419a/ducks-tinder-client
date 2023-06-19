@@ -1,4 +1,4 @@
 export const FilesServiceMock = jest.fn().mockReturnValue({
-  savePicture: jest.fn().mockResolvedValue('picture-name'),
+  savePicture: jest.fn(),
   deletePicture: jest.fn(),
 });

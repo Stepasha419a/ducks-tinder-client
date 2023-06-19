@@ -33,22 +33,24 @@ describe('when logout is called', () => {
       moduleRef.get<LogoutCommandHandler>(LogoutCommandHandler);
   });
 
-  let response;
+  describe('when it is called correctly', () => {
+    let response;
 
-  beforeEach(async () => {
-    jest.clearAllMocks();
-    response = await logoutCommandHandler.execute(
-      new LogoutCommand(userDataStub().refreshToken),
-    );
-  });
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      response = await logoutCommandHandler.execute(
+        new LogoutCommand(userDataStub().refreshToken),
+      );
+    });
 
-  it('should call tokensService removeToken', () => {
-    expect(tokensService.removeToken).toBeCalledWith(
-      userDataStub().refreshToken,
-    );
-  });
+    it('should call tokensService removeToken', () => {
+      expect(tokensService.removeToken).toBeCalledWith(
+        userDataStub().refreshToken,
+      );
+    });
 
-  it('should return undefined', () => {
-    expect(response).toEqual(undefined);
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
+    });
   });
 });

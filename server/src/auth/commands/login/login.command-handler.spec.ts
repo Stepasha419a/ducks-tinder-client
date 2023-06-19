@@ -51,6 +51,10 @@ describe('when login is called', () => {
           '$2a$07$HQtmk3r9h1Gg1YiOLO67duUs3GPDg5.KKCtPSm/152gqIALiRvs6q',
         interests: [{ name: 'programming' }],
       });
+      tokensService.generateTokens = jest.fn().mockResolvedValue({
+        refreshToken: userDataStub().refreshToken,
+        accessToken: userDataStub().accessToken,
+      });
     });
 
     let userData: UserData;

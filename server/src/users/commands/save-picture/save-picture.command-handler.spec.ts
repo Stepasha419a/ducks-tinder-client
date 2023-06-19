@@ -35,9 +35,25 @@ describe('when save picture is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
-      prismaService.user.findUnique = jest
-        .fn()
-        .mockResolvedValue({ ...userDtoStub(), pairs: [userDtoStub().firstPair] });
+      prismaService.user.findUnique = jest.fn().mockResolvedValue({
+        ...userDtoStub(),
+        pairs: [userDtoStub().firstPair],
+      });
+      prismaService.picture.findMany = jest.fn().mockResolvedValue([
+        {
+          id: '123123',
+          name: '123.jpg',
+          userId: userDtoStub().id,
+          order: 0,
+        },
+        {
+          id: '456456',
+          name: '456.jpg',
+          userId: userDtoStub().id,
+          order: 1,
+        },
+      ]);
+      filesService.savePicture = jest.fn().mockResolvedValue('picture-name');
     });
 
     let user: UserDto;

@@ -25,70 +25,59 @@ describe('when return user is called', () => {
     );
   });
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  let response;
-
-  let oldUserFindUniqueMock;
-  let oldCheckedUsersFindFirstMock;
-
-  beforeAll(() => {
-    oldUserFindUniqueMock = prismaService.user.findUnique;
-    oldCheckedUsersFindFirstMock = prismaService.checkedUsers.findFirst;
-    prismaService.user.findUnique = jest
-      .fn()
-      .mockResolvedValue({ pairFor: [{ id: userDtoStub().id }] });
-    prismaService.checkedUsers.findFirst = jest.fn().mockResolvedValue({
-      checkedId: userDtoStub().id,
-      wasCheckedId: requestUserStub().id,
-    });
-  });
-
-  beforeEach(async () => {
-    response = await returnUserCommandHandler.execute(
-      new ReturnUserCommand(requestUserStub()),
-    );
-  });
-
-  afterAll(() => {
-    prismaService.user.findUnique = oldUserFindUniqueMock;
-    prismaService.checkedUsers.findFirst = oldCheckedUsersFindFirstMock;
-  });
-
-  it('should call user find unique', () => {
-    expect(prismaService.user.findUnique).toBeCalledTimes(1);
-    expect(prismaService.user.findUnique).toBeCalledWith({
-      where: { id: requestUserStub().id },
-      select: { pairFor: { select: { id: true } } },
-    });
-  });
-
-  it('should call checkedUsers find first', () => {
-    expect(prismaService.checkedUsers.findFirst).toBeCalledTimes(1);
-    expect(prismaService.checkedUsers.findFirst).toBeCalledWith({
-      where: {
+  describe('when it is called correctly', () => {
+    beforeAll(() => {
+      prismaService.user.findUnique = jest
+        .fn()
+        .mockResolvedValue({ pairFor: [{ id: userDtoStub().id }] });
+      prismaService.checkedUsers.findFirst = jest.fn().mockResolvedValue({
+        checkedId: userDtoStub().id,
         wasCheckedId: requestUserStub().id,
-        checked: { id: { notIn: [userDtoStub().id] } },
-      },
-      orderBy: { createdAt: 'desc' },
+      });
     });
-  });
 
-  it('should call checkedUsers delete', () => {
-    expect(prismaService.checkedUsers.delete).toBeCalledTimes(1);
-    expect(prismaService.checkedUsers.delete).toBeCalledWith({
-      where: {
-        checkedId_wasCheckedId: {
-          checkedId: userDtoStub().id,
+    let response;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      response = await returnUserCommandHandler.execute(
+        new ReturnUserCommand(requestUserStub()),
+      );
+    });
+
+    it('should call user find unique', () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
+        where: { id: requestUserStub().id },
+        select: { pairFor: { select: { id: true } } },
+      });
+    });
+
+    it('should call checkedUsers find first', () => {
+      expect(prismaService.checkedUsers.findFirst).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.findFirst).toBeCalledWith({
+        where: {
           wasCheckedId: requestUserStub().id,
+          checked: { id: { notIn: [userDtoStub().id] } },
         },
-      },
+        orderBy: { createdAt: 'desc' },
+      });
     });
-  });
 
-  it('should return undefined', () => {
-    expect(response).toEqual(undefined);
+    it('should call checkedUsers delete', () => {
+      expect(prismaService.checkedUsers.delete).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.delete).toBeCalledWith({
+        where: {
+          checkedId_wasCheckedId: {
+            checkedId: userDtoStub().id,
+            wasCheckedId: requestUserStub().id,
+          },
+        },
+      });
+    });
+
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
+    });
   });
 });

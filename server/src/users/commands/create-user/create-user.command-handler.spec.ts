@@ -34,6 +34,7 @@ describe('when delete pair is called', () => {
         ...userDtoStub(),
         pairs: [userDtoStub().firstPair],
       });
+      prismaService.user.count = jest.fn().mockResolvedValue(5);
     });
 
     let user: UserDto;

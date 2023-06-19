@@ -28,16 +28,20 @@ describe('when get user is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
-      prismaService.user.findUnique = jest
-        .fn()
-        .mockResolvedValue({ ...userDtoStub(), pairs: [userDtoStub().firstPair] });
+      prismaService.user.findUnique = jest.fn().mockResolvedValue({
+        ...userDtoStub(),
+        pairs: [userDtoStub().firstPair],
+      });
+      prismaService.user.count = jest.fn().mockResolvedValue(5);
     });
 
     let user: UserDto;
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      user = await getUserQueryHandler.execute(new GetUserQuery(userDtoStub().id));
+      user = await getUserQueryHandler.execute(
+        new GetUserQuery(userDtoStub().id),
+      );
     });
 
     it('should call count', async () => {

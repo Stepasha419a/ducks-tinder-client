@@ -37,6 +37,7 @@ describe('when patch is called', () => {
         ...userDtoStub(),
         pairs: [userDtoStub().firstPair],
       });
+      prismaService.user.count = jest.fn().mockResolvedValue(5);
       prismaService.interest.findMany = jest.fn().mockResolvedValue([
         { id: 'interest-id-2', name: UPDATE_USER_DTO.interests[0] },
         { id: 'interest-id-3', name: UPDATE_USER_DTO.interests[1] },

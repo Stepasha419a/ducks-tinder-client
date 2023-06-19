@@ -40,44 +40,45 @@ describe('when registration is called', () => {
     registerCommandHandler = moduleRef.get<RegisterCommandHandler>(
       RegisterCommandHandler,
     );
-
-    usersService.getUserByEmail = jest.fn().mockResolvedValue(undefined);
   });
 
-  afterAll(() => {
-    usersService.getUserByEmail = jest.fn().mockResolvedValue({
-      ...userDtoStub(),
-      _count: { pairFor: 0 },
-      password: '$2a$07$HQtmk3r9h1Gg1YiOLO67duUs3GPDg5.KKCtPSm/152gqIALiRvs6q',
+  describe('when it is called correctly', () => {
+    beforeAll(() => {
+      usersService.getUserByEmail = jest.fn().mockResolvedValue(undefined);
+      usersService.createUser = jest.fn().mockResolvedValue(userDtoStub());
+      tokensService.generateTokens = jest.fn().mockResolvedValue({
+        refreshToken: userDataStub().refreshToken,
+        accessToken: userDataStub().accessToken,
+      });
     });
-  });
 
-  let userData: UserData;
+    let userData: UserData;
 
-  beforeEach(async () => {
-    jest.clearAllMocks();
-    userData = await registerCommandHandler.execute(
-      new RegisterCommand(CREATE_USER_DTO),
-    );
-  });
-
-  it('should call usersService getUserByEmail', () => {
-    expect(usersService.getUserByEmail).toBeCalledWith(CREATE_USER_DTO.email);
-  });
-
-  it('should call usersService create', () => {
-    // password is custom with bcrypt
-    expect(usersService.createUser).toBeCalledTimes(1);
-  });
-
-  it('should call tokensService generateTokens', () => {
-    expect(tokensService.generateTokens).toBeCalledWith({
-      id: userDtoStub().id,
-      email: userDtoStub().email,
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      userData = await registerCommandHandler.execute(
+        new RegisterCommand(CREATE_USER_DTO),
+      );
     });
-  });
 
-  it('should return userData', () => {
-    expect(userData).toEqual(userDataStub());
+    it('should call usersService getUserByEmail', () => {
+      expect(usersService.getUserByEmail).toBeCalledWith(CREATE_USER_DTO.email);
+    });
+
+    it('should call usersService create', () => {
+      // password is custom with bcrypt
+      expect(usersService.createUser).toBeCalledTimes(1);
+    });
+
+    it('should call tokensService generateTokens', () => {
+      expect(tokensService.generateTokens).toBeCalledWith({
+        id: userDtoStub().id,
+        email: userDtoStub().email,
+      });
+    });
+
+    it('should return userData', () => {
+      expect(userData).toEqual(userDataStub());
+    });
   });
 });

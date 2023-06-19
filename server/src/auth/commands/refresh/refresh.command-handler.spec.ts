@@ -43,31 +43,44 @@ describe('when refresh is called', () => {
 
   let userData: UserData;
 
-  beforeEach(async () => {
-    jest.clearAllMocks();
-    userData = await refreshCommandHandler.execute(
-      new RefreshCommand(userDataStub().refreshToken),
-    );
-  });
-
-  it('should call tokensService validateRefreshToken', () => {
-    expect(tokensService.validateRefreshToken).toBeCalledWith(
-      userDataStub().refreshToken,
-    );
-  });
-
-  it('should call usersService getUser', () => {
-    expect(usersService.getUser).toBeCalledWith(userDtoStub().id);
-  });
-
-  it('should call tokensService generateTokens', () => {
-    expect(tokensService.generateTokens).toBeCalledWith({
-      id: userDtoStub().id,
-      email: userDtoStub().email,
+  describe('when it is called correctly', () => {
+    beforeAll(async () => {
+      usersService.getUser = jest.fn().mockResolvedValue(userDtoStub());
+      tokensService.generateTokens = jest.fn().mockResolvedValue({
+        refreshToken: userDataStub().refreshToken,
+        accessToken: userDataStub().accessToken,
+      });
+      tokensService.validateRefreshToken = jest.fn().mockResolvedValue({
+        id: userDtoStub().id,
+      });
     });
-  });
 
-  it('should return userData', () => {
-    expect(userData).toEqual(userDataStub());
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      userData = await refreshCommandHandler.execute(
+        new RefreshCommand(userDataStub().refreshToken),
+      );
+    });
+
+    it('should call tokensService validateRefreshToken', () => {
+      expect(tokensService.validateRefreshToken).toBeCalledWith(
+        userDataStub().refreshToken,
+      );
+    });
+
+    it('should call usersService getUser', () => {
+      expect(usersService.getUser).toBeCalledWith(userDtoStub().id);
+    });
+
+    it('should call tokensService generateTokens', () => {
+      expect(tokensService.generateTokens).toBeCalledWith({
+        id: userDtoStub().id,
+        email: userDtoStub().email,
+      });
+    });
+
+    it('should return userData', () => {
+      expect(userData).toEqual(userDataStub());
+    });
   });
 });

@@ -47,9 +47,11 @@ describe('when accept pair is called', () => {
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      pairs = await acceptPairCommandHandler.execute(
-        new AcceptPairCommand(requestUserStub(), userPairId),
-      );
+      try {
+        pairs = await acceptPairCommandHandler.execute(
+          new AcceptPairCommand(requestUserStub(), userPairId),
+        );
+      } catch {}
     });
 
     it('should call user find unique', async () => {

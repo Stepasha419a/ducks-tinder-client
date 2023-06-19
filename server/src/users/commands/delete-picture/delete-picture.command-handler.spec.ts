@@ -38,9 +38,30 @@ describe('when delete picture is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
-      prismaService.user.findUnique = jest
-        .fn()
-        .mockResolvedValue({ ...userDtoStub(), pairs: [userDtoStub().firstPair] });
+      prismaService.user.findUnique = jest.fn().mockResolvedValue({
+        ...userDtoStub(),
+        pairs: [userDtoStub().firstPair],
+      });
+      prismaService.picture.findFirst = jest.fn().mockResolvedValue({
+        id: '123123',
+        name: '123.jpg',
+        userId: userDtoStub().id,
+        order: 0,
+      });
+      prismaService.picture.findMany = jest.fn().mockResolvedValue([
+        {
+          id: '123123',
+          name: '123.jpg',
+          userId: userDtoStub().id,
+          order: 0,
+        },
+        {
+          id: '456456',
+          name: '456.jpg',
+          userId: userDtoStub().id,
+          order: 1,
+        },
+      ]);
     });
 
     beforeEach(async () => {

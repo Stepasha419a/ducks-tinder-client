@@ -38,40 +38,46 @@ describe('when get sorted is called', () => {
     }));
   });
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  beforeEach(async () => {
-    user = await getSortedQueryHandler.execute(
-      new GetSortedQuery(RequestMock().user),
-    );
-  });
-
-  it('should call checked users find many', async () => {
-    expect(prismaService.checkedUsers.findMany).toBeCalledTimes(1);
-    expect(prismaService.checkedUsers.findMany).toBeCalledWith({
-      where: {
-        OR: [
-          { checkedId: shortUserStub().id },
-          { wasCheckedId: shortUserStub().id },
-        ],
-      },
-      select: {
-        checked: { select: { id: true } },
-        wasChecked: { select: { id: true } },
-      },
+  describe('when it is called correctly', () => {
+    beforeAll(() => {
+      prismaService.user.findFirst = jest
+        .fn()
+        .mockResolvedValue(shortUserStub());
+      prismaService.checkedUsers.findMany = jest.fn().mockResolvedValue([]);
     });
-  });
 
-  it('should call find first', async () => {
-    expect(prismaService.user.findFirst).toBeCalledTimes(1);
-    expect(prismaService.user.findFirst).toBeCalledWith(
-      GET_SORTED_FIND_FIRST_CALLED,
-    );
-  });
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      user = await getSortedQueryHandler.execute(
+        new GetSortedQuery(RequestMock().user),
+      );
+    });
 
-  it('should return a short user', async () => {
-    expect(user).toEqual(shortUserStub());
+    it('should call checked users find many', async () => {
+      expect(prismaService.checkedUsers.findMany).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.findMany).toBeCalledWith({
+        where: {
+          OR: [
+            { checkedId: shortUserStub().id },
+            { wasCheckedId: shortUserStub().id },
+          ],
+        },
+        select: {
+          checked: { select: { id: true } },
+          wasChecked: { select: { id: true } },
+        },
+      });
+    });
+
+    it('should call find first', async () => {
+      expect(prismaService.user.findFirst).toBeCalledTimes(1);
+      expect(prismaService.user.findFirst).toBeCalledWith(
+        GET_SORTED_FIND_FIRST_CALLED,
+      );
+    });
+
+    it('should return a short user', async () => {
+      expect(user).toEqual(shortUserStub());
+    });
   });
 });
