@@ -8,7 +8,7 @@ import {
 } from 'auth/test/values/auth.const.dto';
 import { Response } from 'express';
 import { CommandBusMock, RequestMock, ResponseMock } from 'auth/test/mocks';
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { userDataStub } from 'auth/test/stubs';
 import { ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
 import { CommandBus, CqrsModule } from '@nestjs/cqrs';
@@ -97,7 +97,7 @@ describe('auth-controller', () => {
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 
@@ -146,7 +146,7 @@ describe('auth-controller', () => {
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 

@@ -8,7 +8,7 @@ import { TokensServiceMock, UsersServiceMock } from 'auth/test/mocks';
 import { UserData } from 'auth/auth.interface';
 import { RefreshCommand } from './refresh.command';
 import { userDataStub } from 'auth/test/stubs';
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { RefreshCommandHandler } from './refresh.command-handler';
 
 describe('when refresh is called', () => {
@@ -57,13 +57,13 @@ describe('when refresh is called', () => {
   });
 
   it('should call usersService getUser', () => {
-    expect(usersService.getUser).toBeCalledWith(userStub().id);
+    expect(usersService.getUser).toBeCalledWith(userDtoStub().id);
   });
 
   it('should call tokensService generateTokens', () => {
     expect(tokensService.generateTokens).toBeCalledWith({
-      id: userStub().id,
-      email: userStub().email,
+      id: userDtoStub().id,
+      email: userDtoStub().email,
     });
   });
 

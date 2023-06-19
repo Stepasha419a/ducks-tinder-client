@@ -48,12 +48,16 @@ export class PatchUserCommandHandler
       );
     }
 
+    const pairsCount = await this.prismaService.user.count({
+      where: { pairFor: { some: { id: user.id } } },
+    });
+
     const updatedUser = await this.prismaService.user.update({
       where: { id: user.id },
       data: { ...updateUserDto },
       include: UsersSelector.selectUser(),
     });
 
-    return new UserDto(updatedUser);
+    return new UserDto({ ...updatedUser, pairsCount });
   }
 }

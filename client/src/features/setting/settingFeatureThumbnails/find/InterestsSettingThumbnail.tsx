@@ -23,7 +23,7 @@ export const InterestsSettingThumbnail = () => {
       value={
         !interests.length
           ? 'Empty interests'
-          : `${interests[0]} and so on...`
+          : `${interests[0].name} and so on...`
       }
       isPointer
       isError={errorFields.includes('interests')}

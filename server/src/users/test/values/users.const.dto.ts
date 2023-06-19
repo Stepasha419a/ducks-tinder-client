@@ -4,10 +4,10 @@ import {
   MixPicturesDto,
   UpdateUserDto,
 } from 'users/dto';
-import { userStub } from '../stubs';
+import { userDtoStub } from '../stubs';
 
 export const USER_SORTS_DATA = {
-  ...userStub(),
+  ...userDtoStub(),
   distance: 100,
   onlyNear: true,
   age: 20,
@@ -23,9 +23,9 @@ export const USER_SORTS_DATA = {
 };
 
 export const CREATE_USER_DTO: CreateUserDto = {
-  email: userStub().email,
+  email: userDtoStub().email,
   password: '123123123',
-  name: userStub().name,
+  name: userDtoStub().name,
 };
 
 export const UPDATE_USER_DTO: UpdateUserDto = {

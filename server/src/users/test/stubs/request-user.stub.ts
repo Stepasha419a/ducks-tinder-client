@@ -1,8 +1,8 @@
 import { User } from '@prisma/client';
-import { userStub } from './user.stub';
+import { userDtoStub } from './user-dto.stub';
 
 export const requestUserStub = (): User => {
-  const userStubObj = userStub();
+  const userStubObj = userDtoStub();
 
   return {
     id: 'sdfhsdghj34259034578923',

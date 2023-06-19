@@ -1,7 +1,7 @@
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 
 export const userDataStub = () => ({
-  user: userStub(),
+  user: userDtoStub(),
   accessToken: 'access-token',
   refreshToken: 'refresh-token',
 });

@@ -10,7 +10,7 @@ import {
   CommandBusMock,
   QueryBusMock,
 } from 'users/test/mocks';
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { CREATE_USER_DTO } from 'users/test/values/users.const.dto';
 import { CreateUserCommand } from 'users/commands';
 import { GetUserByEmailQuery, GetUserQuery } from 'users/queries';
@@ -52,20 +52,22 @@ describe('users-service', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      queryBus.execute = jest.fn().mockResolvedValue(userStub());
+      queryBus.execute = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
-      user = await service.getUser(userStub().id);
+      user = await service.getUser(userDtoStub().id);
     });
 
     it('should call command bus execute', () => {
       expect(queryBus.execute).toBeCalledTimes(1);
-      expect(queryBus.execute).toBeCalledWith(new GetUserQuery(userStub().id));
+      expect(queryBus.execute).toBeCalledWith(
+        new GetUserQuery(userDtoStub().id),
+      );
     });
 
     it('should return a short user', async () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 
@@ -73,22 +75,22 @@ describe('users-service', () => {
     let user: User;
 
     beforeAll(() => {
-      queryBus.execute = jest.fn().mockResolvedValue(userStub());
+      queryBus.execute = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
-      user = await service.getUserByEmail(userStub().email);
+      user = await service.getUserByEmail(userDtoStub().email);
     });
 
     it('should call command bus execute', () => {
       expect(queryBus.execute).toBeCalledTimes(1);
       expect(queryBus.execute).toBeCalledWith(
-        new GetUserByEmailQuery(userStub().email),
+        new GetUserByEmailQuery(userDtoStub().email),
       );
     });
 
     it('should return a user', async () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 
@@ -96,7 +98,7 @@ describe('users-service', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
@@ -111,7 +113,7 @@ describe('users-service', () => {
     });
 
     it('should return a user', async () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 });

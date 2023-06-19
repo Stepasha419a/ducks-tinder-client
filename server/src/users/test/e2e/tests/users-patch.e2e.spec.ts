@@ -103,8 +103,8 @@ describe('users (PATCH)', () => {
       });
       expect(user.interests.length).toEqual(2);
       expect(user.interests).toEqual([
-        UPDATE_USER_DTO.interests[0],
-        UPDATE_USER_DTO.interests[1],
+        { name: UPDATE_USER_DTO.interests[0] },
+        { name: UPDATE_USER_DTO.interests[1] },
       ]);
     });
   });

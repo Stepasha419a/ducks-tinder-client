@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { ShortUser, User } from '@shared/api/interfaces';
 import {
   acceptPairThunk,
-  deletePairThunk,
+  refusePairThunk,
   deleteUserImage,
   getUserPairsThunk,
   mixUserImages,
@@ -18,7 +18,6 @@ const initialState: UserInitialState = {
   currentUser: {} as User,
   currentPair: null,
   pairs: [],
-  pairsCount: null,
   pairSorts: INITIAL_SORTS,
   profileSetting: {
     imageURL: null,
@@ -54,15 +53,17 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getUserPairsThunk.fulfilled, (state, action) => {
-        state.pairs = action.payload;
+      .addCase(getUserPairsThunk.fulfilled, (state, { payload }) => {
+        state.pairs = payload;
       })
       .addCase(acceptPairThunk.fulfilled, (state, { payload }) => {
         state.pairs = payload;
+        state.currentUser.pairsCount = payload.length;
         state.currentPair = null;
       })
-      .addCase(deletePairThunk.fulfilled, (state, { payload }) => {
+      .addCase(refusePairThunk.fulfilled, (state, { payload }) => {
         state.pairs = payload;
+        state.currentUser.pairsCount = payload.length;
         state.currentPair = null;
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
@@ -78,7 +79,7 @@ const userSlice = createSlice({
       })
       .addCase(mixUserImages.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
-      })
+      });
   },
 });
 

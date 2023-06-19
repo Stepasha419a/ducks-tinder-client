@@ -1,10 +1,10 @@
-import type { Range, ShortUser, User } from '@shared/api/interfaces';
+import type { Interest, Range, ShortUser, User } from '@shared/api/interfaces';
 
 export interface PairSorts {
   distance: number;
   age: Range;
   photos: number;
-  interests: string[];
+  interests: Interest[];
   account: string[];
 }
 
@@ -14,7 +14,6 @@ export interface UserInitialState {
   currentUser: User;
   currentPair: ShortUser | null;
   pairs: ShortUser[];
-  pairsCount: number | null;
   pairSorts: PairSorts;
   profileSetting: {
     imageURL: string | null;

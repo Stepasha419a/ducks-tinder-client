@@ -5,7 +5,7 @@ import { NestApplication } from '@nestjs/core';
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'app.module';
 import prismaClient from 'prisma/test/prisma-client';
-import { newUserStub, userStub } from 'users/test/stubs';
+import { newUserStub, userDtoStub } from 'users/test/stubs';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { prepareAfter, prepareBefore } from './preparations';
@@ -56,7 +56,7 @@ describe('auth-e2e', () => {
         response = await request(httpServer).post('/auth/registration').send({
           email: '789@gmail.com',
           password: '123123123',
-          name: userStub().name,
+          name: userDtoStub().name,
         });
       });
 
@@ -65,7 +65,7 @@ describe('auth-e2e', () => {
           ...newUserStub(),
           id: response.body.id,
           email: '789@gmail.com',
-          name: userStub().name,
+          name: userDtoStub().name,
         });
       });
 
@@ -83,7 +83,7 @@ describe('auth-e2e', () => {
         response = await request(httpServer).post('/auth/registration').send({
           email: authUserStub().email,
           password: '123123123',
-          name: userStub().name,
+          name: userDtoStub().name,
         });
       });
 
@@ -114,7 +114,7 @@ describe('auth-e2e', () => {
           ...newUserStub(),
           id: authUserStub().id,
           email: authUserStub().email,
-          name: userStub().name,
+          name: userDtoStub().name,
         });
       });
 
@@ -308,7 +308,7 @@ describe('auth-e2e', () => {
           ...newUserStub(),
           id: authUserStub().id,
           email: authUserStub().email,
-          name: userStub().name,
+          name: userDtoStub().name,
         });
       });
     });
@@ -368,7 +368,7 @@ describe('auth-e2e', () => {
           ...newUserStub(),
           id: authUserStub().id,
           email: authUserStub().email,
-          name: userStub().name,
+          name: userDtoStub().name,
         });
       });
     });

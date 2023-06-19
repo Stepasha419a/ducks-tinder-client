@@ -88,14 +88,18 @@ export const Preview: FC<PreviewPropsInterface> = ({
       </div>
       {isFull && (
         <>
-          <hr className={styles.separator} />
-          <div className={styles.description}>{user.description}</div>
+          {user.description && (
+            <>
+              <hr className={styles.separator} />
+              <div className={styles.description}>{user.description}</div>
+            </>
+          )}
           <hr className={styles.separator} />
           <div className={styles.interests}>
             <div className={styles.title}>Interests</div>
             <div className={styles.items}>
               {interestsForLoop.map((item) => {
-                return <ListItem key={item}>{item}</ListItem>;
+                return <ListItem key={item.name}>{item.name}</ListItem>;
               })}
             </div>
           </div>

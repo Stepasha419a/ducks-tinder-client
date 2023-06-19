@@ -3,7 +3,7 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersPrismaMock } from 'users/test/mocks';
 import { UserDto } from 'users/dto';
-import { requestUserStub, userStub } from 'users/test/stubs';
+import { requestUserStub, userDtoStub } from 'users/test/stubs';
 import { UsersSelector } from 'users/users.selector';
 import { MixPicturesCommandHandler } from './mix-pictures.command-handler';
 import { MixPicturesCommand } from './mix-pictures.command';
@@ -28,39 +28,51 @@ describe('when mix pictures is called', () => {
     );
   });
 
-  let user: UserDto;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  beforeEach(async () => {
-    user = await mixPicturesCommandHandler.execute(
-      new MixPicturesCommand(requestUserStub(), MIX_PICTURES_DTO),
-    );
-  });
-
-  it('should call user find unique', async () => {
-    expect(prismaService.user.findUnique).toBeCalledTimes(1);
-    expect(prismaService.user.findUnique).toBeCalledWith({
-      where: { id: userStub().id },
-      include: UsersSelector.selectUser(),
+  describe('when it is called correctly', () => {
+    beforeAll(() => {
+      prismaService.user.findUnique = jest
+        .fn()
+        .mockResolvedValue({ ...userDtoStub(), pairs: [userDtoStub().firstPair] });
     });
-  });
 
-  it('should call picture update', async () => {
-    expect(prismaService.picture.update).toBeCalledTimes(2);
-    expect(prismaService.picture.update).toHaveBeenNthCalledWith(1, {
-      where: { id: userStub().pictures[0].id },
-      data: { order: MIX_PICTURES_DTO.withOrder },
-    });
-    expect(prismaService.picture.update).toHaveBeenNthCalledWith(2, {
-      where: { id: userStub().pictures[1].id },
-      data: { order: MIX_PICTURES_DTO.mixOrder },
-    });
-  });
+    let user: UserDto;
 
-  it('should return a user', async () => {
-    expect(user).toEqual(userStub());
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      user = await mixPicturesCommandHandler.execute(
+        new MixPicturesCommand(requestUserStub(), MIX_PICTURES_DTO),
+      );
+    });
+
+    it('should call picture findMany', async () => {
+      expect(prismaService.picture.findMany).toBeCalledTimes(1);
+      expect(prismaService.picture.findMany).toBeCalledWith({
+        where: { userId: user.id },
+      });
+    });
+
+    it('should call user find unique', async () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
+        where: { id: userDtoStub().id },
+        include: UsersSelector.selectUser(),
+      });
+    });
+
+    it('should call picture update', async () => {
+      expect(prismaService.picture.update).toBeCalledTimes(2);
+      expect(prismaService.picture.update).toHaveBeenNthCalledWith(1, {
+        where: { id: userDtoStub().pictures[0].id },
+        data: { order: MIX_PICTURES_DTO.withOrder },
+      });
+      expect(prismaService.picture.update).toHaveBeenNthCalledWith(2, {
+        where: { id: userDtoStub().pictures[1].id },
+        data: { order: MIX_PICTURES_DTO.mixOrder },
+      });
+    });
+
+    it('should return a user', async () => {
+      expect(user).toEqual(userDtoStub());
+    });
   });
 });

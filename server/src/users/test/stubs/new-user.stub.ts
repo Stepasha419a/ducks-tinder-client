@@ -8,7 +8,6 @@ export const newUserStub = () => ({
   interests: [],
   isActivated: false,
   nickname: null,
-  pairs: [],
   pairsCount: 0,
   pictures: [],
   place: null,

@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { UsersController } from 'users/users.controller';
 import { CommandBusMock, QueryBusMock, RequestMock } from 'users/test/mocks';
 import { AccessTokenGuard } from 'common/guards';
-import { requestUserStub, shortUserStub, userStub } from 'users/test/stubs';
+import { requestUserStub, shortUserStub, userDtoStub } from 'users/test/stubs';
 import { UserDto } from 'users/dto';
 import { ShortUser } from 'users/users.interface';
 import {
@@ -65,7 +65,7 @@ describe('users-controller', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
@@ -80,7 +80,7 @@ describe('users-controller', () => {
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 
@@ -115,7 +115,7 @@ describe('users-controller', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
@@ -134,7 +134,7 @@ describe('users-controller', () => {
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 
@@ -142,7 +142,7 @@ describe('users-controller', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
@@ -160,7 +160,7 @@ describe('users-controller', () => {
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 
@@ -168,7 +168,7 @@ describe('users-controller', () => {
     let user: UserDto;
 
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(userStub());
+      commandBus.execute = jest.fn().mockResolvedValue(userDtoStub());
     });
 
     beforeEach(async () => {
@@ -183,7 +183,7 @@ describe('users-controller', () => {
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userStub());
+      expect(user).toEqual(userDtoStub());
     });
   });
 

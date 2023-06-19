@@ -1,10 +1,16 @@
+import { User } from '@prisma/client';
+
 export interface PictureInterface {
   name: string;
   order: number;
 }
 
-interface InterestInterface {
+interface Interest {
   name: string;
+}
+
+export interface FullUser extends User {
+  pairsCount: number;
 }
 
 export interface ShortUser {
@@ -15,7 +21,7 @@ export interface ShortUser {
   distance: number;
   place: string;
   isActivated: boolean;
-  interests: InterestInterface[];
+  interests: Interest[];
   pictures: PictureInterface[];
 }
 

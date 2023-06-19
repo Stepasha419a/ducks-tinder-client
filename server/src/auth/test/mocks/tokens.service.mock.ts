@@ -1,4 +1,4 @@
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { userDataStub } from '../stubs';
 
 export const TokensServiceMock = jest.fn().mockReturnValue({
@@ -8,7 +8,7 @@ export const TokensServiceMock = jest.fn().mockReturnValue({
   }),
   removeToken: jest.fn(),
   validateRefreshToken: jest.fn().mockResolvedValue({
-    id: userStub().id,
-    email: userStub().email,
+    id: userDtoStub().id,
+    email: userDtoStub().email,
   }),
 });

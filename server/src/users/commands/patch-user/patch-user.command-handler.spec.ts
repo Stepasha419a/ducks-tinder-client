@@ -6,7 +6,7 @@ import { UsersPrismaMock } from 'users/test/mocks';
 import { UserDto } from 'users/dto';
 import { PatchUserCommandHandler } from './patch-user.command-handler';
 import { PatchUserCommand } from './patch-user.command';
-import { requestUserStub, userStub } from 'users/test/stubs';
+import { requestUserStub, userDtoStub } from 'users/test/stubs';
 import { UPDATE_USER_DTO } from 'users/test/values/users.const.dto';
 
 describe('when patch is called', () => {
@@ -28,52 +28,77 @@ describe('when patch is called', () => {
     prismaService = moduleRef.get<PrismaService>(PrismaService);
   });
 
-  let user: UserDto;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  beforeEach(async () => {
-    user = await patchUserCommandHandler.execute(
-      new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
-    );
-  });
-
-  it('should call find many interests', async () => {
-    expect(prismaService.interest.findMany).toBeCalledTimes(1);
-    expect(prismaService.interest.findMany).toBeCalledWith({
-      where: { name: { in: UPDATE_USER_DTO.interests } },
+  describe('when it is called correctly', () => {
+    beforeAll(() => {
+      prismaService.user.findUnique = jest.fn().mockResolvedValue({
+        interests: [{ id: 'interest-id-1', name: 'programming' }],
+      });
+      prismaService.user.update = jest.fn().mockResolvedValue({
+        ...userDtoStub(),
+        pairs: [userDtoStub().firstPair],
+      });
+      prismaService.interest.findMany = jest.fn().mockResolvedValue([
+        { id: 'interest-id-2', name: UPDATE_USER_DTO.interests[0] },
+        { id: 'interest-id-3', name: UPDATE_USER_DTO.interests[1] },
+      ]);
     });
-  });
 
-  it('should call update user', async () => {
-    expect(prismaService.user.update).toBeCalledTimes(3);
-    expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
-      where: { id: userStub().id },
-      data: {
-        interests: {
-          disconnect: {
-            id: 'interest-id-1',
+    let user: UserDto;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      user = await patchUserCommandHandler.execute(
+        new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
+      );
+    });
+
+    it('should call find many interests', async () => {
+      expect(prismaService.interest.findMany).toBeCalledTimes(1);
+      expect(prismaService.interest.findMany).toBeCalledWith({
+        where: { name: { in: UPDATE_USER_DTO.interests } },
+      });
+    });
+
+    it('should call update user', async () => {
+      expect(prismaService.user.update).toBeCalledTimes(4);
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
+        where: { id: userDtoStub().id },
+        data: {
+          interests: {
+            disconnect: {
+              id: 'interest-id-1',
+            },
           },
         },
-      },
-    });
-    expect(prismaService.user.update).toHaveBeenNthCalledWith(2, {
-      data: {
-        interests: {
-          connect: {
-            id: 'interest-id-2',
+      });
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(2, {
+        data: {
+          interests: {
+            connect: {
+              id: 'interest-id-2',
+            },
           },
         },
-      },
-      where: {
-        id: userStub().id,
-      },
+        where: {
+          id: userDtoStub().id,
+        },
+      });
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(3, {
+        data: {
+          interests: {
+            connect: {
+              id: 'interest-id-3',
+            },
+          },
+        },
+        where: {
+          id: userDtoStub().id,
+        },
+      });
     });
-  });
 
-  it('should return a user', async () => {
-    expect(user).toEqual(userStub());
+    it('should return a user', async () => {
+      expect(user).toEqual(userDtoStub());
+    });
   });
 });

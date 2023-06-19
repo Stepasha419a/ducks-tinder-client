@@ -60,8 +60,8 @@ export const acceptPairThunk = createAsyncThunk(
   }
 );
 
-export const deletePairThunk = createAsyncThunk(
-  'users/deletePair',
+export const refusePairThunk = createAsyncThunk(
+  'users/refusePair',
   async (_, { rejectWithValue, getState }) => {
     try {
       const { user } = getState() as RootState;

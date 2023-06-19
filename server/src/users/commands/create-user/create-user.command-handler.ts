@@ -18,6 +18,10 @@ export class CreateUserCommandHandler
       include: UsersSelector.selectUser(),
     });
 
-    return new UserDto(user);
+    const pairsCount = await this.prismaService.user.count({
+      where: { pairFor: { some: { email: dto.email } } },
+    });
+
+    return new UserDto({ ...user, pairsCount });
   }
 }

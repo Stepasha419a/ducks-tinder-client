@@ -8,7 +8,7 @@ import { userDataStub } from 'auth/test/stubs';
 import { UsersModule } from 'users/users.module';
 import { TokensModule } from 'tokens/tokens.module';
 import { ConfigModule } from '@nestjs/config';
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { RegisterCommand } from './register.command';
 import { RegisterCommandHandler } from './register.command-handler';
 
@@ -46,7 +46,7 @@ describe('when registration is called', () => {
 
   afterAll(() => {
     usersService.getUserByEmail = jest.fn().mockResolvedValue({
-      ...userStub(),
+      ...userDtoStub(),
       _count: { pairFor: 0 },
       password: '$2a$07$HQtmk3r9h1Gg1YiOLO67duUs3GPDg5.KKCtPSm/152gqIALiRvs6q',
     });
@@ -72,8 +72,8 @@ describe('when registration is called', () => {
 
   it('should call tokensService generateTokens', () => {
     expect(tokensService.generateTokens).toBeCalledWith({
-      id: userStub().id,
-      email: userStub().email,
+      id: userDtoStub().id,
+      email: userDtoStub().email,
     });
   });
 

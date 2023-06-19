@@ -1,14 +1,14 @@
 import { CreateUserDto } from 'users/dto';
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { LoginUserDto } from 'auth/dto';
 
 export const CREATE_USER_DTO: CreateUserDto = {
-  email: userStub().email,
+  email: userDtoStub().email,
   password: '123123123',
-  name: userStub().name,
+  name: userDtoStub().name,
 };
 
 export const LOGIN_USER_DTO: LoginUserDto = {
-  email: userStub().email,
+  email: userDtoStub().email,
   password: '123123123',
 };

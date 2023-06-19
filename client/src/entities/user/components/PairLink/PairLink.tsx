@@ -3,25 +3,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { makeImageUrl } from '@shared/helpers';
 import FailedPair from './Failed/FailedPair';
-import Loading from './Loading/Loading';
 import styles from './PairLink.module.scss';
 import { useAppSelector } from '@/shared/hooks';
 
 export const PairLink = () => {
-  const firstPair = useAppSelector((state) => state.user.pairs[0]);
-  const pairsCount = useAppSelector((state) => state.user.pairsCount);
+  const firstPair = useAppSelector((state) => state.user.currentUser.firstPair);
+  const pairsCount = useAppSelector(
+    (state) => state.user.currentUser.pairsCount
+  );
 
   if (!pairsCount) {
     return <FailedPair />;
   }
 
-  // throws errors because firstPair on refresh it's just an empty {}
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if (!firstPair?.name) {
-    return <Loading />;
-  }
-
-  const imageUrl = makeImageUrl(firstPair.id, firstPair.pictures[0].name);
+  const imageUrl = makeImageUrl(firstPair?.id, firstPair?.pictures[0].name);
 
   return (
     <div className={styles.pairs}>

@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersPrismaMock } from 'users/test/mocks';
-import { requestUserStub, userStub } from 'users/test/stubs';
+import { requestUserStub, shortUserStub, userDtoStub } from 'users/test/stubs';
 import { GetPairsQueryHandler } from './get-pairs.query-handler';
 import { GetPairsQuery } from './get-pairs.query';
 import { ShortUser } from 'users/users.interface';
@@ -26,31 +26,36 @@ describe('when get pairs is called', () => {
       moduleRef.get<GetPairsQueryHandler>(GetPairsQueryHandler);
   });
 
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  let pairs: ShortUser[];
-
-  beforeEach(async () => {
-    pairs = await getPairsQueryHandler.execute(
-      new GetPairsQuery(requestUserStub()),
-    );
-  });
-
-  it('should call user find unique', async () => {
-    expect(prismaService.user.findUnique).toBeCalledTimes(1);
-    expect(prismaService.user.findUnique).toBeCalledWith({
-      where: { id: userStub().id },
-      select: {
-        pairs: {
-          select: UsersSelector.selectShortUser(),
-        },
-      },
+  describe('when it is called correctly', () => {
+    beforeAll(() => {
+      prismaService.user.findUnique = jest
+        .fn()
+        .mockResolvedValue({ pairs: [shortUserStub()] });
     });
-  });
 
-  it('should return pairs', async () => {
-    expect(pairs).toEqual(userStub().pairs);
+    let pairs: ShortUser[];
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      pairs = await getPairsQueryHandler.execute(
+        new GetPairsQuery(requestUserStub()),
+      );
+    });
+
+    it('should call user find unique', async () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
+        where: { id: userDtoStub().id },
+        select: {
+          pairs: {
+            select: UsersSelector.selectShortUser(),
+          },
+        },
+      });
+    });
+
+    it('should return pairs', async () => {
+      expect(pairs).toEqual([shortUserStub()]);
+    });
   });
 });

@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import type { ShortChat } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { getChatsThunk, selectChatList } from '@entities/chat/model';
-import { Preloader } from '@shared/ui';
 import FailedChats from './Failed/FailedChats';
 import { ChatItem } from './ChatItem/ChatItem';
 import styles from './ChatList.module.scss';
@@ -16,7 +15,7 @@ export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
   const dispatch = useAppDispatch();
 
   const currentUserId = useAppSelector((state) => state.user.currentUser.id);
-  const { chats, currentChatId, isLoading } = useAppSelector(selectChatList);
+  const { chats, currentChatId } = useAppSelector(selectChatList);
   const chatsLength = chats.length;
 
   useEffect(() => {
@@ -25,10 +24,6 @@ export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
 
   if (!chatsLength) {
     return <FailedChats />;
-  }
-
-  if (!chats.length || isLoading) {
-    return <Preloader />;
   }
 
   return (

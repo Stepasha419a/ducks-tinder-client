@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { CreateChatCommand } from './create-chat.command';
 import { CreateChatCommandHandler } from './create-chat.command-handler';
 import { ChatsPrismaMock } from 'chats/test/mocks';
@@ -32,7 +32,7 @@ describe('when create chat is called', () => {
 
     let response;
     const userPairId = '34545656';
-    const memberIds = [userStub().id, userPairId];
+    const memberIds = [userDtoStub().id, userPairId];
 
     beforeEach(async () => {
       jest.clearAllMocks();
@@ -75,7 +75,7 @@ describe('when create chat is called', () => {
 
     let response;
     const userPairId = '34545656';
-    const memberIds = [userStub().id, userPairId];
+    const memberIds = [userDtoStub().id, userPairId];
 
     beforeEach(async () => {
       jest.clearAllMocks();

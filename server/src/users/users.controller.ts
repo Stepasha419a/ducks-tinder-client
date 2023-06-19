@@ -24,6 +24,7 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
   AcceptPairCommand,
+  CreatePairsCommand,
   DeletePairCommand,
   DeletePictureCommand,
   DislikeUserCommand,
@@ -134,9 +135,16 @@ export class UsersController {
   }
 
   // for dev
-  @Post('removeAllPairs')
+  @Patch('removeAllPairs')
   @HttpCode(HttpStatus.OK)
   removeAllPairs(@Req() req: UserRequest) {
     return this.commandBus.execute(new RemoveAllPairsCommand(req.user));
+  }
+
+  // for dev
+  @Post('createPairs')
+  @HttpCode(HttpStatus.OK)
+  createPairs(@Req() req: UserRequest) {
+    return this.commandBus.execute(new CreatePairsCommand(req.user));
   }
 }

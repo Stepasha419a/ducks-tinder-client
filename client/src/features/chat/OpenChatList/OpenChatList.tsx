@@ -12,6 +12,7 @@ export const OpenChatList = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const currentChatId = useAppSelector((state) => state.chat.currentChatId);
+  const isLoading = useAppSelector((state) => state.chat.isLoading);
 
   useEffect(() => {
     return () => {
@@ -20,7 +21,7 @@ export const OpenChatList = (): ReactElement => {
   }, [dispatch]);
 
   function connect(chatId: string): void {
-    if (chatId !== currentChatId) {
+    if (chatId !== currentChatId && !isLoading) {
       if (currentChatId) dispatch(disconnectChatThunk());
       dispatch(connectChatThunk({ chatId }));
     }

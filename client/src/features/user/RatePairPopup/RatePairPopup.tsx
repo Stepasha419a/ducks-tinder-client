@@ -5,7 +5,8 @@ import { Button, Popup } from '@shared/ui';
 import { setCurrentPair } from '@entities/user/model/user.slice';
 import { InterestsListPopup, Preview } from '@entities/user/components';
 import styles from './RatePairPopup.module.scss';
-import { deletePairThunk } from '@/entities/user/model';
+import { refusePairThunk, acceptPairThunk } from '@/entities/user/model';
+import classNames from 'classnames';
 
 export const RatePairPopup: FC = () => {
   const dispatch = useAppDispatch();
@@ -16,11 +17,11 @@ export const RatePairPopup: FC = () => {
     useState(false);
 
   const handleAccept = (): void => {
-    dispatch(deletePairThunk());
+    dispatch(acceptPairThunk());
   };
 
   const handleRefuse = (): void => {
-    dispatch(deletePairThunk());
+    dispatch(refusePairThunk());
   };
 
   return (
@@ -32,7 +33,10 @@ export const RatePairPopup: FC = () => {
       >
         <Preview user={currentPair} isFull extraClassName={styles.padding} />
         <div className={styles.btns}>
-          <Button onClick={handleAccept} extraClassName={styles.btn}>
+          <Button
+            onClick={handleAccept}
+            extraClassName={classNames(styles.btn, styles.border)}
+          >
             Accept
           </Button>
           <Button onClick={handleRefuse} extraClassName={styles.btn}>

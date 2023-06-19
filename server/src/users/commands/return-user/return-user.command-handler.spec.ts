@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersPrismaMock } from 'users/test/mocks';
-import { requestUserStub, userStub } from 'users/test/stubs';
+import { requestUserStub, userDtoStub } from 'users/test/stubs';
 import { ReturnUserCommandHandler } from './return-user.command-handler';
 import { ReturnUserCommand } from './return-user.command';
 
@@ -39,9 +39,9 @@ describe('when return user is called', () => {
     oldCheckedUsersFindFirstMock = prismaService.checkedUsers.findFirst;
     prismaService.user.findUnique = jest
       .fn()
-      .mockResolvedValue({ pairFor: [{ id: userStub().id }] });
+      .mockResolvedValue({ pairFor: [{ id: userDtoStub().id }] });
     prismaService.checkedUsers.findFirst = jest.fn().mockResolvedValue({
-      checkedId: userStub().id,
+      checkedId: userDtoStub().id,
       wasCheckedId: requestUserStub().id,
     });
   });
@@ -70,7 +70,7 @@ describe('when return user is called', () => {
     expect(prismaService.checkedUsers.findFirst).toBeCalledWith({
       where: {
         wasCheckedId: requestUserStub().id,
-        checked: { id: { notIn: [userStub().id] } },
+        checked: { id: { notIn: [userDtoStub().id] } },
       },
       orderBy: { createdAt: 'desc' },
     });
@@ -81,7 +81,7 @@ describe('when return user is called', () => {
     expect(prismaService.checkedUsers.delete).toBeCalledWith({
       where: {
         checkedId_wasCheckedId: {
-          checkedId: userStub().id,
+          checkedId: userDtoStub().id,
           wasCheckedId: requestUserStub().id,
         },
       },

@@ -8,7 +8,7 @@ export { submitSettingsThunk } from './setting.thunks';
 export type {
   ErrorField,
   SetInputPayload,
-  SettingFieldArrayValues,
+  SettingFieldInterestsArray,
   SettingFieldValues,
   SettingInputName,
   Validation,

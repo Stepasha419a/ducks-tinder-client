@@ -5,6 +5,10 @@ export interface Picture {
   order: number;
 }
 
+export interface Interest {
+  name: string;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -14,7 +18,7 @@ export interface User {
   age: number;
   sex: 'male' | 'female';
   isActivated: boolean;
-  interests: string[];
+  interests: Interest[];
   place: string;
   distance: number;
   usersOnlyInDistance: boolean;
@@ -22,6 +26,8 @@ export interface User {
   preferAgeFrom: number;
   preferAgeTo: number;
   pictures: Picture[];
+  firstPair?: { id: string; pictures: Picture[] };
+  pairsCount: number;
 }
 
 export interface ShortUser {
@@ -32,7 +38,7 @@ export interface ShortUser {
   distance: number;
   place: string;
   isActivated: boolean;
-  interests: string[];
+  interests: Interest[];
   pictures: Picture[];
 }
 

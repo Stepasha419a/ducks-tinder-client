@@ -12,7 +12,8 @@ export {
   saveUserImageThunk,
   deleteUserImage,
   mixUserImages,
-  deletePairThunk,
+  refusePairThunk,
+  acceptPairThunk,
   getUserPairsThunk,
 } from './user.thunks';
 export { selectCropImage, selectImagesDND } from './user.selectors';

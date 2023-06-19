@@ -2,7 +2,7 @@ import type { FC, PropsWithChildren } from 'react';
 import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Button } from '@shared/ui';
 import type {
-  SettingFieldArrayValues,
+  SettingFieldInterestsArray,
   SettingFieldValues,
 } from '@entities/setting/model';
 import styles from './SettingWrapper.module.scss';
@@ -10,7 +10,7 @@ import styles from './SettingWrapper.module.scss';
 interface SettingWrapperProps {
   formName: string | null;
   isValid: boolean;
-  errors: FieldErrors<SettingFieldValues | SettingFieldArrayValues>;
+  errors: FieldErrors<SettingFieldValues | SettingFieldInterestsArray>;
   submitHandler: () => void;
   cancelHandler: () => void;
 }

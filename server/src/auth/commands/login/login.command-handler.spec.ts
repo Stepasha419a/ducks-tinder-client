@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { UserData } from 'auth/auth.interface';
 import { LOGIN_USER_DTO } from 'auth/test/values/auth.const.dto';
 import { UsersService } from 'users/users.service';
@@ -41,27 +41,40 @@ describe('when login is called', () => {
       moduleRef.get<LoginCommandHandler>(LoginCommandHandler);
   });
 
-  let userData: UserData;
-
-  beforeEach(async () => {
-    jest.clearAllMocks();
-    userData = await loginCommandHandler.execute(
-      new LoginCommand(LOGIN_USER_DTO),
-    );
-  });
-
-  it('should call usersService getUserByEmail', () => {
-    expect(usersService.getUserByEmail).toBeCalledWith(LOGIN_USER_DTO.email);
-  });
-
-  it('should call tokensService generateTokens', () => {
-    expect(tokensService.generateTokens).toBeCalledWith({
-      id: userStub().id,
-      email: userStub().email,
+  describe('when it is called correctly', () => {
+    beforeAll(() => {
+      usersService.getUserByEmail = jest.fn().mockResolvedValue({
+        ...userDtoStub(),
+        pairs: [userDtoStub().firstPair],
+        pairsCount: 5,
+        password:
+          '$2a$07$HQtmk3r9h1Gg1YiOLO67duUs3GPDg5.KKCtPSm/152gqIALiRvs6q',
+        interests: [{ name: 'programming' }],
+      });
     });
-  });
 
-  it('should return userData', () => {
-    expect(userData).toEqual(userDataStub());
+    let userData: UserData;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      userData = await loginCommandHandler.execute(
+        new LoginCommand(LOGIN_USER_DTO),
+      );
+    });
+
+    it('should call usersService getUserByEmail', () => {
+      expect(usersService.getUserByEmail).toBeCalledWith(LOGIN_USER_DTO.email);
+    });
+
+    it('should call tokensService generateTokens', () => {
+      expect(tokensService.generateTokens).toBeCalledWith({
+        id: userDtoStub().id,
+        email: userDtoStub().email,
+      });
+    });
+
+    it('should return userData', () => {
+      expect(userData).toEqual(userDataStub());
+    });
   });
 });

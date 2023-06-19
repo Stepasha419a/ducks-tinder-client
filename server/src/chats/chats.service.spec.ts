@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { CommandBus, CqrsModule } from '@nestjs/cqrs';
 import { CommandBusMock } from './test/mocks';
 import { ChatsService } from 'chats/chats.service';
-import { userStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { CreateChatCommand } from 'chats/commands';
 
 describe('chats-service', () => {
@@ -41,13 +41,13 @@ describe('chats-service', () => {
     });
 
     beforeEach(async () => {
-      response = await service.create([userStub().id, userPairId]);
+      response = await service.create([userDtoStub().id, userPairId]);
     });
 
     it('should call command bus execute', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
-        new CreateChatCommand([userStub().id, userPairId]),
+        new CreateChatCommand([userDtoStub().id, userPairId]),
       );
     });
 

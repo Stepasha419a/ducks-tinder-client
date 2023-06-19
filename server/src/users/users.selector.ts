@@ -8,8 +8,10 @@ export class UsersSelector {
         orderBy: { order: 'asc' as 'asc' | 'desc' },
       },
       pairs: {
+        where: { pictures: { some: { order: 0 } } },
         take: 1,
         select: {
+          id: true,
           pictures: {
             take: 1,
             select: { name: true, order: true },
