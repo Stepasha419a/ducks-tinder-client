@@ -8,6 +8,7 @@ import { getUserPairsThunk } from '@entities/user/model';
 import { sortItemBySettings } from '../../model/helpers';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
+import { PairsListLazy } from './PairsList.lazy';
 
 interface PairsListProps {
   setCurrentPair: (user: ShortUser) => void;
@@ -18,10 +19,15 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
 
   const pairs = useAppSelector((state) => state.user.pairs);
   const pairSorts = useAppSelector((state) => state.user.pairSorts);
+  const isPairsLoading = useAppSelector((state) => state.user.isPairsLoading);
 
   useEffect(() => {
     dispatch(getUserPairsThunk());
   }, [dispatch]);
+
+  if (isPairsLoading) {
+    return <PairsListLazy />;
+  }
 
   if (!pairs.length) {
     return (

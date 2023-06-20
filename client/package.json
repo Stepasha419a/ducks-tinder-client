@@ -2,25 +2,6 @@
   "name": "stepasha419a-ducks-tinder-client",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-common-types": "^6.4.0",
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/react-fontawesome": "^0.1.19",
-    "@reduxjs/toolkit": "^1.8.1",
-    "axios": "^0.27.2",
-    "browserslist": "^4.18.1",
-    "classnames": "^2.3.2",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-easy-crop": "^4.5.0",
-    "react-hook-form": "^7.43.4",
-    "react-redux": "^8.0.1",
-    "react-refresh": "^0.14.0",
-    "react-router-dom": "^6.3.0",
-    "redux-thunk": "^2.4.1",
-    "socket.io-client": "^4.5.3"
-  },
   "scripts": {
     "start": "webpack serve --config config/development.config.js",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
@@ -40,6 +21,26 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-common-types": "^6.4.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/react-fontawesome": "^0.1.19",
+    "@reduxjs/toolkit": "^1.8.1",
+    "axios": "^0.27.2",
+    "browserslist": "^4.18.1",
+    "classnames": "^2.3.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-easy-crop": "^4.5.0",
+    "react-hook-form": "^7.43.4",
+    "react-loading-skeleton": "^3.3.1",
+    "react-redux": "^8.0.1",
+    "react-refresh": "^0.14.0",
+    "react-router-dom": "^6.3.0",
+    "redux-thunk": "^2.4.1",
+    "socket.io-client": "^4.5.3"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",

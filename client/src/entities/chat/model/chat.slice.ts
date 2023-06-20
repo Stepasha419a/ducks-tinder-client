@@ -2,16 +2,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Chat, Message, ShortChat } from '@shared/api/interfaces';
 import type { ChatInitialState } from './chat.interfaces';
-import {
-  getChatsThunk,
-  connectChatThunk,
-  closeAllSockets,
-} from './chat.thunks';
+import { getChatsThunk, connectChatThunk } from './chat.thunks';
 
 const initialState: ChatInitialState = {
   chats: [],
   isConnected: false,
-  isLoading: false,
+  isLoading: true,
+  isMessagesLoading: true,
   currentMessages: [],
   currentChatId: '',
 };
@@ -32,7 +29,6 @@ const chatSlice = createSlice({
       state.currentChatId = chat.id;
       state.isConnected = true;
       state.currentMessages = chat.messages;
-      state.isLoading = false;
     },
     disconnectChat: (state) => {
       state.isConnected = false;
@@ -46,15 +42,14 @@ const chatSlice = createSlice({
         getChatsThunk.fulfilled,
         (state, { payload }: PayloadAction<ShortChat[]>) => {
           state.chats = payload;
+          state.isLoading = false;
         }
       )
       .addCase(connectChatThunk.pending, (state) => {
-        state.isLoading = true;
+        state.isMessagesLoading = true;
       })
-      .addCase(closeAllSockets.fulfilled, (state) => {
-        state.isConnected = false;
-        state.currentMessages = [];
-        state.currentChatId = '';
+      .addCase(connectChatThunk.fulfilled, (state) => {
+        state.isMessagesLoading = false;
       });
   },
 });

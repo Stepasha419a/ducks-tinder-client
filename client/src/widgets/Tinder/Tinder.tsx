@@ -4,8 +4,9 @@ import { Preview } from '@entities/user/components';
 import { RateButtons } from '@features/tinder';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { getSortedUserThunk, selectTinderData } from '@entities/tinder/model';
-import { Failed, Loading } from './components';
+import { Failed } from './components';
 import styles from './Tinder.module.scss';
+import { TinderLazy } from './Tinder.lazy';
 
 export const Tinder: FC = () => {
   const dispatch = useAppDispatch();
@@ -28,11 +29,7 @@ export const Tinder: FC = () => {
   }
 
   if (currentTinderUsersIndex === tinderUsers.length) {
-    return (
-      <div className={styles.wrapper}>
-        <Loading />
-      </div>
-    );
+    return <TinderLazy />;
   }
 
   return (

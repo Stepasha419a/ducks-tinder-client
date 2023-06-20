@@ -13,6 +13,7 @@ export type PairSortsKey = keyof PairSorts;
 export interface UserInitialState {
   currentUser: User;
   currentPair: ShortUser | null;
+  isPairsLoading: boolean;
   pairs: ShortUser[];
   pairSorts: PairSorts;
   profileSetting: {

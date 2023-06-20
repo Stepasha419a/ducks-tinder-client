@@ -2,3 +2,17 @@
   margin-top: 20px;
   width: 100%;
 }
+
+.lazy_wrapper {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 4px;
+
+  .lazy_descr {
+    margin-left: 10px;
+
+    .lazy_name {
+      margin-bottom: 8px;
+    }
+  }
+}

@@ -17,6 +17,7 @@ const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh
   currentUser: {} as User,
   currentPair: null,
+  isPairsLoading: true,
   pairs: [],
   pairSorts: INITIAL_SORTS,
   profileSetting: {
@@ -55,6 +56,7 @@ const userSlice = createSlice({
     builder
       .addCase(getUserPairsThunk.fulfilled, (state, { payload }) => {
         state.pairs = payload;
+        state.isPairsLoading = false;
       })
       .addCase(acceptPairThunk.fulfilled, (state, { payload }) => {
         state.pairs = payload;

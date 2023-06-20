@@ -5,7 +5,6 @@
 
   .container {
     display: flex;
-    align-items: flex-end;
 
     .avatar {
       margin-right: 8px;
@@ -15,7 +14,6 @@
       background-color: var(--color--white-100);
       padding: 8px;
       border-radius: 8px;
-      border-bottom-left-radius: 0px;
 
       &.own {
         background: linear-gradient(
@@ -34,32 +32,6 @@
       .content {
         overflow-wrap: break-word;
         max-width: 490px;
-      }
-
-      .mark {
-        position: absolute;
-        bottom: 8px;
-        left: 36px;
-        width: 12px;
-        height: 12px;
-        background-color: var(--color--white-100);
-        overflow: hidden;
-
-        &.own {
-          background: linear-gradient(45deg, var(--color--pink-10), #00000000);
-        }
-
-        &::before {
-          content: '';
-          display: block;
-          width: 200%;
-          height: 200%;
-          position: absolute;
-          border-radius: 69%;
-          bottom: 50px;
-          left: -16px;
-          box-shadow: 0px 50px 0 0 var(--bg-primary);
-        }
       }
     }
   }

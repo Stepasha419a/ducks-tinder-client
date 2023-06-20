@@ -4,12 +4,8 @@ import classNames from 'classnames';
 import type { FC } from 'react';
 import styles from './Choose.module.scss';
 
-interface ChooseProps {
-  isConnected: boolean;
-}
-
-const Choose: FC<ChooseProps> = ({ isConnected }) => {
-  const cn = classNames(styles.choose, !isConnected && styles.visible);
+const Choose: FC = () => {
+  const cn = classNames(styles.choose);
 
   return (
     <div className={cn}>

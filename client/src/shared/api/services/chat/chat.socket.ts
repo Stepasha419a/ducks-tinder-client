@@ -37,6 +37,7 @@ export const chatSocket: ChatSocket = {
   disconnectChat(): void {
     if (this._socket) {
       this._socket.emit('disconnectChat');
+      this._socket.close();
     }
   },
   closeAllSockets(): void {

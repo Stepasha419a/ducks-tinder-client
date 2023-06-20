@@ -10,3 +10,12 @@
   width: 1px;
   height: 1px;
 }
+
+.lazy_wrapper {
+  display: flex;
+  padding: 8px 0;
+
+  .lazy_message{
+    margin-left: 8px;
+  }
+}
