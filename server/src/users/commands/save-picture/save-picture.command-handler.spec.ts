@@ -39,6 +39,7 @@ describe('when save picture is called', () => {
         ...userDtoStub(),
         pairs: [userDtoStub().firstPair],
       });
+      prismaService.user.count = jest.fn().mockResolvedValue(5);
       prismaService.picture.findMany = jest.fn().mockResolvedValue([
         {
           id: '123123',
@@ -98,6 +99,13 @@ describe('when save picture is called', () => {
           userId: userDtoStub().id,
           order: userDtoStub().pictures.length,
         },
+      });
+    });
+
+    it('should call user count', async () => {
+      expect(prismaService.user.count).toBeCalledTimes(1);
+      expect(prismaService.user.count).toBeCalledWith({
+        where: { pairFor: { some: { id: user.id } } },
       });
     });
 

@@ -42,6 +42,7 @@ describe('when delete picture is called', () => {
         ...userDtoStub(),
         pairs: [userDtoStub().firstPair],
       });
+      prismaService.user.count = jest.fn().mockResolvedValue(5);
       prismaService.picture.findFirst = jest.fn().mockResolvedValue({
         id: '123123',
         name: '123.jpg',
@@ -106,6 +107,13 @@ describe('when delete picture is called', () => {
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userDtoStub().id },
         include: UsersSelector.selectUser(),
+      });
+    });
+
+    it('should call user count', async () => {
+      expect(prismaService.user.count).toBeCalledTimes(1);
+      expect(prismaService.user.count).toBeCalledWith({
+        where: { pairFor: { some: { id: user.id } } },
       });
     });
 

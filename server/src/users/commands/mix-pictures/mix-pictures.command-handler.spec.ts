@@ -34,6 +34,7 @@ describe('when mix pictures is called', () => {
         ...userDtoStub(),
         pairs: [userDtoStub().firstPair],
       });
+      prismaService.user.count = jest.fn().mockResolvedValue(5);
       prismaService.picture.findMany = jest.fn().mockResolvedValue([
         {
           id: '123123',
@@ -83,6 +84,13 @@ describe('when mix pictures is called', () => {
       expect(prismaService.picture.update).toHaveBeenNthCalledWith(2, {
         where: { id: userDtoStub().pictures[1].id },
         data: { order: MIX_PICTURES_DTO.mixOrder },
+      });
+    });
+
+    it('should call user count', async () => {
+      expect(prismaService.user.count).toBeCalledTimes(1);
+      expect(prismaService.user.count).toBeCalledWith({
+        where: { pairFor: { some: { id: user.id } } },
       });
     });
 

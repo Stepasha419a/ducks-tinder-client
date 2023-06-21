@@ -86,7 +86,7 @@ describe('users/picture (POST)', () => {
       expect(response.body).toEqual(
         new UserDto({
           ...currentUser,
-          _count: { pairFor: 0 },
+          pairsCount: 0,
           pictures: [
             {
               name: response.body.pictures[0].name,

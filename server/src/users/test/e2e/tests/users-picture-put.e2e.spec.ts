@@ -127,6 +127,7 @@ describe('users/picture (PUT)', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
         ...currentUser,
+        pairsCount: 0,
         pictures: [],
       });
     });

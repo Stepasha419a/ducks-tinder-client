@@ -92,6 +92,7 @@ describe('users/picture/mix (PUT)', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
         ...currentUser,
+        pairsCount: 0,
         pictures: [
           { ...currentUser.pictures[1], order: 0 },
           { ...currentUser.pictures[0], order: 1 },

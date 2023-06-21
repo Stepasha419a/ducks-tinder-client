@@ -5,7 +5,7 @@ import { requestUserStub } from 'users/test/stubs';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { FullChat } from 'chats/chats.interfaces';
 import { UsersSelector } from 'users/users.selector';
-import { shortChatStub } from 'chats/test/stubs';
+import { fullChatStub } from 'chats/test/stubs';
 import { GetChatQueryHandler } from './get-chat.query-handler';
 import { GetChatQuery } from './get-chat.query';
 
@@ -31,14 +31,15 @@ describe('when get chats is called', () => {
     beforeAll(() => {
       prismaService.chat.findFirst = jest
         .fn()
-        .mockResolvedValue({ id: shortChatStub().id });
+        .mockResolvedValue({ id: fullChatStub().id });
       prismaService.chat.findUnique = jest
         .fn()
-        .mockResolvedValue(shortChatStub());
+        .mockResolvedValue(fullChatStub());
+      prismaService.message.count = jest.fn().mockResolvedValue(20);
     });
 
     let chat: FullChat;
-    const chatId = shortChatStub().id;
+    const chatId = fullChatStub().id;
 
     beforeEach(async () => {
       jest.clearAllMocks();
@@ -58,6 +59,13 @@ describe('when get chats is called', () => {
       });
     });
 
+    it('should call message count', async () => {
+      expect(prismaService.message.count).toBeCalledTimes(1);
+      expect(prismaService.message.count).toBeCalledWith({
+        where: { chatId },
+      });
+    });
+
     it('should call chat find unique', async () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
@@ -67,6 +75,8 @@ describe('when get chats is called', () => {
           messages: {
             orderBy: { createdAt: 'asc' },
             select: { id: true, text: true, userId: true },
+            skip: 0,
+            take: 20,
           },
           users: {
             where: { id: { not: requestUserStub().id } },
@@ -78,7 +88,7 @@ describe('when get chats is called', () => {
 
     it('should return a full chat', async () => {
       // to reduce stubs - short chat
-      expect(chat).toEqual(shortChatStub());
+      expect(chat).toEqual(fullChatStub());
     });
   });
 
@@ -88,7 +98,7 @@ describe('when get chats is called', () => {
     });
 
     let chat: FullChat;
-    const chatId = shortChatStub().id;
+    const chatId = fullChatStub().id;
 
     beforeEach(async () => {
       jest.clearAllMocks();
@@ -108,6 +118,10 @@ describe('when get chats is called', () => {
         },
         select: { id: true },
       });
+    });
+
+    it('should not call message count', async () => {
+      expect(prismaService.message.count).not.toBeCalled();
     });
 
     it('should not call chat find unique', async () => {

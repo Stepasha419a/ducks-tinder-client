@@ -7,6 +7,7 @@ export const GET_FULL_CHAT_EXPECTED = {
       userId: 'chat_get_current_user_id',
     },
   ],
+  messagesCount: 1,
   users: [
     {
       id: 'chat_get_second_user_id',
