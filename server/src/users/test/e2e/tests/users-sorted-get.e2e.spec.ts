@@ -5,13 +5,12 @@ import { HttpServer } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'app.module';
 import prismaClient from 'prisma/test/prisma-client';
-import { UserDto } from 'users/dto';
 import {
   prepareAccessTokens,
   prepareAfter,
   prepareBefore,
 } from '../preparations';
-import { UsersSelector } from 'users/users.selector';
+import { USERS_SORTED_GET_EXPECT } from 'users/test/values/users.e2e-const.expect';
 
 const currentUserId = 'sorted_current_user_id';
 const secondUserId = 'sorted_second_user_id';
@@ -19,8 +18,6 @@ const secondUserId = 'sorted_second_user_id';
 describe('users/sorted (GET)', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
-
-  let secondUser: UserDto;
 
   const prepareReadyAccessTokens = () =>
     prepareAccessTokens(currentUserId, secondUserId);
@@ -57,20 +54,17 @@ describe('users/sorted (GET)', () => {
     let response: request.Response;
 
     beforeAll(async () => {
-      secondUser = new UserDto(
-        await prismaClient.user.update({
-          where: { id: secondUserId },
-          data: {
-            age: 20,
-            distance: 50,
-            preferAgeFrom: 18,
-            preferAgeTo: 28,
-            preferSex: 'male',
-            sex: 'female',
-          },
-          select: UsersSelector.selectShortUser(),
-        }),
-      );
+      await prismaClient.user.update({
+        where: { id: secondUserId },
+        data: {
+          age: 20,
+          distance: 50,
+          preferAgeFrom: 18,
+          preferAgeTo: 28,
+          preferSex: 'male',
+          sex: 'female',
+        },
+      });
       await prismaClient.user.update({
         where: { id: currentUserId },
         data: {
@@ -92,17 +86,7 @@ describe('users/sorted (GET)', () => {
 
     it('should return a user', async () => {
       expect(response.status).toBe(200);
-      expect(response.body).toEqual({
-        id: secondUser.id,
-        age: secondUser.age,
-        description: secondUser.description,
-        distance: secondUser.distance,
-        name: secondUser.name,
-        place: secondUser.place,
-        isActivated: secondUser.isActivated,
-        pictures: secondUser.pictures,
-        interests: [],
-      });
+      expect(response.body).toEqual(USERS_SORTED_GET_EXPECT);
     });
   });
 

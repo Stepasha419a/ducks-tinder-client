@@ -1,0 +1,40 @@
+export const AUTH_REGISTRATION_EXPECT = {
+  email: '789@gmail.com',
+  name: 'Jason',
+  age: null,
+  description: null,
+  distance: null,
+  interests: [],
+  isActivated: false,
+  nickname: null,
+  pairsCount: 0,
+  pictures: [],
+  place: null,
+  preferAgeFrom: null,
+  preferAgeTo: null,
+  preferSex: null,
+  sex: null,
+  usersOnlyInDistance: false,
+};
+
+export const AUTH_LOGIN_EXPECT = {
+  id: 'auth-current-user-id',
+  email: 'authUser@gmail.com',
+  name: 'Jason',
+  age: null,
+  description: null,
+  distance: null,
+  interests: [],
+  isActivated: false,
+  nickname: null,
+  pairsCount: 0,
+  pictures: [],
+  place: null,
+  preferAgeFrom: null,
+  preferAgeTo: null,
+  preferSex: null,
+  sex: null,
+  usersOnlyInDistance: false,
+};
+
+export const AUTH_REFRESH_EXPECT = AUTH_LOGIN_EXPECT;

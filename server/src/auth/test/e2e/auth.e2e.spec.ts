@@ -10,6 +10,11 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { prepareAfter, prepareBefore } from './preparations';
 import { authUserStub } from '../stubs';
+import {
+  AUTH_LOGIN_EXPECT,
+  AUTH_REFRESH_EXPECT,
+  AUTH_REGISTRATION_EXPECT,
+} from '../values/auth.e2e-const.expect';
 
 describe('auth-e2e', () => {
   let httpServer: HttpServer;
@@ -61,12 +66,10 @@ describe('auth-e2e', () => {
       });
 
       it('should return a user', () => {
-        expect(response.body).toEqual({
-          ...newUserStub(),
-          id: response.body.id,
-          email: '789@gmail.com',
-          name: userDtoStub().name,
-        });
+        expect({ ...response.body, id: undefined }).toEqual(
+          AUTH_REGISTRATION_EXPECT,
+        );
+        expect(response.body.id).toBeDefined();
       });
 
       it('should set jwt tokens in cookies', () => {
@@ -110,12 +113,7 @@ describe('auth-e2e', () => {
       });
 
       it('should return a user', () => {
-        expect(response.body).toEqual({
-          ...newUserStub(),
-          id: authUserStub().id,
-          email: authUserStub().email,
-          name: userDtoStub().name,
-        });
+        expect(response.body).toEqual(AUTH_LOGIN_EXPECT);
       });
 
       it('should set jwt tokens in cookies', () => {
@@ -304,12 +302,7 @@ describe('auth-e2e', () => {
       });
 
       it('should return a user', () => {
-        expect(response.body).toEqual({
-          ...newUserStub(),
-          id: authUserStub().id,
-          email: authUserStub().email,
-          name: userDtoStub().name,
-        });
+        expect(response.body).toEqual(AUTH_REFRESH_EXPECT);
       });
     });
 

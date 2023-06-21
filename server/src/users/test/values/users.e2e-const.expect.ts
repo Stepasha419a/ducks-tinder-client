@@ -1,0 +1,65 @@
+export const USERS_PAIRS_GET_EXPECT = [
+  {
+    id: 'users_pairs_get_second_user_id',
+    name: 'Loren',
+    description: null,
+    distance: null,
+    interests: [],
+    age: null,
+    place: null,
+    isActivated: false,
+    pictures: [],
+  },
+];
+
+export const USERS_PATCH_EXPECT = {
+  id: 'patch_current_user_id',
+  email: 'email123123@gmail.com',
+  name: 'William',
+  age: null,
+  description: null,
+  distance: null,
+  isActivated: false,
+  nickname: null,
+  pairsCount: 0,
+  place: null,
+  preferAgeFrom: null,
+  preferAgeTo: null,
+  preferSex: null,
+  usersOnlyInDistance: false,
+  sex: null,
+  pictures: [],
+  interests: [{ name: 'traveling' }, { name: 'ski' }],
+};
+
+export const USERS_PICTURE_PUT_EXPECT = {
+  id: 'users_picture_put_current_user_id',
+  email: 'users_picture_put_current_user_id@gmail.com',
+  name: 'Jason',
+  age: null,
+  description: null,
+  distance: null,
+  isActivated: false,
+  nickname: null,
+  pairsCount: 0,
+  place: null,
+  preferAgeFrom: null,
+  preferAgeTo: null,
+  preferSex: null,
+  sex: null,
+  usersOnlyInDistance: false,
+  pictures: [],
+  interests: [],
+};
+
+export const USERS_SORTED_GET_EXPECT = {
+  id: 'sorted_second_user_id',
+  age: 20,
+  distance: 50,
+  description: null,
+  name: 'Loren',
+  place: null,
+  isActivated: false,
+  pictures: [],
+  interests: [],
+};

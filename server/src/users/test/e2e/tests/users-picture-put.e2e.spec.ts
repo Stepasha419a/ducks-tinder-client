@@ -9,12 +9,12 @@ import { HttpServer } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'app.module';
 import prismaClient from 'prisma/test/prisma-client';
-import { UserDto } from 'users/dto';
 import {
   prepareAccessTokens,
   prepareAfter,
   prepareBefore,
 } from '../preparations';
+import { USERS_PICTURE_PUT_EXPECT } from 'users/test/values/users.e2e-const.expect';
 
 const currentUserId = 'users_picture_put_current_user_id';
 const secondUserId = 'users_picture_put_second_user_id';
@@ -22,8 +22,6 @@ const secondUserId = 'users_picture_put_second_user_id';
 describe('users/picture (PUT)', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
-
-  let currentUser: UserDto;
 
   const prepareReadyAccessTokens = () =>
     prepareAccessTokens(currentUserId, secondUserId);
@@ -64,8 +62,7 @@ describe('users/picture (PUT)', () => {
 
   beforeEach(async () => {
     await prepareAfter(currentUserId, secondUserId);
-    const users = await prepareBefore(currentUserId, secondUserId);
-    currentUser = users.currentUser;
+    await prepareBefore(currentUserId, secondUserId);
   });
 
   describe('when it is called correctly', () => {
@@ -125,11 +122,7 @@ describe('users/picture (PUT)', () => {
 
     it('should return a user', async () => {
       expect(response.status).toBe(200);
-      expect(response.body).toEqual({
-        ...currentUser,
-        pairsCount: 0,
-        pictures: [],
-      });
+      expect(response.body).toEqual(USERS_PICTURE_PUT_EXPECT);
     });
   });
 

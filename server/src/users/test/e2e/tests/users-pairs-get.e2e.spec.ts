@@ -5,12 +5,12 @@ import { HttpServer } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'app.module';
 import prismaClient from 'prisma/test/prisma-client';
-import { UserDto } from 'users/dto';
 import {
   prepareAccessTokens,
   prepareAfter,
   prepareBefore,
 } from '../preparations';
+import { USERS_PAIRS_GET_EXPECT } from 'users/test/values/users.e2e-const.expect';
 
 const currentUserId = 'users_pairs_get_current_user_id';
 const secondUserId = 'users_pairs_get_second_user_id';
@@ -18,8 +18,6 @@ const secondUserId = 'users_pairs_get_second_user_id';
 describe('users/pairs (GET)', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
-
-  let secondUser: UserDto;
 
   const prepareReadyAccessTokens = () =>
     prepareAccessTokens(currentUserId, secondUserId);
@@ -50,8 +48,7 @@ describe('users/pairs (GET)', () => {
 
   beforeEach(async () => {
     await prepareAfter(currentUserId, secondUserId);
-    const users = await prepareBefore(currentUserId, secondUserId);
-    secondUser = users.secondUser;
+    await prepareBefore(currentUserId, secondUserId);
   });
 
   describe('when it is called correctly', () => {
@@ -72,19 +69,7 @@ describe('users/pairs (GET)', () => {
 
     it('should return a user', async () => {
       expect(response.status).toBe(200);
-      expect(response.body).toEqual([
-        {
-          id: secondUserId,
-          name: secondUser.name,
-          description: secondUser.description,
-          distance: secondUser.distance,
-          interests: secondUser.interests,
-          age: secondUser.age,
-          place: secondUser.place,
-          isActivated: secondUser.isActivated,
-          pictures: secondUser.pictures,
-        },
-      ]);
+      expect(response.body).toEqual(USERS_PAIRS_GET_EXPECT);
     });
   });
 

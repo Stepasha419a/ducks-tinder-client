@@ -98,6 +98,13 @@ describe('when patch is called', () => {
       });
     });
 
+    it('should call user count', async () => {
+      expect(prismaService.user.count).toBeCalledTimes(1);
+      expect(prismaService.user.count).toBeCalledWith({
+        where: { pairFor: { some: { id: user.id } } },
+      });
+    });
+
     it('should return a user', async () => {
       expect(user).toEqual(userDtoStub());
     });

@@ -1,3 +1,4 @@
+import { USERS_PATCH_EXPECT } from './../../values/users.e2e-const.expect';
 import * as request from 'supertest';
 import * as cookieParser from 'cookie-parser';
 import { NestApplication } from '@nestjs/core';
@@ -5,9 +6,7 @@ import { HttpServer } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'app.module';
 import prismaClient from 'prisma/test/prisma-client';
-import { newUserStub } from 'users/test/stubs';
 import { UPDATE_USER_DTO } from 'users/test/values/users.const.dto';
-import { UserDto } from 'users/dto';
 import {
   prepareAccessTokens,
   prepareAfter,
@@ -21,8 +20,6 @@ describe('users (PATCH)', () => {
   let httpServer: HttpServer;
   let app: NestApplication;
 
-  let currentUser: UserDto;
-
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
@@ -35,8 +32,7 @@ describe('users (PATCH)', () => {
     await app.init();
     await prismaClient.$connect();
 
-    const users = await prepareBefore(currentUserId, secondUserId);
-    currentUser = users.currentUser;
+    await prepareBefore(currentUserId, secondUserId);
 
     await prismaClient.interest.createMany({
       data: [
@@ -94,18 +90,7 @@ describe('users (PATCH)', () => {
       expect(response.status).toBe(200);
 
       // to equal interest items by another way
-      expect({ ...user, interests: undefined }).toEqual({
-        ...newUserStub(),
-        id: currentUser.id,
-        email: UPDATE_USER_DTO.email,
-        name: UPDATE_USER_DTO.name,
-        interests: undefined,
-      });
-      expect(user.interests.length).toEqual(2);
-      expect(user.interests).toEqual([
-        { name: UPDATE_USER_DTO.interests[0] },
-        { name: UPDATE_USER_DTO.interests[1] },
-      ]);
+      expect(user).toEqual(USERS_PATCH_EXPECT);
     });
   });
 
