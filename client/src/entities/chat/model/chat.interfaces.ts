@@ -4,7 +4,9 @@ export interface ChatInitialState {
   chats: ShortChat[];
   isConnected: boolean;
   isLoading: boolean;
-  isMessagesLoading: boolean;
+  isMessagesInitialLoading: boolean;
   currentMessages: Message[];
+  maxMessagesCount: number;
+  isMessagesEnded: boolean;
   currentChatId: string;
 }

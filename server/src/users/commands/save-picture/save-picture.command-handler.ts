@@ -36,7 +36,10 @@ export class SavePictureCommandHandler
       where: { id: user.id },
       include: UsersSelector.selectUser(),
     });
+    const pairsCount = await this.prismaService.user.count({
+      where: { pairFor: { some: { id: user.id } } },
+    });
 
-    return new UserDto(updatedUser);
+    return new UserDto({ ...updatedUser, pairsCount });
   }
 }

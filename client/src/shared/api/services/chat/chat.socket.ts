@@ -1,12 +1,13 @@
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
-import type { SendMessage } from '@shared/api/interfaces';
+import type { SendMessage, User } from '@shared/api/interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;
   _sockets: Set<Socket>;
   connectChat: (chatId: string) => Socket;
   sendMessage: (content: string, username: string, userId: string) => void;
+  getMessages: (user: User, chatId: string, haveCount: number) => void;
   disconnectChat: () => void;
   closeAllSockets: () => void;
 }
@@ -33,6 +34,9 @@ export const chatSocket: ChatSocket = {
       chatId,
     };
     this._socket!.send(message);
+  },
+  getMessages(user: User, chatId: string, haveCount: number): void {
+    this._socket!.emit('get-messages', { user, chatId, haveCount });
   },
   disconnectChat(): void {
     if (this._socket) {

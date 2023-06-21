@@ -1,11 +1,11 @@
 import { Avatar } from '@shared/ui';
 import classNames from 'classnames';
-import type { Chat, ShortUser } from '@shared/api/interfaces';
+import type { ShortChat, ShortUser } from '@shared/api/interfaces';
 import type { FC } from 'react';
 import styles from './ChatItem.module.scss';
 
 interface ChatInterface {
-  chat: Chat;
+  chat: ShortChat;
   chatCompanion: ShortUser | undefined;
   isActive: boolean;
   connect: (chatId: string) => void;

@@ -11,6 +11,7 @@ export interface FullChat {
   id: string;
   users: ShortUser[];
   messages: Message[];
+  messagesCount: number;
 }
 
 // has only latest message

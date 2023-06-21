@@ -1,5 +1,5 @@
 import { FilesService } from 'files/files.service';
-import { PrismaService } from '../../../prisma/prisma.service';
+import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeletePictureCommand } from './delete-picture.command';
 import { UserDto } from 'users/dto';
@@ -48,7 +48,10 @@ export class DeletePictureCommandHandler
       where: { id: user.id },
       include: UsersSelector.selectUser(),
     });
+    const pairsCount = await this.prismaService.user.count({
+      where: { pairFor: { some: { id: user.id } } },
+    });
 
-    return new UserDto(updatedUser);
+    return new UserDto({ ...updatedUser, pairsCount });
   }
 }

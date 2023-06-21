@@ -10,6 +10,7 @@ import {
 interface InitialState {
   tinderUsers: ShortUser[];
   isReturnUser: boolean;
+  isLoading: boolean;
   requestedUsers: string[];
   currentTinderUsersIndex: number;
   isFailed: boolean;
@@ -18,6 +19,7 @@ interface InitialState {
 const initialState: InitialState = {
   tinderUsers: [],
   isReturnUser: false,
+  isLoading: true,
   requestedUsers: [],
   currentTinderUsersIndex: 0,
   isFailed: false,
@@ -29,8 +31,12 @@ const tinderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getSortedUserThunk.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(getSortedUserThunk.fulfilled, (state, { payload }) => {
         state.tinderUsers = [...state.tinderUsers, payload];
+        state.isLoading = false;
       })
       .addCase(getSortedUserThunk.rejected, (state) => {
         state.isFailed = true;

@@ -1,4 +1,4 @@
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Server, Socket } from 'socket.io';
 import { ConnectedSocket, MessageBody } from '@nestjs/websockets';
 import {
@@ -6,12 +6,16 @@ import {
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { SendMessageDto } from './dto';
+import { GetMessagesDto, SendMessageDto } from './dto';
 import { SendMessageCommand } from './commands';
+import { GetMessagesQuery } from './queries';
 
 @WebSocketGateway({ namespace: '/chat/socket', cors: '*:*', origin: true })
 export class ChatsGateway {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(
+    private readonly commandBus: CommandBus,
+    private readonly queryBus: QueryBus,
+  ) {}
 
   @WebSocketServer()
   wss: Server;
@@ -34,7 +38,6 @@ export class ChatsGateway {
     const chatId = newStr.slice(0, newStr.indexOf('&'));
 
     client.leave(chatId);
-    client.emit('disconnected', chatId);
   }
 
   @SubscribeMessage('message')
@@ -42,5 +45,12 @@ export class ChatsGateway {
     const message = await this.commandBus.execute(new SendMessageCommand(dto));
 
     this.wss.to(dto.chatId).emit('message', message);
+  }
+
+  @SubscribeMessage('get-messages')
+  async getMessages(@MessageBody() dto: GetMessagesDto) {
+    const messages = await this.queryBus.execute(new GetMessagesQuery(dto));
+
+    this.wss.to(dto.chatId).emit('get-messages', messages);
   }
 }

@@ -20,11 +20,19 @@ export class GetChatQueryHandler implements IQueryHandler<GetChatQuery> {
       throw new NotFoundException();
     }
 
-    return this.prismaService.chat.findUnique({
+    const messagesCount = await this.prismaService.message.count({
+      where: { chatId: id },
+    });
+
+    const skipCount = messagesCount > 20 ? messagesCount - 20 : 0;
+
+    const chat = await this.prismaService.chat.findUnique({
       where: { id },
       select: {
         id: true,
         messages: {
+          skip: skipCount,
+          take: 20,
           orderBy: { createdAt: 'asc' },
           select: { id: true, text: true, userId: true },
         },
@@ -34,5 +42,7 @@ export class GetChatQueryHandler implements IQueryHandler<GetChatQuery> {
         },
       },
     });
+
+    return { ...chat, messagesCount };
   }
 }

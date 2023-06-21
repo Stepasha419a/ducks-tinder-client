@@ -1,6 +1,6 @@
 import type { Socket } from 'socket.io-client';
 import { instance } from '@shared/api';
-import type { Chat, ShortChat } from '@shared/api/interfaces';
+import type { Chat, ShortChat, User } from '@shared/api/interfaces';
 import { chatSocket } from './chat.socket';
 
 export const chatService = {
@@ -18,6 +18,9 @@ export const chatService = {
   },
   disconnectChat(): void {
     chatSocket.disconnectChat();
+  },
+  getMessages(user: User, chatId: string, takeOrder: number): void {
+    chatSocket.getMessages(user, chatId, takeOrder);
   },
   closeAllSockets(): void {
     chatSocket.closeAllSockets();

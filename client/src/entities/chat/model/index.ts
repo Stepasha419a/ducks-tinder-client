@@ -1,10 +1,6 @@
+export { pushNewMessage, setCurrentChatData } from './chat.slice';
 export {
-  disconnectChat,
-  pushNewMessage,
-  setCurrentChatData,
-} from './chat.slice';
-export {
-  closeAllSockets,
+  closeAllSocketsThunk,
   connectChatThunk,
   disconnectChatThunk,
   getChatsThunk,

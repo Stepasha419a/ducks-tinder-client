@@ -13,6 +13,7 @@ export const Tinder: FC = () => {
 
   const { tinderUsers, currentTinderUsersIndex, isFailed } =
     useAppSelector(selectTinderData);
+  const isLoading = useAppSelector((state) => state.tinder.isLoading);
 
   const [isFullPreview, setIsFullPreview] = useState(false);
 
@@ -28,7 +29,7 @@ export const Tinder: FC = () => {
     );
   }
 
-  if (currentTinderUsersIndex === tinderUsers.length) {
+  if (currentTinderUsersIndex === tinderUsers.length || isLoading) {
     return <TinderLazy />;
   }
 

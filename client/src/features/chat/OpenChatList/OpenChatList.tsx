@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import {
-  closeAllSockets,
+  closeAllSocketsThunk,
   connectChatThunk,
   disconnectChatThunk,
 } from '@entities/chat/model';
@@ -16,7 +16,7 @@ export const OpenChatList = (): ReactElement => {
 
   useEffect(() => {
     return () => {
-      dispatch(closeAllSockets());
+      dispatch(closeAllSocketsThunk());
     };
   }, [dispatch]);
 

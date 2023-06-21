@@ -2,14 +2,20 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Chat, Message, ShortChat } from '@shared/api/interfaces';
 import type { ChatInitialState } from './chat.interfaces';
-import { getChatsThunk, connectChatThunk } from './chat.thunks';
+import {
+  getChatsThunk,
+  connectChatThunk,
+  closeAllSocketsThunk,
+} from './chat.thunks';
 
 const initialState: ChatInitialState = {
   chats: [],
   isConnected: false,
   isLoading: true,
-  isMessagesLoading: true,
+  isMessagesInitialLoading: true,
   currentMessages: [],
+  maxMessagesCount: 0,
+  isMessagesEnded: false,
   currentChatId: '',
 };
 
@@ -29,11 +35,14 @@ const chatSlice = createSlice({
       state.currentChatId = chat.id;
       state.isConnected = true;
       state.currentMessages = chat.messages;
+      state.maxMessagesCount = chat.messagesCount;
+      state.isMessagesEnded = false;
     },
-    disconnectChat: (state) => {
-      state.isConnected = false;
-      state.currentMessages = [];
-      state.currentChatId = '';
+    getMessages: (state, { payload }: PayloadAction<Message[]>) => {
+      if (payload.length === 0) {
+        state.isMessagesEnded = true;
+      }
+      state.currentMessages = [...payload, ...state.currentMessages];
     },
   },
   extraReducers: (builder) => {
@@ -46,15 +55,21 @@ const chatSlice = createSlice({
         }
       )
       .addCase(connectChatThunk.pending, (state) => {
-        state.isMessagesLoading = true;
+        state.isMessagesInitialLoading = true;
       })
       .addCase(connectChatThunk.fulfilled, (state) => {
-        state.isMessagesLoading = false;
+        state.isMessagesInitialLoading = false;
+      })
+      .addCase(closeAllSocketsThunk.fulfilled, (state) => {
+        state.isConnected = false;
+        state.currentMessages = [];
+        state.maxMessagesCount = 0;
+        state.currentChatId = '';
       });
   },
 });
 
-export const { pushNewMessage, setCurrentChatData, disconnectChat } =
+export const { pushNewMessage, setCurrentChatData, getMessages } =
   chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

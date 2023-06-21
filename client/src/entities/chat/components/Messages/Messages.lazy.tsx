@@ -1,13 +1,18 @@
+import type { FC } from 'react';
 import { Skeleton } from '@shared/ui';
 import styles from './Messages.module.scss';
 
 const heights = [35, 55, 75];
 const widths = [150, 200, 250, 300, 350];
 
-export const MessagesLazy = () => {
+interface MessagesLazyProps {
+  count?: number;
+}
+
+export const MessagesLazy: FC<MessagesLazyProps> = ({ count = 12 }) => {
   return (
-    <div className={styles.messages}>
-      {Array(12)
+    <>
+      {Array(count)
         .fill(null)
         .map((_, i) => {
           return (
@@ -21,6 +26,6 @@ export const MessagesLazy = () => {
             </div>
           );
         })}
-    </div>
+    </>
   );
 };

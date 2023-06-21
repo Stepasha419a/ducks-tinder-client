@@ -2,11 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { Message } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
-import {
-  disconnectChat,
-  pushNewMessage,
-  setCurrentChatData,
-} from '@entities/chat/model';
+import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
+import { getMessages } from './chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
@@ -39,8 +36,8 @@ export const connectChatThunk = createAsyncThunk(
         dispatch(pushNewMessage(message));
       });
 
-      socket.on('disconnected', () => {
-        dispatch(disconnectChat());
+      socket.on('get-messages', (data: Message[]) => {
+        dispatch(getMessages(data));
       });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -59,8 +56,27 @@ export const disconnectChatThunk = createAsyncThunk(
   }
 );
 
-export const closeAllSockets = createAsyncThunk(
-  'chat/closeSocket',
+export const getMessagesThunk = createAsyncThunk(
+  'chat/getMessages',
+  (_, { rejectWithValue, getState }) => {
+    try {
+      const { user, chat } = getState() as RootState;
+      const { currentUser } = user;
+      const { currentChatId, currentMessages } = chat;
+
+      chatService.getMessages(
+        currentUser,
+        currentChatId,
+        currentMessages.length
+      );
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
+export const closeAllSocketsThunk = createAsyncThunk(
+  'chat/closeAllSockets',
   (_, { rejectWithValue }) => {
     try {
       chatService.closeAllSockets();
