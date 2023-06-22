@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { FilesModule } from '../files/files.module';
 import { UsersController } from './users.controller';
@@ -11,7 +11,12 @@ import { ChatsModule } from 'chats/chats.module';
 @Module({
   providers: [UsersService, ...UserCommandHandlers, ...UserQueryHandlers],
   controllers: [UsersController],
-  imports: [PrismaModule, CqrsModule, FilesModule, ChatsModule],
+  imports: [
+    PrismaModule,
+    CqrsModule,
+    FilesModule,
+    forwardRef(() => ChatsModule),
+  ],
   exports: [UsersService],
 })
 export class UsersModule {}

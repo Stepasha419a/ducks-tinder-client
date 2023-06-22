@@ -27,22 +27,43 @@ export class AccessTokenGuard implements CanActivate {
     }
 
     const req = context.switchToHttp().getRequest();
+    let client;
+
+    let accessToken;
     const cookies = req.cookies;
-    if (!cookies?.accessToken) {
-      throw new UnauthorizedException();
+    if (cookies?.accessToken) {
+      accessToken = req.cookies.accessToken;
+    } else {
+      client = context.switchToWs().getClient();
+      accessToken = this.getAccessTokenFromWs(client);
     }
 
-    const userData = await this.tokensService.validateAccessToken(
-      cookies.accessToken,
-    );
+    const userData = await this.tokensService.validateAccessToken(accessToken);
     if (!userData) {
       throw new UnauthorizedException();
     }
 
     const user = await this.usersService.getUser(userData.id);
 
-    req.user = user;
+    if (cookies?.accessToken) {
+      req.user = user;
+    } else if (client) {
+      client.request.user = user;
+    }
 
     return true;
+  }
+
+  private getAccessTokenFromWs(client) {
+    if (client?.handshake?.headers?.cookie) {
+      // to get token from string 'refreshToken=...; accessToken=...'
+      const mappedTokens = client.handshake.headers.cookie
+        .split(' ')
+        .map((string) => string.split('='));
+      const index = mappedTokens.findIndex((pair) => pair[0] === 'accessToken');
+      return mappedTokens[index][1];
+    } else {
+      throw new UnauthorizedException();
+    }
   }
 }

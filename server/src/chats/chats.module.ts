@@ -1,11 +1,13 @@
 import { ChatsGateway } from './chats.gateway';
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { ChatsController } from './chats.controller';
 import { ChatsService } from './chats.service';
 import { PrismaModule } from 'prisma/prisma.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ChatCommandHandlers } from './commands';
 import { ChatQueryHandlers } from './queries';
+import { TokensModule } from 'tokens/tokens.module';
+import { UsersModule } from 'users/users.module';
 
 @Module({
   controllers: [ChatsController],
@@ -15,7 +17,12 @@ import { ChatQueryHandlers } from './queries';
     ...ChatCommandHandlers,
     ...ChatQueryHandlers,
   ],
-  imports: [PrismaModule, CqrsModule],
+  imports: [
+    PrismaModule,
+    CqrsModule,
+    TokensModule,
+    forwardRef(() => UsersModule),
+  ],
   exports: [ChatsService],
 })
 export class ChatsModule {}

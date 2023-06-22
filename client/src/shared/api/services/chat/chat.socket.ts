@@ -18,6 +18,8 @@ export const chatSocket: ChatSocket = {
   connectChat(chatId: string): Socket {
     this._socket = io('http://localhost:5000/chat/socket', {
       query: { chatId },
+      withCredentials: true,
+      transports: ['websocket'],
     });
 
     this._socket.emit('connectChat', chatId);

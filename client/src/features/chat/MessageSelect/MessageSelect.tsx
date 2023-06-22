@@ -3,23 +3,24 @@ import { useRef } from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import type { Message } from '@shared/api/interfaces';
+import { useOnClickOutside } from '@shared/hooks';
 import styles from './MessageSelect.module.scss';
-import { useOnClickOutside } from '@/shared/hooks';
 
 interface MessageSelectProps {
-  setCurrentMessageId: (id: string | null) => void;
-  currentMessageId: string;
+  setCurrentMessage: (message: Message | null) => void;
+  currentMessage: Message;
 }
 
 export const MessageSelect: FC<MessageSelectProps> = ({
-  setCurrentMessageId,
-  currentMessageId,
+  setCurrentMessage,
+  currentMessage,
 }) => {
-  console.log(currentMessageId);
+  console.log(currentMessage);
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   const handleSelectClickOutside = () => {
-    setCurrentMessageId(null);
+    setCurrentMessage(null);
   };
 
   useOnClickOutside(selectRef, handleSelectClickOutside);

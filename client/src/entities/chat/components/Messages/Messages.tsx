@@ -9,14 +9,14 @@ import { useMessagesScroll } from '../../lib';
 
 interface MessagesProps {
   select: ReactElement;
-  currentMessageId: string | null;
-  setCurrentMessageId: (id: string) => void;
+  currentMessage: MessageInterface | null;
+  setCurrentMessage: (id: MessageInterface) => void;
 }
 
 export const Messages: FC<MessagesProps> = ({
   select,
-  currentMessageId,
-  setCurrentMessageId,
+  currentMessage,
+  setCurrentMessage,
 }): ReactElement => {
   const { currentChatUserObj, messages, currentChat } =
     useAppSelector(selectUserChat);
@@ -57,8 +57,8 @@ export const Messages: FC<MessagesProps> = ({
         return (
           <Message
             key={message.id}
-            isSelectOpen={currentMessageId === message.id}
-            setCurrentMessageId={setCurrentMessageId}
+            isSelectOpen={currentMessage?.id === message.id}
+            setCurrentMessage={setCurrentMessage}
             isOwn={isOwn}
             message={message}
             username={name}

@@ -1,5 +1,6 @@
 import { useState, type ReactElement } from 'react';
 import { useAppSelector } from '@hooks';
+import type { Message } from '@shared/api/interfaces';
 import { Messages } from '@entities/chat/components';
 import { ChatForm, MessageSelect } from '@features/chat';
 import { Status } from './components';
@@ -8,7 +9,7 @@ import styles from './Chat.module.scss';
 export const Chat = (): ReactElement => {
   const isConnected = useAppSelector((state) => state.chat.isConnected);
 
-  const [currentMessageId, setCurrentMessageId] = useState<string | null>(null);
+  const [currentMessage, setCurrentMessage] = useState<Message | null>(null);
 
   return (
     <div className={styles.content}>
@@ -18,12 +19,12 @@ export const Chat = (): ReactElement => {
           <Messages
             select={
               <MessageSelect
-                setCurrentMessageId={setCurrentMessageId}
-                currentMessageId={currentMessageId!}
+                setCurrentMessage={setCurrentMessage}
+                currentMessage={currentMessage!}
               />
             }
-            currentMessageId={currentMessageId}
-            setCurrentMessageId={setCurrentMessageId}
+            currentMessage={currentMessage}
+            setCurrentMessage={setCurrentMessage}
           />
           <ChatForm />
         </>

@@ -13,7 +13,7 @@ interface MessageProps {
   select: ReactElement;
   avatar?: string;
   isSelectOpen: boolean;
-  setCurrentMessageId: (id: string) => void;
+  setCurrentMessage: (message: MessageType) => void;
 }
 
 export const Message: FC<MessageProps> = ({
@@ -23,17 +23,16 @@ export const Message: FC<MessageProps> = ({
   select,
   avatar,
   isSelectOpen,
-  setCurrentMessageId,
+  setCurrentMessage,
 }) => {
   const cnMessage = classNames(
     styles.message,
     isOwn && styles.own,
     isSelectOpen && styles.editing
   );
-  const cnMark = classNames(styles.mark, isOwn && styles.own);
 
   const handleSelectClick = () => {
-    setCurrentMessageId(message.id);
+    setCurrentMessage(message);
   };
 
   return (
@@ -47,17 +46,17 @@ export const Message: FC<MessageProps> = ({
         <div className={cnMessage}>
           {!isOwn && <div className={styles.username}>{username}</div>}
           <div className={styles.content}>{message.text}</div>
-          <div className={cnMark}></div>
         </div>
-        {isSelectOpen ? (
-          select
-        ) : (
-          <FontAwesomeIcon
-            onClick={handleSelectClick}
-            className={styles.dots}
-            icon={faEllipsis}
-          />
-        )}
+        {isOwn &&
+          (isSelectOpen ? (
+            select
+          ) : (
+            <FontAwesomeIcon
+              onClick={handleSelectClick}
+              className={styles.dots}
+              icon={faEllipsis}
+            />
+          ))}
       </div>
     </div>
   );
