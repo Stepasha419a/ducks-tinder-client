@@ -23,6 +23,10 @@
         );
       }
 
+      &.editing {
+        background: rgb(228, 228, 228);
+      }
+
       .username {
         font-weight: 600;
         font-size: 15px;
@@ -33,6 +37,26 @@
         overflow-wrap: break-word;
         max-width: 490px;
       }
+    }
+
+    .dots {
+      font-size: 20px;
+      cursor: pointer;
+      padding: 8px;
+      margin-left: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.1s;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.171);
+        border-radius: 8px;
+      }
+    }
+
+    &:hover .dots {
+      opacity: 1;
+      visibility: visible;
     }
   }
 }

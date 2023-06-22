@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { useAppSelector } from '@hooks';
 import type { Message as MessageInterface } from '@shared/api/interfaces';
 import { Message } from './Message/Message';
@@ -7,7 +7,17 @@ import { MessagesLazy } from './Messages.lazy';
 import styles from './Messages.module.scss';
 import { useMessagesScroll } from '../../lib';
 
-export const Messages = (): ReactElement => {
+interface MessagesProps {
+  select: ReactElement;
+  currentMessageId: string | null;
+  setCurrentMessageId: (id: string) => void;
+}
+
+export const Messages: FC<MessagesProps> = ({
+  select,
+  currentMessageId,
+  setCurrentMessageId,
+}): ReactElement => {
   const { currentChatUserObj, messages, currentChat } =
     useAppSelector(selectUserChat);
   const isMessagesInitialLoading = useAppSelector(
@@ -47,10 +57,13 @@ export const Messages = (): ReactElement => {
         return (
           <Message
             key={message.id}
+            isSelectOpen={currentMessageId === message.id}
+            setCurrentMessageId={setCurrentMessageId}
             isOwn={isOwn}
             message={message}
             username={name}
             avatar={avatar}
+            select={select}
           />
         );
       })}

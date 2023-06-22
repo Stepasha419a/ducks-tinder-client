@@ -23,6 +23,12 @@
       border-radius: 8px;
       z-index: 12;
 
+      &.xs {
+        position: absolute;
+        height: 40px;
+        width: 100px;
+      }
+
       &.s {
         height: 400px;
       }
@@ -31,7 +37,7 @@
         height: 600px;
       }
 
-      &.l{
+      &.l {
         height: 650px;
       }
 
