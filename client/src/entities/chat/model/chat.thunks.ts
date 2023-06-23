@@ -3,7 +3,7 @@ import type { Message } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
-import { getMessages } from './chat.slice';
+import { deleteMessage, getMessages } from './chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
@@ -36,8 +36,12 @@ export const connectChatThunk = createAsyncThunk(
         dispatch(pushNewMessage(message));
       });
 
-      socket.on('get-messages', (data: Message[]) => {
-        dispatch(getMessages(data));
+      socket.on('get-messages', (messages: Message[]) => {
+        dispatch(getMessages(messages));
+      });
+
+      socket.on('delete-message', (message: Message) => {
+        dispatch(deleteMessage(message));
       });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -64,6 +68,17 @@ export const getMessagesThunk = createAsyncThunk(
       const { currentMessages } = chat;
 
       chatService.getMessages(currentMessages.length);
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
+export const deleteMessageThunk = createAsyncThunk(
+  'chat/deleteMessage',
+  (messageId: string, { rejectWithValue }) => {
+    try {
+      chatService.deleteMessage(messageId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

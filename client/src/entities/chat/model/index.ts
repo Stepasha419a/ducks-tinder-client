@@ -5,5 +5,6 @@ export {
   disconnectChatThunk,
   getChatsThunk,
   sendMessageThunk,
+  deleteMessageThunk,
 } from './chat.thunks';
 export { selectUserChat, selectChatList } from './chat.selectors';

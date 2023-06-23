@@ -44,6 +44,11 @@ const chatSlice = createSlice({
       }
       state.currentMessages = [...payload, ...state.currentMessages];
     },
+    deleteMessage: (state, { payload }: PayloadAction<Message>) => {
+      state.currentMessages = state.currentMessages.filter(
+        (message) => message.id !== payload.id
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -69,7 +74,11 @@ const chatSlice = createSlice({
   },
 });
 
-export const { pushNewMessage, setCurrentChatData, getMessages } =
-  chatSlice.actions;
+export const {
+  pushNewMessage,
+  setCurrentChatData,
+  getMessages,
+  deleteMessage,
+} = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;
