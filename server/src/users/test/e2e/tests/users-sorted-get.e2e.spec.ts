@@ -84,7 +84,7 @@ describe('users/sorted (GET)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual(USERS_SORTED_GET_EXPECT);
     });
@@ -101,7 +101,7 @@ describe('users/sorted (GET)', () => {
         .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Such user was not found');
     });
@@ -114,7 +114,7 @@ describe('users/sorted (GET)', () => {
       response = await request(httpServer).get('/users/sorted');
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(401);
       expect(response.body.message).toEqual('Unauthorized');
     });

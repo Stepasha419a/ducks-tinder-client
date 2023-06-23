@@ -85,7 +85,7 @@ describe('users (PATCH)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       const user = response.body;
       expect(response.status).toBe(200);
 
@@ -109,7 +109,7 @@ describe('users (PATCH)', () => {
         .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Such user was not found');
     });
@@ -124,7 +124,7 @@ describe('users (PATCH)', () => {
         .send({ name: 'William' });
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(401);
       expect(response.body.message).toEqual('Unauthorized');
     });

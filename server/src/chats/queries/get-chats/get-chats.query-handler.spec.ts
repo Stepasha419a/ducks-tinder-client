@@ -8,6 +8,7 @@ import { GetChatsQueryHandler } from './get-chats.query-handler';
 import { ShortChat } from 'chats/chats.interfaces';
 import { UsersSelector } from 'users/users.selector';
 import { shortChatStub } from 'chats/test/stubs';
+import { ChatsSelector } from 'chats/chats.selector';
 
 describe('when get chats is called', () => {
   let prismaService: PrismaService;
@@ -43,17 +44,13 @@ describe('when get chats is called', () => {
       );
     });
 
-    it('should call chat find many', async () => {
+    it('should call chat find many', () => {
       expect(prismaService.chat.findMany).toBeCalledTimes(1);
       expect(prismaService.chat.findMany).toBeCalledWith({
         where: { users: { some: { id: requestUserStub().id } } },
         select: {
           id: true,
-          messages: {
-            take: 1,
-            orderBy: { createdAt: 'desc' },
-            select: { id: true, text: true, userId: true },
-          },
+          messages: ChatsSelector.selectShortMessages(),
           users: {
             where: { id: { not: requestUserStub().id } },
             select: UsersSelector.selectShortUser(),
@@ -62,7 +59,7 @@ describe('when get chats is called', () => {
       });
     });
 
-    it('should return an array of chats', async () => {
+    it('should return an array of chats', () => {
       expect(chats).toEqual([shortChatStub()]);
     });
   });

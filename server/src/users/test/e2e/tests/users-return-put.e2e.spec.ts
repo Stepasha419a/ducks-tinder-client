@@ -68,7 +68,7 @@ describe('users/return (PUT)', () => {
         .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
     });
 
-    it('should return an empty object', async () => {
+    it('should return an empty object', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({});
     });
@@ -85,7 +85,7 @@ describe('users/return (PUT)', () => {
         .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Such user was not found');
     });
@@ -102,7 +102,7 @@ describe('users/return (PUT)', () => {
         .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Not Found');
     });
@@ -126,7 +126,7 @@ describe('users/return (PUT)', () => {
         .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Not Found');
     });
@@ -139,7 +139,7 @@ describe('users/return (PUT)', () => {
       response = await request(httpServer).put('/users/return');
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(401);
       expect(response.body.message).toEqual('Unauthorized');
     });

@@ -1,3 +1,4 @@
+import { ConfigModule } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
@@ -18,7 +19,14 @@ describe('when accept pair is called', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [AcceptPairCommandHandler],
-      imports: [PrismaModule, ChatsModule],
+      imports: [
+        ConfigModule.forRoot({
+          isGlobal: true,
+          envFilePath: `.env.${process.env.NODE_ENV}`,
+        }),
+        PrismaModule,
+        ChatsModule,
+      ],
     })
       .overrideProvider(PrismaService)
       .useValue(UsersPrismaMock())
@@ -54,7 +62,7 @@ describe('when accept pair is called', () => {
       } catch {}
     });
 
-    it('should call user find unique', async () => {
+    it('should call user find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(3);
       expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
         where: { id: userPairId },
@@ -69,7 +77,7 @@ describe('when accept pair is called', () => {
       });
     });
 
-    it('should call user update', async () => {
+    it('should call user update', () => {
       expect(prismaService.user.update).toBeCalledTimes(1);
       expect(prismaService.user.update).toBeCalledWith({
         where: { id: userDtoStub().id },
@@ -77,7 +85,7 @@ describe('when accept pair is called', () => {
       });
     });
 
-    it('should call chatService create', async () => {
+    it('should call chatService create', () => {
       expect(chatsService.create).toBeCalledTimes(1);
       expect(chatsService.create).toBeCalledWith([
         userDtoStub().id,
@@ -85,7 +93,7 @@ describe('when accept pair is called', () => {
       ]);
     });
 
-    it('should return pairs', async () => {
+    it('should return pairs', () => {
       expect(pairs).toEqual([{ ...userDtoStub().firstPair, id: '34545656' }]);
     });
   });
@@ -107,22 +115,22 @@ describe('when accept pair is called', () => {
       } catch {}
     });
 
-    it('should call user find unique', async () => {
+    it('should call user find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(1);
       expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
         where: { id: userPairId },
       });
     });
 
-    it('should not call user update', async () => {
+    it('should not call user update', () => {
       expect(chatsService.create).not.toBeCalled();
     });
 
-    it('should not call chatService create', async () => {
+    it('should not call chatService create', () => {
       expect(chatsService.create).not.toBeCalled();
     });
 
-    it('should return undefined', async () => {
+    it('should return undefined', () => {
       expect(pairs).toEqual(undefined);
     });
   });
@@ -150,7 +158,7 @@ describe('when accept pair is called', () => {
       } catch {}
     });
 
-    it('should call user find unique', async () => {
+    it('should call user find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(2);
       expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
         where: { id: userPairId },
@@ -161,15 +169,15 @@ describe('when accept pair is called', () => {
       });
     });
 
-    it('should not call user update', async () => {
+    it('should not call user update', () => {
       expect(chatsService.create).not.toBeCalled();
     });
 
-    it('should not call chatService create', async () => {
+    it('should not call chatService create', () => {
       expect(chatsService.create).not.toBeCalled();
     });
 
-    it('should return undefined', async () => {
+    it('should return undefined', () => {
       expect(pairs).toEqual(undefined);
     });
   });

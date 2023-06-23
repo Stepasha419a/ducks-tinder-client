@@ -51,7 +51,7 @@ describe('chats-service', () => {
       );
     });
 
-    it('should return undefined', async () => {
+    it('should return undefined', () => {
       expect(response).toEqual(undefined);
     });
   });

@@ -79,7 +79,7 @@ describe('chats (GET)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should return an array of short chats', async () => {
+    it('should return an array of short chats', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual(chats);
     });
@@ -92,7 +92,7 @@ describe('chats (GET)', () => {
       response = await request(httpServer).get('/chats');
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(401);
       expect(response.body.message).toEqual('Unauthorized');
     });

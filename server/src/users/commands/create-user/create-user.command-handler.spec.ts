@@ -46,7 +46,7 @@ describe('when delete pair is called', () => {
       );
     });
 
-    it('should call create user', async () => {
+    it('should call create user', () => {
       expect(prismaService.user.create).toBeCalledTimes(1);
       expect(prismaService.user.create).toBeCalledWith({
         data: CREATE_USER_DTO,
@@ -54,14 +54,14 @@ describe('when delete pair is called', () => {
       });
     });
 
-    it('should call user count', async () => {
+    it('should call user count', () => {
       expect(prismaService.user.count).toBeCalledTimes(1);
       expect(prismaService.user.count).toBeCalledWith({
         where: { pairFor: { some: { email: CREATE_USER_DTO.email } } },
       });
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });

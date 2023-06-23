@@ -72,14 +72,14 @@ describe('when delete picture is called', () => {
       );
     });
 
-    it('should call picture find first', async () => {
+    it('should call picture find first', () => {
       expect(prismaService.picture.findFirst).toBeCalledTimes(1);
       expect(prismaService.picture.findFirst).toBeCalledWith({
         where: DELETE_PICTURE_DTO,
       });
     });
 
-    it('should call files-service delete picture', async () => {
+    it('should call files-service delete picture', () => {
       expect(filesService.deletePicture).toBeCalledTimes(1);
       expect(filesService.deletePicture).toBeCalledWith(
         '123.jpg',
@@ -87,14 +87,14 @@ describe('when delete picture is called', () => {
       );
     });
 
-    it('should call picture delete', async () => {
+    it('should call picture delete', () => {
       expect(prismaService.picture.delete).toBeCalledTimes(1);
       expect(prismaService.picture.delete).toBeCalledWith({
         where: { id: userDtoStub().pictures[0].id },
       });
     });
 
-    it('should call picture update', async () => {
+    it('should call picture update', () => {
       expect(prismaService.picture.update).toBeCalledTimes(1);
       expect(prismaService.picture.update).toBeCalledWith({
         where: { id: userDtoStub().pictures[1].id },
@@ -102,7 +102,7 @@ describe('when delete picture is called', () => {
       });
     });
 
-    it('should call user find unique', async () => {
+    it('should call user find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(1);
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userDtoStub().id },
@@ -110,14 +110,14 @@ describe('when delete picture is called', () => {
       });
     });
 
-    it('should call user count', async () => {
+    it('should call user count', () => {
       expect(prismaService.user.count).toBeCalledTimes(1);
       expect(prismaService.user.count).toBeCalledWith({
         where: { pairFor: { some: { id: user.id } } },
       });
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });

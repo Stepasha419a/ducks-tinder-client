@@ -81,7 +81,7 @@ describe('users/picture (POST)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(response.status).toBe(201);
       expect(response.body).toEqual(
         new UserDto({
@@ -113,7 +113,7 @@ describe('users/picture (POST)', () => {
         .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Such user was not found');
     });
@@ -155,7 +155,7 @@ describe('users/picture (POST)', () => {
         .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(400);
       expect(response.body.message).toEqual('You have max pictures count');
     });

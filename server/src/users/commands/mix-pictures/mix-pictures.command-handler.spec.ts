@@ -60,14 +60,14 @@ describe('when mix pictures is called', () => {
       );
     });
 
-    it('should call picture findMany', async () => {
+    it('should call picture findMany', () => {
       expect(prismaService.picture.findMany).toBeCalledTimes(1);
       expect(prismaService.picture.findMany).toBeCalledWith({
         where: { userId: user.id },
       });
     });
 
-    it('should call user find unique', async () => {
+    it('should call user find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(1);
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userDtoStub().id },
@@ -75,7 +75,7 @@ describe('when mix pictures is called', () => {
       });
     });
 
-    it('should call picture update', async () => {
+    it('should call picture update', () => {
       expect(prismaService.picture.update).toBeCalledTimes(2);
       expect(prismaService.picture.update).toHaveBeenNthCalledWith(1, {
         where: { id: userDtoStub().pictures[0].id },
@@ -87,14 +87,14 @@ describe('when mix pictures is called', () => {
       });
     });
 
-    it('should call user count', async () => {
+    it('should call user count', () => {
       expect(prismaService.user.count).toBeCalledTimes(1);
       expect(prismaService.user.count).toBeCalledWith({
         where: { pairFor: { some: { id: user.id } } },
       });
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });

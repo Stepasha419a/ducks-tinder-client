@@ -88,7 +88,7 @@ describe('users/picture/mix (PUT)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
         ...currentUser,
@@ -114,7 +114,7 @@ describe('users/picture/mix (PUT)', () => {
         .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Such user was not found');
     });
@@ -132,7 +132,7 @@ describe('users/picture/mix (PUT)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Not Found');
     });
@@ -150,7 +150,7 @@ describe('users/picture/mix (PUT)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Not Found');
     });
@@ -165,7 +165,7 @@ describe('users/picture/mix (PUT)', () => {
         .send({ mixOrder: 1, withOrder: 10 });
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(401);
       expect(response.body.message).toEqual('Unauthorized');
     });

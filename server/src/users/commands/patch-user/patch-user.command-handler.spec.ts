@@ -53,14 +53,14 @@ describe('when patch is called', () => {
       );
     });
 
-    it('should call find many interests', async () => {
+    it('should call find many interests', () => {
       expect(prismaService.interest.findMany).toBeCalledTimes(1);
       expect(prismaService.interest.findMany).toBeCalledWith({
         where: { name: { in: UPDATE_USER_DTO.interests } },
       });
     });
 
-    it('should call update user', async () => {
+    it('should call update user', () => {
       expect(prismaService.user.update).toBeCalledTimes(4);
       expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
         where: { id: userDtoStub().id },
@@ -98,14 +98,14 @@ describe('when patch is called', () => {
       });
     });
 
-    it('should call user count', async () => {
+    it('should call user count', () => {
       expect(prismaService.user.count).toBeCalledTimes(1);
       expect(prismaService.user.count).toBeCalledWith({
         where: { pairFor: { some: { id: user.id } } },
       });
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });

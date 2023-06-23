@@ -67,7 +67,7 @@ describe('users/pairs (GET)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual(USERS_PAIRS_GET_EXPECT);
     });
@@ -84,7 +84,7 @@ describe('users/pairs (GET)', () => {
         .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
     });
 
-    it('should return an empty array of pairs', async () => {
+    it('should return an empty array of pairs', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual([]);
     });
@@ -101,7 +101,7 @@ describe('users/pairs (GET)', () => {
         .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(404);
       expect(response.body.message).toEqual('Such user was not found');
     });
@@ -114,7 +114,7 @@ describe('users/pairs (GET)', () => {
       response = await request(httpServer).get('/users/pairs');
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(401);
       expect(response.body.message).toEqual('Unauthorized');
     });

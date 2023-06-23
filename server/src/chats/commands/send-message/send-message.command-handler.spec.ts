@@ -7,6 +7,7 @@ import { messageStub } from 'chats/test/stubs';
 import { SendMessageCommandHandler } from './send-message.command-handler';
 import { SendMessageCommand } from './send-message.command';
 import { Message } from '@prisma/client';
+import { requestUserStub } from 'users/test/stubs';
 
 describe('when send message is called', () => {
   let prismaService: PrismaService;
@@ -35,21 +36,20 @@ describe('when send message is called', () => {
     let message: Message;
     const sendMessageDto: SendMessageDto = {
       chatId: 'chat-id',
-      userId: 'user-id',
       text: 'message-text',
     };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       message = await sendMessageCommandHandler.execute(
-        new SendMessageCommand(sendMessageDto),
+        new SendMessageCommand(requestUserStub(), sendMessageDto),
       );
     });
 
     it('should call message create', () => {
       expect(prismaService.message.create).toBeCalledTimes(1);
       expect(prismaService.message.create).toBeCalledWith({
-        data: sendMessageDto,
+        data: { ...sendMessageDto, userId: requestUserStub().id },
       });
     });
 

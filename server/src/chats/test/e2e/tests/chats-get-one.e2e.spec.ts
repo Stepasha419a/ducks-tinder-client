@@ -70,7 +70,7 @@ describe('chat/:id (GET)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should return a full chat', async () => {
+    it('should return a full chat', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual(GET_FULL_CHAT_EXPECTED);
     });
@@ -83,7 +83,7 @@ describe('chat/:id (GET)', () => {
       response = await request(httpServer).get(`/chats/${chatId}`);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(401);
       expect(response.body.message).toEqual('Unauthorized');
     });

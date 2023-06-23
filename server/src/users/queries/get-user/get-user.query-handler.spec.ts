@@ -44,14 +44,14 @@ describe('when get user is called', () => {
       );
     });
 
-    it('should call count', async () => {
+    it('should call count', () => {
       expect(prismaService.user.count).toBeCalledTimes(1);
       expect(prismaService.user.count).toBeCalledWith({
         where: { pairFor: { some: { id: userDtoStub().id } } },
       });
     });
 
-    it('should call find unique', async () => {
+    it('should call find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(1);
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userDtoStub().id },
@@ -59,7 +59,7 @@ describe('when get user is called', () => {
       });
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });

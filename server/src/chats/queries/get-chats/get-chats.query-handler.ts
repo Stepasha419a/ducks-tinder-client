@@ -3,6 +3,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { GetChatsQuery } from './get-chats.query';
 import { ShortChat } from 'chats/chats.interfaces';
 import { UsersSelector } from 'users/users.selector';
+import { ChatsSelector } from 'chats/chats.selector';
 
 @QueryHandler(GetChatsQuery)
 export class GetChatsQueryHandler implements IQueryHandler<GetChatsQuery> {
@@ -15,11 +16,7 @@ export class GetChatsQueryHandler implements IQueryHandler<GetChatsQuery> {
       where: { users: { some: { id: user.id } } },
       select: {
         id: true,
-        messages: {
-          take: 1,
-          orderBy: { createdAt: 'desc' },
-          select: { id: true, text: true, userId: true },
-        },
+        messages: ChatsSelector.selectShortMessages(),
         users: {
           where: { id: { not: user.id } },
           select: UsersSelector.selectShortUser(),

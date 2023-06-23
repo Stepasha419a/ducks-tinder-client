@@ -53,7 +53,7 @@ describe('when get sorted is called', () => {
       );
     });
 
-    it('should call checked users find many', async () => {
+    it('should call checked users find many', () => {
       expect(prismaService.checkedUsers.findMany).toBeCalledTimes(1);
       expect(prismaService.checkedUsers.findMany).toBeCalledWith({
         where: {
@@ -69,14 +69,14 @@ describe('when get sorted is called', () => {
       });
     });
 
-    it('should call find first', async () => {
+    it('should call find first', () => {
       expect(prismaService.user.findFirst).toBeCalledTimes(1);
       expect(prismaService.user.findFirst).toBeCalledWith(
         GET_SORTED_FIND_FIRST_CALLED,
       );
     });
 
-    it('should return a short user', async () => {
+    it('should return a short user', () => {
       expect(user).toEqual(shortUserStub());
     });
   });

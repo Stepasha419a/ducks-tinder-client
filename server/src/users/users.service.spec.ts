@@ -66,7 +66,7 @@ describe('users-service', () => {
       );
     });
 
-    it('should return a short user', async () => {
+    it('should return a short user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });
@@ -89,7 +89,7 @@ describe('users-service', () => {
       );
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });
@@ -112,7 +112,7 @@ describe('users-service', () => {
       );
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });

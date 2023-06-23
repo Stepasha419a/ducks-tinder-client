@@ -75,7 +75,7 @@ describe('when save picture is called', () => {
       });
     });
 
-    it('should call find unique', async () => {
+    it('should call find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(1);
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userDtoStub().id },
@@ -83,7 +83,7 @@ describe('when save picture is called', () => {
       });
     });
 
-    it('should call files-service save picture', async () => {
+    it('should call files-service save picture', () => {
       expect(filesService.savePicture).toBeCalledTimes(1);
       expect(filesService.savePicture).toBeCalledWith(
         { fieldname: '123123' },
@@ -91,7 +91,7 @@ describe('when save picture is called', () => {
       );
     });
 
-    it('should call create picture', async () => {
+    it('should call create picture', () => {
       expect(prismaService.picture.create).toBeCalledTimes(1);
       expect(prismaService.picture.create).toBeCalledWith({
         data: {
@@ -102,14 +102,14 @@ describe('when save picture is called', () => {
       });
     });
 
-    it('should call user count', async () => {
+    it('should call user count', () => {
       expect(prismaService.user.count).toBeCalledTimes(1);
       expect(prismaService.user.count).toBeCalledWith({
         where: { pairFor: { some: { id: user.id } } },
       });
     });
 
-    it('should return a user', async () => {
+    it('should return a user', () => {
       expect(user).toEqual(userDtoStub());
     });
   });

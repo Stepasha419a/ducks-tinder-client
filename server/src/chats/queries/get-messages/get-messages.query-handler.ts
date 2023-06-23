@@ -12,11 +12,12 @@ export class GetMessagesQueryHandler
 
   async execute(query: GetMessagesQuery): Promise<Message[]> {
     const {
-      dto: { userId, chatId, haveCount },
+      user,
+      dto: { chatId, haveCount },
     } = query;
 
     const candidate = await this.prismaService.chat.findFirst({
-      where: { id: chatId, users: { some: { id: userId } } },
+      where: { id: chatId, users: { some: { id: user.id } } },
       select: { id: true },
     });
     if (!candidate) {

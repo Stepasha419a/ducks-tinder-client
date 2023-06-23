@@ -62,7 +62,7 @@ describe('users-service', () => {
       );
     });
 
-    it('should return tokens', async () => {
+    it('should return tokens', () => {
       expect(tokens).toEqual(tokensStub());
     });
   });
@@ -85,7 +85,7 @@ describe('users-service', () => {
       );
     });
 
-    it('should return payload data (as tokensStub to check)', async () => {
+    it('should return payload data (as tokensStub to check)', () => {
       expect(response).toEqual(tokensStub());
     });
   });
@@ -110,7 +110,7 @@ describe('users-service', () => {
       );
     });
 
-    it('should return payload data (as tokensStub to check)', async () => {
+    it('should return payload data (as tokensStub to check)', () => {
       expect(response).toEqual(tokensStub());
     });
   });

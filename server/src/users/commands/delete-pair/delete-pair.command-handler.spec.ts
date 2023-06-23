@@ -46,7 +46,7 @@ describe('when delete pair is called', () => {
       );
     });
 
-    it('should call user find unique', async () => {
+    it('should call user find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(3);
       expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
         where: { id: requestUserStub().id },
@@ -61,7 +61,7 @@ describe('when delete pair is called', () => {
       });
     });
 
-    it('should call user update', async () => {
+    it('should call user update', () => {
       expect(prismaService.user.update).toBeCalledTimes(1);
       expect(prismaService.user.update).toBeCalledWith({
         where: { id: requestUserStub().id },
@@ -71,7 +71,7 @@ describe('when delete pair is called', () => {
       });
     });
 
-    it('should return pairs', async () => {
+    it('should return pairs', () => {
       expect(pairs).toEqual([userDtoStub().firstPair]);
     });
   });

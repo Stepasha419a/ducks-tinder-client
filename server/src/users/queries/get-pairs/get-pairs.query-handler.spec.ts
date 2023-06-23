@@ -42,7 +42,7 @@ describe('when get pairs is called', () => {
       );
     });
 
-    it('should call user find unique', async () => {
+    it('should call user find unique', () => {
       expect(prismaService.user.findUnique).toBeCalledTimes(1);
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userDtoStub().id },
@@ -54,7 +54,7 @@ describe('when get pairs is called', () => {
       });
     });
 
-    it('should return pairs', async () => {
+    it('should return pairs', () => {
       expect(pairs).toEqual([shortUserStub()]);
     });
   });

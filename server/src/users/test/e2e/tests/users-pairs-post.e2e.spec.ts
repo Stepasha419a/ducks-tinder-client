@@ -80,7 +80,7 @@ describe('users/pairs/:id (POST)', () => {
         .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
     });
 
-    it('should return an empty array of pairs', async () => {
+    it('should return an empty array of pairs', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual([]);
     });
@@ -93,7 +93,7 @@ describe('users/pairs/:id (POST)', () => {
       response = await request(httpServer).post(`/users/pairs/${secondUserId}`);
     });
 
-    it('should throw an error', async () => {
+    it('should throw an error', () => {
       expect(response.status).toBe(401);
       expect(response.body.message).toEqual('Unauthorized');
     });

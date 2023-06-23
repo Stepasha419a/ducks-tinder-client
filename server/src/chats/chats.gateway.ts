@@ -1,6 +1,6 @@
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Server } from 'socket.io';
-import { ConnectedSocket, MessageBody } from '@nestjs/websockets';
+import { ConnectedSocket, MessageBody, WsException } from '@nestjs/websockets';
 import {
   SubscribeMessage,
   WebSocketGateway,
@@ -9,7 +9,7 @@ import {
 import { UserSocket } from 'common/types/user-socket';
 import { GetMessagesDto, SendMessageDto } from './dto';
 import { SendMessageCommand } from './commands';
-import { GetMessagesQuery } from './queries';
+import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import { UseGuards } from '@nestjs/common';
 import { AccessTokenGuard } from 'common/guards';
 
@@ -26,14 +26,16 @@ export class ChatsGateway {
   ) {}
 
   @WebSocketServer()
-  wss: Server;
+  private readonly wss: Server;
 
   @SubscribeMessage('connectChat')
-  handleConnectChat(
+  async handleConnectChat(
     @ConnectedSocket() client: UserSocket,
     @MessageBody() chatId: string,
   ) {
-    console.log(client.request.user);
+    await this.queryBus.execute(
+      new ValidateChatMemberQuery(client.request.user, chatId),
+    );
     client.join(chatId);
 
     client.emit('connected', chatId);
@@ -41,16 +43,16 @@ export class ChatsGateway {
 
   @SubscribeMessage('disconnectChat')
   handleDisconnectChat(@ConnectedSocket() client: UserSocket) {
-    const newStr = client.request.url.slice(
-      client.request.url.indexOf('=') + 1,
-    );
-    const chatId = newStr.slice(0, newStr.indexOf('&'));
+    const chatId = client?.handshake?.query?.chatId as string | undefined;
+    if (!chatId) {
+      throw new WsException('Not found');
+    }
 
     client.leave(chatId);
   }
 
   @SubscribeMessage('message')
-  async handleMessage(
+  async sendMessage(
     @ConnectedSocket() client: UserSocket,
     @MessageBody() dto: SendMessageDto,
   ) {
@@ -66,7 +68,9 @@ export class ChatsGateway {
     @ConnectedSocket() client: UserSocket,
     @MessageBody() dto: GetMessagesDto,
   ) {
-    const messages = await this.queryBus.execute(new GetMessagesQuery(dto));
+    const messages = await this.queryBus.execute(
+      new GetMessagesQuery(client.request.user, dto),
+    );
 
     this.wss.to(dto.chatId).emit('get-messages', messages);
   }

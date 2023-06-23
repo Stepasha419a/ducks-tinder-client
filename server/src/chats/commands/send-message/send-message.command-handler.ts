@@ -12,8 +12,8 @@ export class SendMessageCommandHandler
   async execute(command: SendMessageCommand): Promise<Message> {
     const { user, dto } = command;
 
-    console.log(user);
-
-    return this.prismaService.message.create({ data: dto });
+    return this.prismaService.message.create({
+      data: { ...dto, userId: user.id },
+    });
   }
 }

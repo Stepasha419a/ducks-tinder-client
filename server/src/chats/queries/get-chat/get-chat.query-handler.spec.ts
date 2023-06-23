@@ -48,7 +48,7 @@ describe('when get chats is called', () => {
       );
     });
 
-    it('should call chat find first', async () => {
+    it('should call chat find first', () => {
       expect(prismaService.chat.findFirst).toBeCalledTimes(1);
       expect(prismaService.chat.findFirst).toBeCalledWith({
         where: {
@@ -59,14 +59,14 @@ describe('when get chats is called', () => {
       });
     });
 
-    it('should call message count', async () => {
+    it('should call message count', () => {
       expect(prismaService.message.count).toBeCalledTimes(1);
       expect(prismaService.message.count).toBeCalledWith({
         where: { chatId },
       });
     });
 
-    it('should call chat find unique', async () => {
+    it('should call chat find unique', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: chatId },
@@ -86,7 +86,7 @@ describe('when get chats is called', () => {
       });
     });
 
-    it('should return a full chat', async () => {
+    it('should return a full chat', () => {
       // to reduce stubs - short chat
       expect(chat).toEqual(fullChatStub());
     });
@@ -109,7 +109,7 @@ describe('when get chats is called', () => {
       } catch {}
     });
 
-    it('should call chat find first', async () => {
+    it('should call chat find first', () => {
       expect(prismaService.chat.findFirst).toBeCalledTimes(1);
       expect(prismaService.chat.findFirst).toBeCalledWith({
         where: {
@@ -120,15 +120,15 @@ describe('when get chats is called', () => {
       });
     });
 
-    it('should not call message count', async () => {
+    it('should not call message count', () => {
       expect(prismaService.message.count).not.toBeCalled();
     });
 
-    it('should not call chat find unique', async () => {
+    it('should not call chat find unique', () => {
       expect(prismaService.chat.findUnique).not.toBeCalled();
     });
 
-    it('should return undefined', async () => {
+    it('should return undefined', () => {
       expect(chat).toEqual(undefined);
     });
   });
