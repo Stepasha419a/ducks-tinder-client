@@ -3,10 +3,9 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { Message } from 'chats/chats.interfaces';
-import { fullChatStub, messageStub } from 'chats/test/stubs';
+import { fullChatStub, messageStub, shortChatStub } from 'chats/test/stubs';
 import { GetMessagesQueryHandler } from './get-messages.query-handler';
 import { GetMessagesQuery } from './get-messages.query';
-import { GET_MESSAGES_DTO } from 'chats/test/values/chats.const.dto';
 import { requestUserStub } from 'users/test/stubs';
 
 describe('when get messages is called', () => {
@@ -44,7 +43,7 @@ describe('when get messages is called', () => {
     beforeEach(async () => {
       jest.clearAllMocks();
       messages = await getMessagesQueryHandler.execute(
-        new GetMessagesQuery(requestUserStub(), GET_MESSAGES_DTO),
+        new GetMessagesQuery(requestUserStub(), shortChatStub().id, 0),
       );
     });
 
@@ -52,7 +51,7 @@ describe('when get messages is called', () => {
       expect(prismaService.chat.findFirst).toBeCalledTimes(1);
       expect(prismaService.chat.findFirst).toBeCalledWith({
         where: {
-          id: GET_MESSAGES_DTO.chatId,
+          id: shortChatStub().id,
           users: { some: { id: requestUserStub().id } },
         },
         select: { id: true },
@@ -62,7 +61,7 @@ describe('when get messages is called', () => {
     it('should call message count', () => {
       expect(prismaService.message.count).toBeCalledTimes(1);
       expect(prismaService.message.count).toBeCalledWith({
-        where: { chatId: GET_MESSAGES_DTO.chatId },
+        where: { chatId: shortChatStub().id },
       });
     });
 
@@ -70,7 +69,7 @@ describe('when get messages is called', () => {
       expect(prismaService.message.findMany).toBeCalledTimes(1);
       expect(prismaService.message.findMany).toBeCalledWith({
         where: {
-          chatId: GET_MESSAGES_DTO.chatId,
+          chatId: shortChatStub().id,
         },
         select: { id: true, text: true, userId: true },
         orderBy: { createdAt: 'asc' },

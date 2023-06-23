@@ -26,13 +26,13 @@ export const connectChatThunk = createAsyncThunk(
 
       const socket = chatService.connectChat(chatId);
 
-      socket.on('connected', async () => {
+      socket.on('connect-chat', async () => {
         const response = await chatService.getChat(chatId);
         const chat = response.data;
         dispatch(setCurrentChatData(chat));
       });
 
-      socket.on('message', (message: Message) => {
+      socket.on('send-message', (message: Message) => {
         dispatch(pushNewMessage(message));
       });
 
@@ -60,15 +60,10 @@ export const getMessagesThunk = createAsyncThunk(
   'chat/getMessages',
   (_, { rejectWithValue, getState }) => {
     try {
-      const { user, chat } = getState() as RootState;
-      const { currentUser } = user;
-      const { currentChatId, currentMessages } = chat;
+      const { chat } = getState() as RootState;
+      const { currentMessages } = chat;
 
-      chatService.getMessages(
-        currentUser,
-        currentChatId,
-        currentMessages.length
-      );
+      chatService.getMessages(currentMessages.length);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -88,13 +83,9 @@ export const closeAllSocketsThunk = createAsyncThunk(
 
 export const sendMessageThunk = createAsyncThunk(
   'chat/sendMessage',
-  (content: string, { rejectWithValue, getState }) => {
+  (text: string, { rejectWithValue }) => {
     try {
-      const { user, chat } = getState() as RootState;
-      const { currentUser } = user;
-      const { currentChatId } = chat;
-
-      chatService.sendMessage(content, currentUser.id, currentChatId);
+      chatService.sendMessage(text);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

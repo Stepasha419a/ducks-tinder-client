@@ -7,8 +7,7 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { UserSocket } from 'common/types/user-socket';
-import { GetMessagesDto, SendMessageDto } from './dto';
-import { SendMessageCommand } from './commands';
+import { DeleteMessageCommand, SendMessageCommand } from './commands';
 import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import { UseGuards } from '@nestjs/common';
 import { AccessTokenGuard } from 'common/guards';
@@ -28,20 +27,21 @@ export class ChatsGateway {
   @WebSocketServer()
   private readonly wss: Server;
 
-  @SubscribeMessage('connectChat')
-  async handleConnectChat(
-    @ConnectedSocket() client: UserSocket,
-    @MessageBody() chatId: string,
-  ) {
+  @SubscribeMessage('connect-chat')
+  async handleConnectChat(@ConnectedSocket() client: UserSocket) {
+    const chatId = client?.handshake?.query?.chatId as string | undefined;
+    if (!chatId) {
+      throw new WsException('Not found');
+    }
     await this.queryBus.execute(
       new ValidateChatMemberQuery(client.request.user, chatId),
     );
     client.join(chatId);
 
-    client.emit('connected', chatId);
+    client.emit('connect-chat', chatId);
   }
 
-  @SubscribeMessage('disconnectChat')
+  @SubscribeMessage('disconnect-chat')
   handleDisconnectChat(@ConnectedSocket() client: UserSocket) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
@@ -51,27 +51,53 @@ export class ChatsGateway {
     client.leave(chatId);
   }
 
-  @SubscribeMessage('message')
+  @SubscribeMessage('send-message')
   async sendMessage(
     @ConnectedSocket() client: UserSocket,
-    @MessageBody() dto: SendMessageDto,
+    @MessageBody() text: string,
   ) {
+    const chatId = client?.handshake?.query?.chatId as string | undefined;
+    if (!chatId) {
+      throw new WsException('Not found');
+    }
+
     const message = await this.commandBus.execute(
-      new SendMessageCommand(client.request.user, dto),
+      new SendMessageCommand(client.request.user, chatId, text),
     );
 
-    this.wss.to(dto.chatId).emit('message', message);
+    this.wss.to(chatId).emit('send-message', message);
   }
 
   @SubscribeMessage('get-messages')
   async getMessages(
     @ConnectedSocket() client: UserSocket,
-    @MessageBody() dto: GetMessagesDto,
+    @MessageBody() haveCount: number,
   ) {
+    const chatId = client?.handshake?.query?.chatId as string | undefined;
+    if (!chatId) {
+      throw new WsException('Not found');
+    }
     const messages = await this.queryBus.execute(
-      new GetMessagesQuery(client.request.user, dto),
+      new GetMessagesQuery(client.request.user, chatId, haveCount),
     );
 
-    this.wss.to(dto.chatId).emit('get-messages', messages);
+    this.wss.to(chatId).emit('get-messages', messages);
+  }
+
+  @SubscribeMessage('delete-message')
+  async deleteMessage(
+    @ConnectedSocket() client: UserSocket,
+    @MessageBody() messageId: string,
+  ) {
+    const chatId = client?.handshake?.query?.chatId as string | undefined;
+    if (!chatId) {
+      throw new WsException('Not found');
+    }
+
+    const message = await this.commandBus.execute(
+      new DeleteMessageCommand(client.request.user, messageId),
+    );
+
+    this.wss.to(chatId).emit('delete-message', message);
   }
 }

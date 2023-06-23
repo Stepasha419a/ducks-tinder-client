@@ -1,9 +1,8 @@
-import { SendMessageDto } from 'chats/dto';
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
-import { messageStub } from 'chats/test/stubs';
+import { messageStub, shortChatStub } from 'chats/test/stubs';
 import { SendMessageCommandHandler } from './send-message.command-handler';
 import { SendMessageCommand } from './send-message.command';
 import { Message } from '@prisma/client';
@@ -34,22 +33,26 @@ describe('when send message is called', () => {
     });
 
     let message: Message;
-    const sendMessageDto: SendMessageDto = {
-      chatId: 'chat-id',
-      text: 'message-text',
-    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       message = await sendMessageCommandHandler.execute(
-        new SendMessageCommand(requestUserStub(), sendMessageDto),
+        new SendMessageCommand(
+          requestUserStub(),
+          shortChatStub().id,
+          'message-text',
+        ),
       );
     });
 
     it('should call message create', () => {
       expect(prismaService.message.create).toBeCalledTimes(1);
       expect(prismaService.message.create).toBeCalledWith({
-        data: { ...sendMessageDto, userId: requestUserStub().id },
+        data: {
+          userId: requestUserStub().id,
+          chatId: shortChatStub().id,
+          text: 'message-text',
+        },
       });
     });
 

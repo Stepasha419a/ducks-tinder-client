@@ -10,10 +10,10 @@ export class SendMessageCommandHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(command: SendMessageCommand): Promise<Message> {
-    const { user, dto } = command;
+    const { user, chatId, text } = command;
 
     return this.prismaService.message.create({
-      data: { ...dto, userId: user.id },
+      data: { chatId, text, userId: user.id },
     });
   }
 }

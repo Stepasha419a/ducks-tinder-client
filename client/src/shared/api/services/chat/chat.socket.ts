@@ -1,13 +1,13 @@
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
-import type { SendMessage, User } from '@shared/api/interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;
   _sockets: Set<Socket>;
   connectChat: (chatId: string) => Socket;
-  sendMessage: (content: string, username: string, userId: string) => void;
-  getMessages: (user: User, chatId: string, haveCount: number) => void;
+  sendMessage: (text: string) => void;
+  getMessages: (haveCount: number) => void;
+  deleteMessage: (messageId: string) => void;
   disconnectChat: () => void;
   closeAllSockets: () => void;
 }
@@ -22,27 +22,25 @@ export const chatSocket: ChatSocket = {
       transports: ['websocket'],
     });
 
-    this._socket.emit('connectChat', chatId);
+    this._socket.emit('connect-chat', chatId);
 
     this._sockets.add(this._socket);
 
     // TODO: fix this return by adding some idk, methods that require callbacks on every event
     return this._socket;
   },
-  sendMessage(text: string, userId: string, chatId: string): void {
-    const message: SendMessage = {
-      text,
-      userId,
-      chatId,
-    };
-    this._socket!.send(message);
+  sendMessage(text: string): void {
+    this._socket!.emit('send-message', text);
   },
-  getMessages(user: User, chatId: string, haveCount: number): void {
-    this._socket!.emit('get-messages', { user, chatId, haveCount });
+  getMessages(haveCount: number): void {
+    this._socket!.emit('get-messages', haveCount);
+  },
+  deleteMessage(messageId: string): void {
+    this._socket!.emit('delete-message', messageId);
   },
   disconnectChat(): void {
     if (this._socket) {
-      this._socket.emit('disconnectChat');
+      this._socket.emit('disconnect-chat');
       this._socket.close();
     }
   },

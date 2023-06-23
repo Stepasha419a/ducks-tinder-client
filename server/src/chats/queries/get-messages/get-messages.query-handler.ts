@@ -11,10 +11,7 @@ export class GetMessagesQueryHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(query: GetMessagesQuery): Promise<Message[]> {
-    const {
-      user,
-      dto: { chatId, haveCount },
-    } = query;
+    const { user, chatId, haveCount } = query;
 
     const candidate = await this.prismaService.chat.findFirst({
       where: { id: chatId, users: { some: { id: user.id } } },
