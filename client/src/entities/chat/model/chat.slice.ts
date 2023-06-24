@@ -13,7 +13,7 @@ const initialState: ChatInitialState = {
   isConnected: false,
   isLoading: true,
   isMessagesInitialLoading: true,
-  currentMessages: [],
+  isMessagesLoading: false,
   maxMessagesCount: 0,
   isMessagesEnded: false,
   currentChatId: '',
@@ -28,26 +28,43 @@ const chatSlice = createSlice({
         (chat) => chat.id === state.currentChatId
       );
       state.chats[index].messages.push(payload);
-      state.currentMessages.push(payload);
+      state.maxMessagesCount++;
     },
     setCurrentChatData: (state, { payload }: PayloadAction<Chat>) => {
-      const chat: Chat = payload;
-      state.currentChatId = chat.id;
+      state.currentChatId = payload.id;
+
+      const index = state.chats.findIndex((chat) => chat.id === payload.id);
+      state.chats[index].messages = payload.messages;
+
       state.isConnected = true;
-      state.currentMessages = chat.messages;
-      state.maxMessagesCount = chat.messagesCount;
+      state.maxMessagesCount = payload.messagesCount;
+      state.isMessagesLoading = false;
       state.isMessagesEnded = false;
     },
     getMessages: (state, { payload }: PayloadAction<Message[]>) => {
       if (payload.length === 0) {
         state.isMessagesEnded = true;
       }
-      state.currentMessages = [...payload, ...state.currentMessages];
+      const index = state.chats.findIndex(
+        (chat) => chat.id === state.currentChatId
+      );
+      state.chats[index].messages = [
+        ...payload,
+        ...state.chats[index].messages,
+      ];
+      state.isMessagesLoading = false;
     },
     deleteMessage: (state, { payload }: PayloadAction<Message>) => {
-      state.currentMessages = state.currentMessages.filter(
+      const index = state.chats.findIndex(
+        (chat) => chat.id === state.currentChatId
+      );
+      state.chats[index].messages = state.chats[index].messages.filter(
         (message) => message.id !== payload.id
       );
+      state.maxMessagesCount--;
+    },
+    setIsMessagesLoading: (state, { payload }: PayloadAction<boolean>) => {
+      state.isMessagesLoading = payload;
     },
   },
   extraReducers: (builder) => {
@@ -67,7 +84,6 @@ const chatSlice = createSlice({
       })
       .addCase(closeAllSocketsThunk.fulfilled, (state) => {
         state.isConnected = false;
-        state.currentMessages = [];
         state.maxMessagesCount = 0;
         state.currentChatId = '';
       });
@@ -79,6 +95,7 @@ export const {
   setCurrentChatData,
   getMessages,
   deleteMessage,
+  setIsMessagesLoading,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

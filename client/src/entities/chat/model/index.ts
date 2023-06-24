@@ -7,4 +7,8 @@ export {
   sendMessageThunk,
   deleteMessageThunk,
 } from './chat.thunks';
-export { selectUserChat, selectChatList } from './chat.selectors';
+export {
+  selectUserChat,
+  selectChatList,
+  selectCurrentMessages,
+} from './chat.selectors';

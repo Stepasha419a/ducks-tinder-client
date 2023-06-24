@@ -7,13 +7,13 @@ export const selectUserChat = createSelector(
     (state: RootState) => state.user.currentUser.name,
     (state: RootState) =>
       state.user.currentUser.pictures[0] as Picture | undefined,
-    (state: RootState) => state.chat.currentMessages,
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
   ],
-  (_id, name, avatar, messages, chats, currentChatId) => ({
+  (_id, name, avatar, chats, currentChatId) => ({
     currentChatUserObj: { _id, name, avatar },
-    messages,
+    messages:
+      chats[chats.findIndex((chat) => chat.id === currentChatId)].messages,
     currentChat: chats.find((chat) => chat.id === currentChatId),
   })
 );
@@ -29,4 +29,13 @@ export const selectChatList = createSelector(
     currentChatId,
     isLoading,
   })
+);
+
+export const selectCurrentMessages = createSelector(
+  [
+    (state: RootState) => state.chat.chats,
+    (state: RootState) => state.chat.currentChatId,
+  ],
+  (chats, currentChatId) =>
+    chats[chats.findIndex((chat) => chat.id === currentChatId)].messages
 );

@@ -8,6 +8,7 @@ import {
   useScrollToBottom,
 } from '@shared/hooks';
 import { getMessagesThunk } from '../../model/chat.thunks';
+import { selectCurrentMessages } from '../../model';
 
 interface UseMessagesScrollReturn {
   messagesRef: MutableRefObject<HTMLDivElement | null>;
@@ -18,8 +19,11 @@ export function useMessagesScroll(): UseMessagesScrollReturn {
   const dispatch = useAppDispatch();
 
   const currentChatId = useAppSelector((state) => state.chat.currentChatId);
-  const currentMessages = useAppSelector((state) => state.chat.currentMessages);
+  const currentMessages = useAppSelector(selectCurrentMessages);
   const isMessagesEnded = useAppSelector((state) => state.chat.isMessagesEnded);
+  const isMessagesLoading = useAppSelector(
+    (state) => state.chat.isMessagesLoading
+  );
 
   const messagesRef = useScrollToBottom([currentChatId], [currentMessages]);
 
@@ -27,15 +31,11 @@ export function useMessagesScroll(): UseMessagesScrollReturn {
   const topScrollEntry = useIntersectionObserver(topScrollRef, {});
   const isVisible = topScrollEntry?.isIntersecting;
 
-  const oldScrollHeight = useRef<number>(0);
-
   const delayedGetMessages = useDebouncedCallback(() => {
-    if (!isMessagesEnded) {
+    if (!isMessagesEnded && !isMessagesLoading) {
       dispatch(getMessagesThunk());
       if (messagesRef.current) {
-        messagesRef.current.scrollTop =
-          messagesRef.current.scrollHeight - oldScrollHeight.current;
-        oldScrollHeight.current = messagesRef.current.scrollHeight;
+        messagesRef.current.scrollTop = 400;
       }
     }
   });

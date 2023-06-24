@@ -3,7 +3,7 @@ import type { Message } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
-import { deleteMessage, getMessages } from './chat.slice';
+import { deleteMessage, getMessages, setIsMessagesLoading } from './chat.slice';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
@@ -62,12 +62,18 @@ export const disconnectChatThunk = createAsyncThunk(
 
 export const getMessagesThunk = createAsyncThunk(
   'chat/getMessages',
-  (_, { rejectWithValue, getState }) => {
+  (_, { rejectWithValue, getState, dispatch }) => {
     try {
       const { chat } = getState() as RootState;
-      const { currentMessages } = chat;
+      const { chats, currentChatId, isMessagesLoading } = chat;
 
-      chatService.getMessages(currentMessages.length);
+      if (!isMessagesLoading) {
+        chatService.getMessages(
+          chats[chats.findIndex((item) => item.id === currentChatId)].messages
+            .length
+        );
+        dispatch(setIsMessagesLoading(true));
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
