@@ -12,8 +12,7 @@ export const selectUserChat = createSelector(
   ],
   (_id, name, avatar, chats, currentChatId) => ({
     currentChatUserObj: { _id, name, avatar },
-    messages:
-      chats[chats.findIndex((chat) => chat.id === currentChatId)].messages,
+    messages: chats.find((chat) => chat.id === currentChatId)!.messages,
     currentChat: chats.find((chat) => chat.id === currentChatId),
   })
 );
@@ -31,11 +30,26 @@ export const selectChatList = createSelector(
   })
 );
 
-export const selectCurrentMessages = createSelector(
+export const selectCurrentMessagesLength = createSelector(
   [
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
   ],
   (chats, currentChatId) =>
-    chats[chats.findIndex((chat) => chat.id === currentChatId)].messages
+    chats.find((chat) => chat.id === currentChatId)?.messages.length
+);
+
+export const selectMessages = createSelector(
+  [
+    (state: RootState) => state.chat.chats,
+    (state: RootState) => state.chat.currentChatId,
+    (state: RootState) => state.chat.isMessagesInitialLoading,
+    (state: RootState) => state.chat.maxMessagesCount,
+  ],
+  (chats, currentChatId, isMessagesInitialLoading, maxMessagesCount) => ({
+    messagesLength: chats.find((chat) => chat.id === currentChatId)!.messages
+      .length,
+    isMessagesInitialLoading,
+    maxMessagesCount,
+  })
 );

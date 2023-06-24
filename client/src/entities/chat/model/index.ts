@@ -6,9 +6,11 @@ export {
   getChatsThunk,
   sendMessageThunk,
   deleteMessageThunk,
+  getMessagesThunk,
 } from './chat.thunks';
 export {
   selectUserChat,
   selectChatList,
-  selectCurrentMessages,
+  selectCurrentMessagesLength,
+  selectMessages,
 } from './chat.selectors';

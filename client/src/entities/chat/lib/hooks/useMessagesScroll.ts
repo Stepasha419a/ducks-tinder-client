@@ -7,8 +7,7 @@ import {
   useIntersectionObserver,
   useScrollToBottom,
 } from '@shared/hooks';
-import { getMessagesThunk } from '../../model/chat.thunks';
-import { selectCurrentMessages } from '../../model';
+import { getMessagesThunk, selectCurrentMessagesLength } from '../../model';
 
 interface UseMessagesScrollReturn {
   messagesRef: MutableRefObject<HTMLDivElement | null>;
@@ -19,7 +18,7 @@ export function useMessagesScroll(): UseMessagesScrollReturn {
   const dispatch = useAppDispatch();
 
   const currentChatId = useAppSelector((state) => state.chat.currentChatId);
-  const currentMessages = useAppSelector(selectCurrentMessages);
+  const currentMessages = useAppSelector(selectCurrentMessagesLength);
   const isMessagesEnded = useAppSelector((state) => state.chat.isMessagesEnded);
   const isMessagesLoading = useAppSelector(
     (state) => state.chat.isMessagesLoading
@@ -32,8 +31,10 @@ export function useMessagesScroll(): UseMessagesScrollReturn {
   const isVisible = topScrollEntry?.isIntersecting;
 
   const delayedGetMessages = useDebouncedCallback(() => {
-    if (!isMessagesEnded && !isMessagesLoading) {
-      dispatch(getMessagesThunk());
+    if (!isMessagesEnded) {
+      if (!isMessagesLoading) {
+        dispatch(getMessagesThunk());
+      }
       if (messagesRef.current) {
         messagesRef.current.scrollTop = 400;
       }

@@ -1,0 +1,1 @@
+export { getMessageProps } from './getMessageProps';
