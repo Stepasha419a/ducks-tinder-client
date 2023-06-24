@@ -7,10 +7,15 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { UserSocket } from 'common/types/user-socket';
-import { DeleteMessageCommand, SendMessageCommand } from './commands';
+import {
+  DeleteMessageCommand,
+  EditMessageCommand,
+  SendMessageCommand,
+} from './commands';
 import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import { UseGuards } from '@nestjs/common';
 import { AccessTokenGuard } from 'common/guards';
+import { EditMessageDto } from './dto';
 
 @UseGuards(AccessTokenGuard)
 @WebSocketGateway({
@@ -99,5 +104,22 @@ export class ChatsGateway {
     );
 
     this.wss.to(chatId).emit('delete-message', message);
+  }
+
+  @SubscribeMessage('edit-message')
+  async editMessage(
+    @ConnectedSocket() client: UserSocket,
+    @MessageBody() dto: EditMessageDto,
+  ) {
+    const chatId = client?.handshake?.query?.chatId as string | undefined;
+    if (!chatId) {
+      throw new WsException('Not found');
+    }
+
+    const message = await this.commandBus.execute(
+      new EditMessageCommand(client.request.user, dto),
+    );
+
+    this.wss.to(chatId).emit('edit-message', message);
   }
 }

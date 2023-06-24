@@ -8,6 +8,7 @@ interface ChatSocket {
   sendMessage: (text: string) => void;
   getMessages: (haveCount: number) => void;
   deleteMessage: (messageId: string) => void;
+  editMessage: (messageId: string, text: string) => void;
   disconnectChat: () => void;
   closeAllSockets: () => void;
 }
@@ -37,6 +38,9 @@ export const chatSocket: ChatSocket = {
   },
   deleteMessage(messageId: string): void {
     this._socket!.emit('delete-message', messageId);
+  },
+  editMessage(messageId: string, text: string): void {
+    this._socket!.emit('edit-message', { messageId, text });
   },
   disconnectChat(): void {
     if (this._socket) {

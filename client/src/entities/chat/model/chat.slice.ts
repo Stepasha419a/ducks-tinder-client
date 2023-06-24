@@ -63,6 +63,15 @@ const chatSlice = createSlice({
       );
       state.maxMessagesCount--;
     },
+    editMessage: (state, { payload }: PayloadAction<Message>) => {
+      const chatIndex = state.chats.findIndex(
+        (chat) => chat.id === state.currentChatId
+      );
+      const messageIndex = state.chats[chatIndex].messages.findIndex(
+        (message) => message.id === payload.id
+      );
+      state.chats[chatIndex].messages[messageIndex] = payload;
+    },
     setIsMessagesLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isMessagesLoading = payload;
     },
@@ -96,6 +105,7 @@ export const {
   getMessages,
   deleteMessage,
   setIsMessagesLoading,
+  editMessage,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

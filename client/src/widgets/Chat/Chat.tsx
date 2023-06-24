@@ -32,6 +32,7 @@ export const Chat = (): ReactElement => {
                 currentMessage={currentMessage!}
                 setIsMessageEditing={setIsMessageEditing}
                 isMessageEditing={isMessageEditing}
+                editingValue={editingValue}
               />
             }
             currentMessage={currentMessage}

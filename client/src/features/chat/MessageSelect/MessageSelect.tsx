@@ -11,13 +11,14 @@ import {
 import type { Message } from '@shared/api/interfaces';
 import { useAppDispatch, useOnClickOutside } from '@shared/hooks';
 import styles from './MessageSelect.module.scss';
-import { deleteMessageThunk } from '@/entities/chat/model';
+import { deleteMessageThunk, editMessageThunk } from '@/entities/chat/model';
 
 interface MessageSelectProps {
   setCurrentMessage: Dispatch<SetStateAction<Message | null>>;
   currentMessage: Message;
   setIsMessageEditing: Dispatch<SetStateAction<boolean>>;
   isMessageEditing: boolean;
+  editingValue: string;
 }
 
 export const MessageSelect: FC<MessageSelectProps> = ({
@@ -25,6 +26,7 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   currentMessage,
   setIsMessageEditing,
   isMessageEditing,
+  editingValue,
 }) => {
   const dispatch = useAppDispatch();
   const selectRef = useRef<HTMLDivElement | null>(null);
@@ -44,8 +46,14 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   };
 
   const handleSaveMessage = () => {
-    setCurrentMessage(null);
-    setIsMessageEditing(false);
+    const trimmedValue = editingValue.trim();
+    if (trimmedValue) {
+      dispatch(
+        editMessageThunk({ messageId: currentMessage.id, text: trimmedValue })
+      );
+      setCurrentMessage(null);
+      setIsMessageEditing(false);
+    }
   };
 
   const handleCancelMessage = () => {

@@ -19,6 +19,9 @@ export const chatService = {
   deleteMessage(messageId: string): void {
     chatSocket.deleteMessage(messageId);
   },
+  editMessage(messageId: string, text: string): void {
+    chatSocket.editMessage(messageId, text);
+  },
   disconnectChat(): void {
     chatSocket.disconnectChat();
   },
