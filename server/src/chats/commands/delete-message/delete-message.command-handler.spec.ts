@@ -7,6 +7,7 @@ import { requestUserStub } from 'users/test/stubs';
 import { DeleteMessageCommandHandler } from './delete-message.command-handler';
 import { DeleteMessageCommand } from './delete-message.command';
 import { Message } from 'chats/chats.interfaces';
+import { ChatsSelector } from 'chats/chats.selector';
 
 describe('when send message is called', () => {
   let prismaService: PrismaService;
@@ -48,7 +49,7 @@ describe('when send message is called', () => {
       expect(prismaService.message.findFirst).toBeCalledTimes(1);
       expect(prismaService.message.findFirst).toBeCalledWith({
         where: { id: messageStub().id, userId: requestUserStub().id },
-        select: { id: true, text: true, userId: true },
+        select: ChatsSelector.selectMessage(),
       });
     });
 
@@ -85,7 +86,7 @@ describe('when send message is called', () => {
       expect(prismaService.message.findFirst).toBeCalledTimes(1);
       expect(prismaService.message.findFirst).toBeCalledWith({
         where: { id: messageStub().id, userId: requestUserStub().id },
-        select: { id: true, text: true, userId: true },
+        select: ChatsSelector.selectMessage(),
       });
     });
 

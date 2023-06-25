@@ -61,6 +61,8 @@ describe('chat/:id (GET)', () => {
           text: 'message-text',
           chatId: chatId,
           userId: currentUserId,
+          createdAt: new Date('2022-01-01'),
+          updatedAt: new Date('2022-01-01'),
         },
       });
       const { currentUserAccessToken } = prepareReadyAccessTokens();

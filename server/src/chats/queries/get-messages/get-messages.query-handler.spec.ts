@@ -1,3 +1,4 @@
+import { ChatsSelector } from 'chats/chats.selector';
 import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
@@ -71,7 +72,7 @@ describe('when get messages is called', () => {
         where: {
           chatId: shortChatStub().id,
         },
-        select: { id: true, text: true, userId: true },
+        select: ChatsSelector.selectMessage(),
         orderBy: { createdAt: 'asc' },
         skip: 20,
         take: 20,

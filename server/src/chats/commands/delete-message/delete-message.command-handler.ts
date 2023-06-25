@@ -3,6 +3,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteMessageCommand } from './delete-message.command';
 import { Message } from 'chats/chats.interfaces';
 import { PrismaService } from 'prisma/prisma.service';
+import { ChatsSelector } from 'chats/chats.selector';
 
 @CommandHandler(DeleteMessageCommand)
 export class DeleteMessageCommandHandler
@@ -15,7 +16,7 @@ export class DeleteMessageCommandHandler
 
     const message = await this.prismaService.message.findFirst({
       where: { id: messageId, userId: user.id },
-      select: { id: true, text: true, userId: true },
+      select: ChatsSelector.selectMessage(),
     });
     if (!message) {
       throw new WsException('Not found');

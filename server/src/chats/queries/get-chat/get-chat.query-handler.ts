@@ -4,6 +4,7 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetChatQuery } from './get-chat.query';
 import { FullChat } from 'chats/chats.interfaces';
 import { UsersSelector } from 'users/users.selector';
+import { ChatsSelector } from 'chats/chats.selector';
 
 @QueryHandler(GetChatQuery)
 export class GetChatQueryHandler implements IQueryHandler<GetChatQuery> {
@@ -34,7 +35,7 @@ export class GetChatQueryHandler implements IQueryHandler<GetChatQuery> {
           skip: skipCount,
           take: 20,
           orderBy: { createdAt: 'asc' },
-          select: { id: true, text: true, userId: true },
+          select: ChatsSelector.selectMessage(),
         },
         users: {
           where: { id: { not: user.id } },

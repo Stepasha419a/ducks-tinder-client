@@ -45,6 +45,8 @@ export const MessageList: FC<MessagesProps> = ({
               isMessageEditing={isSelectOpen && isMessageEditing}
               isSelectOpen={isSelectOpen}
               username={name}
+              createdAt={message.createdAt}
+              updatedAt={message.updatedAt}
             />
             <Message.Select
               isSelectOpen={isSelectOpen}

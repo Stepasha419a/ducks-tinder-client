@@ -3,6 +3,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { EditMessageCommand } from './edit-message.command';
 import { Message } from 'chats/chats.interfaces';
 import { WsException } from '@nestjs/websockets';
+import { ChatsSelector } from 'chats/chats.selector';
 
 @CommandHandler(EditMessageCommand)
 export class EditMessageCommandHandler
@@ -23,7 +24,7 @@ export class EditMessageCommandHandler
     const message = await this.prismaService.message.update({
       where: { id: dto.messageId },
       data: { text: dto.text },
-      select: { id: true, text: true, userId: true },
+      select: ChatsSelector.selectMessage(),
     });
 
     return message;

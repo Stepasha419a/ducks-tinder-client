@@ -5,7 +5,23 @@ export class ChatsSelector {
     return {
       take: 1,
       orderBy: { createdAt: 'desc' },
-      select: { id: true, text: true, userId: true },
+      select: {
+        id: true,
+        text: true,
+        userId: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    };
+  }
+
+  static selectMessage() {
+    return {
+      id: true,
+      text: true,
+      userId: true,
+      createdAt: true,
+      updatedAt: true,
     };
   }
 }

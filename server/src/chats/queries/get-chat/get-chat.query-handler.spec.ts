@@ -8,6 +8,7 @@ import { UsersSelector } from 'users/users.selector';
 import { fullChatStub } from 'chats/test/stubs';
 import { GetChatQueryHandler } from './get-chat.query-handler';
 import { GetChatQuery } from './get-chat.query';
+import { ChatsSelector } from 'chats/chats.selector';
 
 describe('when get chats is called', () => {
   let prismaService: PrismaService;
@@ -74,7 +75,7 @@ describe('when get chats is called', () => {
           id: true,
           messages: {
             orderBy: { createdAt: 'asc' },
-            select: { id: true, text: true, userId: true },
+            select: ChatsSelector.selectMessage(),
             skip: 0,
             take: 20,
           },

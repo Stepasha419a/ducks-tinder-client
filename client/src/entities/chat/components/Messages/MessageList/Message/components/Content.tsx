@@ -11,6 +11,8 @@ interface MessageContentProps {
   editingValue: string;
   setEditingValue: Dispatch<SetStateAction<string>>;
   text: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export const Content: FC<MessageContentProps> = ({
@@ -21,12 +23,22 @@ export const Content: FC<MessageContentProps> = ({
   editingValue,
   setEditingValue,
   text,
+  createdAt,
+  updatedAt,
 }) => {
+  const isEdited = createdAt !== updatedAt;
+
   const cnMessage = classNames(
     styles.message,
     isOwn && styles.own,
-    isSelectOpen && styles.editing
+    isSelectOpen && styles.selected,
+    isMessageEditing && styles.editing,
+    isEdited && styles.edited
   );
+
+  const time = isEdited
+    ? `edited ${new Date(updatedAt).toLocaleTimeString()}`
+    : new Date(createdAt).toLocaleTimeString();
 
   return (
     <div className={cnMessage}>
@@ -39,7 +51,10 @@ export const Content: FC<MessageContentProps> = ({
             extraClassName={styles.textarea}
           />
         ) : (
-          <div className={styles.content}>{text}</div>
+          <>
+            <div className={styles.text}>{text}</div>
+            <p className={styles.timestamp}>{time}</p>
+          </>
         )}
       </div>
     </div>

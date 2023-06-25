@@ -8,6 +8,7 @@ import { Message } from 'chats/chats.interfaces';
 import { EditMessageCommandHandler } from './edit-message.command-handler';
 import { EditMessageCommand } from './edit-message.command';
 import { EDIT_MESSAGE_DTO } from 'chats/test/values/chats.const.dto';
+import { ChatsSelector } from 'chats/chats.selector';
 
 describe('when send message is called', () => {
   let prismaService: PrismaService;
@@ -57,7 +58,7 @@ describe('when send message is called', () => {
       expect(prismaService.message.update).toBeCalledWith({
         where: { id: EDIT_MESSAGE_DTO.messageId },
         data: { text: EDIT_MESSAGE_DTO.text },
-        select: { id: true, text: true, userId: true },
+        select: ChatsSelector.selectMessage(),
       });
     });
 

@@ -48,7 +48,13 @@ export class GetMessagesQueryHandler
       where: {
         chatId,
       },
-      select: { id: true, text: true, userId: true },
+      select: {
+        id: true,
+        text: true,
+        userId: true,
+        createdAt: true,
+        updatedAt: true,
+      },
       orderBy: { createdAt: 'asc' },
       skip: skipMessages,
       take: takeMessages,

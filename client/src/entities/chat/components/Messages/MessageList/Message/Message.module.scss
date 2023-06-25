@@ -13,6 +13,7 @@
     .message {
       background-color: var(--color--white-100);
       padding: 8px;
+      padding-right: 70px;
       border-radius: 8px;
 
       &.own {
@@ -23,8 +24,26 @@
         );
       }
 
-      &.editing {
+      &.selected {
         background: rgb(228, 228, 228);
+      }
+
+      &.editing {
+        padding-right: 0px !important;
+        min-width: 590px;
+
+        .content {
+          max-width: none;
+          width: 590px;
+        }
+      }
+
+      &.edited {
+        padding-right: 100px;
+
+        .timestamp {
+          right: -90px !important;
+        }
       }
 
       .username {
@@ -34,8 +53,22 @@
       }
 
       .content {
-        overflow-wrap: break-word;
         max-width: 490px;
+        padding-right: 8px;
+        position: relative;
+
+        .text {
+          max-width: 490px;
+          overflow-wrap: break-word;
+        }
+
+        .timestamp {
+          position: absolute;
+          bottom: 0;
+          right: -60px;
+          color: var(--color--black-85);
+          font-size: 12px;
+        }
       }
     }
 

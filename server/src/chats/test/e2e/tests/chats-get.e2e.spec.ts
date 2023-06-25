@@ -12,6 +12,7 @@ import {
 } from '../preparations';
 import { UsersSelector } from 'users/users.selector';
 import { ShortChat } from 'chats/chats.interfaces';
+import { ChatsSelector } from 'chats/chats.selector';
 
 const currentUserId = 'chats_get_current_user_id';
 const secondUserId = 'chats_get_second_user_id';
@@ -61,11 +62,7 @@ describe('chats (GET)', () => {
         where: { id: chatId },
         select: {
           id: true,
-          messages: {
-            take: 1,
-            orderBy: { createdAt: 'desc' },
-            select: { id: true, text: true, userId: true },
-          },
+          messages: ChatsSelector.selectShortMessages(),
           users: {
             where: { id: { not: currentUserId } },
             select: UsersSelector.selectShortUser(),

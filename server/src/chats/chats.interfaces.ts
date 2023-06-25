@@ -4,6 +4,8 @@ export interface Message {
   id: string;
   text: string;
   userId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 // has all messages
