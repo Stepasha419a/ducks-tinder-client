@@ -1,13 +1,9 @@
 import { Reflector } from '@nestjs/core';
-import {
-  Injectable,
-  CanActivate,
-  ExecutionContext,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
 import { ACCESS_TOKEN_REGEX, IS_PUBLIC_KEY } from 'common/constants';
+import { WsException } from '@nestjs/websockets';
 
 @Injectable()
 export class WsAccessTokenGuard implements CanActivate {
@@ -31,7 +27,7 @@ export class WsAccessTokenGuard implements CanActivate {
 
     const userData = await this.tokensService.validateAccessToken(accessToken);
     if (!userData) {
-      throw new UnauthorizedException();
+      throw new WsException('Unauthorized');
     }
 
     const user = await this.usersService.getUser(userData.id);
@@ -45,7 +41,7 @@ export class WsAccessTokenGuard implements CanActivate {
       // to get token from string 'refreshToken=...; accessToken=...'
       return client?.handshake?.headers?.cookie.match(ACCESS_TOKEN_REGEX)?.[1];
     } else {
-      throw new UnauthorizedException();
+      throw new WsException('Unauthorized');
     }
   }
 }

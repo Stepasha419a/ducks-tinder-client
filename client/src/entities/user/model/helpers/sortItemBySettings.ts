@@ -47,7 +47,7 @@ function sortPair(
       return true;
     case 'interests':
       for (const interest of sortSettings.interests) {
-        if (!item.interests.includes(interest)) {
+        if (!item.interests.some((i) => i.name === interest.name)) {
           return false;
         }
       }

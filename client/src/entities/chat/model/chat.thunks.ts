@@ -1,3 +1,4 @@
+import type { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { Message } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
@@ -9,6 +10,7 @@ import {
   getMessages,
   setIsMessagesLoading,
 } from './chat.slice';
+import { checkAuthThunk } from '@/entities/auth/model';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
@@ -30,6 +32,16 @@ export const connectChatThunk = createAsyncThunk(
       const { chatId } = args;
 
       const socket = chatService.connectChat(chatId);
+
+      socket.onAny((event: string, ...errors: unknown[]) => {
+        if (
+          event === 'exception' &&
+          (errors as AxiosError[])[0]?.message === 'Unauthorized' &&
+          (errors as AxiosError[])[0]?.status === 'error'
+        ) {
+          dispatch(checkAuthThunk());
+        }
+      });
 
       socket.on('connect-chat', async () => {
         const response = await chatService.getChat(chatId);

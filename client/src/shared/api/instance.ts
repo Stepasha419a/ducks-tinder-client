@@ -22,7 +22,7 @@ instance.interceptors.response.use(
       !(error.config as AxiosEditedConfig)._isRetry
     ) {
       originalRequest._isRetry = true;
-      await axios.get<User>(`${API_URL}/auth/refresh`, {
+      await axios.get<User>(`${API_URL}auth/refresh`, {
         withCredentials: true,
       });
 

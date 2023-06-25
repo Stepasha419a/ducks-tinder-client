@@ -1,14 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { authService } from '@/shared/api/services';
-import { API_URL } from '@shared/api';
 import type {
   LoginParams,
   RegistrationParams,
 } from '@shared/api/services/auth';
 import { returnErrorMessage } from '@shared/helpers';
 import { setCurrentUser } from '@entities/user/model';
-import type { User } from '@shared/api/interfaces';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',
@@ -46,10 +43,7 @@ export const checkAuthThunk = createAsyncThunk(
   'auth/checkAuth',
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      // TODO: decompose it into authService
-      const response = await axios.get<User>(`${API_URL}auth/refresh`, {
-        withCredentials: true,
-      });
+      const response = await authService.refresh();
 
       dispatch(setCurrentUser(response.data));
       return response.data;
