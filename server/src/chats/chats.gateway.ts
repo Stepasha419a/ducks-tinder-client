@@ -14,10 +14,9 @@ import {
 } from './commands';
 import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import { UseGuards } from '@nestjs/common';
-import { AccessTokenGuard } from 'common/guards';
+import { WsAccessTokenGuard, WsRefreshTokenGuard } from 'common/guards';
 import { EditMessageDto } from './dto';
 
-@UseGuards(AccessTokenGuard)
 @WebSocketGateway({
   namespace: '/chat/socket',
   cors: { origin: true },
@@ -32,6 +31,7 @@ export class ChatsGateway {
   @WebSocketServer()
   private readonly wss: Server;
 
+  @UseGuards(WsAccessTokenGuard)
   @SubscribeMessage('connect-chat')
   async handleConnectChat(@ConnectedSocket() client: UserSocket) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
@@ -46,6 +46,7 @@ export class ChatsGateway {
     client.emit('connect-chat', chatId);
   }
 
+  @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('disconnect-chat')
   handleDisconnectChat(@ConnectedSocket() client: UserSocket) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
@@ -56,6 +57,7 @@ export class ChatsGateway {
     client.leave(chatId);
   }
 
+  @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('send-message')
   async sendMessage(
     @ConnectedSocket() client: UserSocket,
@@ -73,6 +75,7 @@ export class ChatsGateway {
     this.wss.to(chatId).emit('send-message', message);
   }
 
+  @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('get-messages')
   async getMessages(
     @ConnectedSocket() client: UserSocket,
@@ -89,6 +92,7 @@ export class ChatsGateway {
     this.wss.to(chatId).emit('get-messages', messages);
   }
 
+  @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('delete-message')
   async deleteMessage(
     @ConnectedSocket() client: UserSocket,
@@ -106,6 +110,7 @@ export class ChatsGateway {
     this.wss.to(chatId).emit('delete-message', message);
   }
 
+  @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('edit-message')
   async editMessage(
     @ConnectedSocket() client: UserSocket,

@@ -7,10 +7,10 @@ import {
 } from '@nestjs/common';
 import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
-import { IS_PUBLIC_KEY } from 'common/constants';
+import { ACCESS_TOKEN_REGEX, IS_PUBLIC_KEY } from 'common/constants';
 
 @Injectable()
-export class AccessTokenGuard implements CanActivate {
+export class WsAccessTokenGuard implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
     private readonly tokensService: TokensService,
@@ -26,8 +26,8 @@ export class AccessTokenGuard implements CanActivate {
       return true;
     }
 
-    const req = context.switchToHttp().getRequest();
-    const accessToken = req.cookies?.accessToken;
+    const client = context.switchToWs().getClient();
+    const accessToken = this.getAccessTokenFromWs(client);
 
     const userData = await this.tokensService.validateAccessToken(accessToken);
     if (!userData) {
@@ -36,7 +36,16 @@ export class AccessTokenGuard implements CanActivate {
 
     const user = await this.usersService.getUser(userData.id);
 
-    req.user = user;
+    client.request.user = user;
     return true;
+  }
+
+  private getAccessTokenFromWs(client) {
+    if (client?.handshake?.headers?.cookie) {
+      // to get token from string 'refreshToken=...; accessToken=...'
+      return client?.handshake?.headers?.cookie.match(ACCESS_TOKEN_REGEX)?.[1];
+    } else {
+      throw new UnauthorizedException();
+    }
   }
 }
