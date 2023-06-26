@@ -12,6 +12,7 @@ export const DistanceSettingThumbnail = () => {
   const usersOnlyInDistance = useAppSelector(
     (state) => state.user.currentUser.usersOnlyInDistance
   );
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const [distanceSetting, setDistanceSetting] = useState(distance);
 
@@ -19,7 +20,7 @@ export const DistanceSettingThumbnail = () => {
     dispatch(
       submitSettingsThunk({
         inputName: 'distance',
-        changedData: distanceSetting,
+        changedData: distanceSetting!,
         innerObjectName: 'partnerSettings',
       })
     );
@@ -35,7 +36,11 @@ export const DistanceSettingThumbnail = () => {
   };
 
   return (
-    <SettingThumbnail title="Distance" value={`${distanceSetting} км.`}>
+    <SettingThumbnail
+      title="Distance"
+      value={distanceSetting ? `${distanceSetting} km.` : 'unknown'}
+      isError={errorFields.includes('distance')}
+    >
       <div className={styles.slider}>
         <RangeInput
           value={{ value: distanceSetting }}

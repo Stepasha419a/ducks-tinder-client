@@ -1,7 +1,7 @@
 export interface RangeValue {
-  min?: number;
-  max?: number;
-  value?: number;
+  min?: number | null;
+  max?: number | null;
+  value?: number | null;
 }
 
 export interface RangeInputProps {

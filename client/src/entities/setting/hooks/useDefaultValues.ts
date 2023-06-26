@@ -16,5 +16,5 @@ export function useDefaultValues(): string | Interest[] {
     (state) => state.setting.settingInputName
   );
 
-  return currentUser[settingInputName as ChangeableUserFields];
+  return currentUser[settingInputName as ChangeableUserFields]!;
 }

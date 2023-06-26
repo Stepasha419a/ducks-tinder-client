@@ -12,11 +12,14 @@ type Setting = 'textarea' | 'select' | 'radio' | null;
 
 export type ErrorField =
   | 'description'
-  | 'sex'
   | 'interests'
   | 'place'
+  | 'sex'
+  | 'age'
   | 'distance'
-  | 'preferSex';
+  | 'preferSex'
+  | 'preferAgeFrom'
+  | 'preferAgeTo';
 
 export interface SettingInitialState {
   setting: Setting;

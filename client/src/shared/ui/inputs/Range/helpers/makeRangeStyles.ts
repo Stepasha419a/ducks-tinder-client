@@ -11,7 +11,7 @@ export function makeRangeStyles(
       '--min': min,
       '--max': max,
       '--value-a': value.min!,
-      '--value-b': value.max,
+      '--value-b': value.max!,
       '--suffix': '%',
     };
   }

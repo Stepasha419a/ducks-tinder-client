@@ -22,6 +22,7 @@ interface PreviewPropsInterface {
   extraClassName?: string;
 }
 
+// TODO: make correct props data (which participates in the code)
 export const Preview: FC<PreviewPropsInterface> = ({
   user,
   setIsFullPreview = null,
@@ -69,11 +70,11 @@ export const Preview: FC<PreviewPropsInterface> = ({
         </div>
         <div className={styles.place}>
           <FontAwesomeIcon icon={faHouse} className={styles.icon} />
-          <div>Lives in {user.place}</div>
+          <div>Lives in {user.place || 'unknown place'}</div>
         </div>
         <div className={styles.distance}>
           <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-          {user.distance}
+          {user.distance || 'unknown distance'}
           <span className={styles.text}>km from you</span>
         </div>
         {!isFull && setIsFullPreview && (
@@ -94,21 +95,27 @@ export const Preview: FC<PreviewPropsInterface> = ({
               <div className={styles.description}>{user.description}</div>
             </>
           )}
-          <hr className={styles.separator} />
-          <div className={styles.interests}>
-            <div className={styles.title}>Interests</div>
-            <div className={styles.items}>
-              {interestsForLoop.map((item) => {
-                return <ListItem key={item.name}>{item.name}</ListItem>;
-              })}
-            </div>
-          </div>
-          <div
-            onClick={() => setIsInterestsListPopupOpen(true)}
-            className={styles.showAll}
-          >
-            Show all
-          </div>
+          {interestsForLoop.length > 0 && (
+            <>
+              <hr className={styles.separator} />
+
+              <div className={styles.interests}>
+                <div className={styles.title}>Interests</div>
+                <div className={styles.items}>
+                  {interestsForLoop.map((item) => {
+                    return <ListItem key={item.name}>{item.name}</ListItem>;
+                  })}
+                </div>
+              </div>
+
+              <div
+                onClick={() => setIsInterestsListPopupOpen(true)}
+                className={styles.showAll}
+              >
+                Show all
+              </div>
+            </>
+          )}
 
           {isInterestsListPopupOpen && (
             <InterestsListPopup

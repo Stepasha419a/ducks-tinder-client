@@ -14,6 +14,7 @@ export const PartnerAgeSettingThumbnail = () => {
   const preferAgeTo = useAppSelector(
     (state) => state.user.currentUser.preferAgeTo
   );
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const [preferAgeSetting, setPreferAgeSetting] = useState({
     preferAgeFrom,
@@ -25,29 +26,40 @@ export const PartnerAgeSettingThumbnail = () => {
       dispatch(
         submitSettingsThunk({
           inputName: 'preferAgeFrom',
-          changedData: preferAgeSetting.preferAgeFrom,
+          changedData: preferAgeSetting.preferAgeFrom!,
         })
       );
     } else if (preferAgeSetting.preferAgeTo !== preferAgeTo) {
       dispatch(
         submitSettingsThunk({
           inputName: 'preferAgeTo',
-          changedData: preferAgeSetting.preferAgeTo,
+          changedData: preferAgeSetting.preferAgeTo!,
         })
       );
     }
   };
 
+  const areValuesDefined =
+    preferAgeSetting.preferAgeFrom && preferAgeSetting.preferAgeTo;
+
   return (
     <SettingThumbnail
       title="Partner age"
-      value={`from ${preferAgeSetting.preferAgeFrom} to ${preferAgeSetting.preferAgeTo}`}
+      value={
+        areValuesDefined
+          ? `from ${preferAgeSetting.preferAgeFrom!} to ${preferAgeSetting.preferAgeTo!}`
+          : 'unknown'
+      }
+      isError={
+        errorFields.includes('preferAgeFrom') ||
+        errorFields.includes('preferAgeTo')
+      }
     >
       <div className={styles.slider}>
         <RangeInput
           value={{
-            min: preferAgeSetting.preferAgeFrom,
-            max: preferAgeSetting.preferAgeTo,
+            min: preferAgeSetting.preferAgeFrom || 28,
+            max: preferAgeSetting.preferAgeTo || 90,
           }}
           setValue={(value) =>
             setPreferAgeSetting({

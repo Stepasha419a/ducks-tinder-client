@@ -6,6 +6,7 @@ export const PreferSexSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
   const preferSex = useAppSelector((state) => state.user.currentUser.preferSex);
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const setInputHandler = (): void => {
     dispatch(
@@ -23,6 +24,7 @@ export const PreferSexSettingThumbnail = () => {
       title="Interested in"
       value={preferSex}
       isPointer
+      isError={errorFields.includes('preferSex')}
     />
   );
 };

@@ -6,7 +6,7 @@ import styles from './SettingThumbnail.module.scss';
 
 interface SettingThumbnailProps {
   title?: string;
-  value?: string;
+  value: string | null;
   isPointer?: boolean;
   isError?: boolean;
   isOverflow?: boolean;

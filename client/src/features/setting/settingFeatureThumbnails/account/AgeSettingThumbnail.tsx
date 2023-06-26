@@ -9,6 +9,7 @@ export const AgeSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
   const age = useAppSelector((state) => state.user.currentUser.age);
+  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const [ageSetting, setAgeSetting] = useState(age);
 
@@ -16,13 +17,17 @@ export const AgeSettingThumbnail = () => {
     dispatch(
       submitSettingsThunk({
         inputName: 'age',
-        changedData: ageSetting,
+        changedData: ageSetting!,
       })
     );
   };
 
   return (
-    <SettingThumbnail title="Age" value={`${ageSetting} years old`}>
+    <SettingThumbnail
+      title="Age"
+      value={ageSetting ? `${ageSetting} years old` : 'unknown'}
+      isError={errorFields.includes('age')}
+    >
       <div className={styles.slider}>
         <RangeInput
           value={{ value: ageSetting }}
