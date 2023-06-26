@@ -73,7 +73,7 @@ describe('chats (GET)', () => {
 
       response = await request(httpServer)
         .get('/chats')
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return an array of short chats', () => {

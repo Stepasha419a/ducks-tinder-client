@@ -81,7 +81,7 @@ describe('users/sorted (GET)', () => {
 
       response = await request(httpServer)
         .get('/users/sorted')
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return a user', () => {
@@ -98,7 +98,7 @@ describe('users/sorted (GET)', () => {
 
       response = await request(httpServer)
         .get('/users/sorted')
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {

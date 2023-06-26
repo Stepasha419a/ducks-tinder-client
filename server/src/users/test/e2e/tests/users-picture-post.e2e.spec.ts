@@ -78,7 +78,7 @@ describe('users/picture (POST)', () => {
           'picture',
           path.resolve(__dirname, '..', '..', 'stubs', 'test-image.jpg'),
         )
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return a user', () => {
@@ -110,7 +110,7 @@ describe('users/picture (POST)', () => {
           'picture',
           path.resolve(__dirname, '..', '..', 'stubs', 'test-image.jpg'),
         )
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -152,7 +152,7 @@ describe('users/picture (POST)', () => {
           'picture',
           path.resolve(__dirname, '..', '..', 'stubs', 'test-image.jpg'),
         )
-        .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+        .set('Authorization', `Bearer ${secondUserAccessToken}`);
     });
 
     it('should throw an error', () => {

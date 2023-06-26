@@ -3,7 +3,7 @@ import { CommandHandler } from '@nestjs/cqrs';
 import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
 import { UserTokenDto } from 'auth/dto';
-import { UserData } from 'auth/auth.interface';
+import { AuthDataReturn } from 'auth/auth.interface';
 import { RefreshCommand } from './refresh.command';
 
 @CommandHandler(RefreshCommand)
@@ -13,7 +13,7 @@ export class RefreshCommandHandler {
     private readonly tokensService: TokensService,
   ) {}
 
-  async execute(command: RefreshCommand): Promise<UserData> {
+  async execute(command: RefreshCommand): Promise<AuthDataReturn> {
     const { refreshToken } = command;
 
     if (!refreshToken) {
@@ -33,6 +33,9 @@ export class RefreshCommandHandler {
       email: user.email,
     });
     const tokens = await this.tokensService.generateTokens({ ...userTokenDto });
-    return { ...tokens, user };
+    return {
+      data: { user, accessToken: tokens.accessToken },
+      refreshToken: tokens.refreshToken,
+    };
   }
 }

@@ -1,7 +1,7 @@
 import { Test } from '@nestjs/testing';
 import { AuthController } from 'auth/auth.controller';
 import { AccessTokenGuard } from 'common/guards';
-import { UserDto } from 'users/dto';
+import { UserData } from './auth.interface';
 import {
   CREATE_USER_DTO,
   LOGIN_USER_DTO,
@@ -10,7 +10,7 @@ import { Response } from 'express';
 import { CommandBusMock, RequestMock, ResponseMock } from 'auth/test/mocks';
 import { userDtoStub } from 'users/test/stubs';
 import { userDataStub } from 'auth/test/stubs';
-import { ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
+import { REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
 import { CommandBus, CqrsModule } from '@nestjs/cqrs';
 import {
   LoginCommand,
@@ -53,7 +53,7 @@ describe('auth-controller', () => {
   });
 
   describe('when registration is called', () => {
-    let user: Response<UserDto>;
+    let data: Response<UserData>;
 
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
@@ -61,7 +61,7 @@ describe('auth-controller', () => {
     });
 
     beforeEach(async () => {
-      user = await authController.registration(responseMock, CREATE_USER_DTO);
+      data = await authController.registration(responseMock, CREATE_USER_DTO);
     });
 
     it('should call command bus execute', () => {
@@ -72,9 +72,8 @@ describe('auth-controller', () => {
     });
 
     it('should call response cookie', () => {
-      expect(responseMock.cookie).toBeCalledTimes(2);
-      expect(responseMock.cookie).toHaveBeenNthCalledWith(
-        1,
+      expect(responseMock.cookie).toBeCalledTimes(1);
+      expect(responseMock.cookie).toBeCalledWith(
         'refreshToken',
         userDataStub().refreshToken,
         {
@@ -82,28 +81,19 @@ describe('auth-controller', () => {
           httpOnly: true,
         },
       );
-      expect(responseMock.cookie).toHaveBeenNthCalledWith(
-        2,
-        'accessToken',
-        userDataStub().accessToken,
-        {
-          maxAge: ACCESS_TOKEN_TIME,
-          httpOnly: true,
-        },
-      );
     });
 
     it('should call response json', () => {
-      expect(responseMock.json).toBeCalledWith(userDataStub().user);
+      expect(responseMock.json).toBeCalledWith(userDataStub().data);
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userDtoStub());
+      expect(data).toEqual(userDtoStub());
     });
   });
 
   describe('when login is called', () => {
-    let user: Response<UserDto>;
+    let data: Response<UserData>;
 
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
@@ -111,7 +101,7 @@ describe('auth-controller', () => {
     });
 
     beforeEach(async () => {
-      user = await authController.login(responseMock, LOGIN_USER_DTO);
+      data = await authController.login(responseMock, LOGIN_USER_DTO);
     });
 
     it('should call command bus execute', () => {
@@ -122,9 +112,8 @@ describe('auth-controller', () => {
     });
 
     it('should call response cookie', () => {
-      expect(responseMock.cookie).toBeCalledTimes(2);
-      expect(responseMock.cookie).toHaveBeenNthCalledWith(
-        1,
+      expect(responseMock.cookie).toBeCalledTimes(1);
+      expect(responseMock.cookie).toBeCalledWith(
         'refreshToken',
         userDataStub().refreshToken,
         {
@@ -132,23 +121,14 @@ describe('auth-controller', () => {
           httpOnly: true,
         },
       );
-      expect(responseMock.cookie).toHaveBeenNthCalledWith(
-        2,
-        'accessToken',
-        userDataStub().accessToken,
-        {
-          maxAge: ACCESS_TOKEN_TIME,
-          httpOnly: true,
-        },
-      );
     });
 
     it('should call response json', () => {
-      expect(responseMock.json).toBeCalledWith(userDataStub().user);
+      expect(responseMock.json).toBeCalledWith(userDataStub().data);
     });
 
     it('should return a user', () => {
-      expect(user).toEqual(userDtoStub());
+      expect(data).toEqual(userDtoStub());
     });
   });
 
@@ -171,15 +151,8 @@ describe('auth-controller', () => {
     });
 
     it('should call response clearCookie', () => {
-      expect(responseMock.clearCookie).toBeCalledTimes(2);
-      expect(responseMock.clearCookie).toHaveBeenNthCalledWith(
-        1,
-        'refreshToken',
-      );
-      expect(responseMock.clearCookie).toHaveBeenNthCalledWith(
-        2,
-        'accessToken',
-      );
+      expect(responseMock.clearCookie).toBeCalledTimes(1);
+      expect(responseMock.clearCookie).toBeCalledWith('refreshToken');
     });
 
     it('should call response end', () => {
@@ -192,15 +165,15 @@ describe('auth-controller', () => {
   });
 
   describe('when refresh is called', () => {
-    let user: Response<UserDto>;
+    let data: Response<UserData>;
 
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue(userDataStub());
-      responseMock.json = jest.fn().mockResolvedValue(userDtoStub());
+      responseMock.json = jest.fn().mockResolvedValue(userDataStub().data);
     });
 
     beforeEach(async () => {
-      user = await authController.refresh(requestMock, responseMock);
+      data = await authController.refresh(requestMock, responseMock);
     });
 
     it('should call command bus execute', () => {
@@ -211,9 +184,8 @@ describe('auth-controller', () => {
     });
 
     it('should call response cookie', () => {
-      expect(responseMock.cookie).toBeCalledTimes(2);
-      expect(responseMock.cookie).toHaveBeenNthCalledWith(
-        1,
+      expect(responseMock.cookie).toBeCalledTimes(1);
+      expect(responseMock.cookie).toBeCalledWith(
         'refreshToken',
         userDataStub().refreshToken,
         {
@@ -221,23 +193,14 @@ describe('auth-controller', () => {
           httpOnly: true,
         },
       );
-      expect(responseMock.cookie).toHaveBeenNthCalledWith(
-        2,
-        'accessToken',
-        userDataStub().accessToken,
-        {
-          maxAge: ACCESS_TOKEN_TIME,
-          httpOnly: true,
-        },
-      );
     });
 
     it('should call response json', () => {
-      expect(responseMock.json).toBeCalledWith(userDataStub().user);
+      expect(responseMock.json).toBeCalledWith(userDataStub().data);
     });
 
     it('should return a response', () => {
-      expect(user).toEqual(userDataStub().user);
+      expect(data).toEqual(userDataStub().data);
     });
   });
 });

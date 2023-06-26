@@ -3,7 +3,7 @@ import { BadRequestException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
-import { UserData } from 'auth/auth.interface';
+import { AuthDataReturn } from 'auth/auth.interface';
 import { UserTokenDto } from 'auth/dto';
 import { RegisterCommand } from './register.command';
 
@@ -16,7 +16,7 @@ export class RegisterCommandHandler
     private readonly tokensService: TokensService,
   ) {}
 
-  async execute(command: RegisterCommand): Promise<UserData> {
+  async execute(command: RegisterCommand): Promise<AuthDataReturn> {
     const { dto } = command;
 
     const candidate = await this.usersService.getUserByEmail(dto.email);
@@ -34,6 +34,9 @@ export class RegisterCommandHandler
     const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
     const tokens = await this.tokensService.generateTokens({ ...userTokenDto });
 
-    return { ...tokens, user };
+    return {
+      data: { user, accessToken: tokens.accessToken },
+      refreshToken: tokens.refreshToken,
+    };
   }
 }

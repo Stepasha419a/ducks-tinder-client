@@ -85,7 +85,7 @@ describe('users/picture/mix (PUT)', () => {
       response = await request(httpServer)
         .put('/users/picture/mix')
         .send({ mixOrder: 0, withOrder: 1 })
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return a user', () => {
@@ -111,7 +111,7 @@ describe('users/picture/mix (PUT)', () => {
       response = await request(httpServer)
         .put('/users/picture/mix')
         .send({ mixOrder: 0, withOrder: 1 })
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -129,7 +129,7 @@ describe('users/picture/mix (PUT)', () => {
       response = await request(httpServer)
         .put('/users/picture/mix')
         .send({ mixOrder: 10, withOrder: 1 })
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -147,7 +147,7 @@ describe('users/picture/mix (PUT)', () => {
       response = await request(httpServer)
         .put('/users/picture/mix')
         .send({ mixOrder: 0, withOrder: 10 })
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {

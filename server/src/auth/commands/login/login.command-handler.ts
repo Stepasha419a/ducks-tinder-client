@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { LoginCommand } from './login.command';
-import { UserData } from 'auth/auth.interface';
+import { AuthDataReturn } from 'auth/auth.interface';
 import { UsersService } from 'users/users.service';
 import { TokensService } from 'tokens/tokens.service';
 import { ForbiddenException } from '@nestjs/common';
@@ -15,7 +15,7 @@ export class LoginCommandHandler implements ICommandHandler<LoginCommand> {
     private readonly tokensService: TokensService,
   ) {}
 
-  async execute(command: LoginCommand): Promise<UserData> {
+  async execute(command: LoginCommand): Promise<AuthDataReturn> {
     const { dto } = command;
 
     const user = await this.usersService.getUserByEmail(dto.email);
@@ -32,6 +32,9 @@ export class LoginCommandHandler implements ICommandHandler<LoginCommand> {
     const userTokenDto = new UserTokenDto({ id: user.id, email: user.email });
     const tokens = await this.tokensService.generateTokens({ ...userTokenDto });
 
-    return { ...tokens, user: userDto };
+    return {
+      data: { user: userDto, accessToken: tokens.accessToken },
+      refreshToken: tokens.refreshToken,
+    };
   }
 }

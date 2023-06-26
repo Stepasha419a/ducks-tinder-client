@@ -69,7 +69,7 @@ describe('chat/:id (GET)', () => {
 
       response = await request(httpServer)
         .get(`/chats/${chatId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return a full chat', () => {

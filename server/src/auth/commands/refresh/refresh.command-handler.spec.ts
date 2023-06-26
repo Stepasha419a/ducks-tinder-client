@@ -5,7 +5,7 @@ import { UsersModule } from 'users/users.module';
 import { TokensService } from 'tokens/tokens.service';
 import { TokensModule } from 'tokens/tokens.module';
 import { TokensServiceMock, UsersServiceMock } from 'auth/test/mocks';
-import { UserData } from 'auth/auth.interface';
+import { AuthDataReturn } from 'auth/auth.interface';
 import { RefreshCommand } from './refresh.command';
 import { userDataStub } from 'auth/test/stubs';
 import { userDtoStub } from 'users/test/stubs';
@@ -41,14 +41,14 @@ describe('when refresh is called', () => {
     );
   });
 
-  let userData: UserData;
+  let data: AuthDataReturn;
 
   describe('when it is called correctly', () => {
     beforeAll(async () => {
       usersService.getUser = jest.fn().mockResolvedValue(userDtoStub());
       tokensService.generateTokens = jest.fn().mockResolvedValue({
         refreshToken: userDataStub().refreshToken,
-        accessToken: userDataStub().accessToken,
+        accessToken: userDataStub().data.accessToken,
       });
       tokensService.validateRefreshToken = jest.fn().mockResolvedValue({
         id: userDtoStub().id,
@@ -57,7 +57,7 @@ describe('when refresh is called', () => {
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      userData = await refreshCommandHandler.execute(
+      data = await refreshCommandHandler.execute(
         new RefreshCommand(userDataStub().refreshToken),
       );
     });
@@ -80,7 +80,7 @@ describe('when refresh is called', () => {
     });
 
     it('should return userData', () => {
-      expect(userData).toEqual(userDataStub());
+      expect(data).toEqual(userDataStub());
     });
   });
 });

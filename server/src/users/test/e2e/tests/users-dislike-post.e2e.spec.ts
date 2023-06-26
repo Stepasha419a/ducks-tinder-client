@@ -62,7 +62,7 @@ describe('users/dislike/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/dislike/${secondUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return an empty object', () => {
@@ -79,7 +79,7 @@ describe('users/dislike/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/dislike/${currentUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -103,7 +103,7 @@ describe('users/dislike/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/dislike/${secondUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -127,7 +127,7 @@ describe('users/dislike/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/dislike/${secondUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -157,7 +157,7 @@ describe('users/dislike/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/dislike/${secondUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -187,7 +187,7 @@ describe('users/dislike/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/dislike/${secondUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -204,7 +204,7 @@ describe('users/dislike/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/dislike/${secondUserId}`)
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -221,7 +221,7 @@ describe('users/dislike/:id (POST)', () => {
 
       response = await request(httpServer)
         .post('/users/dislike/wrong-id')
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {

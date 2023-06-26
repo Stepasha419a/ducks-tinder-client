@@ -65,7 +65,7 @@ describe('users/return (PUT)', () => {
 
       response = await request(httpServer)
         .put('/users/return')
-        .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+        .set('Authorization', `Bearer ${secondUserAccessToken}`);
     });
 
     it('should return an empty object', () => {
@@ -82,7 +82,7 @@ describe('users/return (PUT)', () => {
 
       response = await request(httpServer)
         .put('/users/return')
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -99,7 +99,7 @@ describe('users/return (PUT)', () => {
 
       response = await request(httpServer)
         .put('/users/return')
-        .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+        .set('Authorization', `Bearer ${secondUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -123,7 +123,7 @@ describe('users/return (PUT)', () => {
 
       response = await request(httpServer)
         .put('/users/return')
-        .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+        .set('Authorization', `Bearer ${secondUserAccessToken}`);
     });
 
     it('should throw an error', () => {

@@ -63,7 +63,7 @@ describe('users/pairs/:id (PUT)', () => {
 
       response = await request(httpServer)
         .put(`/users/pairs/${secondUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return an empty array of pairs', () => {
@@ -80,7 +80,7 @@ describe('users/pairs/:id (PUT)', () => {
 
       response = await request(httpServer)
         .put(`/users/pairs/${secondUserId}`)
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -97,7 +97,7 @@ describe('users/pairs/:id (PUT)', () => {
 
       response = await request(httpServer)
         .put('/users/pairs/wrong-id')
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -114,7 +114,7 @@ describe('users/pairs/:id (PUT)', () => {
 
       response = await request(httpServer)
         .put(`/users/pairs/${currentUserId}`)
-        .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+        .set('Authorization', `Bearer ${secondUserAccessToken}`);
     });
 
     it('should throw an error', () => {

@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { Public } from 'common/decorators';
-import { ACCESS_TOKEN_TIME, REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
-import { CreateUserDto, UserDto } from 'users/dto';
+import { REFRESH_TOKEN_TIME } from 'tokens/tokens.constants';
+import { CreateUserDto } from 'users/dto';
 import { LoginUserDto } from './dto';
 import { CommandBus } from '@nestjs/cqrs';
 import {
@@ -21,6 +21,7 @@ import {
   RefreshCommand,
   RegisterCommand,
 } from './commands';
+import { AuthDataReturn, UserData } from './auth.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -32,11 +33,13 @@ export class AuthController {
   async registration(
     @Res() res: Response,
     @Body() dto: CreateUserDto,
-  ): Promise<Response<UserDto>> {
-    const userData = await this.commandBus.execute(new RegisterCommand(dto));
-    this.setCookies(res, userData.refreshToken, userData.accessToken);
+  ): Promise<Response<UserData>> {
+    const userData: AuthDataReturn = await this.commandBus.execute(
+      new RegisterCommand(dto),
+    );
+    this.setCookies(res, userData.refreshToken);
 
-    return res.json(userData.user);
+    return res.json(userData.data);
   }
 
   @Public()
@@ -45,11 +48,13 @@ export class AuthController {
   async login(
     @Res() res: Response,
     @Body() dto: LoginUserDto,
-  ): Promise<Response<UserDto>> {
-    const userData = await this.commandBus.execute(new LoginCommand(dto));
-    this.setCookies(res, userData.refreshToken, userData.accessToken);
+  ): Promise<Response<UserData>> {
+    const userData: AuthDataReturn = await this.commandBus.execute(
+      new LoginCommand(dto),
+    );
+    this.setCookies(res, userData.refreshToken);
 
-    return res.json(userData.user);
+    return res.json(userData.data);
   }
 
   @Patch('logout')
@@ -72,30 +77,25 @@ export class AuthController {
   async refresh(
     @Req() req: Request,
     @Res() res: Response,
-  ): Promise<Response<UserDto>> {
+  ): Promise<Response<UserData>> {
     const { refreshToken } = req.cookies;
 
-    const userData = await this.commandBus.execute(
+    const userData: AuthDataReturn = await this.commandBus.execute(
       new RefreshCommand(refreshToken),
     );
-    this.setCookies(res, userData.refreshToken, userData.accessToken);
+    this.setCookies(res, userData.refreshToken);
 
-    return res.json(userData.user);
+    return res.json(userData.data);
   }
 
-  private setCookies(res: Response, refreshToken: string, accessToken: string) {
+  private setCookies(res: Response, refreshToken: string) {
     res.cookie('refreshToken', refreshToken, {
       maxAge: REFRESH_TOKEN_TIME,
-      httpOnly: true,
-    });
-    res.cookie('accessToken', accessToken, {
-      maxAge: ACCESS_TOKEN_TIME,
       httpOnly: true,
     });
   }
 
   private clearCookies(res: Response) {
     res.clearCookie('refreshToken');
-    res.clearCookie('accessToken');
   }
 }

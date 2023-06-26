@@ -77,7 +77,7 @@ describe('users/pairs/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/pairs/${secondUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return an empty array of pairs', () => {

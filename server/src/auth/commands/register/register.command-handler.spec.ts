@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { UserData } from 'auth/auth.interface';
+import { AuthDataReturn } from 'auth/auth.interface';
 import { CREATE_USER_DTO } from 'auth/test/values/auth.const.dto';
 import { UsersService } from 'users/users.service';
 import { TokensServiceMock, UsersServiceMock } from 'auth/test/mocks';
@@ -48,15 +48,15 @@ describe('when registration is called', () => {
       usersService.createUser = jest.fn().mockResolvedValue(userDtoStub());
       tokensService.generateTokens = jest.fn().mockResolvedValue({
         refreshToken: userDataStub().refreshToken,
-        accessToken: userDataStub().accessToken,
+        accessToken: userDataStub().data.accessToken,
       });
     });
 
-    let userData: UserData;
+    let data: AuthDataReturn;
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      userData = await registerCommandHandler.execute(
+      data = await registerCommandHandler.execute(
         new RegisterCommand(CREATE_USER_DTO),
       );
     });
@@ -78,7 +78,7 @@ describe('when registration is called', () => {
     });
 
     it('should return userData', () => {
-      expect(userData).toEqual(userDataStub());
+      expect(data).toEqual(userDataStub());
     });
   });
 });

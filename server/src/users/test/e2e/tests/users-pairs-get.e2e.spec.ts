@@ -64,7 +64,7 @@ describe('users/pairs (GET)', () => {
 
       response = await request(httpServer)
         .get('/users/pairs')
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return a user', () => {
@@ -81,7 +81,7 @@ describe('users/pairs (GET)', () => {
 
       response = await request(httpServer)
         .get('/users/pairs')
-        .set('Cookie', [`accessToken=${secondUserAccessToken}`]);
+        .set('Authorization', `Bearer ${secondUserAccessToken}`);
     });
 
     it('should return an empty array of pairs', () => {
@@ -98,7 +98,7 @@ describe('users/pairs (GET)', () => {
 
       response = await request(httpServer)
         .get('/users/pairs')
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {

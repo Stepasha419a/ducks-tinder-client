@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { userDtoStub } from 'users/test/stubs';
-import { UserData } from 'auth/auth.interface';
+import { AuthDataReturn } from 'auth/auth.interface';
 import { LOGIN_USER_DTO } from 'auth/test/values/auth.const.dto';
 import { UsersService } from 'users/users.service';
 import { TokensServiceMock, UsersServiceMock } from 'auth/test/mocks';
@@ -53,15 +53,15 @@ describe('when login is called', () => {
       });
       tokensService.generateTokens = jest.fn().mockResolvedValue({
         refreshToken: userDataStub().refreshToken,
-        accessToken: userDataStub().accessToken,
+        accessToken: userDataStub().data.accessToken,
       });
     });
 
-    let userData: UserData;
+    let data: AuthDataReturn;
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      userData = await loginCommandHandler.execute(
+      data = await loginCommandHandler.execute(
         new LoginCommand(LOGIN_USER_DTO),
       );
     });
@@ -78,7 +78,7 @@ describe('when login is called', () => {
     });
 
     it('should return userData', () => {
-      expect(userData).toEqual(userDataStub());
+      expect(data).toEqual(userDataStub());
     });
   });
 });

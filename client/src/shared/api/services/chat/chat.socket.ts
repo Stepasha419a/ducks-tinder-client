@@ -21,6 +21,9 @@ export const chatSocket: ChatSocket = {
       query: { chatId },
       withCredentials: true,
       transports: ['websocket'],
+      auth: {
+        authorization: localStorage.getItem('accessToken'),
+      },
     });
 
     this._socket.emit('connect-chat', chatId);

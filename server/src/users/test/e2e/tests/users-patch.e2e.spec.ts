@@ -82,7 +82,7 @@ describe('users (PATCH)', () => {
             'wrong-interest-2',
           ],
         })
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return a user', () => {
@@ -106,7 +106,7 @@ describe('users (PATCH)', () => {
       response = await request(httpServer)
         .patch('/users')
         .send({ name: 'William' })
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {

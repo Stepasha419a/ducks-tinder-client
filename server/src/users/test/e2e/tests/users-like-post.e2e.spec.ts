@@ -61,7 +61,7 @@ describe('users/like/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/like/${secondUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should return an empty object', () => {
@@ -78,7 +78,7 @@ describe('users/like/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/like/${currentUserId}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -102,7 +102,7 @@ describe('users/like/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/like/${secondUser.id}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -128,7 +128,7 @@ describe('users/like/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/like/${secondUser.id}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -160,7 +160,7 @@ describe('users/like/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/like/${secondUser.id}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -192,7 +192,7 @@ describe('users/like/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/like/${secondUser.id}`)
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -211,7 +211,7 @@ describe('users/like/:id (POST)', () => {
 
       response = await request(httpServer)
         .post(`/users/like/${secondUserId}`)
-        .set('Cookie', [`accessToken=${wrongUserAccessToken}`]);
+        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
     });
 
     it('should throw an error', () => {
@@ -228,7 +228,7 @@ describe('users/like/:id (POST)', () => {
 
       response = await request(httpServer)
         .post('/users/like/wrong-id')
-        .set('Cookie', [`accessToken=${currentUserAccessToken}`]);
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
     it('should throw an error', () => {

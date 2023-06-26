@@ -5,7 +5,7 @@ import { NestApplication } from '@nestjs/core';
 import { Test } from '@nestjs/testing';
 import { AppModule } from 'app.module';
 import prismaClient from 'prisma/test/prisma-client';
-import { newUserStub, userDtoStub } from 'users/test/stubs';
+import { userDtoStub } from 'users/test/stubs';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { prepareAfter, prepareBefore } from './preparations';
@@ -65,17 +65,17 @@ describe('auth-e2e', () => {
         });
       });
 
-      it('should return a user', () => {
-        expect({ ...response.body, id: undefined }).toEqual(
+      it('should return a user data', () => {
+        expect(response.body.accessToken).toBeDefined();
+        expect({ ...response.body.user, id: undefined }).toEqual(
           AUTH_REGISTRATION_EXPECT,
         );
-        expect(response.body.id).toBeDefined();
+        expect(response.body.user.id).toBeDefined();
       });
 
       it('should set jwt tokens in cookies', () => {
         expect(response.headers['set-cookie']).toBeDefined();
         expect(response.headers['set-cookie'][0]).toBeDefined();
-        expect(response.headers['set-cookie'][1]).toBeDefined();
       });
     });
 
@@ -112,14 +112,14 @@ describe('auth-e2e', () => {
         });
       });
 
-      it('should return a user', () => {
-        expect(response.body).toEqual(AUTH_LOGIN_EXPECT);
+      it('should return a user data', () => {
+        expect(response.body.accessToken).toBeDefined();
+        expect(response.body.user).toEqual(AUTH_LOGIN_EXPECT);
       });
 
       it('should set jwt tokens in cookies', () => {
         expect(response.headers['set-cookie']).toBeDefined();
         expect(response.headers['set-cookie'][0]).toBeDefined();
-        expect(response.headers['set-cookie'][1]).toBeDefined();
       });
     });
 
@@ -186,10 +186,8 @@ describe('auth-e2e', () => {
         response = await request(httpServer)
           .patch('/auth/logout')
           .send({})
-          .set('Cookie', [
-            `refreshToken=${refreshToken}`,
-            `accessToken=${accessToken}`,
-          ]);
+          .set('Authorization', `Bearer ${accessToken}`)
+          .set('Cookie', [`refreshToken=${refreshToken}`]);
       });
 
       it('should return empty object', () => {
@@ -298,11 +296,11 @@ describe('auth-e2e', () => {
       it('should set jwt tokens in cookies', () => {
         expect(response.headers['set-cookie']).toBeDefined();
         expect(response.headers['set-cookie'][0]).toBeDefined();
-        expect(response.headers['set-cookie'][1]).toBeDefined();
       });
 
-      it('should return a user', () => {
-        expect(response.body).toEqual(AUTH_REFRESH_EXPECT);
+      it('should return a user data', () => {
+        expect(response.body.accessToken).toBeDefined();
+        expect(response.body.user).toEqual(AUTH_REFRESH_EXPECT);
       });
     });
 
@@ -353,16 +351,11 @@ describe('auth-e2e', () => {
       it('should set jwt tokens in cookies', () => {
         expect(response.headers['set-cookie']).toBeDefined();
         expect(response.headers['set-cookie'][0]).toBeDefined();
-        expect(response.headers['set-cookie'][1]).toBeDefined();
       });
 
-      it('should return a user', () => {
-        expect(response.body).toEqual({
-          ...newUserStub(),
-          id: authUserStub().id,
-          email: authUserStub().email,
-          name: userDtoStub().name,
-        });
+      it('should return a user data', () => {
+        expect(response.body.accessToken).toBeDefined();
+        expect(response.body.user).toEqual(AUTH_REFRESH_EXPECT);
       });
     });
 

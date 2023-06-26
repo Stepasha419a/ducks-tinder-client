@@ -8,6 +8,7 @@ import {
 import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
 import { IS_PUBLIC_KEY } from 'common/constants';
+import { Request } from 'express';
 
 @Injectable()
 export class AccessTokenGuard implements CanActivate {
@@ -27,7 +28,7 @@ export class AccessTokenGuard implements CanActivate {
     }
 
     const req = context.switchToHttp().getRequest();
-    const accessToken = req.cookies?.accessToken;
+    const accessToken = this.extractTokenFromHeader(req);
 
     const userData = await this.tokensService.validateAccessToken(accessToken);
     if (!userData) {
@@ -35,8 +36,12 @@ export class AccessTokenGuard implements CanActivate {
     }
 
     const user = await this.usersService.getUser(userData.id);
-
     req.user = user;
     return true;
+  }
+
+  private extractTokenFromHeader(req: Request): string | undefined {
+    const [type, token] = req.headers.authorization?.split(' ') ?? [];
+    return type === 'Bearer' ? token : undefined;
   }
 }

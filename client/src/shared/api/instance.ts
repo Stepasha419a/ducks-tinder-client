@@ -1,6 +1,6 @@
-import type { AxiosResponse, AxiosError } from 'axios';
+import type { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import type { User } from './interfaces';
+import type { AuthResponse } from './services/auth/auth.interfaces';
 
 export const API_URL = 'http://localhost:5000/';
 
@@ -13,6 +13,12 @@ interface AxiosEditedConfig extends AxiosResponse {
   _isRetry?: boolean;
 }
 
+instance.interceptors.request.use((config: AxiosRequestConfig) => {
+  config.headers!.Authorization =
+    'Bearer ' + localStorage.getItem('accessToken')!;
+  return config;
+});
+
 instance.interceptors.response.use(
   (config: AxiosEditedConfig) => config,
   async (error: AxiosError<{ message: string; status: string }>) => {
@@ -22,9 +28,10 @@ instance.interceptors.response.use(
       !(error.config as AxiosEditedConfig)._isRetry
     ) {
       originalRequest._isRetry = true;
-      await axios.get<User>(`${API_URL}auth/refresh`, {
+      const response = await axios.get<AuthResponse>(`${API_URL}auth/refresh`, {
         withCredentials: true,
       });
+      localStorage.setItem('accessToken', response.data.accessToken);
 
       return instance.request(originalRequest);
     }
