@@ -4,6 +4,7 @@ import { EditMessageCommand } from './edit-message.command';
 import { Message } from 'chats/chats.interfaces';
 import { WsException } from '@nestjs/websockets';
 import { ChatsSelector } from 'chats/chats.selector';
+import { getDatesHourDiff } from 'common/helpers';
 
 @CommandHandler(EditMessageCommand)
 export class EditMessageCommandHandler
@@ -19,6 +20,12 @@ export class EditMessageCommandHandler
     });
     if (!candidate) {
       throw new WsException('Not found');
+    }
+
+    const isMessageEditable =
+      getDatesHourDiff(new Date(), new Date(candidate.createdAt)) < 6;
+    if (!isMessageEditable) {
+      throw new WsException('Forbidden to edit');
     }
 
     const message = await this.prismaService.message.update({

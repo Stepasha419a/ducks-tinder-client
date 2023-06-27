@@ -49,6 +49,7 @@ export const MessageList: FC<MessagesProps> = ({
               updatedAt={message.updatedAt}
             />
             <Message.Select
+              createdAt={message.createdAt}
               isSelectOpen={isSelectOpen}
               handleSelectMessage={() => handleSelectMessage(message)}
               isOwn={isOwn}

@@ -33,7 +33,7 @@ describe('when send message is called', () => {
     beforeAll(() => {
       prismaService.message.findFirst = jest
         .fn()
-        .mockResolvedValue(messageStub());
+        .mockResolvedValue({ ...messageStub(), createdAt: new Date() });
       prismaService.message.update = jest.fn().mockResolvedValue(messageStub());
     });
 
@@ -70,6 +70,42 @@ describe('when send message is called', () => {
   describe('when there is no such message', () => {
     beforeAll(() => {
       prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.update = jest.fn();
+    });
+
+    let message: Message;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        message = await editMessageCommandHandler.execute(
+          new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
+        );
+      } catch {}
+    });
+
+    it('should call message find first', () => {
+      expect(prismaService.message.findFirst).toBeCalledTimes(1);
+      expect(prismaService.message.findFirst).toBeCalledWith({
+        where: { id: EDIT_MESSAGE_DTO.messageId, userId: requestUserStub().id },
+      });
+    });
+
+    it('should not call message update', () => {
+      expect(prismaService.message.update).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(message).toEqual(undefined);
+    });
+  });
+
+  describe('when there is too late to edit (> 6 hours lasted)', () => {
+    beforeAll(() => {
+      prismaService.message.findFirst = jest.fn().mockResolvedValue({
+        ...messageStub(),
+        createdAt: new Date('2018-01-01'),
+      });
       prismaService.message.update = jest.fn();
     });
 

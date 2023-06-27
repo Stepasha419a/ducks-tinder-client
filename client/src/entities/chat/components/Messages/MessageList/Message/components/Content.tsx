@@ -2,6 +2,7 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import classNames from 'classnames';
 import { Textarea } from '@shared/ui';
 import styles from '../Message.module.scss';
+import { getTime } from '@/shared/helpers';
 
 interface MessageContentProps {
   isOwn: boolean;
@@ -37,8 +38,8 @@ export const Content: FC<MessageContentProps> = ({
   );
 
   const time = isEdited
-    ? `edited ${new Date(updatedAt).toLocaleTimeString()}`
-    : new Date(createdAt).toLocaleTimeString();
+    ? `edited ${getTime(new Date(updatedAt).toLocaleTimeString())!.toString()}`
+    : getTime(new Date(createdAt).toLocaleTimeString());
 
   return (
     <div className={cnMessage}>

@@ -13,7 +13,7 @@
     .message {
       background-color: var(--color--white-100);
       padding: 8px;
-      padding-right: 70px;
+      padding-right: 40px;
       border-radius: 8px;
 
       &.own {
@@ -39,10 +39,10 @@
       }
 
       &.edited {
-        padding-right: 100px;
+        padding-right: 80px;
 
         .timestamp {
-          right: -90px !important;
+          right: -70px !important;
         }
       }
 
@@ -65,7 +65,7 @@
         .timestamp {
           position: absolute;
           bottom: 0;
-          right: -60px;
+          right: -30px;
           color: var(--color--black-85);
           font-size: 12px;
         }

@@ -4,7 +4,6 @@
   right: -108px;
   z-index: 1;
   width: 100px;
-  height: 60px;
   background-color: rgb(228, 228, 228);
   border-radius: 8px;
 
@@ -36,5 +35,14 @@
       opacity: 1;
       visibility: visible;
     }
+  }
+
+  .default {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
   }
 }

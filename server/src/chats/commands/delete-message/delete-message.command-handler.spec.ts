@@ -29,10 +29,12 @@ describe('when send message is called', () => {
   });
 
   describe('when it is called correctly', () => {
+    const createdAtDate = new Date();
+
     beforeAll(() => {
       prismaService.message.findFirst = jest
         .fn()
-        .mockResolvedValue(messageStub());
+        .mockResolvedValue({ ...messageStub(), createdAt: createdAtDate });
       prismaService.message.delete = jest.fn();
     });
 
@@ -61,7 +63,10 @@ describe('when send message is called', () => {
     });
 
     it('should return a message', () => {
-      expect(message).toStrictEqual(messageStub());
+      expect(message).toStrictEqual({
+        ...messageStub(),
+        createdAt: createdAtDate,
+      });
     });
   });
 
@@ -96,6 +101,43 @@ describe('when send message is called', () => {
 
     it('should return undefined', () => {
       expect(message).toEqual(undefined);
+    });
+  });
+
+  describe('when there is too late to delete (> 12 hours lasted)', () => {
+    beforeAll(() => {
+      prismaService.message.findFirst = jest.fn().mockResolvedValue({
+        ...messageStub(),
+        createdAt: new Date('2022-01-01'),
+      });
+      prismaService.message.delete = jest.fn();
+    });
+
+    let message: Message;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        message = await deleteMessageCommandHandler.execute(
+          new DeleteMessageCommand(requestUserStub(), messageStub().id),
+        );
+      } catch {}
+    });
+
+    it('should call message find first', () => {
+      expect(prismaService.message.findFirst).toBeCalledTimes(1);
+      expect(prismaService.message.findFirst).toBeCalledWith({
+        where: { id: messageStub().id, userId: requestUserStub().id },
+        select: ChatsSelector.selectMessage(),
+      });
+    });
+
+    it('should not call message delete', () => {
+      expect(prismaService.message.delete).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(message).toStrictEqual(undefined);
     });
   });
 });

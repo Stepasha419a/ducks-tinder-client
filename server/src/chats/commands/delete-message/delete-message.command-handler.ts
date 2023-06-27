@@ -4,6 +4,7 @@ import { DeleteMessageCommand } from './delete-message.command';
 import { Message } from 'chats/chats.interfaces';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
+import { getDatesHourDiff } from 'common/helpers';
 
 @CommandHandler(DeleteMessageCommand)
 export class DeleteMessageCommandHandler
@@ -20,6 +21,12 @@ export class DeleteMessageCommandHandler
     });
     if (!message) {
       throw new WsException('Not found');
+    }
+
+    const isMessageDeletable =
+      getDatesHourDiff(new Date(), new Date(message.createdAt)) < 12;
+    if (!isMessageDeletable) {
+      throw new WsException('Forbidden to delete');
     }
 
     await this.prismaService.message.delete({ where: { id: messageId } });

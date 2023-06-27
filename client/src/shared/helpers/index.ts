@@ -6,3 +6,5 @@ export { returnErrorMessage } from './returnErrorMessage';
 export { compose } from './compose';
 export { createFileUrl } from './createFileUrl';
 export { createEmptyArray } from './createEmptyArray';
+export { getDatesHourDiff } from './getDatesHourDiff';
+export { getTime } from './getTime';

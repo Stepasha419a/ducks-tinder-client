@@ -12,6 +12,7 @@ import type { Message } from '@shared/api/interfaces';
 import { useAppDispatch, useOnClickOutside } from '@shared/hooks';
 import styles from './MessageSelect.module.scss';
 import { deleteMessageThunk, editMessageThunk } from '@/entities/chat/model';
+import { getDatesHourDiff } from '@/shared/helpers';
 
 interface MessageSelectProps {
   setCurrentMessage: Dispatch<SetStateAction<Message | null>>;
@@ -63,36 +64,45 @@ export const MessageSelect: FC<MessageSelectProps> = ({
 
   useOnClickOutside(selectRef, handleSelectClickOutside);
 
+  const isMessageEditable =
+    getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 6;
+  const isMessageDeleting =
+    getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 12;
+
+  if (isMessageEditing) {
+    return (
+      <div ref={selectRef} className={styles.select}>
+        <div onClick={handleSaveMessage} className={styles.item}>
+          <p>Save</p>
+          <FontAwesomeIcon className={styles.icon} icon={faFloppyDisk} />
+        </div>
+        <div
+          onClick={handleCancelMessage}
+          className={classNames(styles.item, styles.remove)}
+        >
+          <p>Cancel</p>
+          <FontAwesomeIcon className={styles.icon} icon={faBan} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div ref={selectRef} className={styles.select}>
-      {isMessageEditing ? (
-        <>
-          <div onClick={handleSaveMessage} className={styles.item}>
-            <p>Save</p>
-            <FontAwesomeIcon className={styles.icon} icon={faFloppyDisk} />
-          </div>
-          <div
-            onClick={handleCancelMessage}
-            className={classNames(styles.item, styles.remove)}
-          >
-            <p>Cancel</p>
-            <FontAwesomeIcon className={styles.icon} icon={faBan} />
-          </div>
-        </>
-      ) : (
-        <>
-          <div onClick={handleEditMessage} className={styles.item}>
-            <p>Edit</p>
-            <FontAwesomeIcon className={styles.icon} icon={faPen} />
-          </div>
-          <div
-            onClick={handleDeleteMessage}
-            className={classNames(styles.item, styles.remove)}
-          >
-            <p>Remove</p>
-            <FontAwesomeIcon className={styles.icon} icon={faTrash} />
-          </div>
-        </>
+      {isMessageEditable && (
+        <div onClick={handleEditMessage} className={styles.item}>
+          <p>Edit</p>
+          <FontAwesomeIcon className={styles.icon} icon={faPen} />
+        </div>
+      )}
+      {isMessageDeleting && (
+        <div
+          onClick={handleDeleteMessage}
+          className={classNames(styles.item, styles.remove)}
+        >
+          <p>Remove</p>
+          <FontAwesomeIcon className={styles.icon} icon={faTrash} />
+        </div>
       )}
     </div>
   );
