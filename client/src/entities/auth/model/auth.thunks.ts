@@ -45,7 +45,6 @@ export const checkAuthThunk = createAsyncThunk(
   'auth/checkAuth',
   async (_, { rejectWithValue, dispatch }) => {
     try {
-      console.log('asdasdas');
       const response = await authService.refresh();
       localStorage.setItem('accessToken', response.data.accessToken);
 

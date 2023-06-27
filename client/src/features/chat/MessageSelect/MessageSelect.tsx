@@ -6,12 +6,17 @@ import {
   faBan,
   faFloppyDisk,
   faPen,
+  faReply,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import type { Message } from '@shared/api/interfaces';
 import { useAppDispatch, useOnClickOutside } from '@shared/hooks';
 import styles from './MessageSelect.module.scss';
-import { deleteMessageThunk, editMessageThunk } from '@/entities/chat/model';
+import {
+  deleteMessageThunk,
+  editMessageThunk,
+  setRepliedMessage,
+} from '@/entities/chat/model';
 import { getDatesHourDiff } from '@/shared/helpers';
 
 interface MessageSelectProps {
@@ -44,6 +49,11 @@ export const MessageSelect: FC<MessageSelectProps> = ({
 
   const handleEditMessage = () => {
     setIsMessageEditing(true);
+  };
+
+  const handleRepliedMessage = () => {
+    setCurrentMessage(null);
+    dispatch(setRepliedMessage(currentMessage));
   };
 
   const handleSaveMessage = () => {
@@ -89,6 +99,10 @@ export const MessageSelect: FC<MessageSelectProps> = ({
 
   return (
     <div ref={selectRef} className={styles.select}>
+      <div onClick={handleRepliedMessage} className={styles.item}>
+        <p>Reply</p>
+        <FontAwesomeIcon className={styles.icon} icon={faReply} />
+      </div>
       {isMessageEditable && (
         <div onClick={handleEditMessage} className={styles.item}>
           <p>Edit</p>

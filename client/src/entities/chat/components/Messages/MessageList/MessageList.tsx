@@ -36,7 +36,8 @@ export const MessageList: FC<MessagesProps> = ({
         );
 
         return (
-          <Message key={message.id} message={message} avatar={avatar}>
+          <Message key={message.id}>
+            <Message.Avatar userId={message.userId} avatar={avatar} />
             <Message.Content
               isOwn={isOwn}
               editingValue={editingValue}
@@ -49,7 +50,6 @@ export const MessageList: FC<MessagesProps> = ({
               updatedAt={message.updatedAt}
             />
             <Message.Select
-              createdAt={message.createdAt}
               isSelectOpen={isSelectOpen}
               handleSelectMessage={() => handleSelectMessage(message)}
               isOwn={isOwn}

@@ -2,10 +2,8 @@ import type { FC, ReactElement } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import styles from '../Message.module.scss';
-import { getDatesHourDiff } from '@/shared/helpers';
 
 interface SelectProps {
-  createdAt: Date;
   isOwn: boolean;
   isSelectOpen: boolean;
   select: ReactElement;
@@ -13,16 +11,12 @@ interface SelectProps {
 }
 
 export const Select: FC<SelectProps> = ({
-  createdAt,
   isOwn,
   isSelectOpen,
   select,
   handleSelectMessage,
 }) => {
-  const isMessageDeleting =
-    getDatesHourDiff(new Date(), new Date(createdAt)) < 12;
-
-  if (isMessageDeleting && isOwn) {
+  if (isOwn) {
     return isSelectOpen ? (
       select
     ) : (

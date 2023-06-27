@@ -1,4 +1,8 @@
-export { pushNewMessage, setCurrentChatData } from './chat.slice';
+export {
+  pushNewMessage,
+  setCurrentChatData,
+  setRepliedMessage,
+} from './chat.slice';
 export {
   closeAllSocketsThunk,
   connectChatThunk,
@@ -14,4 +18,5 @@ export {
   selectChatList,
   selectCurrentMessagesLength,
   selectMessages,
+  selectRepliedMessage,
 } from './chat.selectors';

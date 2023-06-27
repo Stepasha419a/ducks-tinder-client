@@ -53,3 +53,18 @@ export const selectMessages = createSelector(
     maxMessagesCount,
   })
 );
+
+export const selectRepliedMessage = createSelector(
+  [
+    (state: RootState) => state.user.currentUser.id,
+    (state: RootState) => state.user.currentUser.name,
+    (state: RootState) =>
+      state.user.currentUser.pictures[0] as Picture | undefined,
+    (state: RootState) => state.chat.chats,
+    (state: RootState) => state.chat.currentChatId,
+  ],
+  (_id, name, avatar, chats, currentChatId) => ({
+    currentChatUserObj: { _id, name, avatar },
+    currentChat: chats.find((chat) => chat.id === currentChatId),
+  })
+);

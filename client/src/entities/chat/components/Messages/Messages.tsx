@@ -6,6 +6,7 @@ import { MessagesLazy } from './Messages.lazy';
 import styles from './Messages.module.scss';
 import { useMessagesScroll } from '../../lib';
 import { MessageList } from './MessageList/MessageList';
+import classNames from 'classnames';
 
 interface MessagesProps {
   select: ReactElement;
@@ -19,6 +20,7 @@ interface MessagesProps {
 export const Messages: FC<MessagesProps> = (props): ReactElement => {
   const { messagesLength, isMessagesInitialLoading, maxMessagesCount } =
     useAppSelector(selectMessages);
+  const repliedMessage = useAppSelector((state) => state.chat.repliedMessage);
 
   const { messagesRef, topScrollRef } = useMessagesScroll();
 
@@ -30,11 +32,15 @@ export const Messages: FC<MessagesProps> = (props): ReactElement => {
     );
   }
 
+  const cn = classNames(styles.messages, repliedMessage && styles.replying);
+
   return (
-    <div className={styles.messages} ref={messagesRef}>
-      <div className={styles.loadMessages} ref={topScrollRef}></div>
-      {maxMessagesCount > messagesLength && <MessagesLazy count={4} />}
-      <MessageList {...props} />
+    <div className={cn} ref={messagesRef}>
+      <div className={styles.inner}>
+        <div className={styles.loadMessages} ref={topScrollRef}></div>
+        {maxMessagesCount > messagesLength && <MessagesLazy count={4} />}
+        <MessageList {...props} />
+      </div>
     </div>
   );
 };

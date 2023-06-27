@@ -17,6 +17,7 @@ const initialState: ChatInitialState = {
   maxMessagesCount: 0,
   isMessagesEnded: false,
   currentChatId: '',
+  repliedMessage: null,
 };
 
 const chatSlice = createSlice({
@@ -40,6 +41,7 @@ const chatSlice = createSlice({
       state.maxMessagesCount = payload.messagesCount;
       state.isMessagesLoading = false;
       state.isMessagesEnded = false;
+      state.repliedMessage = null;
     },
     getMessages: (state, { payload }: PayloadAction<Message[]>) => {
       if (payload.length === 0) {
@@ -75,6 +77,9 @@ const chatSlice = createSlice({
     setIsMessagesLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isMessagesLoading = payload;
     },
+    setRepliedMessage: (state, { payload }: PayloadAction<Message | null>) => {
+      state.repliedMessage = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -95,6 +100,7 @@ const chatSlice = createSlice({
         state.isConnected = false;
         state.maxMessagesCount = 0;
         state.currentChatId = '';
+        state.repliedMessage = null;
       });
   },
 });
@@ -106,6 +112,7 @@ export const {
   deleteMessage,
   setIsMessagesLoading,
   editMessage,
+  setRepliedMessage,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

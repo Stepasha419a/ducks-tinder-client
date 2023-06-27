@@ -1,4 +1,4 @@
-import type { ShortChat } from '@shared/api/interfaces';
+import type { Message, ShortChat } from '@shared/api/interfaces';
 
 export interface ChatInitialState {
   chats: ShortChat[];
@@ -9,4 +9,5 @@ export interface ChatInitialState {
   maxMessagesCount: number;
   isMessagesEnded: boolean;
   currentChatId: string;
+  repliedMessage: Message | null;
 }
