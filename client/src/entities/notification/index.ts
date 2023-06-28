@@ -1,1 +1,0 @@
-export { notificationReducer } from './model';

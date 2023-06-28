@@ -28,40 +28,30 @@ export const MessageList: FC<MessagesProps> = ({
   return (
     <>
       {messages.map((message: MessageInterface) => {
-        const {
-          name,
-          isOwn,
-          avatar,
-          isSelectOpen,
-          repliedMessage,
-          repliedUsername,
-        } = getMessageProps(
-          message,
-          currentMessage,
-          currentChat,
-          currentChatUserObj
-        );
+        const { getAvatarProps, getSelectProps, getContentProps } =
+          getMessageProps(
+            message,
+            currentMessage,
+            currentChat,
+            currentChatUserObj,
+            isMessageEditing
+          );
 
         return (
           <Message key={message.id}>
-            <Message.Avatar userId={message.userId} avatar={avatar} />
+            <Message.Avatar {...getAvatarProps()} />
             <Message.Content
-              isOwn={isOwn}
               editingValue={editingValue}
               setEditingValue={setEditingValue}
               text={message.text}
-              isMessageEditing={isSelectOpen && isMessageEditing}
-              isSelectOpen={isSelectOpen}
-              username={name}
               createdAt={message.createdAt}
               updatedAt={message.updatedAt}
-              repliedMessage={repliedMessage}
-              repliedUsername={repliedUsername}
+              {...getContentProps()}
             />
             <Message.Select
-              isSelectOpen={isSelectOpen}
               handleSelectMessage={() => handleSelectMessage(message)}
               select={select}
+              {...getSelectProps()}
             />
           </Message>
         );

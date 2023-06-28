@@ -56,7 +56,7 @@ function checkField(user: User, field: ErrorField): ErrorField | boolean {
       }
       return false;
     case 'preferAgeTo':
-      if (!user.sex) {
+      if (!user.preferAgeTo) {
         return 'preferAgeTo';
       }
       return false;

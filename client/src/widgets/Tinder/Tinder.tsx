@@ -14,12 +14,17 @@ export const Tinder: FC = () => {
   const { tinderUsers, currentTinderUsersIndex, isFailed } =
     useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
+  const errorFieldsLength = useAppSelector(
+    (state) => state.setting.errorFields.length
+  );
 
   const [isFullPreview, setIsFullPreview] = useState(false);
 
   useEffect(() => {
-    dispatch(getSortedUserThunk());
-  }, [currentTinderUsersIndex, dispatch]);
+    if (!errorFieldsLength) {
+      dispatch(getSortedUserThunk());
+    }
+  }, [errorFieldsLength, currentTinderUsersIndex, dispatch]);
 
   if (isFailed) {
     return (

@@ -2,7 +2,6 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import classNames from 'classnames';
 import { Textarea } from '@shared/ui';
 import styles from '../Message.module.scss';
-import type { RepliedMessage } from '@shared/api/interfaces';
 import { getTime } from '@/shared/helpers';
 
 interface MessageContentProps {
@@ -15,7 +14,7 @@ interface MessageContentProps {
   text: string;
   createdAt: Date;
   updatedAt: Date;
-  repliedMessage: RepliedMessage | null;
+  repliedMessageText: string | undefined;
   repliedUsername: string | undefined;
 }
 
@@ -29,7 +28,7 @@ export const Content: FC<MessageContentProps> = ({
   text,
   createdAt,
   updatedAt,
-  repliedMessage,
+  repliedMessageText,
   repliedUsername,
 }) => {
   const isEdited = createdAt !== updatedAt;
@@ -46,6 +45,8 @@ export const Content: FC<MessageContentProps> = ({
     ? `edited ${getTime(new Date(updatedAt).toLocaleTimeString())!.toString()}`
     : getTime(new Date(createdAt).toLocaleTimeString());
 
+  const isReply = repliedMessageText && repliedUsername;
+
   return (
     <div className={cnMessage}>
       {!isOwn && <div className={styles.username}>{username}</div>}
@@ -58,12 +59,12 @@ export const Content: FC<MessageContentProps> = ({
           />
         ) : (
           <>
-            {repliedMessage && (
+            {isReply && (
               <div className={styles.reply}>
                 <div className={styles.border} />
                 <div className={styles.reply_message}>
                   <div className={styles.reply_username}>{repliedUsername}</div>
-                  <div className={styles.reply_text}>{repliedMessage.text}</div>
+                  <div className={styles.reply_text}>{repliedMessageText}</div>
                 </div>
               </div>
             )}
