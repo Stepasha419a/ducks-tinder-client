@@ -36,11 +36,9 @@ export const Messages: FC<MessagesProps> = (props): ReactElement => {
 
   return (
     <div className={cn} ref={messagesRef}>
-      <div className={styles.inner}>
-        <div className={styles.loadMessages} ref={topScrollRef}></div>
-        {maxMessagesCount > messagesLength && <MessagesLazy count={4} />}
-        <MessageList {...props} />
-      </div>
+      <div className={styles.loadMessages} ref={topScrollRef}></div>
+      {maxMessagesCount > messagesLength && <MessagesLazy count={4} />}
+      <MessageList {...props} />
     </div>
   );
 };

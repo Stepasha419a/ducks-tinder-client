@@ -1,26 +1,18 @@
-import { useEffect, useRef } from 'react';
+import type { MutableRefObject } from 'react';
+import { useEffect } from 'react';
 import { isRefElementVisible, scrollToBottom } from '../helpers';
 
 // uses deps to trigger useEffect hooks
-export function useScrollToBottom(
-  initialDeps: Array<unknown>,
-  deps: Array<unknown>
+export function useScrollToBottom<T = HTMLDivElement | null>(
+  ref: MutableRefObject<T>,
+  deps: unknown[]
 ) {
-  const bottomScrollRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    if (bottomScrollRef.current) {
-      scrollToBottom(bottomScrollRef);
+    if (
+      ref.current &&
+      isRefElementVisible(ref as MutableRefObject<HTMLDivElement | null>)
+    ) {
+      scrollToBottom(ref as MutableRefObject<HTMLDivElement | null>, true);
     }
-    // these deps work incorrect => requires to spread them
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [...initialDeps]);
-
-  useEffect(() => {
-    if (bottomScrollRef.current && isRefElementVisible(bottomScrollRef)) {
-      scrollToBottom(bottomScrollRef, true);
-    }
-  }, [deps]);
-
-  return bottomScrollRef;
+  }, [ref, deps]);
 }

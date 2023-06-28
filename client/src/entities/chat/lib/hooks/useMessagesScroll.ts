@@ -4,6 +4,7 @@ import {
   useAppDispatch,
   useAppSelector,
   useDebouncedCallback,
+  useInitialScrollToBottom,
   useIntersectionObserver,
   useScrollToBottom,
 } from '@shared/hooks';
@@ -24,7 +25,9 @@ export function useMessagesScroll(): UseMessagesScrollReturn {
     (state) => state.chat.isMessagesLoading
   );
 
-  const messagesRef = useScrollToBottom([currentChatId], [currentMessages]);
+  const messagesRef = useRef<HTMLDivElement | null>(null);
+  useInitialScrollToBottom(messagesRef, [currentChatId]);
+  useScrollToBottom(messagesRef, [currentMessages]);
 
   const topScrollRef = useRef<HTMLDivElement | null>(null);
   const topScrollEntry = useIntersectionObserver(topScrollRef, {});
