@@ -10,7 +10,11 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import type { Message } from '@shared/api/interfaces';
-import { useAppDispatch, useOnClickOutside } from '@shared/hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useOnClickOutside,
+} from '@shared/hooks';
 import styles from './MessageSelect.module.scss';
 import {
   deleteMessageThunk,
@@ -36,6 +40,9 @@ export const MessageSelect: FC<MessageSelectProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const selectRef = useRef<HTMLDivElement | null>(null);
+
+  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
+  const isOwn = currentMessage.userId === currentUserId;
 
   const handleSelectClickOutside = () => {
     if (!isMessageEditing) {
@@ -75,8 +82,10 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   useOnClickOutside(selectRef, handleSelectClickOutside);
 
   const isMessageEditable =
+    isOwn &&
     getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 6;
   const isMessageDeleting =
+    isOwn &&
     getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 12;
 
   if (isMessageEditing) {

@@ -11,6 +11,7 @@ export const fullChatStub = (): FullChat => ({
       userId: shortUserStub().id,
       createdAt: new Date('2022-01-01'),
       updatedAt: new Date('2022-01-01'),
+      replied: null,
     },
   ],
   messagesCount: 20,

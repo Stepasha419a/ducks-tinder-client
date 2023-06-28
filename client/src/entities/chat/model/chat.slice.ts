@@ -6,6 +6,7 @@ import {
   getChatsThunk,
   connectChatThunk,
   closeAllSocketsThunk,
+  sendMessageThunk,
 } from './chat.thunks';
 
 const initialState: ChatInitialState = {
@@ -101,6 +102,11 @@ const chatSlice = createSlice({
         state.maxMessagesCount = 0;
         state.currentChatId = '';
         state.repliedMessage = null;
+      })
+      .addCase(sendMessageThunk.fulfilled, (state) => {
+        if (state.repliedMessage) {
+          state.repliedMessage = null;
+        }
       });
   },
 });

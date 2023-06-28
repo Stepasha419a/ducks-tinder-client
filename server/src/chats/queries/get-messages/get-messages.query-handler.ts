@@ -3,6 +3,7 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetMessagesQuery } from './get-messages.query';
 import { Message } from 'chats/chats.interfaces';
 import { PrismaService } from 'prisma/prisma.service';
+import { ChatsSelector } from 'chats/chats.selector';
 
 @QueryHandler(GetMessagesQuery)
 export class GetMessagesQueryHandler
@@ -48,13 +49,7 @@ export class GetMessagesQueryHandler
       where: {
         chatId,
       },
-      select: {
-        id: true,
-        text: true,
-        userId: true,
-        createdAt: true,
-        updatedAt: true,
-      },
+      select: ChatsSelector.selectMessage(),
       orderBy: { createdAt: 'asc' },
       skip: skipMessages,
       take: takeMessages,

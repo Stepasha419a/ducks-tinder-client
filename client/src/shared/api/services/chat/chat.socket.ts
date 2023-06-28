@@ -5,7 +5,7 @@ interface ChatSocket {
   _socket: Socket | null;
   _sockets: Set<Socket>;
   connectChat: (chatId: string) => Socket;
-  sendMessage: (text: string) => void;
+  sendMessage: (text: string, repliedId: string | null) => void;
   getMessages: (haveCount: number) => void;
   deleteMessage: (messageId: string) => void;
   editMessage: (messageId: string, text: string) => void;
@@ -33,8 +33,8 @@ export const chatSocket: ChatSocket = {
     // TODO: fix this return by adding some idk, methods that require callbacks on every event
     return this._socket;
   },
-  sendMessage(text: string): void {
-    this._socket!.emit('send-message', text);
+  sendMessage(text: string, repliedId: string | null): void {
+    this._socket!.emit('send-message', { text, repliedId });
   },
   getMessages(haveCount: number): void {
     this._socket!.emit('get-messages', haveCount);

@@ -16,7 +16,11 @@ export class GetChatsQueryHandler implements IQueryHandler<GetChatsQuery> {
       where: { users: { some: { id: user.id } } },
       select: {
         id: true,
-        messages: ChatsSelector.selectShortMessages(),
+        messages: {
+          take: 1,
+          orderBy: { createdAt: 'desc' },
+          select: ChatsSelector.selectMessage(),
+        },
         users: {
           where: { id: { not: user.id } },
           select: UsersSelector.selectShortUser(),

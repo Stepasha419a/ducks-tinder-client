@@ -15,7 +15,7 @@ import {
 import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import { UseGuards } from '@nestjs/common';
 import { WsAccessTokenGuard, WsRefreshTokenGuard } from 'common/guards';
-import { EditMessageDto } from './dto';
+import { EditMessageDto, SendMessageDto } from './dto';
 
 @WebSocketGateway({
   namespace: '/chat/socket',
@@ -61,7 +61,7 @@ export class ChatsGateway {
   @SubscribeMessage('send-message')
   async sendMessage(
     @ConnectedSocket() client: UserSocket,
-    @MessageBody() text: string,
+    @MessageBody() dto: SendMessageDto,
   ) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
@@ -69,7 +69,7 @@ export class ChatsGateway {
     }
 
     const message = await this.commandBus.execute(
-      new SendMessageCommand(client.request.user, chatId, text),
+      new SendMessageCommand(client.request.user, chatId, dto),
     );
 
     this.wss.to(chatId).emit('send-message', message);

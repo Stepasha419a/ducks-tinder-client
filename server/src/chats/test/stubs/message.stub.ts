@@ -5,6 +5,7 @@ export const messageStub = (): Message => ({
   chatId: 'chat-id',
   userId: 'user-id',
   text: 'message-text',
+  repliedId: null,
   createdAt: new Date('2022-01-01'),
   updatedAt: new Date('2022-01-02'),
 });

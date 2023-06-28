@@ -50,7 +50,11 @@ describe('when get chats is called', () => {
         where: { users: { some: { id: requestUserStub().id } } },
         select: {
           id: true,
-          messages: ChatsSelector.selectShortMessages(),
+          messages: {
+            take: 1,
+            orderBy: { createdAt: 'desc' },
+            select: ChatsSelector.selectMessage(),
+          },
           users: {
             where: { id: { not: requestUserStub().id } },
             select: UsersSelector.selectShortUser(),

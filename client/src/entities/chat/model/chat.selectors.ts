@@ -10,8 +10,8 @@ export const selectUserChat = createSelector(
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
   ],
-  (_id, name, avatar, chats, currentChatId) => ({
-    currentChatUserObj: { _id, name, avatar },
+  (id, name, avatar, chats, currentChatId) => ({
+    currentChatUserObj: { id, name, avatar },
     messages: chats.find((chat) => chat.id === currentChatId)!.messages,
     currentChat: chats.find((chat) => chat.id === currentChatId),
   })

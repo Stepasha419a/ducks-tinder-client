@@ -28,7 +28,14 @@ export const MessageList: FC<MessagesProps> = ({
   return (
     <>
       {messages.map((message: MessageInterface) => {
-        const { name, isOwn, avatar, isSelectOpen } = getMessageProps(
+        const {
+          name,
+          isOwn,
+          avatar,
+          isSelectOpen,
+          repliedMessage,
+          repliedUsername,
+        } = getMessageProps(
           message,
           currentMessage,
           currentChat,
@@ -48,11 +55,12 @@ export const MessageList: FC<MessagesProps> = ({
               username={name}
               createdAt={message.createdAt}
               updatedAt={message.updatedAt}
+              repliedMessage={repliedMessage}
+              repliedUsername={repliedUsername}
             />
             <Message.Select
               isSelectOpen={isSelectOpen}
               handleSelectMessage={() => handleSelectMessage(message)}
-              isOwn={isOwn}
               select={select}
             />
           </Message>

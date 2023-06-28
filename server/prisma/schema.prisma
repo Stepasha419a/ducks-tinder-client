@@ -97,6 +97,10 @@ model Message {
   chat   Chat   @relation(fields: [chatId], references: [id])
   chatId String
 
+  replied   Message?  @relation(name: "MessageReply", fields: [repliedId], references: [id])
+  repliedId String?
+  repliedBy Message[] @relation(name: "MessageReply")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

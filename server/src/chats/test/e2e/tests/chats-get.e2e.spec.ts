@@ -62,7 +62,11 @@ describe('chats (GET)', () => {
         where: { id: chatId },
         select: {
           id: true,
-          messages: ChatsSelector.selectShortMessages(),
+          messages: {
+            take: 1,
+            orderBy: { createdAt: 'desc' },
+            select: ChatsSelector.selectMessage(),
+          },
           users: {
             where: { id: { not: currentUserId } },
             select: UsersSelector.selectShortUser(),

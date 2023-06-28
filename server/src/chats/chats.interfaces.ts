@@ -6,6 +6,11 @@ export interface Message {
   userId: string;
   createdAt: Date;
   updatedAt: Date;
+  replied: {
+    id: string;
+    text: string;
+    userId: string;
+  };
 }
 
 // has all messages

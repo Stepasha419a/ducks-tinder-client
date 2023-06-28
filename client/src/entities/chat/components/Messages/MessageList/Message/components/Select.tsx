@@ -4,28 +4,23 @@ import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import styles from '../Message.module.scss';
 
 interface SelectProps {
-  isOwn: boolean;
   isSelectOpen: boolean;
   select: ReactElement;
   handleSelectMessage: () => void;
 }
 
 export const Select: FC<SelectProps> = ({
-  isOwn,
   isSelectOpen,
   select,
   handleSelectMessage,
 }) => {
-  if (isOwn) {
-    return isSelectOpen ? (
-      select
-    ) : (
-      <FontAwesomeIcon
-        onClick={handleSelectMessage}
-        className={styles.dots}
-        icon={faEllipsis}
-      />
-    );
-  }
-  return <></>;
+  return isSelectOpen ? (
+    select
+  ) : (
+    <FontAwesomeIcon
+      onClick={handleSelectMessage}
+      className={styles.dots}
+      icon={faEllipsis}
+    />
+  );
 };

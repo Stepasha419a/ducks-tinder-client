@@ -5,7 +5,7 @@ import { scrollToBottom } from '../helpers';
 // uses deps to trigger useEffect hooks
 export function useInitialScrollToBottom<T = HTMLDivElement | null>(
   ref: MutableRefObject<T>,
-  initialDeps: Array<unknown>
+  initialDeps: unknown[]
 ) {
   useEffect(() => {
     if (ref.current) {

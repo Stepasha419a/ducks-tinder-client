@@ -1,7 +1,9 @@
+import { WsException } from '@nestjs/websockets';
 import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendMessageCommand } from './send-message.command';
-import { Message } from '@prisma/client';
+import { ChatsSelector } from 'chats/chats.selector';
+import { Message } from 'chats/chats.interfaces';
 
 @CommandHandler(SendMessageCommand)
 export class SendMessageCommandHandler
@@ -10,10 +12,20 @@ export class SendMessageCommandHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(command: SendMessageCommand): Promise<Message> {
-    const { user, chatId, text } = command;
+    const { user, chatId, dto } = command;
+
+    if (dto.repliedId) {
+      const replied = await this.prismaService.message.findUnique({
+        where: { id: dto.repliedId },
+      });
+      if (!replied) {
+        throw new WsException('Not Found');
+      }
+    }
 
     return this.prismaService.message.create({
-      data: { chatId, text, userId: user.id },
+      data: { chatId, userId: user.id, ...dto },
+      select: ChatsSelector.selectMessage(),
     });
   }
 }
