@@ -1,9 +1,6 @@
 import { useController, useForm } from 'react-hook-form';
 import type { SettingFieldValues } from '@entities/setting/model';
-import {
-  setIsUserInfoSetting,
-  submitSettingsThunk,
-} from '@entities/setting/model';
+import { nullInput, submitSettingsThunk } from '@entities/setting/model';
 import { useDefaultValues } from '@entities/setting/hooks';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 
@@ -25,7 +22,7 @@ export function useRadioForm() {
   } = useController({ name: 'input', control, rules: { required: true } });
 
   const cancelHandler = (): void => {
-    dispatch(setIsUserInfoSetting(false));
+    dispatch(nullInput());
   };
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {

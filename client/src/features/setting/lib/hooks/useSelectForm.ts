@@ -1,10 +1,7 @@
 import { useController, useForm } from 'react-hook-form';
 import { useDefaultValues } from '@entities/setting/hooks';
 import type { SettingFieldInterestsArray } from '@entities/setting/model';
-import {
-  submitSettingsThunk,
-  setIsUserInfoSetting,
-} from '@entities/setting/model';
+import { submitSettingsThunk, nullInput } from '@entities/setting/model';
 import type { Interest } from '@/shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
 
@@ -42,7 +39,7 @@ export function useSelectForm() {
   };
 
   const cancelHandler = (): void => {
-    dispatch(setIsUserInfoSetting(false));
+    dispatch(nullInput());
     reset();
   };
 

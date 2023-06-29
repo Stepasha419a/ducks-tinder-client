@@ -2,6 +2,7 @@ export {
   settingReducer,
   checkFields,
   setInput,
+  nullInput,
   setIsUserInfoSetting,
 } from './setting.slice';
 export { submitSettingsThunk } from './setting.thunks';

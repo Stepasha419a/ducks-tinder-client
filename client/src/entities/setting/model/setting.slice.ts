@@ -28,12 +28,7 @@ const settingSlice = createSlice({
     setInput: (
       state,
       {
-        payload: {
-          inputName,
-          innerObjectName,
-          formName,
-          validation,
-        },
+        payload: { inputName, innerObjectName, formName, validation },
       }: PayloadAction<SetInputPayload>
     ) => {
       state.formName = formName || inputName;
@@ -57,6 +52,14 @@ const settingSlice = createSlice({
           state.setting = null;
       }
     },
+    nullInput: (state) => {
+      state.formName = null;
+      state.innerObjectName = null;
+      state.settingInputName = null;
+      state.isUserInfoSetting = false;
+      state.setting = null;
+      state.validation = null;
+    },
     checkFields: (state, { payload }: PayloadAction<User>) => {
       state.errorFields = checkUserFields(payload);
     },
@@ -68,7 +71,7 @@ const settingSlice = createSlice({
   },
 });
 
-export const { setIsUserInfoSetting, setInput, checkFields } =
+export const { setIsUserInfoSetting, setInput, nullInput, checkFields } =
   settingSlice.actions;
 
 export const settingReducer = settingSlice.reducer;

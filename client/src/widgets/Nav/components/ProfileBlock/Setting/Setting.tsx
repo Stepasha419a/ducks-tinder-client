@@ -7,7 +7,7 @@ import {
   TextForm,
 } from '@features/setting';
 import { useAppDispatch, useAppSelector } from '@hooks';
-import { setIsUserInfoSetting } from '@entities/setting/model';
+import { nullInput } from '@entities/setting/model';
 
 export const Setting = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -16,7 +16,7 @@ export const Setting = (): ReactElement => {
 
   useEffect(() => {
     return () => {
-      dispatch(setIsUserInfoSetting(false));
+      dispatch(nullInput());
     };
   });
 
