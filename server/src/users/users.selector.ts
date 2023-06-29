@@ -1,5 +1,7 @@
+import { Prisma } from '@prisma/client';
+
 export class UsersSelector {
-  static selectUser() {
+  static selectUser(): Prisma.UserSelect {
     return {
       _count: { select: { pairFor: true } },
       interests: { select: { name: true } },
@@ -19,6 +21,9 @@ export class UsersSelector {
           },
         },
       },
+      place: {
+        select: { name: true, address: true },
+      },
     };
   }
 
@@ -29,9 +34,11 @@ export class UsersSelector {
       age: true,
       description: true,
       distance: true,
-      place: true,
       isActivated: true,
       interests: { select: { name: true } },
+      place: {
+        select: { name: true },
+      },
       pictures: {
         select: { name: true, order: true },
         orderBy: { order: 'asc' as 'asc' | 'desc' },

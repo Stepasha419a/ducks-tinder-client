@@ -1,4 +1,4 @@
-export class UpdateUserDto {
+export class PatchUserDto {
   email?: string;
   name?: string;
   description?: string;
@@ -6,7 +6,6 @@ export class UpdateUserDto {
   isActivated?: boolean;
   age?: number;
   sex?: string;
-  place?: string;
   distance?: number;
   usersOnlyInDistance?: boolean;
   preferSex?: 'male' | 'female' | '';

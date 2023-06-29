@@ -9,6 +9,10 @@ interface Interest {
   name: string;
 }
 
+interface Place {
+  name: string;
+}
+
 export interface FullUser extends User {
   pairsCount: number;
 }
@@ -19,9 +23,9 @@ export interface ShortUser {
   age: number;
   description: string;
   distance: number;
-  place: string;
   isActivated: boolean;
   interests: Interest[];
+  place: Place;
   pictures: PictureInterface[];
 }
 

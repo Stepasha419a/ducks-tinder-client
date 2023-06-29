@@ -17,9 +17,10 @@ import { ShortUser } from './users.interface';
 import { UserRequest } from 'common/types';
 import {
   DeletePictureDto,
-  UpdateUserDto,
+  PatchUserDto,
   UserDto,
   MixPicturesDto,
+  PatchUserPlaceDto,
 } from './dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
@@ -31,6 +32,7 @@ import {
   LikeUserCommand,
   MixPicturesCommand,
   PatchUserCommand,
+  PatchUserPlaceCommand,
   RemoveAllPairsCommand,
   ReturnUserCommand,
   SavePictureCommand,
@@ -46,8 +48,17 @@ export class UsersController {
 
   @Patch()
   @HttpCode(HttpStatus.OK)
-  patch(@Req() req: UserRequest, @Body() dto: UpdateUserDto): Promise<UserDto> {
+  patch(@Req() req: UserRequest, @Body() dto: PatchUserDto): Promise<UserDto> {
     return this.commandBus.execute(new PatchUserCommand(req.user, dto));
+  }
+
+  @Patch('place')
+  @HttpCode(HttpStatus.OK)
+  patchPlace(
+    @Req() req: UserRequest,
+    @Body() dto: PatchUserPlaceDto,
+  ): Promise<UserDto> {
+    return this.commandBus.execute(new PatchUserPlaceCommand(req.user, dto));
   }
 
   @Get('sorted')

@@ -11,6 +11,7 @@ import { ChatsModule } from 'chats/chats.module';
 import { PrismaModule } from 'prisma/prisma.module';
 import * as path from 'path';
 import { AccessTokenGuard } from 'common/guards';
+import { MapsModule } from './maps/maps.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AccessTokenGuard } from 'common/guards';
     TokensModule,
     MailModule,
     ChatsModule,
+    MapsModule,
   ],
   providers: [
     { provide: APP_GUARD, useExisting: AccessTokenGuard },

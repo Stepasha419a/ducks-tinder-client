@@ -7,6 +7,7 @@ import { PrismaModule } from '../prisma/prisma.module';
 import { UserCommandHandlers } from './commands';
 import { UserQueryHandlers } from './queries';
 import { ChatsModule } from 'chats/chats.module';
+import { MapsModule } from 'maps/maps.module';
 
 @Module({
   providers: [UsersService, ...UserCommandHandlers, ...UserQueryHandlers],
@@ -16,6 +17,7 @@ import { ChatsModule } from 'chats/chats.module';
     CqrsModule,
     FilesModule,
     forwardRef(() => ChatsModule),
+    MapsModule,
   ],
   exports: [UsersService],
 })

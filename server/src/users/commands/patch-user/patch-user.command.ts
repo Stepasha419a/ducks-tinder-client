@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
-import { UpdateUserDto } from 'users/dto';
+import { PatchUserDto } from 'users/dto';
 
 export class PatchUserCommand {
-  constructor(public readonly user: User, public readonly dto: UpdateUserDto) {}
+  constructor(public readonly user: User, public readonly dto: PatchUserDto) {}
 }

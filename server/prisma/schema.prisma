@@ -21,7 +21,6 @@ model User {
   activationLink      String   @default(uuid())
   age                 Int?
   sex                 String?
-  place               String?
   distance            Int?
   usersOnlyInDistance Boolean  @default(false)
   preferSex           String?
@@ -40,6 +39,8 @@ model User {
   pairFor User[] @relation(name: "Pairs")
   pairs   User[] @relation(name: "Pairs")
 
+  place Place?
+
   checked    CheckedUsers[] @relation(name: "Checked")
   wasChecked CheckedUsers[] @relation(name: "WasChecked")
 
@@ -57,6 +58,20 @@ model CheckedUsers {
 
   @@id([checkedId, wasCheckedId])
   @@map("checked-users")
+}
+
+model Place {
+  user      User   @relation(fields: [id], references: [id])
+  id        String @id
+  latitude  Float
+  longitude Float
+  name      String
+  address   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("places")
 }
 
 model Token {

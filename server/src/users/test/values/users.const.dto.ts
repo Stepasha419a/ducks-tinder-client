@@ -2,7 +2,7 @@ import {
   CreateUserDto,
   DeletePictureDto,
   MixPicturesDto,
-  UpdateUserDto,
+  PatchUserDto,
 } from 'users/dto';
 import { userDtoStub } from '../stubs';
 
@@ -28,7 +28,7 @@ export const CREATE_USER_DTO: CreateUserDto = {
   name: userDtoStub().name,
 };
 
-export const UPDATE_USER_DTO: UpdateUserDto = {
+export const UPDATE_USER_DTO: PatchUserDto = {
   name: 'William',
   email: 'email123123@gmail.com',
   interests: ['traveling', 'ski'],

@@ -16,7 +16,6 @@ export const requestUserStub = (): User => {
     name: userStubObj.name,
     nickname: userStubObj.nickname,
     sex: userStubObj.sex,
-    place: userStubObj.place,
     preferAgeFrom: userStubObj.preferAgeFrom,
     preferAgeTo: userStubObj.preferAgeTo,
     usersOnlyInDistance: userStubObj.usersOnlyInDistance,
