@@ -4,3 +4,5 @@ export { InterestsSettingPopup } from './InterestsSettingsPopup/InterestsSetting
 export { InterestsListPopup } from './InterestsListPopup/InterestsListPopup';
 export { Preview } from './Preview/Preview';
 export { LikesCount } from './LikesCount/LikesCount';
+export { Places } from './Places/Places';
+export { Map } from './Map/Map';

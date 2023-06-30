@@ -5,9 +5,7 @@ import { useAppDispatch, useAppSelector } from '@hooks';
 export const PlaceSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
-  const place = useAppSelector(
-    (state) => state.user.currentUser.place
-  );
+  const place = useAppSelector((state) => state.user.currentUser.place);
   const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const setInputHandler = (): void => {
@@ -24,9 +22,10 @@ export const PlaceSettingThumbnail = () => {
     <SettingThumbnail
       clickHandler={setInputHandler}
       title="Place"
-      value={place || 'Empty place'}
+      value={place?.name || 'Empty place'}
       isPointer
       isError={errorFields.includes('place')}
+      isOverflow
     />
   );
 };

@@ -18,10 +18,10 @@ const ProfilePage: FC = (): ReactElement => {
       <div className={styles.content}>
         <div className={styles.wrapper}>
           <div className={styles.user}>
-            {isImageSetting ? (
-              <ImageSetting setIsImageSetting={setIsImageSetting} />
-            ) : isPlaceSetting ? (
+            {isPlaceSetting ? (
               <PlaceSetting />
+            ) : isImageSetting ? (
+              <ImageSetting setIsImageSetting={setIsImageSetting} />
             ) : (
               <UserImage setIsImageSetting={setIsImageSetting} />
             )}

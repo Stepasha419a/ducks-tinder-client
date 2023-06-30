@@ -70,7 +70,10 @@ export const Preview: FC<PreviewPropsInterface> = ({
         </div>
         <div className={styles.place}>
           <FontAwesomeIcon icon={faHouse} className={styles.icon} />
-          <div>Lives in {user.place || 'unknown place'}</div>
+          <span className={styles.name}>
+            Lives in&nbsp;
+            {user.place?.name || 'unknown place'}
+          </span>
         </div>
         <div className={styles.distance}>
           <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />

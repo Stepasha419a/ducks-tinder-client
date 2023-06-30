@@ -9,6 +9,7 @@ import {
   mixUserImages,
   saveUserImageThunk,
   updateUserThunk,
+  updateUserPlaceThunk,
 } from './user.thunks';
 import type { PairSorts, UserInitialState } from './user.interfaces';
 import { INITIAL_SORTS } from './user.constants';
@@ -69,6 +70,9 @@ const userSlice = createSlice({
         state.currentPair = null;
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
+        state.currentUser = payload;
+      })
+      .addCase(updateUserPlaceThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       })
       .addCase(saveUserImageThunk.fulfilled, (state, { payload }) => {

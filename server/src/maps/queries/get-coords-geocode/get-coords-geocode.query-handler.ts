@@ -25,7 +25,7 @@ export class GetCoordsGeocodeQueryHandler
             'GEOCODE_API_URL',
           )}?apikey=${this.configService.get<string>(
             'GEOCODE_API_KEY',
-          )}&geocode=${latitude},${longitude}&results=1&format=json`,
+          )}&geocode=${latitude},${longitude}&results=1&format=json&lang=en_US`,
         )
         .pipe(map((res) => res.data)),
     );

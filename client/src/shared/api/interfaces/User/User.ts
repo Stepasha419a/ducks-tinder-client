@@ -9,6 +9,17 @@ export interface Interest {
   name: string;
 }
 
+interface Place {
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+}
+
+interface ShortPlace {
+  name: string;
+}
+
 export interface User {
   id: string;
   email: string;
@@ -19,7 +30,7 @@ export interface User {
   sex: 'male' | 'female' | null;
   isActivated: boolean;
   interests: Interest[];
-  place: string | null;
+  place: Place | null;
   distance: number | null;
   usersOnlyInDistance: boolean;
   preferSex: 'male' | 'female' | null;
@@ -36,7 +47,7 @@ export interface ShortUser {
   age: number;
   description: string;
   distance: number;
-  place: string;
+  place: ShortPlace | null;
   isActivated: boolean;
   interests: Interest[];
   pictures: Picture[];
@@ -51,7 +62,6 @@ export interface PartialUser {
   sex?: 'male' | 'female';
   isActivated?: boolean;
   interests?: string[];
-  place?: string;
   distance?: number;
   usersOnlyInDistance?: boolean;
   preferSex?: 'male' | 'female';

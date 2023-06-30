@@ -10,6 +10,10 @@ export const userService = {
     return instance.patch<User>('users', data);
   },
 
+  async updateUserPlace(latitude: number, longitude: number) {
+    return instance.patch<User>('users/place', { latitude, longitude });
+  },
+
   async savePicture(picture: Blob) {
     return instance.post<User>(
       'users/picture',

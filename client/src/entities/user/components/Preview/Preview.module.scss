@@ -83,6 +83,14 @@
       align-items: baseline;
       font-size: 16px;
 
+      .name {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 244px;
+      }
+
       .icon {
         font-size: 14px;
         margin-right: 5px;
@@ -173,6 +181,13 @@
       .place {
         font-size: 18px;
         margin-bottom: 6px;
+
+        .name {
+          overflow: visible;
+          white-space: normal;
+          text-overflow: unset;
+          max-width: none;
+        }
       }
 
       .distance {

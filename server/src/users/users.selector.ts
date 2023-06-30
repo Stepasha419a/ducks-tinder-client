@@ -22,7 +22,7 @@ export class UsersSelector {
         },
       },
       place: {
-        select: { name: true, address: true },
+        select: { name: true, address: true, latitude: true, longitude: true },
       },
     };
   }

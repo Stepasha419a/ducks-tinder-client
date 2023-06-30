@@ -48,6 +48,9 @@ const settingSlice = createSlice({
         case 'preferSex':
           state.setting = 'radio';
           break;
+        case 'place':
+          state.setting = 'hidden';
+          break;
         default:
           state.setting = null;
       }

@@ -15,6 +15,7 @@ export {
   refusePairThunk,
   acceptPairThunk,
   getUserPairsThunk,
+  updateUserPlaceThunk,
 } from './user.thunks';
 export { selectCropImage, selectImagesDND } from './user.selectors';
 export type { PairSorts, PairSortsKey } from './user.interfaces';

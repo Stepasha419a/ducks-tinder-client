@@ -32,6 +32,28 @@ export const updateUserThunk = createAsyncThunk(
   }
 );
 
+export const updateUserPlaceThunk = createAsyncThunk(
+  'users/updateUserPlace',
+  async (
+    args: {
+      latitude: number;
+      longitude: number;
+    },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await userService.updateUserPlace(
+        args.latitude,
+        args.longitude
+      );
+
+      return response.data;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
   async (_, { rejectWithValue }) => {

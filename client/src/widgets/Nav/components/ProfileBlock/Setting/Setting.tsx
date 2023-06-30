@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import { useEffect } from 'react';
 import {
+  HiddenForm,
   InterestsForm,
   RadioForm,
   TextareaForm,
@@ -13,10 +14,14 @@ export const Setting = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const setting = useAppSelector((state) => state.setting.setting);
+  const currentSetting = useAppSelector((state) => state.setting.setting);
 
   useEffect(() => {
     return () => {
-      dispatch(nullInput());
+      // not to close custom forms (uses main window for settings instead of nav)
+      if (currentSetting !== 'hidden') {
+        dispatch(nullInput());
+      }
     };
   });
 
@@ -28,6 +33,9 @@ export const Setting = (): ReactElement => {
   }
   if (setting === 'radio') {
     return <RadioForm />;
+  }
+  if (setting === 'hidden') {
+    return <HiddenForm />;
   }
 
   return <TextForm />;

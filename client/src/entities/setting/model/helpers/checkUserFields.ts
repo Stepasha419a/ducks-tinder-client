@@ -26,7 +26,7 @@ function checkField(user: User, field: ErrorField): ErrorField | boolean {
       }
       return false;
     case 'place':
-      if (user.place === '') {
+      if (!user.place) {
         return 'place';
       }
       return false;

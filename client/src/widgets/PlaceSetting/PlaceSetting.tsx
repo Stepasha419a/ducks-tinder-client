@@ -1,12 +1,8 @@
-import { Map } from '@/entities/map/components';
 import styles from './PlaceSetting.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSquareCheck,
-  faLocationDot,
-} from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '@/shared/hooks';
 import { nullInput } from '@/entities/setting/model';
+import { Map } from '@entities/user/components';
+import { PlacesGeolocation } from '@/features/user/PlacesGeolocation/PlacesGeolocation';
 
 export const PlaceSetting = () => {
   const dispatch = useAppDispatch();
@@ -24,17 +20,7 @@ export const PlaceSetting = () => {
         </div>
       </div>
       <Map />
-      <div className={styles.positions}>
-        <div className={styles.subtitle}>Current position</div>
-        <div className={styles.item}>
-          <FontAwesomeIcon className={styles.icon} icon={faLocationDot} />
-          <div className={styles.position}>
-            <div className={styles.current}>My current position</div>
-            <div className={styles.name}>Moscow, Russia</div>
-          </div>
-          <FontAwesomeIcon className={styles.mark} icon={faSquareCheck} />
-        </div>
-      </div>
+      <PlacesGeolocation />
     </div>
   );
 };

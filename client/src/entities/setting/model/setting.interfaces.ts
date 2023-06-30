@@ -8,7 +8,7 @@ export interface Validation {
 
 export type SettingInputName = keyof User | null;
 
-type Setting = 'textarea' | 'select' | 'radio' | null;
+type Setting = 'textarea' | 'select' | 'radio' | 'hidden' | null;
 
 export type ErrorField =
   | 'description'
