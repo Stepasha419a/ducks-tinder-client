@@ -110,6 +110,7 @@ describe('when send message is called', () => {
     });
 
     let message: Message;
+    let error;
     const sendMessageDto: SendMessageDto = {
       text: 'message-text',
       repliedId: 'replied-message-id',
@@ -125,7 +126,9 @@ describe('when send message is called', () => {
             sendMessageDto,
           ),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
     it('should call message find unique', () => {
@@ -141,6 +144,10 @@ describe('when send message is called', () => {
 
     it('should return undefined', () => {
       expect(message).toStrictEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual('Not Found');
     });
   });
 });

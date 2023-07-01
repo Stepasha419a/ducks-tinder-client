@@ -12,3 +12,8 @@ export interface ChatInitialState {
   currentChatId: string;
   repliedMessage: Message | null;
 }
+
+export interface GetMessagesResponse {
+  chatId: string;
+  messages: Message[];
+}

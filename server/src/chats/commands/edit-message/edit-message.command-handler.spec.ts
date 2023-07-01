@@ -74,6 +74,7 @@ describe('when send message is called', () => {
     });
 
     let message: Message;
+    let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
@@ -81,7 +82,9 @@ describe('when send message is called', () => {
         message = await editMessageCommandHandler.execute(
           new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
     it('should call message find first', () => {
@@ -97,6 +100,10 @@ describe('when send message is called', () => {
 
     it('should return undefined', () => {
       expect(message).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual('Not found');
     });
   });
 
@@ -110,6 +117,7 @@ describe('when send message is called', () => {
     });
 
     let message: Message;
+    let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
@@ -117,7 +125,9 @@ describe('when send message is called', () => {
         message = await editMessageCommandHandler.execute(
           new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
     it('should call message find first', () => {
@@ -133,6 +143,10 @@ describe('when send message is called', () => {
 
     it('should return undefined', () => {
       expect(message).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual('Forbidden to edit');
     });
   });
 });

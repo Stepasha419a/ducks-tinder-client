@@ -74,6 +74,7 @@ describe('when create chat is called', () => {
     });
 
     let response;
+    let error;
     const userPairId = '34545656';
     const memberIds = [userDtoStub().id, userPairId];
 
@@ -83,7 +84,9 @@ describe('when create chat is called', () => {
         response = await createChatCommandHandler.execute(
           new CreateChatCommand(memberIds),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
     it('should call chat find first', async () => {
@@ -101,6 +104,11 @@ describe('when create chat is called', () => {
 
     it('should return undefined', async () => {
       expect(response).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.status).toEqual(400);
+      expect(error?.message).toEqual('Chat already exists');
     });
   });
 });

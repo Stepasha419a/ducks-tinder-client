@@ -3,10 +3,9 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
-import { Message } from 'chats/chats.interfaces';
 import { fullChatStub, messageStub, shortChatStub } from 'chats/test/stubs';
 import { GetMessagesQueryHandler } from './get-messages.query-handler';
-import { GetMessagesQuery } from './get-messages.query';
+import { GetMessagesQuery, GetMessagesQueryReturn } from './get-messages.query';
 import { requestUserStub } from 'users/test/stubs';
 
 describe('when get messages is called', () => {
@@ -39,11 +38,11 @@ describe('when get messages is called', () => {
         .mockResolvedValue([messageStub()]);
     });
 
-    let messages: Message[];
+    let response: GetMessagesQueryReturn;
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      messages = await getMessagesQueryHandler.execute(
+      response = await getMessagesQueryHandler.execute(
         new GetMessagesQuery(requestUserStub(), shortChatStub().id, 0),
       );
     });
@@ -79,8 +78,114 @@ describe('when get messages is called', () => {
       });
     });
 
-    it('should return an array of messages', () => {
-      expect(messages).toEqual([messageStub()]);
+    it('should return an array of messages with chat id', () => {
+      expect(response).toEqual({
+        chatId: shortChatStub().id,
+        messages: [messageStub()],
+      });
+    });
+  });
+
+  describe('when there is no such chat', () => {
+    beforeAll(() => {
+      prismaService.chat.findFirst = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.count = jest.fn();
+      prismaService.message.findMany = jest.fn();
+    });
+
+    let response: GetMessagesQueryReturn;
+    let error;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        response = await getMessagesQueryHandler.execute(
+          new GetMessagesQuery(requestUserStub(), shortChatStub().id, 0),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call chat find first', () => {
+      expect(prismaService.chat.findFirst).toBeCalledTimes(1);
+      expect(prismaService.chat.findFirst).toBeCalledWith({
+        where: {
+          id: shortChatStub().id,
+          users: { some: { id: requestUserStub().id } },
+        },
+        select: { id: true },
+      });
+    });
+
+    it('should not call message count', () => {
+      expect(prismaService.message.count).not.toBeCalled();
+    });
+
+    it('should not call message find many', () => {
+      expect(prismaService.message.findMany).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual('Not found');
+    });
+  });
+
+  describe('when there are no such messages (< than have count)', () => {
+    beforeAll(() => {
+      prismaService.chat.findFirst = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
+      prismaService.message.count = jest.fn().mockResolvedValue(40);
+      prismaService.message.findMany = jest.fn();
+    });
+
+    let response: GetMessagesQueryReturn;
+    let error;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        response = await getMessagesQueryHandler.execute(
+          new GetMessagesQuery(requestUserStub(), shortChatStub().id, 60),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call chat find first', () => {
+      expect(prismaService.chat.findFirst).toBeCalledTimes(1);
+      expect(prismaService.chat.findFirst).toBeCalledWith({
+        where: {
+          id: shortChatStub().id,
+          users: { some: { id: requestUserStub().id } },
+        },
+        select: { id: true },
+      });
+    });
+
+    it('should call message count', () => {
+      expect(prismaService.message.count).toBeCalledTimes(1);
+      expect(prismaService.message.count).toBeCalledWith({
+        where: { chatId: shortChatStub().id },
+      });
+    });
+
+    it('should not call message find many', () => {
+      expect(prismaService.message.findMany).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual('Not found');
     });
   });
 });

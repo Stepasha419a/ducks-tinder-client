@@ -4,6 +4,7 @@ import type { Message } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
+import type { GetMessagesResponse } from './chat.interfaces';
 import {
   deleteMessage,
   editMessage,
@@ -63,8 +64,8 @@ export const connectChatThunk = createAsyncThunk(
         dispatch(pushNewMessage(message));
       });
 
-      socket.on('get-messages', (messages: Message[]) => {
-        dispatch(getMessages(messages));
+      socket.on('get-messages', (response: GetMessagesResponse) => {
+        dispatch(getMessages(response));
       });
 
       socket.on('delete-message', (message: Message) => {

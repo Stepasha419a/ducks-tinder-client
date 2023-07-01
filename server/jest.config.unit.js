@@ -1,7 +1,8 @@
 module.exports = {
   roots: ['<rootDir>'],
   moduleFileExtensions: ['js', 'json', 'ts'],
-  testRegex: '(command-handler|query-handler|controller|service).spec.ts$',
+  testRegex:
+    '(command-handler|query-handler|controller|service|gateway).spec.ts$',
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest',
   },

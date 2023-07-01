@@ -1,7 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Chat, Message, ShortChat } from '@shared/api/interfaces';
-import type { ChatInitialState } from './chat.interfaces';
+import type { ChatInitialState, GetMessagesResponse } from './chat.interfaces';
 import {
   getChatsThunk,
   connectChatThunk,
@@ -46,15 +46,13 @@ const chatSlice = createSlice({
       state.repliedMessage = null;
       state.isNotFound = false;
     },
-    getMessages: (state, { payload }: PayloadAction<Message[]>) => {
-      if (payload.length === 0) {
+    getMessages: (state, { payload }: PayloadAction<GetMessagesResponse>) => {
+      if (payload.messages.length === 0) {
         state.isMessagesEnded = true;
       }
-      const index = state.chats.findIndex(
-        (chat) => chat.id === state.currentChatId
-      );
+      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
       state.chats[index].messages = [
-        ...payload,
+        ...payload.messages,
         ...state.chats[index].messages,
       ];
       state.isMessagesLoading = false;

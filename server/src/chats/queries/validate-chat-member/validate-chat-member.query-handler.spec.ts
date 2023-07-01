@@ -67,6 +67,7 @@ describe('when get messages is called', () => {
     });
 
     let response;
+    let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
@@ -74,7 +75,9 @@ describe('when get messages is called', () => {
         response = await validateChatMemberQueryHandler.execute(
           new ValidateChatMemberQuery(requestUserStub(), shortChatStub().id),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
     it('should call chat find first', () => {
@@ -92,6 +95,10 @@ describe('when get messages is called', () => {
 
     it('should return undefined', () => {
       expect(response).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual('Such chat was not found');
     });
   });
 });

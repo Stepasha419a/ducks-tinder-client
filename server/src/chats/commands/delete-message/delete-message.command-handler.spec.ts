@@ -77,6 +77,7 @@ describe('when send message is called', () => {
     });
 
     let message: Message;
+    let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
@@ -84,7 +85,9 @@ describe('when send message is called', () => {
         message = await deleteMessageCommandHandler.execute(
           new DeleteMessageCommand(requestUserStub(), messageStub().id),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
     it('should call message find first', () => {
@@ -102,6 +105,10 @@ describe('when send message is called', () => {
     it('should return undefined', () => {
       expect(message).toEqual(undefined);
     });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual('Not found');
+    });
   });
 
   describe('when there is too late to delete (> 12 hours lasted)', () => {
@@ -114,6 +121,7 @@ describe('when send message is called', () => {
     });
 
     let message: Message;
+    let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
@@ -121,7 +129,9 @@ describe('when send message is called', () => {
         message = await deleteMessageCommandHandler.execute(
           new DeleteMessageCommand(requestUserStub(), messageStub().id),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
     it('should call message find first', () => {
@@ -138,6 +148,10 @@ describe('when send message is called', () => {
 
     it('should return undefined', () => {
       expect(message).toStrictEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual('Forbidden to delete');
     });
   });
 });

@@ -99,6 +99,7 @@ describe('when get chats is called', () => {
     });
 
     let chat: FullChat;
+    let error;
     const chatId = fullChatStub().id;
 
     beforeEach(async () => {
@@ -107,7 +108,9 @@ describe('when get chats is called', () => {
         chat = await getChatQueryHandler.execute(
           new GetChatQuery(requestUserStub(), chatId),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
     it('should call chat find first', () => {
@@ -131,6 +134,11 @@ describe('when get chats is called', () => {
 
     it('should return undefined', () => {
       expect(chat).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.status).toEqual(404);
+      expect(error?.message).toEqual('Not Found');
     });
   });
 });

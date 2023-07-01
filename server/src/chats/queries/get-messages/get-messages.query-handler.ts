@@ -1,7 +1,6 @@
 import { WsException } from '@nestjs/websockets';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetMessagesQuery } from './get-messages.query';
-import { Message } from 'chats/chats.interfaces';
+import { GetMessagesQuery, GetMessagesQueryReturn } from './get-messages.query';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
 
@@ -11,7 +10,7 @@ export class GetMessagesQueryHandler
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(query: GetMessagesQuery): Promise<Message[]> {
+  async execute(query: GetMessagesQuery): Promise<GetMessagesQueryReturn> {
     const { user, chatId, haveCount } = query;
 
     const candidate = await this.prismaService.chat.findFirst({
@@ -45,7 +44,7 @@ export class GetMessagesQueryHandler
 
     // return the most young messages, skipping
     // already available and taking most available until 20
-    return this.prismaService.message.findMany({
+    const messages = await this.prismaService.message.findMany({
       where: {
         chatId,
       },
@@ -54,5 +53,10 @@ export class GetMessagesQueryHandler
       skip: skipMessages,
       take: takeMessages,
     });
+
+    return {
+      chatId,
+      messages,
+    };
   }
 }
