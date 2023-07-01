@@ -9,6 +9,7 @@ import {
   editMessage,
   getMessages,
   setIsMessagesLoading,
+  setIsNotFound,
 } from './chat.slice';
 import { checkAuthThunk } from '@/entities/auth/model';
 
@@ -36,10 +37,19 @@ export const connectChatThunk = createAsyncThunk(
       socket.onAny((event: string, ...errors: unknown[]) => {
         if (
           event === 'exception' &&
-          (errors as AxiosError[])[0]?.message === 'Unauthorized' &&
-          (errors as AxiosError[])[0]?.status === 'error'
+          (errors as AxiosError[])[0]?.status === 'error' &&
+          (errors as AxiosError[])[0]?.message
         ) {
-          dispatch(checkAuthThunk());
+          switch ((errors as AxiosError[])[0].message) {
+            case 'Unauthorized':
+              dispatch(checkAuthThunk());
+              break;
+            case 'Such chat was not found':
+              dispatch(setIsNotFound(true));
+              break;
+            default:
+              break;
+          }
         }
       });
 

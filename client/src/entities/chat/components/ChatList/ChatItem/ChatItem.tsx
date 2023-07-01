@@ -3,19 +3,19 @@ import classNames from 'classnames';
 import type { ShortChat, ShortUser } from '@shared/api/interfaces';
 import type { FC } from 'react';
 import styles from './ChatItem.module.scss';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@/shared/constants';
 
 interface ChatInterface {
   chat: ShortChat;
   chatCompanion: ShortUser | undefined;
   isActive: boolean;
-  connect: (chatId: string) => void;
 }
 
 export const ChatItem: FC<ChatInterface> = ({
   chat,
   chatCompanion,
   isActive,
-  connect,
 }) => {
   if (!chatCompanion) {
     return null;
@@ -23,14 +23,14 @@ export const ChatItem: FC<ChatInterface> = ({
 
   const isCompanion =
     chat.messages[chat.messages.length - 1]?.userId === chatCompanion.id;
-
   const username = isCompanion ? `${chatCompanion.name}: ` : 'you: ';
-
   const messageName = chat.messages.length ? username : 'send first message';
 
+  const chatLink = `${ROUTES.chat}/${chat.id}`;
+
   return (
-    <div
-      onClick={() => connect(chat.id)}
+    <Link
+      to={chatLink}
       className={classNames(styles.item, isActive && styles.active)}
     >
       <Avatar
@@ -45,6 +45,6 @@ export const ChatItem: FC<ChatInterface> = ({
           {chat.messages[chat.messages.length - 1]?.text}
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

@@ -14,16 +14,12 @@ export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
 
   return (
     <div className={styles.titles}>
-      <Link onClick={() => setIsPairsOpened(true)} className={cnPairs} to="/">
+      <Link to="/" onClick={() => setIsPairsOpened(true)} className={cnPairs}>
         Pairs
       </Link>
-      <Link
-        onClick={() => setIsPairsOpened(false)}
-        className={cnMessages}
-        to="/chat"
-      >
+      <div onClick={() => setIsPairsOpened(false)} className={cnMessages}>
         Messages
-      </Link>
+      </div>
     </div>
   );
 };

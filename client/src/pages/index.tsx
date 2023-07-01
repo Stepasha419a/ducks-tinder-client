@@ -8,6 +8,7 @@ import ProfilePage from '@pages/Profile';
 import ChatPage from '@pages/Chat';
 import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
+import { Chat } from '@/widgets';
 
 const Routing = (): ReactElement => {
   return (
@@ -17,7 +18,9 @@ const Routing = (): ReactElement => {
 
       <Route index element={<TinderPage />} />
       <Route path={ROUTES.profile} element={<ProfilePage />} />
-      <Route path={ROUTES.chat} element={<ChatPage />} />
+      <Route path={ROUTES.chat} element={<ChatPage />}>
+        <Route path={`${ROUTES.chat}/:chatId`} element={<Chat />} />
+      </Route>
       <Route path={ROUTES.pairs} element={<PairsPage />} />
       <Route path={ROUTES.policy} element={<PolicyPage />} />
       <Route path={ROUTES.notFound} element={<div>404 NOT FOUND</div>} />

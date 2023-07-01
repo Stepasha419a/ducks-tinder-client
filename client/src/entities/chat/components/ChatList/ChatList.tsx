@@ -8,11 +8,7 @@ import { ChatItem } from './ChatItem/ChatItem';
 import styles from './ChatList.module.scss';
 import { ChatListLazy } from './ChatList.lazy';
 
-interface ChatListProps {
-  connect(chatId: string): void;
-}
-
-export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
+export const ChatList: FC = (): ReactElement => {
   const dispatch = useAppDispatch();
 
   const currentUserId = useAppSelector((state) => state.user.currentUser.id);
@@ -45,7 +41,6 @@ export const ChatList: FC<ChatListProps> = ({ connect }): ReactElement => {
             chat={chat}
             chatCompanion={chatCompanion}
             isActive={isActive}
-            connect={connect}
           />
         );
       })}

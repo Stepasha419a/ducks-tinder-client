@@ -13,6 +13,7 @@ const initialState: ChatInitialState = {
   chats: [],
   isConnected: false,
   isLoading: true,
+  isNotFound: false,
   isMessagesInitialLoading: true,
   isMessagesLoading: false,
   maxMessagesCount: 0,
@@ -43,6 +44,7 @@ const chatSlice = createSlice({
       state.isMessagesLoading = false;
       state.isMessagesEnded = false;
       state.repliedMessage = null;
+      state.isNotFound = false;
     },
     getMessages: (state, { payload }: PayloadAction<Message[]>) => {
       if (payload.length === 0) {
@@ -80,6 +82,9 @@ const chatSlice = createSlice({
     },
     setRepliedMessage: (state, { payload }: PayloadAction<Message | null>) => {
       state.repliedMessage = payload;
+    },
+    setIsNotFound: (state, { payload }: PayloadAction<boolean>) => {
+      state.isNotFound = payload;
     },
   },
   extraReducers: (builder) => {
@@ -119,6 +124,7 @@ export const {
   setIsMessagesLoading,
   editMessage,
   setRepliedMessage,
+  setIsNotFound,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;
