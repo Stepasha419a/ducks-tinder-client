@@ -17,6 +17,7 @@ module.exports = {
     chunkFilename: 'js/[name].chunk.js',
     path: path.resolve(__dirname, '..', 'dist'),
     assetModuleFilename: 'media/[name].[hash][ext]',
+    publicPath: '/',
     clean: true,
   },
   cache: {

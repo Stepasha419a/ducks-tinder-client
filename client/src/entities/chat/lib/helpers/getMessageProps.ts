@@ -23,7 +23,7 @@ export function getMessageProps(
   const getAvatarProps = () => ({
     avatar: isOwn
       ? currentChatUserObj.avatar?.name
-      : chatMember!.pictures[0]?.name,
+      : chatMember?.pictures[0]?.name,
     userId: message.userId,
   });
 
@@ -32,7 +32,7 @@ export function getMessageProps(
   });
 
   const getContentProps = () => {
-    const username = isOwn ? currentChatUserObj.name : chatMember!.name;
+    const username = isOwn ? currentChatUserObj.name : chatMember?.name;
 
     const repliedMessage = message.replied;
     const repliedMessageText = repliedMessage?.text;

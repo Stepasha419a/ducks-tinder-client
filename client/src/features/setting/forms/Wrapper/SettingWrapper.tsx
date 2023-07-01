@@ -9,7 +9,7 @@ import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {
   formName: string | null;
-  isValid: boolean;
+  isValid?: boolean;
   errors: FieldErrors<SettingFieldValues | SettingFieldInterestsArray>;
   submitHandler: () => void;
   cancelHandler: () => void;
@@ -18,7 +18,7 @@ interface SettingWrapperProps {
 const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   formName,
   children,
-  isValid,
+  isValid = true,
   errors,
   submitHandler,
   cancelHandler,

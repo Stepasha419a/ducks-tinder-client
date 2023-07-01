@@ -8,7 +8,7 @@ interface MessageContentProps {
   isOwn: boolean;
   isSelectOpen: boolean;
   isMessageEditing: boolean;
-  username: string;
+  username: string | undefined;
   editingValue: string;
   setEditingValue: Dispatch<SetStateAction<string>>;
   text: string;
