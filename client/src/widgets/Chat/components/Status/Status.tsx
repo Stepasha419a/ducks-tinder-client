@@ -1,13 +1,11 @@
-import type { ReactElement } from 'react';
 import { useAppSelector } from '@hooks';
-import Choose from './Choose/Choose';
-import FailedChats from './Failed/NoChats';
 import NotFoundChats from './NotFound/NotFound';
+import FailedChats from './Failed/NoChats';
+import type { FC } from 'react';
 
-export const Status = (): ReactElement => {
+export const Status: FC = () => {
   const chats = useAppSelector((state) => state.chat.chats);
   const isLoading = useAppSelector((state) => state.chat.isLoading);
-  const isConnected = useAppSelector((state) => state.chat.isConnected);
   const isNotFound = useAppSelector((state) => state.chat.isNotFound);
 
   if (!chats.length && !isLoading) {
@@ -18,5 +16,5 @@ export const Status = (): ReactElement => {
     return <NotFoundChats />;
   }
 
-  return !isConnected ? <Choose /> : <></>;
+  return <></>;
 };

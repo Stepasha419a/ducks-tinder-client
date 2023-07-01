@@ -12,7 +12,7 @@ export const ChatsPairsBlock: FC = () => {
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsPairsOpened(!/chat\/./.test(pathname));
+    setIsPairsOpened(!/chat\/?.*/.test(pathname));
   }, [pathname]);
 
   return (
