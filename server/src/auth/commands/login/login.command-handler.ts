@@ -7,6 +7,7 @@ import { TokensService } from 'tokens/tokens.service';
 import { ForbiddenException } from '@nestjs/common';
 import { UserDto } from 'users/dto';
 import { UserTokenDto } from 'auth/dto';
+import { INCORRECT_EMAIL_OR_PASSWORD } from 'common/constants/error';
 
 @CommandHandler(LoginCommand)
 export class LoginCommandHandler implements ICommandHandler<LoginCommand> {
@@ -20,12 +21,12 @@ export class LoginCommandHandler implements ICommandHandler<LoginCommand> {
 
     const user = await this.usersService.getUserByEmail(dto.email);
     if (!user) {
-      throw new ForbiddenException('Incorrect email or password');
+      throw new ForbiddenException(INCORRECT_EMAIL_OR_PASSWORD);
     }
 
     const isPassEquals = await bcrypt.compare(dto.password, user.password);
     if (!isPassEquals) {
-      throw new ForbiddenException('Incorrect email or password');
+      throw new ForbiddenException(INCORRECT_EMAIL_OR_PASSWORD);
     }
 
     const userDto = new UserDto(user);

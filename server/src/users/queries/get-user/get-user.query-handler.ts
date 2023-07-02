@@ -4,6 +4,7 @@ import { UserDto } from 'users/dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersSelector } from 'users/users.selector';
 import { NotFoundException } from '@nestjs/common';
+import { NOT_FOUND_USER } from 'common/constants/error';
 
 @QueryHandler(GetUserQuery)
 export class GetUserQueryHandler implements IQueryHandler<GetUserQuery> {
@@ -22,7 +23,7 @@ export class GetUserQueryHandler implements IQueryHandler<GetUserQuery> {
     });
 
     if (!user) {
-      throw new NotFoundException('Such user was not found');
+      throw new NotFoundException(NOT_FOUND_USER);
     }
 
     return new UserDto({ ...user, pairsCount });

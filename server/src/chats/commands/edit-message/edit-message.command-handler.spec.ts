@@ -9,6 +9,7 @@ import { EditMessageCommandHandler } from './edit-message.command-handler';
 import { EditMessageCommand } from './edit-message.command';
 import { EDIT_MESSAGE_DTO } from 'chats/test/values/chats.const.dto';
 import { ChatsSelector } from 'chats/chats.selector';
+import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 
 describe('when send message is called', () => {
   let prismaService: PrismaService;
@@ -103,7 +104,7 @@ describe('when send message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual('Not found');
+      expect(error?.message).toEqual(NOT_FOUND);
     });
   });
 
@@ -146,7 +147,7 @@ describe('when send message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual('Forbidden to edit');
+      expect(error?.message).toEqual(FORBIDDEN);
     });
   });
 });

@@ -6,6 +6,7 @@ import { UsersService } from 'users/users.service';
 import { AuthDataReturn } from 'auth/auth.interface';
 import { UserTokenDto } from 'auth/dto';
 import { RegisterCommand } from './register.command';
+import { USER_ALREADY_EXISTS } from 'common/constants/error';
 
 @CommandHandler(RegisterCommand)
 export class RegisterCommandHandler
@@ -21,7 +22,7 @@ export class RegisterCommandHandler
 
     const candidate = await this.usersService.getUserByEmail(dto.email);
     if (candidate) {
-      throw new BadRequestException('User already exists');
+      throw new BadRequestException(USER_ALREADY_EXISTS);
     }
 
     const hashPassword = await bcrypt.hash(dto.password, 7);

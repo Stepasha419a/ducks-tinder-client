@@ -8,6 +8,7 @@ import { DeleteMessageCommandHandler } from './delete-message.command-handler';
 import { DeleteMessageCommand } from './delete-message.command';
 import { Message } from 'chats/chats.interfaces';
 import { ChatsSelector } from 'chats/chats.selector';
+import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 
 describe('when send message is called', () => {
   let prismaService: PrismaService;
@@ -107,7 +108,7 @@ describe('when send message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual('Not found');
+      expect(error?.message).toEqual(NOT_FOUND);
     });
   });
 
@@ -151,7 +152,7 @@ describe('when send message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual('Forbidden to delete');
+      expect(error?.message).toEqual(FORBIDDEN);
     });
   });
 });

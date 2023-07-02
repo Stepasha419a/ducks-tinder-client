@@ -38,7 +38,7 @@ export class GetCoordsGeocodeQueryHandler
         ?.description;
 
     if (!address || !name) {
-      throw new NotFoundException('Address was not found');
+      throw new NotFoundException();
     }
 
     return { address, name };

@@ -5,6 +5,7 @@ import { SavePictureCommand } from './save-picture.command';
 import { UserDto } from 'users/dto';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersSelector } from 'users/users.selector';
+import { MAX_PICTURES_COUNT } from 'common/constants/error';
 
 @CommandHandler(SavePictureCommand)
 export class SavePictureCommandHandler
@@ -23,7 +24,7 @@ export class SavePictureCommandHandler
     });
 
     if (pictures.length > 8) {
-      throw new BadRequestException('You have max pictures count');
+      throw new BadRequestException(MAX_PICTURES_COUNT);
     }
 
     const fileName = await this.filesService.savePicture(picture, user.id);

@@ -4,6 +4,7 @@ import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
 import { IS_PUBLIC_KEY } from 'common/constants';
 import { WsException } from '@nestjs/websockets';
+import { UNAUTHORIZED } from 'common/constants/error';
 
 @Injectable()
 export class WsAccessTokenGuard implements CanActivate {
@@ -27,7 +28,7 @@ export class WsAccessTokenGuard implements CanActivate {
 
     const userData = await this.tokensService.validateAccessToken(accessToken);
     if (!userData) {
-      throw new WsException('Unauthorized');
+      throw new WsException(UNAUTHORIZED);
     }
 
     const user = await this.usersService.getUser(userData.id);

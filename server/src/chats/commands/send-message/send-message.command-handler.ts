@@ -4,6 +4,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendMessageCommand } from './send-message.command';
 import { ChatsSelector } from 'chats/chats.selector';
 import { Message } from 'chats/chats.interfaces';
+import { NOT_FOUND } from 'common/constants/error';
 
 @CommandHandler(SendMessageCommand)
 export class SendMessageCommandHandler
@@ -19,7 +20,7 @@ export class SendMessageCommandHandler
         where: { id: dto.repliedId },
       });
       if (!replied) {
-        throw new WsException('Not Found');
+        throw new WsException(NOT_FOUND);
       }
     }
 

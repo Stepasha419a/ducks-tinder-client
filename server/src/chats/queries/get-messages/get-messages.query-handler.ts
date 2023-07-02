@@ -3,6 +3,7 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetMessagesQuery, GetMessagesQueryReturn } from './get-messages.query';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
+import { NOT_FOUND } from 'common/constants/error';
 
 @QueryHandler(GetMessagesQuery)
 export class GetMessagesQueryHandler
@@ -18,7 +19,7 @@ export class GetMessagesQueryHandler
       select: { id: true },
     });
     if (!candidate) {
-      throw new WsException('Not found');
+      throw new WsException(NOT_FOUND);
     }
 
     const allMessagesCount = await this.prismaService.message.count({
@@ -26,7 +27,7 @@ export class GetMessagesQueryHandler
     });
 
     if (haveCount > allMessagesCount) {
-      throw new WsException('Not found');
+      throw new WsException(NOT_FOUND);
     }
 
     // to take from db

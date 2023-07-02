@@ -16,6 +16,7 @@ import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import { UseGuards } from '@nestjs/common';
 import { WsAccessTokenGuard, WsRefreshTokenGuard } from 'common/guards';
 import { EditMessageDto, SendMessageDto } from './dto';
+import { NOT_FOUND } from 'common/constants/error';
 
 @WebSocketGateway({
   namespace: '/chat/socket',
@@ -36,7 +37,7 @@ export class ChatsGateway {
   async handleConnectChat(@ConnectedSocket() client: UserSocket) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
-      throw new WsException('Not found');
+      throw new WsException(NOT_FOUND);
     }
     await this.queryBus.execute(
       new ValidateChatMemberQuery(client.request.user, chatId),
@@ -51,7 +52,7 @@ export class ChatsGateway {
   handleDisconnectChat(@ConnectedSocket() client: UserSocket) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
-      throw new WsException('Not found');
+      throw new WsException(NOT_FOUND);
     }
 
     client.leave(chatId);
@@ -65,7 +66,7 @@ export class ChatsGateway {
   ) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
-      throw new WsException('Not found');
+      throw new WsException(NOT_FOUND);
     }
 
     const message = await this.commandBus.execute(
@@ -83,7 +84,7 @@ export class ChatsGateway {
   ) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
-      throw new WsException('Not found');
+      throw new WsException(NOT_FOUND);
     }
     const messages = await this.queryBus.execute(
       new GetMessagesQuery(client.request.user, chatId, haveCount),
@@ -100,7 +101,7 @@ export class ChatsGateway {
   ) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
-      throw new WsException('Not found');
+      throw new WsException(NOT_FOUND);
     }
 
     const message = await this.commandBus.execute(
@@ -118,7 +119,7 @@ export class ChatsGateway {
   ) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
-      throw new WsException('Not found');
+      throw new WsException(NOT_FOUND);
     }
 
     const message = await this.commandBus.execute(

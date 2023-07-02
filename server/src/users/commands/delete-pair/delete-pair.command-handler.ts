@@ -4,6 +4,7 @@ import { DeletePairCommand } from './delete-pair.command';
 import { ShortUser } from 'users/users.interface';
 import { NotFoundException } from '@nestjs/common';
 import { UsersSelector } from 'users/users.selector';
+import { NOT_FOUND_PAIR, NOT_FOUND_USER } from 'common/constants/error';
 
 @CommandHandler(DeletePairCommand)
 export class DeletePairCommandHandler
@@ -25,7 +26,7 @@ export class DeletePairCommandHandler
       where: { id: userPairId },
     });
     if (!userPair) {
-      throw new NotFoundException('Such user was not found');
+      throw new NotFoundException(NOT_FOUND_USER);
     }
 
     const deletedPair = pairs.find((pair) => pair.id === userPair.id);
@@ -36,7 +37,7 @@ export class DeletePairCommandHandler
         data: { pairs: { disconnect: { id: deletedPair.id } } },
       });
     } else {
-      throw new NotFoundException('Pair with such an id was not found');
+      throw new NotFoundException(NOT_FOUND_PAIR);
     }
 
     const updatedPairs = (

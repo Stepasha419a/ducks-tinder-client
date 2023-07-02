@@ -5,6 +5,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { UsersSelector } from 'users/users.selector';
 import { ChatsService } from 'chats/chats.service';
 import { ShortUser } from 'users/users.interface';
+import { NOT_FOUND_PAIR, NOT_FOUND_USER } from 'common/constants/error';
 
 @CommandHandler(AcceptPairCommand)
 export class AcceptPairCommandHandler
@@ -22,7 +23,7 @@ export class AcceptPairCommandHandler
       where: { id: userPairId },
     });
     if (!userPair) {
-      throw new NotFoundException('Such user was not found');
+      throw new NotFoundException(NOT_FOUND_USER);
     }
 
     const pairs = (
@@ -40,7 +41,7 @@ export class AcceptPairCommandHandler
         data: { pairs: { disconnect: { id: acceptedPair.id } } },
       });
     } else {
-      throw new NotFoundException('Pair with such an id was not found');
+      throw new NotFoundException(NOT_FOUND_PAIR);
     }
 
     await this.chatsService.create([user.id, userPairId]);

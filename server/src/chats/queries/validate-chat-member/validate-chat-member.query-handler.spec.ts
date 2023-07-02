@@ -6,6 +6,7 @@ import { shortChatStub } from 'chats/test/stubs';
 import { requestUserStub } from 'users/test/stubs';
 import { ValidateChatMemberQueryHandler } from './validate-chat-member.query-handler';
 import { ValidateChatMemberQuery } from './validate-chat-member.query';
+import { NOT_FOUND } from 'common/constants/error';
 
 describe('when get messages is called', () => {
   let prismaService: PrismaService;
@@ -98,7 +99,7 @@ describe('when get messages is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual('Such chat was not found');
+      expect(error?.message).toEqual(NOT_FOUND);
     });
   });
 });

@@ -2,6 +2,11 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DislikeUserCommand } from './dislike-user.command';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import {
+  CAN_NOT_DISLIKE_YOURSELF,
+  NOT_FOUND_USER,
+} from 'common/constants/error';
+import { USER_ALREADY_CHECKED } from 'common/constants/error/user-already-checked.constant';
 
 @CommandHandler(DislikeUserCommand)
 export class DislikeUserCommandHandler
@@ -13,14 +18,14 @@ export class DislikeUserCommandHandler
     const { user, userPairId } = command;
 
     if (user.id === userPairId) {
-      throw new BadRequestException('You can not dislike yourself');
+      throw new BadRequestException(CAN_NOT_DISLIKE_YOURSELF);
     }
 
     const userPair = await this.prismaService.user.findUnique({
       where: { id: userPairId },
     });
     if (!userPair) {
-      throw new NotFoundException('Such user was not found');
+      throw new NotFoundException(NOT_FOUND_USER);
     }
 
     const checkedUsers = await this.prismaService.checkedUsers.findMany({
@@ -35,7 +40,7 @@ export class DislikeUserCommandHandler
     if (
       [...checkedIds, ...wasCheckedIds].find((userId) => userId === userPairId)
     ) {
-      throw new BadRequestException('User is already checked');
+      throw new BadRequestException(USER_ALREADY_CHECKED);
     }
 
     await this.prismaService.checkedUsers.create({

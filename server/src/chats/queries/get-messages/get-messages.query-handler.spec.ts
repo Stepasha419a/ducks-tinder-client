@@ -7,6 +7,7 @@ import { fullChatStub, messageStub, shortChatStub } from 'chats/test/stubs';
 import { GetMessagesQueryHandler } from './get-messages.query-handler';
 import { GetMessagesQuery, GetMessagesQueryReturn } from './get-messages.query';
 import { requestUserStub } from 'users/test/stubs';
+import { NOT_FOUND } from 'common/constants/error';
 
 describe('when get messages is called', () => {
   let prismaService: PrismaService;
@@ -131,7 +132,7 @@ describe('when get messages is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual('Not found');
+      expect(error?.message).toEqual(NOT_FOUND);
     });
   });
 
@@ -185,7 +186,7 @@ describe('when get messages is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual('Not found');
+      expect(error?.message).toEqual(NOT_FOUND);
     });
   });
 });

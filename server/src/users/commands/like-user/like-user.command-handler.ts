@@ -2,6 +2,9 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { PrismaService } from 'prisma/prisma.service';
 import { LikeUserCommand } from './like-user.command';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { CAN_NOT_LIKE_YOURSELF } from 'common/constants/error/can-not-like-yourself.constant';
+import { NOT_FOUND_USER } from 'common/constants/error';
+import { USER_ALREADY_CHECKED } from 'common/constants/error/user-already-checked.constant';
 
 @CommandHandler(LikeUserCommand)
 export class LikeUserCommandHandler
@@ -13,14 +16,14 @@ export class LikeUserCommandHandler
     const { user, userPairId } = command;
 
     if (user.id === userPairId) {
-      throw new BadRequestException('You can not like yourself');
+      throw new BadRequestException(CAN_NOT_LIKE_YOURSELF);
     }
 
     const userPair = await this.prismaService.user.findUnique({
       where: { id: userPairId },
     });
     if (!userPair) {
-      throw new NotFoundException('Such user was not found');
+      throw new NotFoundException(NOT_FOUND_USER);
     }
 
     const checkedUsers = await this.prismaService.checkedUsers.findMany({
@@ -38,9 +41,7 @@ export class LikeUserCommandHandler
     );
 
     if (isSomeonePairForAnotherOne) {
-      throw new BadRequestException(
-        'Pair with such an id already exists or such user is already checked',
-      );
+      throw new BadRequestException(USER_ALREADY_CHECKED);
     }
     await this.prismaService.user.update({
       where: { id: userPairId },

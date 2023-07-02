@@ -11,6 +11,7 @@ import {
   prepareAfter,
   prepareBefore,
 } from '../preparations';
+import { USER_ALREADY_CHECKED } from 'common/constants/error/user-already-checked.constant';
 
 const currentUserId = 'like_post_current_user_id';
 const secondUserId = 'like_post_second_user_id';
@@ -107,9 +108,7 @@ describe('users/like/:id (POST)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(400);
-      expect(response.body.message).toEqual(
-        'Pair with such an id already exists or such user is already checked',
-      );
+      expect(response.body.message).toEqual(USER_ALREADY_CHECKED);
     });
   });
 
@@ -133,9 +132,7 @@ describe('users/like/:id (POST)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(400);
-      expect(response.body.message).toEqual(
-        'Pair with such an id already exists or such user is already checked',
-      );
+      expect(response.body.message).toEqual(USER_ALREADY_CHECKED);
     });
   });
 
@@ -165,9 +162,7 @@ describe('users/like/:id (POST)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(400);
-      expect(response.body.message).toEqual(
-        'Pair with such an id already exists or such user is already checked',
-      );
+      expect(response.body.message).toEqual(USER_ALREADY_CHECKED);
     });
   });
 
@@ -197,9 +192,7 @@ describe('users/like/:id (POST)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(400);
-      expect(response.body.message).toEqual(
-        'Pair with such an id already exists or such user is already checked',
-      );
+      expect(response.body.message).toEqual(USER_ALREADY_CHECKED);
     });
   });
 
