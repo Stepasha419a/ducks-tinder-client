@@ -12,7 +12,7 @@ export class GetMessagesQueryHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(query: GetMessagesQuery): Promise<GetMessagesQueryReturn> {
-    const { user, chatId, haveCount } = query;
+    const { user, chatId, dto } = query;
 
     const candidate = await this.prismaService.chat.findFirst({
       where: { id: chatId, users: { some: { id: user.id } } },
@@ -26,7 +26,7 @@ export class GetMessagesQueryHandler
       where: { chatId },
     });
 
-    if (haveCount > allMessagesCount) {
+    if (dto.haveCount > allMessagesCount) {
       throw new WsException(NOT_FOUND);
     }
 
@@ -34,7 +34,7 @@ export class GetMessagesQueryHandler
     let takeMessages = 20;
 
     // to skip, f.e. all = 101, have = 24 => skip = 57
-    let skipMessages = allMessagesCount - haveCount - 20;
+    let skipMessages = allMessagesCount - dto.haveCount - 20;
 
     // if skip < 0 f.e. all = 101, have = 100 => skip = -19
     if (skipMessages < 0) {

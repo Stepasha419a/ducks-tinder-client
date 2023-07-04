@@ -7,3 +7,4 @@ export { NOT_FOUND_USER } from './not-found-user.constant';
 export { NOT_FOUND_PAIR } from './not-found-pair.constant';
 export { CAN_NOT_DISLIKE_YOURSELF } from './can-not-dislike-yourself.constant';
 export { MAX_PICTURES_COUNT } from './max-pictures-count.constant';
+export { NOTHING_PASSED } from './nothing-passed.constant';

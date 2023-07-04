@@ -15,7 +15,12 @@ import {
 import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import { UseGuards } from '@nestjs/common';
 import { WsAccessTokenGuard, WsRefreshTokenGuard } from 'common/guards';
-import { EditMessageDto, SendMessageDto } from './dto';
+import {
+  DeleteMessageDto,
+  EditMessageDto,
+  GetMessagesDto,
+  SendMessageDto,
+} from './dto';
 import { NOT_FOUND } from 'common/constants/error';
 
 @WebSocketGateway({
@@ -80,14 +85,14 @@ export class ChatsGateway {
   @SubscribeMessage('get-messages')
   async getMessages(
     @ConnectedSocket() client: UserSocket,
-    @MessageBody() haveCount: number,
+    @MessageBody() dto: GetMessagesDto,
   ) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
     const messages = await this.queryBus.execute(
-      new GetMessagesQuery(client.request.user, chatId, haveCount),
+      new GetMessagesQuery(client.request.user, chatId, dto),
     );
 
     this.wss.to(chatId).emit('get-messages', messages);
@@ -97,7 +102,7 @@ export class ChatsGateway {
   @SubscribeMessage('delete-message')
   async deleteMessage(
     @ConnectedSocket() client: UserSocket,
-    @MessageBody() messageId: string,
+    @MessageBody() dto: DeleteMessageDto,
   ) {
     const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
@@ -105,7 +110,7 @@ export class ChatsGateway {
     }
 
     const message = await this.commandBus.execute(
-      new DeleteMessageCommand(client.request.user, messageId),
+      new DeleteMessageCommand(client.request.user, dto),
     );
 
     this.wss.to(chatId).emit('delete-message', message);

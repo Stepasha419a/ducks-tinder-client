@@ -11,6 +11,9 @@ import {
   UseInterceptors,
   Req,
   Param,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ShortUser } from './users.interface';
@@ -38,6 +41,8 @@ import {
   SavePictureCommand,
 } from './commands';
 import { GetPairsQuery, GetSortedQuery } from './queries';
+import { OptionalValidationPipe } from 'common/pipes';
+import { ONE_MB_SIZE } from 'common/constants';
 
 @Controller('users')
 export class UsersController {
@@ -48,7 +53,10 @@ export class UsersController {
 
   @Patch()
   @HttpCode(HttpStatus.OK)
-  patch(@Req() req: UserRequest, @Body() dto: PatchUserDto): Promise<UserDto> {
+  patch(
+    @Req() req: UserRequest,
+    @Body(OptionalValidationPipe) dto: PatchUserDto,
+  ): Promise<UserDto> {
     return this.commandBus.execute(new PatchUserCommand(req.user, dto));
   }
 
@@ -72,7 +80,15 @@ export class UsersController {
   @UseInterceptors(FileInterceptor('picture'))
   savePicture(
     @Req() req: UserRequest,
-    @UploadedFile() picture: Express.Multer.File,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({ maxSize: ONE_MB_SIZE }),
+          new FileTypeValidator({ fileType: 'image/*' }),
+        ],
+      }),
+    )
+    picture: Express.Multer.File,
   ): Promise<UserDto> {
     return this.commandBus.execute(new SavePictureCommand(req.user, picture));
   }

@@ -9,6 +9,7 @@ import { DeleteMessageCommand } from './delete-message.command';
 import { Message } from 'chats/chats.interfaces';
 import { ChatsSelector } from 'chats/chats.selector';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
+import { DeleteMessageDto } from 'chats/dto';
 
 describe('when send message is called', () => {
   let prismaService: PrismaService;
@@ -40,11 +41,14 @@ describe('when send message is called', () => {
     });
 
     let message: Message;
+    const deleteMessageDto: DeleteMessageDto = {
+      messageId: messageStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       message = await deleteMessageCommandHandler.execute(
-        new DeleteMessageCommand(requestUserStub(), messageStub().id),
+        new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
       );
     });
 
@@ -79,12 +83,15 @@ describe('when send message is called', () => {
 
     let message: Message;
     let error;
+    const deleteMessageDto: DeleteMessageDto = {
+      messageId: messageStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
         message = await deleteMessageCommandHandler.execute(
-          new DeleteMessageCommand(requestUserStub(), messageStub().id),
+          new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
         );
       } catch (responseError) {
         error = responseError;
@@ -123,12 +130,15 @@ describe('when send message is called', () => {
 
     let message: Message;
     let error;
+    const deleteMessageDto: DeleteMessageDto = {
+      messageId: messageStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
         message = await deleteMessageCommandHandler.execute(
-          new DeleteMessageCommand(requestUserStub(), messageStub().id),
+          new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
         );
       } catch (responseError) {
         error = responseError;

@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 
@@ -12,6 +13,8 @@ async function start() {
     methods: 'GET,PUT,POST,DELETE,PATCH',
     credentials: true,
   });
+
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(5000);
 }

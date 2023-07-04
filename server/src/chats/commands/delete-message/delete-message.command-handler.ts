@@ -14,10 +14,10 @@ export class DeleteMessageCommandHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(command: DeleteMessageCommand): Promise<Message> {
-    const { user, messageId } = command;
+    const { user, dto } = command;
 
     const message = await this.prismaService.message.findFirst({
-      where: { id: messageId, userId: user.id },
+      where: { id: dto.messageId, userId: user.id },
       select: ChatsSelector.selectMessage(),
     });
     if (!message) {
@@ -30,7 +30,7 @@ export class DeleteMessageCommandHandler
       throw new WsException(FORBIDDEN);
     }
 
-    await this.prismaService.message.delete({ where: { id: messageId } });
+    await this.prismaService.message.delete({ where: { id: dto.messageId } });
 
     return message;
   }

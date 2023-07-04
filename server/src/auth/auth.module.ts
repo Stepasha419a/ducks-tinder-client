@@ -1,5 +1,4 @@
 import { CqrsModule } from '@nestjs/cqrs';
-import { MailModule } from 'mail/mail.module';
 import { TokensModule } from 'tokens/tokens.module';
 import { UsersModule } from 'users/users.module';
 import { Module } from '@nestjs/common';
@@ -9,6 +8,6 @@ import { AuthCommandHandlers } from './commands';
 @Module({
   providers: [...AuthCommandHandlers],
   controllers: [AuthController],
-  imports: [CqrsModule, UsersModule, TokensModule, MailModule],
+  imports: [CqrsModule, UsersModule, TokensModule],
 })
 export class AuthModule {}

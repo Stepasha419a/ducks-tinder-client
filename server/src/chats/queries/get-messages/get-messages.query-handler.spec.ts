@@ -8,6 +8,7 @@ import { GetMessagesQueryHandler } from './get-messages.query-handler';
 import { GetMessagesQuery, GetMessagesQueryReturn } from './get-messages.query';
 import { requestUserStub } from 'users/test/stubs';
 import { NOT_FOUND } from 'common/constants/error';
+import { GetMessagesDto } from 'chats/dto';
 
 describe('when get messages is called', () => {
   let prismaService: PrismaService;
@@ -40,11 +41,18 @@ describe('when get messages is called', () => {
     });
 
     let response: GetMessagesQueryReturn;
+    const getMessagesDto: GetMessagesDto = {
+      haveCount: 0,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       response = await getMessagesQueryHandler.execute(
-        new GetMessagesQuery(requestUserStub(), shortChatStub().id, 0),
+        new GetMessagesQuery(
+          requestUserStub(),
+          shortChatStub().id,
+          getMessagesDto,
+        ),
       );
     });
 
@@ -96,12 +104,19 @@ describe('when get messages is called', () => {
 
     let response: GetMessagesQueryReturn;
     let error;
+    const getMessagesDto: GetMessagesDto = {
+      haveCount: 0,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
         response = await getMessagesQueryHandler.execute(
-          new GetMessagesQuery(requestUserStub(), shortChatStub().id, 0),
+          new GetMessagesQuery(
+            requestUserStub(),
+            shortChatStub().id,
+            getMessagesDto,
+          ),
         );
       } catch (responseError) {
         error = responseError;
@@ -147,12 +162,19 @@ describe('when get messages is called', () => {
 
     let response: GetMessagesQueryReturn;
     let error;
+    const getMessagesDto: GetMessagesDto = {
+      haveCount: 60,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
         response = await getMessagesQueryHandler.execute(
-          new GetMessagesQuery(requestUserStub(), shortChatStub().id, 60),
+          new GetMessagesQuery(
+            requestUserStub(),
+            shortChatStub().id,
+            getMessagesDto,
+          ),
         );
       } catch (responseError) {
         error = responseError;

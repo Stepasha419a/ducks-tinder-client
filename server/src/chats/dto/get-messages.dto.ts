@@ -1,6 +1,6 @@
 import { IsNumber } from 'class-validator';
 
-export class DeletePictureDto {
+export class GetMessagesDto {
   @IsNumber()
-  readonly order: number;
+  haveCount: number;
 }

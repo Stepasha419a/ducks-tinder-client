@@ -6,7 +6,6 @@ import { UsersModule } from 'users/users.module';
 import { FilesModule } from 'files/files.module';
 import { AuthModule } from 'auth/auth.module';
 import { TokensModule } from 'tokens/tokens.module';
-import { MailModule } from 'mail/mail.module';
 import { ChatsModule } from 'chats/chats.module';
 import { PrismaModule } from 'prisma/prisma.module';
 import * as path from 'path';
@@ -27,7 +26,6 @@ import { MapsModule } from './maps/maps.module';
     FilesModule,
     AuthModule,
     TokensModule,
-    MailModule,
     ChatsModule,
     MapsModule,
   ],
