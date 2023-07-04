@@ -1,6 +1,6 @@
 import { Test } from '@nestjs/testing';
 import { UsersController } from 'users/users.controller';
-import { CommandBusMock, QueryBusMock, RequestMock } from 'users/test/mocks';
+import { CommandBusMock, QueryBusMock } from 'users/test/mocks';
 import { AccessTokenGuard } from 'common/guards';
 import { requestUserStub, shortUserStub, userDtoStub } from 'users/test/stubs';
 import { UserDto } from 'users/dto';
@@ -31,7 +31,6 @@ describe('users-controller', () => {
   let queryBus: QueryBus;
 
   const mockAccessTokenGuard = jest.fn().mockReturnValue(true);
-  const requestMock = RequestMock();
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
@@ -69,7 +68,7 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      user = await usersController.patch(requestMock, UPDATE_USER_DTO);
+      user = await usersController.patch(requestUserStub(), UPDATE_USER_DTO);
     });
 
     it('should call command bus execute', () => {
@@ -87,9 +86,7 @@ describe('users-controller', () => {
   describe('when getSorted is called', () => {
     let user: ShortUser;
 
-    const RequestMock = jest.fn().mockReturnValue({
-      user: USER_SORTS_DATA,
-    });
+    const RequestMock = jest.fn().mockReturnValue(USER_SORTS_DATA);
 
     beforeAll(() => {
       queryBus.execute = jest.fn().mockResolvedValue(shortUserStub());
@@ -119,7 +116,7 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      user = await usersController.savePicture(requestMock, {
+      user = await usersController.savePicture(requestUserStub(), {
         fieldname: '123123',
       } as Express.Multer.File);
     });
@@ -147,7 +144,7 @@ describe('users-controller', () => {
 
     beforeEach(async () => {
       user = await usersController.deletePicture(
-        requestMock,
+        requestUserStub(),
         DELETE_PICTURE_DTO,
       );
     });
@@ -172,7 +169,10 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      user = await usersController.mixPictures(requestMock, MIX_PICTURES_DTO);
+      user = await usersController.mixPictures(
+        requestUserStub(),
+        MIX_PICTURES_DTO,
+      );
     });
 
     it('should call command bus execute', () => {
@@ -196,7 +196,7 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      response = await usersController.likeUser(requestMock, userPairId);
+      response = await usersController.likeUser(requestUserStub(), userPairId);
     });
 
     it('should call command bus execute', () => {
@@ -220,7 +220,10 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      response = await usersController.dislikeUser(requestMock, userPairId);
+      response = await usersController.dislikeUser(
+        requestUserStub(),
+        userPairId,
+      );
     });
 
     it('should call command bus execute', () => {
@@ -243,7 +246,7 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      response = await usersController.returnUser(requestMock);
+      response = await usersController.returnUser(requestUserStub());
     });
 
     it('should call command bus execute', () => {
@@ -266,7 +269,7 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      users = await usersController.getPairs(requestMock);
+      users = await usersController.getPairs(requestUserStub());
     });
 
     it('should call command bus execute', () => {
@@ -290,7 +293,7 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      user = await usersController.deletePair(RequestMock(), userPairId);
+      user = await usersController.deletePair(requestUserStub(), userPairId);
     });
 
     it('should call command bus execute', () => {
@@ -314,7 +317,7 @@ describe('users-controller', () => {
     });
 
     beforeEach(async () => {
-      user = await usersController.acceptPair(RequestMock(), userPairId);
+      user = await usersController.acceptPair(requestUserStub(), userPairId);
     });
 
     it('should call command bus execute', () => {

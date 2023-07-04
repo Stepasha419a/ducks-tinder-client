@@ -16,6 +16,7 @@
     &.hasImage {
       border: none;
       cursor: grab;
+      object-fit: cover;
     }
   }
 

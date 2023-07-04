@@ -22,6 +22,7 @@ import {
   SendMessageDto,
 } from './dto';
 import { NOT_FOUND } from 'common/constants/error';
+import { ChatId, User } from 'common/decorators';
 
 @WebSocketGateway({
   namespace: '/chat/socket',
@@ -39,14 +40,16 @@ export class ChatsGateway {
 
   @UseGuards(WsAccessTokenGuard)
   @SubscribeMessage('connect-chat')
-  async handleConnectChat(@ConnectedSocket() client: UserSocket) {
-    const chatId = client?.handshake?.query?.chatId as string | undefined;
+  async handleConnectChat(
+    @ConnectedSocket() client: UserSocket,
+    @ChatId() chatId,
+    @User({ isSocket: true }) user,
+  ) {
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
-    await this.queryBus.execute(
-      new ValidateChatMemberQuery(client.request.user, chatId),
-    );
+    await this.queryBus.execute(new ValidateChatMemberQuery(user, chatId));
+
     client.join(chatId);
 
     client.emit('connect-chat', chatId);
@@ -54,8 +57,10 @@ export class ChatsGateway {
 
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('disconnect-chat')
-  handleDisconnectChat(@ConnectedSocket() client: UserSocket) {
-    const chatId = client?.handshake?.query?.chatId as string | undefined;
+  handleDisconnectChat(
+    @ConnectedSocket() client: UserSocket,
+    @ChatId() chatId,
+  ) {
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
@@ -66,16 +71,16 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('send-message')
   async sendMessage(
-    @ConnectedSocket() client: UserSocket,
+    @ChatId() chatId,
+    @User({ isSocket: true }) user,
     @MessageBody() dto: SendMessageDto,
   ) {
-    const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
 
     const message = await this.commandBus.execute(
-      new SendMessageCommand(client.request.user, chatId, dto),
+      new SendMessageCommand(user, chatId, dto),
     );
 
     this.wss.to(chatId).emit('send-message', message);
@@ -84,15 +89,15 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('get-messages')
   async getMessages(
-    @ConnectedSocket() client: UserSocket,
+    @ChatId() chatId,
+    @User({ isSocket: true }) user,
     @MessageBody() dto: GetMessagesDto,
   ) {
-    const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
     const messages = await this.queryBus.execute(
-      new GetMessagesQuery(client.request.user, chatId, dto),
+      new GetMessagesQuery(user, chatId, dto),
     );
 
     this.wss.to(chatId).emit('get-messages', messages);
@@ -101,16 +106,16 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('delete-message')
   async deleteMessage(
-    @ConnectedSocket() client: UserSocket,
+    @ChatId() chatId,
+    @User({ isSocket: true }) user,
     @MessageBody() dto: DeleteMessageDto,
   ) {
-    const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
 
     const message = await this.commandBus.execute(
-      new DeleteMessageCommand(client.request.user, dto),
+      new DeleteMessageCommand(user, dto),
     );
 
     this.wss.to(chatId).emit('delete-message', message);
@@ -119,16 +124,16 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('edit-message')
   async editMessage(
-    @ConnectedSocket() client: UserSocket,
+    @ChatId() chatId,
+    @User({ isSocket: true }) user,
     @MessageBody() dto: EditMessageDto,
   ) {
-    const chatId = client?.handshake?.query?.chatId as string | undefined;
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
 
     const message = await this.commandBus.execute(
-      new EditMessageCommand(client.request.user, dto),
+      new EditMessageCommand(user, dto),
     );
 
     this.wss.to(chatId).emit('edit-message', message);

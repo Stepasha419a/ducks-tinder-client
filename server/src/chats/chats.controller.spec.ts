@@ -1,12 +1,11 @@
 import { Test } from '@nestjs/testing';
-import { QueryBusMock, RequestMock } from 'users/test/mocks';
 import { AccessTokenGuard } from 'common/guards';
-import { requestUserStub } from 'users/test/stubs';
 import { CqrsModule, QueryBus } from '@nestjs/cqrs';
 import { ChatsController } from './chats.controller';
-import { shortChatStub } from './test/stubs';
+import { requestUserStub, shortChatStub } from './test/stubs';
 import { FullChat, ShortChat } from './chats.interfaces';
 import { GetChatQuery, GetChatsQuery } from './queries';
+import { QueryBusMock } from './test/mocks';
 
 describe('chats-controller', () => {
   let chatsController: ChatsController;
@@ -47,7 +46,7 @@ describe('chats-controller', () => {
     });
 
     beforeEach(async () => {
-      chats = await chatsController.getChats(RequestMock());
+      chats = await chatsController.getChats(requestUserStub());
     });
 
     it('should call query bus execute', () => {
@@ -70,7 +69,10 @@ describe('chats-controller', () => {
     });
 
     beforeEach(async () => {
-      chat = await chatsController.getChat(RequestMock(), shortChatStub().id);
+      chat = await chatsController.getChat(
+        requestUserStub(),
+        shortChatStub().id,
+      );
     });
 
     it('should call query bus execute', () => {

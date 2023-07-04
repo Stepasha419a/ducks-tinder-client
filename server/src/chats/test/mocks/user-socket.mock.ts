@@ -1,5 +1,5 @@
 import { fullChatStub } from '../stubs';
-import { requestUserStub } from './request-user.stub';
+import { requestUserStub } from '../stubs/request-user.stub';
 
 export const UserSocketMock = jest.fn().mockReturnValue({
   handshake: {

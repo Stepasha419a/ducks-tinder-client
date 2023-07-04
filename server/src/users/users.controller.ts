@@ -9,7 +9,6 @@ import {
   Get,
   UploadedFile,
   UseInterceptors,
-  Req,
   Param,
   ParseFilePipe,
   MaxFileSizeValidator,
@@ -17,7 +16,6 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ShortUser } from './users.interface';
-import { UserRequest } from 'common/types';
 import {
   DeletePictureDto,
   PatchUserDto,
@@ -43,6 +41,7 @@ import {
 import { GetPairsQuery, GetSortedQuery } from './queries';
 import { OptionalValidationPipe } from 'common/pipes';
 import { ONE_MB_SIZE } from 'common/constants';
+import { User } from 'common/decorators';
 
 @Controller('users')
 export class UsersController {
@@ -54,32 +53,29 @@ export class UsersController {
   @Patch()
   @HttpCode(HttpStatus.OK)
   patch(
-    @Req() req: UserRequest,
+    @User() user,
     @Body(OptionalValidationPipe) dto: PatchUserDto,
   ): Promise<UserDto> {
-    return this.commandBus.execute(new PatchUserCommand(req.user, dto));
+    return this.commandBus.execute(new PatchUserCommand(user, dto));
   }
 
   @Patch('place')
   @HttpCode(HttpStatus.OK)
-  patchPlace(
-    @Req() req: UserRequest,
-    @Body() dto: PatchUserPlaceDto,
-  ): Promise<UserDto> {
-    return this.commandBus.execute(new PatchUserPlaceCommand(req.user, dto));
+  patchPlace(@User() user, @Body() dto: PatchUserPlaceDto): Promise<UserDto> {
+    return this.commandBus.execute(new PatchUserPlaceCommand(user, dto));
   }
 
   @Get('sorted')
   @HttpCode(HttpStatus.OK)
-  getSortedUser(@Req() req: UserRequest): Promise<ShortUser> {
-    return this.queryBus.execute(new GetSortedQuery(req.user));
+  getSortedUser(@User() user): Promise<ShortUser> {
+    return this.queryBus.execute(new GetSortedQuery(user));
   }
 
   @Post('picture')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('picture'))
   savePicture(
-    @Req() req: UserRequest,
+    @User() user,
     @UploadedFile(
       new ParseFilePipe({
         validators: [
@@ -90,88 +86,74 @@ export class UsersController {
     )
     picture: Express.Multer.File,
   ): Promise<UserDto> {
-    return this.commandBus.execute(new SavePictureCommand(req.user, picture));
+    return this.commandBus.execute(new SavePictureCommand(user, picture));
   }
 
   @Put('picture')
   @HttpCode(HttpStatus.OK)
-  deletePicture(
-    @Req() req: UserRequest,
-    @Body() dto: DeletePictureDto,
-  ): Promise<UserDto> {
-    return this.commandBus.execute(new DeletePictureCommand(req.user, dto));
+  deletePicture(@User() user, @Body() dto: DeletePictureDto): Promise<UserDto> {
+    return this.commandBus.execute(new DeletePictureCommand(user, dto));
   }
 
   @Put('picture/mix')
   @HttpCode(HttpStatus.OK)
-  mixPictures(
-    @Req() req: UserRequest,
-    @Body() dto: MixPicturesDto,
-  ): Promise<UserDto> {
-    return this.commandBus.execute(new MixPicturesCommand(req.user, dto));
+  mixPictures(@User() user, @Body() dto: MixPicturesDto): Promise<UserDto> {
+    return this.commandBus.execute(new MixPicturesCommand(user, dto));
   }
 
   @Post('like/:id')
   @HttpCode(HttpStatus.OK)
-  likeUser(
-    @Req() req: UserRequest,
-    @Param('id') userPairId: string,
-  ): Promise<void> {
-    return this.commandBus.execute(new LikeUserCommand(req.user, userPairId));
+  likeUser(@User() user, @Param('id') userPairId: string): Promise<void> {
+    return this.commandBus.execute(new LikeUserCommand(user, userPairId));
   }
 
   @Post('dislike/:id')
   @HttpCode(HttpStatus.OK)
-  dislikeUser(
-    @Req() req: UserRequest,
-    @Param('id') userPairId: string,
-  ): Promise<void> {
-    return this.commandBus.execute(
-      new DislikeUserCommand(req.user, userPairId),
-    );
+  dislikeUser(@User() user, @Param('id') userPairId: string): Promise<void> {
+    return this.commandBus.execute(new DislikeUserCommand(user, userPairId));
   }
 
   @Put('return')
   @HttpCode(HttpStatus.OK)
-  returnUser(@Req() req: UserRequest): Promise<void> {
-    return this.commandBus.execute(new ReturnUserCommand(req.user));
+  returnUser(@User() user): Promise<void> {
+    return this.commandBus.execute(new ReturnUserCommand(user));
   }
 
   @Get('pairs')
   @HttpCode(HttpStatus.OK)
-  getPairs(@Req() req: UserRequest): Promise<ShortUser[]> {
-    return this.queryBus.execute(new GetPairsQuery(req.user));
+  getPairs(@User() user): Promise<ShortUser[]> {
+    return this.queryBus.execute(new GetPairsQuery(user));
   }
 
   @Post('pairs/:id')
   @HttpCode(HttpStatus.OK)
   acceptPair(
-    @Req() req: UserRequest,
+    @User() user,
     @Param('id') userPairId: string,
   ): Promise<ShortUser[]> {
-    return this.commandBus.execute(new AcceptPairCommand(req.user, userPairId));
+    return this.commandBus.execute(new AcceptPairCommand(user, userPairId));
   }
 
   @Put('pairs/:id')
   @HttpCode(HttpStatus.OK)
   deletePair(
-    @Req() req: UserRequest,
+    @User() user,
     @Param('id') userPairId: string,
   ): Promise<ShortUser[]> {
-    return this.commandBus.execute(new DeletePairCommand(req.user, userPairId));
+    return this.commandBus.execute(new DeletePairCommand(user, userPairId));
   }
 
   // for dev
   @Patch('removeAllPairs')
   @HttpCode(HttpStatus.OK)
-  removeAllPairs(@Req() req: UserRequest) {
-    return this.commandBus.execute(new RemoveAllPairsCommand(req.user));
+  removeAllPairs(@User() user) {
+    return this.commandBus.execute(new RemoveAllPairsCommand(user));
   }
 
   // for dev
   @Post('createPairs')
   @HttpCode(HttpStatus.OK)
-  createPairs(@Req() req: UserRequest) {
-    return this.commandBus.execute(new CreatePairsCommand(req.user));
+  createPairs(@User() user) {
+    return this.commandBus.execute(new CreatePairsCommand(user));
   }
 }

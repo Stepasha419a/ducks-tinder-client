@@ -7,10 +7,9 @@ import { ChatsGateway } from './chats.gateway';
 import { TokensModule } from 'tokens/tokens.module';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from 'users/users.module';
-import { fullChatStub } from './test/stubs';
+import { fullChatStub, requestUserStub } from './test/stubs';
 import { UserSocketMock } from './test/mocks';
 import { ValidateChatMemberQuery } from './queries';
-import { requestUserStub } from 'users/test/stubs';
 
 describe('chats-controller', () => {
   let chatsGateway: ChatsGateway;
@@ -62,7 +61,11 @@ describe('chats-controller', () => {
     });
 
     beforeEach(async () => {
-      response = await chatsGateway.handleConnectChat(socket);
+      response = await chatsGateway.handleConnectChat(
+        socket,
+        fullChatStub().id,
+        requestUserStub(),
+      );
     });
 
     it('should call query bus execute', () => {
@@ -92,7 +95,10 @@ describe('chats-controller', () => {
     const socket = UserSocketMock();
 
     beforeEach(async () => {
-      response = await chatsGateway.handleDisconnectChat(socket);
+      response = await chatsGateway.handleDisconnectChat(
+        socket,
+        fullChatStub().id,
+      );
     });
 
     it('should call socket leave', () => {

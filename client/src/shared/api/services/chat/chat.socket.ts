@@ -37,10 +37,10 @@ export const chatSocket: ChatSocket = {
     this._socket!.emit('send-message', { text, repliedId });
   },
   getMessages(haveCount: number): void {
-    this._socket!.emit('get-messages', haveCount);
+    this._socket!.emit('get-messages', { haveCount });
   },
   deleteMessage(messageId: string): void {
-    this._socket!.emit('delete-message', messageId);
+    this._socket!.emit('delete-message', { messageId });
   },
   editMessage(messageId: string, text: string): void {
     this._socket!.emit('edit-message', { messageId, text });
