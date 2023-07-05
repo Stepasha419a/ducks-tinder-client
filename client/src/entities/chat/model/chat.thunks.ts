@@ -1,11 +1,12 @@
 import type { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Message } from '@shared/api/interfaces';
+import type { Chat, Message } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
 import type { GetMessagesResponse } from './chat.interfaces';
 import {
+  blockChat,
   deleteMessage,
   editMessage,
   getMessages,
@@ -75,6 +76,10 @@ export const connectChatThunk = createAsyncThunk(
       socket.on('edit-message', (message: Message) => {
         dispatch(editMessage(message));
       });
+
+      socket.on('block-chat', (chat: Chat) => {
+        dispatch(blockChat(chat));
+      });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -128,6 +133,17 @@ export const editMessageThunk = createAsyncThunk(
   (args: { messageId: string; text: string }, { rejectWithValue }) => {
     try {
       chatService.editMessage(args.messageId, args.text);
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
+export const blockChatThunk = createAsyncThunk(
+  'chat/blockChat',
+  (_, { rejectWithValue }) => {
+    try {
+      chatService.blockChat();
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

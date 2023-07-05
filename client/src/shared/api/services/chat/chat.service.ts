@@ -13,6 +13,9 @@ export const chatService = {
   connectChat(chatId: string): Socket {
     return chatSocket.connectChat(chatId);
   },
+  getMessages(haveCount: number): void {
+    chatSocket.getMessages(haveCount);
+  },
   sendMessage(text: string, repliedId: string | null = null): void {
     chatSocket.sendMessage(text, repliedId);
   },
@@ -22,11 +25,11 @@ export const chatService = {
   editMessage(messageId: string, text: string): void {
     chatSocket.editMessage(messageId, text);
   },
+  blockChat(): void {
+    chatSocket.blockChat();
+  },
   disconnectChat(): void {
     chatSocket.disconnectChat();
-  },
-  getMessages(haveCount: number): void {
-    chatSocket.getMessages(haveCount);
   },
   closeAllSockets(): void {
     chatSocket.closeAllSockets();

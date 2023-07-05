@@ -123,9 +123,11 @@ model Message {
 }
 
 model Chat {
-  id       String    @id @default(uuid())
-  messages Message[]
-  users    User[]
+  id          String    @id @default(uuid())
+  messages    Message[]
+  users       User[]
+  blocked     Boolean   @default(false)
+  blockedById String?
 
   @@map("chats")
 }

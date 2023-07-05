@@ -20,10 +20,14 @@ export interface Chat {
   messages: Message[];
   users: ShortUser[];
   messagesCount: number;
+  blocked: boolean;
+  blockedById: string;
 }
 
 export interface ShortChat {
   id: string;
   messages: Message[];
   users: ShortUser[];
+  blocked: boolean;
+  blockedById: string;
 }

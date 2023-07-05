@@ -1,34 +1,37 @@
-import { NotFoundException } from '@nestjs/common';
+import { NOT_FOUND } from 'common/constants/error';
+import { WsException } from '@nestjs/websockets';
 import { PrismaService } from 'prisma/prisma.service';
-import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetChatQuery } from './get-chat.query';
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { BlockChatCommand } from './block-chat.command';
 import { FullChat } from 'chats/chats.interfaces';
-import { UsersSelector } from 'users/users.selector';
 import { ChatsSelector } from 'chats/chats.selector';
+import { UsersSelector } from 'users/users.selector';
 
-@QueryHandler(GetChatQuery)
-export class GetChatQueryHandler implements IQueryHandler<GetChatQuery> {
+@CommandHandler(BlockChatCommand)
+export class BlockChatCommandHandler
+  implements ICommandHandler<BlockChatCommand>
+{
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(query: GetChatQuery): Promise<FullChat> {
-    const { user, id } = query;
+  async execute(command: BlockChatCommand): Promise<FullChat> {
+    const { user, chatId } = command;
 
     const candidate = await this.prismaService.chat.findFirst({
-      where: { id, users: { some: { id: user.id } } },
-      select: { id: true },
+      where: { id: chatId, blocked: false, users: { some: { id: user.id } } },
     });
     if (!candidate) {
-      throw new NotFoundException();
+      throw new WsException(NOT_FOUND);
     }
 
     const messagesCount = await this.prismaService.message.count({
-      where: { chatId: id },
+      where: { chatId },
     });
 
     const skipCount = messagesCount > 20 ? messagesCount - 20 : 0;
 
-    const chat = await this.prismaService.chat.findUnique({
-      where: { id },
+    const blockedChat = await this.prismaService.chat.update({
+      where: { id: chatId },
+      data: { blocked: true, blockedById: user.id },
       select: {
         id: true,
         messages: {
@@ -46,6 +49,6 @@ export class GetChatQueryHandler implements IQueryHandler<GetChatQuery> {
       },
     });
 
-    return { ...chat, messagesCount };
+    return { ...blockedChat, messagesCount };
   }
 }

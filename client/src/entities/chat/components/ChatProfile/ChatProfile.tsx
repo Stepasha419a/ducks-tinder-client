@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Avatar } from '@/shared/ui';
 import { useAppSelector } from '@/shared/hooks';
-import { selectCurrentChatUser } from '../../model';
+import { selectChatProfile } from '../../model';
 import styles from './ChatProfile.module.scss';
 
 interface ChatProfileProps {
@@ -9,7 +9,7 @@ interface ChatProfileProps {
 }
 
 export const ChatProfile: FC<ChatProfileProps> = ({ handleClick }) => {
-  const { currentChatUser } = useAppSelector(selectCurrentChatUser);
+  const { currentChatUser } = useAppSelector(selectChatProfile);
 
   return (
     <>

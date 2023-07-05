@@ -14,4 +14,6 @@ export const shortChatStub = (): ShortChat => ({
       replied: null,
     },
   ],
+  blocked: false,
+  blockedById: null,
 });

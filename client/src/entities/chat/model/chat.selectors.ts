@@ -63,18 +63,22 @@ export const selectRepliedMessage = createSelector(
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
   ],
-  (_id, name, avatar, chats, currentChatId) => ({
-    currentChatUserObj: { _id, name, avatar },
+  (id, name, avatar, chats, currentChatId) => ({
+    currentChatUserObj: { id, name, avatar },
     currentChat: chats.find((chat) => chat.id === currentChatId),
   })
 );
 
-export const selectCurrentChatUser = createSelector(
+export const selectChatProfile = createSelector(
   [
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
   ],
-  (chats, currentChatId) => ({
-    currentChatUser: chats.find((chat) => chat.id === currentChatId)?.users[0],
-  })
+  (chats, currentChatId) => {
+    const currentChat = chats.find((chat) => chat.id === currentChatId);
+    return {
+      blocked: currentChat?.blocked,
+      currentChatUser: currentChat?.users[0],
+    };
+  }
 );

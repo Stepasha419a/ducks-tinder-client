@@ -25,6 +25,8 @@ export class GetChatsQueryHandler implements IQueryHandler<GetChatsQuery> {
           where: { id: { not: user.id } },
           select: UsersSelector.selectShortUser(),
         },
+        blocked: true,
+        blockedById: true,
       },
     });
   }

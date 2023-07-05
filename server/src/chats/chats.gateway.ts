@@ -8,6 +8,7 @@ import {
 } from '@nestjs/websockets';
 import { UserSocket } from 'common/types/user-socket';
 import {
+  BlockChatCommand,
   DeleteMessageCommand,
   EditMessageCommand,
   SendMessageCommand,
@@ -137,5 +138,19 @@ export class ChatsGateway {
     );
 
     this.wss.to(chatId).emit('edit-message', message);
+  }
+
+  @UseGuards(WsRefreshTokenGuard)
+  @SubscribeMessage('block-chat')
+  async blockChat(@ChatId() chatId, @User({ isSocket: true }) user) {
+    if (!chatId) {
+      throw new WsException(NOT_FOUND);
+    }
+
+    const chat = await this.commandBus.execute(
+      new BlockChatCommand(user, chatId),
+    );
+
+    this.wss.to(chatId).emit('block-chat', chat);
   }
 }

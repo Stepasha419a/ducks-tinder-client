@@ -19,6 +19,8 @@ export interface FullChat {
   users: ShortUser[];
   messages: Message[];
   messagesCount: number;
+  blocked: boolean;
+  blockedById: string;
 }
 
 // has only latest message
@@ -26,4 +28,6 @@ export interface ShortChat {
   id: string;
   users: ShortUser[];
   messages: Message[];
+  blocked: boolean;
+  blockedById: string;
 }

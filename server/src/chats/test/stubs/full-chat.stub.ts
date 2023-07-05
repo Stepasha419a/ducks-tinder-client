@@ -15,4 +15,6 @@ export const fullChatStub = (): FullChat => ({
     },
   ],
   messagesCount: 20,
+  blocked: false,
+  blockedById: null,
 });

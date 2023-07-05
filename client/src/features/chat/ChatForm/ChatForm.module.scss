@@ -1,6 +1,38 @@
 .wrapper {
   background-color: var(--color--white-90);
 
+  .blocked {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    min-width: 200px;
+    max-width: 600px;
+    padding: 4px 0;
+    margin-left: 14vw;
+
+    .icon {
+      width: 28px;
+      height: 28px;
+      color: var(--color--red-90);
+    }
+
+    .descr {
+      margin-left: 12px;
+
+      .name {
+        font-weight: 700;
+        font-size: 20px;
+        margin-right: 8px;
+      }
+
+      .text {
+        font-weight: 500;
+        font-size: 18px;
+      }
+    }
+  }
+
   .reply {
     display: flex;
     align-items: center;
