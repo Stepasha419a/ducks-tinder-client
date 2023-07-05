@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import {
   faCircleDown,
@@ -19,6 +19,7 @@ interface PreviewPropsInterface {
   setIsFullPreview?: (setting: boolean) => void;
   isFull?: boolean;
   isShadow?: boolean;
+  extraContent?: ReactElement;
   extraClassName?: string;
 }
 
@@ -28,6 +29,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
   setIsFullPreview = null,
   isFull = false,
   isShadow = false,
+  extraContent,
   extraClassName,
 }) => {
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
@@ -119,6 +121,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
               </div>
             </>
           )}
+          {extraContent && extraContent}
 
           {isInterestsListPopupOpen && (
             <InterestsListPopup

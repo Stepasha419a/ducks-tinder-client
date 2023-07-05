@@ -19,4 +19,5 @@ export {
   selectCurrentMessagesLength,
   selectMessages,
   selectRepliedMessage,
+  selectCurrentChatUser,
 } from './chat.selectors';

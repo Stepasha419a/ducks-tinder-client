@@ -4,3 +4,4 @@ export { CropImage } from './CropImage/CropImage';
 export { DialogUpload } from './DialogUpload/DialogUpload';
 export { ImagesDND } from './ImagesDND/ImagesDND';
 export { PairsSortPopup } from './PairsSortPopup/PairsSortPopup';
+export { UserProfilePopup } from './UserProfilePopup/UserProfilePopup';

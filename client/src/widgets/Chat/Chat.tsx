@@ -1,12 +1,13 @@
 import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 import type { Message } from '@shared/api/interfaces';
-import { Messages } from '@entities/chat/components';
+import { ChatProfile, Messages } from '@entities/chat/components';
 import { ChatForm, MessageSelect } from '@features/chat';
+import { UserProfilePopup } from '@/features/user';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
-import { Status } from './components';
 import { useParams } from 'react-router-dom';
 import { connectChatThunk, disconnectChatThunk } from '@/entities/chat/model';
+import { Status } from './components';
 
 export const Chat = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,8 @@ export const Chat = (): ReactElement => {
   const [currentMessage, setCurrentMessage] = useState<Message | null>(null);
   const [isMessageEditing, setIsMessageEditing] = useState<boolean>(false);
   const [editingValue, setEditingValue] = useState('');
+
+  const [isPreviewOpen, setIsPreviewOpen] = useState<boolean>(false);
 
   const handleSelectMessage = (message: Message) => {
     setEditingValue(message.text);
@@ -40,6 +43,7 @@ export const Chat = (): ReactElement => {
 
   return (
     <>
+      <ChatProfile handleClick={() => setIsPreviewOpen(true)} />
       <Messages
         select={
           <MessageSelect
@@ -57,6 +61,9 @@ export const Chat = (): ReactElement => {
         setEditingValue={setEditingValue}
       />
       <ChatForm />
+      {isPreviewOpen && (
+        <UserProfilePopup handleClose={() => setIsPreviewOpen(false)} />
+      )}
     </>
   );
 };

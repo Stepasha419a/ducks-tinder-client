@@ -68,3 +68,13 @@ export const selectRepliedMessage = createSelector(
     currentChat: chats.find((chat) => chat.id === currentChatId),
   })
 );
+
+export const selectCurrentChatUser = createSelector(
+  [
+    (state: RootState) => state.chat.chats,
+    (state: RootState) => state.chat.currentChatId,
+  ],
+  (chats, currentChatId) => ({
+    currentChatUser: chats.find((chat) => chat.id === currentChatId)?.users[0],
+  })
+);
