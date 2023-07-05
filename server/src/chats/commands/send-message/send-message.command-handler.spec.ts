@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
-import { messageStub, shortChatStub } from 'chats/test/stubs';
+import { fullChatStub, messageStub, shortChatStub } from 'chats/test/stubs';
 import { SendMessageCommandHandler } from './send-message.command-handler';
 import { SendMessageCommand } from './send-message.command';
 import { requestUserStub } from 'users/test/stubs';
@@ -31,6 +31,9 @@ describe('when send message is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
       prismaService.message.findUnique = jest
         .fn()
         .mockResolvedValue(messageStub());
@@ -97,6 +100,9 @@ describe('when send message is called', () => {
 
   describe('when there is no replied message', () => {
     beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
       prismaService.message.findUnique = jest.fn().mockResolvedValue(undefined);
       prismaService.message.create = jest.fn().mockResolvedValue({
         ...messageStub(),

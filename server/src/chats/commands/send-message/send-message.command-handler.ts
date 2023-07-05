@@ -4,7 +4,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendMessageCommand } from './send-message.command';
 import { ChatsSelector } from 'chats/chats.selector';
 import { Message } from 'chats/chats.interfaces';
-import { NOT_FOUND } from 'common/constants/error';
+import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 
 @CommandHandler(SendMessageCommand)
 export class SendMessageCommandHandler
@@ -14,6 +14,14 @@ export class SendMessageCommandHandler
 
   async execute(command: SendMessageCommand): Promise<Message> {
     const { user, chatId, dto } = command;
+
+    const chat = await this.prismaService.chat.findUnique({
+      where: { id: chatId },
+      select: { blocked: true },
+    });
+    if (chat.blocked) {
+      throw new WsException(FORBIDDEN);
+    }
 
     if (dto.repliedId) {
       const replied = await this.prismaService.message.findUnique({

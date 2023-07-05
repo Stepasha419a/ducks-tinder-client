@@ -10,6 +10,7 @@ interface ChatSocket {
   deleteMessage: (messageId: string) => void;
   editMessage: (messageId: string, text: string) => void;
   blockChat: () => void;
+  unblockChat: () => void;
   disconnectChat: () => void;
   closeAllSockets: () => void;
 }
@@ -48,6 +49,9 @@ export const chatSocket: ChatSocket = {
   },
   blockChat(): void {
     this._socket!.emit('block-chat');
+  },
+  unblockChat(): void {
+    this._socket!.emit('unblock-chat');
   },
   disconnectChat(): void {
     if (this._socket) {

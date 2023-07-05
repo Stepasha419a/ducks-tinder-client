@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
-import { messageStub } from 'chats/test/stubs';
+import { fullChatStub, messageStub } from 'chats/test/stubs';
 import { requestUserStub } from 'users/test/stubs';
 import { DeleteMessageCommandHandler } from './delete-message.command-handler';
 import { DeleteMessageCommand } from './delete-message.command';
@@ -34,6 +34,9 @@ describe('when send message is called', () => {
     const createdAtDate = new Date();
 
     beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
       prismaService.message.findFirst = jest
         .fn()
         .mockResolvedValue({ ...messageStub(), createdAt: createdAtDate });
@@ -48,7 +51,11 @@ describe('when send message is called', () => {
     beforeEach(async () => {
       jest.clearAllMocks();
       message = await deleteMessageCommandHandler.execute(
-        new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
+        new DeleteMessageCommand(
+          requestUserStub(),
+          fullChatStub().id,
+          deleteMessageDto,
+        ),
       );
     });
 
@@ -77,6 +84,9 @@ describe('when send message is called', () => {
 
   describe('when there is no such message', () => {
     beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
       prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
       prismaService.message.delete = jest.fn();
     });
@@ -91,7 +101,11 @@ describe('when send message is called', () => {
       jest.clearAllMocks();
       try {
         message = await deleteMessageCommandHandler.execute(
-          new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
+          new DeleteMessageCommand(
+            requestUserStub(),
+            fullChatStub().id,
+            deleteMessageDto,
+          ),
         );
       } catch (responseError) {
         error = responseError;
@@ -121,6 +135,9 @@ describe('when send message is called', () => {
 
   describe('when there is too late to delete (> 12 hours lasted)', () => {
     beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
       prismaService.message.findFirst = jest.fn().mockResolvedValue({
         ...messageStub(),
         createdAt: new Date('2022-01-01'),
@@ -138,7 +155,11 @@ describe('when send message is called', () => {
       jest.clearAllMocks();
       try {
         message = await deleteMessageCommandHandler.execute(
-          new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
+          new DeleteMessageCommand(
+            requestUserStub(),
+            fullChatStub().id,
+            deleteMessageDto,
+          ),
         );
       } catch (responseError) {
         error = responseError;

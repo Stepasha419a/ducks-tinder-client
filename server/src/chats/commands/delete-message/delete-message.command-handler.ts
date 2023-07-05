@@ -14,7 +14,15 @@ export class DeleteMessageCommandHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(command: DeleteMessageCommand): Promise<Message> {
-    const { user, dto } = command;
+    const { user, chatId, dto } = command;
+
+    const chat = await this.prismaService.chat.findUnique({
+      where: { id: chatId },
+      select: { blocked: true },
+    });
+    if (chat.blocked) {
+      throw new WsException(FORBIDDEN);
+    }
 
     const message = await this.prismaService.message.findFirst({
       where: { id: dto.messageId, userId: user.id },

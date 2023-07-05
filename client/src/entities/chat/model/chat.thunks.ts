@@ -12,6 +12,7 @@ import {
   getMessages,
   setIsMessagesLoading,
   setIsNotFound,
+  unblockChat,
 } from './chat.slice';
 import { checkAuthThunk } from '@/entities/auth/model';
 
@@ -80,6 +81,10 @@ export const connectChatThunk = createAsyncThunk(
       socket.on('block-chat', (chat: Chat) => {
         dispatch(blockChat(chat));
       });
+
+      socket.on('unblock-chat', (chat: Chat) => {
+        dispatch(unblockChat(chat));
+      });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -144,6 +149,17 @@ export const blockChatThunk = createAsyncThunk(
   (_, { rejectWithValue }) => {
     try {
       chatService.blockChat();
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
+export const unblockChatThunk = createAsyncThunk(
+  'chat/blockChat',
+  (_, { rejectWithValue }) => {
+    try {
+      chatService.unblockChat();
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

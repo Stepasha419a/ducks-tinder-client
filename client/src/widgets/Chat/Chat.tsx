@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 import type { Message } from '@shared/api/interfaces';
 import { ChatProfile, Messages } from '@entities/chat/components';
-import { ChatForm, MessageSelect, ChatUserProfilePopup } from '@features/chat';
+import { ChatForm, MessageSelect, ChatUserPopup } from '@features/chat';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { useParams } from 'react-router-dom';
 import { connectChatThunk, disconnectChatThunk } from '@/entities/chat/model';
@@ -61,7 +61,7 @@ export const Chat = (): ReactElement => {
       />
       <ChatForm />
       {isPreviewOpen && (
-        <ChatUserProfilePopup handleClose={() => setIsPreviewOpen(false)} />
+        <ChatUserPopup handleClose={() => setIsPreviewOpen(false)} />
       )}
     </>
   );

@@ -14,7 +14,15 @@ export class EditMessageCommandHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(command: EditMessageCommand): Promise<Message> {
-    const { user, dto } = command;
+    const { user, chatId, dto } = command;
+
+    const chat = await this.prismaService.chat.findUnique({
+      where: { id: chatId },
+      select: { blocked: true },
+    });
+    if (chat.blocked) {
+      throw new WsException(FORBIDDEN);
+    }
 
     const candidate = await this.prismaService.message.findFirst({
       where: { id: dto.messageId, userId: user.id },

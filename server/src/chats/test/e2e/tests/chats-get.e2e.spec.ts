@@ -71,6 +71,8 @@ describe('chats (GET)', () => {
             where: { id: { not: currentUserId } },
             select: UsersSelector.selectShortUser(),
           },
+          blocked: true,
+          blockedById: true,
         },
       });
       const { currentUserAccessToken } = prepareReadyAccessTokens();

@@ -2,7 +2,7 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
-import { messageStub } from 'chats/test/stubs';
+import { fullChatStub, messageStub } from 'chats/test/stubs';
 import { requestUserStub } from 'users/test/stubs';
 import { Message } from 'chats/chats.interfaces';
 import { EditMessageCommandHandler } from './edit-message.command-handler';
@@ -32,6 +32,9 @@ describe('when send message is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
       prismaService.message.findFirst = jest
         .fn()
         .mockResolvedValue({ ...messageStub(), createdAt: new Date() });
@@ -43,7 +46,11 @@ describe('when send message is called', () => {
     beforeEach(async () => {
       jest.clearAllMocks();
       message = await editMessageCommandHandler.execute(
-        new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
+        new EditMessageCommand(
+          requestUserStub(),
+          fullChatStub().id,
+          EDIT_MESSAGE_DTO,
+        ),
       );
     });
 
@@ -70,6 +77,9 @@ describe('when send message is called', () => {
 
   describe('when there is no such message', () => {
     beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
       prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
       prismaService.message.update = jest.fn();
     });
@@ -81,7 +91,11 @@ describe('when send message is called', () => {
       jest.clearAllMocks();
       try {
         message = await editMessageCommandHandler.execute(
-          new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
+          new EditMessageCommand(
+            requestUserStub(),
+            fullChatStub().id,
+            EDIT_MESSAGE_DTO,
+          ),
         );
       } catch (responseError) {
         error = responseError;
@@ -110,6 +124,9 @@ describe('when send message is called', () => {
 
   describe('when there is too late to edit (> 6 hours lasted)', () => {
     beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue(fullChatStub());
       prismaService.message.findFirst = jest.fn().mockResolvedValue({
         ...messageStub(),
         createdAt: new Date('2018-01-01'),
@@ -124,7 +141,11 @@ describe('when send message is called', () => {
       jest.clearAllMocks();
       try {
         message = await editMessageCommandHandler.execute(
-          new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
+          new EditMessageCommand(
+            requestUserStub(),
+            fullChatStub().id,
+            EDIT_MESSAGE_DTO,
+          ),
         );
       } catch (responseError) {
         error = responseError;

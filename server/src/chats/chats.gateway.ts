@@ -12,6 +12,7 @@ import {
   DeleteMessageCommand,
   EditMessageCommand,
   SendMessageCommand,
+  UnblockChatCommand,
 } from './commands';
 import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import { UseGuards } from '@nestjs/common';
@@ -116,7 +117,7 @@ export class ChatsGateway {
     }
 
     const message = await this.commandBus.execute(
-      new DeleteMessageCommand(user, dto),
+      new DeleteMessageCommand(user, chatId, dto),
     );
 
     this.wss.to(chatId).emit('delete-message', message);
@@ -134,7 +135,7 @@ export class ChatsGateway {
     }
 
     const message = await this.commandBus.execute(
-      new EditMessageCommand(user, dto),
+      new EditMessageCommand(user, chatId, dto),
     );
 
     this.wss.to(chatId).emit('edit-message', message);
@@ -152,5 +153,19 @@ export class ChatsGateway {
     );
 
     this.wss.to(chatId).emit('block-chat', chat);
+  }
+
+  @UseGuards(WsRefreshTokenGuard)
+  @SubscribeMessage('unblock-chat')
+  async unblockChat(@ChatId() chatId, @User({ isSocket: true }) user) {
+    if (!chatId) {
+      throw new WsException(NOT_FOUND);
+    }
+
+    const chat = await this.commandBus.execute(
+      new UnblockChatCommand(user, chatId),
+    );
+
+    this.wss.to(chatId).emit('unblock-chat', chat);
   }
 }

@@ -24,4 +24,6 @@ export const GET_FULL_CHAT_EXPECTED = {
       place: null,
     },
   ],
+  blocked: false,
+  blockedById: null,
 };

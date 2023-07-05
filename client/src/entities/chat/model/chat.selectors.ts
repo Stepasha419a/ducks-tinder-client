@@ -78,6 +78,7 @@ export const selectChatProfile = createSelector(
     const currentChat = chats.find((chat) => chat.id === currentChatId);
     return {
       blocked: currentChat?.blocked,
+      blockedById: currentChat?.blockedById,
       currentChatUser: currentChat?.users[0],
     };
   }
