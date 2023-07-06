@@ -1,7 +1,9 @@
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { Server } from 'socket.io';
-import { ConnectedSocket, MessageBody, WsException } from '@nestjs/websockets';
 import {
+  ConnectedSocket,
+  MessageBody,
+  WsException,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
@@ -25,6 +27,7 @@ import {
 } from './dto';
 import { NOT_FOUND } from 'common/constants/error';
 import { ChatId, User } from 'common/decorators';
+import { GetMessagesQueryReturn } from './queries/get-messages/get-messages.query';
 
 @WebSocketGateway({
   namespace: '/chat/socket',
@@ -38,7 +41,7 @@ export class ChatsGateway {
   ) {}
 
   @WebSocketServer()
-  private readonly wss: Server;
+  wss: Server;
 
   @UseGuards(WsAccessTokenGuard)
   @SubscribeMessage('connect-chat')
@@ -98,11 +101,11 @@ export class ChatsGateway {
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
-    const messages = await this.queryBus.execute(
+    const data: GetMessagesQueryReturn = await this.queryBus.execute(
       new GetMessagesQuery(user, chatId, dto),
     );
 
-    this.wss.to(chatId).emit('get-messages', messages);
+    this.wss.to(chatId).emit('get-messages', data);
   }
 
   @UseGuards(WsRefreshTokenGuard)
