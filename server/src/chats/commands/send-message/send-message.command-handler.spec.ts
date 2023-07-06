@@ -9,6 +9,7 @@ import { requestUserStub } from 'users/test/stubs';
 import { SendMessageDto } from 'chats/dto';
 import { Message } from 'chats/chats.interfaces';
 import { ChatsSelector } from 'chats/chats.selector';
+import { FORBIDDEN } from 'common/constants/error';
 
 describe('when send message is called', () => {
   let prismaService: PrismaService;
@@ -63,6 +64,14 @@ describe('when send message is called', () => {
           sendMessageDto,
         ),
       );
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: shortChatStub().id },
+        select: { blocked: true },
+      });
     });
 
     it('should call message find unique', () => {
@@ -137,6 +146,14 @@ describe('when send message is called', () => {
       }
     });
 
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: shortChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
     it('should call message find unique', () => {
       expect(prismaService.message.findUnique).toBeCalledTimes(1);
       expect(prismaService.message.findUnique).toBeCalledWith({
@@ -154,6 +171,136 @@ describe('when send message is called', () => {
 
     it('should throw an error', () => {
       expect(error?.message).toEqual('Not Found');
+    });
+  });
+
+  describe('when there is no such chat', () => {
+    beforeAll(() => {
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.findUnique = jest
+        .fn()
+        .mockResolvedValue(messageStub());
+      prismaService.message.create = jest.fn().mockResolvedValue({
+        ...messageStub(),
+        replied: {
+          id: 'replied-message-id',
+          text: 'replied-message-text',
+          userId: 'replied-user-id',
+        },
+        repliedId: undefined,
+      });
+    });
+
+    let message: Message;
+    let error;
+    const sendMessageDto: SendMessageDto = {
+      text: 'message-text',
+      repliedId: 'replied-message-id',
+    };
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        message = await sendMessageCommandHandler.execute(
+          new SendMessageCommand(
+            requestUserStub(),
+            shortChatStub().id,
+            sendMessageDto,
+          ),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: shortChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
+    it('should not call message find unique', () => {
+      expect(prismaService.message.findUnique).not.toBeCalled();
+    });
+
+    it('should not call message create', () => {
+      expect(prismaService.message.create).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(message).toStrictEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual(FORBIDDEN);
+    });
+  });
+
+  describe('when chat is blocked', () => {
+    beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue({ blocked: true });
+      prismaService.message.findUnique = jest
+        .fn()
+        .mockResolvedValue(messageStub());
+      prismaService.message.create = jest.fn().mockResolvedValue({
+        ...messageStub(),
+        replied: {
+          id: 'replied-message-id',
+          text: 'replied-message-text',
+          userId: 'replied-user-id',
+        },
+        repliedId: undefined,
+      });
+    });
+
+    let message: Message;
+    let error;
+    const sendMessageDto: SendMessageDto = {
+      text: 'message-text',
+      repliedId: 'replied-message-id',
+    };
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        message = await sendMessageCommandHandler.execute(
+          new SendMessageCommand(
+            requestUserStub(),
+            shortChatStub().id,
+            sendMessageDto,
+          ),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: shortChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
+    it('should not call message find unique', () => {
+      expect(prismaService.message.findUnique).not.toBeCalled();
+    });
+
+    it('should not call message create', () => {
+      expect(prismaService.message.create).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(message).toStrictEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual(FORBIDDEN);
     });
   });
 });

@@ -11,7 +11,7 @@ import { ChatsSelector } from 'chats/chats.selector';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 import { DeleteMessageDto } from 'chats/dto';
 
-describe('when send message is called', () => {
+describe('when delete message is called', () => {
   let prismaService: PrismaService;
   let deleteMessageCommandHandler: DeleteMessageCommandHandler;
 
@@ -59,6 +59,14 @@ describe('when send message is called', () => {
       );
     });
 
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
     it('should call message find first', () => {
       expect(prismaService.message.findFirst).toBeCalledTimes(1);
       expect(prismaService.message.findFirst).toBeCalledWith({
@@ -79,6 +87,114 @@ describe('when send message is called', () => {
         ...messageStub(),
         createdAt: createdAtDate,
       });
+    });
+  });
+
+  describe('when there is no such chat', () => {
+    beforeAll(() => {
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.delete = jest.fn();
+    });
+
+    let message: Message;
+    let error;
+    const deleteMessageDto: DeleteMessageDto = {
+      messageId: messageStub().id,
+    };
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        message = await deleteMessageCommandHandler.execute(
+          new DeleteMessageCommand(
+            requestUserStub(),
+            fullChatStub().id,
+            deleteMessageDto,
+          ),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
+    it('should not call message find first', () => {
+      expect(prismaService.message.findFirst).not.toBeCalled();
+    });
+
+    it('should not call message delete', () => {
+      expect(prismaService.message.delete).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(message).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual(FORBIDDEN);
+    });
+  });
+
+  describe('when chat is blocked', () => {
+    beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue({ blocked: true });
+      prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.delete = jest.fn();
+    });
+
+    let message: Message;
+    let error;
+    const deleteMessageDto: DeleteMessageDto = {
+      messageId: messageStub().id,
+    };
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        message = await deleteMessageCommandHandler.execute(
+          new DeleteMessageCommand(
+            requestUserStub(),
+            fullChatStub().id,
+            deleteMessageDto,
+          ),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
+    it('should not call message find first', () => {
+      expect(prismaService.message.findFirst).not.toBeCalled();
+    });
+
+    it('should not call message delete', () => {
+      expect(prismaService.message.delete).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(message).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual(FORBIDDEN);
     });
   });
 
@@ -110,6 +226,14 @@ describe('when send message is called', () => {
       } catch (responseError) {
         error = responseError;
       }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
     });
 
     it('should call message find first', () => {
@@ -164,6 +288,14 @@ describe('when send message is called', () => {
       } catch (responseError) {
         error = responseError;
       }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
     });
 
     it('should call message find first', () => {

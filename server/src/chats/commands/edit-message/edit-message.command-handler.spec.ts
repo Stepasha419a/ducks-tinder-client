@@ -11,7 +11,7 @@ import { EDIT_MESSAGE_DTO } from 'chats/test/values/chats.const.dto';
 import { ChatsSelector } from 'chats/chats.selector';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 
-describe('when send message is called', () => {
+describe('when edit message is called', () => {
   let prismaService: PrismaService;
   let editMessageCommandHandler: EditMessageCommandHandler;
 
@@ -54,6 +54,14 @@ describe('when send message is called', () => {
       );
     });
 
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
     it('should call message find first', () => {
       expect(prismaService.message.findFirst).toBeCalledTimes(1);
       expect(prismaService.message.findFirst).toBeCalledWith({
@@ -72,6 +80,108 @@ describe('when send message is called', () => {
 
     it('should return a message', () => {
       expect(message).toStrictEqual(messageStub());
+    });
+  });
+
+  describe('when there is no such chat', () => {
+    beforeAll(() => {
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.update = jest.fn();
+    });
+
+    let message: Message;
+    let error;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        message = await editMessageCommandHandler.execute(
+          new EditMessageCommand(
+            requestUserStub(),
+            fullChatStub().id,
+            EDIT_MESSAGE_DTO,
+          ),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
+    it('should not call message find first', () => {
+      expect(prismaService.message.findFirst).not.toBeCalled();
+    });
+
+    it('should not call message update', () => {
+      expect(prismaService.message.update).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(message).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual(FORBIDDEN);
+    });
+  });
+
+  describe('when chat is blocked', () => {
+    beforeAll(() => {
+      prismaService.chat.findUnique = jest
+        .fn()
+        .mockResolvedValue({ blocked: true });
+      prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
+      prismaService.message.update = jest.fn();
+    });
+
+    let message: Message;
+    let error;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      try {
+        message = await editMessageCommandHandler.execute(
+          new EditMessageCommand(
+            requestUserStub(),
+            fullChatStub().id,
+            EDIT_MESSAGE_DTO,
+          ),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
+    });
+
+    it('should not call message find first', () => {
+      expect(prismaService.message.findFirst).not.toBeCalled();
+    });
+
+    it('should not call message update', () => {
+      expect(prismaService.message.update).not.toBeCalled();
+    });
+
+    it('should return undefined', () => {
+      expect(message).toEqual(undefined);
+    });
+
+    it('should throw an error', () => {
+      expect(error?.message).toEqual(FORBIDDEN);
     });
   });
 
@@ -100,6 +210,14 @@ describe('when send message is called', () => {
       } catch (responseError) {
         error = responseError;
       }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
     });
 
     it('should call message find first', () => {
@@ -150,6 +268,14 @@ describe('when send message is called', () => {
       } catch (responseError) {
         error = responseError;
       }
+    });
+
+    it('should call chat find unique', () => {
+      expect(prismaService.chat.findUnique).toBeCalledTimes(1);
+      expect(prismaService.chat.findUnique).toBeCalledWith({
+        where: { id: fullChatStub().id },
+        select: { blocked: true },
+      });
     });
 
     it('should call message find first', () => {

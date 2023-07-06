@@ -19,7 +19,7 @@ export class SendMessageCommandHandler
       where: { id: chatId },
       select: { blocked: true },
     });
-    if (chat.blocked) {
+    if (!chat || chat?.blocked) {
       throw new WsException(FORBIDDEN);
     }
 
