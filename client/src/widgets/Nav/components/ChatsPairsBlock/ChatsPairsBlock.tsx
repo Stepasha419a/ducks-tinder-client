@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import { PairLink } from '@entities/user/components';
 import { OpenChatList } from '@features/chat';
 import styles from './ChatsPairsBlock.module.scss';
@@ -19,7 +20,29 @@ export const ChatsPairsBlock: FC = () => {
     <>
       <Tabs isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} />
       <div className={styles.content}>
-        {isPairsOpened ? <PairLink /> : <OpenChatList />}
+        <AnimatePresence>
+          {isPairsOpened ? (
+            <motion.div
+              key="pair-link"
+              initial={{ translateX: '-340px', position: 'absolute' }}
+              animate={{ translateX: 0 }}
+              exit={{ translateX: '-340px' }}
+              transition={{ duration: 0.3 }}
+            >
+              <PairLink />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="chat-list"
+              initial={{ translateX: '340px', position: 'absolute' }}
+              animate={{ translateX: 0 }}
+              exit={{ translateX: '340px' }}
+              transition={{ duration: 0.3 }}
+            >
+              <OpenChatList />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );

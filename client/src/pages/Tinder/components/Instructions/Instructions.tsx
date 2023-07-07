@@ -1,5 +1,6 @@
 import type { ReactElement } from 'react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   faArrowTurnDown,
   faDownLong,
@@ -14,54 +15,56 @@ import styles from './Instructions.module.scss';
 export const Instructions = (): ReactElement => {
   const [isInstructionsOpen, setIsInstructionsOpen] = useState(true);
 
-  if (!isInstructionsOpen) {
-    return (
-      <div className={styles.instructions}>
-        <Button
-          onClick={() => setIsInstructionsOpen(true)}
-          extraClassName={styles.toggle}
-        >
-          show
-        </Button>
-      </div>
-    );
-  }
-
   return (
-    <div className={styles.instructions}>
+    <motion.div
+      key="open-instructions"
+      transition={{ duration: 0.15 }}
+      animate={{ width: isInstructionsOpen ? '800px' : '97px' }}
+      className={styles.instructions}
+    >
       <Button
-        onClick={() => setIsInstructionsOpen(false)}
+        onClick={() =>
+          isInstructionsOpen
+            ? setIsInstructionsOpen(false)
+            : setIsInstructionsOpen(true)
+        }
         extraClassName={styles.toggle}
       >
-        hide
+        {isInstructionsOpen ? 'hide' : 'show'}
       </Button>
-      <div className={styles.instruction}>
-        <FontAwesomeIcon icon={faLeftLong} className={styles.icon} />
-        <div className={styles.text}>no</div>
-      </div>
-      <div className={styles.instruction}>
-        <FontAwesomeIcon icon={faRightLong} className={styles.icon} />
-        <div className={styles.text}>like</div>
-      </div>
-      <div className={styles.instruction}>
-        <FontAwesomeIcon icon={faUpLong} className={styles.icon} />
-        <div className={styles.text}>open profile</div>
-      </div>
-      <div className={styles.instruction}>
-        <FontAwesomeIcon icon={faDownLong} className={styles.icon} />
-        <div className={styles.text}>close profile</div>
-      </div>
-      <div className={styles.instruction}>
-        <FontAwesomeIcon
-          icon={faArrowTurnDown}
-          className={`${styles.icon} ${styles.icon_rotate}`}
-        />
-        <div className={styles.text}>superlike</div>
-      </div>
-      <div className={styles.instruction}>
-        <div className={`${styles.icon} ${styles.icon_space}`}></div>
-        <div className={styles.text}>next</div>
-      </div>
-    </div>
+      <motion.div
+        transition={{ duration: 0.15 }}
+        animate={{ width: isInstructionsOpen ? '800px' : '0' }}
+        className={styles.items}
+      >
+        <div className={styles.instruction}>
+          <FontAwesomeIcon icon={faLeftLong} className={styles.icon} />
+          <div className={styles.text}>no</div>
+        </div>
+        <div className={styles.instruction}>
+          <FontAwesomeIcon icon={faRightLong} className={styles.icon} />
+          <div className={styles.text}>like</div>
+        </div>
+        <div className={styles.instruction}>
+          <FontAwesomeIcon icon={faUpLong} className={styles.icon} />
+          <div className={styles.text}>open profile</div>
+        </div>
+        <div className={styles.instruction}>
+          <FontAwesomeIcon icon={faDownLong} className={styles.icon} />
+          <div className={styles.text}>close profile</div>
+        </div>
+        <div className={styles.instruction}>
+          <FontAwesomeIcon
+            icon={faArrowTurnDown}
+            className={`${styles.icon} ${styles.icon_rotate}`}
+          />
+          <div className={styles.text}>superlike</div>
+        </div>
+        <div className={styles.instruction}>
+          <div className={`${styles.icon} ${styles.icon_space}`}></div>
+          <div className={styles.text}>next</div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };

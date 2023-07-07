@@ -8,6 +8,7 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  overflow: hidden;
 
   .toggle {
     width: auto;
@@ -26,33 +27,41 @@
     }
   }
 
-  .instruction {
+  .items {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    justify-content: space-between;
+    height: 25px;
 
-    .icon {
-      font-size: 20px;
-      color: var(--color--black-80);
-      margin-right: 8px;
+    .instruction {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
 
-      &_rotate {
-        transform: rotate(90deg);
+      .icon {
+        font-size: 20px;
+        color: var(--color--black-80);
+        margin-right: 8px;
+
+        &_rotate {
+          transform: rotate(90deg);
+        }
+
+        &_space {
+          width: 70px;
+          height: 20px;
+          border: 2px solid var(--color--black-80);
+          border-radius: 4px;
+        }
       }
 
-      &_space {
-        width: 70px;
-        height: 20px;
-        border: 2px solid var(--color--black-80);
-        border-radius: 4px;
+      .text {
+        color: var(--color--black-80);
+        font-weight: 900;
+        font-size: 14px;
+        white-space: nowrap;
+        text-transform: uppercase;
       }
-    }
-
-    .text {
-      color: var(--color--black-80);
-      font-weight: 900;
-      font-size: 14px;
-      text-transform: uppercase;
     }
   }
 
