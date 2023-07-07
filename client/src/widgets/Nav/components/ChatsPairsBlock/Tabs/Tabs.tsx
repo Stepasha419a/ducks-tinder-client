@@ -1,6 +1,7 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames';
+import { ROUTES } from '@/shared/constants';
+import { motion } from 'framer-motion';
 import styles from '../ChatsPairsBlock.module.scss';
 
 interface TabsProps {
@@ -9,16 +10,33 @@ interface TabsProps {
 }
 
 export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
-  const cnPairs = classNames(styles.title, isPairsOpened && styles.active);
-  const cnMessages = classNames(styles.title, !isPairsOpened && styles.active);
-
   return (
     <div className={styles.titles}>
-      <Link to="/" onClick={() => setIsPairsOpened(true)} className={cnPairs}>
+      <Link
+        to={ROUTES.main}
+        onClick={() => setIsPairsOpened(true)}
+        className={styles.title}
+      >
         Pairs
+        {isPairsOpened && (
+          <motion.div
+            animate={{
+              borderBottom: '3px solid var(--color--red-100)',
+            }}
+            layoutId="selected"
+          ></motion.div>
+        )}
       </Link>
-      <div onClick={() => setIsPairsOpened(false)} className={cnMessages}>
+      <div onClick={() => setIsPairsOpened(false)} className={styles.title}>
         Messages
+        {!isPairsOpened && (
+          <motion.div
+            animate={{
+              borderBottom: '3px solid var(--color--red-100)',
+            }}
+            layoutId="selected"
+          ></motion.div>
+        )}
       </div>
     </div>
   );

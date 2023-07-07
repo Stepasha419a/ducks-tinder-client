@@ -47,7 +47,7 @@ export const connectChatThunk = createAsyncThunk(
             case 'Unauthorized':
               dispatch(checkAuthThunk());
               break;
-            case 'Such chat was not found':
+            case 'Not Found':
               dispatch(setIsNotFound(true));
               break;
             default:

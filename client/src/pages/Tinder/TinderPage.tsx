@@ -1,19 +1,14 @@
 import type { FC, ReactElement } from 'react';
-import { Nav, Tinder } from '@widgets';
+import { Tinder } from '@widgets';
 import { Instructions } from './components';
-import { withPrivatePageHocs } from '@hocs';
-import styles from './Tinder.module.scss';
 
 const TinderPage: FC = (): ReactElement => {
   return (
-    <div className={styles.main}>
-      <Nav />
-      <div className={styles.content}>
-        <Tinder />
-        <Instructions />
-      </div>
-    </div>
+    <>
+      <Tinder />
+      <Instructions />
+    </>
   );
 };
 
-export default withPrivatePageHocs(TinderPage);
+export default TinderPage;

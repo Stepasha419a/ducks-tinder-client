@@ -1,5 +1,6 @@
 import type { FC, ReactElement } from 'react';
 import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import type { ShortChat } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { getChatsThunk, selectChatList } from '@entities/chat/model';
@@ -29,7 +30,13 @@ export const ChatList: FC = (): ReactElement => {
   }
 
   return (
-    <div className={styles.chats}>
+    <motion.div
+      layout
+      initial={{ translateX: '-340px' }}
+      animate={{ translateX: 0 }}
+      transition={{ duration: 0.3 }}
+      className={styles.chats}
+    >
       {chats.map((chat: ShortChat) => {
         const chatCompanion = chat.users.find(
           (user) => user.id !== currentUserId
@@ -44,6 +51,6 @@ export const ChatList: FC = (): ReactElement => {
           />
         );
       })}
-    </div>
+    </motion.div>
   );
 };
