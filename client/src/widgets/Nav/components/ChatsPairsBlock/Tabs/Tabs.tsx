@@ -24,7 +24,7 @@ export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
               borderBottom: '3px solid var(--color--red-100)',
             }}
             layoutId="selected"
-          ></motion.div>
+          />
         )}
       </Link>
       <div onClick={() => setIsPairsOpened(false)} className={styles.title}>
@@ -35,7 +35,7 @@ export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
               borderBottom: '3px solid var(--color--red-100)',
             }}
             layoutId="selected"
-          ></motion.div>
+          />
         )}
       </div>
     </div>

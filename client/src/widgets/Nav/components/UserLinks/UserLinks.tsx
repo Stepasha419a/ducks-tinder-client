@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import classNames from 'classnames';
 import {
   faBriefcase,
   faFireFlameCurved,
@@ -8,7 +9,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar } from '@shared/ui';
 import { useAppSelector } from '@hooks';
-import classNames from 'classnames';
+import { variants } from './UserLinks.variants';
 import styles from './UserLinks.module.scss';
 
 export const UserLinks = () => {
@@ -18,12 +19,13 @@ export const UserLinks = () => {
 
   return (
     <div className={styles.links}>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {pathname === '/profile' ? (
           <motion.div
             key="main-link"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
+            variants={variants}
+            initial={'scaleIn'}
+            animate={'scaleOut'}
             transition={{ duration: 0.1 }}
           >
             <Link className={classNames(styles.mainLink, styles.main)} to="/">
@@ -33,8 +35,9 @@ export const UserLinks = () => {
         ) : (
           <motion.div
             key="profile-link"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
+            variants={variants}
+            initial={'scaleIn'}
+            animate={'scaleOut'}
             transition={{ duration: 0.1 }}
           >
             <Link

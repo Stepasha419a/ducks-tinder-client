@@ -4,8 +4,9 @@ import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { PairLink } from '@entities/user/components';
 import { OpenChatList } from '@features/chat';
-import styles from './ChatsPairsBlock.module.scss';
 import { Tabs } from './Tabs/Tabs';
+import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
+import styles from './ChatsPairsBlock.module.scss';
 
 export const ChatsPairsBlock: FC = () => {
   const { pathname } = useLocation();
@@ -20,24 +21,26 @@ export const ChatsPairsBlock: FC = () => {
     <>
       <Tabs isPairsOpened={isPairsOpened} setIsPairsOpened={setIsPairsOpened} />
       <div className={styles.content}>
-        <AnimatePresence>
+        <AnimatePresence initial={false} mode="wait">
           {isPairsOpened ? (
             <motion.div
               key="pair-link"
-              initial={{ translateX: '-340px', position: 'absolute' }}
-              animate={{ translateX: 0 }}
-              exit={{ translateX: '-340px' }}
-              transition={{ duration: 0.3 }}
+              variants={pairLinkVariants}
+              initial={'slideOut'}
+              animate={'slideIn'}
+              exit={'slideOut'}
+              transition={{ duration: 0.25 }}
             >
               <PairLink />
             </motion.div>
           ) : (
             <motion.div
               key="chat-list"
-              initial={{ translateX: '340px', position: 'absolute' }}
-              animate={{ translateX: 0 }}
-              exit={{ translateX: '340px' }}
-              transition={{ duration: 0.3 }}
+              variants={chatListVariants}
+              initial={'slideOut'}
+              animate={'slideIn'}
+              exit={'slideOut'}
+              transition={{ duration: 0.25 }}
             >
               <OpenChatList />
             </motion.div>

@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useAppSelector } from '@hooks';
 import { Setting } from './Setting/Setting';
 import { SettingsList } from './SettingsList/SettingsList';
+import { settingVariants } from './ProfileBlock.variants';
 import styles from './ProfileBlock.module.scss';
 
 export const ProfileBlock = (): ReactElement => {
@@ -12,25 +13,29 @@ export const ProfileBlock = (): ReactElement => {
 
   return (
     <div className={styles.block}>
-      <AnimatePresence>
+      <AnimatePresence initial={false} mode="wait">
         {isUserInfoSetting ? (
           <motion.div
-            initial={{
-              translateX: '340px',
-              borderLeft: '1px solid var(--border-main)',
-            }}
-            animate={{ translateX: 0, borderRight: '0' }}
-            transition={{ duration: 0.3 }}
-            exit={{
-              translateX: '340px',
-              borderLeft: '1px solid var(--border-main)',
-            }}
             key="setting"
+            variants={settingVariants}
+            initial={'slideOut'}
+            animate={'slideIn'}
+            exit={'slideOut'}
+            transition={{ duration: 0.25 }}
           >
             <Setting />
           </motion.div>
         ) : (
-          <SettingsList />
+          <motion.div
+            key="setting-list"
+            variants={settingVariants}
+            initial={'slideOut'}
+            animate={'slideIn'}
+            exit={'slideOut'}
+            transition={{ duration: 0.25 }}
+          >
+            <SettingsList />
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

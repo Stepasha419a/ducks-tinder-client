@@ -2,6 +2,7 @@ import type { ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ProfileBlock, UserLinks, ChatsPairsBlock } from './components';
+import { chatPairsVariants, profileVariants } from './Nav.variants';
 import styles from './Nav.module.scss';
 
 export const Nav = (): ReactElement => {
@@ -10,33 +11,26 @@ export const Nav = (): ReactElement => {
   return (
     <aside className={styles.info}>
       <UserLinks />
-      <AnimatePresence>
+      <AnimatePresence initial={false} mode="wait">
         {pathname === '/profile' ? (
           <motion.div
             key="profile"
-            transition={{ duration: 0.3 }}
-            initial={{
-              translateX: '-340px',
-              borderRight: '1px solid var(--border-main)',
-              position: 'absolute',
-            }}
-            animate={{ translateX: 0, borderRight: '0', width: '100%' }}
-            exit={{
-              translateX: '-340px',
-              borderRight: '1px solid var(--border-main)',
-            }}
+            variants={profileVariants}
+            initial={'slideOut'}
+            animate={'slideIn'}
+            exit={'slideOut'}
+            transition={{ duration: 0.25 }}
           >
             <ProfileBlock />
           </motion.div>
         ) : (
           <motion.div
             key="chats-pairs"
-            transition={{ duration: 0.3 }}
-            initial={{
-              translateX: '-340px',
-              position: 'absolute',
-            }}
-            animate={{ translateX: 0 }}
+            variants={chatPairsVariants}
+            initial={'slideOut'}
+            animate={'slideIn'}
+            exit={'slideOut'}
+            transition={{ duration: 0.25 }}
           >
             <ChatsPairsBlock />
           </motion.div>

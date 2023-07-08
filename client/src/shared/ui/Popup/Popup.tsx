@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import styles from './Popup.module.scss';
 import type { PopupProps } from './Popup.types';
+import { variants } from './Popup.variants';
 
 const portalElement = document.getElementById('portal');
 
@@ -20,9 +21,10 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
     <div className={styles.popup}>
       <motion.div
         className={styles.body}
+        variants={variants}
+        initial={'initial'}
+        animate={'animate'}
         transition={{ duration: 0.1 }}
-        initial={{ scale: 0.9 }}
-        animate={{ scale: 1 }}
       >
         <div className={cn}>
           {title && <div className={styles.title}>{title}</div>}
