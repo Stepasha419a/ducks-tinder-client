@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppSelector } from '@hooks';
-import { CropImage, DialogUpload, ImagesDND } from '@features/user';
+import { CropImage, DialogUpload, PicturesDND } from '@features/user';
 import { Preview } from '@entities/user/components';
 import { ImagesFormWrapper, Tabs } from './components';
 import styles from './ImageSetting.module.scss';
@@ -44,7 +44,7 @@ export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
               />
             ) : (
               <ImagesFormWrapper setIsImageSetting={setIsImageSetting}>
-                <ImagesDND />
+                <PicturesDND />
               </ImagesFormWrapper>
             )}
           </div>
