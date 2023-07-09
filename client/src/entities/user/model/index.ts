@@ -10,8 +10,8 @@ export {
 export {
   updateUserThunk,
   saveUserImageThunk,
-  deleteUserImage,
-  mixUserImages,
+  deleteUserPictureThunk,
+  mixUserPicturesThunk,
   refusePairThunk,
   acceptPairThunk,
   getUserPairsThunk,

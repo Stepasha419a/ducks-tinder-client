@@ -4,6 +4,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { UsersSelector } from 'users/users.selector';
 import { UserDto } from 'users/dto';
 import { MixPicturesCommand } from './mix-pictures.command';
+import { PictureInterface } from 'users/users.interface';
 
 @CommandHandler(MixPicturesCommand)
 export class MixPicturesCommandHandler
@@ -18,20 +19,24 @@ export class MixPicturesCommandHandler
       where: { userId: user.id },
     });
 
-    const mixPicture = pictures.find((pic) => pic.order === dto.mixOrder);
-    const withPicture = pictures.find((pic) => pic.order === dto.withOrder);
-    if (!mixPicture || !withPicture) {
+    if (dto.pictures.length !== pictures.length) {
       throw new NotFoundException();
     }
 
-    await this.prismaService.picture.update({
-      where: { id: mixPicture.id },
-      data: { order: dto.withOrder },
-    });
-    await this.prismaService.picture.update({
-      where: { id: withPicture.id },
-      data: { order: dto.mixOrder },
-    });
+    await Promise.all(
+      dto.pictures.map((pic: PictureInterface, i) => {
+        const picture = pictures.find((item) => item.name === pic.name);
+        if (!picture) {
+          throw new NotFoundException();
+        }
+        if (picture.order !== i) {
+          return this.prismaService.picture.update({
+            where: { id: picture.id },
+            data: { order: i },
+          });
+        }
+      }),
+    );
 
     const updatedUser = await this.prismaService.user.findUnique({
       where: { id: user.id },

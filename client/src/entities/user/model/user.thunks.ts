@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import type {
   ChangedData,
   InnerObjectName,
+  Picture,
   User,
 } from '@shared/api/interfaces';
 import { userService } from '@shared/api/services';
@@ -110,8 +111,8 @@ export const saveUserImageThunk = createAsyncThunk(
   }
 );
 
-export const deleteUserImage = createAsyncThunk(
-  'users/deleteUserImage',
+export const deleteUserPictureThunk = createAsyncThunk(
+  'users/deleteUserPicture',
   async (order: number, { rejectWithValue }) => {
     try {
       const response = await userService.deletePicture(order);
@@ -123,14 +124,11 @@ export const deleteUserImage = createAsyncThunk(
   }
 );
 
-export const mixUserImages = createAsyncThunk(
-  'users/mixUserImages',
-  async (args: { order: number; withOrder: number }, { rejectWithValue }) => {
+export const mixUserPicturesThunk = createAsyncThunk(
+  'users/mixUserPictures',
+  async (pictures: Picture[], { rejectWithValue }) => {
     try {
-      const response = await userService.mixPictures(
-        args.order,
-        args.withOrder
-      );
+      const response = await userService.mixPictures(pictures);
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

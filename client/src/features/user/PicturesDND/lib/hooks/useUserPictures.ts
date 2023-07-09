@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { Picture } from '@shared/api/interfaces';
-import { deleteUserImage } from '@entities/user/model';
+import {
+  deleteUserPictureThunk,
+  mixUserPicturesThunk,
+} from '@entities/user/model';
 import { useAppDispatch, useAppSelector } from '@hooks';
 
 export function useUserPictures() {
@@ -17,12 +20,26 @@ export function useUserPictures() {
   }, [userPictures]);
 
   const handleDeletePicture = (order: number): void => {
-    dispatch(deleteUserImage(order));
+    dispatch(deleteUserPictureThunk(order));
+  };
+
+  const handleMixPictures = () => {
+    let isChanged = false;
+    for (let i = 0; i < pictures.length; i++) {
+      if (pictures[i].order !== i) {
+        isChanged = true;
+        break;
+      }
+    }
+    if (isChanged) {
+      dispatch(mixUserPicturesThunk(pictures));
+    }
   };
 
   return {
     pictures,
     setPictures,
     handleDeletePicture,
+    handleMixPictures,
   };
 }

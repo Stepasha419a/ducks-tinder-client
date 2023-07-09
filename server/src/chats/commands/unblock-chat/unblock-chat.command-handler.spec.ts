@@ -2,7 +2,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { Test } from '@nestjs/testing';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { fullChatStub } from 'chats/test/stubs';
-import { FullChat } from 'chats/chats.interfaces';
+import { FullChat } from 'chats/chats.interface';
 import { requestUserStub } from 'users/test/stubs';
 import { ChatsSelector } from 'chats/chats.selector';
 import { UsersSelector } from 'users/users.selector';

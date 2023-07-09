@@ -4,7 +4,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { fullChatStub, messageStub } from 'chats/test/stubs';
 import { requestUserStub } from 'users/test/stubs';
-import { Message } from 'chats/chats.interfaces';
+import { Message } from 'chats/chats.interface';
 import { EditMessageCommandHandler } from './edit-message.command-handler';
 import { EditMessageCommand } from './edit-message.command';
 import { EDIT_MESSAGE_DTO } from 'chats/test/values/chats.const.dto';

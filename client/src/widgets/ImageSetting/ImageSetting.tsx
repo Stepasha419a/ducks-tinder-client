@@ -1,13 +1,13 @@
-import type { FC } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import { useAppSelector } from '@hooks';
 import { CropImage, DialogUpload, PicturesDND } from '@features/user';
 import { Preview } from '@entities/user/components';
-import { ImagesFormWrapper, Tabs } from './components';
+import { Tabs } from './components';
 import styles from './ImageSetting.module.scss';
 
 interface ImageSettingProps {
-  setIsImageSetting: (isImageSetting: boolean) => void;
+  setIsImageSetting: Dispatch<SetStateAction<boolean>>;
 }
 
 export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
@@ -43,9 +43,7 @@ export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
                 setIsFullPreview={setIsFullPreviewSetting}
               />
             ) : (
-              <ImagesFormWrapper setIsImageSetting={setIsImageSetting}>
-                <PicturesDND />
-              </ImagesFormWrapper>
+              <PicturesDND setIsImageSetting={setIsImageSetting} />
             )}
           </div>
         </>

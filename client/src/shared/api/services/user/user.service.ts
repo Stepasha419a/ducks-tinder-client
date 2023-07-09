@@ -1,5 +1,10 @@
 import { instance } from '@shared/api';
-import type { User, PartialUser, ShortUser } from '@shared/api/interfaces';
+import type {
+  User,
+  PartialUser,
+  ShortUser,
+  Picture,
+} from '@shared/api/interfaces';
 
 export const userService = {
   async getSortedUser() {
@@ -32,10 +37,9 @@ export const userService = {
     });
   },
 
-  async mixPictures(mixOrder: number, withOrder: number) {
+  async mixPictures(pictures: Picture[]) {
     return instance.put<User>('users/picture/mix', {
-      mixOrder,
-      withOrder,
+      pictures,
     });
   },
 

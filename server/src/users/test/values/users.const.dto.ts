@@ -39,6 +39,9 @@ export const DELETE_PICTURE_DTO: DeletePictureDto = {
 };
 
 export const MIX_PICTURES_DTO: MixPicturesDto = {
-  mixOrder: 0,
-  withOrder: 1,
+  pictures: [
+    { name: 'picture-1.jpg', order: 0 },
+    { name: 'picture-1.jpg', order: 1 },
+    { name: 'picture-1.jpg', order: 2 },
+  ],
 };

@@ -4,9 +4,9 @@ import type { ShortUser, User } from '@shared/api/interfaces';
 import {
   acceptPairThunk,
   refusePairThunk,
-  deleteUserImage,
+  deleteUserPictureThunk,
   getUserPairsThunk,
-  mixUserImages,
+  mixUserPicturesThunk,
   saveUserImageThunk,
   updateUserThunk,
   updateUserPlaceThunk,
@@ -80,10 +80,10 @@ const userSlice = createSlice({
         state.profileSetting.isImageCropOpen = false;
         state.profileSetting.imageURL = null;
       })
-      .addCase(deleteUserImage.fulfilled, (state, { payload }) => {
+      .addCase(deleteUserPictureThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       })
-      .addCase(mixUserImages.fulfilled, (state, { payload }) => {
+      .addCase(mixUserPicturesThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       });
   },

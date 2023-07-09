@@ -3,7 +3,7 @@ import { AccessTokenGuard } from 'common/guards';
 import { CqrsModule, QueryBus } from '@nestjs/cqrs';
 import { ChatsController } from './chats.controller';
 import { requestUserStub, shortChatStub } from './test/stubs';
-import { FullChat, ShortChat } from './chats.interfaces';
+import { FullChat, ShortChat } from './chats.interface';
 import { GetChatQuery, GetChatsQuery } from './queries';
 import { QueryBusMock } from './test/mocks';
 

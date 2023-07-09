@@ -6,7 +6,7 @@ import { fullChatStub, messageStub } from 'chats/test/stubs';
 import { requestUserStub } from 'users/test/stubs';
 import { DeleteMessageCommandHandler } from './delete-message.command-handler';
 import { DeleteMessageCommand } from './delete-message.command';
-import { Message } from 'chats/chats.interfaces';
+import { Message } from 'chats/chats.interface';
 import { ChatsSelector } from 'chats/chats.selector';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 import { DeleteMessageDto } from 'chats/dto';

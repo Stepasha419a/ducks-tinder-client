@@ -1,4 +1,4 @@
-import { ShortChat } from 'chats/chats.interfaces';
+import { ShortChat } from 'chats/chats.interface';
 import { shortUserStub } from 'users/test/stubs';
 
 export const shortChatStub = (): ShortChat => ({

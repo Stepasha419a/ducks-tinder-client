@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EditMessageCommand } from './edit-message.command';
-import { Message } from 'chats/chats.interfaces';
+import { Message } from 'chats/chats.interface';
 import { WsException } from '@nestjs/websockets';
 import { ChatsSelector } from 'chats/chats.selector';
 import { getDatesHourDiff } from 'common/helpers';

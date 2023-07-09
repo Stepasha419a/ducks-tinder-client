@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { PrismaService } from 'prisma/prisma.service';
 import { GetChatsQuery } from './get-chats.query';
-import { ShortChat } from 'chats/chats.interfaces';
+import { ShortChat } from 'chats/chats.interface';
 import { UsersSelector } from 'users/users.selector';
 import { ChatsSelector } from 'chats/chats.selector';
 

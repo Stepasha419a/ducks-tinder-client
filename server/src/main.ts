@@ -14,7 +14,7 @@ async function start() {
     credentials: true,
   });
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   await app.listen(5000);
 }

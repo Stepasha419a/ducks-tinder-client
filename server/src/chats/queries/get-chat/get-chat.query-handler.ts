@@ -2,7 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetChatQuery } from './get-chat.query';
-import { FullChat } from 'chats/chats.interfaces';
+import { FullChat } from 'chats/chats.interface';
 import { UsersSelector } from 'users/users.selector';
 import { ChatsSelector } from 'chats/chats.selector';
 

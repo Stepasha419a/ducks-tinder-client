@@ -7,7 +7,7 @@ import { SendMessageCommandHandler } from './send-message.command-handler';
 import { SendMessageCommand } from './send-message.command';
 import { requestUserStub } from 'users/test/stubs';
 import { SendMessageDto } from 'chats/dto';
-import { Message } from 'chats/chats.interfaces';
+import { Message } from 'chats/chats.interface';
 import { ChatsSelector } from 'chats/chats.selector';
 import { FORBIDDEN } from 'common/constants/error';
 

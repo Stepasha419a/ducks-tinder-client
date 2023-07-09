@@ -3,7 +3,7 @@ import { BlockChatCommandHandler } from './block-chat.command-handler';
 import { Test } from '@nestjs/testing';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { fullChatStub } from 'chats/test/stubs';
-import { FullChat } from 'chats/chats.interfaces';
+import { FullChat } from 'chats/chats.interface';
 import { BlockChatCommand } from './block-chat.command';
 import { requestUserStub } from 'users/test/stubs';
 import { ChatsSelector } from 'chats/chats.selector';

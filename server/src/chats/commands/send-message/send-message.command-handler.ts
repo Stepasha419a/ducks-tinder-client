@@ -3,7 +3,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendMessageCommand } from './send-message.command';
 import { ChatsSelector } from 'chats/chats.selector';
-import { Message } from 'chats/chats.interfaces';
+import { Message } from 'chats/chats.interface';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 
 @CommandHandler(SendMessageCommand)

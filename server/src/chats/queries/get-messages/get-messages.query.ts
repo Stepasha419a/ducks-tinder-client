@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { Message } from 'chats/chats.interfaces';
+import { Message } from 'chats/chats.interface';
 import { GetMessagesDto } from 'chats/dto';
 
 export interface GetMessagesQueryReturn {

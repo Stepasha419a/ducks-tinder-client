@@ -5,7 +5,7 @@ import { requestUserStub } from 'users/test/stubs';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { GetChatsQuery } from './get-chats.query';
 import { GetChatsQueryHandler } from './get-chats.query-handler';
-import { ShortChat } from 'chats/chats.interfaces';
+import { ShortChat } from 'chats/chats.interface';
 import { UsersSelector } from 'users/users.selector';
 import { shortChatStub } from 'chats/test/stubs';
 import { ChatsSelector } from 'chats/chats.selector';

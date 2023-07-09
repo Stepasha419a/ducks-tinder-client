@@ -1,7 +1,7 @@
 import { WsException } from '@nestjs/websockets';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteMessageCommand } from './delete-message.command';
-import { Message } from 'chats/chats.interfaces';
+import { Message } from 'chats/chats.interface';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
 import { getDatesHourDiff } from 'common/helpers';

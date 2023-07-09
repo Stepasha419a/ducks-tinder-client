@@ -2,7 +2,7 @@ import { WsException } from '@nestjs/websockets';
 import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UnblockChatCommand } from './unblock-chat.command';
-import { FullChat } from 'chats/chats.interfaces';
+import { FullChat } from 'chats/chats.interface';
 import { NOT_FOUND } from 'common/constants/error';
 import { ChatsSelector } from 'chats/chats.selector';
 import { UsersSelector } from 'users/users.selector';

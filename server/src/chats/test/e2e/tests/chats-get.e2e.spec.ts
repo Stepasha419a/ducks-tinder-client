@@ -11,7 +11,7 @@ import {
   prepareBefore,
 } from '../preparations';
 import { UsersSelector } from 'users/users.selector';
-import { ShortChat } from 'chats/chats.interfaces';
+import { ShortChat } from 'chats/chats.interface';
 import { ChatsSelector } from 'chats/chats.selector';
 
 const currentUserId = 'chats_get_current_user_id';
