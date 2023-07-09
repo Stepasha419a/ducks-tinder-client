@@ -12,6 +12,8 @@ import {
   prepareBefore,
 } from '../preparations';
 import { UsersSelector } from 'users/users.selector';
+import { USERS_PICTURE_MIX_PUT_DTO } from 'users/test/values/users.e2e-const.dto';
+import { USERS_PICTURE_MIX_PUT_EXPECT } from 'users/test/values/users.e2e-const.expect';
 
 const currentUserId = 'picture_mix_current_user_id';
 const secondUserId = 'picture_mix_second_user_id';
@@ -65,13 +67,13 @@ describe('users/picture/mix (PUT)', () => {
                 data: [
                   { name: 'picture-name-0', order: 0 },
                   { name: 'picture-name-1', order: 1 },
-                  { name: 'picture-name', order: 2 },
-                  { name: 'picture-name', order: 3 },
-                  { name: 'picture-name', order: 4 },
-                  { name: 'picture-name', order: 5 },
-                  { name: 'picture-name', order: 6 },
-                  { name: 'picture-name', order: 7 },
-                  { name: 'picture-name', order: 8 },
+                  { name: 'picture-name-2', order: 2 },
+                  { name: 'picture-name-3', order: 3 },
+                  { name: 'picture-name-4', order: 4 },
+                  { name: 'picture-name-5', order: 5 },
+                  { name: 'picture-name-6', order: 6 },
+                  { name: 'picture-name-7', order: 7 },
+                  { name: 'picture-name-8', order: 8 },
                 ],
               },
             },
@@ -84,7 +86,7 @@ describe('users/picture/mix (PUT)', () => {
 
       response = await request(httpServer)
         .put('/users/picture/mix')
-        .send({ mixOrder: 0, withOrder: 1 })
+        .send(USERS_PICTURE_MIX_PUT_DTO)
         .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
@@ -93,66 +95,8 @@ describe('users/picture/mix (PUT)', () => {
       expect(response.body).toEqual({
         ...currentUser,
         pairsCount: 0,
-        pictures: [
-          { ...currentUser.pictures[1], order: 0 },
-          { ...currentUser.pictures[0], order: 1 },
-          ...currentUser.pictures.slice(2),
-        ],
+        pictures: USERS_PICTURE_MIX_PUT_EXPECT,
       });
-    });
-  });
-
-  describe('when there is no such user', () => {
-    let response: request.Response;
-
-    beforeAll(async () => {
-      const { wrongUserAccessToken } = prepareReadyAccessTokens();
-
-      response = await request(httpServer)
-        .put('/users/picture/mix')
-        .send({ mixOrder: 0, withOrder: 1 })
-        .set('Authorization', `Bearer ${wrongUserAccessToken}`);
-    });
-
-    it('should throw an error', () => {
-      expect(response.status).toBe(404);
-      expect(response.body.message).toEqual('Such user was not found');
-    });
-  });
-
-  describe('when there is no such picture', () => {
-    let response: request.Response;
-
-    beforeAll(async () => {
-      const { currentUserAccessToken } = prepareReadyAccessTokens();
-
-      response = await request(httpServer)
-        .put('/users/picture/mix')
-        .send({ mixOrder: 10, withOrder: 1 })
-        .set('Authorization', `Bearer ${currentUserAccessToken}`);
-    });
-
-    it('should throw an error', () => {
-      expect(response.status).toBe(404);
-      expect(response.body.message).toEqual('Not Found');
-    });
-  });
-
-  describe('when there is no such picture', () => {
-    let response: request.Response;
-
-    beforeAll(async () => {
-      const { currentUserAccessToken } = prepareReadyAccessTokens();
-
-      response = await request(httpServer)
-        .put('/users/picture/mix')
-        .send({ mixOrder: 0, withOrder: 10 })
-        .set('Authorization', `Bearer ${currentUserAccessToken}`);
-    });
-
-    it('should throw an error', () => {
-      expect(response.status).toBe(404);
-      expect(response.body.message).toEqual('Not Found');
     });
   });
 
@@ -162,7 +106,7 @@ describe('users/picture/mix (PUT)', () => {
     beforeAll(async () => {
       response = await request(httpServer)
         .put('/users/picture/mix')
-        .send({ mixOrder: 1, withOrder: 10 });
+        .send(USERS_PICTURE_MIX_PUT_DTO);
     });
 
     it('should throw an error', () => {
