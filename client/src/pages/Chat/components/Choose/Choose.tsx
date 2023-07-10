@@ -1,10 +1,10 @@
+import type { FC } from 'react';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import type { FC } from 'react';
 import styles from './Choose.module.scss';
 
-const Choose: FC = () => {
+export const Choose: FC = () => {
   const cn = classNames(styles.choose);
 
   return (
@@ -16,5 +16,3 @@ const Choose: FC = () => {
     </div>
   );
 };
-
-export default Choose;

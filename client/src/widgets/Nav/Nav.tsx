@@ -8,11 +8,12 @@ import styles from './Nav.module.scss';
 export const Nav = (): ReactElement => {
   const { pathname } = useLocation();
 
+  const isProfilePage = /profile\/?.*/.test(pathname);
   return (
     <aside className={styles.info}>
-      <UserLinks />
+      <UserLinks isProfilePage={isProfilePage} />
       <AnimatePresence initial={false} mode="wait">
-        {pathname === '/profile' ? (
+        {isProfilePage ? (
           <motion.div
             key="profile"
             variants={profileVariants}

@@ -1,4 +1,4 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppSelector } from '@hooks';
 import { CropImage, DialogUpload, PicturesDND } from '@features/user';
@@ -6,11 +6,7 @@ import { Preview } from '@entities/user/components';
 import { Tabs } from './components';
 import styles from './ImageSetting.module.scss';
 
-interface ImageSettingProps {
-  setIsImageSetting: Dispatch<SetStateAction<boolean>>;
-}
-
-export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
+export const ImageSetting: FC = () => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
   const isDialogUploadOpen = useAppSelector(
     (state) => state.user.profileSetting.isDialogUploadOpen
@@ -43,7 +39,7 @@ export const ImageSetting: FC<ImageSettingProps> = ({ setIsImageSetting }) => {
                 setIsFullPreview={setIsFullPreviewSetting}
               />
             ) : (
-              <PicturesDND setIsImageSetting={setIsImageSetting} />
+              <PicturesDND />
             )}
           </div>
         </>

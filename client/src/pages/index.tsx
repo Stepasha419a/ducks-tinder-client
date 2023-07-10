@@ -9,7 +9,9 @@ import ProfilePage from '@pages/Profile';
 import ChatPage from '@pages/Chat';
 import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
-import { Chat } from '@/widgets';
+import { Chat, ImageSetting } from '@/widgets';
+import { Choose } from './Chat/components';
+import { UserImage } from './Profile/components';
 
 const Routing = (): ReactElement => {
   return (
@@ -19,8 +21,12 @@ const Routing = (): ReactElement => {
 
       <Route path={ROUTES.main} element={<NavLayout />}>
         <Route index element={<TinderPage />} />
-        <Route path={ROUTES.profile} element={<ProfilePage />} />
+        <Route path={ROUTES.profile} element={<ProfilePage />}>
+          <Route index element={<UserImage />} />
+          <Route path="edit" element={<ImageSetting />} />
+        </Route>
         <Route path={ROUTES.chat} element={<ChatPage />}>
+          <Route index element={<Choose />} />
           <Route path={`${ROUTES.chat}/:chatId`} element={<Chat />} />
         </Route>
         <Route path={ROUTES.pairs} element={<PairsPage />} />

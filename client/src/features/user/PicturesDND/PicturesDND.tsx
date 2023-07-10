@@ -1,18 +1,15 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import type { FC } from 'react';
 import { Reorder } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { selectImagesDND, setIsDialogUploadOpen } from '@entities/user/model';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
 import { useUserPictures } from './lib';
-import styles from './PicturesDND.module.scss';
 import { Button } from '@/shared/ui';
+import styles from './PicturesDND.module.scss';
+import { Link } from 'react-router-dom';
 
-interface PicturesDNDProps {
-  setIsImageSetting: Dispatch<SetStateAction<boolean>>;
-}
-
-export const PicturesDND: FC<PicturesDNDProps> = ({ setIsImageSetting }) => {
+export const PicturesDND: FC = () => {
   const dispatch = useAppDispatch();
 
   const { currentUserId } = useAppSelector(selectImagesDND);
@@ -25,7 +22,6 @@ export const PicturesDND: FC<PicturesDNDProps> = ({ setIsImageSetting }) => {
   };
 
   const handleSubmit = () => {
-    setIsImageSetting(false);
     handleMixPictures();
   };
 
@@ -58,13 +54,15 @@ export const PicturesDND: FC<PicturesDNDProps> = ({ setIsImageSetting }) => {
         by another 4% and get more likes.
       </div>
       <div className={styles.save}>
-        <Button
-          onClick={handleSubmit}
-          variant="gradient"
-          extraClassName={styles.btn}
-        >
-          Save changes
-        </Button>
+        <Link to={'/profile'}>
+          <Button
+            onClick={handleSubmit}
+            variant="gradient"
+            extraClassName={styles.btn}
+          >
+            Save changes
+          </Button>
+        </Link>
       </div>
     </div>
   );

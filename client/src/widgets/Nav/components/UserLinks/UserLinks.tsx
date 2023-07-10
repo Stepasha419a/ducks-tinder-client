@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
+import type { FC } from 'react';
+import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import classNames from 'classnames';
 import {
@@ -12,15 +13,17 @@ import { useAppSelector } from '@hooks';
 import { variants } from './UserLinks.variants';
 import styles from './UserLinks.module.scss';
 
-export const UserLinks = () => {
-  const { pathname } = useLocation();
+interface UserLinksProps {
+  isProfilePage: boolean;
+}
 
+export const UserLinks: FC<UserLinksProps> = ({ isProfilePage }) => {
   const currentUser = useAppSelector((state) => state.user.currentUser);
 
   return (
     <div className={styles.links}>
       <AnimatePresence initial={false}>
-        {pathname === '/profile' ? (
+        {isProfilePage ? (
           <motion.div
             key="main-link"
             variants={variants}
