@@ -47,11 +47,10 @@ export const Preview: FC<PreviewPropsInterface> = ({
     <div className={cn}>
       <div className={classNames(styles.slider)}>
         <ImageSlider
-          picturesObj={user.pictures}
+          images={user.pictures}
           userId={user.id}
           extraClassName={styles.image}
-          extraWrapperClassName={classNames(isShadow && styles.wrapper)}
-          arrowsExtraClassName={classNames(isShadow && styles.arrows)}
+          isShadow={isShadow}
         />
         {isFull && setIsFullPreview && (
           <Button
@@ -83,13 +82,15 @@ export const Preview: FC<PreviewPropsInterface> = ({
           <span className={styles.text}>km from you</span>
         </div>
         {!isFull && setIsFullPreview && (
-          <Button
-            variant="mark"
-            onClick={() => setIsFullPreview(true)}
-            extraClassName={styles.openFullPreview}
-          >
-            <FontAwesomeIcon icon={faCircleInfo} />
-          </Button>
+          <div className={styles.buttonWrapper}>
+            <Button
+              variant="mark"
+              onClick={() => setIsFullPreview(true)}
+              extraClassName={styles.openFullPreview}
+            >
+              <FontAwesomeIcon icon={faCircleInfo} />
+            </Button>
+          </div>
         )}
       </div>
       {isFull && (

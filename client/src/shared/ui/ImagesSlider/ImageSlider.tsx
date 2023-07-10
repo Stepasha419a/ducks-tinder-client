@@ -1,77 +1,78 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
+import Carousel from 'react-slick';
 import { makeImageUrl } from '@shared/helpers';
 import type { Picture } from '@shared/api/interfaces';
-import Arrows from './Arrows/Arrows';
-import Stripes from './Stripes/Stripes';
 import styles from './ImageSlider.module.scss';
+import 'slick-carousel/slick/slick.scss';
+import './override.scss';
+import { Dots, NextArrow, PrevArrow } from './components';
 
 interface ImageSliderPropsInterface {
-  picturesObj: Picture[];
+  images: Picture[];
   userId: string;
   extraClassName?: string;
-  extraWrapperClassName?: string;
-  arrowsExtraClassName?: string;
+  isShadow?: boolean;
 }
 
 export const ImageSlider: FC<ImageSliderPropsInterface> = ({
-  picturesObj,
+  images,
   userId,
-  extraClassName = '',
-  extraWrapperClassName = '',
-  arrowsExtraClassName = '',
+  extraClassName = null,
+  isShadow,
 }) => {
   const [current, setCurrent] = useState<number>(0);
-  const images = [...picturesObj];
-  const length = images.length;
 
-  const prevSlide = (): void => {
-    setCurrent(current === 0 ? 0 : current - 1);
-  };
-
-  const nextSlide = (): void => {
-    setCurrent(current === length - 1 ? length - 1 : current + 1);
-  };
-
-  const cnDefault = classNames(styles.item, styles.default, extraClassName);
-  const cnDefaultWrapper = classNames(styles.slider, extraWrapperClassName);
+  const cnWrapper = classNames(
+    styles.slider,
+    isShadow ? 'isShadow' : 'smallArrowWrappers',
+    'slider'
+  );
   const cn = classNames(styles.item, extraClassName);
 
   if (!Array.isArray(images) || images.length <= 0) {
+    const cnDefault = classNames(styles.item, styles.default, extraClassName);
     const url = makeImageUrl(userId);
     return (
-      <div className={cnDefaultWrapper}>
+      <div className={cnWrapper}>
         <img src={url} alt="imagesSlider" className={cnDefault}></img>
       </div>
     );
   }
 
   return (
-    <div className={styles.slider}>
-      <Stripes current={current} length={length} />
-      <Arrows
-        current={current}
-        length={length}
-        prevSlide={prevSlide}
-        nextSlide={nextSlide}
-        arrowsExtraClassName={arrowsExtraClassName}
-      />
-
-      {images.map((image, index) => {
-        const url = makeImageUrl(userId, image.name);
-        const cnWrapper = classNames(
-          styles.itemWrapper,
-          index === current ? styles.active : styles.hidden,
-          extraWrapperClassName
-        );
-
-        return (
-          <div key={index} className={cnWrapper}>
-            <img src={url} alt="imagesSlider" className={cn}></img>
+    <div className={cnWrapper}>
+      <Carousel
+        speed={500}
+        dots={true}
+        arrows={true}
+        infinite={false}
+        prevArrow={<PrevArrow />}
+        nextArrow={<NextArrow />}
+        afterChange={(i: number) => setCurrent(i)}
+        customPaging={(i) => (
+          <div className={styles.wrapper}>
+            <div
+              className={classNames(styles.dot, i === current && styles.active)}
+            />
           </div>
-        );
-      })}
+        )}
+        appendDots={(dots) => <Dots>{dots}</Dots>}
+        className={styles.carousel}
+      >
+        {images.map((image, index) => {
+          return (
+            <div key={index}>
+              <img
+                src={makeImageUrl(userId, image.name)}
+                alt="imagesSlider"
+                className={cn}
+              ></img>
+            </div>
+          );
+        })}
+      </Carousel>
     </div>
   );
 };
