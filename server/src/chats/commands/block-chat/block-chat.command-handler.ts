@@ -6,6 +6,7 @@ import { BlockChatCommand } from './block-chat.command';
 import { FullChat } from 'chats/chats.interface';
 import { ChatsSelector } from 'chats/chats.selector';
 import { UsersSelector } from 'users/users.selector';
+import { getDistanceFromLatLonInKm } from 'common/helpers';
 
 @CommandHandler(BlockChatCommand)
 export class BlockChatCommandHandler
@@ -49,6 +50,23 @@ export class BlockChatCommandHandler
       },
     });
 
-    return { ...blockedChat, messagesCount };
+    const place = await this.prismaService.place.findUnique({
+      where: { id: user.id },
+      select: { latitude: true, longitude: true },
+    });
+
+    return {
+      ...blockedChat,
+      users: blockedChat.users.map((user) => ({
+        ...user,
+        distance: getDistanceFromLatLonInKm(
+          place.latitude,
+          place.longitude,
+          user.place.latitude,
+          user.place.longitude,
+        ),
+      })),
+      messagesCount,
+    };
   }
 }

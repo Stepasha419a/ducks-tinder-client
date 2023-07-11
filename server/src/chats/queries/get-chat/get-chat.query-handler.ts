@@ -5,6 +5,7 @@ import { GetChatQuery } from './get-chat.query';
 import { FullChat } from 'chats/chats.interface';
 import { UsersSelector } from 'users/users.selector';
 import { ChatsSelector } from 'chats/chats.selector';
+import { getDistanceFromLatLonInKm } from 'common/helpers';
 
 @QueryHandler(GetChatQuery)
 export class GetChatQueryHandler implements IQueryHandler<GetChatQuery> {
@@ -46,6 +47,23 @@ export class GetChatQueryHandler implements IQueryHandler<GetChatQuery> {
       },
     });
 
-    return { ...chat, messagesCount };
+    const place = await this.prismaService.place.findUnique({
+      where: { id: user.id },
+      select: { latitude: true, longitude: true },
+    });
+
+    return {
+      ...chat,
+      users: chat.users.map((user) => ({
+        ...user,
+        distance: getDistanceFromLatLonInKm(
+          place.latitude,
+          place.longitude,
+          user.place.latitude,
+          user.place.longitude,
+        ),
+      })),
+      messagesCount,
+    };
   }
 }

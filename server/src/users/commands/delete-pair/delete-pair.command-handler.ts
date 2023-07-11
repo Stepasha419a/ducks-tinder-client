@@ -1,7 +1,7 @@
 import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeletePairCommand } from './delete-pair.command';
-import { ShortUser } from 'users/users.interface';
+import { ShortUserWithoutDistance } from 'users/users.interface';
 import { NotFoundException } from '@nestjs/common';
 import { UsersSelector } from 'users/users.selector';
 import { NOT_FOUND_PAIR, NOT_FOUND_USER } from 'common/constants/error';
@@ -12,7 +12,7 @@ export class DeletePairCommandHandler
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(command: DeletePairCommand): Promise<ShortUser[]> {
+  async execute(command: DeletePairCommand): Promise<ShortUserWithoutDistance> {
     const { user, userPairId } = command;
 
     const pairs = (
@@ -40,13 +40,9 @@ export class DeletePairCommandHandler
       throw new NotFoundException(NOT_FOUND_PAIR);
     }
 
-    const updatedPairs = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: { pairs: { select: UsersSelector.selectShortUser() } },
-      })
-    ).pairs;
-
-    return updatedPairs;
+    return this.prismaService.user.findUnique({
+      where: { id: deletedPair.id },
+      select: UsersSelector.selectShortUser(),
+    });
   }
 }

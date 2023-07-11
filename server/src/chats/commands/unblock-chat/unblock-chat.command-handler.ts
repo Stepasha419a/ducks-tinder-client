@@ -6,6 +6,7 @@ import { FullChat } from 'chats/chats.interface';
 import { NOT_FOUND } from 'common/constants/error';
 import { ChatsSelector } from 'chats/chats.selector';
 import { UsersSelector } from 'users/users.selector';
+import { getDistanceFromLatLonInKm } from 'common/helpers';
 
 @CommandHandler(UnblockChatCommand)
 export class UnblockChatCommandHandler
@@ -49,6 +50,23 @@ export class UnblockChatCommandHandler
       },
     });
 
-    return { ...unblockedChat, messagesCount };
+    const place = await this.prismaService.place.findUnique({
+      where: { id: user.id },
+      select: { latitude: true, longitude: true },
+    });
+
+    return {
+      ...unblockedChat,
+      users: unblockedChat.users.map((user) => ({
+        ...user,
+        distance: getDistanceFromLatLonInKm(
+          place.latitude,
+          place.longitude,
+          user.place.latitude,
+          user.place.longitude,
+        ),
+      })),
+      messagesCount,
+    };
   }
 }

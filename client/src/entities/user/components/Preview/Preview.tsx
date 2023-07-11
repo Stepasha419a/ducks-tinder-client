@@ -78,7 +78,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
         </div>
         <div className={styles.distance}>
           <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-          {user.distance || 'unknown distance'}
+          {user.distance ?? 'unknown distance'}
           <span className={styles.text}>km from you</span>
         </div>
         {!isFull && setIsFullPreview && (

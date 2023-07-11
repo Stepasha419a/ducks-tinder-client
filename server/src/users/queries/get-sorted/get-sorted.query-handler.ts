@@ -3,8 +3,9 @@ import { PrismaService } from 'prisma/prisma.service';
 import { GetSortedQuery } from './get-sorted.query';
 import { ShortUser } from 'users/users.interface';
 import { UsersSelector } from 'users/users.selector';
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import { UserDto } from 'users/dto';
+import { getDistanceFromLatLonInKm } from 'common/helpers';
 
 @QueryHandler(GetSortedQuery)
 export class GetSortedQueryHandler implements IQueryHandler<GetSortedQuery> {
@@ -23,10 +24,27 @@ export class GetSortedQueryHandler implements IQueryHandler<GetSortedQuery> {
     const checkedIds = checkedUsers.map((user) => user.checked.id);
     const wasCheckedIds = checkedUsers.map((user) => user.wasChecked.id);
 
+    const place = await this.prismaService.place.findUnique({
+      where: { id: user.id },
+      select: { latitude: true, longitude: true },
+    });
+    if (!place) {
+      throw new BadRequestException();
+    }
+
+    const km = 0.009009;
+    const maxLatitude = place.latitude + (km * user.distance) / 2;
+    const minLatitude = place.latitude - (km * user.distance) / 2;
+    const maxLongitude = place.longitude + (km * user.distance) / 2;
+    const minLongitude = place.longitude - (km * user.distance) / 2;
+
     const sortedUser = await this.prismaService.user.findFirst({
       where: {
         id: { notIn: [...checkedIds, ...wasCheckedIds] },
-        distance: { gt: 0, lte: user.distance },
+        place: {
+          latitude: { gte: minLatitude, lte: maxLatitude },
+          longitude: { gte: minLongitude, lte: maxLongitude },
+        },
         age: {
           gte: user.preferAgeFrom,
           lte: user.preferAgeTo,
@@ -49,6 +67,16 @@ export class GetSortedQueryHandler implements IQueryHandler<GetSortedQuery> {
       );
     }
 
-    return new UserDto(sortedUser);
+    const distance = getDistanceFromLatLonInKm(
+      place.latitude,
+      place.longitude,
+      sortedUser.place.latitude,
+      sortedUser.place.longitude,
+    );
+
+    return new UserDto({
+      ...sortedUser,
+      distance: distance,
+    });
   }
 }

@@ -4,7 +4,7 @@ import { AcceptPairCommand } from './accept-pair.command';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersSelector } from 'users/users.selector';
 import { ChatsService } from 'chats/chats.service';
-import { ShortUser } from 'users/users.interface';
+import { ShortUserWithoutDistance } from 'users/users.interface';
 import { NOT_FOUND_PAIR, NOT_FOUND_USER } from 'common/constants/error';
 
 @CommandHandler(AcceptPairCommand)
@@ -16,7 +16,7 @@ export class AcceptPairCommandHandler
     private readonly chatsService: ChatsService,
   ) {}
 
-  async execute(command: AcceptPairCommand): Promise<ShortUser[]> {
+  async execute(command: AcceptPairCommand): Promise<ShortUserWithoutDistance> {
     const { user, userPairId } = command;
 
     const userPair = await this.prismaService.user.findUnique({
@@ -46,13 +46,9 @@ export class AcceptPairCommandHandler
 
     await this.chatsService.create([user.id, userPairId]);
 
-    const updatedPairs = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: { pairs: { select: UsersSelector.selectShortUser() } },
-      })
-    ).pairs;
-
-    return updatedPairs;
+    return this.prismaService.user.findUnique({
+      where: { id: acceptedPair.id },
+      select: UsersSelector.selectShortUser(),
+    });
   }
 }

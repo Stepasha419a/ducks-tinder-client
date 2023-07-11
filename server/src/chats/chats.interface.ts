@@ -1,4 +1,4 @@
-import { ShortUser } from 'users/users.interface';
+import { ShortUser, ShortUserWithoutDistance } from 'users/users.interface';
 
 export interface Message {
   id: string;
@@ -26,7 +26,7 @@ export interface FullChat {
 // has only latest message
 export interface ShortChat {
   id: string;
-  users: ShortUser[];
+  users: ShortUserWithoutDistance[];
   messages: Message[];
   blocked: boolean;
   blockedById: string;

@@ -33,11 +33,10 @@ export class UsersSelector {
       name: true,
       age: true,
       description: true,
-      distance: true,
       isActivated: true,
       interests: { select: { name: true } },
       place: {
-        select: { name: true },
+        select: { name: true, latitude: true, longitude: true },
       },
       pictures: {
         select: { name: true, order: true },
