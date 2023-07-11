@@ -25,14 +25,14 @@ export const PartnerAgeSettingThumbnail = () => {
     if (preferAgeSetting.preferAgeFrom !== preferAgeFrom) {
       dispatch(
         submitSettingsThunk({
-          inputName: 'preferAgeFrom',
+          setting: 'preferAgeFrom',
           changedData: preferAgeSetting.preferAgeFrom!,
         })
       );
     } else if (preferAgeSetting.preferAgeTo !== preferAgeTo) {
       dispatch(
         submitSettingsThunk({
-          inputName: 'preferAgeTo',
+          setting: 'preferAgeTo',
           changedData: preferAgeSetting.preferAgeTo!,
         })
       );

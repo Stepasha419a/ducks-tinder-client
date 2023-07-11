@@ -13,28 +13,27 @@ import { nullInput } from '@entities/setting/model';
 export const Setting = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const setting = useAppSelector((state) => state.setting.setting);
-  const currentSetting = useAppSelector((state) => state.setting.setting);
+  const settingType = useAppSelector((state) => state.setting.settingType);
 
   useEffect(() => {
     return () => {
       // not to close custom forms (uses main window for settings instead of nav)
-      if (currentSetting !== 'hidden') {
+      if (settingType !== 'hidden') {
         dispatch(nullInput());
       }
     };
   });
 
-  if (setting === 'select') {
+  if (settingType === 'select') {
     return <InterestsForm />;
   }
-  if (setting === 'textarea') {
+  if (settingType === 'textarea') {
     return <TextareaForm />;
   }
-  if (setting === 'radio') {
+  if (settingType === 'radio') {
     return <RadioForm />;
   }
-  if (setting === 'hidden') {
+  if (settingType === 'hidden') {
     return <HiddenForm />;
   }
 

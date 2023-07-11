@@ -1,15 +1,11 @@
-import type {
-  User,
-  ChangedData,
-  InnerObjectName,
-} from '@shared/api/interfaces';
+import type { User, ChangedData } from '@shared/api/interfaces';
+import type { Setting } from '@/entities/setting/model';
 
 export function makeDataObject(args: {
   currentUser: User;
-  inputName: string;
+  settingName: Setting;
   changedData: ChangedData;
-  innerObjectName?: InnerObjectName;
 }) {
-  const { inputName, changedData } = args;
-  return { [inputName]: changedData };
+  const { settingName, changedData } = args;
+  return { [settingName]: changedData };
 }

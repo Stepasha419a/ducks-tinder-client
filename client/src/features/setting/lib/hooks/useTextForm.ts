@@ -6,8 +6,10 @@ import {
   useDefaultValues,
 } from '@entities/setting/hooks';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export function useTextForm() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const formName = useAppSelector((state) => state.setting.formName);
@@ -27,6 +29,7 @@ export function useTextForm() {
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
     dispatch(submitSettingsThunk({ changedData: data.input }));
+    navigate('profile');
   });
 
   const registerProps = register('input', useCurrentValidation());

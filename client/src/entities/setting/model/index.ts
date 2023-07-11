@@ -7,10 +7,9 @@ export {
 } from './setting.slice';
 export { submitSettingsThunk } from './setting.thunks';
 export type {
-  ErrorField,
+  Setting,
   SetInputPayload,
   SettingFieldInterestsArray,
   SettingFieldValues,
-  SettingInputName,
   Validation,
 } from './setting.interfaces';

@@ -3,10 +3,12 @@ import { useAppDispatch } from '@/shared/hooks';
 import { nullInput } from '@/entities/setting/model';
 import { Map } from '@entities/user/components';
 import { PlacesGeolocation } from '@/features/user/PlacesGeolocation/PlacesGeolocation';
+import { useSettingUrl } from '@/entities/setting/hooks';
 
 export const PlaceSetting = () => {
   const dispatch = useAppDispatch();
 
+  useSettingUrl();
   const handleSubmit = () => {
     dispatch(nullInput());
   };

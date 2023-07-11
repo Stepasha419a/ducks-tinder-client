@@ -1,26 +1,13 @@
-import { SettingThumbnail } from '@entities/setting/components';
-import { setInput } from '@entities/setting/model';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { LinkSettingThumbnail } from '@entities/setting/components';
+import { useAppSelector } from '@hooks';
 
 export const PlaceSettingThumbnail = () => {
-  const dispatch = useAppDispatch();
-
   const place = useAppSelector((state) => state.user.currentUser.place);
   const errorFields = useAppSelector((state) => state.setting.errorFields);
 
-  const setInputHandler = (): void => {
-    dispatch(
-      setInput({
-        inputName: 'place',
-        validation: { min: 12, max: 30 },
-        innerObjectName: 'partnerSettings',
-      })
-    );
-  };
-
   return (
-    <SettingThumbnail
-      clickHandler={setInputHandler}
+    <LinkSettingThumbnail
+      url="place"
       title="Place"
       value={place?.name || 'Empty place'}
       isPointer

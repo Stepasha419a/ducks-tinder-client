@@ -16,7 +16,7 @@ export const AgeSettingThumbnail = () => {
   const ageSubmitHandler = (): void => {
     dispatch(
       submitSettingsThunk({
-        inputName: 'age',
+        setting: 'age',
         changedData: ageSetting!,
       })
     );

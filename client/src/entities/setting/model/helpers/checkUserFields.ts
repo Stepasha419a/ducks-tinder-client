@@ -1,7 +1,7 @@
 import type { User } from '@shared/api/interfaces';
-import type { ErrorField } from '../setting.interfaces';
+import type { Setting } from '../setting.interfaces';
 
-const potentialFields: ErrorField[] = [
+const potentialFields: Setting[] = [
   'description',
   'sex',
   'interests',
@@ -13,7 +13,7 @@ const potentialFields: ErrorField[] = [
   'preferAgeTo',
 ];
 
-function checkField(user: User, field: ErrorField): ErrorField | boolean {
+function checkField(user: User, field: Setting): Setting | boolean {
   switch (field) {
     case 'description':
       if (user.description === '') {
@@ -65,9 +65,9 @@ function checkField(user: User, field: ErrorField): ErrorField | boolean {
   }
 }
 
-export function checkUserFields(user: User): ErrorField[] {
+export function checkUserFields(user: User): Setting[] {
   return potentialFields.reduce(
-    (acc: ErrorField[], field: ErrorField) =>
+    (acc: Setting[], field: Setting) =>
       checkField(user, field) ? [...acc, field] : acc,
     []
   );

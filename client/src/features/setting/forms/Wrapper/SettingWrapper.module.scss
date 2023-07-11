@@ -23,7 +23,11 @@
     padding: 0 16px;
   }
 
-  button.noBorder {
-    border-bottom: none;
+  .link {
+    display: block;
+
+    button.noBorder {
+      border-bottom: none;
+    }
   }
 }

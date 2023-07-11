@@ -1,27 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { updateUserThunk } from '@entities/user/model';
-import type { ChangedData, InnerObjectName } from '@shared/api/interfaces';
+import type { ChangedData } from '@shared/api/interfaces';
 import { returnErrorMessage } from '@shared/helpers';
-import type { SettingInputName } from './setting.interfaces';
+import type { Setting } from './setting.interfaces';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',
   (
     args: {
       changedData: ChangedData;
-      inputName?: SettingInputName;
-      innerObjectName?: InnerObjectName;
+      setting?: Setting;
     },
     { rejectWithValue, dispatch, getState }
   ) => {
     try {
       const { setting } = getState() as RootState;
-      const { settingInputName, innerObjectName } = setting;
+      const { settingName } = setting;
 
       dispatch(
         updateUserThunk({
-          inputName: args.inputName ?? settingInputName!,
-          innerObjectName: args.innerObjectName ?? innerObjectName,
+          settingName: args.setting ?? settingName!,
           changedData: args.changedData,
         })
       );

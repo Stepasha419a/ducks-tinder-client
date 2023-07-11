@@ -4,8 +4,10 @@ import type { SettingFieldInterestsArray } from '@entities/setting/model';
 import { submitSettingsThunk, nullInput } from '@entities/setting/model';
 import type { Interest } from '@/shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export function useSelectForm() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const formName = useAppSelector((state) => state.setting.formName);
@@ -49,6 +51,7 @@ export function useSelectForm() {
         changedData: data.input.map((interest) => interest.name),
       })
     );
+    navigate('profile');
   });
 
   return {

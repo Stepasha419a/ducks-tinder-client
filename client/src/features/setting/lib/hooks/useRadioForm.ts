@@ -3,8 +3,10 @@ import type { SettingFieldValues } from '@entities/setting/model';
 import { nullInput, submitSettingsThunk } from '@entities/setting/model';
 import { useDefaultValues } from '@entities/setting/hooks';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import { useNavigate } from 'react-router-dom';
 
 export function useRadioForm() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const formName = useAppSelector((state) => state.setting.formName);
@@ -27,6 +29,7 @@ export function useRadioForm() {
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
     dispatch(submitSettingsThunk({ changedData: data.input }));
+    navigate('profile');
   });
 
   return {

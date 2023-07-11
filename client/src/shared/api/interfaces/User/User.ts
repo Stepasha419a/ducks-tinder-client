@@ -9,7 +9,7 @@ export interface Interest {
   name: string;
 }
 
-interface Place {
+export interface Place {
   name: string;
   address: string;
   latitude: number;
@@ -81,5 +81,3 @@ export interface QuerySorts {
 }
 
 export type ChangedData = string | string[] | number | boolean;
-
-export type InnerObjectName = 'partnerSettings' | null;

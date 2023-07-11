@@ -9,9 +9,8 @@ import type {
 import { submitSettingsThunk } from './setting.thunks';
 
 const initialState: SettingInitialState = {
-  setting: null,
-  settingInputName: null,
-  innerObjectName: null,
+  settingType: null,
+  settingName: null,
   isUserInfoSetting: false,
   validation: null,
   formName: null,
@@ -28,39 +27,37 @@ const settingSlice = createSlice({
     setInput: (
       state,
       {
-        payload: { inputName, innerObjectName, formName, validation },
+        payload: { settingName, formName, validation },
       }: PayloadAction<SetInputPayload>
     ) => {
-      state.formName = formName || inputName;
-      state.innerObjectName = innerObjectName || null;
-      state.settingInputName = inputName;
+      state.formName = formName || settingName;
+      state.settingName = settingName;
       state.validation = validation || null;
       state.isUserInfoSetting = true;
 
-      switch (inputName) {
+      switch (settingName) {
         case 'interests':
-          state.setting = 'select';
+          state.settingType = 'select';
           break;
         case 'description':
-          state.setting = 'textarea';
+          state.settingType = 'textarea';
           break;
         case 'sex':
         case 'preferSex':
-          state.setting = 'radio';
+          state.settingType = 'radio';
           break;
         case 'place':
-          state.setting = 'hidden';
+          state.settingType = 'hidden';
           break;
         default:
-          state.setting = null;
+          state.settingType = null;
       }
     },
     nullInput: (state) => {
       state.formName = null;
-      state.innerObjectName = null;
-      state.settingInputName = null;
+      state.settingName = null;
       state.isUserInfoSetting = false;
-      state.setting = null;
+      state.settingType = null;
       state.validation = null;
     },
     checkFields: (state, { payload }: PayloadAction<User>) => {

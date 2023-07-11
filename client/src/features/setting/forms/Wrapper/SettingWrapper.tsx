@@ -1,5 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
 import type { FieldErrors, FieldError } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@/shared/constants';
 import { Button } from '@shared/ui';
 import type {
   SettingFieldInterestsArray,
@@ -33,15 +35,16 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
       <div className={styles.name}>{formName}</div>
       {children}
       <div className={styles.title}>Your {formName}</div>
-      <Button
-        type="button"
-        disabled={!isValid}
-        onClick={cancelHandler}
-        variant="setting"
-        extraClassName={styles.noBorder}
-      >
-        Cancel
-      </Button>
+      <Link onClick={cancelHandler} to={ROUTES.profile} className={styles.link}>
+        <Button
+          type="button"
+          disabled={!isValid}
+          variant="setting"
+          extraClassName={styles.noBorder}
+        >
+          Cancel
+        </Button>
+      </Link>
       <Button type="submit" disabled={!isValid} variant="setting">
         Update my {formName}
       </Button>

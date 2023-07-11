@@ -2,9 +2,11 @@ import type { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import styles from './SettingThumbnail.module.scss';
+import { Link } from 'react-router-dom';
+import styles from './LinkSettingThumbnail.module.scss';
 
 interface SettingThumbnailProps {
+  url: string;
   title?: string;
   value: string | null;
   isPointer?: boolean;
@@ -14,7 +16,8 @@ interface SettingThumbnailProps {
   extraClassName?: string;
 }
 
-export const SettingThumbnail: FC<PropsWithChildren<SettingThumbnailProps>> = ({
+export const LinkSettingThumbnail: FC<PropsWithChildren<SettingThumbnailProps>> = ({
+  url,
   children,
   title,
   value,
@@ -34,7 +37,7 @@ export const SettingThumbnail: FC<PropsWithChildren<SettingThumbnailProps>> = ({
   );
 
   return (
-    <div className={cn}>
+    <Link to={`profile/${url}`} className={cn}>
       {(title || value) && (
         <div className={styles.descr}>
           <div className={styles.title}>{title}</div>
@@ -47,6 +50,6 @@ export const SettingThumbnail: FC<PropsWithChildren<SettingThumbnailProps>> = ({
         </div>
       )}
       {children && <div className={styles.setting}>{children}</div>}
-    </div>
+    </Link>
   );
 };

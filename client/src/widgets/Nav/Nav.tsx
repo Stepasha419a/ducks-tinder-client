@@ -21,6 +21,7 @@ export const Nav = (): ReactElement => {
             animate={'slideIn'}
             exit={'slideOut'}
             transition={{ duration: 0.25 }}
+            className={styles.profile}
           >
             <ProfileBlock />
           </motion.div>

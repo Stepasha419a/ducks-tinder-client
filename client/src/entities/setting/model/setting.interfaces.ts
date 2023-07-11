@@ -1,4 +1,4 @@
-import type { InnerObjectName, Interest, User } from '@shared/api/interfaces';
+import type { Interest } from '@shared/api/interfaces';
 
 export interface Validation {
   min?: number;
@@ -6,35 +6,38 @@ export interface Validation {
   email?: boolean;
 }
 
-export type SettingInputName = keyof User | null;
-
-type Setting = 'textarea' | 'select' | 'radio' | 'hidden' | null;
-
-export type ErrorField =
+export type SettingName =
+  | 'email'
+  | 'name'
   | 'description'
+  | 'sex'
   | 'interests'
   | 'place'
-  | 'sex'
+  | 'preferSex'
+  | 'nickname';
+
+type SettingType = 'textarea' | 'select' | 'radio' | 'hidden' | null;
+
+export type Setting =
+  | SettingName
   | 'age'
   | 'distance'
-  | 'preferSex'
   | 'preferAgeFrom'
-  | 'preferAgeTo';
+  | 'preferAgeTo'
+  | 'usersOnlyInDistance';
 
 export interface SettingInitialState {
-  setting: Setting;
-  settingInputName: SettingInputName;
-  innerObjectName: InnerObjectName;
+  settingType: SettingType;
+  settingName: SettingName | null;
   isUserInfoSetting: boolean;
   validation: Validation | null;
   formName: string | null;
-  errorFields: ErrorField[];
+  errorFields: Setting[];
 }
 
 export interface SetInputPayload {
-  inputName: SettingInputName;
+  settingName: SettingName;
   formName?: string | null;
-  innerObjectName?: InnerObjectName;
   validation?: Validation | null;
 }
 
