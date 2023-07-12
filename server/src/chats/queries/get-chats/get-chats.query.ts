@@ -1,5 +1,5 @@
-import { User } from '@prisma/client';
+import { AuthorizedUser } from 'users/users.interface';
 
 export class GetChatsQuery {
-  constructor(public readonly user: User) {}
+  constructor(public readonly user: AuthorizedUser) {}
 }

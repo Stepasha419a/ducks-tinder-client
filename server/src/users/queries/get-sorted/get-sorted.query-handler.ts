@@ -3,9 +3,8 @@ import { PrismaService } from 'prisma/prisma.service';
 import { GetSortedQuery } from './get-sorted.query';
 import { ShortUser } from 'users/users.interface';
 import { UsersSelector } from 'users/users.selector';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { UserDto } from 'users/dto';
-import { getDistanceFromLatLonInKm } from 'common/helpers';
+import { NotFoundException } from '@nestjs/common';
+import { getDistanceFromLatLonInKm, getSearchingCoords } from 'common/helpers';
 
 @QueryHandler(GetSortedQuery)
 export class GetSortedQueryHandler implements IQueryHandler<GetSortedQuery> {
@@ -24,19 +23,12 @@ export class GetSortedQueryHandler implements IQueryHandler<GetSortedQuery> {
     const checkedIds = checkedUsers.map((user) => user.checked.id);
     const wasCheckedIds = checkedUsers.map((user) => user.wasChecked.id);
 
-    const place = await this.prismaService.place.findUnique({
-      where: { id: user.id },
-      select: { latitude: true, longitude: true },
-    });
-    if (!place) {
-      throw new BadRequestException();
-    }
-
-    const km = 0.009009;
-    const maxLatitude = place.latitude + (km * user.distance) / 2;
-    const minLatitude = place.latitude - (km * user.distance) / 2;
-    const maxLongitude = place.longitude + (km * user.distance) / 2;
-    const minLongitude = place.longitude - (km * user.distance) / 2;
+    const { maxLatitude, minLatitude, maxLongitude, minLongitude } =
+      getSearchingCoords(
+        user.place.latitude,
+        user.place.longitude,
+        user.distance,
+      );
 
     const sortedUser = await this.prismaService.user.findFirst({
       where: {
@@ -68,15 +60,16 @@ export class GetSortedQueryHandler implements IQueryHandler<GetSortedQuery> {
     }
 
     const distance = getDistanceFromLatLonInKm(
-      place.latitude,
-      place.longitude,
+      user.place.latitude,
+      user.place.longitude,
       sortedUser.place.latitude,
       sortedUser.place.longitude,
     );
 
-    return new UserDto({
+    return {
       ...sortedUser,
       distance: distance,
-    });
+      place: { name: sortedUser.place.name },
+    };
   }
 }

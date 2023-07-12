@@ -1,9 +1,9 @@
 import { ICommand } from '@nestjs/cqrs';
-import { User } from '@prisma/client';
+import { AuthorizedUser } from 'users/users.interface';
 
 export class SavePictureCommand implements ICommand {
   constructor(
-    public readonly user: User,
+    public readonly user: AuthorizedUser,
     public readonly picture: Express.Multer.File,
   ) {}
 }

@@ -13,10 +13,6 @@ export class GetUserQueryHandler implements IQueryHandler<GetUserQuery> {
   async execute(query: GetUserQuery): Promise<UserDto> {
     const { id } = query;
 
-    const pairsCount = await this.prismaService.user.count({
-      where: { pairFor: { some: { id } } },
-    });
-
     const user = await this.prismaService.user.findUnique({
       where: { id },
       include: UsersSelector.selectUser(),
@@ -25,6 +21,10 @@ export class GetUserQueryHandler implements IQueryHandler<GetUserQuery> {
     if (!user) {
       throw new NotFoundException(NOT_FOUND_USER);
     }
+
+    const pairsCount = await this.prismaService.user.count({
+      where: { pairFor: { some: { id } } },
+    });
 
     return new UserDto({ ...user, pairsCount });
   }

@@ -1,7 +1,7 @@
-import { User } from '@prisma/client';
 import { userDtoStub } from './user-dto.stub';
+import { AuthorizedUser } from 'users/users.interface';
 
-export const requestUserStub = (): User => {
+export const requestUserStub = (): AuthorizedUser => {
   const userStubObj = userDtoStub();
 
   return {
@@ -20,6 +20,12 @@ export const requestUserStub = (): User => {
     preferAgeTo: userStubObj.preferAgeTo,
     usersOnlyInDistance: userStubObj.usersOnlyInDistance,
     preferSex: userStubObj.preferSex,
+    place: {
+      name: 'place-name',
+      address: 'place-address',
+      latitude: 12.3456789,
+      longitude: 12.3456789,
+    },
     createdAt: new Date('2022-08-19'),
     updatedAt: new Date('2022-08-20'),
   };

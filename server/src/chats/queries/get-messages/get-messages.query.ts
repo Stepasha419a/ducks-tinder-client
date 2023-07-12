@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { AuthorizedUser } from 'users/users.interface';
 import { Message } from 'chats/chats.interface';
 import { GetMessagesDto } from 'chats/dto';
 
@@ -9,7 +9,7 @@ export interface GetMessagesQueryReturn {
 
 export class GetMessagesQuery {
   constructor(
-    public readonly user: User,
+    public readonly user: AuthorizedUser,
     public readonly chatId: string,
     public readonly dto: GetMessagesDto,
   ) {}

@@ -10,6 +10,8 @@ import {
   prepareAfter,
   prepareBefore,
 } from '../preparations';
+import { NOT_FOUND_PAIR } from 'common/constants/error';
+import { USERS_PAIRS_PUT_EXPECT } from 'users/test/values/users.e2e-const.expect';
 
 const currentUserId = 'users_pairs_put_current_user_id';
 const secondUserId = 'users_pairs_put_second_user_id';
@@ -66,9 +68,9 @@ describe('users/pairs/:id (PUT)', () => {
         .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
-    it('should return an empty array of pairs', () => {
+    it('should return deleted pair', () => {
       expect(response.status).toBe(200);
-      expect(response.body).toEqual([]);
+      expect(response.body).toEqual(USERS_PAIRS_PUT_EXPECT);
     });
   });
 
@@ -102,7 +104,7 @@ describe('users/pairs/:id (PUT)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(404);
-      expect(response.body.message).toEqual('Such user was not found');
+      expect(response.body.message).toEqual(NOT_FOUND_PAIR);
     });
   });
 

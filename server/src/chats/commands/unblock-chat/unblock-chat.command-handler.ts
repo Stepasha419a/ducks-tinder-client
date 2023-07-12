@@ -2,7 +2,7 @@ import { WsException } from '@nestjs/websockets';
 import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UnblockChatCommand } from './unblock-chat.command';
-import { FullChat } from 'chats/chats.interface';
+import { FullChat, FullChatWithoutDistance } from 'chats/chats.interface';
 import { NOT_FOUND } from 'common/constants/error';
 import { ChatsSelector } from 'chats/chats.selector';
 import { UsersSelector } from 'users/users.selector';
@@ -30,41 +30,38 @@ export class UnblockChatCommandHandler
 
     const skipCount = messagesCount > 20 ? messagesCount - 20 : 0;
 
-    const unblockedChat = await this.prismaService.chat.update({
-      where: { id: chatId },
-      data: { blocked: false, blockedById: null },
-      select: {
-        id: true,
-        messages: {
-          skip: skipCount,
-          take: 20,
-          orderBy: { createdAt: 'asc' },
-          select: ChatsSelector.selectMessage(),
+    const unblockedChat: FullChatWithoutDistance =
+      await this.prismaService.chat.update({
+        where: { id: chatId },
+        data: { blocked: false, blockedById: null },
+        select: {
+          id: true,
+          messages: {
+            skip: skipCount,
+            take: 20,
+            orderBy: { createdAt: 'asc' },
+            select: ChatsSelector.selectMessage(),
+          },
+          users: {
+            where: { id: { not: user.id } },
+            select: UsersSelector.selectShortUser(),
+          },
+          blocked: true,
+          blockedById: true,
         },
-        users: {
-          where: { id: { not: user.id } },
-          select: UsersSelector.selectShortUser(),
-        },
-        blocked: true,
-        blockedById: true,
-      },
-    });
-
-    const place = await this.prismaService.place.findUnique({
-      where: { id: user.id },
-      select: { latitude: true, longitude: true },
-    });
+      });
 
     return {
       ...unblockedChat,
-      users: unblockedChat.users.map((user) => ({
-        ...user,
+      users: unblockedChat.users.map((chatUser) => ({
+        ...chatUser,
         distance: getDistanceFromLatLonInKm(
-          place.latitude,
-          place.longitude,
           user.place.latitude,
           user.place.longitude,
+          chatUser.place.latitude,
+          chatUser.place.longitude,
         ),
+        place: { name: chatUser.place.name },
       })),
       messagesCount,
     };

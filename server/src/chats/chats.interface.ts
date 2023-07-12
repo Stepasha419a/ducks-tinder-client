@@ -1,4 +1,8 @@
-import { ShortUser, ShortUserWithoutDistance } from 'users/users.interface';
+import {
+  ShortUser,
+  ShortUserWithLocation,
+  ShortUserWithoutDistance,
+} from 'users/users.interface';
 
 export interface Message {
   id: string;
@@ -11,6 +15,14 @@ export interface Message {
     text: string;
     userId: string;
   };
+}
+
+export interface FullChatWithoutDistance {
+  id: string;
+  users: ShortUserWithLocation[];
+  messages: Message[];
+  blocked: boolean;
+  blockedById: string;
 }
 
 // has all messages

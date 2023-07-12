@@ -7,6 +7,7 @@ import { shortUserStub } from 'users/test/stubs';
 import { GetSortedQueryHandler } from './get-sorted.query-handler';
 import { GetSortedQuery } from './get-sorted.query';
 import { GET_SORTED_FIND_FIRST_CALLED } from 'users/test/values/users.const.expect';
+import { shortUserWithLocationStub } from 'users/test/stubs';
 import { USER_SORTS_DATA } from 'users/test/values/users.const.dto';
 
 describe('when get sorted is called', () => {
@@ -42,7 +43,7 @@ describe('when get sorted is called', () => {
     beforeAll(() => {
       prismaService.user.findFirst = jest
         .fn()
-        .mockResolvedValue(shortUserStub());
+        .mockResolvedValue(shortUserWithLocationStub());
       prismaService.checkedUsers.findMany = jest.fn().mockResolvedValue([]);
     });
 

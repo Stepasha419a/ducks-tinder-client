@@ -50,21 +50,17 @@ export class BlockChatCommandHandler
       },
     });
 
-    const place = await this.prismaService.place.findUnique({
-      where: { id: user.id },
-      select: { latitude: true, longitude: true },
-    });
-
     return {
       ...blockedChat,
-      users: blockedChat.users.map((user) => ({
-        ...user,
+      users: blockedChat.users.map((chatUser) => ({
+        ...chatUser,
         distance: getDistanceFromLatLonInKm(
-          place.latitude,
-          place.longitude,
           user.place.latitude,
           user.place.longitude,
+          chatUser.place.latitude,
+          chatUser.place.longitude,
         ),
+        place: { name: chatUser.place.name },
       })),
       messagesCount,
     };

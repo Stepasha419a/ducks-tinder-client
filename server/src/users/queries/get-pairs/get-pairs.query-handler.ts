@@ -12,11 +12,6 @@ export class GetPairsQueryHandler implements IQueryHandler<GetPairsQuery> {
   async execute(query: GetPairsQuery): Promise<ShortUser[]> {
     const { user } = query;
 
-    const place = await this.prismaService.place.findUnique({
-      where: { id: user.id },
-      select: { latitude: true, longitude: true },
-    });
-
     const pairs = (
       await this.prismaService.user.findUnique({
         where: { id: user.id },
@@ -30,13 +25,13 @@ export class GetPairsQueryHandler implements IQueryHandler<GetPairsQuery> {
 
     return pairs.map((pair) => ({
       ...pair,
-      place: { name: pair.place?.name },
       distance: getDistanceFromLatLonInKm(
-        place.latitude,
-        place.longitude,
+        user.place.latitude,
+        user.place.longitude,
         pair.place?.latitude,
         pair.place?.longitude,
       ),
+      place: { name: pair.place?.name },
     }));
   }
 }

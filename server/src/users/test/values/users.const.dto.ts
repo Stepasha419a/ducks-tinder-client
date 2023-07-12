@@ -18,6 +18,12 @@ export const USER_SORTS_DATA = {
   userIds: [],
   password: '123123123',
   activationLink: 'asd456',
+  place: {
+    name: 'place-name',
+    address: 'place-address',
+    latitude: 12.3456789,
+    longitude: 12.3456789,
+  },
   createdAt: new Date('2022-08-19'),
   updatedAt: new Date('2022-08-20'),
 };

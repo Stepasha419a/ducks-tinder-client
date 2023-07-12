@@ -1,12 +1,12 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { User as UserType } from '@prisma/client';
+import { AuthorizedUser } from 'users/users.interface';
 
 interface UserOptions {
   isSocket?: boolean;
 }
 
 export const User = createParamDecorator(
-  (options: UserOptions = null, ctx: ExecutionContext): UserType => {
+  (options: UserOptions = null, ctx: ExecutionContext): AuthorizedUser => {
     if (options?.isSocket) {
       const client = ctx.switchToWs().getClient();
       return client.request.user;

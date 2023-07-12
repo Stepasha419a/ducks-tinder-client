@@ -9,7 +9,7 @@ interface Interest {
   name: string;
 }
 
-interface Place {
+interface PlaceName {
   name: string;
 }
 
@@ -17,8 +17,14 @@ export interface FullUser extends User {
   pairsCount: number;
 }
 
-export interface ShortUser extends ShortUserWithoutDistance {
-  distance: number;
+interface OwnPlace extends PlaceName {
+  address: string;
+  latitude: number;
+  longitude: number;
+}
+
+export interface AuthorizedUser extends User {
+  place: OwnPlace;
 }
 
 export interface ShortUserWithoutDistance {
@@ -28,8 +34,21 @@ export interface ShortUserWithoutDistance {
   description: string;
   isActivated: boolean;
   interests: Interest[];
-  place: Place;
+  place: PlaceName;
   pictures: PictureInterface[];
+}
+
+interface ShortUserLocationPlace extends PlaceName {
+  latitude: number;
+  longitude: number;
+}
+
+export interface ShortUserWithLocation extends ShortUserWithoutDistance {
+  place: ShortUserLocationPlace;
+}
+
+export interface ShortUser extends ShortUserWithoutDistance {
+  distance: number;
 }
 
 export interface UserToInterestsRelation {

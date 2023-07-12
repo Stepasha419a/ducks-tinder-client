@@ -10,6 +10,9 @@ export async function prepareAfter(currentUserId, secondUserId) {
         users: { some: { id: { in: [currentUserId, secondUserId] } } },
       },
     }),
+    prismaClient.place.deleteMany({
+      where: { id: { in: [currentUserId, secondUserId] } },
+    }),
     prismaClient.user.deleteMany({
       where: { id: { in: [currentUserId, secondUserId] } },
     }),

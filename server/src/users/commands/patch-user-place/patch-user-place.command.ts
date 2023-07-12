@@ -1,9 +1,9 @@
-import { User } from '@prisma/client';
+import { AuthorizedUser } from 'users/users.interface';
 import { PatchUserPlaceDto } from 'users/dto';
 
 export class PatchUserPlaceCommand {
   constructor(
-    public readonly user: User,
+    public readonly user: AuthorizedUser,
     public readonly dto: PatchUserPlaceDto,
   ) {}
 }

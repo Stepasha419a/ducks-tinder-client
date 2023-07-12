@@ -9,6 +9,7 @@ import { fullChatStub } from 'chats/test/stubs';
 import { GetChatQueryHandler } from './get-chat.query-handler';
 import { GetChatQuery } from './get-chat.query';
 import { ChatsSelector } from 'chats/chats.selector';
+import { fullChatWithoutDistanceStub } from 'chats/test/stubs/full-chat-without-distance.stub';
 
 describe('when get chats is called', () => {
   let prismaService: PrismaService;
@@ -35,7 +36,7 @@ describe('when get chats is called', () => {
         .mockResolvedValue({ id: fullChatStub().id });
       prismaService.chat.findUnique = jest
         .fn()
-        .mockResolvedValue(fullChatStub());
+        .mockResolvedValue(fullChatWithoutDistanceStub());
       prismaService.message.count = jest.fn().mockResolvedValue(20);
     });
 

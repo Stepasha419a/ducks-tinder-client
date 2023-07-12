@@ -20,6 +20,24 @@ export async function prepareBefore(currentUserId, secondUserId) {
         },
       ],
     }),
+    prismaClient.place.createMany({
+      data: [
+        {
+          id: currentUserId,
+          latitude: 12.3456789,
+          longitude: 12.3456789,
+          name: 'current-user-place-name',
+          address: 'current-user-place-address',
+        },
+        {
+          id: secondUserId,
+          latitude: 12.5456789,
+          longitude: 12.5456789,
+          name: 'second-user-place-name',
+          address: 'second-user-place-address',
+        },
+      ],
+    }),
   ]);
 
   const currentUser = new UserDto(

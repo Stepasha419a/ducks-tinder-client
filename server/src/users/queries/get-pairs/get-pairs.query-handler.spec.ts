@@ -2,7 +2,12 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersPrismaMock } from 'users/test/mocks';
-import { requestUserStub, shortUserStub, userDtoStub } from 'users/test/stubs';
+import {
+  requestUserStub,
+  shortUserStub,
+  shortUserWithLocationStub,
+  userDtoStub,
+} from 'users/test/stubs';
 import { GetPairsQueryHandler } from './get-pairs.query-handler';
 import { GetPairsQuery } from './get-pairs.query';
 import { ShortUser } from 'users/users.interface';
@@ -30,7 +35,7 @@ describe('when get pairs is called', () => {
     beforeAll(() => {
       prismaService.user.findUnique = jest
         .fn()
-        .mockResolvedValue({ pairs: [shortUserStub()] });
+        .mockResolvedValue({ pairs: [shortUserWithLocationStub()] });
     });
 
     let pairs: ShortUser[];

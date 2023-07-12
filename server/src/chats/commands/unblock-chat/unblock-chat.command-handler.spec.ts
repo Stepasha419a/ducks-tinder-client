@@ -10,6 +10,7 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { NOT_FOUND } from 'common/constants/error';
 import { UnblockChatCommandHandler } from './unblock-chat.command-handler';
 import { UnblockChatCommand } from './unblock-chat.command';
+import { fullChatWithoutDistanceStub } from 'chats/test/stubs/full-chat-without-distance.stub';
 
 describe('when unblock chat is called', () => {
   let prismaService: PrismaService;
@@ -36,7 +37,9 @@ describe('when unblock chat is called', () => {
         .fn()
         .mockResolvedValue(fullChatStub());
       prismaService.message.count = jest.fn().mockResolvedValue(20);
-      prismaService.chat.update = jest.fn().mockResolvedValue(fullChatStub());
+      prismaService.chat.update = jest
+        .fn()
+        .mockResolvedValue(fullChatWithoutDistanceStub());
     });
 
     let chat: FullChat;

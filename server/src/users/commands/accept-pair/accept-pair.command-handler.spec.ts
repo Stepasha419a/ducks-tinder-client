@@ -3,13 +3,14 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsServiceMock, UsersPrismaMock } from 'users/test/mocks';
-import { requestUserStub, userDtoStub } from 'users/test/stubs';
-import { ShortUser } from 'users/users.interface';
+import { requestUserStub, shortUserStub, userDtoStub } from 'users/test/stubs';
+import { ShortUserWithoutDistance } from 'users/users.interface';
 import { UsersSelector } from 'users/users.selector';
 import { AcceptPairCommandHandler } from './accept-pair.command-handler';
 import { AcceptPairCommand } from './accept-pair.command';
 import { ChatsModule } from 'chats/chats.module';
 import { ChatsService } from 'chats/chats.service';
+import { NOT_FOUND_PAIR } from 'common/constants/error';
 
 describe('when accept pair is called', () => {
   let prismaService: PrismaService;
@@ -43,45 +44,50 @@ describe('when accept pair is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
-      prismaService.user.findUnique = jest.fn().mockResolvedValue({
-        ...userDtoStub(),
+      prismaService.user.findFirst = jest.fn().mockResolvedValue({
         id: '34545656',
-        pairs: [{ ...userDtoStub().firstPair, id: '34545656' }],
       });
+      prismaService.user.findUnique = jest
+        .fn()
+        .mockResolvedValue({ ...shortUserStub(), distance: undefined });
     });
 
-    let pairs: ShortUser[];
+    let pair: ShortUserWithoutDistance;
     const userPairId = '34545656';
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        pairs = await acceptPairCommandHandler.execute(
+        pair = await acceptPairCommandHandler.execute(
           new AcceptPairCommand(requestUserStub(), userPairId),
         );
       } catch {}
     });
 
+    it('should call user find first', () => {
+      expect(prismaService.user.findFirst).toBeCalledTimes(1);
+      expect(prismaService.user.findFirst).toBeCalledWith({
+        where: {
+          id: userPairId,
+          pairFor: { some: { id: requestUserStub().id } },
+        },
+        select: { id: true },
+      });
+    });
+
     it('should call user find unique', () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(3);
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: userPairId },
-      });
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
-        where: { id: userDtoStub().id },
-        select: { pairs: { select: { id: true } } },
-      });
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(3, {
-        where: { id: userDtoStub().id },
-        select: { pairs: { select: UsersSelector.selectShortUser() } },
+        select: UsersSelector.selectShortUser(),
       });
     });
 
     it('should call user update', () => {
       expect(prismaService.user.update).toBeCalledTimes(1);
       expect(prismaService.user.update).toBeCalledWith({
-        where: { id: userDtoStub().id },
-        data: { pairs: { disconnect: { id: '34545656' } } },
+        where: { id: requestUserStub().id },
+        data: { pairs: { disconnect: { id: userPairId } } },
       });
     });
 
@@ -93,33 +99,44 @@ describe('when accept pair is called', () => {
       ]);
     });
 
-    it('should return pairs', () => {
-      expect(pairs).toEqual([{ ...userDtoStub().firstPair, id: '34545656' }]);
+    it('should return accepted pair', () => {
+      expect(pair).toEqual({ ...shortUserStub(), distance: undefined });
     });
   });
 
   describe('when such user pair does not exist', () => {
     beforeAll(() => {
-      prismaService.user.findUnique = jest.fn().mockResolvedValue(undefined);
+      prismaService.user.findFirst = jest.fn().mockResolvedValue(undefined);
     });
 
-    let pairs: ShortUser[];
+    let pair: ShortUserWithoutDistance;
+    let error;
     const userPairId = '34545656';
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        pairs = await acceptPairCommandHandler.execute(
+        pair = await acceptPairCommandHandler.execute(
           new AcceptPairCommand(requestUserStub(), userPairId),
         );
-      } catch {}
+      } catch (responseError) {
+        error = responseError;
+      }
     });
 
-    it('should call user find unique', () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
-        where: { id: userPairId },
+    it('should call user find first', () => {
+      expect(prismaService.user.findFirst).toBeCalledTimes(1);
+      expect(prismaService.user.findFirst).toBeCalledWith({
+        where: {
+          id: userPairId,
+          pairFor: { some: { id: requestUserStub().id } },
+        },
+        select: { id: true },
       });
+    });
+
+    it('should not call user find unique', () => {
+      expect(prismaService.user.findUnique).not.toBeCalled();
     });
 
     it('should not call user update', () => {
@@ -130,55 +147,13 @@ describe('when accept pair is called', () => {
       expect(chatsService.create).not.toBeCalled();
     });
 
-    it('should return undefined', () => {
-      expect(pairs).toEqual(undefined);
-    });
-  });
-
-  describe('when there is no such user pair', () => {
-    beforeAll(() => {
-      prismaService.user.findUnique = jest.fn(() => {
-        return {
-          ...userDtoStub(),
-          id: '34545656',
-          pairs: [],
-        } as any;
-      });
-    });
-
-    let pairs: ShortUser[];
-    const userPairId = '34545656';
-
-    beforeEach(async () => {
-      jest.clearAllMocks();
-      try {
-        pairs = await acceptPairCommandHandler.execute(
-          new AcceptPairCommand(requestUserStub(), userPairId),
-        );
-      } catch {}
-    });
-
-    it('should call user find unique', () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(2);
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
-        where: { id: userPairId },
-      });
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
-        where: { id: userDtoStub().id },
-        select: { pairs: { select: { id: true } } },
-      });
-    });
-
-    it('should not call user update', () => {
-      expect(chatsService.create).not.toBeCalled();
-    });
-
-    it('should not call chatService create', () => {
-      expect(chatsService.create).not.toBeCalled();
+    it('should throw an error', () => {
+      expect(error.status).toEqual(404);
+      expect(error.message).toEqual(NOT_FOUND_PAIR);
     });
 
     it('should return undefined', () => {
-      expect(pairs).toEqual(undefined);
+      expect(pair).toEqual(undefined);
     });
   });
 });

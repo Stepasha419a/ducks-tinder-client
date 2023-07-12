@@ -10,6 +10,7 @@ import {
   prepareAfter,
   prepareBefore,
 } from '../preparations';
+import { USERS_PAIRS_POST_EXPECT } from 'users/test/values/users.e2e-const.expect';
 
 const currentUserId = 'users_pairs_post_current_user_id';
 const secondUserId = 'users_pairs_post_second_user_id';
@@ -82,7 +83,7 @@ describe('users/pairs/:id (POST)', () => {
 
     it('should return an empty array of pairs', () => {
       expect(response.status).toBe(200);
-      expect(response.body).toEqual([]);
+      expect(response.body).toEqual(USERS_PAIRS_POST_EXPECT);
     });
   });
 

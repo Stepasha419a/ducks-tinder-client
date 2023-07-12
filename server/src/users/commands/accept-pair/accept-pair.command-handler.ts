@@ -5,7 +5,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { UsersSelector } from 'users/users.selector';
 import { ChatsService } from 'chats/chats.service';
 import { ShortUserWithoutDistance } from 'users/users.interface';
-import { NOT_FOUND_PAIR, NOT_FOUND_USER } from 'common/constants/error';
+import { NOT_FOUND_PAIR } from 'common/constants/error';
 
 @CommandHandler(AcceptPairCommand)
 export class AcceptPairCommandHandler
@@ -19,36 +19,26 @@ export class AcceptPairCommandHandler
   async execute(command: AcceptPairCommand): Promise<ShortUserWithoutDistance> {
     const { user, userPairId } = command;
 
-    const userPair = await this.prismaService.user.findUnique({
-      where: { id: userPairId },
+    const userPair = await this.prismaService.user.findFirst({
+      where: { id: userPairId, pairFor: { some: { id: user.id } } },
+      select: { id: true },
     });
     if (!userPair) {
-      throw new NotFoundException(NOT_FOUND_USER);
-    }
-
-    const pairs = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: { pairs: { select: { id: true } } },
-      })
-    ).pairs;
-
-    const acceptedPair = pairs.find((pair) => pair.id === userPair.id);
-
-    if (acceptedPair) {
-      await this.prismaService.user.update({
-        where: { id: user.id },
-        data: { pairs: { disconnect: { id: acceptedPair.id } } },
-      });
-    } else {
       throw new NotFoundException(NOT_FOUND_PAIR);
     }
 
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: { pairs: { disconnect: { id: userPair.id } } },
+    });
+
     await this.chatsService.create([user.id, userPairId]);
 
-    return this.prismaService.user.findUnique({
-      where: { id: acceptedPair.id },
+    const acceptedPair = await this.prismaService.user.findUnique({
+      where: { id: userPair.id },
       select: UsersSelector.selectShortUser(),
     });
+
+    return { ...acceptedPair, place: { name: acceptedPair.place.name } };
   }
 }

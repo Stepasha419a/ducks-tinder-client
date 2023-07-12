@@ -3,10 +3,12 @@ export const USERS_PAIRS_GET_EXPECT = [
     id: 'users_pairs_get_second_user_id',
     name: 'Loren',
     description: null,
-    distance: null,
+    distance: 31,
     interests: [],
     age: null,
-    place: null,
+    place: {
+      name: 'second-user-place-name',
+    },
     isActivated: false,
     pictures: [],
   },
@@ -22,7 +24,12 @@ export const USERS_PATCH_EXPECT = {
   isActivated: false,
   nickname: null,
   pairsCount: 0,
-  place: null,
+  place: {
+    address: 'current-user-place-address',
+    latitude: 12.3456789,
+    longitude: 12.3456789,
+    name: 'current-user-place-name',
+  },
   preferAgeFrom: null,
   preferAgeTo: null,
   preferSex: null,
@@ -42,7 +49,12 @@ export const USERS_PICTURE_PUT_EXPECT = {
   isActivated: false,
   nickname: null,
   pairsCount: 0,
-  place: null,
+  place: {
+    address: 'current-user-place-address',
+    latitude: 12.3456789,
+    longitude: 12.3456789,
+    name: 'current-user-place-name',
+  },
   preferAgeFrom: null,
   preferAgeTo: null,
   preferSex: null,
@@ -55,13 +67,41 @@ export const USERS_PICTURE_PUT_EXPECT = {
 export const USERS_SORTED_GET_EXPECT = {
   id: 'sorted_second_user_id',
   age: 20,
-  distance: 50,
+  distance: 31,
   description: null,
   name: 'Loren',
-  place: null,
+  place: {
+    name: 'second-user-place-name',
+  },
   isActivated: false,
   pictures: [],
   interests: [],
+};
+
+export const USERS_PAIRS_PUT_EXPECT = {
+  age: null,
+  description: null,
+  id: 'users_pairs_put_second_user_id',
+  interests: [],
+  isActivated: false,
+  name: 'Loren',
+  pictures: [],
+  place: {
+    name: 'second-user-place-name',
+  },
+};
+
+export const USERS_PAIRS_POST_EXPECT = {
+  age: null,
+  description: null,
+  id: 'users_pairs_post_second_user_id',
+  interests: [],
+  isActivated: false,
+  name: 'Loren',
+  pictures: [],
+  place: {
+    name: 'second-user-place-name',
+  },
 };
 
 export const USERS_PICTURE_MIX_PUT_EXPECT = [

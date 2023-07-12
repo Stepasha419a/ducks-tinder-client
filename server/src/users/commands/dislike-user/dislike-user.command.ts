@@ -1,5 +1,8 @@
-import { User } from '@prisma/client';
+import { AuthorizedUser } from 'users/users.interface';
 
 export class DislikeUserCommand {
-  constructor(public readonly user: User, public readonly userPairId: string) {}
+  constructor(
+    public readonly user: AuthorizedUser,
+    public readonly userPairId: string,
+  ) {}
 }

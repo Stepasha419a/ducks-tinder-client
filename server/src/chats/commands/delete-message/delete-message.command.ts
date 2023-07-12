@@ -1,9 +1,9 @@
-import { User } from '@prisma/client';
+import { AuthorizedUser } from 'users/users.interface';
 import { DeleteMessageDto } from 'chats/dto';
 
 export class DeleteMessageCommand {
   constructor(
-    public readonly user: User,
+    public readonly user: AuthorizedUser,
     public readonly chatId: string,
     public readonly dto: DeleteMessageDto,
   ) {}

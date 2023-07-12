@@ -6,7 +6,7 @@ export const shortUserStub = (): ShortUser => ({
   description: '',
   age: 18,
   interests: [],
-  distance: 2,
+  distance: 31,
   place: { name: 'russia moscow' },
   isActivated: false,
   pictures: [
