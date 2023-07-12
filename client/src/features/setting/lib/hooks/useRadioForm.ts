@@ -4,6 +4,7 @@ import { nullInput, submitSettingsThunk } from '@entities/setting/model';
 import { useDefaultValues } from '@entities/setting/hooks';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { useNavigate } from 'react-router-dom';
+import { useNullOnClose } from './useNullOnClose';
 
 export function useRadioForm() {
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ export function useRadioForm() {
   const {
     field: { value, onChange },
   } = useController({ name: 'input', control, rules: { required: true } });
+
+  useNullOnClose();
 
   const cancelHandler = (): void => {
     dispatch(nullInput());

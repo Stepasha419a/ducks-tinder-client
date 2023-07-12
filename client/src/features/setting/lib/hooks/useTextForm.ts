@@ -7,6 +7,7 @@ import {
 } from '@entities/setting/hooks';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
 import { useNavigate } from 'react-router-dom';
+import { useNullOnClose } from './useNullOnClose';
 
 export function useTextForm() {
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ export function useTextForm() {
     defaultValues: { input: useDefaultValues() as string },
     mode: 'onChange',
   });
+
+  useNullOnClose();
 
   const cancelHandler = (): void => {
     dispatch(nullInput());

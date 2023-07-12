@@ -6,12 +6,10 @@ import type {
   SetInputPayload,
   SettingInitialState,
 } from './setting.interfaces';
-import { submitSettingsThunk } from './setting.thunks';
 
 const initialState: SettingInitialState = {
   settingType: null,
   settingName: null,
-  isUserInfoSetting: false,
   validation: null,
   formName: null,
   errorFields: [],
@@ -21,9 +19,6 @@ const settingSlice = createSlice({
   name: 'settingSlice',
   initialState,
   reducers: {
-    setIsUserInfoSetting: (state, { payload }: PayloadAction<boolean>) => {
-      state.isUserInfoSetting = payload;
-    },
     setInput: (
       state,
       {
@@ -33,7 +28,6 @@ const settingSlice = createSlice({
       state.formName = formName || settingName;
       state.settingName = settingName;
       state.validation = validation || null;
-      state.isUserInfoSetting = true;
 
       switch (settingName) {
         case 'interests':
@@ -47,16 +41,15 @@ const settingSlice = createSlice({
           state.settingType = 'radio';
           break;
         case 'place':
-          state.settingType = 'hidden';
+          state.settingType = 'external';
           break;
         default:
-          state.settingType = null;
+          state.settingType = 'text';
       }
     },
     nullInput: (state) => {
       state.formName = null;
       state.settingName = null;
-      state.isUserInfoSetting = false;
       state.settingType = null;
       state.validation = null;
     },
@@ -64,14 +57,8 @@ const settingSlice = createSlice({
       state.errorFields = checkUserFields(payload);
     },
   },
-  extraReducers(builder) {
-    builder.addCase(submitSettingsThunk.pending, (state) => {
-      state.isUserInfoSetting = false;
-    });
-  },
 });
 
-export const { setIsUserInfoSetting, setInput, nullInput, checkFields } =
-  settingSlice.actions;
+export const { setInput, nullInput, checkFields } = settingSlice.actions;
 
 export const settingReducer = settingSlice.reducer;

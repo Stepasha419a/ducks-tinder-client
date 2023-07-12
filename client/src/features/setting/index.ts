@@ -17,5 +17,5 @@ export {
   RadioForm,
   TextForm,
   TextareaForm,
-  HiddenForm,
+  ExternalForm,
 } from './forms';

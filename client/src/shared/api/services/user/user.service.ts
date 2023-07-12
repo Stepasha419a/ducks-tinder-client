@@ -4,6 +4,7 @@ import type {
   PartialUser,
   ShortUser,
   Picture,
+  ShortUserWithoutDistance,
 } from '@shared/api/interfaces';
 
 export const userService = {
@@ -48,11 +49,11 @@ export const userService = {
   },
 
   async acceptPair(pairId: string) {
-    return instance.post<ShortUser[]>(`users/pairs/${pairId}`);
+    return instance.post<ShortUserWithoutDistance>(`users/pairs/${pairId}`);
   },
 
   async deletePair(pairId: string) {
-    return instance.put<ShortUser[]>(`users/pairs/${pairId}`);
+    return instance.put<ShortUserWithoutDistance>(`users/pairs/${pairId}`);
   },
 
   async likeUser(userId: string) {

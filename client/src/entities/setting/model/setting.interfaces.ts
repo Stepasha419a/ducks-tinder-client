@@ -6,6 +6,11 @@ export interface Validation {
   email?: boolean;
 }
 
+export interface SettingProperties {
+  formName?: string;
+  validation?: Validation;
+}
+
 export type SettingName =
   | 'email'
   | 'name'
@@ -16,7 +21,7 @@ export type SettingName =
   | 'preferSex'
   | 'nickname';
 
-type SettingType = 'textarea' | 'select' | 'radio' | 'hidden' | null;
+type SettingType = 'textarea' | 'select' | 'radio' | 'external' | 'text' | null;
 
 export type Setting =
   | SettingName
@@ -29,7 +34,6 @@ export type Setting =
 export interface SettingInitialState {
   settingType: SettingType;
   settingName: SettingName | null;
-  isUserInfoSetting: boolean;
   validation: Validation | null;
   formName: string | null;
   errorFields: Setting[];

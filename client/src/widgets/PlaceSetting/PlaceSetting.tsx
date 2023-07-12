@@ -1,14 +1,14 @@
-import styles from './PlaceSetting.module.scss';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@/shared/constants';
 import { useAppDispatch } from '@/shared/hooks';
 import { nullInput } from '@/entities/setting/model';
 import { Map } from '@entities/user/components';
 import { PlacesGeolocation } from '@/features/user/PlacesGeolocation/PlacesGeolocation';
-import { useSettingUrl } from '@/entities/setting/hooks';
+import styles from './PlaceSetting.module.scss';
 
 export const PlaceSetting = () => {
   const dispatch = useAppDispatch();
 
-  useSettingUrl();
   const handleSubmit = () => {
     dispatch(nullInput());
   };
@@ -17,9 +17,13 @@ export const PlaceSetting = () => {
     <div className={styles.setting}>
       <div className={styles.head}>
         <div className={styles.title}>Place</div>
-        <div onClick={handleSubmit} className={styles.submit}>
+        <Link
+          to={ROUTES.profile}
+          onClick={handleSubmit}
+          className={styles.submit}
+        >
           Submit
-        </div>
+        </Link>
       </div>
       <Map />
       <PlacesGeolocation />

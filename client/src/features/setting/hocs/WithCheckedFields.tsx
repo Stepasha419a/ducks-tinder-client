@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toastify } from '@shared/lib';
 import { useAppDispatch, useAppSelector, useDebouncedCallback } from '@hooks';
 import { checkFields } from '@entities/setting/model';
@@ -8,6 +8,7 @@ import { checkFields } from '@entities/setting/model';
 export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
   const Wrapper = (props: P): ReactElement<P> => {
     const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     const dispatch = useAppDispatch();
 
@@ -18,11 +19,14 @@ export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
     useEffect(() => {
       if (isAuth) {
         dispatch(checkFields(currentUser));
-        if (errorFields.length) {
+        if (
+          errorFields.length &&
+          !pathname.match(/\/profile\/([a-z]+)-?([a-z]*)/)?.[1]
+        ) {
           return navigate('/profile');
         }
       }
-    }, [isAuth, navigate, currentUser, dispatch, errorFields.length]);
+    }, [isAuth, navigate, currentUser, dispatch, errorFields.length, pathname]);
 
     // checkFields call toastify twice => it displays it only once in rerender
     const debouncedToastify = useDebouncedCallback(

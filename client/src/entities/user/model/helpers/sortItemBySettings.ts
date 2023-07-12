@@ -21,7 +21,10 @@ function sortPair(
 ): boolean {
   switch (sortKey) {
     case 'distance':
-      if (item.distance > sortSettings.distance) {
+      if (
+        item.distance > sortSettings.distance &&
+        sortSettings.distance !== 100
+      ) {
         return false;
       }
       return true;

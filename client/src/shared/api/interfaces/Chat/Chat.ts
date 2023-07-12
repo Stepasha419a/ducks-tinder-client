@@ -1,4 +1,4 @@
-import type { ShortUser } from '../User/User';
+import type { ShortUser, ShortUserWithoutDistance } from '../User/User';
 
 export interface RepliedMessage {
   id: string;
@@ -27,7 +27,7 @@ export interface Chat {
 export interface ShortChat {
   id: string;
   messages: Message[];
-  users: ShortUser[];
+  users: ShortUserWithoutDistance[];
   blocked: boolean;
   blockedById: string;
 }

@@ -12,9 +12,7 @@ import { Link } from 'react-router-dom';
 import { ROUTES } from '@/shared/constants';
 
 export const ProfileBlock = (): ReactElement => {
-  const isUserInfoSetting = useAppSelector(
-    (state) => state.setting.isUserInfoSetting
-  );
+  const settingType = useAppSelector((state) => state.setting.settingType);
   const isFound = useSettingUrl();
 
   if (isFound === false) {
@@ -33,7 +31,7 @@ export const ProfileBlock = (): ReactElement => {
   return (
     <div className={styles.block}>
       <AnimatePresence initial={false} mode="wait">
-        {isUserInfoSetting ? (
+        {settingType && isFound ? (
           <motion.div
             key="setting"
             variants={settingVariants}

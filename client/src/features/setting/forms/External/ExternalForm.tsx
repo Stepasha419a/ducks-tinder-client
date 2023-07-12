@@ -1,11 +1,11 @@
 import type { FC, ReactElement } from 'react';
-import styles from './HiddenForm.module.scss';
-import SettingWrapper from '../Wrapper/SettingWrapper';
-import { useTextForm } from '../../lib';
 import { useAppSelector } from '@/shared/hooks';
+import SettingWrapper from '../Wrapper/SettingWrapper';
+import styles from './ExternalForm.module.scss';
+import { useExternalForm } from '../../lib/hooks';
 
-export const HiddenForm: FC = (): ReactElement => {
-  const { formName, errors, cancelHandler } = useTextForm();
+export const ExternalForm: FC = (): ReactElement => {
+  const { formName, errors, submitHandler, cancelHandler } = useExternalForm();
   const place = useAppSelector((state) => state.user.currentUser.place);
 
   return (
@@ -13,7 +13,7 @@ export const HiddenForm: FC = (): ReactElement => {
       <SettingWrapper
         formName={formName}
         errors={errors}
-        submitHandler={cancelHandler}
+        submitHandler={submitHandler}
         cancelHandler={cancelHandler}
       >
         <div className={styles.place}>

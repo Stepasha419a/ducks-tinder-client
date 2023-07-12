@@ -1,6 +1,10 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { ShortUser, User } from '@shared/api/interfaces';
+import type {
+  ShortUser,
+  ShortUserWithoutDistance,
+  User,
+} from '@shared/api/interfaces';
 import {
   acceptPairThunk,
   refusePairThunk,
@@ -59,16 +63,22 @@ const userSlice = createSlice({
         state.pairs = payload;
         state.isPairsLoading = false;
       })
-      .addCase(acceptPairThunk.fulfilled, (state, { payload }) => {
-        state.pairs = payload;
-        state.currentUser.pairsCount = payload.length;
-        state.currentPair = null;
-      })
-      .addCase(refusePairThunk.fulfilled, (state, { payload }) => {
-        state.pairs = payload;
-        state.currentUser.pairsCount = payload.length;
-        state.currentPair = null;
-      })
+      .addCase(
+        acceptPairThunk.fulfilled,
+        (state, { payload }: PayloadAction<ShortUserWithoutDistance>) => {
+          state.pairs = state.pairs.filter((pair) => pair.id !== payload.id);
+          state.currentUser.pairsCount--;
+          state.currentPair = null;
+        }
+      )
+      .addCase(
+        refusePairThunk.fulfilled,
+        (state, { payload }: PayloadAction<ShortUserWithoutDistance>) => {
+          state.pairs = state.pairs.filter((pair) => pair.id !== payload.id);
+          state.currentUser.pairsCount--;
+          state.currentPair = null;
+        }
+      )
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       })

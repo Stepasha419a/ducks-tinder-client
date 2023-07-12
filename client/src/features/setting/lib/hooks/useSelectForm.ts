@@ -5,6 +5,7 @@ import { submitSettingsThunk, nullInput } from '@entities/setting/model';
 import type { Interest } from '@/shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
 import { useNavigate } from 'react-router-dom';
+import { useNullOnClose } from './useNullOnClose';
 
 export function useSelectForm() {
   const navigate = useNavigate();
@@ -31,6 +32,8 @@ export function useSelectForm() {
       required: 'Form is required',
     },
   });
+
+  useNullOnClose();
 
   const toggleItem = (item: Interest): void => {
     if (items.some((interest) => interest.name === item.name)) {

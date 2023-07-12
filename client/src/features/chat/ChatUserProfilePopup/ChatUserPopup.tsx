@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import type { ShortUser } from '@/shared/api/interfaces';
 import { selectChatProfile } from '@/entities/chat/model';
 import { Preview } from '@/entities/user/components';
 import {
@@ -31,7 +32,7 @@ export const ChatUserPopup: FC<ChatUserPopupProps> = ({ handleClose }) => {
   return (
     <Popup closeHandler={handleClose} size="l">
       <Preview
-        user={currentChatUser!}
+        user={currentChatUser! as ShortUser}
         isFull
         extraContent={
           <>

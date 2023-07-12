@@ -1,6 +1,10 @@
 import { Avatar } from '@shared/ui';
 import classNames from 'classnames';
-import type { ShortChat, ShortUser } from '@shared/api/interfaces';
+import type {
+  ShortChat,
+  ShortUser,
+  ShortUserWithoutDistance,
+} from '@shared/api/interfaces';
 import type { FC } from 'react';
 import styles from './ChatItem.module.scss';
 import { Link } from 'react-router-dom';
@@ -8,7 +12,7 @@ import { ROUTES } from '@/shared/constants';
 
 interface ChatInterface {
   chat: ShortChat;
-  chatCompanion: ShortUser | undefined;
+  chatCompanion: ShortUserWithoutDistance | ShortUser | undefined;
   isActive: boolean;
 }
 

@@ -41,12 +41,15 @@ export interface User {
   pairsCount: number;
 }
 
-export interface ShortUser {
+export interface ShortUser extends ShortUserWithoutDistance {
+  distance: number;
+}
+
+export interface ShortUserWithoutDistance {
   id: string;
   name: string;
   age: number;
   description: string;
-  distance: number;
   place: ShortPlace | null;
   isActivated: boolean;
   interests: Interest[];
