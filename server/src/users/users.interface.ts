@@ -50,10 +50,3 @@ export interface ShortUserWithLocation extends ShortUserWithoutDistance {
 export interface ShortUser extends ShortUserWithoutDistance {
   distance: number;
 }
-
-export interface UserToInterestsRelation {
-  interest: {
-    id: string;
-    name: string;
-  };
-}

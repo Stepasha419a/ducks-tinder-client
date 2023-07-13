@@ -14,6 +14,9 @@ export class PatchUserPlaceCommandHandler
     private readonly mapsService: MapsService,
   ) {}
 
+  /* idk how it works but browser maps api returns lat and long but geocode api requires
+   them on the contrary for correct geocode answer & distance formula requires them on the
+   contrary => I swap them when save in db */
   async execute(command: PatchUserPlaceCommand): Promise<UserDto> {
     const { user, dto } = command;
 
@@ -25,15 +28,15 @@ export class PatchUserPlaceCommandHandler
     await this.prismaService.place.upsert({
       where: { id: user.id },
       create: {
-        latitude: dto.latitude,
-        longitude: dto.longitude,
+        latitude: dto.longitude,
+        longitude: dto.latitude,
         address: geocode.address,
         name: geocode.name,
         user: { connect: { id: user.id } },
       },
       update: {
-        latitude: dto.latitude,
-        longitude: dto.longitude,
+        latitude: dto.longitude,
+        longitude: dto.latitude,
         address: geocode.address,
         name: geocode.name,
       },

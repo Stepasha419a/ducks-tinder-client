@@ -20,13 +20,13 @@ export const Map: FC = () => {
             minZoom: 8,
           }}
           defaultState={{
-            center: [place.longitude, place.latitude],
+            center: [place.latitude, place.longitude],
             zoom: 8,
           }}
           width={375}
           height={300}
         >
-          <Placemark geometry={[place.longitude, place.latitude]} />
+          <Placemark geometry={[place.latitude, place.longitude]} />
         </YMap>
       </YMaps>
     </>

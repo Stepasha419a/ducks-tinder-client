@@ -58,9 +58,5 @@ export function getMessageProps(
     getAvatarProps,
     getSelectProps,
     getContentProps,
-    /* isOwn,
-    name,
-    repliedMessageText,
-    repliedUsername, */
   };
 }
