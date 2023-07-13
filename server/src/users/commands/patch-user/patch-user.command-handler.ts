@@ -3,6 +3,8 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { PatchUserCommand } from './patch-user.command';
 import { UsersSelector } from 'users/users.selector';
 import { UserDto } from 'users/dto';
+import { ForbiddenException } from '@nestjs/common';
+import { USER_ALREADY_EXISTS } from 'common/constants/error';
 
 @CommandHandler(PatchUserCommand)
 export class PatchUserCommandHandler
@@ -16,16 +18,24 @@ export class PatchUserCommandHandler
     // dto without interests to update user fields (interest = relation)
     const updateUserDto = { ...dto, interests: undefined };
 
-    const interests = (
-      await this.prismaService.user.findUnique({
-        where: { id: user.id },
-        select: {
-          interests: true,
-        },
-      })
-    ).interests;
+    if (dto.email) {
+      const candidate = await this.prismaService.user.findUnique({
+        where: { email: dto.email },
+      });
+      if (candidate) {
+        throw new ForbiddenException(USER_ALREADY_EXISTS);
+      }
+    }
 
     if (dto.interests && (dto.interests.length || dto.interests.length === 0)) {
+      const interests = (
+        await this.prismaService.user.findUnique({
+          where: { id: user.id },
+          select: {
+            interests: true,
+          },
+        })
+      ).interests;
       const existingInterests = await this.prismaService.interest.findMany({
         where: { name: { in: dto.interests } },
       });

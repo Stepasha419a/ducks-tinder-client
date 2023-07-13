@@ -17,6 +17,7 @@ import {
 } from './user.thunks';
 import type { PairSorts, UserInitialState } from './user.interfaces';
 import { INITIAL_SORTS } from './user.constants';
+import { toastify } from '@/shared/lib';
 
 const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh
@@ -79,6 +80,11 @@ const userSlice = createSlice({
           state.currentPair = null;
         }
       )
+      .addCase(updateUserThunk.rejected, (_, { payload }) => {
+        if (payload === 'User already exists') {
+          toastify('This email address is already used, try another one');
+        }
+      })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       })
