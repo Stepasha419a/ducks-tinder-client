@@ -1,3 +1,4 @@
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { ShortUser } from '@shared/api/interfaces';
 import {
@@ -8,20 +9,16 @@ import {
 } from './tinder.thunks';
 
 interface InitialState {
-  tinderUsers: ShortUser[];
+  tinderUser: ShortUser | null;
   isReturnUser: boolean;
   isLoading: boolean;
-  requestedUsers: string[];
-  currentTinderUsersIndex: number;
   isFailed: boolean;
 }
 
 const initialState: InitialState = {
-  tinderUsers: [],
+  tinderUser: null,
   isReturnUser: false,
   isLoading: true,
-  requestedUsers: [],
-  currentTinderUsersIndex: 0,
   isFailed: false,
 };
 
@@ -34,23 +31,60 @@ const tinderSlice = createSlice({
       .addCase(getSortedUserThunk.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getSortedUserThunk.fulfilled, (state, { payload }) => {
-        state.tinderUsers = [...state.tinderUsers, payload];
-        state.isLoading = false;
-      })
+      .addCase(
+        getSortedUserThunk.fulfilled,
+        (state, { payload }: PayloadAction<ShortUser>) => {
+          state.tinderUser = payload;
+          state.isLoading = false;
+        }
+      )
       .addCase(getSortedUserThunk.rejected, (state) => {
         state.isFailed = true;
       })
-      .addCase(likeUserThunk.fulfilled, (state) => {
-        state.currentTinderUsersIndex++;
+      .addCase(returnUserThunk.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(returnUserThunk.fulfilled, (state) => {
-        state.currentTinderUsersIndex--;
-        state.isReturnUser = false;
+      .addCase(
+        returnUserThunk.fulfilled,
+        (state, { payload }: PayloadAction<ShortUser | undefined>) => {
+          if (payload) {
+            state.tinderUser = payload;
+          }
+          state.isReturnUser = false;
+          state.isLoading = false;
+        }
+      )
+      .addCase(likeUserThunk.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(dislikeUserThunk.fulfilled, (state) => {
-        state.currentTinderUsersIndex++;
-        state.isReturnUser = true;
+      .addCase(
+        likeUserThunk.fulfilled,
+        (state, { payload }: PayloadAction<ShortUser | undefined>) => {
+          if (payload) {
+            state.tinderUser = payload;
+          }
+          state.isReturnUser = false;
+          state.isLoading = false;
+        }
+      )
+      .addCase(likeUserThunk.rejected, (state) => {
+        state.isFailed = true;
+      })
+      .addCase(dislikeUserThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        dislikeUserThunk.fulfilled,
+        (state, { payload }: PayloadAction<ShortUser | undefined>) => {
+          if (payload) {
+            state.tinderUser = payload;
+          }
+          state.isReturnUser = true;
+          state.isLoading = false;
+        }
+      )
+      .addCase(dislikeUserThunk.rejected, (state) => {
+        state.isFailed = true;
       });
   },
 });

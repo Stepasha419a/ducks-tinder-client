@@ -1,3 +1,4 @@
+import type { AnimationControls } from 'framer-motion';
 import {
   dislikeUserThunk,
   likeUserThunk,
@@ -13,31 +14,53 @@ import {
 import { useAppDispatch, useAppSelector } from '@shared/hooks';
 
 export function useRateButtons(
+  controls: AnimationControls,
   isMinimum: boolean,
   styles: Record<string, string>
 ) {
   const dispatch = useAppDispatch();
 
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
-  const currentTinderUsersIndex = useAppSelector(
-    (state) => state.tinder.currentTinderUsersIndex
-  );
+
+  function startCenter() {
+    setTimeout(() => {
+      controls.start('center');
+    }, 400);
+  }
+
+  function handleLike() {
+    setTimeout(() => {
+      dispatch(likeUserThunk());
+    }, 300);
+  }
+
+  function handleDislike() {
+    setTimeout(() => {
+      dispatch(dislikeUserThunk());
+    }, 300);
+  }
 
   const buttons = [
     {
-      onClick: async () => isReturnUser && dispatch(returnUserThunk()),
+      onClick: () => {
+        if (isReturnUser) {
+          dispatch(returnUserThunk());
+        }
+      },
       extraClassName: [
         styles.btn,
         styles.small,
-        currentTinderUsersIndex && isReturnUser ? styles.gold : styles.blocked,
+        isReturnUser ? styles.gold : styles.blocked,
       ],
       icon: faRotateLeft,
-      cnIcon: `${styles.icon} ${
-        currentTinderUsersIndex && isReturnUser ? styles.gold : styles.blocked
-      }`,
+      cnIcon: `${styles.icon} ${isReturnUser ? styles.gold : styles.blocked}`,
     },
     {
-      onClick: async () => dispatch(dislikeUserThunk()),
+      onClick: () => {
+        controls.start('dislike');
+        startCenter();
+        handleDislike();
+      },
       extraClassName: [
         styles.btn,
         styles.large,
@@ -48,7 +71,11 @@ export function useRateButtons(
       cnIcon: `${styles.icon} ${styles.red} ${styles.large}`,
     },
     {
-      onClick: async () => dispatch(likeUserThunk()),
+      onClick: () => {
+        controls.start('superLike');
+        startCenter();
+        handleLike();
+      },
       extraClassName: [
         styles.btn,
         styles.small,
@@ -59,7 +86,11 @@ export function useRateButtons(
       cnIcon: `${styles.icon} ${styles.blue}`,
     },
     {
-      onClick: async () => dispatch(likeUserThunk()),
+      onClick: () => {
+        controls.start('like');
+        startCenter();
+        handleLike();
+      },
       extraClassName: [
         styles.btn,
         styles.large,

@@ -2,9 +2,16 @@ import { Test } from '@nestjs/testing';
 import { PrismaModule } from 'prisma/prisma.module';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersPrismaMock } from 'users/test/mocks';
-import { requestUserStub, userDtoStub } from 'users/test/stubs';
+import {
+  requestUserStub,
+  shortUserStub,
+  shortUserWithLocationStub,
+  userDtoStub,
+} from 'users/test/stubs';
 import { ReturnUserCommandHandler } from './return-user.command-handler';
 import { ReturnUserCommand } from './return-user.command';
+import { UsersSelector } from 'users/users.selector';
+import { NOT_FOUND } from 'common/constants/error';
 
 describe('when return user is called', () => {
   let prismaService: PrismaService;
@@ -27,9 +34,6 @@ describe('when return user is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
-      prismaService.user.findUnique = jest
-        .fn()
-        .mockResolvedValue({ pairFor: [{ id: userDtoStub().id }] });
       prismaService.checkedUsers.findFirst = jest.fn().mockResolvedValue({
         checkedId: userDtoStub().id,
         wasCheckedId: requestUserStub().id,
@@ -40,16 +44,25 @@ describe('when return user is called', () => {
 
     beforeEach(async () => {
       jest.clearAllMocks();
+      prismaService.user.findUnique = jest
+        .fn()
+        .mockResolvedValueOnce({ pairFor: [{ id: userDtoStub().id }] })
+        .mockResolvedValue(shortUserWithLocationStub());
+
       response = await returnUserCommandHandler.execute(
         new ReturnUserCommand(requestUserStub()),
       );
     });
 
     it('should call user find unique', () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledTimes(2);
       expect(prismaService.user.findUnique).toBeCalledWith({
         where: { id: requestUserStub().id },
         select: { pairFor: { select: { id: true } } },
+      });
+      expect(prismaService.user.findUnique).toBeCalledWith({
+        where: { id: shortUserStub().id },
+        select: UsersSelector.selectShortUser(),
       });
     });
 
@@ -74,6 +87,65 @@ describe('when return user is called', () => {
           },
         },
       });
+    });
+
+    it('should return short user', () => {
+      expect(response).toEqual(shortUserStub());
+    });
+  });
+
+  describe('when there is no checked user', () => {
+    beforeAll(() => {
+      prismaService.checkedUsers.findFirst = jest
+        .fn()
+        .mockResolvedValue(undefined);
+    });
+
+    let response;
+    let error;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      prismaService.user.findUnique = jest
+        .fn()
+        .mockResolvedValueOnce({ pairFor: [{ id: userDtoStub().id }] })
+        .mockResolvedValue(shortUserWithLocationStub());
+
+      try {
+        response = await returnUserCommandHandler.execute(
+          new ReturnUserCommand(requestUserStub()),
+        );
+      } catch (responseError) {
+        error = responseError;
+      }
+    });
+
+    it('should call user find unique only once', () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toBeCalledWith({
+        where: { id: requestUserStub().id },
+        select: { pairFor: { select: { id: true } } },
+      });
+    });
+
+    it('should call checkedUsers find first', () => {
+      expect(prismaService.checkedUsers.findFirst).toBeCalledTimes(1);
+      expect(prismaService.checkedUsers.findFirst).toBeCalledWith({
+        where: {
+          wasCheckedId: requestUserStub().id,
+          checked: { id: { notIn: [userDtoStub().id] } },
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+    });
+
+    it('should not call checkedUsers delete', () => {
+      expect(prismaService.checkedUsers.delete).not.toBeCalled();
+    });
+
+    it('should throw an error', () => {
+      expect(error.status).toEqual(404);
+      expect(error.message).toEqual(NOT_FOUND);
     });
 
     it('should return undefined', () => {

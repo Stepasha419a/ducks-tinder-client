@@ -1,15 +1,16 @@
-import type { PanInfo } from 'framer-motion';
-import { useAnimationControls, useMotionValue } from 'framer-motion';
+import type { AnimationControls, PanInfo } from 'framer-motion';
+import { useMotionValue } from 'framer-motion';
 import { dislikeUserThunk, likeUserThunk } from '@/entities/tinder/model';
 import { useAppDispatch } from '@/shared/hooks';
 
-export function useSwipeProps(isDraggable: boolean) {
+export function useSwipeProps(
+  controls: AnimationControls,
+  isDraggable: boolean
+) {
   const dispatch = useAppDispatch();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-
-  const controls = useAnimationControls();
 
   function startCenter() {
     setTimeout(() => {

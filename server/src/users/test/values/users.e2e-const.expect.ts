@@ -78,6 +78,20 @@ export const USERS_SORTED_GET_EXPECT = {
   interests: [],
 };
 
+export const USERS_RETURN_PUT_EXPECT = {
+  id: 'users_return_put_current_user_id',
+  age: null,
+  distance: 31,
+  description: null,
+  name: 'Jason',
+  place: {
+    name: 'current-user-place-name',
+  },
+  isActivated: false,
+  pictures: [],
+  interests: [],
+};
+
 export const USERS_PAIRS_PUT_EXPECT = {
   age: null,
   description: null,

@@ -65,6 +65,6 @@ export const userService = {
   },
 
   async returnUser() {
-    return instance.put<undefined>('users/return');
+    return instance.put<ShortUser>('users/return');
   },
 };

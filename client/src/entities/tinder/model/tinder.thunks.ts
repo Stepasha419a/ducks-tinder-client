@@ -20,12 +20,13 @@ export const likeUserThunk = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { tinder } = getState() as RootState;
-      const { tinderUsers, currentTinderUsersIndex } = tinder;
-      const tinderUser = tinderUsers[currentTinderUsersIndex];
+      const { tinderUser } = tinder;
 
-      const response = await userService.likeUser(tinderUser.id);
-
-      return response.data;
+      if (tinderUser) {
+        await userService.likeUser(tinderUser.id);
+        const response = await userService.getSortedUser();
+        return response.data;
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -37,9 +38,9 @@ export const returnUserThunk = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { tinder } = getState() as RootState;
-      const { currentTinderUsersIndex, isReturnUser } = tinder;
+      const { isReturnUser } = tinder;
 
-      if (currentTinderUsersIndex && isReturnUser) {
+      if (isReturnUser) {
         const response = await userService.returnUser();
 
         return response.data;
@@ -55,12 +56,13 @@ export const dislikeUserThunk = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { tinder } = getState() as RootState;
-      const { tinderUsers, currentTinderUsersIndex } = tinder;
+      const { tinderUser } = tinder;
 
-      const response = await userService.dislikeUser(
-        tinderUsers[currentTinderUsersIndex].id
-      );
-      return response.data;
+      if (tinderUser) {
+        await userService.dislikeUser(tinderUser.id);
+        const response = await userService.getSortedUser();
+        return response.data;
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
