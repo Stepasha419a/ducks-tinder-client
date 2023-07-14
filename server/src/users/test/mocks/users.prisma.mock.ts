@@ -23,4 +23,7 @@ export const UsersPrismaMock = jest.fn().mockReturnValue({
     update: jest.fn(),
     delete: jest.fn(),
   },
+  place: {
+    upsert: jest.fn(),
+  },
 });
