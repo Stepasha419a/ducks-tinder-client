@@ -1,1 +1,1 @@
-export { RateButtons } from './RateButtons/RateButtons';
+export { RateUser } from './RateUser/RateUser';

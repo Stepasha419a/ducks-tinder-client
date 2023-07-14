@@ -1,19 +1,21 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC } from 'react';
-import { Button } from '@shared/ui';
-import styles from './RateButtons.module.scss';
-import { useRateButtons } from '../lib';
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Button } from '@/shared/ui';
+import { useRateButtons } from '@features/tinder/lib';
+import styles from './RateButtons.module.scss';
 
 interface RateButtonsProps {
-  isMinimum?: boolean;
+  isFullPreview: boolean;
 }
 
-export const RateButtons: FC<RateButtonsProps> = ({ isMinimum = false }) => {
-  const buttons = useRateButtons(isMinimum, styles);
+export const RateButtons: FC<RateButtonsProps> = ({ isFullPreview }) => {
+  const buttons = useRateButtons(isFullPreview, styles);
 
   return (
-    <div className={classNames(styles.buttons, isMinimum && styles.minimized)}>
+    <div
+      className={classNames(styles.buttons, isFullPreview && styles.minimized)}
+    >
       {buttons.map((buttonData, index) => {
         return (
           <Button

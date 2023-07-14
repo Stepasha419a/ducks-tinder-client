@@ -1,1 +1,1 @@
-export { useRateButtons } from './hooks';
+export { useRateButtons, useSwipeProps } from './hooks';
