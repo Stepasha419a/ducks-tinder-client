@@ -90,6 +90,102 @@ describe('users/sorted (GET)', () => {
     });
   });
 
+  describe('when there is more than 100 km (148.2) and usersOnlyInDistance - false', () => {
+    let response: request.Response;
+
+    beforeAll(async () => {
+      await prismaClient.place.update({
+        where: { id: secondUserId },
+        data: { latitude: 13.2916238, longitude: 11.399734 },
+      });
+      await prismaClient.user.update({
+        where: { id: secondUserId },
+        data: {
+          age: 20,
+          distance: 50,
+          preferAgeFrom: 18,
+          preferAgeTo: 28,
+          preferSex: 'male',
+          sex: 'female',
+        },
+      });
+      await prismaClient.user.update({
+        where: { id: currentUserId },
+        data: {
+          age: 18,
+          distance: 100,
+          preferAgeFrom: 18,
+          preferAgeTo: 26,
+          sex: 'male',
+          preferSex: 'female',
+          usersOnlyInDistance: false,
+        },
+      });
+
+      const { currentUserAccessToken } = prepareReadyAccessTokens();
+
+      response = await request(httpServer)
+        .get('/users/sorted')
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
+    });
+
+    it('should return a user', () => {
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        ...USERS_SORTED_GET_EXPECT,
+        distance: 147,
+      });
+    });
+  });
+
+  describe('when there it is 100 km (96.8)', () => {
+    let response: request.Response;
+
+    beforeAll(async () => {
+      await prismaClient.place.update({
+        where: { id: secondUserId },
+        data: { latitude: 12.9616238, longitude: 12.9763088 },
+      });
+      await prismaClient.user.update({
+        where: { id: secondUserId },
+        data: {
+          age: 20,
+          distance: 50,
+          preferAgeFrom: 18,
+          preferAgeTo: 28,
+          preferSex: 'male',
+          sex: 'female',
+        },
+      });
+      await prismaClient.user.update({
+        where: { id: currentUserId },
+        data: {
+          age: 18,
+          distance: 100,
+          preferAgeFrom: 18,
+          preferAgeTo: 26,
+          sex: 'male',
+          preferSex: 'female',
+          usersOnlyInDistance: true,
+        },
+      });
+
+      const { currentUserAccessToken } = prepareReadyAccessTokens();
+
+      response = await request(httpServer)
+        .get('/users/sorted')
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
+    });
+
+    it('should return a user', () => {
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual({
+        ...USERS_SORTED_GET_EXPECT,
+        distance: 97,
+      });
+    });
+  });
+
   describe('when there is no such user', () => {
     let response: request.Response;
 

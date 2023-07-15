@@ -16,12 +16,12 @@ export const GET_SORTED_FIND_FIRST_CALLED = {
     },
     place: {
       latitude: {
-        gte: 11.8952289,
-        lte: 12.7961289,
+        gte: 11.3997339,
+        lte: 13.2916239,
       },
       longitude: {
-        gte: 11.8952289,
-        lte: 12.7961289,
+        gte: 11.3997339,
+        lte: 13.2916239,
       },
     },
     sex: USER_SORTS_DATA.preferSex,

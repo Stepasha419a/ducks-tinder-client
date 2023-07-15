@@ -9,7 +9,7 @@ import { userDtoStub } from '../stubs';
 export const USER_SORTS_DATA = {
   ...userDtoStub(),
   distance: 100,
-  onlyNear: true,
+  usersOnlyInDistance: false,
   age: 20,
   preferAgeFrom: 18,
   preferAgeTo: 25,

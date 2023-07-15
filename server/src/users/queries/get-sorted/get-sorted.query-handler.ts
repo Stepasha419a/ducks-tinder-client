@@ -23,11 +23,12 @@ export class GetSortedQueryHandler implements IQueryHandler<GetSortedQuery> {
     const checkedIds = checkedUsers.map((user) => user.checked.id);
     const wasCheckedIds = checkedUsers.map((user) => user.wasChecked.id);
 
+    const userDistance = user.usersOnlyInDistance ? user.distance : 150;
     const { maxLatitude, minLatitude, maxLongitude, minLongitude } =
       getSearchingCoords(
         user.place.latitude,
         user.place.longitude,
-        user.distance,
+        userDistance,
       );
 
     const sortedUser = await this.prismaService.user.findFirst({

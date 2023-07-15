@@ -13,10 +13,10 @@ export function getSearchingCoords(
   longitude: number,
   distance: number,
 ): SearchingCoords {
-  const maxLatitude = latitude + (km * distance) / 2;
-  const minLatitude = latitude - (km * distance) / 2;
-  const maxLongitude = longitude + (km * distance) / 2;
-  const minLongitude = longitude - (km * distance) / 2;
+  const maxLatitude = latitude + km * distance * 0.7;
+  const minLatitude = latitude - km * distance * 0.7;
+  const maxLongitude = longitude + km * distance * 0.7;
+  const minLongitude = longitude - km * distance * 0.7;
 
   return { maxLatitude, minLatitude, maxLongitude, minLongitude };
 }
