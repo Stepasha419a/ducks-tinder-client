@@ -13,6 +13,7 @@ import {
   PreferSexSettingThumbnail,
   SexSettingThumbnail,
 } from '@features/setting';
+import { SwitchTheme } from '@/features/theme';
 import { LinkThumbnail, SettingsGroup } from '@entities/setting/components';
 import {
   AccountGroup,
@@ -31,6 +32,7 @@ export const SettingsList = (): ReactElement => {
         <DescriptionSettingThumbnail />
         <SexSettingThumbnail />
         <AgeSettingThumbnail />
+        <SwitchTheme />
       </AccountGroup>
       <FindGroup>
         <InterestsSettingThumbnail />

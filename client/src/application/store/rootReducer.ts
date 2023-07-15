@@ -3,6 +3,7 @@ import { chatReducer } from '@entities/chat';
 import { settingReducer } from '@entities/setting';
 import { tinderReducer } from '@entities/tinder';
 import { userReducer } from '@entities/user';
+import { themeReducer } from '@entities/theme';
 import { combineReducers } from '@reduxjs/toolkit';
 
 export const rootReducer = combineReducers({
@@ -11,4 +12,5 @@ export const rootReducer = combineReducers({
   chat: chatReducer,
   setting: settingReducer,
   tinder: tinderReducer,
+  theme: themeReducer,
 });
