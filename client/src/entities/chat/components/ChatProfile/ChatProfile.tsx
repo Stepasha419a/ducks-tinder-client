@@ -11,19 +11,21 @@ interface ChatProfileProps {
 export const ChatProfile: FC<ChatProfileProps> = ({ handleClick }) => {
   const { currentChatUser } = useAppSelector(selectChatProfile);
 
+  if (!currentChatUser) {
+    return null;
+  }
+
   return (
-    <>
-      <div className={styles.profile}>
-        <div onClick={handleClick} className={styles.user}>
-          <Avatar
-            userId={currentChatUser!.id}
-            size="m"
-            avatarUrl={currentChatUser!.pictures[0]?.name}
-            extraClassName={styles.avatar}
-          />
-          <div className={styles.name}>{currentChatUser!.name}</div>
-        </div>
+    <div className={styles.profile}>
+      <div onClick={handleClick} className={styles.user}>
+        <Avatar
+          userId={currentChatUser.id}
+          size="m"
+          avatarUrl={currentChatUser.pictures[0]?.name}
+          extraClassName={styles.avatar}
+        />
+        <div className={styles.name}>{currentChatUser.name}</div>
       </div>
-    </>
+    </div>
   );
 };

@@ -31,6 +31,9 @@ export const chatService = {
   unblockChat(): void {
     chatSocket.unblockChat();
   },
+  deleteChat(): void {
+    chatSocket.deleteChat();
+  },
   disconnectChat(): void {
     chatSocket.disconnectChat();
   },

@@ -83,6 +83,13 @@ const chatSlice = createSlice({
       state.chats[state.chats.findIndex((chat) => chat.id === payload.id)] =
         payload;
     },
+    deleteChat: (state, { payload }: PayloadAction<string>) => {
+      state.chats = state.chats.filter((chat) => chat.id !== payload);
+      state.isConnected = false;
+      state.maxMessagesCount = 0;
+      state.currentChatId = '';
+      state.repliedMessage = null;
+    },
     setIsMessagesLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isMessagesLoading = payload;
     },
@@ -131,6 +138,7 @@ export const {
   editMessage,
   blockChat,
   unblockChat,
+  deleteChat,
   setRepliedMessage,
   setIsNotFound,
 } = chatSlice.actions;

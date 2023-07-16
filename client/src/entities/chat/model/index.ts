@@ -13,6 +13,7 @@ export {
   getMessagesThunk,
   editMessageThunk,
   unblockChatThunk,
+  deleteChatThunk,
 } from './chat.thunks';
 export {
   selectUserChat,

@@ -7,6 +7,7 @@ import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
 import type { GetMessagesResponse } from './chat.interfaces';
 import {
   blockChat,
+  deleteChat,
   deleteMessage,
   editMessage,
   getMessages,
@@ -85,6 +86,10 @@ export const connectChatThunk = createAsyncThunk(
       socket.on('unblock-chat', (chat: Chat) => {
         dispatch(unblockChat(chat));
       });
+
+      socket.on('delete-chat', (deletedChatId: string) => {
+        dispatch(deleteChat(deletedChatId));
+      });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -156,10 +161,21 @@ export const blockChatThunk = createAsyncThunk(
 );
 
 export const unblockChatThunk = createAsyncThunk(
-  'chat/blockChat',
+  'chat/unblockChat',
   (_, { rejectWithValue }) => {
     try {
       chatService.unblockChat();
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
+export const deleteChatThunk = createAsyncThunk(
+  'chat/deleteChat',
+  (_, { rejectWithValue }) => {
+    try {
+      chatService.deleteChat();
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

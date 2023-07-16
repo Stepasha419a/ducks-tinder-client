@@ -2,12 +2,9 @@ import type { FC } from 'react';
 import type { ShortUser } from '@/shared/api/interfaces';
 import { selectChatProfile } from '@/entities/chat/model';
 import { Preview } from '@/entities/user/components';
-import {
-  blockChatThunk,
-  unblockChatThunk,
-} from '@/entities/chat/model/chat.thunks';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks';
-import { Button, Popup } from '@/shared/ui';
+import { useAppSelector } from '@/shared/hooks';
+import { Popup } from '@/shared/ui';
+import { BlockChat, DeleteChat, UnblockChat } from './components';
 import styles from './ChatUserPopup.module.scss';
 
 interface ChatUserPopupProps {
@@ -15,19 +12,9 @@ interface ChatUserPopupProps {
 }
 
 export const ChatUserPopup: FC<ChatUserPopupProps> = ({ handleClose }) => {
-  const dispatch = useAppDispatch();
-
   const { currentChatUser, blocked, blockedById } =
     useAppSelector(selectChatProfile);
   const currentUserId = useAppSelector((state) => state.user.currentUser.id);
-
-  const handleBlock = () => {
-    dispatch(blockChatThunk());
-  };
-
-  const handleUnblock = () => {
-    dispatch(unblockChatThunk());
-  };
 
   return (
     <Popup closeHandler={handleClose} size="l">
@@ -35,22 +22,14 @@ export const ChatUserPopup: FC<ChatUserPopupProps> = ({ handleClose }) => {
         user={currentChatUser! as ShortUser}
         isFull
         extraContent={
-          <>
-            {blocked && blockedById === currentUserId && (
-              <div className={styles.btns}>
-                <Button onClick={handleUnblock} extraClassName={styles.btn}>
-                  Unblock
-                </Button>
-              </div>
+          <div className={styles.btns}>
+            {blocked ? (
+              blockedById === currentUserId && <UnblockChat />
+            ) : (
+              <BlockChat />
             )}
-            {!blocked && (
-              <div className={styles.btns}>
-                <Button onClick={handleBlock} extraClassName={styles.btn}>
-                  Block
-                </Button>
-              </div>
-            )}
-          </>
+            <DeleteChat />
+          </div>
         }
       />
     </Popup>
