@@ -11,6 +11,7 @@ import {
 import { UserSocket } from 'common/types/user-socket';
 import {
   BlockChatCommand,
+  DeleteChatCommand,
   DeleteMessageCommand,
   EditMessageCommand,
   SendMessageCommand,
@@ -170,5 +171,19 @@ export class ChatsGateway {
     );
 
     this.wss.to(chatId).emit('unblock-chat', chat);
+  }
+
+  @UseGuards(WsRefreshTokenGuard)
+  @SubscribeMessage('delete-chat')
+  async deleteChat(@ChatId() chatId, @User({ isSocket: true }) user) {
+    if (!chatId) {
+      throw new WsException(NOT_FOUND);
+    }
+
+    const chat = await this.commandBus.execute(
+      new DeleteChatCommand(user, chatId),
+    );
+
+    this.wss.to(chatId).emit('delete-chat', chat);
   }
 }
