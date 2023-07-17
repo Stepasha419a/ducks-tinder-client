@@ -2,6 +2,7 @@ export {
   pushNewMessage,
   setCurrentChatData,
   setRepliedMessage,
+  setIsChatUserPopup,
 } from './chat.slice';
 export {
   closeAllSocketsThunk,

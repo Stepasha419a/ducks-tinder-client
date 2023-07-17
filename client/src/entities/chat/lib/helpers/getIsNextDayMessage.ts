@@ -1,4 +1,4 @@
-import type { Message } from '@/shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 
 export function getIsNextDayMessage(
   message1: Message,

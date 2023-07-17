@@ -11,3 +11,12 @@
     background-color: var(--border-main);
   }
 }
+
+.lazy_wrapper {
+  display: flex;
+  padding: 8px 0;
+
+  .lazy_message {
+    margin-left: 8px;
+  }
+}

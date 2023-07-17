@@ -1,9 +1,9 @@
-import { Places } from '@/entities/user/components';
+import { Places } from '@entities/user/components';
 import styles from './PlacesGeolocation.module.scss';
-import { toastify } from '@/shared/lib';
+import { toastify } from '@shared/lib';
 import { useEffect } from 'react';
-import { updateUserPlaceThunk } from '@/entities/user/model';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import { updateUserPlaceThunk } from '@entities/user/model';
+import { useAppDispatch, useAppSelector } from '@shared/hooks';
 
 export const PlacesGeolocation = () => {
   const dispatch = useAppDispatch();

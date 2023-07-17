@@ -9,8 +9,8 @@ import ProfilePage from '@pages/Profile';
 import ChatPage from '@pages/Chat';
 import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
-import { Chat, ImageSetting, PlaceSetting } from '@/widgets';
-import { Choose } from './Chat/components';
+import { ImageSetting, PlaceSetting } from '@widgets';
+import { ActiveChat, Choose } from './Chat/components';
 import { UserImage } from './Profile/components';
 
 const Routing = (): ReactElement => {
@@ -29,7 +29,7 @@ const Routing = (): ReactElement => {
         </Route>
         <Route path={ROUTES.chat} element={<ChatPage />}>
           <Route index element={<Choose />} />
-          <Route path=":chatId" element={<Chat />} />
+          <Route path=":chatId" element={<ActiveChat />} />
         </Route>
         <Route path={ROUTES.pairs} element={<PairsPage />} />
       </Route>

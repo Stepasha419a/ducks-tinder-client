@@ -1,7 +1,7 @@
-import { SettingThumbnail } from '@/entities/setting/components';
-import { setTheme } from '@/entities/theme/model';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks';
-import { CheckboxInput } from '@/shared/ui';
+import { SettingThumbnail } from '@entities/setting/components';
+import { setTheme } from '@entities/theme/model';
+import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { CheckboxInput } from '@shared/ui';
 import styles from './SwitchTheme.module.scss';
 
 export const SwitchTheme = () => {

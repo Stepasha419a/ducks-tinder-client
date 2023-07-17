@@ -1,7 +1,7 @@
 import type { AnimationControls, PanInfo } from 'framer-motion';
 import { useMotionValue } from 'framer-motion';
-import { dislikeUserThunk, likeUserThunk } from '@/entities/tinder/model';
-import { useAppDispatch } from '@/shared/hooks';
+import { dislikeUserThunk, likeUserThunk } from '@entities/tinder/model';
+import { useAppDispatch } from '@shared/hooks';
 
 export function useSwipeProps(
   controls: AnimationControls,

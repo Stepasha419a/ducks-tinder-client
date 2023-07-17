@@ -1,7 +1,7 @@
-import { Button } from '@/shared/ui';
-import { useAppDispatch } from '@/shared/hooks';
-import { unblockChatThunk } from '@/entities/chat/model/chat.thunks';
-import styles from '../../ChatUserPopup.module.scss';
+import { Button } from '@shared/ui';
+import { useAppDispatch } from '@shared/hooks';
+import { unblockChatThunk } from '@entities/chat/model/chat.thunks';
+import styles from './UnblockChat.module.scss';
 
 export const UnblockChat = () => {
   const dispatch = useAppDispatch();

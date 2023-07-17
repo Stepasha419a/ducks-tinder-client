@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@/shared/constants';
-import { useAppDispatch } from '@/shared/hooks';
-import { nullInput } from '@/entities/setting/model';
+import { ROUTES } from '@shared/constants';
+import { useAppDispatch } from '@shared/hooks';
+import { nullInput } from '@entities/setting/model';
 import { Map } from '@entities/user/components';
-import { PlacesGeolocation } from '@/features/user/PlacesGeolocation/PlacesGeolocation';
+import { PlacesGeolocation } from '@features/user/PlacesGeolocation/PlacesGeolocation';
 import styles from './PlaceSetting.module.scss';
 
 export const PlaceSetting = () => {

@@ -2,7 +2,7 @@ import { useController, useForm } from 'react-hook-form';
 import type { SettingFieldValues } from '@entities/setting/model';
 import { nullInput, submitSettingsThunk } from '@entities/setting/model';
 import { useDefaultValues } from '@entities/setting/hooks';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/hooks';
 import { useNavigate } from 'react-router-dom';
 import { useNullOnClose } from './useNullOnClose';
 

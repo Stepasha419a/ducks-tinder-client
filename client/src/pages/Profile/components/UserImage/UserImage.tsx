@@ -4,7 +4,7 @@ import { Button } from '@shared/ui';
 import { Preview } from '@entities/user/components';
 import styles from './UserImage.module.scss';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@/shared/constants';
+import { ROUTES } from '@shared/constants';
 
 export const UserImage: FC = () => {
   const currentUser = useAppSelector((state) => state.user.currentUser);

@@ -11,6 +11,7 @@ export interface ChatInitialState {
   isMessagesEnded: boolean;
   currentChatId: string;
   repliedMessage: Message | null;
+  isChatUserPopup: boolean;
 }
 
 export interface GetMessagesResponse {

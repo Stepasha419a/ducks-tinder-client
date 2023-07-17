@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './Places.module.scss';
-import { useAppSelector } from '@/shared/hooks';
+import { useAppSelector } from '@shared/hooks';
 
 interface PlacesProps {
   refreshFeature: ReactElement;

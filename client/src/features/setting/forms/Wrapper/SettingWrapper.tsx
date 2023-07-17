@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
 import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@/shared/constants';
+import { ROUTES } from '@shared/constants';
 import { Button } from '@shared/ui';
 import type {
   SettingFieldInterestsArray,

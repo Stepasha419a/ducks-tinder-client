@@ -4,7 +4,7 @@ import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { makeImageUrl } from '@shared/helpers';
 import FailedPair from './Failed/FailedPair';
 import styles from './PairLink.module.scss';
-import { useAppSelector } from '@/shared/hooks';
+import { useAppSelector } from '@shared/hooks';
 
 export const PairLink = () => {
   const firstPair = useAppSelector((state) => state.user.currentUser.firstPair);

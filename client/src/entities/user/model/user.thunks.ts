@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { ChangedData, Picture } from '@shared/api/interfaces';
-import type { Setting } from '@/entities/setting/model';
+import type { Setting } from '@entities/setting/model';
 import { userService } from '@shared/api/services';
 import { makeDataObject } from '@shared/helpers/makeDataObject';
 import { returnErrorMessage } from '@shared/helpers';

@@ -1,4 +1,4 @@
-import type { Interest, Place } from '@/shared/api/interfaces';
+import type { Interest, Place } from '@shared/api/interfaces';
 import { useAppSelector } from '@hooks';
 import type { Setting } from '../model';
 

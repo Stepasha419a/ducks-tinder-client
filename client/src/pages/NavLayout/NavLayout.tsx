@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
-import { Nav } from '@/widgets';
+import { Nav } from '@widgets';
 import styles from './NavLayout.module.scss';
-import { withPrivatePageHocs } from '@/shared/hocs';
+import { withPrivatePageHocs } from '@shared/hocs';
 
 export const NavLayout = () => {
   return (

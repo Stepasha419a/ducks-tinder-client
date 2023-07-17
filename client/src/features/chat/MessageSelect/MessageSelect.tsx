@@ -20,8 +20,8 @@ import {
   deleteMessageThunk,
   editMessageThunk,
   setRepliedMessage,
-} from '@/entities/chat/model';
-import { getDatesHourDiff } from '@/shared/helpers';
+} from '@entities/chat/model';
+import { getDatesHourDiff } from '@shared/helpers';
 
 interface MessageSelectProps {
   setCurrentMessage: Dispatch<SetStateAction<Message | null>>;

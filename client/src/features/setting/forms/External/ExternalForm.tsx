@@ -1,5 +1,5 @@
 import type { FC, ReactElement } from 'react';
-import { useAppSelector } from '@/shared/hooks';
+import { useAppSelector } from '@shared/hooks';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import styles from './ExternalForm.module.scss';
 import { useExternalForm } from '../../lib/hooks';

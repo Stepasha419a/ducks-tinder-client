@@ -1,0 +1,24 @@
+.messages {
+  position: relative;
+  overflow: auto;
+  height: calc(100vh - 110px);
+  padding-left: 14vw;
+  padding-bottom: 8px;
+
+  &.replying {
+    height: calc(100vh - 170px);
+  }
+
+  .loadMessages {
+    padding: 20px;
+  }
+}
+
+.lazy_wrapper {
+  display: flex;
+  padding: 8px 0;
+
+  .lazy_message {
+    margin-left: 8px;
+  }
+}

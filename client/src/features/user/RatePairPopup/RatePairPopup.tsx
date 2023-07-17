@@ -5,7 +5,7 @@ import { Button, Popup } from '@shared/ui';
 import { setCurrentPair } from '@entities/user/model/user.slice';
 import { InterestsListPopup, Preview } from '@entities/user/components';
 import styles from './RatePairPopup.module.scss';
-import { refusePairThunk, acceptPairThunk } from '@/entities/user/model';
+import { refusePairThunk, acceptPairThunk } from '@entities/user/model';
 import classNames from 'classnames';
 
 export const RatePairPopup: FC = () => {

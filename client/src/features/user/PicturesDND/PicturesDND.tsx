@@ -5,7 +5,7 @@ import { selectImagesDND, setIsDialogUploadOpen } from '@entities/user/model';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
 import { useUserPictures } from './lib';
-import { Button } from '@/shared/ui';
+import { Button } from '@shared/ui';
 import styles from './PicturesDND.module.scss';
 import { Link } from 'react-router-dom';
 

@@ -17,7 +17,7 @@ import {
 } from './user.thunks';
 import type { PairSorts, UserInitialState } from './user.interfaces';
 import { INITIAL_SORTS } from './user.constants';
-import { toastify } from '@/shared/lib';
+import { toastify } from '@shared/lib';
 
 const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh

@@ -13,7 +13,7 @@ import {
   PreferSexSettingThumbnail,
   SexSettingThumbnail,
 } from '@features/setting';
-import { SwitchTheme } from '@/features/theme';
+import { SwitchTheme } from '@features/theme';
 import { LinkThumbnail, SettingsGroup } from '@entities/setting/components';
 import {
   AccountGroup,

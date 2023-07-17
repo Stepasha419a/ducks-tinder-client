@@ -1,4 +1,4 @@
-import { Skeleton } from '@/shared/ui';
+import { Skeleton } from '@shared/ui';
 import styles from './PairsList.module.scss';
 
 export const PairsListLazy = () => {

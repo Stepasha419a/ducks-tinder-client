@@ -2,7 +2,7 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import classNames from 'classnames';
 import { Textarea } from '@shared/ui';
 import styles from '../Message.module.scss';
-import { getTime } from '@/shared/helpers';
+import { getTime } from '@shared/helpers';
 
 interface MessageContentProps {
   isOwn: boolean;

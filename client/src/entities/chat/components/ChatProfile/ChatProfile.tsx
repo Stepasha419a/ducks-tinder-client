@@ -1,14 +1,14 @@
 import type { FC } from 'react';
-import { Avatar } from '@/shared/ui';
-import { useAppSelector } from '@/shared/hooks';
+import { Avatar } from '@shared/ui';
+import { useAppSelector } from '@shared/hooks';
 import { selectChatProfile } from '../../model';
 import styles from './ChatProfile.module.scss';
 
 interface ChatProfileProps {
-  handleClick: () => void;
+  handleOpen: () => void;
 }
 
-export const ChatProfile: FC<ChatProfileProps> = ({ handleClick }) => {
+export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
   const { currentChatUser } = useAppSelector(selectChatProfile);
 
   if (!currentChatUser) {
@@ -17,7 +17,7 @@ export const ChatProfile: FC<ChatProfileProps> = ({ handleClick }) => {
 
   return (
     <div className={styles.profile}>
-      <div onClick={handleClick} className={styles.user}>
+      <div onClick={handleOpen} className={styles.user}>
         <Avatar
           userId={currentChatUser.id}
           size="m"

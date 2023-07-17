@@ -15,7 +15,7 @@ import {
   setIsNotFound,
   unblockChat,
 } from './chat.slice';
-import { checkAuthThunk } from '@/entities/auth/model';
+import { checkAuthThunk } from '@entities/auth/model';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',

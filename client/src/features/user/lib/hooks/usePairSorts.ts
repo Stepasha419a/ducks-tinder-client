@@ -1,4 +1,4 @@
-import type { Interest } from '@/shared/api/interfaces';
+import type { Interest } from '@shared/api/interfaces';
 import type { PairSorts } from '@entities/user/model';
 import { INITIAL_SORTS } from '@entities/user/model';
 import { setPairSorts } from '@entities/user/model';

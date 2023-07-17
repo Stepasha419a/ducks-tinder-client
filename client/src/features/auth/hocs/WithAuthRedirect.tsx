@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { Navigate, useLocation } from 'react-router-dom';
 import { checkAuthThunk } from '@entities/auth/model';
-import { ROUTES } from '@/shared/constants';
+import { ROUTES } from '@shared/constants';
 
 export const WithAuthRedirect = <P extends object>(Component: FC<P>): FC<P> => {
   const Wrapper = (props: P) => {

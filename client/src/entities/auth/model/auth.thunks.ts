@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authService } from '@/shared/api/services';
+import { authService } from '@shared/api/services';
 import type {
   LoginParams,
   RegistrationParams,

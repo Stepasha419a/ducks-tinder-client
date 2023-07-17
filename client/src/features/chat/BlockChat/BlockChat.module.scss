@@ -1,0 +1,12 @@
+.btn {
+  height: 46px;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 400;
+  border-top: 2px solid var(--color--black-90);
+  transition: 0.2s;
+
+  &:hover {
+    color: var(--color--red-90);
+  }
+}

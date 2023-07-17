@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '@/shared/hooks';
-import { nullInput } from '@/entities/setting/model';
+import { useAppDispatch } from '@shared/hooks';
+import { nullInput } from '@entities/setting/model';
 
 export function useNullOnClose() {
   const dispatch = useAppDispatch();

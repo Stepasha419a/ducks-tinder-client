@@ -3,13 +3,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from '@hooks';
-import { useSettingUrl } from '@/entities/setting/hooks';
+import { useSettingUrl } from '@entities/setting/hooks';
 import { Setting } from './Setting/Setting';
 import { SettingsList } from './SettingsList/SettingsList';
 import { settingVariants } from './ProfileBlock.variants';
 import styles from './ProfileBlock.module.scss';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@/shared/constants';
+import { ROUTES } from '@shared/constants';
 
 export const ProfileBlock = (): ReactElement => {
   const settingType = useAppSelector((state) => state.setting.settingType);

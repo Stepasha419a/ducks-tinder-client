@@ -1,4 +1,4 @@
-import type { Picture } from '@/shared/api/interfaces';
+import type { Picture } from '@shared/api/interfaces';
 import { createSelector } from '@reduxjs/toolkit';
 
 export const selectUserChat = createSelector(

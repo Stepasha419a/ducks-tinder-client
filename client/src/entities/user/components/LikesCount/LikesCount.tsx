@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppSelector } from '@/shared/hooks';
+import { useAppSelector } from '@shared/hooks';
 import styles from './LikesCount.module.scss';
 
 export const LikesCount: FC = (): ReactElement => {

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Button } from '@/shared/ui';
+import { Button } from '@shared/ui';
 import styles from '../PairsSortPopup.module.scss';
 
 interface ButtonsProps {

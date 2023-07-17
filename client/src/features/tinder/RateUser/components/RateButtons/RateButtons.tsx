@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import classNames from 'classnames';
 import type { AnimationControls } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from '@/shared/ui';
+import { Button } from '@shared/ui';
 import { useRateButtons } from '@features/tinder/lib';
 import styles from './RateButtons.module.scss';
 

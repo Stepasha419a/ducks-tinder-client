@@ -1,6 +1,6 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@/shared/constants';
+import { ROUTES } from '@shared/constants';
 import { motion } from 'framer-motion';
 import styles from '../ChatsPairsBlock.module.scss';
 

@@ -1,4 +1,4 @@
-import { useAppDispatch } from '@/shared/hooks';
+import { useAppDispatch } from '@shared/hooks';
 import { setInput } from '../model';
 import type {
   SettingName,

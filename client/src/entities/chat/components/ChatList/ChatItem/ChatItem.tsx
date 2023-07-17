@@ -8,7 +8,7 @@ import type {
 import type { FC } from 'react';
 import styles from './ChatItem.module.scss';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@/shared/constants';
+import { ROUTES } from '@shared/constants';
 
 interface ChatInterface {
   chat: ShortChat;

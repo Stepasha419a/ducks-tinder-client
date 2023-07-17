@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
 import { Reorder } from 'framer-motion';
-import type { Picture } from '@/shared/api/interfaces';
+import type { Picture } from '@shared/api/interfaces';
 import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '@shared/ui';
