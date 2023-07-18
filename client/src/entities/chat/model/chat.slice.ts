@@ -21,6 +21,8 @@ const initialState: ChatInitialState = {
   currentChatId: '',
   repliedMessage: null,
   isChatUserPopup: false,
+  currentMessage: null,
+  isMessageEditing: false,
 };
 
 const chatSlice = createSlice({
@@ -103,6 +105,12 @@ const chatSlice = createSlice({
     setIsChatUserPopup: (state, { payload }: PayloadAction<boolean>) => {
       state.isChatUserPopup = payload;
     },
+    setCurrentMessage: (state, { payload }: PayloadAction<Message | null>) => {
+      state.currentMessage = payload;
+    },
+    setIsMessageEditing: (state, { payload }: PayloadAction<boolean>) => {
+      state.isMessageEditing = payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -146,6 +154,8 @@ export const {
   setRepliedMessage,
   setIsNotFound,
   setIsChatUserPopup,
+  setCurrentMessage,
+  setIsMessageEditing,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

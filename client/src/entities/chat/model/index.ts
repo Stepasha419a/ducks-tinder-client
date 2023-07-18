@@ -3,6 +3,8 @@ export {
   setCurrentChatData,
   setRepliedMessage,
   setIsChatUserPopup,
+  setCurrentMessage,
+  setIsMessageEditing,
 } from './chat.slice';
 export {
   closeAllSocketsThunk,

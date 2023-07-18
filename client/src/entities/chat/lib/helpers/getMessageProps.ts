@@ -1,3 +1,4 @@
+import { getTime } from '@/shared/helpers';
 import type { Message, Picture, ShortChat } from '@shared/api/interfaces';
 
 interface CurrentChatUserObj {
@@ -17,6 +18,7 @@ export function getMessageProps(
     (user) => user.id === message.userId
   );
   const isOwn = message.userId === currentChatUserObj.id;
+  const isEdited = message.createdAt !== message.updatedAt;
 
   const isSelectOpen = currentMessage?.id === message.id;
 
@@ -31,9 +33,30 @@ export function getMessageProps(
     isSelectOpen,
   });
 
-  const getContentProps = () => {
+  const getTextProps = () => {
+    const time = isEdited
+      ? `edited ${getTime(
+          new Date(message.updatedAt).toLocaleTimeString()
+        )!.toString()}`
+      : getTime(new Date(message.createdAt).toLocaleTimeString())!.toString();
+
+    return {
+      time,
+      text: message.text,
+      isEdited,
+    };
+  };
+
+  const getUsernameProps = () => {
     const username = isOwn ? currentChatUserObj.name : chatMember?.name;
 
+    return {
+      isOwn,
+      username,
+    };
+  };
+
+  const getReplyProps = () => {
     const repliedMessage = message.replied;
     const repliedMessageText = repliedMessage?.text;
     const isOwnReplied = repliedMessage?.userId === currentChatUserObj.id;
@@ -44,19 +67,26 @@ export function getMessageProps(
       repliedMessage && isOwnReplied
         ? currentChatUserObj.name
         : repliedUser?.name;
+
     return {
-      isOwn,
-      username,
-      isSelectOpen,
-      isMessageEditing: isMessageEditing && isSelectOpen,
-      repliedMessageText,
       repliedUsername,
+      repliedMessageText,
     };
   };
 
+  const getBodyProps = () => ({
+    isOwn,
+    isEdited,
+    isSelectOpen,
+    isMessageEditing: isMessageEditing && isSelectOpen,
+  });
+
   return {
     getAvatarProps,
+    getBodyProps,
+    getUsernameProps,
+    getReplyProps,
+    getTextProps,
     getSelectProps,
-    getContentProps,
   };
 }

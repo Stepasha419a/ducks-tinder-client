@@ -1,0 +1,32 @@
+.message {
+  background-color: var(--color--white-100);
+  padding: 8px;
+  padding-right: 40px;
+  border-radius: 8px;
+
+  &.own {
+    background: linear-gradient(
+      45deg,
+      var(--color--pink-10),
+      var(--color--brown-100)
+    );
+  }
+
+  &.selected {
+    background: rgb(228, 228, 228);
+  }
+
+  &.edited {
+    padding-right: 80px;
+  }
+
+  &.editing {
+    padding-right: 8px;
+    min-width: 590px;
+
+    .content {
+      max-width: none;
+      width: 590px;
+    }
+  }
+}

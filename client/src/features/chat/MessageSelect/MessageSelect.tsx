@@ -1,4 +1,4 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import type { FC } from 'react';
 import { useRef } from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +9,6 @@ import {
   faReply,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import type { Message } from '@shared/api/interfaces';
 import {
   useAppDispatch,
   useAppSelector,
@@ -19,43 +18,41 @@ import styles from './MessageSelect.module.scss';
 import {
   deleteMessageThunk,
   editMessageThunk,
+  setCurrentMessage,
+  setIsMessageEditing,
   setRepliedMessage,
 } from '@entities/chat/model';
 import { getDatesHourDiff } from '@shared/helpers';
 
 interface MessageSelectProps {
-  setCurrentMessage: Dispatch<SetStateAction<Message | null>>;
-  currentMessage: Message;
-  setIsMessageEditing: Dispatch<SetStateAction<boolean>>;
-  isMessageEditing: boolean;
   editingValue: string;
 }
 
-export const MessageSelect: FC<MessageSelectProps> = ({
-  setCurrentMessage,
-  currentMessage,
-  setIsMessageEditing,
-  isMessageEditing,
-  editingValue,
-}) => {
+export const MessageSelect: FC<MessageSelectProps> = ({ editingValue }) => {
   const dispatch = useAppDispatch();
+
+  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
+  const isMessageEditing = useAppSelector(
+    (state) => state.chat.isMessageEditing
+  );
+
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   const currentUserId = useAppSelector((state) => state.user.currentUser.id);
-  const isOwn = currentMessage.userId === currentUserId;
+  const isOwn = currentMessage?.userId === currentUserId;
 
   const handleSelectClickOutside = () => {
     if (!isMessageEditing) {
-      setCurrentMessage(null);
+      dispatch(setCurrentMessage(null));
     }
   };
 
   const handleDeleteMessage = () => {
-    dispatch(deleteMessageThunk(currentMessage.id));
+    dispatch(deleteMessageThunk(currentMessage!.id));
   };
 
   const handleEditMessage = () => {
-    setIsMessageEditing(true);
+    dispatch(setIsMessageEditing(true));
   };
 
   const handleRepliedMessage = () => {
@@ -67,16 +64,16 @@ export const MessageSelect: FC<MessageSelectProps> = ({
     const trimmedValue = editingValue.trim();
     if (trimmedValue) {
       dispatch(
-        editMessageThunk({ messageId: currentMessage.id, text: trimmedValue })
+        editMessageThunk({ messageId: currentMessage!.id, text: trimmedValue })
       );
-      setCurrentMessage(null);
-      setIsMessageEditing(false);
+      dispatch(setCurrentMessage(null));
+      dispatch(setIsMessageEditing(false));
     }
   };
 
   const handleCancelMessage = () => {
-    setCurrentMessage(null);
-    setIsMessageEditing(false);
+    dispatch(setCurrentMessage(null));
+    dispatch(setIsMessageEditing(false));
   };
 
   useOnClickOutside(selectRef, handleSelectClickOutside);

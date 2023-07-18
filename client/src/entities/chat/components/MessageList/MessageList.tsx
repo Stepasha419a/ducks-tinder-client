@@ -1,34 +1,32 @@
-import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
+import type { FC, ReactElement } from 'react';
 import type { Message as MessageInterface } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/hooks';
 import { selectMessages, selectUserChat } from '@entities/chat/model';
 import { getMessageProps } from '@entities/chat/lib';
-import { Message } from './Message/Message';
 import { getIsNextDayMessage } from '@entities/chat/lib/helpers';
-import { MessagesLazy } from '../Messages.lazy';
+import { Message } from './components';
+import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';
 
 interface MessagesProps {
   select: ReactElement;
-  currentMessage: MessageInterface | null;
-  isMessageEditing: boolean;
-  editingValue: string;
-  setEditingValue: Dispatch<SetStateAction<string>>;
+  edit: ReactElement;
   handleSelectMessage: (message: MessageInterface) => void;
 }
 
 export const MessageList: FC<MessagesProps> = ({
   select,
-  currentMessage,
-  isMessageEditing,
-  editingValue,
-  setEditingValue,
+  edit,
   handleSelectMessage,
 }) => {
   const { messagesLength, isMessagesInitialLoading, maxMessagesCount } =
     useAppSelector(selectMessages);
   const { currentChatUserObj, messages, currentChat } =
     useAppSelector(selectUserChat);
+  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
+  const isMessageEditing = useAppSelector(
+    (state) => state.chat.isMessageEditing
+  );
 
   if (isMessagesInitialLoading) {
     return <MessagesLazy />;
@@ -38,32 +36,46 @@ export const MessageList: FC<MessagesProps> = ({
     <>
       {maxMessagesCount > messagesLength && <MessagesLazy count={4} />}
       {messages.map((message: MessageInterface, i) => {
-        const { getAvatarProps, getSelectProps, getContentProps } =
-          getMessageProps(
-            message,
-            currentMessage,
-            currentChat,
-            currentChatUserObj,
-            isMessageEditing
-          );
+        const {
+          getAvatarProps,
+          getSelectProps,
+          getBodyProps,
+          getUsernameProps,
+          getReplyProps,
+          getTextProps,
+        } = getMessageProps(
+          message,
+          currentMessage,
+          currentChat,
+          currentChatUserObj,
+          isMessageEditing
+        );
+
+        const isSelectOpen = currentMessage?.id === message.id;
 
         return (
           <>
             <Message key={message.id}>
               <Message.Avatar {...getAvatarProps()} />
-              <Message.Content
-                editingValue={editingValue}
-                setEditingValue={setEditingValue}
-                text={message.text}
-                createdAt={message.createdAt}
-                updatedAt={message.updatedAt}
-                {...getContentProps()}
-              />
-              <Message.Select
-                handleSelectMessage={() => handleSelectMessage(message)}
-                select={select}
-                {...getSelectProps()}
-              />
+              <Message.Body {...getBodyProps()}>
+                <Message.Username {...getUsernameProps()} />
+                {isSelectOpen && isMessageEditing ? (
+                  edit
+                ) : (
+                  <Message.Content>
+                    <Message.Reply {...getReplyProps()} />
+                    <Message.Text {...getTextProps()} />
+                  </Message.Content>
+                )}
+              </Message.Body>
+              {isSelectOpen ? (
+                select
+              ) : (
+                <Message.Select
+                  handleSelectMessage={() => handleSelectMessage(message)}
+                  {...getSelectProps()}
+                />
+              )}
             </Message>
             {messages[i + 1] &&
               getIsNextDayMessage(message, messages[i + 1]) && (

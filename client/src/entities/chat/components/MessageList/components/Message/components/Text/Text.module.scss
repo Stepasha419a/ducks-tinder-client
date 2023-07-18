@@ -1,0 +1,16 @@
+.text {
+  max-width: 490px;
+  overflow-wrap: break-word;
+}
+
+.timestamp {
+  position: absolute;
+  bottom: 0;
+  right: -30px;
+  color: var(--color--black-85);
+  font-size: 12px;
+
+  &.edited {
+    right: -70px;
+  }
+}

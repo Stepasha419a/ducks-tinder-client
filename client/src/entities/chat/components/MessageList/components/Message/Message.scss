@@ -1,0 +1,14 @@
+.wrapper {
+  display: table;
+  padding: 8px 0;
+  position: relative;
+
+  .container {
+    display: flex;
+
+    &:hover .dots {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
