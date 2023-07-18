@@ -56,8 +56,8 @@ export const MessageSelect: FC<MessageSelectProps> = ({ editingValue }) => {
   };
 
   const handleRepliedMessage = () => {
-    setCurrentMessage(null);
     dispatch(setRepliedMessage(currentMessage));
+    dispatch(setCurrentMessage(null));
   };
 
   const handleSaveMessage = () => {
