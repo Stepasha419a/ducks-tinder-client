@@ -19,7 +19,6 @@ export {
   deleteChatThunk,
 } from './chat.thunks';
 export {
-  selectUserChat,
   selectChatList,
   selectCurrentMessagesLength,
   selectMessages,

@@ -1,70 +1,74 @@
-import type { FC, ReactElement } from 'react';
+import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 import type { Message as MessageInterface } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/hooks';
-import { selectMessages, selectUserChat } from '@entities/chat/model';
-import { getMessageProps } from '@entities/chat/lib';
+import { selectMessages } from '@entities/chat/model';
+import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
 import { getIsNextDayMessage } from '@entities/chat/lib/helpers';
-import { Message } from './components';
+import { Message, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
+import classNames from 'classnames';
 import styles from './MessageList.module.scss';
 
 interface MessagesProps {
+  setEditingValue: Dispatch<SetStateAction<string>>;
   select: ReactElement;
   edit: ReactElement;
-  handleSelectMessage: (message: MessageInterface) => void;
 }
 
 export const MessageList: FC<MessagesProps> = ({
   select,
   edit,
-  handleSelectMessage,
+  setEditingValue,
 }) => {
-  const { messagesLength, isMessagesInitialLoading, maxMessagesCount } =
-    useAppSelector(selectMessages);
-  const { currentChatUserObj, messages, currentChat } =
-    useAppSelector(selectUserChat);
-  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
-  const isMessageEditing = useAppSelector(
-    (state) => state.chat.isMessageEditing
-  );
+  const {
+    messagesLength,
+    isMessagesInitialLoading,
+    maxMessagesCount,
+    messages,
+    currentMessage,
+    isMessageEditing,
+    repliedMessage,
+  } = useAppSelector(selectMessages);
+
+  const {
+    handleSelectMessage,
+    getAvatarProps,
+    getSelectProps,
+    getBodyProps,
+    getUsernameProps,
+    getReplyProps,
+    getTextProps,
+  } = useMessagesProps(setEditingValue);
+
+  const { messagesRef, topScrollRef } = useMessagesScroll();
 
   if (isMessagesInitialLoading) {
     return <MessagesLazy />;
   }
 
+  const cn = classNames(styles.messages, repliedMessage && styles.replying);
+
   return (
-    <>
+    <div className={cn} ref={messagesRef}>
+      <div className={styles.loadMessages} ref={topScrollRef}></div>
       {maxMessagesCount > messagesLength && <MessagesLazy count={4} />}
       {messages.map((message: MessageInterface, i) => {
-        const {
-          getAvatarProps,
-          getSelectProps,
-          getBodyProps,
-          getUsernameProps,
-          getReplyProps,
-          getTextProps,
-        } = getMessageProps(
-          message,
-          currentMessage,
-          currentChat,
-          currentChatUserObj,
-          isMessageEditing
-        );
-
         const isSelectOpen = currentMessage?.id === message.id;
+        const isNextDayMessage =
+          messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
 
         return (
           <>
             <Message key={message.id}>
-              <Message.Avatar {...getAvatarProps()} />
-              <Message.Body {...getBodyProps()}>
-                <Message.Username {...getUsernameProps()} />
+              <Message.Avatar {...getAvatarProps(message)} />
+              <Message.Body {...getBodyProps(message)}>
+                <Message.Username {...getUsernameProps(message)} />
                 {isSelectOpen && isMessageEditing ? (
                   edit
                 ) : (
                   <Message.Content>
-                    <Message.Reply {...getReplyProps()} />
-                    <Message.Text {...getTextProps()} />
+                    <Message.Reply {...getReplyProps(message)} />
+                    <Message.Text {...getTextProps(message)} />
                   </Message.Content>
                 )}
               </Message.Body>
@@ -73,20 +77,16 @@ export const MessageList: FC<MessagesProps> = ({
               ) : (
                 <Message.Select
                   handleSelectMessage={() => handleSelectMessage(message)}
-                  {...getSelectProps()}
+                  {...getSelectProps(message)}
                 />
               )}
             </Message>
-            {messages[i + 1] &&
-              getIsNextDayMessage(message, messages[i + 1]) && (
-                <div className={styles.date} key={`${messages[i + 1].id}_date`}>
-                  {new Date(messages[i + 1].createdAt).toLocaleDateString()}
-                  <div className={styles.border}></div>
-                </div>
-              )}
+            {isNextDayMessage && (
+              <Timestamp createdAt={messages[i + 1].createdAt} />
+            )}
           </>
         );
       })}
-    </>
+    </div>
   );
 };
