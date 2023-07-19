@@ -33,18 +33,18 @@ export const MessageSelect: FC<MessageSelectProps> = ({ editingValue }) => {
 
   useOnClickOutside(selectRef, handleSelectClickOutside);
 
+  if (isMessageEditing) {
+    return (
+      <EditMessageSelect selectRef={selectRef} editingValue={editingValue} />
+    );
+  }
+
   const isMessageEditable =
     isOwn &&
     getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 6;
   const isMessageDeleting =
     isOwn &&
     getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 12;
-
-  if (isMessageEditing) {
-    return (
-      <EditMessageSelect selectRef={selectRef} editingValue={editingValue} />
-    );
-  }
 
   return (
     <div ref={selectRef} className={styles.select}>

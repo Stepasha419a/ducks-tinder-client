@@ -1,12 +1,14 @@
 import type { FC, ReactElement } from 'react';
 import { LikesCount } from '@entities/user/components';
-import { Pairs, SortPairs } from '@widgets';
+import { SortPairs } from '@widgets';
+import { RatePairPopup, SetCurrentPair } from '@/features/user';
 
 const PairsPage: FC = (): ReactElement => (
   <>
     <LikesCount />
     <SortPairs />
-    <Pairs />
+    <SetCurrentPair />
+    <RatePairPopup />
   </>
 );
 

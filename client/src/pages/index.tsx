@@ -12,6 +12,7 @@ import PolicyPage from '@pages/Policy';
 import { ImageSetting, PlaceSetting } from '@widgets';
 import { ActiveChat, Choose } from './Chat/components';
 import { UserImage } from './Profile/components';
+import NotFound from './NotFound/NotFound';
 
 const Routing = (): ReactElement => {
   return (
@@ -35,7 +36,7 @@ const Routing = (): ReactElement => {
       </Route>
 
       <Route path={ROUTES.policy} element={<PolicyPage />} />
-      <Route path={ROUTES.notFound} element={<div>404 NOT FOUND</div>} />
+      <Route path={ROUTES.notFound} element={<NotFound />} />
     </Routes>
   );
 };

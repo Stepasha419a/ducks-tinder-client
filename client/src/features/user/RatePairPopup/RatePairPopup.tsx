@@ -11,7 +11,7 @@ import classNames from 'classnames';
 export const RatePairPopup: FC = () => {
   const dispatch = useAppDispatch();
 
-  const currentPair = useAppSelector((state) => state.user.currentPair)!;
+  const currentPair = useAppSelector((state) => state.user.currentPair);
 
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
@@ -23,6 +23,10 @@ export const RatePairPopup: FC = () => {
   const handleRefuse = (): void => {
     dispatch(refusePairThunk());
   };
+
+  if (!currentPair) {
+    return null;
+  }
 
   return (
     <>
