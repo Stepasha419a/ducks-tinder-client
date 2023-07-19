@@ -2,8 +2,8 @@ import {
   editMessageThunk,
   setCurrentMessage,
   setIsMessageEditing,
-} from '@/entities/chat/model';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+} from '@entities/chat/model';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function useSelectMessageEdit() {
   const dispatch = useAppDispatch();

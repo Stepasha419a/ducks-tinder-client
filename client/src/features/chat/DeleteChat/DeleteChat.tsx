@@ -1,6 +1,6 @@
 import { Button, Popup } from '@shared/ui';
 import { useState } from 'react';
-import { useAppDispatch } from '@shared/hooks';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { deleteChatThunk } from '@entities/chat/model';
 import styles from './DeleteChat.module.scss';
 

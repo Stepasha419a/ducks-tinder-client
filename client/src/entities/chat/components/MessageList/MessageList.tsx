@@ -1,9 +1,9 @@
 import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 import type { Message as MessageInterface } from '@shared/api/interfaces';
-import { useAppSelector } from '@shared/hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { selectMessages } from '@entities/chat/model';
 import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
-import { getIsNextDayMessage } from '@entities/chat/lib/helpers';
+import { getIsNextDayMessage } from '@entities/chat/lib';
 import { Message, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import classNames from 'classnames';

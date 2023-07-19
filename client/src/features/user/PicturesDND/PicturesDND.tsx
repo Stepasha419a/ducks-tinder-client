@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Reorder } from 'framer-motion';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { selectImagesDND, setIsDialogUploadOpen } from '@entities/user/model';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';

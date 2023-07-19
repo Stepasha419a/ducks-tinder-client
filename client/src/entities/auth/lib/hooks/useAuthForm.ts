@@ -2,12 +2,11 @@ import type { BaseSyntheticEvent, FormEventHandler } from 'react';
 import { useEffect } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { loginThunk, registerThunk } from '@entities/auth/model';
 import { EMAIL_REGEXP } from '@shared/constants';
 import type { TextFieldProps } from '@shared/ui/inputs/TextField/TextField.types';
 
-// complicated interface, no need to use it as the truth
 export interface AuthFieldValues extends BaseSyntheticEvent {
   email: string;
   password: string;

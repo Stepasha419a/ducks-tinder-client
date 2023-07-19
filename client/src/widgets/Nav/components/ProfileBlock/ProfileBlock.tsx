@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from '@hooks';
-import { useSettingUrl } from '@entities/setting/hooks';
+import { useSettingUrl } from '@entities/setting/lib';
 import { Setting } from './Setting/Setting';
 import { SettingsList } from './SettingsList/SettingsList';
 import { settingVariants } from './ProfileBlock.variants';

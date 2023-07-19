@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { motion, useAnimationControls } from 'framer-motion';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Preview } from '@entities/user/components';
 import { getSortedUserThunk, selectTinderData } from '@entities/tinder/model';
 import { RateButtons, Failed } from './components';

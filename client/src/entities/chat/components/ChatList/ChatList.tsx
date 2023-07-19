@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import { useEffect } from 'react';
 import type { ShortChat } from '@shared/api/interfaces';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { getChatsThunk, selectChatList } from '@entities/chat/model';
 import FailedChats from './Failed/FailedChats';
 import { ChatItem } from './ChatItem/ChatItem';

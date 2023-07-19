@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { Button, TextField } from '@shared/ui';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import {
   selectRepliedMessage,
   sendMessageThunk,

@@ -1,4 +1,4 @@
-import { getTime } from '@/shared/helpers';
+import { getTime } from '@shared/helpers';
 import type { Message, Picture, ShortChat } from '@shared/api/interfaces';
 
 interface CurrentChatUserObj {

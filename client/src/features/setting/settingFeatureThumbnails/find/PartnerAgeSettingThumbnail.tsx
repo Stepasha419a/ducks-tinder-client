@@ -1,6 +1,6 @@
 import { SettingThumbnail } from '@entities/setting/components';
 import { submitSettingsThunk } from '@entities/setting/model';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { useState } from 'react';
 import { RangeInput } from '@shared/ui';
 import styles from '../SettingFeatureThumbnails.module.scss';

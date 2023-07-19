@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Navigate, useLocation } from 'react-router-dom';
 import { checkAuthThunk } from '@entities/auth/model';
 import { ROUTES } from '@shared/constants';

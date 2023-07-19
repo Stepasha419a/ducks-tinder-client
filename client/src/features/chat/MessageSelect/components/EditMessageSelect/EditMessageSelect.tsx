@@ -3,7 +3,7 @@ import { faBan, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import styles from '../../MessageSelect.module.scss';
-import { useSelectMessageEdit } from '@/features/chat/lib';
+import { useSelectMessageEdit } from '@features/chat/lib';
 
 interface EditMessageSelectProps {
   selectRef: MutableRefObject<HTMLDivElement | null>;

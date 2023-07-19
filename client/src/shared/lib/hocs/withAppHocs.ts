@@ -1,5 +1,5 @@
-import { WithBrowserRouter } from '@app/hocs';
-import { StoreProvider } from '@app/providers';
+import { WithBrowserRouter } from '@app/lib';
+import { StoreProvider } from '@app/lib';
 import { WithTheme } from '@features/theme/lib';
 import { compose } from '../helpers';
 

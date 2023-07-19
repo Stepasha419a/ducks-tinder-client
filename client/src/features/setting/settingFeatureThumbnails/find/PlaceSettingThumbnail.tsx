@@ -1,5 +1,5 @@
 import { LinkSettingThumbnail } from '@entities/setting/components';
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 
 export const PlaceSettingThumbnail = () => {
   const place = useAppSelector((state) => state.user.currentUser.place);

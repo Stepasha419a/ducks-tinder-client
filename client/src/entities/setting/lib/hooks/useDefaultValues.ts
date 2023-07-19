@@ -1,6 +1,6 @@
 import type { Interest, Place } from '@shared/api/interfaces';
-import { useAppSelector } from '@hooks';
-import type { Setting } from '../model';
+import { useAppSelector } from '@shared/lib/hooks';
+import type { Setting } from '../../model';
 
 export function useDefaultValues():
   | string

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import type { ShortUser } from '@shared/api/interfaces';
 import { selectChatProfile, setIsChatUserPopup } from '@entities/chat/model';
 import { Preview } from '@entities/user/components';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Popup } from '@shared/ui';
 import { BlockChat, DeleteChat, UnblockChat } from '@features/chat';
 import styles from './ChatUserPopup.module.scss';

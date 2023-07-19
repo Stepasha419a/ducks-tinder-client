@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react';
 import { Button } from '@shared/ui';
-import { useAppDispatch } from '@hooks';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { logoutThunk } from '@entities/auth/model';
 import styles from './LogoutButton.module.scss';
 

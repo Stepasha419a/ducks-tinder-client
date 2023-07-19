@@ -6,7 +6,7 @@ import {
   selectCropImage,
   setIsImageCropOpen,
 } from '@entities/user/model';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Button, Popup, RangeInput } from '@shared/ui';
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';

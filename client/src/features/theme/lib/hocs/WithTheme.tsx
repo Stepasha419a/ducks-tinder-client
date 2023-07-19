@@ -1,5 +1,5 @@
 import { useEffect, type FC, type ReactElement } from 'react';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import type { Theme } from '@entities/theme/model';
 import { setTheme } from '@entities/theme/model';
 

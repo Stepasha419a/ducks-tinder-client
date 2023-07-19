@@ -4,8 +4,8 @@ import { nullInput, submitSettingsThunk } from '@entities/setting/model';
 import {
   useCurrentValidation,
   useDefaultValues,
-} from '@entities/setting/hooks';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
+} from '@entities/setting/lib';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { useNullOnClose } from './useNullOnClose';
 

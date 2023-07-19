@@ -11,7 +11,7 @@ import {
   faStar,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function useRateButtons(
   controls: AnimationControls,

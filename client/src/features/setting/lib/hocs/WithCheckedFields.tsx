@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toastify } from '@shared/lib';
-import { useAppDispatch, useAppSelector, useDebouncedCallback } from '@hooks';
+import { useAppDispatch, useAppSelector, useDebouncedCallback } from '@shared/lib/hooks';
 import { checkFields } from '@entities/setting/model';
 
 export const WithCheckedFields = <P extends object>(Component: FC<P>) => {

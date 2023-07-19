@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { motion } from 'framer-motion';
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { variants } from './Loading.variants';
 import styles from './Loading.module.scss';
 

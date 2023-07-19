@@ -7,7 +7,7 @@ import {
   useInitialScrollToBottom,
   useIntersectionObserver,
   useScrollToBottom,
-} from '@shared/hooks';
+} from '@shared/lib/hooks';
 import { getMessagesThunk, selectCurrentMessagesLength } from '../../model';
 
 interface UseMessagesScrollReturn {

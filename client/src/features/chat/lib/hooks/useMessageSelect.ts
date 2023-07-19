@@ -3,8 +3,8 @@ import {
   setCurrentMessage,
   setIsMessageEditing,
   setRepliedMessage,
-} from '@/entities/chat/model';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+} from '@entities/chat/model';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function useMessageSelect() {
   const dispatch = useAppDispatch();

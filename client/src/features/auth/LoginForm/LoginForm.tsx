@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@shared/ui';
-import { useAuthForm } from '@entities/auth/hooks';
+import { useAuthForm } from '@entities/auth/lib';
 import { AuthLayout } from '@entities/auth/components';
 import styles from './LoginForm.module.scss';
 

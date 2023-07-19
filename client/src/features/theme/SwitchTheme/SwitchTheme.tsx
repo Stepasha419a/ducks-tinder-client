@@ -1,6 +1,6 @@
 import { SettingThumbnail } from '@entities/setting/components';
 import { setTheme } from '@entities/theme/model';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { CheckboxInput } from '@shared/ui';
 import styles from './SwitchTheme.module.scss';
 

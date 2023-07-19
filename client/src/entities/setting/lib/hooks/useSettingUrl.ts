@@ -1,11 +1,11 @@
-import { useAppDispatch } from '@shared/hooks';
-import { setInput } from '../model';
+import { useAppDispatch } from '@shared/lib/hooks';
+import { setInput } from '../../model';
 import type {
   SettingName,
   SettingProperties,
-} from '../model/setting.interfaces';
+} from '../../model/setting.interfaces';
 import { useEffect, useRef } from 'react';
-import { SETTING_LIST, BUSY_ROUTES } from '../model/setting.constants';
+import { SETTING_LIST, BUSY_ROUTES } from '../../model/setting.constants';
 import { useLocation } from 'react-router-dom';
 
 export function useSettingUrl(): boolean | null {

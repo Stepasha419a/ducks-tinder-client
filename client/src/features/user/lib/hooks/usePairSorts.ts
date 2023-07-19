@@ -2,7 +2,7 @@ import type { Interest } from '@shared/api/interfaces';
 import type { PairSorts } from '@entities/user/model';
 import { INITIAL_SORTS } from '@entities/user/model';
 import { setPairSorts } from '@entities/user/model';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { useController, useForm } from 'react-hook-form';
 
 export function usePairSorts() {

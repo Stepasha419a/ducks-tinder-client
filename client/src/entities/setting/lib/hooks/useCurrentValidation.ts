@@ -1,7 +1,7 @@
 import type { RegisterOptions } from 'react-hook-form';
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { EMAIL_REGEXP } from '@shared/constants';
-import type { SettingFieldValues, Validation } from '../model';
+import type { SettingFieldValues, Validation } from '../../model';
 
 export function useCurrentValidation():
   | RegisterOptions<SettingFieldValues, 'input'>

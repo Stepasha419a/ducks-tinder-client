@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import type { ShortUser } from '@shared/api/interfaces';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { setCurrentPair } from '@entities/user/model';
 import { PairsList } from '@entities/user/components';
 import { RatePairPopup } from '@features/user';

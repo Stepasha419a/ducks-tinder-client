@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Avatar } from '@shared/ui';
-import { useAppSelector } from '@shared/hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { selectChatProfile } from '../../model';
 import styles from './ChatProfile.module.scss';
 

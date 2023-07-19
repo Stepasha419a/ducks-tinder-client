@@ -1,2 +1,2 @@
 export { useMessagesScroll, useMessagesProps } from './hooks';
-export { getMessageProps } from './helpers';
+export { getMessageProps, getIsNextDayMessage } from './helpers';

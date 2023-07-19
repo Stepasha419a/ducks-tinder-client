@@ -1,5 +1,5 @@
 import { ChatForm, OpenChatProfilePopup } from '@features/chat';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { ChatUserPopup, Messages } from '@widgets';
 import { Status } from './components';
 import { useEffect } from 'react';

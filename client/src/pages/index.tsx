@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ROUTES } from '@shared/constants/routes';
+import { ROUTES } from '@shared/constants';
 import Login from '@pages/Login';
 import Registration from '@pages/Registration';
 import NavLayout from '@pages/NavLayout';

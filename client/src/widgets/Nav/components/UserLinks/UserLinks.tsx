@@ -9,7 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar } from '@shared/ui';
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { variants } from './UserLinks.variants';
 import styles from './UserLinks.module.scss';
 

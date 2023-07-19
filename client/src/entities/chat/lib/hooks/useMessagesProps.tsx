@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
-import type { Message } from '@/shared/api/interfaces';
-import { getTime } from '@/shared/helpers';
-import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import type { Message } from '@shared/api/interfaces';
+import { getTime } from '@shared/helpers';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { setCurrentMessage, setIsMessageEditing } from '../../model';
 
 export function useMessagesProps(

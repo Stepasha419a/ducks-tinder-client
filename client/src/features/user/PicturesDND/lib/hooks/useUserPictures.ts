@@ -4,7 +4,7 @@ import {
   deleteUserPictureThunk,
   mixUserPicturesThunk,
 } from '@entities/user/model';
-import { useAppDispatch, useAppSelector } from '@hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function useUserPictures() {
   const dispatch = useAppDispatch();

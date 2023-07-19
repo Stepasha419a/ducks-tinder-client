@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useAppSelector, useOnClickOutside } from '@shared/hooks';
+import { useAppSelector, useOnClickOutside } from '@shared/lib/hooks';
 import styles from './MessageSelect.module.scss';
 import { getDatesHourDiff } from '@shared/helpers';
 import { useMessageSelect } from '../lib';

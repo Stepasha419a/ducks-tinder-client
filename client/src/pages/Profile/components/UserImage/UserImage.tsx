@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { Button } from '@shared/ui';
 import { Preview } from '@entities/user/components';
 import styles from './UserImage.module.scss';

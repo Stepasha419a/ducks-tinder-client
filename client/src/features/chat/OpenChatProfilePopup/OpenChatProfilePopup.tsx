@@ -1,6 +1,6 @@
 import { ChatProfile } from '@entities/chat/components';
 import { setIsChatUserPopup } from '@entities/chat/model';
-import { useAppDispatch } from '@shared/hooks';
+import { useAppDispatch } from '@shared/lib/hooks';
 
 export const OpenChatProfilePopup = () => {
   const dispatch = useAppDispatch();

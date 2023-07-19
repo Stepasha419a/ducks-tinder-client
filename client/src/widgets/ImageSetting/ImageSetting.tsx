@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { CropImage, DialogUpload, PicturesDND } from '@features/user';
 import { Preview } from '@entities/user/components';
 import { Tabs } from './components';

@@ -3,7 +3,7 @@ import styles from './PlacesGeolocation.module.scss';
 import { toastify } from '@shared/lib';
 import { useEffect } from 'react';
 import { updateUserPlaceThunk } from '@entities/user/model';
-import { useAppDispatch, useAppSelector } from '@shared/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export const PlacesGeolocation = () => {
   const dispatch = useAppDispatch();

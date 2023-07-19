@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
-import { useAppDispatch } from '@shared/hooks';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { nullInput } from '@entities/setting/model';
 import { Map } from '@entities/user/components';
 import { PlacesGeolocation } from '@features/user/PlacesGeolocation/PlacesGeolocation';

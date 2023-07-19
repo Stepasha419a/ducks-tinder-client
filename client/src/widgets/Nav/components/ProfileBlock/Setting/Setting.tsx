@@ -6,7 +6,7 @@ import {
   TextareaForm,
   TextForm,
 } from '@features/setting';
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 
 export const Setting = (): ReactElement => {
   const settingType = useAppSelector((state) => state.setting.settingType);

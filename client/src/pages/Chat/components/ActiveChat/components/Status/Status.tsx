@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import NotFoundChats from './NotFound/NotFound';
 import FailedChats from './Failed/NoChats';
 

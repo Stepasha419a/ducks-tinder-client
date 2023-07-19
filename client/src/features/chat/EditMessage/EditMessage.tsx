@@ -1,5 +1,5 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { Textarea } from '@/shared/ui';
+import { Textarea } from '@shared/ui';
 import styles from './EditMessage.module.scss';
 
 interface EditMessageProps {
