@@ -15,6 +15,10 @@ export interface Message {
   replied: RepliedMessage | null;
 }
 
+export interface LastSeen {
+  lastSeen: Date;
+}
+
 export interface Chat {
   id: string;
   messages: Message[];
@@ -22,6 +26,7 @@ export interface Chat {
   messagesCount: number;
   blocked: boolean;
   blockedById: string;
+  chatVisits: LastSeen[];
 }
 
 export interface ShortChat {
@@ -30,4 +35,5 @@ export interface ShortChat {
   users: ShortUserWithoutDistance[];
   blocked: boolean;
   blockedById: string;
+  chatVisits: LastSeen[];
 }

@@ -27,6 +27,7 @@ export class GetChatsQueryHandler implements IQueryHandler<GetChatsQuery> {
         },
         blocked: true,
         blockedById: true,
+        chatVisits: { where: { userId: user.id }, select: { lastSeen: true } },
       },
     });
   }

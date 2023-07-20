@@ -1,14 +1,15 @@
-import { Avatar } from '@shared/ui';
+import type { FC } from 'react';
 import classNames from 'classnames';
 import type {
   ShortChat,
   ShortUser,
   ShortUserWithoutDistance,
 } from '@shared/api/interfaces';
-import type { FC } from 'react';
-import styles from './ChatItem.module.scss';
+import { Avatar } from '@shared/ui';
+import { getIsNewMessages } from '@entities/chat/lib';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
+import styles from './ChatItem.module.scss';
 
 interface ChatInterface {
   chat: ShortChat;
@@ -29,6 +30,7 @@ export const ChatItem: FC<ChatInterface> = ({
     chat.messages[chat.messages.length - 1]?.userId === chatCompanion.id;
   const username = isCompanion ? `${chatCompanion.name}: ` : 'you: ';
   const messageName = chat.messages.length ? username : 'send first message';
+  const isNewMessages = getIsNewMessages(chat);
 
   const chatLink = `${ROUTES.chat}/${chat.id}`;
 
@@ -48,6 +50,7 @@ export const ChatItem: FC<ChatInterface> = ({
           {messageName}
           {chat.messages[chat.messages.length - 1]?.text}
         </div>
+        {isNewMessages && <div className={styles.count} />}
       </div>
     </Link>
   );

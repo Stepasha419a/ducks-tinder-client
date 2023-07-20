@@ -5,6 +5,7 @@
   padding: 4px;
   border-radius: 36px;
   cursor: pointer;
+  position: relative;
   transition: 0.3s;
 
   &.active {
@@ -32,6 +33,17 @@
       white-space: nowrap;
       max-width: 210px;
       overflow: hidden;
+    }
+
+    .count {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: var(--color--red-100);
     }
   }
 }

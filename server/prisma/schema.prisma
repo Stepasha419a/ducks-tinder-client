@@ -129,7 +129,7 @@ model Chat {
   users       User[]
   blocked     Boolean     @default(false)
   blockedById String?
-  ChatVisit   ChatVisit[]
+  chatVisits   ChatVisit[]
 
   @@map("chats")
 }

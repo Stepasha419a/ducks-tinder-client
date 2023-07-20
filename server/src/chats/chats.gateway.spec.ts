@@ -117,7 +117,11 @@ describe('chats-controller', () => {
     const socket = UserSocketMock();
 
     beforeEach(async () => {
-      response = chatsGateway.handleDisconnectChat(socket, fullChatStub().id);
+      response = await chatsGateway.handleDisconnectChat(
+        socket,
+        fullChatStub().id,
+        requestUserStub(),
+      );
     });
 
     it('should call socket leave', () => {
