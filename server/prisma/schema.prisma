@@ -33,8 +33,9 @@ model User {
   pictures  Picture[]
   interests Interest[]
 
-  messages Message[]
-  chats    Chat[]
+  messages   Message[]
+  chats      Chat[]
+  chatsVisit ChatVisit[]
 
   pairFor User[] @relation(name: "Pairs")
   pairs   User[] @relation(name: "Pairs")
@@ -123,11 +124,23 @@ model Message {
 }
 
 model Chat {
-  id          String    @id @default(uuid())
+  id          String      @id @default(uuid())
   messages    Message[]
   users       User[]
-  blocked     Boolean   @default(false)
+  blocked     Boolean     @default(false)
   blockedById String?
+  ChatVisit   ChatVisit[]
 
   @@map("chats")
+}
+
+model ChatVisit {
+  user     User     @relation(fields: [userId], references: [id])
+  userId   String
+  chat     Chat     @relation(fields: [chatId], references: [id])
+  chatId   String
+  lastSeen DateTime
+
+  @@id([userId, chatId])
+  @@map("chat-visit")
 }

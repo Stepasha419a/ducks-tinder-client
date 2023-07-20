@@ -14,6 +14,7 @@ import {
   DeleteChatCommand,
   DeleteMessageCommand,
   EditMessageCommand,
+  SaveLastSeenCommand,
   SendMessageCommand,
   UnblockChatCommand,
 } from './commands';
@@ -63,13 +64,16 @@ export class ChatsGateway {
 
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('disconnect-chat')
-  handleDisconnectChat(
+  async handleDisconnectChat(
     @ConnectedSocket() client: UserSocket,
     @ChatId() chatId,
+    @User({ isSocket: true }) user,
   ) {
     if (!chatId) {
       throw new WsException(NOT_FOUND);
     }
+
+    await this.commandBus.execute(new SaveLastSeenCommand(user, chatId));
 
     client.leave(chatId);
   }

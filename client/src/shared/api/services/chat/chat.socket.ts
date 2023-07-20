@@ -65,6 +65,7 @@ export const chatSocket: ChatSocket = {
   },
   closeAllSockets(): void {
     this._sockets.forEach((socket) => {
+      socket.emit('disconnect-chat');
       socket.close();
       this._sockets.delete(socket);
     });

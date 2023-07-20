@@ -26,8 +26,8 @@ export class GetSortedQueryHandler implements IQueryHandler<GetSortedQuery> {
     const userDistance = user.usersOnlyInDistance ? user.distance : 150;
     const { maxLatitude, minLatitude, maxLongitude, minLongitude } =
       getSearchingCoords(
-        user.place.latitude,
-        user.place.longitude,
+        user.place?.latitude,
+        user.place?.longitude,
         userDistance,
       );
 
