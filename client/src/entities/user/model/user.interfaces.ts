@@ -1,4 +1,11 @@
-import type { Interest, Range, ShortUser, User } from '@shared/api/interfaces';
+import type {
+  Interest,
+  Picture,
+  Place,
+  Range,
+  ShortUser,
+  User,
+} from '@shared/api/interfaces';
 
 export interface PairSorts {
   distance: number;
@@ -21,4 +28,15 @@ export interface UserInitialState {
     isImageCropOpen: boolean;
     isDialogUploadOpen: boolean;
   };
+}
+
+export interface PreviewUser {
+  id: string;
+  name: string;
+  description: string | null;
+  age: number | null;
+  place: Place | null;
+  distance: number | null;
+  interests: Interest[];
+  pictures: Picture[];
 }

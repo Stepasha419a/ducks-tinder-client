@@ -17,8 +17,12 @@ export {
   getUserPairsThunk,
   updateUserPlaceThunk,
 } from './user.thunks';
-export { selectCropImage, selectImagesDND } from './user.selectors';
-export type { PairSorts, PairSortsKey } from './user.interfaces';
+export {
+  selectCropImage,
+  selectImagesDND,
+  selectPreviewUser,
+} from './user.selectors';
+export type { PairSorts, PairSortsKey, PreviewUser } from './user.interfaces';
 export {
   INITIAL_SORTS,
   INTERESTS_FOR_LOOP,

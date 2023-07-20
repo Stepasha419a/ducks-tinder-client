@@ -24,7 +24,7 @@ const Pair: FC<PairPropsInterface> = ({ user, setCurrentPair }) => {
           <div className={styles.years}>{user.age}</div>
         </div>
         <div className={styles.distance}>
-          {user.distance || 'unknown'}
+          {user.distance}
           <span className={styles.text}>miles from you</span>
         </div>
       </div>

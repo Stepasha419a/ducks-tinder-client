@@ -2,12 +2,13 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppSelector } from '@shared/lib/hooks';
 import { CropImage, DialogUpload, PicturesDND } from '@features/user';
+import { selectPreviewUser } from '@/entities/user/model';
 import { Preview } from '@entities/user/components';
 import { Tabs } from './components';
 import styles from './ImageSetting.module.scss';
 
 export const ImageSetting: FC = () => {
-  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const previewUser = useAppSelector(selectPreviewUser);
   const isDialogUploadOpen = useAppSelector(
     (state) => state.user.profileSetting.isDialogUploadOpen
   );
@@ -22,7 +23,7 @@ export const ImageSetting: FC = () => {
     <div className={styles.change}>
       {isFullPreviewSetting ? (
         <Preview
-          user={currentUser}
+          user={previewUser}
           setIsFullPreview={setIsFullPreviewSetting}
           isFull
         />
@@ -35,7 +36,7 @@ export const ImageSetting: FC = () => {
           <div className={styles.panel}>
             {isPreviewSetting ? (
               <Preview
-                user={currentUser}
+                user={previewUser}
                 setIsFullPreview={setIsFullPreviewSetting}
               />
             ) : (

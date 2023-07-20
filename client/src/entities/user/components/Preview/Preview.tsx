@@ -8,14 +8,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import type { ShortUser, User } from '@shared/api/interfaces';
+import type { PreviewUser } from '@entities/user/model';
+import type { ShortUser } from '@shared/api/interfaces';
 import { ImageSlider } from '@shared/ui';
 import { Button, ListItem } from '@shared/ui';
 import { InterestsListPopup } from '../InterestsListPopup/InterestsListPopup';
 import styles from './Preview.module.scss';
 
 interface PreviewPropsInterface {
-  user: User | ShortUser;
+  user: PreviewUser | ShortUser;
   setIsFullPreview?: (setting: boolean) => void;
   isFull?: boolean;
   isShadow?: boolean;
@@ -23,7 +24,6 @@ interface PreviewPropsInterface {
   extraClassName?: string;
 }
 
-// TODO: make correct props data (which participates in the code)
 export const Preview: FC<PreviewPropsInterface> = ({
   user,
   setIsFullPreview = null,

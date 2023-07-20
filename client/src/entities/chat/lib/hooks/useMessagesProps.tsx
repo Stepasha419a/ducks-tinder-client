@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from 'react';
-import type { Message } from '@shared/api/interfaces';
+import type { Message, ShortChat } from '@shared/api/interfaces';
 import { getTime } from '@shared/helpers';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { setCurrentMessage, setIsMessageEditing } from '../../model';
@@ -28,46 +28,31 @@ export function useMessagesProps(
   const currentChat = chats.find((chat) => chat.id === currentChatId);
 
   const getAvatarProps = (message: Message) => {
-    const isOwn = message.userId === currentUserId;
-    const chatMember = currentChat?.users.find(
-      (user) => user.id === message.userId
-    );
+    const chatMember = getChatMember(currentChat, message);
 
     return {
-      avatar: isOwn ? avatarName : chatMember?.pictures[0]?.name,
+      avatar: getIsOwn(message.userId, currentUserId)
+        ? avatarName
+        : chatMember?.pictures[0]?.name,
       userId: message.userId,
     };
   };
 
   const getSelectProps = (message: Message) => {
-    const isSelectOpen = currentMessage?.id === message.id;
-
     return {
-      isSelectOpen,
+      isSelectOpen: getIsSelectOpen(message, currentMessage),
     };
   };
 
-  const getTextProps = (message: Message) => {
-    const isEdited = message.createdAt !== message.updatedAt;
-
-    const time = isEdited
-      ? `edited ${getTime(
-          new Date(message.updatedAt).toLocaleTimeString()
-        )!.toString()}`
-      : getTime(new Date(message.createdAt).toLocaleTimeString())!.toString();
-
-    return {
-      time,
-      text: message.text,
-      isEdited,
-    };
-  };
+  const getTextProps = (message: Message) => ({
+    time: getMessageTime(message),
+    text: message.text,
+    isEdited: getIsEdited(message),
+  });
 
   const getUsernameProps = (message: Message) => {
-    const isOwn = message.userId === currentUserId;
-    const chatMember = currentChat?.users.find(
-      (user) => user.id === message.userId
-    );
+    const isOwn = getIsOwn(message.userId, currentUserId);
+    const chatMember = getChatMember(currentChat, message);
     const username = isOwn ? currentUserName : chatMember?.name;
 
     return {
@@ -79,7 +64,7 @@ export function useMessagesProps(
   const getReplyProps = (message: Message) => {
     const repliedMessage = message.replied;
     const repliedMessageText = repliedMessage?.text;
-    const isOwnReplied = repliedMessage?.userId === currentUserId;
+    const isOwnReplied = getIsOwn(repliedMessage?.userId, currentUserId);
     const repliedUser = currentChat?.users.find(
       (user) => user.id === repliedMessage?.userId
     );
@@ -93,9 +78,9 @@ export function useMessagesProps(
   };
 
   const getBodyProps = (message: Message) => {
-    const isOwn = message.userId === currentUserId;
-    const isSelectOpen = currentMessage?.id === message.id;
-    const isEdited = message.createdAt !== message.updatedAt;
+    const isOwn = getIsOwn(message.userId, currentUserId);
+    const isEdited = getIsEdited(message);
+    const isSelectOpen = getIsSelectOpen(message, currentMessage);
 
     return {
       isOwn,
@@ -120,4 +105,31 @@ export function useMessagesProps(
     getTextProps,
     getSelectProps,
   };
+}
+
+function getIsOwn(
+  messageUserId: string | undefined,
+  currentUserId: string
+): boolean {
+  return messageUserId === currentUserId;
+}
+
+function getIsEdited(message: Message) {
+  return message.createdAt !== message.updatedAt;
+}
+
+function getIsSelectOpen(message: Message, currentMessage: Message | null) {
+  return message.id === currentMessage?.id;
+}
+
+function getChatMember(currentChat: ShortChat | undefined, message: Message) {
+  return currentChat?.users.find((user) => user.id === message.userId);
+}
+
+function getMessageTime(message: Message) {
+  return getIsEdited(message)
+    ? `edited ${getTime(
+        new Date(message.updatedAt).toLocaleTimeString()
+      )!.toString()}`
+    : getTime(new Date(message.createdAt).toLocaleTimeString())!.toString();
 }
