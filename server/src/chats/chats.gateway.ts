@@ -56,6 +56,7 @@ export class ChatsGateway {
       throw new WsException(NOT_FOUND);
     }
     await this.queryBus.execute(new ValidateChatMemberQuery(user, chatId));
+    await this.commandBus.execute(new SaveLastSeenCommand(user, chatId));
 
     client.join(chatId);
 
