@@ -1,5 +1,6 @@
-import { ChatsGateway } from './chats.gateway';
 import { Module, forwardRef } from '@nestjs/common';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { ChatsGateway } from './chats.gateway';
 import { ChatsController } from './chats.controller';
 import { ChatsService } from './chats.service';
 import { PrismaModule } from 'prisma/prisma.module';
@@ -20,6 +21,7 @@ import { UsersModule } from 'users/users.module';
   imports: [
     PrismaModule,
     CqrsModule,
+    EventEmitterModule.forRoot(),
     TokensModule,
     forwardRef(() => UsersModule),
   ],
