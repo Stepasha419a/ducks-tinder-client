@@ -14,6 +14,9 @@ export const chatService = {
   async getChat(chatId: string) {
     return instance.get<Chat>(`chats/${chatId}`);
   },
+  connect(): Socket {
+    return chatSocket.connect();
+  },
   connectChat(chatData: ChatSocketQueryData, currentUserId: string): Socket {
     return chatSocket.connectChat(chatData, currentUserId);
   },
@@ -40,8 +43,5 @@ export const chatService = {
   },
   disconnectChat(): void {
     chatSocket.disconnectChat();
-  },
-  closeAllSockets(): void {
-    chatSocket.closeAllSockets();
   },
 };

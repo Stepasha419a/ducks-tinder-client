@@ -47,6 +47,17 @@ export class ChatsGateway {
   wss: Server;
 
   @UseGuards(WsAccessTokenGuard)
+  @SubscribeMessage('connect-chats')
+  async handleConnect(
+    @ConnectedSocket() client: UserSocket,
+    @User({ isSocket: true }) user,
+  ) {
+    client.join(user.id);
+
+    client.emit('connect-chats', user.id);
+  }
+
+  @UseGuards(WsAccessTokenGuard)
   @SubscribeMessage('connect-chat')
   async handleConnectChat(
     @ConnectedSocket() client: UserSocket,

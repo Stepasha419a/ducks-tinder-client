@@ -20,6 +20,10 @@ export class DeleteChatCommandHandler
       throw new WsException(NOT_FOUND);
     }
 
+    await this.prismaService.chatVisit.deleteMany({
+      where: { chatId: candidate.id },
+    });
+
     const deletedChat = await this.prismaService.chat.delete({
       where: { id: candidate.id },
     });

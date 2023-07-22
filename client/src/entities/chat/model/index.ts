@@ -7,7 +7,7 @@ export {
   setIsMessageEditing,
 } from './chat.slice';
 export {
-  closeAllSocketsThunk,
+  connectChatsThunk,
   connectChatThunk,
   disconnectChatThunk,
   getChatsThunk,

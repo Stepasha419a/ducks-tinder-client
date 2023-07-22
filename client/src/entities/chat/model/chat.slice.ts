@@ -9,7 +9,6 @@ import type {
 import {
   getChatsThunk,
   connectChatThunk,
-  closeAllSocketsThunk,
   sendMessageThunk,
 } from './chat.thunks';
 
@@ -79,12 +78,14 @@ const chatSlice = createSlice({
       state.chats[chatIndex].messages[messageIndex] = payload.message;
     },
     blockChat: (state, { payload }: PayloadAction<Chat>) => {
-      state.chats[state.chats.findIndex((chat) => chat.id === payload.id)] =
-        payload;
+      const chatIndex = state.chats.findIndex((chat) => chat.id === payload.id);
+      state.chats[chatIndex].blocked = payload.blocked;
+      state.chats[chatIndex].blockedById = payload.blockedById;
     },
     unblockChat: (state, { payload }: PayloadAction<Chat>) => {
-      state.chats[state.chats.findIndex((chat) => chat.id === payload.id)] =
-        payload;
+      state.chats[
+        state.chats.findIndex((chat) => chat.id === payload.id)
+      ].blocked = payload.blocked;
     },
     deleteChat: (state, { payload }: PayloadAction<string>) => {
       state.chats = state.chats.filter((chat) => chat.id !== payload);
@@ -127,12 +128,12 @@ const chatSlice = createSlice({
       .addCase(connectChatThunk.fulfilled, (state) => {
         state.isMessagesInitialLoading = false;
       })
-      .addCase(closeAllSocketsThunk.fulfilled, (state) => {
+      /* .addCase(disconnectChatThunk.fulfilled, (state) => {
         state.isConnected = false;
         state.maxMessagesCount = 0;
         state.currentChatId = '';
         state.repliedMessage = null;
-      })
+      }) */
       .addCase(sendMessageThunk.fulfilled, (state) => {
         if (state.repliedMessage) {
           state.repliedMessage = null;

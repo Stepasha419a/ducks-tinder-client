@@ -4,7 +4,7 @@ import type { ChatSocketQueryData } from '../../interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;
-  _sockets: Set<Socket>;
+  connect: () => Socket;
   connectChat: (chatData: ChatSocketQueryData, currentUserId: string) => Socket;
   sendMessage: (text: string, repliedId: string | null) => void;
   getMessages: (haveCount: number) => void;
@@ -14,12 +14,23 @@ interface ChatSocket {
   unblockChat: () => void;
   deleteChat: () => void;
   disconnectChat: () => void;
-  closeAllSockets: () => void;
 }
 
 export const chatSocket: ChatSocket = {
   _socket: null,
-  _sockets: new Set(),
+  connect(): Socket {
+    this._socket = io('http://localhost:5000/chat/socket', {
+      withCredentials: true,
+      transports: ['websocket'],
+      auth: {
+        authorization: localStorage.getItem('accessToken'),
+      },
+    });
+
+    this._socket.emit('connect-chats');
+
+    return this._socket;
+  },
   connectChat(chatData: ChatSocketQueryData, currentUserId: string): Socket {
     this._socket = io('http://localhost:5000/chat/socket', {
       query: chatData,
@@ -31,8 +42,6 @@ export const chatSocket: ChatSocket = {
     });
 
     this._socket.emit('connect-chat', currentUserId);
-
-    this._sockets.add(this._socket);
 
     // TODO: fix this return by adding some idk, methods that require callbacks on every event
     return this._socket;
@@ -63,12 +72,5 @@ export const chatSocket: ChatSocket = {
       this._socket.emit('disconnect-chat');
       this._socket.close();
     }
-  },
-  closeAllSockets(): void {
-    this._sockets.forEach((socket) => {
-      socket.emit('disconnect-chat');
-      socket.close();
-      this._sockets.delete(socket);
-    });
   },
 };
