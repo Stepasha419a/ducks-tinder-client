@@ -1,10 +1,11 @@
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
+import type { ChatSocketQueryData } from '../../interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;
   _sockets: Set<Socket>;
-  connectChat: (chatId: string) => Socket;
+  connectChat: (chatData: ChatSocketQueryData, currentUserId: string) => Socket;
   sendMessage: (text: string, repliedId: string | null) => void;
   getMessages: (haveCount: number) => void;
   deleteMessage: (messageId: string) => void;
@@ -19,9 +20,9 @@ interface ChatSocket {
 export const chatSocket: ChatSocket = {
   _socket: null,
   _sockets: new Set(),
-  connectChat(chatId: string): Socket {
+  connectChat(chatData: ChatSocketQueryData, currentUserId: string): Socket {
     this._socket = io('http://localhost:5000/chat/socket', {
-      query: { chatId },
+      query: chatData,
       withCredentials: true,
       transports: ['websocket'],
       auth: {
@@ -29,7 +30,7 @@ export const chatSocket: ChatSocket = {
       },
     });
 
-    this._socket.emit('connect-chat', chatId);
+    this._socket.emit('connect-chat', currentUserId);
 
     this._sockets.add(this._socket);
 

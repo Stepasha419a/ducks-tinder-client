@@ -44,8 +44,7 @@ export interface ShortChat {
   blockedById: string;
 }
 
-// new messages to notify inactive chats
-export interface NewMessage {
+export interface ChatSocketQueryData {
   chatId: string;
-  message: Message;
+  userIds: string[];
 }

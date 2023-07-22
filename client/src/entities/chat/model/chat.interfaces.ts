@@ -20,3 +20,8 @@ export interface GetMessagesResponse {
   chatId: string;
   messages: Message[];
 }
+
+export interface ReceivedMessage {
+  chatId: string;
+  message: Message;
+}

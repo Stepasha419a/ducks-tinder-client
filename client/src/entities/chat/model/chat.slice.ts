@@ -1,7 +1,11 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Chat, Message, ShortChat } from '@shared/api/interfaces';
-import type { ChatInitialState, GetMessagesResponse } from './chat.interfaces';
+import type {
+  ChatInitialState,
+  GetMessagesResponse,
+  ReceivedMessage,
+} from './chat.interfaces';
 import {
   getChatsThunk,
   connectChatThunk,
@@ -29,11 +33,9 @@ const chatSlice = createSlice({
   name: 'chatSlice',
   initialState,
   reducers: {
-    pushNewMessage: (state, { payload }: PayloadAction<Message>) => {
-      const index = state.chats.findIndex(
-        (chat) => chat.id === state.currentChatId
-      );
-      state.chats[index].messages.push(payload);
+    pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
+      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
+      state.chats[index].messages.push(payload.message);
       state.maxMessagesCount++;
     },
     setCurrentChatData: (state, { payload }: PayloadAction<Chat>) => {
@@ -60,23 +62,21 @@ const chatSlice = createSlice({
       ];
       state.isMessagesLoading = false;
     },
-    deleteMessage: (state, { payload }: PayloadAction<Message>) => {
-      const index = state.chats.findIndex(
-        (chat) => chat.id === state.currentChatId
-      );
+    deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
+      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
       state.chats[index].messages = state.chats[index].messages.filter(
-        (message) => message.id !== payload.id
+        (message) => message.id !== payload.message.id
       );
       state.maxMessagesCount--;
     },
-    editMessage: (state, { payload }: PayloadAction<Message>) => {
+    editMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const chatIndex = state.chats.findIndex(
-        (chat) => chat.id === state.currentChatId
+        (chat) => chat.id === payload.chatId
       );
       const messageIndex = state.chats[chatIndex].messages.findIndex(
-        (message) => message.id === payload.id
+        (message) => message.id === payload.message.id
       );
-      state.chats[chatIndex].messages[messageIndex] = payload;
+      state.chats[chatIndex].messages[messageIndex] = payload.message;
     },
     blockChat: (state, { payload }: PayloadAction<Chat>) => {
       state.chats[state.chats.findIndex((chat) => chat.id === payload.id)] =

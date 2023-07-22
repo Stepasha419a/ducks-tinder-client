@@ -1,10 +1,10 @@
 import type { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Chat, Message } from '@shared/api/interfaces';
+import type { Chat, ChatSocketQueryData } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
-import type { GetMessagesResponse } from './chat.interfaces';
+import type { GetMessagesResponse, ReceivedMessage } from './chat.interfaces';
 import {
   blockChat,
   deleteChat,
@@ -32,11 +32,23 @@ export const getChatsThunk = createAsyncThunk(
 
 export const connectChatThunk = createAsyncThunk(
   'chat/connectChat',
-  (args: { chatId: string }, { rejectWithValue, dispatch }) => {
+  (args: { chatId: string }, { rejectWithValue, dispatch, getState }) => {
     try {
       const { chatId } = args;
 
-      const socket = chatService.connectChat(chatId);
+      const { chat: chatState, user: userState } = getState() as RootState;
+      const { chats } = chatState;
+      const { currentUser } = userState;
+      const userIds = chats
+        .find((chat) => chat.id === chatId)
+        ?.users.map((user) => user.id)
+        .join(' ');
+      if (!userIds) {
+        throw new Error('Not Found Chat');
+      }
+      const chatData: ChatSocketQueryData = { chatId, userIds };
+
+      const socket = chatService.connectChat(chatData, currentUser.id);
 
       socket.onAny((event: string, ...errors: unknown[]) => {
         if (
@@ -63,20 +75,20 @@ export const connectChatThunk = createAsyncThunk(
         dispatch(setCurrentChatData(chat));
       });
 
-      socket.on('send-message', (message: Message) => {
-        dispatch(pushNewMessage(message));
+      socket.on('send-message', (data: ReceivedMessage) => {
+        dispatch(pushNewMessage(data));
       });
 
       socket.on('get-messages', (response: GetMessagesResponse) => {
         dispatch(getMessages(response));
       });
 
-      socket.on('delete-message', (message: Message) => {
-        dispatch(deleteMessage(message));
+      socket.on('delete-message', (data: ReceivedMessage) => {
+        dispatch(deleteMessage(data));
       });
 
-      socket.on('edit-message', (message: Message) => {
-        dispatch(editMessage(message));
+      socket.on('edit-message', (data: ReceivedMessage) => {
+        dispatch(editMessage(data));
       });
 
       socket.on('block-chat', (chat: Chat) => {

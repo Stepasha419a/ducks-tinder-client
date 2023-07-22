@@ -37,3 +37,8 @@ export interface ShortChat {
   blockedById: string;
   chatVisits: LastSeen[];
 }
+
+export interface ChatSocketQueryData {
+  chatId: string;
+  userIds: string;
+}

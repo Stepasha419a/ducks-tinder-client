@@ -1,6 +1,10 @@
 import type { Socket } from 'socket.io-client';
 import { instance } from '@shared/api';
-import type { Chat, ShortChat } from '@shared/api/interfaces';
+import type {
+  Chat,
+  ChatSocketQueryData,
+  ShortChat,
+} from '@shared/api/interfaces';
 import { chatSocket } from './chat.socket';
 
 export const chatService = {
@@ -10,8 +14,8 @@ export const chatService = {
   async getChat(chatId: string) {
     return instance.get<Chat>(`chats/${chatId}`);
   },
-  connectChat(chatId: string): Socket {
-    return chatSocket.connectChat(chatId);
+  connectChat(chatData: ChatSocketQueryData, currentUserId: string): Socket {
+    return chatSocket.connectChat(chatData, currentUserId);
   },
   getMessages(haveCount: number): void {
     chatSocket.getMessages(haveCount);
