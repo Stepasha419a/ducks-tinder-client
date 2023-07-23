@@ -3,10 +3,7 @@ import { WsException } from '@nestjs/websockets';
 import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { BlockChatCommand } from './block-chat.command';
-import { FullChat } from 'chats/chats.interface';
-import { ChatsSelector } from 'chats/chats.selector';
-import { UsersSelector } from 'users/users.selector';
-import { getDistanceFromLatLonInKm } from 'common/helpers';
+import { BlockChatSocketReturn } from 'chats/chats.interface';
 
 @CommandHandler(BlockChatCommand)
 export class BlockChatCommandHandler
@@ -14,7 +11,7 @@ export class BlockChatCommandHandler
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(command: BlockChatCommand): Promise<FullChat> {
+  async execute(command: BlockChatCommand): Promise<BlockChatSocketReturn> {
     const { user, chatId } = command;
 
     const candidate = await this.prismaService.chat.findFirst({
@@ -24,26 +21,13 @@ export class BlockChatCommandHandler
       throw new WsException(NOT_FOUND);
     }
 
-    const messagesCount = await this.prismaService.message.count({
-      where: { chatId },
-    });
-
-    const skipCount = messagesCount > 20 ? messagesCount - 20 : 0;
-
     const blockedChat = await this.prismaService.chat.update({
       where: { id: chatId },
       data: { blocked: true, blockedById: user.id },
       select: {
         id: true,
-        messages: {
-          skip: skipCount,
-          take: 20,
-          orderBy: { createdAt: 'asc' },
-          select: ChatsSelector.selectMessage(),
-        },
         users: {
-          where: { id: { not: user.id } },
-          select: UsersSelector.selectShortUser(),
+          select: { id: true },
         },
         blocked: true,
         blockedById: true,
@@ -52,17 +36,7 @@ export class BlockChatCommandHandler
 
     return {
       ...blockedChat,
-      users: blockedChat.users.map((chatUser) => ({
-        ...chatUser,
-        distance: getDistanceFromLatLonInKm(
-          user.place.latitude,
-          user.place.longitude,
-          chatUser.place.latitude,
-          chatUser.place.longitude,
-        ),
-        place: { name: chatUser.place.name },
-      })),
-      messagesCount,
+      users: blockedChat.users.map((chatUser) => chatUser.id),
     };
   }
 }

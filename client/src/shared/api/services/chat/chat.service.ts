@@ -1,10 +1,6 @@
 import type { Socket } from 'socket.io-client';
 import { instance } from '@shared/api';
-import type {
-  Chat,
-  ChatSocketQueryData,
-  ShortChat,
-} from '@shared/api/interfaces';
+import type { Chat, ShortChat } from '@shared/api/interfaces';
 import { chatSocket } from './chat.socket';
 
 export const chatService = {
@@ -14,34 +10,38 @@ export const chatService = {
   async getChat(chatId: string) {
     return instance.get<Chat>(`chats/${chatId}`);
   },
-  connect(): Socket {
-    return chatSocket.connect();
+  connect(userIds: string): Socket {
+    return chatSocket.connect(userIds);
   },
-  connectChat(chatData: ChatSocketQueryData, currentUserId: string): Socket {
-    return chatSocket.connectChat(chatData, currentUserId);
+  connectChat(chatId: string): Socket {
+    return chatSocket.connectChat(chatId);
   },
-  getMessages(haveCount: number): void {
-    chatSocket.getMessages(haveCount);
+  getMessages(chatId: string, haveCount: number): void {
+    chatSocket.getMessages(chatId, haveCount);
   },
-  sendMessage(text: string, repliedId: string | null = null): void {
-    chatSocket.sendMessage(text, repliedId);
+  sendMessage(
+    chatId: string,
+    text: string,
+    repliedId: string | null = null
+  ): void {
+    chatSocket.sendMessage(chatId, text, repliedId);
   },
-  deleteMessage(messageId: string): void {
-    chatSocket.deleteMessage(messageId);
+  deleteMessage(chatId: string, messageId: string): void {
+    chatSocket.deleteMessage(chatId, messageId);
   },
-  editMessage(messageId: string, text: string): void {
-    chatSocket.editMessage(messageId, text);
+  editMessage(chatId: string, messageId: string, text: string): void {
+    chatSocket.editMessage(chatId, messageId, text);
   },
-  blockChat(): void {
-    chatSocket.blockChat();
+  blockChat(chatId: string): void {
+    chatSocket.blockChat(chatId);
   },
-  unblockChat(): void {
-    chatSocket.unblockChat();
+  unblockChat(chatId: string): void {
+    chatSocket.unblockChat(chatId);
   },
-  deleteChat(): void {
-    chatSocket.deleteChat();
+  deleteChat(chatId: string): void {
+    chatSocket.deleteChat(chatId);
   },
-  disconnectChat(): void {
-    chatSocket.disconnectChat();
+  disconnectChat(chatId: string): void {
+    chatSocket.disconnectChat(chatId);
   },
 };

@@ -1,7 +1,7 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { PrismaService } from 'prisma/prisma.service';
 import { EditMessageCommand } from './edit-message.command';
-import { Message } from 'chats/chats.interface';
+import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { WsException } from '@nestjs/websockets';
 import { ChatsSelector } from 'chats/chats.selector';
 import { getDatesHourDiff } from 'common/helpers';
@@ -13,12 +13,12 @@ export class EditMessageCommandHandler
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(command: EditMessageCommand): Promise<Message> {
-    const { user, chatId, dto } = command;
+  async execute(command: EditMessageCommand): Promise<ChatSocketMessageReturn> {
+    const { user, dto } = command;
 
     const chat = await this.prismaService.chat.findUnique({
-      where: { id: chatId },
-      select: { blocked: true },
+      where: { id: dto.chatId },
+      select: { id: true, blocked: true, users: { select: { id: true } } },
     });
     if (!chat || chat?.blocked) {
       throw new WsException(FORBIDDEN);
@@ -43,6 +43,6 @@ export class EditMessageCommandHandler
       select: ChatsSelector.selectMessage(),
     });
 
-    return message;
+    return { message, id: chat.id, users: chat.users.map((user) => user.id) };
   }
 }

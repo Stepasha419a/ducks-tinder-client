@@ -8,7 +8,6 @@ export const ChatData = createParamDecorator(
   ): ChatSocketQueryData | undefined => {
     const client = context.switchToWs().getClient();
     return {
-      chatId: client?.handshake?.query?.chatId,
       userIds: client?.handshake?.query?.userIds?.split(' '),
     };
   },

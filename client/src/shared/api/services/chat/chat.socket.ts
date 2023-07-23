@@ -1,25 +1,25 @@
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
-import type { ChatSocketQueryData } from '../../interfaces';
 
 interface ChatSocket {
   _socket: Socket | null;
-  connect: () => Socket;
-  connectChat: (chatData: ChatSocketQueryData, currentUserId: string) => Socket;
-  sendMessage: (text: string, repliedId: string | null) => void;
-  getMessages: (haveCount: number) => void;
-  deleteMessage: (messageId: string) => void;
-  editMessage: (messageId: string, text: string) => void;
-  blockChat: () => void;
-  unblockChat: () => void;
-  deleteChat: () => void;
-  disconnectChat: () => void;
+  connect: (userIds: string) => Socket;
+  connectChat: (chatId: string) => Socket;
+  sendMessage: (chatId: string, text: string, repliedId: string | null) => void;
+  getMessages: (chatId: string, haveCount: number) => void;
+  deleteMessage: (chatId: string, messageId: string) => void;
+  editMessage: (chatId: string, messageId: string, text: string) => void;
+  blockChat: (chatId: string) => void;
+  unblockChat: (chatId: string) => void;
+  deleteChat: (chatId: string) => void;
+  disconnectChat: (chatId: string) => void;
 }
 
 export const chatSocket: ChatSocket = {
   _socket: null,
-  connect(): Socket {
+  connect(userIds: string): Socket {
     this._socket = io('http://localhost:5000/chat/socket', {
+      query: { userIds },
       withCredentials: true,
       transports: ['websocket'],
       auth: {
@@ -31,46 +31,36 @@ export const chatSocket: ChatSocket = {
 
     return this._socket;
   },
-  connectChat(chatData: ChatSocketQueryData, currentUserId: string): Socket {
-    this._socket = io('http://localhost:5000/chat/socket', {
-      query: chatData,
-      withCredentials: true,
-      transports: ['websocket'],
-      auth: {
-        authorization: localStorage.getItem('accessToken'),
-      },
-    });
-
-    this._socket.emit('connect-chat', currentUserId);
+  connectChat(chatId: string): Socket {
+    this._socket!.emit('connect-chat', { chatId });
 
     // TODO: fix this return by adding some idk, methods that require callbacks on every event
-    return this._socket;
+    return this._socket!;
   },
-  sendMessage(text: string, repliedId: string | null): void {
-    this._socket!.emit('send-message', { text, repliedId });
+  sendMessage(chatId: string, text: string, repliedId: string | null): void {
+    this._socket!.emit('send-message', { chatId, text, repliedId });
   },
-  getMessages(haveCount: number): void {
-    this._socket!.emit('get-messages', { haveCount });
+  getMessages(chatId: string, haveCount: number): void {
+    this._socket!.emit('get-messages', { chatId, haveCount });
   },
-  deleteMessage(messageId: string): void {
-    this._socket!.emit('delete-message', { messageId });
+  deleteMessage(chatId: string, messageId: string): void {
+    this._socket!.emit('delete-message', { chatId, messageId });
   },
-  editMessage(messageId: string, text: string): void {
-    this._socket!.emit('edit-message', { messageId, text });
+  editMessage(chatId: string, messageId: string, text: string): void {
+    this._socket!.emit('edit-message', { chatId, messageId, text });
   },
-  blockChat(): void {
-    this._socket!.emit('block-chat');
+  blockChat(chatId: string): void {
+    this._socket!.emit('block-chat', { chatId });
   },
-  unblockChat(): void {
-    this._socket!.emit('unblock-chat');
+  unblockChat(chatId: string): void {
+    this._socket!.emit('unblock-chat', { chatId });
   },
-  deleteChat(): void {
-    this._socket!.emit('delete-chat');
+  deleteChat(chatId: string): void {
+    this._socket!.emit('delete-chat', { chatId });
   },
-  disconnectChat(): void {
+  disconnectChat(chatId: string): void {
     if (this._socket) {
-      this._socket.emit('disconnect-chat');
-      this._socket.close();
+      this._socket.emit('disconnect-chat', { chatId });
     }
   },
 };

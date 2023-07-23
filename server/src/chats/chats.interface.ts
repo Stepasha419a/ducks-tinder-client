@@ -45,6 +45,28 @@ export interface ShortChat {
 }
 
 export interface ChatSocketQueryData {
-  chatId: string;
   userIds: string[];
+}
+
+export interface ChatSocketReturn {
+  id: string;
+  users: string[];
+}
+
+export interface BlockChatSocketReturn {
+  id: string;
+  users: string[];
+  blocked: boolean;
+  blockedById: string | null;
+}
+
+export interface ChatSocketMessageReturn {
+  id: string;
+  users: string[];
+  message: Message;
+}
+
+export interface GetMessagesQueryReturn {
+  id: string;
+  messages: Message[];
 }

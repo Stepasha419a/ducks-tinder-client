@@ -17,11 +17,24 @@ export interface ChatInitialState {
 }
 
 export interface GetMessagesResponse {
-  chatId: string;
+  id: string;
   messages: Message[];
 }
 
 export interface ReceivedMessage {
-  chatId: string;
+  id: string;
   message: Message;
+}
+
+interface ChatBlockBase {
+  id: string;
+  blocked: boolean;
+}
+
+export interface ChatBlockResponse extends ChatBlockBase {
+  blockedById: string;
+}
+
+export interface ChatUnblockResponse extends ChatBlockBase {
+  blockedById: null;
 }

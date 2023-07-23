@@ -2,7 +2,9 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type { Chat, Message, ShortChat } from '@shared/api/interfaces';
 import type {
+  ChatBlockResponse,
   ChatInitialState,
+  ChatUnblockResponse,
   GetMessagesResponse,
   ReceivedMessage,
 } from './chat.interfaces';
@@ -10,6 +12,7 @@ import {
   getChatsThunk,
   connectChatThunk,
   sendMessageThunk,
+  disconnectChatThunk,
 } from './chat.thunks';
 
 const initialState: ChatInitialState = {
@@ -33,7 +36,7 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
-      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
+      const index = state.chats.findIndex((chat) => chat.id === payload.id);
       state.chats[index].messages.push(payload.message);
       state.maxMessagesCount++;
     },
@@ -54,7 +57,7 @@ const chatSlice = createSlice({
       if (payload.messages.length === 0) {
         state.isMessagesEnded = true;
       }
-      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
+      const index = state.chats.findIndex((chat) => chat.id === payload.id);
       state.chats[index].messages = [
         ...payload.messages,
         ...state.chats[index].messages,
@@ -62,27 +65,25 @@ const chatSlice = createSlice({
       state.isMessagesLoading = false;
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
-      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
+      const index = state.chats.findIndex((chat) => chat.id === payload.id);
       state.chats[index].messages = state.chats[index].messages.filter(
         (message) => message.id !== payload.message.id
       );
       state.maxMessagesCount--;
     },
     editMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
-      const chatIndex = state.chats.findIndex(
-        (chat) => chat.id === payload.chatId
-      );
+      const chatIndex = state.chats.findIndex((chat) => chat.id === payload.id);
       const messageIndex = state.chats[chatIndex].messages.findIndex(
         (message) => message.id === payload.message.id
       );
       state.chats[chatIndex].messages[messageIndex] = payload.message;
     },
-    blockChat: (state, { payload }: PayloadAction<Chat>) => {
+    blockChat: (state, { payload }: PayloadAction<ChatBlockResponse>) => {
       const chatIndex = state.chats.findIndex((chat) => chat.id === payload.id);
       state.chats[chatIndex].blocked = payload.blocked;
       state.chats[chatIndex].blockedById = payload.blockedById;
     },
-    unblockChat: (state, { payload }: PayloadAction<Chat>) => {
+    unblockChat: (state, { payload }: PayloadAction<ChatUnblockResponse>) => {
       state.chats[
         state.chats.findIndex((chat) => chat.id === payload.id)
       ].blocked = payload.blocked;
@@ -128,12 +129,12 @@ const chatSlice = createSlice({
       .addCase(connectChatThunk.fulfilled, (state) => {
         state.isMessagesInitialLoading = false;
       })
-      /* .addCase(disconnectChatThunk.fulfilled, (state) => {
+      .addCase(disconnectChatThunk.fulfilled, (state) => {
         state.isConnected = false;
         state.maxMessagesCount = 0;
         state.currentChatId = '';
         state.repliedMessage = null;
-      }) */
+      })
       .addCase(sendMessageThunk.fulfilled, (state) => {
         if (state.repliedMessage) {
           state.repliedMessage = null;

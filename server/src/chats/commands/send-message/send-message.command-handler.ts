@@ -4,7 +4,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendMessageCommand } from './send-message.command';
 import { ChatsSelector } from 'chats/chats.selector';
-import { Message } from 'chats/chats.interface';
+import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 
 @CommandHandler(SendMessageCommand)
@@ -16,12 +16,12 @@ export class SendMessageCommandHandler
     private readonly eventEmitter: EventEmitter2,
   ) {}
 
-  async execute(command: SendMessageCommand): Promise<Message> {
-    const { user, chatId, dto } = command;
+  async execute(command: SendMessageCommand): Promise<ChatSocketMessageReturn> {
+    const { user, dto } = command;
 
     const chat = await this.prismaService.chat.findUnique({
-      where: { id: chatId },
-      select: { blocked: true, users: { select: { id: true } } },
+      where: { id: dto.chatId },
+      select: { id: true, blocked: true, users: { select: { id: true } } },
     });
     if (!chat || chat?.blocked) {
       throw new WsException(FORBIDDEN);
@@ -37,16 +37,16 @@ export class SendMessageCommandHandler
     }
 
     const message = await this.prismaService.message.create({
-      data: { chatId, userId: user.id, ...dto },
+      data: { chatId: dto.chatId, userId: user.id, ...dto },
       select: ChatsSelector.selectMessage(),
     });
 
     this.eventEmitter.emit('new-message', {
       message,
-      chatId,
+      chatId: dto.chatId,
       userIds: chat.users.map((user) => user.id),
     });
 
-    return message;
+    return { message, id: chat.id, users: chat.users.map((user) => user.id) };
   }
 }

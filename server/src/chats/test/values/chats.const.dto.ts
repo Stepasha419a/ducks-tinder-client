@@ -1,7 +1,8 @@
 import { EditMessageDto } from 'chats/dto';
-import { messageStub } from '../stubs';
+import { fullChatStub, messageStub } from '../stubs';
 
 export const EDIT_MESSAGE_DTO: EditMessageDto = {
   messageId: messageStub().id,
+  chatId: fullChatStub().id,
   text: 'update-text',
 };

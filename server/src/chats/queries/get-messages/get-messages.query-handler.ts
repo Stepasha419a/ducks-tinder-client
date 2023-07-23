@@ -1,9 +1,10 @@
 import { WsException } from '@nestjs/websockets';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { GetMessagesQuery, GetMessagesQueryReturn } from './get-messages.query';
+import { GetMessagesQuery } from './get-messages.query';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
 import { NOT_FOUND } from 'common/constants/error';
+import { GetMessagesQueryReturn } from 'chats/chats.interface';
 
 @QueryHandler(GetMessagesQuery)
 export class GetMessagesQueryHandler
@@ -12,10 +13,10 @@ export class GetMessagesQueryHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(query: GetMessagesQuery): Promise<GetMessagesQueryReturn> {
-    const { user, chatId, dto } = query;
+    const { user, dto } = query;
 
     const candidate = await this.prismaService.chat.findFirst({
-      where: { id: chatId, users: { some: { id: user.id } } },
+      where: { id: dto.chatId, users: { some: { id: user.id } } },
       select: { id: true },
     });
     if (!candidate) {
@@ -23,7 +24,7 @@ export class GetMessagesQueryHandler
     }
 
     const allMessagesCount = await this.prismaService.message.count({
-      where: { chatId },
+      where: { chatId: candidate.id },
     });
 
     if (dto.haveCount > allMessagesCount) {
@@ -47,7 +48,7 @@ export class GetMessagesQueryHandler
     // already available and taking most available until 20
     const messages = await this.prismaService.message.findMany({
       where: {
-        chatId,
+        chatId: candidate.id,
       },
       select: ChatsSelector.selectMessage(),
       orderBy: { createdAt: 'asc' },
@@ -56,7 +57,7 @@ export class GetMessagesQueryHandler
     });
 
     return {
-      chatId,
+      id: candidate.id,
       messages,
     };
   }

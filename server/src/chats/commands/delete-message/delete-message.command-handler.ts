@@ -1,7 +1,7 @@
 import { WsException } from '@nestjs/websockets';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteMessageCommand } from './delete-message.command';
-import { Message } from 'chats/chats.interface';
+import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
 import { getDatesHourDiff } from 'common/helpers';
@@ -13,12 +13,14 @@ export class DeleteMessageCommandHandler
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(command: DeleteMessageCommand): Promise<Message> {
-    const { user, chatId, dto } = command;
+  async execute(
+    command: DeleteMessageCommand,
+  ): Promise<ChatSocketMessageReturn> {
+    const { user, dto } = command;
 
     const chat = await this.prismaService.chat.findUnique({
-      where: { id: chatId },
-      select: { blocked: true },
+      where: { id: dto.chatId },
+      select: { blocked: true, id: true, users: { select: { id: true } } },
     });
     if (!chat || chat?.blocked) {
       throw new WsException(FORBIDDEN);
@@ -40,6 +42,6 @@ export class DeleteMessageCommandHandler
 
     await this.prismaService.message.delete({ where: { id: dto.messageId } });
 
-    return message;
+    return { message, id: chat.id, users: chat.users.map((user) => user.id) };
   }
 }

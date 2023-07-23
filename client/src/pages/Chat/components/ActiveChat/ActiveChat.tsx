@@ -17,6 +17,7 @@ export const ActiveChat = () => {
 
   useEffect(() => {
     if (params.chatId && params.chatId !== currentChatId && !isLoading) {
+      console.log(params.chatId, currentChatId, !isLoading);
       if (currentChatId) dispatch(disconnectChatThunk());
       dispatch(connectChatThunk({ chatId: params.chatId }));
     }

@@ -26,11 +26,17 @@ import {
   EditMessageDto,
   GetMessagesDto,
   SendMessageDto,
+  ChatIdDto,
 } from './dto';
 import { NOT_FOUND } from 'common/constants/error';
 import { ChatData, User } from 'common/decorators';
-import { GetMessagesQueryReturn } from './queries/get-messages/get-messages.query';
-import { ChatSocketQueryData } from './chats.interface';
+import {
+  BlockChatSocketReturn,
+  ChatSocketMessageReturn,
+  ChatSocketQueryData,
+  ChatSocketReturn,
+  GetMessagesQueryReturn,
+} from './chats.interface';
 
 @WebSocketGateway({
   namespace: '/chat/socket',
@@ -54,45 +60,30 @@ export class ChatsGateway {
   ) {
     client.join(user.id);
 
-    client.emit('connect-chats', user.id);
+    client.emit('connect-chats');
   }
 
   @UseGuards(WsAccessTokenGuard)
   @SubscribeMessage('connect-chat')
   async handleConnectChat(
     @ConnectedSocket() client: UserSocket,
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
+    @MessageBody() dto: ChatIdDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
-    await this.queryBus.execute(
-      new ValidateChatMemberQuery(user, chatData.chatId),
-    );
-    await this.commandBus.execute(
-      new SaveLastSeenCommand(user, chatData.chatId),
-    );
+    await this.queryBus.execute(new ValidateChatMemberQuery(user, dto.chatId));
+    await this.commandBus.execute(new SaveLastSeenCommand(user, dto.chatId));
 
-    client.join(user.id);
-
-    client.emit('connect-chat', user.id);
+    client.emit('connect-chat');
   }
 
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('disconnect-chat')
   async handleDisconnectChat(
     @ConnectedSocket() client: UserSocket,
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
+    @MessageBody() dto: ChatIdDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
-
-    await this.commandBus.execute(
-      new SaveLastSeenCommand(user, chatData.chatId),
-    );
+    await this.commandBus.execute(new SaveLastSeenCommand(user, dto.chatId));
 
     client.leave(user.id);
   }
@@ -108,13 +99,11 @@ export class ChatsGateway {
       throw new WsException(NOT_FOUND);
     }
 
-    const message = await this.commandBus.execute(
-      new SendMessageCommand(user, chatData.chatId, dto),
+    const data: ChatSocketMessageReturn = await this.commandBus.execute(
+      new SendMessageCommand(user, dto),
     );
 
-    this.wss
-      .to([...chatData.userIds, user.id])
-      .emit('send-message', { message, chatId: chatData.chatId });
+    this.wss.to(data.users).emit('send-message', { ...data, users: undefined });
   }
 
   @UseGuards(WsRefreshTokenGuard)
@@ -128,7 +117,7 @@ export class ChatsGateway {
       throw new WsException(NOT_FOUND);
     }
     const data: GetMessagesQueryReturn = await this.queryBus.execute(
-      new GetMessagesQuery(user, chatData.chatId, dto),
+      new GetMessagesQuery(user, dto),
     );
 
     this.wss.to(user.id).emit('get-messages', data);
@@ -137,91 +126,67 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('delete-message')
   async deleteMessage(
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
     @MessageBody() dto: DeleteMessageDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
-
-    const message = await this.commandBus.execute(
-      new DeleteMessageCommand(user, chatData.chatId, dto),
+    const data: ChatSocketMessageReturn = await this.commandBus.execute(
+      new DeleteMessageCommand(user, dto),
     );
 
     this.wss
-      .to([...chatData.userIds, user.id])
-      .emit('delete-message', { message, chatId: chatData.chatId });
+      .to(data.users)
+      .emit('delete-message', { ...data, users: undefined });
   }
 
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('edit-message')
   async editMessage(
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
     @MessageBody() dto: EditMessageDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
-
-    const message = await this.commandBus.execute(
-      new EditMessageCommand(user, chatData.chatId, dto),
+    const data: ChatSocketMessageReturn = await this.commandBus.execute(
+      new EditMessageCommand(user, dto),
     );
 
-    this.wss
-      .to([...chatData.userIds, user.id])
-      .emit('edit-message', { message, chatId: chatData.chatId });
+    this.wss.to(data.users).emit('edit-message', { ...data, users: undefined });
   }
 
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('block-chat')
   async blockChat(
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
+    @MessageBody() dto: ChatIdDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
-
-    const chat = await this.commandBus.execute(
-      new BlockChatCommand(user, chatData.chatId),
+    const chat: BlockChatSocketReturn = await this.commandBus.execute(
+      new BlockChatCommand(user, dto.chatId),
     );
 
-    this.wss.to([...chatData.userIds, user.id]).emit('block-chat', chat);
+    this.wss.to(chat.users).emit('block-chat', { ...chat, users: undefined });
   }
 
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('unblock-chat')
   async unblockChat(
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
+    @MessageBody() dto: ChatIdDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
-
-    const chat = await this.commandBus.execute(
-      new UnblockChatCommand(user, chatData.chatId),
+    const chat: BlockChatSocketReturn = await this.commandBus.execute(
+      new UnblockChatCommand(user, dto.chatId),
     );
 
-    this.wss.to([...chatData.userIds, user.id]).emit('unblock-chat', chat);
+    this.wss.to(chat.users).emit('unblock-chat', { ...chat, users: undefined });
   }
 
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('delete-chat')
   async deleteChat(
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
+    @MessageBody() dto: ChatIdDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
-
-    const chat = await this.commandBus.execute(
-      new DeleteChatCommand(user, chatData.chatId),
+    const chat: ChatSocketReturn = await this.commandBus.execute(
+      new DeleteChatCommand(user, dto.chatId),
     );
 
-    this.wss.to([...chatData.userIds, user.id]).emit('delete-chat', chat);
+    this.wss.to(chat.users).emit('delete-chat', chat.id);
   }
 }

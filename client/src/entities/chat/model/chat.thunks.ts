@@ -1,10 +1,14 @@
 import type { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { Chat, ChatSocketQueryData } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
-import type { GetMessagesResponse, ReceivedMessage } from './chat.interfaces';
+import type {
+  ChatBlockResponse,
+  ChatUnblockResponse,
+  GetMessagesResponse,
+  ReceivedMessage,
+} from './chat.interfaces';
 import {
   blockChat,
   deleteChat,
@@ -32,9 +36,18 @@ export const getChatsThunk = createAsyncThunk(
 
 export const connectChatsThunk = createAsyncThunk(
   'chat/connectChats',
-  (_, { rejectWithValue, dispatch }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
-      const socket = chatService.connect();
+      const { data: chats } = await chatService.getChats();
+
+      const userIds = chats
+        .map((chat) => chat.users.map((user) => user.id))
+        .join(' ');
+      if (!userIds) {
+        throw new Error('Not Found');
+      }
+
+      const socket = chatService.connect(userIds);
 
       socket.onAny((event: string, ...errors: unknown[]) => {
         if (
@@ -70,24 +83,11 @@ export const connectChatsThunk = createAsyncThunk(
 
 export const connectChatThunk = createAsyncThunk(
   'chat/connectChat',
-  (args: { chatId: string }, { rejectWithValue, dispatch, getState }) => {
+  (args: { chatId: string }, { rejectWithValue, dispatch }) => {
     try {
       const { chatId } = args;
 
-      const { chat: chatState, user: userState } = getState() as RootState;
-      const { chats } = chatState;
-      const { currentUser } = userState;
-      const userIds = chats
-        .find((chat) => chat.id === chatId)
-        ?.users.map((user) => user.id)
-        .join(' ');
-      if (!userIds) {
-        dispatch(setIsNotFound(true));
-        throw new Error('Not Found');
-      }
-      const chatData: ChatSocketQueryData = { chatId, userIds };
-
-      const socket = chatService.connectChat(chatData, currentUser.id);
+      const socket = chatService.connectChat(chatId);
 
       socket.on('connect-chat', async () => {
         const response = await chatService.getChat(chatId);
@@ -103,12 +103,12 @@ export const connectChatThunk = createAsyncThunk(
         dispatch(deleteMessage(data));
       });
 
-      socket.on('block-chat', (chat: Chat) => {
-        dispatch(blockChat(chat));
+      socket.on('block-chat', (data: ChatBlockResponse) => {
+        dispatch(blockChat(data));
       });
 
-      socket.on('unblock-chat', (chat: Chat) => {
-        dispatch(unblockChat(chat));
+      socket.on('unblock-chat', (data: ChatUnblockResponse) => {
+        dispatch(unblockChat(data));
       });
 
       socket.on('delete-chat', (deletedChatId: string) => {
@@ -122,9 +122,12 @@ export const connectChatThunk = createAsyncThunk(
 
 export const disconnectChatThunk = createAsyncThunk(
   'chat/disconnectChat',
-  (_, { rejectWithValue }) => {
+  (_, { rejectWithValue, getState }) => {
     try {
-      chatService.disconnectChat();
+      const { chat } = getState() as RootState;
+      const { currentChatId } = chat;
+
+      chatService.disconnectChat(currentChatId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -140,6 +143,7 @@ export const getMessagesThunk = createAsyncThunk(
 
       if (!isMessagesLoading) {
         chatService.getMessages(
+          currentChatId,
           chats[chats.findIndex((item) => item.id === currentChatId)].messages
             .length
         );
@@ -153,9 +157,12 @@ export const getMessagesThunk = createAsyncThunk(
 
 export const deleteMessageThunk = createAsyncThunk(
   'chat/deleteMessage',
-  (messageId: string, { rejectWithValue }) => {
+  (messageId: string, { rejectWithValue, getState }) => {
     try {
-      chatService.deleteMessage(messageId);
+      const { chat } = getState() as RootState;
+      const { currentChatId } = chat;
+
+      chatService.deleteMessage(currentChatId, messageId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -164,9 +171,15 @@ export const deleteMessageThunk = createAsyncThunk(
 
 export const editMessageThunk = createAsyncThunk(
   'chat/editMessage',
-  (args: { messageId: string; text: string }, { rejectWithValue }) => {
+  (
+    args: { messageId: string; text: string },
+    { rejectWithValue, getState }
+  ) => {
     try {
-      chatService.editMessage(args.messageId, args.text);
+      const { chat } = getState() as RootState;
+      const { currentChatId } = chat;
+
+      chatService.editMessage(currentChatId, args.messageId, args.text);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -175,9 +188,12 @@ export const editMessageThunk = createAsyncThunk(
 
 export const blockChatThunk = createAsyncThunk(
   'chat/blockChat',
-  (_, { rejectWithValue }) => {
+  (_, { rejectWithValue, getState }) => {
     try {
-      chatService.blockChat();
+      const { chat } = getState() as RootState;
+      const { currentChatId } = chat;
+
+      chatService.blockChat(currentChatId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -186,9 +202,12 @@ export const blockChatThunk = createAsyncThunk(
 
 export const unblockChatThunk = createAsyncThunk(
   'chat/unblockChat',
-  (_, { rejectWithValue }) => {
+  (_, { rejectWithValue, getState }) => {
     try {
-      chatService.unblockChat();
+      const { chat } = getState() as RootState;
+      const { currentChatId } = chat;
+
+      chatService.unblockChat(currentChatId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -197,9 +216,12 @@ export const unblockChatThunk = createAsyncThunk(
 
 export const deleteChatThunk = createAsyncThunk(
   'chat/deleteChat',
-  (_, { rejectWithValue }) => {
+  (_, { rejectWithValue, getState }) => {
     try {
-      chatService.deleteChat();
+      const { chat } = getState() as RootState;
+      const { currentChatId } = chat;
+
+      chatService.deleteChat(currentChatId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -211,14 +233,14 @@ export const sendMessageThunk = createAsyncThunk(
   (text: string, { rejectWithValue, getState }) => {
     try {
       const { chat } = getState() as RootState;
-      const { repliedMessage } = chat;
+      const { repliedMessage, currentChatId } = chat;
 
       let repliedId = null;
       if (repliedMessage) {
         repliedId = repliedMessage.id;
       }
 
-      chatService.sendMessage(text, repliedId);
+      chatService.sendMessage(currentChatId, text, repliedId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

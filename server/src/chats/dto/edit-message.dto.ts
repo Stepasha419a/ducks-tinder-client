@@ -1,5 +1,7 @@
 import { IsString, IsNotEmpty, Length } from 'class-validator';
-export class EditMessageDto {
+import { ChatIdDto } from './chat-id.dto';
+
+export class EditMessageDto extends ChatIdDto {
   @IsString()
   @IsNotEmpty()
   messageId: string;

@@ -3,6 +3,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteChatCommand } from './delete-chat.command';
 import { NOT_FOUND } from 'common/constants/error';
+import { ChatSocketReturn } from 'chats/chats.interface';
 
 @CommandHandler(DeleteChatCommand)
 export class DeleteChatCommandHandler
@@ -10,7 +11,7 @@ export class DeleteChatCommandHandler
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async execute(command: DeleteChatCommand): Promise<string> {
+  async execute(command: DeleteChatCommand): Promise<ChatSocketReturn> {
     const { user, chatId } = command;
 
     const candidate = await this.prismaService.chat.findFirst({
@@ -26,8 +27,9 @@ export class DeleteChatCommandHandler
 
     const deletedChat = await this.prismaService.chat.delete({
       where: { id: candidate.id },
+      select: { users: { select: { id: true } }, id: true },
     });
 
-    return deletedChat.id;
+    return { ...deletedChat, users: deletedChat.users.map((user) => user.id) };
   }
 }
