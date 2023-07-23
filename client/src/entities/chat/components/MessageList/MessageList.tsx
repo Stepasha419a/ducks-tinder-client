@@ -1,4 +1,10 @@
-import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
+import {
+  Fragment,
+  type Dispatch,
+  type FC,
+  type ReactElement,
+  type SetStateAction,
+} from 'react';
 import type { Message as MessageInterface } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
 import { selectMessages } from '@entities/chat/model';
@@ -58,8 +64,8 @@ export const MessageList: FC<MessagesProps> = ({
           messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
 
         return (
-          <>
-            <Message key={message.id}>
+          <Fragment key={message.id}>
+            <Message>
               <Message.Avatar {...getAvatarProps(message)} />
               <Message.Body {...getBodyProps(message)}>
                 <Message.Username {...getUsernameProps(message)} />
@@ -84,7 +90,7 @@ export const MessageList: FC<MessagesProps> = ({
             {isNextDayMessage && (
               <Timestamp createdAt={messages[i + 1].createdAt} />
             )}
-          </>
+          </Fragment>
         );
       })}
     </div>

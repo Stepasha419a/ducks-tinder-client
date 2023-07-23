@@ -75,25 +75,6 @@ export const connectChatsThunk = createAsyncThunk(
       socket.on('edit-message', (data: ReceivedMessage) => {
         dispatch(editMessage(data));
       });
-    } catch (error: unknown) {
-      return rejectWithValue(returnErrorMessage(error));
-    }
-  }
-);
-
-export const connectChatThunk = createAsyncThunk(
-  'chat/connectChat',
-  (args: { chatId: string }, { rejectWithValue, dispatch }) => {
-    try {
-      const { chatId } = args;
-
-      const socket = chatService.connectChat(chatId);
-
-      socket.on('connect-chat', async () => {
-        const response = await chatService.getChat(chatId);
-        const chat = response.data;
-        dispatch(setCurrentChatData(chat));
-      });
 
       socket.on('get-messages', (response: GetMessagesResponse) => {
         dispatch(getMessages(response));
@@ -113,6 +94,25 @@ export const connectChatThunk = createAsyncThunk(
 
       socket.on('delete-chat', (deletedChatId: string) => {
         dispatch(deleteChat(deletedChatId));
+      });
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
+export const connectChatThunk = createAsyncThunk(
+  'chat/connectChat',
+  (args: { chatId: string }, { rejectWithValue, dispatch }) => {
+    try {
+      const { chatId } = args;
+
+      const socket = chatService.connectChat(chatId);
+
+      socket.on('connect-chat', async () => {
+        const response = await chatService.getChat(chatId);
+        const chat = response.data;
+        dispatch(setCurrentChatData(chat));
       });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
