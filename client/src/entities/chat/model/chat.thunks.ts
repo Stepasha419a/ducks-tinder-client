@@ -109,7 +109,7 @@ export const connectChatThunk = createAsyncThunk(
 
       const socket = chatService.connectChat(chatId);
 
-      socket.on('connect-chat', async () => {
+      socket.once('connect-chat', async () => {
         const response = await chatService.getChat(chatId);
         const chat = response.data;
         dispatch(setCurrentChatData(chat));
