@@ -79,13 +79,10 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('disconnect-chat')
   async handleDisconnectChat(
-    @ConnectedSocket() client: UserSocket,
     @User({ isSocket: true }) user,
     @MessageBody() dto: ChatIdDto,
   ) {
     await this.commandBus.execute(new SaveLastSeenCommand(user, dto.chatId));
-
-    client.leave(user.id);
   }
 
   @UseGuards(WsRefreshTokenGuard)

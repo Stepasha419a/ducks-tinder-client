@@ -1,4 +1,4 @@
-import type { ShortUser, ShortUserWithoutDistance } from '../User/User';
+import type { ShortUser, ShortUserWithoutDistance } from "../User/User";
 
 export interface RepliedMessage {
   id: string;
@@ -10,13 +10,13 @@ export interface Message {
   id: string;
   text: string;
   userId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   replied: RepliedMessage | null;
 }
 
 export interface LastSeen {
-  lastSeen: Date;
+  lastSeen: string;
 }
 
 export interface Chat {

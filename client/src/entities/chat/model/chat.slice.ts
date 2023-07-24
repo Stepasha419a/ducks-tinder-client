@@ -38,12 +38,18 @@ const chatSlice = createSlice({
     pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const index = state.chats.findIndex((chat) => chat.id === payload.id);
       state.chats[index].messages.push(payload.message);
+
+      const isActiveChat = state.currentChatId === payload.id;
+      if (isActiveChat) {
+        state.chats[index].chatVisits[0].lastSeen = payload.message.createdAt;
+      }
       state.maxMessagesCount++;
     },
     setCurrentChatData: (state, { payload }: PayloadAction<Chat>) => {
       state.currentChatId = payload.id;
 
       const index = state.chats.findIndex((chat) => chat.id === payload.id);
+      state.chats[index].chatVisits[0].lastSeen = new Date().toISOString();
       state.chats[index].messages = payload.messages;
 
       state.isConnected = true;
@@ -125,6 +131,14 @@ const chatSlice = createSlice({
       )
       .addCase(connectChatThunk.pending, (state) => {
         state.isMessagesInitialLoading = true;
+
+        const wasConnectedBefore = state.currentChatId;
+        if (wasConnectedBefore) {
+          const index = state.chats.findIndex(
+            (chat) => chat.id === state.currentChatId
+          );
+          state.chats[index].chatVisits[0].lastSeen = new Date().toISOString();
+        }
       })
       .addCase(connectChatThunk.fulfilled, (state) => {
         state.isMessagesInitialLoading = false;

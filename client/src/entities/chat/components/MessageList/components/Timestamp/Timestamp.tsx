@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import styles from './Timestamp.module.scss';
 
 interface TimestampProps {
-  createdAt: Date;
+  createdAt: string;
 }
 
 export const Timestamp: FC<TimestampProps> = ({ createdAt }) => {

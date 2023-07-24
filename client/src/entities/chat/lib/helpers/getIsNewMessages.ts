@@ -7,8 +7,8 @@ export function getIsNewMessages(
 ): boolean | undefined {
   return (
     !isActive &&
-    chat.messages.at(-1)?.createdAt &&
-    (chat.chatVisits[0]?.lastSeen as Date | undefined) &&
+    Boolean(chat.messages.at(-1)?.createdAt) &&
+    Boolean(chat.chatVisits[0]?.lastSeen) &&
     getDatesHourDiff(
       new Date(chat.messages.at(-1)!.createdAt),
       new Date(new Date(chat.chatVisits[0].lastSeen).toUTCString())
