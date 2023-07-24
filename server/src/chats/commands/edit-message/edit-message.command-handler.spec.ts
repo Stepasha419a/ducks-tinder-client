@@ -4,7 +4,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { fullChatStub, messageStub } from 'chats/test/stubs';
 import { requestUserStub } from 'users/test/stubs';
-import { Message } from 'chats/chats.interface';
+import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { EditMessageCommandHandler } from './edit-message.command-handler';
 import { EditMessageCommand } from './edit-message.command';
 import { EDIT_MESSAGE_DTO } from 'chats/test/values/chats.const.dto';
@@ -32,25 +32,24 @@ describe('when edit message is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
-      prismaService.chat.findUnique = jest
-        .fn()
-        .mockResolvedValue(fullChatStub());
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [...fullChatStub().users, { id: 'another-user-id' }],
+        blocked: fullChatStub().blocked,
+        blockedById: fullChatStub().blockedById,
+      });
       prismaService.message.findFirst = jest
         .fn()
         .mockResolvedValue({ ...messageStub(), createdAt: new Date() });
       prismaService.message.update = jest.fn().mockResolvedValue(messageStub());
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      message = await editMessageCommandHandler.execute(
-        new EditMessageCommand(
-          requestUserStub(),
-          fullChatStub().id,
-          EDIT_MESSAGE_DTO,
-        ),
+      data = await editMessageCommandHandler.execute(
+        new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
       );
     });
 
@@ -58,7 +57,7 @@ describe('when edit message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { id: true, blocked: true, users: { select: { id: true } } },
       });
     });
 
@@ -78,8 +77,12 @@ describe('when edit message is called', () => {
       });
     });
 
-    it('should return a message', () => {
-      expect(message).toStrictEqual(messageStub());
+    it('should return a data', () => {
+      expect(data).toStrictEqual({
+        id: fullChatStub().id,
+        message: messageStub(),
+        users: [requestUserStub().id, 'another-user-id'],
+      });
     });
   });
 
@@ -90,18 +93,14 @@ describe('when edit message is called', () => {
       prismaService.message.update = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        message = await editMessageCommandHandler.execute(
-          new EditMessageCommand(
-            requestUserStub(),
-            fullChatStub().id,
-            EDIT_MESSAGE_DTO,
-          ),
+        data = await editMessageCommandHandler.execute(
+          new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
         );
       } catch (responseError) {
         error = responseError;
@@ -112,7 +111,7 @@ describe('when edit message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { id: true, blocked: true, users: { select: { id: true } } },
       });
     });
 
@@ -125,7 +124,7 @@ describe('when edit message is called', () => {
     });
 
     it('should return undefined', () => {
-      expect(message).toEqual(undefined);
+      expect(data).toEqual(undefined);
     });
 
     it('should throw an error', () => {
@@ -142,18 +141,14 @@ describe('when edit message is called', () => {
       prismaService.message.update = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        message = await editMessageCommandHandler.execute(
-          new EditMessageCommand(
-            requestUserStub(),
-            fullChatStub().id,
-            EDIT_MESSAGE_DTO,
-          ),
+        data = await editMessageCommandHandler.execute(
+          new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
         );
       } catch (responseError) {
         error = responseError;
@@ -164,7 +159,7 @@ describe('when edit message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { id: true, blocked: true, users: { select: { id: true } } },
       });
     });
 
@@ -177,7 +172,7 @@ describe('when edit message is called', () => {
     });
 
     it('should return undefined', () => {
-      expect(message).toEqual(undefined);
+      expect(data).toEqual(undefined);
     });
 
     it('should throw an error', () => {
@@ -187,25 +182,24 @@ describe('when edit message is called', () => {
 
   describe('when there is no such message', () => {
     beforeAll(() => {
-      prismaService.chat.findUnique = jest
-        .fn()
-        .mockResolvedValue(fullChatStub());
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [...fullChatStub().users, { id: 'another-user-id' }],
+        blocked: fullChatStub().blocked,
+        blockedById: fullChatStub().blockedById,
+      });
       prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
       prismaService.message.update = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        message = await editMessageCommandHandler.execute(
-          new EditMessageCommand(
-            requestUserStub(),
-            fullChatStub().id,
-            EDIT_MESSAGE_DTO,
-          ),
+        data = await editMessageCommandHandler.execute(
+          new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
         );
       } catch (responseError) {
         error = responseError;
@@ -216,7 +210,7 @@ describe('when edit message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { id: true, blocked: true, users: { select: { id: true } } },
       });
     });
 
@@ -232,7 +226,7 @@ describe('when edit message is called', () => {
     });
 
     it('should return undefined', () => {
-      expect(message).toEqual(undefined);
+      expect(data).toEqual(undefined);
     });
 
     it('should throw an error', () => {
@@ -242,9 +236,12 @@ describe('when edit message is called', () => {
 
   describe('when there is too late to edit (> 6 hours lasted)', () => {
     beforeAll(() => {
-      prismaService.chat.findUnique = jest
-        .fn()
-        .mockResolvedValue(fullChatStub());
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [...fullChatStub().users, { id: 'another-user-id' }],
+        blocked: fullChatStub().blocked,
+        blockedById: fullChatStub().blockedById,
+      });
       prismaService.message.findFirst = jest.fn().mockResolvedValue({
         ...messageStub(),
         createdAt: new Date('2018-01-01'),
@@ -252,18 +249,14 @@ describe('when edit message is called', () => {
       prismaService.message.update = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        message = await editMessageCommandHandler.execute(
-          new EditMessageCommand(
-            requestUserStub(),
-            fullChatStub().id,
-            EDIT_MESSAGE_DTO,
-          ),
+        data = await editMessageCommandHandler.execute(
+          new EditMessageCommand(requestUserStub(), EDIT_MESSAGE_DTO),
         );
       } catch (responseError) {
         error = responseError;
@@ -274,7 +267,7 @@ describe('when edit message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { id: true, blocked: true, users: { select: { id: true } } },
       });
     });
 
@@ -290,7 +283,7 @@ describe('when edit message is called', () => {
     });
 
     it('should return undefined', () => {
-      expect(message).toEqual(undefined);
+      expect(data).toEqual(undefined);
     });
 
     it('should throw an error', () => {

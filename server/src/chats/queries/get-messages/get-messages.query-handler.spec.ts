@@ -5,10 +5,11 @@ import { PrismaService } from 'prisma/prisma.service';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { fullChatStub, messageStub, shortChatStub } from 'chats/test/stubs';
 import { GetMessagesQueryHandler } from './get-messages.query-handler';
-import { GetMessagesQuery, GetMessagesQueryReturn } from './get-messages.query';
+import { GetMessagesQuery } from './get-messages.query';
 import { requestUserStub } from 'users/test/stubs';
 import { NOT_FOUND } from 'common/constants/error';
 import { GetMessagesDto } from 'chats/dto';
+import { GetMessagesQueryReturn } from 'chats/chats.interface';
 
 describe('when get messages is called', () => {
   let prismaService: PrismaService;
@@ -42,17 +43,14 @@ describe('when get messages is called', () => {
 
     let response: GetMessagesQueryReturn;
     const getMessagesDto: GetMessagesDto = {
+      chatId: fullChatStub().id,
       haveCount: 0,
     };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       response = await getMessagesQueryHandler.execute(
-        new GetMessagesQuery(
-          requestUserStub(),
-          shortChatStub().id,
-          getMessagesDto,
-        ),
+        new GetMessagesQuery(requestUserStub(), getMessagesDto),
       );
     });
 
@@ -89,7 +87,7 @@ describe('when get messages is called', () => {
 
     it('should return an array of messages with chat id', () => {
       expect(response).toEqual({
-        chatId: shortChatStub().id,
+        id: shortChatStub().id,
         messages: [messageStub()],
       });
     });
@@ -105,6 +103,7 @@ describe('when get messages is called', () => {
     let response: GetMessagesQueryReturn;
     let error;
     const getMessagesDto: GetMessagesDto = {
+      chatId: fullChatStub().id,
       haveCount: 0,
     };
 
@@ -112,11 +111,7 @@ describe('when get messages is called', () => {
       jest.clearAllMocks();
       try {
         response = await getMessagesQueryHandler.execute(
-          new GetMessagesQuery(
-            requestUserStub(),
-            shortChatStub().id,
-            getMessagesDto,
-          ),
+          new GetMessagesQuery(requestUserStub(), getMessagesDto),
         );
       } catch (responseError) {
         error = responseError;
@@ -163,6 +158,7 @@ describe('when get messages is called', () => {
     let response: GetMessagesQueryReturn;
     let error;
     const getMessagesDto: GetMessagesDto = {
+      chatId: fullChatStub().id,
       haveCount: 60,
     };
 
@@ -170,11 +166,7 @@ describe('when get messages is called', () => {
       jest.clearAllMocks();
       try {
         response = await getMessagesQueryHandler.execute(
-          new GetMessagesQuery(
-            requestUserStub(),
-            shortChatStub().id,
-            getMessagesDto,
-          ),
+          new GetMessagesQuery(requestUserStub(), getMessagesDto),
         );
       } catch (responseError) {
         error = responseError;

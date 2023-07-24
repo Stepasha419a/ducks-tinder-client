@@ -44,10 +44,6 @@ export interface ShortChat {
   blockedById: string;
 }
 
-export interface ChatSocketQueryData {
-  userIds: string[];
-}
-
 export interface ChatSocketReturn {
   id: string;
   users: string[];

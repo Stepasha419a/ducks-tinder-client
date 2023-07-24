@@ -19,9 +19,12 @@ import {
   BlockChatCommand,
   DeleteMessageCommand,
   EditMessageCommand,
+  SaveLastSeenCommand,
   SendMessageCommand,
   UnblockChatCommand,
 } from './commands';
+import { CHAT_ID_DTO } from './test/values/chats.const.dto';
+import { BlockChatSocketReturn } from './chats.interface';
 
 describe('chats-controller', () => {
   let chatsGateway: ChatsGateway;
@@ -74,6 +77,32 @@ describe('chats-controller', () => {
     });
   });
 
+  describe('when connect-chats is called', () => {
+    let response;
+    const socket = UserSocketMock();
+
+    beforeEach(async () => {
+      response = await chatsGateway.handleConnectChats(
+        socket,
+        requestUserStub(),
+      );
+    });
+
+    it('should call socket emit', () => {
+      expect(socket.join).toBeCalledTimes(1);
+      expect(socket.join).toBeCalledWith(requestUserStub().id);
+    });
+
+    it('should call socket emit', () => {
+      expect(socket.emit).toBeCalledTimes(1);
+      expect(socket.emit).toBeCalledWith('connect-chats');
+    });
+
+    it('should return undefined', () => {
+      expect(response).toEqual(undefined);
+    });
+  });
+
   describe('when connect-chat is called', () => {
     let response;
     const socket = UserSocketMock();
@@ -85,8 +114,8 @@ describe('chats-controller', () => {
     beforeEach(async () => {
       response = await chatsGateway.handleConnectChat(
         socket,
-        fullChatStub().id,
         requestUserStub(),
+        CHAT_ID_DTO,
       );
     });
 
@@ -97,14 +126,16 @@ describe('chats-controller', () => {
       );
     });
 
-    it('should call socket join', () => {
-      expect(socket.join).toBeCalledTimes(1);
-      expect(socket.join).toBeCalledWith(fullChatStub().id);
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new SaveLastSeenCommand(requestUserStub(), fullChatStub().id),
+      );
     });
 
     it('should call socket emit', () => {
       expect(socket.emit).toBeCalledTimes(1);
-      expect(socket.emit).toBeCalledWith('connect-chat', fullChatStub().id);
+      expect(socket.emit).toBeCalledWith('connect-chat');
     });
 
     it('should return undefined', () => {
@@ -113,20 +144,24 @@ describe('chats-controller', () => {
   });
 
   describe('when disconnect-chat is called', () => {
+    beforeAll(() => {
+      commandBus.execute = jest.fn();
+    });
+
     let response;
-    const socket = UserSocketMock();
 
     beforeEach(async () => {
       response = await chatsGateway.handleDisconnectChat(
-        socket,
-        fullChatStub().id,
         requestUserStub(),
+        CHAT_ID_DTO,
       );
     });
 
-    it('should call socket leave', () => {
-      expect(socket.leave).toBeCalledTimes(1);
-      expect(socket.leave).toBeCalledWith(fullChatStub().id);
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new SaveLastSeenCommand(requestUserStub(), fullChatStub().id),
+      );
     });
 
     it('should return undefined', () => {
@@ -136,38 +171,45 @@ describe('chats-controller', () => {
 
   describe('when send-message is called', () => {
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(messageStub());
+      commandBus.execute = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        message: messageStub(),
+        users: [requestUserStub().id, '123123'],
+      });
     });
 
     let response;
     const dto: SendMessageDto = {
+      chatId: fullChatStub().id,
       repliedId: null,
       text: 'message-text',
     };
 
     beforeEach(async () => {
-      response = await chatsGateway.sendMessage(
-        fullChatStub().id,
-        requestUserStub(),
-        dto,
-      );
+      response = await chatsGateway.sendMessage(requestUserStub(), dto);
     });
 
     it('should call command bus execute', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
-        new SendMessageCommand(requestUserStub(), fullChatStub().id, dto),
+        new SendMessageCommand(requestUserStub(), dto),
       );
     });
 
     it('should call wss to', () => {
       expect(chatsGateway.wss.to).toBeCalledTimes(1);
-      expect(chatsGateway.wss.to).toBeCalledWith(fullChatStub().id);
+      expect(chatsGateway.wss.to).toBeCalledWith([
+        requestUserStub().id,
+        '123123',
+      ]);
     });
 
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
-      expect(mockedWssEmit).toBeCalledWith('send-message', messageStub());
+      expect(mockedWssEmit).toBeCalledWith('send-message', {
+        id: fullChatStub().id,
+        message: messageStub(),
+      });
     });
 
     it('should return undefined', () => {
@@ -178,40 +220,38 @@ describe('chats-controller', () => {
   describe('when get-messages is called', () => {
     beforeAll(() => {
       queryBus.execute = jest.fn().mockResolvedValue({
-        chatId: fullChatStub().id,
+        id: fullChatStub().id,
         messages: [messageStub()],
+        users: [requestUserStub().id, '123123'],
       });
     });
 
     let response;
     const dto: GetMessagesDto = {
+      chatId: fullChatStub().id,
       haveCount: 0,
     };
 
     beforeEach(async () => {
-      response = await chatsGateway.getMessages(
-        fullChatStub().id,
-        requestUserStub(),
-        dto,
-      );
+      response = await chatsGateway.getMessages(requestUserStub(), dto);
     });
 
     it('should call query bus execute', () => {
       expect(queryBus.execute).toBeCalledTimes(1);
       expect(queryBus.execute).toBeCalledWith(
-        new GetMessagesQuery(requestUserStub(), fullChatStub().id, dto),
+        new GetMessagesQuery(requestUserStub(), dto),
       );
     });
 
     it('should call wss to', () => {
       expect(chatsGateway.wss.to).toBeCalledTimes(1);
-      expect(chatsGateway.wss.to).toBeCalledWith(fullChatStub().id);
+      expect(chatsGateway.wss.to).toBeCalledWith(requestUserStub().id);
     });
 
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
       expect(mockedWssEmit).toBeCalledWith('get-messages', {
-        chatId: fullChatStub().id,
+        id: fullChatStub().id,
         messages: [messageStub()],
       });
     });
@@ -223,37 +263,44 @@ describe('chats-controller', () => {
 
   describe('when delete-message is called', () => {
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(messageStub());
+      commandBus.execute = jest.fn().mockResolvedValue({
+        message: messageStub(),
+        id: fullChatStub().id,
+        users: [requestUserStub().id, '123123'],
+      });
     });
 
     let response;
     const dto: DeleteMessageDto = {
+      chatId: fullChatStub().id,
       messageId: messageStub().id,
     };
 
     beforeEach(async () => {
-      response = await chatsGateway.deleteMessage(
-        fullChatStub().id,
-        requestUserStub(),
-        dto,
-      );
+      response = await chatsGateway.deleteMessage(requestUserStub(), dto);
     });
 
     it('should call command bus execute', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
-        new DeleteMessageCommand(requestUserStub(), fullChatStub().id, dto),
+        new DeleteMessageCommand(requestUserStub(), dto),
       );
     });
 
     it('should call wss to', () => {
       expect(chatsGateway.wss.to).toBeCalledTimes(1);
-      expect(chatsGateway.wss.to).toBeCalledWith(fullChatStub().id);
+      expect(chatsGateway.wss.to).toBeCalledWith([
+        requestUserStub().id,
+        '123123',
+      ]);
     });
 
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
-      expect(mockedWssEmit).toBeCalledWith('delete-message', messageStub());
+      expect(mockedWssEmit).toBeCalledWith('delete-message', {
+        message: messageStub(),
+        id: fullChatStub().id,
+      });
     });
 
     it('should return undefined', () => {
@@ -263,38 +310,45 @@ describe('chats-controller', () => {
 
   describe('when edit-message is called', () => {
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(messageStub());
+      commandBus.execute = jest.fn().mockResolvedValue({
+        message: messageStub(),
+        id: fullChatStub().id,
+        users: [requestUserStub().id, '123123'],
+      });
     });
 
     let response;
     const dto: EditMessageDto = {
+      chatId: fullChatStub().id,
       messageId: messageStub().id,
       text: 'edit-message-text',
     };
 
     beforeEach(async () => {
-      response = await chatsGateway.editMessage(
-        fullChatStub().id,
-        requestUserStub(),
-        dto,
-      );
+      response = await chatsGateway.editMessage(requestUserStub(), dto);
     });
 
     it('should call command bus execute', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
-        new EditMessageCommand(requestUserStub(), fullChatStub().id, dto),
+        new EditMessageCommand(requestUserStub(), dto),
       );
     });
 
     it('should call wss to', () => {
       expect(chatsGateway.wss.to).toBeCalledTimes(1);
-      expect(chatsGateway.wss.to).toBeCalledWith(fullChatStub().id);
+      expect(chatsGateway.wss.to).toBeCalledWith([
+        requestUserStub().id,
+        '123123',
+      ]);
     });
 
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
-      expect(mockedWssEmit).toBeCalledWith('edit-message', messageStub());
+      expect(mockedWssEmit).toBeCalledWith('edit-message', {
+        message: messageStub(),
+        id: fullChatStub().id,
+      });
     });
 
     it('should return undefined', () => {
@@ -304,16 +358,18 @@ describe('chats-controller', () => {
 
   describe('when block-chat is called', () => {
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(fullChatStub());
+      commandBus.execute = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        blocked: true,
+        blockedById: requestUserStub().id,
+        users: [requestUserStub().id, '123123'],
+      });
     });
 
     let response;
 
     beforeEach(async () => {
-      response = await chatsGateway.blockChat(
-        fullChatStub().id,
-        requestUserStub(),
-      );
+      response = await chatsGateway.blockChat(requestUserStub(), CHAT_ID_DTO);
     });
 
     it('should call command bus execute', () => {
@@ -325,12 +381,19 @@ describe('chats-controller', () => {
 
     it('should call wss to', () => {
       expect(chatsGateway.wss.to).toBeCalledTimes(1);
-      expect(chatsGateway.wss.to).toBeCalledWith(fullChatStub().id);
+      expect(chatsGateway.wss.to).toBeCalledWith([
+        requestUserStub().id,
+        '123123',
+      ]);
     });
 
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
-      expect(mockedWssEmit).toBeCalledWith('block-chat', fullChatStub());
+      expect(mockedWssEmit).toBeCalledWith('block-chat', {
+        id: fullChatStub().id,
+        blocked: true,
+        blockedById: requestUserStub().id,
+      });
     });
 
     it('should return undefined', () => {
@@ -340,16 +403,18 @@ describe('chats-controller', () => {
 
   describe('when unblock-chat is called', () => {
     beforeAll(() => {
-      commandBus.execute = jest.fn().mockResolvedValue(fullChatStub());
+      commandBus.execute = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [requestUserStub().id, '123123'],
+        blocked: false,
+        blockedById: null,
+      } as BlockChatSocketReturn);
     });
 
     let response;
 
     beforeEach(async () => {
-      response = await chatsGateway.unblockChat(
-        fullChatStub().id,
-        requestUserStub(),
-      );
+      response = await chatsGateway.unblockChat(requestUserStub(), CHAT_ID_DTO);
     });
 
     it('should call command bus execute', () => {
@@ -361,12 +426,19 @@ describe('chats-controller', () => {
 
     it('should call wss to', () => {
       expect(chatsGateway.wss.to).toBeCalledTimes(1);
-      expect(chatsGateway.wss.to).toBeCalledWith(fullChatStub().id);
+      expect(chatsGateway.wss.to).toBeCalledWith([
+        requestUserStub().id,
+        '123123',
+      ]);
     });
 
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
-      expect(mockedWssEmit).toBeCalledWith('unblock-chat', fullChatStub());
+      expect(mockedWssEmit).toBeCalledWith('unblock-chat', {
+        id: fullChatStub().id,
+        blocked: false,
+        blockedById: null,
+      });
     });
 
     it('should return undefined', () => {

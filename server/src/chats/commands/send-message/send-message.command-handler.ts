@@ -1,5 +1,4 @@
 import { WsException } from '@nestjs/websockets';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendMessageCommand } from './send-message.command';
@@ -11,10 +10,7 @@ import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 export class SendMessageCommandHandler
   implements ICommandHandler<SendMessageCommand>
 {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly eventEmitter: EventEmitter2,
-  ) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   async execute(command: SendMessageCommand): Promise<ChatSocketMessageReturn> {
     const { user, dto } = command;
@@ -39,12 +35,6 @@ export class SendMessageCommandHandler
     const message = await this.prismaService.message.create({
       data: { chatId: dto.chatId, userId: user.id, ...dto },
       select: ChatsSelector.selectMessage(),
-    });
-
-    this.eventEmitter.emit('new-message', {
-      message,
-      chatId: dto.chatId,
-      userIds: chat.users.map((user) => user.id),
     });
 
     return { message, id: chat.id, users: chat.users.map((user) => user.id) };

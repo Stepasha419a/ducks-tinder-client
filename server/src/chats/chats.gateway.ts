@@ -3,7 +3,6 @@ import { Server } from 'socket.io';
 import {
   ConnectedSocket,
   MessageBody,
-  WsException,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
@@ -28,12 +27,10 @@ import {
   SendMessageDto,
   ChatIdDto,
 } from './dto';
-import { NOT_FOUND } from 'common/constants/error';
-import { ChatData, User } from 'common/decorators';
+import { User } from 'common/decorators';
 import {
   BlockChatSocketReturn,
   ChatSocketMessageReturn,
-  ChatSocketQueryData,
   ChatSocketReturn,
   GetMessagesQueryReturn,
 } from './chats.interface';
@@ -54,7 +51,7 @@ export class ChatsGateway {
 
   @UseGuards(WsAccessTokenGuard)
   @SubscribeMessage('connect-chats')
-  async handleConnect(
+  async handleConnectChats(
     @ConnectedSocket() client: UserSocket,
     @User({ isSocket: true }) user,
   ) {
@@ -88,14 +85,9 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('send-message')
   async sendMessage(
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
     @MessageBody() dto: SendMessageDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
-
     const data: ChatSocketMessageReturn = await this.commandBus.execute(
       new SendMessageCommand(user, dto),
     );
@@ -106,18 +98,14 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('get-messages')
   async getMessages(
-    @ChatData() chatData: ChatSocketQueryData,
     @User({ isSocket: true }) user,
     @MessageBody() dto: GetMessagesDto,
   ) {
-    if (!chatData) {
-      throw new WsException(NOT_FOUND);
-    }
     const data: GetMessagesQueryReturn = await this.queryBus.execute(
       new GetMessagesQuery(user, dto),
     );
 
-    this.wss.to(user.id).emit('get-messages', data);
+    this.wss.to(user.id).emit('get-messages', { ...data, users: undefined });
   }
 
   @UseGuards(WsRefreshTokenGuard)

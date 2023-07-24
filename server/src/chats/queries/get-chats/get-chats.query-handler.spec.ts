@@ -59,6 +59,14 @@ describe('when get chats is called', () => {
             where: { id: { not: requestUserStub().id } },
             select: UsersSelector.selectShortUser(),
           },
+          chatVisits: {
+            select: {
+              lastSeen: true,
+            },
+            where: {
+              userId: requestUserStub().id,
+            },
+          },
           blocked: true,
           blockedById: true,
         },

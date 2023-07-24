@@ -2,15 +2,12 @@ import { PrismaService } from 'prisma/prisma.service';
 import { Test } from '@nestjs/testing';
 import { ChatsPrismaMock } from 'chats/test/mocks';
 import { fullChatStub } from 'chats/test/stubs';
-import { FullChat } from 'chats/chats.interface';
+import { BlockChatSocketReturn } from 'chats/chats.interface';
 import { requestUserStub } from 'users/test/stubs';
-import { ChatsSelector } from 'chats/chats.selector';
-import { UsersSelector } from 'users/users.selector';
 import { PrismaModule } from 'prisma/prisma.module';
 import { NOT_FOUND } from 'common/constants/error';
 import { UnblockChatCommandHandler } from './unblock-chat.command-handler';
 import { UnblockChatCommand } from './unblock-chat.command';
-import { fullChatWithoutDistanceStub } from 'chats/test/stubs/full-chat-without-distance.stub';
 
 describe('when unblock chat is called', () => {
   let prismaService: PrismaService;
@@ -36,17 +33,19 @@ describe('when unblock chat is called', () => {
       prismaService.chat.findFirst = jest
         .fn()
         .mockResolvedValue(fullChatStub());
-      prismaService.message.count = jest.fn().mockResolvedValue(20);
-      prismaService.chat.update = jest
-        .fn()
-        .mockResolvedValue(fullChatWithoutDistanceStub());
+      prismaService.chat.update = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [...fullChatStub().users, { id: 'another-user-id' }],
+        blocked: false,
+        blockedById: null,
+      });
     });
 
-    let chat: FullChat;
+    let data: BlockChatSocketReturn;
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      chat = await unblockChatCommandHandler.execute(
+      data = await unblockChatCommandHandler.execute(
         new UnblockChatCommand(requestUserStub(), fullChatStub().id),
       );
     });
@@ -62,13 +61,6 @@ describe('when unblock chat is called', () => {
       });
     });
 
-    it('should call message count', () => {
-      expect(prismaService.message.count).toBeCalledTimes(1);
-      expect(prismaService.message.count).toBeCalledWith({
-        where: { chatId: fullChatStub().id },
-      });
-    });
-
     it('should call chat update', () => {
       expect(prismaService.chat.update).toBeCalledTimes(1);
       expect(prismaService.chat.update).toBeCalledWith({
@@ -76,15 +68,8 @@ describe('when unblock chat is called', () => {
         data: { blocked: false, blockedById: null },
         select: {
           id: true,
-          messages: {
-            skip: 0,
-            take: 20,
-            orderBy: { createdAt: 'asc' },
-            select: ChatsSelector.selectMessage(),
-          },
           users: {
-            where: { id: { not: requestUserStub().id } },
-            select: UsersSelector.selectShortUser(),
+            select: { id: true },
           },
           blocked: true,
           blockedById: true,
@@ -92,25 +77,29 @@ describe('when unblock chat is called', () => {
       });
     });
 
-    it('should return chat', () => {
-      expect(chat).toEqual(fullChatStub());
+    it('should return data', () => {
+      expect(data).toEqual({
+        id: fullChatStub().id,
+        users: [requestUserStub().id, 'another-user-id'],
+        blocked: false,
+        blockedById: null,
+      });
     });
   });
 
   describe('when there is no such chat', () => {
     beforeAll(() => {
       prismaService.chat.findFirst = jest.fn().mockResolvedValue(undefined);
-      prismaService.message.count = jest.fn().mockResolvedValue(20);
       prismaService.chat.update = jest.fn().mockResolvedValue(fullChatStub());
     });
 
-    let chat: FullChat;
+    let data: BlockChatSocketReturn;
     let error;
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        chat = await unblockChatCommandHandler.execute(
+        data = await unblockChatCommandHandler.execute(
           new UnblockChatCommand(requestUserStub(), fullChatStub().id),
         );
       } catch (responseError) {
@@ -129,16 +118,12 @@ describe('when unblock chat is called', () => {
       });
     });
 
-    it('should call not message count', () => {
-      expect(prismaService.message.count).not.toBeCalled();
-    });
-
-    it('should call chat update', () => {
+    it('should not call chat update', () => {
       expect(prismaService.chat.update).not.toBeCalled();
     });
 
     it('should return undefined', () => {
-      expect(chat).toEqual(undefined);
+      expect(data).toEqual(undefined);
     });
 
     it('should throw an error', () => {

@@ -6,7 +6,7 @@ import { fullChatStub, messageStub } from 'chats/test/stubs';
 import { requestUserStub } from 'users/test/stubs';
 import { DeleteMessageCommandHandler } from './delete-message.command-handler';
 import { DeleteMessageCommand } from './delete-message.command';
-import { Message } from 'chats/chats.interface';
+import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { ChatsSelector } from 'chats/chats.selector';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 import { DeleteMessageDto } from 'chats/dto';
@@ -34,28 +34,28 @@ describe('when delete message is called', () => {
     const createdAtDate = new Date();
 
     beforeAll(() => {
-      prismaService.chat.findUnique = jest
-        .fn()
-        .mockResolvedValue(fullChatStub());
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [...fullChatStub().users, { id: 'another-user-id' }],
+        blocked: fullChatStub().blocked,
+        blockedById: fullChatStub().blockedById,
+      });
       prismaService.message.findFirst = jest
         .fn()
         .mockResolvedValue({ ...messageStub(), createdAt: createdAtDate });
       prismaService.message.delete = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     const deleteMessageDto: DeleteMessageDto = {
+      chatId: fullChatStub().id,
       messageId: messageStub().id,
     };
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      message = await deleteMessageCommandHandler.execute(
-        new DeleteMessageCommand(
-          requestUserStub(),
-          fullChatStub().id,
-          deleteMessageDto,
-        ),
+      data = await deleteMessageCommandHandler.execute(
+        new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
       );
     });
 
@@ -63,7 +63,7 @@ describe('when delete message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { blocked: true, id: true, users: { select: { id: true } } },
       });
     });
 
@@ -82,10 +82,11 @@ describe('when delete message is called', () => {
       });
     });
 
-    it('should return a message', () => {
-      expect(message).toStrictEqual({
-        ...messageStub(),
-        createdAt: createdAtDate,
+    it('should return a data', () => {
+      expect(data).toStrictEqual({
+        id: fullChatStub().id,
+        message: { ...messageStub(), createdAt: createdAtDate },
+        users: [requestUserStub().id, 'another-user-id'],
       });
     });
   });
@@ -97,21 +98,18 @@ describe('when delete message is called', () => {
       prismaService.message.delete = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     let error;
     const deleteMessageDto: DeleteMessageDto = {
+      chatId: fullChatStub().id,
       messageId: messageStub().id,
     };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        message = await deleteMessageCommandHandler.execute(
-          new DeleteMessageCommand(
-            requestUserStub(),
-            fullChatStub().id,
-            deleteMessageDto,
-          ),
+        data = await deleteMessageCommandHandler.execute(
+          new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
         );
       } catch (responseError) {
         error = responseError;
@@ -122,7 +120,7 @@ describe('when delete message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { blocked: true, id: true, users: { select: { id: true } } },
       });
     });
 
@@ -135,7 +133,7 @@ describe('when delete message is called', () => {
     });
 
     it('should return undefined', () => {
-      expect(message).toEqual(undefined);
+      expect(data).toEqual(undefined);
     });
 
     it('should throw an error', () => {
@@ -145,28 +143,28 @@ describe('when delete message is called', () => {
 
   describe('when chat is blocked', () => {
     beforeAll(() => {
-      prismaService.chat.findUnique = jest
-        .fn()
-        .mockResolvedValue({ blocked: true });
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [...fullChatStub().users, { id: 'another-user-id' }],
+        blocked: true,
+        blockedById: requestUserStub().id,
+      });
       prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
       prismaService.message.delete = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     let error;
     const deleteMessageDto: DeleteMessageDto = {
+      chatId: fullChatStub().id,
       messageId: messageStub().id,
     };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        message = await deleteMessageCommandHandler.execute(
-          new DeleteMessageCommand(
-            requestUserStub(),
-            fullChatStub().id,
-            deleteMessageDto,
-          ),
+        data = await deleteMessageCommandHandler.execute(
+          new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
         );
       } catch (responseError) {
         error = responseError;
@@ -177,7 +175,7 @@ describe('when delete message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { blocked: true, id: true, users: { select: { id: true } } },
       });
     });
 
@@ -190,7 +188,7 @@ describe('when delete message is called', () => {
     });
 
     it('should return undefined', () => {
-      expect(message).toEqual(undefined);
+      expect(data).toEqual(undefined);
     });
 
     it('should throw an error', () => {
@@ -200,28 +198,28 @@ describe('when delete message is called', () => {
 
   describe('when there is no such message', () => {
     beforeAll(() => {
-      prismaService.chat.findUnique = jest
-        .fn()
-        .mockResolvedValue(fullChatStub());
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [...fullChatStub().users, { id: 'another-user-id' }],
+        blocked: fullChatStub().blocked,
+        blockedById: fullChatStub().blockedById,
+      });
       prismaService.message.findFirst = jest.fn().mockResolvedValue(undefined);
       prismaService.message.delete = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     let error;
     const deleteMessageDto: DeleteMessageDto = {
+      chatId: fullChatStub().id,
       messageId: messageStub().id,
     };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        message = await deleteMessageCommandHandler.execute(
-          new DeleteMessageCommand(
-            requestUserStub(),
-            fullChatStub().id,
-            deleteMessageDto,
-          ),
+        data = await deleteMessageCommandHandler.execute(
+          new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
         );
       } catch (responseError) {
         error = responseError;
@@ -232,7 +230,7 @@ describe('when delete message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { blocked: true, id: true, users: { select: { id: true } } },
       });
     });
 
@@ -249,7 +247,7 @@ describe('when delete message is called', () => {
     });
 
     it('should return undefined', () => {
-      expect(message).toEqual(undefined);
+      expect(data).toEqual(undefined);
     });
 
     it('should throw an error', () => {
@@ -259,9 +257,12 @@ describe('when delete message is called', () => {
 
   describe('when there is too late to delete (> 12 hours lasted)', () => {
     beforeAll(() => {
-      prismaService.chat.findUnique = jest
-        .fn()
-        .mockResolvedValue(fullChatStub());
+      prismaService.chat.findUnique = jest.fn().mockResolvedValue({
+        id: fullChatStub().id,
+        users: [...fullChatStub().users, { id: 'another-user-id' }],
+        blocked: fullChatStub().blocked,
+        blockedById: fullChatStub().blockedById,
+      });
       prismaService.message.findFirst = jest.fn().mockResolvedValue({
         ...messageStub(),
         createdAt: new Date('2022-01-01'),
@@ -269,21 +270,18 @@ describe('when delete message is called', () => {
       prismaService.message.delete = jest.fn();
     });
 
-    let message: Message;
+    let data: ChatSocketMessageReturn;
     let error;
     const deleteMessageDto: DeleteMessageDto = {
+      chatId: fullChatStub().id,
       messageId: messageStub().id,
     };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
-        message = await deleteMessageCommandHandler.execute(
-          new DeleteMessageCommand(
-            requestUserStub(),
-            fullChatStub().id,
-            deleteMessageDto,
-          ),
+        data = await deleteMessageCommandHandler.execute(
+          new DeleteMessageCommand(requestUserStub(), deleteMessageDto),
         );
       } catch (responseError) {
         error = responseError;
@@ -294,7 +292,7 @@ describe('when delete message is called', () => {
       expect(prismaService.chat.findUnique).toBeCalledTimes(1);
       expect(prismaService.chat.findUnique).toBeCalledWith({
         where: { id: fullChatStub().id },
-        select: { blocked: true },
+        select: { blocked: true, id: true, users: { select: { id: true } } },
       });
     });
 
@@ -311,7 +309,7 @@ describe('when delete message is called', () => {
     });
 
     it('should return undefined', () => {
-      expect(message).toStrictEqual(undefined);
+      expect(data).toStrictEqual(undefined);
     });
 
     it('should throw an error', () => {
