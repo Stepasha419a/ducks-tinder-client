@@ -30,7 +30,7 @@ export const ChatItem: FC<ChatInterface> = ({
     chat.messages[chat.messages.length - 1]?.userId === chatCompanion.id;
   const username = isCompanion ? `${chatCompanion.name}: ` : 'you: ';
   const messageName = chat.messages.length ? username : 'send first message';
-  const isNewMessages = getIsNewMessages(chat, isActive);
+  const isNewMessages = getIsNewMessages(chat, isActive, isCompanion);
 
   const chatLink = `${ROUTES.chat}/${chat.id}`;
 

@@ -1,5 +1,6 @@
 import type { Picture } from '@shared/api/interfaces';
 import { createSelector } from '@reduxjs/toolkit';
+import { sortChats } from '../lib';
 
 export const selectMessages = createSelector(
   [
@@ -38,7 +39,7 @@ export const selectChatList = createSelector(
     (state: RootState) => state.chat.isLoading,
   ],
   (chats, currentChatId, isLoading) => ({
-    chats,
+    chats: [...chats].sort(sortChats),
     currentChatId,
     isLoading,
   })

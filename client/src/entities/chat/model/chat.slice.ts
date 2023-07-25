@@ -42,8 +42,8 @@ const chatSlice = createSlice({
       const isActiveChat = state.currentChatId === payload.chatId;
       if (isActiveChat) {
         state.chats[index].chatVisits[0].lastSeen = payload.message.createdAt;
+        state.maxMessagesCount++;
       }
-      state.maxMessagesCount++;
     },
     setCurrentChatData: (state, { payload }: PayloadAction<Chat>) => {
       state.currentChatId = payload.id;

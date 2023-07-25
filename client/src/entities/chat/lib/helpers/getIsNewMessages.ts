@@ -3,9 +3,11 @@ import { getDatesHourDiff } from '@/shared/lib/helpers';
 
 export function getIsNewMessages(
   chat: ShortChat,
-  isActive: boolean
+  isActive: boolean,
+  isCompanion: boolean
 ): boolean | undefined {
   return (
+    isCompanion &&
     !isActive &&
     Boolean(chat.messages.at(-1)?.createdAt) &&
     Boolean(chat.chatVisits[0]?.lastSeen) &&
