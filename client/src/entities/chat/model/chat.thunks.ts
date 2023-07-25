@@ -127,7 +127,9 @@ export const disconnectChatThunk = createAsyncThunk(
       const { chat } = getState() as RootState;
       const { currentChatId } = chat;
 
-      chatService.disconnectChat(currentChatId);
+      if (currentChatId) {
+        chatService.disconnectChat(currentChatId);
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -141,7 +143,7 @@ export const getMessagesThunk = createAsyncThunk(
       const { chat } = getState() as RootState;
       const { chats, currentChatId, isMessagesLoading } = chat;
 
-      if (!isMessagesLoading) {
+      if (!isMessagesLoading && currentChatId) {
         chatService.getMessages(
           currentChatId,
           chats[chats.findIndex((item) => item.id === currentChatId)].messages
@@ -162,7 +164,9 @@ export const deleteMessageThunk = createAsyncThunk(
       const { chat } = getState() as RootState;
       const { currentChatId } = chat;
 
-      chatService.deleteMessage(currentChatId, messageId);
+      if (currentChatId) {
+        chatService.deleteMessage(currentChatId, messageId);
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -179,7 +183,9 @@ export const editMessageThunk = createAsyncThunk(
       const { chat } = getState() as RootState;
       const { currentChatId } = chat;
 
-      chatService.editMessage(currentChatId, args.messageId, args.text);
+      if (currentChatId) {
+        chatService.editMessage(currentChatId, args.messageId, args.text);
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -193,7 +199,9 @@ export const blockChatThunk = createAsyncThunk(
       const { chat } = getState() as RootState;
       const { currentChatId } = chat;
 
-      chatService.blockChat(currentChatId);
+      if (currentChatId) {
+        chatService.blockChat(currentChatId);
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -207,7 +215,9 @@ export const unblockChatThunk = createAsyncThunk(
       const { chat } = getState() as RootState;
       const { currentChatId } = chat;
 
-      chatService.unblockChat(currentChatId);
+      if (currentChatId) {
+        chatService.unblockChat(currentChatId);
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -221,7 +231,9 @@ export const deleteChatThunk = createAsyncThunk(
       const { chat } = getState() as RootState;
       const { currentChatId } = chat;
 
-      chatService.deleteChat(currentChatId);
+      if (currentChatId) {
+        chatService.deleteChat(currentChatId);
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -240,7 +252,9 @@ export const sendMessageThunk = createAsyncThunk(
         repliedId = repliedMessage.id;
       }
 
-      chatService.sendMessage(currentChatId, text, repliedId);
+      if (currentChatId) {
+        chatService.sendMessage(currentChatId, text, repliedId);
+      }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

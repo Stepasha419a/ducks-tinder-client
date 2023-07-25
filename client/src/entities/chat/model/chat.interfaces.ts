@@ -9,7 +9,7 @@ export interface ChatInitialState {
   isMessagesLoading: boolean;
   maxMessagesCount: number;
   isMessagesEnded: boolean;
-  currentChatId: string;
+  currentChatId: string | null;
   repliedMessage: Message | null;
   isChatUserPopup: boolean;
   currentMessage: Message | null;

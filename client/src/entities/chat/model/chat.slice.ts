@@ -24,7 +24,7 @@ const initialState: ChatInitialState = {
   isMessagesLoading: false,
   maxMessagesCount: 0,
   isMessagesEnded: false,
-  currentChatId: '',
+  currentChatId: null,
   repliedMessage: null,
   isChatUserPopup: false,
   currentMessage: null,

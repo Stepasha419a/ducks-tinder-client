@@ -41,6 +41,9 @@ export const ImageSlider: FC<ImageSliderPropsInterface> = ({
     );
   }
 
+  const isFirstImage = current === 0;
+  const isLastImage = current === images.length - 1;
+
   return (
     <div className={cnWrapper}>
       <Carousel
@@ -48,8 +51,8 @@ export const ImageSlider: FC<ImageSliderPropsInterface> = ({
         dots={true}
         arrows={true}
         infinite={false}
-        prevArrow={<PrevArrow />}
-        nextArrow={<NextArrow />}
+        prevArrow={isFirstImage ? <></> : <PrevArrow />}
+        nextArrow={isLastImage ? <></> : <NextArrow />}
         afterChange={(i: number) => setCurrent(i)}
         customPaging={(i) => (
           <div className={styles.wrapper}>
