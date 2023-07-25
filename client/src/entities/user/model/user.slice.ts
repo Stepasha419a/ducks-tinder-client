@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import type {
@@ -17,7 +18,6 @@ import {
 } from './user.thunks';
 import type { PairSorts, UserInitialState } from './user.interfaces';
 import { INITIAL_SORTS } from './user.constants';
-import { toastify } from '@shared/lib';
 
 const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh
@@ -82,7 +82,7 @@ const userSlice = createSlice({
       )
       .addCase(updateUserThunk.rejected, (_, { payload }) => {
         if (payload === 'User already exists') {
-          toastify('This email address is already used, try another one');
+          toast('This email address is already used, try another one');
         }
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {

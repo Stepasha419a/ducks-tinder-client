@@ -3,6 +3,7 @@ import type { ReactElement } from 'react';
 import Routing from '@pages/index';
 import { Loading } from '@entities/auth/components';
 import { withAppHocs } from '@hocs';
+import { ToastContainer } from '@/shared/ui';
 import './styles/index.scss';
 
 function App(): ReactElement {
@@ -10,6 +11,7 @@ function App(): ReactElement {
     <>
       <Loading />
       <Routing />
+      <ToastContainer />
     </>
   );
 }

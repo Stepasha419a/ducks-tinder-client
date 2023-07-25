@@ -1,9 +1,9 @@
-import { Places } from '@entities/user/components';
-import styles from './PlacesGeolocation.module.scss';
-import { toastify } from '@shared/lib';
 import { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { Places } from '@entities/user/components';
 import { updateUserPlaceThunk } from '@entities/user/model';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import styles from './PlacesGeolocation.module.scss';
 
 export const PlacesGeolocation = () => {
   const dispatch = useAppDispatch();
@@ -12,10 +12,10 @@ export const PlacesGeolocation = () => {
 
   const handlePlaceUpdate = (pos: GeolocationPosition) => {
     if (
-      pos.coords.longitude === place?.latitude &&
-      pos.coords.latitude === place.longitude
+      pos.coords.longitude === place?.longitude &&
+      pos.coords.latitude === place.latitude
     ) {
-      toastify('Your position is remained unchanged');
+      toast('Your position is remained unchanged');
     } else {
       if (!place) {
         dispatch(
@@ -32,7 +32,7 @@ export const PlacesGeolocation = () => {
     navigator.geolocation.getCurrentPosition(
       handlePlaceUpdate,
       () => {
-        toastify(
+        toast(
           'Enable your geolocation, otherwise we wont be able to set your location'
         );
       },
