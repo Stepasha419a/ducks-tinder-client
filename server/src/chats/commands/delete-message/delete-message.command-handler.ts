@@ -6,6 +6,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
 import { getDatesHourDiff } from 'common/helpers';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
+import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(DeleteMessageCommand)
 export class DeleteMessageCommandHandler
@@ -42,6 +43,6 @@ export class DeleteMessageCommandHandler
 
     await this.prismaService.message.delete({ where: { id: dto.messageId } });
 
-    return { message, id: chat.id, users: chat.users.map((user) => user.id) };
+    return ChatsMapper.mapChatMessage(chat, message);
   }
 }

@@ -4,6 +4,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { BlockChatCommand } from './block-chat.command';
 import { BlockChatSocketReturn } from 'chats/chats.interface';
+import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(BlockChatCommand)
 export class BlockChatCommandHandler
@@ -34,9 +35,6 @@ export class BlockChatCommandHandler
       },
     });
 
-    return {
-      ...blockedChat,
-      users: blockedChat.users.map((chatUser) => chatUser.id),
-    };
+    return ChatsMapper.mapBlockChat(blockedChat);
   }
 }

@@ -17,17 +17,17 @@ export interface ChatInitialState {
 }
 
 export interface GetMessagesResponse {
-  id: string;
+  chatId: string;
   messages: Message[];
 }
 
 export interface ReceivedMessage {
-  id: string;
+  chatId: string;
   message: Message;
 }
 
 interface ChatBlockBase {
-  id: string;
+  chatId: string;
   blocked: boolean;
 }
 

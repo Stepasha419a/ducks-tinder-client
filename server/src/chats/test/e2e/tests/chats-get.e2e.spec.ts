@@ -10,9 +10,7 @@ import {
   prepareAfter,
   prepareBefore,
 } from '../preparations';
-import { UsersSelector } from 'users/users.selector';
-import { ShortChat } from 'chats/chats.interface';
-import { ChatsSelector } from 'chats/chats.selector';
+import { GET_CHATS_EXPECTED } from 'chats/test/values/chats.const.expect';
 
 const currentUserId = 'chats_get_current_user_id';
 const secondUserId = 'chats_get_second_user_id';
@@ -55,26 +53,7 @@ describe('chats (GET)', () => {
   describe('when it is called correctly', () => {
     let response: request.Response;
 
-    let chats: ShortChat[];
-
     beforeAll(async () => {
-      chats = await prismaClient.chat.findMany({
-        where: { id: chatId },
-        select: {
-          id: true,
-          messages: {
-            take: 1,
-            orderBy: { createdAt: 'desc' },
-            select: ChatsSelector.selectMessage(),
-          },
-          users: {
-            where: { id: { not: currentUserId } },
-            select: UsersSelector.selectShortUser(),
-          },
-          blocked: true,
-          blockedById: true,
-        },
-      });
       const { currentUserAccessToken } = prepareReadyAccessTokens();
 
       response = await request(httpServer)
@@ -84,7 +63,7 @@ describe('chats (GET)', () => {
 
     it('should return an array of short chats', () => {
       expect(response.status).toBe(200);
-      expect(response.body).toEqual(chats);
+      expect(response.body).toEqual(GET_CHATS_EXPECTED);
     });
   });
 

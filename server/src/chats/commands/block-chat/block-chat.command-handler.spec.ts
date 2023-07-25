@@ -83,7 +83,7 @@ describe('when block chat is called', () => {
 
     it('should return data', () => {
       expect(data).toEqual({
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         users: [requestUserStub().id, 'another-user-id'],
         blocked: true,
         blockedById: requestUserStub().id,

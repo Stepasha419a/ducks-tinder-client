@@ -5,6 +5,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
 import { NOT_FOUND } from 'common/constants/error';
 import { GetMessagesQueryReturn } from 'chats/chats.interface';
+import { ChatsMapper } from 'chats/chats.mapper';
 
 @QueryHandler(GetMessagesQuery)
 export class GetMessagesQueryHandler
@@ -15,16 +16,16 @@ export class GetMessagesQueryHandler
   async execute(query: GetMessagesQuery): Promise<GetMessagesQueryReturn> {
     const { user, dto } = query;
 
-    const candidate = await this.prismaService.chat.findFirst({
+    const chat = await this.prismaService.chat.findFirst({
       where: { id: dto.chatId, users: { some: { id: user.id } } },
       select: { id: true },
     });
-    if (!candidate) {
+    if (!chat) {
       throw new WsException(NOT_FOUND);
     }
 
     const allMessagesCount = await this.prismaService.message.count({
-      where: { chatId: candidate.id },
+      where: { chatId: chat.id },
     });
 
     if (dto.haveCount > allMessagesCount) {
@@ -48,7 +49,7 @@ export class GetMessagesQueryHandler
     // already available and taking most available until 20
     const messages = await this.prismaService.message.findMany({
       where: {
-        chatId: candidate.id,
+        chatId: chat.id,
       },
       select: ChatsSelector.selectMessage(),
       orderBy: { createdAt: 'asc' },
@@ -56,9 +57,6 @@ export class GetMessagesQueryHandler
       take: takeMessages,
     });
 
-    return {
-      id: candidate.id,
-      messages,
-    };
+    return ChatsMapper.mapChatMessages(chat, messages);
   }
 }

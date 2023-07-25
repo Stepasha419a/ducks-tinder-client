@@ -84,7 +84,7 @@ describe('when delete message is called', () => {
 
     it('should return a data', () => {
       expect(data).toStrictEqual({
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         message: { ...messageStub(), createdAt: createdAtDate },
         users: [requestUserStub().id, 'another-user-id'],
       });

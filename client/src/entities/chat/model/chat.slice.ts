@@ -36,10 +36,10 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
-      const index = state.chats.findIndex((chat) => chat.id === payload.id);
+      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
       state.chats[index].messages.push(payload.message);
 
-      const isActiveChat = state.currentChatId === payload.id;
+      const isActiveChat = state.currentChatId === payload.chatId;
       if (isActiveChat) {
         state.chats[index].chatVisits[0].lastSeen = payload.message.createdAt;
       }
@@ -63,7 +63,7 @@ const chatSlice = createSlice({
       if (payload.messages.length === 0) {
         state.isMessagesEnded = true;
       }
-      const index = state.chats.findIndex((chat) => chat.id === payload.id);
+      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
       state.chats[index].messages = [
         ...payload.messages,
         ...state.chats[index].messages,
@@ -71,27 +71,31 @@ const chatSlice = createSlice({
       state.isMessagesLoading = false;
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
-      const index = state.chats.findIndex((chat) => chat.id === payload.id);
+      const index = state.chats.findIndex((chat) => chat.id === payload.chatId);
       state.chats[index].messages = state.chats[index].messages.filter(
         (message) => message.id !== payload.message.id
       );
       state.maxMessagesCount--;
     },
     editMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
-      const chatIndex = state.chats.findIndex((chat) => chat.id === payload.id);
+      const chatIndex = state.chats.findIndex(
+        (chat) => chat.id === payload.chatId
+      );
       const messageIndex = state.chats[chatIndex].messages.findIndex(
         (message) => message.id === payload.message.id
       );
       state.chats[chatIndex].messages[messageIndex] = payload.message;
     },
     blockChat: (state, { payload }: PayloadAction<ChatBlockResponse>) => {
-      const chatIndex = state.chats.findIndex((chat) => chat.id === payload.id);
+      const chatIndex = state.chats.findIndex(
+        (chat) => chat.id === payload.chatId
+      );
       state.chats[chatIndex].blocked = payload.blocked;
       state.chats[chatIndex].blockedById = payload.blockedById;
     },
     unblockChat: (state, { payload }: PayloadAction<ChatUnblockResponse>) => {
       state.chats[
-        state.chats.findIndex((chat) => chat.id === payload.id)
+        state.chats.findIndex((chat) => chat.id === payload.chatId)
       ].blocked = payload.blocked;
     },
     deleteChat: (state, { payload }: PayloadAction<string>) => {

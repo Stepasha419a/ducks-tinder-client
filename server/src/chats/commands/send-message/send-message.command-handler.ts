@@ -5,6 +5,7 @@ import { SendMessageCommand } from './send-message.command';
 import { ChatsSelector } from 'chats/chats.selector';
 import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
+import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(SendMessageCommand)
 export class SendMessageCommandHandler
@@ -37,6 +38,6 @@ export class SendMessageCommandHandler
       select: ChatsSelector.selectMessage(),
     });
 
-    return { message, id: chat.id, users: chat.users.map((user) => user.id) };
+    return ChatsMapper.mapChatMessage(chat, message);
   }
 }

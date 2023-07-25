@@ -29,3 +29,29 @@ export const GET_FULL_CHAT_EXPECTED = {
   blocked: false,
   blockedById: null,
 };
+
+export const GET_CHATS_EXPECTED = [
+  {
+    id: 'chats_get_chat_id',
+    messages: [],
+    users: [
+      {
+        age: null,
+        description: null,
+        id: 'chats_get_second_user_id',
+        interests: [],
+        isActivated: false,
+        name: 'Loren',
+        pictures: [],
+        place: {
+          latitude: 12.5456789,
+          longitude: 12.5456789,
+          name: 'second-user-place-name',
+        },
+      },
+    ],
+    blocked: false,
+    blockedById: null,
+    chatVisits: [],
+  },
+];

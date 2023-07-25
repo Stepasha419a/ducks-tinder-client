@@ -87,7 +87,7 @@ describe('when get messages is called', () => {
 
     it('should return an array of messages with chat id', () => {
       expect(response).toEqual({
-        id: shortChatStub().id,
+        chatId: shortChatStub().id,
         messages: [messageStub()],
       });
     });

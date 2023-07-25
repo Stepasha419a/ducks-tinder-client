@@ -34,6 +34,7 @@ import {
   ChatSocketReturn,
   GetMessagesQueryReturn,
 } from './chats.interface';
+import { ChatsMapper } from './chats.mapper';
 
 @WebSocketGateway({
   namespace: '/chat/socket',
@@ -92,7 +93,9 @@ export class ChatsGateway {
       new SendMessageCommand(user, dto),
     );
 
-    this.wss.to(data.users).emit('send-message', { ...data, users: undefined });
+    this.wss
+      .to(data.users)
+      .emit('send-message', ChatsMapper.mapWithoutUsers(data));
   }
 
   @UseGuards(WsRefreshTokenGuard)
@@ -105,7 +108,7 @@ export class ChatsGateway {
       new GetMessagesQuery(user, dto),
     );
 
-    this.wss.to(user.id).emit('get-messages', { ...data, users: undefined });
+    this.wss.to(user.id).emit('get-messages', data);
   }
 
   @UseGuards(WsRefreshTokenGuard)
@@ -120,7 +123,7 @@ export class ChatsGateway {
 
     this.wss
       .to(data.users)
-      .emit('delete-message', { ...data, users: undefined });
+      .emit('delete-message', ChatsMapper.mapWithoutUsers(data));
   }
 
   @UseGuards(WsRefreshTokenGuard)
@@ -133,7 +136,9 @@ export class ChatsGateway {
       new EditMessageCommand(user, dto),
     );
 
-    this.wss.to(data.users).emit('edit-message', { ...data, users: undefined });
+    this.wss
+      .to(data.users)
+      .emit('edit-message', ChatsMapper.mapWithoutUsers(data));
   }
 
   @UseGuards(WsRefreshTokenGuard)
@@ -146,7 +151,9 @@ export class ChatsGateway {
       new BlockChatCommand(user, dto.chatId),
     );
 
-    this.wss.to(chat.users).emit('block-chat', { ...chat, users: undefined });
+    this.wss
+      .to(chat.users)
+      .emit('block-chat', ChatsMapper.mapWithoutUsers(chat));
   }
 
   @UseGuards(WsRefreshTokenGuard)
@@ -159,7 +166,9 @@ export class ChatsGateway {
       new UnblockChatCommand(user, dto.chatId),
     );
 
-    this.wss.to(chat.users).emit('unblock-chat', { ...chat, users: undefined });
+    this.wss
+      .to(chat.users)
+      .emit('unblock-chat', ChatsMapper.mapWithoutUsers(chat));
   }
 
   @UseGuards(WsRefreshTokenGuard)
@@ -172,6 +181,6 @@ export class ChatsGateway {
       new DeleteChatCommand(user, dto.chatId),
     );
 
-    this.wss.to(chat.users).emit('delete-chat', chat.id);
+    this.wss.to(chat.users).emit('delete-chat', chat.chatId);
   }
 }

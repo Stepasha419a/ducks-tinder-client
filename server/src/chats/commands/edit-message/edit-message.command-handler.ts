@@ -6,6 +6,7 @@ import { WsException } from '@nestjs/websockets';
 import { ChatsSelector } from 'chats/chats.selector';
 import { getDatesHourDiff } from 'common/helpers';
 import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
+import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(EditMessageCommand)
 export class EditMessageCommandHandler
@@ -43,6 +44,6 @@ export class EditMessageCommandHandler
       select: ChatsSelector.selectMessage(),
     });
 
-    return { message, id: chat.id, users: chat.users.map((user) => user.id) };
+    return ChatsMapper.mapChatMessage(chat, message);
   }
 }

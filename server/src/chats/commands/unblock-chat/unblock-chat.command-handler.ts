@@ -4,6 +4,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UnblockChatCommand } from './unblock-chat.command';
 import { BlockChatSocketReturn } from 'chats/chats.interface';
 import { NOT_FOUND } from 'common/constants/error';
+import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(UnblockChatCommand)
 export class UnblockChatCommandHandler
@@ -34,9 +35,6 @@ export class UnblockChatCommandHandler
       },
     });
 
-    return {
-      ...unblockedChat,
-      users: unblockedChat.users.map((chatUser) => chatUser.id),
-    };
+    return ChatsMapper.mapBlockChat(unblockedChat);
   }
 }

@@ -172,7 +172,7 @@ describe('chats-controller', () => {
   describe('when send-message is called', () => {
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue({
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         message: messageStub(),
         users: [requestUserStub().id, '123123'],
       });
@@ -207,7 +207,7 @@ describe('chats-controller', () => {
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
       expect(mockedWssEmit).toBeCalledWith('send-message', {
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         message: messageStub(),
       });
     });
@@ -220,9 +220,8 @@ describe('chats-controller', () => {
   describe('when get-messages is called', () => {
     beforeAll(() => {
       queryBus.execute = jest.fn().mockResolvedValue({
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         messages: [messageStub()],
-        users: [requestUserStub().id, '123123'],
       });
     });
 
@@ -251,7 +250,7 @@ describe('chats-controller', () => {
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
       expect(mockedWssEmit).toBeCalledWith('get-messages', {
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         messages: [messageStub()],
       });
     });
@@ -265,7 +264,7 @@ describe('chats-controller', () => {
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue({
         message: messageStub(),
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         users: [requestUserStub().id, '123123'],
       });
     });
@@ -299,7 +298,7 @@ describe('chats-controller', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
       expect(mockedWssEmit).toBeCalledWith('delete-message', {
         message: messageStub(),
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
       });
     });
 
@@ -312,7 +311,7 @@ describe('chats-controller', () => {
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue({
         message: messageStub(),
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         users: [requestUserStub().id, '123123'],
       });
     });
@@ -347,7 +346,7 @@ describe('chats-controller', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
       expect(mockedWssEmit).toBeCalledWith('edit-message', {
         message: messageStub(),
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
       });
     });
 
@@ -359,7 +358,7 @@ describe('chats-controller', () => {
   describe('when block-chat is called', () => {
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue({
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         blocked: true,
         blockedById: requestUserStub().id,
         users: [requestUserStub().id, '123123'],
@@ -390,7 +389,7 @@ describe('chats-controller', () => {
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
       expect(mockedWssEmit).toBeCalledWith('block-chat', {
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         blocked: true,
         blockedById: requestUserStub().id,
       });
@@ -404,7 +403,7 @@ describe('chats-controller', () => {
   describe('when unblock-chat is called', () => {
     beforeAll(() => {
       commandBus.execute = jest.fn().mockResolvedValue({
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         users: [requestUserStub().id, '123123'],
         blocked: false,
         blockedById: null,
@@ -435,7 +434,7 @@ describe('chats-controller', () => {
     it('should call wss to emit', () => {
       expect(mockedWssEmit).toBeCalledTimes(1);
       expect(mockedWssEmit).toBeCalledWith('unblock-chat', {
-        id: fullChatStub().id,
+        chatId: fullChatStub().id,
         blocked: false,
         blockedById: null,
       });

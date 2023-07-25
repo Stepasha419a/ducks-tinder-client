@@ -4,6 +4,7 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DeleteChatCommand } from './delete-chat.command';
 import { NOT_FOUND } from 'common/constants/error';
 import { ChatSocketReturn } from 'chats/chats.interface';
+import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(DeleteChatCommand)
 export class DeleteChatCommandHandler
@@ -30,6 +31,6 @@ export class DeleteChatCommandHandler
       select: { users: { select: { id: true } }, id: true },
     });
 
-    return { ...deletedChat, users: deletedChat.users.map((user) => user.id) };
+    return ChatsMapper.mapChat(deletedChat);
   }
 }
