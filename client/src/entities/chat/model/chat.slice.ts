@@ -14,6 +14,7 @@ import {
   sendMessageThunk,
   disconnectChatThunk,
 } from './chat.thunks';
+import { toast } from 'react-toastify';
 
 const initialState: ChatInitialState = {
   chats: [],
@@ -43,6 +44,13 @@ const chatSlice = createSlice({
       if (isActiveChat) {
         state.chats[index].chatVisits[0].lastSeen = payload.message.createdAt;
         state.maxMessagesCount++;
+      } else {
+        const nickname = state.chats[index].users[0].name;
+        const messageText =
+          payload.message.text.length > 20
+            ? `${payload.message.text.slice(0, 20)}...`
+            : payload.message.text;
+        toast(`${nickname}: ${messageText}`);
       }
     },
     setCurrentChatData: (state, { payload }: PayloadAction<Chat>) => {

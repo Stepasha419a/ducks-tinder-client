@@ -18,7 +18,7 @@ export const ChatList: FC = (): ReactElement => {
 
   useEffect(() => {
     dispatch(getChatsThunk());
-  }, [currentUserId, chatsLength, chats.length, dispatch]);
+  }, [dispatch]);
 
   if (isLoading) {
     return <ChatListLazy />;
