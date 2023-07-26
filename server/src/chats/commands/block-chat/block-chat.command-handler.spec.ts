@@ -9,6 +9,7 @@ import { requestUserStub } from 'users/test/stubs';
 import { PrismaModule } from 'prisma/prisma.module';
 import { NOT_FOUND } from 'common/constants/error';
 import { fullChatWithoutDistanceStub } from 'chats/test/stubs/full-chat-without-distance.stub';
+import { ChatIdDto } from 'chats/dto';
 
 describe('when block chat is called', () => {
   let prismaService: PrismaService;
@@ -46,11 +47,14 @@ describe('when block chat is called', () => {
     });
 
     let data: BlockChatSocketReturn;
+    const dto: ChatIdDto = {
+      chatId: fullChatStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       data = await blockChatCommandHandler.execute(
-        new BlockChatCommand(requestUserStub(), fullChatStub().id),
+        new BlockChatCommand(requestUserStub(), dto),
       );
     });
 
@@ -99,12 +103,15 @@ describe('when block chat is called', () => {
 
     let data: BlockChatSocketReturn;
     let error;
+    const dto: ChatIdDto = {
+      chatId: fullChatStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
         data = await blockChatCommandHandler.execute(
-          new BlockChatCommand(requestUserStub(), fullChatStub().id),
+          new BlockChatCommand(requestUserStub(), dto),
         );
       } catch (responseError) {
         error = responseError;

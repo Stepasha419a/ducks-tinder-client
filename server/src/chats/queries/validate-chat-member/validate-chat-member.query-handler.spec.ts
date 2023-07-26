@@ -7,6 +7,7 @@ import { requestUserStub } from 'users/test/stubs';
 import { ValidateChatMemberQueryHandler } from './validate-chat-member.query-handler';
 import { ValidateChatMemberQuery } from './validate-chat-member.query';
 import { NOT_FOUND } from 'common/constants/error';
+import { ChatIdDto } from 'chats/dto';
 
 describe('when get messages is called', () => {
   let prismaService: PrismaService;
@@ -36,11 +37,14 @@ describe('when get messages is called', () => {
     });
 
     let response;
+    const dto: ChatIdDto = {
+      chatId: shortChatStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       response = await validateChatMemberQueryHandler.execute(
-        new ValidateChatMemberQuery(requestUserStub(), shortChatStub().id),
+        new ValidateChatMemberQuery(requestUserStub(), dto),
       );
     });
 
@@ -69,12 +73,15 @@ describe('when get messages is called', () => {
 
     let response;
     let error;
+    const dto: ChatIdDto = {
+      chatId: shortChatStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
         response = await validateChatMemberQueryHandler.execute(
-          new ValidateChatMemberQuery(requestUserStub(), shortChatStub().id),
+          new ValidateChatMemberQuery(requestUserStub(), dto),
         );
       } catch (responseError) {
         error = responseError;

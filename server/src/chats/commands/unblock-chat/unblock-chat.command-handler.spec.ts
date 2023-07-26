@@ -8,6 +8,7 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { NOT_FOUND } from 'common/constants/error';
 import { UnblockChatCommandHandler } from './unblock-chat.command-handler';
 import { UnblockChatCommand } from './unblock-chat.command';
+import { ChatIdDto } from 'chats/dto';
 
 describe('when unblock chat is called', () => {
   let prismaService: PrismaService;
@@ -42,11 +43,14 @@ describe('when unblock chat is called', () => {
     });
 
     let data: BlockChatSocketReturn;
+    const dto: ChatIdDto = {
+      chatId: fullChatStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       data = await unblockChatCommandHandler.execute(
-        new UnblockChatCommand(requestUserStub(), fullChatStub().id),
+        new UnblockChatCommand(requestUserStub(), dto),
       );
     });
 
@@ -95,12 +99,15 @@ describe('when unblock chat is called', () => {
 
     let data: BlockChatSocketReturn;
     let error;
+    const dto: ChatIdDto = {
+      chatId: fullChatStub().id,
+    };
 
     beforeEach(async () => {
       jest.clearAllMocks();
       try {
         data = await unblockChatCommandHandler.execute(
-          new UnblockChatCommand(requestUserStub(), fullChatStub().id),
+          new UnblockChatCommand(requestUserStub(), dto),
         );
       } catch (responseError) {
         error = responseError;

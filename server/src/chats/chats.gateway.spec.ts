@@ -10,6 +10,7 @@ import { fullChatStub, messageStub, requestUserStub } from './test/stubs';
 import { CommandBusMock, UserSocketMock } from './test/mocks';
 import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
 import {
+  ChatIdDto,
   DeleteMessageDto,
   EditMessageDto,
   GetMessagesDto,
@@ -106,6 +107,9 @@ describe('chats-controller', () => {
   describe('when connect-chat is called', () => {
     let response;
     const socket = UserSocketMock();
+    const dto: ChatIdDto = {
+      chatId: fullChatStub().id,
+    };
 
     beforeAll(() => {
       queryBus.execute = jest.fn().mockResolvedValue(fullChatStub());
@@ -122,14 +126,14 @@ describe('chats-controller', () => {
     it('should call query bus execute', () => {
       expect(queryBus.execute).toBeCalledTimes(1);
       expect(queryBus.execute).toBeCalledWith(
-        new ValidateChatMemberQuery(requestUserStub(), fullChatStub().id),
+        new ValidateChatMemberQuery(requestUserStub(), dto),
       );
     });
 
     it('should call command bus execute', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
-        new SaveLastSeenCommand(requestUserStub(), fullChatStub().id),
+        new SaveLastSeenCommand(requestUserStub(), dto),
       );
     });
 
@@ -149,6 +153,9 @@ describe('chats-controller', () => {
     });
 
     let response;
+    const dto: ChatIdDto = {
+      chatId: fullChatStub().id,
+    };
 
     beforeEach(async () => {
       response = await chatsGateway.handleDisconnectChat(
@@ -160,7 +167,7 @@ describe('chats-controller', () => {
     it('should call command bus execute', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
-        new SaveLastSeenCommand(requestUserStub(), fullChatStub().id),
+        new SaveLastSeenCommand(requestUserStub(), dto),
       );
     });
 
@@ -366,6 +373,9 @@ describe('chats-controller', () => {
     });
 
     let response;
+    const dto: ChatIdDto = {
+      chatId: fullChatStub().id,
+    };
 
     beforeEach(async () => {
       response = await chatsGateway.blockChat(requestUserStub(), CHAT_ID_DTO);
@@ -374,7 +384,7 @@ describe('chats-controller', () => {
     it('should call command bus execute', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
-        new BlockChatCommand(requestUserStub(), fullChatStub().id),
+        new BlockChatCommand(requestUserStub(), dto),
       );
     });
 
@@ -411,6 +421,9 @@ describe('chats-controller', () => {
     });
 
     let response;
+    const dto: ChatIdDto = {
+      chatId: fullChatStub().id,
+    };
 
     beforeEach(async () => {
       response = await chatsGateway.unblockChat(requestUserStub(), CHAT_ID_DTO);
@@ -419,7 +432,7 @@ describe('chats-controller', () => {
     it('should call command bus execute', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
-        new UnblockChatCommand(requestUserStub(), fullChatStub().id),
+        new UnblockChatCommand(requestUserStub(), dto),
       );
     });
 

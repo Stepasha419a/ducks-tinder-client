@@ -11,10 +11,10 @@ export class ValidateChatMemberQueryHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(query: ValidateChatMemberQuery): Promise<void> {
-    const { user, chatId } = query;
+    const { user, dto } = query;
 
     const chat = await this.prismaService.chat.findFirst({
-      where: { id: chatId, users: { some: { id: user.id } } },
+      where: { id: dto.chatId, users: { some: { id: user.id } } },
       select: {
         id: true,
       },

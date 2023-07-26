@@ -13,17 +13,17 @@ export class UnblockChatCommandHandler
   constructor(private readonly prismaService: PrismaService) {}
 
   async execute(command: UnblockChatCommand): Promise<BlockChatSocketReturn> {
-    const { user, chatId } = command;
+    const { user, dto } = command;
 
     const candidate = await this.prismaService.chat.findFirst({
-      where: { id: chatId, blocked: true, blockedById: user.id },
+      where: { id: dto.chatId, blocked: true, blockedById: user.id },
     });
     if (!candidate) {
       throw new WsException(NOT_FOUND);
     }
 
     const unblockedChat = await this.prismaService.chat.update({
-      where: { id: chatId },
+      where: { id: dto.chatId },
       data: { blocked: false, blockedById: null },
       select: {
         id: true,

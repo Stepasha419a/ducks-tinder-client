@@ -68,8 +68,8 @@ export class ChatsGateway {
     @User({ isSocket: true }) user,
     @MessageBody() dto: ChatIdDto,
   ) {
-    await this.queryBus.execute(new ValidateChatMemberQuery(user, dto.chatId));
-    await this.commandBus.execute(new SaveLastSeenCommand(user, dto.chatId));
+    await this.queryBus.execute(new ValidateChatMemberQuery(user, dto));
+    await this.commandBus.execute(new SaveLastSeenCommand(user, dto));
 
     client.emit('connect-chat');
   }
@@ -80,7 +80,7 @@ export class ChatsGateway {
     @User({ isSocket: true }) user,
     @MessageBody() dto: ChatIdDto,
   ) {
-    await this.commandBus.execute(new SaveLastSeenCommand(user, dto.chatId));
+    await this.commandBus.execute(new SaveLastSeenCommand(user, dto));
   }
 
   @UseGuards(WsRefreshTokenGuard)
@@ -148,7 +148,7 @@ export class ChatsGateway {
     @MessageBody() dto: ChatIdDto,
   ) {
     const chat: BlockChatSocketReturn = await this.commandBus.execute(
-      new BlockChatCommand(user, dto.chatId),
+      new BlockChatCommand(user, dto),
     );
 
     this.wss
@@ -163,7 +163,7 @@ export class ChatsGateway {
     @MessageBody() dto: ChatIdDto,
   ) {
     const chat: BlockChatSocketReturn = await this.commandBus.execute(
-      new UnblockChatCommand(user, dto.chatId),
+      new UnblockChatCommand(user, dto),
     );
 
     this.wss
@@ -178,7 +178,7 @@ export class ChatsGateway {
     @MessageBody() dto: ChatIdDto,
   ) {
     const chat: ChatSocketReturn = await this.commandBus.execute(
-      new DeleteChatCommand(user, dto.chatId),
+      new DeleteChatCommand(user, dto),
     );
 
     this.wss.to(chat.users).emit('delete-chat', chat.chatId);
