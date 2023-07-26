@@ -4,7 +4,7 @@
   right: -108px;
   z-index: 1;
   width: 100px;
-  background-color: rgb(228, 228, 228);
+  background-color: var(--selected-message);
   border-radius: 8px;
 
   .item {

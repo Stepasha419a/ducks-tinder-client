@@ -40,7 +40,7 @@
 
       .icon {
         font-size: 20px;
-        color: var(--color--black-80);
+        color: var(--primary-instruction);
         margin-right: 8px;
 
         &_rotate {
@@ -50,13 +50,13 @@
         &_space {
           width: 70px;
           height: 20px;
-          border: 2px solid var(--color--black-80);
+          border: 2px solid var(--primary-instruction);
           border-radius: 4px;
         }
       }
 
       .text {
-        color: var(--color--black-80);
+        color: var(--primary-instruction);
         font-weight: 900;
         font-size: 14px;
         white-space: nowrap;

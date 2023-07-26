@@ -1,5 +1,5 @@
 .message {
-  background-color: var(--color--white-100);
+  background-color: var(--bg-sub-primary);
   padding: 8px;
   padding-right: 40px;
   border-radius: 8px;
@@ -7,13 +7,13 @@
   &.own {
     background: linear-gradient(
       45deg,
-      var(--color--pink-10),
-      var(--color--brown-100)
+      var(--primary-message),
+      var(--second-message)
     );
   }
 
   &.selected {
-    background: rgb(228, 228, 228);
+    background: var(--selected-message);
   }
 
   &.edited {

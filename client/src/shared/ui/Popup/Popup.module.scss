@@ -17,7 +17,7 @@
 
     .content {
       position: relative;
-      background-color: var(--color--white-100);
+      background-color: var(--bg-sub-primary);
       width: 440px;
       transition: all 0.5s ease 0s;
       border-radius: 8px;
@@ -63,7 +63,7 @@
           display: block;
           height: 4px;
           width: 20px;
-          background-color: var(--bg-secondary);
+          background-color: var(--main-primary);
           border-radius: 4px;
           position: absolute;
           top: 11px;

@@ -5,9 +5,10 @@
   font-size: 15px;
   line-height: 1.5;
   color: var(--main-secondary);
+  background-color: var(--bg-sub-primary);
   border: 1px solid var(--border-main);
 
-  &:focus{
+  &:focus {
     border-color: var(--border-main);
   }
 

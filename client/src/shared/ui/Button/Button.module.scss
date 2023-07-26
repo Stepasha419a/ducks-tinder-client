@@ -7,7 +7,7 @@
 
   &.default {
     color: var(--main-primary);
-    background-color: var(--color--white-100);
+    background-color: var(--bg-sub-primary);
   }
 
   &.mark {
@@ -28,7 +28,7 @@
     text-transform: uppercase;
     height: 60px;
     color: var(--main-primary);
-    background-color: var(--color--white-100);
+    background-color: var(--bg-sub-primary);
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     margin-top: 10px;
@@ -58,7 +58,7 @@
 
   &.setting {
     max-height: 53px;
-    background-color: var(--color--white-100);
+    background-color: var(--bg-sub-primary);
     border: 1px solid var(--border-main);
     border-right: none;
     padding: 16px;
