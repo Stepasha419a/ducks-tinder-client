@@ -34,7 +34,10 @@ function sortPair(
       }
       return true;
     case 'photos':
-      if (1 + item.pictures.length < sortSettings.photos) {
+      if (
+        sortSettings.photos !== 1 &&
+        item.pictures.length < sortSettings.photos
+      ) {
         return false;
       }
       return true;
