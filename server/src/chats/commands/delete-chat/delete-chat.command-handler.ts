@@ -1,8 +1,7 @@
-import { WsException } from '@nestjs/websockets';
-import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { NotFoundException } from '@nestjs/common';
+import { PrismaService } from 'prisma/prisma.service';
 import { DeleteChatCommand } from './delete-chat.command';
-import { NOT_FOUND } from 'common/constants/error';
 import { ChatSocketReturn } from 'chats/chats.interface';
 import { ChatsMapper } from 'chats/chats.mapper';
 
@@ -19,7 +18,7 @@ export class DeleteChatCommandHandler
       where: { id: dto.chatId, users: { some: { id: user.id } } },
     });
     if (!candidate) {
-      throw new WsException(NOT_FOUND);
+      throw new NotFoundException();
     }
 
     await this.prismaService.chatVisit.deleteMany({

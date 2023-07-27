@@ -1,9 +1,8 @@
-import { WsException } from '@nestjs/websockets';
+import { NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { UnblockChatCommand } from './unblock-chat.command';
 import { BlockChatSocketReturn } from 'chats/chats.interface';
-import { NOT_FOUND } from 'common/constants/error';
 import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(UnblockChatCommand)
@@ -19,7 +18,7 @@ export class UnblockChatCommandHandler
       where: { id: dto.chatId, blocked: true, blockedById: user.id },
     });
     if (!candidate) {
-      throw new WsException(NOT_FOUND);
+      throw new NotFoundException();
     }
 
     const unblockedChat = await this.prismaService.chat.update({

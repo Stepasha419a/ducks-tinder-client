@@ -1,11 +1,10 @@
-import { WsException } from '@nestjs/websockets';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GetMessagesQuery } from './get-messages.query';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
-import { NOT_FOUND } from 'common/constants/error';
 import { GetMessagesQueryReturn } from 'chats/chats.interface';
 import { ChatsMapper } from 'chats/chats.mapper';
+import { NotFoundException } from '@nestjs/common';
 
 @QueryHandler(GetMessagesQuery)
 export class GetMessagesQueryHandler
@@ -21,7 +20,7 @@ export class GetMessagesQueryHandler
       select: { id: true },
     });
     if (!chat) {
-      throw new WsException(NOT_FOUND);
+      throw new NotFoundException();
     }
 
     const allMessagesCount = await this.prismaService.message.count({
@@ -29,7 +28,7 @@ export class GetMessagesQueryHandler
     });
 
     if (dto.haveCount > allMessagesCount) {
-      throw new WsException(NOT_FOUND);
+      throw new NotFoundException();
     }
 
     // to take from db

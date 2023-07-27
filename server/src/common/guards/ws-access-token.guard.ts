@@ -1,10 +1,13 @@
 import { Reflector } from '@nestjs/core';
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
 import { IS_PUBLIC_KEY } from 'common/constants';
-import { WsException } from '@nestjs/websockets';
-import { UNAUTHORIZED } from 'common/constants/error';
 
 @Injectable()
 export class WsAccessTokenGuard implements CanActivate {
@@ -28,7 +31,7 @@ export class WsAccessTokenGuard implements CanActivate {
 
     const userData = await this.tokensService.validateAccessToken(accessToken);
     if (!userData) {
-      throw new WsException(UNAUTHORIZED);
+      throw new UnauthorizedException();
     }
 
     const user = await this.usersService.getUser(userData.id);

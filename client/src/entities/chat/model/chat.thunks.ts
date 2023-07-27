@@ -1,5 +1,5 @@
-import type { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import type { WsExceptionError } from '@/shared/lib/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
@@ -50,12 +50,8 @@ export const connectChatsThunk = createAsyncThunk(
       const socket = chatService.connect(userIds);
 
       socket.onAny((event: string, ...errors: unknown[]) => {
-        if (
-          event === 'exception' &&
-          (errors as AxiosError[])[0]?.status === 'error' &&
-          (errors as AxiosError[])[0]?.message
-        ) {
-          switch ((errors as AxiosError[])[0].message) {
+        if (event === 'exception' && (errors[0] as WsExceptionError).message) {
+          switch ((errors[0] as WsExceptionError).message) {
             case 'Unauthorized':
               dispatch(checkAuthThunk());
               break;

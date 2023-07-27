@@ -1,8 +1,7 @@
-import { WsException } from '@nestjs/websockets';
+import { NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { ValidateChatMemberQuery } from './validate-chat-member.query';
-import { NOT_FOUND } from 'common/constants/error';
 
 @QueryHandler(ValidateChatMemberQuery)
 export class ValidateChatMemberQueryHandler
@@ -20,7 +19,7 @@ export class ValidateChatMemberQueryHandler
       },
     });
     if (!chat) {
-      throw new WsException(NOT_FOUND);
+      throw new NotFoundException();
     }
   }
 }

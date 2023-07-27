@@ -128,7 +128,8 @@ describe('when edit message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual(FORBIDDEN);
+      expect(error.status).toEqual(403);
+      expect(error.message).toEqual(FORBIDDEN);
     });
   });
 
@@ -176,7 +177,8 @@ describe('when edit message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual(FORBIDDEN);
+      expect(error.status).toEqual(403);
+      expect(error.message).toEqual(FORBIDDEN);
     });
   });
 
@@ -230,7 +232,8 @@ describe('when edit message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual(NOT_FOUND);
+      expect(error.status).toEqual(404);
+      expect(error.message).toEqual(NOT_FOUND);
     });
   });
 
@@ -287,7 +290,8 @@ describe('when edit message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual(FORBIDDEN);
+      expect(error.status).toEqual(403);
+      expect(error.message).toEqual(FORBIDDEN);
     });
   });
 });

@@ -18,7 +18,13 @@ import {
   UnblockChatCommand,
 } from './commands';
 import { GetMessagesQuery, ValidateChatMemberQuery } from './queries';
-import { UseGuards } from '@nestjs/common';
+import {
+  UseFilters,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
+import { WsHttpExceptionFilter } from 'common/filters';
 import { WsAccessTokenGuard, WsRefreshTokenGuard } from 'common/guards';
 import {
   DeleteMessageDto,
@@ -36,6 +42,8 @@ import {
 } from './chats.interface';
 import { ChatsMapper } from './chats.mapper';
 
+@UseFilters(WsHttpExceptionFilter)
+@UsePipes(ValidationPipe)
 @WebSocketGateway({
   namespace: '/chat/socket',
   cors: { origin: true },

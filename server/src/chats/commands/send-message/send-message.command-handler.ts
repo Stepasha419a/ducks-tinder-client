@@ -1,10 +1,9 @@
-import { WsException } from '@nestjs/websockets';
+import { NotFoundException, ForbiddenException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SendMessageCommand } from './send-message.command';
 import { ChatsSelector } from 'chats/chats.selector';
 import { ChatSocketMessageReturn } from 'chats/chats.interface';
-import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(SendMessageCommand)
@@ -21,7 +20,7 @@ export class SendMessageCommandHandler
       select: { id: true, blocked: true, users: { select: { id: true } } },
     });
     if (!chat || chat?.blocked) {
-      throw new WsException(FORBIDDEN);
+      throw new ForbiddenException();
     }
 
     if (dto.repliedId) {
@@ -29,7 +28,7 @@ export class SendMessageCommandHandler
         where: { id: dto.repliedId },
       });
       if (!replied) {
-        throw new WsException(NOT_FOUND);
+        throw new NotFoundException();
       }
     }
 

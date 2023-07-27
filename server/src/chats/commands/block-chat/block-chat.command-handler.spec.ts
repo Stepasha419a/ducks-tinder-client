@@ -138,7 +138,8 @@ describe('when block chat is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual(NOT_FOUND);
+      expect(error.status).toEqual(404);
+      expect(error.message).toEqual(NOT_FOUND);
     });
   });
 });

@@ -1,11 +1,10 @@
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { ForbiddenException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { EditMessageCommand } from './edit-message.command';
 import { ChatSocketMessageReturn } from 'chats/chats.interface';
-import { WsException } from '@nestjs/websockets';
 import { ChatsSelector } from 'chats/chats.selector';
 import { getDatesHourDiff } from 'common/helpers';
-import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(EditMessageCommand)
@@ -22,20 +21,20 @@ export class EditMessageCommandHandler
       select: { id: true, blocked: true, users: { select: { id: true } } },
     });
     if (!chat || chat?.blocked) {
-      throw new WsException(FORBIDDEN);
+      throw new ForbiddenException();
     }
 
     const candidate = await this.prismaService.message.findFirst({
       where: { id: dto.messageId, userId: user.id },
     });
     if (!candidate) {
-      throw new WsException(NOT_FOUND);
+      throw new NotFoundException();
     }
 
     const isMessageEditable =
       getDatesHourDiff(new Date(), new Date(candidate.createdAt)) < 6;
     if (!isMessageEditable) {
-      throw new WsException(FORBIDDEN);
+      throw new ForbiddenException();
     }
 
     const message = await this.prismaService.message.update({

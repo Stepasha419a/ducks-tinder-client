@@ -1,9 +1,12 @@
-import { WsException } from '@nestjs/websockets';
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import {
+  Injectable,
+  CanActivate,
+  ExecutionContext,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { REFRESH_TOKEN_REGEX } from 'common/constants';
 import { TokensService } from 'tokens/tokens.service';
 import { UsersService } from 'users/users.service';
-import { UNAUTHORIZED } from 'common/constants/error';
 
 @Injectable()
 export class WsRefreshTokenGuard implements CanActivate {
@@ -20,7 +23,7 @@ export class WsRefreshTokenGuard implements CanActivate {
       refreshToken,
     );
     if (!userData) {
-      throw new WsException(UNAUTHORIZED);
+      throw new UnauthorizedException();
     }
 
     const user = await this.usersService.getUser(userData.id);
@@ -34,7 +37,7 @@ export class WsRefreshTokenGuard implements CanActivate {
       // to get token from string 'refreshToken=...; accessToken=...'
       return client?.handshake?.headers?.cookie.match(REFRESH_TOKEN_REGEX)?.[1];
     } else {
-      throw new WsException(UNAUTHORIZED);
+      throw new UnauthorizedException();
     }
   }
 }

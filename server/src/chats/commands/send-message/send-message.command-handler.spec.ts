@@ -9,7 +9,7 @@ import { requestUserStub } from 'users/test/stubs';
 import { SendMessageDto } from 'chats/dto';
 import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { ChatsSelector } from 'chats/chats.selector';
-import { FORBIDDEN } from 'common/constants/error';
+import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 
 describe('when send message is called', () => {
   let prismaService: PrismaService;
@@ -186,7 +186,8 @@ describe('when send message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual('Not Found');
+      expect(error.status).toEqual(404);
+      expect(error.message).toEqual(NOT_FOUND);
     });
   });
 
@@ -255,7 +256,8 @@ describe('when send message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual(FORBIDDEN);
+      expect(error.status).toEqual(403);
+      expect(error.message).toEqual(FORBIDDEN);
     });
   });
 
@@ -326,7 +328,8 @@ describe('when send message is called', () => {
     });
 
     it('should throw an error', () => {
-      expect(error?.message).toEqual(FORBIDDEN);
+      expect(error.status).toEqual(403);
+      expect(error.message).toEqual(FORBIDDEN);
     });
   });
 });

@@ -1,11 +1,10 @@
-import { WsException } from '@nestjs/websockets';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { ForbiddenException, NotFoundException } from '@nestjs/common';
 import { DeleteMessageCommand } from './delete-message.command';
 import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { PrismaService } from 'prisma/prisma.service';
 import { ChatsSelector } from 'chats/chats.selector';
 import { getDatesHourDiff } from 'common/helpers';
-import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 import { ChatsMapper } from 'chats/chats.mapper';
 
 @CommandHandler(DeleteMessageCommand)
@@ -24,7 +23,7 @@ export class DeleteMessageCommandHandler
       select: { blocked: true, id: true, users: { select: { id: true } } },
     });
     if (!chat || chat?.blocked) {
-      throw new WsException(FORBIDDEN);
+      throw new ForbiddenException();
     }
 
     const message = await this.prismaService.message.findFirst({
@@ -32,13 +31,13 @@ export class DeleteMessageCommandHandler
       select: ChatsSelector.selectMessage(),
     });
     if (!message) {
-      throw new WsException(NOT_FOUND);
+      throw new NotFoundException();
     }
 
     const isMessageDeletable =
       getDatesHourDiff(new Date(), new Date(message.createdAt)) < 12;
     if (!isMessageDeletable) {
-      throw new WsException(FORBIDDEN);
+      throw new ForbiddenException();
     }
 
     await this.prismaService.message.delete({ where: { id: dto.messageId } });
