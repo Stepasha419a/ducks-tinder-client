@@ -24,4 +24,5 @@ export {
   selectMessages,
   selectRepliedMessage,
   selectChatProfile,
+  selectNewMessageChatsCount,
 } from './chat.selectors';

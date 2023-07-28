@@ -1,6 +1,6 @@
 import type { Picture } from '@shared/api/interfaces';
 import { createSelector } from '@reduxjs/toolkit';
-import { sortChats } from '../lib';
+import { getIsNewMessages, sortChats } from '../lib';
 
 export const selectMessages = createSelector(
   [
@@ -82,4 +82,19 @@ export const selectChatProfile = createSelector(
       currentChatUser: currentChat?.users[0],
     };
   }
+);
+
+export const selectNewMessageChatsCount = createSelector(
+  [
+    (state: RootState) => state.chat.chats,
+    (state: RootState) => state.chat.currentChatId,
+    (state: RootState) => state.user.currentUser.id,
+  ],
+  (chats, currentChatId, currentUserId) =>
+    chats.reduce((total, chat) => {
+      const isActive = chat.id === currentChatId;
+      const isOwn =
+        chat.messages[chat.messages.length - 1]?.userId === currentUserId;
+      return getIsNewMessages(chat, isActive, !isOwn) ? total + 1 : total;
+    }, 0)
 );

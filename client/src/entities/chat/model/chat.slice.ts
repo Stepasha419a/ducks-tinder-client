@@ -156,6 +156,11 @@ const chatSlice = createSlice({
         state.isMessagesInitialLoading = false;
       })
       .addCase(disconnectChatThunk.fulfilled, (state) => {
+        const index = state.chats.findIndex(
+          (chat) => chat.id === state.currentChatId
+        );
+        state.chats[index].chatVisits[0].lastSeen = new Date().toISOString();
+
         state.isConnected = false;
         state.maxMessagesCount = 0;
         state.currentChatId = '';
