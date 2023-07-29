@@ -6,7 +6,6 @@ import { shortChatStub } from 'chats/test/stubs';
 import { requestUserStub } from 'users/test/stubs';
 import { ValidateChatMemberQueryHandler } from './validate-chat-member.query-handler';
 import { ValidateChatMemberQuery } from './validate-chat-member.query';
-import { NOT_FOUND } from 'common/constants/error';
 import { ChatIdDto } from 'chats/dto';
 
 describe('when get messages is called', () => {
@@ -107,7 +106,7 @@ describe('when get messages is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 });

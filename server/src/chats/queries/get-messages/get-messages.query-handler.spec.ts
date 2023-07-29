@@ -7,7 +7,6 @@ import { fullChatStub, messageStub, shortChatStub } from 'chats/test/stubs';
 import { GetMessagesQueryHandler } from './get-messages.query-handler';
 import { GetMessagesQuery } from './get-messages.query';
 import { requestUserStub } from 'users/test/stubs';
-import { NOT_FOUND } from 'common/constants/error';
 import { GetMessagesDto } from 'chats/dto';
 import { GetMessagesQueryReturn } from 'chats/chats.interface';
 
@@ -143,7 +142,7 @@ describe('when get messages is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 
@@ -202,7 +201,7 @@ describe('when get messages is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 });

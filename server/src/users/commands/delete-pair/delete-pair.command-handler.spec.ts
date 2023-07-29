@@ -7,7 +7,6 @@ import { ShortUserWithoutDistance } from 'users/users.interface';
 import { UsersSelector } from 'users/users.selector';
 import { DeletePairCommandHandler } from './delete-pair.command-handler';
 import { DeletePairCommand } from './delete-pair.command';
-import { NOT_FOUND_PAIR } from 'common/constants/error';
 
 describe('when delete pair is called', () => {
   let prismaService: PrismaService;
@@ -126,7 +125,7 @@ describe('when delete pair is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND_PAIR);
+      expect(error.message).toEqual('Not Found');
     });
 
     it('should return undefined', () => {

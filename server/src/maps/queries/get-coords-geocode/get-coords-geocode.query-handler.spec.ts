@@ -6,7 +6,6 @@ import { Geocode } from 'maps/maps.interface';
 import { HttpModule, HttpService } from '@nestjs/axios';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { of } from 'rxjs';
-import { NOT_FOUND } from 'common/constants/error';
 
 describe('when get sorted is called', () => {
   let getCoordsGeocodeQueryHandler: GetCoordsGeocodeQueryHandler;
@@ -140,7 +139,7 @@ describe('when get sorted is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 });

@@ -2,9 +2,10 @@ import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { PrismaService } from 'prisma/prisma.service';
 import { LikeUserCommand } from './like-user.command';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
-import { CAN_NOT_LIKE_YOURSELF } from 'common/constants/error/can-not-like-yourself.constant';
-import { NOT_FOUND_USER } from 'common/constants/error';
-import { USER_ALREADY_CHECKED } from 'common/constants/error/user-already-checked.constant';
+import {
+  CAN_NOT_LIKE_YOURSELF,
+  USER_ALREADY_CHECKED,
+} from 'common/constants/error';
 
 @CommandHandler(LikeUserCommand)
 export class LikeUserCommandHandler
@@ -23,7 +24,7 @@ export class LikeUserCommandHandler
       where: { id: userPairId },
     });
     if (!userPair) {
-      throw new NotFoundException(NOT_FOUND_USER);
+      throw new NotFoundException();
     }
 
     const checkedUsers = await this.prismaService.checkedUsers.findMany({

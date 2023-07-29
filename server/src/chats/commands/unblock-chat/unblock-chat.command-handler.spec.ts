@@ -5,7 +5,6 @@ import { fullChatStub } from 'chats/test/stubs';
 import { BlockChatSocketReturn } from 'chats/chats.interface';
 import { requestUserStub } from 'users/test/stubs';
 import { PrismaModule } from 'prisma/prisma.module';
-import { NOT_FOUND } from 'common/constants/error';
 import { UnblockChatCommandHandler } from './unblock-chat.command-handler';
 import { UnblockChatCommand } from './unblock-chat.command';
 import { ChatIdDto } from 'chats/dto';
@@ -135,7 +134,7 @@ describe('when unblock chat is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 });

@@ -11,7 +11,6 @@ import {
 import { ReturnUserCommandHandler } from './return-user.command-handler';
 import { ReturnUserCommand } from './return-user.command';
 import { UsersSelector } from 'users/users.selector';
-import { NOT_FOUND } from 'common/constants/error';
 
 describe('when return user is called', () => {
   let prismaService: PrismaService;
@@ -145,7 +144,7 @@ describe('when return user is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
 
     it('should return undefined', () => {

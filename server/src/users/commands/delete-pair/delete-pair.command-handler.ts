@@ -4,7 +4,6 @@ import { DeletePairCommand } from './delete-pair.command';
 import { ShortUserWithoutDistance } from 'users/users.interface';
 import { NotFoundException } from '@nestjs/common';
 import { UsersSelector } from 'users/users.selector';
-import { NOT_FOUND_PAIR } from 'common/constants/error';
 
 @CommandHandler(DeletePairCommand)
 export class DeletePairCommandHandler
@@ -20,7 +19,7 @@ export class DeletePairCommandHandler
       select: { id: true },
     });
     if (!userPair) {
-      throw new NotFoundException(NOT_FOUND_PAIR);
+      throw new NotFoundException();
     }
 
     await this.prismaService.user.update({

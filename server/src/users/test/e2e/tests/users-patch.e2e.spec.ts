@@ -111,7 +111,7 @@ describe('users (PATCH)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(404);
-      expect(response.body.message).toEqual('Such user was not found');
+      expect(response.body.message).toEqual('Not Found');
     });
   });
 

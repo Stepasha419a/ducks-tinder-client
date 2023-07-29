@@ -10,7 +10,6 @@ import { AcceptPairCommandHandler } from './accept-pair.command-handler';
 import { AcceptPairCommand } from './accept-pair.command';
 import { ChatsModule } from 'chats/chats.module';
 import { ChatsService } from 'chats/chats.service';
-import { NOT_FOUND_PAIR } from 'common/constants/error';
 
 describe('when accept pair is called', () => {
   let prismaService: PrismaService;
@@ -149,7 +148,7 @@ describe('when accept pair is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND_PAIR);
+      expect(error.message).toEqual('Not Found');
     });
 
     it('should return undefined', () => {

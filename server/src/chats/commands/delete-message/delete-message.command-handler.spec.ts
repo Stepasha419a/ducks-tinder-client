@@ -8,7 +8,6 @@ import { DeleteMessageCommandHandler } from './delete-message.command-handler';
 import { DeleteMessageCommand } from './delete-message.command';
 import { ChatSocketMessageReturn } from 'chats/chats.interface';
 import { ChatsSelector } from 'chats/chats.selector';
-import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 import { DeleteMessageDto } from 'chats/dto';
 
 describe('when delete message is called', () => {
@@ -138,7 +137,7 @@ describe('when delete message is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(403);
-      expect(error.message).toEqual(FORBIDDEN);
+      expect(error.message).toEqual('Forbidden');
     });
   });
 
@@ -194,7 +193,7 @@ describe('when delete message is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(403);
-      expect(error.message).toEqual(FORBIDDEN);
+      expect(error.message).toEqual('Forbidden');
     });
   });
 
@@ -254,7 +253,7 @@ describe('when delete message is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 
@@ -317,7 +316,7 @@ describe('when delete message is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(403);
-      expect(error.message).toEqual(FORBIDDEN);
+      expect(error.message).toEqual('Forbidden');
     });
   });
 });

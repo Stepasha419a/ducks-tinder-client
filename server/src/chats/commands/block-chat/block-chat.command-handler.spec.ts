@@ -7,7 +7,6 @@ import { BlockChatSocketReturn } from 'chats/chats.interface';
 import { BlockChatCommand } from './block-chat.command';
 import { requestUserStub } from 'users/test/stubs';
 import { PrismaModule } from 'prisma/prisma.module';
-import { NOT_FOUND } from 'common/constants/error';
 import { fullChatWithoutDistanceStub } from 'chats/test/stubs/full-chat-without-distance.stub';
 import { ChatIdDto } from 'chats/dto';
 
@@ -139,7 +138,7 @@ describe('when block chat is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 });

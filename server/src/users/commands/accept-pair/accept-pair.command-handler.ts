@@ -5,7 +5,6 @@ import { PrismaService } from 'prisma/prisma.service';
 import { UsersSelector } from 'users/users.selector';
 import { ChatsService } from 'chats/chats.service';
 import { ShortUserWithoutDistance } from 'users/users.interface';
-import { NOT_FOUND_PAIR } from 'common/constants/error';
 
 @CommandHandler(AcceptPairCommand)
 export class AcceptPairCommandHandler
@@ -24,7 +23,7 @@ export class AcceptPairCommandHandler
       select: { id: true },
     });
     if (!userPair) {
-      throw new NotFoundException(NOT_FOUND_PAIR);
+      throw new NotFoundException();
     }
 
     await this.prismaService.user.update({

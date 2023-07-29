@@ -9,7 +9,6 @@ import { EditMessageCommandHandler } from './edit-message.command-handler';
 import { EditMessageCommand } from './edit-message.command';
 import { EDIT_MESSAGE_DTO } from 'chats/test/values/chats.const.dto';
 import { ChatsSelector } from 'chats/chats.selector';
-import { FORBIDDEN, NOT_FOUND } from 'common/constants/error';
 
 describe('when edit message is called', () => {
   let prismaService: PrismaService;
@@ -129,7 +128,7 @@ describe('when edit message is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(403);
-      expect(error.message).toEqual(FORBIDDEN);
+      expect(error.message).toEqual('Forbidden');
     });
   });
 
@@ -178,7 +177,7 @@ describe('when edit message is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(403);
-      expect(error.message).toEqual(FORBIDDEN);
+      expect(error.message).toEqual('Forbidden');
     });
   });
 
@@ -233,7 +232,7 @@ describe('when edit message is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 
@@ -291,7 +290,7 @@ describe('when edit message is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(403);
-      expect(error.message).toEqual(FORBIDDEN);
+      expect(error.message).toEqual('Forbidden');
     });
   });
 });

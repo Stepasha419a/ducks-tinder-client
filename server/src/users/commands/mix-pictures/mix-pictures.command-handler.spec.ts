@@ -8,7 +8,6 @@ import { UsersSelector } from 'users/users.selector';
 import { MixPicturesCommandHandler } from './mix-pictures.command-handler';
 import { MixPicturesCommand } from './mix-pictures.command';
 import { MIX_PICTURES_DTO } from 'users/test/values/users.const.dto';
-import { NOT_FOUND } from 'common/constants/error';
 
 describe('when mix pictures is called', () => {
   let prismaService: PrismaService;
@@ -166,7 +165,7 @@ describe('when mix pictures is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 
@@ -238,7 +237,7 @@ describe('when mix pictures is called', () => {
 
     it('should throw an error', () => {
       expect(error.status).toEqual(404);
-      expect(error.message).toEqual(NOT_FOUND);
+      expect(error.message).toEqual('Not Found');
     });
   });
 });

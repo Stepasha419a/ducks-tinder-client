@@ -10,7 +10,6 @@ import {
   prepareAfter,
   prepareBefore,
 } from '../preparations';
-import { NOT_FOUND_PAIR } from 'common/constants/error';
 import { USERS_PAIRS_PUT_EXPECT } from 'users/test/values/users.e2e-const.expect';
 
 const currentUserId = 'users_pairs_put_current_user_id';
@@ -87,7 +86,7 @@ describe('users/pairs/:id (PUT)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(404);
-      expect(response.body.message).toEqual('Such user was not found');
+      expect(response.body.message).toEqual('Not Found');
     });
   });
 
@@ -104,7 +103,7 @@ describe('users/pairs/:id (PUT)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(404);
-      expect(response.body.message).toEqual(NOT_FOUND_PAIR);
+      expect(response.body.message).toEqual('Not Found');
     });
   });
 
@@ -121,9 +120,7 @@ describe('users/pairs/:id (PUT)', () => {
 
     it('should throw an error', () => {
       expect(response.status).toBe(404);
-      expect(response.body.message).toEqual(
-        'Pair with such an id was not found',
-      );
+      expect(response.body.message).toEqual('Not Found');
     });
   });
 

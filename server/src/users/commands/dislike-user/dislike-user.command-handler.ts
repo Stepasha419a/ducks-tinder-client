@@ -4,9 +4,8 @@ import { DislikeUserCommand } from './dislike-user.command';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import {
   CAN_NOT_DISLIKE_YOURSELF,
-  NOT_FOUND_USER,
+  USER_ALREADY_CHECKED,
 } from 'common/constants/error';
-import { USER_ALREADY_CHECKED } from 'common/constants/error/user-already-checked.constant';
 
 @CommandHandler(DislikeUserCommand)
 export class DislikeUserCommandHandler
@@ -25,7 +24,7 @@ export class DislikeUserCommandHandler
       where: { id: userPairId },
     });
     if (!userPair) {
-      throw new NotFoundException(NOT_FOUND_USER);
+      throw new NotFoundException();
     }
 
     const checkedUsers = await this.prismaService.checkedUsers.findMany({
