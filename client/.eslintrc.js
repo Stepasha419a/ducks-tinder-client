@@ -13,7 +13,8 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended'
+    'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended',
   ],
   overrides: [],
   parserOptions: {
@@ -67,7 +68,6 @@ module.exports = {
     '@typescript-eslint/restrict-plus-operands': 'warn',
     '@typescript-eslint/restrict-template-expressions': 'warn',
     '@typescript-eslint/switch-exhaustiveness-check': 'warn',
-
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'warn',
     'no-array-constructor': 'off',
