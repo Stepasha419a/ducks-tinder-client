@@ -21,7 +21,6 @@
       "@app/*": ["./application/*"],
       "@pages/*": ["./pages/*"],
       "@widgets": ["./widgets/index"],
-      "@components": ["./components/index"],
       "@hooks": ["./shared/lib/hooks"],
       "@hocs": ["./shared/lib/hocs"],
       "@features/*": ["./features/*"],

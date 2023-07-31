@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
 import Carousel from 'react-slick';
-import { makeImageUrl } from '@shared/helpers';
+import { makeImageUrl, showDefaultImage } from '@shared/helpers';
 import type { Picture } from '@shared/api/interfaces';
 import styles from './ImageSlider.module.scss';
 import 'slick-carousel/slick/slick.scss';
@@ -70,6 +70,7 @@ export const ImageSlider: FC<ImageSliderPropsInterface> = ({
               <img
                 src={makeImageUrl(userId, image.name)}
                 alt="imagesSlider"
+                onError={showDefaultImage}
                 className={cn}
               ></img>
             </div>

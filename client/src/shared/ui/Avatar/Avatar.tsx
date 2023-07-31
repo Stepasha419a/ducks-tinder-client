@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
 import type { AvatarProps } from './Avatar.types';
+import { makeImageUrl, showDefaultImage } from '@shared/helpers';
 import styles from './Avatar.module.scss';
-import { makeImageUrl } from '@shared/helpers';
 
 export const Avatar: FC<AvatarProps> = ({
   size = 's',
@@ -15,13 +15,19 @@ export const Avatar: FC<AvatarProps> = ({
   const cnContainer = classNames(
     styles.container,
     styles[size],
-    extraClassName,
+    extraClassName
   );
   const cn = classNames(styles.image, styles[size]);
 
   return (
     <div className={cnContainer}>
-      <img draggable="false" className={cn} src={imageUrl} alt="avatar" />
+      <img
+        draggable="false"
+        className={cn}
+        src={imageUrl}
+        onError={showDefaultImage}
+        alt="avatar"
+      />
     </div>
   );
 };
