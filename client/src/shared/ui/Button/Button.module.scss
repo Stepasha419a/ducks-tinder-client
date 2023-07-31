@@ -4,11 +4,16 @@
   color: var(--main-secondary);
   font-size: 18px;
   font-weight: 600;
+  color: var(--main-primary);
+  background-color: var(--bg-sub-primary);
   cursor: pointer;
 
-  &.default {
-    color: var(--main-primary);
-    background-color: var(--bg-sub-primary);
+  &.border {
+    border: 1px solid var(--border-main);
+  }
+
+  &.rounded {
+    border-radius: 24px;
   }
 
   &.mark {
@@ -19,60 +24,6 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-  }
-
-  &.closePopup {
-    position: sticky;
-    bottom: 0;
-    font-size: 22px;
-    font-weight: 400;
-    text-transform: uppercase;
-    height: 60px;
-    color: var(--main-primary);
-    background-color: var(--bg-sub-primary);
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    margin-top: 10px;
-    transition: 0.2s;
-
-    &:hover {
-      color: var(--color--red-90);
-    }
-  }
-
-  &.auth {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--color--white-100);
-    text-transform: uppercase;
-
-    height: 50px;
-    border-radius: 25px;
-    background: var(--color--green-90);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 25px;
-
-    transition: all 0.4s;
-  }
-
-  &.setting {
-    max-height: 53px;
-    background-color: var(--bg-sub-primary);
-    border: 1px solid var(--border-main);
-    border-right: none;
-    padding: 16px;
-    cursor: pointer;
-    color: var(--danger-light);
-    text-align: left;
-    font-size: 16px;
-    font-weight: 500;
-
-    &:disabled {
-      background-color: var(--bg-primary);
-      cursor: not-allowed;
-    }
   }
 
   &.gradient {
@@ -109,16 +60,5 @@
     &:hover::before {
       opacity: 1;
     }
-  }
-
-  &.tinder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    color: var(--color--white-100);
-    border: 1px solid var(--color--white-100);
-    border-radius: 50%;
-    cursor: pointer;
   }
 }

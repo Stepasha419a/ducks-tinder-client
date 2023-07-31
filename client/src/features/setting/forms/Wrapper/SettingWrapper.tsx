@@ -8,6 +8,7 @@ import type {
   SettingFieldValues,
 } from '@entities/setting/model';
 import styles from './SettingWrapper.module.scss';
+import classNames from 'classnames';
 
 interface SettingWrapperProps {
   formName: string | null;
@@ -37,15 +38,19 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
       <div className={styles.title}>Your {formName}</div>
       <Link onClick={cancelHandler} to={ROUTES.profile} className={styles.link}>
         <Button
-          type="button"
           disabled={!isValid}
-          variant="setting"
-          extraClassName={styles.noBorder}
+          border
+          extraClassName={classNames(styles.btn, styles.noBorder)}
         >
           Cancel
         </Button>
       </Link>
-      <Button type="submit" disabled={!isValid} variant="setting">
+      <Button
+        border
+        type="submit"
+        disabled={!isValid}
+        extraClassName={styles.btn}
+      >
         Update my {formName}
       </Button>
     </form>

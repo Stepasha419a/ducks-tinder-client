@@ -24,9 +24,8 @@ export const RateButtons: FC<RateButtonsProps> = ({
       {buttons.map((buttonData, index) => {
         return (
           <Button
-            variant="tinder"
             onClick={buttonData.onClick}
-            extraClassName={buttonData.extraClassName}
+            extraClassName={classNames(styles.btn, buttonData.extraClassName)}
             key={index}
           >
             <div className={styles.background} />

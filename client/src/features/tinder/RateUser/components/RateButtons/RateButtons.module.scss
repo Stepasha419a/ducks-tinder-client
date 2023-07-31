@@ -38,36 +38,41 @@
     }
   }
 
-  .blocked {
-    border-color: var(--border-main);
-    cursor: default;
-  }
-
-  .gold {
-    border-color: var(--color--yellow-100);
-  }
-
-  .red {
-    border-color: var(--color--red-100);
-  }
-
-  .blue {
-    border-color: var(--color--blue-100);
-  }
-
-  .green {
-    border-color: var(--color--green-100);
-  }
-
-  .purple {
-    border-color: var(--color--purple-100);
-  }
-
   .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    color: var(--color--white-100);
+    border: 1px solid var(--color--white-100);
+    border-radius: 50%;
+    cursor: pointer;
+
     transition: 0.2s;
 
-    .red {
-      width: 28px;
+    &.blocked {
+      border-color: var(--border-main);
+      cursor: default;
+    }
+
+    &.gold {
+      border-color: var(--color--yellow-100);
+    }
+
+    &.red {
+      border-color: var(--color--red-100);
+    }
+
+    &.blue {
+      border-color: var(--color--blue-100);
+    }
+
+    &.green {
+      border-color: var(--color--green-100);
+    }
+
+    &.purple {
+      border-color: var(--color--purple-100);
     }
 
     .icon {
@@ -87,6 +92,7 @@
       }
 
       &.red {
+        width: 28px;
         color: var(--color--red-70);
       }
 

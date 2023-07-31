@@ -25,8 +25,25 @@
 
   .link {
     display: block;
+  }
 
-    button.noBorder {
+  .btn {
+    max-height: 53px;
+    background-color: var(--bg-sub-primary);
+    border-right: none;
+    padding: 16px;
+    cursor: pointer;
+    color: var(--danger-light);
+    text-align: left;
+    font-size: 16px;
+    font-weight: 500;
+
+    &:disabled {
+      background-color: var(--bg-primary);
+      cursor: not-allowed;
+    }
+
+    &.noBorder {
       border-bottom: none;
     }
   }

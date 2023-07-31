@@ -58,7 +58,7 @@ export const RegistrationForm = (): ReactElement => {
 
         <Button
           type="submit"
-          variant="auth"
+          rounded
           disabled={!isValid}
           extraClassName={[styles.btn, isValid ? '' : styles.disabled]}
         >

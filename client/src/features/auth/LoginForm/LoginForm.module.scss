@@ -43,7 +43,17 @@
   }
 
   .btn {
-    margin-top: 20px;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color--white-100);
+    text-transform: uppercase;
+
+    height: 50px;
+    background: var(--color--green-90);
+    padding: 0 25px;
+    margin-top: 10px;
+
+    transition: all 0.4s;
 
     &.disabled {
       background: var(--bg-secondary) !important;

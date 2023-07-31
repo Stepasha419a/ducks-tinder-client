@@ -23,7 +23,7 @@ export const InterestsListPopup: FC<InterestsListPopupProps> = ({
         })}
       </div>
       <Button
-        variant="closePopup"
+        extraClassName={styles.btn}
         onClick={() => setIsInterestsListPopupOpen(false)}
       >
         Close

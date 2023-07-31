@@ -48,7 +48,7 @@ export const LoginForm = (): ReactElement => {
         </div>
         <Button
           type="submit"
-          variant="auth"
+          rounded
           disabled={!isValid}
           extraClassName={[styles.btn, isValid ? '' : styles.disabled]}
         >

@@ -1,21 +1,10 @@
 import type { ButtonHTMLAttributes } from 'react';
 
-type VariantType =
-  | 'gradient'
-  | 'default'
-  | 'setting'
-  | 'auth'
-  | 'closePopup'
-  | 'mark'
-  | 'tinder';
-
-type SizeType = 'small' | 'large';
-
-type ColorType = 'gold' | 'red' | 'blue' | 'green' | 'purple';
+type VariantType = 'default' | 'gradient' | 'mark';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: VariantType;
   extraClassName?: string | string[];
-  size?: SizeType;
-  color?: ColorType;
+  border?: boolean;
+  rounded?: boolean;
 }
