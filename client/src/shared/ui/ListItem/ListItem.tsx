@@ -4,6 +4,7 @@ import styles from './ListItem.module.scss';
 
 interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
   isActive?: boolean;
+  pointer?: boolean;
   xmark?: boolean;
   extraClassName?: string;
 }
@@ -11,6 +12,7 @@ interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
 export const ListItem: FC<PropsWithChildren<ListItemProps>> = ({
   children,
   isActive,
+  pointer,
   xmark,
   extraClassName,
   ...props
@@ -18,7 +20,8 @@ export const ListItem: FC<PropsWithChildren<ListItemProps>> = ({
   const cn = classNames(
     styles.item,
     isActive && styles.active,
-    props.onClick && styles.pointer,
+    xmark && styles.xmark,
+    pointer && styles.pointer,
     extraClassName
   );
   return (

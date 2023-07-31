@@ -36,6 +36,7 @@ export const InterestsForm: FC = (): ReactElement => {
               return (
                 <ListItem
                   onClick={() => toggleItem(item)}
+                  pointer
                   key={item.name}
                   extraClassName={styles.item}
                   xmark

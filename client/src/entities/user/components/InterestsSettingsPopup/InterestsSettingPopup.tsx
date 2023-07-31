@@ -27,6 +27,7 @@ export const InterestsSettingPopup: FC<InterestsSettingPopupProps> = ({
             <ListItem
               onClick={() => toggleInterest({ name: interest })}
               isActive={isActive}
+              pointer
               key={interest}
             >
               {interest}
@@ -34,7 +35,10 @@ export const InterestsSettingPopup: FC<InterestsSettingPopupProps> = ({
           );
         })}
       </div>
-      <Button extraClassName={styles.btn} onClick={() => setIsInterestsSettingPopupOpen(false)}>
+      <Button
+        extraClassName={styles.btn}
+        onClick={() => setIsInterestsSettingPopupOpen(false)}
+      >
         Confirm
       </Button>
     </Popup>

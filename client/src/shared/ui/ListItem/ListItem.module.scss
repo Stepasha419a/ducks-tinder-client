@@ -9,13 +9,17 @@
   color: var(--main-secondary);
   transition: 0.2s;
 
-  &.pointer{
+  &.pointer {
     cursor: pointer;
   }
 
   &.active {
     border-color: var(--color--red-90);
     color: var(--color--red-90);
+  }
+
+  &.xmark {
+    padding: 5px 25px 5px 10px;
   }
 
   .xmark {
