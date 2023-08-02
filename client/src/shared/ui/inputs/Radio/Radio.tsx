@@ -5,7 +5,7 @@ import type { InputHTMLAttributes, PropsWithChildren } from 'react';
 import { forwardRef } from 'react';
 import styles from './Radio.module.scss';
 
-interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {
   checked?: boolean;
   name?: string;
   text?: string;

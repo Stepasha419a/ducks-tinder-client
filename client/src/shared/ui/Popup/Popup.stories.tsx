@@ -1,6 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Popup } from './Popup';
+import type { FC } from 'react';
 import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react';
+import type { PopupProps } from './Popup.types';
+import { Popup } from './Popup';
 import { Button } from '../Button/Button';
 
 const meta = {
@@ -14,37 +16,37 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  render: (args) => {
-    return (() => {
-      const [isOpen, setIsOpen] = useState(true);
+const PopupComponent: FC<PopupProps> = (args) => {
+  const [isOpen, setIsOpen] = useState(true);
 
-      return (
-        <>
-          <Button
-            style={{ padding: '10px 40px' }}
-            rounded
-            border
-            onClick={() => setIsOpen(true)}
+  return (
+    <>
+      <Button
+        style={{ padding: '10px 40px' }}
+        rounded
+        border
+        onClick={() => setIsOpen(true)}
+      >
+        open
+      </Button>
+      {isOpen && (
+        <Popup {...args} closeHandler={() => setIsOpen(false)}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+            }}
           >
-            open
-          </Button>
-          {isOpen && (
-            <Popup {...args} closeHandler={() => setIsOpen(false)}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                }}
-              >
-                content
-              </div>
-            </Popup>
-          )}
-        </>
-      );
-    })();
-  },
+            content
+          </div>
+        </Popup>
+      )}
+    </>
+  );
+};
+
+export const Primary: Story = {
+  render: (args) => <PopupComponent {...args} />,
   args: {
     size: 'm',
     title: 'Popup title',
