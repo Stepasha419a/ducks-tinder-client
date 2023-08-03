@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from './Button';
+import { userEvent, within } from '@storybook/testing-library';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { Button } from './Button';
 
 const meta = {
   title: 'UI/Button',
@@ -16,8 +17,15 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   render: (args) => (
-    <Button {...args} style={{ height: '60px', width: '180px' }}>Click me!</Button>
+    <Button {...args} style={{ height: '60px', width: '180px' }}>
+      Click me!
+    </Button>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('Click me!'));
+  },
 };
 
 export const Gradient: Story = {
@@ -33,6 +41,11 @@ export const Gradient: Story = {
       Click me!
     </Button>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByText('Click me!'));
+  },
 };
 
 export const Mark: Story = {
@@ -41,4 +54,9 @@ export const Mark: Story = {
       <FontAwesomeIcon icon={faCircleInfo} />
     </Button>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole('button'));
+  },
 };
