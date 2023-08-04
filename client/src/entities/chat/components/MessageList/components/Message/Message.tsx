@@ -16,8 +16,10 @@ interface MessageProps {
 
 export const Message = ({ children }: MessageProps) => {
   return (
-    <div className='wrapper'>
-      <div className='container'>{children}</div>
+    <div className="wrapper">
+      <div className="container">
+        <span className="flex">{children}</span>
+      </div>
     </div>
   );
 };

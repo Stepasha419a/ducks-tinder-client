@@ -1,14 +1,26 @@
 .wrapper {
-  display: table;
+  display: block;
   padding: 8px 0;
-  position: relative;
 
   .container {
     display: flex;
 
+    .flex {
+      position: relative;
+      display: flex;
+    }
+
     &:hover .dots {
       opacity: 1;
       visibility: visible;
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .wrapper {
+    .container {
+      position: relative;
     }
   }
 }

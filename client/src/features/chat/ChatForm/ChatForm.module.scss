@@ -138,3 +138,38 @@
     }
   }
 }
+
+@media (max-width: 1260px) {
+  .wrapper {
+    .reply {
+      max-width: 490px;
+      margin-left: 70px;
+    }
+
+    .form {
+      margin-left: 50px;
+      padding: 4px 20px;
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .wrapper {
+    .reply {
+      max-width: 690px;
+      width: calc(100% - 120px);
+      margin-left: 20px;
+    }
+
+    .form {
+      justify-content: space-between;
+      max-width: none;
+      margin-left: 0;
+      padding: 4px 20px;
+
+      .input {
+        max-width: none;
+      }
+    }
+  }
+}

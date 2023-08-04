@@ -22,3 +22,21 @@
     margin-left: 8px;
   }
 }
+
+@media (max-width: 1260px) {
+  .messages {
+    padding-left: 70px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .messages {
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .messages {
+    padding-left: 20px;
+  }
+}

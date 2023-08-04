@@ -30,3 +30,21 @@
     }
   }
 }
+
+@media (max-width: 1150px) {
+  .message {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .message {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 950px) {
+  .message {
+    max-width: 300px;
+  }
+}
