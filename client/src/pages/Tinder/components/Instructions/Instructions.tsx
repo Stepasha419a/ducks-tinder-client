@@ -11,6 +11,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '@shared/ui';
 import styles from './Instructions.module.scss';
+import classNames from 'classnames';
 
 export const Instructions = (): ReactElement => {
   const [isInstructionsOpen, setIsInstructionsOpen] = useState(true);
@@ -19,8 +20,12 @@ export const Instructions = (): ReactElement => {
     <motion.div
       key="open-instructions"
       transition={{ duration: 0.15 }}
-      animate={{ width: isInstructionsOpen ? '800px' : '97px' }}
-      className={styles.instructions}
+      initial={false}
+      animate={{ width: isInstructionsOpen ? '100%' : '97px' }}
+      className={classNames(
+        styles.instructions,
+        isInstructionsOpen && styles.open
+      )}
     >
       <Button
         onClick={() =>
