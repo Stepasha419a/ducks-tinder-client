@@ -9,3 +9,13 @@
     overflow: auto;
   }
 }
+
+@media (max-width: 900px) {
+  .main {
+    display: block;
+
+    .content{
+      height: calc(100vh - 48px);
+    }
+  }
+}

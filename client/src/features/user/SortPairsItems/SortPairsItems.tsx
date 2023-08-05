@@ -23,6 +23,7 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
       <div className={styles.sorting}>
         <ListItem
           onClick={() => setIsSortPopupOpen(true)}
+          pointer
           isActive={isSortPopupOpen}
           extraClassName={styles.item}
         >
@@ -32,6 +33,7 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
           return (
             <ListItem
               onClick={() => forcedToggleInterest({ name: item })}
+              pointer
               isActive={interests.some((interest) => interest.name === item)}
               extraClassName={styles.item}
               key={item}
@@ -42,6 +44,7 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
         })}
         <ListItem
           onClick={() => forcedToggleAccount('have interests')}
+          pointer
           isActive={account.includes('have interests')}
           extraClassName={styles.item}
         >

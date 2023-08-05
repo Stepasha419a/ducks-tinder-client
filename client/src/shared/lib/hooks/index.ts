@@ -6,3 +6,4 @@ export { useIntersectionObserver } from './useIntersectionObserver';
 export { useDebouncedCallback } from './useDebouncedCallback';
 export { useEventListener } from './useEventListener';
 export { useOnClickOutside } from './useOnClickOutside';
+export { useMediaQuery } from './useMediaQuery';
