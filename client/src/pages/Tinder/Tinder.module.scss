@@ -17,4 +17,13 @@
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
   }
+
+  &.mobile {
+    height: 100%;
+
+    .users {
+      width: 100%;
+      max-height: none;
+    }
+  }
 }

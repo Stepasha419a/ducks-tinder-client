@@ -58,3 +58,21 @@
     background-color: rgb(255, 71, 71);
   }
 }
+
+@media (max-width: 400px) {
+  .item {
+    font-size: 14px;
+    height: 28px;
+
+    padding: 4px 16px;
+  }
+}
+
+@media (max-width: 340px) {
+  .item {
+    font-size: 12px;
+    height: 26px;
+
+    padding: 3px 12px;
+  }
+}

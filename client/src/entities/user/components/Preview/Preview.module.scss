@@ -13,6 +13,7 @@
 
   .slider {
     height: 100%;
+    position: relative;
 
     .image {
       position: relative;
@@ -21,25 +22,6 @@
 
     .arrows {
       height: 85%;
-    }
-
-    .closeFullPreview {
-      font-size: 44px;
-      height: 44px;
-      width: 44px;
-      bottom: -20px;
-      right: 18px;
-      transition: 0.3s;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-
-      .icon {
-        color: rgba(224, 48, 48, 0.747);
-        background-color: var(--color--white-100);
-        border-radius: 50%;
-      }
     }
   }
 
@@ -196,7 +178,22 @@
 
     .closeFullPreview {
       z-index: 1;
-      bottom: 175px;
+      font-size: 44px;
+      height: 44px;
+      width: 44px;
+      bottom: -20px;
+      right: 18px;
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      .icon {
+        color: rgba(224, 48, 48, 0.747);
+        background-color: var(--color--white-100);
+        border-radius: 50%;
+      }
     }
 
     .description {
@@ -211,6 +208,38 @@
       cursor: pointer;
       margin: 0 auto;
       padding: 10px 0;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .preview {
+    .descr {
+      .person {
+        font-size: 28px;
+
+        .years {
+          font-size: 24px;
+        }
+      }
+
+      .place {
+        .name {
+          font-size: 16px;
+        }
+      }
+
+      .distance {
+        .text {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .interests {
+      .title {
+        font-size: 18px;
+      }
     }
   }
 }
