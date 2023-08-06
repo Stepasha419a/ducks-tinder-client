@@ -1,4 +1,4 @@
-type SizeType = 's' | 'm';
+type SizeType = 's' | 'm' | 'l' | 'xl';
 
 export interface AvatarProps {
   size?: SizeType;

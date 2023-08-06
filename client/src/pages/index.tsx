@@ -11,7 +11,7 @@ import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
 import { ImageSetting, PlaceSetting } from '@widgets';
 import { ActiveChat, Choose } from './Chat/components';
-import { UserImage } from './Profile/components';
+import { ProfilePreview } from './Profile/components';
 import NotFound from './NotFound/NotFound';
 
 const Routing = (): ReactElement => {
@@ -23,10 +23,10 @@ const Routing = (): ReactElement => {
       <Route path={ROUTES.main} element={<NavLayout />}>
         <Route index element={<TinderPage />} />
         <Route path={ROUTES.profile} element={<ProfilePage />}>
-          <Route index element={<UserImage />} />
+          <Route index element={<ProfilePreview />} />
           <Route path="edit" element={<ImageSetting />} />
           <Route path="place" element={<PlaceSetting />} />
-          <Route path=":settingName" element={<UserImage />} />
+          <Route path=":settingName" element={<ProfilePreview />} />
         </Route>
         <Route path={ROUTES.chat} element={<ChatPage />}>
           <Route index element={<Choose />} />

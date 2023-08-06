@@ -1,0 +1,128 @@
+.profile {
+  max-height: calc(100vh - 48px);
+  height: 100%;
+  width: 100%;
+
+  .miniature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-height: calc(100vh - 280px - 48px - 80px);
+    min-height: 400px;
+    height: 100%;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      display: block;
+      height: 80px;
+      width: 100%;
+
+      background-color: var(--bg-primary);
+      border-bottom-left-radius: 150%;
+      border-bottom-right-radius: 150%;
+    }
+
+    .wrapper {
+      width: 100%;
+
+      .user {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .avatarWrapper {
+          width: 100%;
+          margin: 0 auto;
+
+          .avatar {
+            margin: 0 auto;
+          }
+        }
+
+        .descr {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          margin-top: 20px;
+
+          .name {
+            font-size: 28px;
+            font-weight: 500;
+            margin-right: 8px;
+          }
+
+          .age {
+            font-size: 28px;
+          }
+        }
+      }
+
+      .links {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+
+        .link {
+          min-width: 100px;
+          padding: 10px;
+          text-align: center;
+
+          &.top {
+            margin-bottom: 40px;
+          }
+
+          .iconWrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--sub-border-main);
+            border-radius: 50%;
+            margin: 0 auto 10px;
+
+            .icon {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .membership {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    max-height: 360px;
+    height: 100%;
+    width: 100%;
+    padding-top: 40px;
+
+    background-color: var(--bg-sub-secondary);
+  }
+}
+
+@media (max-width: 340px) {
+  .profile {
+    .miniature {
+      .wrapper {
+        .links {
+          .link {
+            font-size: 12px;
+            min-width: auto;
+            padding: 0px;
+          }
+        }
+      }
+    }
+  }
+}

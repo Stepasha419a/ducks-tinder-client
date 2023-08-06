@@ -1,14 +1,21 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '@shared/lib/hooks';
+import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { Button } from '@shared/ui';
 import { ROUTES } from '@shared/constants';
 import { selectPreviewUser } from '@entities/user/model';
 import { Preview } from '@entities/user/components';
-import styles from './UserImage.module.scss';
+import { ProfilePreviewMobile } from './mobile/ProfilePreview.mobile';
+import styles from './ProfilePreview.module.scss';
 
-export const UserImage: FC = () => {
+export const ProfilePreview: FC = () => {
+  const isMobile = useMediaQuery('(max-width: 900px)');
+
   const previewUser = useAppSelector(selectPreviewUser);
+
+  if (isMobile) {
+    return <ProfilePreviewMobile />;
+  }
 
   return (
     <>
