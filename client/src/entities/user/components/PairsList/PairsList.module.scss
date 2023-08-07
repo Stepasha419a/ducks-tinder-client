@@ -20,3 +20,9 @@
     color: var(--color--red-90);
   }
 }
+
+@media (max-width: 575px) {
+  .pairs {
+    margin: 30px 15px 20px;
+  }
+}

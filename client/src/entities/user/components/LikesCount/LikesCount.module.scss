@@ -15,3 +15,14 @@
     margin-right: 6px;
   }
 }
+
+@media (max-width: 600px) {
+  .likes {
+    height: 60px;
+    font-size: 18px;
+
+    .icon {
+      font-size: 24px;
+    }
+  }
+}

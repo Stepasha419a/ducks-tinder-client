@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ListItem } from '@shared/ui';
 import { usePairSorts } from '../lib';
 import styles from './SortPairsItems.module.scss';
+import { useMediaQuery } from '@/shared/lib/hooks';
+import { SortPairsItemsMobile } from './mobile/SortPairsItems.mobile';
 
 interface SortPairsItemsProps {
   isSortPopupOpen: boolean;
@@ -15,8 +17,21 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
   isSortPopupOpen,
   setIsSortPopupOpen,
 }) => {
+  const isSmallMobile = useMediaQuery('(max-width: 600px)');
+
   const { account, forcedToggleAccount, interests, forcedToggleInterest } =
     usePairSorts();
+
+  if (isSmallMobile) {
+    return (
+      <SortPairsItemsMobile
+        isSortPopupOpen={isSortPopupOpen}
+        setIsSortPopupOpen={setIsSortPopupOpen}
+        account={account}
+        forcedToggleAccount={forcedToggleAccount}
+      />
+    );
+  }
 
   return (
     <>
