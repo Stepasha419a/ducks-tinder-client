@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import styles from './Popup.module.scss';
 import type { PopupProps } from './Popup.types';
-import { variants } from './Popup.variants';
+import { mobileVariants, variants } from './Popup.variants';
+import { useMediaQuery } from '@/shared/lib/hooks';
 
 const portalElement = document.getElementById('portal');
 
@@ -15,16 +16,23 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
   size = 'm',
   extraClassName,
 }) => {
+  const isMobile = useMediaQuery('(max-width: 900px)');
+
   const cn = classNames(styles.content, styles[size], extraClassName);
+
+  const adaptiveVariants = isMobile ? mobileVariants : variants;
+  const duration = isMobile ? 0.2 : 0.1;
 
   return ReactDOM.createPortal(
     <div className={styles.popup}>
       <motion.div
         className={styles.body}
-        variants={variants}
+        variants={adaptiveVariants}
         initial={'initial'}
         animate={'animate'}
-        transition={{ duration: 0.1 }}
+        exit={'initial'}
+        transition={{ duration }}
+        key="popup"
       >
         <div className={cn}>
           {title && <div className={styles.title}>{title}</div>}
