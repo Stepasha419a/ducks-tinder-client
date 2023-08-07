@@ -43,9 +43,9 @@ export const PairsSortPopup: FC<PairsSortPopupProps> = ({
       <Popup
         title="Likes filter"
         closeHandler={handleSubmit}
-        extraClassName={styles.noRadius}
+        extraClassName={styles.popup}
       >
-        <form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <DistanceSetting control={control} />
           <AgeSetting control={control} />
           <PhotosSetting control={control} />

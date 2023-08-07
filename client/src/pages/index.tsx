@@ -10,7 +10,7 @@ import ChatPage from '@pages/Chat';
 import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
 import { ImageSetting, PlaceSetting } from '@widgets';
-import { ActiveChat, Choose } from './Chat/components';
+import { ActiveChat, IndexChatPage } from './Chat/components';
 import { ProfilePreview } from './Profile/components';
 import NotFound from './NotFound/NotFound';
 
@@ -29,7 +29,7 @@ const Routing = (): ReactElement => {
           <Route path=":settingName" element={<ProfilePreview />} />
         </Route>
         <Route path={ROUTES.chat} element={<ChatPage />}>
-          <Route index element={<Choose />} />
+          <Route index element={<IndexChatPage />} />
           <Route path=":chatId" element={<ActiveChat />} />
         </Route>
         <Route path={ROUTES.pairs} element={<PairsPage />} />

@@ -98,6 +98,8 @@
 
       .content {
         width: 100%;
+        overflow: auto;
+        position: relative;
 
         &.xs {
           height: calc(100vh - 320px);

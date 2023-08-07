@@ -37,7 +37,7 @@
   }
 }
 
-.noRadius {
+.popup {
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
 }
@@ -75,5 +75,22 @@
     &:hover {
       color: var(--color--red-90);
     }
+  }
+}
+
+@media (max-width: 900px) {
+  .form {
+    padding-bottom: 48px;
+  }
+
+  .btns {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+
+    width: 100%;
+
+    border-top: 1px solid var(--border-main);
   }
 }
