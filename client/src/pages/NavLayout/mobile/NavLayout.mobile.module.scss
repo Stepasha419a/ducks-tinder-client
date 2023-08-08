@@ -1,5 +1,5 @@
 .main {
-  display: flex;
+  display: block;
 
   .content {
     height: 100vh;
@@ -7,5 +7,9 @@
     background-color: var(--bg-primary);
     position: relative;
     overflow: auto;
+
+    &.isNav {
+      height: calc(100vh - 48px);
+    }
   }
 }
