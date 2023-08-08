@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-
-const activeChatRegex = /\/chat\/[a-z0-9]+/i;
+import { getIsMobileNavAvailable } from '../helpers';
 
 export function useIsMobileNavAvailable(): boolean {
   const { pathname } = useLocation();
@@ -9,7 +8,7 @@ export function useIsMobileNavAvailable(): boolean {
   const isAvailableRef = useRef(true);
 
   useEffect(() => {
-    if (activeChatRegex.test(pathname)) {
+    if (getIsMobileNavAvailable(pathname)) {
       isAvailableRef.current = false;
     } else {
       isAvailableRef.current = true;

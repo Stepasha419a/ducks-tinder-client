@@ -14,3 +14,15 @@
     right: -70px;
   }
 }
+
+@media (max-width: 900px) {
+  .text {
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 430px) {
+  .text {
+    font-size: 14px;
+  }
+}

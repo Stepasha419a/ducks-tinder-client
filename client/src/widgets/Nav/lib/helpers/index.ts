@@ -1,0 +1,1 @@
+export { getIsMobileNavAvailable } from './getIsMobileNavAvailable';

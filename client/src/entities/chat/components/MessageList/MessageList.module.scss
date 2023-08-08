@@ -40,3 +40,21 @@
     padding-left: 20px;
   }
 }
+
+@media (max-width: 900px) {
+  .messages {
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 550px) {
+  .messages {
+    padding-left: 10px;
+  }
+
+  .lazy_wrapper {
+    span {
+      max-width: 200px;
+    }
+  }
+}

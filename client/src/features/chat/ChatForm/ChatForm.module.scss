@@ -159,6 +159,12 @@
       max-width: 690px;
       width: calc(100% - 120px);
       margin-left: 20px;
+
+      .message {
+        .text {
+          max-width: 350px;
+        }
+      }
     }
 
     .form {
@@ -169,6 +175,81 @@
 
       .input {
         max-width: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    .reply {
+      max-width: 780px;
+
+      .message {
+        .text {
+          max-width: 400px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .wrapper {
+    .form {
+      .button {
+        width: 80px;
+        font-size: 20px;
+      }
+    }
+    .reply {
+      width: calc(100% - 100px);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    .reply {
+      .message {
+        .text {
+          max-width: 250px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 470px) {
+  .wrapper {
+    .reply {
+      .message {
+        .text {
+          font-size: 12px;
+          max-width: 150px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .wrapper {
+    .reply {
+      .close {
+        right: -60px;
+      }
+    }
+  }
+}
+
+@media (max-width: 300px) {
+  .wrapper {
+    .reply {
+      .message {
+        .text {
+          max-width: 120px;
+        }
       }
     }
   }
