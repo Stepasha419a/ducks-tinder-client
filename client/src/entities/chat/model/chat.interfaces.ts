@@ -2,7 +2,8 @@ import type { Message, ShortChat } from '@shared/api/interfaces';
 
 export interface ChatInitialState {
   chats: ShortChat[];
-  isConnected: boolean;
+  isSocketConnected: boolean;
+  isChatConnected: boolean;
   isLoading: boolean;
   isNotFound: boolean;
   isMessagesInitialLoading: boolean;

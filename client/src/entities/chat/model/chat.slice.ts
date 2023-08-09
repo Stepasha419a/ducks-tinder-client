@@ -13,12 +13,14 @@ import {
   connectChatThunk,
   sendMessageThunk,
   disconnectChatThunk,
+  connectChatsThunk,
 } from './chat.thunks';
 import { toast } from 'react-toastify';
 
 const initialState: ChatInitialState = {
   chats: [],
-  isConnected: false,
+  isSocketConnected: false,
+  isChatConnected: false,
   isLoading: true,
   isNotFound: false,
   isMessagesInitialLoading: true,
@@ -60,7 +62,7 @@ const chatSlice = createSlice({
       state.chats[index].chatVisits[0].lastSeen = new Date().toISOString();
       state.chats[index].messages = payload.messages;
 
-      state.isConnected = true;
+      state.isChatConnected = true;
       state.maxMessagesCount = payload.messagesCount;
       state.isMessagesLoading = false;
       state.isMessagesEnded = false;
@@ -108,7 +110,7 @@ const chatSlice = createSlice({
     },
     deleteChat: (state, { payload }: PayloadAction<string>) => {
       state.chats = state.chats.filter((chat) => chat.id !== payload);
-      state.isConnected = false;
+      state.isChatConnected = false;
       state.maxMessagesCount = 0;
       state.currentChatId = '';
       state.repliedMessage = null;
@@ -141,6 +143,9 @@ const chatSlice = createSlice({
           state.isLoading = false;
         }
       )
+      .addCase(connectChatsThunk.fulfilled, (state) => {
+        state.isSocketConnected = true;
+      })
       .addCase(connectChatThunk.pending, (state) => {
         state.isMessagesInitialLoading = true;
 
@@ -156,12 +161,14 @@ const chatSlice = createSlice({
         state.isMessagesInitialLoading = false;
       })
       .addCase(disconnectChatThunk.fulfilled, (state) => {
-        const index = state.chats.findIndex(
-          (chat) => chat.id === state.currentChatId
-        );
-        state.chats[index].chatVisits[0].lastSeen = new Date().toISOString();
+        if (state.currentChatId) {
+          const index = state.chats.findIndex(
+            (chat) => chat.id === state.currentChatId
+          );
+          state.chats[index].chatVisits[0].lastSeen = new Date().toISOString();
+        }
 
-        state.isConnected = false;
+        state.isChatConnected = false;
         state.maxMessagesCount = 0;
         state.currentChatId = '';
         state.repliedMessage = null;

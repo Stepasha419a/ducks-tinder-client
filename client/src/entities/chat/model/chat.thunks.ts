@@ -36,18 +36,9 @@ export const getChatsThunk = createAsyncThunk(
 
 export const connectChatsThunk = createAsyncThunk(
   'chat/connectChats',
-  async (_, { rejectWithValue, dispatch }) => {
+  (_, { rejectWithValue, dispatch }) => {
     try {
-      const { data: chats } = await chatService.getChats();
-
-      const userIds = chats
-        .map((chat) => chat.users.map((user) => user.id))
-        .join(' ');
-      if (!userIds) {
-        throw new Error('Not Found');
-      }
-
-      const socket = chatService.connect(userIds);
+      const socket = chatService.connect();
 
       socket.onAny((event: string, ...errors: unknown[]) => {
         if (event === 'exception' && (errors[0] as WsExceptionError).message) {

@@ -5,6 +5,7 @@ import { ProfileBlock, UserLinks, ChatsPairsBlock } from './components';
 import { chatPairsVariants, profileVariants } from './Nav.variants';
 import styles from './Nav.module.scss';
 import { NavMobile } from './mobile/Nav.mobile';
+import { getIsProfilePage } from './lib';
 
 interface NavProps {
   isMobile?: boolean;
@@ -17,7 +18,7 @@ export const Nav: FC<NavProps> = ({ isMobile }): ReactElement => {
     return <NavMobile />;
   }
 
-  const isProfilePage = /profile\/?.*/.test(pathname);
+  const isProfilePage = getIsProfilePage(pathname);
   return (
     <aside className={styles.nav}>
       <UserLinks isProfilePage={isProfilePage} />

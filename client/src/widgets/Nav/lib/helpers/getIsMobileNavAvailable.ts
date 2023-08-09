@@ -1,5 +1,5 @@
-const activeChatRegex = /\/chat\/[a-z0-9]+/i;
+import { getIsActiveChatPage } from '@/entities/chat/lib';
 
 export function getIsMobileNavAvailable(pathname: string) {
-  return activeChatRegex.test(pathname);
+  return getIsActiveChatPage(pathname);
 }

@@ -6,6 +6,7 @@ import { PairLink } from '@entities/user/components';
 import { OpenChatList } from '@features/chat';
 import { Tabs } from './Tabs/Tabs';
 import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
+import { getIsChatPage } from '@/entities/chat/lib';
 import styles from './ChatsPairsBlock.module.scss';
 
 export const ChatsPairsBlock: FC = () => {
@@ -14,7 +15,7 @@ export const ChatsPairsBlock: FC = () => {
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
 
   useEffect(() => {
-    setIsPairsOpened(!/chat\/?.*/.test(pathname));
+    setIsPairsOpened(!getIsChatPage(pathname));
   }, [pathname]);
 
   return (

@@ -10,8 +10,8 @@ export const chatService = {
   async getChat(chatId: string) {
     return instance.get<Chat>(`chats/${chatId}`);
   },
-  connect(userIds: string): Socket {
-    return chatSocket.connect(userIds);
+  connect(): Socket {
+    return chatSocket.connect();
   },
   connectChat(chatId: string): Socket {
     return chatSocket.connectChat(chatId);

@@ -6,11 +6,11 @@ import {
   faStar,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import styles from './Nav.mobile.module.scss';
 import classNames from 'classnames';
 import { ROUTES } from '@/shared/lib/constants';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { selectNewMessageChatsCount } from '@/entities/chat/model';
+import styles from './Nav.mobile.module.scss';
 
 export const NavMobile = () => {
   const { pathname } = useLocation();

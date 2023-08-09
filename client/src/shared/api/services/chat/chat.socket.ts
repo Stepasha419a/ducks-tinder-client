@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 
 interface ChatSocket {
   _socket: Socket | null;
-  connect: (userIds: string) => Socket;
+  connect: () => Socket;
   connectChat: (chatId: string) => Socket;
   sendMessage: (chatId: string, text: string, repliedId: string | null) => void;
   getMessages: (chatId: string, haveCount: number) => void;
@@ -17,9 +17,8 @@ interface ChatSocket {
 
 export const chatSocket: ChatSocket = {
   _socket: null,
-  connect(userIds: string): Socket {
+  connect(): Socket {
     this._socket = io('http://localhost:5000/chat/socket', {
-      query: { userIds },
       withCredentials: true,
       transports: ['websocket'],
       auth: {
