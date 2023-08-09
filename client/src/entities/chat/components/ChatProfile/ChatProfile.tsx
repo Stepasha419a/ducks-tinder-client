@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 import { Avatar } from '@shared/ui';
-import { useAppSelector } from '@shared/lib/hooks';
+import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { selectChatProfile } from '../../model';
 import styles from './ChatProfile.module.scss';
+import { ChatProfileMobile } from './mobile/ChatProfile.mobile';
 
 interface ChatProfileProps {
   handleOpen: () => void;
@@ -10,6 +11,11 @@ interface ChatProfileProps {
 
 export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
   const { currentChatUser } = useAppSelector(selectChatProfile);
+  const isMobile = useMediaQuery('(max-width: 900px)');
+
+  if (isMobile) {
+    return <ChatProfileMobile handleOpen={handleOpen} />;
+  }
 
   if (!currentChatUser) {
     return null;

@@ -3,10 +3,10 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { PairLink } from '@entities/user/components';
-import { OpenChatList } from '@features/chat';
 import { Tabs } from './Tabs/Tabs';
 import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
 import { getIsChatPage } from '@/entities/chat/lib';
+import { ChatList } from '@/entities/chat/components';
 import styles from './ChatsPairsBlock.module.scss';
 
 export const ChatsPairsBlock: FC = () => {
@@ -43,7 +43,7 @@ export const ChatsPairsBlock: FC = () => {
               exit={'slideOut'}
               transition={{ duration: 0.25 }}
             >
-              <OpenChatList />
+              <ChatList />
             </motion.div>
           )}
         </AnimatePresence>
