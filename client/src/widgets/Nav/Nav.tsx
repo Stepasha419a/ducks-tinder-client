@@ -1,11 +1,12 @@
 import type { FC, ReactElement } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ProfileBlock, UserLinks, ChatsPairsBlock } from './components';
+import { UserLinks, ChatsPairsBlock } from './components';
 import { chatPairsVariants, profileVariants } from './Nav.variants';
-import styles from './Nav.module.scss';
 import { NavMobile } from './mobile/Nav.mobile';
 import { getIsProfilePage } from './lib';
+import { SettingsBlock } from '@/features/setting';
+import styles from './Nav.module.scss';
 
 interface NavProps {
   isMobile?: boolean;
@@ -33,7 +34,7 @@ export const Nav: FC<NavProps> = ({ isMobile }): ReactElement => {
             transition={{ duration: 0.25 }}
             className={styles.profile}
           >
-            <ProfileBlock />
+            <SettingsBlock />
           </motion.div>
         ) : (
           <motion.div

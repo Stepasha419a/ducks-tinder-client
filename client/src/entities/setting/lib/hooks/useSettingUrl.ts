@@ -40,7 +40,7 @@ export function useSettingUrl(): boolean | null {
 }
 
 function extractSettingName(pathname: string): RegExpMatchArray | null {
-  return pathname.match(/\/profile\/([a-z]+)-?([a-z]*)/);
+  return pathname.match(/\/settings\/([a-z]+)-?([a-z]*)/);
 }
 
 function concatenateUrl(matchArr: RegExpMatchArray): string {

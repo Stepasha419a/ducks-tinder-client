@@ -4,14 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector } from '@hooks';
 import { useSettingUrl } from '@entities/setting/lib';
-import { Setting } from './Setting/Setting';
-import { SettingsList } from './SettingsList/SettingsList';
-import { settingVariants } from './ProfileBlock.variants';
-import styles from './ProfileBlock.module.scss';
+import { Setting, SettingsList } from './components';
+import { settingVariants } from './SettingsBlock.variants';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
+import styles from './SettingsBlock.module.scss';
 
-export const ProfileBlock = (): ReactElement => {
+export const SettingsBlock = (): ReactElement => {
   const settingType = useAppSelector((state) => state.setting.settingType);
   const isFound = useSettingUrl();
 

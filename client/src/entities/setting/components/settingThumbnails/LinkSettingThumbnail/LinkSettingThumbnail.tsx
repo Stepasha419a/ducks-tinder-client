@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import styles from './LinkSettingThumbnail.module.scss';
+import { ROUTES } from '@/shared/lib/constants';
 
 interface SettingThumbnailProps {
   url: string;
@@ -16,7 +17,9 @@ interface SettingThumbnailProps {
   extraClassName?: string;
 }
 
-export const LinkSettingThumbnail: FC<PropsWithChildren<SettingThumbnailProps>> = ({
+export const LinkSettingThumbnail: FC<
+  PropsWithChildren<SettingThumbnailProps>
+> = ({
   url,
   children,
   title,
@@ -37,7 +40,7 @@ export const LinkSettingThumbnail: FC<PropsWithChildren<SettingThumbnailProps>> 
   );
 
   return (
-    <Link to={`profile/${url}`} className={cn}>
+    <Link to={`${ROUTES.settings}/${url}`} className={cn}>
       {(title || value) && (
         <div className={styles.descr}>
           <div className={styles.title}>{title}</div>

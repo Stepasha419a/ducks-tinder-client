@@ -12,10 +12,11 @@ export {
   NicknameSettingThumbnail,
 } from './settingFeatureThumbnails';
 export { LogoutButton } from './LogoutButton/LogoutButton';
+export { SettingsBlock } from './SettingsBlock/SettingsBlock';
 export {
   InterestsForm,
   RadioForm,
   TextForm,
   TextareaForm,
   ExternalForm,
-} from './forms';
+} from './SettingsBlock/components/Setting/forms';

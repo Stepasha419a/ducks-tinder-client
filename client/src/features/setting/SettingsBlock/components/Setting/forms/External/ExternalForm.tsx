@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { useAppSelector } from '@shared/lib/hooks';
 import SettingWrapper from '../Wrapper/SettingWrapper';
 import styles from './ExternalForm.module.scss';
-import { useExternalForm } from '../../lib/hooks';
+import { useExternalForm } from '@features/setting/lib/hooks';
 
 export const ExternalForm: FC = (): ReactElement => {
   const { formName, errors, submitHandler, cancelHandler } = useExternalForm();

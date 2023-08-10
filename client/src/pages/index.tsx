@@ -9,10 +9,11 @@ import ProfilePage from '@pages/Profile';
 import ChatPage from '@pages/Chat';
 import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
-import { ImageSetting, PlaceSetting } from '@widgets';
+import SettingsPage from '@pages/Settings';
+import { ImageSetting, PlaceSetting, ProfilePreview } from '@widgets';
 import { ActiveChat, IndexChatPage } from './Chat/components';
-import { ProfilePreview } from './Profile/components';
 import NotFound from './NotFound/NotFound';
+import { SettingsIndexPage } from './Settings/components';
 
 const Routing = (): ReactElement => {
   return (
@@ -25,6 +26,9 @@ const Routing = (): ReactElement => {
         <Route path={ROUTES.profile} element={<ProfilePage />}>
           <Route index element={<ProfilePreview />} />
           <Route path="edit" element={<ImageSetting />} />
+        </Route>
+        <Route path={ROUTES.settings} element={<SettingsPage />}>
+          <Route index element={<SettingsIndexPage />} />
           <Route path="place" element={<PlaceSetting />} />
           <Route path=":settingName" element={<ProfilePreview />} />
         </Route>

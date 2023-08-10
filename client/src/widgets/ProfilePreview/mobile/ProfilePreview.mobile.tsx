@@ -31,7 +31,7 @@ export const ProfilePreviewMobile = () => {
           </Link>
           <div className={styles.links}>
             <Link
-              to={`${ROUTES.profile}/settings`}
+              to={ROUTES.settings}
               className={classNames(styles.link, styles.top)}
             >
               <div className={styles.iconWrapper}>

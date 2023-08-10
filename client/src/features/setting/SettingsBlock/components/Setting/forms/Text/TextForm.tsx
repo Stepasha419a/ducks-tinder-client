@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import { TextField } from '@shared/ui';
 import SettingWrapper from '../Wrapper/SettingWrapper';
-import { useTextForm } from '../../lib';
+import { useTextForm } from '@features/setting/lib';
 import styles from './TextForm.module.scss';
 
 export const TextForm: FC = (): ReactElement => {
