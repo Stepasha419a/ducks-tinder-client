@@ -108,3 +108,63 @@
     }
   }
 }
+
+@media (max-width: 900px) {
+  .thumbnail {
+    padding: 12px 40px;
+
+    &.link {
+      padding: 0 40px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .thumbnail {
+    padding: 12px 10px;
+
+    &.link {
+      padding: 0 10px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .thumbnail {
+    .descr {
+      .title {
+        font-size: 16px;
+        font-weight: 300;
+      }
+
+      .value {
+        font-size: 16px;
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .thumbnail {
+    padding: 12px 4px;
+
+    &.link {
+      padding: 0 4px;
+
+      .link {
+        padding: 12px 4px;
+      }
+    }
+
+    .descr {
+      .title {
+        font-size: 14px;
+      }
+
+      .value {
+        font-size: 12px;
+      }
+    }
+  }
+}

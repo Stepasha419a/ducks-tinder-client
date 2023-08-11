@@ -106,3 +106,17 @@
     }
   }
 }
+
+@media (max-width: 350px) {
+  .label {
+    &.small {
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    &.full {
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+}

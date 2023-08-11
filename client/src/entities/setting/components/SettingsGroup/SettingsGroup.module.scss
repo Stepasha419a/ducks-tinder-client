@@ -1,16 +1,28 @@
 .group {
   padding-top: 20px;
 
-  .groupTitle {
+  .title {
     text-transform: uppercase;
     color: var(--main-secondary);
     border-bottom: 1px solid var(--border-main);
     padding: 8px 16px;
   }
 
-  .groupDescr {
+  .descr {
     color: var(--main-secondary);
     margin: 12px 0;
     padding: 0 16px;
+  }
+}
+
+@media (max-width: 350px) {
+  .group {
+    .title {
+      font-size: 14px;
+    }
+  
+    .descr {
+      font-size: 12px;
+    }
   }
 }
