@@ -9,6 +9,7 @@ import type {
 } from '@entities/setting/model';
 import styles from './SettingWrapper.module.scss';
 import classNames from 'classnames';
+import { useMediaQuery } from '@/shared/lib/hooks';
 
 interface SettingWrapperProps {
   formName: string | null;
@@ -26,6 +27,9 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   submitHandler,
   cancelHandler,
 }) => {
+  const isMobile = useMediaQuery('(max-width: 900px)');
+  const cancelUrl = isMobile ? ROUTES.settings : ROUTES.profile;
+
   return (
     <form onSubmit={submitHandler} className={styles.setting}>
       {Object.values(errors).map((error: FieldError) => (
@@ -36,7 +40,7 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
       <div className={styles.name}>{formName}</div>
       {children}
       <div className={styles.title}>Your {formName}</div>
-      <Link onClick={cancelHandler} to={ROUTES.profile} className={styles.link}>
+      <Link onClick={cancelHandler} to={cancelUrl} className={styles.link}>
         <Button
           disabled={!isValid}
           border

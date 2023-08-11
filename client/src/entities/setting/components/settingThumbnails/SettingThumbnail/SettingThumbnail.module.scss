@@ -33,25 +33,6 @@
     }
   }
 
-  &.link {
-    padding: 0;
-    width: 100%;
-
-    .icon {
-      color: var(--main-secondary);
-      transition: 0.2s;
-    }
-
-    &:hover .icon {
-      color: var(--color--pink-100) !important;
-    }
-
-    .link {
-      display: block;
-      padding: 12px 16px;
-    }
-  }
-
   &.logout {
     border-top: 1px solid var(--border-main);
 
@@ -112,20 +93,12 @@
 @media (max-width: 900px) {
   .thumbnail {
     padding: 12px 40px;
-
-    &.link {
-      padding: 0 40px;
-    }
   }
 }
 
 @media (max-width: 500px) {
   .thumbnail {
     padding: 12px 10px;
-
-    &.link {
-      padding: 0 10px;
-    }
   }
 }
 
@@ -148,14 +121,6 @@
 @media (max-width: 350px) {
   .thumbnail {
     padding: 12px 4px;
-
-    &.link {
-      padding: 0 4px;
-
-      .link {
-        padding: 12px 4px;
-      }
-    }
 
     .descr {
       .title {

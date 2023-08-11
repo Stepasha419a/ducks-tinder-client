@@ -30,7 +30,7 @@ const Routing = (): ReactElement => {
         <Route path={ROUTES.settings} element={<SettingsPage />}>
           <Route index element={<SettingsIndexPage />} />
           <Route path="place" element={<PlaceSetting />} />
-          <Route path=":settingName" element={<ProfilePreview />} />
+          <Route path=":settingName" element={<SettingsIndexPage />} />
         </Route>
         <Route path={ROUTES.chat} element={<ChatPage />}>
           <Route index element={<IndexChatPage />} />

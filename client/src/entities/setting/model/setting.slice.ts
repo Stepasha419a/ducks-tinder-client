@@ -6,6 +6,7 @@ import type {
   SetInputPayload,
   SettingInitialState,
 } from './setting.interfaces';
+import { submitSettingsThunk } from './setting.thunks';
 
 const initialState: SettingInitialState = {
   settingType: null,
@@ -56,6 +57,14 @@ const settingSlice = createSlice({
     checkFields: (state, { payload }: PayloadAction<User>) => {
       state.errorFields = checkUserFields(payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(submitSettingsThunk.fulfilled, (state) => {
+      state.formName = null;
+      state.settingName = null;
+      state.settingType = null;
+      state.validation = null;
+    });
   },
 });
 
