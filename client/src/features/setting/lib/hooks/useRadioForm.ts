@@ -2,13 +2,16 @@ import { useController, useForm } from 'react-hook-form';
 import type { SettingFieldValues } from '@entities/setting/model';
 import { nullInput, submitSettingsThunk } from '@entities/setting/model';
 import { useDefaultValues } from '@entities/setting/lib';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch, useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { useNullOnClose } from './useNullOnClose';
+import { ROUTES } from '@/shared/lib/constants';
 
 export function useRadioForm() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const isMobile = useMediaQuery('(max-width: 900px)');
 
   const formName = useAppSelector((state) => state.setting.formName);
 
@@ -31,8 +34,10 @@ export function useRadioForm() {
   };
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
+    const url = isMobile ? ROUTES.settings : ROUTES.profile;
+
     dispatch(submitSettingsThunk({ changedData: data.input }));
-    navigate('profile');
+    navigate(url);
   });
 
   return {

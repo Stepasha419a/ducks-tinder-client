@@ -13,6 +13,6 @@
 
 @media (max-width: 900px) {
   .groups {
-    max-height: 100%;
+    max-height: calc(100vh - 50px);
   }
 }

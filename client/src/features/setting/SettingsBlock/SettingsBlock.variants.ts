@@ -1,7 +1,9 @@
 export const settingVariants = {
   slideOut: {
-    translateX: '340px',
+    x: '340px',
     borderLeft: '1px solid var(--border-main)',
   },
-  slideIn: { translateX: 0, borderRight: '0' },
+  slideOutMobile: { y: '100%' },
+  slideIn: { x: 0, borderRight: '0' },
+  slideInMobile: { y: 0 },
 };

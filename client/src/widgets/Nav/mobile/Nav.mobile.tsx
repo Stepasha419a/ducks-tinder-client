@@ -11,6 +11,8 @@ import { ROUTES } from '@/shared/lib/constants';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { selectNewMessageChatsCount } from '@/entities/chat/model';
 import styles from './Nav.mobile.module.scss';
+import { getIsProfilePage } from '../lib';
+import { getIsChatPage } from '@/entities/chat/lib';
 
 export const NavMobile = () => {
   const { pathname } = useLocation();
@@ -48,7 +50,7 @@ export const NavMobile = () => {
         <FontAwesomeIcon
           className={classNames(
             styles.icon,
-            activePath === 'chat' && styles.active
+            getIsChatPage(pathname) && styles.active
           )}
           icon={faComments}
         />
@@ -57,7 +59,7 @@ export const NavMobile = () => {
         <FontAwesomeIcon
           className={classNames(
             styles.icon,
-            activePath === 'profile' && styles.active
+            getIsProfilePage(pathname) && styles.active
           )}
           icon={faUser}
         />

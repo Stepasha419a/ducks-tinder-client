@@ -39,3 +39,9 @@
   padding: 16px calc(50% - 40px);
   border-bottom: 1px solid var(--border-main);
 }
+
+@media (max-width: 900px) {
+  .showAll {
+    max-width: 100%;
+  }
+}

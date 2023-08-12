@@ -1,14 +1,18 @@
 import type { FC } from 'react';
 import { YMaps, Map as YMap, Placemark } from '@pbe/react-yandex-maps';
 import { MapLazy } from './Map.lazy';
-import { useAppSelector } from '@shared/lib/hooks';
+import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 
 export const Map: FC = () => {
   const place = useAppSelector((state) => state.user.currentUser.place);
 
+  const isMobile = useMediaQuery('(max-width: 900px)');
+
   if (!place) {
     return <MapLazy />;
   }
+
+  const width = isMobile ? '100%' : 375;
 
   return (
     <>
@@ -23,7 +27,7 @@ export const Map: FC = () => {
             center: [place.latitude, place.longitude],
             zoom: 8,
           }}
-          width={375}
+          width={width}
           height={300}
         >
           <Placemark geometry={[place.latitude, place.longitude]} />

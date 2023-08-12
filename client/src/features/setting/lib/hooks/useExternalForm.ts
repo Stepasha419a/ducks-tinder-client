@@ -3,13 +3,20 @@ import { useForm } from 'react-hook-form';
 import { useDefaultValues } from '@entities/setting/lib';
 import type { SettingFieldValues } from '@entities/setting/model';
 import { nullInput } from '@entities/setting/model';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useMediaQuery,
+} from '@shared/lib/hooks';
 import { useNullOnClose } from './useNullOnClose';
+import { ROUTES } from '@/shared/lib/constants';
 
 // just to display nav form without any logic, all logic is in the main section
 export function useExternalForm() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const isMobile = useMediaQuery('(max-width: 900px)');
 
   const formName = useAppSelector((state) => state.setting.formName);
 
@@ -28,8 +35,10 @@ export function useExternalForm() {
 
   // submit is not a link => redirect internally
   const submitHandler = () => {
+    const url = isMobile ? ROUTES.settings : ROUTES.profile;
+
     dispatch(nullInput());
-    navigate('profile');
+    navigate(url);
   };
 
   return {

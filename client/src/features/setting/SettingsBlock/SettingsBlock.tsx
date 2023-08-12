@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { useAppSelector } from '@hooks';
+import { useAppSelector, useMediaQuery } from '@hooks';
 import { useSettingUrl } from '@entities/setting/lib';
 import { Setting, SettingsList } from './components';
 import { settingVariants } from './SettingsBlock.variants';
@@ -11,6 +11,8 @@ import { ROUTES } from '@shared/constants';
 import styles from './SettingsBlock.module.scss';
 
 export const SettingsBlock = (): ReactElement => {
+  const isMobile = useMediaQuery('(max-width: 900px)');
+
   const settingType = useAppSelector((state) => state.setting.settingType);
   const isFound = useSettingUrl();
 
@@ -27,6 +29,9 @@ export const SettingsBlock = (): ReactElement => {
     );
   }
 
+  const slideIn = isMobile ? 'slideInMobile' : 'slideIn';
+  const slideOut = isMobile ? 'slideOutMobile' : 'slideOut';
+
   return (
     <div className={styles.block}>
       <AnimatePresence initial={false} mode="wait">
@@ -34,9 +39,9 @@ export const SettingsBlock = (): ReactElement => {
           <motion.div
             key="setting"
             variants={settingVariants}
-            initial={'slideOut'}
-            animate={'slideIn'}
-            exit={'slideOut'}
+            initial={slideOut}
+            animate={slideIn}
+            exit={slideOut}
             transition={{ duration: 0.25 }}
           >
             <Setting />
@@ -45,9 +50,9 @@ export const SettingsBlock = (): ReactElement => {
           <motion.div
             key="setting-list"
             variants={settingVariants}
-            initial={'slideOut'}
-            animate={'slideIn'}
-            exit={'slideOut'}
+            initial={slideOut}
+            animate={slideIn}
+            exit={slideOut}
             transition={{ duration: 0.25 }}
           >
             <SettingsList />

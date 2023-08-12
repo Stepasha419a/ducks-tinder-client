@@ -3,13 +3,16 @@ import { useDefaultValues } from '@entities/setting/lib';
 import type { SettingFieldInterestsArray } from '@entities/setting/model';
 import { submitSettingsThunk, nullInput } from '@entities/setting/model';
 import type { Interest } from '@shared/api/interfaces';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch, useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { useNullOnClose } from './useNullOnClose';
+import { ROUTES } from '@/shared/lib/constants';
 
 export function useSelectForm() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const isMobile = useMediaQuery('(max-width: 900px)');
 
   const formName = useAppSelector((state) => state.setting.formName);
 
@@ -49,12 +52,14 @@ export function useSelectForm() {
   };
 
   const submitHandler = handleSubmit((data: SettingFieldInterestsArray) => {
+    const url = isMobile ? ROUTES.settings : ROUTES.profile;
+
     dispatch(
       submitSettingsThunk({
         changedData: data.input.map((interest) => interest.name),
       })
     );
-    navigate('profile');
+    navigate(url);
   });
 
   return {
