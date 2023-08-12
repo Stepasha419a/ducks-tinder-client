@@ -8,12 +8,17 @@ import styles from './MessageSelect.module.scss';
 import { getDatesHourDiff } from '@shared/helpers';
 import { useMessageSelect } from '../lib';
 import { EditMessageSelect } from './components';
+import { MessageSelectMobile } from './mobile/MessageSelect.mobile';
 
 interface MessageSelectProps {
-  editingValue: string;
+  editingValue?: string;
+  isMobile?: boolean;
 }
 
-export const MessageSelect: FC<MessageSelectProps> = ({ editingValue }) => {
+export const MessageSelect: FC<MessageSelectProps> = ({
+  editingValue,
+  isMobile,
+}) => {
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
   const isMessageEditing = useAppSelector(
     (state) => state.chat.isMessageEditing
@@ -33,18 +38,31 @@ export const MessageSelect: FC<MessageSelectProps> = ({ editingValue }) => {
 
   useOnClickOutside(selectRef, handleSelectClickOutside);
 
-  if (isMessageEditing) {
-    return (
-      <EditMessageSelect selectRef={selectRef} editingValue={editingValue} />
-    );
-  }
-
   const isMessageEditable =
     isOwn &&
     getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 6;
   const isMessageDeleting =
     isOwn &&
     getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 12;
+
+  if (isMobile) {
+    return (
+      <MessageSelectMobile
+        handleSelectClickOutside={handleSelectClickOutside}
+        handleDeleteMessage={handleDeleteMessage}
+        handleEditMessage={handleEditMessage}
+        handleRepliedMessage={handleRepliedMessage}
+        isMessageEditable={isMessageEditable}
+        isMessageDeleting={isMessageDeleting}
+      />
+    );
+  }
+
+  if (isMessageEditing && editingValue) {
+    return (
+      <EditMessageSelect selectRef={selectRef} editingValue={editingValue} />
+    );
+  }
 
   return (
     <div ref={selectRef} className={styles.select}>

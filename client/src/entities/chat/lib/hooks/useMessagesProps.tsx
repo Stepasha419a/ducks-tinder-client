@@ -92,7 +92,9 @@ export function useMessagesProps(
 
   const handleSelectMessage = (message: Message) => {
     setEditingValue(message.text);
-    dispatch(setIsMessageEditing(false));
+    if (isMessageEditing) {
+      dispatch(setIsMessageEditing(false));
+    }
     dispatch(setCurrentMessage(message));
   };
 

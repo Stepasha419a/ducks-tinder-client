@@ -31,15 +31,31 @@
   }
 }
 
+@media (max-width: 1200px) {
+  .message {
+    &.editing {
+      min-width: calc(100vw - 340px - 200px - 70px);
+    }
+  }
+}
+
 @media (max-width: 1150px) {
   .message {
     max-width: 400px;
+
+    &.editing {
+      min-width: calc(100vw - 340px - 160px - 70px);
+    }
   }
 }
 
 @media (max-width: 1050px) {
   .message {
     max-width: 350px;
+
+    &.editing {
+      min-width: calc(100vw - 340px - 150px - 70px);
+    }
   }
 }
 

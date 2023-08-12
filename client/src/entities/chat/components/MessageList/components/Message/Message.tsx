@@ -9,12 +9,25 @@ import {
   Username,
 } from './components';
 import './Message.scss';
+import { useMediaQuery } from '@/shared/lib/hooks';
+import { MessageMobile } from './mobile/Message.mobile';
 
 interface MessageProps {
   children: ReactNode;
+  handleSelectMessage: () => void;
 }
 
-export const Message = ({ children }: MessageProps) => {
+export const Message = ({ children, handleSelectMessage }: MessageProps) => {
+  const isMobile = useMediaQuery('(max-width: 900px)');
+
+  if (isMobile) {
+    return (
+      <MessageMobile handleSelectMessage={handleSelectMessage}>
+        {children}
+      </MessageMobile>
+    );
+  }
+
   return (
     <div className="wrapper">
       <div className="container">

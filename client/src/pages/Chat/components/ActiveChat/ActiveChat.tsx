@@ -1,13 +1,19 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ChatForm, OpenChatProfilePopup } from '@features/chat';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { ChatForm, MessageSelect, OpenChatProfilePopup } from '@features/chat';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useMediaQuery,
+} from '@shared/lib/hooks';
 import { ChatUserPopup, Messages } from '@widgets';
 import { Status } from './components';
 import { connectChatThunk, disconnectChatThunk } from '@entities/chat/model';
 
 export const ActiveChat = () => {
   const { chatId } = useParams<'chatId'>() as { chatId: string | undefined };
+
+  const isMobile = useMediaQuery('(max-width: 900px)');
 
   const dispatch = useAppDispatch();
 
@@ -16,6 +22,7 @@ export const ActiveChat = () => {
   const isSocketConnected = useAppSelector(
     (state) => state.chat.isSocketConnected
   );
+  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
 
   useEffect(() => {
     return () => {
@@ -33,9 +40,11 @@ export const ActiveChat = () => {
     return <Status />;
   }
 
+  const isMobileSelected = currentMessage && isMobile;
+
   return (
     <>
-      <OpenChatProfilePopup />
+      {isMobileSelected ? <MessageSelect isMobile /> : <OpenChatProfilePopup />}
       <Messages />
       <ChatForm />
       <ChatUserPopup />

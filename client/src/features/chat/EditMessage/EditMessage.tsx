@@ -1,7 +1,7 @@
 import type { Dispatch, FC, KeyboardEvent, SetStateAction } from 'react';
 import { Textarea } from '@shared/ui';
-import styles from './EditMessage.module.scss';
 import { useSelectMessageEdit } from '../lib';
+import styles from './EditMessage.module.scss';
 
 interface EditMessageProps {
   editingValue: string;

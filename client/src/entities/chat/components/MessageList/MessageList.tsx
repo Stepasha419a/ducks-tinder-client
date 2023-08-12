@@ -10,7 +10,7 @@ import { useAppSelector } from '@shared/lib/hooks';
 import { selectMessages } from '@entities/chat/model';
 import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
 import { getIsNextDayMessage } from '@entities/chat/lib';
-import { Message, Timestamp } from './components';
+import { Message, MessageSelect, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import classNames from 'classnames';
 import styles from './MessageList.module.scss';
@@ -65,7 +65,7 @@ export const MessageList: FC<MessagesProps> = ({
 
         return (
           <Fragment key={message.id}>
-            <Message>
+            <Message handleSelectMessage={() => handleSelectMessage(message)}>
               <Message.Avatar {...getAvatarProps(message)} />
               <Message.Body {...getBodyProps(message)}>
                 <Message.Username {...getUsernameProps(message)} />
@@ -78,14 +78,12 @@ export const MessageList: FC<MessagesProps> = ({
                   </Message.Content>
                 )}
               </Message.Body>
-              {isSelectOpen ? (
-                select
-              ) : (
-                <Message.Select
-                  handleSelectMessage={() => handleSelectMessage(message)}
-                  {...getSelectProps(message)}
-                />
-              )}
+              <MessageSelect
+                getSelectProps={() => getSelectProps(message)}
+                handleSelectMessage={() => handleSelectMessage(message)}
+                isSelectOpen={isSelectOpen}
+                select={select}
+              />
             </Message>
             {isNextDayMessage && (
               <Timestamp createdAt={messages[i + 1].createdAt} />

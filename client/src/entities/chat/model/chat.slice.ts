@@ -14,6 +14,7 @@ import {
   sendMessageThunk,
   disconnectChatThunk,
   connectChatsThunk,
+  deleteMessageThunk,
 } from './chat.thunks';
 import { toast } from 'react-toastify';
 
@@ -177,6 +178,9 @@ const chatSlice = createSlice({
         if (state.repliedMessage) {
           state.repliedMessage = null;
         }
+      })
+      .addCase(deleteMessageThunk.pending, (state) => {
+        state.currentMessage = null;
       });
   },
 });
