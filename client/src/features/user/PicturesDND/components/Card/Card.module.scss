@@ -11,7 +11,7 @@
     border-radius: 8px;
     background-color: var(--bg-primary);
     cursor: pointer;
-    transition: .2s opacity;
+    transition: 0.2s opacity;
 
     &.hasImage {
       border: none;
@@ -41,6 +41,78 @@
         width: 20px;
         height: 20px;
         color: var(--color--red-80);
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .item {
+    width: calc(100% / 3 - 10px);
+    height: calc((100vw / 3 - 10px) * 1.25);
+
+    .btn {
+      width: 40px;
+      height: 40px;
+
+      &.plus {
+        .mark {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      &.xmark {
+        .mark {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .item {
+    .btn {
+      width: 28px;
+      height: 28px;
+
+      &.plus {
+        .mark {
+          width: 12px;
+          height: 12px;
+        }
+      }
+
+      &.xmark {
+        .mark {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .item {
+    .btn {
+      width: 20px;
+      height: 20px;
+
+      &.plus {
+        .mark {
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      &.xmark {
+        .mark {
+          width: 12px;
+          height: 12px;
+        }
       }
     }
   }

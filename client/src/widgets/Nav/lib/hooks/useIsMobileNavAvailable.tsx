@@ -9,9 +9,9 @@ export function useIsMobileNavAvailable(): boolean {
 
   useEffect(() => {
     if (getIsMobileNavAvailable(pathname)) {
-      isAvailableRef.current = false;
-    } else {
       isAvailableRef.current = true;
+    } else {
+      isAvailableRef.current = false;
     }
   }, [pathname]);
 

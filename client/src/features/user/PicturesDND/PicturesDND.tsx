@@ -1,6 +1,10 @@
 import type { FC } from 'react';
 import { Reorder } from 'framer-motion';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useMediaQuery,
+} from '@shared/lib/hooks';
 import { selectImagesDND, setIsDialogUploadOpen } from '@entities/user/model';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
@@ -11,6 +15,8 @@ import { Link } from 'react-router-dom';
 
 export const PicturesDND: FC = () => {
   const dispatch = useAppDispatch();
+
+  const isMobile = useMediaQuery('(max-width: 900px)');
 
   const { currentUserId } = useAppSelector(selectImagesDND);
 
@@ -53,17 +59,19 @@ export const PicturesDND: FC = () => {
         <br />
         by another 4% and get more likes.
       </div>
-      <div className={styles.save}>
-        <Link to={'/profile'}>
-          <Button
-            onClick={handleSubmit}
-            variant="gradient"
-            extraClassName={styles.btn}
-          >
-            Save changes
-          </Button>
-        </Link>
-      </div>
+      {!isMobile && (
+        <div className={styles.save}>
+          <Link to={'/profile'}>
+            <Button
+              onClick={handleSubmit}
+              variant="gradient"
+              extraClassName={styles.btn}
+            >
+              Save changes
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
