@@ -6,7 +6,7 @@ import {
   type SetStateAction,
 } from 'react';
 import type { Message as MessageInterface } from '@shared/api/interfaces';
-import { useAppSelector } from '@shared/lib/hooks';
+import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { selectMessages } from '@entities/chat/model';
 import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
 import { getIsNextDayMessage } from '@entities/chat/lib';
@@ -26,6 +26,8 @@ export const MessageList: FC<MessagesProps> = ({
   edit,
   setEditingValue,
 }) => {
+  const isMobile = useMediaQuery('(max-width: 900px)');
+
   const {
     messagesLength,
     isMessagesInitialLoading,
@@ -52,7 +54,12 @@ export const MessageList: FC<MessagesProps> = ({
     return <MessagesLazy />;
   }
 
-  const cn = classNames(styles.messages, repliedMessage && styles.replying);
+  const isMobileEditing = isMessageEditing && isMobile;
+  const cn = classNames(
+    styles.messages,
+    repliedMessage && styles.replying,
+    isMobileEditing && styles.mobileEditing
+  );
 
   return (
     <div className={cn} ref={messagesRef}>
@@ -62,6 +69,7 @@ export const MessageList: FC<MessagesProps> = ({
         const isSelectOpen = currentMessage?.id === message.id;
         const isNextDayMessage =
           messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
+        const isEditing = isSelectOpen && isMessageEditing && !isMobile;
 
         return (
           <Fragment key={message.id}>
@@ -69,7 +77,7 @@ export const MessageList: FC<MessagesProps> = ({
               <Message.Avatar {...getAvatarProps(message)} />
               <Message.Body {...getBodyProps(message)}>
                 <Message.Username {...getUsernameProps(message)} />
-                {isSelectOpen && isMessageEditing ? (
+                {isEditing ? (
                   edit
                 ) : (
                   <Message.Content>

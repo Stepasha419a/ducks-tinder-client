@@ -1,0 +1,142 @@
+.block {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  height: 50px;
+  width: 500px;
+  margin-left: 14vw;
+  position: relative;
+
+  .border {
+    height: 40px;
+    width: 4px;
+    background-color: var(--color--red-90);
+    border-radius: 2px;
+  }
+
+  .message {
+    margin-left: 10px;
+
+    .username {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      max-width: 400px;
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    padding: 20px;
+    cursor: pointer;
+
+    .mark {
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 10px;
+
+      &::before,
+      &::after {
+        content: '';
+        display: block;
+        height: 4px;
+        width: 20px;
+        background-color: var(--color--black-85);
+        border-radius: 4px;
+        position: absolute;
+        top: 11px;
+        left: 2px;
+      }
+      &::before {
+        transform: rotate(45deg);
+      }
+      &::after {
+        transform: rotate(135deg);
+      }
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .reply {
+    max-width: 690px;
+    width: calc(100% - 120px);
+    margin-left: 20px;
+
+    .message {
+      .text {
+        max-width: 350px;
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .reply {
+    max-width: 780px;
+
+    .message {
+      .text {
+        max-width: 400px;
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .reply {
+    width: calc(100% - 100px);
+  }
+}
+
+@media (max-width: 600px) {
+  .reply {
+    .message {
+      .text {
+        max-width: 250px;
+      }
+    }
+  }
+}
+
+@media (max-width: 470px) {
+  .reply {
+    .message {
+      .text {
+        font-size: 12px;
+        max-width: 150px;
+      }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .reply {
+    .close {
+      right: -60px;
+    }
+  }
+}
+
+@media (max-width: 300px) {
+  .reply {
+    .message {
+      .text {
+        max-width: 120px;
+      }
+    }
+  }
+}

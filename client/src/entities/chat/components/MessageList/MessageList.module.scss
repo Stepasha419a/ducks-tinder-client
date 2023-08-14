@@ -9,6 +9,10 @@
     height: calc(100vh - 170px);
   }
 
+  &.mobileEditing {
+    height: calc(100vh - 160px);
+  }
+
   .loadMessages {
     padding: 20px;
   }

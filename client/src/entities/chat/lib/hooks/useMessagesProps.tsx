@@ -1,13 +1,15 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { Message, ShortChat } from '@shared/api/interfaces';
 import { getTime } from '@shared/helpers';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch, useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { setCurrentMessage, setIsMessageEditing } from '../../model';
 
 export function useMessagesProps(
   setEditingValue: Dispatch<SetStateAction<string>>
 ) {
   const dispatch = useAppDispatch();
+
+  const isMobile = useMediaQuery('(max-width: 900px)');
 
   const chats = useAppSelector((state) => state.chat.chats);
   const avatarName = useAppSelector(
@@ -86,7 +88,7 @@ export function useMessagesProps(
       isOwn,
       isEdited,
       isSelectOpen,
-      isMessageEditing: isMessageEditing && isSelectOpen,
+      isMessageEditing: isMessageEditing && isSelectOpen && !isMobile,
     };
   };
 

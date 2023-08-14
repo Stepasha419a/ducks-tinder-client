@@ -23,6 +23,9 @@ export const ActiveChat = () => {
     (state) => state.chat.isSocketConnected
   );
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
+  const isMessageEditing = useAppSelector(
+    (state) => state.chat.isMessageEditing
+  );
 
   useEffect(() => {
     return () => {
@@ -40,7 +43,7 @@ export const ActiveChat = () => {
     return <Status />;
   }
 
-  const isMobileSelected = currentMessage && isMobile;
+  const isMobileSelected = currentMessage && !isMessageEditing && isMobile;
 
   return (
     <>
