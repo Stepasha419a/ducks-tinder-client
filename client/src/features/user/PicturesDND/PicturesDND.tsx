@@ -1,34 +1,45 @@
-import type { FC } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import { Reorder } from 'framer-motion';
+import type { Picture } from '@/shared/api/interfaces';
 import {
   useAppDispatch,
   useAppSelector,
   useMediaQuery,
 } from '@shared/lib/hooks';
-import { selectImagesDND, setIsDialogUploadOpen } from '@entities/user/model';
+import {
+  deleteUserPictureThunk,
+  selectImagesDND,
+  setIsDialogUploadOpen,
+} from '@entities/user/model';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
-import { useUserPictures } from './lib';
 import { Button } from '@shared/ui';
-import styles from './PicturesDND.module.scss';
 import { Link } from 'react-router-dom';
+import styles from './PicturesDND.module.scss';
 
-export const PicturesDND: FC = () => {
+interface PicturesDNDProps {
+  pictures: Picture[];
+  setPictures: Dispatch<SetStateAction<Picture[]>>;
+  handleSubmit: () => void;
+}
+
+export const PicturesDND: FC<PicturesDNDProps> = ({
+  pictures,
+  setPictures,
+  handleSubmit,
+}) => {
   const dispatch = useAppDispatch();
 
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   const { currentUserId } = useAppSelector(selectImagesDND);
 
-  const { pictures, setPictures, handleDeletePicture, handleMixPictures } =
-    useUserPictures();
+  const handleDeletePicture = (order: number): void => {
+    dispatch(deleteUserPictureThunk(order));
+  };
 
   const openSettingHandler = (): void => {
     dispatch(setIsDialogUploadOpen(true));
-  };
-
-  const handleSubmit = () => {
-    handleMixPictures();
   };
 
   return (

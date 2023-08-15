@@ -1,1 +1,1 @@
-export { useUserPictures } from './hooks';
+export { useUserPictures, usePicturesMix } from './hooks';

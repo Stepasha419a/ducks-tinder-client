@@ -8,6 +8,10 @@ import { Tabs } from './components';
 import styles from './ImageSetting.module.scss';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/shared/lib/constants';
+import {
+  usePicturesMix,
+  useUserPictures,
+} from '@/features/user/PicturesDND/lib';
 
 export const ImageSetting: FC = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');
@@ -23,12 +27,23 @@ export const ImageSetting: FC = () => {
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);
   const [isFullPreviewSetting, setIsFullPreviewSetting] = useState(false);
 
+  const { pictures, setPictures } = useUserPictures();
+
+  const handleMixPictures = usePicturesMix();
+  const handleSubmit = () => {
+    handleMixPictures(pictures);
+  };
+
   return (
     <div className={styles.change}>
       {isMobile && (
         <div className={styles.head}>
           <div className={styles.title}>Edit profile</div>
-          <Link to={ROUTES.profile} className={styles.submit}>
+          <Link
+            onClick={handleSubmit}
+            to={ROUTES.profile}
+            className={styles.submit}
+          >
             Submit
           </Link>
         </div>
@@ -52,7 +67,11 @@ export const ImageSetting: FC = () => {
                 setIsFullPreview={setIsFullPreviewSetting}
               />
             ) : (
-              <PicturesDND />
+              <PicturesDND
+                handleSubmit={handleSubmit}
+                pictures={pictures}
+                setPictures={setPictures}
+              />
             )}
           </div>
         </>
