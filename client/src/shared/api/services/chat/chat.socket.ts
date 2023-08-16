@@ -13,6 +13,7 @@ interface ChatSocket {
   unblockChat: (chatId: string) => void;
   deleteChat: (chatId: string) => void;
   disconnectChat: (chatId: string) => void;
+  disconnect: () => void;
 }
 
 export const chatSocket: ChatSocket = {
@@ -61,5 +62,8 @@ export const chatSocket: ChatSocket = {
     if (this._socket) {
       this._socket.emit('disconnect-chat', { chatId });
     }
+  },
+  disconnect(): void {
+    this._socket?.close();
   },
 };

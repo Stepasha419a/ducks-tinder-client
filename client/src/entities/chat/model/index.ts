@@ -10,6 +10,7 @@ export {
   connectChatsThunk,
   connectChatThunk,
   disconnectChatThunk,
+  disconnectThunk,
   getChatsThunk,
   sendMessageThunk,
   deleteMessageThunk,

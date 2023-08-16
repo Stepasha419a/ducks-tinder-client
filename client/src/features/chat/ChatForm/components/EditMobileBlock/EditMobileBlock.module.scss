@@ -119,6 +119,14 @@
   }
 }
 
+@media (max-width: 400px) {
+  .block {
+    .close {
+      right: 1px;
+    }
+  }
+}
+
 @media (max-width: 300px) {
   .block {
     .message {

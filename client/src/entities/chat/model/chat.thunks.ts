@@ -123,6 +123,17 @@ export const disconnectChatThunk = createAsyncThunk(
   }
 );
 
+export const disconnectThunk = createAsyncThunk(
+  'chat/disconnect',
+  (_, { rejectWithValue }) => {
+    try {
+      chatService.disconnect();
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
 export const getMessagesThunk = createAsyncThunk(
   'chat/getMessages',
   (_, { rejectWithValue, getState, dispatch }) => {

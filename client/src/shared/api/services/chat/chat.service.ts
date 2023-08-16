@@ -44,4 +44,7 @@ export const chatService = {
   disconnectChat(chatId: string): void {
     chatSocket.disconnectChat(chatId);
   },
+  disconnect(): void {
+    chatSocket.disconnect();
+  },
 };
