@@ -9,7 +9,7 @@ export const Map: FC = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   if (!place) {
-    return <MapLazy />;
+    return <MapLazy isMobile />;
   }
 
   const width = isMobile ? '100%' : 375;

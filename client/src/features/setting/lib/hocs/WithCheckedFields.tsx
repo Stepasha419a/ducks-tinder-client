@@ -19,10 +19,9 @@ export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
     useEffect(() => {
       if (isAuth) {
         dispatch(checkFields(currentUser));
-        if (
-          errorFields.length &&
-          !pathname.match(/\/profile\/([a-z]+)-?([a-z]*)/)?.[1]
-        ) {
+
+        const isError = getIsError(pathname, errorFields.length);
+        if (isError) {
           return navigate('/profile');
         }
       }
@@ -41,3 +40,11 @@ export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
 
   return Wrapper;
 };
+
+function getIsError(pathname: string, errorFieldsLength: number): boolean {
+  const isError =
+    errorFieldsLength &&
+    !/^\/(profile|settings)(\/([a-z]+)-?([a-z]*))?$/.test(pathname);
+
+  return Boolean(isError);
+}
