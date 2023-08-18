@@ -1,9 +1,9 @@
-import { AuthorizedUser } from 'users/users.interface';
 import { SendMessageDto } from 'chats/dto';
+import { ValidatedUserDto } from 'users/dto';
 
 export class SendMessageCommand {
   constructor(
-    public readonly user: AuthorizedUser,
+    public readonly user: ValidatedUserDto,
     public readonly dto: SendMessageDto,
   ) {}
 }

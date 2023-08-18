@@ -1,13 +1,11 @@
+import { NotValidatedUserDto, ValidatedUserDto } from 'users/dto';
 import { userDtoStub } from './user-dto.stub';
-import { AuthorizedUser } from 'users/users.interface';
 
-export const requestUserStub = (): AuthorizedUser => {
+export const requestUserStub = (): ValidatedUserDto & NotValidatedUserDto => {
   const userStubObj = userDtoStub();
 
   return {
     id: 'sdfhsdghj34259034578923',
-    password: '123123123',
-    activationLink: 'asdasd',
     age: userStubObj.age,
     description: userStubObj.description,
     distance: userStubObj.distance,
@@ -26,7 +24,9 @@ export const requestUserStub = (): AuthorizedUser => {
       latitude: 12.3456789,
       longitude: 12.3456789,
     },
-    createdAt: new Date('2022-08-19'),
-    updatedAt: new Date('2022-08-20'),
+    interests: [{ name: 'interest-1' }, { name: 'interest-2' }],
+    pictures: [{ name: 'picture.jpg', order: 0 }],
+    firstPair: undefined,
+    pairsCount: 0,
   };
 };

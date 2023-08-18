@@ -1,8 +1,8 @@
-import { AuthorizedUser } from 'users/users.interface';
+import { ValidatedUserDto } from 'users/dto';
 
 export class GetChatQuery {
   constructor(
-    public readonly user: AuthorizedUser,
+    public readonly user: ValidatedUserDto,
     public readonly id: string,
   ) {}
 }

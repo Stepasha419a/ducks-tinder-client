@@ -1,9 +1,9 @@
 import { ChatIdDto } from 'chats/dto';
-import { AuthorizedUser } from 'users/users.interface';
+import { ValidatedUserDto } from 'users/dto';
 
 export class DeleteChatCommand {
   constructor(
-    public readonly user: AuthorizedUser,
+    public readonly user: ValidatedUserDto,
     public readonly dto: ChatIdDto,
   ) {}
 }

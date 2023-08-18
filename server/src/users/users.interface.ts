@@ -1,30 +1,14 @@
-import { User } from '@prisma/client';
-
 export interface PictureInterface {
   name: string;
   order: number;
 }
 
-interface Interest {
+export interface Interest {
   name: string;
 }
 
 interface PlaceName {
   name: string;
-}
-
-export interface FullUser extends User {
-  pairsCount: number;
-}
-
-interface OwnPlace extends PlaceName {
-  address: string;
-  latitude: number;
-  longitude: number;
-}
-
-export interface AuthorizedUser extends User {
-  place: OwnPlace;
 }
 
 export interface ShortUserWithoutDistance {

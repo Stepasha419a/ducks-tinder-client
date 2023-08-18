@@ -22,6 +22,8 @@ import {
   UserDto,
   MixPicturesDto,
   PatchUserPlaceDto,
+  ValidatedUserDto,
+  NotValidatedUserDto,
 } from './dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
@@ -39,7 +41,7 @@ import {
   SavePictureCommand,
 } from './commands';
 import { GetPairsQuery, GetSortedQuery } from './queries';
-import { OptionalValidationPipe } from 'common/pipes';
+import { CustomValidationPipe, OptionalValidationPipe } from 'common/pipes';
 import { ONE_MB_SIZE } from 'common/constants';
 import { User } from 'common/decorators';
 
@@ -53,7 +55,7 @@ export class UsersController {
   @Patch()
   @HttpCode(HttpStatus.OK)
   patch(
-    @User() user,
+    @User(CustomValidationPipe) user: NotValidatedUserDto,
     @Body(OptionalValidationPipe) dto: PatchUserDto,
   ): Promise<UserDto> {
     return this.commandBus.execute(new PatchUserCommand(user, dto));
@@ -61,13 +63,18 @@ export class UsersController {
 
   @Patch('place')
   @HttpCode(HttpStatus.OK)
-  patchPlace(@User() user, @Body() dto: PatchUserPlaceDto): Promise<UserDto> {
+  patchPlace(
+    @User(CustomValidationPipe) user: NotValidatedUserDto,
+    @Body() dto: PatchUserPlaceDto,
+  ): Promise<UserDto> {
     return this.commandBus.execute(new PatchUserPlaceCommand(user, dto));
   }
 
   @Get('sorted')
   @HttpCode(HttpStatus.OK)
-  getSortedUser(@User() user): Promise<ShortUser> {
+  getSortedUser(
+    @User(CustomValidationPipe) user: ValidatedUserDto,
+  ): Promise<ShortUser> {
     return this.queryBus.execute(new GetSortedQuery(user));
   }
 
@@ -75,7 +82,7 @@ export class UsersController {
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('picture'))
   savePicture(
-    @User() user,
+    @User(CustomValidationPipe) user: NotValidatedUserDto,
     @UploadedFile(
       new ParseFilePipe({
         validators: [
@@ -91,44 +98,60 @@ export class UsersController {
 
   @Put('picture')
   @HttpCode(HttpStatus.OK)
-  deletePicture(@User() user, @Body() dto: DeletePictureDto): Promise<UserDto> {
+  deletePicture(
+    @User(CustomValidationPipe) user: NotValidatedUserDto,
+    @Body() dto: DeletePictureDto,
+  ): Promise<UserDto> {
     return this.commandBus.execute(new DeletePictureCommand(user, dto));
   }
 
   @Put('picture/mix')
   @HttpCode(HttpStatus.OK)
-  mixPictures(@User() user, @Body() dto: MixPicturesDto): Promise<UserDto> {
+  mixPictures(
+    @User(CustomValidationPipe) user: NotValidatedUserDto,
+    @Body() dto: MixPicturesDto,
+  ): Promise<UserDto> {
     return this.commandBus.execute(new MixPicturesCommand(user, dto));
   }
 
   @Post('like/:id')
   @HttpCode(HttpStatus.OK)
-  likeUser(@User() user, @Param('id') userPairId: string): Promise<void> {
+  likeUser(
+    @User(CustomValidationPipe) user: ValidatedUserDto,
+    @Param('id') userPairId: string,
+  ): Promise<void> {
     return this.commandBus.execute(new LikeUserCommand(user, userPairId));
   }
 
   @Post('dislike/:id')
   @HttpCode(HttpStatus.OK)
-  dislikeUser(@User() user, @Param('id') userPairId: string): Promise<void> {
+  dislikeUser(
+    @User(CustomValidationPipe) user: ValidatedUserDto,
+    @Param('id') userPairId: string,
+  ): Promise<void> {
     return this.commandBus.execute(new DislikeUserCommand(user, userPairId));
   }
 
   @Put('return')
   @HttpCode(HttpStatus.OK)
-  returnUser(@User() user): Promise<void> {
+  returnUser(
+    @User(CustomValidationPipe) user: ValidatedUserDto,
+  ): Promise<void> {
     return this.commandBus.execute(new ReturnUserCommand(user));
   }
 
   @Get('pairs')
   @HttpCode(HttpStatus.OK)
-  getPairs(@User() user): Promise<ShortUser[]> {
+  getPairs(
+    @User(CustomValidationPipe) user: ValidatedUserDto,
+  ): Promise<ShortUser[]> {
     return this.queryBus.execute(new GetPairsQuery(user));
   }
 
   @Post('pairs/:id')
   @HttpCode(HttpStatus.OK)
   acceptPair(
-    @User() user,
+    @User(CustomValidationPipe) user: ValidatedUserDto,
     @Param('id') userPairId: string,
   ): Promise<ShortUser[]> {
     return this.commandBus.execute(new AcceptPairCommand(user, userPairId));
@@ -137,7 +160,7 @@ export class UsersController {
   @Put('pairs/:id')
   @HttpCode(HttpStatus.OK)
   deletePair(
-    @User() user,
+    @User(CustomValidationPipe) user: ValidatedUserDto,
     @Param('id') userPairId: string,
   ): Promise<ShortUser[]> {
     return this.commandBus.execute(new DeletePairCommand(user, userPairId));

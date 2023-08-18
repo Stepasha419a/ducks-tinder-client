@@ -1,9 +1,8 @@
-import { AuthorizedUser } from 'users/users.interface';
-import { PatchUserPlaceDto } from 'users/dto';
+import { NotValidatedUserDto, PatchUserPlaceDto } from 'users/dto';
 
 export class PatchUserPlaceCommand {
   constructor(
-    public readonly user: AuthorizedUser,
+    public readonly user: NotValidatedUserDto,
     public readonly dto: PatchUserPlaceDto,
   ) {}
 }

@@ -1,5 +1,5 @@
-import { AuthorizedUser } from 'users/users.interface';
+import { ValidatedUserDto } from 'users/dto';
 
 export class RemoveAllPairsCommand {
-  constructor(public readonly user: AuthorizedUser) {}
+  constructor(public readonly user: ValidatedUserDto) {}
 }

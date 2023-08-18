@@ -1,9 +1,8 @@
-import { AuthorizedUser } from 'users/users.interface';
-import { DeletePictureDto } from 'users/dto';
+import { DeletePictureDto, NotValidatedUserDto } from 'users/dto';
 
 export class DeletePictureCommand {
   constructor(
-    public readonly user: AuthorizedUser,
+    public readonly user: NotValidatedUserDto,
     public readonly dto: DeletePictureDto,
   ) {}
 }

@@ -1,12 +1,12 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { AuthorizedUser } from 'users/users.interface';
+import { ValidatedUserDto } from 'users/dto';
 
 interface UserOptions {
   isSocket?: boolean;
 }
 
 export const User = createParamDecorator(
-  (options: UserOptions = null, ctx: ExecutionContext): AuthorizedUser => {
+  (options: UserOptions = null, ctx: ExecutionContext): ValidatedUserDto => {
     if (options?.isSocket) {
       const client = ctx.switchToWs().getClient();
       return client.request.user;

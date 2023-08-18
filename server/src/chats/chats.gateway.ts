@@ -41,6 +41,8 @@ import {
   GetMessagesQueryReturn,
 } from './chats.interface';
 import { ChatsMapper } from './chats.mapper';
+import { CustomValidationPipe } from 'common/pipes';
+import { ValidatedUserDto } from 'users/dto';
 
 @UseFilters(WsHttpExceptionFilter)
 @UsePipes(ValidationPipe)
@@ -62,7 +64,7 @@ export class ChatsGateway {
   @SubscribeMessage('connect-chats')
   async handleConnectChats(
     @ConnectedSocket() client: UserSocket,
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
   ) {
     client.join(user.id);
 
@@ -73,7 +75,7 @@ export class ChatsGateway {
   @SubscribeMessage('connect-chat')
   async handleConnectChat(
     @ConnectedSocket() client: UserSocket,
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: ChatIdDto,
   ) {
     await this.queryBus.execute(new ValidateChatMemberQuery(user, dto));
@@ -85,7 +87,7 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('disconnect-chat')
   async handleDisconnectChat(
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: ChatIdDto,
   ) {
     await this.commandBus.execute(new SaveLastSeenCommand(user, dto));
@@ -94,7 +96,7 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('send-message')
   async sendMessage(
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: SendMessageDto,
   ) {
     const data: ChatSocketMessageReturn = await this.commandBus.execute(
@@ -109,7 +111,7 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('get-messages')
   async getMessages(
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: GetMessagesDto,
   ) {
     const data: GetMessagesQueryReturn = await this.queryBus.execute(
@@ -122,7 +124,7 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('delete-message')
   async deleteMessage(
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: DeleteMessageDto,
   ) {
     const data: ChatSocketMessageReturn = await this.commandBus.execute(
@@ -137,7 +139,7 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('edit-message')
   async editMessage(
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: EditMessageDto,
   ) {
     const data: ChatSocketMessageReturn = await this.commandBus.execute(
@@ -152,7 +154,7 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('block-chat')
   async blockChat(
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: ChatIdDto,
   ) {
     const chat: BlockChatSocketReturn = await this.commandBus.execute(
@@ -167,7 +169,7 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('unblock-chat')
   async unblockChat(
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: ChatIdDto,
   ) {
     const chat: BlockChatSocketReturn = await this.commandBus.execute(
@@ -182,7 +184,7 @@ export class ChatsGateway {
   @UseGuards(WsRefreshTokenGuard)
   @SubscribeMessage('delete-chat')
   async deleteChat(
-    @User({ isSocket: true }) user,
+    @User({ isSocket: true }, CustomValidationPipe) user: ValidatedUserDto,
     @MessageBody() dto: ChatIdDto,
   ) {
     const chat: ChatSocketReturn = await this.commandBus.execute(

@@ -1,9 +1,9 @@
 import { ICommand } from '@nestjs/cqrs';
-import { AuthorizedUser } from 'users/users.interface';
+import { NotValidatedUserDto } from 'users/dto';
 
 export class SavePictureCommand implements ICommand {
   constructor(
-    public readonly user: AuthorizedUser,
+    public readonly user: NotValidatedUserDto,
     public readonly picture: Express.Multer.File,
   ) {}
 }

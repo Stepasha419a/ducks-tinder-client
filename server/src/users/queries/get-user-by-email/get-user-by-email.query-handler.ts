@@ -2,7 +2,11 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersSelector } from 'users/users.selector';
 import { GetUserByEmailQuery } from './get-user-by-email.query';
-import { FullUser } from 'users/users.interface';
+import { User } from '@prisma/client';
+
+interface FullUser extends User {
+  pairsCount: number;
+}
 
 @QueryHandler(GetUserByEmailQuery)
 export class GetUserByEmailQueryHandler
