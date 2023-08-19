@@ -54,6 +54,14 @@ describe('users/sorted (GET)', () => {
     let response: request.Response;
 
     beforeAll(async () => {
+      await prismaClient.place.update({
+        where: { id: currentUserId },
+        data: { latitude: 22.3456789, longitude: 22.3456789 },
+      });
+      await prismaClient.place.update({
+        where: { id: secondUserId },
+        data: { latitude: 22.5456789, longitude: 22.5456789 },
+      });
       await prismaClient.user.update({
         where: { id: secondUserId },
         data: {
@@ -90,13 +98,17 @@ describe('users/sorted (GET)', () => {
     });
   });
 
-  describe('when there is more than 100 km (148.2) and usersOnlyInDistance - false', () => {
+  describe('when there is more than 100 km (143) and usersOnlyInDistance - false', () => {
     let response: request.Response;
 
     beforeAll(async () => {
       await prismaClient.place.update({
+        where: { id: currentUserId },
+        data: { latitude: 22.3456789, longitude: 22.3456789 },
+      });
+      await prismaClient.place.update({
         where: { id: secondUserId },
-        data: { latitude: 13.2916238, longitude: 11.399734 },
+        data: { latitude: 23.2916238, longitude: 21.3997339 },
       });
       await prismaClient.user.update({
         where: { id: secondUserId },
@@ -133,18 +145,22 @@ describe('users/sorted (GET)', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
         ...USERS_SORTED_GET_EXPECT,
-        distance: 147,
+        distance: 143,
       });
     });
   });
 
-  describe('when there it is 100 km (96.8)', () => {
+  describe('when there it is 100 km (95)', () => {
     let response: request.Response;
 
     beforeAll(async () => {
       await prismaClient.place.update({
+        where: { id: currentUserId },
+        data: { latitude: 22.3456789, longitude: 22.3456789 },
+      });
+      await prismaClient.place.update({
         where: { id: secondUserId },
-        data: { latitude: 12.9616238, longitude: 12.9763088 },
+        data: { latitude: 22.9763039, longitude: 21.7150589 },
       });
       await prismaClient.user.update({
         where: { id: secondUserId },
@@ -181,8 +197,60 @@ describe('users/sorted (GET)', () => {
       expect(response.status).toBe(200);
       expect(response.body).toEqual({
         ...USERS_SORTED_GET_EXPECT,
-        distance: 97,
+        distance: 95,
       });
+    });
+  });
+
+  describe('when there it is more than distance limit - 80 km (between users - 84km)', () => {
+    let response: request.Response;
+
+    beforeAll(async () => {
+      await prismaClient.place.update({
+        where: { id: currentUserId },
+        data: { latitude: 22.3456789, longitude: 22.3456789 },
+      });
+      await prismaClient.place.update({
+        where: { id: secondUserId },
+        data: { latitude: 22.8501829, longitude: 21.7411749 },
+      });
+      await prismaClient.user.update({
+        where: { id: secondUserId },
+        data: {
+          age: 20,
+          distance: 50,
+          preferAgeFrom: 18,
+          preferAgeTo: 28,
+          preferSex: 'male',
+          sex: 'female',
+        },
+      });
+      await prismaClient.user.update({
+        where: { id: currentUserId },
+        data: {
+          age: 18,
+          distance: 80,
+          preferAgeFrom: 18,
+          preferAgeTo: 26,
+          sex: 'male',
+          preferSex: 'female',
+          usersOnlyInDistance: true,
+        },
+      });
+
+      const { currentUserAccessToken } = prepareReadyAccessTokens();
+
+      response = await request(httpServer)
+        .get('/users/sorted')
+        .set('Authorization', `Bearer ${currentUserAccessToken}`);
+    });
+
+    it('should throw an 404 error', () => {
+      expect(response.status).toBe(404);
+      expect(response.body.error).toEqual('Not Found');
+      expect(response.body.message).toEqual(
+        'Such user was not found, try to change settings',
+      );
     });
   });
 

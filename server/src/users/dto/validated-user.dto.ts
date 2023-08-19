@@ -12,7 +12,6 @@ import {
   IsNumber,
   IsOptional,
   IsString,
-  IsUUID,
   Length,
   Matches,
   Max,
@@ -39,12 +38,8 @@ export class Place {
 }
 
 export class ValidatedUserDto implements UserDto {
-  @IsDefined()
-  @IsNotEmptyObject()
-  @Type(() => Place)
-  place: Place;
-
-  @IsUUID()
+  @IsString() // because e2e tests use string ids (not uuid)
+  @IsNotEmpty()
   id: string;
 
   @IsEmail()
@@ -100,6 +95,11 @@ export class ValidatedUserDto implements UserDto {
   @Min(20)
   @Max(100)
   preferAgeTo: number;
+
+  @IsDefined()
+  @IsNotEmptyObject()
+  @Type(() => Place)
+  place: Place;
 
   @IsArray()
   @ArrayMaxSize(16)

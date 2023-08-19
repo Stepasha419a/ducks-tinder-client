@@ -15,7 +15,7 @@ export const GET_FULL_CHAT_EXPECTED = {
     {
       id: 'chat_get_second_user_id',
       name: 'Loren',
-      age: null,
+      age: 21,
       description: null,
       distance: 31,
       interests: [],
@@ -36,7 +36,7 @@ export const GET_CHATS_EXPECTED = [
     messages: [],
     users: [
       {
-        age: null,
+        age: 21,
         description: null,
         id: 'chats_get_second_user_id',
         interests: [],

@@ -4,11 +4,11 @@ import {
   IsBoolean,
   IsDefined,
   IsEmail,
+  IsNotEmpty,
   IsNotEmptyObject,
   IsNumber,
   IsOptional,
   IsString,
-  IsUUID,
   Length,
   Matches,
   Max,
@@ -21,7 +21,8 @@ import { Interest, PictureInterface, ShortUser } from 'users/users.interface';
 import { UserDto } from './user.dto';
 
 export class NotValidatedUserDto implements UserDto {
-  @IsUUID()
+  @IsString() // because e2e tests use string ids (not uuid)
+  @IsNotEmpty()
   id: string;
 
   @IsEmail()

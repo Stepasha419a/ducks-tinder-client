@@ -5,7 +5,7 @@ export const USERS_PAIRS_GET_EXPECT = [
     description: null,
     distance: 31,
     interests: [],
-    age: null,
+    age: 21,
     place: {
       name: 'second-user-place-name',
     },
@@ -18,9 +18,9 @@ export const USERS_PATCH_EXPECT = {
   id: 'patch_current_user_id',
   email: 'email123123@gmail.com',
   name: 'William',
-  age: null,
+  age: 20,
   description: null,
-  distance: null,
+  distance: 50,
   isActivated: false,
   nickname: null,
   pairsCount: 0,
@@ -30,11 +30,11 @@ export const USERS_PATCH_EXPECT = {
     longitude: 12.3456789,
     name: 'current-user-place-name',
   },
-  preferAgeFrom: null,
-  preferAgeTo: null,
-  preferSex: null,
+  preferAgeFrom: 18,
+  preferAgeTo: 26,
+  preferSex: 'female',
+  sex: 'male',
   usersOnlyInDistance: false,
-  sex: null,
   pictures: [],
   interests: [{ name: 'traveling' }, { name: 'ski' }],
 };
@@ -43,9 +43,9 @@ export const USERS_PICTURE_PUT_EXPECT = {
   id: 'users_picture_put_current_user_id',
   email: 'users_picture_put_current_user_id@gmail.com',
   name: 'Jason',
-  age: null,
+  age: 20,
   description: null,
-  distance: null,
+  distance: 50,
   isActivated: false,
   nickname: null,
   pairsCount: 0,
@@ -55,10 +55,10 @@ export const USERS_PICTURE_PUT_EXPECT = {
     longitude: 12.3456789,
     name: 'current-user-place-name',
   },
-  preferAgeFrom: null,
-  preferAgeTo: null,
-  preferSex: null,
-  sex: null,
+  preferAgeFrom: 18,
+  preferAgeTo: 26,
+  preferSex: 'female',
+  sex: 'male',
   usersOnlyInDistance: false,
   pictures: [],
   interests: [],
@@ -67,7 +67,7 @@ export const USERS_PICTURE_PUT_EXPECT = {
 export const USERS_SORTED_GET_EXPECT = {
   id: 'sorted_second_user_id',
   age: 20,
-  distance: 31,
+  distance: 30,
   description: null,
   name: 'Loren',
   place: {
@@ -80,7 +80,7 @@ export const USERS_SORTED_GET_EXPECT = {
 
 export const USERS_RETURN_PUT_EXPECT = {
   id: 'users_return_put_current_user_id',
-  age: null,
+  age: 20,
   distance: 31,
   description: null,
   name: 'Jason',
@@ -93,7 +93,7 @@ export const USERS_RETURN_PUT_EXPECT = {
 };
 
 export const USERS_PAIRS_PUT_EXPECT = {
-  age: null,
+  age: 21,
   description: null,
   id: 'users_pairs_put_second_user_id',
   interests: [],
@@ -106,7 +106,7 @@ export const USERS_PAIRS_PUT_EXPECT = {
 };
 
 export const USERS_PAIRS_POST_EXPECT = {
-  age: null,
+  age: 21,
   description: null,
   id: 'users_pairs_post_second_user_id',
   interests: [],
