@@ -1,0 +1,1 @@
+export { InterestGroup } from './InterestGroup';

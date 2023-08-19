@@ -31,18 +31,12 @@ const settingSlice = createSlice({
       state.validation = validation || null;
 
       switch (settingName) {
-        case 'interests':
-          state.settingType = 'select';
-          break;
         case 'description':
           state.settingType = 'textarea';
           break;
         case 'sex':
         case 'preferSex':
           state.settingType = 'radio';
-          break;
-        case 'place':
-          state.settingType = 'external';
           break;
         default:
           state.settingType = 'text';

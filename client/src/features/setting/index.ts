@@ -1,5 +1,4 @@
 export {
-  InterestsSettingThumbnail,
   PlaceSettingThumbnail,
   DistanceSettingThumbnail,
   PreferSexSettingThumbnail,
@@ -18,5 +17,4 @@ export {
   RadioForm,
   TextForm,
   TextareaForm,
-  ExternalForm,
 } from './SettingsBlock/components/Setting/forms';

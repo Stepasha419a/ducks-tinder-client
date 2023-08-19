@@ -11,10 +11,6 @@ export const SETTING_LIST: Record<string, SettingProperties | null> = {
     validation: { min: 50, max: 400 },
   },
   sex: null,
-  interests: null,
-  place: {
-    validation: { min: 12, max: 30 },
-  },
   preferSex: {
     formName: 'Interested in',
   },
@@ -24,4 +20,4 @@ export const SETTING_LIST: Record<string, SettingProperties | null> = {
 };
 
 // profile/edit
-export const BUSY_ROUTES = ['edit'];
+export const BUSY_ROUTES = ['edit', 'place'];

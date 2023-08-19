@@ -1,5 +1,4 @@
 export {
-  InterestsSettingThumbnail,
   PlaceSettingThumbnail,
   DistanceSettingThumbnail,
   PreferSexSettingThumbnail,

@@ -4,7 +4,6 @@ import {
   DescriptionSettingThumbnail,
   DistanceSettingThumbnail,
   EmailSettingThumbnail,
-  InterestsSettingThumbnail,
   LogoutButton,
   NameSettingThumbnail,
   NicknameSettingThumbnail,
@@ -41,7 +40,6 @@ export const SettingsList = (): ReactElement => {
           <SwitchTheme />
         </AccountGroup>
         <FindGroup>
-          <InterestsSettingThumbnail />
           <PlaceSettingThumbnail />
           <DistanceSettingThumbnail />
           <PreferSexSettingThumbnail />

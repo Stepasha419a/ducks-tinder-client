@@ -1,0 +1,31 @@
+.change {
+  background-color: var(--bg-primary);
+  padding-bottom: 60px;
+
+  .descr {
+    text-align: center;
+    padding: 0 16px;
+    margin: 10px 0 14px;
+    color: var(--main-secondary);
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 900px) {
+  .change {
+    overflow: hidden;
+
+    .descr {
+      font-size: 20px;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .change {
+    .descr {
+      font-size: 14px;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+.panel {
+  height: calc(100% - 45px);
+  overflow: auto;
+
+  scrollbar-width: 0px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

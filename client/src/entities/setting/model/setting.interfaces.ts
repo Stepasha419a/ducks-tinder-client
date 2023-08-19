@@ -21,7 +21,7 @@ export type SettingName =
   | 'preferSex'
   | 'nickname';
 
-type SettingType = 'textarea' | 'select' | 'radio' | 'external' | 'text' | null;
+type SettingType = 'textarea' | 'radio' | 'text' | null;
 
 export type Setting =
   | SettingName
