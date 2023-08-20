@@ -13,7 +13,6 @@ export {
 export { LogoutButton } from './LogoutButton/LogoutButton';
 export { SettingsBlock } from './SettingsBlock/SettingsBlock';
 export {
-  InterestsForm,
   RadioForm,
   TextForm,
   TextareaForm,

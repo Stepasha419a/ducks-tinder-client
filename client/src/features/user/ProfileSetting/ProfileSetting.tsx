@@ -1,5 +1,6 @@
 import { useAppSelector } from '@/shared/lib/hooks';
 import { useProfileSettingUrl } from '../lib';
+import { SelectForm } from './components';
 
 export const ProfileSetting = () => {
   const settingType = useAppSelector(
@@ -7,7 +8,6 @@ export const ProfileSetting = () => {
   );
 
   const isFound = useProfileSettingUrl();
-
   if (!isFound) {
     return <div>not found</div>;
   }
@@ -16,5 +16,5 @@ export const ProfileSetting = () => {
     return <div>radio</div>;
   }
 
-  return <div>select</div>;
+  return <SelectForm />;
 };

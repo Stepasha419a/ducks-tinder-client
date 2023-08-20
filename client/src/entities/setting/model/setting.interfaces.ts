@@ -1,4 +1,4 @@
-import type { Interest } from '@shared/api/interfaces';
+import type { SelectItem } from '@/entities/user/model';
 
 export interface Validation {
   min?: number;
@@ -50,5 +50,5 @@ export interface SettingFieldValues {
 }
 
 export interface SettingFieldInterestsArray {
-  input: Interest[];
+  input: SelectItem[];
 }

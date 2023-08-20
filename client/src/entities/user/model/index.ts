@@ -24,7 +24,13 @@ export {
   selectImagesDND,
   selectPreviewUser,
 } from './user.selectors';
-export type { PairSorts, PairSortsKey, PreviewUser } from './user.interfaces';
+export type {
+  ProfileSettingName,
+  SelectItem,
+  PairSorts,
+  PairSortsKey,
+  PreviewUser,
+} from './user.interfaces';
 export {
   INITIAL_SORTS,
   INTERESTS_FOR_LOOP,

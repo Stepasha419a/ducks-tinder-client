@@ -1,12 +1,13 @@
 import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { ListItem } from '@shared/ui';
-import SettingWrapper from '../Wrapper/SettingWrapper';
-import { InterestsSettingPopup } from '@entities/user/components';
+import { SettingWrapper } from '../Wrapper/SettingWrapper';
+import { ItemsSettingPopup } from '@entities/user/components';
 import { useSelectForm } from '@features/setting/lib';
-import styles from './InterestsForm.module.scss';
+import styles from './SelectForm.module.scss';
+import { INTERESTS_LIST } from '@/entities/user/model';
 
-export const InterestsForm: FC = (): ReactElement => {
+export const SelectForm: FC = (): ReactElement => {
   const {
     formName,
     errors,
@@ -59,10 +60,11 @@ export const InterestsForm: FC = (): ReactElement => {
         </div>
       </SettingWrapper>
       {isInterestsSettingPopupOpen && (
-        <InterestsSettingPopup
-          pairInterests={items}
-          toggleInterest={toggleItem}
-          setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
+        <ItemsSettingPopup
+          list={INTERESTS_LIST}
+          activeItems={items}
+          toggleItem={toggleItem}
+          setIsItemsSettingPopupOpen={setIsInterestsSettingPopupOpen}
         />
       )}
     </>

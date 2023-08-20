@@ -46,3 +46,7 @@ export interface PreviewUser {
   interests: Interest[];
   pictures: Picture[];
 }
+
+export interface SelectItem {
+  name: string;
+}

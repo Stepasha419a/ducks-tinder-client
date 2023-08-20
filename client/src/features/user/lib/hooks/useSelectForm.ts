@@ -1,12 +1,19 @@
 import { useController, useForm } from 'react-hook-form';
-import { useDefaultValues } from '@entities/setting/lib';
-import type { SettingFieldInterestsArray } from '@entities/setting/model';
-import { submitSettingsThunk, nullInput } from '@entities/setting/model';
+import { nullProfileSetting, type SelectItem } from '@/entities/user/model';
+import {
+  submitSettingsThunk,
+  type SettingFieldInterestsArray,
+} from '@entities/setting/model';
 import type { Interest } from '@shared/api/interfaces';
-import { useAppDispatch, useAppSelector, useMediaQuery } from '@shared/lib/hooks';
+import { useDefaultProfileValues } from '@/entities/user/lib';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useMediaQuery,
+} from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
-import { useNullOnClose } from './useNullOnClose';
 import { ROUTES } from '@/shared/lib/constants';
+import { useProfileNullOnClose } from './useProfileNullOnClose';
 
 export function useSelectForm() {
   const navigate = useNavigate();
@@ -22,7 +29,7 @@ export function useSelectForm() {
     control,
     reset,
   } = useForm<SettingFieldInterestsArray>({
-    defaultValues: { input: useDefaultValues() as Interest[] },
+    defaultValues: { input: useDefaultProfileValues() as SelectItem[] },
     mode: 'onChange',
   });
 
@@ -36,7 +43,7 @@ export function useSelectForm() {
     },
   });
 
-  useNullOnClose();
+  useProfileNullOnClose();
 
   const toggleItem = (item: Interest): void => {
     if (items.some((interest) => interest.name === item.name)) {
@@ -47,7 +54,7 @@ export function useSelectForm() {
   };
 
   const cancelHandler = (): void => {
-    dispatch(nullInput());
+    dispatch(nullProfileSetting());
     reset();
   };
 
