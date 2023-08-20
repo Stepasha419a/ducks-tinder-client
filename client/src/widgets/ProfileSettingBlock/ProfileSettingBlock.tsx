@@ -6,14 +6,14 @@ import {
   ProfileSettingsList,
   ProfileSubmit,
 } from '@/features/user';
-import styles from './ProfileSetting.module.scss';
+import styles from './ProfileSettingBlock.module.scss';
 
 interface ProfileSettingProps {
   pictures: Picture[];
   setPictures: Dispatch<SetStateAction<Picture[]>>;
 }
 
-export const ProfileSetting: FC<ProfileSettingProps> = ({
+export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
   pictures,
   setPictures,
 }) => {

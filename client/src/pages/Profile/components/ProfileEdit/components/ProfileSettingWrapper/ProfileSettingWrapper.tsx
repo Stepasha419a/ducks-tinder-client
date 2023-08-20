@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { Picture } from '@/shared/api/interfaces';
 import { Preview } from '@/entities/user/components';
 import { Tabs } from './components';
-import { ProfileSetting } from '@/widgets';
+import { ProfileSettingBlock } from '@/widgets';
 import { useAppSelector } from '@/shared/lib/hooks';
 import { selectPreviewUser } from '@/entities/user/model';
 import styles from './ProfileSettingWrapper.module.scss';
@@ -36,7 +36,7 @@ export const ProfileSettingWrapper: FC<ProfileSettingWrapperProps> = ({
             setIsFullPreview={setIsFullPreviewSetting}
           />
         ) : (
-          <ProfileSetting pictures={pictures} setPictures={setPictures} />
+          <ProfileSettingBlock pictures={pictures} setPictures={setPictures} />
         )}
       </div>
     </>

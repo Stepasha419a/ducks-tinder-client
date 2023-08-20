@@ -15,6 +15,7 @@ import { ActiveChat, IndexChatPage } from './Chat/components';
 import NotFound from './NotFound/NotFound';
 import { SettingsIndexPage } from './Settings/components';
 import { ProfileEdit } from './Profile/components';
+import { ProfileSetting } from '@/features/user/ProfileSetting/ProfileSetting';
 
 const Routing = (): ReactElement => {
   return (
@@ -27,6 +28,7 @@ const Routing = (): ReactElement => {
         <Route path={ROUTES.profile} element={<ProfilePage />}>
           <Route index element={<ProfilePreview />} />
           <Route path="edit" element={<ProfileEdit />} />
+          <Route path="edit/:profileSettingName" element={<ProfileSetting />} />
         </Route>
         <Route path={ROUTES.settings} element={<SettingsPage />}>
           <Route index element={<SettingsIndexPage />} />

@@ -6,6 +6,8 @@ export {
   setIsDialogUploadOpen,
   setIsImageCropOpen,
   setImageChange,
+  setProfileSetting,
+  nullProfileSetting,
 } from './user.slice';
 export {
   updateUserThunk,

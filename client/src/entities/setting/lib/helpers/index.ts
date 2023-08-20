@@ -1,0 +1,1 @@
+export { getSettingUrl } from './settingHelpers';

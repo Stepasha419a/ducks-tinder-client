@@ -16,7 +16,11 @@ import {
   updateUserThunk,
   updateUserPlaceThunk,
 } from './user.thunks';
-import type { PairSorts, UserInitialState } from './user.interfaces';
+import type {
+  PairSorts,
+  ProfileSettingName,
+  UserInitialState,
+} from './user.interfaces';
 import { INITIAL_SORTS } from './user.constants';
 
 const initialState: UserInitialState = {
@@ -30,6 +34,8 @@ const initialState: UserInitialState = {
     imageURL: null,
     isDialogUploadOpen: false,
     isImageCropOpen: false,
+    settingType: null,
+    settingName: null,
   },
 };
 
@@ -56,6 +62,17 @@ const userSlice = createSlice({
       state.profileSetting.isDialogUploadOpen = false;
       state.profileSetting.imageURL = payload;
       state.profileSetting.isImageCropOpen = true;
+    },
+    setProfileSetting: (
+      state,
+      { payload }: PayloadAction<ProfileSettingName>
+    ) => {
+      state.profileSetting.settingName = payload;
+      state.profileSetting.settingType = 'select';
+    },
+    nullProfileSetting: (state) => {
+      state.profileSetting.settingName = null;
+      state.profileSetting.settingType = null;
     },
   },
   extraReducers: (builder) => {
@@ -112,6 +129,8 @@ export const {
   setIsDialogUploadOpen,
   setIsImageCropOpen,
   setImageChange,
+  setProfileSetting,
+  nullProfileSetting,
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
