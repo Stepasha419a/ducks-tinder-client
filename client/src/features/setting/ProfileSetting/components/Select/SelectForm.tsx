@@ -2,8 +2,8 @@ import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { ListItem } from '@shared/ui';
 import { SettingWrapper } from '../Wrapper/SettingWrapper';
-import { ItemsSettingPopup } from '@entities/user/components';
-import { useSelectForm } from '@features/setting/lib';
+import { ItemsSettingPopup } from '@entities/setting/components';
+import { useProfileSelectForm } from '@features/setting/lib';
 import styles from './SelectForm.module.scss';
 import { INTERESTS_LIST } from '@/entities/user/model';
 
@@ -16,7 +16,7 @@ export const SelectForm: FC = (): ReactElement => {
     toggleItem,
     cancelHandler,
     submitHandler,
-  } = useSelectForm();
+  } = useProfileSelectForm();
 
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);

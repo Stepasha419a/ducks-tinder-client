@@ -1,11 +1,11 @@
 import { useController, useForm } from 'react-hook-form';
-import { nullProfileSetting, type SelectItem } from '@/entities/user/model';
+import { nullProfileSetting, type SelectItem } from '@/entities/setting/model';
 import {
   submitSettingsThunk,
   type SettingFieldInterestsArray,
 } from '@entities/setting/model';
 import type { Interest } from '@shared/api/interfaces';
-import { useDefaultProfileValues } from '@/entities/user/lib';
+import { useDefaultProfileValues } from '@/entities/setting/lib';
 import {
   useAppDispatch,
   useAppSelector,
@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/shared/lib/constants';
 import { useProfileNullOnClose } from './useProfileNullOnClose';
 
-export function useSelectForm() {
+export function useProfileSelectForm() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

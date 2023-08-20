@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { User } from '@shared/api/interfaces';
 import { checkUserFields } from './helpers';
 import type {
+  ProfileSettingName,
   SetInputPayload,
   SettingInitialState,
 } from './setting.interfaces';
@@ -14,6 +15,10 @@ const initialState: SettingInitialState = {
   validation: null,
   formName: null,
   errorFields: [],
+  profileSetting: {
+    settingType: null,
+    settingName: null,
+  },
 };
 
 const settingSlice = createSlice({
@@ -51,6 +56,17 @@ const settingSlice = createSlice({
     checkFields: (state, { payload }: PayloadAction<User>) => {
       state.errorFields = checkUserFields(payload);
     },
+    setProfileSetting: (
+      state,
+      { payload }: PayloadAction<ProfileSettingName>
+    ) => {
+      state.profileSetting.settingName = payload;
+      state.profileSetting.settingType = 'select';
+    },
+    nullProfileSetting: (state) => {
+      state.profileSetting.settingName = null;
+      state.profileSetting.settingType = null;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(submitSettingsThunk.fulfilled, (state) => {
@@ -62,6 +78,12 @@ const settingSlice = createSlice({
   },
 });
 
-export const { setInput, nullInput, checkFields } = settingSlice.actions;
+export const {
+  setInput,
+  nullInput,
+  checkFields,
+  setProfileSetting,
+  nullProfileSetting,
+} = settingSlice.actions;
 
 export const settingReducer = settingSlice.reducer;

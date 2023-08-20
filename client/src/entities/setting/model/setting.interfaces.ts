@@ -1,5 +1,3 @@
-import type { SelectItem } from '@/entities/user/model';
-
 export interface Validation {
   min?: number;
   max?: number;
@@ -31,12 +29,24 @@ export type Setting =
   | 'preferAgeTo'
   | 'usersOnlyInDistance';
 
+export type ProfileSettingName = 'interests' | null;
+
+type ProfileSettingType = 'radio' | 'select' | null;
+
 export interface SettingInitialState {
   settingType: SettingType;
   settingName: SettingName | null;
   validation: Validation | null;
   formName: string | null;
   errorFields: Setting[];
+  profileSetting: {
+    settingType: ProfileSettingType;
+    settingName: ProfileSettingName;
+  };
+}
+
+export interface SelectItem {
+  name: string;
 }
 
 export interface SetInputPayload {

@@ -1,11 +1,8 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import type { Picture } from '@/shared/api/interfaces';
 import { useMediaQuery } from '@/shared/lib/hooks';
-import {
-  PicturesDND,
-  ProfileSettingsList,
-  ProfileSubmit,
-} from '@/features/user';
+import { PicturesDND, ProfileSubmit } from '@/features/user';
+import { ProfileSettingsList } from '@/features/setting';
 import styles from './ProfileSettingBlock.module.scss';
 
 interface ProfileSettingProps {

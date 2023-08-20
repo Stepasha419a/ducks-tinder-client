@@ -1,7 +1,7 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import { Popup } from '@shared/ui';
-import { ItemsSettingPopup } from '@entities/user/components';
+import { ItemsSettingPopup } from '@entities/setting/components';
 import { usePairSorts } from '../lib';
 import {
   AgeSetting,

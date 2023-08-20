@@ -1,10 +1,10 @@
 import { useAppSelector } from '@/shared/lib/hooks';
-import { useProfileSettingUrl } from '../lib';
+import { useProfileSettingUrl } from '@/entities/setting/lib';
 import { SelectForm } from './components';
 
 export const ProfileSetting = () => {
   const settingType = useAppSelector(
-    (state) => state.user.profileSetting.settingType
+    (state) => state.setting.profileSetting.settingType
   );
 
   const isFound = useProfileSettingUrl();

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '@shared/lib/hooks';
-import { nullProfileSetting } from '@/entities/user/model';
+import { nullProfileSetting } from '@/entities/setting/model';
 
 export function useProfileNullOnClose() {
   const dispatch = useAppDispatch();

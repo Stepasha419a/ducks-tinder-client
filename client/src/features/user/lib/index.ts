@@ -1,1 +1,1 @@
-export { usePairSorts, useProfileSettingUrl } from './hooks';
+export { usePairSorts } from './hooks';

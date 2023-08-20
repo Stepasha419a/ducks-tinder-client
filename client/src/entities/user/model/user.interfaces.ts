@@ -17,10 +17,6 @@ export interface PairSorts {
 
 export type PairSortsKey = keyof PairSorts;
 
-export type ProfileSettingName = 'interests' | null;
-
-type ProfileSettingType = 'radio' | 'select' | null;
-
 export interface UserInitialState {
   currentUser: User;
   currentPair: ShortUser | null;
@@ -31,8 +27,6 @@ export interface UserInitialState {
     imageURL: string | null;
     isImageCropOpen: boolean;
     isDialogUploadOpen: boolean;
-    settingName: ProfileSettingName;
-    settingType: ProfileSettingType;
   };
 }
 
@@ -45,8 +39,4 @@ export interface PreviewUser {
   distance: number | null;
   interests: Interest[];
   pictures: Picture[];
-}
-
-export interface SelectItem {
-  name: string;
 }

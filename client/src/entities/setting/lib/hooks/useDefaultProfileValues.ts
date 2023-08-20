@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/shared/lib/hooks';
-import type { SelectItem } from '../../model';
+import type { SelectItem } from '@entities/setting/model';
 
 export function useDefaultProfileValues():
   | string
@@ -8,7 +8,7 @@ export function useDefaultProfileValues():
   | SelectItem[] {
   const currentUser = useAppSelector((state) => state.user.currentUser);
   const settingName = useAppSelector(
-    (state) => state.user.profileSetting.settingName
+    (state) => state.setting.profileSetting.settingName
   );
 
   return currentUser[settingName!];

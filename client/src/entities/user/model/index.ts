@@ -6,8 +6,6 @@ export {
   setIsDialogUploadOpen,
   setIsImageCropOpen,
   setImageChange,
-  setProfileSetting,
-  nullProfileSetting,
 } from './user.slice';
 export {
   updateUserThunk,
@@ -24,13 +22,7 @@ export {
   selectImagesDND,
   selectPreviewUser,
 } from './user.selectors';
-export type {
-  ProfileSettingName,
-  SelectItem,
-  PairSorts,
-  PairSortsKey,
-  PreviewUser,
-} from './user.interfaces';
+export type { PairSorts, PairSortsKey, PreviewUser } from './user.interfaces';
 export {
   INITIAL_SORTS,
   INTERESTS_FOR_LOOP,
