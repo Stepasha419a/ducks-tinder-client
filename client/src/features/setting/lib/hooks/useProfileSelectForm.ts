@@ -1,10 +1,9 @@
-import { useController, useForm } from 'react-hook-form';
-import { nullProfileSetting, type SelectItem } from '@/entities/setting/model';
+import { useForm } from 'react-hook-form';
 import {
-  submitSettingsThunk,
-  type SettingFieldInterestsArray,
-} from '@entities/setting/model';
-import type { Interest } from '@shared/api/interfaces';
+  submitProfileSettingsThunk,
+  type SelectItem,
+} from '@/entities/setting/model';
+import type { MultiSelectForm } from '@entities/setting/model';
 import { useDefaultProfileValues } from '@/entities/setting/lib';
 import {
   useAppDispatch,
@@ -21,61 +20,33 @@ export function useProfileSelectForm() {
 
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const formName = useAppSelector((state) => state.setting.formName);
+  const settingName = useAppSelector(
+    (state) => state.setting.profileSetting.settingName
+  );
 
-  const {
-    formState: { errors, isValid },
-    handleSubmit,
-    control,
-    reset,
-  } = useForm<SettingFieldInterestsArray>({
-    defaultValues: { input: useDefaultProfileValues() as SelectItem[] },
-    mode: 'onChange',
-  });
-
-  const {
-    field: { value: items, onChange: setItems },
-  } = useController({
-    name: 'input',
-    control,
-    rules: {
-      required: 'Form is required',
+  const { handleSubmit, control } = useForm<MultiSelectForm>({
+    defaultValues: {
+      input: { interests: useDefaultProfileValues() as SelectItem[] },
     },
+    mode: 'onChange',
   });
 
   useProfileNullOnClose();
 
-  const toggleItem = (item: Interest): void => {
-    if (items.some((interest) => interest.name === item.name)) {
-      setItems(items.filter((interest) => interest.name !== item.name));
-    } else {
-      setItems([...items, item]);
-    }
-  };
-
-  const cancelHandler = (): void => {
-    dispatch(nullProfileSetting());
-    reset();
-  };
-
-  const submitHandler = handleSubmit((data: SettingFieldInterestsArray) => {
+  const submitHandler = handleSubmit((data: MultiSelectForm) => {
     const url = isMobile ? ROUTES.settings : ROUTES.profile;
 
     dispatch(
-      submitSettingsThunk({
-        changedData: data.input.map((interest) => interest.name),
+      submitProfileSettingsThunk({
+        changedData: data.input.interests.map((interest) => interest.name),
       })
     );
     navigate(url);
   });
 
   return {
-    formName,
-    errors,
-    isValid,
-    items,
-    toggleItem,
-    cancelHandler,
+    control,
+    settingName,
     submitHandler,
   };
 }

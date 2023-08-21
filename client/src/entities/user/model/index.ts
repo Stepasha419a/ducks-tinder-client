@@ -23,8 +23,4 @@ export {
   selectPreviewUser,
 } from './user.selectors';
 export type { PairSorts, PairSortsKey, PreviewUser } from './user.interfaces';
-export {
-  INITIAL_SORTS,
-  INTERESTS_FOR_LOOP,
-  INTERESTS_LIST,
-} from './user.constants';
+export { INITIAL_SORTS, INTERESTS_FOR_LOOP } from './user.constants';

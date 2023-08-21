@@ -1,50 +1,51 @@
-.setting {
-  border-right: 1px solid var(--border-main);
-  height: calc(100vh - 90px);
-  background-color: var(--bg-primary);
+.form {
+  height: 100%;
 
-  .name {
-    border-bottom: 1px solid var(--border-main);
-    padding: 20px 16px 10px;
-    text-transform: uppercase;
-    color: var(--main-secondary);
-
-    &.error {
-      color: var(--danger-light);
-      border-bottom: none;
-      padding: 25px 16px 0px;
-    }
-  }
-
-  .title {
-    font-size: 14px;
-    color: var(--main-secondary);
-    margin: 12px 0;
-    padding: 0 16px;
-  }
-
-  .link {
-    display: block;
-  }
-
-  .btn {
-    max-height: 53px;
+  .head {
     background-color: var(--bg-sub-primary);
-    border-right: none;
-    padding: 16px;
-    cursor: pointer;
-    color: var(--danger-light);
-    text-align: left;
-    font-size: 16px;
-    font-weight: 500;
+    border-bottom: 1px solid var(--border-main);
+    padding: 10px 0;
+    position: relative;
 
-    &:disabled {
-      background-color: var(--bg-primary);
-      cursor: not-allowed;
+    .title {
+      font-weight: 500;
+      font-size: 24px;
+      text-align: center;
     }
 
-    &.noBorder {
-      border-bottom: none;
+    .submit {
+      font-weight: 700;
+      color: var(--color--red-100);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 6px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .setting {
+    height: 100%;
+    background-color: var(--bg-primary);
+
+    overflow: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .name {
+      border-bottom: 1px solid var(--border-main);
+      padding: 20px 16px 10px;
+      text-transform: uppercase;
+      color: var(--main-secondary);
+    }
+
+    .descr {
+      padding: 0 12px;
+      margin: 20px 0;
     }
   }
 }

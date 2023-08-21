@@ -29,7 +29,8 @@ export type Setting =
   | 'preferAgeTo'
   | 'usersOnlyInDistance';
 
-export type ProfileSettingName = 'interests' | null;
+export type ProfileSettingName = 'interests';
+export type ProfileSettingSelectName = 'interests';
 
 type ProfileSettingType = 'radio' | 'select' | null;
 
@@ -41,7 +42,7 @@ export interface SettingInitialState {
   errorFields: Setting[];
   profileSetting: {
     settingType: ProfileSettingType;
-    settingName: ProfileSettingName;
+    settingName: ProfileSettingName | null;
   };
 }
 
@@ -61,4 +62,8 @@ export interface SettingFieldValues {
 
 export interface SettingFieldInterestsArray {
   input: SelectItem[];
+}
+
+export interface MultiSelectForm {
+  input: Record<ProfileSettingSelectName, SelectItem[]>;
 }

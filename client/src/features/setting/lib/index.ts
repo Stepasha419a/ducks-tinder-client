@@ -5,3 +5,4 @@ export {
   useProfileSelectForm,
 } from './hooks';
 export { WithCheckedFields } from './hocs';
+export { getProfileSettingWrapperData } from './helpers';

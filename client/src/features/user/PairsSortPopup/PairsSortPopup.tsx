@@ -12,7 +12,7 @@ import {
   PhotosSetting,
 } from './components';
 import styles from './PairsSortPopup.module.scss';
-import { INTERESTS_LIST } from '@/entities/user/model';
+import { SETTING_INTERESTS_LIST } from '@/entities/setting/model/setting.constants';
 
 interface PairsSortPopupProps {
   setIsSortPopupOpen: Dispatch<SetStateAction<boolean>>;
@@ -61,7 +61,7 @@ export const PairsSortPopup: FC<PairsSortPopupProps> = ({
       </Popup>
       {isInterestsSettingPopupOpen && (
         <ItemsSettingPopup
-          list={INTERESTS_LIST}
+          list={SETTING_INTERESTS_LIST}
           activeItems={interests}
           toggleItem={toggleInterest}
           setIsItemsSettingPopupOpen={setIsInterestsSettingPopupOpen}

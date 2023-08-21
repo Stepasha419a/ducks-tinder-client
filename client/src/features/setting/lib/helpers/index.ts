@@ -1,0 +1,1 @@
+export { getProfileSettingWrapperData } from './getProfileSettingWrapperData';

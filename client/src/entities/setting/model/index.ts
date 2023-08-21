@@ -6,13 +6,18 @@ export {
   nullProfileSetting,
   setProfileSetting,
 } from './setting.slice';
-export { submitSettingsThunk } from './setting.thunks';
+export {
+  submitSettingsThunk,
+  submitProfileSettingsThunk,
+} from './setting.thunks';
 export type {
   Setting,
   SetInputPayload,
+  MultiSelectForm,
   SettingFieldInterestsArray,
   SettingFieldValues,
   Validation,
   ProfileSettingName,
   SelectItem,
+  ProfileSettingSelectName,
 } from './setting.interfaces';
