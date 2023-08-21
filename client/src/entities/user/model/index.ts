@@ -9,13 +9,14 @@ export {
 } from './user.slice';
 export {
   updateUserThunk,
+  updateUserMultipleFieldsThunk,
+  updateUserPlaceThunk,
   saveUserImageThunk,
   deleteUserPictureThunk,
   mixUserPicturesThunk,
   refusePairThunk,
   acceptPairThunk,
   getUserPairsThunk,
-  updateUserPlaceThunk,
 } from './user.thunks';
 export {
   selectCropImage,

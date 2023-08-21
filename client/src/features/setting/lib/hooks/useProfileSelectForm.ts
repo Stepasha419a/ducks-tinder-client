@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import {
-  submitProfileSettingsThunk,
+  submitProfileSelectSettingsThunk,
   type SelectItem,
 } from '@/entities/setting/model';
 import type { MultiSelectForm } from '@entities/setting/model';
@@ -13,6 +13,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/shared/lib/constants';
 import { useProfileNullOnClose } from './useProfileNullOnClose';
+import { parseSelectData } from '../helpers';
 
 export function useProfileSelectForm() {
   const navigate = useNavigate();
@@ -36,11 +37,8 @@ export function useProfileSelectForm() {
   const submitHandler = handleSubmit((data: MultiSelectForm) => {
     const url = isMobile ? ROUTES.settings : ROUTES.profile;
 
-    dispatch(
-      submitProfileSettingsThunk({
-        changedData: data.input.interests.map((interest) => interest.name),
-      })
-    );
+    const parsedData = parseSelectData(data);
+    dispatch(submitProfileSelectSettingsThunk(parsedData));
     navigate(url);
   });
 

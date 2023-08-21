@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { ChangedData, Picture } from '@shared/api/interfaces';
+import type { ChangedData, PartialUser, Picture } from '@shared/api/interfaces';
 import type { Setting } from '@entities/setting/model';
 import { userService } from '@shared/api/services';
 import { makeDataObject } from '@shared/helpers';
@@ -12,13 +12,24 @@ export const updateUserThunk = createAsyncThunk(
       settingName: Setting;
       changedData: ChangedData;
     },
-    { rejectWithValue, getState }
+    { rejectWithValue }
   ) => {
     try {
-      const { user } = getState() as RootState;
-      const { currentUser } = user;
-      const data = makeDataObject({ ...args, currentUser });
+      const data = makeDataObject({ ...args });
 
+      const response = await userService.updateUser(data);
+
+      return response.data;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
+export const updateUserMultipleFieldsThunk = createAsyncThunk(
+  'users/updateUserMultipleFields',
+  async (data: PartialUser, { rejectWithValue }) => {
+    try {
       const response = await userService.updateUser(data);
 
       return response.data;

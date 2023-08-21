@@ -64,6 +64,8 @@ export interface SettingFieldInterestsArray {
   input: SelectItem[];
 }
 
+export type ProfileSelectInput = Record<ProfileSettingSelectName, SelectItem[]>;
+
 export interface MultiSelectForm {
-  input: Record<ProfileSettingSelectName, SelectItem[]>;
+  input: ProfileSelectInput;
 }

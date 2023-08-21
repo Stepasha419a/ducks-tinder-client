@@ -1,14 +1,13 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
-import { useController } from 'react-hook-form';
 import type {
   MultiSelectForm,
   ProfileSettingSelectName,
-  SelectItem,
 } from '@/entities/setting/model';
 import styles from './SelectSetting.module.scss';
 import { ListItem } from '@/shared/ui';
 import { SETTING_INTERESTS_LIST } from '@/entities/setting/model/setting.constants';
+import { useSelectFormControl } from '@/features/setting/lib/hooks';
 
 interface SelectSettingProps {
   control: Control<MultiSelectForm>;
@@ -19,23 +18,7 @@ export const SelectSetting: FC<SelectSettingProps> = ({
   control,
   settingFieldName,
 }) => {
-  const {
-    field: { value: items, onChange: setItems },
-  } = useController({
-    name: `input.${settingFieldName}`,
-    control,
-    rules: {
-      required: 'Form is required',
-    },
-  });
-
-  const toggleItem = (item: SelectItem): void => {
-    if (items.some((interest) => interest.name === item.name)) {
-      setItems(items.filter((candidate) => candidate.name !== item.name));
-    } else {
-      setItems([...items, item]);
-    }
-  };
+  const { items, toggleItem } = useSelectFormControl(control, settingFieldName);
 
   return (
     <>

@@ -8,7 +8,7 @@ export {
 } from './setting.slice';
 export {
   submitSettingsThunk,
-  submitProfileSettingsThunk,
+  submitProfileSelectSettingsThunk,
 } from './setting.thunks';
 export type {
   Setting,
