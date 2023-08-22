@@ -17,6 +17,6 @@ export const SettingsGroup: FC<SettingsGroupProps> = ({ control }) => {
     case 'interests':
       return <InterestsSettingGroup control={control} />;
     default:
-      return <div></div>;
+      return <div>not found group</div>;
   }
 };

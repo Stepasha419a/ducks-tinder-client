@@ -17,4 +17,5 @@ export type {
   ProfileSettingName,
   SelectItem,
   ProfileSettingSelectName,
+  SelectValidation,
 } from './setting.interfaces';

@@ -69,3 +69,7 @@ export type ProfileSelectInput = Record<ProfileSettingSelectName, SelectItem[]>;
 export interface MultiSelectForm {
   input: ProfileSelectInput;
 }
+
+export interface SelectValidation {
+  maxLength: number;
+}

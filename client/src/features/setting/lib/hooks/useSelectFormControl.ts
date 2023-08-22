@@ -4,7 +4,9 @@ import type {
   MultiSelectForm,
   ProfileSettingSelectName,
   SelectItem,
+  SelectValidation,
 } from '@/entities/setting/model';
+import { getSelectData } from '@/entities/setting/lib';
 
 export function useSelectFormControl(
   control: Control<MultiSelectForm>,
@@ -15,18 +17,28 @@ export function useSelectFormControl(
   } = useController({
     name: `input.${settingFieldName}`,
     control,
-    rules: {
-      required: 'Form is required',
-    },
   });
 
+  const { list, validation } = getSelectData(settingFieldName);
+
   const toggleItem = (item: SelectItem): void => {
-    if (items.some((interest) => interest.name === item.name)) {
+    if (isActive(items, item)) {
       setItems(items.filter((candidate) => candidate.name !== item.name));
-    } else {
+    } else if (isActivatable(items, validation)) {
       setItems([...items, item]);
     }
   };
 
-  return { items, toggleItem };
+  return { list, items, toggleItem, validation };
+}
+
+function isActive(items: SelectItem[], item: SelectItem): boolean {
+  return items.some((candidate) => candidate.name === item.name);
+}
+
+function isActivatable(
+  items: SelectItem[],
+  validation: SelectValidation
+): boolean {
+  return items.length < validation.maxLength;
 }
