@@ -1,14 +1,12 @@
 import type { ReactElement } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector, useMediaQuery } from '@hooks';
 import { useSettingUrl } from '@entities/setting/lib';
 import { Setting, SettingsList } from './components';
 import { settingVariants } from './SettingsBlock.variants';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '@shared/constants';
 import styles from './SettingsBlock.module.scss';
+import { NotFoundSetting } from '@/entities/setting/components';
+import { ROUTES } from '@/shared/lib/constants';
 
 export const SettingsBlock = (): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');
@@ -17,16 +15,7 @@ export const SettingsBlock = (): ReactElement => {
   const isFound = useSettingUrl();
 
   if (isFound === false) {
-    return (
-      <div className={styles.block}>
-        <div className={styles.notFound}>
-          <Link to={ROUTES.profile} className={styles.link}>
-            <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />
-            <span className={styles.text}>Such setting was not found</span>
-          </Link>
-        </div>
-      </div>
-    );
+    return <NotFoundSetting url={ROUTES.profile} />;
   }
 
   const slideIn = isMobile ? 'slideInMobile' : 'slideIn';
