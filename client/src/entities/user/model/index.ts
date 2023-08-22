@@ -9,7 +9,6 @@ export {
 } from './user.slice';
 export {
   updateUserThunk,
-  updateUserMultipleFieldsThunk,
   updateUserPlaceThunk,
   saveUserImageThunk,
   deleteUserPictureThunk,

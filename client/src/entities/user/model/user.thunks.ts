@@ -1,33 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { ChangedData, PartialUser, Picture } from '@shared/api/interfaces';
-import type { Setting } from '@entities/setting/model';
+import type { PartialUser, Picture } from '@shared/api/interfaces';
 import { userService } from '@shared/api/services';
-import { makeDataObject } from '@shared/helpers';
 import { returnErrorMessage } from '@shared/helpers';
 
 export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
-  async (
-    args: {
-      settingName: Setting;
-      changedData: ChangedData;
-    },
-    { rejectWithValue }
-  ) => {
-    try {
-      const data = makeDataObject({ ...args });
-
-      const response = await userService.updateUser(data);
-
-      return response.data;
-    } catch (error: unknown) {
-      return rejectWithValue(returnErrorMessage(error));
-    }
-  }
-);
-
-export const updateUserMultipleFieldsThunk = createAsyncThunk(
-  'users/updateUserMultipleFields',
   async (data: PartialUser, { rejectWithValue }) => {
     try {
       const response = await userService.updateUser(data);

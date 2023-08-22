@@ -5,7 +5,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import type { ShortUser } from '@shared/api/interfaces';
 import { getUserPairsThunk } from '@entities/user/model';
-import { sortItemBySettings } from '../../model/helpers';
+import { sortItemBySettings } from '../../lib';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
 import { PairsListLazy } from './PairsList.lazy';

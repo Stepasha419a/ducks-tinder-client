@@ -6,10 +6,7 @@ export {
   nullProfileSetting,
   setProfileSetting,
 } from './setting.slice';
-export {
-  submitSettingsThunk,
-  submitProfileSelectSettingsThunk,
-} from './setting.thunks';
+export { submitSettingsThunk } from './setting.thunks';
 export type {
   Setting,
   SetInputPayload,

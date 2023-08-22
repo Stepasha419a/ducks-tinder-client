@@ -1,1 +1,2 @@
-export { getSettingUrl } from './settingHelpers';
+export { getSettingUrl } from './getSettingUrl';
+export { getSelectSettingFields } from './getSelectSettingFields';

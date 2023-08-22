@@ -19,16 +19,14 @@ export const DistanceSettingThumbnail = () => {
   const distanceHandler = (): void => {
     dispatch(
       submitSettingsThunk({
-        setting: 'distance',
-        changedData: distanceSetting!,
+        distance: distanceSetting!,
       })
     );
   };
   const setUsersOnlyInDistanceHandler = (): void => {
     dispatch(
       submitSettingsThunk({
-        setting: 'usersOnlyInDistance',
-        changedData: !usersOnlyInDistance,
+        usersOnlyInDistance: !usersOnlyInDistance,
       })
     );
   };

@@ -18,6 +18,7 @@ export function useTextForm() {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   const formName = useAppSelector((state) => state.setting.formName);
+  const settingName = useAppSelector((state) => state.setting.settingName);
 
   const {
     register,
@@ -37,7 +38,7 @@ export function useTextForm() {
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
     const url = isMobile ? ROUTES.settings : ROUTES.profile;
 
-    dispatch(submitSettingsThunk({ changedData: data.input }));
+    dispatch(submitSettingsThunk({ [settingName!]: data.input }));
     navigate(url);
   });
 
