@@ -5,6 +5,7 @@ import { UsersSelector } from 'users/users.selector';
 import { UserDto } from 'users/dto';
 import { ForbiddenException } from '@nestjs/common';
 import { USER_ALREADY_EXISTS } from 'common/constants/error';
+import { compareUserRelationFieldIds } from './helpers';
 
 @CommandHandler(PatchUserCommand)
 export class PatchUserCommandHandler
@@ -28,34 +29,40 @@ export class PatchUserCommandHandler
     }
 
     if (dto.interests && (dto.interests.length || dto.interests.length === 0)) {
-      const interests = (
-        await this.prismaService.user.findUnique({
-          where: { id: user.id },
-          select: {
-            interests: true,
-          },
-        })
-      ).interests;
-      const existingInterests = await this.prismaService.interest.findMany({
-        where: { name: { in: dto.interests } },
+      const interestIds = await this.prismaService.interest.findMany({
+        where: { users: { some: { id: user.id } } },
+        select: { id: true },
       });
-      // TODO: do this with comparison
-      await Promise.all(
-        interests.map(async (interest) => {
-          await this.prismaService.user.update({
-            where: { id: user.id },
-            data: { interests: { disconnect: { id: interest.id } } },
-          });
-        }),
+      const updatedInterestIds = await this.prismaService.interest.findMany({
+        where: { name: { in: dto.interests } },
+        select: { id: true },
+      });
+
+      const { toConnect, toDisconnect } = compareUserRelationFieldIds(
+        interestIds,
+        updatedInterestIds,
       );
-      await Promise.all(
-        existingInterests.map(async (interest) => {
-          await this.prismaService.user.update({
-            where: { id: user.id },
-            data: { interests: { connect: { id: interest.id } } },
-          });
-        }),
-      );
+
+      if (toConnect.length) {
+        await this.prismaService.$transaction(
+          toConnect.map((field) =>
+            this.prismaService.user.update({
+              where: { id: user.id },
+              data: { interests: { connect: { id: field.id } } },
+            }),
+          ),
+        );
+      }
+      if (toDisconnect.length) {
+        await this.prismaService.$transaction(
+          toDisconnect.map((field) =>
+            this.prismaService.user.update({
+              where: { id: user.id },
+              data: { interests: { disconnect: { id: field.id } } },
+            }),
+          ),
+        );
+      }
     }
 
     const pairsCount = await this.prismaService.user.count({

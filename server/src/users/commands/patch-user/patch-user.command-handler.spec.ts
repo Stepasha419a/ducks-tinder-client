@@ -9,6 +9,7 @@ import { PatchUserCommand } from './patch-user.command';
 import { requestUserStub, userDtoStub } from 'users/test/stubs';
 import { UPDATE_USER_DTO } from 'users/test/values/users.const.dto';
 import { USER_ALREADY_EXISTS } from 'common/constants/error';
+import { UsersSelector } from 'users/users.selector';
 
 describe('when patch is called', () => {
   let prismaService: PrismaService;
@@ -31,49 +32,48 @@ describe('when patch is called', () => {
 
   describe('when it is called correctly', () => {
     beforeAll(() => {
+      prismaService.user.findUnique = jest.fn().mockResolvedValue(undefined);
+      prismaService.$transaction = jest.fn();
       prismaService.user.update = jest.fn().mockResolvedValue({
         ...userDtoStub(),
         pairs: [userDtoStub().firstPair],
       });
       prismaService.user.count = jest.fn().mockResolvedValue(5);
-      prismaService.interest.findMany = jest.fn().mockResolvedValue([
-        { id: 'interest-id-2', name: UPDATE_USER_DTO.interests[0] },
-        { id: 'interest-id-3', name: UPDATE_USER_DTO.interests[1] },
-      ]);
     });
 
     let user: UserDto;
 
     beforeEach(async () => {
       jest.clearAllMocks();
-      prismaService.user.findUnique = jest
+      prismaService.interest.findMany = jest
         .fn()
-        .mockResolvedValueOnce(undefined)
-        .mockResolvedValue({
-          interests: [{ id: 'interest-id-1', name: 'programming' }],
-        });
+        .mockResolvedValueOnce([{ id: 'interest-id-1', name: 'programming' }])
+        .mockResolvedValue([
+          { id: 'interest-id-2', name: UPDATE_USER_DTO.interests[0] },
+          { id: 'interest-id-3', name: UPDATE_USER_DTO.interests[1] },
+        ]);
+
       user = await patchUserCommandHandler.execute(
         new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
       );
     });
 
     it('should call user find unique', () => {
-      expect(prismaService.user.findUnique).toBeCalledTimes(2);
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
       expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
         where: { email: UPDATE_USER_DTO.email },
-      });
-      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(2, {
-        where: { id: requestUserStub().id },
-        select: {
-          interests: true,
-        },
       });
     });
 
     it('should call find many interests', () => {
-      expect(prismaService.interest.findMany).toBeCalledTimes(1);
-      expect(prismaService.interest.findMany).toBeCalledWith({
+      expect(prismaService.interest.findMany).toBeCalledTimes(2);
+      expect(prismaService.interest.findMany).toHaveBeenNthCalledWith(1, {
+        where: { users: { some: { id: requestUserStub().id } } },
+        select: { id: true },
+      });
+      expect(prismaService.interest.findMany).toHaveBeenNthCalledWith(2, {
         where: { name: { in: UPDATE_USER_DTO.interests } },
+        select: { id: true },
       });
     });
 
@@ -83,25 +83,13 @@ describe('when patch is called', () => {
         where: { id: userDtoStub().id },
         data: {
           interests: {
-            disconnect: {
-              id: 'interest-id-1',
-            },
-          },
-        },
-      });
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(2, {
-        data: {
-          interests: {
             connect: {
               id: 'interest-id-2',
             },
           },
         },
-        where: {
-          id: userDtoStub().id,
-        },
       });
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(3, {
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(2, {
         data: {
           interests: {
             connect: {
@@ -113,12 +101,181 @@ describe('when patch is called', () => {
           id: userDtoStub().id,
         },
       });
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(3, {
+        data: {
+          interests: {
+            disconnect: {
+              id: 'interest-id-1',
+            },
+          },
+        },
+        where: {
+          id: userDtoStub().id,
+        },
+      });
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(4, {
+        where: { id: requestUserStub().id },
+        data: { ...UPDATE_USER_DTO, interests: undefined },
+        include: UsersSelector.selectUser(),
+      });
     });
 
     it('should call user count', () => {
       expect(prismaService.user.count).toBeCalledTimes(1);
       expect(prismaService.user.count).toBeCalledWith({
-        where: { pairFor: { some: { id: user.id } } },
+        where: { pairFor: { some: { id: requestUserStub().id } } },
+      });
+    });
+
+    it('should return a user', () => {
+      expect(user).toEqual(userDtoStub());
+    });
+  });
+
+  describe('when there are no interests (not found => empty)', () => {
+    beforeAll(() => {
+      prismaService.user.findUnique = jest.fn().mockResolvedValue(undefined);
+      prismaService.$transaction = jest.fn();
+      prismaService.user.update = jest.fn().mockResolvedValue({
+        ...userDtoStub(),
+        pairs: [userDtoStub().firstPair],
+      });
+      prismaService.user.count = jest.fn().mockResolvedValue(5);
+    });
+
+    let user: UserDto;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      prismaService.interest.findMany = jest.fn().mockResolvedValue([]);
+
+      user = await patchUserCommandHandler.execute(
+        new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
+      );
+    });
+
+    it('should call user find unique', () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { email: UPDATE_USER_DTO.email },
+      });
+    });
+
+    it('should call find many interests', () => {
+      expect(prismaService.interest.findMany).toBeCalledTimes(2);
+      expect(prismaService.interest.findMany).toHaveBeenNthCalledWith(1, {
+        where: { users: { some: { id: requestUserStub().id } } },
+        select: { id: true },
+      });
+      expect(prismaService.interest.findMany).toHaveBeenNthCalledWith(2, {
+        where: { name: { in: UPDATE_USER_DTO.interests } },
+        select: { id: true },
+      });
+    });
+
+    it('should call update user', () => {
+      expect(prismaService.user.update).toBeCalledTimes(1);
+      expect(prismaService.user.update).toBeCalledWith({
+        where: { id: requestUserStub().id },
+        data: { ...UPDATE_USER_DTO, interests: undefined },
+        include: UsersSelector.selectUser(),
+      });
+    });
+
+    it('should call user count', () => {
+      expect(prismaService.user.count).toBeCalledTimes(1);
+      expect(prismaService.user.count).toBeCalledWith({
+        where: { pairFor: { some: { id: requestUserStub().id } } },
+      });
+    });
+
+    it('should return a user', () => {
+      expect(user).toEqual(userDtoStub());
+    });
+  });
+
+  describe('when there were not interests before (new user)', () => {
+    beforeAll(() => {
+      prismaService.user.findUnique = jest.fn().mockResolvedValue(undefined);
+      prismaService.$transaction = jest.fn();
+      prismaService.user.update = jest.fn().mockResolvedValue({
+        ...userDtoStub(),
+        pairs: [userDtoStub().firstPair],
+      });
+      prismaService.user.count = jest.fn().mockResolvedValue(5);
+    });
+
+    let user: UserDto;
+
+    beforeEach(async () => {
+      jest.clearAllMocks();
+      prismaService.interest.findMany = jest
+        .fn()
+        .mockResolvedValueOnce([])
+        .mockResolvedValue([
+          { id: 'interest-id-2', name: UPDATE_USER_DTO.interests[0] },
+          { id: 'interest-id-3', name: UPDATE_USER_DTO.interests[1] },
+        ]);
+
+      user = await patchUserCommandHandler.execute(
+        new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
+      );
+    });
+
+    it('should call user find unique', () => {
+      expect(prismaService.user.findUnique).toBeCalledTimes(1);
+      expect(prismaService.user.findUnique).toHaveBeenNthCalledWith(1, {
+        where: { email: UPDATE_USER_DTO.email },
+      });
+    });
+
+    it('should call find many interests', () => {
+      expect(prismaService.interest.findMany).toBeCalledTimes(2);
+      expect(prismaService.interest.findMany).toHaveBeenNthCalledWith(1, {
+        where: { users: { some: { id: requestUserStub().id } } },
+        select: { id: true },
+      });
+      expect(prismaService.interest.findMany).toHaveBeenNthCalledWith(2, {
+        where: { name: { in: UPDATE_USER_DTO.interests } },
+        select: { id: true },
+      });
+    });
+
+    it('should call update user', () => {
+      expect(prismaService.user.update).toBeCalledTimes(3);
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
+        where: { id: userDtoStub().id },
+        data: {
+          interests: {
+            connect: {
+              id: 'interest-id-2',
+            },
+          },
+        },
+      });
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(2, {
+        data: {
+          interests: {
+            connect: {
+              id: 'interest-id-3',
+            },
+          },
+        },
+        where: {
+          id: userDtoStub().id,
+        },
+      });
+      expect(prismaService.user.update).toHaveBeenNthCalledWith(3, {
+        where: { id: requestUserStub().id },
+        data: { ...UPDATE_USER_DTO, interests: undefined },
+        include: UsersSelector.selectUser(),
+      });
+    });
+
+    it('should call user count', () => {
+      expect(prismaService.user.count).toBeCalledTimes(1);
+      expect(prismaService.user.count).toBeCalledWith({
+        where: { pairFor: { some: { id: requestUserStub().id } } },
       });
     });
 
