@@ -42,9 +42,19 @@ export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
 };
 
 function getIsError(pathname: string, errorFieldsLength: number): boolean {
-  const isError =
-    errorFieldsLength &&
-    !/^\/(profile|settings)(\/([a-z]+)-?([a-z]*))?$/.test(pathname);
+  const isError = errorFieldsLength && isWrongPage(pathname);
 
   return Boolean(isError);
+}
+
+function isWrongPage(pathname: string): boolean {
+  return !(isProfilePage(pathname) || isProfileEditPage(pathname));
+}
+
+function isProfilePage(pathname: string): boolean {
+  return /^\/(profile|settings)(\/([a-z]+)-?([a-z]*))?$/.test(pathname);
+}
+
+function isProfileEditPage(pathname: string): boolean {
+  return /^\/profile\/edit(\/([a-z]+)-?([a-z]*))?$/.test(pathname);
 }
