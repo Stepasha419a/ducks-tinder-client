@@ -11,6 +11,12 @@ export const USERS_PAIRS_GET_EXPECT = [
     },
     isActivated: false,
     pictures: [],
+    personalityType: null,
+    zodiacSign: null,
+    education: null,
+    attentionSign: null,
+    childrenAttitude: null,
+    communicationStyle: null,
   },
 ];
 
@@ -37,6 +43,12 @@ export const USERS_PATCH_EXPECT = {
   usersOnlyInDistance: false,
   pictures: [],
   interests: [{ name: 'traveling' }, { name: 'ski' }],
+  attentionSign: null,
+  childrenAttitude: null,
+  communicationStyle: null,
+  education: null,
+  personalityType: null,
+  zodiacSign: null,
 };
 
 export const USERS_PICTURE_PUT_EXPECT = {
@@ -62,6 +74,12 @@ export const USERS_PICTURE_PUT_EXPECT = {
   usersOnlyInDistance: false,
   pictures: [],
   interests: [],
+  attentionSign: null,
+  childrenAttitude: null,
+  communicationStyle: null,
+  education: null,
+  personalityType: null,
+  zodiacSign: null,
 };
 
 export const USERS_SORTED_GET_EXPECT = {
@@ -76,6 +94,12 @@ export const USERS_SORTED_GET_EXPECT = {
   isActivated: false,
   pictures: [],
   interests: [],
+  personalityType: null,
+  zodiacSign: null,
+  education: null,
+  attentionSign: null,
+  childrenAttitude: null,
+  communicationStyle: null,
 };
 
 export const USERS_RETURN_PUT_EXPECT = {
@@ -90,6 +114,12 @@ export const USERS_RETURN_PUT_EXPECT = {
   isActivated: false,
   pictures: [],
   interests: [],
+  personalityType: null,
+  zodiacSign: null,
+  education: null,
+  attentionSign: null,
+  childrenAttitude: null,
+  communicationStyle: null,
 };
 
 export const USERS_PAIRS_PUT_EXPECT = {
@@ -103,6 +133,12 @@ export const USERS_PAIRS_PUT_EXPECT = {
   place: {
     name: 'second-user-place-name',
   },
+  personalityType: null,
+  zodiacSign: null,
+  education: null,
+  attentionSign: null,
+  childrenAttitude: null,
+  communicationStyle: null,
 };
 
 export const USERS_PAIRS_POST_EXPECT = {
@@ -116,6 +152,12 @@ export const USERS_PAIRS_POST_EXPECT = {
   place: {
     name: 'second-user-place-name',
   },
+  personalityType: null,
+  zodiacSign: null,
+  education: null,
+  attentionSign: null,
+  childrenAttitude: null,
+  communicationStyle: null,
 };
 
 export const USERS_PICTURE_MIX_PUT_EXPECT = [

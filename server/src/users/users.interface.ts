@@ -3,7 +3,7 @@ export interface PictureInterface {
   order: number;
 }
 
-export interface Interest {
+export interface NameObject {
   name: string;
 }
 
@@ -17,7 +17,7 @@ export interface ShortUserWithoutDistance {
   age: number;
   description: string;
   isActivated: boolean;
-  interests: Interest[];
+  interests: NameObject[];
   place: PlaceName;
   pictures: PictureInterface[];
 }

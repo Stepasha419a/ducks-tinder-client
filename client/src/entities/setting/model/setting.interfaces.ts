@@ -14,7 +14,6 @@ export type SettingName =
   | 'name'
   | 'description'
   | 'sex'
-  | 'interests'
   | 'place'
   | 'preferSex'
   | 'nickname';

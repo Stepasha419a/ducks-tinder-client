@@ -23,5 +23,9 @@
 
   .item {
     font-weight: 400;
+
+    &.disabled:not(.active) {
+      color: var(--sub-border-main);
+    }
   }
 }

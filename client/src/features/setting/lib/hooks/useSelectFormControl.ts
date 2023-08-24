@@ -21,15 +21,17 @@ export function useSelectFormControl(
 
   const { list, validation } = getSelectData(settingFieldName);
 
+  const isValid = isActivatable(items, validation);
+
   const toggleItem = (item: SelectItem): void => {
     if (isActive(items, item)) {
       setItems(items.filter((candidate) => candidate.name !== item.name));
-    } else if (isActivatable(items, validation)) {
+    } else if (isValid) {
       setItems([...items, item]);
     }
   };
 
-  return { list, items, toggleItem, validation };
+  return { list, items, toggleItem, validation, isValid };
 }
 
 function isActive(items: SelectItem[], item: SelectItem): boolean {

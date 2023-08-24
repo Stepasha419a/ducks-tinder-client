@@ -4,7 +4,6 @@ import type { Setting } from '../setting.interfaces';
 const potentialFields: Setting[] = [
   'description',
   'sex',
-  'interests',
   'place',
   'age',
   'distance',
@@ -18,11 +17,6 @@ function checkField(user: User, field: Setting): Setting | boolean {
     case 'description':
       if (user.description === '') {
         return 'description';
-      }
-      return false;
-    case 'interests':
-      if (!user.interests.length) {
-        return 'interests';
       }
       return false;
     case 'place':

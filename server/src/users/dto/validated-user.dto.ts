@@ -18,7 +18,7 @@ import {
   MaxLength,
   Min,
 } from 'class-validator';
-import { Interest, PictureInterface, ShortUser } from 'users/users.interface';
+import { NameObject, PictureInterface, ShortUser } from 'users/users.interface';
 import { UserDto } from './user.dto';
 
 export class Place {
@@ -103,7 +103,37 @@ export class ValidatedUserDto implements UserDto {
 
   @IsArray()
   @ArrayMaxSize(16)
-  interests: Interest[];
+  interests: NameObject[];
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  zodiacSign: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  education: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  childrenAttitude: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  personalityType: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  communicationStyle: string;
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  attentionSign: string;
 
   @IsArray()
   @ArrayMaxSize(9)

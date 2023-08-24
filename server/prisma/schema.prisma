@@ -11,23 +11,24 @@ datasource db {
 }
 
 model User {
-  id                  String   @id @default(uuid())
+  id                  String  @id @default(uuid())
   password            String
-  email               String   @unique
+  email               String  @unique
   name                String
   description         String?
   nickname            String?
-  isActivated         Boolean  @default(false)
-  activationLink      String   @default(uuid())
+  isActivated         Boolean @default(false)
+  activationLink      String  @default(uuid())
   age                 Int?
   sex                 String?
   distance            Int?
-  usersOnlyInDistance Boolean  @default(false)
+  usersOnlyInDistance Boolean @default(false)
   preferSex           String?
   preferAgeFrom       Int?
   preferAgeTo         Int?
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   token     Token?
   pictures  Picture[]
@@ -44,6 +45,24 @@ model User {
 
   checked    CheckedUsers[] @relation(name: "Checked")
   wasChecked CheckedUsers[] @relation(name: "WasChecked")
+
+  zodiacSign   ZodiacSign? @relation(fields: [zodiacSignId], references: [id])
+  zodiacSignId String?
+
+  education   Education? @relation(fields: [educationId], references: [id])
+  educationId String?
+
+  childrenAttitude   ChildrenAttitude? @relation(fields: [childrenAttitudeId], references: [id])
+  childrenAttitudeId String?
+
+  personalityType   PersonalityType? @relation(fields: [personalityTypeId], references: [id])
+  personalityTypeId String?
+
+  communicationStyle    CommunicationStyle? @relation(fields: [communicationStylesId], references: [id])
+  communicationStylesId String?
+
+  attentionSign    AttentionSign? @relation(fields: [attentionSignsId], references: [id])
+  attentionSignsId String?
 
   @@map("users")
 }
@@ -105,6 +124,54 @@ model Interest {
   @@map("interests")
 }
 
+model ZodiacSign {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("zodiac-signs")
+}
+
+model Education {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("educations")
+}
+
+model ChildrenAttitude {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("children-attitudes")
+}
+
+model PersonalityType {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("personality-types")
+}
+
+model CommunicationStyle {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("communication-styles")
+}
+
+model AttentionSign {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("attention-signs")
+}
+
 model Message {
   id     String @id @default(uuid())
   text   String
@@ -129,7 +196,7 @@ model Chat {
   users       User[]
   blocked     Boolean     @default(false)
   blockedById String?
-  chatVisits   ChatVisit[]
+  chatVisits  ChatVisit[]
 
   @@map("chats")
 }

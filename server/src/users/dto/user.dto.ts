@@ -16,6 +16,12 @@ export class UserDto {
   preferAgeFrom;
   preferAgeTo;
   interests;
+  zodiacSign;
+  education;
+  childrenAttitude;
+  personalityType;
+  communicationStyle;
+  attentionSign;
   pictures;
   firstPair;
   pairsCount;
@@ -36,6 +42,12 @@ export class UserDto {
     this.preferAgeFrom = model.preferAgeFrom;
     this.preferAgeTo = model.preferAgeTo;
     this.interests = model.interests;
+    this.zodiacSign = model.zodiacSign;
+    this.education = model.education;
+    this.childrenAttitude = model.childrenAttitude;
+    this.personalityType = model.personalityType;
+    this.communicationStyle = model.communicationStyle;
+    this.attentionSign = model.attentionSign;
     this.pictures = model.pictures;
     this.firstPair = model.pairs && model.pairs[0];
     this.pairsCount = model.pairsCount;

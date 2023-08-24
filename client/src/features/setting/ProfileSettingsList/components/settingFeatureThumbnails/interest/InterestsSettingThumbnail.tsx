@@ -4,7 +4,6 @@ import { useAppSelector } from '@shared/lib/hooks';
 
 export const InterestsSettingThumbnail = () => {
   const interests = useAppSelector((state) => state.user.currentUser.interests);
-  const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const url = `${ROUTES.profile}/edit/interests`;
   return (
@@ -17,7 +16,6 @@ export const InterestsSettingThumbnail = () => {
           : `${interests[0].name} and so on...`
       }
       isPointer
-      isError={errorFields.includes('interests')}
     />
   );
 };

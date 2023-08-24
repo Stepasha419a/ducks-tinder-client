@@ -24,6 +24,24 @@ export class UsersSelector {
       place: {
         select: { name: true, address: true, latitude: true, longitude: true },
       },
+      zodiacSign: {
+        select: { name: true },
+      },
+      education: {
+        select: { name: true },
+      },
+      childrenAttitude: {
+        select: { name: true },
+      },
+      personalityType: {
+        select: { name: true },
+      },
+      communicationStyle: {
+        select: { name: true },
+      },
+      attentionSign: {
+        select: { name: true },
+      },
     };
   }
 
@@ -41,6 +59,24 @@ export class UsersSelector {
       pictures: {
         select: { name: true, order: true },
         orderBy: { order: 'asc' as 'asc' | 'desc' },
+      },
+      zodiacSign: {
+        select: { name: true },
+      },
+      education: {
+        select: { name: true },
+      },
+      childrenAttitude: {
+        select: { name: true },
+      },
+      personalityType: {
+        select: { name: true },
+      },
+      communicationStyle: {
+        select: { name: true },
+      },
+      attentionSign: {
+        select: { name: true },
       },
     };
   }

@@ -7,6 +7,7 @@ import type {
 import styles from './SelectSetting.module.scss';
 import { ListItem } from '@/shared/ui';
 import { useSelectFormControl } from '@/features/setting/lib/hooks';
+import classNames from 'classnames';
 
 interface SelectSettingProps {
   control: Control<MultiSelectForm>;
@@ -17,7 +18,7 @@ export const SelectSetting: FC<SelectSettingProps> = ({
   control,
   settingFieldName,
 }) => {
-  const { list, items, toggleItem, validation } = useSelectFormControl(
+  const { list, items, toggleItem, validation, isValid } = useSelectFormControl(
     control,
     settingFieldName
   );
@@ -39,7 +40,11 @@ export const SelectSetting: FC<SelectSettingProps> = ({
               isActive={isActive}
               pointer
               key={selectItem}
-              extraClassName={styles.item}
+              extraClassName={classNames(
+                styles.item,
+                isActive && styles.active,
+                !isValid && styles.disabled
+              )}
             >
               {selectItem}
             </ListItem>
