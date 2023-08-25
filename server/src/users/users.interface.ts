@@ -1,10 +1,8 @@
+import { NameObjectDto } from './dto';
+
 export interface PictureInterface {
   name: string;
   order: number;
-}
-
-export interface NameObject {
-  name: string;
 }
 
 interface PlaceName {
@@ -17,7 +15,7 @@ export interface ShortUserWithoutDistance {
   age: number;
   description: string;
   isActivated: boolean;
-  interests: NameObject[];
+  interests: NameObjectDto[];
   place: PlaceName;
   pictures: PictureInterface[];
 }

@@ -7,6 +7,7 @@ import {
   IsNotEmpty,
   IsNotEmptyObject,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   Length,
@@ -14,11 +15,13 @@ import {
   Max,
   MaxLength,
   Min,
+  ValidateNested,
 } from 'class-validator';
-import { Place } from './validated-user.dto';
 import { Type } from 'class-transformer';
-import { NameObject, PictureInterface, ShortUser } from 'users/users.interface';
+import { PictureInterface, ShortUser } from 'users/users.interface';
 import { UserDto } from './user.dto';
+import { NameObjectDto } from './name-object.dto';
+import { PlaceDto } from './place.dto';
 
 export class NotValidatedUserDto implements UserDto {
   @IsString() // because e2e tests use string ids (not uuid)
@@ -67,8 +70,8 @@ export class NotValidatedUserDto implements UserDto {
   @IsOptional()
   @IsDefined()
   @IsNotEmptyObject()
-  @Type(() => Place)
-  place: Place | null;
+  @Type(() => PlaceDto)
+  place: PlaceDto | null;
 
   @IsBoolean()
   usersOnlyInDistance: boolean;
@@ -93,37 +96,51 @@ export class NotValidatedUserDto implements UserDto {
 
   @IsArray()
   @ArrayMaxSize(16)
-  interests: NameObject[];
+  @ValidateNested({ each: true })
+  @Type(() => NameObjectDto)
+  interests: NameObjectDto[];
 
   @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  zodiacSign: string;
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  zodiacSign: NameObjectDto;
 
   @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  education: string;
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  education: NameObjectDto;
 
   @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  childrenAttitude: string;
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  childrenAttitude: NameObjectDto;
 
   @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  personalityType: string;
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  personalityType: NameObjectDto;
 
   @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  communicationStyle: string;
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  communicationStyle: NameObjectDto;
 
   @IsOptional()
-  @IsString()
-  @IsNotEmpty()
-  attentionSign: string;
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  attentionSign: NameObjectDto;
 
   @IsArray()
   @ArrayMaxSize(9)
