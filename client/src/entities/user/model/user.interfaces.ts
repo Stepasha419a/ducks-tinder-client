@@ -1,5 +1,5 @@
 import type {
-  Interest,
+  NameObject,
   Picture,
   Place,
   Range,
@@ -11,7 +11,7 @@ export interface PairSorts {
   distance: number;
   age: Range;
   photos: number;
-  interests: Interest[];
+  interests: NameObject[];
   account: string[];
 }
 
@@ -37,6 +37,12 @@ export interface PreviewUser {
   age: number | null;
   place: Place | null;
   distance: number | null;
-  interests: Interest[];
+  interests: NameObject[];
+  attentionSign: NameObject | null;
+  childrenAttitude: NameObject | null;
+  communicationStyle: NameObject | null;
+  education: NameObject | null;
+  personalityType: NameObject | null;
+  zodiacSign: NameObject | null;
   pictures: Picture[];
 }

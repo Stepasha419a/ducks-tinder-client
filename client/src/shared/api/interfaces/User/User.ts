@@ -5,7 +5,7 @@ export interface Picture {
   order: number;
 }
 
-export interface Interest {
+export interface NameObject {
   name: string;
 }
 
@@ -29,7 +29,13 @@ export interface User {
   age: number | null;
   sex: 'male' | 'female' | null;
   isActivated: boolean;
-  interests: Interest[];
+  interests: NameObject[];
+  attentionSign: NameObject | null;
+  childrenAttitude: NameObject | null;
+  communicationStyle: NameObject | null;
+  education: NameObject | null;
+  personalityType: NameObject | null;
+  zodiacSign: NameObject | null;
   place: Place | null;
   distance: number | null;
   usersOnlyInDistance: boolean;
@@ -52,7 +58,13 @@ export interface ShortUserWithoutDistance {
   description: string;
   place: ShortPlace | null;
   isActivated: boolean;
-  interests: Interest[];
+  interests: NameObject[];
+  attentionSign: NameObject | null;
+  childrenAttitude: NameObject | null;
+  communicationStyle: NameObject | null;
+  education: NameObject | null;
+  personalityType: NameObject | null;
+  zodiacSign: NameObject | null;
   pictures: Picture[];
 }
 
@@ -65,6 +77,12 @@ export interface PartialUser {
   sex?: 'male' | 'female';
   isActivated?: boolean;
   interests?: string[];
+  attentionSign?: string | null;
+  childrenAttitude?: string | null;
+  communicationStyle?: string | null;
+  education?: string | null;
+  personalityType?: string | null;
+  zodiacSign?: string | null;
   distance?: number;
   usersOnlyInDistance?: boolean;
   preferSex?: 'male' | 'female';

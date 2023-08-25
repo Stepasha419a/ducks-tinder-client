@@ -11,9 +11,10 @@ import classNames from 'classnames';
 import type { PreviewUser } from '@entities/user/model';
 import type { ShortUser } from '@shared/api/interfaces';
 import { ImageSlider } from '@shared/ui';
-import { Button, ListItem } from '@shared/ui';
+import { Button } from '@shared/ui';
 import { InterestsListPopup } from '../InterestsListPopup/InterestsListPopup';
 import styles from './Preview.module.scss';
+import { InterestsList, MoreAboutMeList } from './components';
 
 interface PreviewPropsInterface {
   user: PreviewUser | ShortUser;
@@ -34,12 +35,6 @@ export const Preview: FC<PreviewPropsInterface> = ({
 }) => {
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
-
-  const interestsForLoop = [];
-
-  for (let i = 0; i < 4; i++) {
-    if (user.interests[i]) interestsForLoop.push(user.interests[i]);
-  }
 
   const cn = classNames(styles.preview, extraClassName, isFull && styles.full);
 
@@ -101,27 +96,11 @@ export const Preview: FC<PreviewPropsInterface> = ({
               <div className={styles.description}>{user.description}</div>
             </>
           )}
-          {interestsForLoop.length > 0 && (
-            <>
-              <hr className={styles.separator} />
-
-              <div className={styles.interests}>
-                <div className={styles.title}>Interests</div>
-                <div className={styles.items}>
-                  {interestsForLoop.map((item) => {
-                    return <ListItem key={item.name}>{item.name}</ListItem>;
-                  })}
-                </div>
-              </div>
-
-              <div
-                onClick={() => setIsInterestsListPopupOpen(true)}
-                className={styles.showAll}
-              >
-                Show all
-              </div>
-            </>
-          )}
+          <InterestsList
+            interests={user.interests}
+            handleShowAll={() => setIsInterestsListPopupOpen(true)}
+          />
+          <MoreAboutMeList user={user} />
           {extraContent && extraContent}
 
           {isInterestsListPopupOpen && (

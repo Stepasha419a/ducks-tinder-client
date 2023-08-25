@@ -1,11 +1,11 @@
 import type { FC } from 'react';
 import { Button, ListItem, Popup } from '@shared/ui';
-import type { Interest } from '@shared/api/interfaces';
+import type { NameObject } from '@shared/api/interfaces';
 import styles from './InterestsListPopup.module.scss';
 
 interface InterestsListPopupProps {
   setIsInterestsListPopupOpen: (setting: boolean) => void;
-  interestsList: Interest[];
+  interestsList: NameObject[];
 }
 
 export const InterestsListPopup: FC<InterestsListPopupProps> = ({
