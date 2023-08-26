@@ -1,7 +1,5 @@
-import type { FC, ReactElement } from 'react';
-import { useState } from 'react';
+import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 import {
-  faCircleDown,
   faCircleInfo,
   faHouse,
   faLocationDot,
@@ -12,13 +10,12 @@ import type { PreviewUser } from '@entities/user/model';
 import type { ShortUser } from '@shared/api/interfaces';
 import { ImageSlider } from '@shared/ui';
 import { Button } from '@shared/ui';
-import { InterestsListPopup } from '../InterestsListPopup/InterestsListPopup';
 import styles from './Preview.module.scss';
-import { InterestsList, MoreAboutMeList } from './components';
+import { FullPreview } from './full/FullPreview';
 
 interface PreviewPropsInterface {
   user: PreviewUser | ShortUser;
-  setIsFullPreview?: (setting: boolean) => void;
+  setIsFullPreview?: Dispatch<SetStateAction<boolean>>;
   isFull?: boolean;
   isShadow?: boolean;
   extraContent?: ReactElement;
@@ -27,16 +24,24 @@ interface PreviewPropsInterface {
 
 export const Preview: FC<PreviewPropsInterface> = ({
   user,
-  setIsFullPreview = null,
+  setIsFullPreview,
   isFull = false,
   isShadow = false,
   extraContent,
   extraClassName,
 }) => {
-  const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
-    useState(false);
+  if (isFull) {
+    return (
+      <FullPreview
+        user={user}
+        setIsFullPreview={setIsFullPreview}
+        extraClassName={extraClassName}
+        extraContent={extraContent}
+      />
+    );
+  }
 
-  const cn = classNames(styles.preview, extraClassName, isFull && styles.full);
+  const cn = classNames(styles.preview, extraClassName);
 
   return (
     <div className={cn}>
@@ -47,15 +52,6 @@ export const Preview: FC<PreviewPropsInterface> = ({
           extraClassName={styles.image}
           isShadow={isShadow}
         />
-        {isFull && setIsFullPreview && (
-          <Button
-            variant="mark"
-            onClick={() => setIsFullPreview(false)}
-            extraClassName={styles.closeFullPreview}
-          >
-            <FontAwesomeIcon icon={faCircleDown} className={styles.icon} />
-          </Button>
-        )}
       </div>
       <div
         onClick={() => setIsFullPreview && setIsFullPreview(true)}
@@ -76,7 +72,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
           {user.distance ?? 'unknown distance'}
           <span className={styles.text}>km from you</span>
         </div>
-        {!isFull && setIsFullPreview && (
+        {setIsFullPreview && (
           <div className={styles.buttonWrapper}>
             <Button
               variant="mark"
@@ -88,29 +84,6 @@ export const Preview: FC<PreviewPropsInterface> = ({
           </div>
         )}
       </div>
-      {isFull && (
-        <>
-          {user.description && (
-            <>
-              <hr className={styles.separator} />
-              <div className={styles.description}>{user.description}</div>
-            </>
-          )}
-          <InterestsList
-            interests={user.interests}
-            handleShowAll={() => setIsInterestsListPopupOpen(true)}
-          />
-          <MoreAboutMeList user={user} />
-          {extraContent && extraContent}
-
-          {isInterestsListPopupOpen && (
-            <InterestsListPopup
-              interestsList={user.interests}
-              setIsInterestsListPopupOpen={setIsInterestsListPopupOpen}
-            />
-          )}
-        </>
-      )}
     </div>
   );
 };

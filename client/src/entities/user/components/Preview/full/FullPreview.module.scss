@@ -5,6 +5,7 @@
   border-radius: 8px;
   overflow: hidden;
   position: relative;
+  overflow: auto;
   z-index: 0;
 
   &::-webkit-scrollbar {
@@ -12,10 +13,11 @@
   }
 
   .slider {
-    height: 100%;
+    height: 470px;
     position: relative;
 
     .image {
+      max-height: 470px;
       position: relative;
       z-index: -1;
     }
@@ -23,33 +25,45 @@
     .arrows {
       height: 85%;
     }
-  }
 
-  .info {
-    display: flex;
-    align-items: baseline;
-    position: absolute;
-    bottom: 100px;
-    left: 20px;
-    color: var(--color--white-100);
-    letter-spacing: 0.7px;
+    .wrapper {
+      box-shadow: none;
+    }
+
+    .closeFullPreview {
+      z-index: 1;
+      font-size: 44px;
+      height: 44px;
+      width: 44px;
+      bottom: -20px;
+      right: 18px;
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      .icon {
+        color: rgba(224, 48, 48, 0.747);
+        background-color: var(--color--white-100);
+        border-radius: 50%;
+      }
+    }
   }
 
   .descr {
-    position: absolute;
     width: 100%;
+    color: var(--main-secondary);
     letter-spacing: 0.7px;
-    bottom: 102px;
-    left: 0;
-    z-index: 1;
-    color: var(--color--white-100);
-    padding: 5px 0 25px 20px;
-    cursor: pointer;
+    padding: 25px;
 
     .person {
+      height: 43px;
       font-size: 36px;
       font-weight: 700;
-      height: 43px;
+      text-shadow: 0 1px 1px var(--color--black-90);
+      color: var(--main-primary);
+      margin-bottom: 10px;
 
       .years {
         font-size: 28px;
@@ -58,16 +72,13 @@
     }
 
     .place {
+      margin-bottom: 6px;
       display: flex;
       align-items: baseline;
-      font-size: 16px;
+      font-size: 18px;
 
       .name {
         display: inline-block;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-        max-width: 244px;
       }
 
       .icon {
@@ -77,30 +88,21 @@
     }
 
     .distance {
-      font-size: 16px;
+      font-size: 18px;
 
       .icon {
-        margin: 0 8px 0 1px;
+        margin: 0 5px 0 1px;
       }
 
       .text {
         margin-left: 4px;
       }
     }
+  }
 
-    .openFullPreview {
-      bottom: 40px;
-      right: 30px;
-      z-index: 2;
-      font-size: 24px;
-      color: var(--color--white-100);
-      background-color: var(--color--black-100);
-      transition: 0.3s;
-
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
+  .description {
+    border-top: 2px solid var(--sub-border-main);
+    padding: 15px;
   }
 }
 
@@ -116,17 +118,22 @@
       }
 
       .place {
+        .icon {
+          font-size: 12px;
+        }
+
         .name {
-          max-width: 170px;
-          font-size: 14px;
+          font-size: 16px;
         }
       }
 
       .distance {
-        font-size: 14px;
+        .icon {
+          font-size: 14px;
+        }
 
         .text {
-          font-size: 14px;
+          font-size: 16px;
         }
       }
     }

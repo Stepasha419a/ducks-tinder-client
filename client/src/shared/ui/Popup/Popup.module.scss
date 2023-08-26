@@ -90,6 +90,22 @@
   }
 }
 
+@media (max-height: 700px) and (min-width: 900px) {
+  .popup {
+    .body {
+      .content {
+        &.m {
+          height: calc(100vh - 100px);
+        }
+
+        &.l {
+          height: calc(100vh - 60px);
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 900px) {
   .popup {
     .body {

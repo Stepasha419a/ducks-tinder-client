@@ -36,3 +36,40 @@
     padding: 10px 0;
   }
 }
+
+@media (max-width: 900px) {
+  .list {
+    .showAll {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .list {
+    .content {
+      .title {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .showAll {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 340px) {
+  .list {
+    .content {
+      .title {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .showAll {
+    font-size: 12px;
+  }
+}
