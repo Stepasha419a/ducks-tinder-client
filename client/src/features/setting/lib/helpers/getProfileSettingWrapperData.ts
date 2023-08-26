@@ -1,4 +1,4 @@
-import type { ProfileSettingName } from '@/entities/setting/model';
+import type { ProfileSettingName } from '@entities/setting/model';
 import type { ProfileSettingWrapperData } from '../constants/profileSettingWrapperData';
 import { PROFILE_SETTING_WRAPPER_DATA } from '../constants';
 

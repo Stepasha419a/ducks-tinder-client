@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { UserLinks, ChatsPairsBlock } from './components';
 import { chatPairsVariants, profileVariants } from './Nav.variants';
 import { NavMobile } from './mobile/Nav.mobile';
-import { SettingsBlock } from '@/features/setting';
+import { SettingsBlock } from '@features/setting';
 import styles from './Nav.module.scss';
 import { useIsCheckedProfilePage } from './lib/hooks';
 

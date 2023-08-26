@@ -1,11 +1,11 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { Picture } from '@/shared/api/interfaces';
-import { Preview } from '@/entities/user/components';
+import type { Picture } from '@shared/api/interfaces';
+import { Preview } from '@entities/user/components';
 import { Tabs } from './components';
-import { ProfileSettingBlock } from '@/widgets';
-import { useAppSelector } from '@/shared/lib/hooks';
-import { selectPreviewUser } from '@/entities/user/model';
+import { ProfileSettingBlock } from '@widgets';
+import { useAppSelector } from '@shared/lib/hooks';
+import { selectPreviewUser } from '@entities/user/model';
 import styles from './ProfileSettingWrapper.module.scss';
 
 interface ProfileSettingWrapperProps {

@@ -9,7 +9,7 @@ import {
   Username,
 } from './components';
 import './Message.scss';
-import { useMediaQuery } from '@/shared/lib/hooks';
+import { useMediaQuery } from '@shared/lib/hooks';
 import { MessageMobile } from './mobile/Message.mobile';
 
 interface MessageProps {

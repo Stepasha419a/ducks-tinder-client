@@ -1,8 +1,13 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import type { Picture } from '@/shared/api/interfaces';
-import { useMediaQuery } from '@/shared/lib/hooks';
-import { PicturesDND, ProfileSubmit } from '@/features/user';
-import { ProfileSettingsList } from '@/features/setting';
+import type { Picture } from '@shared/api/interfaces';
+import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
+import {
+  CropImage,
+  DialogUpload,
+  PicturesDND,
+  ProfileSubmit,
+} from '@features/user';
+import { ProfileSettingsList } from '@features/setting';
 import styles from './ProfileSettingBlock.module.scss';
 
 interface ProfileSettingProps {
@@ -16,6 +21,13 @@ export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
 }) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
+  const isDialogUploadOpen = useAppSelector(
+    (state) => state.user.profileSetting.isDialogUploadOpen
+  );
+  const isImageCropOpen = useAppSelector(
+    (state) => state.user.profileSetting.isImageCropOpen
+  );
+
   return (
     <div className={styles.change}>
       <PicturesDND pictures={pictures} setPictures={setPictures} />
@@ -26,6 +38,8 @@ export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
       </div>
       <ProfileSettingsList />
       {!isMobile && <ProfileSubmit pictures={pictures} />}
+      {isDialogUploadOpen && <DialogUpload />}
+      {isImageCropOpen && <CropImage />}
     </div>
   );
 };

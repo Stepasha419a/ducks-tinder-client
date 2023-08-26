@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useAppSelector } from '@/shared/lib/hooks';
-import { useSelectMessageEdit } from '@/features/chat/lib';
+import { useAppSelector } from '@shared/lib/hooks';
+import { useSelectMessageEdit } from '@features/chat/lib';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPen, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { TextField } from '@/shared/ui';
+import { TextField } from '@shared/ui';
 import styles from './EditMobileBlock.module.scss';
 import classNames from 'classnames';
 

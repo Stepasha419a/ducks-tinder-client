@@ -1,5 +1,5 @@
 import type { FC, ReactElement } from 'react';
-import { useMediaQuery } from '@/shared/lib/hooks';
+import { useMediaQuery } from '@shared/lib/hooks';
 import { Message } from '../Message/Message';
 
 interface MessageSelectProps {

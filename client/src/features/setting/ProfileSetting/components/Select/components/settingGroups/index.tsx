@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
-import type { MultiSelectForm } from '@/entities/setting/model';
-import { useAppSelector } from '@/shared/lib/hooks';
+import type { MultiSelectForm } from '@entities/setting/model';
+import { useAppSelector } from '@shared/lib/hooks';
 import { InterestsSettingGroup } from './InterestsSettingGroup';
 
 interface SettingsGroupProps {

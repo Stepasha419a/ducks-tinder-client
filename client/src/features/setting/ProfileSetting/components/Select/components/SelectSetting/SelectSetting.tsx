@@ -3,10 +3,10 @@ import type { Control } from 'react-hook-form';
 import type {
   MultiSelectForm,
   ProfileSettingSelectName,
-} from '@/entities/setting/model';
+} from '@entities/setting/model';
 import styles from './SelectSetting.module.scss';
-import { ListItem } from '@/shared/ui';
-import { useSelectFormControl } from '@/features/setting/lib/hooks';
+import { ListItem } from '@shared/ui';
+import { useSelectFormControl } from '@features/setting/lib/hooks';
 import classNames from 'classnames';
 
 interface SelectSettingProps {

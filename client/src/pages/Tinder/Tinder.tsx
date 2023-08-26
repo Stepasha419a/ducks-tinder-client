@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { RateUser } from '@features/tinder';
 import { Instructions } from './components';
 import styles from './Tinder.module.scss';
-import { useMediaQuery } from '@/shared/lib/hooks';
+import { useMediaQuery } from '@shared/lib/hooks';
 import classNames from 'classnames';
 
 const Tinder: FC = (): ReactElement => {

@@ -9,7 +9,7 @@ import type {
 } from '@entities/setting/model';
 import styles from './SettingWrapper.module.scss';
 import classNames from 'classnames';
-import { useMediaQuery } from '@/shared/lib/hooks';
+import { useMediaQuery } from '@shared/lib/hooks';
 
 interface SettingWrapperProps {
   formName: string | null;

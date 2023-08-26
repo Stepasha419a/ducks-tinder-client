@@ -2,7 +2,7 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
 import { motion } from 'framer-motion';
-import { ChatTabTitle } from '@/entities/chat/components';
+import { ChatTabTitle } from '@entities/chat/components';
 import styles from '../ChatsPairsBlock.module.scss';
 
 interface TabsProps {

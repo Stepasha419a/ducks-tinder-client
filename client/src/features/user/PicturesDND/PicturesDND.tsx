@@ -1,6 +1,6 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { Reorder } from 'framer-motion';
-import type { Picture } from '@/shared/api/interfaces';
+import type { Picture } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import {
   deleteUserPictureThunk,

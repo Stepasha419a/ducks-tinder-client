@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
 import { Button } from '@shared/ui';
-import type { ProfileSettingName } from '@/entities/setting/model';
-import { getProfileSettingWrapperData } from '@/features/setting/lib';
+import type { ProfileSettingName } from '@entities/setting/model';
+import { getProfileSettingWrapperData } from '@features/setting/lib';
 import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {

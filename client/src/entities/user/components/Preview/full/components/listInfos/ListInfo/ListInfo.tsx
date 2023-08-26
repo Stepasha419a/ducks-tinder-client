@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import type { NameObject } from '@/shared/api/interfaces';
+import type { NameObject } from '@shared/api/interfaces';
 import styles from './ListInfo.module.scss';
-import { ListItem } from '@/shared/ui';
+import { ListItem } from '@shared/ui';
 
 interface ListInfoProps {
   title: string;

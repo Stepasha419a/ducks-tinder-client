@@ -1,7 +1,7 @@
-import { getSettingUrl } from '@/entities/setting/lib';
-import type { ProfileSettingName } from '@/entities/setting/model';
-import { setProfileSetting } from '@/entities/setting/model';
-import { useAppDispatch } from '@/shared/lib/hooks';
+import { getSettingUrl } from '@entities/setting/lib';
+import type { ProfileSettingName } from '@entities/setting/model';
+import { setProfileSetting } from '@entities/setting/model';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 

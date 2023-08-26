@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { withPrivatePageHocs } from '@shared/lib/hocs';
 import duckImg from '@shared/assets/images/auth-duck.png';
-import { ROUTES } from '@/shared/lib/constants';
+import { ROUTES } from '@shared/lib/constants';
 import {
   contentVariants,
   imgVariants,

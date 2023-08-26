@@ -9,7 +9,7 @@ import {
 } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { useNullOnClose } from './useNullOnClose';
-import { ROUTES } from '@/shared/lib/constants';
+import { ROUTES } from '@shared/lib/constants';
 
 export function useTextForm() {
   const navigate = useNavigate();

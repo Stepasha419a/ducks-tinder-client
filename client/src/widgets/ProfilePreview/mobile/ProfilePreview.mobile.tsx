@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
+import { CropImage, DialogUpload } from '@features/user';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import { ROUTES } from '@shared/constants';
 import { selectPreviewUser, setIsDialogUploadOpen } from '@entities/user/model';
 import styles from './ProfilePreview.mobile.module.scss';
-import { CropImage, DialogUpload } from '@/features/user';
 
 export const ProfilePreviewMobile = () => {
   const dispatch = useAppDispatch();

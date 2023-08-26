@@ -1,5 +1,5 @@
-import type { ShortChat } from '@/shared/api/interfaces';
-import { getDatesHourDiff } from '@/shared/lib/helpers';
+import type { ShortChat } from '@shared/api/interfaces';
+import { getDatesHourDiff } from '@shared/lib/helpers';
 
 export function sortChats(chat1: ShortChat, chat2: ShortChat) {
   if (!chat1.messages.at(-1)?.createdAt) {

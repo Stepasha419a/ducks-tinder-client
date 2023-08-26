@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import styles from './ReplyBlock.module.scss';
-import { selectRepliedMessage, setRepliedMessage } from '@/entities/chat/model';
+import { selectRepliedMessage, setRepliedMessage } from '@entities/chat/model';
 
 export const ReplyBlock = () => {
   const dispatch = useAppDispatch();

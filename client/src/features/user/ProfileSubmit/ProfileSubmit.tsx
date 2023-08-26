@@ -1,11 +1,11 @@
 import type { FC } from 'react';
-import { ROUTES } from '@/shared/lib/constants';
-import type { Picture } from '@/shared/api/interfaces';
+import { ROUTES } from '@shared/lib/constants';
+import type { Picture } from '@shared/api/interfaces';
 import { Link } from 'react-router-dom';
 import { usePicturesMix } from '../PicturesDND/lib';
 import styles from './ProfileSubmit.module.scss';
 import { ProfileSubmitMobile } from './mobile/ProfileSubmit.mobile';
-import { Button } from '@/shared/ui';
+import { Button } from '@shared/ui';
 
 interface ProfileSubmitProps {
   pictures: Picture[];

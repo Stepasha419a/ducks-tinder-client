@@ -1,8 +1,8 @@
 import type { FC } from 'react';
-import type { ShortUser } from '@/shared/api/interfaces';
-import type { PreviewUser } from '@/entities/user/model';
+import type { ShortUser } from '@shared/api/interfaces';
+import type { PreviewUser } from '@entities/user/model';
 import { ListInfo } from '../ListInfo/ListInfo';
-import { getMoreAboutMe } from '@/entities/user/lib/helpers';
+import { getMoreAboutMe } from '@entities/user/lib/helpers';
 
 interface MoreAboutMeListProps {
   user: PreviewUser | ShortUser;

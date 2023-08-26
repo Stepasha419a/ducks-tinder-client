@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Button, ListItem, Popup } from '@shared/ui';
 import styles from './ItemsSettingPopup.module.scss';
-import type { SelectItem } from '@/entities/setting/model';
+import type { SelectItem } from '@entities/setting/model';
 
 interface ItemsSettingPopupProps {
   list: string[];

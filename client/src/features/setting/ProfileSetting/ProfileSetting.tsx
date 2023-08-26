@@ -1,7 +1,7 @@
-import { useAppSelector } from '@/shared/lib/hooks';
-import { useProfileSettingUrl } from '@/entities/setting/lib';
-import { NotFoundSetting } from '@/entities/setting/components';
-import { ROUTES } from '@/shared/lib/constants';
+import { useAppSelector } from '@shared/lib/hooks';
+import { useProfileSettingUrl } from '@entities/setting/lib';
+import { NotFoundSetting } from '@entities/setting/components';
+import { ROUTES } from '@shared/lib/constants';
 import { SelectForm } from './components';
 
 export const ProfileSetting = () => {

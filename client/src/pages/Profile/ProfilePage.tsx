@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useMediaQuery } from '@/shared/lib/hooks';
+import { useMediaQuery } from '@shared/lib/hooks';
 import styles from './ProfilePage.module.scss';
 
 const ProfilePage: FC = (): ReactElement => {

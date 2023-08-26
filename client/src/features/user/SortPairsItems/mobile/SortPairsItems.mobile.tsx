@@ -1,5 +1,5 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { ListItem } from '@/shared/ui';
+import { ListItem } from '@shared/ui';
 import styles from './SortPairsItems.mobile.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';

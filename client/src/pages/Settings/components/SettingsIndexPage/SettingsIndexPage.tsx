@@ -1,6 +1,6 @@
-import { SettingsBlock } from '@/features/setting';
-import { useMediaQuery } from '@/shared/lib/hooks';
-import { ProfilePreview } from '@/widgets';
+import { SettingsBlock } from '@features/setting';
+import { useMediaQuery } from '@shared/lib/hooks';
+import { ProfilePreview } from '@widgets';
 
 export const SettingsIndexPage = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');

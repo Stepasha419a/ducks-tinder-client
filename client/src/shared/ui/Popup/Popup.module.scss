@@ -94,6 +94,13 @@
   .popup {
     .body {
       .content {
+        overflow: auto;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
         &.m {
           height: calc(100vh - 100px);
         }

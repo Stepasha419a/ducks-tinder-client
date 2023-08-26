@@ -5,8 +5,8 @@ import type {
   ProfileSettingSelectName,
   SelectItem,
   SelectValidation,
-} from '@/entities/setting/model';
-import { getSelectData } from '@/entities/setting/lib';
+} from '@entities/setting/model';
+import { getSelectData } from '@entities/setting/lib';
 
 export function useSelectFormControl(
   control: Control<MultiSelectForm>,

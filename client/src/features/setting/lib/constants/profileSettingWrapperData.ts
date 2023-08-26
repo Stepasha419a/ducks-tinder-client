@@ -1,4 +1,4 @@
-import type { ProfileSettingName } from '@/entities/setting/model';
+import type { ProfileSettingName } from '@entities/setting/model';
 
 export interface ProfileSettingWrapperData {
   title: string;

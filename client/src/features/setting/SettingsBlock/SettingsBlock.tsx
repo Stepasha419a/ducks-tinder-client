@@ -5,8 +5,8 @@ import { useSettingUrl } from '@entities/setting/lib';
 import { Setting, SettingsList } from './components';
 import { settingVariants } from './SettingsBlock.variants';
 import styles from './SettingsBlock.module.scss';
-import { NotFoundSetting } from '@/entities/setting/components';
-import { ROUTES } from '@/shared/lib/constants';
+import { NotFoundSetting } from '@entities/setting/components';
+import { ROUTES } from '@shared/lib/constants';
 
 export const SettingsBlock = (): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');

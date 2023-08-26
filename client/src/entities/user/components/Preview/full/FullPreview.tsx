@@ -1,10 +1,10 @@
 import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { PreviewUser } from '@/entities/user/model';
-import type { ShortUser } from '@/shared/api/interfaces';
+import type { PreviewUser } from '@entities/user/model';
+import type { ShortUser } from '@shared/api/interfaces';
 import classNames from 'classnames';
 import styles from './FullPreview.module.scss';
-import { Button, ImageSlider } from '@/shared/ui';
+import { Button, ImageSlider } from '@shared/ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleDown,
@@ -39,7 +39,6 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
           images={user.pictures}
           userId={user.id}
           extraClassName={styles.image}
-          /* isShadow={isShadow} */
         />
         {setIsFullPreview && (
           <Button

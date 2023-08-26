@@ -21,7 +21,7 @@ import {
   NicknameGroup,
 } from './settingGroups';
 import styles from './SettingsList.module.scss';
-import { useMediaQuery } from '@/shared/lib/hooks';
+import { useMediaQuery } from '@shared/lib/hooks';
 import { MobileTitle } from './MobileTitle/MobileTitle';
 
 export const SettingsList = (): ReactElement => {

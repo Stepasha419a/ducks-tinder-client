@@ -1,4 +1,4 @@
-import { useAppSelector } from '@/shared/lib/hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { getIsProfilePage } from '../helpers';
 import { useLocation } from 'react-router-dom';
 

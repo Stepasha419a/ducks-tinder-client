@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { PairLink } from '@entities/user/components';
 import { Tabs } from './Tabs/Tabs';
 import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
-import { getIsChatPage } from '@/entities/chat/lib';
-import { ChatList } from '@/entities/chat/components';
+import { getIsChatPage } from '@entities/chat/lib';
+import { ChatList } from '@entities/chat/components';
 import styles from './ChatsPairsBlock.module.scss';
 
 export const ChatsPairsBlock: FC = () => {

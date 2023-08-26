@@ -1,4 +1,4 @@
-import { ROUTES } from '@/shared/lib/constants';
+import { ROUTES } from '@shared/lib/constants';
 import { Link } from 'react-router-dom';
 import styles from './MobileTitle.module.scss';
 

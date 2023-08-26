@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { motion } from 'framer-motion';
 import styles from './ChatTabTitle.module.scss';
-import { useAppSelector } from '@/shared/lib/hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 import { selectNewMessageChatsCount } from '../../model';
 
 interface ChatTabTitleProps {

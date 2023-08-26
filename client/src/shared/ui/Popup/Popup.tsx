@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import styles from './Popup.module.scss';
 import type { PopupProps } from './Popup.types';
 import { mobileVariants, variants } from './Popup.variants';
-import { useMediaQuery } from '@/shared/lib/hooks';
+import { useMediaQuery } from '@shared/lib/hooks';
 
 const portalElement = document.getElementById('portal');
 

@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { Button } from '@shared/ui';
 import { useAppDispatch } from '@shared/lib/hooks';
 import { logoutThunk } from '@entities/auth/model';
-import { disconnectThunk } from '@/entities/chat/model';
+import { disconnectThunk } from '@entities/chat/model';
 import styles from './LogoutButton.module.scss';
 
 export const LogoutButton: FC = (): ReactElement => {

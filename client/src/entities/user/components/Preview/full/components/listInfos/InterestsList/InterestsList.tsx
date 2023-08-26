@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import type { NameObject } from '@/shared/api/interfaces';
+import type { NameObject } from '@shared/api/interfaces';
 import { ListInfo } from '../ListInfo/ListInfo';
 
 interface InterestsListProps {

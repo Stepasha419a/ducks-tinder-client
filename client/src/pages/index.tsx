@@ -15,7 +15,7 @@ import { ActiveChat, IndexChatPage } from './Chat/components';
 import NotFound from './NotFound/NotFound';
 import { SettingsIndexPage } from './Settings/components';
 import { ProfileEdit } from './Profile/components';
-import { ProfileSetting } from '@/features/setting/ProfileSetting/ProfileSetting';
+import { ProfileSetting } from '@features/setting/ProfileSetting/ProfileSetting';
 
 const Routing = (): ReactElement => {
   return (

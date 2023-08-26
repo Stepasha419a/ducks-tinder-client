@@ -1,4 +1,4 @@
-import { ROUTES } from '@/shared/lib/constants';
+import { ROUTES } from '@shared/lib/constants';
 import { LinkSettingThumbnail } from '@entities/setting/components';
 import { useAppSelector } from '@shared/lib/hooks';
 

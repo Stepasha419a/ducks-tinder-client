@@ -1,5 +1,5 @@
-import type { ShortChat } from '@/shared/api/interfaces';
-import { getDatesHourDiff } from '@/shared/lib/helpers';
+import type { ShortChat } from '@shared/api/interfaces';
+import { getDatesHourDiff } from '@shared/lib/helpers';
 
 export function getIsNewMessages(
   chat: ShortChat,

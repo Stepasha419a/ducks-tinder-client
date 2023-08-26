@@ -1,4 +1,4 @@
-import type { NameObject, ShortUser } from '@/shared/api/interfaces';
+import type { NameObject, ShortUser } from '@shared/api/interfaces';
 import type { PreviewUser } from '../../model';
 
 export function getMoreAboutMe(user: PreviewUser | ShortUser): NameObject[] {
