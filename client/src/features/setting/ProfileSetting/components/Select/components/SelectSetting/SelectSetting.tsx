@@ -23,12 +23,14 @@ export const SelectSetting: FC<SelectSettingProps> = ({
     settingFieldName
   );
 
+  const length = Array.isArray(items) ? items.length : 0;
+
   return (
     <>
       <div className={styles.subhead}>
         <div className={styles.title}>{settingFieldName}</div>
         <div className={styles.limit}>
-          ({items?.length || 0}/{validation.maxLength})
+          ({length}/{validation.maxLength})
         </div>
       </div>
       <div className={styles.items}>

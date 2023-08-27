@@ -25,9 +25,12 @@ export function useSelectFormControl(
 
   const toggleItem = (item: SelectItem): void => {
     if (isActive(items, item)) {
-      setItems(items!.filter((candidate) => candidate.name !== item.name));
+      const value = Array.isArray(items)
+        ? items.filter((candidate) => candidate.name !== item.name)
+        : items;
+      setItems(value);
     } else if (isValid) {
-      const value = items ? [...items, item] : [item];
+      const value = Array.isArray(items) ? [...items, item] : item;
       setItems(value);
     }
   };
@@ -35,19 +38,27 @@ export function useSelectFormControl(
   return { list, items, toggleItem, validation, isValid };
 }
 
-function isActive(items: SelectItem[] | null, item: SelectItem): boolean {
-  if (!items) {
-    return false;
+function isActive(
+  items: SelectItem[] | SelectItem | null,
+  item: SelectItem
+): boolean {
+  if (Array.isArray(items)) {
+    return items.some((candidate) => candidate.name === item.name);
   }
-  return items.some((candidate) => candidate.name === item.name);
+  if (items !== null) {
+    return items.name === item.name;
+  }
+  return false;
 }
 
 function isActivatable(
-  items: SelectItem[] | null,
+  items: SelectItem[] | SelectItem | null,
   validation: SelectValidation
 ): boolean {
-  if (!items) {
-    return true;
+  if (Array.isArray(items)) {
+    return items.length < validation.maxLength;
+  } else if (items !== null) {
+    return false;
   }
-  return items.length < validation.maxLength;
+  return true;
 }

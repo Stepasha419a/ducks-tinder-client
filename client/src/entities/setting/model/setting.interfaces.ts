@@ -72,7 +72,7 @@ export interface SettingFieldInterestsArray {
 
 export type ProfileSelectInput = Record<
   ProfileSettingSelectName,
-  SelectItem[] | null
+  SelectItem[] | SelectItem | null
 >;
 
 export interface MultiSelectForm {

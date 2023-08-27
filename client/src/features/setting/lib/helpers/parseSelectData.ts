@@ -8,8 +8,10 @@ export function parseSelectData(data: MultiSelectForm) {
   return Object.keys(data.input).reduce((res, key) => {
     const extracted = data.input[key as ProfileSettingSelectName];
     let value = null;
-    if (extracted !== null) {
+    if (Array.isArray(extracted)) {
       value = extracted.map((item: SelectItem) => item.name);
+    } else if (extracted !== null) {
+      value = extracted;
     }
 
     return {
