@@ -28,8 +28,15 @@ export type Setting =
   | 'preferAgeTo'
   | 'usersOnlyInDistance';
 
-export type ProfileSettingName = 'interests';
-export type ProfileSettingSelectName = 'interests';
+export type ProfileSettingName = 'interests' | 'moreAboutMe';
+export type ProfileSettingSelectName =
+  | 'interests'
+  | 'zodiacSign'
+  | 'education'
+  | 'childrenAttitude'
+  | 'personalityType'
+  | 'communicationStyle'
+  | 'attentionSign';
 
 type ProfileSettingType = 'radio' | 'select' | null;
 
@@ -63,7 +70,10 @@ export interface SettingFieldInterestsArray {
   input: SelectItem[];
 }
 
-export type ProfileSelectInput = Record<ProfileSettingSelectName, SelectItem[]>;
+export type ProfileSelectInput = Record<
+  ProfileSettingSelectName,
+  SelectItem[] | null
+>;
 
 export interface MultiSelectForm {
   input: ProfileSelectInput;

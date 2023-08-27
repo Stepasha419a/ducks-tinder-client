@@ -28,12 +28,14 @@ export const SelectSetting: FC<SelectSettingProps> = ({
       <div className={styles.subhead}>
         <div className={styles.title}>{settingFieldName}</div>
         <div className={styles.limit}>
-          ({items.length}/{validation.maxLength})
+          ({items?.length || 0}/{validation.maxLength})
         </div>
       </div>
       <div className={styles.items}>
         {list.map((selectItem) => {
-          const isActive = items.some((item) => selectItem === item.name);
+          const isActive = Array.isArray(items)
+            ? items.some((item) => selectItem === item.name)
+            : false;
           return (
             <ListItem
               onClick={() => toggleItem({ name: selectItem })}

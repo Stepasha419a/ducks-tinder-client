@@ -1,17 +1,11 @@
-function concatenateUrl(matchArr: RegExpMatchArray): string {
-  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  return (
-    matchArr[1] +
-    (matchArr[2] ? matchArr[2][0].toUpperCase() + matchArr[2].slice(1) : '')
-  );
-}
-
 export function getSettingUrl(pathname: string, regex: RegExp): string | null {
   const extractedSetting = pathname.match(regex);
-  if (!extractedSetting) {
+  if (!extractedSetting?.[1]) {
     return null;
   }
+  const settingName = extractedSetting[1].replaceAll(/-\w/g, (char) => {
+    return char[1].toUpperCase();
+  });
 
-  const settingName = concatenateUrl(extractedSetting);
   return settingName;
 }

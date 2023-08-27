@@ -3,6 +3,7 @@ import type { Control } from 'react-hook-form';
 import type { MultiSelectForm } from '@entities/setting/model';
 import { useAppSelector } from '@shared/lib/hooks';
 import { InterestsSettingGroup } from './InterestsSettingGroup';
+import { MoreAboutMeSettingGroup } from './MoreAboutMeSettingGroup';
 
 interface SettingsGroupProps {
   control: Control<MultiSelectForm>;
@@ -16,6 +17,8 @@ export const SettingsGroup: FC<SettingsGroupProps> = ({ control }) => {
   switch (settingName) {
     case 'interests':
       return <InterestsSettingGroup control={control} />;
+    case 'moreAboutMe':
+      return <MoreAboutMeSettingGroup control={control} />;
     default:
       return <div>not found group</div>;
   }

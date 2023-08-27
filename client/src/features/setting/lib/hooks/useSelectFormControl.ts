@@ -25,22 +25,29 @@ export function useSelectFormControl(
 
   const toggleItem = (item: SelectItem): void => {
     if (isActive(items, item)) {
-      setItems(items.filter((candidate) => candidate.name !== item.name));
+      setItems(items!.filter((candidate) => candidate.name !== item.name));
     } else if (isValid) {
-      setItems([...items, item]);
+      const value = items ? [...items, item] : [item];
+      setItems(value);
     }
   };
 
   return { list, items, toggleItem, validation, isValid };
 }
 
-function isActive(items: SelectItem[], item: SelectItem): boolean {
+function isActive(items: SelectItem[] | null, item: SelectItem): boolean {
+  if (!items) {
+    return false;
+  }
   return items.some((candidate) => candidate.name === item.name);
 }
 
 function isActivatable(
-  items: SelectItem[],
+  items: SelectItem[] | null,
   validation: SelectValidation
 ): boolean {
+  if (!items) {
+    return true;
+  }
   return items.length < validation.maxLength;
 }

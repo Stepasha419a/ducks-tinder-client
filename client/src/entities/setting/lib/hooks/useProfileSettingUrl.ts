@@ -5,9 +5,9 @@ import { useAppDispatch } from '@shared/lib/hooks';
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const settingRegex = /\/profile\/edit\/([a-z]+)-?([a-z]*)/;
+const settingRegex = /\/profile\/edit\/([a-z]+(?:(?:-)(?:[a-z]+))*)/;
 
-const SETTING_LIST = ['interests'];
+const SETTING_LIST: ProfileSettingName[] = ['interests', 'moreAboutMe'];
 
 export function useProfileSettingUrl() {
   const dispatch = useAppDispatch();
@@ -18,7 +18,10 @@ export function useProfileSettingUrl() {
     isFound.current = null;
     const settingName = getSettingUrl(pathname, settingRegex);
 
-    if (settingName && SETTING_LIST.includes(settingName)) {
+    if (
+      settingName &&
+      SETTING_LIST.includes(settingName as ProfileSettingName)
+    ) {
       isFound.current = true;
       dispatch(setProfileSetting(settingName as ProfileSettingName));
     } else {

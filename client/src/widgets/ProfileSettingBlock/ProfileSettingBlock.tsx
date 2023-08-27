@@ -38,6 +38,7 @@ export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
       </div>
       <ProfileSettingsList />
       {!isMobile && <ProfileSubmit pictures={pictures} />}
+
       {isDialogUploadOpen && <DialogUpload />}
       {isImageCropOpen && <CropImage />}
     </div>

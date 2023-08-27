@@ -7,4 +7,12 @@ export const SELECT_SETTING_FIELDS: Record<
   ProfileSettingSelectName[] & PartialUser
 > = {
   interests: ['interests'],
+  moreAboutMe: [
+    'zodiacSign',
+    'education',
+    'childrenAttitude',
+    'personalityType',
+    'communicationStyle',
+    'attentionSign',
+  ],
 };
