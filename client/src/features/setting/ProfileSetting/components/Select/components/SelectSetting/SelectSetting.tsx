@@ -18,26 +18,27 @@ export const SelectSetting: FC<SelectSettingProps> = ({
   control,
   settingFieldName,
 }) => {
-  const { list, items, toggleItem, validation, isValid } = useSelectFormControl(
-    control,
-    settingFieldName
-  );
-
-  const length = Array.isArray(items) ? items.length : 0;
+  const {
+    list,
+    items,
+    toggleItem,
+    validation,
+    isValid,
+    getIsActive,
+    activeLength,
+  } = useSelectFormControl(control, settingFieldName);
 
   return (
     <>
       <div className={styles.subhead}>
         <div className={styles.title}>{settingFieldName}</div>
         <div className={styles.limit}>
-          ({length}/{validation.maxLength})
+          ({activeLength}/{validation.maxLength})
         </div>
       </div>
       <div className={styles.items}>
         {list.map((selectItem) => {
-          const isActive = Array.isArray(items)
-            ? items.some((item) => selectItem === item.name)
-            : false;
+          const isActive = getIsActive(items, selectItem);
           return (
             <ListItem
               onClick={() => toggleItem({ name: selectItem })}
