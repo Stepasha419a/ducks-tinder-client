@@ -18,22 +18,22 @@ export class PatchUserRelationsHandlerCommand
     if (dto.interests && (dto.interests.length || dto.interests.length === 0)) {
       await this.updateInterests(user, dto);
     }
-    if (dto.attentionSign) {
+    if (this.needsUpdate(dto.attentionSign)) {
       await this.updateAttentionSign(user, dto);
     }
-    if (dto.childrenAttitude) {
+    if (this.needsUpdate(dto.childrenAttitude)) {
       await this.updateChildrenAttitude(user, dto);
     }
-    if (dto.communicationStyle) {
+    if (this.needsUpdate(dto.communicationStyle)) {
       await this.updateCommunicationStyle(user, dto);
     }
-    if (dto.education) {
+    if (this.needsUpdate(dto.education)) {
       await this.updateEducation(user, dto);
     }
-    if (dto.personalityType) {
+    if (this.needsUpdate(dto.personalityType)) {
       await this.updatePersonalityType(user, dto);
     }
-    if (dto.zodiacSign) {
+    if (this.needsUpdate(dto.zodiacSign) || dto.attentionSign === null) {
       await this.updateZodiacSign(user, dto);
     }
 
@@ -47,6 +47,10 @@ export class PatchUserRelationsHandlerCommand
     });
 
     return new UserDto({ ...updatedUser, pairsCount });
+  }
+
+  private needsUpdate(settingField?: string): boolean {
+    return Boolean(settingField || settingField === null);
   }
 
   private async updateInterests(
@@ -101,6 +105,11 @@ export class PatchUserRelationsHandlerCommand
         },
       });
     }
+
+    if (dto.attentionSign === null) {
+      return;
+    }
+
     const candidate = await this.prismaService.attentionSign.findUnique({
       where: { name: dto.attentionSign },
     });
@@ -128,6 +137,11 @@ export class PatchUserRelationsHandlerCommand
         },
       });
     }
+
+    if (dto.childrenAttitude === null) {
+      return;
+    }
+
     const candidate = await this.prismaService.childrenAttitude.findUnique({
       where: { name: dto.childrenAttitude },
     });
@@ -155,6 +169,11 @@ export class PatchUserRelationsHandlerCommand
         },
       });
     }
+
+    if (dto.communicationStyle === null) {
+      return;
+    }
+
     const candidate = await this.prismaService.communicationStyle.findUnique({
       where: { name: dto.communicationStyle },
     });
@@ -182,6 +201,11 @@ export class PatchUserRelationsHandlerCommand
         },
       });
     }
+
+    if (dto.education === null) {
+      return;
+    }
+
     const candidate = await this.prismaService.education.findUnique({
       where: { name: dto.education },
     });
@@ -209,6 +233,11 @@ export class PatchUserRelationsHandlerCommand
         },
       });
     }
+
+    if (dto.personalityType === null) {
+      return;
+    }
+
     const candidate = await this.prismaService.personalityType.findUnique({
       where: { name: dto.personalityType },
     });
@@ -236,6 +265,11 @@ export class PatchUserRelationsHandlerCommand
         },
       });
     }
+
+    if (dto.zodiacSign === null) {
+      return;
+    }
+
     const candidate = await this.prismaService.zodiacSign.findUnique({
       where: { name: dto.zodiacSign },
     });
