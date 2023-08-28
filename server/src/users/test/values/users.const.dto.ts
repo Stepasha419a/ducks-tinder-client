@@ -34,7 +34,6 @@ export const CREATE_USER_DTO: CreateUserDto = {
 export const UPDATE_USER_DTO: PatchUserDto = {
   name: 'William',
   email: 'email123123@gmail.com',
-  interests: ['traveling', 'ski'],
 };
 
 export const DELETE_PICTURE_DTO: DeletePictureDto = {

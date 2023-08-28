@@ -7,10 +7,9 @@ import {
   Max,
   Matches,
   IsBoolean,
-  IsArray,
-  ArrayMaxSize,
   IsOptional,
 } from 'class-validator';
+
 export class PatchUserDto {
   @IsOptional()
   @IsEmail()
@@ -70,10 +69,4 @@ export class PatchUserDto {
   @Min(20)
   @Max(100)
   preferAgeTo?: number;
-
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  @ArrayMaxSize(16)
-  interests?: string[];
 }

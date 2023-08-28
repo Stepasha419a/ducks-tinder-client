@@ -11,6 +11,7 @@ export { AcceptPairCommand } from './accept-pair';
 export { RemoveAllPairsCommand } from './remove-all-pairs-dev';
 export { CreatePairsCommand } from './create-pairs-dev';
 export { PatchUserPlaceCommand } from './patch-user-place';
+export { PatchUserRelationsCommand } from './patch-user-relations';
 
 import { PatchUserCommandHandler } from './patch-user';
 import { SavePictureCommandHandler } from './save-picture';
@@ -25,6 +26,7 @@ import { AcceptPairCommandHandler } from './accept-pair';
 import { RemoveAllPairsCommandHandler } from './remove-all-pairs-dev';
 import { CreatePairsCommandHandler } from './create-pairs-dev';
 import { PatchUserPlaceCommandHandler } from './patch-user-place';
+import { PatchUserRelationsHandlerCommand } from './patch-user-relations';
 
 export const UserCommandHandlers = [
   PatchUserCommandHandler,
@@ -40,4 +42,5 @@ export const UserCommandHandlers = [
   RemoveAllPairsCommandHandler,
   CreatePairsCommandHandler,
   PatchUserPlaceCommandHandler,
+  PatchUserRelationsHandlerCommand,
 ];

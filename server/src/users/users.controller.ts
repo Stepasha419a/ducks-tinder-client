@@ -24,6 +24,7 @@ import {
   PatchUserPlaceDto,
   ValidatedUserDto,
   NotValidatedUserDto,
+  PatchUserRelationsDto,
 } from './dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import {
@@ -36,6 +37,7 @@ import {
   MixPicturesCommand,
   PatchUserCommand,
   PatchUserPlaceCommand,
+  PatchUserRelationsCommand,
   RemoveAllPairsCommand,
   ReturnUserCommand,
   SavePictureCommand,
@@ -68,6 +70,15 @@ export class UsersController {
     @Body() dto: PatchUserPlaceDto,
   ): Promise<UserDto> {
     return this.commandBus.execute(new PatchUserPlaceCommand(user, dto));
+  }
+
+  @Patch('relations')
+  @HttpCode(HttpStatus.OK)
+  patchRelations(
+    @User(CustomValidationPipe) user: NotValidatedUserDto,
+    @Body(OptionalValidationPipe) dto: PatchUserRelationsDto,
+  ): Promise<UserDto> {
+    return this.commandBus.execute(new PatchUserRelationsCommand(user, dto));
   }
 
   @Get('sorted')

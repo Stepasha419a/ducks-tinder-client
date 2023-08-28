@@ -42,7 +42,7 @@ export const USERS_PATCH_EXPECT = {
   sex: 'male',
   usersOnlyInDistance: false,
   pictures: [],
-  interests: [{ name: 'traveling' }, { name: 'ski' }],
+  interests: [],
   attentionSign: null,
   childrenAttitude: null,
   communicationStyle: null,

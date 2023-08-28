@@ -34,25 +34,11 @@ describe('users (PATCH)', () => {
 
     await prepareBefore(currentUserId, secondUserId);
 
-    await prismaClient.interest.createMany({
-      data: [
-        { id: 'interest-id-1', name: 'traveling' },
-        { id: 'interest-id-2', name: 'ski' },
-      ],
-    });
-
     httpServer = app.getHttpServer();
   });
 
   afterAll(async () => {
     await prepareAfter(currentUserId, secondUserId);
-    await prismaClient.interest.deleteMany({
-      where: {
-        id: {
-          in: ['interest-id-1', 'interest-id-2'],
-        },
-      },
-    });
 
     await app.close();
     await prismaClient.$disconnect();
@@ -74,14 +60,7 @@ describe('users (PATCH)', () => {
 
       response = await request(httpServer)
         .patch('/users')
-        .send({
-          ...UPDATE_USER_DTO,
-          interests: [
-            ...UPDATE_USER_DTO.interests,
-            'wrong-interest-1',
-            'wrong-interest-2',
-          ],
-        })
+        .send(UPDATE_USER_DTO)
         .set('Authorization', `Bearer ${currentUserAccessToken}`);
     });
 
