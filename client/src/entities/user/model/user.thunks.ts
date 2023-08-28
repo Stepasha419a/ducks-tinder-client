@@ -1,5 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { PartialUser, Picture } from '@shared/api/interfaces';
+import type {
+  PartialUser,
+  PartialUserRelations,
+  Picture,
+} from '@shared/api/interfaces';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 
@@ -8,6 +12,19 @@ export const updateUserThunk = createAsyncThunk(
   async (data: PartialUser, { rejectWithValue }) => {
     try {
       const response = await userService.updateUser(data);
+
+      return response.data;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
+export const updateUserRelationsThunk = createAsyncThunk(
+  'users/updateUserRelations',
+  async (data: PartialUserRelations, { rejectWithValue }) => {
+    try {
+      const response = await userService.updateUserRelations(data);
 
       return response.data;
     } catch (error: unknown) {

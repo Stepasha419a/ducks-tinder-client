@@ -39,17 +39,19 @@ export const SelectSetting: FC<SelectSettingProps> = ({
       <div className={styles.items}>
         {list.map((selectItem) => {
           const isActive = getIsActive(items, selectItem);
+          const cn = classNames(
+            styles.item,
+            isActive && styles.active,
+            !isValid && styles.disabled
+          );
+
           return (
             <ListItem
               onClick={() => toggleItem({ name: selectItem })}
               isActive={isActive}
               pointer
               key={selectItem}
-              extraClassName={classNames(
-                styles.item,
-                isActive && styles.active,
-                !isValid && styles.disabled
-              )}
+              extraClassName={cn}
             >
               {selectItem}
             </ListItem>

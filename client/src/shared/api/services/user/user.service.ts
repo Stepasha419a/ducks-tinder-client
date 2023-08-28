@@ -5,6 +5,7 @@ import type {
   ShortUser,
   Picture,
   ShortUserWithoutDistance,
+  PartialUserRelations,
 } from '@shared/api/interfaces';
 
 export const userService = {
@@ -14,6 +15,10 @@ export const userService = {
 
   async updateUser(data: PartialUser) {
     return instance.patch<User>('users', data);
+  },
+
+  async updateUserRelations(data: PartialUserRelations) {
+    return instance.patch<User>('users/relations', data);
   },
 
   async updateUserPlace(latitude: number, longitude: number) {

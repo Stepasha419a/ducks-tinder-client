@@ -76,6 +76,14 @@ export interface PartialUser {
   age?: number;
   sex?: 'male' | 'female';
   isActivated?: boolean;
+  distance?: number;
+  usersOnlyInDistance?: boolean;
+  preferSex?: 'male' | 'female';
+  preferAgeFrom?: number;
+  preferAgeTo?: number;
+}
+
+export interface PartialUserRelations {
   interests?: string[];
   attentionSign?: string | null;
   childrenAttitude?: string | null;
@@ -83,11 +91,6 @@ export interface PartialUser {
   education?: string | null;
   personalityType?: string | null;
   zodiacSign?: string | null;
-  distance?: number;
-  usersOnlyInDistance?: boolean;
-  preferSex?: 'male' | 'female';
-  preferAgeFrom?: number;
-  preferAgeTo?: number;
 }
 
 export interface QuerySorts {
