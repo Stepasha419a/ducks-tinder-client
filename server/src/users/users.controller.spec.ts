@@ -9,6 +9,8 @@ import {
   DELETE_PICTURE_DTO,
   MIX_PICTURES_DTO,
   UPDATE_USER_DTO,
+  UPDATE_USER_PLACE_DTO,
+  UPDATE_USER_RELATIONS_DTO,
   USER_SORTS_DATA,
 } from 'users/test/values/users.const.dto';
 import { CommandBus, CqrsModule, QueryBus } from '@nestjs/cqrs';
@@ -22,6 +24,8 @@ import {
   ReturnUserCommand,
   SavePictureCommand,
   AcceptPairCommand,
+  PatchUserPlaceCommand,
+  PatchUserRelationsCommand,
 } from 'users/commands';
 import { GetPairsQuery, GetSortedQuery } from 'users/queries';
 
@@ -75,6 +79,61 @@ describe('users-controller', () => {
       expect(commandBus.execute).toBeCalledTimes(1);
       expect(commandBus.execute).toBeCalledWith(
         new PatchUserCommand(requestUserStub(), UPDATE_USER_DTO),
+      );
+    });
+
+    it('should return a user', () => {
+      expect(user).toEqual(userDtoStub());
+    });
+  });
+
+  describe('when patch relations is called', () => {
+    let user: UserDto;
+
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userDtoStub());
+    });
+
+    beforeEach(async () => {
+      user = await usersController.patchRelations(
+        requestUserStub(),
+        UPDATE_USER_RELATIONS_DTO,
+      );
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new PatchUserRelationsCommand(
+          requestUserStub(),
+          UPDATE_USER_RELATIONS_DTO,
+        ),
+      );
+    });
+
+    it('should return a user', () => {
+      expect(user).toEqual(userDtoStub());
+    });
+  });
+
+  describe('when patch place is called', () => {
+    let user: UserDto;
+
+    beforeAll(() => {
+      commandBus.execute = jest.fn().mockResolvedValue(userDtoStub());
+    });
+
+    beforeEach(async () => {
+      user = await usersController.patchPlace(
+        requestUserStub(),
+        UPDATE_USER_PLACE_DTO,
+      );
+    });
+
+    it('should call command bus execute', () => {
+      expect(commandBus.execute).toBeCalledTimes(1);
+      expect(commandBus.execute).toBeCalledWith(
+        new PatchUserPlaceCommand(requestUserStub(), UPDATE_USER_PLACE_DTO),
       );
     });
 

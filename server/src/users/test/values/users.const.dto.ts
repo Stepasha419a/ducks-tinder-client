@@ -3,6 +3,8 @@ import {
   DeletePictureDto,
   MixPicturesDto,
   PatchUserDto,
+  PatchUserPlaceDto,
+  PatchUserRelationsDto,
 } from 'users/dto';
 import { userDtoStub } from '../stubs';
 
@@ -34,6 +36,21 @@ export const CREATE_USER_DTO: CreateUserDto = {
 export const UPDATE_USER_DTO: PatchUserDto = {
   name: 'William',
   email: 'email123123@gmail.com',
+};
+
+export const UPDATE_USER_PLACE_DTO: PatchUserPlaceDto = {
+  latitude: 12.34567,
+  longitude: 12.34567,
+};
+
+export const UPDATE_USER_RELATIONS_DTO: PatchUserRelationsDto = {
+  attentionSign: 'attention-sign',
+  childrenAttitude: 'children-attitude',
+  communicationStyle: 'communication-style',
+  education: 'education',
+  interests: ['interest-1', 'interest-2', 'wrong-interest'],
+  personalityType: 'personality-type',
+  zodiacSign: 'zodiac-sign',
 };
 
 export const DELETE_PICTURE_DTO: DeletePictureDto = {
