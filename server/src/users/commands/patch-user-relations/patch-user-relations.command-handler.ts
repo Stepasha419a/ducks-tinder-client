@@ -97,16 +97,14 @@ export class PatchUserRelationsHandlerCommand
     user: NotValidatedUserDto,
     dto: PatchUserRelationsDto,
   ) {
-    if (user.attentionSign) {
+    if (dto.attentionSign === null) {
       await this.prismaService.user.update({
         where: { id: user.id },
         data: {
           attentionSign: { disconnect: true },
         },
       });
-    }
 
-    if (dto.attentionSign === null) {
       return;
     }
 
@@ -115,6 +113,15 @@ export class PatchUserRelationsHandlerCommand
     });
     if (!candidate) {
       throw new NotFoundException();
+    }
+
+    if (user.attentionSign) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          attentionSign: { disconnect: true },
+        },
+      });
     }
 
     await this.prismaService.user.update({
@@ -129,16 +136,14 @@ export class PatchUserRelationsHandlerCommand
     user: NotValidatedUserDto,
     dto: PatchUserRelationsDto,
   ) {
-    if (user.childrenAttitude) {
+    if (dto.childrenAttitude === null) {
       await this.prismaService.user.update({
         where: { id: user.id },
         data: {
           childrenAttitude: { disconnect: true },
         },
       });
-    }
 
-    if (dto.childrenAttitude === null) {
       return;
     }
 
@@ -147,6 +152,15 @@ export class PatchUserRelationsHandlerCommand
     });
     if (!candidate) {
       throw new NotFoundException();
+    }
+
+    if (user.childrenAttitude) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          childrenAttitude: { disconnect: true },
+        },
+      });
     }
 
     await this.prismaService.user.update({
@@ -161,16 +175,14 @@ export class PatchUserRelationsHandlerCommand
     user: NotValidatedUserDto,
     dto: PatchUserRelationsDto,
   ) {
-    if (user.communicationStyle) {
+    if (dto.communicationStyle === null) {
       await this.prismaService.user.update({
         where: { id: user.id },
         data: {
           communicationStyle: { disconnect: true },
         },
       });
-    }
 
-    if (dto.communicationStyle === null) {
       return;
     }
 
@@ -179,6 +191,15 @@ export class PatchUserRelationsHandlerCommand
     });
     if (!candidate) {
       throw new NotFoundException();
+    }
+
+    if (user.communicationStyle) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          communicationStyle: { disconnect: true },
+        },
+      });
     }
 
     await this.prismaService.user.update({
@@ -193,16 +214,14 @@ export class PatchUserRelationsHandlerCommand
     user: NotValidatedUserDto,
     dto: PatchUserRelationsDto,
   ) {
-    if (user.education) {
+    if (dto.education === null) {
       await this.prismaService.user.update({
         where: { id: user.id },
         data: {
           education: { disconnect: true },
         },
       });
-    }
 
-    if (dto.education === null) {
       return;
     }
 
@@ -211,6 +230,15 @@ export class PatchUserRelationsHandlerCommand
     });
     if (!candidate) {
       throw new NotFoundException();
+    }
+
+    if (user.education) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          education: { disconnect: true },
+        },
+      });
     }
 
     await this.prismaService.user.update({
@@ -225,16 +253,14 @@ export class PatchUserRelationsHandlerCommand
     user: NotValidatedUserDto,
     dto: PatchUserRelationsDto,
   ) {
-    if (user.personalityType) {
+    if (dto.personalityType === null) {
       await this.prismaService.user.update({
         where: { id: user.id },
         data: {
           personalityType: { disconnect: true },
         },
       });
-    }
 
-    if (dto.personalityType === null) {
       return;
     }
 
@@ -243,6 +269,15 @@ export class PatchUserRelationsHandlerCommand
     });
     if (!candidate) {
       throw new NotFoundException();
+    }
+
+    if (user.personalityType) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          personalityType: { disconnect: true },
+        },
+      });
     }
 
     await this.prismaService.user.update({
@@ -257,16 +292,14 @@ export class PatchUserRelationsHandlerCommand
     user: NotValidatedUserDto,
     dto: PatchUserRelationsDto,
   ) {
-    if (user.zodiacSign) {
+    if (dto.zodiacSign === null) {
       await this.prismaService.user.update({
         where: { id: user.id },
         data: {
           zodiacSign: { disconnect: true },
         },
       });
-    }
 
-    if (dto.zodiacSign === null) {
       return;
     }
 
@@ -275,6 +308,15 @@ export class PatchUserRelationsHandlerCommand
     });
     if (!candidate) {
       throw new NotFoundException();
+    }
+
+    if (user.zodiacSign) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          zodiacSign: { disconnect: true },
+        },
+      });
     }
 
     await this.prismaService.user.update({

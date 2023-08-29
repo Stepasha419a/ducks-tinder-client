@@ -340,18 +340,8 @@ describe('when patch user relations is called', () => {
       expect(prismaService.childrenAttitude.findUnique).not.toBeCalled();
     });
 
-    it('should call user update', () => {
-      expect(prismaService.user.update).toBeCalledTimes(1);
-      expect(prismaService.user.update).toBeCalledWith({
-        data: {
-          attentionSign: {
-            disconnect: true,
-          },
-        },
-        where: {
-          id: requestUserStub().id,
-        },
-      });
+    it('should not call user update', () => {
+      expect(prismaService.user.update).not.toBeCalled();
     });
 
     it('should not call user count', () => {
@@ -463,7 +453,7 @@ describe('when patch user relations is called', () => {
     });
 
     it('should call user update', () => {
-      expect(prismaService.user.update).toBeCalledTimes(3);
+      expect(prismaService.user.update).toBeCalledTimes(2);
       expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
         data: {
           attentionSign: {
@@ -477,14 +467,6 @@ describe('when patch user relations is called', () => {
       expect(prismaService.user.update).toHaveBeenNthCalledWith(2, {
         data: { attentionSign: { connect: { name: 'attention-sign' } } },
         where: { id: requestUserStub().id },
-      });
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(3, {
-        where: { id: requestUserStub().id },
-        data: {
-          childrenAttitude: {
-            disconnect: true,
-          },
-        },
       });
     });
 
@@ -603,7 +585,7 @@ describe('when patch user relations is called', () => {
     });
 
     it('should call user update', () => {
-      expect(prismaService.user.update).toBeCalledTimes(5);
+      expect(prismaService.user.update).toBeCalledTimes(4);
       expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
         data: {
           attentionSign: {
@@ -631,14 +613,6 @@ describe('when patch user relations is called', () => {
           childrenAttitude: { connect: { name: 'children-attitude' } },
         },
         where: { id: requestUserStub().id },
-      });
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(5, {
-        where: { id: requestUserStub().id },
-        data: {
-          communicationStyle: {
-            disconnect: true,
-          },
-        },
       });
     });
 
@@ -763,7 +737,7 @@ describe('when patch user relations is called', () => {
     });
 
     it('should call user update', () => {
-      expect(prismaService.user.update).toBeCalledTimes(7);
+      expect(prismaService.user.update).toBeCalledTimes(6);
       expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
         data: {
           attentionSign: {
@@ -805,14 +779,6 @@ describe('when patch user relations is called', () => {
           communicationStyle: { connect: { name: 'communication-style' } },
         },
         where: { id: requestUserStub().id },
-      });
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(7, {
-        where: { id: requestUserStub().id },
-        data: {
-          education: {
-            disconnect: true,
-          },
-        },
       });
     });
 
@@ -943,7 +909,7 @@ describe('when patch user relations is called', () => {
     });
 
     it('should call user update', () => {
-      expect(prismaService.user.update).toBeCalledTimes(9);
+      expect(prismaService.user.update).toBeCalledTimes(8);
       expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
         data: {
           attentionSign: {
@@ -999,14 +965,6 @@ describe('when patch user relations is called', () => {
           education: { connect: { name: 'education' } },
         },
         where: { id: requestUserStub().id },
-      });
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(9, {
-        where: { id: requestUserStub().id },
-        data: {
-          personalityType: {
-            disconnect: true,
-          },
-        },
       });
     });
 
@@ -1140,7 +1098,7 @@ describe('when patch user relations is called', () => {
     });
 
     it('should call user update', () => {
-      expect(prismaService.user.update).toBeCalledTimes(11);
+      expect(prismaService.user.update).toBeCalledTimes(10);
       expect(prismaService.user.update).toHaveBeenNthCalledWith(1, {
         data: {
           attentionSign: {
@@ -1210,14 +1168,6 @@ describe('when patch user relations is called', () => {
           personalityType: { connect: { name: 'personality-type' } },
         },
         where: { id: requestUserStub().id },
-      });
-      expect(prismaService.user.update).toHaveBeenNthCalledWith(11, {
-        where: { id: requestUserStub().id },
-        data: {
-          zodiacSign: {
-            disconnect: true,
-          },
-        },
       });
     });
 
