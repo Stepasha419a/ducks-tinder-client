@@ -15,7 +15,7 @@ export class PatchUserRelationsHandlerCommand
   async execute(command: PatchUserRelationsCommand): Promise<UserDto> {
     const { user, dto } = command;
 
-    if (dto.interests && (dto.interests.length || dto.interests.length === 0)) {
+    if (dto.interests || dto.interests?.length === 0) {
       await this.updateInterests(user, dto);
     }
     if (this.needsUpdate(dto.attentionSign)) {
