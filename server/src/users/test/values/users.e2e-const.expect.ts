@@ -51,6 +51,56 @@ export const USERS_PATCH_EXPECT = {
   zodiacSign: null,
 };
 
+export const USERS_PATCH_RELATIONS_EXPECT = {
+  id: 'patch_relations_current_user_id',
+  email: 'patch_relations_current_user_id@gmail.com',
+  name: 'Jason',
+  age: 20,
+  description: null,
+  distance: 50,
+  isActivated: false,
+  nickname: null,
+  pairsCount: 0,
+  place: {
+    address: 'current-user-place-address',
+    latitude: 12.3456789,
+    longitude: 12.3456789,
+    name: 'current-user-place-name',
+  },
+  preferAgeFrom: 18,
+  preferAgeTo: 26,
+  preferSex: 'female',
+  sex: 'male',
+  usersOnlyInDistance: false,
+  pictures: [],
+  interests: [
+    {
+      name: 'interest-1',
+    },
+    {
+      name: 'interest-2',
+    },
+  ],
+  attentionSign: {
+    name: 'attention-sign',
+  },
+  childrenAttitude: {
+    name: 'children-attitude',
+  },
+  communicationStyle: {
+    name: 'communication-style',
+  },
+  education: {
+    name: 'education',
+  },
+  personalityType: {
+    name: 'personality-type',
+  },
+  zodiacSign: {
+    name: 'zodiac-sign',
+  },
+};
+
 export const USERS_PICTURE_PUT_EXPECT = {
   id: 'users_picture_put_current_user_id',
   email: 'users_picture_put_current_user_id@gmail.com',
