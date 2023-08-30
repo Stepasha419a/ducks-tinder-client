@@ -28,8 +28,8 @@ export function useSelectFormControl(
   const toggleItem = (item: SelectItem): void => {
     if (getIsActive(items, item.name)) {
       deleteItem(item, items, setItems);
-    } else if (isValid) {
-      addItem(item, items, setItems);
+    } else {
+      addItem(item, items, setItems, isValid);
     }
   };
 
@@ -70,10 +70,13 @@ function getIsActive(
 function addItem(
   value: SelectItem,
   items: SelectItem[] | SelectItem | null,
-  setItems: (data: SelectItem[] | SelectItem | null) => void
+  setItems: (data: SelectItem[] | SelectItem | null) => void,
+  isValid: boolean
 ) {
   if (Array.isArray(items)) {
-    setItems([...items, value]);
+    if (isValid) {
+      setItems([...items, value]);
+    }
   } else {
     setItems(value);
   }
@@ -97,8 +100,6 @@ function isActivatable(
 ): boolean {
   if (Array.isArray(items)) {
     return items.length < validation.maxLength;
-  } else if (items !== null) {
-    return false;
   }
   return true;
 }
