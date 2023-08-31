@@ -32,6 +32,8 @@
 
 @media (max-width: 900px) {
   .container {
+    padding: 0px 24px;
+
     .cropper {
       width: calc(100vw - 48px);
       height: calc(100vh - 204px - 86px - 40px);

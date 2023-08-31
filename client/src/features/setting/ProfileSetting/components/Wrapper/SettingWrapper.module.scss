@@ -26,9 +26,8 @@
   }
 
   .setting {
-    height: 100%;
+    height: calc(100% - 45px);
     background-color: var(--bg-primary);
-    padding-bottom: 32px;
 
     overflow: auto;
     scrollbar-width: none;
@@ -37,16 +36,27 @@
       display: none;
     }
 
-    .name {
-      border-bottom: 1px solid var(--border-main);
-      padding: 20px 16px 10px;
-      text-transform: uppercase;
-      color: var(--main-secondary);
-    }
-
     .descr {
       padding: 0 12px;
       margin: 20px 0;
+    }
+  }
+}
+
+@media (max-width: 370px) {
+  .form {
+    .head {
+      .title {
+        font-size: 20px;
+        text-align: left;
+        padding-left: 12px;
+      }
+    }
+
+    .setting {
+      .descr {
+        font-size: 14px;
+      }
     }
   }
 }

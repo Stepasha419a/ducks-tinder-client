@@ -40,6 +40,12 @@
 .popup {
   border-bottom-left-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
+
+  scrollbar-width: 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .showAll {
@@ -111,5 +117,13 @@
     width: 100%;
 
     border-top: 1px solid var(--border-main);
+  }
+}
+
+@media (max-width: 400px) {
+  .btns {
+    .btn {
+      font-size: 18px;
+    }
   }
 }

@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import classNames from 'classnames';
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import type { PairSorts } from '@entities/user/model';
@@ -20,7 +21,7 @@ export const PhotosSetting: FC<PhotosSettingProps> = ({ control }) => {
   return (
     <div className={styles.setting}>
       <div className={styles.name}>Min photo's count</div>
-      <div className={`${styles.change} ${styles.flex}`}>
+      <div className={classNames(styles.change, styles.flex)}>
         {photosCountArrForLoop.map((_, i) => {
           const content = i + 1;
           return (
@@ -28,6 +29,7 @@ export const PhotosSetting: FC<PhotosSettingProps> = ({ control }) => {
               onClick={() => setPhotosCount(content)}
               isActive={photosCount === content}
               key={i}
+              pointer
             >
               {content}
             </ListItem>

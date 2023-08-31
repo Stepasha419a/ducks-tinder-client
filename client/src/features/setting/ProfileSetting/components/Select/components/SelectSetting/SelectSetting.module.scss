@@ -24,9 +24,20 @@
 
   .item {
     font-weight: 400;
+    text-wrap: nowrap;
 
     &.disabled:not(.active) {
       color: var(--sub-border-main);
+    }
+  }
+}
+
+@media (max-width: 370px) {
+  .subhead {
+    .title,
+    .limit {
+      font-weight: 400;
+      font-size: 14px;
     }
   }
 }

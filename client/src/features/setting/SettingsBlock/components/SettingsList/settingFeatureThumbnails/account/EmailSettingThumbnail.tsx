@@ -7,6 +7,12 @@ export const EmailSettingThumbnail = () => {
 
   const url = `${ROUTES.settings}/email`;
   return (
-    <LinkSettingThumbnail url={url} title="Email" value={email} isPointer />
+    <LinkSettingThumbnail
+      url={url}
+      title="Email"
+      value={email}
+      isPointer
+      isOverflow
+    />
   );
 };

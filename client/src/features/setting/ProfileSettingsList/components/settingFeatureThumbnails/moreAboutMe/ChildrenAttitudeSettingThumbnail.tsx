@@ -8,11 +8,15 @@ export const ChildrenAttitudeSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;
-  const value = childrenAttitude
-    ? childrenAttitude.name
-    : 'Add';
+  const value = childrenAttitude ? childrenAttitude.name : 'Add';
 
   return (
-    <LinkSettingThumbnail url={url} title="Children attitude" value={value} isPointer />
+    <LinkSettingThumbnail
+      url={url}
+      title="Children attitude"
+      value={value}
+      isPointer
+      isOverflow
+    />
   );
 };

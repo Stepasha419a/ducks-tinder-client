@@ -25,6 +25,7 @@ export const InterestsSetting: FC<InterestsSettingProps> = ({
               onClick={() => toggleInterest({ name: item })}
               isActive={interests.some((interest) => interest.name === item)}
               key={item}
+              pointer
             >
               {item}
             </ListItem>
