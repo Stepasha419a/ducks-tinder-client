@@ -33,8 +33,29 @@ export class PatchUserRelationsHandlerCommand
     if (this.needsUpdate(dto.personalityType)) {
       await this.updatePersonalityType(user, dto);
     }
-    if (this.needsUpdate(dto.zodiacSign) || dto.attentionSign === null) {
+    if (this.needsUpdate(dto.zodiacSign)) {
       await this.updateZodiacSign(user, dto);
+    }
+    if (this.needsUpdate(dto.alcoholAttitude)) {
+      await this.updateAlcoholAttitude(user, dto);
+    }
+    if (this.needsUpdate(dto.chronotype)) {
+      await this.updateChronotype(user, dto);
+    }
+    if (this.needsUpdate(dto.foodPreference)) {
+      await this.updateFoodPreference(user, dto);
+    }
+    if (this.needsUpdate(dto.pet)) {
+      await this.updatePet(user, dto);
+    }
+    if (this.needsUpdate(dto.smokingAttitude)) {
+      await this.updateSmokingAttitude(user, dto);
+    }
+    if (this.needsUpdate(dto.socialNetworksActivity)) {
+      await this.updateSocialNetworksActivity(user, dto);
+    }
+    if (this.needsUpdate(dto.trainingAttitude)) {
+      await this.updateTrainingAttitude(user, dto);
     }
 
     const pairsCount = await this.prismaService.user.count({
@@ -323,6 +344,284 @@ export class PatchUserRelationsHandlerCommand
       where: { id: user.id },
       data: {
         zodiacSign: { connect: { name: dto.zodiacSign } },
+      },
+    });
+  }
+
+  private async updateAlcoholAttitude(
+    user: NotValidatedUserDto,
+    dto: PatchUserRelationsDto,
+  ) {
+    if (dto.alcoholAttitude === null) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          alcoholAttitude: { disconnect: true },
+        },
+      });
+
+      return;
+    }
+
+    const candidate = await this.prismaService.alcoholAttitude.findUnique({
+      where: { name: dto.alcoholAttitude },
+    });
+    if (!candidate) {
+      throw new NotFoundException();
+    }
+
+    if (user.alcoholAttitude) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          alcoholAttitude: { disconnect: true },
+        },
+      });
+    }
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        alcoholAttitude: { connect: { name: dto.alcoholAttitude } },
+      },
+    });
+  }
+
+  private async updateChronotype(
+    user: NotValidatedUserDto,
+    dto: PatchUserRelationsDto,
+  ) {
+    if (dto.chronotype === null) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          chronotype: { disconnect: true },
+        },
+      });
+
+      return;
+    }
+
+    const candidate = await this.prismaService.chronotype.findUnique({
+      where: { name: dto.chronotype },
+    });
+    if (!candidate) {
+      throw new NotFoundException();
+    }
+
+    if (user.chronotype) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          chronotype: { disconnect: true },
+        },
+      });
+    }
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        chronotype: { connect: { name: dto.chronotype } },
+      },
+    });
+  }
+
+  private async updateFoodPreference(
+    user: NotValidatedUserDto,
+    dto: PatchUserRelationsDto,
+  ) {
+    if (dto.foodPreference === null) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          foodPreference: { disconnect: true },
+        },
+      });
+
+      return;
+    }
+
+    const candidate = await this.prismaService.foodPreference.findUnique({
+      where: { name: dto.foodPreference },
+    });
+    if (!candidate) {
+      throw new NotFoundException();
+    }
+
+    if (user.foodPreference) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          foodPreference: { disconnect: true },
+        },
+      });
+    }
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        foodPreference: { connect: { name: dto.foodPreference } },
+      },
+    });
+  }
+
+  private async updatePet(
+    user: NotValidatedUserDto,
+    dto: PatchUserRelationsDto,
+  ) {
+    if (dto.pet === null) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          pet: { disconnect: true },
+        },
+      });
+
+      return;
+    }
+
+    const candidate = await this.prismaService.pet.findUnique({
+      where: { name: dto.pet },
+    });
+    if (!candidate) {
+      throw new NotFoundException();
+    }
+
+    if (user.pet) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          pet: { disconnect: true },
+        },
+      });
+    }
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        pet: { connect: { name: dto.pet } },
+      },
+    });
+  }
+
+  private async updateSmokingAttitude(
+    user: NotValidatedUserDto,
+    dto: PatchUserRelationsDto,
+  ) {
+    if (dto.smokingAttitude === null) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          smokingAttitude: { disconnect: true },
+        },
+      });
+
+      return;
+    }
+
+    const candidate = await this.prismaService.smokingAttitude.findUnique({
+      where: { name: dto.smokingAttitude },
+    });
+    if (!candidate) {
+      throw new NotFoundException();
+    }
+
+    if (user.smokingAttitude) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          smokingAttitude: { disconnect: true },
+        },
+      });
+    }
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        smokingAttitude: { connect: { name: dto.smokingAttitude } },
+      },
+    });
+  }
+
+  private async updateSocialNetworksActivity(
+    user: NotValidatedUserDto,
+    dto: PatchUserRelationsDto,
+  ) {
+    if (dto.socialNetworksActivity === null) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          socialNetworksActivity: { disconnect: true },
+        },
+      });
+
+      return;
+    }
+
+    const candidate =
+      await this.prismaService.socialNetworksActivity.findUnique({
+        where: { name: dto.socialNetworksActivity },
+      });
+    if (!candidate) {
+      throw new NotFoundException();
+    }
+
+    if (user.socialNetworksActivity) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          socialNetworksActivity: { disconnect: true },
+        },
+      });
+    }
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        socialNetworksActivity: {
+          connect: { name: dto.socialNetworksActivity },
+        },
+      },
+    });
+  }
+
+  private async updateTrainingAttitude(
+    user: NotValidatedUserDto,
+    dto: PatchUserRelationsDto,
+  ) {
+    if (dto.trainingAttitude === null) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          trainingAttitude: { disconnect: true },
+        },
+      });
+
+      return;
+    }
+
+    const candidate = await this.prismaService.trainingAttitude.findUnique({
+      where: { name: dto.trainingAttitude },
+    });
+    if (!candidate) {
+      throw new NotFoundException();
+    }
+
+    if (user.trainingAttitude) {
+      await this.prismaService.user.update({
+        where: { id: user.id },
+        data: {
+          trainingAttitude: { disconnect: true },
+        },
+      });
+    }
+
+    await this.prismaService.user.update({
+      where: { id: user.id },
+      data: {
+        trainingAttitude: {
+          connect: { name: dto.trainingAttitude },
+        },
       },
     });
   }

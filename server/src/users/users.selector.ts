@@ -42,6 +42,27 @@ export class UsersSelector {
       attentionSign: {
         select: { name: true },
       },
+      alcoholAttitude: {
+        select: { name: true },
+      },
+      chronotype: {
+        select: { name: true },
+      },
+      foodPreference: {
+        select: { name: true },
+      },
+      pet: {
+        select: { name: true },
+      },
+      smokingAttitude: {
+        select: { name: true },
+      },
+      socialNetworksActivity: {
+        select: { name: true },
+      },
+      trainingAttitude: {
+        select: { name: true },
+      },
     };
   }
 

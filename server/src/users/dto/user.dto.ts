@@ -18,6 +18,13 @@ export class UserDto {
   interests;
   zodiacSign;
   education;
+  alcoholAttitude;
+  chronotype;
+  foodPreference;
+  pet;
+  smokingAttitude;
+  socialNetworksActivity;
+  trainingAttitude;
   childrenAttitude;
   personalityType;
   communicationStyle;
@@ -48,6 +55,13 @@ export class UserDto {
     this.personalityType = model.personalityType;
     this.communicationStyle = model.communicationStyle;
     this.attentionSign = model.attentionSign;
+    this.alcoholAttitude = model.alcoholAttitude;
+    this.chronotype = model.chronotype;
+    this.foodPreference = model.foodPreference;
+    this.pet = model.pet;
+    this.smokingAttitude = model.smokingAttitude;
+    this.socialNetworksActivity = model.socialNetworksActivity;
+    this.trainingAttitude = model.trainingAttitude;
     this.pictures = model.pictures;
     this.firstPair = model.pairs && model.pairs[0];
     this.pairsCount = model.pairsCount;

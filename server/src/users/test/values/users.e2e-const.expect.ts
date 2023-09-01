@@ -49,6 +49,13 @@ export const USERS_PATCH_EXPECT = {
   education: null,
   personalityType: null,
   zodiacSign: null,
+  alcoholAttitude: null,
+  chronotype: null,
+  foodPreference: null,
+  pet: null,
+  smokingAttitude: null,
+  socialNetworksActivity: null,
+  trainingAttitude: null,
 };
 
 export const USERS_PATCH_RELATIONS_EXPECT = {
@@ -99,6 +106,13 @@ export const USERS_PATCH_RELATIONS_EXPECT = {
   zodiacSign: {
     name: 'zodiac-sign',
   },
+  alcoholAttitude: null,
+  chronotype: null,
+  foodPreference: null,
+  pet: null,
+  smokingAttitude: null,
+  socialNetworksActivity: null,
+  trainingAttitude: null,
 };
 
 export const USERS_PICTURE_PUT_EXPECT = {
@@ -130,6 +144,13 @@ export const USERS_PICTURE_PUT_EXPECT = {
   education: null,
   personalityType: null,
   zodiacSign: null,
+  alcoholAttitude: null,
+  chronotype: null,
+  foodPreference: null,
+  pet: null,
+  smokingAttitude: null,
+  socialNetworksActivity: null,
+  trainingAttitude: null,
 };
 
 export const USERS_SORTED_GET_EXPECT = {

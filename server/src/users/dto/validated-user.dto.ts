@@ -135,6 +135,55 @@ export class ValidatedUserDto implements UserDto {
   @Type(() => NameObjectDto)
   attentionSign: NameObjectDto;
 
+  @IsOptional()
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  alcoholAttitude: NameObjectDto;
+
+  @IsOptional()
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  chronotype: NameObjectDto;
+
+  @IsOptional()
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  foodPreference: NameObjectDto;
+
+  @IsOptional()
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  pet: NameObjectDto;
+
+  @IsOptional()
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  smokingAttitude: NameObjectDto;
+
+  @IsOptional()
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  socialNetworksActivity: NameObjectDto;
+
+  @IsOptional()
+  @IsObject()
+  @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => NameObjectDto)
+  trainingAttitude: NameObjectDto;
+
   @IsArray()
   @ArrayMaxSize(9)
   pictures: PictureInterface[];
