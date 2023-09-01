@@ -26,7 +26,10 @@ import { AcceptPairCommandHandler } from './accept-pair';
 import { RemoveAllPairsCommandHandler } from './remove-all-pairs-dev';
 import { CreatePairsCommandHandler } from './create-pairs-dev';
 import { PatchUserPlaceCommandHandler } from './patch-user-place';
-import { PatchUserRelationsHandlerCommand } from './patch-user-relations';
+import {
+  PatchUserRelationCommandHandlers,
+  PatchUserRelationsHandlerCommand,
+} from './patch-user-relations';
 
 export const UserCommandHandlers = [
   PatchUserCommandHandler,
@@ -43,4 +46,5 @@ export const UserCommandHandlers = [
   CreatePairsCommandHandler,
   PatchUserPlaceCommandHandler,
   PatchUserRelationsHandlerCommand,
+  ...PatchUserRelationCommandHandlers,
 ];
