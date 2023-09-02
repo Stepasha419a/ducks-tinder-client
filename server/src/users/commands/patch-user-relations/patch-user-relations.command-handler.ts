@@ -21,7 +21,7 @@ import {
 } from './commands';
 
 @CommandHandler(PatchUserRelationsCommand)
-export class PatchUserRelationsHandlerCommand
+export class PatchUserRelationsCommandHandler
   implements ICommandHandler<PatchUserRelationsCommand>
 {
   constructor(
