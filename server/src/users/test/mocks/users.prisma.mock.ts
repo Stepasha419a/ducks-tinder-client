@@ -26,4 +26,16 @@ export const UsersPrismaMock = jest.fn().mockReturnValue({
   place: {
     upsert: jest.fn(),
   },
+  alcoholAttitude: {
+    findUnique: jest.fn(),
+  },
+  attentionSign: {
+    findUnique: jest.fn(),
+  },
+  childrenAttitude: {
+    findUnique: jest.fn(),
+  },
+  chronotype: {
+    findUnique: jest.fn(),
+  },
 });
