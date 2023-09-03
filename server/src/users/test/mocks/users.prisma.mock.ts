@@ -38,4 +38,13 @@ export const UsersPrismaMock = jest.fn().mockReturnValue({
   chronotype: {
     findUnique: jest.fn(),
   },
+  communicationStyle: {
+    findUnique: jest.fn(),
+  },
+  education: {
+    findUnique: jest.fn(),
+  },
+  foodPreference: {
+    findUnique: jest.fn(),
+  },
 });
