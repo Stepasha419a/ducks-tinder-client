@@ -21,13 +21,24 @@ export const selectPreviewUser = createSelector(
     (state: RootState) => state.user.currentUser.age,
     (state: RootState) => state.user.currentUser.place,
     (state: RootState) => state.user.currentUser.distance,
+
     (state: RootState) => state.user.currentUser.interests,
+
     (state: RootState) => state.user.currentUser.attentionSign,
     (state: RootState) => state.user.currentUser.childrenAttitude,
     (state: RootState) => state.user.currentUser.communicationStyle,
     (state: RootState) => state.user.currentUser.education,
     (state: RootState) => state.user.currentUser.personalityType,
     (state: RootState) => state.user.currentUser.zodiacSign,
+
+    (state: RootState) => state.user.currentUser.alcoholAttitude,
+    (state: RootState) => state.user.currentUser.chronotype,
+    (state: RootState) => state.user.currentUser.foodPreference,
+    (state: RootState) => state.user.currentUser.pet,
+    (state: RootState) => state.user.currentUser.smokingAttitude,
+    (state: RootState) => state.user.currentUser.socialNetworksActivity,
+    (state: RootState) => state.user.currentUser.trainingAttitude,
+
     (state: RootState) => state.user.currentUser.pictures,
   ],
   (
@@ -37,13 +48,24 @@ export const selectPreviewUser = createSelector(
     age,
     place,
     distance,
+
     interests,
+
     attentionSign,
     childrenAttitude,
     communicationStyle,
     education,
     personalityType,
     zodiacSign,
+
+    alcoholAttitude,
+    chronotype,
+    foodPreference,
+    pet,
+    smokingAttitude,
+    socialNetworksActivity,
+    trainingAttitude,
+
     pictures
   ) => ({
     id,
@@ -52,13 +74,24 @@ export const selectPreviewUser = createSelector(
     age,
     place,
     distance,
+
     interests,
+
     attentionSign,
     childrenAttitude,
     communicationStyle,
     education,
     personalityType,
     zodiacSign,
+
+    alcoholAttitude,
+    chronotype,
+    foodPreference,
+    pet,
+    smokingAttitude,
+    socialNetworksActivity,
+    trainingAttitude,
+
     pictures,
   })
 );

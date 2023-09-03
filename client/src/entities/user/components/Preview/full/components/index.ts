@@ -1,1 +1,1 @@
-export { InterestsList, MoreAboutMeList } from './listInfos';
+export { InterestsList, MoreAboutMeList, LifestyleList } from './listInfos';

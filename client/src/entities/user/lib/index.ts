@@ -1,1 +1,1 @@
-export { sortItemBySettings, getMoreAboutMe } from './helpers';
+export { sortItemBySettings, getMoreAboutMe, getLifestyle } from './helpers';

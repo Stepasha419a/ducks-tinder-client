@@ -29,13 +29,24 @@ export interface User {
   age: number | null;
   sex: 'male' | 'female' | null;
   isActivated: boolean;
+
   interests: NameObject[];
+
   attentionSign: NameObject | null;
   childrenAttitude: NameObject | null;
   communicationStyle: NameObject | null;
   education: NameObject | null;
   personalityType: NameObject | null;
   zodiacSign: NameObject | null;
+
+  alcoholAttitude: NameObject | null;
+  chronotype: NameObject | null;
+  foodPreference: NameObject | null;
+  pet: NameObject | null;
+  smokingAttitude: NameObject | null;
+  socialNetworksActivity: NameObject | null;
+  trainingAttitude: NameObject | null;
+
   place: Place | null;
   distance: number | null;
   usersOnlyInDistance: boolean;
@@ -58,13 +69,24 @@ export interface ShortUserWithoutDistance {
   description: string;
   place: ShortPlace | null;
   isActivated: boolean;
+
   interests: NameObject[];
+
   attentionSign: NameObject | null;
   childrenAttitude: NameObject | null;
   communicationStyle: NameObject | null;
   education: NameObject | null;
   personalityType: NameObject | null;
   zodiacSign: NameObject | null;
+
+  alcoholAttitude: NameObject | null;
+  chronotype: NameObject | null;
+  foodPreference: NameObject | null;
+  pet: NameObject | null;
+  smokingAttitude: NameObject | null;
+  socialNetworksActivity: NameObject | null;
+  trainingAttitude: NameObject | null;
+
   pictures: Picture[];
 }
 

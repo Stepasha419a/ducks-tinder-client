@@ -11,7 +11,7 @@ import {
   faHouse,
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
-import { InterestsList, MoreAboutMeList } from './components';
+import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
 import { InterestsListPopup } from '../../InterestsListPopup/InterestsListPopup';
 
 interface FullPreviewPropsInterface {
@@ -78,6 +78,7 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
         handleShowAll={() => setIsInterestsListPopupOpen(true)}
       />
       <MoreAboutMeList user={user} />
+      <LifestyleList user={user} />
       {extraContent && extraContent}
 
       {isInterestsListPopupOpen && (
