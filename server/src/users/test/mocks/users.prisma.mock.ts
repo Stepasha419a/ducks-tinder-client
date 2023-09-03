@@ -47,4 +47,22 @@ export const UsersPrismaMock = jest.fn().mockReturnValue({
   foodPreference: {
     findUnique: jest.fn(),
   },
+  personalityType: {
+    findUnique: jest.fn(),
+  },
+  pet: {
+    findUnique: jest.fn(),
+  },
+  smokingAttitude: {
+    findUnique: jest.fn(),
+  },
+  socialNetworksActivity: {
+    findUnique: jest.fn(),
+  },
+  trainingAttitude: {
+    findUnique: jest.fn(),
+  },
+  zodiacSign: {
+    findUnique: jest.fn(),
+  },
 });
