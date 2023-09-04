@@ -7,7 +7,11 @@ import { useLocation } from 'react-router-dom';
 
 const settingRegex = /\/profile\/edit\/([a-z]+(?:(?:-)(?:[a-z]+))*)/;
 
-const SETTING_LIST: ProfileSettingName[] = ['interests', 'moreAboutMe'];
+const SETTING_LIST: ProfileSettingName[] = [
+  'interests',
+  'moreAboutMe',
+  'lifestyle',
+];
 
 export function useProfileSettingUrl() {
   const dispatch = useAppDispatch();

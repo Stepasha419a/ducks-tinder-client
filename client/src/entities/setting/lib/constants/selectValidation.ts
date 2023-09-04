@@ -11,4 +11,11 @@ export const SELECT_VALIDATION: Record<
   education: { maxLength: 1 },
   personalityType: { maxLength: 1 },
   zodiacSign: { maxLength: 1 },
+  alcoholAttitude: { maxLength: 1 },
+  chronotype: { maxLength: 1 },
+  foodPreference: { maxLength: 1 },
+  pet: { maxLength: 1 },
+  smokingAttitude: { maxLength: 1 },
+  socialNetworksActivity: { maxLength: 1 },
+  trainingAttitude: { maxLength: 1 },
 };

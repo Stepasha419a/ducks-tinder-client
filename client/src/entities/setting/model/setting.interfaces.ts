@@ -28,7 +28,7 @@ export type Setting =
   | 'preferAgeTo'
   | 'usersOnlyInDistance';
 
-export type ProfileSettingName = 'interests' | 'moreAboutMe';
+export type ProfileSettingName = 'interests' | 'moreAboutMe' | 'lifestyle';
 export type ProfileSettingSelectName =
   | 'interests'
   | 'zodiacSign'
@@ -36,7 +36,14 @@ export type ProfileSettingSelectName =
   | 'childrenAttitude'
   | 'personalityType'
   | 'communicationStyle'
-  | 'attentionSign';
+  | 'attentionSign'
+  | 'alcoholAttitude'
+  | 'chronotype'
+  | 'foodPreference'
+  | 'pet'
+  | 'smokingAttitude'
+  | 'socialNetworksActivity'
+  | 'trainingAttitude';
 
 type ProfileSettingType = 'radio' | 'select' | null;
 

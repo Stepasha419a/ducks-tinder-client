@@ -19,6 +19,10 @@ export const PROFILE_SETTING_WRAPPER_DATA: Record<
     description:
       'Reveal yourself from the best side by telling more about yourself',
   },
+  lifestyle: {
+    title: 'Lifestyle',
+    description: 'Bring your best self forward by adding your lifestyle',
+  },
   default: {
     title: 'Default title',
     description: 'Default description.',

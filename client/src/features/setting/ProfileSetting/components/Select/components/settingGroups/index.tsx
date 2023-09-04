@@ -4,6 +4,7 @@ import type { MultiSelectForm } from '@entities/setting/model';
 import { useAppSelector } from '@shared/lib/hooks';
 import { InterestsSettingGroup } from './InterestsSettingGroup';
 import { MoreAboutMeSettingGroup } from './MoreAboutMeSettingGroup';
+import { LifestyleSettingGroup } from './LifestyleSettingGroup';
 
 interface SettingsGroupProps {
   control: Control<MultiSelectForm>;
@@ -19,6 +20,8 @@ export const SettingsGroup: FC<SettingsGroupProps> = ({ control }) => {
       return <InterestsSettingGroup control={control} />;
     case 'moreAboutMe':
       return <MoreAboutMeSettingGroup control={control} />;
+    case 'lifestyle':
+      return <LifestyleSettingGroup control={control} />;
     default:
       return <div>not found group</div>;
   }

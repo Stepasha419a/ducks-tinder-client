@@ -15,4 +15,13 @@ export const SELECT_SETTING_FIELDS: Record<
     'communicationStyle',
     'attentionSign',
   ],
+  lifestyle: [
+    'pet',
+    'alcoholAttitude',
+    'smokingAttitude',
+    'trainingAttitude',
+    'foodPreference',
+    'socialNetworksActivity',
+    'chronotype',
+  ],
 };
