@@ -17,6 +17,13 @@ export const USERS_PAIRS_GET_EXPECT = [
     attentionSign: null,
     childrenAttitude: null,
     communicationStyle: null,
+    alcoholAttitude: null,
+    chronotype: null,
+    foodPreference: null,
+    pet: null,
+    smokingAttitude: null,
+    socialNetworksActivity: null,
+    trainingAttitude: null,
   },
 ];
 
@@ -171,6 +178,13 @@ export const USERS_SORTED_GET_EXPECT = {
   attentionSign: null,
   childrenAttitude: null,
   communicationStyle: null,
+  alcoholAttitude: null,
+  chronotype: null,
+  foodPreference: null,
+  pet: null,
+  smokingAttitude: null,
+  socialNetworksActivity: null,
+  trainingAttitude: null,
 };
 
 export const USERS_RETURN_PUT_EXPECT = {
@@ -191,6 +205,13 @@ export const USERS_RETURN_PUT_EXPECT = {
   attentionSign: null,
   childrenAttitude: null,
   communicationStyle: null,
+  alcoholAttitude: null,
+  chronotype: null,
+  foodPreference: null,
+  pet: null,
+  smokingAttitude: null,
+  socialNetworksActivity: null,
+  trainingAttitude: null,
 };
 
 export const USERS_PAIRS_PUT_EXPECT = {
@@ -210,6 +231,13 @@ export const USERS_PAIRS_PUT_EXPECT = {
   attentionSign: null,
   childrenAttitude: null,
   communicationStyle: null,
+  alcoholAttitude: null,
+  chronotype: null,
+  foodPreference: null,
+  pet: null,
+  smokingAttitude: null,
+  socialNetworksActivity: null,
+  trainingAttitude: null,
 };
 
 export const USERS_PAIRS_POST_EXPECT = {
@@ -229,6 +257,13 @@ export const USERS_PAIRS_POST_EXPECT = {
   attentionSign: null,
   childrenAttitude: null,
   communicationStyle: null,
+  alcoholAttitude: null,
+  chronotype: null,
+  foodPreference: null,
+  pet: null,
+  smokingAttitude: null,
+  socialNetworksActivity: null,
+  trainingAttitude: null,
 };
 
 export const USERS_PICTURE_MIX_PUT_EXPECT = [
