@@ -13,7 +13,7 @@ export const ZodiacSignSettingThumbnail = () => {
   return (
     <LinkSettingThumbnail
       url={url}
-      title="Zodiac sign"
+      title="Zodiac"
       value={value}
       isPointer
     />

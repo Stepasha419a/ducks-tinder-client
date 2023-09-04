@@ -7,3 +7,12 @@ export {
   PersonalityTypeSettingThumbnail,
   ZodiacSignSettingThumbnail,
 } from './moreAboutMe';
+export {
+  AlcoholAttitudeSettingThumbnail,
+  ChronotypeSettingThumbnail,
+  FoodPreferenceSettingThumbnail,
+  PetSettingThumbnail,
+  SmokingAttitudeSettingThumbnail,
+  SocialNetworksActivitySettingThumbnail,
+  TrainingAttitudeSettingThumbnail,
+} from './lifestyle';

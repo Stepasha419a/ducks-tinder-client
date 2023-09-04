@@ -1,12 +1,20 @@
 import {
+  AlcoholAttitudeSettingThumbnail,
   AttentionSignSettingThumbnail,
   ChildrenAttitudeSettingThumbnail,
+  ChronotypeSettingThumbnail,
   CommunicationStyleSettingThumbnail,
   EducationSettingThumbnail,
+  FoodPreferenceSettingThumbnail,
   InterestGroup,
   InterestsSettingThumbnail,
+  LifestyleGroup,
   MoreAboutMeGroup,
   PersonalityTypeSettingThumbnail,
+  PetSettingThumbnail,
+  SmokingAttitudeSettingThumbnail,
+  SocialNetworksActivitySettingThumbnail,
+  TrainingAttitudeSettingThumbnail,
   ZodiacSignSettingThumbnail,
 } from './components';
 
@@ -24,6 +32,15 @@ export const ProfileSettingsList = () => {
         <CommunicationStyleSettingThumbnail />
         <AttentionSignSettingThumbnail />
       </MoreAboutMeGroup>
+      <LifestyleGroup>
+        <PetSettingThumbnail />
+        <AlcoholAttitudeSettingThumbnail />
+        <SmokingAttitudeSettingThumbnail />
+        <TrainingAttitudeSettingThumbnail />
+        <FoodPreferenceSettingThumbnail />
+        <SocialNetworksActivitySettingThumbnail />
+        <ChronotypeSettingThumbnail />
+      </LifestyleGroup>
     </>
   );
 };

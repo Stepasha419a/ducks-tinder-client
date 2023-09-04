@@ -1,4 +1,8 @@
-export { InterestGroup, MoreAboutMeGroup } from './settingGroups';
+export {
+  InterestGroup,
+  MoreAboutMeGroup,
+  LifestyleGroup,
+} from './settingGroups';
 export {
   InterestsSettingThumbnail,
   ZodiacSignSettingThumbnail,
@@ -7,4 +11,11 @@ export {
   CommunicationStyleSettingThumbnail,
   EducationSettingThumbnail,
   PersonalityTypeSettingThumbnail,
+  AlcoholAttitudeSettingThumbnail,
+  ChronotypeSettingThumbnail,
+  FoodPreferenceSettingThumbnail,
+  PetSettingThumbnail,
+  SmokingAttitudeSettingThumbnail,
+  SocialNetworksActivitySettingThumbnail,
+  TrainingAttitudeSettingThumbnail,
 } from './settingFeatureThumbnails';
