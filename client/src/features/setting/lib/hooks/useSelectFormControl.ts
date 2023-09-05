@@ -7,6 +7,7 @@ import type {
   SelectValidation,
 } from '@entities/setting/model';
 import { getSelectData } from '@entities/setting/lib';
+import { getProfileSettingTitles } from '../helpers';
 
 export function useSelectFormControl(
   control: Control<MultiSelectForm>,
@@ -20,6 +21,7 @@ export function useSelectFormControl(
   });
 
   const { list, validation } = getSelectData(settingFieldName);
+  const title = getProfileSettingTitles(settingFieldName);
 
   const activeLength = getActiveLength(items);
 
@@ -34,6 +36,7 @@ export function useSelectFormControl(
   };
 
   return {
+    title,
     list,
     items,
     toggleItem,

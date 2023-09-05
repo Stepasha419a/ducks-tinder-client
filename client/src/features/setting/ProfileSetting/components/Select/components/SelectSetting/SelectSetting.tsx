@@ -19,6 +19,7 @@ export const SelectSetting: FC<SelectSettingProps> = ({
   settingFieldName,
 }) => {
   const {
+    title,
     list,
     items,
     toggleItem,
@@ -31,7 +32,7 @@ export const SelectSetting: FC<SelectSettingProps> = ({
   return (
     <>
       <div className={styles.subhead}>
-        <div className={styles.title}>{settingFieldName}</div>
+        <div className={styles.title}>{title}</div>
         <div className={styles.limit}>
           ({activeLength}/{validation.maxLength})
         </div>

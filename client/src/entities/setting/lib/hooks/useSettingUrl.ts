@@ -9,7 +9,7 @@ import { SETTING_LIST, BUSY_ROUTES } from '../../model/setting.constants';
 import { useLocation } from 'react-router-dom';
 import { getSettingUrl } from '../helpers';
 
-const settingRegex = /\/settings\/([a-z]+)-?([a-z]*)/;
+const settingRegex = /\/settings\/([a-z]+(?:(?:-)(?:[a-z]+))*)/;
 
 export function useSettingUrl(): boolean | null {
   const dispatch = useAppDispatch();
