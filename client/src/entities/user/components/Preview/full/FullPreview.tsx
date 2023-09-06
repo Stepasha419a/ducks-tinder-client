@@ -64,11 +64,12 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
             {user.place?.name || 'unknown place'}
           </span>
         </div>
-        <div className={styles.distance}>
-          <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-          {user.distance ?? 'unknown distance'}
-          <span className={styles.text}>km from you</span>
-        </div>
+        {user.distance !== null && (
+          <div className={styles.distance}>
+            <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
+            <span className={styles.text}>{user.distance} km from you</span>
+          </div>
+        )}
       </div>
       {user.description && (
         <div className={styles.description}>{user.description}</div>
