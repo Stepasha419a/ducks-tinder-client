@@ -19,12 +19,11 @@
 
     .wrapper {
       width: 960px;
-      background: var(--color--white-100);
+      background: var(--bg-sub-primary);
       border-radius: 10px;
       overflow: hidden;
 
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       padding: 50px 130px 40px 95px;
@@ -66,6 +65,81 @@
           text-align: center;
           padding-top: 136px;
           font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-height: 750px) {
+  .auth {
+    .container {
+      .wrapper {
+        width: 700px;
+        padding: 50px 26px 40px 18px;
+
+        .formWrapper {
+          padding-top: 0;
+
+          .navigate {
+            padding-top: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .auth {
+    .container {
+      .wrapper {
+        align-items: center;
+        justify-content: center;
+
+        padding: 50px 26px 40px 18px;
+
+        img {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .auth {
+    .container {
+      .wrapper {
+        width: 350px;
+
+        .formWrapper {
+          padding-top: 0;
+
+          .navigate {
+            padding-top: 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .auth {
+    .container {
+      .wrapper {
+        .formWrapper {
+          .title {
+            font-weight: 500;
+            font-size: 18px;
+          }
+
+          .validation {
+            .error {
+              font-size: 13px;
+            }
+          }
         }
       }
     }

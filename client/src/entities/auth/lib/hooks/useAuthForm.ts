@@ -59,7 +59,7 @@ export function useAuthForm(isRegisterForm?: boolean): AuthFormReturn {
       pattern: { value: EMAIL_REGEXP, message: 'Incorrect email' },
       maxLength: {
         value: 30,
-        message: 'Email must be less than 30',
+        message: 'Email must be less than 30 symbols',
       },
     }),
   };
@@ -71,11 +71,11 @@ export function useAuthForm(isRegisterForm?: boolean): AuthFormReturn {
       required: 'Password is required',
       minLength: {
         value: 6,
-        message: 'Password must be more than 6',
+        message: 'Password must be more than 6 symbols',
       },
       maxLength: {
         value: 30,
-        message: 'Password must be less than 30',
+        message: 'Password must be less than 30 symbols',
       },
     }),
   };
@@ -98,8 +98,8 @@ export function useAuthForm(isRegisterForm?: boolean): AuthFormReturn {
       placeholder: 'First name',
       ...register('name', {
         required: 'Name is required',
-        minLength: { value: 2, message: 'Name must be more than 2' },
-        maxLength: { value: 14, message: 'Name must be less than 14' },
+        minLength: { value: 2, message: 'Name must be more than 2 symbols' },
+        maxLength: { value: 14, message: 'Name must be less than 14 symbols' },
       }),
     };
   }

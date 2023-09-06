@@ -40,7 +40,7 @@ export const ChatsPairsBlock: FC = () => {
               variants={chatListVariants}
               initial={'slideOut'}
               animate={'slideIn'}
-              exit={'slideOut'}
+              exit={'slideExit'}
               transition={{ duration: 0.25 }}
             >
               <ChatList />

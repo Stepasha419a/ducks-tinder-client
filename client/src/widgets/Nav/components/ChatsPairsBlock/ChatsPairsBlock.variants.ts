@@ -7,5 +7,6 @@ export const pairLinkVariants: Variants = {
 
 export const chatListVariants: Variants = {
   slideOut: { x: '340px' },
+  slideExit: { x: '-340px' },
   slideIn: { x: 0 },
 };
