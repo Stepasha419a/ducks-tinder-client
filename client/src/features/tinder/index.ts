@@ -1,1 +1,2 @@
-export { RateUser } from './RateUser/RateUser';
+export { SwipeUser } from './SwipeUser/SwipeUser';
+export { RateButtons } from './RateButtons/RateButtons';
