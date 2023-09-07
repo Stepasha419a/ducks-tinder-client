@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import { memo, type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import classNames from 'classnames';
@@ -12,13 +12,15 @@ import { Avatar } from '@shared/ui';
 import { useAppSelector } from '@shared/lib/hooks';
 import { variants } from './UserLinks.variants';
 import styles from './UserLinks.module.scss';
+import { selectAvatar } from '@/entities/user/model';
 
 interface UserLinksProps {
   isProfilePage: boolean;
 }
 
-export const UserLinks: FC<UserLinksProps> = ({ isProfilePage }) => {
-  const currentUser = useAppSelector((state) => state.user.currentUser);
+export const UserLinks: FC<UserLinksProps> = memo(({ isProfilePage }) => {
+  const { avatarName, currentUserId, currentUserName } =
+    useAppSelector(selectAvatar);
 
   return (
     <div className={styles.links}>
@@ -47,11 +49,8 @@ export const UserLinks: FC<UserLinksProps> = ({ isProfilePage }) => {
               className={classNames(styles.mainLink, styles.person)}
               to="/profile"
             >
-              <Avatar
-                userId={currentUser.id}
-                avatarUrl={currentUser.pictures[0]?.name}
-              />
-              <div className={styles.name}>{currentUser.name}</div>
+              <Avatar userId={currentUserId} avatarUrl={avatarName} />
+              <div className={styles.name}>{currentUserName}</div>
             </Link>
           </motion.div>
         )}
@@ -68,4 +67,4 @@ export const UserLinks: FC<UserLinksProps> = ({ isProfilePage }) => {
       </div>
     </div>
   );
-};
+});

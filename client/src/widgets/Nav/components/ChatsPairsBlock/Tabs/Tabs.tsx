@@ -1,4 +1,9 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import {
+  useCallback,
+  type Dispatch,
+  type FC,
+  type SetStateAction,
+} from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
 import { motion } from 'framer-motion';
@@ -11,13 +16,19 @@ interface TabsProps {
 }
 
 export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
+  const handlePairsOpen = useCallback(() => {
+    setIsPairsOpened(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChatsOpen = useCallback(() => {
+    setIsPairsOpened(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={styles.titles}>
-      <Link
-        to={ROUTES.main}
-        onClick={() => setIsPairsOpened(true)}
-        className={styles.title}
-      >
+      <Link to={ROUTES.main} onClick={handlePairsOpen} className={styles.title}>
         Pairs
         {isPairsOpened && (
           <motion.div
@@ -28,10 +39,7 @@ export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
           />
         )}
       </Link>
-      <ChatTabTitle
-        isActive={!isPairsOpened}
-        handleClick={() => setIsPairsOpened(false)}
-      />
+      <ChatTabTitle isActive={!isPairsOpened} handleClick={handleChatsOpen} />
     </div>
   );
 };

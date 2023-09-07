@@ -22,6 +22,7 @@ export {
   selectCropImage,
   selectImagesDND,
   selectPreviewUser,
+  selectAvatar,
 } from './user.selectors';
 export type { PairSorts, PairSortsKey, PreviewUser } from './user.interfaces';
 export { INITIAL_SORTS, INTERESTS_FOR_LOOP } from './user.constants';
