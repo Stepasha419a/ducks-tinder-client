@@ -4,12 +4,10 @@
   .blocked {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 50px;
     width: 100%;
-    min-width: 200px;
-    max-width: 600px;
     padding: 4px 0;
-    margin-left: 14vw;
 
     .icon {
       width: 28px;
@@ -29,6 +27,29 @@
       .text {
         font-weight: 500;
         font-size: 18px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .wrapper {
+    .blocked {
+      .icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .descr {
+        .name {
+          font-weight: 500;
+          font-size: 16px;
+        }
+
+        .text {
+          font-weight: 400;
+          font-size: 14px;
+        }
       }
     }
   }
