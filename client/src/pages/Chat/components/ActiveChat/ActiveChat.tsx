@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ChatForm, MessageSelect, OpenChatProfilePopup } from '@features/chat';
+import { MessageSelect, OpenChatProfilePopup } from '@features/chat';
 import {
   useAppDispatch,
   useAppSelector,
   useMediaQuery,
 } from '@shared/lib/hooks';
-import { ChatUserPopup, Messages } from '@widgets';
+import { ChatForm, ChatUserPopup, Messages } from '@widgets';
 import { Status } from './components';
 import { connectChatThunk, disconnectChatThunk } from '@entities/chat/model';
 

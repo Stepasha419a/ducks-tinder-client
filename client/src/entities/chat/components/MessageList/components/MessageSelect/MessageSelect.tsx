@@ -4,6 +4,7 @@ import { Message } from '../Message/Message';
 
 interface MessageSelectProps {
   isSelectOpen: boolean;
+  isMessageEditing: boolean;
   select: ReactElement;
   handleSelectMessage: () => void;
   getSelectProps: () => {
@@ -15,6 +16,7 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   getSelectProps,
   handleSelectMessage,
   isSelectOpen,
+  isMessageEditing,
   select,
 }) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
@@ -23,7 +25,9 @@ export const MessageSelect: FC<MessageSelectProps> = ({
     return null;
   }
 
-  return isSelectOpen ? (
+  const isSelect = isSelectOpen && !isMessageEditing;
+
+  return isSelect ? (
     select
   ) : (
     <Message.Select

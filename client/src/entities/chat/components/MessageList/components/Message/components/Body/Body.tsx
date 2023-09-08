@@ -6,12 +6,10 @@ interface MessageBodyProps {
   isOwn: boolean;
   isEdited: boolean;
   isSelectOpen: boolean;
-  isMessageEditing: boolean;
 }
 
 export const Body: FC<PropsWithChildren<MessageBodyProps>> = ({
   isEdited,
-  isMessageEditing,
   isOwn,
   isSelectOpen,
   children,
@@ -20,7 +18,6 @@ export const Body: FC<PropsWithChildren<MessageBodyProps>> = ({
     styles.message,
     isOwn && styles.own,
     isSelectOpen && styles.selected,
-    isMessageEditing && styles.editing,
     isEdited && styles.edited
   );
 

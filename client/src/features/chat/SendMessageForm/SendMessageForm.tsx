@@ -1,30 +1,23 @@
 import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, TextField } from '@shared/ui';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useMediaQuery,
-} from '@shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { selectRepliedMessage, sendMessageThunk } from '@entities/chat/model';
-import styles from './ChatForm.module.scss';
-import { BlockedChat, EditMobileBlock, ReplyBlock } from './components';
+import { BlockedChat, ReplyBlock } from './components';
+import styles from './SendMessageForm.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 interface ChatFormValues {
   input: string;
 }
 
-export const ChatForm = (): ReactElement => {
+export const SendMessageForm = (): ReactElement => {
   const dispatch = useAppDispatch();
-
-  const isMobile = useMediaQuery('(max-width: 900px)');
 
   const { currentChatUserObj, currentChat } =
     useAppSelector(selectRepliedMessage);
   const repliedMessage = useAppSelector((state) => state.chat.repliedMessage);
-  const isMessageEditing = useAppSelector(
-    (state) => state.chat.isMessageEditing
-  );
 
   const {
     register,
@@ -50,12 +43,6 @@ export const ChatForm = (): ReactElement => {
     return <BlockedChat blockedByName={blockedByName} />;
   }
 
-  const isMessageEditingMobile = isMessageEditing && isMobile;
-
-  if (isMessageEditingMobile) {
-    return <EditMobileBlock />;
-  }
-
   return (
     <div className={styles.wrapper}>
       {repliedMessage && <ReplyBlock />}
@@ -70,7 +57,7 @@ export const ChatForm = (): ReactElement => {
           type="submit"
           extraClassName={styles.button}
         >
-          send
+          <FontAwesomeIcon className={styles.icon} icon={faPaperPlane} />
         </Button>
       </form>
     </div>

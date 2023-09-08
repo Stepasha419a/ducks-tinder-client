@@ -1,4 +1,4 @@
-export { ChatForm } from './ChatForm/ChatForm';
+export { SendMessageForm } from './SendMessageForm/SendMessageForm';
 export { MessageSelect } from './MessageSelect/MessageSelect';
 export { BlockChat } from './BlockChat/BlockChat';
 export { UnblockChat } from './UnblockChat/UnblockChat';

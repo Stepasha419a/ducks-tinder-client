@@ -4,25 +4,17 @@ import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector, useOnClickOutside } from '@shared/lib/hooks';
-import styles from './MessageSelect.module.scss';
 import { getDatesHourDiff } from '@shared/helpers';
 import { useMessageSelect } from '../lib';
-import { EditMessageSelect } from './components';
 import { MessageSelectMobile } from './mobile/MessageSelect.mobile';
+import styles from './MessageSelect.module.scss';
 
 interface MessageSelectProps {
-  editingValue?: string;
   isMobile?: boolean;
 }
 
-export const MessageSelect: FC<MessageSelectProps> = ({
-  editingValue,
-  isMobile,
-}) => {
+export const MessageSelect: FC<MessageSelectProps> = ({ isMobile }) => {
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
-  const isMessageEditing = useAppSelector(
-    (state) => state.chat.isMessageEditing
-  );
 
   const selectRef = useRef<HTMLDivElement | null>(null);
 
@@ -55,12 +47,6 @@ export const MessageSelect: FC<MessageSelectProps> = ({
         isMessageEditable={isMessageEditable}
         isMessageDeleting={isMessageDeleting}
       />
-    );
-  }
-
-  if (isMessageEditing && editingValue) {
-    return (
-      <EditMessageSelect selectRef={selectRef} editingValue={editingValue} />
     );
   }
 
