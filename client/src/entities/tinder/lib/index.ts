@@ -1,0 +1,1 @@
+export { useTinderAnimations } from './hooks';

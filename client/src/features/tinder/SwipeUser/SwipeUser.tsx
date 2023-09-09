@@ -10,7 +10,7 @@ import {
 } from '@shared/lib/hooks';
 import { Preview } from '@entities/user/components';
 import { getSortedUserThunk, selectTinderData } from '@entities/tinder/model';
-import { useSwipeProps } from '../lib';
+import { useKeyboardEvents, useSwipeProps } from '../lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';
 
@@ -33,6 +33,7 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
   const { tinderUser } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
 
+  useKeyboardEvents(controls, setIsFullPreview);
   const motionProps = useSwipeProps(controls, !isFullPreview);
 
   useEffect(() => {

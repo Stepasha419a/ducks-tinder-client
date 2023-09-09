@@ -1,50 +1,26 @@
+import { useTinderAnimations } from '@/entities/tinder/lib';
 import type { AnimationControls, PanInfo } from 'framer-motion';
 import { useMotionValue } from 'framer-motion';
-import { dislikeUserThunk, likeUserThunk } from '@entities/tinder/model';
-import { useAppDispatch } from '@shared/lib/hooks';
 
 export function useSwipeProps(
   controls: AnimationControls,
   isDraggable: boolean
 ) {
-  const dispatch = useAppDispatch();
-
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  function startCenter() {
-    setTimeout(() => {
-      controls.start('center');
-    }, 400);
-  }
-
-  function handleLike() {
-    setTimeout(() => {
-      dispatch(likeUserThunk());
-    }, 300);
-  }
-
-  function handleDislike() {
-    setTimeout(() => {
-      dispatch(dislikeUserThunk());
-    }, 300);
-  }
+  const { handleDislike, handleLike, handleSuperLike } =
+    useTinderAnimations(controls);
 
   function handleDrag(
     e: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) {
     if (info.offset.y < -100) {
-      controls.start('superLike');
-      startCenter();
-      handleLike();
+      handleSuperLike();
     } else if (info.offset.x < -100) {
-      controls.start('dislike');
-      startCenter();
       handleDislike();
     } else if (info.offset.x > 100) {
-      controls.start('like');
-      startCenter();
       handleLike();
     }
   }

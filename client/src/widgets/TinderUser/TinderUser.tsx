@@ -15,12 +15,19 @@ export const TinderUser = () => {
 
   const controls = useAnimationControls();
 
+  const cn = classNames(styles.wrapper, isMobile && styles.mobile);
   if (isFailed) {
-    return <Failed />;
+    return (
+      <div className={cn}>
+        <div className={styles.users}>
+          <Failed />
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div className={classNames(styles.wrapper, isMobile && styles.mobile)}>
+    <div className={cn}>
       <div className={styles.users}>
         <SwipeUser
           isFullPreview={isFullPreview}
