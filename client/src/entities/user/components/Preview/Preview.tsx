@@ -1,10 +1,17 @@
-import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
+import type {
+  Dispatch,
+  FC,
+  ReactElement,
+  RefObject,
+  SetStateAction,
+} from 'react';
 import {
   faCircleInfo,
   faHouse,
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type Slider from 'react-slick';
 import classNames from 'classnames';
 import type { PreviewUser } from '@entities/user/model';
 import type { ShortUser } from '@shared/api/interfaces';
@@ -20,6 +27,7 @@ interface PreviewPropsInterface {
   isShadow?: boolean;
   extraContent?: ReactElement;
   extraClassName?: string;
+  sliderRef?: RefObject<Slider>;
 }
 
 export const Preview: FC<PreviewPropsInterface> = ({
@@ -29,6 +37,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
   isShadow = false,
   extraContent,
   extraClassName,
+  sliderRef,
 }) => {
   if (isFull) {
     return (
@@ -51,6 +60,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
           userId={user.id}
           extraClassName={styles.image}
           isShadow={isShadow}
+          sliderRef={sliderRef}
         />
       </div>
       <div

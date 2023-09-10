@@ -1,7 +1,8 @@
 import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { AnimationControls } from 'framer-motion';
 import { motion } from 'framer-motion';
+import type Slider from 'react-slick';
 import classNames from 'classnames';
 import {
   useAppDispatch,
@@ -28,12 +29,14 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
 }) => {
   const dispatch = useAppDispatch();
 
+  const sliderRef = useRef<Slider>(null);
+
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   const { tinderUser } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
 
-  useKeyboardEvents(controls, setIsFullPreview);
+  useKeyboardEvents(controls, setIsFullPreview, sliderRef);
   const motionProps = useSwipeProps(controls, !isFullPreview);
 
   useEffect(() => {
@@ -55,6 +58,7 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
         )}
         isFull={isFullPreview}
         isShadow={!isFullPreview}
+        sliderRef={sliderRef}
       />
       {children}
     </motion.div>
