@@ -1,0 +1,70 @@
+.wrapper {
+  max-width: calc(100% - 70px);
+  width: 100%;
+  height: 100px;
+
+  position: absolute;
+  bottom: 100px;
+  left: 0;
+  z-index: 1;
+
+  letter-spacing: 0.7px;
+  padding: 5px 0 25px 20px;
+  cursor: pointer;
+  overflow: hidden;
+  color: var(--color--white-100);
+
+  &.flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+
+    height: 120px;
+  }
+
+  .listItem {
+    font-weight: 500;
+    margin: 3px 1px;
+    background-color: var(--bg-tinder-list-item);
+    color: var(--main-tinder-list-item);
+    border-color: var(--border-tinder-list-item);
+  }
+
+  .person {
+    font-size: 36px;
+    font-weight: 700;
+    height: 43px;
+
+    .years {
+      font-size: 28px;
+      font-weight: 300;
+    }
+  }
+
+  .place {
+    display: flex;
+    align-items: baseline;
+    font-size: 16px;
+
+    .name {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 244px;
+    }
+
+    .icon {
+      font-size: 14px;
+      margin-right: 5px;
+    }
+  }
+
+  .distance {
+    font-size: 16px;
+
+    .icon {
+      margin: 0 8px 0 1px;
+    }
+  }
+}

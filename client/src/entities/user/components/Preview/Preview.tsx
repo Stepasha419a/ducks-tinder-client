@@ -5,20 +5,16 @@ import type {
   RefObject,
   SetStateAction,
 } from 'react';
-import {
-  faCircleInfo,
-  faHouse,
-  faLocationDot,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type Slider from 'react-slick';
 import classNames from 'classnames';
 import type { PreviewUser } from '@entities/user/model';
 import type { ShortUser } from '@shared/api/interfaces';
-import { ImageSlider } from '@shared/ui';
 import { Button } from '@shared/ui';
-import styles from './Preview.module.scss';
 import { FullPreview } from './full/FullPreview';
+import { UserSlider } from './components';
+import styles from './Preview.module.scss';
 
 interface PreviewPropsInterface {
   user: PreviewUser | ShortUser;
@@ -55,8 +51,8 @@ export const Preview: FC<PreviewPropsInterface> = ({
   return (
     <div className={cn}>
       <div className={classNames(styles.slider)}>
-        <ImageSlider
-          images={user.pictures}
+        <UserSlider
+          user={user}
           userId={user.id}
           extraClassName={styles.image}
           isShadow={isShadow}
@@ -67,7 +63,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
         onClick={() => setIsFullPreview && setIsFullPreview(true)}
         className={styles.descr}
       >
-        <div className={styles.person}>
+        {/* <div className={styles.person}>
           {user.name} <span className={styles.years}>{user.age}</span>
         </div>
         <div className={styles.place}>
@@ -82,7 +78,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
             <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
             <span className={styles.text}>{user.distance} km from you</span>
           </div>
-        )}
+        )} */}
         {setIsFullPreview && (
           <div className={styles.buttonWrapper}>
             <Button

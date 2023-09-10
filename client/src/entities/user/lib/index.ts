@@ -1,1 +1,6 @@
-export { sortItemBySettings, getMoreAboutMe, getLifestyle } from './helpers';
+export {
+  sortItemBySettings,
+  getMoreAboutMe,
+  getLifestyle,
+  getUserSliderInfo,
+} from './helpers';

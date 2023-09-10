@@ -16,7 +16,7 @@ export interface Place {
   longitude: number;
 }
 
-interface ShortPlace {
+export interface ShortPlace {
   name: string;
 }
 

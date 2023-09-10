@@ -1,4 +1,10 @@
-import type { FC, RefObject } from 'react';
+import type {
+  Dispatch,
+  FC,
+  ReactElement,
+  RefObject,
+  SetStateAction,
+} from 'react';
 import { useState } from 'react';
 import classNames from 'classnames';
 import type Slider from 'react-slick';
@@ -19,6 +25,9 @@ import { makeImageUrl, showDefaultImage } from '@/shared/lib/helpers';
 interface ImageSliderProps {
   images: Picture[];
   userId: string;
+  currentSlide?: number;
+  setCurrentSlide?: Dispatch<SetStateAction<number>>;
+  content?: ReactElement;
   extraClassName?: string;
   isShadow?: boolean;
   sliderRef?: RefObject<Slider>;
@@ -27,11 +36,14 @@ interface ImageSliderProps {
 export const ImageSlider: FC<ImageSliderProps> = ({
   images,
   userId,
+  currentSlide = null,
+  setCurrentSlide = null,
+  content,
   extraClassName = null,
   isShadow,
   sliderRef,
 }) => {
-  const [current, setCurrent] = useState<number>(0);
+  const [current, setCurrent] = useSliderState(currentSlide, setCurrentSlide);
 
   const cn = classNames(styles.item, extraClassName);
   const cnWrapper = classNames(
@@ -41,11 +53,13 @@ export const ImageSlider: FC<ImageSliderProps> = ({
   );
 
   if (!Array.isArray(images) || images.length <= 0) {
-    return <NotFoundImages
-      cnWrapper={cnWrapper}
-      extraClassName={extraClassName}
-      userId={userId}
-    />;
+    return (
+      <NotFoundImages
+        cnWrapper={cnWrapper}
+        extraClassName={extraClassName}
+        userId={userId}
+      />
+    );
   }
 
   const isFirstImage = current === 0;
@@ -55,13 +69,13 @@ export const ImageSlider: FC<ImageSliderProps> = ({
     <div className={cnWrapper}>
       <Carousel
         ref={sliderRef}
-        speed={500}
+        speed={100}
         dots={true}
         arrows={true}
         infinite={false}
         prevArrow={isFirstImage ? <></> : <PrevArrow />}
         nextArrow={isLastImage ? <></> : <NextArrow />}
-        afterChange={(i: number) => setCurrent(i)}
+        beforeChange={(prev, next: number) => setCurrent(next)}
         customPaging={(i) => <Dot isActive={i === current} />}
         appendDots={(dots) => <DotsWrapper>{dots}</DotsWrapper>}
         className={styles.carousel}
@@ -75,6 +89,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
                 onError={showDefaultImage}
                 className={cn}
               ></img>
+              {content}
             </div>
           );
         })}
@@ -82,3 +97,16 @@ export const ImageSlider: FC<ImageSliderProps> = ({
     </div>
   );
 };
+
+function useSliderState(
+  currentSlide: number | null,
+  setCurrentSlide: Dispatch<SetStateAction<number>> | null
+): [number, Dispatch<SetStateAction<number>>] {
+  const [current, setCurrent] = useState<number>(0);
+
+  if (currentSlide !== null && setCurrentSlide !== null) {
+    return [currentSlide, setCurrentSlide];
+  }
+
+  return [current, setCurrent];
+}
