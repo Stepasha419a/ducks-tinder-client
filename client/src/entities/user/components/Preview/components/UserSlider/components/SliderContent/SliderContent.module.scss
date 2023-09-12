@@ -1,7 +1,7 @@
 .wrapper {
   max-width: calc(100% - 70px);
   width: 100%;
-  height: 100px;
+  height: 120px;
 
   position: absolute;
   bottom: 100px;
@@ -14,12 +14,16 @@
   overflow: hidden;
   color: var(--color--white-100);
 
-  &.flex {
+  &.high{
+    height: 164px;
+  }
+
+  .items {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
 
-    height: 120px;
+    bottom: 100px;
   }
 
   .listItem {

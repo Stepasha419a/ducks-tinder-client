@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import { makeImageUrl } from '@/shared/lib/helpers';
 import classNames from 'classnames';
 import styles from '../../ImageSlider.module.scss';
+import '../../override.scss';
 
 interface NotFoundImagesProps {
   userId: string;
@@ -19,7 +20,9 @@ export const NotFoundImages: FC<NotFoundImagesProps> = ({
 
   return (
     <div className={cnWrapper}>
-      <img src={url} alt="imagesSlider" className={cnDefault}></img>
+      <div className="default-wrapper">
+        <img src={url} alt="imagesSlider" className={cnDefault} />
+      </div>
     </div>
   );
 };

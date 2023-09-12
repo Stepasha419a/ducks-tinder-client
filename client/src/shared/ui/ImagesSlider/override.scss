@@ -79,6 +79,12 @@
     }
   }
 
+  .default-wrapper {
+    height: 100%;
+    width: 100%;
+    box-shadow: rgb(0 0 0) 0px -205px 55px -70px inset;
+  }
+
   &.isShadow {
     .slick-slide {
       box-shadow: rgb(0 0 0) 0px -205px 55px -70px inset;

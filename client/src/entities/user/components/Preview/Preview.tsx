@@ -63,32 +63,14 @@ export const Preview: FC<PreviewPropsInterface> = ({
         onClick={() => setIsFullPreview && setIsFullPreview(true)}
         className={styles.descr}
       >
-        {/* <div className={styles.person}>
-          {user.name} <span className={styles.years}>{user.age}</span>
-        </div>
-        <div className={styles.place}>
-          <FontAwesomeIcon icon={faHouse} className={styles.icon} />
-          <span className={styles.name}>
-            Lives in&nbsp;
-            {user.place?.name || 'unknown place'}
-          </span>
-        </div>
-        {user.distance !== null && (
-          <div className={styles.distance}>
-            <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-            <span className={styles.text}>{user.distance} km from you</span>
-          </div>
-        )} */}
         {setIsFullPreview && (
-          <div className={styles.buttonWrapper}>
-            <Button
-              variant="mark"
-              onClick={() => setIsFullPreview(true)}
-              extraClassName={styles.openFullPreview}
-            >
-              <FontAwesomeIcon icon={faCircleInfo} />
-            </Button>
-          </div>
+          <Button
+            variant="mark"
+            onClick={() => setIsFullPreview(true)}
+            extraClassName={styles.openFullPreview}
+          >
+            <FontAwesomeIcon icon={faCircleInfo} />
+          </Button>
         )}
       </div>
     </div>

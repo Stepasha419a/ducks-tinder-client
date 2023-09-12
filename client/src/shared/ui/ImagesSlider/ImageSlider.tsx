@@ -52,7 +52,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
     'slider'
   );
 
-  if (!Array.isArray(images) || images.length <= 0) {
+  if (!Array.isArray(images) || images.length === 0) {
     return (
       <NotFoundImages
         cnWrapper={cnWrapper}

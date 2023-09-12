@@ -24,12 +24,17 @@ export const SliderContent: FC<SliderContentProps> = ({
 
   if (Array.isArray(currentInfo)) {
     return (
-      <div className={classNames(styles.wrapper, styles.flex)}>
-        {currentInfo.map((item) => (
-          <ListItem extraClassName={styles.listItem} key={item.name}>
-            {item.name}
-          </ListItem>
-        ))}
+      <div className={classNames(styles.wrapper, styles.high)}>
+        <div className={styles.person}>
+          {user.name} <span className={styles.years}>{user.age}</span>
+        </div>
+        <div className={styles.items}>
+          {currentInfo.map((item) => (
+            <ListItem extraClassName={styles.listItem} key={item.name}>
+              {item.name}
+            </ListItem>
+          ))}
+        </div>
       </div>
     );
   }
