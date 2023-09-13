@@ -1,0 +1,10 @@
+.block {
+  background-color: var(--bg-primary);
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .block {
+    width: 100%;
+  }
+}

@@ -1,0 +1,119 @@
+.item {
+  width: 114px;
+  height: 160px;
+  padding-bottom: 8px;
+  position: relative;
+
+  .image {
+    height: 100%;
+    width: 100%;
+    border: 4px dashed var(--color--white-70);
+    border-radius: 8px;
+    background-color: var(--bg-sub-primary);
+    cursor: pointer;
+    transition: 0.2s opacity;
+
+    &.hasImage {
+      border: none;
+      cursor: grab;
+      object-fit: cover;
+    }
+  }
+
+  .btn {
+    bottom: 3px;
+    right: -6px;
+
+    &.plus {
+      background-color: var(--color--red-100);
+
+      .mark {
+        width: 12px;
+        height: 12px;
+        color: var(--color--white-100);
+      }
+    }
+
+    &.xmark {
+      background-color: var(--color--white-100);
+
+      .mark {
+        width: 20px;
+        height: 20px;
+        color: var(--color--red-80);
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .item {
+    width: calc(100% / 3 - 10px);
+    height: calc((100vw / 3 - 10px) * 1.25);
+
+    .btn {
+      width: 40px;
+      height: 40px;
+
+      &.plus {
+        .mark {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      &.xmark {
+        .mark {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .item {
+    .btn {
+      width: 28px;
+      height: 28px;
+
+      &.plus {
+        .mark {
+          width: 12px;
+          height: 12px;
+        }
+      }
+
+      &.xmark {
+        .mark {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .item {
+    .btn {
+      width: 20px;
+      height: 20px;
+
+      &.plus {
+        .mark {
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      &.xmark {
+        .mark {
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+  }
+}

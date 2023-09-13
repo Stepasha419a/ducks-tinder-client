@@ -1,1 +1,0 @@
-export { userReducer } from './model';

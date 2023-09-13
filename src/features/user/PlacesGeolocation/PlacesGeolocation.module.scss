@@ -1,0 +1,10 @@
+.refresh {
+  font-weight: 700;
+  color: var(--color--red-100);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 6px;
+  padding: 10px;
+  cursor: pointer;
+}

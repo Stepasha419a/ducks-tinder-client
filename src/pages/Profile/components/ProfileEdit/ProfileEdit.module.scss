@@ -1,0 +1,9 @@
+.change {
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .change {
+    height: calc(100% - 50px - 1px); // border
+  }
+}

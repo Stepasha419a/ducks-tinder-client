@@ -1,1 +1,0 @@
-export { WithBrowserRouter } from './BrowserRouter';

@@ -1,1 +1,0 @@
-export { themeReducer } from './model';

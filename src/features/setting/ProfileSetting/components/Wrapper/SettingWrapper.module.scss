@@ -1,0 +1,62 @@
+.form {
+  height: 100%;
+
+  .head {
+    background-color: var(--bg-sub-primary);
+    border-bottom: 1px solid var(--border-main);
+    padding: 10px 0;
+    position: relative;
+
+    .title {
+      font-weight: 500;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .submit {
+      font-weight: 700;
+      color: var(--color--red-100);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 6px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .setting {
+    height: calc(100% - 50px);
+    background-color: var(--bg-primary);
+
+    overflow: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .descr {
+      padding: 0 12px;
+      margin: 20px 0;
+    }
+  }
+}
+
+@media (max-width: 370px) {
+  .form {
+    .head {
+      .title {
+        font-size: 20px;
+        text-align: left;
+        padding-left: 12px;
+      }
+    }
+
+    .setting {
+      .descr {
+        font-size: 14px;
+      }
+    }
+  }
+}

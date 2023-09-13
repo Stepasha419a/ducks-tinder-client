@@ -1,0 +1,13 @@
+.wrapper {
+  padding: 8px 0;
+  user-select: none;
+
+  .container {
+    display: flex;
+
+    .flex {
+      position: relative;
+      display: flex;
+    }
+  }
+}

@@ -1,1 +1,0 @@
-export { checkChangedPictures } from './checkChangedPictures';

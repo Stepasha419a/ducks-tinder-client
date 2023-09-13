@@ -1,0 +1,96 @@
+.pair {
+  width: 244px;
+  height: 305px;
+  border-radius: 8px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.1s;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    scale: 1.01;
+  }
+
+  .image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--color--white-100);
+    font-size: 20px;
+    font-weight: 600;
+
+    .descr {
+      display: flex;
+
+      .years {
+        padding-left: 10px;
+      }
+    }
+
+    .distance {
+      font-size: 18px;
+      font-weight: 300;
+
+      .text {
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .pair {
+    height: 275px;
+    width: 220px;
+  }
+}
+
+@media (max-width: 950px) {
+  .pair {
+    height: 240px;
+    width: 192px;
+  }
+}
+
+@media (max-width: 900px) {
+  .pair {
+    height: 275px;
+    width: 220px;
+  }
+}
+
+@media (max-width: 575px) {
+  .pair {
+    height: 240px;
+    width: 192px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pair {
+    height: 200px;
+    width: 160px;
+
+    .info {
+      font-size: 16px;
+
+      .distance {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: 410px) {
+  .pair {
+    height: 180px;
+    width: 144px;
+  }
+}

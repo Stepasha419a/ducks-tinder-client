@@ -1,0 +1,140 @@
+.instructions {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: 850px;
+  width: 97px;
+  margin: 0 auto;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+
+  &.open {
+    width: 100%;
+  }
+
+  .toggle {
+    width: auto;
+    height: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: var(--color--black-80);
+    color: var(--color--white-100);
+    padding: 0 20px;
+    border-radius: 16px;
+    margin-right: 20px;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: var(--main-secondary);
+    }
+  }
+
+  .items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 25px;
+
+    .instruction {
+      display: flex;
+      align-items: center;
+      margin-right: 20px;
+
+      .icon {
+        font-size: 20px;
+        color: var(--primary-instruction);
+        margin-right: 8px;
+
+        &_rotate {
+          transform: rotate(90deg);
+        }
+
+        &_space {
+          width: 70px;
+          height: 20px;
+          border: 2px solid var(--primary-instruction);
+          border-radius: 4px;
+        }
+      }
+
+      .text {
+        color: var(--primary-instruction);
+        font-weight: 900;
+        font-size: 14px;
+        white-space: nowrap;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+@media (max-width: 1160px) {
+  .instructions {
+    justify-content: end;
+    max-width: 700px;
+
+    &.open {
+      justify-content: space-around;
+    }
+
+    .toggle {
+      margin-right: 5px;
+      font-weight: 300;
+      padding: 0 10px;
+    }
+
+    .items {
+      .instruction {
+        .icon {
+          font-size: 12px;
+
+          &_space {
+            width: 40px;
+            height: 15px;
+          }
+        }
+
+        .text {
+          font-weight: 300;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1060px) {
+  .instructions {
+    max-width: 600px;
+    .items {
+      .instruction {
+        margin-right: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  .instructions {
+    max-width: 500px;
+
+    .toggle {
+      font-size: 12px;
+    }
+
+    .items {
+      .instruction {
+        .text {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .instructions {
+    display: none;
+  }
+}

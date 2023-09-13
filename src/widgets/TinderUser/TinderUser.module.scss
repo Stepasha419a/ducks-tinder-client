@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 50px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  .users {
+    width: 375px;
+    max-height: 667px;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+  }
+
+  &.mobile {
+    height: 100%;
+
+    .users {
+      width: 100%;
+      max-height: none;
+    }
+  }
+}

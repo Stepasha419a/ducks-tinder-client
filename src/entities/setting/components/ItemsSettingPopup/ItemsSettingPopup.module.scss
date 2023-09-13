@@ -1,0 +1,31 @@
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: calc(100% - 136px);
+  padding: 0 10px;
+  overflow: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.btn {
+  position: sticky;
+  bottom: 0;
+  font-size: 22px;
+  font-weight: 400;
+  text-transform: uppercase;
+  height: 60px;
+  color: var(--main-primary);
+  background-color: var(--bg-sub-primary);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin-top: 10px;
+  transition: 0.2s;
+
+  &:hover {
+    color: var(--color--red-90);
+  }
+}

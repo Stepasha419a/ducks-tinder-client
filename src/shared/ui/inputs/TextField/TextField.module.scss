@@ -1,0 +1,22 @@
+.input {
+  width: 100%;
+  height: 100%;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--main-secondary);
+  background-color: var(--bg-sub-primary);
+  border: 1px solid var(--border-main);
+
+  &:focus {
+    border-color: var(--border-main);
+  }
+
+  &.low-rounded {
+    border-radius: 8px;
+  }
+
+  &.rounded {
+    border-radius: 25px;
+  }
+}

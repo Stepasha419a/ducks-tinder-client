@@ -1,0 +1,42 @@
+.subhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px 12px;
+
+  .title {
+    font-weight: 500;
+  }
+
+  .limit {
+    font-weight: 500;
+  }
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+  margin-bottom: 16px;
+
+  background-color: var(--bg-sub-primary);
+
+  .item {
+    font-weight: 400;
+    text-wrap: nowrap;
+
+    &.disabled:not(.active) {
+      color: var(--sub-border-main);
+    }
+  }
+}
+
+@media (max-width: 370px) {
+  .subhead {
+    .title,
+    .limit {
+      font-weight: 400;
+      font-size: 14px;
+    }
+  }
+}

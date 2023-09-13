@@ -1,0 +1,64 @@
+.messages {
+  position: relative;
+  overflow: auto;
+  height: calc(100vh - 110px);
+  padding-left: 14vw;
+  padding-bottom: 8px;
+
+  &.replying {
+    height: calc(100vh - 170px);
+  }
+
+  &.messageEditing {
+    height: calc(100vh - 160px);
+  }
+
+  .loadMessages {
+    padding: 20px;
+  }
+}
+
+.lazy_wrapper {
+  display: flex;
+  padding: 8px 0;
+
+  .lazy_message {
+    margin-left: 8px;
+  }
+}
+
+@media (max-width: 1260px) {
+  .messages {
+    padding-left: 70px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .messages {
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .messages {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .messages {
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 550px) {
+  .messages {
+    padding-left: 10px;
+  }
+
+  .lazy_wrapper {
+    span {
+      max-width: 200px;
+    }
+  }
+}

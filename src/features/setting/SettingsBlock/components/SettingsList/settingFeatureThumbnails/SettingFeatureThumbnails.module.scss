@@ -1,0 +1,70 @@
+.slider {
+  margin: 20px 0px 10px;
+}
+
+.checkbox {
+  position: relative;
+
+  .label {
+    position: absolute;
+    top: -4px;
+    right: 0;
+
+    --width: 48px;
+    --height: 28px;
+    --unactive-color: rgb(121, 121, 121);
+    --active-color: var(--color--red-100);
+    --box-color: var(--color--white-100);
+    --offset: 20px;
+    --duration: 0.3s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  .content {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--width);
+    background-color: var(--unactive-color);
+    cursor: pointer;
+    transition: var(--duration);
+
+    &::before {
+      --width: 48px;
+      --height: 28px;
+      --box-color: var(--color--white-100);
+      --offset: 2px;
+
+      content: '';
+      position: absolute;
+      top: var(--offset);
+      left: var(--offset);
+      width: calc(var(--height) - 2 * var(--offset));
+      height: calc(var(--height) - 2 * var(--offset));
+      background-color: var(--box-color);
+      border-radius: 50%;
+      transition: var(--duration);
+    }
+  }
+
+  .input {
+    display: none;
+
+    &:checked ~ .content {
+      background-color: var(--active-color);
+    }
+
+    &:checked ~ .content::before {
+      left: calc(var(--width) - var(--height) + var(--offset));
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .label {
+    font-size: 16px;
+  }
+}

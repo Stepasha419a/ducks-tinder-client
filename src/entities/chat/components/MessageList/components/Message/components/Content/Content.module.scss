@@ -1,0 +1,11 @@
+.content {
+  max-width: 490px;
+  padding-right: 8px;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .content {
+    max-width: 730px;
+  }
+}

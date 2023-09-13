@@ -1,0 +1,16 @@
+.save {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-primary);
+  box-shadow: 0 0 6px 4px var(--bg-primary);
+
+  padding: 6px 0 10px;
+  text-align: center;
+
+  .btn {
+    height: 40px;
+    width: 160px;
+  }
+}

@@ -1,1 +1,0 @@
-export { usePairSorts } from './hooks';

@@ -1,0 +1,67 @@
+.reply {
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+  padding-left: 10px;
+  max-width: 400px;
+  position: relative;
+
+  .border {
+    height: 40px;
+    width: 4px;
+    background-color: var(--color--red-90);
+    border-radius: 2px;
+  }
+
+  .reply_message {
+    margin-left: 10px;
+    background: inherit;
+    max-width: 370px;
+
+    .reply_username {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .reply_text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      max-width: 400px;
+    }
+  }
+}
+
+@media (max-width: 1150px) {
+  .reply {
+    .reply_message {
+      max-width: 320px;
+    }
+  }
+}
+
+@media (max-width: 1050px) {
+  .reply {
+    .reply_message {
+      max-width: 280px;
+    }
+  }
+}
+
+@media (max-width: 950px) {
+  .reply {
+    .reply_message {
+      max-width: 230px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .reply {
+    .reply_message {
+      max-width: calc(100% - 20px);
+    }
+  }
+}

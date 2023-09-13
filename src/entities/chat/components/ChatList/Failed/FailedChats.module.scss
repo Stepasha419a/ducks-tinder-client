@@ -1,0 +1,14 @@
+.noPairs {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: var(--main-secondary);
+  padding: 5px;
+  margin-top: 10px;
+
+  .icon {
+    font-size: 38px;
+    margin-right: 10px;
+    color: var(--color--red-90);
+  }
+}

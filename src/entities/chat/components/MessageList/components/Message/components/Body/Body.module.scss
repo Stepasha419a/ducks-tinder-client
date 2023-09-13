@@ -1,0 +1,58 @@
+.message {
+  background-color: var(--bg-sub-primary);
+  padding: 8px;
+  padding-right: 40px;
+  border-radius: 8px;
+
+  &.own {
+    background: linear-gradient(
+      45deg,
+      var(--primary-message),
+      var(--second-message)
+    );
+  }
+
+  &.selected {
+    background: var(--selected-message);
+  }
+
+  &.edited {
+    padding-right: 80px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .message {
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .message {
+    max-width: 350px;
+  }
+}
+
+@media (max-width: 950px) {
+  .message {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 900px) {
+  .message {
+    max-width: calc(100vw - 140px);
+  }
+}
+
+@media (max-width: 550px) {
+  .message {
+    max-width: calc(100vw - 120px);
+  }
+}
+
+@media (max-width: 380px) {
+  .message {
+    max-width: calc(100vw - 36px);
+  }
+}

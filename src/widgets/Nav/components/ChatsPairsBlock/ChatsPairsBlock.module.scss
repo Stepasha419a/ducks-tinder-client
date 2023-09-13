@@ -1,0 +1,18 @@
+.titles {
+  margin-top: 10px;
+  display: flex;
+
+  .title {
+    font-size: 20px;
+    color: var(--main-primary);
+    font-weight: 700;
+    margin-left: 15px;
+    padding: 0 6px;
+    cursor: pointer;
+  }
+}
+
+.content {
+  margin: 0 20px;
+  position: relative;
+}

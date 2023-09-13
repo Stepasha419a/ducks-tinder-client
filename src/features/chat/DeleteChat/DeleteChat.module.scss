@@ -1,0 +1,42 @@
+.btn {
+  height: 46px;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 400;
+  border-top: 2px solid var(--color--black-90);
+  transition: 0.2s;
+
+  &:hover {
+    color: var(--color--red-90);
+  }
+}
+
+.overflow {
+  overflow: hidden;
+  .title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 80px 0 10px 50px;
+  }
+
+  .descr {
+    margin: 0 0 24px 50px;
+
+    .text {
+      font-size: 18px;
+      color: var(--main-secondary);
+    }
+
+    .attention {
+      font-size: 16px;
+      color: var(--danger-main);
+    }
+  }
+
+  .wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}

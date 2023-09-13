@@ -1,0 +1,32 @@
+.date {
+  max-width: 660px;
+  color: var(--primary-chat);
+  font-size: 12px;
+  margin: 8px 0;
+
+  .border {
+    max-width: 660px;
+    height: 2px;
+    border-radius: 2px;
+    background-color: var(--border-main);
+  }
+}
+
+@media (max-width: 900px) {
+  .date {
+    max-width: 100%;
+
+    .border{
+      max-width: 100%;
+      width: calc(100% - 30px);
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .date {
+    .border{
+      width: calc(100% - 10px);
+    }
+  }
+}

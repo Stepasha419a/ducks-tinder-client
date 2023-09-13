@@ -1,0 +1,122 @@
+.label {
+  &.small {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: -4px;
+    right: 0;
+
+    --width: 48px;
+    --height: 28px;
+    --offset: 20px;
+    --duration: 0.3s;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+
+    .icon {
+      position: relative;
+      width: var(--width);
+      height: var(--height);
+      border-radius: var(--width);
+      background-color: rgb(121, 121, 121);
+      cursor: pointer;
+      transition: var(--duration);
+
+      &::before {
+        --width: 48px;
+        --height: 28px;
+        --box-color: var(--color--white-100);
+        --offset: 2px;
+
+        content: '';
+        position: absolute;
+        top: var(--offset);
+        left: var(--offset);
+        width: calc(var(--height) - 2 * var(--offset));
+        height: calc(var(--height) - 2 * var(--offset));
+        background-color: var(--color--white-100);
+        border-radius: 50%;
+        transition: var(--duration);
+      }
+    }
+
+    .input {
+      display: none;
+
+      &:checked ~ .icon {
+        background-color: var(--color--red-100);
+      }
+
+      &:checked ~ .icon::before {
+        left: calc(var(--width) - var(--height) + var(--offset));
+      }
+    }
+  }
+
+  &.full {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 17px 0 5px;
+    cursor: pointer;
+    position: relative;
+
+    .input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+
+      &:checked ~ .icon::before,
+      &:checked ~ .icon::after {
+        content: '';
+        display: block;
+        height: 3px;
+        width: 14px;
+        background-color: var(--color--red-90);
+        position: absolute;
+        top: 7px;
+        left: 3px;
+      }
+      &:checked ~ .icon::after {
+        width: 6px;
+        top: 9px;
+        left: 1px;
+        transform: rotate(40deg);
+      }
+
+      &:checked ~ .icon::before {
+        transform: rotate(-45deg);
+      }
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--main-secondary);
+      border-radius: 4px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 24px;
+      z-index: -1;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .label {
+    &.small {
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    &.full {
+      font-size: 14px;
+      font-weight: 300;
+    }
+  }
+}

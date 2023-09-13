@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-sub-primary);
+  width: 100vw;
+  height: 100vh;
+
+  .content {
+    .link {
+      display: flex;
+      align-items: center;
+      padding: 20px;
+
+      .title {
+        font-size: 48px;
+      }
+
+      .text {
+        font-size: 24px;
+        margin-left: 18px;
+      }
+
+      .line {
+        width: 2px;
+        height: 58px;
+        background-color: #ccc;
+        margin-left: 18px;
+      }
+
+      .img {
+        margin-left: 8px;
+        width: 80px;
+        height: 80px;
+      }
+    }
+  }
+}

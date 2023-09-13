@@ -1,0 +1,19 @@
+.Toastify__toast {
+  background: linear-gradient(
+    45deg,
+    var(--color--pink-100),
+    var(--color--orange-90)
+  );
+
+  .Toastify__toast-body {
+    color: var(--color--white-100);
+  }
+
+  .Toastify__close-button {
+    color: var(--color--white-100);
+  }
+
+  .Toastify__progress-bar {
+    background: var(--color--white-100);
+  }
+}

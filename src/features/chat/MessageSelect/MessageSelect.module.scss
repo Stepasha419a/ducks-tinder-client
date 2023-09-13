@@ -1,0 +1,48 @@
+.select {
+  position: absolute;
+  top: 0;
+  right: -108px;
+  z-index: 1;
+  width: 100px;
+  background-color: var(--selected-message);
+  border-radius: 8px;
+
+  .item {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+
+    &.remove {
+      color: var(--danger-main);
+    }
+
+    .icon {
+      position: absolute;
+      top: 7px;
+      right: -24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.1s;
+    }
+
+    &:hover .icon {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  .default {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+  }
+}

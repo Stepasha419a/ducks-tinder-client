@@ -1,0 +1,64 @@
+.button {
+  width: 100%;
+  height: 100%;
+  color: var(--main-secondary);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--main-primary);
+  background-color: var(--bg-sub-primary);
+  cursor: pointer;
+
+  &.border {
+    border: 1px solid var(--border-main);
+  }
+
+  &.rounded {
+    border-radius: 24px;
+  }
+
+  &.mark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+  }
+
+  &.gradient {
+    position: relative;
+    z-index: 0;
+    border-radius: 24px;
+    background: linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgb(255, 111, 44) 0%,
+      rgb(255, 81, 0) 100%
+    );
+    color: var(--color--white-100);
+
+    &::before {
+      content: '';
+      display: block;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        rgb(0, 0, 0) 0%,
+        rgb(255, 208, 0) 0%,
+        rgb(255, 171, 44) 100%
+      );
+      transition: opacity 0.2s ease-in-out;
+      border-radius: 24px;
+      z-index: -1;
+    }
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+}

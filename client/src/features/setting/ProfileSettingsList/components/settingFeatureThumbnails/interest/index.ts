@@ -1,1 +1,0 @@
-export { InterestsSettingThumbnail } from './InterestsSettingThumbnail';
