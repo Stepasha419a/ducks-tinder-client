@@ -1,4 +1,4 @@
-import type { BaseSyntheticEvent, FormEventHandler } from 'react';
+import type { FormEventHandler } from 'react';
 import { useEffect } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -6,12 +6,7 @@ import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { loginThunk, registerThunk } from '@entities/auth/model';
 import { EMAIL_REGEXP } from '@shared/constants';
 import type { TextFieldProps } from '@shared/ui/inputs/TextField/TextField.types';
-
-export interface AuthFieldValues extends BaseSyntheticEvent {
-  email: string;
-  password: string;
-  name: string;
-}
+import type { RegistrationParams } from '@shared/api/services/auth';
 
 interface AuthFormReturn {
   fields: {
@@ -20,7 +15,7 @@ interface AuthFormReturn {
     name?: TextFieldProps;
   };
   validation: {
-    errors: FieldErrors<AuthFieldValues>;
+    errors: FieldErrors<RegistrationParams>;
     isValid: boolean;
   };
   submitHandler: FormEventHandler<HTMLFormElement>;
@@ -35,7 +30,7 @@ export function useAuthForm(isRegisterForm?: boolean): AuthFormReturn {
     setError,
     formState: { errors, isValid },
     handleSubmit,
-  } = useForm<AuthFieldValues>({ mode: 'onChange' });
+  } = useForm<RegistrationParams>({ mode: 'onChange' });
 
   useEffect(() => {
     if (formError) {
@@ -43,7 +38,7 @@ export function useAuthForm(isRegisterForm?: boolean): AuthFormReturn {
     }
   }, [formError, setError, errors]);
 
-  const submitHandler = handleSubmit((data: AuthFieldValues) => {
+  const submitHandler = handleSubmit((data: RegistrationParams) => {
     if (isRegisterForm) {
       dispatch(registerThunk(data));
     } else {

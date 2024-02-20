@@ -9,7 +9,8 @@ export interface RegistrationParams extends LoginParams {
   name: string;
 }
 
-export interface AuthResponse {
-  user: User;
-  accessToken: string;
+export interface AuthResponse extends User {
+  accessToken: {
+    value: string;
+  };
 }

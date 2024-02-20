@@ -16,9 +16,11 @@ export const registerThunk = createAsyncThunk(
         params.name,
         params.password
       );
-      localStorage.setItem('accessToken', response.data.accessToken);
 
-      dispatch(setCurrentUser(response.data.user));
+      const { accessToken, ...user } = response.data;
+      localStorage.setItem('accessToken', accessToken.value);
+
+      dispatch(setCurrentUser(user));
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -31,9 +33,11 @@ export const loginThunk = createAsyncThunk(
   async (params: LoginParams, { rejectWithValue, dispatch }) => {
     try {
       const response = await authService.login(params.email, params.password);
-      localStorage.setItem('accessToken', response.data.accessToken);
 
-      dispatch(setCurrentUser(response.data.user));
+      const { accessToken, ...user } = response.data;
+      localStorage.setItem('accessToken', accessToken.value);
+
+      dispatch(setCurrentUser(user));
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -46,9 +50,11 @@ export const checkAuthThunk = createAsyncThunk(
   async (_, { rejectWithValue, dispatch }) => {
     try {
       const response = await authService.refresh();
-      localStorage.setItem('accessToken', response.data.accessToken);
 
-      dispatch(setCurrentUser(response.data.user));
+      const { accessToken, ...user } = response.data;
+      localStorage.setItem('accessToken', accessToken.value);
+
+      dispatch(setCurrentUser(user));
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

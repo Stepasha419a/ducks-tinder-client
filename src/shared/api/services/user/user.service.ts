@@ -8,20 +8,20 @@ import type { PartialUser } from './user-service.interface';
 
 export const userService = {
   async getSortedUser() {
-    return instance.get<ShortUser>('users/sorted');
+    return instance.get<ShortUser>('user/sorted');
   },
 
   async updateUser(data: PartialUser) {
-    return instance.patch<User>('users', data);
+    return instance.patch<User>('user', data);
   },
 
   async updateUserPlace(latitude: number, longitude: number) {
-    return instance.patch<User>('users/place', { latitude, longitude });
+    return instance.patch<User>('user/place', { latitude, longitude });
   },
 
   async savePicture(picture: Blob) {
     return instance.post<User>(
-      'users/picture',
+      'user/picture',
       { picture },
       {
         headers: {
@@ -32,36 +32,36 @@ export const userService = {
   },
 
   async deletePicture(id: string) {
-    return instance.put<User>(`users/picture/${id}`);
+    return instance.put<User>(`user/picture/${id}`);
   },
 
   async mixPictures(pictureOrders: number[]) {
-    return instance.put<User>('users/picture/mix', {
+    return instance.put<User>('user/picture/mix', {
       pictureOrders,
     });
   },
 
   async getPairs() {
-    return instance.get<ShortUser[]>('users/pairs');
+    return instance.get<ShortUser[]>('user/pairs');
   },
 
   async acceptPair(pairId: string) {
-    return instance.post<ShortUserWithoutDistance>(`users/pairs/${pairId}`);
+    return instance.post<ShortUserWithoutDistance>(`user/pairs/${pairId}`);
   },
 
   async deletePair(pairId: string) {
-    return instance.put<ShortUserWithoutDistance>(`users/pairs/${pairId}`);
+    return instance.put<ShortUserWithoutDistance>(`user/pairs/${pairId}`);
   },
 
   async likeUser(userId: string) {
-    return instance.post<undefined>(`users/like/${userId}`);
+    return instance.post<undefined>(`user/like/${userId}`);
   },
 
   async dislikeUser(userId: string) {
-    return instance.post<undefined>(`users/dislike/${userId}`);
+    return instance.post<undefined>(`user/dislike/${userId}`);
   },
 
   async returnUser() {
-    return instance.put<ShortUser>('users/return');
+    return instance.put<ShortUser>('user/return');
   },
 };
