@@ -11,7 +11,7 @@ export const PlaceSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Place"
-      value={place?.name || 'Empty place'}
+      value={place.name || 'Empty place'}
       isPointer
       isError={errorFields.includes('place')}
       isOverflow

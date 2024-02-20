@@ -1,12 +1,10 @@
 import { instance } from '@shared/api';
 import type {
   User,
-  PartialUser,
   ShortUser,
-  Picture,
   ShortUserWithoutDistance,
-  PartialUserRelations,
 } from '@shared/api/interfaces';
+import type { PartialUser } from './user-service.interface';
 
 export const userService = {
   async getSortedUser() {
@@ -15,10 +13,6 @@ export const userService = {
 
   async updateUser(data: PartialUser) {
     return instance.patch<User>('users', data);
-  },
-
-  async updateUserRelations(data: PartialUserRelations) {
-    return instance.patch<User>('users/relations', data);
   },
 
   async updateUserPlace(latitude: number, longitude: number) {
@@ -37,15 +31,13 @@ export const userService = {
     );
   },
 
-  async deletePicture(order: number) {
-    return instance.put<User>('users/picture', {
-      order,
-    });
+  async deletePicture(id: string) {
+    return instance.put<User>(`users/picture/${id}`);
   },
 
-  async mixPictures(pictures: Picture[]) {
+  async mixPictures(pictureOrders: number[]) {
     return instance.put<User>('users/picture/mix', {
-      pictures,
+      pictureOrders,
     });
   },
 
