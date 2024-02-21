@@ -1,12 +1,11 @@
 import { useState, type FC, type RefObject } from 'react';
 import type Slider from 'react-slick';
-import type { ShortUser } from '@/shared/api/interfaces';
-import type { PreviewUser } from '@/entities/user/model';
+import type { ShortUser, User } from '@/shared/api/interfaces';
 import { ImageSlider } from '@/shared/ui';
 import { SliderContent } from './components';
 
 interface ImageSliderProps {
-  user: PreviewUser | ShortUser;
+  user: User | ShortUser;
   userId: string;
   extraClassName?: string;
   isShadow?: boolean;

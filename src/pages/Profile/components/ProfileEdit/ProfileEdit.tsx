@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
-import { selectPreviewUser } from '@entities/user/model';
 import { Preview } from '@entities/user/components';
 import { useUserPictures } from '@features/user/PicturesDND/lib';
 import { ProfileSettingWrapper } from './components';
@@ -10,7 +9,7 @@ import { ProfileSubmit } from '@features/user';
 export const ProfileEdit = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const previewUser = useAppSelector(selectPreviewUser);
+  const user = useAppSelector((state) => state.user.currentUser);
 
   const [isFullPreviewSetting, setIsFullPreviewSetting] = useState(false);
   const { pictures, setPictures } = useUserPictures();
@@ -20,7 +19,7 @@ export const ProfileEdit = () => {
       {isMobile && <ProfileSubmit isMobile pictures={pictures} />}
       {isFullPreviewSetting ? (
         <Preview
-          user={previewUser}
+          user={user}
           setIsFullPreview={setIsFullPreviewSetting}
           isFull
         />

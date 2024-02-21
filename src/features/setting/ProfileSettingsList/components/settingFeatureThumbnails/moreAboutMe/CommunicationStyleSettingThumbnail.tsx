@@ -8,7 +8,7 @@ export const CommunicationStyleSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;
-  const value = communicationStyle ? communicationStyle.name : 'Add';
+  const value = communicationStyle ? communicationStyle : 'Add';
 
   return (
     <LinkSettingThumbnail

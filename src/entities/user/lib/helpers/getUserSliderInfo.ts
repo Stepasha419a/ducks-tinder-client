@@ -1,9 +1,4 @@
-import type {
-  NameObject,
-  ShortPlace,
-  ShortUser,
-} from '@/shared/api/interfaces';
-import type { PreviewUser } from '../../model';
+import type { ShortPlace, ShortUser, User } from '@/shared/api/interfaces';
 import { getLifestyle } from './getLifestyle';
 import { getMoreAboutMe } from './getMoreAboutMe';
 
@@ -17,13 +12,11 @@ export interface UserPlaceInfo extends UserInfo {
   distance: number;
 }
 
-type UserListInfo = NameObject[];
+type UserListInfo = string[];
 
 type UserSliderInfo = UserInfo | UserPlaceInfo | UserListInfo;
 
-export function getUserSliderInfo(
-  user: PreviewUser | ShortUser
-): UserSliderInfo[] {
+export function getUserSliderInfo(user: User | ShortUser): UserSliderInfo[] {
   const result: UserSliderInfo[] = [];
 
   result.push({

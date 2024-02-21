@@ -1,9 +1,8 @@
 import type { FC } from 'react';
-import type { NameObject } from '@shared/api/interfaces';
 import { ListInfo } from '../ListInfo/ListInfo';
 
 interface InterestsListProps {
-  interests: NameObject[];
+  interests: string[];
   handleShowAll?: () => void;
 }
 

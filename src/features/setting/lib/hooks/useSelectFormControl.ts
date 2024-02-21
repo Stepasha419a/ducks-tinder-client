@@ -3,7 +3,6 @@ import { useController } from 'react-hook-form';
 import type {
   MultiSelectForm,
   ProfileSettingSelectName,
-  SelectItem,
   SelectValidation,
 } from '@entities/setting/model';
 import { getSelectData } from '@entities/setting/lib';
@@ -27,8 +26,8 @@ export function useSelectFormControl(
 
   const isValid = isActivatable(items, validation);
 
-  const toggleItem = (item: SelectItem): void => {
-    if (getIsActive(items, item.name)) {
+  const toggleItem = (item: string): void => {
+    if (getIsActive(items, item)) {
       deleteItem(item, items, setItems);
     } else {
       addItem(item, items, setItems, isValid);
@@ -47,7 +46,7 @@ export function useSelectFormControl(
   };
 }
 
-function getActiveLength(items: SelectItem[] | SelectItem | null): number {
+function getActiveLength(items: string[] | string | null): number {
   if (Array.isArray(items)) {
     return items.length;
   }
@@ -57,23 +56,20 @@ function getActiveLength(items: SelectItem[] | SelectItem | null): number {
   return 0;
 }
 
-function getIsActive(
-  items: SelectItem[] | SelectItem | null,
-  item: string
-): boolean {
+function getIsActive(items: string[] | string | null, item: string): boolean {
   if (Array.isArray(items)) {
-    return items.some((candidate) => candidate.name === item);
+    return items.some((candidate) => candidate === item);
   }
   if (items !== null) {
-    return items.name === item;
+    return items === item;
   }
   return false;
 }
 
 function addItem(
-  value: SelectItem,
-  items: SelectItem[] | SelectItem | null,
-  setItems: (data: SelectItem[] | SelectItem | null) => void,
+  value: string,
+  items: string[] | string | null,
+  setItems: (data: string[] | string | null) => void,
   isValid: boolean
 ) {
   if (Array.isArray(items)) {
@@ -86,19 +82,19 @@ function addItem(
 }
 
 function deleteItem(
-  value: SelectItem,
-  items: SelectItem[] | SelectItem | null,
-  setItems: (data: SelectItem[] | SelectItem | null) => void
+  value: string,
+  items: string[] | string | null,
+  setItems: (data: string[] | string | null) => void
 ) {
   if (Array.isArray(items)) {
-    setItems(items.filter((candidate) => candidate.name !== value.name));
+    setItems(items.filter((candidate) => candidate !== value));
   } else {
     setItems(null);
   }
 }
 
 function isActivatable(
-  items: SelectItem[] | SelectItem | null,
+  items: string[] | string | null,
   validation: SelectValidation
 ): boolean {
   if (Array.isArray(items)) {

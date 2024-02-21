@@ -9,15 +9,18 @@ import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type Slider from 'react-slick';
 import classNames from 'classnames';
-import type { PreviewUser } from '@entities/user/model';
-import type { ShortUser } from '@shared/api/interfaces';
+import type {
+  ShortUser,
+  ShortUserWithoutDistance,
+  User,
+} from '@shared/api/interfaces';
 import { Button } from '@shared/ui';
 import { FullPreview } from './full/FullPreview';
 import { UserSlider } from './components';
 import styles from './Preview.module.scss';
 
 interface PreviewPropsInterface {
-  user: PreviewUser | ShortUser;
+  user: User | ShortUser | ShortUserWithoutDistance;
   setIsFullPreview?: Dispatch<SetStateAction<boolean>>;
   isFull?: boolean;
   isShadow?: boolean;

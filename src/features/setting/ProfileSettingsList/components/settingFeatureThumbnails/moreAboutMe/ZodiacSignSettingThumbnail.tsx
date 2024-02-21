@@ -8,14 +8,9 @@ export const ZodiacSignSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;
-  const value = zodiacSign ? zodiacSign.name : 'Add';
+  const value = zodiacSign ? zodiacSign : 'Add';
 
   return (
-    <LinkSettingThumbnail
-      url={url}
-      title="Zodiac"
-      value={value}
-      isPointer
-    />
+    <LinkSettingThumbnail url={url} title="Zodiac" value={value} isPointer />
   );
 };

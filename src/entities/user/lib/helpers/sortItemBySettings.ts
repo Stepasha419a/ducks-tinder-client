@@ -22,6 +22,7 @@ function sortPair(
   switch (sortKey) {
     case 'distance':
       if (
+        item.distance &&
         item.distance > sortSettings.distance &&
         sortSettings.distance !== 100
       ) {
@@ -29,7 +30,10 @@ function sortPair(
       }
       return true;
     case 'age':
-      if (item.age < sortSettings.age.from || item.age > sortSettings.age.to) {
+      if (
+        item.age &&
+        (item.age < sortSettings.age.from || item.age > sortSettings.age.to)
+      ) {
         return false;
       }
       return true;
@@ -53,7 +57,7 @@ function sortPair(
       return true;
     case 'interests':
       for (const interest of sortSettings.interests) {
-        if (!item.interests.some((i) => i.name === interest.name)) {
+        if (!item.interests.some((i) => i === interest)) {
           return false;
         }
       }

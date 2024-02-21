@@ -8,7 +8,7 @@ export const FoodPreferenceSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;
-  const value = foodPreference ? foodPreference.name : 'Add';
+  const value = foodPreference ? foodPreference : 'Add';
 
   return (
     <LinkSettingThumbnail

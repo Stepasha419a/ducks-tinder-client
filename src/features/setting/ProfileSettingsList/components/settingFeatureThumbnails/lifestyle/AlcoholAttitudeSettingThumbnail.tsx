@@ -8,14 +8,9 @@ export const AlcoholAttitudeSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;
-  const value = alcoholAttitude ? alcoholAttitude.name : 'Add';
+  const value = alcoholAttitude ? alcoholAttitude : 'Add';
 
   return (
-    <LinkSettingThumbnail
-      url={url}
-      title="Drinking"
-      value={value}
-      isPointer
-    />
+    <LinkSettingThumbnail url={url} title="Drinking" value={value} isPointer />
   );
 };

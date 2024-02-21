@@ -1,16 +1,15 @@
 import type { FC } from 'react';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { ShortUser } from '@/shared/api/interfaces';
+import type { ShortUser, User } from '@/shared/api/interfaces';
 import { ListItem } from '@/shared/ui';
 import { getUserSliderInfo } from '@/entities/user/lib';
-import type { PreviewUser } from '@/entities/user/model';
 import type { UserPlaceInfo } from '@/entities/user/lib/helpers/getUserSliderInfo';
 import styles from './SliderContent.module.scss';
 import classNames from 'classnames';
 
 interface SliderContentProps {
-  user: PreviewUser | ShortUser;
+  user: User | ShortUser;
   currentSlide: number;
 }
 
@@ -30,8 +29,8 @@ export const SliderContent: FC<SliderContentProps> = ({
         </div>
         <div className={styles.items}>
           {currentInfo.map((item) => (
-            <ListItem extraClassName={styles.listItem} key={item.name}>
-              {item.name}
+            <ListItem extraClassName={styles.listItem} key={item}>
+              {item}
             </ListItem>
           ))}
         </div>

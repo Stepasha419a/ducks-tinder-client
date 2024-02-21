@@ -5,7 +5,6 @@ import { Preview } from '@entities/user/components';
 import { Tabs } from './components';
 import { ProfileSettingBlock } from '@widgets';
 import { useAppSelector } from '@shared/lib/hooks';
-import { selectPreviewUser } from '@entities/user/model';
 import styles from './ProfileSettingWrapper.module.scss';
 
 interface ProfileSettingWrapperProps {
@@ -19,7 +18,7 @@ export const ProfileSettingWrapper: FC<ProfileSettingWrapperProps> = ({
   setPictures,
   setIsFullPreviewSetting,
 }) => {
-  const previewUser = useAppSelector(selectPreviewUser);
+  const user = useAppSelector((state) => state.user.currentUser);
 
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);
 
@@ -31,10 +30,7 @@ export const ProfileSettingWrapper: FC<ProfileSettingWrapperProps> = ({
       />
       <div className={styles.panel}>
         {isPreviewSetting ? (
-          <Preview
-            user={previewUser}
-            setIsFullPreview={setIsFullPreviewSetting}
-          />
+          <Preview user={user} setIsFullPreview={setIsFullPreviewSetting} />
         ) : (
           <ProfileSettingBlock pictures={pictures} setPictures={setPictures} />
         )}

@@ -1,11 +1,10 @@
 import type { FC } from 'react';
 import { Button, ListItem, Popup } from '@shared/ui';
-import type { NameObject } from '@shared/api/interfaces';
 import styles from './InterestsListPopup.module.scss';
 
 interface InterestsListPopupProps {
   setIsInterestsListPopupOpen: (setting: boolean) => void;
-  interestsList: NameObject[];
+  interestsList: string[];
 }
 
 export const InterestsListPopup: FC<InterestsListPopupProps> = ({
@@ -19,7 +18,7 @@ export const InterestsListPopup: FC<InterestsListPopupProps> = ({
     >
       <div className={styles.items}>
         {interestsList.map((item) => {
-          return <ListItem key={item.name}>{item.name}</ListItem>;
+          return <ListItem key={item}>{item}</ListItem>;
         })}
       </div>
       <Button

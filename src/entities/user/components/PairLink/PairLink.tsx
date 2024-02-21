@@ -7,16 +7,15 @@ import styles from './PairLink.module.scss';
 import { useAppSelector } from '@shared/lib/hooks';
 
 export const PairLink = () => {
-  const firstPair = useAppSelector((state) => state.user.currentUser.firstPair);
-  const pairsCount = useAppSelector(
-    (state) => state.user.currentUser.pairsCount
-  );
+  const pairs = useAppSelector((state) => state.user.pairs);
 
-  if (!pairsCount) {
+  if (!pairs.length) {
     return <FailedPair />;
   }
 
-  const imageUrl = makeImageUrl(firstPair?.id, firstPair?.pictures[0].name);
+  const firstPair = pairs[0];
+
+  const imageUrl = makeImageUrl(firstPair.id, firstPair.pictures[0].name);
 
   return (
     <div className={styles.pairs}>
@@ -28,8 +27,8 @@ export const PairLink = () => {
             alt="Pair img"
             draggable="false"
           />
-          <div className={styles.likes}>{pairsCount}</div>
-          <div className={styles.text}>{pairsCount} likes</div>
+          <div className={styles.likes}>{pairs.length}</div>
+          <div className={styles.text}>{pairs.length} likes</div>
           <FontAwesomeIcon
             icon={faHeartCircleExclamation}
             className={styles.icon}

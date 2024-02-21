@@ -6,13 +6,13 @@ import { CropImage, DialogUpload } from '@features/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import { ROUTES } from '@shared/constants';
-import { selectPreviewUser, setIsDialogUploadOpen } from '@entities/user/model';
+import { setIsDialogUploadOpen } from '@entities/user/model';
 import styles from './ProfilePreview.mobile.module.scss';
 
 export const ProfilePreviewMobile = () => {
   const dispatch = useAppDispatch();
 
-  const previewUser = useAppSelector(selectPreviewUser);
+  const user = useAppSelector((state) => state.user.currentUser);
   const isDialogUploadOpen = useAppSelector(
     (state) => state.user.profileSetting.isDialogUploadOpen
   );
@@ -32,15 +32,15 @@ export const ProfilePreviewMobile = () => {
             <Link to={`${ROUTES.profile}/edit`} className={styles.user}>
               <div className={styles.avatarWrapper}>
                 <Avatar
-                  userId={previewUser.id}
-                  avatarUrl={previewUser.pictures[0]?.name}
+                  userId={user.id}
+                  avatarUrl={user.pictures[0]?.name}
                   size="xl"
                   extraClassName={styles.avatar}
                 />
               </div>
               <div className={styles.descr}>
-                <div className={styles.name}>{previewUser.name}</div>
-                <div className={styles.age}>{previewUser.age}</div>
+                <div className={styles.name}>{user.name}</div>
+                <div className={styles.age}>{user.age}</div>
               </div>
             </Link>
             <div className={styles.actions}>

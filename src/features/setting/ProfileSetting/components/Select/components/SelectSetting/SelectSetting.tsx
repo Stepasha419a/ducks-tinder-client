@@ -48,7 +48,7 @@ export const SelectSetting: FC<SelectSettingProps> = ({
 
           return (
             <ListItem
-              onClick={() => toggleItem({ name: selectItem })}
+              onClick={() => toggleItem(selectItem)}
               isActive={isActive}
               pointer
               key={selectItem}

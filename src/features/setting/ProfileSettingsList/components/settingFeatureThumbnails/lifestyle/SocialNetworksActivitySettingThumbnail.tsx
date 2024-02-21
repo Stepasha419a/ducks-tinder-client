@@ -8,7 +8,7 @@ export const SocialNetworksActivitySettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;
-  const value = socialNetworksActivity ? socialNetworksActivity.name : 'Add';
+  const value = socialNetworksActivity ? socialNetworksActivity : 'Add';
 
   return (
     <LinkSettingThumbnail

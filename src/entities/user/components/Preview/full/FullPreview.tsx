@@ -1,7 +1,6 @@
 import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
-import type { PreviewUser } from '@entities/user/model';
-import type { ShortUser } from '@shared/api/interfaces';
+import type { ShortUser, User } from '@shared/api/interfaces';
 import classNames from 'classnames';
 import styles from './FullPreview.module.scss';
 import { Button, ImageSlider } from '@shared/ui';
@@ -15,7 +14,7 @@ import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
 import { InterestsListPopup } from '../../InterestsListPopup/InterestsListPopup';
 
 interface FullPreviewPropsInterface {
-  user: PreviewUser | ShortUser;
+  user: User | ShortUser;
   setIsFullPreview?: Dispatch<SetStateAction<boolean>>;
   extraContent?: ReactElement;
   extraClassName?: string;

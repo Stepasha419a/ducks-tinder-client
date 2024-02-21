@@ -24,8 +24,8 @@ export const PicturesDND: FC<PicturesDNDProps> = ({
 
   const { currentUserId } = useAppSelector(selectImagesDND);
 
-  const handleDeletePicture = (order: number): void => {
-    dispatch(deleteUserPictureThunk(order));
+  const handleDeletePicture = (id: string): void => {
+    dispatch(deleteUserPictureThunk(id));
   };
 
   const openSettingHandler = (): void => {
@@ -43,7 +43,7 @@ export const PicturesDND: FC<PicturesDNDProps> = ({
         return (
           <Card
             key={picture.name}
-            buttonHandler={() => handleDeletePicture(picture.order)}
+            buttonHandler={() => handleDeletePicture(picture.id)}
             handler={openSettingHandler}
             picture={picture}
             src={makeImageUrl(currentUserId, picture.name)}

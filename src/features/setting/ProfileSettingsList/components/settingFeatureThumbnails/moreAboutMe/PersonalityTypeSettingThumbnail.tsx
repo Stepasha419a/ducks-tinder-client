@@ -8,9 +8,7 @@ export const PersonalityTypeSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;
-  const value = personalityType
-    ? personalityType.name
-    : 'Add';
+  const value = personalityType ? personalityType : 'Add';
 
   return (
     <LinkSettingThumbnail

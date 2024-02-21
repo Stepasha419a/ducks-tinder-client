@@ -1,27 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import {
-  updateUserRelationsThunk,
-  updateUserThunk,
-} from '@entities/user/model';
-import type { PartialUser, PartialUserRelations } from '@shared/api/interfaces';
+import { updateUserThunk } from '@entities/user/model';
 import { returnErrorMessage } from '@shared/helpers';
+import type { PartialUser } from '@/shared/api/services/user/user-service.interface';
 
 export const submitSettingsThunk = createAsyncThunk(
   'settings/submitSettings',
   (data: PartialUser, { rejectWithValue, dispatch }) => {
     try {
       dispatch(updateUserThunk(data));
-    } catch (error: unknown) {
-      return rejectWithValue(returnErrorMessage(error));
-    }
-  }
-);
-
-export const submitRelationSettingsThunk = createAsyncThunk(
-  'settings/submitRelationSettings',
-  (data: PartialUserRelations, { rejectWithValue, dispatch }) => {
-    try {
-      dispatch(updateUserRelationsThunk(data));
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

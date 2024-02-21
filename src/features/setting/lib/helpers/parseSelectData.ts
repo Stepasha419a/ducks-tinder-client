@@ -1,7 +1,6 @@
 import type {
   MultiSelectForm,
   ProfileSettingSelectName,
-  SelectItem,
 } from '@/entities/setting/model';
 
 export function parseSelectData(data: MultiSelectForm) {
@@ -17,13 +16,13 @@ export function parseSelectData(data: MultiSelectForm) {
 }
 
 function getValueFromExtracted(
-  extracted: SelectItem | SelectItem[] | null
+  extracted: string | string[] | null
 ): string | string[] | null {
   let value = null;
   if (Array.isArray(extracted)) {
-    value = extracted.map((item: SelectItem) => item.name);
+    value = extracted.map((item: string) => item);
   } else if (extracted !== null) {
-    value = extracted.name;
+    value = extracted;
   }
   return value;
 }

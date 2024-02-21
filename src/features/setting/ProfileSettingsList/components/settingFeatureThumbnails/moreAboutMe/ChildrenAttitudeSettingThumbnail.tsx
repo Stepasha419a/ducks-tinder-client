@@ -8,7 +8,7 @@ export const ChildrenAttitudeSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;
-  const value = childrenAttitude ? childrenAttitude.name : 'Add';
+  const value = childrenAttitude ? childrenAttitude : 'Add';
 
   return (
     <LinkSettingThumbnail

@@ -15,7 +15,6 @@ import {
   saveUserImageThunk,
   updateUserThunk,
   updateUserPlaceThunk,
-  updateUserRelationsThunk,
 } from './user.thunks';
 import type { PairSorts, UserInitialState } from './user.interfaces';
 import { INITIAL_SORTS } from './user.constants';
@@ -69,7 +68,6 @@ const userSlice = createSlice({
         acceptPairThunk.fulfilled,
         (state, { payload }: PayloadAction<ShortUserWithoutDistance>) => {
           state.pairs = state.pairs.filter((pair) => pair.id !== payload.id);
-          state.currentUser.pairsCount--;
           state.currentPair = null;
         }
       )
@@ -77,7 +75,6 @@ const userSlice = createSlice({
         refusePairThunk.fulfilled,
         (state, { payload }: PayloadAction<ShortUserWithoutDistance>) => {
           state.pairs = state.pairs.filter((pair) => pair.id !== payload.id);
-          state.currentUser.pairsCount--;
           state.currentPair = null;
         }
       )
@@ -87,9 +84,6 @@ const userSlice = createSlice({
         }
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
-        state.currentUser = payload;
-      })
-      .addCase(updateUserRelationsThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
       })
       .addCase(updateUserPlaceThunk.fulfilled, (state, { payload }) => {

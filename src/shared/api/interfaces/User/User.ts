@@ -21,33 +21,33 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  description?: string;
-  nickname?: string;
+  description: string | null;
+  nickname: string | null;
   isActivated: boolean;
-  age?: number;
-  sex?: string;
-  distance?: number;
-  usersOnlyInDistance?: boolean;
-  preferSex?: string;
-  preferAgeFrom?: number;
-  preferAgeTo?: number;
+  age: number | null;
+  sex: string | null;
+  distance: number | null;
+  usersOnlyInDistance: boolean;
+  preferSex: string | null;
+  preferAgeFrom: number | null;
+  preferAgeTo: number | null;
 
-  interests?: string[];
-  zodiacSign?: string;
-  education?: string;
-  alcoholAttitude?: string;
-  chronotype?: string;
-  foodPreference?: string;
-  pet?: string;
-  smokingAttitude?: string;
-  socialNetworksActivity?: string;
-  trainingAttitude?: string;
-  childrenAttitude?: string;
-  personalityType?: string;
-  communicationStyle?: string;
-  attentionSign?: string;
+  interests: string[];
+  zodiacSign: string | null;
+  education: string | null;
+  alcoholAttitude: string | null;
+  chronotype: string | null;
+  foodPreference: string | null;
+  pet: string | null;
+  smokingAttitude: string | null;
+  socialNetworksActivity: string | null;
+  trainingAttitude: string | null;
+  childrenAttitude: string | null;
+  personalityType: string | null;
+  communicationStyle: string | null;
+  attentionSign: string | null;
 
-  place: Place;
+  place: Place | null;
 
   pictures: Picture[];
 }
@@ -55,26 +55,27 @@ export interface User {
 export interface ShortUser {
   id: string;
   name: string;
-  age: number;
-  description: string;
+  age: number | null;
+  description: string | null;
   isActivated: boolean;
 
+  distance: number | null;
   interests: string[];
-  zodiacSign?: string;
-  education?: string;
-  alcoholAttitude?: string;
-  chronotype?: string;
-  foodPreference?: string;
-  pet?: string;
-  smokingAttitude?: string;
-  socialNetworksActivity?: string;
-  trainingAttitude?: string;
-  childrenAttitude?: string;
-  personalityType?: string;
-  communicationStyle?: string;
-  attentionSign?: string;
+  zodiacSign: string | null;
+  education: string | null;
+  alcoholAttitude: string | null;
+  chronotype: string | null;
+  foodPreference: string | null;
+  pet: string | null;
+  smokingAttitude: string | null;
+  socialNetworksActivity: string | null;
+  trainingAttitude: string | null;
+  childrenAttitude: string | null;
+  personalityType: string | null;
+  communicationStyle: string | null;
+  attentionSign: string | null;
 
-  place: ShortPlace;
+  place: ShortPlace | null;
 
   pictures: Picture[];
 }

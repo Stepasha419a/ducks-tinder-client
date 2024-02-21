@@ -1,7 +1,6 @@
-import type { NameObject, ShortUser } from '@shared/api/interfaces';
-import type { PreviewUser } from '../../model';
+import type { ShortUser, User } from '@shared/api/interfaces';
 
-export function getMoreAboutMe(user: PreviewUser | ShortUser): NameObject[] {
+export function getMoreAboutMe(user: User | ShortUser): string[] {
   const arr = [
     user.attentionSign,
     user.zodiacSign,
@@ -10,5 +9,5 @@ export function getMoreAboutMe(user: PreviewUser | ShortUser): NameObject[] {
     user.communicationStyle,
     user.personalityType,
   ].filter((item) => item !== null);
-  return arr as NameObject[];
+  return arr as string[];
 }

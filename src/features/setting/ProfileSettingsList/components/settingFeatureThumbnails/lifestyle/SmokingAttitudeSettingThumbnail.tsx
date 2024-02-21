@@ -8,7 +8,7 @@ export const SmokingAttitudeSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;
-  const value = smokingAttitude ? smokingAttitude.name : 'Add';
+  const value = smokingAttitude ? smokingAttitude : 'Add';
 
   return (
     <LinkSettingThumbnail url={url} title="Smoking" value={value} isPointer />

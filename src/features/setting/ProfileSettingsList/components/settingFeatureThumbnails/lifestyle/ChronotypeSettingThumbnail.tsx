@@ -8,7 +8,7 @@ export const ChronotypeSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;
-  const value = chronotype ? chronotype.name : 'Add';
+  const value = chronotype ? chronotype : 'Add';
 
   return (
     <LinkSettingThumbnail

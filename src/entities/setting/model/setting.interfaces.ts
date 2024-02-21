@@ -59,10 +59,6 @@ export interface SettingInitialState {
   };
 }
 
-export interface SelectItem {
-  name: string;
-}
-
 export interface SetInputPayload {
   settingName: SettingName;
   formName?: string | null;
@@ -74,12 +70,12 @@ export interface SettingFieldValues {
 }
 
 export interface SettingFieldInterestsArray {
-  input: SelectItem[];
+  input: string[];
 }
 
 export type ProfileSelectInput = Record<
   ProfileSettingSelectName,
-  SelectItem[] | SelectItem | null
+  string[] | string | null
 >;
 
 export interface MultiSelectForm {

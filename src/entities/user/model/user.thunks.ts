@@ -1,9 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type {
-  PartialUser,
-  PartialUserRelations,
-  Picture,
-} from '@shared/api/interfaces';
+import type { PartialUser } from '@shared/api/services/user/user-service.interface';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 
@@ -12,19 +8,6 @@ export const updateUserThunk = createAsyncThunk(
   async (data: PartialUser, { rejectWithValue }) => {
     try {
       const response = await userService.updateUser(data);
-
-      return response.data;
-    } catch (error: unknown) {
-      return rejectWithValue(returnErrorMessage(error));
-    }
-  }
-);
-
-export const updateUserRelationsThunk = createAsyncThunk(
-  'users/updateUserRelations',
-  async (data: PartialUserRelations, { rejectWithValue }) => {
-    try {
-      const response = await userService.updateUserRelations(data);
 
       return response.data;
     } catch (error: unknown) {
@@ -113,9 +96,9 @@ export const saveUserImageThunk = createAsyncThunk(
 
 export const deleteUserPictureThunk = createAsyncThunk(
   'users/deleteUserPicture',
-  async (order: number, { rejectWithValue }) => {
+  async (id: string, { rejectWithValue }) => {
     try {
-      const response = await userService.deletePicture(order);
+      const response = await userService.deletePicture(id);
 
       return response.data;
     } catch (error: unknown) {
@@ -126,9 +109,9 @@ export const deleteUserPictureThunk = createAsyncThunk(
 
 export const mixUserPicturesThunk = createAsyncThunk(
   'users/mixUserPictures',
-  async (pictures: Picture[], { rejectWithValue }) => {
+  async (pictureOrders: number[], { rejectWithValue }) => {
     try {
-      const response = await userService.mixPictures(pictures);
+      const response = await userService.mixPictures(pictureOrders);
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

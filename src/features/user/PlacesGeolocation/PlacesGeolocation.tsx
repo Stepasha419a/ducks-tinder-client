@@ -12,7 +12,7 @@ export const PlacesGeolocation = () => {
 
   const handlePlaceUpdate = (pos: GeolocationPosition) => {
     if (
-      pos.coords.longitude === place.longitude &&
+      pos.coords.longitude === place?.longitude &&
       pos.coords.latitude === place.latitude
     ) {
       toast('Your position is remained unchanged');

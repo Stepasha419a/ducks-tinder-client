@@ -27,9 +27,9 @@ export const Primary: Story = {
   ),
   args: {
     images: [
-      { name: '1.jpg', order: 0 },
-      { name: '2.jpg', order: 1 },
-      { name: '3.jpg', order: 2 },
+      { id: '1', name: '1.jpg', order: 0 },
+      { id: '2', name: '2.jpg', order: 1 },
+      { id: '3', name: '3.jpg', order: 2 },
     ],
     userId: 'user-id',
   },

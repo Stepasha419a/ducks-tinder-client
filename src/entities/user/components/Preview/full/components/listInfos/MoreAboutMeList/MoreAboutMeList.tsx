@@ -1,11 +1,10 @@
 import type { FC } from 'react';
-import type { ShortUser } from '@shared/api/interfaces';
-import type { PreviewUser } from '@entities/user/model';
+import type { ShortUser, User } from '@shared/api/interfaces';
 import { ListInfo } from '../ListInfo/ListInfo';
 import { getMoreAboutMe } from '@entities/user/lib';
 
 interface MoreAboutMeListProps {
-  user: PreviewUser | ShortUser;
+  user: User | ShortUser;
 }
 
 export const MoreAboutMeList: FC<MoreAboutMeListProps> = ({ user }) => {

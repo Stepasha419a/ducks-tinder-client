@@ -8,7 +8,7 @@ export const AttentionSignSettingThumbnail = () => {
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;
-  const value = attentionSign ? attentionSign.name : 'Add';
+  const value = attentionSign ? attentionSign : 'Add';
 
   return (
     <LinkSettingThumbnail
