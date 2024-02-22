@@ -5,6 +5,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   target: 'web',
@@ -104,6 +105,9 @@ module.exports = {
       failOnError: false,
       extensions: ['ts', 'tsx'],
       overrideConfigFile: './.eslintrc.js',
+    }),
+    new Dotenv({
+      path: '.env',
     }),
   ],
   optimization: {

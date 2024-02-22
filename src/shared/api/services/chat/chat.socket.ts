@@ -19,7 +19,7 @@ interface ChatSocket {
 export const chatSocket: ChatSocket = {
   _socket: null,
   connect(): Socket {
-    this._socket = io('http://localhost:5000/chat/socket', {
+    this._socket = io(`${process.env.CHAT_SERVICE_URL!}//chat/socket`, {
       withCredentials: true,
       transports: ['websocket'],
       auth: {

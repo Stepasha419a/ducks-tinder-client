@@ -8,20 +8,25 @@ import type { PartialUser } from './user-service.interface';
 
 export const userService = {
   async getSortedUser() {
-    return instance.get<ShortUser>('user/sorted');
+    return instance.get<ShortUser>(
+      `${process.env.USER_SERVICE_URL!}/user/sorted`
+    );
   },
 
   async updateUser(data: PartialUser) {
-    return instance.patch<User>('user', data);
+    return instance.patch<User>(`${process.env.USER_SERVICE_URL!}/user`, data);
   },
 
   async updateUserPlace(latitude: number, longitude: number) {
-    return instance.patch<User>('user/place', { latitude, longitude });
+    return instance.patch<User>(`${process.env.USER_SERVICE_URL!}/user/place`, {
+      latitude,
+      longitude,
+    });
   },
 
   async savePicture(picture: Blob) {
     return instance.post<User>(
-      'user/picture',
+      `${process.env.USER_SERVICE_URL!}/user/picture`,
       { picture },
       {
         headers: {
@@ -32,36 +37,53 @@ export const userService = {
   },
 
   async deletePicture(id: string) {
-    return instance.put<User>(`user/picture/${id}`);
+    return instance.put<User>(
+      `${process.env.USER_SERVICE_URL!}/user/picture/${id}`
+    );
   },
 
   async mixPictures(pictureOrders: number[]) {
-    return instance.put<User>('user/picture/mix', {
-      pictureOrders,
-    });
+    return instance.put<User>(
+      `${process.env.USER_SERVICE_URL!}/user/picture/mix`,
+      {
+        pictureOrders,
+      }
+    );
   },
 
   async getPairs() {
-    return instance.get<ShortUser[]>('user/pairs');
+    return instance.get<ShortUser[]>(
+      `${process.env.USER_SERVICE_URL!}/user/pairs`
+    );
   },
 
   async acceptPair(pairId: string) {
-    return instance.post<ShortUserWithoutDistance>(`user/pairs/${pairId}`);
+    return instance.post<ShortUserWithoutDistance>(
+      `${process.env.USER_SERVICE_URL!}/user/pairs/${pairId}`
+    );
   },
 
   async deletePair(pairId: string) {
-    return instance.put<ShortUserWithoutDistance>(`user/pairs/${pairId}`);
+    return instance.put<ShortUserWithoutDistance>(
+      `${process.env.USER_SERVICE_URL!}/user/pairs/${pairId}`
+    );
   },
 
   async likeUser(userId: string) {
-    return instance.post<undefined>(`user/like/${userId}`);
+    return instance.post<undefined>(
+      `${process.env.USER_SERVICE_URL!}/user/like/${userId}`
+    );
   },
 
   async dislikeUser(userId: string) {
-    return instance.post<undefined>(`user/dislike/${userId}`);
+    return instance.post<undefined>(
+      `${process.env.USER_SERVICE_URL!}/user/dislike/${userId}`
+    );
   },
 
   async returnUser() {
-    return instance.put<ShortUser>('user/return');
+    return instance.put<ShortUser>(
+      `${process.env.USER_SERVICE_URL!}/user/return`
+    );
   },
 };

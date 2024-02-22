@@ -2,11 +2,8 @@ import type { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
 import type { AuthResponse } from './services/auth/auth.interfaces';
 
-export const API_URL = 'http://localhost:5000/';
-
 export const instance = axios.create({
   withCredentials: true,
-  baseURL: API_URL,
 });
 
 interface AxiosEditedConfig extends AxiosResponse {
@@ -28,9 +25,12 @@ instance.interceptors.response.use(
       !(error.config as AxiosEditedConfig)._isRetry
     ) {
       originalRequest._isRetry = true;
-      const response = await axios.get<AuthResponse>(`${API_URL}auth/refresh`, {
-        withCredentials: true,
-      });
+      const response = await axios.get<AuthResponse>(
+        `${process.env.USER_SERVICE_URL!}/auth/refresh`,
+        {
+          withCredentials: true,
+        }
+      );
       localStorage.setItem('accessToken', response.data.accessToken.value);
 
       return instance.request(originalRequest);

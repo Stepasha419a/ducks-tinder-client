@@ -5,10 +5,12 @@ import { chatSocket } from './chat.socket';
 
 export const chatService = {
   async getChats() {
-    return instance.get<ShortChat[]>('chats');
+    return instance.get<ShortChat[]>(`${process.env.CHAT_SERVICE_URL!}/chats`);
   },
   async getChat(chatId: string) {
-    return instance.get<Chat>(`chats/${chatId}`);
+    return instance.get<Chat>(
+      `${process.env.CHAT_SERVICE_URL!}/chats/${chatId}`
+    );
   },
   connect(): Socket {
     return chatSocket.connect();
