@@ -1,15 +1,18 @@
 import type { Socket } from 'socket.io-client';
 import { instance } from '@shared/api';
-import type { Chat, ShortChat } from '@shared/api/interfaces';
+import type { Chat } from '@shared/api/interfaces';
 import { chatSocket } from './chat.socket';
+import type { ShortMessagesPagination } from './chat-service.interface';
+import type { PaginationParams } from '@shared/lib/interfaces';
 
 export const chatService = {
   async getChats() {
-    return instance.get<ShortChat[]>(`${process.env.CHAT_SERVICE_URL!}/chats`);
+    return instance.get<Chat[]>(`${process.env.CHAT_SERVICE_URL!}/chat`);
   },
-  async getChat(chatId: string) {
-    return instance.get<Chat>(
-      `${process.env.CHAT_SERVICE_URL!}/chats/${chatId}`
+  async getMessages(chatId: string, params: PaginationParams) {
+    return instance.get<ShortMessagesPagination>(
+      `${process.env.CHAT_SERVICE_URL!}/chat/${chatId}/messages`,
+      { params }
     );
   },
   connect(): Socket {
@@ -18,9 +21,6 @@ export const chatService = {
   connectChat(chatId: string): Socket {
     return chatSocket.connectChat(chatId);
   },
-  getMessages(chatId: string, haveCount: number): void {
-    chatSocket.getMessages(chatId, haveCount);
-  },
   sendMessage(
     chatId: string,
     text: string,
@@ -28,11 +28,11 @@ export const chatService = {
   ): void {
     chatSocket.sendMessage(chatId, text, repliedId);
   },
-  deleteMessage(chatId: string, messageId: string): void {
-    chatSocket.deleteMessage(chatId, messageId);
+  deleteMessage(messageId: string): void {
+    chatSocket.deleteMessage(messageId);
   },
-  editMessage(chatId: string, messageId: string, text: string): void {
-    chatSocket.editMessage(chatId, messageId, text);
+  editMessage(messageId: string, text: string): void {
+    chatSocket.editMessage(messageId, text);
   },
   blockChat(chatId: string): void {
     chatSocket.blockChat(chatId);

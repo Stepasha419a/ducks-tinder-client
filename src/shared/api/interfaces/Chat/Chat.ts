@@ -1,4 +1,28 @@
-import type { ShortUser, ShortUserWithoutDistance } from "../User/User";
+export interface Chat {
+  id: string;
+  name: string;
+  avatar: string;
+  lastMessage?: ShortMessage;
+  chatVisit?: LastSeen;
+  blocked: boolean;
+  blockedById?: string;
+}
+
+export interface LastSeen {
+  userId: string;
+  chatId: string;
+  lastSeen: string;
+}
+
+export interface Message {
+  id: string;
+  text: string;
+  userId: string;
+  replied?: RepliedMessage;
+
+  createdAt: string;
+  updatedAt: string;
+}
 
 export interface RepliedMessage {
   id: string;
@@ -6,34 +30,11 @@ export interface RepliedMessage {
   userId: string;
 }
 
-export interface Message {
+export interface ShortMessage {
   id: string;
   text: string;
   userId: string;
+
   createdAt: string;
   updatedAt: string;
-  replied: RepliedMessage | null;
-}
-
-export interface LastSeen {
-  lastSeen: string;
-}
-
-export interface Chat {
-  id: string;
-  messages: Message[];
-  users: ShortUser[];
-  messagesCount: number;
-  blocked: boolean;
-  blockedById: string;
-  chatVisits: LastSeen[];
-}
-
-export interface ShortChat {
-  id: string;
-  messages: Message[];
-  users: ShortUserWithoutDistance[];
-  blocked: boolean;
-  blockedById: string;
-  chatVisits: LastSeen[];
 }

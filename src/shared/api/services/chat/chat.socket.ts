@@ -6,9 +6,8 @@ interface ChatSocket {
   connect: () => Socket;
   connectChat: (chatId: string) => Socket;
   sendMessage: (chatId: string, text: string, repliedId: string | null) => void;
-  getMessages: (chatId: string, haveCount: number) => void;
-  deleteMessage: (chatId: string, messageId: string) => void;
-  editMessage: (chatId: string, messageId: string, text: string) => void;
+  deleteMessage: (messageId: string) => void;
+  editMessage: (messageId: string, text: string) => void;
   blockChat: (chatId: string) => void;
   unblockChat: (chatId: string) => void;
   deleteChat: (chatId: string) => void;
@@ -19,7 +18,7 @@ interface ChatSocket {
 export const chatSocket: ChatSocket = {
   _socket: null,
   connect(): Socket {
-    this._socket = io(`${process.env.CHAT_SERVICE_URL!}//chat/socket`, {
+    this._socket = io(`${process.env.CHAT_SERVICE_URL!}/chat/socket`, {
       withCredentials: true,
       transports: ['websocket'],
       auth: {
@@ -32,7 +31,7 @@ export const chatSocket: ChatSocket = {
     return this._socket;
   },
   connectChat(chatId: string): Socket {
-    this._socket!.emit('connect-chat', { chatId });
+    this._socket!.emit('connect-chat', chatId);
 
     // TODO: fix this return by adding some idk, methods that require callbacks on every event
     return this._socket!;
@@ -40,27 +39,24 @@ export const chatSocket: ChatSocket = {
   sendMessage(chatId: string, text: string, repliedId: string | null): void {
     this._socket!.emit('send-message', { chatId, text, repliedId });
   },
-  getMessages(chatId: string, haveCount: number): void {
-    this._socket!.emit('get-messages', { chatId, haveCount });
+  deleteMessage(messageId: string): void {
+    this._socket!.emit('delete-message', messageId);
   },
-  deleteMessage(chatId: string, messageId: string): void {
-    this._socket!.emit('delete-message', { chatId, messageId });
-  },
-  editMessage(chatId: string, messageId: string, text: string): void {
-    this._socket!.emit('edit-message', { chatId, messageId, text });
+  editMessage(messageId: string, text: string): void {
+    this._socket!.emit('edit-message', { messageId, text });
   },
   blockChat(chatId: string): void {
-    this._socket!.emit('block-chat', { chatId });
+    this._socket!.emit('block-chat', chatId);
   },
   unblockChat(chatId: string): void {
-    this._socket!.emit('unblock-chat', { chatId });
+    this._socket!.emit('unblock-chat', chatId);
   },
   deleteChat(chatId: string): void {
-    this._socket!.emit('delete-chat', { chatId });
+    this._socket!.emit('delete-chat', chatId);
   },
   disconnectChat(chatId: string): void {
     if (this._socket) {
-      this._socket.emit('disconnect-chat', { chatId });
+      this._socket.emit('disconnect-chat', chatId);
     }
   },
   disconnect(): void {

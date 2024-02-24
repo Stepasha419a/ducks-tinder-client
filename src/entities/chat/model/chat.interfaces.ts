@@ -1,14 +1,16 @@
-import type { Message, ShortChat } from '@shared/api/interfaces';
+import type { ShortMessagesPagination } from '@/shared/api/services/chat/chat-service.interface';
+import type { Chat, Message } from '@shared/api/interfaces';
 
 export interface ChatInitialState {
-  chats: ShortChat[];
+  chats: Chat[];
+  messagesPagination: ShortMessagesPagination | null;
   isSocketConnected: boolean;
   isChatConnected: boolean;
   isLoading: boolean;
   isNotFound: boolean;
   isMessagesInitialLoading: boolean;
   isMessagesLoading: boolean;
-  maxMessagesCount: number;
+  skipMessagesCount: number;
   isMessagesEnded: boolean;
   currentChatId: string | null;
   repliedMessage: Message | null;
@@ -17,25 +19,8 @@ export interface ChatInitialState {
   isMessageEditing: boolean;
 }
 
-export interface GetMessagesResponse {
+export interface ReceivedMessage extends Message {
   chatId: string;
-  messages: Message[];
 }
 
-export interface ReceivedMessage {
-  chatId: string;
-  message: Message;
-}
-
-interface ChatBlockBase {
-  chatId: string;
-  blocked: boolean;
-}
-
-export interface ChatBlockResponse extends ChatBlockBase {
-  blockedById: string;
-}
-
-export interface ChatUnblockResponse extends ChatBlockBase {
-  blockedById: null;
-}
+export type ReceivedChatBlock = Pick<Chat, 'id' | 'blocked' | 'blockedById'>;
