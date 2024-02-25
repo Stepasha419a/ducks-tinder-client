@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { selectChatProfile } from '@entities/chat/model';
+import { selectCurrentChat } from '@entities/chat/model';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import styles from './ChatProfile.mobile.module.scss';
@@ -13,9 +13,9 @@ interface ChatProfileProps {
 }
 
 export const ChatProfileMobile: FC<ChatProfileProps> = ({ handleOpen }) => {
-  const { currentChatUser } = useAppSelector(selectChatProfile);
+  const currentChat = useAppSelector(selectCurrentChat);
 
-  if (!currentChatUser) {
+  if (!currentChat) {
     return null;
   }
 
@@ -26,12 +26,11 @@ export const ChatProfileMobile: FC<ChatProfileProps> = ({ handleOpen }) => {
       </Link>
       <div onClick={handleOpen} className={styles.user}>
         <Avatar
-          userId={currentChatUser.id}
           size="m"
-          avatarUrl={currentChatUser.pictures[0]?.name}
+          avatarUrl={currentChat.avatar}
           extraClassName={styles.avatar}
         />
-        <div className={styles.name}>{currentChatUser.name}</div>
+        <div className={styles.name}>{currentChat.name}</div>
       </div>
     </div>
   );

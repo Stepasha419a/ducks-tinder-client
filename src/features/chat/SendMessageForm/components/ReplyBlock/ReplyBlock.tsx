@@ -1,21 +1,19 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import styles from './ReplyBlock.module.scss';
-import { selectRepliedMessage, setRepliedMessage } from '@entities/chat/model';
+import { setRepliedMessage } from '@entities/chat/model';
 
 export const ReplyBlock = () => {
   const dispatch = useAppDispatch();
 
   const repliedMessage = useAppSelector((state) => state.chat.repliedMessage);
-  const { currentChatUserObj, currentChat } =
-    useAppSelector(selectRepliedMessage);
+  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
 
-  const chatRepliedMember = currentChat?.users.find(
-    (user) => user.id === repliedMessage?.userId
-  );
-  const isOwnReplied = repliedMessage?.userId === currentChatUserObj.id;
-  const repliedName = isOwnReplied
-    ? currentChatUserObj.name
-    : chatRepliedMember?.name;
+  if (!repliedMessage) {
+    return null;
+  }
+
+  const isOwnReplied = repliedMessage.userId === currentUserId;
+  const repliedName = isOwnReplied ? repliedMessage.name : repliedMessage.name;
 
   const handleCancelReplying = () => {
     dispatch(setRepliedMessage(null));
@@ -26,7 +24,7 @@ export const ReplyBlock = () => {
       <div className={styles.border} />
       <div className={styles.message}>
         <div className={styles.username}>{repliedName}</div>
-        <div className={styles.text}>{repliedMessage!.text}</div>
+        <div className={styles.text}>{repliedMessage.text}</div>
       </div>
       <div onClick={handleCancelReplying} className={styles.close}>
         <div className={styles.mark} />

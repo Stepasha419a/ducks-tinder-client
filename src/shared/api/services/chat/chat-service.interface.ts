@@ -1,7 +1,6 @@
-import type { Message, ShortUser } from '../../interfaces';
+import type { Message } from '../../interfaces';
 
 export interface ShortMessagesPagination {
   chatId: string;
-  users: ShortUser[];
   messages: Message[];
 }

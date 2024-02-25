@@ -1,5 +1,6 @@
 export {
   pushNewMessage,
+  setMessagesPagination,
   setCurrentChatData,
   setRepliedMessage,
   setIsChatUserPopup,
@@ -23,7 +24,7 @@ export {
   selectChatList,
   selectCurrentMessagesLength,
   selectMessages,
-  selectRepliedMessage,
   selectChatProfile,
   selectNewMessageChatsCount,
+  selectCurrentChat,
 } from './chat.selectors';

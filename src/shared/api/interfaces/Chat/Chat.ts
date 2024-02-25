@@ -18,6 +18,8 @@ export interface Message {
   id: string;
   text: string;
   userId: string;
+  avatar: string;
+  name: string;
   replied?: RepliedMessage;
 
   createdAt: string;

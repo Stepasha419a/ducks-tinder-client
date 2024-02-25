@@ -17,7 +17,7 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
   const {
     messagesLength,
     isMessagesInitialLoading,
-    maxMessagesCount,
+    skipMessagesCount,
     messages,
     currentMessage,
     isMessageEditing,
@@ -26,7 +26,6 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
 
   const {
     handleSelectMessage,
-    getAvatarProps,
     getSelectProps,
     getBodyProps,
     getUsernameProps,
@@ -49,8 +48,8 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
   return (
     <div className={cn} ref={messagesRef}>
       <div className={styles.loadMessages} ref={topScrollRef}></div>
-      {maxMessagesCount > messagesLength && <MessagesLazy count={4} />}
-      {messages.map((message: MessageInterface, i) => {
+      {skipMessagesCount > (messagesLength || 0) && <MessagesLazy count={4} />}
+      {messages?.map((message: MessageInterface, i) => {
         const isSelectOpen = currentMessage?.id === message.id;
         const isNextDayMessage =
           messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
@@ -58,7 +57,7 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
         return (
           <Fragment key={message.id}>
             <Message handleSelectMessage={() => handleSelectMessage(message)}>
-              <Message.Avatar {...getAvatarProps(message)} />
+              <Message.Avatar userId={message.userId} avatar={message.avatar} />
               <Message.Body {...getBodyProps(message)}>
                 <Message.Username {...getUsernameProps(message)} />
                 <Message.Content>

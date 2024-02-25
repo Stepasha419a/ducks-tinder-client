@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, TextField } from '@shared/ui';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import { selectRepliedMessage, sendMessageThunk } from '@entities/chat/model';
+import { selectCurrentChat, sendMessageThunk } from '@entities/chat/model';
 import { BlockedChat, ReplyBlock } from './components';
 import styles from './SendMessageForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,9 +15,9 @@ interface ChatFormValues {
 export const SendMessageForm = (): ReactElement => {
   const dispatch = useAppDispatch();
 
-  const { currentChatUserObj, currentChat } =
-    useAppSelector(selectRepliedMessage);
+  const currentChat = useAppSelector(selectCurrentChat);
   const repliedMessage = useAppSelector((state) => state.chat.repliedMessage);
+  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
 
   const {
     register,
@@ -36,9 +36,7 @@ export const SendMessageForm = (): ReactElement => {
 
   if (currentChat?.blocked) {
     const blockedByName =
-      currentChat.blockedById === currentChatUserObj.id
-        ? 'You'
-        : currentChat.users[0].name;
+      currentChat.blockedById === currentUserId ? 'You' : currentChat.name;
 
     return <BlockedChat blockedByName={blockedByName} />;
   }

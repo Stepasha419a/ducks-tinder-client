@@ -1,16 +1,14 @@
 import type { FC } from 'react';
-import type { ShortUser } from '@shared/api/interfaces';
 import { selectChatProfile, setIsChatUserPopup } from '@entities/chat/model';
-import { Preview } from '@entities/user/components';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import { Popup } from '@shared/ui';
+import { Avatar, Popup } from '@shared/ui';
 import { BlockChat, DeleteChat, UnblockChat } from '@features/chat';
 import styles from './ChatUserPopup.module.scss';
 
 export const ChatUserPopup: FC = () => {
   const dispatch = useAppDispatch();
 
-  const { currentChatUser, blocked, blockedById } =
+  const { chatAvatar, chatName, blocked, blockedById } =
     useAppSelector(selectChatProfile);
   const currentUserId = useAppSelector((state) => state.user.currentUser.id);
   const isChatUserPopup = useAppSelector((state) => state.chat.isChatUserPopup);
@@ -23,9 +21,21 @@ export const ChatUserPopup: FC = () => {
     return null;
   }
 
+  // TODO: Make chat preview popup with participants and actions
   return (
     <Popup closeHandler={handleClose} size="l">
-      <Preview
+      <Avatar avatarUrl={chatAvatar} />
+      <div>{chatAvatar}</div>
+      <div>{chatName}</div>
+      <div className={styles.btns}>
+        {blocked ? (
+          blockedById === currentUserId && <UnblockChat />
+        ) : (
+          <BlockChat />
+        )}
+        <DeleteChat />
+      </div>
+      {/* <Preview
         user={currentChatUser! as ShortUser}
         isFull
         extraContent={
@@ -38,7 +48,7 @@ export const ChatUserPopup: FC = () => {
             <DeleteChat />
           </div>
         }
-      />
+      /> */}
     </Popup>
   );
 };

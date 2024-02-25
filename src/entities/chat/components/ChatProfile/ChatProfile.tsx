@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Avatar } from '@shared/ui';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
-import { selectChatProfile } from '../../model';
+import { selectCurrentChat } from '../../model';
 import styles from './ChatProfile.module.scss';
 import { ChatProfileMobile } from './mobile/ChatProfile.mobile';
 
@@ -10,14 +10,14 @@ interface ChatProfileProps {
 }
 
 export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
-  const { currentChatUser } = useAppSelector(selectChatProfile);
+  const currentChat = useAppSelector(selectCurrentChat);
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   if (isMobile) {
     return <ChatProfileMobile handleOpen={handleOpen} />;
   }
 
-  if (!currentChatUser) {
+  if (!currentChat) {
     return null;
   }
 
@@ -25,12 +25,11 @@ export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
     <div className={styles.profile}>
       <div onClick={handleOpen} className={styles.user}>
         <Avatar
-          userId={currentChatUser.id}
           size="m"
-          avatarUrl={currentChatUser.pictures[0]?.name}
+          avatarUrl={currentChat.avatar}
           extraClassName={styles.avatar}
         />
-        <div className={styles.name}>{currentChatUser.name}</div>
+        <div className={styles.name}>{currentChat.name}</div>
       </div>
     </div>
   );

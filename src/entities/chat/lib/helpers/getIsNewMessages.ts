@@ -1,19 +1,19 @@
-import type { ShortChat } from '@shared/api/interfaces';
+import type { Chat } from '@shared/api/interfaces';
 import { getDatesHourDiff } from '@shared/lib/helpers';
 
 export function getIsNewMessages(
-  chat: ShortChat,
+  chat: Chat,
   isActive: boolean,
   isCompanion: boolean
 ): boolean | undefined {
   return (
     isCompanion &&
     !isActive &&
-    Boolean(chat.messages.at(-1)?.createdAt) &&
-    Boolean(chat.chatVisits[0]?.lastSeen) &&
+    Boolean(chat.lastMessage?.createdAt) &&
+    Boolean(chat.chatVisit?.lastSeen) &&
     getDatesHourDiff(
-      new Date(chat.messages.at(-1)!.createdAt),
-      new Date(new Date(chat.chatVisits[0].lastSeen).toUTCString())
+      new Date(chat.lastMessage!.createdAt),
+      new Date(new Date(chat.chatVisit!.lastSeen).toUTCString())
     ) > 0
   );
 }

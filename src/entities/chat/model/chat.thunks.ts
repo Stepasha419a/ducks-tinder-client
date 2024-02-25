@@ -1,22 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { WsExceptionError } from '@shared/lib/interfaces';
+import type {
+  PaginationParams,
+  WsExceptionError,
+} from '@shared/lib/interfaces';
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
-import type {
-  ChatBlockResponse,
-  ChatUnblockResponse,
-  GetMessagesResponse,
-  ReceivedMessage,
-} from './chat.interfaces';
+import type { ReceivedChatBlock, ReceivedMessage } from './chat.interfaces';
 import {
   blockChat,
   deleteChat,
   deleteMessage,
   editMessage,
-  getMessages,
   setIsMessagesLoading,
   setIsNotFound,
+  setMessagesPagination,
   unblockChat,
 } from './chat.slice';
 import { checkAuthThunk } from '@entities/auth/model';
@@ -63,19 +61,15 @@ export const connectChatsThunk = createAsyncThunk(
         dispatch(editMessage(data));
       });
 
-      socket.on('get-messages', (response: GetMessagesResponse) => {
-        dispatch(getMessages(response));
-      });
-
       socket.on('delete-message', (data: ReceivedMessage) => {
         dispatch(deleteMessage(data));
       });
 
-      socket.on('block-chat', (data: ChatBlockResponse) => {
+      socket.on('block-chat', (data: ReceivedChatBlock) => {
         dispatch(blockChat(data));
       });
 
-      socket.on('unblock-chat', (data: ChatUnblockResponse) => {
+      socket.on('unblock-chat', (data: ReceivedChatBlock) => {
         dispatch(unblockChat(data));
       });
 
@@ -96,10 +90,8 @@ export const connectChatThunk = createAsyncThunk(
 
       const socket = chatService.connectChat(chatId);
 
-      socket.once('connect-chat', async () => {
-        const response = await chatService.getChat(chatId);
-        const chat = response.data;
-        dispatch(setCurrentChatData(chat));
+      socket.once('connect-chat', () => {
+        dispatch(setCurrentChatData(chatId));
       });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -136,18 +128,21 @@ export const disconnectThunk = createAsyncThunk(
 
 export const getMessagesThunk = createAsyncThunk(
   'chat/getMessages',
-  (_, { rejectWithValue, getState, dispatch }) => {
+  async (_, { rejectWithValue, getState, dispatch }) => {
     try {
       const { chat } = getState() as RootState;
-      const { chats, currentChatId, isMessagesLoading } = chat;
+      const { currentChatId, isMessagesLoading, messagesPagination } = chat;
 
       if (!isMessagesLoading && currentChatId) {
-        chatService.getMessages(
-          currentChatId,
-          chats[chats.findIndex((item) => item.id === currentChatId)].messages
-            .length
-        );
+        const params: PaginationParams = {
+          skip: messagesPagination?.messages.length || 0,
+          take: 20,
+        };
+
         dispatch(setIsMessagesLoading(true));
+
+        const response = await chatService.getMessages(currentChatId, params);
+        dispatch(setMessagesPagination(response.data));
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -157,14 +152,9 @@ export const getMessagesThunk = createAsyncThunk(
 
 export const deleteMessageThunk = createAsyncThunk(
   'chat/deleteMessage',
-  (messageId: string, { rejectWithValue, getState }) => {
+  (messageId: string, { rejectWithValue }) => {
     try {
-      const { chat } = getState() as RootState;
-      const { currentChatId } = chat;
-
-      if (currentChatId) {
-        chatService.deleteMessage(currentChatId, messageId);
-      }
+      chatService.deleteMessage(messageId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -173,17 +163,9 @@ export const deleteMessageThunk = createAsyncThunk(
 
 export const editMessageThunk = createAsyncThunk(
   'chat/editMessage',
-  (
-    args: { messageId: string; text: string },
-    { rejectWithValue, getState }
-  ) => {
+  (args: { messageId: string; text: string }, { rejectWithValue }) => {
     try {
-      const { chat } = getState() as RootState;
-      const { currentChatId } = chat;
-
-      if (currentChatId) {
-        chatService.editMessage(currentChatId, args.messageId, args.text);
-      }
+      chatService.editMessage(args.messageId, args.text);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

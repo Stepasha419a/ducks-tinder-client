@@ -1,4 +1,4 @@
-import type { Message, ShortChat } from '@shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 import { getTime } from '@shared/helpers';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { setCurrentMessage, setIsMessageEditing } from '../../model';
@@ -6,34 +6,12 @@ import { setCurrentMessage, setIsMessageEditing } from '../../model';
 export function useMessagesProps() {
   const dispatch = useAppDispatch();
 
-  const chats = useAppSelector((state) => state.chat.chats);
-  const avatarName = useAppSelector(
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    (state) => state.user.currentUser.pictures?.[0]?.name
-  );
   const currentUserId = useAppSelector((state) => state.user.currentUser.id);
-  const currentUserName = useAppSelector(
-    (state) => state.user.currentUser.name
-  );
 
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
-  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
   const isMessageEditing = useAppSelector(
     (state) => state.chat.isMessageEditing
   );
-
-  const currentChat = chats.find((chat) => chat.id === currentChatId);
-
-  const getAvatarProps = (message: Message) => {
-    const chatMember = getChatMember(currentChat, message);
-
-    return {
-      avatar: getIsOwn(message.userId, currentUserId)
-        ? avatarName
-        : chatMember?.pictures[0]?.name,
-      userId: message.userId,
-    };
-  };
 
   const getSelectProps = (message: Message) => {
     return {
@@ -49,8 +27,7 @@ export function useMessagesProps() {
 
   const getUsernameProps = (message: Message) => {
     const isOwn = getIsOwn(message.userId, currentUserId);
-    const chatMember = getChatMember(currentChat, message);
-    const username = isOwn ? currentUserName : chatMember?.name;
+    const username = message.name;
 
     return {
       isOwn,
@@ -62,14 +39,10 @@ export function useMessagesProps() {
     const repliedMessage = message.replied;
     const repliedMessageText = repliedMessage?.text;
     const isOwnReplied = getIsOwn(repliedMessage?.userId, currentUserId);
-    const repliedUser = currentChat?.users.find(
-      (user) => user.id === repliedMessage?.userId
-    );
-    const repliedUsername =
-      repliedMessage && isOwnReplied ? currentUserName : repliedUser?.name;
 
     return {
-      repliedUsername,
+      // TODO: replied message should have its own name
+      repliedUsername: isOwnReplied ? message.name : repliedMessage?.userId,
       repliedMessageText,
     };
   };
@@ -95,7 +68,6 @@ export function useMessagesProps() {
 
   return {
     handleSelectMessage,
-    getAvatarProps,
     getBodyProps,
     getUsernameProps,
     getReplyProps,
@@ -117,10 +89,6 @@ function getIsEdited(message: Message) {
 
 function getIsSelectOpen(message: Message, currentMessage: Message | null) {
   return message.id === currentMessage?.id;
-}
-
-function getChatMember(currentChat: ShortChat | undefined, message: Message) {
-  return currentChat?.users.find((user) => user.id === message.userId);
 }
 
 function getMessageTime(message: Message) {

@@ -39,6 +39,14 @@ const chatSlice = createSlice({
   name: 'chatSlice',
   initialState,
   reducers: {
+    setCurrentChatData: (state, { payload }: PayloadAction<string>) => {
+      state.currentChatId = payload;
+      state.isChatConnected = true;
+      state.isMessagesLoading = false;
+      state.isMessagesEnded = false;
+      state.repliedMessage = null;
+      state.isNotFound = false;
+    },
     pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
       const chat = state.chats.find((item) => item.id === chatId);
@@ -63,7 +71,7 @@ const chatSlice = createSlice({
         toast(`${chat.name}: ${messageText}`);
       }
     },
-    getMessages: (
+    setMessagesPagination: (
       state,
       { payload }: PayloadAction<ShortMessagesPagination>
     ) => {
@@ -81,11 +89,6 @@ const chatSlice = createSlice({
       messagesPagination.messages = payload.messages.concat(
         messagesPagination.messages
       );
-      payload.users.forEach((user) => {
-        if (!messagesPagination.users.find((item) => item.id === user.id)) {
-          messagesPagination.users.push(user);
-        }
-      });
       state.isMessagesLoading = false;
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
@@ -220,7 +223,8 @@ const chatSlice = createSlice({
 
 export const {
   pushNewMessage,
-  getMessages,
+  setCurrentChatData,
+  setMessagesPagination,
   deleteMessage,
   setIsMessagesLoading,
   editMessage,
