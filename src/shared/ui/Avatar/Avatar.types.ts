@@ -5,4 +5,5 @@ export interface AvatarProps {
   userId?: string;
   extraClassName?: string;
   avatarUrl?: string;
+  fullUrl?: string;
 }

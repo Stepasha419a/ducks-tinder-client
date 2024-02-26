@@ -24,7 +24,7 @@ export const ChatUserPopup: FC = () => {
   // TODO: Make chat preview popup with participants and actions
   return (
     <Popup closeHandler={handleClose} size="l">
-      <Avatar avatarUrl={chatAvatar} />
+      <Avatar fullUrl={chatAvatar} />
       <div>{chatAvatar}</div>
       <div>{chatName}</div>
       <div className={styles.btns}>

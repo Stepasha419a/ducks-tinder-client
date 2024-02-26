@@ -27,7 +27,7 @@ export const ChatProfileMobile: FC<ChatProfileProps> = ({ handleOpen }) => {
       <div onClick={handleOpen} className={styles.user}>
         <Avatar
           size="m"
-          avatarUrl={currentChat.avatar}
+          fullUrl={currentChat.avatar}
           extraClassName={styles.avatar}
         />
         <div className={styles.name}>{currentChat.name}</div>

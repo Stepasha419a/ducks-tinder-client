@@ -9,8 +9,9 @@ export const Avatar: FC<AvatarProps> = ({
   extraClassName,
   avatarUrl,
   userId,
+  fullUrl,
 }) => {
-  const imageUrl = makeImageUrl(userId, avatarUrl);
+  const imageUrl = makeImageUrl(userId, avatarUrl, fullUrl);
 
   const cnContainer = classNames(
     styles.container,

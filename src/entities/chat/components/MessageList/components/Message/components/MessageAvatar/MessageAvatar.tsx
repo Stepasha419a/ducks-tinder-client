@@ -9,6 +9,6 @@ interface MessageAvatarProps {
 
 export const MessageAvatar: FC<MessageAvatarProps> = ({ userId, avatar }) => {
   return (
-    <Avatar userId={userId} avatarUrl={avatar} extraClassName={styles.avatar} />
+    <Avatar userId={userId} fullUrl={avatar} extraClassName={styles.avatar} />
   );
 };
