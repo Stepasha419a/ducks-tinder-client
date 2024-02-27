@@ -49,7 +49,7 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
     <div className={cn} ref={messagesRef}>
       <div className={styles.loadMessages} ref={topScrollRef}></div>
       {skipMessagesCount > (messagesLength || 0) && <MessagesLazy count={4} />}
-      {messages?.map((message: MessageInterface, i) => {
+      {messages.map((message: MessageInterface, i) => {
         const isSelectOpen = currentMessage?.id === message.id;
         const isNextDayMessage =
           messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);

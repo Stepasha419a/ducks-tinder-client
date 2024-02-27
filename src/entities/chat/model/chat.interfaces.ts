@@ -1,9 +1,8 @@
-import type { ShortMessagesPagination } from '@/shared/api/services/chat/chat-service.interface';
 import type { Chat, Message } from '@shared/api/interfaces';
 
 export interface ChatInitialState {
   chats: Chat[];
-  messagesPagination: ShortMessagesPagination | null;
+  messages: Message[];
   isSocketConnected: boolean;
   isChatConnected: boolean;
   isLoading: boolean;

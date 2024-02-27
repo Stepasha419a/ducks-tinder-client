@@ -3,7 +3,7 @@ import { getIsNewMessages, sortChats } from '../lib';
 
 export const selectMessages = createSelector(
   [
-    (state: RootState) => state.chat.messagesPagination,
+    (state: RootState) => state.chat.messages,
     (state: RootState) => state.chat.isMessagesInitialLoading,
     (state: RootState) => state.chat.skipMessagesCount,
     (state: RootState) => state.chat.repliedMessage,
@@ -11,17 +11,17 @@ export const selectMessages = createSelector(
     (state: RootState) => state.chat.isMessageEditing,
   ],
   (
-    messagesPagination,
+    messages,
     isMessagesInitialLoading,
     skipMessagesCount,
     repliedMessage,
     currentMessage,
     isMessageEditing
   ) => ({
-    messagesLength: messagesPagination?.messages.length,
+    messagesLength: messages.length,
+    messages,
     isMessagesInitialLoading,
     skipMessagesCount,
-    messages: messagesPagination?.messages,
     repliedMessage,
     currentMessage,
     isMessageEditing,
@@ -50,8 +50,8 @@ export const selectCurrentChat = createSelector(
 );
 
 export const selectCurrentMessagesLength = createSelector(
-  [(state: RootState) => state.chat.messagesPagination],
-  (messagesPagination) => messagesPagination?.messages.length
+  [(state: RootState) => state.chat.messages],
+  (messages) => messages.length
 );
 
 export const selectChatProfile = createSelector(
@@ -75,14 +75,12 @@ export const selectNewMessageChatsCount = createSelector(
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
     (state: RootState) => state.user.currentUser.id,
-    (state: RootState) => state.chat.messagesPagination,
+    (state: RootState) => state.chat.messages,
   ],
-  (chats, currentChatId, currentUserId, messagesPagination) =>
+  (chats, currentChatId, currentUserId, messages) =>
     chats.reduce((total, chat) => {
       const isActive = chat.id === currentChatId;
-      const isOwn =
-        messagesPagination?.messages[messagesPagination.messages.length - 1]
-          ?.userId === currentUserId;
+      const isOwn = messages.at(-1)?.userId === currentUserId;
       return getIsNewMessages(chat, isActive, !isOwn) ? total + 1 : total;
     }, 0)
 );

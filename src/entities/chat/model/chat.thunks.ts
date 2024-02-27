@@ -131,11 +131,11 @@ export const getMessagesThunk = createAsyncThunk(
   async (_, { rejectWithValue, getState, dispatch }) => {
     try {
       const { chat } = getState() as RootState;
-      const { currentChatId, isMessagesLoading, messagesPagination } = chat;
+      const { currentChatId, isMessagesLoading, messages } = chat;
 
       if (!isMessagesLoading && currentChatId) {
         const params: PaginationParams = {
-          skip: messagesPagination?.messages.length || 0,
+          skip: messages.length,
           take: 20,
         };
 

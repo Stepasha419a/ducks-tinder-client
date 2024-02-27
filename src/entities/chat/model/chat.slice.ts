@@ -19,7 +19,7 @@ import type { ShortMessagesPagination } from '@/shared/api/services/chat/chat-se
 
 const initialState: ChatInitialState = {
   chats: [],
-  messagesPagination: null,
+  messages: [],
   isSocketConnected: false,
   isChatConnected: false,
   isLoading: true,
@@ -41,6 +41,7 @@ const chatSlice = createSlice({
   reducers: {
     setCurrentChatData: (state, { payload }: PayloadAction<string>) => {
       state.currentChatId = payload;
+      state.messages = [];
       state.isChatConnected = true;
       state.isMessagesLoading = false;
       state.isMessagesEnded = false;
@@ -80,40 +81,33 @@ const chatSlice = createSlice({
         return;
       }
 
-      const isActive = payload.chatId === state.messagesPagination?.chatId;
+      const isActive = payload.chatId === state.currentChatId;
       if (!isActive) {
         return;
       }
-      const messagesPagination = state.messagesPagination!;
 
-      messagesPagination.messages = payload.messages.concat(
-        messagesPagination.messages
-      );
+      state.messages = payload.messages.concat(state.messages);
       state.isMessagesLoading = false;
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
-      const isActive = chatId === state.messagesPagination?.chatId;
+      const isActive = chatId === state.currentChatId;
       if (!isActive) {
         return;
       }
-      const messagesPagination = state.messagesPagination!;
 
-      messagesPagination.messages = messagesPagination.messages.filter(
-        (item) => item.id !== message.id
-      );
+      state.messages = state.messages.filter((item) => item.id !== message.id);
       state.skipMessagesCount--;
     },
     editMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
 
-      const isActive = chatId === state.messagesPagination?.chatId;
+      const isActive = chatId === state.currentChatId;
       if (!isActive) {
         return;
       }
-      const messagesPagination = state.messagesPagination!;
 
-      const foundMessage = messagesPagination.messages.find(
+      const foundMessage = state.messages.find(
         (item) => item.id === message.id
       );
       if (foundMessage) {
