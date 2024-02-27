@@ -3,9 +3,10 @@ import { selectChatProfile, setIsChatUserPopup } from '@entities/chat/model';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Avatar, Popup } from '@shared/ui';
 import { BlockChat, DeleteChat, UnblockChat } from '@features/chat';
-import styles from './ChatUserPopup.module.scss';
+import styles from './ChatProfilePopup.module.scss';
+import { Participants } from '@/entities/chat/components';
 
-export const ChatUserPopup: FC = () => {
+export const ChatProfilePopup: FC = () => {
   const dispatch = useAppDispatch();
 
   const { chatAvatar, chatName, blocked, blockedById } =
@@ -23,10 +24,14 @@ export const ChatUserPopup: FC = () => {
 
   // TODO: Make chat preview popup with participants and actions
   return (
-    <Popup closeHandler={handleClose} size="l">
-      <Avatar fullUrl={chatAvatar} />
-      <div>{chatAvatar}</div>
-      <div>{chatName}</div>
+    <Popup closeHandler={handleClose} size="l" extraClassName={styles.popup}>
+      <div className={styles.wrapper}>
+        <div className={styles.chatInfo}>
+          <Avatar size="l" fullUrl={chatAvatar} />
+          <div className={styles.name}>{chatName}</div>
+        </div>
+        <Participants />
+      </div>
       <div className={styles.btns}>
         {blocked ? (
           blockedById === currentUserId && <UnblockChat />

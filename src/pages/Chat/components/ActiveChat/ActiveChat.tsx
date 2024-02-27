@@ -6,7 +6,7 @@ import {
   useAppSelector,
   useMediaQuery,
 } from '@shared/lib/hooks';
-import { ChatForm, ChatUserPopup, Messages } from '@widgets';
+import { ChatForm, ChatProfilePopup, Messages } from '@widgets';
 import { Status } from './components';
 import { connectChatThunk, disconnectChatThunk } from '@entities/chat/model';
 
@@ -50,7 +50,7 @@ export const ActiveChat = () => {
       {isMobileSelected ? <MessageSelect isMobile /> : <OpenChatProfilePopup />}
       <Messages />
       <ChatForm />
-      <ChatUserPopup />
+      <ChatProfilePopup />
     </>
   );
 };
