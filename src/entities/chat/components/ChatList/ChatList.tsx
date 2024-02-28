@@ -1,4 +1,4 @@
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { getChatsThunk, selectChatList } from '@entities/chat/model';
@@ -7,7 +7,7 @@ import { ChatItem } from './ChatItem/ChatItem';
 import styles from './ChatList.module.scss';
 import { ChatListLazy } from './ChatList.lazy';
 
-export const ChatList: FC = (): ReactElement => {
+export const ChatList: FC = () => {
   const dispatch = useAppDispatch();
 
   const isLoading = useAppSelector((state) => state.chat.isLoading);

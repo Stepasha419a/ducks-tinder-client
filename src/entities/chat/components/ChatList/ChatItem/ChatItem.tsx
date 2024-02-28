@@ -13,11 +13,13 @@ interface ChatInterface {
 }
 
 export const ChatItem: FC<ChatInterface> = ({ chat, isActive }) => {
-  const messageName = chat.lastMessage ? chat.name : 'send first message';
+  const messageName = chat.lastMessage
+    ? `${chat.name}: `
+    : 'send first message';
   const isNewMessages = getIsNewMessages(
     chat,
     isActive,
-    chat.lastMessage?.userId === chat.chatVisit?.userId
+    chat.lastMessage?.userId !== chat.chatVisit?.userId
   );
 
   const chatLink = `${ROUTES.chat}/${chat.id}`;

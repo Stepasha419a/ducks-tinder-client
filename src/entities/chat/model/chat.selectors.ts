@@ -75,12 +75,11 @@ export const selectNewMessageChatsCount = createSelector(
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
     (state: RootState) => state.user.currentUser.id,
-    (state: RootState) => state.chat.messages,
   ],
-  (chats, currentChatId, currentUserId, messages) =>
+  (chats, currentChatId, currentUserId) =>
     chats.reduce((total, chat) => {
       const isActive = chat.id === currentChatId;
-      const isOwn = messages.at(-1)?.userId === currentUserId;
-      return getIsNewMessages(chat, isActive, !isOwn) ? total + 1 : total;
+      const isCompanion = chat.lastMessage?.userId !== currentUserId;
+      return getIsNewMessages(chat, isActive, isCompanion) ? total + 1 : total;
     }, 0)
 );
