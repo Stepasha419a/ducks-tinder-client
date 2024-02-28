@@ -8,9 +8,12 @@ import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
 import { getIsChatPage } from '@entities/chat/lib';
 import { ChatList } from '@entities/chat/components';
 import styles from './ChatsPairsBlock.module.scss';
+import { useAppSelector } from '@/shared/lib/hooks';
 
 export const ChatsPairsBlock: FC = () => {
   const { pathname } = useLocation();
+
+  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
 
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
 
@@ -43,7 +46,7 @@ export const ChatsPairsBlock: FC = () => {
               exit={'slideExit'}
               transition={{ duration: 0.25 }}
             >
-              <ChatList />
+              <ChatList currentUserId={currentUserId} />
             </motion.div>
           )}
         </AnimatePresence>

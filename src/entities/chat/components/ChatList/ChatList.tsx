@@ -7,7 +7,11 @@ import { ChatItem } from './ChatItem/ChatItem';
 import styles from './ChatList.module.scss';
 import { ChatListLazy } from './ChatList.lazy';
 
-export const ChatList: FC = () => {
+interface ChatListProps {
+  currentUserId: string;
+}
+
+export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
   const dispatch = useAppDispatch();
 
   const isLoading = useAppSelector((state) => state.chat.isLoading);
@@ -30,7 +34,14 @@ export const ChatList: FC = () => {
     <div className={styles.chats}>
       {chats.map((chat) => {
         const isActive = currentChatId === chat.id;
-        return <ChatItem key={chat.id} chat={chat} isActive={isActive} />;
+        return (
+          <ChatItem
+            currentUserId={currentUserId}
+            key={chat.id}
+            chat={chat}
+            isActive={isActive}
+          />
+        );
       })}
     </div>
   );

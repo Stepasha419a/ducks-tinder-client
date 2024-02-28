@@ -10,12 +10,20 @@ import type { Chat } from '@/shared/api/interfaces';
 interface ChatInterface {
   chat: Chat;
   isActive: boolean;
+  currentUserId: string;
 }
 
-export const ChatItem: FC<ChatInterface> = ({ chat, isActive }) => {
-  const messageName = chat.lastMessage
-    ? `${chat.name}: `
-    : 'send first message';
+export const ChatItem: FC<ChatInterface> = ({
+  chat,
+  isActive,
+  currentUserId,
+}) => {
+  const username =
+    chat.lastMessage &&
+    (currentUserId === chat.lastMessage.userId ? 'you' : chat.lastMessage.name);
+
+  const messageName = username ? `${username}: ` : 'send first message';
+
   const isNewMessages = getIsNewMessages(
     chat,
     isActive,
