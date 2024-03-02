@@ -57,6 +57,8 @@ const chatSlice = createSlice({
 
       chat.lastMessage = message;
 
+      state.messages.push(message);
+
       const isActiveChat = state.currentChatId === chatId;
       if (isActiveChat) {
         const chatVisit = chat.chatVisit;
@@ -72,7 +74,7 @@ const chatSlice = createSlice({
         toast(`${chat.name}: ${messageText}`);
       }
     },
-    setMessagesPagination: (
+    setMessages: (
       state,
       { payload }: PayloadAction<ShortMessagesPagination>
     ) => {
@@ -86,7 +88,7 @@ const chatSlice = createSlice({
         return;
       }
 
-      state.messages = payload.messages.concat(state.messages);
+      state.messages = payload.messages.reverse().concat(state.messages);
       state.isMessagesLoading = false;
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
@@ -102,8 +104,8 @@ const chatSlice = createSlice({
     editMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
 
-      const isActive = chatId === state.currentChatId;
-      if (!isActive) {
+      const activeChat = state.chats.find((chat) => chat.id === chatId);
+      if (!activeChat) {
         return;
       }
 
@@ -113,6 +115,10 @@ const chatSlice = createSlice({
       if (foundMessage) {
         foundMessage.text = message.text;
         foundMessage.updatedAt = message.updatedAt;
+
+        if (activeChat.lastMessage?.id === foundMessage.id) {
+          activeChat.lastMessage = foundMessage;
+        }
       }
     },
     blockChat: (state, { payload }: PayloadAction<ReceivedChatBlock>) => {
@@ -218,7 +224,7 @@ const chatSlice = createSlice({
 export const {
   pushNewMessage,
   setCurrentChatData,
-  setMessagesPagination,
+  setMessages,
   deleteMessage,
   setIsMessagesLoading,
   editMessage,

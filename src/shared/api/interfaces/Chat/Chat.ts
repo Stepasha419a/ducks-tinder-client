@@ -2,7 +2,7 @@ export interface Chat {
   id: string;
   name: string;
   avatar: string;
-  lastMessage?: ShortMessage;
+  lastMessage?: Message;
   chatVisit?: LastSeen;
   blocked: boolean;
   blockedById?: string;
@@ -30,14 +30,4 @@ export interface RepliedMessage {
   id: string;
   text: string;
   userId: string;
-}
-
-export interface ShortMessage {
-  id: string;
-  text: string;
-  userId: string;
-  name: string;
-
-  createdAt: string;
-  updatedAt: string;
 }

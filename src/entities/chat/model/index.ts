@@ -1,6 +1,6 @@
 export {
   pushNewMessage,
-  setMessagesPagination,
+  setMessages,
   setCurrentChatData,
   setRepliedMessage,
   setIsChatUserPopup,

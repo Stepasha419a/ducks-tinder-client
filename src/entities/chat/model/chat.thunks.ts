@@ -14,7 +14,7 @@ import {
   editMessage,
   setIsMessagesLoading,
   setIsNotFound,
-  setMessagesPagination,
+  setMessages,
   unblockChat,
 } from './chat.slice';
 import { checkAuthThunk } from '@entities/auth/model';
@@ -142,7 +142,7 @@ export const getMessagesThunk = createAsyncThunk(
         dispatch(setIsMessagesLoading(true));
 
         const response = await chatService.getMessages(currentChatId, params);
-        dispatch(setMessagesPagination(response.data));
+        dispatch(setMessages(response.data));
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
