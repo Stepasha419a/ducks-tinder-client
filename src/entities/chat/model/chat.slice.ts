@@ -13,6 +13,7 @@ import {
   disconnectChatThunk,
   connectChatsThunk,
   deleteMessageThunk,
+  getMessagesThunk,
 } from './chat.thunks';
 import { toast } from 'react-toastify';
 import type { ShortMessagesPagination } from '@/shared/api/services/chat/chat-service.interface';
@@ -43,7 +44,7 @@ const chatSlice = createSlice({
       state.currentChatId = payload;
       state.messages = [];
       state.isChatConnected = true;
-      state.isMessagesLoading = false;
+      state.isMessagesInitialLoading = true;
       state.isMessagesEnded = false;
       state.repliedMessage = null;
       state.isNotFound = false;
@@ -57,14 +58,13 @@ const chatSlice = createSlice({
 
       chat.lastMessage = message;
 
-      state.messages.push(message);
-
       const isActiveChat = state.currentChatId === chatId;
       if (isActiveChat) {
         const chatVisit = chat.chatVisit;
         if (chatVisit) {
           chatVisit.lastSeen = message.createdAt;
         }
+        state.messages.push(message);
         state.skipMessagesCount++;
       } else {
         const messageText =
@@ -78,6 +78,9 @@ const chatSlice = createSlice({
       state,
       { payload }: PayloadAction<ShortMessagesPagination>
     ) => {
+      if (state.isMessagesInitialLoading) {
+        state.isMessagesInitialLoading = false;
+      }
       if (payload.messages.length === 0) {
         state.isMessagesEnded = true;
         return;
@@ -89,7 +92,6 @@ const chatSlice = createSlice({
       }
 
       state.messages = payload.messages.reverse().concat(state.messages);
-      state.isMessagesLoading = false;
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
@@ -194,6 +196,9 @@ const chatSlice = createSlice({
       })
       .addCase(connectChatThunk.fulfilled, (state) => {
         state.isMessagesInitialLoading = false;
+      })
+      .addCase(getMessagesThunk.fulfilled, (state) => {
+        state.isMessagesLoading = false;
       })
       .addCase(disconnectChatThunk.fulfilled, (state) => {
         if (state.currentChatId) {

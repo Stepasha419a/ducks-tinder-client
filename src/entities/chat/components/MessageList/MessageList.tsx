@@ -15,9 +15,8 @@ interface MessagesProps {
 
 export const MessageList: FC<MessagesProps> = ({ select }) => {
   const {
-    messagesLength,
     isMessagesInitialLoading,
-    skipMessagesCount,
+    isMessagesEnded,
     messages,
     currentMessage,
     isMessageEditing,
@@ -36,7 +35,11 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
   const { messagesRef, topScrollRef } = useMessagesScroll();
 
   if (isMessagesInitialLoading) {
-    return <MessagesLazy />;
+    return (
+      <div className={styles.messages}>
+        <MessagesLazy />
+      </div>
+    );
   }
 
   const cn = classNames(
@@ -48,7 +51,7 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
   return (
     <div className={cn} ref={messagesRef}>
       <div className={styles.loadMessages} ref={topScrollRef}></div>
-      {skipMessagesCount > (messagesLength || 0) && <MessagesLazy count={4} />}
+      {!isMessagesEnded && <MessagesLazy count={4} />}
       {messages.map((message: MessageInterface, i) => {
         const isSelectOpen = currentMessage?.id === message.id;
         const isNextDayMessage =

@@ -11,7 +11,7 @@ interface MessagesLazyProps {
 
 export const MessagesLazy: FC<MessagesLazyProps> = ({ count = 12 }) => {
   return (
-    <>
+    <div>
       {Array(count)
         .fill(null)
         .map((_, i) => {
@@ -26,6 +26,6 @@ export const MessagesLazy: FC<MessagesLazyProps> = ({ count = 12 }) => {
             </div>
           );
         })}
-    </>
+    </div>
   );
 };

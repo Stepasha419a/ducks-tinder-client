@@ -92,6 +92,7 @@ export const connectChatThunk = createAsyncThunk(
 
       socket.once('connect-chat', () => {
         dispatch(setCurrentChatData(chatId));
+        dispatch(getMessagesThunk());
       });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
