@@ -38,11 +38,11 @@ export function useMessagesProps() {
   const getReplyProps = (message: Message) => {
     const repliedMessage = message.replied;
     const repliedMessageText = repliedMessage?.text;
-    const isOwnReplied = getIsOwn(repliedMessage?.userId, currentUserId);
+    const repliedMessageName = repliedMessage?.name;
 
     return {
       // TODO: replied message should have its own name
-      repliedUsername: isOwnReplied ? message.name : repliedMessage?.userId,
+      repliedUsername: repliedMessageName,
       repliedMessageText,
     };
   };

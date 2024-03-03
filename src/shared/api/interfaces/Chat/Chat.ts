@@ -28,6 +28,7 @@ export interface Message {
 
 export interface RepliedMessage {
   id: string;
+  name: string;
   text: string;
   userId: string;
 }
