@@ -6,6 +6,7 @@ export interface Chat {
   chatVisit?: LastSeen;
   blocked: boolean;
   blockedById?: string;
+  createdAt: string;
 }
 
 export interface LastSeen {
