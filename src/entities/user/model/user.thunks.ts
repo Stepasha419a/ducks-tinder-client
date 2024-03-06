@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { PartialUser } from '@shared/api/services/user/user-service.interface';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
+import type { Picture } from '@/shared/api/interfaces';
 
 export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
@@ -109,12 +110,22 @@ export const deleteUserPictureThunk = createAsyncThunk(
 
 export const mixUserPicturesThunk = createAsyncThunk(
   'users/mixUserPictures',
-  async (pictureOrders: number[], { rejectWithValue }) => {
+  async (pictures: Picture[], { rejectWithValue }) => {
     try {
-      const response = await userService.mixPictures(pictureOrders);
+      const newOrders = []
+      for(let i = 0; i < pictures.length; i++) {
+        newOrders.push(pictures.findIndex(item => item.order === i))
+      }
+      
+      const response = await userService.mixPictures(newOrders);
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
   }
 );
+
+
+// 0 1 2
+// 1 2 0
+// 2 0 1

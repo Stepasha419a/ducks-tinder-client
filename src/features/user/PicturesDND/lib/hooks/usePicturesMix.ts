@@ -9,7 +9,7 @@ export function usePicturesMix() {
   const handleMixPictures = (pictures: Picture[]) => {
     const isChanged = checkChangedPictures(pictures);
     if (isChanged) {
-      dispatch(mixUserPicturesThunk(pictures.map((picture) => picture.order)));
+      dispatch(mixUserPicturesThunk(pictures));
     }
   };
 
