@@ -5,7 +5,7 @@ import type {
   RefObject,
   SetStateAction,
 } from 'react';
-import { faCircleInfo, faHouse, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type Slider from 'react-slick';
 import classNames from 'classnames';
@@ -66,31 +66,14 @@ export const Preview: FC<PreviewPropsInterface> = ({
         onClick={() => setIsFullPreview && setIsFullPreview(true)}
         className={styles.descr}
       >
-        <div className={styles.person}>
-          {user.name} <span className={styles.years}>{user.age}</span>
-        </div>
-        <div className={styles.place}>
-          <FontAwesomeIcon icon={faHouse} className={styles.icon} />
-          <span className={styles.name}>
-            Lives in&nbsp;
-            {user.place?.name || 'unknown place'}
-          </span>
-        </div>
-        <div className={styles.distance}>
-          <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-          {user.distance ?? 'unknown distance'}
-          <span className={styles.text}>km from you</span>
-        </div>
         {setIsFullPreview && (
-          <div className={styles.buttonWrapper}>
-            <Button
-              variant="mark"
-              onClick={() => setIsFullPreview(true)}
-              extraClassName={styles.openFullPreview}
-            >
-              <FontAwesomeIcon icon={faCircleInfo} />
-            </Button>
-          </div>
+          <Button
+            variant="mark"
+            onClick={() => setIsFullPreview(true)}
+            extraClassName={styles.openFullPreview}
+          >
+            <FontAwesomeIcon icon={faCircleInfo} />
+          </Button>
         )}
       </div>
     </div>

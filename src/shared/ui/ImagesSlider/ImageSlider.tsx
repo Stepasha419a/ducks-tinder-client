@@ -58,6 +58,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
         cnWrapper={cnWrapper}
         extraClassName={extraClassName}
         userId={userId}
+        content={content}
       />
     );
   }

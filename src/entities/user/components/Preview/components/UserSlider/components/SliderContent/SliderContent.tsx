@@ -1,12 +1,12 @@
-import type { FC } from 'react';
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { ShortUser, User } from '@/shared/api/interfaces';
-import { ListItem } from '@/shared/ui';
-import { getUserSliderInfo } from '@/entities/user/lib';
-import type { UserPlaceInfo } from '@/entities/user/lib/helpers/getUserSliderInfo';
-import styles from './SliderContent.module.scss';
-import classNames from 'classnames';
+import type { FC } from "react";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { ShortUser, User } from "@/shared/api/interfaces";
+import { ListItem } from "@/shared/ui";
+import { getUserSliderInfo } from "@/entities/user/lib";
+import type { UserPlaceInfo } from "@/entities/user/lib/helpers/getUserSliderInfo";
+import styles from "./SliderContent.module.scss";
+import classNames from "classnames";
 
 interface SliderContentProps {
   user: User | ShortUser;
@@ -49,22 +49,18 @@ export const SliderContent: FC<SliderContentProps> = ({
           <FontAwesomeIcon icon={faHouse} className={styles.icon} />
           <span className={styles.name}>
             Lives in&nbsp;
-            {user.place?.name || 'unknown place'}
+            {user.place?.name || "unknown place"}
           </span>
         </div>
       </div>
     );
   }
 
-  if (info.length <= currentSlide || currentInfo.name) {
-    return (
-      <div className={styles.wrapper}>
-        <div className={styles.person}>
-          {user.name} <span className={styles.years}>{user.age}</span>
-        </div>
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.person}>
+        {user.name} <span className={styles.years}>{user.age}</span>
       </div>
-    );
-  }
-
-  return null;
+    </div>
+  );
 };
