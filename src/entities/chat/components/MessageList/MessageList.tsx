@@ -1,19 +1,22 @@
-import { Fragment, type FC, type ReactElement } from 'react';
-import type { Message as MessageInterface } from '@shared/api/interfaces';
-import { useAppSelector } from '@shared/lib/hooks';
-import { selectMessages } from '@entities/chat/model';
-import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
-import { getIsNextDayMessage } from '@entities/chat/lib';
-import { Message, MessageSelect, Timestamp } from './components';
-import { MessagesLazy } from './MessageList.lazy';
-import classNames from 'classnames';
-import styles from './MessageList.module.scss';
+import { Fragment, type FC, type ReactElement } from "react";
+import type { Message as MessageInterface } from "@shared/api/interfaces";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
+import { getMessagesThunk, selectMessages } from "@entities/chat/model";
+import { useMessagesProps, useMessagesScroll } from "@entities/chat/lib";
+import { getIsNextDayMessage } from "@entities/chat/lib";
+import { Message, MessageSelect, Timestamp } from "./components";
+import { MessagesLazy } from "./MessageList.lazy";
+import InfiniteScroll from "react-infinite-scroller";
+import classNames from "classnames";
+import styles from "./MessageList.module.scss";
 
 interface MessagesProps {
   select: ReactElement;
 }
 
 export const MessageList: FC<MessagesProps> = ({ select }) => {
+  const dispatch = useAppDispatch();
+
   const {
     isMessagesInitialLoading,
     isMessagesEnded,
@@ -22,6 +25,10 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
     isMessageEditing,
     repliedMessage,
   } = useAppSelector(selectMessages);
+
+  const isMessagesLoading = useAppSelector(
+    (state) => state.chat.isMessagesLoading
+  );
 
   const {
     handleSelectMessage,
@@ -48,40 +55,55 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
     isMessageEditing && styles.messageEditing
   );
 
+  const handleLoadMore = () => {
+    if (!isMessagesLoading) dispatch(getMessagesThunk());
+  };
+
   return (
     <div className={cn} ref={messagesRef}>
       <div className={styles.loadMessages} ref={topScrollRef}></div>
       {!isMessagesEnded && <MessagesLazy count={4} />}
-      {messages.map((message: MessageInterface, i) => {
-        const isSelectOpen = currentMessage?.id === message.id;
-        const isNextDayMessage =
-          messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
 
-        return (
-          <Fragment key={message.id}>
-            <Message handleSelectMessage={() => handleSelectMessage(message)}>
-              <Message.Avatar userId={message.userId} avatar={message.avatar} />
-              <Message.Body {...getBodyProps(message)}>
-                <Message.Username {...getUsernameProps(message)} />
-                <Message.Content>
-                  <Message.Reply {...getReplyProps(message)} />
-                  <Message.Text {...getTextProps(message)} />
-                </Message.Content>
-              </Message.Body>
-              <MessageSelect
-                getSelectProps={() => getSelectProps(message)}
-                handleSelectMessage={() => handleSelectMessage(message)}
-                isSelectOpen={isSelectOpen}
-                isMessageEditing={isMessageEditing}
-                select={select}
-              />
-            </Message>
-            {isNextDayMessage && (
-              <Timestamp createdAt={messages[i + 1].createdAt} />
-            )}
-          </Fragment>
-        );
-      })}
+      <InfiniteScroll
+        loadMore={handleLoadMore}
+        hasMore={!isMessagesEnded}
+        useWindow={false}
+        isReverse
+      >
+        {messages.map((message: MessageInterface, i) => {
+          const isSelectOpen = currentMessage?.id === message.id;
+          const isNextDayMessage =
+            messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
+
+          return (
+            <Fragment key={message.id}>
+              <Message handleSelectMessage={() => handleSelectMessage(message)}>
+                <Message.Avatar
+                  userId={message.userId}
+                  avatar={message.avatar}
+                />
+                <Message.Body {...getBodyProps(message)}>
+                  <Message.Username {...getUsernameProps(message)} />
+                  <Message.Content>
+                    <Message.Reply {...getReplyProps(message)} />
+                    <Message.Text {...getTextProps(message)} />
+                  </Message.Content>
+                </Message.Body>
+                <MessageSelect
+                  getSelectProps={() => getSelectProps(message)}
+                  handleSelectMessage={() => handleSelectMessage(message)}
+                  isSelectOpen={isSelectOpen}
+                  isMessageEditing={isMessageEditing}
+                  select={select}
+                />
+              </Message>
+              {isNextDayMessage && (
+                <Timestamp createdAt={messages[i + 1].createdAt} />
+              )}
+            </Fragment>
+          );
+        })}
+      </InfiniteScroll>
     </div>
   );
 };

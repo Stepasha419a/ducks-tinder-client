@@ -27,7 +27,7 @@ export function useMessagesScroll(): UseMessagesScrollReturn {
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
   useInitialScrollToBottom(messagesRef, [currentChatId]);
-  useScrollToBottom(messagesRef, [currentMessages]);
+  //useScrollToBottom(messagesRef, [currentMessages]);
 
   const topScrollRef = useRef<HTMLDivElement | null>(null);
   const topScrollEntry = useIntersectionObserver(topScrollRef, {});
@@ -45,7 +45,7 @@ export function useMessagesScroll(): UseMessagesScrollReturn {
   });
 
   if (isVisible) {
-    delayedGetMessages();
+    //delayedGetMessages();
   }
 
   return { messagesRef, topScrollRef };
