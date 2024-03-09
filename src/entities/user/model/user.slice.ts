@@ -1,11 +1,11 @@
-import { toast } from 'react-toastify';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import { createSlice } from '@reduxjs/toolkit';
+import { toast } from "react-toastify";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type {
   ShortUser,
   ShortUserWithoutDistance,
   User,
-} from '@shared/api/interfaces';
+} from "@shared/api/interfaces";
 import {
   acceptPairThunk,
   refusePairThunk,
@@ -15,9 +15,10 @@ import {
   saveUserImageThunk,
   updateUserThunk,
   updateUserPlaceThunk,
-} from './user.thunks';
-import type { PairSorts, UserInitialState } from './user.interfaces';
-import { INITIAL_SORTS } from './user.constants';
+  getPairsInfoThunk,
+} from "./user.thunks";
+import type { PairSorts, UserInitialState } from "./user.interfaces";
+import { INITIAL_SORTS } from "./user.constants";
 
 const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh
@@ -31,10 +32,15 @@ const initialState: UserInitialState = {
     isDialogUploadOpen: false,
     isImageCropOpen: false,
   },
+  isPairsInfoLoading: true,
+  pairsInfo: {
+    count: 0,
+    picture: null,
+  },
 };
 
 const userSlice = createSlice({
-  name: 'userSlice',
+  name: "userSlice",
   initialState,
   reducers: {
     setCurrentUser: (state, { payload }: PayloadAction<User>) => {
@@ -79,8 +85,8 @@ const userSlice = createSlice({
         }
       )
       .addCase(updateUserThunk.rejected, (_, { payload }) => {
-        if (payload === 'User already exists') {
-          toast('This email address is already used, try another one');
+        if (payload === "User already exists") {
+          toast("This email address is already used, try another one");
         }
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
@@ -99,6 +105,13 @@ const userSlice = createSlice({
       })
       .addCase(mixUserPicturesThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+      })
+      .addCase(getPairsInfoThunk.pending, (state) => {
+        state.isPairsInfoLoading = true;
+      })
+      .addCase(getPairsInfoThunk.fulfilled, (state, { payload }) => {
+        state.pairsInfo = payload;
+        state.isPairsInfoLoading = false;
       });
   },
 });

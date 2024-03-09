@@ -1,13 +1,15 @@
+import type { FullPicture } from "../../interfaces";
+
 export interface PartialUser {
   email?: string;
   name?: string;
   description?: string;
   nickname?: string;
   age?: number;
-  sex?: 'male' | 'female';
+  sex?: "male" | "female";
   distance?: number;
   usersOnlyInDistance?: boolean;
-  preferSex?: 'male' | 'female';
+  preferSex?: "male" | "female";
   preferAgeFrom?: number;
   preferAgeTo?: number;
   interests?: string[];
@@ -32,9 +34,14 @@ export interface QuerySorts {
   age: number;
   preferAgeFrom: number;
   preferAgeTo: number;
-  sex: 'male' | 'female';
-  preferSex: 'male' | 'female';
+  sex: "male" | "female";
+  preferSex: "male" | "female";
   userIds?: string[];
 }
 
 export type ChangedData = string | string[] | number | boolean;
+
+export interface PairsInfo {
+  count: number;
+  picture: FullPicture | null;
+}

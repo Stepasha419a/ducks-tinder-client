@@ -1,21 +1,28 @@
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
-import { makeImageUrl } from '@shared/helpers';
-import FailedPair from './Failed/FailedPair';
-import styles from './PairLink.module.scss';
-import { useAppSelector } from '@shared/lib/hooks';
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeartCircleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { makeImageUrl } from "@shared/helpers";
+import styles from "./PairLink.module.scss";
+import { useAppSelector } from "@shared/lib/hooks";
+import { FailedPair, Loading } from "./components";
 
 export const PairLink = () => {
-  const pairs = useAppSelector((state) => state.user.pairs);
+  const pairsInfo = useAppSelector((state) => state.user.pairsInfo);
+  const isPairsInfoLoading = useAppSelector(
+    (state) => state.user.isPairsInfoLoading
+  );
 
-  if (!pairs.length) {
+  if (isPairsInfoLoading) {
+    return <Loading />;
+  }
+
+  if (!pairsInfo.count) {
     return <FailedPair />;
   }
 
-  const firstPair = pairs[0];
+  const picture = pairsInfo.picture;
 
-  const imageUrl = makeImageUrl(firstPair.id, firstPair.pictures[0].name);
+  const imageUrl = makeImageUrl(picture?.userId, picture?.name);
 
   return (
     <div className={styles.pairs}>
@@ -27,8 +34,8 @@ export const PairLink = () => {
             alt="Pair img"
             draggable="false"
           />
-          <div className={styles.likes}>{pairs.length}</div>
-          <div className={styles.text}>{pairs.length} likes</div>
+          <div className={styles.likes}>{pairsInfo.count}</div>
+          <div className={styles.text}>{pairsInfo.count} likes</div>
           <FontAwesomeIcon
             icon={faHeartCircleExclamation}
             className={styles.icon}

@@ -6,6 +6,15 @@ export interface Picture {
   order: number;
 }
 
+export interface FullPicture {
+  id: string;
+  name: string;
+  order: number;
+  userId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface Place {
   name: string;
   address: string;
@@ -80,6 +89,6 @@ export interface ShortUser {
   pictures: Picture[];
 }
 
-export interface ShortUserWithoutDistance extends Omit<ShortUser, 'distance'> {
+export interface ShortUserWithoutDistance extends Omit<ShortUser, "distance"> {
   distance: never;
 }

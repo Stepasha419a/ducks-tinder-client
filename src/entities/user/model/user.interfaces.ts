@@ -1,4 +1,5 @@
-import type { Range, ShortUser, User } from '@shared/api/interfaces';
+import type { PairsInfo } from "@/shared/api/services/user/user-service.interface";
+import type { Range, ShortUser, User } from "@shared/api/interfaces";
 
 export interface PairSorts {
   distance: number;
@@ -21,4 +22,6 @@ export interface UserInitialState {
     isImageCropOpen: boolean;
     isDialogUploadOpen: boolean;
   };
+  isPairsInfoLoading: boolean;
+  pairsInfo: PairsInfo;
 }

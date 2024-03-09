@@ -4,7 +4,7 @@ import type {
   ShortUser,
   ShortUserWithoutDistance,
 } from '@shared/api/interfaces';
-import type { PartialUser } from './user-service.interface';
+import type { PairsInfo, PartialUser } from './user-service.interface';
 
 export const userService = {
   async getSortedUser() {
@@ -54,6 +54,12 @@ export const userService = {
   async getPairs() {
     return instance.get<ShortUser[]>(
       `${process.env.USER_SERVICE_URL!}/user/pairs`
+    );
+  },
+
+  async getPairsInfo() {
+    return instance.get<PairsInfo>(
+      `${process.env.USER_SERVICE_URL!}/user/pairs/info`
     );
   },
 

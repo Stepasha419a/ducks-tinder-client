@@ -52,6 +52,19 @@ export const getUserPairsThunk = createAsyncThunk(
   }
 );
 
+export const getPairsInfoThunk = createAsyncThunk(
+  'users/getPairsInfo',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await userService.getPairsInfo();
+
+      return response.data;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
 export const acceptPairThunk = createAsyncThunk(
   'users/acceptPair',
   async (_, { rejectWithValue, getState }) => {

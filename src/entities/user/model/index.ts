@@ -16,6 +16,7 @@ export {
   refusePairThunk,
   acceptPairThunk,
   getUserPairsThunk,
+  getPairsInfoThunk
 } from './user.thunks';
 export {
   selectCropImage,
