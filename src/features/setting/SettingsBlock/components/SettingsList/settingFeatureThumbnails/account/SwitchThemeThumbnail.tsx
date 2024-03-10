@@ -1,10 +1,9 @@
 import { SettingThumbnail } from '@entities/setting/components';
-import { setTheme } from '@entities/theme/model';
+import { setTheme } from '@/shared/model/theme';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { CheckboxInput } from '@shared/ui';
-import styles from './SwitchTheme.module.scss';
 
-export const SwitchTheme = () => {
+export const SwitchThemeThumbnail = () => {
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.theme.theme);
 
@@ -21,7 +20,6 @@ export const SwitchTheme = () => {
         onChange={handleChange}
         variant="small"
         text="Dark Mode"
-        extraClassName={styles.checkbox}
       />
     </SettingThumbnail>
   );

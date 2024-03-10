@@ -1,0 +1,1 @@
+export { themeReducer } from './theme';

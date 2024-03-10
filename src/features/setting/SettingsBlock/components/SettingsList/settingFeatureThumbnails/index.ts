@@ -10,5 +10,6 @@ export {
   DescriptionSettingThumbnail,
   SexSettingThumbnail,
   AgeSettingThumbnail,
+  SwitchThemeThumbnail,
 } from './account';
 export { NicknameSettingThumbnail } from './nickname';

@@ -1,9 +1,9 @@
-import { authReducer } from '@entities/auth';
+import { authReducer } from '@entities/user';
 import { chatReducer } from '@entities/chat';
 import { settingReducer } from '@entities/setting';
 import { tinderReducer } from '@entities/tinder';
 import { userReducer } from '@entities/user';
-import { themeReducer } from '@entities/theme';
+import { themeReducer } from '@shared/model';
 import { combineReducers } from '@reduxjs/toolkit';
 
 export const rootReducer = combineReducers({
