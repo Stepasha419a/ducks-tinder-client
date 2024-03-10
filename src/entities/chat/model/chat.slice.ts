@@ -17,6 +17,7 @@ import {
 } from './chat.thunks';
 import { toast } from 'react-toastify';
 import type { ShortMessagesPagination } from '@/shared/api/services/chat/chat-service.interface';
+import { PAGINATION_TAKE } from '@/shared/lib/constants';
 
 const initialState: ChatInitialState = {
   chats: [],
@@ -73,25 +74,6 @@ const chatSlice = createSlice({
             : message.text;
         toast(`${chat.name}: ${messageText}`);
       }
-    },
-    setMessages: (
-      state,
-      { payload }: PayloadAction<ShortMessagesPagination>
-    ) => {
-      if (state.isMessagesInitialLoading) {
-        state.isMessagesInitialLoading = false;
-      }
-      if (payload.messages.length === 0) {
-        state.isMessagesEnded = true;
-        return;
-      }
-
-      const isActive = payload.chatId === state.currentChatId;
-      if (!isActive) {
-        return;
-      }
-
-      state.messages = payload.messages.reverse().concat(state.messages);
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
@@ -197,9 +179,35 @@ const chatSlice = createSlice({
       .addCase(connectChatThunk.fulfilled, (state) => {
         state.isMessagesInitialLoading = false;
       })
-      .addCase(getMessagesThunk.fulfilled, (state) => {
-        state.isMessagesLoading = false;
-      })
+      .addCase(
+        getMessagesThunk.fulfilled,
+        (
+          state,
+          { payload }: PayloadAction<ShortMessagesPagination | undefined>
+        ) => {
+          state.isMessagesLoading = false;
+          if (!payload) {
+            return;
+          }
+
+          if (state.isMessagesInitialLoading) {
+            state.isMessagesInitialLoading = false;
+          }
+          if (payload.messages.length < PAGINATION_TAKE) {
+            state.isMessagesEnded = true;
+            if (payload.messages.length === 0) {
+              return;
+            }
+          }
+
+          const isActive = payload.chatId === state.currentChatId;
+          if (!isActive) {
+            return;
+          }
+
+          state.messages = payload.messages.reverse().concat(state.messages);
+        }
+      )
       .addCase(disconnectChatThunk.fulfilled, (state) => {
         if (state.currentChatId) {
           const chat = state.chats.find(
@@ -229,7 +237,6 @@ const chatSlice = createSlice({
 export const {
   pushNewMessage,
   setCurrentChatData,
-  setMessages,
   deleteMessage,
   setIsMessagesLoading,
   editMessage,

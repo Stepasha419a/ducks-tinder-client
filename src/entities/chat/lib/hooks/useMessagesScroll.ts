@@ -1,52 +1,49 @@
-import type { MutableRefObject } from 'react';
-import { useRef } from 'react';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useDebouncedCallback,
-  useInitialScrollToBottom,
-  useIntersectionObserver,
-  useScrollToBottom,
-} from '@shared/lib/hooks';
-import { getMessagesThunk, selectCurrentMessagesLength } from '../../model';
+import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import { scrollToBottom } from '@/shared/lib/helpers';
+import { useAppSelector } from '@/shared/lib/hooks';
 
-interface UseMessagesScrollReturn {
-  messagesRef: MutableRefObject<HTMLDivElement | null>;
-  topScrollRef: MutableRefObject<HTMLDivElement | null>;
-}
-
-export function useMessagesScroll(): UseMessagesScrollReturn {
-  const dispatch = useAppDispatch();
-
-  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
-  const currentMessages = useAppSelector(selectCurrentMessagesLength);
-  const isMessagesEnded = useAppSelector((state) => state.chat.isMessagesEnded);
-  const isMessagesLoading = useAppSelector(
-    (state) => state.chat.isMessagesLoading
+export function useMessagesScroll() {
+  const isMessagesInitialLoading = useAppSelector(
+    (state) => state.chat.isMessagesInitialLoading
   );
 
+  const messagesLength = useAppSelector((state) => state.chat.messages.length);
+
   const messagesRef = useRef<HTMLDivElement | null>(null);
-  useInitialScrollToBottom(messagesRef, [currentChatId]);
-  //useScrollToBottom(messagesRef, [currentMessages]);
+  const messagesBottomRef = useRef<HTMLDivElement | null>(null);
+  const previousMessagesLength = useRef(0);
 
-  const topScrollRef = useRef<HTMLDivElement | null>(null);
-  const topScrollEntry = useIntersectionObserver(topScrollRef, {});
-  const isVisible = topScrollEntry?.isIntersecting;
-
-  const delayedGetMessages = useDebouncedCallback(() => {
-    if (!isMessagesEnded) {
-      if (!isMessagesLoading) {
-        dispatch(getMessagesThunk());
-      }
-      if (messagesRef.current) {
-        messagesRef.current.scrollTop = 400;
-      }
+  useLayoutEffect(() => {
+    if (messagesRef.current && !isMessagesInitialLoading) {
+      scrollToBottom(messagesRef);
     }
-  });
+  }, [isMessagesInitialLoading]);
 
-  if (isVisible) {
-    //delayedGetMessages();
-  }
+  const isValidSmoothScroll = useCallback(() => {
+    if (messagesBottomRef.current && messagesRef.current) {
+      const isNearBottom =
+        messagesRef.current.scrollHeight - messagesRef.current.scrollTop <
+        messagesRef.current.clientHeight + 300;
+      const isAddedMessage = previousMessagesLength.current < messagesLength;
 
-  return { messagesRef, topScrollRef };
+      return isNearBottom && isAddedMessage;
+    }
+  }, [messagesLength]);
+
+  useEffect(() => {
+    if (messagesBottomRef.current && messagesRef.current) {
+      setTimeout(() => {
+        if (isValidSmoothScroll()) {
+          messagesBottomRef.current!.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        previousMessagesLength.current = messagesLength;
+      }, 0);
+    }
+  }, [isValidSmoothScroll, messagesLength]);
+
+  return {
+    messagesRef,
+    messagesBottomRef,
+  };
 }

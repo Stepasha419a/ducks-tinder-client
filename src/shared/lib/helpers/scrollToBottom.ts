@@ -5,7 +5,7 @@ export function scrollToBottom(
   behavior?: boolean
 ): void {
   if (!behavior) {
-    ref.current!.scrollTop = ref.current!.scrollHeight;
+    ref.current!.scrollTo(0, ref.current!.scrollHeight);
   } else {
     ref.current?.lastElementChild?.scrollIntoView({ behavior: 'smooth' });
   }

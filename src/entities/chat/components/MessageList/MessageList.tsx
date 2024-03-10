@@ -1,14 +1,18 @@
-import { Fragment, type FC, type ReactElement } from "react";
-import type { Message as MessageInterface } from "@shared/api/interfaces";
-import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
-import { getMessagesThunk, selectMessages } from "@entities/chat/model";
-import { useMessagesProps, useMessagesScroll } from "@entities/chat/lib";
-import { getIsNextDayMessage } from "@entities/chat/lib";
-import { Message, MessageSelect, Timestamp } from "./components";
-import { MessagesLazy } from "./MessageList.lazy";
-import InfiniteScroll from "react-infinite-scroller";
-import classNames from "classnames";
-import styles from "./MessageList.module.scss";
+import { Fragment, type FC, type ReactElement } from 'react';
+import type { Message as MessageInterface } from '@shared/api/interfaces';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDebouncedCallback,
+} from '@shared/lib/hooks';
+import { getMessagesThunk, selectMessages } from '@entities/chat/model';
+import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
+import { getIsNextDayMessage } from '@entities/chat/lib';
+import { Message, MessageSelect, Timestamp } from './components';
+import { MessagesLazy } from './MessageList.lazy';
+import InfiniteScroll from 'react-infinite-scroller';
+import classNames from 'classnames';
+import styles from './MessageList.module.scss';
 
 interface MessagesProps {
   select: ReactElement;
@@ -39,7 +43,11 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
     getTextProps,
   } = useMessagesProps();
 
-  const { messagesRef, topScrollRef } = useMessagesScroll();
+  const { messagesRef, messagesBottomRef } = useMessagesScroll();
+
+  const delayedGetMessages = useDebouncedCallback(() => {
+    dispatch(getMessagesThunk());
+  });
 
   if (isMessagesInitialLoading) {
     return (
@@ -56,12 +64,11 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
   );
 
   const handleLoadMore = () => {
-    if (!isMessagesLoading) dispatch(getMessagesThunk());
+    if (!isMessagesLoading) delayedGetMessages();
   };
 
   return (
     <div className={cn} ref={messagesRef}>
-      <div className={styles.loadMessages} ref={topScrollRef}></div>
       {!isMessagesEnded && <MessagesLazy count={4} />}
 
       <InfiniteScroll
@@ -104,6 +111,7 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
           );
         })}
       </InfiniteScroll>
+      <div ref={messagesBottomRef}></div>
     </div>
   );
 };

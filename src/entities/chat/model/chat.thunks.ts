@@ -14,10 +14,10 @@ import {
   editMessage,
   setIsMessagesLoading,
   setIsNotFound,
-  setMessages,
   unblockChat,
 } from './chat.slice';
 import { checkAuthThunk } from '@entities/auth/model';
+import { PAGINATION_TAKE } from '@/shared/lib/constants';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
@@ -137,13 +137,13 @@ export const getMessagesThunk = createAsyncThunk(
       if (!isMessagesLoading && currentChatId) {
         const params: PaginationParams = {
           skip: messages.length,
-          take: 20,
+          take: PAGINATION_TAKE,
         };
 
         dispatch(setIsMessagesLoading(true));
 
         const response = await chatService.getMessages(currentChatId, params);
-        dispatch(setMessages(response.data));
+        return response.data;
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
