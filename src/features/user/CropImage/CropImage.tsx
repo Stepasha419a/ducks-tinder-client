@@ -5,7 +5,7 @@ import {
   saveUserImageThunk,
   selectCropImage,
   setIsImageCropOpen,
-} from '@entities/user/model';
+} from '@/entities/user/model/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Button, Popup, RangeInput } from '@shared/ui';
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';

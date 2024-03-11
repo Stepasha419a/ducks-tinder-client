@@ -1,6 +1,6 @@
-import type { PairSorts } from '@entities/user/model';
-import { INITIAL_SORTS } from '@entities/user/model';
-import { setPairSorts } from '@entities/user/model';
+import type { PairSorts } from '@/entities/user/model/user';
+import { INITIAL_SORTS } from '@/entities/user/model/user';
+import { setPairSorts } from '@/entities/user/model/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { useController, useForm } from 'react-hook-form';
 

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
-import type { PairSorts } from '@entities/user/model';
+import type { PairSorts } from '@/entities/user/model/user';
 import { RangeInput } from '@shared/ui';
 import styles from '../PairsSortPopup.module.scss';
 

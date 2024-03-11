@@ -5,3 +5,5 @@ export { Preview } from './Preview/Preview';
 export { LikesCount } from './LikesCount/LikesCount';
 export { Places } from './Places/Places';
 export { Map } from './Map/Map';
+export { Loading } from './Loading/Loading';
+export { AuthLayout } from './AuthLayout/AuthLayout';

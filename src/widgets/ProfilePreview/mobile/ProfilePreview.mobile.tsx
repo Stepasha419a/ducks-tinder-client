@@ -6,7 +6,7 @@ import { CropImage, DialogUpload } from '@features/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import { ROUTES } from '@shared/constants';
-import { setIsDialogUploadOpen } from '@entities/user/model';
+import { setIsDialogUploadOpen } from '@/entities/user/model/user';
 import styles from './ProfilePreview.mobile.module.scss';
 
 export const ProfilePreviewMobile = () => {

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import type { ShortUser } from '@shared/api/interfaces';
-import { getUserPairsThunk } from '@entities/user/model';
+import { getUserPairsThunk } from '@/entities/user/model/user';
 import { sortItemBySettings } from '../../lib';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';

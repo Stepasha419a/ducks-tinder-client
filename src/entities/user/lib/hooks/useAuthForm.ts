@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import { loginThunk, registerThunk } from '@entities/auth/model';
+import { loginThunk, registerThunk } from '@/entities/user/model/auth';
 import { EMAIL_REGEXP } from '@shared/constants';
 import type { TextFieldProps } from '@shared/ui/inputs/TextField/TextField.types';
 import type { RegistrationParams } from '@shared/api/services/auth';

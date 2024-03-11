@@ -1,5 +1,5 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { INTERESTS_FOR_LOOP } from '@entities/user/model';
+import { INTERESTS_FOR_LOOP } from '@/entities/user/model/user';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ListItem } from '@shared/ui';

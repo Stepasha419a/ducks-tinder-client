@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { Places } from '@entities/user/components';
-import { updateUserPlaceThunk } from '@entities/user/model';
+import { updateUserPlaceThunk } from '@/entities/user/model/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import styles from './PlacesGeolocation.module.scss';
 

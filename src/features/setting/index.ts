@@ -9,6 +9,7 @@ export {
   SexSettingThumbnail,
   AgeSettingThumbnail,
   NicknameSettingThumbnail,
+  SwitchThemeThumbnail,
 } from './SettingsBlock/components/SettingsList/settingFeatureThumbnails';
 export { LogoutButton } from './LogoutButton/LogoutButton';
 export { SettingsBlock } from './SettingsBlock/SettingsBlock';

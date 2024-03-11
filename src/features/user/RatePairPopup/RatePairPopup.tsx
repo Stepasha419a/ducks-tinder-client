@@ -2,10 +2,10 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Button, Popup } from '@shared/ui';
-import { setCurrentPair } from '@entities/user/model/user.slice';
+import { setCurrentPair } from '@/entities/user/model/user/user.slice';
 import { InterestsListPopup, Preview } from '@entities/user/components';
 import styles from './RatePairPopup.module.scss';
-import { refusePairThunk, acceptPairThunk } from '@entities/user/model';
+import { refusePairThunk, acceptPairThunk } from '@/entities/user/model/user';
 import classNames from 'classnames';
 
 export const RatePairPopup: FC = () => {

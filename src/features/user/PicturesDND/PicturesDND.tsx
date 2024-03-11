@@ -6,7 +6,7 @@ import {
   deleteUserPictureThunk,
   selectImagesDND,
   setIsDialogUploadOpen,
-} from '@entities/user/model';
+} from '@/entities/user/model/user';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
 import styles from './PicturesDND.module.scss';

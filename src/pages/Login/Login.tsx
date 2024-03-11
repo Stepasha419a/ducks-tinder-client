@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
-import { LoginForm } from '@features/auth';
-import { WithAuthRedirect } from '@features/auth/lib/hocs';
+import { LoginForm } from '@features/user';
+import { WithAuthRedirect } from '@/features/user/lib';
 
 const Login = (): ReactElement => {
   return <LoginForm />;

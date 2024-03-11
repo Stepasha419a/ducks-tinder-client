@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Navigate, useLocation } from 'react-router-dom';
-import { checkAuthThunk } from '@entities/auth/model';
+import { checkAuthThunk } from '@/entities/user/model/auth';
 import { ROUTES } from '@shared/constants';
 
 export const WithAuthRedirect = <P extends object>(Component: FC<P>): FC<P> => {

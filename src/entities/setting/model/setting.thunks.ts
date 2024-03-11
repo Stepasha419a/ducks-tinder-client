@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { updateUserThunk } from '@entities/user/model';
+import { updateUserThunk } from '@/entities/user/model/user';
 import { returnErrorMessage } from '@shared/helpers';
 import type { PartialUser } from '@/shared/api/services/user/user-service.interface';
 
