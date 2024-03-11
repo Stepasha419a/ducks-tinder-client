@@ -3,7 +3,7 @@ import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '@entities/tinder/model';
+} from '@entities/user/model/tinder';
 import {
   faBolt,
   faHeart,

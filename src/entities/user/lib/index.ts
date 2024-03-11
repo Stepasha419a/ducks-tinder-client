@@ -4,4 +4,4 @@ export {
   getLifestyle,
   getUserSliderInfo,
 } from './helpers';
-export { useAuthForm } from './hooks';
+export { useAuthForm, useTinderAnimations } from './hooks';

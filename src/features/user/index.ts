@@ -8,3 +8,5 @@ export { SetCurrentPair } from './SetCurrentPair/SetCurrentPair';
 export { ProfileSubmit } from './ProfileSubmit/ProfileSubmit';
 export { LoginForm } from './LoginForm/LoginForm';
 export { RegistrationForm } from './RegistrationForm/RegistrationForm';
+export { RateButtons } from './RateButtons/RateButtons';
+export { SwipeUser } from './SwipeUser/SwipeUser';

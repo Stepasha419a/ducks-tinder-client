@@ -10,8 +10,11 @@ import {
   useMediaQuery,
 } from '@shared/lib/hooks';
 import { Preview } from '@entities/user/components';
-import { getSortedUserThunk, selectTinderData } from '@entities/tinder/model';
-import { useKeyboardEvents, useSwipeProps } from '../lib';
+import {
+  getSortedUserThunk,
+  selectTinderData,
+} from '@entities/user/model/tinder';
+import { useKeyboardEvents, useSwipeProps } from '../../user/lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';
 
