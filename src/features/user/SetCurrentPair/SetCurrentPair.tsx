@@ -1,6 +1,6 @@
 import type { ShortUser } from '@shared/api/interfaces';
 import { PairsList } from '@entities/user/components';
-import { setCurrentPair } from '@/entities/user/model/user';
+import { setCurrentPair } from '@/entities/user/model/pair';
 import { useAppDispatch } from '@shared/lib/hooks';
 
 export const SetCurrentPair = () => {

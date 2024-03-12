@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import type { ShortUser } from '@shared/api/interfaces';
-import { getUserPairsThunk } from '@/entities/user/model/user';
+import { getUserPairsThunk } from '@/entities/user/model/pair';
 import { sortItemBySettings } from '../../lib';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
@@ -17,9 +17,9 @@ interface PairsListProps {
 export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
-  const pairs = useAppSelector((state) => state.user.pairs);
-  const pairSorts = useAppSelector((state) => state.user.pairSorts);
-  const isPairsLoading = useAppSelector((state) => state.user.isPairsLoading);
+  const pairs = useAppSelector((state) => state.pair.pairs);
+  const pairSorts = useAppSelector((state) => state.pair.pairSorts);
+  const isPairsLoading = useAppSelector((state) => state.pair.isPairsLoading);
 
   useEffect(() => {
     dispatch(getUserPairsThunk());

@@ -1,5 +1,5 @@
-import type { PairsInfo } from "@/shared/api/services/user/user-service.interface";
-import type { Range, ShortUser, User } from "@shared/api/interfaces";
+import type { Range, ShortUser } from '@/shared/api/interfaces';
+import type { PairsInfo } from '@/shared/api/services/user/user-service.interface';
 
 export interface PairSorts {
   distance: number;
@@ -11,17 +11,11 @@ export interface PairSorts {
 
 export type PairSortsKey = keyof PairSorts;
 
-export interface UserInitialState {
-  currentUser: User;
+export interface PairInitialState {
   currentPair: ShortUser | null;
   isPairsLoading: boolean;
   pairs: ShortUser[];
   pairSorts: PairSorts;
-  profileSetting: {
-    imageURL: string | null;
-    isImageCropOpen: boolean;
-    isDialogUploadOpen: boolean;
-  };
   isPairsInfoLoading: boolean;
   pairsInfo: PairsInfo;
 }

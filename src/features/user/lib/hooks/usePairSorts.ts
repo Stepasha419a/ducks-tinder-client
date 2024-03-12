@@ -1,12 +1,12 @@
-import type { PairSorts } from '@/entities/user/model/user';
-import { INITIAL_SORTS } from '@/entities/user/model/user';
-import { setPairSorts } from '@/entities/user/model/user';
+import type { PairSorts } from '@/entities/user/model/pair';
+import { INITIAL_SORTS } from '@/entities/user/model/pair';
+import { setPairSorts } from '@/entities/user/model/pair';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { useController, useForm } from 'react-hook-form';
 
 export function usePairSorts() {
   const dispatch = useAppDispatch();
-  const pairSorts = useAppSelector((state) => state.user.pairSorts);
+  const pairSorts = useAppSelector((state) => state.pair.pairSorts);
 
   const { control, handleSubmit, reset } = useForm<PairSorts>({
     defaultValues: pairSorts,

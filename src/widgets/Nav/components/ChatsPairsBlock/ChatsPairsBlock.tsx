@@ -9,7 +9,7 @@ import { getIsChatPage } from '@entities/chat/lib';
 import { ChatList } from '@entities/chat/components';
 import styles from './ChatsPairsBlock.module.scss';
 import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
-import { getPairsInfoThunk } from '@/entities/user/model/user';
+import { getPairsInfoThunk } from '@/entities/user/model/pair';
 
 export const ChatsPairsBlock: FC = () => {
   const { pathname } = useLocation();

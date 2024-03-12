@@ -1,5 +1,5 @@
 import type { ShortUser } from '@shared/api/interfaces';
-import type { PairSorts, PairSortsKey } from '../../model/user/user.interfaces';
+import type { PairSorts, PairSortsKey } from '../../model/pair';
 
 export function sortItemBySettings(
   item: ShortUser,

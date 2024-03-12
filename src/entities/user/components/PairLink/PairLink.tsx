@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeartCircleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { makeImageUrl } from "@shared/helpers";
-import styles from "./PairLink.module.scss";
-import { useAppSelector } from "@shared/lib/hooks";
-import { FailedPair, Loading } from "./components";
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { makeImageUrl } from '@shared/helpers';
+import styles from './PairLink.module.scss';
+import { useAppSelector } from '@shared/lib/hooks';
+import { FailedPair, Loading } from './components';
 
 export const PairLink = () => {
-  const pairsInfo = useAppSelector((state) => state.user.pairsInfo);
+  const pairsInfo = useAppSelector((state) => state.pair.pairsInfo);
   const isPairsInfoLoading = useAppSelector(
-    (state) => state.user.isPairsInfoLoading
+    (state) => state.pair.isPairsInfoLoading
   );
 
   if (isPairsInfoLoading) {

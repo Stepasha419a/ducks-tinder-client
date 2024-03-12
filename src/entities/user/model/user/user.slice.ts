@@ -1,56 +1,32 @@
-import { toast } from "react-toastify";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
-import type {
-  ShortUser,
-  ShortUserWithoutDistance,
-  User,
-} from "@shared/api/interfaces";
+import { toast } from 'react-toastify';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import type { User } from '@shared/api/interfaces';
 import {
-  acceptPairThunk,
-  refusePairThunk,
   deleteUserPictureThunk,
-  getUserPairsThunk,
   mixUserPicturesThunk,
   saveUserImageThunk,
   updateUserThunk,
   updateUserPlaceThunk,
-  getPairsInfoThunk,
-} from "./user.thunks";
-import type { PairSorts, UserInitialState } from "./user.interfaces";
-import { INITIAL_SORTS } from "./user.constants";
+} from './user.thunks';
+import type { UserInitialState } from './user.interface';
 
 const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh
   currentUser: {} as User,
-  currentPair: null,
-  isPairsLoading: true,
-  pairs: [],
-  pairSorts: INITIAL_SORTS,
   profileSetting: {
     imageURL: null,
     isDialogUploadOpen: false,
     isImageCropOpen: false,
   },
-  isPairsInfoLoading: true,
-  pairsInfo: {
-    count: 0,
-    picture: null,
-  },
 };
 
 const userSlice = createSlice({
-  name: "userSlice",
+  name: 'userSlice',
   initialState,
   reducers: {
     setCurrentUser: (state, { payload }: PayloadAction<User>) => {
       state.currentUser = payload;
-    },
-    setCurrentPair: (state, { payload }: PayloadAction<ShortUser | null>) => {
-      state.currentPair = payload;
-    },
-    setPairSorts: (state, { payload }: PayloadAction<PairSorts>) => {
-      state.pairSorts = payload;
     },
     setIsDialogUploadOpen: (state, { payload }: PayloadAction<boolean>) => {
       state.profileSetting.isDialogUploadOpen = payload;
@@ -66,27 +42,9 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getUserPairsThunk.fulfilled, (state, { payload }) => {
-        state.pairs = payload;
-        state.isPairsLoading = false;
-      })
-      .addCase(
-        acceptPairThunk.fulfilled,
-        (state, { payload }: PayloadAction<ShortUserWithoutDistance>) => {
-          state.pairs = state.pairs.filter((pair) => pair.id !== payload.id);
-          state.currentPair = null;
-        }
-      )
-      .addCase(
-        refusePairThunk.fulfilled,
-        (state, { payload }: PayloadAction<ShortUserWithoutDistance>) => {
-          state.pairs = state.pairs.filter((pair) => pair.id !== payload.id);
-          state.currentPair = null;
-        }
-      )
       .addCase(updateUserThunk.rejected, (_, { payload }) => {
-        if (payload === "User already exists") {
-          toast("This email address is already used, try another one");
+        if (payload === 'User already exists') {
+          toast('This email address is already used, try another one');
         }
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
@@ -105,21 +63,12 @@ const userSlice = createSlice({
       })
       .addCase(mixUserPicturesThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
-      })
-      .addCase(getPairsInfoThunk.pending, (state) => {
-        state.isPairsInfoLoading = true;
-      })
-      .addCase(getPairsInfoThunk.fulfilled, (state, { payload }) => {
-        state.pairsInfo = payload;
-        state.isPairsInfoLoading = false;
       });
   },
 });
 
 export const {
   setCurrentUser,
-  setCurrentPair,
-  setPairSorts,
   setIsDialogUploadOpen,
   setIsImageCropOpen,
   setImageChange,
