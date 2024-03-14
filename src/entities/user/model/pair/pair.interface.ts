@@ -12,7 +12,6 @@ export interface PairSorts {
 export type PairSortsKey = keyof PairSorts;
 
 export interface PairInitialState {
-  currentPair: ShortUser | null;
   isPairsLoading: boolean;
   pairs: ShortUser[];
   pairSorts: PairSorts;

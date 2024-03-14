@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -11,7 +11,7 @@ import styles from './PairsList.module.scss';
 import { PairsListLazy } from './PairsList.lazy';
 
 interface PairsListProps {
-  setCurrentPair: (user: ShortUser) => void;
+  setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;
 }
 
 export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {

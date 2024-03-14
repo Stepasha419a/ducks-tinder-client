@@ -1,9 +1,5 @@
 import { instance } from '@shared/api';
-import type {
-  User,
-  ShortUser,
-  ShortUserWithoutDistance,
-} from '@shared/api/interfaces';
+import type { User, ShortUser } from '@shared/api/interfaces';
 import type { PairsInfo, PartialUser } from './user-service.interface';
 
 export const userService = {
@@ -64,13 +60,13 @@ export const userService = {
   },
 
   async acceptPair(pairId: string) {
-    return instance.post<ShortUserWithoutDistance>(
+    return instance.post<string>(
       `${process.env.USER_SERVICE_URL!}/user/pairs/${pairId}`
     );
   },
 
   async deletePair(pairId: string) {
-    return instance.put<ShortUserWithoutDistance>(
+    return instance.put<string>(
       `${process.env.USER_SERVICE_URL!}/user/pairs/${pairId}`
     );
   },

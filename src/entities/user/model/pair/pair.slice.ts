@@ -2,10 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { PairInitialState, PairSorts } from './pair.interface';
 import { INITIAL_SORTS } from './pair.constants';
-import type {
-  ShortUser,
-  ShortUserWithoutDistance,
-} from '@/shared/api/interfaces';
 import {
   acceptPairThunk,
   getPairsInfoThunk,
@@ -14,7 +10,6 @@ import {
 } from './pair.thunks';
 
 const initialState: PairInitialState = {
-  currentPair: null,
   isPairsLoading: true,
   pairs: [],
   pairSorts: INITIAL_SORTS,
@@ -29,9 +24,6 @@ const pairSlice = createSlice({
   name: 'pairSlice',
   initialState,
   reducers: {
-    setCurrentPair: (state, { payload }: PayloadAction<ShortUser | null>) => {
-      state.currentPair = payload;
-    },
     setPairSorts: (state, { payload }: PayloadAction<PairSorts>) => {
       state.pairSorts = payload;
     },
@@ -44,16 +36,16 @@ const pairSlice = createSlice({
       })
       .addCase(
         acceptPairThunk.fulfilled,
-        (state, { payload }: PayloadAction<ShortUserWithoutDistance>) => {
-          state.pairs = state.pairs.filter((pair) => pair.id !== payload.id);
-          state.currentPair = null;
+        (state, { payload: pairId }: PayloadAction<string>) => {
+          state.pairsInfo.count--;
+          state.pairs = state.pairs.filter((pair) => pair.id !== pairId);
         }
       )
       .addCase(
         refusePairThunk.fulfilled,
-        (state, { payload }: PayloadAction<ShortUserWithoutDistance>) => {
-          state.pairs = state.pairs.filter((pair) => pair.id !== payload.id);
-          state.currentPair = null;
+        (state, { payload: pairId }: PayloadAction<string>) => {
+          state.pairsInfo.count--;
+          state.pairs = state.pairs.filter((pair) => pair.id !== pairId);
         }
       )
       .addCase(getPairsInfoThunk.pending, (state) => {
@@ -66,6 +58,6 @@ const pairSlice = createSlice({
   },
 });
 
-export const { setCurrentPair, setPairSorts } = pairSlice.actions;
+export const { setPairSorts } = pairSlice.actions;
 
 export const pairReducer = pairSlice.reducer;

@@ -4,7 +4,6 @@ export { CropImage } from './CropImage/CropImage';
 export { DialogUpload } from './DialogUpload/DialogUpload';
 export { PicturesDND } from './PicturesDND/PicturesDND';
 export { PairsSortPopup } from './PairsSortPopup/PairsSortPopup';
-export { SetCurrentPair } from './SetCurrentPair/SetCurrentPair';
 export { ProfileSubmit } from './ProfileSubmit/ProfileSubmit';
 export { LoginForm } from './LoginForm/LoginForm';
 export { RegistrationForm } from './RegistrationForm/RegistrationForm';

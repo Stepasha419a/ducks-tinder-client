@@ -1,40 +1,41 @@
-import type { FC } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { Button, Popup } from '@shared/ui';
 import { InterestsListPopup, Preview } from '@entities/user/components';
 import styles from './RatePairPopup.module.scss';
-import {
-  refusePairThunk,
-  acceptPairThunk,
-  setCurrentPair,
-} from '@/entities/user/model/pair';
+import { refusePairThunk, acceptPairThunk } from '@/entities/user/model/pair';
 import classNames from 'classnames';
+import type { ShortUser } from '@/shared/api/interfaces';
 
-export const RatePairPopup: FC = () => {
+interface RatePairPopupProps {
+  currentPair: ShortUser;
+  setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;
+}
+
+export const RatePairPopup: FC<RatePairPopupProps> = ({
+  currentPair,
+  setCurrentPair,
+}) => {
   const dispatch = useAppDispatch();
-
-  const currentPair = useAppSelector((state) => state.pair.currentPair);
 
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
 
   const handleAccept = (): void => {
-    dispatch(acceptPairThunk());
+    dispatch(acceptPairThunk(currentPair.id));
+    setCurrentPair(null);
   };
 
   const handleRefuse = (): void => {
-    dispatch(refusePairThunk());
+    dispatch(refusePairThunk(currentPair.id));
+    setCurrentPair(null);
   };
-
-  if (!currentPair) {
-    return null;
-  }
 
   return (
     <>
       <Popup
-        closeHandler={() => dispatch(setCurrentPair(null))}
+        closeHandler={() => setCurrentPair(null)}
         size="l"
         extraClassName={styles.overflow}
       >
