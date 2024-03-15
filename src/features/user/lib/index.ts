@@ -3,5 +3,10 @@ export {
   useRateButtons,
   useSwipeProps,
   useKeyboardEvents,
+  useRadioForm,
+  useTextForm,
+  useProfileNullOnClose,
+  useProfileSelectForm,
 } from './hooks';
-export { WithAuthRedirect } from './hocs';
+export { WithAuthRedirect, WithCheckedFields } from './hocs';
+export { getProfileSettingWrapperData } from './helpers';

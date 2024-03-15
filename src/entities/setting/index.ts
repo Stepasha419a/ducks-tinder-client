@@ -1,1 +1,0 @@
-export { settingReducer } from './model';

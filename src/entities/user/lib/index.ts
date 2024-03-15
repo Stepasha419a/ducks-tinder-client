@@ -3,5 +3,15 @@ export {
   getMoreAboutMe,
   getLifestyle,
   getUserSliderInfo,
+  getSettingUrl,
+  getSelectData,
 } from './helpers';
-export { useAuthForm, useTinderAnimations } from './hooks';
+export {
+  useAuthForm,
+  useTinderAnimations,
+  useCurrentValidation,
+  useDefaultValues,
+  useSettingUrl,
+  useDefaultProfileValues,
+  useProfileSettingUrl,
+} from './hooks';

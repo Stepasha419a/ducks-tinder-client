@@ -7,7 +7,7 @@ import {
   PicturesDND,
   ProfileSubmit,
 } from '@features/user';
-import { ProfileSettingsList } from '@features/setting';
+import { ProfileSettingsList } from '@features/user';
 import styles from './ProfileSettingBlock.module.scss';
 
 interface ProfileSettingProps {

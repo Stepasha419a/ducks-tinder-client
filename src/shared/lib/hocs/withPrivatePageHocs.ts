@@ -1,4 +1,4 @@
-import { WithCheckedFields } from '@features/setting/lib';
+import { WithCheckedFields } from '@features/user/lib';
 import { WithAuthRedirect } from '@features/user/lib';
 import { WithChatConnection, WithChats } from '@features/chat/lib';
 import { compose } from '@shared/helpers';

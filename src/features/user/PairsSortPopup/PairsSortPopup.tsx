@@ -1,7 +1,7 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import { Popup } from '@shared/ui';
-import { ItemsSettingPopup } from '@entities/setting/components';
+import { ItemsSettingPopup } from '@entities/user/components';
 import { usePairSorts } from '../lib';
 import {
   AgeSetting,
@@ -12,7 +12,7 @@ import {
   PhotosSetting,
 } from './components';
 import styles from './PairsSortPopup.module.scss';
-import { SETTING_INTERESTS_LIST } from '@entities/setting/model/setting.constants';
+import { SETTING_INTERESTS_LIST } from '@entities/user/model/setting/setting.constants';
 
 interface PairsSortPopupProps {
   setIsSortPopupOpen: Dispatch<SetStateAction<boolean>>;

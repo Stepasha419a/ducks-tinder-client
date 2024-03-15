@@ -1,6 +1,6 @@
 import { authReducer } from '@entities/user';
 import { chatReducer } from '@entities/chat';
-import { settingReducer } from '@entities/setting';
+import { settingReducer } from '@entities/user';
 import { tinderReducer } from '@entities/user';
 import { userReducer } from '@entities/user';
 import { themeReducer } from '@shared/model';
