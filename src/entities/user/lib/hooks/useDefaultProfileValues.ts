@@ -1,13 +1,11 @@
 import type { User } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
-import type {
-  MultiSelectForm,
-  ProfileSettingName,
-} from '@entities/user/model/setting';
+import type { MultiSelectForm } from '@entities/user/model/setting';
 import { getSelectSettingFields } from '../helpers';
+import type { ProfileSettingNameEnum } from '../constants';
 
 export function useDefaultProfileValues(
-  settingName: ProfileSettingName
+  settingName: ProfileSettingNameEnum
 ): MultiSelectForm {
   const currentUser = useAppSelector((state) => state.user.currentUser!);
 
@@ -17,7 +15,7 @@ export function useDefaultProfileValues(
 }
 
 function getProfileSelectData(
-  settingName: ProfileSettingName,
+  settingName: ProfileSettingNameEnum,
   currentUser: User
 ) {
   const fields = getSelectSettingFields(settingName);

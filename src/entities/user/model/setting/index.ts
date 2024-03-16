@@ -3,8 +3,6 @@ export {
   checkFields,
   setInput,
   nullInput,
-  nullProfileSetting,
-  setProfileSetting,
 } from './setting.slice';
 export { submitSettingsThunk } from './setting.thunks';
 export type {
@@ -14,7 +12,6 @@ export type {
   SettingFieldInterestsArray,
   SettingFieldValues,
   Validation,
-  ProfileSettingName,
   ProfileSettingSelectName,
   SelectValidation,
 } from './setting.interfaces';

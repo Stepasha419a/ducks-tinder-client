@@ -28,7 +28,6 @@ export type Setting =
   | 'preferAgeTo'
   | 'usersOnlyInDistance';
 
-export type ProfileSettingName = 'interests' | 'moreAboutMe' | 'lifestyle';
 export type ProfileSettingSelectName =
   | 'interests'
   | 'zodiacSign'
@@ -45,18 +44,12 @@ export type ProfileSettingSelectName =
   | 'socialNetworksActivity'
   | 'trainingAttitude';
 
-type ProfileSettingType = 'radio' | 'select' | null;
-
 export interface SettingInitialState {
   settingType: SettingType;
   settingName: SettingName | null;
   validation: Validation | null;
   formName: string | null;
   errorFields: Setting[];
-  profileSetting: {
-    settingType: ProfileSettingType;
-    settingName: ProfileSettingName | null;
-  };
 }
 
 export interface SetInputPayload {

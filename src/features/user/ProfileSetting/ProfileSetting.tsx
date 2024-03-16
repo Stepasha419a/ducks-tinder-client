@@ -1,20 +1,15 @@
-import { useAppSelector } from '@shared/lib/hooks';
 import { useProfileSettingUrl } from '@entities/user/lib';
 import { NotFoundSetting } from '@entities/user/components';
 import { ROUTES } from '@shared/lib/constants';
 import { SelectForm } from './components';
 
 export const ProfileSetting = () => {
-  const settingType = useAppSelector(
-    (state) => state.setting.profileSetting.settingType
-  );
-
-  const isFound = useProfileSettingUrl();
-  if (!isFound) {
+  const profileSetting = useProfileSettingUrl();
+  if (!profileSetting) {
     return <NotFoundSetting url={`${ROUTES.profile}/edit`} />;
   }
 
-  if (settingType === 'radio') {
+  if (profileSetting.settingType === 'radio') {
     return <div>radio</div>;
   }
 

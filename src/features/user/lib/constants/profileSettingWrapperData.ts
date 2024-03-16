@@ -1,4 +1,4 @@
-import type { ProfileSettingName } from '@entities/user/model/setting';
+import type { ProfileSettingNameEnum } from '@/entities/user/lib';
 
 export interface ProfileSettingWrapperData {
   title: string;
@@ -6,7 +6,7 @@ export interface ProfileSettingWrapperData {
 }
 
 export const PROFILE_SETTING_WRAPPER_DATA: Record<
-  ProfileSettingName | 'default',
+  ProfileSettingNameEnum | 'default',
   ProfileSettingWrapperData
 > = {
   interests: {

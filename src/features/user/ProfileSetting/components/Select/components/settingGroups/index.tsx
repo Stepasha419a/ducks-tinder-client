@@ -1,26 +1,25 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
 import type { MultiSelectForm } from '@entities/user/model/setting';
-import { useAppSelector } from '@shared/lib/hooks';
 import { InterestsSettingGroup } from './InterestsSettingGroup';
 import { MoreAboutMeSettingGroup } from './MoreAboutMeSettingGroup';
 import { LifestyleSettingGroup } from './LifestyleSettingGroup';
+import { useProfileSettingUrl } from '@/entities/user/lib';
+import { ProfileSettingNameEnum } from '@/entities/user/lib/constants';
 
 interface SettingsGroupProps {
   control: Control<MultiSelectForm>;
 }
 
 export const SettingsGroup: FC<SettingsGroupProps> = ({ control }) => {
-  const settingName = useAppSelector(
-    (state) => state.setting.profileSetting.settingName
-  );
+  const profileSetting = useProfileSettingUrl()!;
 
-  switch (settingName) {
-    case 'interests':
+  switch (profileSetting.settingName) {
+    case ProfileSettingNameEnum.INTERESTS:
       return <InterestsSettingGroup control={control} />;
-    case 'moreAboutMe':
+    case ProfileSettingNameEnum.MORE_ABOUT_ME:
       return <MoreAboutMeSettingGroup control={control} />;
-    case 'lifestyle':
+    case ProfileSettingNameEnum.LIFESTYLE:
       return <LifestyleSettingGroup control={control} />;
     default:
       return <div>not found group</div>;

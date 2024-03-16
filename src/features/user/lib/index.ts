@@ -5,7 +5,6 @@ export {
   useKeyboardEvents,
   useRadioForm,
   useTextForm,
-  useProfileNullOnClose,
   useProfileSelectForm,
 } from './hooks';
 export { WithAuthRedirect, WithCheckedFields } from './hocs';
