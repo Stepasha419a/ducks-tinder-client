@@ -77,7 +77,7 @@ export const selectNewMessageChatsCount = createSelector(
   [
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
-    (state: RootState) => state.user.currentUser.id,
+    (state: RootState) => state.user.currentUser!.id,
   ],
   (chats, currentChatId, currentUserId) =>
     chats.reduce((total, chat) => {

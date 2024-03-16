@@ -4,7 +4,7 @@ import { LinkSettingThumbnail } from '@/entities/user/components';
 
 export const ZodiacSignSettingThumbnail = () => {
   const zodiacSign = useAppSelector(
-    (state) => state.user.currentUser.zodiacSign
+    (state) => state.user.currentUser!.zodiacSign
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;

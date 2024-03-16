@@ -6,7 +6,7 @@ import { setCurrentMessage, setIsMessageEditing } from '../../model';
 export function useMessagesProps() {
   const dispatch = useAppDispatch();
 
-  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
+  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
   const isMessageEditing = useAppSelector(

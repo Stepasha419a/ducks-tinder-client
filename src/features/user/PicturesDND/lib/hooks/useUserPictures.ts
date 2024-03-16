@@ -4,7 +4,7 @@ import { useAppSelector } from '@shared/lib/hooks';
 
 export function useUserPictures() {
   const userPictures = useAppSelector(
-    (state) => state.user.currentUser.pictures
+    (state) => state.user.currentUser!.pictures
   );
 
   const [pictures, setPictures] = useState<Picture[]>([]);

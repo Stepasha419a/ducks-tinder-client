@@ -3,7 +3,7 @@ import { LinkSettingThumbnail } from '@entities/user/components';
 import { useAppSelector } from '@shared/lib/hooks';
 
 export const NicknameSettingThumbnail = () => {
-  const nickname = useAppSelector((state) => state.user.currentUser.nickname);
+  const nickname = useAppSelector((state) => state.user.currentUser!.nickname);
 
   const url = `${ROUTES.settings}/nickname`;
   return (

@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const SmokingAttitudeSettingThumbnail = () => {
   const smokingAttitude = useAppSelector(
-    (state) => state.user.currentUser.smokingAttitude
+    (state) => state.user.currentUser!.smokingAttitude
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;

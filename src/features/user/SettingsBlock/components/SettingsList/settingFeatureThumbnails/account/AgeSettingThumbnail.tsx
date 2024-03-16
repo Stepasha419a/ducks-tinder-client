@@ -8,7 +8,7 @@ import { RangeInput } from '@shared/ui';
 export const AgeSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
-  const age = useAppSelector((state) => state.user.currentUser.age);
+  const age = useAppSelector((state) => state.user.currentUser!.age);
   const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const [ageSetting, setAgeSetting] = useState(age);

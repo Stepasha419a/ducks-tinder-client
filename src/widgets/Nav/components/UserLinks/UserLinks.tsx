@@ -24,7 +24,7 @@ export const UserLinks: FC<UserLinksProps> = memo(({ isProfilePage }) => {
 
   return (
     <div className={styles.links}>
-      <AnimatePresence initial={false}>
+      <AnimatePresence initial={false} mode="wait">
         {isProfilePage ? (
           <motion.div
             key="main-link"

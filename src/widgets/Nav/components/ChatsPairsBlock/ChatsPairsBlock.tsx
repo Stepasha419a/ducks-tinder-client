@@ -16,7 +16,7 @@ export const ChatsPairsBlock: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
+  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
 

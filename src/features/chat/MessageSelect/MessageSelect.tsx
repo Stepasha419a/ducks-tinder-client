@@ -18,7 +18,7 @@ export const MessageSelect: FC<MessageSelectProps> = ({ isMobile }) => {
 
   const selectRef = useRef<HTMLDivElement | null>(null);
 
-  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
+  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
   const isOwn = currentMessage?.userId === currentUserId;
 
   const {

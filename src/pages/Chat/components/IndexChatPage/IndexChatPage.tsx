@@ -6,7 +6,7 @@ import { ChatList } from '@entities/chat/components';
 export const IndexChatPage: FC = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
+  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   if (isMobile) {
     return <ChatList currentUserId={currentUserId} />;

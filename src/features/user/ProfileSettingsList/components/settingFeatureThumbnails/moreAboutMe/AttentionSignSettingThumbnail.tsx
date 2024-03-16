@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const AttentionSignSettingThumbnail = () => {
   const attentionSign = useAppSelector(
-    (state) => state.user.currentUser.attentionSign
+    (state) => state.user.currentUser!.attentionSign
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;

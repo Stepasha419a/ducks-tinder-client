@@ -10,7 +10,7 @@ import styles from './ProfilePreview.module.scss';
 export const ProfilePreview: FC = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const user = useAppSelector((state) => state.user.currentUser);
+  const user = useAppSelector((state) => state.user.currentUser!);
 
   if (isMobile) {
     return <ProfilePreviewMobile />;

@@ -17,7 +17,7 @@ export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
     const errorFields = useAppSelector((state) => state.setting.errorFields);
 
     useEffect(() => {
-      if (isAuth) {
+      if (isAuth && currentUser) {
         dispatch(checkFields(currentUser));
 
         const isError = getIsError(pathname, errorFields.length);

@@ -9,7 +9,7 @@ import { ProfileSubmit } from '@features/user';
 export const ProfileEdit = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const user = useAppSelector((state) => state.user.currentUser);
+  const user = useAppSelector((state) => state.user.currentUser!);
 
   const [isFullPreviewSetting, setIsFullPreviewSetting] = useState(false);
   const { pictures, setPictures } = useUserPictures();

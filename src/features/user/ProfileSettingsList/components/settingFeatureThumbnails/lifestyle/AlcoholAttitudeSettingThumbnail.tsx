@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const AlcoholAttitudeSettingThumbnail = () => {
   const alcoholAttitude = useAppSelector(
-    (state) => state.user.currentUser.alcoholAttitude
+    (state) => state.user.currentUser!.alcoholAttitude
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;

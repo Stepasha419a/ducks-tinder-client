@@ -4,7 +4,7 @@ import { MapLazy } from './Map.lazy';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 
 export const Map: FC = () => {
-  const place = useAppSelector((state) => state.user.currentUser.place);
+  const place = useAppSelector((state) => state.user.currentUser!.place);
 
   const isMobile = useMediaQuery('(max-width: 900px)');
 

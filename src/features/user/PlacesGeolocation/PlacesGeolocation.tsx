@@ -8,7 +8,7 @@ import styles from './PlacesGeolocation.module.scss';
 export const PlacesGeolocation = () => {
   const dispatch = useAppDispatch();
 
-  const place = useAppSelector((state) => state.user.currentUser.place);
+  const place = useAppSelector((state) => state.user.currentUser!.place);
 
   const handlePlaceUpdate = (pos: GeolocationPosition) => {
     if (

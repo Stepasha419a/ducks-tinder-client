@@ -3,7 +3,7 @@ import { LinkSettingThumbnail } from '@entities/user/components';
 import { useAppSelector } from '@shared/lib/hooks';
 
 export const SexSettingThumbnail = () => {
-  const sex = useAppSelector((state) => state.user.currentUser.sex);
+  const sex = useAppSelector((state) => state.user.currentUser!.sex);
   const errorFields = useAppSelector((state) => state.setting.errorFields);
 
   const url = `${ROUTES.settings}/sex`;
@@ -11,7 +11,7 @@ export const SexSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Sex"
-      value={sex}
+      value={sex || 'unknown'}
       isPointer
       isError={errorFields.includes('sex')}
     />

@@ -18,7 +18,7 @@ export const ProfileSettingWrapper: FC<ProfileSettingWrapperProps> = ({
   setPictures,
   setIsFullPreviewSetting,
 }) => {
-  const user = useAppSelector((state) => state.user.currentUser);
+  const user = useAppSelector((state) => state.user.currentUser!);
 
   const [isPreviewSetting, setIsPreviewSetting] = useState(false);
 

@@ -12,7 +12,7 @@ interface PlacesProps {
 }
 
 export const Places: FC<PlacesProps> = ({ refreshFeature }) => {
-  const place = useAppSelector((state) => state.user.currentUser.place);
+  const place = useAppSelector((state) => state.user.currentUser!.place);
 
   return (
     <div className={styles.places}>

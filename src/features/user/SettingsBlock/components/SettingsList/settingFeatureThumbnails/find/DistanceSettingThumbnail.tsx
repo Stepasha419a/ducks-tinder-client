@@ -8,9 +8,9 @@ import { CheckboxInput, RangeInput } from '@shared/ui';
 export const DistanceSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
-  const distance = useAppSelector((state) => state.user.currentUser.distance);
+  const distance = useAppSelector((state) => state.user.currentUser!.distance);
   const usersOnlyInDistance = useAppSelector(
-    (state) => state.user.currentUser.usersOnlyInDistance
+    (state) => state.user.currentUser!.usersOnlyInDistance
   );
   const errorFields = useAppSelector((state) => state.setting.errorFields);
 

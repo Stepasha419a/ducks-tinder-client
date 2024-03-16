@@ -9,10 +9,10 @@ export const PartnerAgeSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
   const preferAgeFrom = useAppSelector(
-    (state) => state.user.currentUser.preferAgeFrom
+    (state) => state.user.currentUser!.preferAgeFrom
   );
   const preferAgeTo = useAppSelector(
-    (state) => state.user.currentUser.preferAgeTo
+    (state) => state.user.currentUser!.preferAgeTo
   );
   const errorFields = useAppSelector((state) => state.setting.errorFields);
 

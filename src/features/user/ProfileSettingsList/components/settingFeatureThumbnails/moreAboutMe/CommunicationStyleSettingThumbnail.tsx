@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const CommunicationStyleSettingThumbnail = () => {
   const communicationStyle = useAppSelector(
-    (state) => state.user.currentUser.communicationStyle
+    (state) => state.user.currentUser!.communicationStyle
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;

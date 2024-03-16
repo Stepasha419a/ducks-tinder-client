@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const ChronotypeSettingThumbnail = () => {
   const chronotype = useAppSelector(
-    (state) => state.user.currentUser.chronotype
+    (state) => state.user.currentUser!.chronotype
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;

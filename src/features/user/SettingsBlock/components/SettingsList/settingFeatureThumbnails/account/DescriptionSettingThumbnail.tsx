@@ -4,7 +4,7 @@ import { useAppSelector } from '@shared/lib/hooks';
 
 export const DescriptionSettingThumbnail = () => {
   const description = useAppSelector(
-    (state) => state.user.currentUser.description
+    (state) => state.user.currentUser!.description
   );
   const errorFields = useAppSelector((state) => state.setting.errorFields);
 
@@ -13,7 +13,7 @@ export const DescriptionSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Description"
-      value={description || 'Empty description'}
+      value={description || 'unknown'}
       isPointer
       isError={errorFields.includes('description')}
       isOverflow

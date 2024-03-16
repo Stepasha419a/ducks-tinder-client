@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const PersonalityTypeSettingThumbnail = () => {
   const personalityType = useAppSelector(
-    (state) => state.user.currentUser.personalityType
+    (state) => state.user.currentUser!.personalityType
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;

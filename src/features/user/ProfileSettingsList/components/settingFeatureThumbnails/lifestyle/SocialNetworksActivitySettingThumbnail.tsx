@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const SocialNetworksActivitySettingThumbnail = () => {
   const socialNetworksActivity = useAppSelector(
-    (state) => state.user.currentUser.socialNetworksActivity
+    (state) => state.user.currentUser!.socialNetworksActivity
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;

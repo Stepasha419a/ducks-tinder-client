@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const FoodPreferenceSettingThumbnail = () => {
   const foodPreference = useAppSelector(
-    (state) => state.user.currentUser.foodPreference
+    (state) => state.user.currentUser!.foodPreference
   );
 
   const url = `${ROUTES.profile}/edit/lifestyle`;

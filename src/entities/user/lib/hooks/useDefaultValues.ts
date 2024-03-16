@@ -7,9 +7,10 @@ export function useDefaultValues():
   | number
   | boolean
   | string[]
-  | Place {
-  const currentUser = useAppSelector((state) => state.user.currentUser);
+  | Place
+  | null {
+  const currentUser = useAppSelector((state) => state.user.currentUser!);
   const settingName = useAppSelector((state) => state.setting.settingName);
 
-  return currentUser[settingName as Setting]!;
+  return currentUser[settingName as Setting];
 }

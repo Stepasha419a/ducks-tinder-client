@@ -6,7 +6,7 @@ export const ReplyBlock = () => {
   const dispatch = useAppDispatch();
 
   const repliedMessage = useAppSelector((state) => state.chat.repliedMessage);
-  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
+  const currentUserId = useAppSelector((state) => state.user.currentUser?.id);
 
   if (!repliedMessage) {
     return null;

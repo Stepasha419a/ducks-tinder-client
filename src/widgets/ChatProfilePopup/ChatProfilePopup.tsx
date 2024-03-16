@@ -11,7 +11,7 @@ export const ChatProfilePopup: FC = () => {
 
   const { chatAvatar, chatName, blocked, blockedById } =
     useAppSelector(selectChatProfile);
-  const currentUserId = useAppSelector((state) => state.user.currentUser.id);
+  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
   const isChatUserPopup = useAppSelector((state) => state.chat.isChatUserPopup);
 
   const handleClose = () => {

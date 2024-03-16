@@ -9,7 +9,7 @@ import { getSelectSettingFields } from '../helpers';
 export function useDefaultProfileValues(
   settingName: ProfileSettingName
 ): MultiSelectForm {
-  const currentUser = useAppSelector((state) => state.user.currentUser);
+  const currentUser = useAppSelector((state) => state.user.currentUser!);
 
   return {
     input: getProfileSelectData(settingName, currentUser),
@@ -23,7 +23,10 @@ function getProfileSelectData(
   const fields = getSelectSettingFields(settingName);
 
   return fields.reduce(
-    (data, fieldName) => ({ ...data, [fieldName]: currentUser[fieldName] }),
+    (data, fieldName) => ({
+      ...data,
+      [fieldName]: currentUser[fieldName] || null,
+    }),
     {}
   );
 }

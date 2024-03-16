@@ -3,7 +3,7 @@ import { LinkSettingThumbnail } from '@entities/user/components';
 import { useAppSelector } from '@shared/lib/hooks';
 
 export const EmailSettingThumbnail = () => {
-  const email = useAppSelector((state) => state.user.currentUser.email);
+  const email = useAppSelector((state) => state.user.currentUser!.email);
 
   const url = `${ROUTES.settings}/email`;
   return (

@@ -13,7 +13,7 @@ import type { UserInitialState } from './user.interface';
 
 const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh
-  currentUser: {} as User,
+  currentUser: null,
 };
 
 const userSlice = createSlice({

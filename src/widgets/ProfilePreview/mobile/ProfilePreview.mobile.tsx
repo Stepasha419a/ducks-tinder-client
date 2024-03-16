@@ -10,7 +10,7 @@ import styles from './ProfilePreview.mobile.module.scss';
 import { useState } from 'react';
 
 export const ProfilePreviewMobile = () => {
-  const user = useAppSelector((state) => state.user.currentUser);
+  const user = useAppSelector((state) => state.user.currentUser!);
 
   const [isUploadOpen, setIsUploadOpen] = useState(false);
 

@@ -4,7 +4,7 @@ import { useAppSelector } from '@/shared/lib/hooks';
 
 export const ChildrenAttitudeSettingThumbnail = () => {
   const childrenAttitude = useAppSelector(
-    (state) => state.user.currentUser.childrenAttitude
+    (state) => state.user.currentUser!.childrenAttitude
   );
 
   const url = `${ROUTES.profile}/edit/more-about-me`;

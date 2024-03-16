@@ -2,10 +2,7 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { Reorder } from 'framer-motion';
 import type { Picture } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import {
-  deleteUserPictureThunk,
-  selectImagesDND,
-} from '@/entities/user/model/user';
+import { deleteUserPictureThunk } from '@/entities/user/model/user';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
 import styles from './PicturesDND.module.scss';
@@ -23,7 +20,7 @@ export const PicturesDND: FC<PicturesDNDProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const { currentUserId } = useAppSelector(selectImagesDND);
+  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   const handleDeletePicture = (id: string): void => {
     dispatch(deleteUserPictureThunk(id));
