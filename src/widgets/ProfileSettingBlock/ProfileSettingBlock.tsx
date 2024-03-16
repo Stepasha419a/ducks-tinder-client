@@ -1,14 +1,10 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import { useState, type Dispatch, type FC, type SetStateAction } from 'react';
 import type { Picture } from '@shared/api/interfaces';
-import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
-import {
-  CropImage,
-  DialogUpload,
-  PicturesDND,
-  ProfileSubmit,
-} from '@features/user';
+import { useMediaQuery } from '@shared/lib/hooks';
+import { PicturesDND, ProfileSubmit } from '@features/user';
 import { ProfileSettingsList } from '@features/user';
 import styles from './ProfileSettingBlock.module.scss';
+import { UploadImagePopups } from '@/features/user/UploadImagePopups/UploadImagePopups';
 
 interface ProfileSettingProps {
   pictures: Picture[];
@@ -21,16 +17,19 @@ export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
 }) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const isDialogUploadOpen = useAppSelector(
-    (state) => state.user.profileSetting.isDialogUploadOpen
-  );
-  const isImageCropOpen = useAppSelector(
-    (state) => state.user.profileSetting.isImageCropOpen
-  );
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
+
+  const handleOpenUpload = () => {
+    setIsUploadOpen(true);
+  };
 
   return (
     <div className={styles.change}>
-      <PicturesDND pictures={pictures} setPictures={setPictures} />
+      <PicturesDND
+        handleOpenUpload={handleOpenUpload}
+        pictures={pictures}
+        setPictures={setPictures}
+      />
       <div className={styles.descr}>
         Add more photos to fill out your profile
         <br />
@@ -39,8 +38,10 @@ export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
       <ProfileSettingsList />
       {!isMobile && <ProfileSubmit pictures={pictures} />}
 
-      {isDialogUploadOpen && <DialogUpload />}
-      {isImageCropOpen && <CropImage />}
+      <UploadImagePopups
+        isUploadOpen={isUploadOpen}
+        setIsUploadOpen={setIsUploadOpen}
+      />
     </div>
   );
 };

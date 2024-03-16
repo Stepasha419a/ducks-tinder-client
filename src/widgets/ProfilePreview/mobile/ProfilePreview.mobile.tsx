@@ -2,26 +2,20 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
-import { CropImage, DialogUpload } from '@features/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { UploadImagePopups } from '@features/user';
+import { useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import { ROUTES } from '@shared/constants';
-import { setIsDialogUploadOpen } from '@/entities/user/model/user';
 import styles from './ProfilePreview.mobile.module.scss';
+import { useState } from 'react';
 
 export const ProfilePreviewMobile = () => {
-  const dispatch = useAppDispatch();
-
   const user = useAppSelector((state) => state.user.currentUser);
-  const isDialogUploadOpen = useAppSelector(
-    (state) => state.user.profileSetting.isDialogUploadOpen
-  );
-  const isImageCropOpen = useAppSelector(
-    (state) => state.user.profileSetting.isImageCropOpen
-  );
+
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
 
   const openSettingHandler = (): void => {
-    dispatch(setIsDialogUploadOpen(true));
+    setIsUploadOpen(true);
   };
 
   return (
@@ -77,8 +71,10 @@ export const ProfilePreviewMobile = () => {
         </div>
         <div className={styles.membership}>membership</div>
       </div>
-      {isDialogUploadOpen && <DialogUpload />}
-      {isImageCropOpen && <CropImage />}
+      <UploadImagePopups
+        isUploadOpen={isUploadOpen}
+        setIsUploadOpen={setIsUploadOpen}
+      />
     </>
   );
 };

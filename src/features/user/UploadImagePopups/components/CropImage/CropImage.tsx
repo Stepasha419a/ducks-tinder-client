@@ -1,22 +1,22 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import {
-  saveUserImageThunk,
-  selectCropImage,
-  setIsImageCropOpen,
-} from '@/entities/user/model/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Button, Popup, RangeInput } from '@shared/ui';
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';
 import styles from './CropImage.module.scss';
 
-export const CropImage: FC = () => {
-  const dispatch = useAppDispatch();
+interface CropImageProps {
+  imageUrl: string | null;
+  handleCloseImageCrop: () => void;
+  handleSubmit: (picture: Blob) => void;
+}
 
-  const { imageURL } = useAppSelector(selectCropImage);
-
+export const CropImage: FC<CropImageProps> = ({
+  imageUrl,
+  handleCloseImageCrop,
+  handleSubmit,
+}) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<PixelCrop | null>(
@@ -32,21 +32,17 @@ export const CropImage: FC = () => {
 
   const submitHandler = async (): Promise<void> => {
     const croppedImageData: ReturnGetCroppedImg | null = await getCroppedImg(
-      imageURL!,
+      imageUrl!,
       croppedAreaPixels!
     );
-    dispatch(saveUserImageThunk(croppedImageData!.picture));
+    handleSubmit(croppedImageData!.picture);
   };
 
   return (
-    <Popup
-      size="l"
-      title="Redact photo"
-      closeHandler={() => dispatch(setIsImageCropOpen(false))}
-    >
+    <Popup size="l" title="Redact photo" closeHandler={handleCloseImageCrop}>
       <div className={styles.container}>
         <Cropper
-          image={imageURL!}
+          image={imageUrl!}
           crop={crop}
           zoom={zoom}
           aspect={3 / 4}
@@ -65,10 +61,7 @@ export const CropImage: FC = () => {
           />
         </div>
         <div className={styles.btns}>
-          <Button
-            onClick={() => dispatch(setIsImageCropOpen(false))}
-            extraClassName={styles.btn}
-          >
+          <Button onClick={handleCloseImageCrop} extraClassName={styles.btn}>
             Cancel
           </Button>
           <Button

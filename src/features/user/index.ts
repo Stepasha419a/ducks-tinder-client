@@ -1,8 +1,7 @@
 export { RatePairPopup } from './RatePairPopup/RatePairPopup';
 export { SortPairsItems } from './SortPairsItems/SortPairsItems';
-export { CropImage } from './CropImage/CropImage';
-export { DialogUpload } from './DialogUpload/DialogUpload';
 export { PicturesDND } from './PicturesDND/PicturesDND';
+export { UploadImagePopups } from './UploadImagePopups/UploadImagePopups';
 export { PairsSortPopup } from './PairsSortPopup/PairsSortPopup';
 export { ProfileSubmit } from './ProfileSubmit/ProfileSubmit';
 export { LoginForm } from './LoginForm/LoginForm';

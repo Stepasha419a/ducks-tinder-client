@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import {
   deleteUserPictureThunk,
   selectImagesDND,
-  setIsDialogUploadOpen,
 } from '@/entities/user/model/user';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
@@ -14,11 +13,13 @@ import styles from './PicturesDND.module.scss';
 interface PicturesDNDProps {
   pictures: Picture[];
   setPictures: Dispatch<SetStateAction<Picture[]>>;
+  handleOpenUpload: () => void;
 }
 
 export const PicturesDND: FC<PicturesDNDProps> = ({
   pictures,
   setPictures,
+  handleOpenUpload,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -26,10 +27,6 @@ export const PicturesDND: FC<PicturesDNDProps> = ({
 
   const handleDeletePicture = (id: string): void => {
     dispatch(deleteUserPictureThunk(id));
-  };
-
-  const openSettingHandler = (): void => {
-    dispatch(setIsDialogUploadOpen(true));
   };
 
   return (
@@ -44,14 +41,14 @@ export const PicturesDND: FC<PicturesDNDProps> = ({
           <Card
             key={picture.name}
             buttonHandler={() => handleDeletePicture(picture.id)}
-            handler={openSettingHandler}
+            handler={handleOpenUpload}
             picture={picture}
             src={makeImageUrl(currentUserId, picture.name)}
           />
         );
       })}
       {createEmptyArray(9 - pictures.length).map((_, i) => {
-        return <Card key={i} handler={openSettingHandler} />;
+        return <Card key={i} handler={handleOpenUpload} />;
       })}
     </Reorder.Group>
   );

@@ -1,22 +1,23 @@
 import type { ChangeEvent, FC } from 'react';
 import { Popup } from '@shared/ui';
-import {
-  setImageChange,
-  setIsDialogUploadOpen,
-} from '@/entities/user/model/user';
-import { useAppDispatch } from '@shared/lib/hooks';
-import { createFileUrl } from '@shared/helpers';
 import styles from './DialogUpload.module.scss';
+import { createFileUrl } from '@/shared/lib/helpers';
 
-export const DialogUpload: FC = () => {
-  const dispatch = useAppDispatch();
+interface DialogUploadProps {
+  handleCloseDialogUpload: () => void;
+  handleSubmit: (imageUrl: string) => void;
+}
 
+export const DialogUpload: FC<DialogUploadProps> = ({
+  handleCloseDialogUpload,
+  handleSubmit,
+}) => {
   const handleImage = (e: ChangeEvent<HTMLInputElement>): void => {
-    dispatch(setImageChange(createFileUrl(e.target.files![0])));
+    handleSubmit(createFileUrl(e.target.files![0]));
   };
 
   return (
-    <Popup size="s" closeHandler={() => dispatch(setIsDialogUploadOpen(false))}>
+    <Popup size="s" closeHandler={handleCloseDialogUpload}>
       <div className={styles.title}>Upload</div>
       <div className={styles.descr}>Choose context type</div>
       <div className={styles.wrapper}>
