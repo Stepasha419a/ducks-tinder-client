@@ -7,13 +7,13 @@ import { variants } from './Loading.variants';
 import styles from './Loading.module.scss';
 
 export const Loading = (): ReactElement => {
-  const isLoading = useAppSelector((state) => state.auth.isLoading);
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
 
   return (
     <motion.div
       initial={'visible'}
       variants={variants}
-      animate={isLoading ? 'visible' : 'hidden'}
+      animate={isAuth === null ? 'visible' : 'hidden'}
       className={styles.loadingPage}
     >
       <FontAwesomeIcon icon={faFireFlameCurved} className={styles.icon} />
