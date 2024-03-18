@@ -5,7 +5,6 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import type { ShortUser } from '@shared/api/interfaces';
 import { getUserPairsThunk } from '@/entities/user/model/pair';
-import { sortItemBySettings } from '../../lib';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
 import { PairsListLazy } from './PairsList.lazy';
@@ -18,7 +17,6 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
   const pairs = useAppSelector((state) => state.pair.pairs);
-  const pairSorts = useAppSelector((state) => state.pair.pairSorts);
   const isPairsLoading = useAppSelector((state) => state.pair.isPairsLoading);
 
   useEffect(() => {
@@ -40,17 +38,15 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
 
   return (
     <div className={styles.pairs}>
-      {pairs
-        .filter((user: ShortUser) => sortItemBySettings(user, pairSorts))
-        .map((user: ShortUser) => {
-          return (
-            <Pair
-              key={user.id}
-              user={user}
-              setCurrentPair={() => setCurrentPair(user)}
-            />
-          );
-        })}
+      {pairs.map((user: ShortUser) => {
+        return (
+          <Pair
+            key={user.id}
+            user={user}
+            setCurrentPair={() => setCurrentPair(user)}
+          />
+        );
+      })}
     </div>
   );
 };

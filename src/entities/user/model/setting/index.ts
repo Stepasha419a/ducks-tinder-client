@@ -5,6 +5,7 @@ export {
   nullInput,
 } from './setting.slice';
 export { submitSettingsThunk } from './setting.thunks';
+export { SettingNameEnum } from './setting.interfaces';
 export type {
   Setting,
   SetInputPayload,

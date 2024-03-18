@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { PairInitialState, PairSorts } from './pair.interface';
-import { INITIAL_SORTS } from './pair.constants';
+import type { PairInitialState, PairFilterForm } from './pair.interface';
 import {
   acceptPairThunk,
   getPairsInfoThunk,
   getUserPairsThunk,
   refusePairThunk,
 } from './pair.thunks';
+import type { ShortUser } from '@/shared/api/interfaces';
+import { sortItemBySettings } from '../../lib';
 
 const initialState: PairInitialState = {
   isPairsLoading: true,
   pairs: [],
-  pairSorts: INITIAL_SORTS,
   isPairsInfoLoading: true,
   pairsInfo: {
     count: 0,
@@ -24,8 +24,10 @@ const pairSlice = createSlice({
   name: 'pairSlice',
   initialState,
   reducers: {
-    setPairSorts: (state, { payload }: PayloadAction<PairSorts>) => {
-      state.pairSorts = payload;
+    filterPairs: (state, { payload }: PayloadAction<PairFilterForm>) => {
+      state.pairs = state.pairs.filter((user: ShortUser) =>
+        sortItemBySettings(user, payload)
+      );
     },
   },
   extraReducers: (builder) => {
@@ -58,6 +60,6 @@ const pairSlice = createSlice({
   },
 });
 
-export const { setPairSorts } = pairSlice.actions;
+export const { filterPairs } = pairSlice.actions;
 
 export const pairReducer = pairSlice.reducer;

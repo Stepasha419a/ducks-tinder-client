@@ -1,12 +1,12 @@
 import type { ShortUser } from '@shared/api/interfaces';
-import type { PairSorts, PairSortsKey } from '../../model/pair';
+import type { PairFilterForm, PairFilterKey } from '../../model/pair';
 
 export function sortItemBySettings(
   item: ShortUser,
-  sortSettings: PairSorts
+  sortSettings: PairFilterForm
 ): boolean {
   for (const sortKey in sortSettings) {
-    const result = sortPair(item, sortKey as PairSortsKey, sortSettings);
+    const result = sortPair(item, sortKey as PairFilterKey, sortSettings);
     if (!result) {
       return false;
     }
@@ -16,8 +16,8 @@ export function sortItemBySettings(
 
 function sortPair(
   item: ShortUser,
-  sortKey: PairSortsKey,
-  sortSettings: PairSorts
+  sortKey: PairFilterKey,
+  sortSettings: PairFilterForm
 ): boolean {
   switch (sortKey) {
     case 'distance':

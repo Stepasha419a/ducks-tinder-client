@@ -1,15 +1,21 @@
-import type { PairSorts } from '@/entities/user/model/pair';
-import { INITIAL_SORTS } from '@/entities/user/model/pair';
-import { setPairSorts } from '@/entities/user/model/pair';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import type { PairFilterForm } from '@/entities/user/model/pair';
+import { filterPairs } from '@/entities/user/model/pair';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { useController, useForm } from 'react-hook-form';
+
+const defaultValues: PairFilterForm = {
+  distance: 100,
+  age: { from: 18, to: 100 },
+  photos: 1,
+  interests: [],
+  account: [],
+};
 
 export function usePairSorts() {
   const dispatch = useAppDispatch();
-  const pairSorts = useAppSelector((state) => state.pair.pairSorts);
 
-  const { control, handleSubmit, reset } = useForm<PairSorts>({
-    defaultValues: pairSorts,
+  const { control, handleSubmit, reset } = useForm<PairFilterForm>({
+    defaultValues,
   });
 
   const {
@@ -43,7 +49,7 @@ export function usePairSorts() {
   };
 
   const submitHandler = handleSubmit((data) => {
-    dispatch(setPairSorts(data));
+    dispatch(filterPairs(data));
   });
 
   const forcedToggleInterest = (item: string): void => {
@@ -57,7 +63,7 @@ export function usePairSorts() {
   };
 
   const handleReset = () => {
-    reset(INITIAL_SORTS);
+    reset(defaultValues);
   };
 
   return {

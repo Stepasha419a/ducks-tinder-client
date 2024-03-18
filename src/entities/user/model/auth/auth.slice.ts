@@ -44,7 +44,7 @@ const authSlice = createSlice({
             const thunkName = action.type.split('/')[1];
             // if it's auth form error => set error message
             if (thunkName === 'loginUser' || thunkName === 'registerUser') {
-              toast(action.payload);
+              toast(action.payload, { autoClose: 15000 });
             }
           }
         }
