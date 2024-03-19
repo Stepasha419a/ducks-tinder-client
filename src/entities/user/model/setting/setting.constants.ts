@@ -1,6 +1,6 @@
-import type { SettingProperties } from './setting.interfaces';
+import type { SettingNameEnum, SettingProperties } from './setting.interfaces';
 
-export const SETTING_LIST: Record<string, SettingProperties | null> = {
+export const SETTING_LIST: Record<SettingNameEnum, SettingProperties | null> = {
   email: {
     validation: { min: 0, max: 40, email: true },
   },

@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
-import type { PairSorts } from '@/entities/user/model/pair';
+import type { PairFilterForm } from '@/entities/user/model/pair';
 import { RangeInput } from '@shared/ui';
 import styles from '../PairsSortPopup.module.scss';
 
 interface AgeSettingProps {
-  control: Control<PairSorts>;
+  control: Control<PairFilterForm>;
 }
 
 export const AgeSetting: FC<AgeSettingProps> = ({ control }) => {

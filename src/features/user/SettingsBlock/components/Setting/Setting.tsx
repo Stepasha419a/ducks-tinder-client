@@ -1,10 +1,12 @@
-import type { ReactElement } from 'react';
+import type { FC } from 'react';
 import { RadioForm, TextareaForm, TextForm } from '@features/user';
-import { useAppSelector } from '@shared/lib/hooks';
+import type { SettingTypeEnum } from '@/entities/user/model/setting/setting.interfaces';
 
-export const Setting = (): ReactElement => {
-  const settingType = useAppSelector((state) => state.setting.settingType);
+interface SettingProps {
+  settingType: SettingTypeEnum;
+}
 
+export const Setting: FC<SettingProps> = ({ settingType }) => {
   if (settingType === 'textarea') {
     return <TextareaForm />;
   }

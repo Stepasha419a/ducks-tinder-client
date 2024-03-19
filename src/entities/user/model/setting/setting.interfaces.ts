@@ -9,19 +9,24 @@ export interface SettingProperties {
   validation?: Validation;
 }
 
-export type SettingName =
-  | 'email'
-  | 'name'
-  | 'description'
-  | 'sex'
-  | 'place'
-  | 'preferSex'
-  | 'nickname';
+export enum SettingNameEnum {
+  EMAIL = 'email',
+  NAME = 'name',
+  DESCRIPTION = 'description',
+  SEX = 'sex',
+  PREFER_SEX = 'preferSex',
+  NICKNAME = 'nickname',
+}
 
-type SettingType = 'textarea' | 'radio' | 'text' | null;
+export enum SettingTypeEnum {
+  TEXTAREA = 'textarea',
+  RADIO = 'radio',
+  TEXT = 'text',
+}
 
 export type Setting =
-  | SettingName
+  | SettingNameEnum
+  | 'place'
   | 'age'
   | 'distance'
   | 'preferAgeFrom'
@@ -45,15 +50,12 @@ export type ProfileSettingSelectName =
   | 'trainingAttitude';
 
 export interface SettingInitialState {
-  settingType: SettingType;
-  settingName: SettingName | null;
-  validation: Validation | null;
-  formName: string | null;
+  settingName: SettingNameEnum | null;
   errorFields: Setting[];
 }
 
 export interface SetInputPayload {
-  settingName: SettingName;
+  settingName: SettingNameEnum;
   formName?: string | null;
   validation?: Validation | null;
 }

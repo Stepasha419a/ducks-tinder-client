@@ -9,10 +9,7 @@ import type {
 import { submitSettingsThunk } from './setting.thunks';
 
 const initialState: SettingInitialState = {
-  settingType: null,
   settingName: null,
-  validation: null,
-  formName: null,
   errorFields: [],
 };
 
@@ -22,31 +19,12 @@ const settingSlice = createSlice({
   reducers: {
     setInput: (
       state,
-      {
-        payload: { settingName, formName, validation },
-      }: PayloadAction<SetInputPayload>
+      { payload: { settingName } }: PayloadAction<SetInputPayload>
     ) => {
-      state.formName = formName || settingName;
       state.settingName = settingName;
-      state.validation = validation || null;
-
-      switch (settingName) {
-        case 'description':
-          state.settingType = 'textarea';
-          break;
-        case 'sex':
-        case 'preferSex':
-          state.settingType = 'radio';
-          break;
-        default:
-          state.settingType = 'text';
-      }
     },
     nullInput: (state) => {
-      state.formName = null;
       state.settingName = null;
-      state.settingType = null;
-      state.validation = null;
     },
     checkFields: (state, { payload }: PayloadAction<User>) => {
       state.errorFields = checkUserFields(payload);
@@ -54,10 +32,7 @@ const settingSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(submitSettingsThunk.fulfilled, (state) => {
-      state.formName = null;
       state.settingName = null;
-      state.settingType = null;
-      state.validation = null;
     });
   },
 });

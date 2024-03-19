@@ -1,6 +1,7 @@
 import { ROUTES } from '@shared/lib/constants';
 import { LinkSettingThumbnail } from '@entities/user/components';
 import { useAppSelector } from '@shared/lib/hooks';
+import { SettingNameEnum } from '@/entities/user/model/setting';
 
 export const DescriptionSettingThumbnail = () => {
   const description = useAppSelector(
@@ -15,7 +16,7 @@ export const DescriptionSettingThumbnail = () => {
       title="Description"
       value={description || 'unknown'}
       isPointer
-      isError={errorFields.includes('description')}
+      isError={errorFields.includes(SettingNameEnum.DESCRIPTION)}
       isOverflow
     />
   );

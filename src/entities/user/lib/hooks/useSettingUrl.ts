@@ -1,9 +1,6 @@
 import { useAppDispatch } from '@shared/lib/hooks';
 import { setInput } from '../../model/setting';
-import type {
-  SettingName,
-  SettingProperties,
-} from '../../model/setting/setting.interfaces';
+import type { SettingNameEnum } from '../../model/setting/setting.interfaces';
 import { useEffect, useRef } from 'react';
 import {
   SETTING_LIST,
@@ -25,14 +22,12 @@ export function useSettingUrl(): boolean | null {
 
     if (settingName && Object.keys(SETTING_LIST).includes(settingName)) {
       isFound.current = true;
-      const settingProperties: SettingProperties | null =
-        SETTING_LIST[settingName];
 
       dispatch(
         setInput({
-          settingName: settingName as SettingName,
-          formName: settingProperties?.formName || settingName,
-          validation: settingProperties?.validation,
+          settingName: settingName as SettingNameEnum,
+          formName: 'default',
+          validation: null,
         })
       );
     } else if (settingName && !BUSY_ROUTES.includes(settingName)) {

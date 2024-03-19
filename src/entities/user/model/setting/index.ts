@@ -15,4 +15,5 @@ export type {
   Validation,
   ProfileSettingSelectName,
   SelectValidation,
+  SettingTypeEnum,
 } from './setting.interfaces';

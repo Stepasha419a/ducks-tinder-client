@@ -1,15 +1,18 @@
 import type { RegisterOptions } from 'react-hook-form';
-import { useAppSelector } from '@shared/lib/hooks';
 import { EMAIL_REGEXP } from '@shared/constants';
-import type { SettingFieldValues, Validation } from '../../model/setting';
+import type { SettingFieldValues } from '../../model/setting';
+import { useSettingUrlNew } from './useSettingUrlNew';
 
 export function useCurrentValidation():
   | RegisterOptions<SettingFieldValues, 'input'>
   | undefined {
-  const formName = useAppSelector((state) => state.setting.formName)!;
-  const validation: Validation | null = useAppSelector(
-    (state) => state.setting.validation
-  );
+  const setting = useSettingUrlNew();
+
+  if (!setting) {
+    return undefined;
+  }
+
+  const { formName, validation } = setting;
 
   return {
     required: `${formName} is required`,

@@ -2,14 +2,11 @@ import { useController, useForm } from 'react-hook-form';
 import type { SettingFieldValues } from '@entities/user/model/setting';
 import { nullInput, submitSettingsThunk } from '@entities/user/model/setting';
 import { useDefaultValues } from '@entities/user/lib';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useMediaQuery,
-} from '@shared/lib/hooks';
+import { useAppDispatch, useMediaQuery } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { useNullOnClose } from './useNullOnClose';
 import { ROUTES } from '@shared/lib/constants';
+import { useSettingUrlNew } from '@/entities/user/lib/hooks';
 
 export function useRadioForm() {
   const navigate = useNavigate();
@@ -17,15 +14,14 @@ export function useRadioForm() {
 
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const formName = useAppSelector((state) => state.setting.formName);
-  const settingName = useAppSelector((state) => state.setting.settingName);
+  const { formName, settingName } = useSettingUrlNew()!;
 
   const {
     control,
     formState: { errors, isValid },
     handleSubmit,
   } = useForm<SettingFieldValues>({
-    defaultValues: { input: useDefaultValues() as string },
+    defaultValues: { input: useDefaultValues(settingName) as string },
   });
 
   const {
@@ -41,7 +37,7 @@ export function useRadioForm() {
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
     const url = isMobile ? ROUTES.settings : ROUTES.profile;
 
-    dispatch(submitSettingsThunk({ [settingName!]: data.input }));
+    dispatch(submitSettingsThunk({ [settingName]: data.input }));
     navigate(url);
   });
 

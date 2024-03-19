@@ -1,22 +1,22 @@
 import type { User } from '@shared/api/interfaces';
-import type { Setting } from '../setting.interfaces';
+import { SettingNameEnum, type Setting } from '../setting.interfaces';
 
 const potentialFields: Setting[] = [
-  'description',
-  'sex',
+  SettingNameEnum.DESCRIPTION,
+  SettingNameEnum.SEX,
   'place',
   'age',
   'distance',
-  'preferSex',
+  SettingNameEnum.PREFER_SEX,
   'preferAgeFrom',
   'preferAgeTo',
 ];
 
 function checkField(user: User, field: Setting): Setting | boolean {
   switch (field) {
-    case 'description':
+    case SettingNameEnum.DESCRIPTION:
       if (user.description === '') {
-        return 'description';
+        return SettingNameEnum.DESCRIPTION;
       }
       return false;
     case 'place':
@@ -24,9 +24,9 @@ function checkField(user: User, field: Setting): Setting | boolean {
         return 'place';
       }
       return false;
-    case 'sex':
+    case SettingNameEnum.SEX:
       if (!user.sex) {
-        return 'sex';
+        return SettingNameEnum.SEX;
       }
       return false;
     case 'age':
@@ -39,9 +39,9 @@ function checkField(user: User, field: Setting): Setting | boolean {
         return 'distance';
       }
       return false;
-    case 'preferSex':
+    case SettingNameEnum.PREFER_SEX:
       if (!user.preferSex) {
-        return 'preferSex';
+        return SettingNameEnum.PREFER_SEX;
       }
       return false;
     case 'preferAgeFrom':

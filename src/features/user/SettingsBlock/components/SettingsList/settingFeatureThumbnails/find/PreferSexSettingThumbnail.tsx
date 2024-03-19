@@ -1,6 +1,7 @@
 import { ROUTES } from '@shared/lib/constants';
 import { LinkSettingThumbnail } from '@entities/user/components';
 import { useAppSelector } from '@shared/lib/hooks';
+import { SettingNameEnum } from '@/entities/user/model/setting';
 
 export const PreferSexSettingThumbnail = () => {
   const preferSex = useAppSelector(
@@ -15,7 +16,7 @@ export const PreferSexSettingThumbnail = () => {
       title="Interested in"
       value={preferSex || 'unknown'}
       isPointer
-      isError={errorFields.includes('preferSex')}
+      isError={errorFields.includes(SettingNameEnum.PREFER_SEX)}
     />
   );
 };
