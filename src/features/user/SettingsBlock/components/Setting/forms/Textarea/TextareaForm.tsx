@@ -5,14 +5,8 @@ import { useTextForm } from '@features/user/lib';
 import styles from './TextareaForm.module.scss';
 
 export const TextareaForm: FC = (): ReactElement => {
-  const {
-    formName,
-    errors,
-    isValid,
-    registerProps,
-    cancelHandler,
-    submitHandler,
-  } = useTextForm();
+  const { formName, errors, isValid, registerProps, submitHandler } =
+    useTextForm();
 
   return (
     <SettingWrapper
@@ -20,7 +14,6 @@ export const TextareaForm: FC = (): ReactElement => {
       isValid={isValid}
       errors={errors}
       submitHandler={submitHandler}
-      cancelHandler={cancelHandler}
     >
       <Textarea {...registerProps} extraClassName={styles.textarea} />
     </SettingWrapper>

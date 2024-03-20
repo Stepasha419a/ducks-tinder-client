@@ -11,7 +11,6 @@ export {
   useTinderAnimations,
   useCurrentValidation,
   useDefaultValues,
-  useSettingUrl,
   useDefaultProfileValues,
   useProfileSettingUrl,
 } from './hooks';

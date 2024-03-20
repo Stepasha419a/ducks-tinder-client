@@ -1,10 +1,9 @@
 import { useController, useForm } from 'react-hook-form';
 import type { SettingFieldValues } from '@entities/user/model/setting';
-import { nullInput, submitSettingsThunk } from '@entities/user/model/setting';
+import { submitSettingsThunk } from '@entities/user/model/setting';
 import { useDefaultValues } from '@entities/user/lib';
 import { useAppDispatch, useMediaQuery } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
-import { useNullOnClose } from './useNullOnClose';
 import { ROUTES } from '@shared/lib/constants';
 import { useMemoriedSettingUrl } from '@/entities/user/lib/hooks';
 
@@ -28,12 +27,6 @@ export function useRadioForm() {
     field: { value, onChange },
   } = useController({ name: 'input', control, rules: { required: true } });
 
-  useNullOnClose();
-
-  const cancelHandler = (): void => {
-    dispatch(nullInput());
-  };
-
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
     const url = isMobile ? ROUTES.settings : ROUTES.profile;
 
@@ -47,7 +40,6 @@ export function useRadioForm() {
     isValid,
     value,
     onChange,
-    cancelHandler,
     submitHandler,
   };
 }

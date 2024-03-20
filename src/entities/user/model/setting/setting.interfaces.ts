@@ -50,7 +50,6 @@ export type ProfileSettingSelectName =
   | 'trainingAttitude';
 
 export interface SettingInitialState {
-  settingName: SettingNameEnum | null;
   errorFields: Setting[];
 }
 

@@ -1,9 +1,4 @@
-export {
-  settingReducer,
-  checkFields,
-  setInput,
-  nullInput,
-} from './setting.slice';
+export { settingReducer, checkFields } from './setting.slice';
 export { submitSettingsThunk } from './setting.thunks';
 export { SettingNameEnum, SettingTypeEnum } from './setting.interfaces';
 export type {

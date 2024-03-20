@@ -16,7 +16,6 @@ interface SettingWrapperProps {
   isValid?: boolean;
   errors: FieldErrors<SettingFieldValues | SettingFieldInterestsArray>;
   submitHandler: () => void;
-  cancelHandler: () => void;
 }
 
 const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
@@ -25,7 +24,6 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   isValid = true,
   errors,
   submitHandler,
-  cancelHandler,
 }) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
   const cancelUrl = isMobile ? ROUTES.settings : ROUTES.profile;
@@ -40,7 +38,7 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
       <div className={styles.name}>{formName}</div>
       {children}
       <div className={styles.title}>Your {formName}</div>
-      <Link onClick={cancelHandler} to={cancelUrl} className={styles.link}>
+      <Link to={cancelUrl} className={styles.link}>
         <Button
           disabled={!isValid}
           border
