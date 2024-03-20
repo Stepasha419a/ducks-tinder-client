@@ -6,7 +6,7 @@ import { useAppDispatch, useMediaQuery } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { useNullOnClose } from './useNullOnClose';
 import { ROUTES } from '@shared/lib/constants';
-import { useSettingUrlNew } from '@/entities/user/lib/hooks';
+import { useMemoriedSettingUrl } from '@/entities/user/lib/hooks';
 
 export function useRadioForm() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export function useRadioForm() {
 
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const { formName, settingName } = useSettingUrlNew()!;
+  const { settingName, formName } = useMemoriedSettingUrl()!;
 
   const {
     control,

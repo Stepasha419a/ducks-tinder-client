@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { getSettingUrl } from '../helpers';
-import type { SettingTypeEnum } from '../../model/setting/setting.interfaces';
+import { getSettingType, getSettingUrl } from '../helpers';
 import { SettingNameEnum } from '../../model/setting/setting.interfaces';
 import { SETTING_LIST } from '../../model/setting/setting.constants';
 
@@ -11,11 +10,8 @@ export function useSettingUrlNew() {
 
   const settingName = getSettingUrl(pathname, settingRegex);
 
-  if (!settingName) {
-    return undefined;
-  }
-
   if (
+    !settingName ||
     !Object.values(SettingNameEnum).includes(settingName as SettingNameEnum)
   ) {
     return null;
@@ -23,24 +19,14 @@ export function useSettingUrlNew() {
 
   const settingProperties = SETTING_LIST[settingName as SettingNameEnum];
 
+  const formName = settingProperties?.formName || settingName;
+
   const settingType = getSettingType(settingName as SettingNameEnum);
 
   return {
     settingName: settingName as SettingNameEnum,
-    settingType: settingType as SettingTypeEnum,
-    formName: settingProperties?.formName || settingName,
+    settingType,
+    formName,
     validation: settingProperties?.validation,
   };
-}
-
-function getSettingType(settingName: SettingNameEnum) {
-  switch (settingName) {
-    case 'description':
-      return 'textarea';
-    case 'sex':
-    case 'preferSex':
-      return 'radio';
-    default:
-      return 'text';
-  }
 }

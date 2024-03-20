@@ -6,3 +6,5 @@ export { useSettingUrl } from './useSettingUrl';
 export { useDefaultProfileValues } from './useDefaultProfileValues';
 export { useProfileSettingUrl } from './useProfileSettingUrl';
 export { useSettingUrlNew } from './useSettingUrlNew';
+export { useFoundSetting } from './useFoundSetting';
+export { useMemoriedSettingUrl } from './useMemoriedSettingUrl';

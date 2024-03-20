@@ -6,12 +6,12 @@ import { settingVariants } from './SettingsBlock.variants';
 import styles from './SettingsBlock.module.scss';
 import { NotFoundSetting } from '@entities/user/components';
 import { ROUTES } from '@shared/lib/constants';
-import { useSettingUrlNew } from '@/entities/user/lib/hooks';
+import { useFoundSetting } from '@/entities/user/lib/hooks';
 
 export const SettingsBlock = (): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const setting = useSettingUrlNew();
+  const setting = useFoundSetting();
 
   if (setting === null) {
     return <NotFoundSetting url={ROUTES.profile} />;
@@ -23,7 +23,7 @@ export const SettingsBlock = (): ReactElement => {
   return (
     <div className={styles.block}>
       <AnimatePresence initial={false} mode="wait">
-        {setting?.settingType ? (
+        {setting ? (
           <motion.div
             key="setting"
             variants={settingVariants}
@@ -32,7 +32,7 @@ export const SettingsBlock = (): ReactElement => {
             exit={slideOut}
             transition={{ duration: 0.25 }}
           >
-            <Setting settingType={setting.settingType} />
+            <Setting settingName={setting} />
           </motion.div>
         ) : (
           <motion.div

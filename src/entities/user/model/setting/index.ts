@@ -5,7 +5,7 @@ export {
   nullInput,
 } from './setting.slice';
 export { submitSettingsThunk } from './setting.thunks';
-export { SettingNameEnum } from './setting.interfaces';
+export { SettingNameEnum, SettingTypeEnum } from './setting.interfaces';
 export type {
   Setting,
   SetInputPayload,
@@ -15,5 +15,4 @@ export type {
   Validation,
   ProfileSettingSelectName,
   SelectValidation,
-  SettingTypeEnum,
 } from './setting.interfaces';

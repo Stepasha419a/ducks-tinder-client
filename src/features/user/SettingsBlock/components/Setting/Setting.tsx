@@ -1,16 +1,22 @@
 import type { FC } from 'react';
 import { RadioForm, TextareaForm, TextForm } from '@features/user';
-import type { SettingTypeEnum } from '@/entities/user/model/setting/setting.interfaces';
+import {
+  SettingTypeEnum,
+  type SettingNameEnum,
+} from '@/entities/user/model/setting';
+import { getSettingType } from '@/entities/user/lib/helpers';
 
 interface SettingProps {
-  settingType: SettingTypeEnum;
+  settingName: SettingNameEnum;
 }
 
-export const Setting: FC<SettingProps> = ({ settingType }) => {
-  if (settingType === 'textarea') {
+export const Setting: FC<SettingProps> = ({ settingName }) => {
+  const settingType = getSettingType(settingName);
+
+  if (settingType === SettingTypeEnum.TEXTAREA) {
     return <TextareaForm />;
   }
-  if (settingType === 'radio') {
+  if (settingType === SettingTypeEnum.RADIO) {
     return <RadioForm />;
   }
 
