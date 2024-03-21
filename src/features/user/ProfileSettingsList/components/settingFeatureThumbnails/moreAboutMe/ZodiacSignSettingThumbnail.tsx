@@ -7,7 +7,7 @@ export const ZodiacSignSettingThumbnail = () => {
     (state) => state.user.currentUser!.zodiacSign
   );
 
-  const url = `${ROUTES.profile}/edit/more-about-me`;
+  const url = `${ROUTES.PROFILE}/edit/more-about-me`;
   const value = zodiacSign ? zodiacSign : 'Add';
 
   return (

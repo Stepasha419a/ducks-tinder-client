@@ -20,30 +20,30 @@ import { ProfileSetting } from '@features/user/ProfileSetting/ProfileSetting';
 const Routing = (): ReactElement => {
   return (
     <Routes>
-      <Route path={ROUTES.login} element={<Login />} />
-      <Route path={ROUTES.registration} element={<Registration />} />
+      <Route path={ROUTES.LOGIN} element={<Login />} />
+      <Route path={ROUTES.REGISTRATION} element={<Registration />} />
 
-      <Route path={ROUTES.main} element={<NavLayout />}>
+      <Route path={ROUTES.MAIN} element={<NavLayout />}>
         <Route index element={<TinderPage />} />
-        <Route path={ROUTES.profile} element={<ProfilePage />}>
+        <Route path={ROUTES.PROFILE} element={<ProfilePage />}>
           <Route index element={<ProfilePreview />} />
           <Route path="edit" element={<ProfileEdit />} />
           <Route path="edit/:profileSettingName" element={<ProfileSetting />} />
         </Route>
-        <Route path={ROUTES.settings} element={<SettingsPage />}>
+        <Route path={ROUTES.SETTINGS} element={<SettingsPage />}>
           <Route index element={<SettingsIndexPage />} />
           <Route path="place" element={<PlaceSetting />} />
           <Route path=":settingName" element={<SettingsIndexPage />} />
         </Route>
-        <Route path={ROUTES.chat} element={<ChatPage />}>
+        <Route path={ROUTES.CHAT} element={<ChatPage />}>
           <Route index element={<IndexChatPage />} />
           <Route path=":chatId" element={<ActiveChat />} />
         </Route>
-        <Route path={ROUTES.pairs} element={<PairsPage />} />
+        <Route path={ROUTES.PAIRS} element={<PairsPage />} />
       </Route>
 
-      <Route path={ROUTES.policy} element={<PolicyPage />} />
-      <Route path={ROUTES.notFound} element={<NotFound />} />
+      <Route path={ROUTES.POLICY} element={<PolicyPage />} />
+      <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
     </Routes>
   );
 };

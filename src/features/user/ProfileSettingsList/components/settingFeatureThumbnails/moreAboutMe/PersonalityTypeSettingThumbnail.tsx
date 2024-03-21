@@ -7,7 +7,7 @@ export const PersonalityTypeSettingThumbnail = () => {
     (state) => state.user.currentUser!.personalityType
   );
 
-  const url = `${ROUTES.profile}/edit/more-about-me`;
+  const url = `${ROUTES.PROFILE}/edit/more-about-me`;
   const value = personalityType ? personalityType : 'Add';
 
   return (

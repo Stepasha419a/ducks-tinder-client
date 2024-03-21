@@ -7,7 +7,7 @@ export const InterestsSettingThumbnail = () => {
     (state) => state.user.currentUser!.interests
   );
 
-  const url = `${ROUTES.profile}/edit/interests`;
+  const url = `${ROUTES.PROFILE}/edit/interests`;
   const value = interests.length ? `${interests[0]} and so on...` : 'Add';
 
   return (

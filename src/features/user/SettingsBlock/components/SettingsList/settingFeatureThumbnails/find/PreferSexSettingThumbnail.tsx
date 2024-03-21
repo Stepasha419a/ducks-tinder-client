@@ -9,7 +9,7 @@ export const PreferSexSettingThumbnail = () => {
   );
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
-  const url = `${ROUTES.settings}/prefer-sex`;
+  const url = `${ROUTES.SETTINGS}/prefer-sex`;
   return (
     <LinkSettingThumbnail
       url={url}

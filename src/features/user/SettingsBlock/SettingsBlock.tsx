@@ -14,7 +14,7 @@ export const SettingsBlock = (): ReactElement => {
   const setting = useFoundSetting();
 
   if (setting === null) {
-    return <NotFoundSetting url={ROUTES.profile} />;
+    return <NotFoundSetting url={ROUTES.PROFILE} />;
   }
 
   const slideIn = isMobile ? 'slideInMobile' : 'slideIn';

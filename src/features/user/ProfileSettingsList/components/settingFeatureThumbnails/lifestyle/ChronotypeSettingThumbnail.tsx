@@ -7,7 +7,7 @@ export const ChronotypeSettingThumbnail = () => {
     (state) => state.user.currentUser!.chronotype
   );
 
-  const url = `${ROUTES.profile}/edit/lifestyle`;
+  const url = `${ROUTES.PROFILE}/edit/lifestyle`;
   const value = chronotype ? chronotype : 'Add';
 
   return (

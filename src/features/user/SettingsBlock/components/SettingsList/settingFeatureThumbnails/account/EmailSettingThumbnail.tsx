@@ -5,7 +5,7 @@ import { useAppSelector } from '@shared/lib/hooks';
 export const EmailSettingThumbnail = () => {
   const email = useAppSelector((state) => state.user.currentUser!.email);
 
-  const url = `${ROUTES.settings}/email`;
+  const url = `${ROUTES.SETTINGS}/email`;
   return (
     <LinkSettingThumbnail
       url={url}

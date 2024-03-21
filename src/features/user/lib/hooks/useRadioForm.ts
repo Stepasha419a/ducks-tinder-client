@@ -28,7 +28,7 @@ export function useRadioForm() {
   } = useController({ name: 'input', control, rules: { required: true } });
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
-    const url = isMobile ? ROUTES.settings : ROUTES.profile;
+    const url = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 
     dispatch(updateUserThunk({ [settingName]: data.input }));
     navigate(url);

@@ -26,7 +26,7 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   submitHandler,
 }) => {
   const isMobile = useMediaQuery('(max-width: 900px)');
-  const cancelUrl = isMobile ? ROUTES.settings : ROUTES.profile;
+  const cancelUrl = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 
   return (
     <form onSubmit={submitHandler} className={styles.setting}>

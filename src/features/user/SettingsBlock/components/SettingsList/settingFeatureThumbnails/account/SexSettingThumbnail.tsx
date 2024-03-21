@@ -7,7 +7,7 @@ export const SexSettingThumbnail = () => {
   const sex = useAppSelector((state) => state.user.currentUser!.sex);
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
-  const url = `${ROUTES.settings}/sex`;
+  const url = `${ROUTES.SETTINGS}/sex`;
   return (
     <LinkSettingThumbnail
       url={url}

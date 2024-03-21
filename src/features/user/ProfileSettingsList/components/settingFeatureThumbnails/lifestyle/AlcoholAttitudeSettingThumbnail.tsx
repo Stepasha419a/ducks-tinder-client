@@ -7,7 +7,7 @@ export const AlcoholAttitudeSettingThumbnail = () => {
     (state) => state.user.currentUser!.alcoholAttitude
   );
 
-  const url = `${ROUTES.profile}/edit/lifestyle`;
+  const url = `${ROUTES.PROFILE}/edit/lifestyle`;
   const value = alcoholAttitude ? alcoholAttitude : 'Add';
 
   return (

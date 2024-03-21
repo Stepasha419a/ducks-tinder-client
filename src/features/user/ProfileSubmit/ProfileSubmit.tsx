@@ -27,7 +27,7 @@ export const ProfileSubmit: FC<ProfileSubmitProps> = ({
 
   return (
     <div className={styles.save}>
-      <Link to={ROUTES.profile}>
+      <Link to={ROUTES.PROFILE}>
         <Button
           onClick={handleSubmit}
           variant="gradient"

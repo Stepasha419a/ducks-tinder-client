@@ -19,7 +19,7 @@ export const WithAuthRedirect = <P extends object>(Component: FC<P>): FC<P> => {
     }, [dispatch, isAuth]);
 
     // already auth => no permission for login/reg pages
-    if (pathname === ROUTES.login || pathname === ROUTES.registration) {
+    if (pathname === ROUTES.LOGIN || pathname === ROUTES.REGISTRATION) {
       return isAuth ? <Navigate to="/" /> : <Component {...props} />;
     }
 

@@ -7,7 +7,7 @@ export const EducationSettingThumbnail = () => {
     (state) => state.user.currentUser!.education
   );
 
-  const url = `${ROUTES.profile}/edit/more-about-me`;
+  const url = `${ROUTES.PROFILE}/edit/more-about-me`;
   const value = education ? education : 'Add';
 
   return (

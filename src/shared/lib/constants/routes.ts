@@ -1,11 +1,11 @@
-export const ROUTES = {
-  main: '/',
-  login: '/login',
-  registration: '/reg',
-  profile: '/profile',
-  settings: '/settings',
-  chat: '/chat',
-  pairs: '/pairs',
-  policy: '/policy',
-  notFound: '*',
-};
+export enum ROUTES {
+  MAIN = '/',
+  LOGIN = '/login',
+  REGISTRATION = '/reg',
+  PROFILE = '/profile',
+  SETTINGS = '/settings',
+  CHAT = '/chat',
+  PAIRS = '/pairs',
+  POLICY = '/policy',
+  NOT_FOUND = '*',
+}

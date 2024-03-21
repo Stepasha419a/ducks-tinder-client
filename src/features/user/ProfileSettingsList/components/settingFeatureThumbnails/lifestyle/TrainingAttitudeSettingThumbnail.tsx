@@ -7,7 +7,7 @@ export const TrainingAttitudeSettingThumbnail = () => {
     (state) => state.user.currentUser!.trainingAttitude
   );
 
-  const url = `${ROUTES.profile}/edit/lifestyle`;
+  const url = `${ROUTES.PROFILE}/edit/lifestyle`;
   const value = trainingAttitude ? trainingAttitude : 'Add';
 
   return (

@@ -7,7 +7,7 @@ export const SmokingAttitudeSettingThumbnail = () => {
     (state) => state.user.currentUser!.smokingAttitude
   );
 
-  const url = `${ROUTES.profile}/edit/lifestyle`;
+  const url = `${ROUTES.PROFILE}/edit/lifestyle`;
   const value = smokingAttitude ? smokingAttitude : 'Add';
 
   return (

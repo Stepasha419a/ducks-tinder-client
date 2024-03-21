@@ -9,7 +9,7 @@ export const DescriptionSettingThumbnail = () => {
   );
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
-  const url = `${ROUTES.settings}/description`;
+  const url = `${ROUTES.SETTINGS}/description`;
   return (
     <LinkSettingThumbnail
       url={url}

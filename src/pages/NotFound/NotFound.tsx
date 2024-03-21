@@ -19,7 +19,7 @@ export const NotFound = () => {
         whileHover={'hover'}
         className={styles.content}
       >
-        <Link className={styles.link} to={ROUTES.main}>
+        <Link className={styles.link} to={ROUTES.MAIN}>
           <h1 className={styles.title}>404</h1>
           <motion.div variants={lineVariants} className={styles.line} />
           <h2 className={styles.text}>NOT FOUND</h2>

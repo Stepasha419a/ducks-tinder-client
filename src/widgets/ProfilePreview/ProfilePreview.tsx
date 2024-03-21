@@ -20,7 +20,7 @@ export const ProfilePreview: FC = () => {
     <>
       <Preview user={user} isFull extraClassName={styles.padding} />
       <div className={styles.edit}>
-        <Link to={`${ROUTES.profile}/edit`} className={styles.link}>
+        <Link to={`${ROUTES.PROFILE}/edit`} className={styles.link}>
           <Button variant="gradient" extraClassName={styles.btn}>
             Edit Info
           </Button>

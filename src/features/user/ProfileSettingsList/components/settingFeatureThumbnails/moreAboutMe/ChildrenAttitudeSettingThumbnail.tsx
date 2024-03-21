@@ -7,7 +7,7 @@ export const ChildrenAttitudeSettingThumbnail = () => {
     (state) => state.user.currentUser!.childrenAttitude
   );
 
-  const url = `${ROUTES.profile}/edit/more-about-me`;
+  const url = `${ROUTES.PROFILE}/edit/more-about-me`;
   const value = childrenAttitude ? childrenAttitude : 'Add';
 
   return (

@@ -27,7 +27,7 @@ export function useTextForm() {
   });
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
-    const url = isMobile ? ROUTES.settings : ROUTES.profile;
+    const url = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 
     dispatch(updateUserThunk({ [settingName]: data.input }));
     navigate(url);

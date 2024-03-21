@@ -21,7 +21,7 @@ export const ChatProfileMobile: FC<ChatProfileProps> = ({ handleOpen }) => {
 
   return (
     <div className={styles.profile}>
-      <Link className={styles.link} to={ROUTES.chat}>
+      <Link className={styles.link} to={ROUTES.CHAT}>
         <FontAwesomeIcon className={styles.icon} icon={faAngleLeft} />
       </Link>
       <div onClick={handleOpen} className={styles.user}>

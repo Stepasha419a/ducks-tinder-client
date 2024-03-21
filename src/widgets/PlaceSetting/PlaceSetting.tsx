@@ -8,7 +8,7 @@ import styles from './PlaceSetting.module.scss';
 export const PlaceSetting = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const url = isMobile ? ROUTES.settings : ROUTES.profile;
+  const url = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 
   return (
     <div className={styles.setting}>

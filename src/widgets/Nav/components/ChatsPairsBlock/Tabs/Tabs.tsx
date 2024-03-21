@@ -28,7 +28,7 @@ export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
 
   return (
     <div className={styles.titles}>
-      <Link to={ROUTES.main} onClick={handlePairsOpen} className={styles.title}>
+      <Link to={ROUTES.MAIN} onClick={handlePairsOpen} className={styles.title}>
         Pairs
         {isPairsOpened && (
           <motion.div

@@ -15,7 +15,7 @@ export const ProfileSubmitMobile: FC<ProfileSubmitMobileProps> = ({
       <div className={styles.title}>Edit profile</div>
       <Link
         onClick={handleSubmit}
-        to={ROUTES.profile}
+        to={ROUTES.PROFILE}
         className={styles.submit}
       >
         Submit

@@ -6,7 +6,7 @@ import { SelectForm } from './components';
 export const ProfileSetting = () => {
   const profileSetting = useProfileSettingUrl();
   if (!profileSetting) {
-    return <NotFoundSetting url={`${ROUTES.profile}/edit`} />;
+    return <NotFoundSetting url={`${ROUTES.PROFILE}/edit`} />;
   }
 
   if (profileSetting.settingType === 'radio') {

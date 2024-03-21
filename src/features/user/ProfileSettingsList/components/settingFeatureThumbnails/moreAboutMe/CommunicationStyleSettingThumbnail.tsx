@@ -7,7 +7,7 @@ export const CommunicationStyleSettingThumbnail = () => {
     (state) => state.user.currentUser!.communicationStyle
   );
 
-  const url = `${ROUTES.profile}/edit/more-about-me`;
+  const url = `${ROUTES.PROFILE}/edit/more-about-me`;
   const value = communicationStyle ? communicationStyle : 'Add';
 
   return (

@@ -23,7 +23,7 @@ export const ProfilePreviewMobile = () => {
       <div className={styles.profile}>
         <div className={styles.miniature}>
           <div className={styles.wrapper}>
-            <Link to={`${ROUTES.profile}/edit`} className={styles.user}>
+            <Link to={`${ROUTES.PROFILE}/edit`} className={styles.user}>
               <div className={styles.avatarWrapper}>
                 <Avatar
                   userId={user.id}
@@ -39,7 +39,7 @@ export const ProfilePreviewMobile = () => {
             </Link>
             <div className={styles.actions}>
               <Link
-                to={ROUTES.settings}
+                to={ROUTES.SETTINGS}
                 className={classNames(styles.action, styles.top)}
               >
                 <div className={styles.iconWrapper}>
@@ -47,7 +47,7 @@ export const ProfilePreviewMobile = () => {
                 </div>
                 Settings
               </Link>
-              <Link to={`${ROUTES.profile}/edit`} className={styles.action}>
+              <Link to={`${ROUTES.PROFILE}/edit`} className={styles.action}>
                 <div className={styles.iconWrapper}>
                   <FontAwesomeIcon className={styles.icon} icon={faPen} />
                 </div>

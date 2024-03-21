@@ -23,7 +23,7 @@ export const NavMobile = () => {
 
   return (
     <aside className={styles.nav}>
-      <Link to={ROUTES.main} className={styles.link}>
+      <Link to={ROUTES.MAIN} className={styles.link}>
         <FontAwesomeIcon
           className={classNames(
             styles.icon,
@@ -32,7 +32,7 @@ export const NavMobile = () => {
           icon={faFireFlameCurved}
         />
       </Link>
-      <Link to={ROUTES.pairs} className={styles.link}>
+      <Link to={ROUTES.PAIRS} className={styles.link}>
         <FontAwesomeIcon
           className={classNames(
             styles.icon,
@@ -41,7 +41,7 @@ export const NavMobile = () => {
           icon={faStar}
         />
       </Link>
-      <Link to={ROUTES.chat} className={styles.link}>
+      <Link to={ROUTES.CHAT} className={styles.link}>
         {newMessageChatsCount > 0 && (
           <div className={styles.newMessages}>
             <div className={styles.count}>{reducedCount}</div>
@@ -55,7 +55,7 @@ export const NavMobile = () => {
           icon={faComments}
         />
       </Link>
-      <Link to={ROUTES.profile} className={styles.link}>
+      <Link to={ROUTES.PROFILE} className={styles.link}>
         <FontAwesomeIcon
           className={classNames(
             styles.icon,

@@ -25,7 +25,7 @@ export function useProfileSelectForm() {
     const parsedData = parseSelectData(data);
 
     dispatch(updateUserThunk(parsedData));
-    navigate(`${ROUTES.profile}/edit`);
+    navigate(`${ROUTES.PROFILE}/edit`);
   });
 
   return {

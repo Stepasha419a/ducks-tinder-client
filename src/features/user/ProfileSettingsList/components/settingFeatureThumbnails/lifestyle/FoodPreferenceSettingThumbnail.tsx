@@ -7,7 +7,7 @@ export const FoodPreferenceSettingThumbnail = () => {
     (state) => state.user.currentUser!.foodPreference
   );
 
-  const url = `${ROUTES.profile}/edit/lifestyle`;
+  const url = `${ROUTES.PROFILE}/edit/lifestyle`;
   const value = foodPreference ? foodPreference : 'Add';
 
   return (

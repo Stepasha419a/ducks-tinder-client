@@ -30,7 +30,7 @@ export const ChatItem: FC<ChatInterface> = ({
     chat.lastMessage?.userId !== chat.chatVisit?.userId
   );
 
-  const chatLink = `${ROUTES.chat}/${chat.id}`;
+  const chatLink = `${ROUTES.CHAT}/${chat.id}`;
 
   return (
     <Link

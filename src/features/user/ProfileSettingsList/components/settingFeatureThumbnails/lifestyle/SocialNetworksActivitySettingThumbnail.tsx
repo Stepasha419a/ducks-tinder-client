@@ -7,7 +7,7 @@ export const SocialNetworksActivitySettingThumbnail = () => {
     (state) => state.user.currentUser!.socialNetworksActivity
   );
 
-  const url = `${ROUTES.profile}/edit/lifestyle`;
+  const url = `${ROUTES.PROFILE}/edit/lifestyle`;
   const value = socialNetworksActivity ? socialNetworksActivity : 'Add';
 
   return (
