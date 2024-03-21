@@ -1,5 +1,5 @@
-import type { ProfileSettingSelectName } from '../../model/setting';
-import { SETTING_INTERESTS_LIST } from '../../model/setting/setting.constants';
+import type { ProfileSettingSelectName } from '../../model/user';
+import { SETTING_INTERESTS_LIST } from '../../model/user/user.constants';
 
 export const SELECT_LISTS: Record<ProfileSettingSelectName, string[]> = {
   interests: SETTING_INTERESTS_LIST,

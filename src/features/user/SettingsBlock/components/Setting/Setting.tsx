@@ -3,7 +3,7 @@ import { RadioForm, TextareaForm, TextForm } from '@features/user';
 import {
   SettingTypeEnum,
   type SettingNameEnum,
-} from '@/entities/user/model/setting';
+} from '@/entities/user/model/user';
 import { getSettingType } from '@/entities/user/lib/helpers';
 
 interface SettingProps {

@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { submitSettingsThunk } from '@entities/user/model/setting';
-import type { MultiSelectForm } from '@entities/user/model/setting';
+import { updateUserThunk } from '@entities/user/model/user';
+import type { MultiSelectForm } from '@entities/user/model/user';
 import {
   useDefaultProfileValues,
   useProfileSettingUrl,
@@ -24,7 +24,7 @@ export function useProfileSelectForm() {
   const submitHandler = handleSubmit((data: MultiSelectForm) => {
     const parsedData = parseSelectData(data);
 
-    dispatch(submitSettingsThunk(parsedData));
+    dispatch(updateUserThunk(parsedData));
     navigate(`${ROUTES.profile}/edit`);
   });
 

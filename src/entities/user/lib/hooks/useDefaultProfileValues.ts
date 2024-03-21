@@ -1,6 +1,6 @@
 import type { User } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
-import type { MultiSelectForm } from '@entities/user/model/setting';
+import type { MultiSelectForm } from '@entities/user/model/user';
 import { getSelectSettingFields } from '../helpers';
 import type { ProfileSettingNameEnum } from '../constants';
 

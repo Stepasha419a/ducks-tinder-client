@@ -1,6 +1,6 @@
 import type { RegisterOptions } from 'react-hook-form';
 import { EMAIL_REGEXP } from '@shared/constants';
-import type { SettingFieldValues } from '../../model/setting';
+import type { SettingFieldValues } from '../../model/user';
 import { useSettingUrlNew } from './useSettingUrlNew';
 
 export function useCurrentValidation():

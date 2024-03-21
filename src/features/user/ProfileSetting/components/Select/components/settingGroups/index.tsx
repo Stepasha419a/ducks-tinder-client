@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
-import type { MultiSelectForm } from '@entities/user/model/setting';
+import type { MultiSelectForm } from '@entities/user/model/user';
 import { InterestsSettingGroup } from './InterestsSettingGroup';
 import { MoreAboutMeSettingGroup } from './MoreAboutMeSettingGroup';
 import { LifestyleSettingGroup } from './LifestyleSettingGroup';

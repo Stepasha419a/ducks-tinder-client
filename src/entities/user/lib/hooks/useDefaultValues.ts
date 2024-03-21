@@ -1,6 +1,6 @@
 import type { Place } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
-import type { Setting } from '../../model/setting';
+import type { Setting } from '../../model/user';
 
 export function useDefaultValues(
   settingName: Setting

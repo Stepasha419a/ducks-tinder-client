@@ -12,7 +12,7 @@ import {
   PhotosSetting,
 } from './components';
 import styles from './PairsSortPopup.module.scss';
-import { SETTING_INTERESTS_LIST } from '@entities/user/model/setting/setting.constants';
+import { SETTING_INTERESTS_LIST } from '@entities/user/model/user/user.constants';
 
 interface PairsSortPopupProps {
   setIsSortPopupOpen: Dispatch<SetStateAction<boolean>>;

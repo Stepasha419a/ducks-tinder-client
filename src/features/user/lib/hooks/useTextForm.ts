@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import type { SettingFieldValues } from '@entities/user/model/setting';
-import { submitSettingsThunk } from '@entities/user/model/setting';
+import type { SettingFieldValues } from '@entities/user/model/user';
+import { updateUserThunk } from '@entities/user/model/user';
 import { useCurrentValidation, useDefaultValues } from '@entities/user/lib';
 import { useAppDispatch, useMediaQuery } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +29,7 @@ export function useTextForm() {
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
     const url = isMobile ? ROUTES.settings : ROUTES.profile;
 
-    dispatch(submitSettingsThunk({ [settingName]: data.input }));
+    dispatch(updateUserThunk({ [settingName]: data.input }));
     navigate(url);
   });
 

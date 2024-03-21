@@ -1,4 +1,4 @@
-import type { ProfileSettingSelectName } from '@entities/user/model/setting';
+import type { ProfileSettingSelectName } from '@entities/user/model/user';
 
 export const PROFILE_SETTING_TITLES: Record<ProfileSettingSelectName, string> =
   {

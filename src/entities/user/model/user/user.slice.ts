@@ -10,10 +10,12 @@ import {
   updateUserPlaceThunk,
 } from './user.thunks';
 import type { UserInitialState } from './user.interface';
+import { checkUserFields } from './helpers';
 
 const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh
   currentUser: null,
+  errorFields: [],
 };
 
 const userSlice = createSlice({
@@ -22,6 +24,9 @@ const userSlice = createSlice({
   reducers: {
     setCurrentUser: (state, { payload }: PayloadAction<User>) => {
       state.currentUser = payload;
+    },
+    checkFields: (state, { payload }: PayloadAction<User>) => {
+      state.errorFields = checkUserFields(payload);
     },
   },
   extraReducers: (builder) => {
@@ -49,6 +54,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setCurrentUser } = userSlice.actions;
+export const { setCurrentUser, checkFields } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

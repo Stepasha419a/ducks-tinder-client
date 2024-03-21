@@ -1,7 +1,7 @@
 import type {
   ProfileSettingSelectName,
   SelectValidation,
-} from '../../model/setting';
+} from '../../model/user';
 
 export const SELECT_VALIDATION: Record<
   ProfileSettingSelectName,

@@ -6,7 +6,7 @@ import { Button } from '@shared/ui';
 import type {
   SettingFieldInterestsArray,
   SettingFieldValues,
-} from '@entities/user/model/setting';
+} from '@entities/user/model/user';
 import styles from './SettingWrapper.module.scss';
 import classNames from 'classnames';
 import { useMediaQuery } from '@shared/lib/hooks';

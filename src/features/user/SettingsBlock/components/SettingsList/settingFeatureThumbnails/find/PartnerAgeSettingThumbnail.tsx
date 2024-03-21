@@ -1,9 +1,9 @@
 import { SettingThumbnail } from '@entities/user/components';
-import { submitSettingsThunk } from '@entities/user/model/setting';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { useState } from 'react';
 import { RangeInput } from '@shared/ui';
 import styles from '../SettingFeatureThumbnails.module.scss';
+import { updateUserThunk } from '@/entities/user/model/user';
 
 export const PartnerAgeSettingThumbnail = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ export const PartnerAgeSettingThumbnail = () => {
   const preferAgeTo = useAppSelector(
     (state) => state.user.currentUser!.preferAgeTo
   );
-  const errorFields = useAppSelector((state) => state.setting.errorFields);
+  const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const [preferAgeSetting, setPreferAgeSetting] = useState({
     preferAgeFrom,
@@ -27,7 +27,7 @@ export const PartnerAgeSettingThumbnail = () => {
       preferAgeSetting.preferAgeTo !== preferAgeTo
     ) {
       dispatch(
-        submitSettingsThunk({
+        updateUserThunk({
           preferAgeFrom: preferAgeSetting.preferAgeFrom!,
           preferAgeTo: preferAgeSetting.preferAgeTo!,
         })

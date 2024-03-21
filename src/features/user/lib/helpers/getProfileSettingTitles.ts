@@ -1,4 +1,4 @@
-import type { ProfileSettingSelectName } from '@/entities/user/model/setting';
+import type { ProfileSettingSelectName } from '@/entities/user/model/user';
 import { PROFILE_SETTING_TITLES } from '../constants';
 
 export function getProfileSettingTitles(

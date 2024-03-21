@@ -6,7 +6,7 @@ export function useIsCheckedProfilePage(): boolean {
   const { pathname } = useLocation();
 
   const errorFieldsLength = useAppSelector(
-    (state) => state.setting.errorFields.length
+    (state) => state.user.errorFields.length
   );
 
   const isProfilePage = getIsProfilePage(pathname) || errorFieldsLength !== 0;

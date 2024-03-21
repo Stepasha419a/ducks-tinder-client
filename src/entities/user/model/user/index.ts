@@ -1,4 +1,4 @@
-export { userReducer, setCurrentUser } from './user.slice';
+export { userReducer, setCurrentUser, checkFields } from './user.slice';
 export {
   updateUserThunk,
   updateUserPlaceThunk,
@@ -8,3 +8,4 @@ export {
 } from './user.thunks';
 export { selectAvatar } from './user.selectors';
 export { INTERESTS_FOR_LOOP } from './user.constants';
+export * from './user.interface';

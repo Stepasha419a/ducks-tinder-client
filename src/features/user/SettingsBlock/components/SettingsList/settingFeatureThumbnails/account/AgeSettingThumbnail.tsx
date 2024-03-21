@@ -1,21 +1,21 @@
 import { SettingThumbnail } from '@entities/user/components';
-import { submitSettingsThunk } from '@entities/user/model/setting';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import styles from '../SettingFeatureThumbnails.module.scss';
 import { useState } from 'react';
 import { RangeInput } from '@shared/ui';
+import { updateUserThunk } from '@/entities/user/model/user';
 
 export const AgeSettingThumbnail = () => {
   const dispatch = useAppDispatch();
 
   const age = useAppSelector((state) => state.user.currentUser!.age);
-  const errorFields = useAppSelector((state) => state.setting.errorFields);
+  const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const [ageSetting, setAgeSetting] = useState(age);
 
   const ageSubmitHandler = (): void => {
     dispatch(
-      submitSettingsThunk({
+      updateUserThunk({
         age: ageSetting!,
       })
     );

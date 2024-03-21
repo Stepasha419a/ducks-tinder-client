@@ -1,4 +1,4 @@
-import type { ProfileSettingSelectName } from '../../model/setting';
+import type { ProfileSettingSelectName } from '../../model/user';
 import type { ProfileSettingNameEnum } from '../constants';
 import { SELECT_SETTING_FIELDS } from '../constants';
 

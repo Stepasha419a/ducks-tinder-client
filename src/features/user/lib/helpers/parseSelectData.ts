@@ -1,7 +1,7 @@
 import type {
   MultiSelectForm,
   ProfileSettingSelectName,
-} from '@/entities/user/model/setting';
+} from '@/entities/user/model/user';
 
 export function parseSelectData(data: MultiSelectForm) {
   return Object.keys(data.input).reduce((res, key) => {

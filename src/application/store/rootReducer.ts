@@ -1,6 +1,5 @@
 import { authReducer } from '@entities/user';
 import { chatReducer } from '@entities/chat';
-import { settingReducer } from '@entities/user';
 import { tinderReducer } from '@entities/user';
 import { userReducer } from '@entities/user';
 import { themeReducer } from '@shared/model';
@@ -12,7 +11,6 @@ export const rootReducer = combineReducers({
   pair: pairReducer,
   auth: authReducer,
   chat: chatReducer,
-  setting: settingReducer,
   tinder: tinderReducer,
   theme: themeReducer,
 });

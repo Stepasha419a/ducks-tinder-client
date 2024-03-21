@@ -1,9 +1,9 @@
 import { SettingThumbnail } from '@entities/user/components';
-import { submitSettingsThunk } from '@entities/user/model/setting';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import styles from '../SettingFeatureThumbnails.module.scss';
 import { useState } from 'react';
 import { CheckboxInput, RangeInput } from '@shared/ui';
+import { updateUserThunk } from '@/entities/user/model/user';
 
 export const DistanceSettingThumbnail = () => {
   const dispatch = useAppDispatch();
@@ -12,20 +12,20 @@ export const DistanceSettingThumbnail = () => {
   const usersOnlyInDistance = useAppSelector(
     (state) => state.user.currentUser!.usersOnlyInDistance
   );
-  const errorFields = useAppSelector((state) => state.setting.errorFields);
+  const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const [distanceSetting, setDistanceSetting] = useState(distance);
 
   const distanceHandler = (): void => {
     dispatch(
-      submitSettingsThunk({
+      updateUserThunk({
         distance: distanceSetting!,
       })
     );
   };
   const setUsersOnlyInDistanceHandler = (): void => {
     dispatch(
-      submitSettingsThunk({
+      updateUserThunk({
         usersOnlyInDistance: !usersOnlyInDistance,
       })
     );

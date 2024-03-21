@@ -4,7 +4,7 @@ import type {
   MultiSelectForm,
   ProfileSettingSelectName,
   SelectValidation,
-} from '@entities/user/model/setting';
+} from '@entities/user/model/user';
 import { getSelectData } from '@entities/user/lib';
 import { getProfileSettingTitles } from '../helpers';
 
