@@ -1,0 +1,18 @@
+export const PERSONAL_TYPES = [
+  'INTJ',
+  'INTP',
+  'ENTJ',
+  'ENTP',
+  'INFJ',
+  'INFP',
+  'ENFJ',
+  'ENFP',
+  'ISTJ',
+  'ISFJ',
+  'ESTJ',
+  'ESFJ',
+  'ISTP',
+  'ISFP',
+  'ESTP',
+  'Entertainer',
+] as const;

@@ -3,7 +3,7 @@ import { Button, ListItem, Popup } from '@shared/ui';
 import styles from './ItemsSettingPopup.module.scss';
 
 interface ItemsSettingPopupProps {
-  list: string[];
+  list: string[] | ReadonlyArray<string>;
   activeItems: string[];
   toggleItem: (item: string) => void;
   setIsItemsSettingPopupOpen: (setting: boolean) => void;
