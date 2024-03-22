@@ -1,6 +1,17 @@
 export const INTERESTS_FOR_LOOP = ['music', 'travelling', 'movies', 'sport'];
 
-import type { SettingNameEnum, SettingProperties } from './user.interface';
+import type { SettingNameEnum } from '../../lib';
+
+export interface Validation {
+  min?: number;
+  max?: number;
+  email?: boolean;
+}
+
+export interface SettingProperties {
+  formName?: string;
+  validation?: Validation;
+}
 
 export const SETTING_LIST: Record<SettingNameEnum, SettingProperties | null> = {
   email: {
@@ -19,4 +30,4 @@ export const SETTING_LIST: Record<SettingNameEnum, SettingProperties | null> = {
   nickname: {
     validation: { min: 6, max: 16 },
   },
-};
+} as const;

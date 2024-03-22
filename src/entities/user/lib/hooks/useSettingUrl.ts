@@ -1,11 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import { getSettingType, getSettingUrl } from '../helpers';
-import { SettingNameEnum } from '../../model/user/user.interface';
 import { SETTING_LIST } from '../../model/user/user.constants';
+import { SettingNameEnum } from '../constants';
 
 const settingRegex = /\/settings\/([a-z]+(?:(?:-)(?:[a-z]+))*)/;
 
-export function useSettingUrlNew() {
+export function useSettingUrl() {
   const { pathname } = useLocation();
 
   const settingName = getSettingUrl(pathname, settingRegex);

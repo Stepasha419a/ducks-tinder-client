@@ -1,5 +1,6 @@
 import type { User } from '@shared/api/interfaces';
-import { SettingNameEnum, type Setting } from '../../user/user.interface';
+import type { Setting } from '../user.interface';
+import { SettingNameEnum } from '@/entities/user/lib';
 
 const potentialFields: Setting[] = [
   SettingNameEnum.DESCRIPTION,

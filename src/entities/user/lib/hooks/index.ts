@@ -4,6 +4,6 @@ export { useDefaultValues } from './useDefaultValues';
 export { useCurrentValidation } from './useCurrentValidation';
 export { useDefaultProfileValues } from './useDefaultProfileValues';
 export { useProfileSettingUrl } from './useProfileSettingUrl';
-export { useSettingUrlNew } from './useSettingUrlNew';
+export { useSettingUrl } from './useSettingUrl';
 export { useFoundSetting } from './useFoundSetting';
 export { useMemoriedSettingUrl } from './useMemoriedSettingUrl';

@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { useSettingUrlNew } from './useSettingUrlNew';
-import type { SettingNameEnum } from '../../model/user';
+import type { SettingNameEnum } from '../constants';
+import { useSettingUrl } from './useSettingUrl';
 
 export function useMemoriedSettingUrl() {
-  const setting = useSettingUrlNew();
+  const setting = useSettingUrl();
 
   const lastExistingValues = useRef<{
     settingName: SettingNameEnum | null;

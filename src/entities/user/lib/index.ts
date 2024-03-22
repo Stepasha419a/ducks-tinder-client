@@ -20,4 +20,6 @@ export {
   SELECT_LISTS,
   SELECT_SETTING_FIELDS,
   SELECT_VALIDATION,
+  SettingNameEnum,
+  SettingTypeEnum,
 } from './constants';

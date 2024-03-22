@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { getSettingUrl } from '../helpers';
-import { SETTING_REGEX } from '../constants';
-import { SettingNameEnum } from '../../model/user';
+import { SETTING_REGEX, SettingNameEnum } from '../constants';
 
 export function useFoundSetting() {
   const { pathname } = useLocation();

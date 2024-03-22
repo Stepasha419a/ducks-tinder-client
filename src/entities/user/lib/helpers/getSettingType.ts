@@ -1,4 +1,4 @@
-import { SettingNameEnum, SettingTypeEnum } from '../../model/user';
+import { SettingNameEnum, SettingTypeEnum } from '../constants';
 
 export function getSettingType(settingName: SettingNameEnum): SettingTypeEnum {
   switch (settingName) {

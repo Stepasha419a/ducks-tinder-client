@@ -1,7 +1,7 @@
 import { ROUTES } from '@shared/lib/constants';
 import { LinkSettingThumbnail } from '@entities/user/components';
 import { useAppSelector } from '@shared/lib/hooks';
-import { SettingNameEnum } from '@/entities/user/model/user/user.interface';
+import { SettingNameEnum } from '@/entities/user/lib';
 
 export const SexSettingThumbnail = () => {
   const sex = useAppSelector((state) => state.user.currentUser!.sex);
