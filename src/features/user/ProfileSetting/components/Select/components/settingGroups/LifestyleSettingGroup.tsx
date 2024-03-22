@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
 import type { MultiSelectForm } from '@/entities/user/model/user';
 import { SelectSetting } from '../SelectSetting/SelectSetting';
+import { ProfileSettingSelectNameEnum } from '@/entities/user/lib';
 
 interface LifestyleSettingGroupProps {
   control: Control<MultiSelectForm>;
@@ -12,16 +13,34 @@ export const LifestyleSettingGroup: FC<LifestyleSettingGroupProps> = ({
 }) => {
   return (
     <>
-      <SelectSetting control={control} settingFieldName="pet" />
-      <SelectSetting control={control} settingFieldName="alcoholAttitude" />
-      <SelectSetting control={control} settingFieldName="smokingAttitude" />
-      <SelectSetting control={control} settingFieldName="trainingAttitude" />
-      <SelectSetting control={control} settingFieldName="foodPreference" />
       <SelectSetting
         control={control}
-        settingFieldName="socialNetworksActivity"
+        settingFieldName={ProfileSettingSelectNameEnum.PET}
       />
-      <SelectSetting control={control} settingFieldName="chronotype" />
+      <SelectSetting
+        control={control}
+        settingFieldName={ProfileSettingSelectNameEnum.ALCOHOL_ATTITUDE}
+      />
+      <SelectSetting
+        control={control}
+        settingFieldName={ProfileSettingSelectNameEnum.SMOKING_ATTITUDE}
+      />
+      <SelectSetting
+        control={control}
+        settingFieldName={ProfileSettingSelectNameEnum.TRAINING_ATTITUDE}
+      />
+      <SelectSetting
+        control={control}
+        settingFieldName={ProfileSettingSelectNameEnum.FOOD_PREFERENCE}
+      />
+      <SelectSetting
+        control={control}
+        settingFieldName={ProfileSettingSelectNameEnum.SOCIAL_NETWORK_ACTIVITY}
+      />
+      <SelectSetting
+        control={control}
+        settingFieldName={ProfileSettingSelectNameEnum.CHRONOTYPE}
+      />
     </>
   );
 };

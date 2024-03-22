@@ -6,3 +6,4 @@ export { ProfileSettingNameEnum } from './profileSettingName';
 export { SettingNameEnum } from './settingName';
 export { SettingTypeEnum } from './settingType';
 export { SETTING_REGEX } from './settingRegex';
+export { ProfileSettingSelectNameEnum } from './profileSettingSelectName';

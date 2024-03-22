@@ -1,11 +1,11 @@
 import { useController, useForm } from 'react-hook-form';
-import type { SettingFieldValues } from '@entities/user/model/user';
 import { updateUserThunk } from '@entities/user/model/user';
 import { useDefaultValues } from '@entities/user/lib';
 import { useAppDispatch, useMediaQuery } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@shared/lib/constants';
 import { useMemoriedSettingUrl } from '@/entities/user/lib/hooks';
+import type { SettingFieldValues } from './useCurrentValidation';
 
 export function useRadioForm() {
   const navigate = useNavigate();

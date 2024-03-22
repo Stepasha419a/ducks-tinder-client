@@ -1,0 +1,16 @@
+export enum ProfileSettingSelectNameEnum {
+  INTERESTS = 'interests',
+  ZODIAC_SIGN = 'zodiacSign',
+  EDUCATION = 'education',
+  CHILDREN_ATTITUDE = 'childrenAttitude',
+  PERSONAL_TYPE = 'personalityType',
+  COMMUNICATION_STYLE = 'communicationStyle',
+  ATTENTION_SIGN = 'attentionSign',
+  ALCOHOL_ATTITUDE = 'alcoholAttitude',
+  CHRONOTYPE = 'chronotype',
+  FOOD_PREFERENCE = 'foodPreference',
+  PET = 'pet',
+  SMOKING_ATTITUDE = 'smokingAttitude',
+  SOCIAL_NETWORK_ACTIVITY = 'socialNetworksActivity',
+  TRAINING_ATTITUDE = 'trainingAttitude',
+}

@@ -1,11 +1,9 @@
-import type {
-  MultiSelectForm,
-  ProfileSettingSelectName,
-} from '@/entities/user/model/user';
+import type { ProfileSettingSelectNameEnum } from '@/entities/user/lib';
+import type { MultiSelectForm } from '@/entities/user/model/user';
 
 export function parseSelectData(data: MultiSelectForm) {
   return Object.keys(data.input).reduce((res, key) => {
-    const extracted = data.input[key as ProfileSettingSelectName];
+    const extracted = data.input[key as ProfileSettingSelectNameEnum];
     const value = getValueFromExtracted(extracted);
 
     return {

@@ -14,10 +14,10 @@ import {
   TRAINING_ATTITUDES,
   ZODIAC_SIGNS,
 } from '@/shared/api/constant';
-import type { ProfileSettingSelectName } from '../../model/user';
+import type { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 
 export const SELECT_LISTS: Record<
-  ProfileSettingSelectName,
+  ProfileSettingSelectNameEnum,
   ReadonlyArray<string>
 > = {
   interests: INTERESTS,

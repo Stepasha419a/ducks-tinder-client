@@ -1,10 +1,8 @@
-import type {
-  ProfileSettingSelectName,
-  SelectValidation,
-} from '../../model/user';
+import type { SelectValidation } from '../../model/user';
+import type { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 
 export const SELECT_VALIDATION: Record<
-  ProfileSettingSelectName,
+  ProfileSettingSelectNameEnum,
   SelectValidation
 > = {
   interests: { maxLength: 16 },

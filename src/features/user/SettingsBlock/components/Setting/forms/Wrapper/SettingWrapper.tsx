@@ -3,13 +3,14 @@ import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
 import { Button } from '@shared/ui';
-import type {
-  SettingFieldInterestsArray,
-  SettingFieldValues,
-} from '@entities/user/model/user';
 import styles from './SettingWrapper.module.scss';
 import classNames from 'classnames';
 import { useMediaQuery } from '@shared/lib/hooks';
+import type { SettingFieldValues } from '@/features/user/lib/hooks';
+
+interface SettingFieldInterestsArray {
+  input: string[];
+}
 
 interface SettingWrapperProps {
   formName: string | null;

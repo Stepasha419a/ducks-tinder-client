@@ -1,28 +1,28 @@
 import type { PartialUser } from '@/shared/api/services/user/user-service.interface';
-import type { ProfileSettingSelectName } from '../../model/user';
 import type { ProfileSettingNameEnum } from './profileSettingName';
+import { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 
 // array as fields of user model like user.interests
 export const SELECT_SETTING_FIELDS: Record<
   ProfileSettingNameEnum,
-  ProfileSettingSelectName[] & PartialUser
+  ProfileSettingSelectNameEnum[] & PartialUser
 > = {
-  interests: ['interests'],
+  interests: [ProfileSettingSelectNameEnum.INTERESTS],
   moreAboutMe: [
-    'zodiacSign',
-    'education',
-    'childrenAttitude',
-    'personalityType',
-    'communicationStyle',
-    'attentionSign',
+    ProfileSettingSelectNameEnum.ZODIAC_SIGN,
+    ProfileSettingSelectNameEnum.EDUCATION,
+    ProfileSettingSelectNameEnum.CHILDREN_ATTITUDE,
+    ProfileSettingSelectNameEnum.PERSONAL_TYPE,
+    ProfileSettingSelectNameEnum.COMMUNICATION_STYLE,
+    ProfileSettingSelectNameEnum.ATTENTION_SIGN,
   ],
   lifestyle: [
-    'pet',
-    'alcoholAttitude',
-    'smokingAttitude',
-    'trainingAttitude',
-    'foodPreference',
-    'socialNetworksActivity',
-    'chronotype',
+    ProfileSettingSelectNameEnum.PET,
+    ProfileSettingSelectNameEnum.ALCOHOL_ATTITUDE,
+    ProfileSettingSelectNameEnum.SMOKING_ATTITUDE,
+    ProfileSettingSelectNameEnum.TRAINING_ATTITUDE,
+    ProfileSettingSelectNameEnum.FOOD_PREFERENCE,
+    ProfileSettingSelectNameEnum.SOCIAL_NETWORK_ACTIVITY,
+    ProfileSettingSelectNameEnum.CHRONOTYPE,
   ],
 };

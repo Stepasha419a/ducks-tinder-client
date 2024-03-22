@@ -2,15 +2,15 @@ import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import type {
   MultiSelectForm,
-  ProfileSettingSelectName,
   SelectValidation,
 } from '@entities/user/model/user';
+import type { ProfileSettingSelectNameEnum } from '@entities/user/lib';
 import { getSelectData } from '@entities/user/lib';
 import { getProfileSettingTitles } from '../helpers';
 
 export function useSelectFormControl(
   control: Control<MultiSelectForm>,
-  settingFieldName: ProfileSettingSelectName
+  settingFieldName: ProfileSettingSelectNameEnum
 ) {
   const {
     field: { value: items, onChange: setItems },
