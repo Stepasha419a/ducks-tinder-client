@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { updateUserThunk } from '@entities/user/model/user';
-import type { MultiSelectForm } from '@entities/user/model/user';
+import type { MultiSelectForm } from '@entities/user/lib';
 import {
   useDefaultProfileValues,
   useProfileSettingUrl,

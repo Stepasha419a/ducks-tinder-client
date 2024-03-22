@@ -2,11 +2,11 @@ import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import type {
   MultiSelectForm,
-  SelectValidation,
-} from '@entities/user/model/user';
-import type { ProfileSettingSelectNameEnum } from '@entities/user/lib';
+  ProfileSettingSelectNameEnum,
+} from '@entities/user/lib';
 import { getSelectData } from '@entities/user/lib';
 import { getProfileSettingTitles } from '../helpers';
+import type { SelectValidation } from '@/entities/user/lib/constants/selectValidation';
 
 export function useSelectFormControl(
   control: Control<MultiSelectForm>,

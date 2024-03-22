@@ -1,8 +1,14 @@
 import type { User } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
-import type { MultiSelectForm } from '@entities/user/model/user';
 import { getSelectSettingFields } from '../helpers';
-import type { ProfileSettingNameEnum } from '../constants';
+import type {
+  ProfileSettingNameEnum,
+  ProfileSettingSelectNameEnum,
+} from '../constants';
+
+export interface MultiSelectForm {
+  input: Record<ProfileSettingSelectNameEnum, string[] | string | null>;
+}
 
 export function useDefaultProfileValues(
   settingName: ProfileSettingNameEnum

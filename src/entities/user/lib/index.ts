@@ -9,11 +9,11 @@ export {
 export {
   useAuthForm,
   useTinderAnimations,
-  useCurrentValidation,
   useDefaultValues,
   useDefaultProfileValues,
   useProfileSettingUrl,
 } from './hooks';
+export type { MultiSelectForm } from './hooks';
 export {
   PROFILE_SETTING_REGEX,
   ProfileSettingNameEnum,

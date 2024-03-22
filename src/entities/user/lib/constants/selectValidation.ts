@@ -1,5 +1,8 @@
-import type { SelectValidation } from '../../model/user';
 import type { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
+
+export interface SelectValidation {
+  maxLength: number;
+}
 
 export const SELECT_VALIDATION: Record<
   ProfileSettingSelectNameEnum,

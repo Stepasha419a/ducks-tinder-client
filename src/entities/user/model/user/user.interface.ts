@@ -1,6 +1,5 @@
 import type { User } from '@shared/api/interfaces';
 import type { SettingNameEnum } from '../../lib';
-import type { ProfileSettingSelectNameEnum } from '../../lib/constants';
 
 export interface UserInitialState {
   currentUser: User | null;
@@ -15,16 +14,3 @@ export type Setting =
   | 'preferAgeFrom'
   | 'preferAgeTo'
   | 'usersOnlyInDistance';
-
-export type ProfileSelectInput = Record<
-  ProfileSettingSelectNameEnum,
-  string[] | string | null
->;
-
-export interface MultiSelectForm {
-  input: ProfileSelectInput;
-}
-
-export interface SelectValidation {
-  maxLength: number;
-}
