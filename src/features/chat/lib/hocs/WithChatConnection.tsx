@@ -7,12 +7,15 @@ export function WithChatConnection<P extends object>(Component: FC<P>): FC<P> {
     const dispatch = useAppDispatch();
 
     const chatsLength = useAppSelector((state) => state.chat.chats.length);
+    const isSocketConnected = useAppSelector(
+      (state) => state.chat.isSocketConnected
+    );
 
     useEffect(() => {
-      if (chatsLength > 0) {
+      if (chatsLength > 0 && !isSocketConnected) {
         dispatch(connectChatsThunk());
       }
-    }, [dispatch, chatsLength]);
+    }, [dispatch, chatsLength, isSocketConnected]);
 
     return <Component {...props} />;
   };

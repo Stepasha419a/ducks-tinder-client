@@ -28,7 +28,6 @@ const initialState: ChatInitialState = {
   isNotFound: false,
   isMessagesInitialLoading: true,
   isMessagesLoading: false,
-  skipMessagesCount: 0,
   isMessagesEnded: false,
   currentChatId: null,
   repliedMessage: null,
@@ -66,7 +65,6 @@ const chatSlice = createSlice({
           chatVisit.lastSeen = message.createdAt;
         }
         state.messages.push(message);
-        state.skipMessagesCount++;
       } else {
         const messageText =
           message.text.length > 20
@@ -83,7 +81,6 @@ const chatSlice = createSlice({
       }
 
       state.messages = state.messages.filter((item) => item.id !== message.id);
-      state.skipMessagesCount--;
     },
     editMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
@@ -126,7 +123,7 @@ const chatSlice = createSlice({
     deleteChat: (state, { payload }: PayloadAction<string>) => {
       state.chats = state.chats.filter((chat) => chat.id !== payload);
       state.isChatConnected = false;
-      state.skipMessagesCount = 0;
+      state.messages = [];
       state.currentChatId = '';
       state.repliedMessage = null;
     },
@@ -219,7 +216,7 @@ const chatSlice = createSlice({
         }
 
         state.isChatConnected = false;
-        state.skipMessagesCount = 0;
+        state.messages = [];
         state.currentChatId = '';
         state.repliedMessage = null;
       })

@@ -9,7 +9,6 @@ export interface ChatInitialState {
   isNotFound: boolean;
   isMessagesInitialLoading: boolean;
   isMessagesLoading: boolean;
-  skipMessagesCount: number;
   isMessagesEnded: boolean;
   currentChatId: string | null;
   repliedMessage: Message | null;
