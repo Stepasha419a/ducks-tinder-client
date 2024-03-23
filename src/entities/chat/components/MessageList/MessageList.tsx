@@ -16,9 +16,10 @@ import styles from './MessageList.module.scss';
 
 interface MessagesProps {
   select: ReactElement;
+  repliedMessage: MessageInterface | null;
 }
 
-export const MessageList: FC<MessagesProps> = ({ select }) => {
+export const MessageList: FC<MessagesProps> = ({ select, repliedMessage }) => {
   const dispatch = useAppDispatch();
 
   const {
@@ -27,7 +28,6 @@ export const MessageList: FC<MessagesProps> = ({ select }) => {
     messages,
     currentMessage,
     isMessageEditing,
-    repliedMessage,
   } = useAppSelector(selectMessages);
 
   const isMessagesLoading = useAppSelector(

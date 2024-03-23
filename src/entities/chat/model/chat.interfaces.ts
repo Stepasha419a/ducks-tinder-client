@@ -11,7 +11,6 @@ export interface ChatInitialState {
   isMessagesLoading: boolean;
   isMessagesEnded: boolean;
   currentChatId: string | null;
-  repliedMessage: Message | null;
   isChatUserPopup: boolean;
   currentMessage: Message | null;
   isMessageEditing: boolean;

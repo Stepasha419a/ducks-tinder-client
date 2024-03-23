@@ -1,7 +1,6 @@
 export {
   pushNewMessage,
   setCurrentChatData,
-  setRepliedMessage,
   setIsChatUserPopup,
   setCurrentMessage,
   setIsMessageEditing,

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import { useRef } from 'react';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,12 +8,17 @@ import { getDatesHourDiff } from '@shared/helpers';
 import { useMessageSelect } from '../lib';
 import { MessageSelectMobile } from './mobile/MessageSelect.mobile';
 import styles from './MessageSelect.module.scss';
+import type { Message } from '@/shared/api/interfaces';
 
 interface MessageSelectProps {
   isMobile?: boolean;
+  setRepliedMessage: Dispatch<SetStateAction<Message | null>>;
 }
 
-export const MessageSelect: FC<MessageSelectProps> = ({ isMobile }) => {
+export const MessageSelect: FC<MessageSelectProps> = ({
+  isMobile,
+  setRepliedMessage,
+}) => {
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
 
   const selectRef = useRef<HTMLDivElement | null>(null);
@@ -26,7 +31,7 @@ export const MessageSelect: FC<MessageSelectProps> = ({ isMobile }) => {
     handleDeleteMessage,
     handleEditMessage,
     handleRepliedMessage,
-  } = useMessageSelect();
+  } = useMessageSelect(setRepliedMessage);
 
   useOnClickOutside(selectRef, handleSelectClickOutside);
 

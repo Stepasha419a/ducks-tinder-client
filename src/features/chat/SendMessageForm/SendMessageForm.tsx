@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, TextField } from '@shared/ui';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
@@ -7,16 +7,24 @@ import { BlockedChat, ReplyBlock } from './components';
 import styles from './SendMessageForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import type { Message } from '@/shared/api/interfaces';
 
 interface ChatFormValues {
   input: string;
 }
 
-export const SendMessageForm = (): ReactElement => {
+interface SendMessageFormProps {
+  repliedMessage: Message | null;
+  setRepliedMessage: Dispatch<SetStateAction<Message | null>>;
+}
+
+export const SendMessageForm: FC<SendMessageFormProps> = ({
+  repliedMessage,
+  setRepliedMessage,
+}) => {
   const dispatch = useAppDispatch();
 
   const currentChat = useAppSelector(selectCurrentChat);
-  const repliedMessage = useAppSelector((state) => state.chat.repliedMessage);
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   const {
@@ -29,7 +37,8 @@ export const SendMessageForm = (): ReactElement => {
   const handleSendMessage = handleSubmit((data) => {
     const trimmedValue = data.input.trim();
     if (trimmedValue) {
-      dispatch(sendMessageThunk(trimmedValue));
+      dispatch(sendMessageThunk({ text: trimmedValue, repliedMessage }));
+      setRepliedMessage(null);
     }
     reset();
   });
@@ -43,7 +52,12 @@ export const SendMessageForm = (): ReactElement => {
 
   return (
     <div className={styles.wrapper}>
-      {repliedMessage && <ReplyBlock />}
+      {repliedMessage && (
+        <ReplyBlock
+          setRepliedMessage={setRepliedMessage}
+          repliedMessage={repliedMessage}
+        />
+      )}
       <form onSubmit={handleSendMessage} className={styles.form}>
         <TextField
           {...register('input', { required: true })}

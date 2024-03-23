@@ -5,5 +5,4 @@ export { Messages } from './Messages/Messages';
 export { ChatProfilePopup } from './ChatProfilePopup/ChatProfilePopup';
 export { ProfilePreview } from './ProfilePreview/ProfilePreview';
 export { ProfileSettingBlock } from './ProfileSettingBlock/ProfileSettingBlock';
-export { ChatForm } from './ChatForm/ChatForm';
 export { Pairs } from './Pairs/Pairs';

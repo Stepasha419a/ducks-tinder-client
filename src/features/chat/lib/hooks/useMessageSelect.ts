@@ -1,12 +1,15 @@
+import type { Message } from '@/shared/api/interfaces';
 import {
   deleteMessageThunk,
   setCurrentMessage,
   setIsMessageEditing,
-  setRepliedMessage,
 } from '@entities/chat/model';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import type { Dispatch, SetStateAction } from 'react';
 
-export function useMessageSelect() {
+export function useMessageSelect(
+  setRepliedMessage: Dispatch<SetStateAction<Message | null>>
+) {
   const dispatch = useAppDispatch();
 
   const isMessageEditing = useAppSelector(
@@ -29,7 +32,7 @@ export function useMessageSelect() {
   };
 
   const handleRepliedMessage = () => {
-    dispatch(setRepliedMessage(currentMessage));
+    setRepliedMessage(currentMessage);
     dispatch(setCurrentMessage(null));
   };
 

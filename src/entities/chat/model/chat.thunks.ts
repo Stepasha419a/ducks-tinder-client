@@ -18,6 +18,7 @@ import {
 } from './chat.slice';
 import { checkAuthThunk } from '@/entities/user/model/auth';
 import { PAGINATION_TAKE } from '@/shared/lib/constants';
+import type { Message } from '@/shared/api/interfaces';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
@@ -44,6 +45,7 @@ export const connectChatsThunk = createAsyncThunk(
             case 'Unauthorized':
               dispatch(checkAuthThunk());
               break;
+            case 'Validation failed (uuid v 4 is expected)':
             case 'Not Found':
               dispatch(setIsNotFound(true));
               break;
@@ -223,10 +225,15 @@ export const deleteChatThunk = createAsyncThunk(
 
 export const sendMessageThunk = createAsyncThunk(
   'chat/sendMessage',
-  (text: string, { rejectWithValue, getState }) => {
+  (
+    args: { text: string; repliedMessage: Message | null },
+    { rejectWithValue, getState }
+  ) => {
     try {
       const { chat } = getState() as RootState;
-      const { repliedMessage, currentChatId } = chat;
+      const { currentChatId } = chat;
+
+      const { text, repliedMessage } = args;
 
       let repliedId = null;
       if (repliedMessage) {

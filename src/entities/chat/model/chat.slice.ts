@@ -9,7 +9,6 @@ import type {
 import {
   getChatsThunk,
   connectChatThunk,
-  sendMessageThunk,
   disconnectChatThunk,
   connectChatsThunk,
   deleteMessageThunk,
@@ -30,7 +29,6 @@ const initialState: ChatInitialState = {
   isMessagesLoading: false,
   isMessagesEnded: false,
   currentChatId: null,
-  repliedMessage: null,
   isChatUserPopup: false,
   currentMessage: null,
   isMessageEditing: false,
@@ -46,7 +44,6 @@ const chatSlice = createSlice({
       state.isChatConnected = true;
       state.isMessagesInitialLoading = true;
       state.isMessagesEnded = false;
-      state.repliedMessage = null;
       state.isNotFound = false;
     },
     pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
@@ -125,13 +122,9 @@ const chatSlice = createSlice({
       state.isChatConnected = false;
       state.messages = [];
       state.currentChatId = '';
-      state.repliedMessage = null;
     },
     setIsMessagesLoading: (state, { payload }: PayloadAction<boolean>) => {
       state.isMessagesLoading = payload;
-    },
-    setRepliedMessage: (state, { payload }: PayloadAction<Message | null>) => {
-      state.repliedMessage = payload;
     },
     setIsNotFound: (state, { payload }: PayloadAction<boolean>) => {
       state.isNotFound = payload;
@@ -218,12 +211,6 @@ const chatSlice = createSlice({
         state.isChatConnected = false;
         state.messages = [];
         state.currentChatId = '';
-        state.repliedMessage = null;
-      })
-      .addCase(sendMessageThunk.fulfilled, (state) => {
-        if (state.repliedMessage) {
-          state.repliedMessage = null;
-        }
       })
       .addCase(deleteMessageThunk.pending, (state) => {
         state.currentMessage = null;
@@ -240,7 +227,6 @@ export const {
   blockChat,
   unblockChat,
   deleteChat,
-  setRepliedMessage,
   setIsNotFound,
   setIsChatUserPopup,
   setCurrentMessage,
