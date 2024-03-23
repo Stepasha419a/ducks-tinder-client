@@ -23,4 +23,6 @@ export {
   SettingNameEnum,
   SettingTypeEnum,
   ProfileSettingSelectNameEnum,
+  INTERESTS_FOR_LOOP,
+  SETTING_LIST,
 } from './constants';

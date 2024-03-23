@@ -1,5 +1,4 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { INTERESTS_FOR_LOOP } from '@/entities/user/model/user';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ListItem } from '@shared/ui';
@@ -7,6 +6,7 @@ import { usePairSorts } from '../lib';
 import styles from './SortPairsItems.module.scss';
 import { useMediaQuery } from '@shared/lib/hooks';
 import { SortPairsItemsMobile } from './mobile/SortPairsItems.mobile';
+import { INTERESTS_FOR_LOOP } from '@/entities/user/lib';
 
 interface SortPairsItemsProps {
   isSortPopupOpen: boolean;

@@ -40,11 +40,7 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
       {children}
       <div className={styles.title}>Your {formName}</div>
       <Link to={cancelUrl} className={styles.link}>
-        <Button
-          disabled={!isValid}
-          border
-          extraClassName={classNames(styles.btn, styles.noBorder)}
-        >
+        <Button border extraClassName={classNames(styles.btn, styles.noBorder)}>
           Cancel
         </Button>
       </Link>

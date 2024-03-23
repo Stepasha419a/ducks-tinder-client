@@ -11,6 +11,10 @@ export function useFoundSetting() {
     return undefined;
   }
 
+  if (settingName === 'place') {
+    return undefined;
+  }
+
   if (
     !Object.values(SettingNameEnum).includes(settingName as SettingNameEnum)
   ) {

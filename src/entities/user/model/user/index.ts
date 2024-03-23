@@ -7,5 +7,4 @@ export {
   mixUserPicturesThunk,
 } from './user.thunks';
 export { selectAvatar } from './user.selectors';
-export { INTERESTS_FOR_LOOP } from './user.constants';
 export * from './user.interface';

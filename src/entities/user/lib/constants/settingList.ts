@@ -1,5 +1,3 @@
-export const INTERESTS_FOR_LOOP = ['music', 'travelling', 'movies', 'sport'];
-
 import type { SettingNameEnum } from '../../lib';
 
 export interface Validation {

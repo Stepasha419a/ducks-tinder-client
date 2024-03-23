@@ -7,3 +7,5 @@ export { SettingNameEnum } from './settingName';
 export { SettingTypeEnum } from './settingType';
 export { SETTING_REGEX } from './settingRegex';
 export { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
+export { SETTING_LIST } from './settingList';
+export { INTERESTS_FOR_LOOP } from './interestsForLoop';
