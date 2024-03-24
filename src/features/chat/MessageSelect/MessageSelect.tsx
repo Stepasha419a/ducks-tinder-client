@@ -13,11 +13,15 @@ import type { Message } from '@/shared/api/interfaces';
 interface MessageSelectProps {
   isMobile?: boolean;
   setRepliedMessage: Dispatch<SetStateAction<Message | null>>;
+  isMessageEditing: boolean;
+  setIsMessageEditing: Dispatch<SetStateAction<boolean>>;
 }
 
 export const MessageSelect: FC<MessageSelectProps> = ({
   isMobile,
   setRepliedMessage,
+  isMessageEditing,
+  setIsMessageEditing,
 }) => {
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
 
@@ -31,7 +35,11 @@ export const MessageSelect: FC<MessageSelectProps> = ({
     handleDeleteMessage,
     handleEditMessage,
     handleRepliedMessage,
-  } = useMessageSelect(setRepliedMessage);
+  } = useMessageSelect(
+    setRepliedMessage,
+    isMessageEditing,
+    setIsMessageEditing
+  );
 
   useOnClickOutside(selectRef, handleSelectClickOutside);
 

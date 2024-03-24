@@ -6,8 +6,15 @@ import { TextField } from '@shared/ui';
 import styles from './EditMessage.module.scss';
 import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
+import type { FC } from 'react';
 
-export const EditMessage = () => {
+interface EditMessageProps {
+  handleStopMessageEditing: () => void;
+}
+
+export const EditMessage: FC<EditMessageProps> = ({
+  handleStopMessageEditing,
+}) => {
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
 
   const { register, handleSubmit, reset } = useForm<{ input: string }>({
@@ -15,7 +22,9 @@ export const EditMessage = () => {
     defaultValues: { input: currentMessage?.text },
   });
 
-  const { handleCancelMessage, handleSaveMessage } = useSelectMessageEdit();
+  const { handleCancelMessage, handleSaveMessage } = useSelectMessageEdit(
+    handleStopMessageEditing
+  );
 
   const handleSave = handleSubmit((data) => {
     const trimmedValue = data.input.trim();

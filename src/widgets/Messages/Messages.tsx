@@ -13,28 +13,43 @@ export const Messages: FC<MessagesProps> = ({
 }): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const isMessageEditing = useAppSelector(
-    (state) => state.chat.isMessageEditing
-  );
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
 
   const [repliedMessage, setRepliedMessage] = useState<null | Message>(null);
+  const [isMessageEditing, setIsMessageEditing] = useState(false);
 
   const isMobileSelected = currentMessage && !isMessageEditing && isMobile;
+
+  const handleStopMessageEditing = () => {
+    setIsMessageEditing(false);
+  };
 
   return (
     <>
       {isMobileSelected ? (
-        <MessageSelect isMobile setRepliedMessage={setRepliedMessage} />
+        <MessageSelect
+          isMobile
+          setRepliedMessage={setRepliedMessage}
+          isMessageEditing={isMessageEditing}
+          setIsMessageEditing={setIsMessageEditing}
+        />
       ) : (
         <ChatProfile handleOpen={handleOpenPopup} />
       )}
       <MessageList
         repliedMessage={repliedMessage}
-        select={<MessageSelect setRepliedMessage={setRepliedMessage} />}
+        isMessageEditing={isMessageEditing}
+        select={
+          <MessageSelect
+            setRepliedMessage={setRepliedMessage}
+            isMessageEditing={isMessageEditing}
+            setIsMessageEditing={setIsMessageEditing}
+          />
+        }
+        handleStopMessageEditing={handleStopMessageEditing}
       />
       {isMessageEditing ? (
-        <EditMessage />
+        <EditMessage handleStopMessageEditing={handleStopMessageEditing} />
       ) : (
         <SendMessageForm
           setRepliedMessage={setRepliedMessage}

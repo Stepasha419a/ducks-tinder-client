@@ -2,7 +2,6 @@ export {
   pushNewMessage,
   setCurrentChatData,
   setCurrentMessage,
-  setIsMessageEditing,
 } from './chat.slice';
 export {
   connectChatsThunk,

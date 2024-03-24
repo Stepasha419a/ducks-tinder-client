@@ -17,9 +17,16 @@ import styles from './MessageList.module.scss';
 interface MessagesProps {
   select: ReactElement;
   repliedMessage: MessageInterface | null;
+  handleStopMessageEditing: () => void;
+  isMessageEditing: boolean;
 }
 
-export const MessageList: FC<MessagesProps> = ({ select, repliedMessage }) => {
+export const MessageList: FC<MessagesProps> = ({
+  select,
+  repliedMessage,
+  handleStopMessageEditing,
+  isMessageEditing,
+}) => {
   const dispatch = useAppDispatch();
 
   const {
@@ -27,7 +34,6 @@ export const MessageList: FC<MessagesProps> = ({ select, repliedMessage }) => {
     isMessagesEnded,
     messages,
     currentMessage,
-    isMessageEditing,
   } = useAppSelector(selectMessages);
 
   const isMessagesLoading = useAppSelector(
@@ -41,7 +47,7 @@ export const MessageList: FC<MessagesProps> = ({ select, repliedMessage }) => {
     getUsernameProps,
     getReplyProps,
     getTextProps,
-  } = useMessagesProps();
+  } = useMessagesProps(handleStopMessageEditing);
 
   const { messagesRef, messagesBottomRef } = useMessagesScroll();
 

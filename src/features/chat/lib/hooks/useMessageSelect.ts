@@ -1,20 +1,14 @@
 import type { Message } from '@/shared/api/interfaces';
-import {
-  deleteMessageThunk,
-  setCurrentMessage,
-  setIsMessageEditing,
-} from '@entities/chat/model';
+import { deleteMessageThunk, setCurrentMessage } from '@entities/chat/model';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import type { Dispatch, SetStateAction } from 'react';
 
 export function useMessageSelect(
-  setRepliedMessage: Dispatch<SetStateAction<Message | null>>
+  setRepliedMessage: Dispatch<SetStateAction<Message | null>>,
+  isMessageEditing: boolean,
+  setIsMessageEditing: Dispatch<SetStateAction<boolean>>
 ) {
   const dispatch = useAppDispatch();
-
-  const isMessageEditing = useAppSelector(
-    (state) => state.chat.isMessageEditing
-  );
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
 
   const handleSelectClickOutside = () => {
@@ -28,7 +22,7 @@ export function useMessageSelect(
   };
 
   const handleEditMessage = () => {
-    dispatch(setIsMessageEditing(true));
+    setIsMessageEditing(true);
   };
 
   const handleRepliedMessage = () => {

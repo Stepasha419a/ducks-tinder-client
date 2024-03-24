@@ -1,11 +1,7 @@
-import {
-  editMessageThunk,
-  setCurrentMessage,
-  setIsMessageEditing,
-} from '@entities/chat/model';
+import { editMessageThunk, setCurrentMessage } from '@entities/chat/model';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
-export function useSelectMessageEdit() {
+export function useSelectMessageEdit(handleStopMessageEditing: () => void) {
   const dispatch = useAppDispatch();
 
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
@@ -17,13 +13,13 @@ export function useSelectMessageEdit() {
         editMessageThunk({ messageId: currentMessage!.id, text: trimmedValue })
       );
       dispatch(setCurrentMessage(null));
-      dispatch(setIsMessageEditing(false));
+      handleStopMessageEditing();
     }
   };
 
   const handleCancelMessage = () => {
     dispatch(setCurrentMessage(null));
-    dispatch(setIsMessageEditing(false));
+    handleStopMessageEditing();
   };
 
   return {

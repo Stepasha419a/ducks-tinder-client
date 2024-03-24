@@ -1,17 +1,14 @@
 import type { Message } from '@shared/api/interfaces';
 import { getTime } from '@shared/helpers';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import { setCurrentMessage, setIsMessageEditing } from '../../model';
+import { setCurrentMessage } from '../../model';
 
-export function useMessagesProps() {
+export function useMessagesProps(handleStopMessageEditing: () => void) {
   const dispatch = useAppDispatch();
 
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   const currentMessage = useAppSelector((state) => state.chat.currentMessage);
-  const isMessageEditing = useAppSelector(
-    (state) => state.chat.isMessageEditing
-  );
 
   const getSelectProps = (message: Message) => {
     return {
@@ -60,9 +57,7 @@ export function useMessagesProps() {
   };
 
   const handleSelectMessage = (message: Message) => {
-    if (isMessageEditing) {
-      dispatch(setIsMessageEditing(false));
-    }
+    handleStopMessageEditing();
     dispatch(setCurrentMessage(message));
   };
 
