@@ -1,26 +1,21 @@
 import type { FC } from 'react';
-import { selectChatProfile, setIsChatUserPopup } from '@entities/chat/model';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { selectChatProfile } from '@entities/chat/model';
+import { useAppSelector } from '@shared/lib/hooks';
 import { Avatar, Popup } from '@shared/ui';
 import { BlockChat, DeleteChat, UnblockChat } from '@features/chat';
 import styles from './ChatProfilePopup.module.scss';
 import { Participants } from '@/entities/chat/components';
 
-export const ChatProfilePopup: FC = () => {
-  const dispatch = useAppDispatch();
+interface ChatProfilePopupProps {
+  handleClose: () => void;
+}
 
+export const ChatProfilePopup: FC<ChatProfilePopupProps> = ({
+  handleClose,
+}) => {
   const { chatAvatar, chatName, blocked, blockedById } =
     useAppSelector(selectChatProfile);
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
-  const isChatUserPopup = useAppSelector((state) => state.chat.isChatUserPopup);
-
-  const handleClose = () => {
-    dispatch(setIsChatUserPopup(false));
-  };
-
-  if (!isChatUserPopup) {
-    return null;
-  }
 
   // TODO: Make chat preview popup with participants and actions
   return (
@@ -38,7 +33,7 @@ export const ChatProfilePopup: FC = () => {
         ) : (
           <BlockChat />
         )}
-        <DeleteChat />
+        <DeleteChat handleClose={handleClose} />
       </div>
       {/* <Preview
         user={currentChatUser! as ShortUser}

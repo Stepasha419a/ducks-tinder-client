@@ -29,7 +29,6 @@ const initialState: ChatInitialState = {
   isMessagesLoading: false,
   isMessagesEnded: false,
   currentChatId: null,
-  isChatUserPopup: false,
   currentMessage: null,
   isMessageEditing: false,
 };
@@ -129,9 +128,6 @@ const chatSlice = createSlice({
     setIsNotFound: (state, { payload }: PayloadAction<boolean>) => {
       state.isNotFound = payload;
     },
-    setIsChatUserPopup: (state, { payload }: PayloadAction<boolean>) => {
-      state.isChatUserPopup = payload;
-    },
     setCurrentMessage: (state, { payload }: PayloadAction<Message | null>) => {
       state.currentMessage = payload;
     },
@@ -228,7 +224,6 @@ export const {
   unblockChat,
   deleteChat,
   setIsNotFound,
-  setIsChatUserPopup,
   setCurrentMessage,
   setIsMessageEditing,
 } = chatSlice.actions;

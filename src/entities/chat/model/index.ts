@@ -1,7 +1,6 @@
 export {
   pushNewMessage,
   setCurrentChatData,
-  setIsChatUserPopup,
   setCurrentMessage,
   setIsMessageEditing,
 } from './chat.slice';

@@ -1,16 +1,22 @@
 import { Button, Popup } from '@shared/ui';
+import type { FC } from 'react';
 import { useState } from 'react';
 import { useAppDispatch } from '@shared/lib/hooks';
 import { deleteChatThunk } from '@entities/chat/model';
 import styles from './DeleteChat.module.scss';
 
-export const DeleteChat = () => {
+interface DeleteChatProps {
+  handleClose: () => void;
+}
+
+export const DeleteChat: FC<DeleteChatProps> = ({ handleClose }) => {
   const dispatch = useAppDispatch();
 
   const [isChatDeleting, setIsChatDeleting] = useState(false);
 
   const handleDelete = () => {
     dispatch(deleteChatThunk());
+    handleClose();
   };
 
   return (
@@ -22,7 +28,11 @@ export const DeleteChat = () => {
         Delete
       </Button>
       {isChatDeleting && (
-        <Popup extraClassName={styles.overflow} closeHandler={() => setIsChatDeleting(false)} size="s">
+        <Popup
+          extraClassName={styles.overflow}
+          closeHandler={() => setIsChatDeleting(false)}
+          size="s"
+        >
           <div className={styles.title}>Delete</div>
           <div className={styles.descr}>
             <div className={styles.text}>Are you sure to delete this chat?</div>

@@ -1,15 +1,16 @@
 import { useState, type FC, type ReactElement } from 'react';
-import { MessageList } from '@entities/chat/components';
-import {
-  EditMessage,
-  MessageSelect,
-  OpenChatProfilePopup,
-  SendMessageForm,
-} from '@features/chat';
+import { ChatProfile, MessageList } from '@entities/chat/components';
+import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat';
 import { useAppSelector, useMediaQuery } from '@/shared/lib/hooks';
 import type { Message } from '@/shared/api/interfaces';
 
-export const Messages: FC = (): ReactElement => {
+interface MessagesProps {
+  handleOpenPopup: () => void;
+}
+
+export const Messages: FC<MessagesProps> = ({
+  handleOpenPopup,
+}): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
   const isMessageEditing = useAppSelector(
@@ -26,7 +27,7 @@ export const Messages: FC = (): ReactElement => {
       {isMobileSelected ? (
         <MessageSelect isMobile setRepliedMessage={setRepliedMessage} />
       ) : (
-        <OpenChatProfilePopup />
+        <ChatProfile handleOpen={handleOpenPopup} />
       )}
       <MessageList
         repliedMessage={repliedMessage}
