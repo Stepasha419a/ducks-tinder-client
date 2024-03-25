@@ -1,7 +1,7 @@
 import { useState, type FC, type ReactElement } from 'react';
 import { ChatProfile, MessageList } from '@entities/chat/components';
 import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat';
-import { useAppSelector, useMediaQuery } from '@/shared/lib/hooks';
+import { useMediaQuery } from '@/shared/lib/hooks';
 import type { Message } from '@/shared/api/interfaces';
 
 interface MessagesProps {
@@ -13,15 +13,24 @@ export const Messages: FC<MessagesProps> = ({
 }): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
-
+  const [selectedMessage, setSelectedMessage] = useState<null | Message>(null);
   const [repliedMessage, setRepliedMessage] = useState<null | Message>(null);
   const [isMessageEditing, setIsMessageEditing] = useState(false);
 
-  const isMobileSelected = currentMessage && !isMessageEditing && isMobile;
+  const isMobileSelected = selectedMessage && !isMessageEditing && isMobile;
 
   const handleStopMessageEditing = () => {
     setIsMessageEditing(false);
+  };
+
+  const handleNullSelectedMessage = () => {
+    setSelectedMessage(null);
+  };
+
+  const handleSelectMessage = (message: Message) => {
+    handleStopMessageEditing();
+    setRepliedMessage(null);
+    setSelectedMessage(message);
   };
 
   return (
@@ -32,6 +41,8 @@ export const Messages: FC<MessagesProps> = ({
           setRepliedMessage={setRepliedMessage}
           isMessageEditing={isMessageEditing}
           setIsMessageEditing={setIsMessageEditing}
+          selectedMessage={selectedMessage}
+          handleNullSelectedMessage={handleNullSelectedMessage}
         />
       ) : (
         <ChatProfile handleOpen={handleOpenPopup} />
@@ -44,12 +55,19 @@ export const Messages: FC<MessagesProps> = ({
             setRepliedMessage={setRepliedMessage}
             isMessageEditing={isMessageEditing}
             setIsMessageEditing={setIsMessageEditing}
+            selectedMessage={selectedMessage}
+            handleNullSelectedMessage={handleNullSelectedMessage}
           />
         }
-        handleStopMessageEditing={handleStopMessageEditing}
+        selectedMessage={selectedMessage}
+        handleSelectMessage={handleSelectMessage}
       />
       {isMessageEditing ? (
-        <EditMessage handleStopMessageEditing={handleStopMessageEditing} />
+        <EditMessage
+          handleStopMessageEditing={handleStopMessageEditing}
+          selectedMessage={selectedMessage}
+          handleNullSelectedMessage={handleNullSelectedMessage}
+        />
       ) : (
         <SendMessageForm
           setRepliedMessage={setRepliedMessage}

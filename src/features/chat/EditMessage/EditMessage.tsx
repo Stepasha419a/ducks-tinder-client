@@ -1,4 +1,3 @@
-import { useAppSelector } from '@shared/lib/hooks';
 import { useSelectMessageEdit } from '@features/chat/lib';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPen, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -7,23 +6,28 @@ import styles from './EditMessage.module.scss';
 import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
 import type { FC } from 'react';
+import type { Message } from '@/shared/api/interfaces';
 
 interface EditMessageProps {
   handleStopMessageEditing: () => void;
+  selectedMessage: Message | null;
+  handleNullSelectedMessage: () => void;
 }
 
 export const EditMessage: FC<EditMessageProps> = ({
   handleStopMessageEditing,
+  selectedMessage,
+  handleNullSelectedMessage,
 }) => {
-  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
-
   const { register, handleSubmit, reset } = useForm<{ input: string }>({
     mode: 'onChange',
-    defaultValues: { input: currentMessage?.text },
+    defaultValues: { input: selectedMessage?.text },
   });
 
   const { handleCancelMessage, handleSaveMessage } = useSelectMessageEdit(
-    handleStopMessageEditing
+    handleStopMessageEditing,
+    selectedMessage,
+    handleNullSelectedMessage
   );
 
   const handleSave = handleSubmit((data) => {
@@ -43,7 +47,7 @@ export const EditMessage: FC<EditMessageProps> = ({
         />
         <div className={styles.message}>
           <div className={styles.title}>Editing</div>
-          <div className={styles.text}>{currentMessage?.text}</div>
+          <div className={styles.text}>{selectedMessage?.text}</div>
         </div>
         <div onClick={handleCancelMessage} className={styles.close}>
           <FontAwesomeIcon className={styles.icon} icon={faXmark} />

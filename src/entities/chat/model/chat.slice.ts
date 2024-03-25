@@ -1,6 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { Chat, Message } from '@shared/api/interfaces';
+import type { Chat } from '@shared/api/interfaces';
 import type {
   ReceivedChatBlock,
   ChatInitialState,
@@ -11,7 +11,6 @@ import {
   connectChatThunk,
   disconnectChatThunk,
   connectChatsThunk,
-  deleteMessageThunk,
   getMessagesThunk,
 } from './chat.thunks';
 import { toast } from 'react-toastify';
@@ -29,7 +28,6 @@ const initialState: ChatInitialState = {
   isMessagesLoading: false,
   isMessagesEnded: false,
   currentChatId: null,
-  currentMessage: null,
 };
 
 const chatSlice = createSlice({
@@ -127,9 +125,6 @@ const chatSlice = createSlice({
     setIsNotFound: (state, { payload }: PayloadAction<boolean>) => {
       state.isNotFound = payload;
     },
-    setCurrentMessage: (state, { payload }: PayloadAction<Message | null>) => {
-      state.currentMessage = payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -203,9 +198,6 @@ const chatSlice = createSlice({
         state.isChatConnected = false;
         state.messages = [];
         state.currentChatId = '';
-      })
-      .addCase(deleteMessageThunk.pending, (state) => {
-        state.currentMessage = null;
       });
   },
 });
@@ -220,7 +212,6 @@ export const {
   unblockChat,
   deleteChat,
   setIsNotFound,
-  setCurrentMessage,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

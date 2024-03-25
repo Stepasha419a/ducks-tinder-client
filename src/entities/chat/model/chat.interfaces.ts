@@ -11,7 +11,6 @@ export interface ChatInitialState {
   isMessagesLoading: boolean;
   isMessagesEnded: boolean;
   currentChatId: string | null;
-  currentMessage: Message | null;
 }
 
 export interface ReceivedMessage extends Message {

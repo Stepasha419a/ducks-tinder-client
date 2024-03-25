@@ -17,37 +17,34 @@ import styles from './MessageList.module.scss';
 interface MessagesProps {
   select: ReactElement;
   repliedMessage: MessageInterface | null;
-  handleStopMessageEditing: () => void;
   isMessageEditing: boolean;
+  selectedMessage: MessageInterface | null;
+  handleSelectMessage: (message: MessageInterface) => void;
 }
 
 export const MessageList: FC<MessagesProps> = ({
   select,
   repliedMessage,
-  handleStopMessageEditing,
   isMessageEditing,
+  selectedMessage,
+  handleSelectMessage,
 }) => {
   const dispatch = useAppDispatch();
 
-  const {
-    isMessagesInitialLoading,
-    isMessagesEnded,
-    messages,
-    currentMessage,
-  } = useAppSelector(selectMessages);
+  const { isMessagesInitialLoading, isMessagesEnded, messages } =
+    useAppSelector(selectMessages);
 
   const isMessagesLoading = useAppSelector(
     (state) => state.chat.isMessagesLoading
   );
 
   const {
-    handleSelectMessage,
     getSelectProps,
     getBodyProps,
     getUsernameProps,
     getReplyProps,
     getTextProps,
-  } = useMessagesProps(handleStopMessageEditing);
+  } = useMessagesProps(selectedMessage);
 
   const { messagesRef, messagesBottomRef } = useMessagesScroll();
 
@@ -84,7 +81,7 @@ export const MessageList: FC<MessagesProps> = ({
         isReverse
       >
         {messages.map((message: MessageInterface, i) => {
-          const isSelectOpen = currentMessage?.id === message.id;
+          const isSelectOpen = selectedMessage?.id === message.id;
           const isNextDayMessage =
             messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
 

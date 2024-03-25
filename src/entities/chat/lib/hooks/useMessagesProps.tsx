@@ -1,18 +1,13 @@
 import type { Message } from '@shared/api/interfaces';
 import { getTime } from '@shared/helpers';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import { setCurrentMessage } from '../../model';
+import { useAppSelector } from '@shared/lib/hooks';
 
-export function useMessagesProps(handleStopMessageEditing: () => void) {
-  const dispatch = useAppDispatch();
-
+export function useMessagesProps(selectedMessage: Message | null) {
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
-
-  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
 
   const getSelectProps = (message: Message) => {
     return {
-      isSelectOpen: getIsSelectOpen(message, currentMessage),
+      isSelectOpen: getIsSelectOpen(message, selectedMessage),
     };
   };
 
@@ -47,7 +42,7 @@ export function useMessagesProps(handleStopMessageEditing: () => void) {
   const getBodyProps = (message: Message) => {
     const isOwn = getIsOwn(message.userId, currentUserId);
     const isEdited = getIsEdited(message);
-    const isSelectOpen = getIsSelectOpen(message, currentMessage);
+    const isSelectOpen = getIsSelectOpen(message, selectedMessage);
 
     return {
       isOwn,
@@ -56,13 +51,7 @@ export function useMessagesProps(handleStopMessageEditing: () => void) {
     };
   };
 
-  const handleSelectMessage = (message: Message) => {
-    handleStopMessageEditing();
-    dispatch(setCurrentMessage(message));
-  };
-
   return {
-    handleSelectMessage,
     getBodyProps,
     getUsernameProps,
     getReplyProps,

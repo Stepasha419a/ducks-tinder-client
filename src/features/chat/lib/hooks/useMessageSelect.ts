@@ -1,24 +1,25 @@
 import type { Message } from '@/shared/api/interfaces';
-import { deleteMessageThunk, setCurrentMessage } from '@entities/chat/model';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { deleteMessageThunk } from '@entities/chat/model';
+import { useAppDispatch } from '@shared/lib/hooks';
 import type { Dispatch, SetStateAction } from 'react';
 
 export function useMessageSelect(
   setRepliedMessage: Dispatch<SetStateAction<Message | null>>,
   isMessageEditing: boolean,
-  setIsMessageEditing: Dispatch<SetStateAction<boolean>>
+  setIsMessageEditing: Dispatch<SetStateAction<boolean>>,
+  selectedMessage: Message | null,
+  handleNullSelectedMessage: () => void
 ) {
   const dispatch = useAppDispatch();
-  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
 
   const handleSelectClickOutside = () => {
     if (!isMessageEditing) {
-      dispatch(setCurrentMessage(null));
+      handleNullSelectedMessage();
     }
   };
 
   const handleDeleteMessage = () => {
-    dispatch(deleteMessageThunk(currentMessage!.id));
+    dispatch(deleteMessageThunk(selectedMessage!.id));
   };
 
   const handleEditMessage = () => {
@@ -26,8 +27,8 @@ export function useMessageSelect(
   };
 
   const handleRepliedMessage = () => {
-    setRepliedMessage(currentMessage);
-    dispatch(setCurrentMessage(null));
+    setRepliedMessage(selectedMessage);
+    handleNullSelectedMessage();
   };
 
   return {

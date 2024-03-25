@@ -15,6 +15,8 @@ interface MessageSelectProps {
   setRepliedMessage: Dispatch<SetStateAction<Message | null>>;
   isMessageEditing: boolean;
   setIsMessageEditing: Dispatch<SetStateAction<boolean>>;
+  selectedMessage: Message | null;
+  handleNullSelectedMessage: () => void;
 }
 
 export const MessageSelect: FC<MessageSelectProps> = ({
@@ -22,13 +24,13 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   setRepliedMessage,
   isMessageEditing,
   setIsMessageEditing,
+  selectedMessage,
+  handleNullSelectedMessage,
 }) => {
-  const currentMessage = useAppSelector((state) => state.chat.currentMessage);
-
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
-  const isOwn = currentMessage?.userId === currentUserId;
+  const isOwn = selectedMessage?.userId === currentUserId;
 
   const {
     handleSelectClickOutside,
@@ -38,17 +40,19 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   } = useMessageSelect(
     setRepliedMessage,
     isMessageEditing,
-    setIsMessageEditing
+    setIsMessageEditing,
+    selectedMessage,
+    handleNullSelectedMessage
   );
 
   useOnClickOutside(selectRef, handleSelectClickOutside);
 
   const isMessageEditable =
     isOwn &&
-    getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 6;
+    getDatesHourDiff(new Date(), new Date(selectedMessage.createdAt)) < 6;
   const isMessageDeleting =
     isOwn &&
-    getDatesHourDiff(new Date(), new Date(currentMessage.createdAt)) < 12;
+    getDatesHourDiff(new Date(), new Date(selectedMessage.createdAt)) < 12;
 
   if (isMobile) {
     return (

@@ -6,14 +6,12 @@ export const selectMessages = createSelector(
     (state: RootState) => state.chat.messages,
     (state: RootState) => state.chat.isMessagesInitialLoading,
     (state: RootState) => state.chat.isMessagesEnded,
-    (state: RootState) => state.chat.currentMessage,
   ],
-  (messages, isMessagesInitialLoading, isMessagesEnded, currentMessage) => ({
+  (messages, isMessagesInitialLoading, isMessagesEnded) => ({
     messagesLength: messages.length,
     messages,
     isMessagesInitialLoading,
     isMessagesEnded,
-    currentMessage,
   })
 );
 

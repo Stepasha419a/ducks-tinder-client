@@ -1,8 +1,4 @@
-export {
-  pushNewMessage,
-  setCurrentChatData,
-  setCurrentMessage,
-} from './chat.slice';
+export { pushNewMessage, setCurrentChatData } from './chat.slice';
 export {
   connectChatsThunk,
   connectChatThunk,
