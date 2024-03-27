@@ -1,6 +1,6 @@
 import type { Socket } from 'socket.io-client';
 import { instance } from '@shared/api';
-import type { Chat } from '@shared/api/interfaces';
+import type { Chat, ShortUser } from '@shared/api/interfaces';
 import { chatSocket } from './chat.socket';
 import type { ShortMessagesPagination } from './chat-service.interface';
 import type { PaginationParams } from '@shared/lib/interfaces';
@@ -13,6 +13,11 @@ export const chatService = {
     return instance.get<ShortMessagesPagination>(
       `${process.env.CHAT_SERVICE_URL!}/chat/${chatId}/messages`,
       { params }
+    );
+  },
+  async getMember(memberId: string) {
+    return instance.get<ShortUser>(
+      `${process.env.CHAT_SERVICE_URL!}/chat/member/${memberId}`
     );
   },
   connect(): Socket {

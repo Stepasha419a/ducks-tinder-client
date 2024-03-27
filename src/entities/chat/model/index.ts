@@ -1,4 +1,4 @@
-export { pushNewMessage, setCurrentChatData } from './chat.slice';
+export { pushNewMessage, setCurrentChatData, nullMember } from './chat.slice';
 export {
   connectChatsThunk,
   connectChatThunk,
@@ -11,6 +11,8 @@ export {
   editMessageThunk,
   unblockChatThunk,
   deleteChatThunk,
+  blockChatThunk,
+  getMemberThunk,
 } from './chat.thunks';
 export {
   selectChatList,

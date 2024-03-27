@@ -45,14 +45,14 @@ export const selectChatProfile = createSelector(
   [
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
+    (state: RootState) => state.chat.chatMember,
   ],
-  (chats, currentChatId) => {
+  (chats, currentChatId, chatMember) => {
     const currentChat = chats.find((chat) => chat.id === currentChatId);
     return {
       blocked: currentChat?.blocked,
       blockedById: currentChat?.blockedById,
-      chatName: currentChat?.name,
-      chatAvatar: currentChat?.avatar,
+      chatMember,
     };
   }
 );

@@ -1,6 +1,7 @@
 export interface Chat {
   id: string;
   name: string;
+  memberId: string;
   avatar: string;
   lastMessage?: Message;
   chatVisit?: LastSeen;

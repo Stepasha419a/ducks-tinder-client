@@ -248,3 +248,25 @@ export const sendMessageThunk = createAsyncThunk(
     }
   }
 );
+
+export const getMemberThunk = createAsyncThunk(
+  'chat/getMember',
+  async (_, { rejectWithValue, getState }) => {
+    try {
+      const { chat } = getState() as RootState;
+      const { chats, currentChatId } = chat;
+
+      if (currentChatId) {
+        const currentChat = chats.find((item) => item.id === currentChatId);
+        if (!currentChat) {
+          return;
+        }
+
+        const response = await chatService.getMember(currentChat.memberId);
+        return response.data;
+      }
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
