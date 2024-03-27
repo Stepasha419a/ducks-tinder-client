@@ -5,36 +5,40 @@ import { Popup } from '@shared/ui';
 import { BlockChat, DeleteChat, UnblockChat } from '@features/chat';
 import styles from './ChatProfilePopup.module.scss';
 import { Preview } from '@/entities/user/components';
-import type { ShortUser } from '@/shared/api/interfaces';
+import { ChatProfilePopupLazy } from './ChatProfilePopup.lazy';
 
 interface ChatProfilePopupProps {
   handleClose: () => void;
-  chatMember: ShortUser;
 }
 
 export const ChatProfilePopup: FC<ChatProfilePopupProps> = ({
   handleClose,
-  chatMember,
 }) => {
-  const { blocked, blockedById } = useAppSelector(selectChatProfile);
+  const { blocked, blockedById, chatMember } =
+    useAppSelector(selectChatProfile);
+
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   return (
     <Popup closeHandler={handleClose} size="l" extraClassName={styles.popup}>
-      <Preview
-        user={chatMember}
-        isFull
-        extraContent={
-          <div className={styles.btns}>
-            {blocked ? (
-              blockedById === currentUserId && <UnblockChat />
-            ) : (
-              <BlockChat />
-            )}
-            <DeleteChat handleClose={handleClose} />
-          </div>
-        }
-      />
+      {chatMember ? (
+        <Preview
+          user={chatMember}
+          isFull
+          extraContent={
+            <div className={styles.btns}>
+              {blocked ? (
+                blockedById === currentUserId && <UnblockChat />
+              ) : (
+                <BlockChat />
+              )}
+              <DeleteChat handleClose={handleClose} />
+            </div>
+          }
+        />
+      ) : (
+        <ChatProfilePopupLazy />
+      )}
     </Popup>
   );
 };

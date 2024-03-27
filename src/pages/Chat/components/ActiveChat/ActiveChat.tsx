@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { ChatProfilePopup, Messages } from '@widgets';
@@ -20,7 +20,8 @@ export const ActiveChat = () => {
   const isSocketConnected = useAppSelector(
     (state) => state.chat.isSocketConnected
   );
-  const chatMember = useAppSelector((state) => state.chat.chatMember);
+
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -39,22 +40,19 @@ export const ActiveChat = () => {
   }
 
   const handleClosePopup = () => {
+    setIsPopupOpen(false);
     dispatch(nullMember());
   };
 
   const handleOpenPopup = () => {
+    setIsPopupOpen(true);
     dispatch(getMemberThunk());
   };
 
   return (
     <>
       <Messages handleOpenPopup={handleOpenPopup} />
-      {chatMember && (
-        <ChatProfilePopup
-          handleClose={handleClosePopup}
-          chatMember={chatMember}
-        />
-      )}
+      {isPopupOpen && <ChatProfilePopup handleClose={handleClosePopup} />}
     </>
   );
 };
