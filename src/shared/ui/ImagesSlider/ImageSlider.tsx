@@ -21,6 +21,7 @@ import styles from './ImageSlider.module.scss';
 import 'slick-carousel/slick/slick.scss';
 import './override.scss';
 import { makeImageUrl, showDefaultImage } from '@/shared/lib/helpers';
+import Skeleton from 'react-loading-skeleton';
 
 interface ImageSliderProps {
   images: Picture[];
@@ -44,6 +45,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
   sliderRef,
 }) => {
   const [current, setCurrent] = useSliderState(currentSlide, setCurrentSlide);
+  const [isLoading, setIsLoading] = useState(true);
 
   const cn = classNames(styles.item, extraClassName);
   const cnWrapper = classNames(
@@ -63,6 +65,14 @@ export const ImageSlider: FC<ImageSliderProps> = ({
     );
   }
 
+  const handleStartLoading = () => {
+    setIsLoading(true);
+  };
+
+  const handleFinishLoading = () => {
+    setIsLoading(false);
+  };
+
   const isFirstImage = current === 0;
   const isLastImage = current === images.length - 1;
 
@@ -74,6 +84,8 @@ export const ImageSlider: FC<ImageSliderProps> = ({
         dots={true}
         arrows={true}
         infinite={false}
+        lazyLoad="ondemand"
+        onLazyLoad={handleStartLoading}
         prevArrow={isFirstImage ? <></> : <PrevArrow />}
         nextArrow={isLastImage ? <></> : <NextArrow />}
         beforeChange={(prev, next: number) => setCurrent(next)}
@@ -81,15 +93,17 @@ export const ImageSlider: FC<ImageSliderProps> = ({
         appendDots={(dots) => <DotsWrapper>{dots}</DotsWrapper>}
         className={styles.carousel}
       >
-        {images.map((image, index) => {
+        {images.map((image) => {
           return (
-            <div key={index}>
+            <div key={image.id}>
               <img
                 src={makeImageUrl(userId, image.name)}
                 alt="imagesSlider"
                 onError={showDefaultImage}
+                onLoad={handleFinishLoading}
                 className={cn}
               ></img>
+              {isLoading && <Skeleton key={image.id} className={cn} />}
               {content}
             </div>
           );
