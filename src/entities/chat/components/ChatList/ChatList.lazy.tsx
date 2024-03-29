@@ -3,8 +3,8 @@ import styles from './ChatList.module.scss';
 
 export const ChatListLazy = () => {
   return (
-    <div className={styles.chats}>
-      {Array(2)
+    <div>
+      {Array(4)
         .fill(null)
         .map((_, i) => {
           return (

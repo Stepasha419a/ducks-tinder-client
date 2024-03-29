@@ -1,6 +1,10 @@
 import type { FC } from 'react';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useEffect, useRef, useState } from 'react';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDebouncedCallback,
+} from '@shared/lib/hooks';
 import { getChatsThunk, selectChatList } from '@entities/chat/model';
 import FailedChats from './Failed/FailedChats';
 import { ChatItem } from './ChatItem/ChatItem';
@@ -14,26 +18,63 @@ interface ChatListProps {
 export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
   const dispatch = useAppDispatch();
 
-  const isLoading = useAppSelector((state) => state.chat.isLoading);
-  const { chats, currentChatId } = useAppSelector(selectChatList);
+  const isEnded = useAppSelector((state) => state.chat.isEnded);
+  const { chats, currentChatId, isLoading } = useAppSelector(selectChatList);
   const chatsLength = chats.length;
 
+  const bottomRef = useRef<null | HTMLDivElement>(null);
+  const chatListRef = useRef<null | HTMLDivElement>(null);
+  const lastScroll = useRef(0);
+
+  const [isIntersecting, setIntersecting] = useState(false);
+  const [isRequested, setRequested] = useState(false);
+
+  const delayedGetChats = useDebouncedCallback(() => {
+    dispatch(getChatsThunk());
+  }, 300);
+
   useEffect(() => {
-    if (!chats.length) {
-      dispatch(getChatsThunk());
+    dispatch(getChatsThunk());
+    setRequested(true);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (chatListRef.current && !isLoading) {
+      chatListRef.current.scrollTop =
+        chatListRef.current.scrollTop -
+        (chatListRef.current.scrollTop - lastScroll.current);
+      setRequested(false);
+      setIntersecting(false);
+    } else if (chatListRef.current && isLoading) {
+      lastScroll.current = chatListRef.current.scrollTop;
     }
-  }, [chats.length, dispatch]);
+  }, [isLoading, lastScroll]);
 
-  if (isLoading) {
-    return <ChatListLazy />;
-  }
+  useEffect(() => {
+    if (!isLoading && isIntersecting && !isRequested && !isEnded) {
+      delayedGetChats();
+      setRequested(true);
+    }
+  }, [delayedGetChats, isEnded, isIntersecting, isLoading, isRequested]);
 
-  if (!chatsLength) {
+  useEffect(() => {
+    const child = bottomRef.current!;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setIntersecting(entry.isIntersecting);
+    });
+
+    observer.observe(child);
+
+    return () => observer.unobserve(child);
+  }, []);
+
+  if (!chatsLength && !isLoading) {
     return <FailedChats />;
   }
 
   return (
-    <div className={styles.chats}>
+    <div className={styles.chats} ref={chatListRef}>
       {chats.map((chat) => {
         const isActive = currentChatId === chat.id;
         return (
@@ -45,6 +86,8 @@ export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
           />
         );
       })}
+      <div ref={bottomRef}></div>
+      {!isEnded && <ChatListLazy />}
     </div>
   );
 };

@@ -1,6 +1,8 @@
 .chats {
   margin-top: 20px;
   width: 100%;
+  height: calc(100vh - 147px);
+  overflow: auto;
 }
 
 .lazy_wrapper {

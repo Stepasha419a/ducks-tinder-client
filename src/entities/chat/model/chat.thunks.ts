@@ -12,7 +12,6 @@ import {
   deleteChat,
   deleteMessage,
   editMessage,
-  setIsMessagesLoading,
   setIsNotFound,
   unblockChat,
 } from './chat.slice';
@@ -22,11 +21,20 @@ import type { Message } from '@/shared/api/interfaces';
 
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
-      const { data: chats } = await chatService.getChats();
+      const {
+        chat: { chats },
+      } = getState() as RootState;
 
-      return chats;
+      const params: PaginationParams = {
+        skip: chats.length,
+        take: PAGINATION_TAKE,
+      };
+
+      const response = await chatService.getChats(params);
+
+      return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -131,7 +139,7 @@ export const disconnectThunk = createAsyncThunk(
 
 export const getMessagesThunk = createAsyncThunk(
   'chat/getMessages',
-  async (_, { rejectWithValue, getState, dispatch }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
       const { chat } = getState() as RootState;
       const { currentChatId, isMessagesLoading, messages } = chat;
@@ -141,8 +149,6 @@ export const getMessagesThunk = createAsyncThunk(
           skip: messages.length,
           take: PAGINATION_TAKE,
         };
-
-        dispatch(setIsMessagesLoading(true));
 
         const response = await chatService.getMessages(currentChatId, params);
         return response.data;

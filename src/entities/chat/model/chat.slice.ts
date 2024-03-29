@@ -23,7 +23,9 @@ const initialState: ChatInitialState = {
   messages: [],
   isSocketConnected: false,
   isChatConnected: false,
+  isInitialLoading: true,
   isLoading: true,
+  isEnded: false,
   isNotFound: false,
   isMessagesInitialLoading: true,
   isMessagesLoading: false,
@@ -121,9 +123,6 @@ const chatSlice = createSlice({
       state.messages = [];
       state.currentChatId = '';
     },
-    setIsMessagesLoading: (state, { payload }: PayloadAction<boolean>) => {
-      state.isMessagesLoading = payload;
-    },
     setIsNotFound: (state, { payload }: PayloadAction<boolean>) => {
       state.isNotFound = payload;
     },
@@ -133,11 +132,29 @@ const chatSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getChatsThunk.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(
         getChatsThunk.fulfilled,
-        (state, { payload }: PayloadAction<Chat[]>) => {
-          state.chats = payload;
+        (state, { payload }: PayloadAction<Chat[] | undefined>) => {
           state.isLoading = false;
+          if (!payload) {
+            return;
+          }
+
+          if (state.isInitialLoading) {
+            state.isInitialLoading = false;
+          }
+
+          if (payload.length < PAGINATION_TAKE) {
+            state.isEnded = true;
+            if (payload.length === 0) {
+              return;
+            }
+          }
+
+          state.chats = state.chats.concat(payload);
         }
       )
       .addCase(connectChatsThunk.fulfilled, (state) => {
@@ -219,7 +236,6 @@ export const {
   pushNewMessage,
   setCurrentChatData,
   deleteMessage,
-  setIsMessagesLoading,
   editMessage,
   blockChat,
   unblockChat,
