@@ -5,7 +5,6 @@ export interface ChatInitialState {
   messages: Message[];
   isSocketConnected: boolean;
   isChatConnected: boolean;
-  isInitialLoading: boolean;
   isLoading: boolean;
   isEnded: boolean;
   isNotFound: boolean;

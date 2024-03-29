@@ -23,7 +23,6 @@ const initialState: ChatInitialState = {
   messages: [],
   isSocketConnected: false,
   isChatConnected: false,
-  isInitialLoading: true,
   isLoading: true,
   isEnded: false,
   isNotFound: false,
@@ -141,10 +140,6 @@ const chatSlice = createSlice({
           state.isLoading = false;
           if (!payload) {
             return;
-          }
-
-          if (state.isInitialLoading) {
-            state.isInitialLoading = false;
           }
 
           if (payload.length < PAGINATION_TAKE) {
