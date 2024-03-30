@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { getIsNewMessages, sortChats } from '../lib';
+import { getIsNewMessages } from '../lib';
 
 export const selectMessages = createSelector(
   [
@@ -22,7 +22,7 @@ export const selectChatList = createSelector(
     (state: RootState) => state.chat.isLoading,
   ],
   (chats, currentChatId, isLoading) => ({
-    chats: [...chats].sort(sortChats),
+    chats,
     currentChatId,
     isLoading,
   })

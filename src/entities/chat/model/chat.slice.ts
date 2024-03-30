@@ -47,10 +47,19 @@ const chatSlice = createSlice({
     },
     pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
-      const chat = state.chats.find((item) => item.id === chatId);
-      if (!chat) {
+
+      const chatIndex = state.chats.findIndex((item) => item.id === chatId);
+
+      if (chatIndex === -1) {
         return;
       }
+
+      const chat = state.chats[chatIndex];
+
+      [state.chats[0], state.chats[chatIndex]] = [
+        state.chats[chatIndex],
+        state.chats[0],
+      ];
 
       chat.lastMessage = message;
 
