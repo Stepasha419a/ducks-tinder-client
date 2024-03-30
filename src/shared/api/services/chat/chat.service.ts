@@ -7,19 +7,22 @@ import type { PaginationParams } from '@shared/lib/interfaces';
 
 export const chatService = {
   async getChats(params: PaginationParams) {
-    return instance.get<Chat[]>(`${process.env.CHAT_SERVICE_URL!}/chat`, {
-      params,
-    });
+    return instance.get<Chat[]>(
+      `${import.meta.env.VITE_CHAT_SERVICE_URL!}/chat`,
+      {
+        params,
+      }
+    );
   },
   async getMessages(chatId: string, params: PaginationParams) {
     return instance.get<ShortMessagesPagination>(
-      `${process.env.CHAT_SERVICE_URL!}/chat/${chatId}/messages`,
+      `${import.meta.env.VITE_CHAT_SERVICE_URL!}/chat/${chatId}/messages`,
       { params }
     );
   },
   async getMember(memberId: string) {
     return instance.get<ShortUser>(
-      `${process.env.CHAT_SERVICE_URL!}/chat/member/${memberId}`
+      `${import.meta.env.VITE_CHAT_SERVICE_URL!}/chat/member/${memberId}`
     );
   },
   connect(): Socket {

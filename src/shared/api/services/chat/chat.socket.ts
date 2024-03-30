@@ -19,7 +19,7 @@ export const chatSocket: ChatSocket = {
   _socket: null,
   connect(): Socket {
     const accessToken = 'Bearer ' + localStorage.getItem('accessToken')!;
-    this._socket = io(`${process.env.CHAT_SERVICE_URL!}/chat/socket`, {
+    this._socket = io(`${import.meta.env.VITE_CHAT_SERVICE_URL!}/chat/socket`, {
       withCredentials: true,
       transports: ['websocket'],
       auth: {

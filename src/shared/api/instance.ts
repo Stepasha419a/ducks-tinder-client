@@ -26,7 +26,7 @@ instance.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       const response = await axios.get<AuthResponse>(
-        `${process.env.USER_SERVICE_URL!}/auth/refresh`,
+        `${import.meta.env.VITE_USER_SERVICE_URL!}/auth/refresh`,
         {
           withCredentials: true,
         }

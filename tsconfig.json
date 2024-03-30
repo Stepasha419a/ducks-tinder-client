@@ -27,7 +27,7 @@
       "@entities/*": ["./entities/*"],
       "@shared/*": ["./shared/*"],
       "@shared/constants": ["./shared/lib/constants"],
-      "@shared/helpers": ["./shared/lib/helpers"],
+      "@shared/helpers": ["./shared/lib/helpers"]
     }
   }
 }
