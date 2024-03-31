@@ -4,12 +4,12 @@ import type { AuthResponse } from './auth.interfaces';
 export const authService = {
   async refresh() {
     return instance.get<AuthResponse>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/auth/refresh`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/auth/refresh`
     );
   },
   async registration(email: string, name: string, password: string) {
     return instance.post<AuthResponse>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/auth/registration`,
+      `${import.meta.env.VITE_USER_SERVICE_URL}/auth/registration`,
       {
         email,
         name,
@@ -19,13 +19,13 @@ export const authService = {
   },
   async login(email: string, password: string) {
     return instance.post<AuthResponse>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/auth/login`,
+      `${import.meta.env.VITE_USER_SERVICE_URL}/auth/login`,
       { email, password }
     );
   },
   async logout() {
     return instance.patch(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/auth/logout`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/auth/logout`
     );
   },
 };

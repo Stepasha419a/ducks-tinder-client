@@ -5,10 +5,8 @@ import { useAppDispatch, useMediaQuery } from '@shared/lib/hooks';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@shared/lib/constants';
 import { useMemoriedSettingUrl } from '@/entities/user/lib/hooks';
-import {
-  useCurrentValidation,
-  type SettingFieldValues,
-} from './useCurrentValidation';
+import type { SettingFieldValues } from './useCurrentValidation';
+import { useCurrentValidation } from './useCurrentValidation';
 
 export function useTextForm() {
   const navigate = useNavigate();
@@ -16,7 +14,7 @@ export function useTextForm() {
 
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const { settingName, formName } = useMemoriedSettingUrl()!;
+  const { settingName, formName } = useMemoriedSettingUrl();
 
   const {
     register,

@@ -6,7 +6,5 @@ export function makeImageUrl(
   fullUrl?: string
 ): string {
   const url = fullUrl || (avatarUrl && userId && `${userId}/${avatarUrl}`);
-  return url
-    ? `${import.meta.env.VITE_USER_SERVICE_URL!}/${url}`
-    : defaultPhoto;
+  return url ? `${import.meta.env.VITE_USER_SERVICE_URL}/${url}` : defaultPhoto;
 }

@@ -5,20 +5,20 @@ import type { PairsInfo, PartialUser } from './user-service.interface';
 export const userService = {
   async getSortedUser() {
     return instance.get<ShortUser>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/sorted`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/sorted`
     );
   },
 
   async updateUser(data: PartialUser) {
     return instance.patch<User>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user`,
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user`,
       data
     );
   },
 
   async updateUserPlace(latitude: number, longitude: number) {
     return instance.patch<User>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/place`,
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/place`,
       {
         latitude,
         longitude,
@@ -28,7 +28,7 @@ export const userService = {
 
   async savePicture(picture: Blob) {
     return instance.post<User>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/picture`,
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/picture`,
       { picture },
       {
         headers: {
@@ -40,13 +40,13 @@ export const userService = {
 
   async deletePicture(id: string) {
     return instance.put<User>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/picture/${id}`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/picture/${id}`
     );
   },
 
   async mixPictures(pictureOrders: number[]) {
     return instance.put<User>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/picture/mix`,
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/picture/mix`,
       {
         pictureOrders,
       }
@@ -55,43 +55,43 @@ export const userService = {
 
   async getPairs() {
     return instance.get<ShortUser[]>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/pairs`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs`
     );
   },
 
   async getPairsInfo() {
     return instance.get<PairsInfo>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/pairs/info`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs/info`
     );
   },
 
   async acceptPair(pairId: string) {
     return instance.post<string>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/pairs/${pairId}`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs/${pairId}`
     );
   },
 
   async deletePair(pairId: string) {
     return instance.put<string>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/pairs/${pairId}`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs/${pairId}`
     );
   },
 
   async likeUser(userId: string) {
     return instance.post<undefined>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/like/${userId}`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/like/${userId}`
     );
   },
 
   async dislikeUser(userId: string) {
     return instance.post<undefined>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/dislike/${userId}`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/dislike/${userId}`
     );
   },
 
   async returnUser() {
     return instance.put<ShortUser>(
-      `${import.meta.env.VITE_USER_SERVICE_URL!}/user/return`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/return`
     );
   },
 };

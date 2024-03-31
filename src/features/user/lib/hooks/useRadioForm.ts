@@ -13,7 +13,7 @@ export function useRadioForm() {
 
   const isMobile = useMediaQuery('(max-width: 900px)');
 
-  const { settingName, formName } = useMemoriedSettingUrl()!;
+  const { settingName, formName } = useMemoriedSettingUrl();
 
   const {
     control,

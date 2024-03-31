@@ -1,12 +1,23 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import checker from 'vite-plugin-checker';
 import path from 'path';
 
 export default defineConfig({
   base: '/',
   publicDir: 'public',
+  logLevel: 'warn',
 
-  plugins: [react()],
+  plugins: [
+    react({ include: '**/*.tsx' }),
+    checker({
+      typescript: true,
+      eslint: {
+        // for example, lint .ts and .tsx
+        lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
+      },
+    }),
+  ],
   server: {
     port: 3000,
   },
