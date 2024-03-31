@@ -10,3 +10,4 @@ export { ListItem } from './ListItem/ListItem';
 export { ImageSlider } from './ImagesSlider/ImageSlider';
 export { Skeleton } from './Skeleton/Skeleton';
 export { ToastContainer } from './ToastContainer/ToastContainer';
+export { InfinityScroll } from './InfinityScroll/InfinityScroll';
