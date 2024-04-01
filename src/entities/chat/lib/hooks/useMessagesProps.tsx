@@ -33,7 +33,6 @@ export function useMessagesProps(selectedMessage: Message | null) {
     const repliedMessageName = repliedMessage?.name;
 
     return {
-      // TODO: replied message should have its own name
       repliedUsername: repliedMessageName,
       repliedMessageText,
     };

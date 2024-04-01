@@ -4,13 +4,13 @@ import { getIsNewMessages } from '../lib';
 export const selectMessages = createSelector(
   [
     (state: RootState) => state.chat.messages,
-    (state: RootState) => state.chat.isMessagesInitialLoading,
+    (state: RootState) => state.chat.isMessagesLoading,
     (state: RootState) => state.chat.isMessagesEnded,
   ],
-  (messages, isMessagesInitialLoading, isMessagesEnded) => ({
+  (messages, isMessagesLoading, isMessagesEnded) => ({
     messagesLength: messages.length,
     messages,
-    isMessagesInitialLoading,
+    isMessagesLoading,
     isMessagesEnded,
   })
 );

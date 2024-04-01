@@ -10,9 +10,9 @@ import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
 import { getIsNextDayMessage } from '@entities/chat/lib';
 import { Message, MessageSelect, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
-import InfiniteScroll from 'react-infinite-scroller';
 import classNames from 'classnames';
 import styles from './MessageList.module.scss';
+import { InfinityScroll } from '@/shared/ui';
 
 interface MessagesProps {
   select: ReactElement;
@@ -31,12 +31,8 @@ export const MessageList: FC<MessagesProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const { isMessagesInitialLoading, isMessagesEnded, messages } =
+  const { isMessagesLoading, isMessagesEnded, messages } =
     useAppSelector(selectMessages);
-
-  const isMessagesLoading = useAppSelector(
-    (state) => state.chat.isMessagesLoading
-  );
 
   const {
     getSelectProps,
@@ -52,33 +48,21 @@ export const MessageList: FC<MessagesProps> = ({
     dispatch(getMessagesThunk());
   });
 
-  if (isMessagesInitialLoading) {
-    return (
-      <div className={styles.messages}>
-        <MessagesLazy />
-      </div>
-    );
-  }
-
   const cn = classNames(
     styles.messages,
     repliedMessage && styles.replying,
     isMessageEditing && styles.messageEditing
   );
 
-  const handleLoadMore = () => {
-    if (!isMessagesLoading) delayedGetMessages();
-  };
-
   return (
     <div className={cn} ref={messagesRef}>
       {!isMessagesEnded && <MessagesLazy count={4} />}
-
-      <InfiniteScroll
-        loadMore={handleLoadMore}
-        hasMore={!isMessagesEnded}
-        useWindow={false}
-        isReverse
+      <InfinityScroll
+        handleLoadMore={delayedGetMessages}
+        isLoading={isMessagesLoading}
+        isMore={!isMessagesEnded}
+        listRef={messagesRef}
+        isReversed
       >
         {messages.map((message: MessageInterface, i) => {
           const isSelectOpen = selectedMessage?.id === message.id;
@@ -113,7 +97,7 @@ export const MessageList: FC<MessagesProps> = ({
             </Fragment>
           );
         })}
-      </InfiniteScroll>
+      </InfinityScroll>
       <div ref={messagesBottomRef}></div>
     </div>
   );

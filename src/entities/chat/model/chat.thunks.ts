@@ -102,7 +102,7 @@ export const connectChatThunk = createAsyncThunk(
 
       socket.once('connect-chat', () => {
         dispatch(setCurrentChatData(chatId));
-        dispatch(getMessagesThunk());
+        //dispatch(getMessagesThunk());
       });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -142,9 +142,9 @@ export const getMessagesThunk = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { chat } = getState() as RootState;
-      const { currentChatId, isMessagesLoading, messages } = chat;
+      const { currentChatId, messages } = chat;
 
-      if (!isMessagesLoading && currentChatId) {
+      if (currentChatId) {
         const params: PaginationParams = {
           skip: messages.length,
           take: PAGINATION_TAKE,

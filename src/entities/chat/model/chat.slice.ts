@@ -182,6 +182,9 @@ const chatSlice = createSlice({
       .addCase(connectChatThunk.fulfilled, (state) => {
         state.isMessagesInitialLoading = false;
       })
+      .addCase(getMessagesThunk.pending, (state) => {
+        state.isMessagesLoading = true;
+      })
       .addCase(
         getMessagesThunk.fulfilled,
         (
