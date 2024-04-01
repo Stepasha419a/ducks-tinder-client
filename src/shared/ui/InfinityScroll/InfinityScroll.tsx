@@ -31,18 +31,25 @@ export const InfinityScroll: FC<PropsWithChildren<InfinityScrollProps>> = ({
 
   useEffect(() => {
     if (listRef.current && !isLoading) {
-      listRef.current.scrollTop =
-        listRef.current.scrollTop -
-        (listRef.current.scrollTop - lastScroll.current);
+      const newScrollTop = getNewScrollTop(
+        Boolean(isReversed),
+        lastScroll.current,
+        listRef.current
+      );
+      listRef.current.scrollTop = newScrollTop;
+
       setRequested(false);
       setIntersecting(false);
     } else if (listRef.current && isLoading) {
-      lastScroll.current = listRef.current.scrollTop;
+      if (isReversed) {
+        lastScroll.current = listRef.current.scrollHeight;
+      } else {
+        lastScroll.current = listRef.current.scrollTop;
+      }
     }
-  }, [isLoading, lastScroll, listRef]);
+  }, [isLoading, isReversed, lastScroll, listRef]);
 
   useEffect(() => {
-    console.log({ isLoading, isIntersecting, isRequested, isMore });
     if (!isLoading && isIntersecting && !isRequested && isMore) {
       handleLoadMore();
       setRequested(true);
@@ -80,3 +87,15 @@ export const InfinityScroll: FC<PropsWithChildren<InfinityScrollProps>> = ({
     </>
   );
 };
+
+function getNewScrollTop(
+  isReversed: boolean,
+  lastScroll: number,
+  listElement: Element
+) {
+  if (isReversed) {
+    return listElement.scrollHeight - lastScroll;
+  } else {
+    return listElement.scrollTop - (listElement.scrollTop - lastScroll);
+  }
+}
