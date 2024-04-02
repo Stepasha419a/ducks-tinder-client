@@ -48,34 +48,36 @@ const chatSlice = createSlice({
     pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
 
-      const chatIndex = state.chats.findIndex((item) => item.id === chatId);
+      const existingChatIndex = state.chats.findIndex(
+        (item) => item.id === chatId
+      );
+      if (existingChatIndex !== -1) {
+        state.chats.unshift(state.chats.splice(existingChatIndex, 1)[0]);
 
-      if (chatIndex === -1) {
-        return;
+        state.chats[0].lastMessage = message;
+      } else {
+        state.chats.unshift({
+          avatar: message.avatar,
+          id: chatId,
+          name: message.name,
+          memberId: message.userId,
+          lastMessage: message,
+        } as unknown as Chat);
       }
-
-      const chat = state.chats[chatIndex];
-
-      [state.chats[0], state.chats[chatIndex]] = [
-        state.chats[chatIndex],
-        state.chats[0],
-      ];
-
-      chat.lastMessage = message;
 
       const isActiveChat = state.currentChatId === chatId;
       if (isActiveChat) {
-        const chatVisit = chat.chatVisit;
+        /* const chatVisit = chat.chatVisit;
         if (chatVisit) {
           chatVisit.lastSeen = message.createdAt;
-        }
+        } */
         state.messages.push(message);
       } else {
         const messageText =
           message.text.length > 20
             ? `${message.text.slice(0, 20)}...`
             : message.text;
-        toast(`${chat.name}: ${messageText}`);
+        toast(`${message.name}: ${messageText}`);
       }
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
