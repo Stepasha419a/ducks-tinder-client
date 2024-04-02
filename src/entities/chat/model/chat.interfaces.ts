@@ -8,7 +8,6 @@ export interface ChatInitialState {
   isLoading: boolean;
   isEnded: boolean;
   isNotFound: boolean;
-  isMessagesInitialLoading: boolean;
   isMessagesLoading: boolean;
   isMessagesEnded: boolean;
   currentChatId: string | null;

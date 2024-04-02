@@ -1,23 +1,12 @@
-import { useCallback, useEffect, useLayoutEffect, useRef } from 'react';
-import { scrollToBottom } from '@/shared/lib/helpers';
+import { useCallback, useEffect, useRef } from 'react';
 import { useAppSelector } from '@/shared/lib/hooks';
 
 export function useMessagesScroll() {
-  const isMessagesInitialLoading = useAppSelector(
-    (state) => state.chat.isMessagesInitialLoading
-  );
-
   const messagesLength = useAppSelector((state) => state.chat.messages.length);
 
   const messagesRef = useRef<HTMLDivElement | null>(null);
   const messagesBottomRef = useRef<HTMLDivElement | null>(null);
   const previousMessagesLength = useRef(0);
-
-  useLayoutEffect(() => {
-    if (messagesRef.current && !isMessagesInitialLoading) {
-      scrollToBottom(messagesRef);
-    }
-  }, [isMessagesInitialLoading]);
 
   const isValidSmoothScroll = useCallback(() => {
     if (messagesBottomRef.current && messagesRef.current) {

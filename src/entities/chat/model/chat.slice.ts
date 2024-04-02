@@ -26,7 +26,6 @@ const initialState: ChatInitialState = {
   isLoading: true,
   isEnded: false,
   isNotFound: false,
-  isMessagesInitialLoading: true,
   isMessagesLoading: false,
   isMessagesEnded: false,
   currentChatId: null,
@@ -41,7 +40,6 @@ const chatSlice = createSlice({
       state.currentChatId = payload;
       state.messages = [];
       state.isChatConnected = true;
-      state.isMessagesInitialLoading = true;
       state.isMessagesEnded = false;
       state.isNotFound = false;
     },
@@ -167,8 +165,6 @@ const chatSlice = createSlice({
         state.isSocketConnected = true;
       })
       .addCase(connectChatThunk.pending, (state) => {
-        state.isMessagesInitialLoading = true;
-
         const wasConnectedBefore = state.currentChatId;
         if (wasConnectedBefore) {
           const chat = state.chats.find(
@@ -180,9 +176,6 @@ const chatSlice = createSlice({
 
           chat.chatVisit.lastSeen = new Date().toISOString();
         }
-      })
-      .addCase(connectChatThunk.fulfilled, (state) => {
-        state.isMessagesInitialLoading = false;
       })
       .addCase(getMessagesThunk.pending, (state) => {
         state.isMessagesLoading = true;
@@ -198,9 +191,6 @@ const chatSlice = createSlice({
             return;
           }
 
-          if (state.isMessagesInitialLoading) {
-            state.isMessagesInitialLoading = false;
-          }
           if (payload.messages.length < PAGINATION_TAKE) {
             state.isMessagesEnded = true;
             if (payload.messages.length === 0) {
