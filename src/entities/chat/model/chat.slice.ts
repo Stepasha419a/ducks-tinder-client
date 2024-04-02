@@ -22,7 +22,6 @@ const initialState: ChatInitialState = {
   chats: [],
   messages: [],
   isSocketConnected: false,
-  isChatConnected: false,
   isLoading: true,
   isEnded: false,
   isNotFound: false,
@@ -39,7 +38,6 @@ const chatSlice = createSlice({
     setCurrentChatData: (state, { payload }: PayloadAction<string>) => {
       state.currentChatId = payload;
       state.messages = [];
-      state.isChatConnected = true;
       state.isMessagesEnded = false;
       state.isNotFound = false;
     },
@@ -127,7 +125,6 @@ const chatSlice = createSlice({
     },
     deleteChat: (state, { payload }: PayloadAction<string>) => {
       state.chats = state.chats.filter((chat) => chat.id !== payload);
-      state.isChatConnected = false;
       state.messages = [];
       state.currentChatId = '';
     },
@@ -216,7 +213,6 @@ const chatSlice = createSlice({
           }
         }
 
-        state.isChatConnected = false;
         state.messages = [];
         state.currentChatId = '';
       })

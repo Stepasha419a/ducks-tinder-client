@@ -15,7 +15,7 @@ export const ActiveChat = () => {
 
   const dispatch = useAppDispatch();
 
-  const isChatConnected = useAppSelector((state) => state.chat.isChatConnected);
+  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
   const isLoading = useAppSelector((state) => state.chat.isLoading);
   const isSocketConnected = useAppSelector(
     (state) => state.chat.isSocketConnected
@@ -35,7 +35,7 @@ export const ActiveChat = () => {
     }
   }, [dispatch, isLoading, chatId, isSocketConnected]);
 
-  if (!isChatConnected) {
+  if (!currentChatId) {
     return <Status />;
   }
 
