@@ -63,10 +63,10 @@ const chatSlice = createSlice({
 
       const isActiveChat = state.currentChatId === chatId;
       if (isActiveChat) {
-        /* const chatVisit = chat.chatVisit;
-        if (chatVisit) {
-          chatVisit.lastSeen = message.createdAt;
-        } */
+        const chat = state.chats.find((item) => item.id === chatId);
+        if (chat) {
+          chat.lastSeenAt = message.createdAt;
+        }
         state.messages.push(message);
       } else {
         const messageText =
@@ -167,11 +167,11 @@ const chatSlice = createSlice({
           const chat = state.chats.find(
             (item) => item.id === state.currentChatId
           );
-          if (!chat || !chat.chatVisit) {
+          if (!chat) {
             return;
           }
 
-          chat.chatVisit.lastSeen = new Date().toISOString();
+          chat.lastSeenAt = new Date().toISOString();
         }
       })
       .addCase(getMessagesThunk.pending, (state) => {
@@ -208,8 +208,8 @@ const chatSlice = createSlice({
           const chat = state.chats.find(
             (item) => item.id === state.currentChatId
           );
-          if (chat && chat.chatVisit) {
-            chat.chatVisit.lastSeen = new Date().toISOString();
+          if (chat) {
+            chat.lastSeenAt = new Date().toISOString();
           }
         }
 

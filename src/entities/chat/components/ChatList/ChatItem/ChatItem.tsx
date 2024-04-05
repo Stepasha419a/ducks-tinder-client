@@ -27,7 +27,7 @@ export const ChatItem: FC<ChatInterface> = ({
   const isNewMessages = getIsNewMessages(
     chat,
     isActive,
-    chat.lastMessage?.userId !== chat.chatVisit?.userId
+    chat.lastMessage?.userId !== currentUserId
   );
 
   const chatLink = `${ROUTES.CHAT}/${chat.id}`;

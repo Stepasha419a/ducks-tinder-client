@@ -4,16 +4,10 @@ export interface Chat {
   memberId: string;
   avatar: string;
   lastMessage?: Message;
-  chatVisit?: LastSeen;
   blocked: boolean;
   blockedById?: string;
   createdAt: string;
-}
-
-export interface LastSeen {
-  userId: string;
-  chatId: string;
-  lastSeen: string;
+  lastSeenAt: string;
 }
 
 export interface Message {

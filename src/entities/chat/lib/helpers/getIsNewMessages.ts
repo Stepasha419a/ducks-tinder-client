@@ -10,10 +10,10 @@ export function getIsNewMessages(
     isCompanion &&
     !isActive &&
     Boolean(chat.lastMessage?.createdAt) &&
-    Boolean(chat.chatVisit?.lastSeen) &&
+    Boolean(chat.lastSeenAt) &&
     getDatesHourDiff(
       new Date(chat.lastMessage!.createdAt),
-      new Date(new Date(chat.chatVisit!.lastSeen).toUTCString())
+      new Date(new Date(chat.lastSeenAt).toUTCString())
     ) > 0
   );
 }
