@@ -35,15 +35,25 @@
       overflow: hidden;
     }
 
-    .count {
+    .newMessages {
       position: absolute;
       top: 50%;
-      right: 16px;
       transform: translateY(-50%);
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
+      right: 16px;
       background-color: var(--color--red-100);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+
+      .count {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+
+        font-size: 14px;
+        color: var(--color--white-100);
+      }
     }
   }
 }

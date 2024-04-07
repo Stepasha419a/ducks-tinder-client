@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
 import { Avatar } from '@shared/ui';
-import { getIsNewMessages } from '@entities/chat/lib';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
 import styles from './ChatItem.module.scss';
@@ -24,11 +23,7 @@ export const ChatItem: FC<ChatInterface> = ({
 
   const messageName = username ? `${username}: ` : 'send first message';
 
-  const isNewMessages = getIsNewMessages(
-    chat,
-    isActive,
-    chat.lastMessage?.userId !== currentUserId
-  );
+  const isNewMessages = chat.newMessagesCount > 0 && !isActive;
 
   const chatLink = `${ROUTES.CHAT}/${chat.id}`;
 
@@ -44,7 +39,11 @@ export const ChatItem: FC<ChatInterface> = ({
           {messageName}
           {chat.lastMessage?.text}
         </div>
-        {isNewMessages && <div className={styles.count} />}
+        {isNewMessages && (
+          <div className={styles.newMessages}>
+            <div className={styles.count}>{chat.newMessagesCount}</div>
+          </div>
+        )}
       </div>
     </Link>
   );

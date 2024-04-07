@@ -1,5 +1,5 @@
+import { getDatesHourDiff } from '@/shared/lib/helpers';
 import { createSelector } from '@reduxjs/toolkit';
-import { getIsNewMessages } from '../lib';
 
 export const selectMessages = createSelector(
   [
@@ -67,6 +67,15 @@ export const selectNewMessageChatsCount = createSelector(
     chats.reduce((total, chat) => {
       const isActive = chat.id === currentChatId;
       const isCompanion = chat.lastMessage?.userId !== currentUserId;
-      return getIsNewMessages(chat, isActive, isCompanion) ? total + 1 : total;
+      const isNewMessage =
+        isCompanion &&
+        !isActive &&
+        Boolean(chat.lastMessage?.createdAt) &&
+        Boolean(chat.lastSeenAt) &&
+        getDatesHourDiff(
+          new Date(chat.lastMessage!.createdAt),
+          new Date(new Date(chat.lastSeenAt).toUTCString())
+        ) > 0;
+      return isNewMessage ? total + 1 : total;
     }, 0)
 );

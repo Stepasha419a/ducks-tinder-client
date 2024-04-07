@@ -6,7 +6,9 @@ export interface Chat {
   lastMessage?: Message;
   blocked: boolean;
   blockedById?: string;
+  newMessagesCount: number;
   createdAt: string;
+  updatedAt: string;
   lastSeenAt: string;
 }
 

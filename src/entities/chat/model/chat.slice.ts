@@ -8,7 +8,6 @@ import type {
 } from './chat.interfaces';
 import {
   getChatsThunk,
-  connectChatThunk,
   disconnectChatThunk,
   connectChatsThunk,
   getMessagesThunk,
@@ -40,6 +39,11 @@ const chatSlice = createSlice({
       state.messages = [];
       state.isMessagesEnded = false;
       state.isNotFound = false;
+
+      const chat = state.chats.find((item) => item.id === payload);
+      if (chat) {
+        chat.newMessagesCount = 0;
+      }
     },
     pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
@@ -51,6 +55,7 @@ const chatSlice = createSlice({
         state.chats.unshift(state.chats.splice(existingChatIndex, 1)[0]);
 
         state.chats[0].lastMessage = message;
+        state.chats[0].newMessagesCount++;
       } else {
         state.chats.unshift({
           avatar: message.avatar,
@@ -58,15 +63,13 @@ const chatSlice = createSlice({
           name: message.name,
           memberId: message.userId,
           lastMessage: message,
-        } as unknown as Chat);
+        } as Chat);
       }
 
       const isActiveChat = state.currentChatId === chatId;
-      if (isActiveChat) {
-        const chat = state.chats.find((item) => item.id === chatId);
-        if (chat) {
-          chat.lastSeenAt = message.createdAt;
-        }
+      const isFirstChat = state.chats[0].id === chatId;
+      if (isActiveChat && isFirstChat) {
+        state.chats[0].lastSeenAt = message.createdAt;
         state.messages.push(message);
       } else {
         const messageText =
@@ -161,7 +164,7 @@ const chatSlice = createSlice({
       .addCase(connectChatsThunk.fulfilled, (state) => {
         state.isSocketConnected = true;
       })
-      .addCase(connectChatThunk.pending, (state) => {
+      /* .addCase(connectChatThunk.pending, (state) => {
         const wasConnectedBefore = state.currentChatId;
         if (wasConnectedBefore) {
           const chat = state.chats.find(
@@ -173,7 +176,7 @@ const chatSlice = createSlice({
 
           chat.lastSeenAt = new Date().toISOString();
         }
-      })
+      }) */
       .addCase(getMessagesThunk.pending, (state) => {
         state.isMessagesLoading = true;
       })
@@ -210,6 +213,7 @@ const chatSlice = createSlice({
           );
           if (chat) {
             chat.lastSeenAt = new Date().toISOString();
+            chat.newMessagesCount = 0;
           }
         }
 
