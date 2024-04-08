@@ -102,7 +102,6 @@ export const connectChatThunk = createAsyncThunk(
 
       socket.once('connect-chat', () => {
         dispatch(setCurrentChatData(chatId));
-        //dispatch(getMessagesThunk());
       });
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -112,14 +111,9 @@ export const connectChatThunk = createAsyncThunk(
 
 export const disconnectChatThunk = createAsyncThunk(
   'chat/disconnectChat',
-  (_, { rejectWithValue, getState }) => {
+  (chatId: string, { rejectWithValue }) => {
     try {
-      const { chat } = getState() as RootState;
-      const { currentChatId } = chat;
-
-      if (currentChatId) {
-        chatService.disconnectChat(currentChatId);
-      }
+      chatService.disconnectChat(chatId);
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

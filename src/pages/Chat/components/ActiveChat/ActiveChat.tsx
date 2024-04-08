@@ -25,9 +25,11 @@ export const ActiveChat = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(disconnectChatThunk());
+      if (chatId) {
+        dispatch(disconnectChatThunk(chatId));
+      }
     };
-  }, [dispatch]);
+  }, [dispatch, chatId]);
 
   useEffect(() => {
     if (chatId && !isLoading && isSocketConnected) {
