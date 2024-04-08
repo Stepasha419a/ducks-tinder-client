@@ -24,12 +24,6 @@ export const InfinityScroll: FC<PropsWithChildren<InfinityScrollProps>> = ({
   const [isRequested, setRequested] = useState(false);
 
   useEffect(() => {
-    handleLoadMore();
-    setRequested(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     if (listRef.current && !isLoading) {
       const newScrollTop = getNewScrollTop(
         Boolean(isReversed),
@@ -47,7 +41,7 @@ export const InfinityScroll: FC<PropsWithChildren<InfinityScrollProps>> = ({
         lastScroll.current = listRef.current.scrollTop;
       }
     }
-  }, [isLoading, isReversed, lastScroll, listRef]);
+  }, [isLoading, isReversed, listRef]);
 
   useEffect(() => {
     if (!isLoading && isIntersecting && !isRequested && isMore) {
