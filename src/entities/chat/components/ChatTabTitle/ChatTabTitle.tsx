@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { motion } from 'framer-motion';
 import styles from './ChatTabTitle.module.scss';
 import { useAppSelector } from '@shared/lib/hooks';
-import { selectNewMessageChatsCount } from '../../model';
 
 interface ChatTabTitleProps {
   handleClick: () => void;
@@ -13,14 +12,20 @@ export const ChatTabTitle: FC<ChatTabTitleProps> = ({
   handleClick,
   isActive,
 }) => {
-  const newMessageChatsCount = useAppSelector(selectNewMessageChatsCount);
-  const reducedCount = newMessageChatsCount > 9 ? '9+' : newMessageChatsCount;
+  const newMessageChatsCount = useAppSelector(
+    (state) => state.chat.newMessagesCount
+  );
+
+  const isLoadedNewMessagesCount = newMessageChatsCount !== null;
+  const isNewMessages = isLoadedNewMessagesCount && newMessageChatsCount > 0;
 
   return (
     <div onClick={handleClick} className={styles.title}>
-      {newMessageChatsCount > 0 && (
+      {isNewMessages && (
         <div className={styles.newMessages}>
-          <div className={styles.count}>{reducedCount}</div>
+          <div className={styles.count}>
+            {newMessageChatsCount > 9 ? '9+' : newMessageChatsCount}
+          </div>
         </div>
       )}
       Messages

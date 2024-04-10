@@ -8,6 +8,7 @@ export {
   sendMessageThunk,
   deleteMessageThunk,
   getMessagesThunk,
+  getNewMessagesCountThunk,
   editMessageThunk,
   unblockChatThunk,
   deleteChatThunk,
@@ -19,6 +20,5 @@ export {
   selectCurrentMessagesLength,
   selectMessages,
   selectChatProfile,
-  selectNewMessageChatsCount,
   selectCurrentChat,
 } from './chat.selectors';

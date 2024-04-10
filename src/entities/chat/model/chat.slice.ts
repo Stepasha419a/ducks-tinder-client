@@ -12,6 +12,7 @@ import {
   connectChatsThunk,
   getMessagesThunk,
   getMemberThunk,
+  getNewMessagesCountThunk,
 } from './chat.thunks';
 import { toast } from 'react-toastify';
 import type { ShortMessagesPagination } from '@/shared/api/services/chat/chat-service.interface';
@@ -20,6 +21,7 @@ import { PAGINATION_TAKE } from '@/shared/lib/constants';
 const initialState: ChatInitialState = {
   chats: [],
   messages: [],
+  newMessagesCount: null,
   isSocketConnected: false,
   isLoading: true,
   isEnded: false,
@@ -204,6 +206,12 @@ const chatSlice = createSlice({
           }
 
           state.messages = payload.messages.reverse().concat(state.messages);
+        }
+      )
+      .addCase(
+        getNewMessagesCountThunk.fulfilled,
+        (state, { payload }: PayloadAction<number>) => {
+          state.newMessagesCount = payload;
         }
       )
       .addCase(disconnectChatThunk.fulfilled, (state) => {

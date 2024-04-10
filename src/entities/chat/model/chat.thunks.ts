@@ -153,6 +153,18 @@ export const getMessagesThunk = createAsyncThunk(
   }
 );
 
+export const getNewMessagesCountThunk = createAsyncThunk(
+  'chat/getNewMessagesCount',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await chatService.getNewMessagesCount();
+      return response.data;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
 export const deleteMessageThunk = createAsyncThunk(
   'chat/deleteMessage',
   (messageId: string, { rejectWithValue }) => {

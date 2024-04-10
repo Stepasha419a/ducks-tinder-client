@@ -20,6 +20,11 @@ export const chatService = {
       { params }
     );
   },
+  async getNewMessagesCount() {
+    return instance.get<number>(
+      `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/new`
+    );
+  },
   async getMember(memberId: string) {
     return instance.get<ShortUser>(
       `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/member/${memberId}`

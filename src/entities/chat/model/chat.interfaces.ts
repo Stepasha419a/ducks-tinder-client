@@ -3,6 +3,7 @@ import type { Chat, Message, ShortUser } from '@shared/api/interfaces';
 export interface ChatInitialState {
   chats: Chat[];
   messages: Message[];
+  newMessagesCount: number | null;
   isSocketConnected: boolean;
   isLoading: boolean;
   isEnded: boolean;
