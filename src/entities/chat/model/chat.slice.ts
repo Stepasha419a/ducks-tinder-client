@@ -13,12 +13,15 @@ import {
   getMessagesThunk,
   getMemberThunk,
   getNewMessagesCountThunk,
+  getChatThunk,
 } from './chat.thunks';
 import { toast } from 'react-toastify';
 import type { ShortMessagesPagination } from '@/shared/api/services/chat/chat-service.interface';
 import { PAGINATION_TAKE } from '@/shared/lib/constants';
 
 const initialState: ChatInitialState = {
+  chat: null,
+  isChatLoading: false,
   chats: [],
   messages: [],
   newMessagesCount: null,
@@ -142,6 +145,16 @@ const chatSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getChatThunk.pending, (state) => {
+        state.isChatLoading = true;
+      })
+      .addCase(
+        getChatThunk.fulfilled,
+        (state, { payload }: PayloadAction<Chat>) => {
+          state.chat = payload;
+          state.isChatLoading = false;
+        }
+      )
       .addCase(getChatsThunk.pending, (state) => {
         state.isLoading = true;
       })

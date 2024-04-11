@@ -19,6 +19,19 @@ import { checkAuthThunk } from '@/entities/user/model/auth';
 import { PAGINATION_TAKE } from '@/shared/lib/constants';
 import type { Message } from '@/shared/api/interfaces';
 
+export const getChatThunk = createAsyncThunk(
+  'chat/getChat',
+  async (chatId: string, { rejectWithValue }) => {
+    try {
+      const response = await chatService.getChat(chatId);
+
+      return response.data;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
 export const getChatsThunk = createAsyncThunk(
   'chat/getChats',
   async (_, { rejectWithValue, getState }) => {
@@ -29,8 +42,12 @@ export const getChatsThunk = createAsyncThunk(
 
       const params: PaginationParams = {
         skip: chats.length,
-        take: PAGINATION_TAKE,
+        take: 1,
       };
+
+      if (chats.length > 0) {
+        return [];
+      }
 
       const response = await chatService.getChats(params);
 

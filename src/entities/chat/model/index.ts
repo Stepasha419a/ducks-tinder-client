@@ -4,6 +4,7 @@ export {
   connectChatThunk,
   disconnectChatThunk,
   disconnectThunk,
+  getChatThunk,
   getChatsThunk,
   sendMessageThunk,
   deleteMessageThunk,

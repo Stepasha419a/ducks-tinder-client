@@ -6,6 +6,11 @@ import type { ShortMessagesPagination } from './chat-service.interface';
 import type { PaginationParams } from '@shared/lib/interfaces';
 
 export const chatService = {
+  async getChat(chatId: string) {
+    return instance.get<Chat>(
+      `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/${chatId}`
+    );
+  },
   async getChats(params: PaginationParams) {
     return instance.get<Chat[]>(
       `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat`,

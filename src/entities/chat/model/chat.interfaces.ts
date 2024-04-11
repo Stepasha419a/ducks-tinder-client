@@ -1,6 +1,8 @@
 import type { Chat, Message, ShortUser } from '@shared/api/interfaces';
 
 export interface ChatInitialState {
+  chat: Chat | null;
+  isChatLoading: boolean;
   chats: Chat[];
   messages: Message[];
   newMessagesCount: number | null;
