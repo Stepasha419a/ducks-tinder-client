@@ -16,7 +16,6 @@ export const ActiveChat = () => {
   const dispatch = useAppDispatch();
 
   const currentChatId = useAppSelector((state) => state.chat.currentChatId);
-  const isLoading = useAppSelector((state) => state.chat.isLoading);
   const isSocketConnected = useAppSelector(
     (state) => state.chat.isSocketConnected
   );
@@ -32,10 +31,10 @@ export const ActiveChat = () => {
   }, [dispatch, chatId]);
 
   useEffect(() => {
-    if (chatId && !isLoading && isSocketConnected) {
+    if (chatId && isSocketConnected) {
       dispatch(connectChatThunk({ chatId }));
     }
-  }, [dispatch, isLoading, chatId, isSocketConnected]);
+  }, [dispatch, chatId, isSocketConnected]);
 
   if (!currentChatId) {
     return <Status />;
