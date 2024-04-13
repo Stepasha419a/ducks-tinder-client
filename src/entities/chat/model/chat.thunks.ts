@@ -282,15 +282,11 @@ export const getMemberThunk = createAsyncThunk(
   'chat/getMember',
   async (_, { rejectWithValue, getState }) => {
     try {
-      const { chat } = getState() as RootState;
-      const { chats, currentChatId } = chat;
+      const {
+        chat: { chat: currentChat },
+      } = getState() as RootState;
 
-      if (currentChatId) {
-        const currentChat = chats.find((item) => item.id === currentChatId);
-        if (!currentChat) {
-          return;
-        }
-
+      if (currentChat) {
         const response = await chatService.getMember(currentChat.memberId);
         return response.data;
       }
