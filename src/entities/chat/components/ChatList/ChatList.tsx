@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import {
   useAppDispatch,
   useAppSelector,
@@ -10,6 +10,7 @@ import FailedChats from './Failed/FailedChats';
 import { ChatItem } from './ChatItem/ChatItem';
 import styles from './ChatList.module.scss';
 import { ChatListLazy } from './ChatList.lazy';
+import { InfinityScroll } from '@/shared/ui';
 
 interface ChatListProps {
   currentUserId: string;
@@ -28,28 +29,30 @@ export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
     dispatch(getChatsThunk());
   }, 300);
 
-  useEffect(() => {
-    delayedGetChats();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (!chatsLength && !isLoading) {
+  if (!chatsLength && isEnded) {
     return <FailedChats />;
   }
 
   return (
     <div className={styles.chats} ref={chatListRef}>
-      {chats.map((chat) => {
-        const isActive = currentChatId === chat.id;
-        return (
-          <ChatItem
-            currentUserId={currentUserId}
-            key={chat.id}
-            chat={chat}
-            isActive={isActive}
-          />
-        );
-      })}
+      <InfinityScroll
+        handleLoadMore={delayedGetChats}
+        isLoading={isLoading}
+        isMore={!isEnded}
+        listRef={chatListRef}
+      >
+        {chats.map((chat) => {
+          const isActive = currentChatId === chat.id;
+          return (
+            <ChatItem
+              currentUserId={currentUserId}
+              key={chat.id}
+              chat={chat}
+              isActive={isActive}
+            />
+          );
+        })}
+      </InfinityScroll>
       {!isEnded && <ChatListLazy />}
     </div>
   );

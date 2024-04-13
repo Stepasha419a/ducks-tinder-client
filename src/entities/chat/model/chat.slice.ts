@@ -26,7 +26,7 @@ const initialState: ChatInitialState = {
   messages: [],
   newMessagesCount: null,
   isSocketConnected: false,
-  isLoading: true,
+  isLoading: false,
   isEnded: false,
   isNotFound: false,
   isMessagesLoading: false,
