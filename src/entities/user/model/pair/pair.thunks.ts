@@ -1,12 +1,24 @@
+import { PAGINATION_TAKE } from '@/shared/lib/constants';
+import type { PaginationParams } from '@/shared/lib/interfaces';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
-      const response = await userService.getPairs();
+      const {
+        pair: {
+          pairs: { length },
+        },
+      } = getState() as RootState;
+
+      const params: PaginationParams = {
+        skip: length,
+        take: PAGINATION_TAKE,
+      };
+      const response = await userService.getPairs(params);
 
       return response.data;
     } catch (error: unknown) {

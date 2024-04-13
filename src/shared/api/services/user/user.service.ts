@@ -1,6 +1,7 @@
 import { instance } from '@shared/api';
 import type { User, ShortUser } from '@shared/api/interfaces';
 import type { PairsInfo, PartialUser } from './user-service.interface';
+import type { PaginationParams } from '@/shared/lib/interfaces';
 
 export const userService = {
   async getSortedUser() {
@@ -53,9 +54,10 @@ export const userService = {
     );
   },
 
-  async getPairs() {
+  async getPairs(params: PaginationParams) {
     return instance.get<ShortUser[]>(
-      `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs`,
+      { params }
     );
   },
 

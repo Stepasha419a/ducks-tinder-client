@@ -12,8 +12,9 @@ export interface PairFilterForm {
 export type PairFilterKey = keyof PairFilterForm;
 
 export interface PairInitialState {
-  isPairsLoading: boolean;
   pairs: ShortUser[];
+  isPairsLoading: boolean;
+  isPairsEnded: boolean;
   isPairsInfoLoading: boolean;
   pairsInfo: PairsInfo;
 }

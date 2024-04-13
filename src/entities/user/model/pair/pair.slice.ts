@@ -9,10 +9,12 @@ import {
 } from './pair.thunks';
 import type { ShortUser } from '@/shared/api/interfaces';
 import { sortItemBySettings } from '../../lib';
+import { PAGINATION_TAKE } from '@/shared/lib/constants';
 
 const initialState: PairInitialState = {
-  isPairsLoading: true,
   pairs: [],
+  isPairsLoading: false,
+  isPairsEnded: false,
   isPairsInfoLoading: true,
   pairsInfo: {
     count: 0,
@@ -32,10 +34,20 @@ const pairSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getUserPairsThunk.fulfilled, (state, { payload }) => {
-        state.pairs = payload;
-        state.isPairsLoading = false;
+      .addCase(getUserPairsThunk.pending, (state) => {
+        state.isPairsLoading = true;
       })
+      .addCase(
+        getUserPairsThunk.fulfilled,
+        (state, { payload }: PayloadAction<ShortUser[]>) => {
+          if (payload.length < PAGINATION_TAKE) {
+            state.isPairsEnded = true;
+          }
+
+          state.pairs = state.pairs.concat(payload);
+          state.isPairsLoading = false;
+        }
+      )
       .addCase(
         acceptPairThunk.fulfilled,
         (state, { payload: pairId }: PayloadAction<string>) => {
