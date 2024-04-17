@@ -12,7 +12,7 @@ import { getUserPairsThunk } from '@/entities/user/model/pair';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
 import { PairsListLazy } from './PairsList.lazy';
-import { InfinityScroll } from '@/shared/ui';
+import { InfinityScroll, Skeleton } from '@/shared/ui';
 
 interface PairsListProps {
   setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;
@@ -47,6 +47,7 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
         isLoading={isPairsLoading}
         isMore={!isPairsEnded}
         listRef={listRef}
+        loader={<Skeleton count={1} width={244} height={305} duration={1} />}
       >
         {pairs.map((user: ShortUser) => {
           return (

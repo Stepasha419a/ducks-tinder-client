@@ -3,7 +3,7 @@ import { Skeleton } from '@shared/ui';
 export const PairsListLazy = () => {
   return (
     <>
-      {Array(6)
+      {Array(5)
         .fill(null)
         .map((_, i) => {
           return (
