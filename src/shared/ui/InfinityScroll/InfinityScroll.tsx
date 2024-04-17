@@ -1,4 +1,9 @@
-import type { MutableRefObject, FC, PropsWithChildren } from 'react';
+import type {
+  MutableRefObject,
+  FC,
+  PropsWithChildren,
+  ReactElement,
+} from 'react';
 import { useRef, useEffect, useState } from 'react';
 
 interface InfinityScrollProps {
@@ -7,6 +12,7 @@ interface InfinityScrollProps {
   isLoading: boolean;
   handleLoadMore: () => void;
   listRef: MutableRefObject<HTMLElement | null>;
+  loader?: ReactElement;
 }
 
 export const InfinityScroll: FC<PropsWithChildren<InfinityScrollProps>> = ({
@@ -16,6 +22,7 @@ export const InfinityScroll: FC<PropsWithChildren<InfinityScrollProps>> = ({
   isLoading,
   handleLoadMore,
   listRef,
+  loader,
 }) => {
   const loadRef = useRef<null | HTMLDivElement>(null);
   const lastScroll = useRef(0);
@@ -63,7 +70,11 @@ export const InfinityScroll: FC<PropsWithChildren<InfinityScrollProps>> = ({
     return () => observer.unobserve(child);
   }, []);
 
-  const loadElement = <div key="load-scroll" ref={loadRef}></div>;
+  const loadElement = (
+    <div key="load-scroll" ref={loadRef}>
+      {isMore && loader}
+    </div>
+  );
 
   if (isReversed) {
     return (
