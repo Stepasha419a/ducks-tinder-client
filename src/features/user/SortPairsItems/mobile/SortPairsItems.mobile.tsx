@@ -7,15 +7,15 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons';
 interface SortPairsItemsProps {
   isSortPopupOpen: boolean;
   setIsSortPopupOpen: Dispatch<SetStateAction<boolean>>;
-  account: string[];
-  forcedToggleAccount: (item: string) => void;
+  hasInterests: boolean;
+  forcedHasInterests: () => void;
 }
 
 export const SortPairsItemsMobile: FC<SortPairsItemsProps> = ({
   isSortPopupOpen,
   setIsSortPopupOpen,
-  account,
-  forcedToggleAccount,
+  hasInterests,
+  forcedHasInterests,
 }) => (
   <>
     <div className={styles.sorting}>
@@ -28,9 +28,9 @@ export const SortPairsItemsMobile: FC<SortPairsItemsProps> = ({
         <FontAwesomeIcon className={styles.icon} icon={faSliders} />
       </ListItem>
       <ListItem
-        onClick={() => forcedToggleAccount('have interests')}
+        onClick={forcedHasInterests}
         pointer
-        isActive={account.includes('have interests')}
+        isActive={hasInterests}
         extraClassName={styles.item}
       >
         have interests

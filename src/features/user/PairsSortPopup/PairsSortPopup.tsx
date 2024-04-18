@@ -9,7 +9,7 @@ import {
   Checkboxes,
   DistanceSetting,
   InterestsSetting,
-  PhotosSetting,
+  PicturesSetting,
 } from './components';
 import styles from './PairsSortPopup.module.scss';
 import { INTERESTS } from '@/shared/api/constant';
@@ -24,11 +24,13 @@ export const PairsSortPopup: FC<PairsSortPopupProps> = ({
   const {
     control,
     submitHandler,
-    account,
-    toggleAccount,
     interests,
     toggleInterest,
     handleReset,
+    toggleHasInterests,
+    toggleIdentifyConfirmed,
+    hasInterests,
+    identifyConfirmed,
   } = usePairSorts();
 
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
@@ -49,13 +51,18 @@ export const PairsSortPopup: FC<PairsSortPopupProps> = ({
         <form className={styles.form} onSubmit={handleSubmit}>
           <DistanceSetting control={control} />
           <AgeSetting control={control} />
-          <PhotosSetting control={control} />
+          <PicturesSetting control={control} />
           <InterestsSetting
             interests={interests}
             toggleInterest={toggleInterest}
             setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
           />
-          <Checkboxes account={account} toggleAccount={toggleAccount} />
+          <Checkboxes
+            hasInterests={hasInterests}
+            identifyConfirmed={identifyConfirmed}
+            toggleHasInterests={toggleHasInterests}
+            toggleIdentifyConfirmed={toggleIdentifyConfirmed}
+          />
           <Buttons handleReset={handleReset} />
         </form>
       </Popup>

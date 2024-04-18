@@ -19,16 +19,20 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
 }) => {
   const isSmallMobile = useMediaQuery('(max-width: 600px)');
 
-  const { account, forcedToggleAccount, interests, forcedToggleInterest } =
-    usePairSorts();
+  const {
+    hasInterests,
+    forcedToggleHasInterests,
+    interests,
+    forcedToggleInterest,
+  } = usePairSorts();
 
   if (isSmallMobile) {
     return (
       <SortPairsItemsMobile
         isSortPopupOpen={isSortPopupOpen}
         setIsSortPopupOpen={setIsSortPopupOpen}
-        account={account}
-        forcedToggleAccount={forcedToggleAccount}
+        hasInterests={hasInterests}
+        forcedHasInterests={forcedToggleHasInterests}
       />
     );
   }
@@ -58,9 +62,9 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
           );
         })}
         <ListItem
-          onClick={() => forcedToggleAccount('have interests')}
+          onClick={forcedToggleHasInterests}
           pointer
-          isActive={account.includes('have interests')}
+          isActive={hasInterests}
           extraClassName={styles.item}
         >
           have interests

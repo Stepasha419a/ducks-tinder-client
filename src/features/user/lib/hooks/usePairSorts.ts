@@ -1,21 +1,24 @@
-import type { PairFilterForm } from '@/entities/user/model/pair';
-import { filterPairs } from '@/entities/user/model/pair';
-import { useAppDispatch } from '@shared/lib/hooks';
+import { setFilter } from '@/entities/user/model/pair';
+import type { PairFilterForm } from '@/entities/user/model/pair/pair.interface';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { useController, useForm } from 'react-hook-form';
 
 const defaultValues: PairFilterForm = {
   distance: 100,
   age: { from: 18, to: 100 },
-  photos: 1,
+  pictures: 0,
   interests: [],
-  account: [],
+  hasInterests: false,
+  identifyConfirmed: false,
 };
 
 export function usePairSorts() {
   const dispatch = useAppDispatch();
 
+  const filter = useAppSelector((state) => state.pair.filter);
+
   const { control, handleSubmit, reset } = useForm<PairFilterForm>({
-    defaultValues,
+    defaultValues: filter,
   });
 
   const {
@@ -26,9 +29,16 @@ export function usePairSorts() {
   });
 
   const {
-    field: { value: account, onChange: setAccount },
+    field: { value: hasInterests, onChange: setHasInterests },
   } = useController({
-    name: 'account',
+    name: 'hasInterests',
+    control,
+  });
+
+  const {
+    field: { value: identifyConfirmed, onChange: setIdentifyConfirmed },
+  } = useController({
+    name: 'identifyConfirmed',
     control,
   });
 
@@ -40,16 +50,8 @@ export function usePairSorts() {
     }
   };
 
-  const toggleAccount = (item: string): void => {
-    if (account.includes(item)) {
-      setAccount(account.filter((setting) => setting !== item));
-    } else {
-      setAccount([...account, item]);
-    }
-  };
-
   const submitHandler = handleSubmit((data) => {
-    dispatch(filterPairs(data));
+    dispatch(setFilter(data));
   });
 
   const forcedToggleInterest = (item: string): void => {
@@ -57,8 +59,21 @@ export function usePairSorts() {
     submitHandler();
   };
 
-  const forcedToggleAccount = (item: string): void => {
-    toggleAccount(item);
+  const toggleHasInterests = (): void => {
+    setHasInterests(!hasInterests);
+  };
+
+  const toggleIdentifyConfirmed = (): void => {
+    setIdentifyConfirmed(!identifyConfirmed);
+  };
+
+  const forcedToggleHasInterests = (): void => {
+    setHasInterests(!hasInterests);
+    submitHandler();
+  };
+
+  const forcedToggleIdentifyConfirmed = (): void => {
+    setIdentifyConfirmed(!identifyConfirmed);
     submitHandler();
   };
 
@@ -69,9 +84,12 @@ export function usePairSorts() {
   return {
     control,
     submitHandler,
-    account,
-    toggleAccount,
-    forcedToggleAccount,
+    hasInterests,
+    identifyConfirmed,
+    toggleHasInterests,
+    toggleIdentifyConfirmed,
+    forcedToggleHasInterests,
+    forcedToggleIdentifyConfirmed,
     interests,
     toggleInterest,
     forcedToggleInterest,

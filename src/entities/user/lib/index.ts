@@ -1,5 +1,4 @@
 export {
-  sortItemBySettings,
   getMoreAboutMe,
   getLifestyle,
   getUserSliderInfo,

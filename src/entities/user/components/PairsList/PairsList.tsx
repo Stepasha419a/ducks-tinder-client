@@ -1,5 +1,5 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -8,6 +8,7 @@ import {
   useDebouncedCallback,
 } from '@shared/lib/hooks';
 import type { ShortUser } from '@shared/api/interfaces';
+import type { PairFilterForm } from '@/entities/user/model/pair';
 import { getUserPairsThunk } from '@/entities/user/model/pair';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
@@ -21,14 +22,23 @@ interface PairsListProps {
 export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
+  const filter = useAppSelector((state) => state.pair.filter);
   const pairs = useAppSelector((state) => state.pair.pairs);
   const isPairsLoading = useAppSelector((state) => state.pair.isPairsLoading);
   const isPairsEnded = useAppSelector((state) => state.pair.isPairsEnded);
 
   const listRef = useRef(null);
+  const prevFilter = useRef<PairFilterForm | null>(null);
+
+  useEffect(() => {
+    if (JSON.stringify(filter) !== JSON.stringify(prevFilter.current)) {
+      dispatch(getUserPairsThunk(true));
+      prevFilter.current = filter;
+    }
+  }, [dispatch, filter]);
 
   const delayedGetUserPairs = useDebouncedCallback(() => {
-    dispatch(getUserPairsThunk());
+    dispatch(getUserPairsThunk(false));
   });
 
   if (!pairs.length && isPairsEnded) {

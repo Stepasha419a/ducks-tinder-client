@@ -3,24 +3,31 @@ import { CheckboxInput } from '@shared/ui';
 import styles from '../PairsSortPopup.module.scss';
 
 interface CheckboxesProps {
-  account: string[];
-  toggleAccount: (item: string) => void;
+  hasInterests: boolean;
+  identifyConfirmed: boolean;
+  toggleHasInterests: () => void;
+  toggleIdentifyConfirmed: () => void;
 }
 
-export const Checkboxes: FC<CheckboxesProps> = ({ account, toggleAccount }) => {
+export const Checkboxes: FC<CheckboxesProps> = ({
+  hasInterests,
+  identifyConfirmed,
+  toggleHasInterests,
+  toggleIdentifyConfirmed,
+}) => {
   return (
     <>
       <div className={`${styles.setting} ${styles.checkbox}`}>
         <CheckboxInput
-          checked={account.includes('identify confirmed')}
-          onChange={() => toggleAccount('identify confirmed')}
+          checked={identifyConfirmed}
+          onChange={toggleIdentifyConfirmed}
           text="Identify confirmed"
         />
       </div>
       <div className={`${styles.setting} ${styles.checkbox}`}>
         <CheckboxInput
-          checked={account.includes('have interests')}
-          onChange={() => toggleAccount('have interests')}
+          checked={hasInterests}
+          onChange={toggleHasInterests}
           text="Have interests"
         />
       </div>

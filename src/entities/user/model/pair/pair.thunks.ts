@@ -1,26 +1,40 @@
+import type { PairFilterParams } from '@/shared/api/services/user/user-service.interface';
 import { PAGINATION_TAKE } from '@/shared/lib/constants';
-import type { PaginationParams } from '@/shared/lib/interfaces';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
-  async (_, { rejectWithValue, getState }) => {
+  async (isInitial: boolean, { rejectWithValue, getState }) => {
     try {
       const {
         pair: {
           pairs: { length },
+          filter,
         },
       } = getState() as RootState;
 
-      const params: PaginationParams = {
-        skip: length,
+      const params: PairFilterParams = {
+        skip: isInitial ? 0 : length,
         take: PAGINATION_TAKE,
+
+        ageFrom: filter.age.from,
+        ageTo: filter.age.to,
+        distance: filter.distance,
+        interests: filter.interests,
+        pictures: filter.pictures,
       };
+      if (filter.hasInterests) {
+        params.hasInterests = filter.hasInterests;
+      }
+      if (filter.identifyConfirmed) {
+        params.identifyConfirmed = filter.identifyConfirmed;
+      }
+
       const response = await userService.getPairs(params);
 
-      return response.data;
+      return { pairs: response.data, isInitial };
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

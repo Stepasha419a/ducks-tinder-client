@@ -2,32 +2,32 @@ import type { FC } from 'react';
 import classNames from 'classnames';
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
-import type { PairFilterForm } from '@/entities/user/model/pair';
 import { createEmptyArray } from '@shared/helpers';
 import { ListItem } from '@shared/ui';
 import styles from '../PairsSortPopup.module.scss';
+import type { PairFilterForm } from '@/entities/user/model/pair';
 
-interface PhotosSettingProps {
+interface PicturesSettingProps {
   control: Control<PairFilterForm>;
 }
 
-export const PhotosSetting: FC<PhotosSettingProps> = ({ control }) => {
+export const PicturesSetting: FC<PicturesSettingProps> = ({ control }) => {
   const {
-    field: { value: photosCount, onChange: setPhotosCount },
-  } = useController({ name: 'photos', control });
+    field: { value: picturesCount, onChange: setPicturesCount },
+  } = useController({ name: 'pictures', control });
 
-  const photosCountArrForLoop: undefined[] = createEmptyArray(9);
+  const picturesCountArrForLoop: undefined[] = createEmptyArray(9);
 
   return (
     <div className={styles.setting}>
-      <div className={styles.name}>Min photo's count</div>
+      <div className={styles.name}>Min pictures count</div>
       <div className={classNames(styles.change, styles.flex)}>
-        {photosCountArrForLoop.map((_, i) => {
+        {picturesCountArrForLoop.map((_, i) => {
           const content = i + 1;
           return (
             <ListItem
-              onClick={() => setPhotosCount(content)}
-              isActive={photosCount === content}
+              onClick={() => setPicturesCount(content)}
+              isActive={picturesCount === content}
               key={i}
               pointer
             >

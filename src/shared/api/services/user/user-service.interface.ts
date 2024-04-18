@@ -1,4 +1,5 @@
-import type { FullPicture } from "../../interfaces";
+import type { PaginationParams } from '@/shared/lib/interfaces';
+import type { FullPicture } from '../../interfaces';
 
 export interface PartialUser {
   email?: string;
@@ -6,10 +7,10 @@ export interface PartialUser {
   description?: string;
   nickname?: string;
   age?: number;
-  sex?: "male" | "female";
+  sex?: 'male' | 'female';
   distance?: number;
   usersOnlyInDistance?: boolean;
-  preferSex?: "male" | "female";
+  preferSex?: 'male' | 'female';
   preferAgeFrom?: number;
   preferAgeTo?: number;
   interests?: string[];
@@ -34,9 +35,19 @@ export interface QuerySorts {
   age: number;
   preferAgeFrom: number;
   preferAgeTo: number;
-  sex: "male" | "female";
-  preferSex: "male" | "female";
+  sex: 'male' | 'female';
+  preferSex: 'male' | 'female';
   userIds?: string[];
+}
+
+export interface PairFilterParams extends PaginationParams {
+  distance?: number;
+  ageFrom?: number;
+  ageTo?: number;
+  pictures?: number;
+  interests?: string[];
+  hasInterests?: boolean;
+  identifyConfirmed?: boolean;
 }
 
 export type ChangedData = string | string[] | number | boolean;

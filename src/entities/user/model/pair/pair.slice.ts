@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { PairInitialState, PairFilterForm } from './pair.interface';
+import type {
+  GetUserPairsThunkReturn,
+  PairFilterForm,
+  PairInitialState,
+} from './pair.interface';
 import {
   acceptPairThunk,
   getPairsInfoThunk,
   getUserPairsThunk,
   refusePairThunk,
 } from './pair.thunks';
-import type { ShortUser } from '@/shared/api/interfaces';
-import { sortItemBySettings } from '../../lib';
 import { PAGINATION_TAKE } from '@/shared/lib/constants';
 
 const initialState: PairInitialState = {
@@ -20,16 +22,22 @@ const initialState: PairInitialState = {
     count: 0,
     picture: null,
   },
+  filter: {
+    distance: 100,
+    age: { from: 18, to: 100 },
+    pictures: 0,
+    interests: [],
+    hasInterests: false,
+    identifyConfirmed: false,
+  },
 };
 
 const pairSlice = createSlice({
   name: 'pairSlice',
   initialState,
   reducers: {
-    filterPairs: (state, { payload }: PayloadAction<PairFilterForm>) => {
-      state.pairs = state.pairs.filter((user: ShortUser) =>
-        sortItemBySettings(user, payload)
-      );
+    setFilter: (state, { payload }: PayloadAction<PairFilterForm>) => {
+      state.filter = payload;
     },
   },
   extraReducers: (builder) => {
@@ -39,12 +47,18 @@ const pairSlice = createSlice({
       })
       .addCase(
         getUserPairsThunk.fulfilled,
-        (state, { payload }: PayloadAction<ShortUser[]>) => {
-          if (payload.length < PAGINATION_TAKE) {
+        (state, { payload }: PayloadAction<GetUserPairsThunkReturn>) => {
+          const { pairs, isInitial } = payload;
+          if (pairs.length < PAGINATION_TAKE) {
             state.isPairsEnded = true;
           }
 
-          state.pairs = state.pairs.concat(payload);
+          if (isInitial) {
+            state.pairs = pairs;
+          } else {
+            state.pairs = state.pairs.concat(pairs);
+          }
+
           state.isPairsLoading = false;
         }
       )
@@ -72,6 +86,6 @@ const pairSlice = createSlice({
   },
 });
 
-export const { filterPairs } = pairSlice.actions;
+export const { setFilter } = pairSlice.actions;
 
 export const pairReducer = pairSlice.reducer;

@@ -2,14 +2,13 @@ import type { Range, ShortUser } from '@/shared/api/interfaces';
 import type { PairsInfo } from '@/shared/api/services/user/user-service.interface';
 
 export interface PairFilterForm {
-  distance: number;
+  distance?: number;
   age: Range;
-  photos: number;
+  pictures?: number;
   interests: string[];
-  account: string[];
+  hasInterests: boolean;
+  identifyConfirmed: boolean;
 }
-
-export type PairFilterKey = keyof PairFilterForm;
 
 export interface PairInitialState {
   pairs: ShortUser[];
@@ -17,4 +16,10 @@ export interface PairInitialState {
   isPairsEnded: boolean;
   isPairsInfoLoading: boolean;
   pairsInfo: PairsInfo;
+  filter: PairFilterForm;
+}
+
+export interface GetUserPairsThunkReturn {
+  pairs: ShortUser[];
+  isInitial: boolean;
 }
