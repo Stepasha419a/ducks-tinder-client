@@ -1,5 +1,6 @@
 export {
-  usePairSorts,
+  usePairFilterForm,
+  useOuterPairFilterForm,
   useRateButtons,
   useSwipeProps,
   useKeyboardEvents,

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { CheckboxInput } from '@shared/ui';
-import styles from '../PairsSortPopup.module.scss';
+import styles from '../PairsFilterPopup.module.scss';
 
 interface CheckboxesProps {
   hasInterests: boolean;

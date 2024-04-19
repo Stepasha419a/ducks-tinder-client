@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Button } from '@shared/ui';
-import styles from '../PairsSortPopup.module.scss';
+import styles from '../PairsFilterPopup.module.scss';
 
 interface ButtonsProps {
   handleReset: () => void;

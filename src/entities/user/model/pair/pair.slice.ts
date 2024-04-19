@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type {
   GetUserPairsThunkReturn,
-  PairFilterForm,
   PairInitialState,
 } from './pair.interface';
 import {
@@ -22,24 +21,12 @@ const initialState: PairInitialState = {
     count: 0,
     picture: null,
   },
-  filter: {
-    distance: 100,
-    age: { from: 18, to: 100 },
-    pictures: 0,
-    interests: [],
-    hasInterests: false,
-    identifyConfirmed: false,
-  },
 };
 
 const pairSlice = createSlice({
   name: 'pairSlice',
   initialState,
-  reducers: {
-    setFilter: (state, { payload }: PayloadAction<PairFilterForm>) => {
-      state.filter = payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getUserPairsThunk.pending, (state) => {
@@ -85,7 +72,5 @@ const pairSlice = createSlice({
       });
   },
 });
-
-export const { setFilter } = pairSlice.actions;
 
 export const pairReducer = pairSlice.reducer;

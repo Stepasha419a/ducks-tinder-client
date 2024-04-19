@@ -16,7 +16,11 @@ export interface PairInitialState {
   isPairsEnded: boolean;
   isPairsInfoLoading: boolean;
   pairsInfo: PairsInfo;
-  filter: PairFilterForm;
+}
+
+export interface GetUserPairsProps {
+  isInitial: boolean;
+  filter?: PairFilterForm;
 }
 
 export interface GetUserPairsThunkReturn {

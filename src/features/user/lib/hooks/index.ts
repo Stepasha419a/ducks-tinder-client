@@ -1,4 +1,5 @@
-export { usePairSorts } from './usePairSorts';
+export { usePairFilterForm } from './usePairFilterForm';
+export { useOuterPairFilterForm } from './useOuterPairFilterForm';
 export { useRateButtons } from './useRateButtons';
 export { useSwipeProps } from './useSwipeProps';
 export { useKeyboardEvents } from './useKeyboardEvents';

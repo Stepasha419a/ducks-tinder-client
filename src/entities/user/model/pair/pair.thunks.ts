@@ -3,15 +3,18 @@ import { PAGINATION_TAKE } from '@/shared/lib/constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
+import type { GetUserPairsProps } from './pair.interface';
 
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
-  async (isInitial: boolean, { rejectWithValue, getState }) => {
+  async (
+    { isInitial, filter }: GetUserPairsProps,
+    { rejectWithValue, getState }
+  ) => {
     try {
       const {
         pair: {
           pairs: { length },
-          filter,
         },
       } = getState() as RootState;
 
@@ -19,16 +22,16 @@ export const getUserPairsThunk = createAsyncThunk(
         skip: isInitial ? 0 : length,
         take: PAGINATION_TAKE,
 
-        ageFrom: filter.age.from,
-        ageTo: filter.age.to,
-        distance: filter.distance,
-        interests: filter.interests,
-        pictures: filter.pictures,
+        ageFrom: filter?.age.from,
+        ageTo: filter?.age.to,
+        distance: filter?.distance,
+        interests: filter?.interests,
+        pictures: filter?.pictures,
       };
-      if (filter.hasInterests) {
+      if (filter?.hasInterests) {
         params.hasInterests = filter.hasInterests;
       }
-      if (filter.identifyConfirmed) {
+      if (filter?.identifyConfirmed) {
         params.identifyConfirmed = filter.identifyConfirmed;
       }
 

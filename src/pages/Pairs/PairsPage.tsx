@@ -1,11 +1,10 @@
 import type { FC, ReactElement } from 'react';
 import { LikesCount } from '@entities/user/components';
-import { Pairs, SortPairs } from '@widgets';
+import { Pairs } from '@widgets';
 
 const PairsPage: FC = (): ReactElement => (
   <>
     <LikesCount />
-    <SortPairs />
     <Pairs />
   </>
 );

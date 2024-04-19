@@ -2,7 +2,7 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import { Popup } from '@shared/ui';
 import { ItemsSettingPopup } from '@entities/user/components';
-import { usePairSorts } from '../lib';
+import { usePairFilterForm } from '../lib';
 import {
   AgeSetting,
   Buttons,
@@ -11,33 +11,38 @@ import {
   InterestsSetting,
   PicturesSetting,
 } from './components';
-import styles from './PairsSortPopup.module.scss';
+import styles from './PairsFilterPopup.module.scss';
 import { INTERESTS } from '@/shared/api/constant';
+import type { PairFilterForm } from '@/entities/user/model/pair';
+import type { Control, UseFormReset } from 'react-hook-form';
 
-interface PairsSortPopupProps {
+interface PairsFilterPopupProps {
   setIsSortPopupOpen: Dispatch<SetStateAction<boolean>>;
+  control: Control<PairFilterForm>;
+  handleSubmit: () => void;
+  handleReset: UseFormReset<PairFilterForm>;
 }
 
-export const PairsSortPopup: FC<PairsSortPopupProps> = ({
+export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
   setIsSortPopupOpen,
+  control,
+  handleReset,
+  handleSubmit,
 }) => {
   const {
-    control,
-    submitHandler,
     interests,
     toggleInterest,
-    handleReset,
     toggleHasInterests,
     toggleIdentifyConfirmed,
     hasInterests,
     identifyConfirmed,
-  } = usePairSorts();
+  } = usePairFilterForm(control);
 
   const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
     useState(false);
 
-  const handleSubmit = () => {
-    submitHandler();
+  const submitHandler = () => {
+    handleSubmit();
     setIsSortPopupOpen(false);
   };
 
@@ -45,10 +50,10 @@ export const PairsSortPopup: FC<PairsSortPopupProps> = ({
     <>
       <Popup
         title="Likes filter"
-        closeHandler={handleSubmit}
+        closeHandler={submitHandler}
         extraClassName={styles.popup}
       >
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={submitHandler}>
           <DistanceSetting control={control} />
           <AgeSetting control={control} />
           <PicturesSetting control={control} />

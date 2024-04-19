@@ -4,7 +4,7 @@ import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import { createEmptyArray } from '@shared/helpers';
 import { ListItem } from '@shared/ui';
-import styles from '../PairsSortPopup.module.scss';
+import styles from '../PairsFilterPopup.module.scss';
 import type { PairFilterForm } from '@/entities/user/model/pair';
 
 interface PicturesSettingProps {

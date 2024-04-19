@@ -2,20 +2,26 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ListItem } from '@shared/ui';
-import { usePairSorts } from '../lib';
+import { useOuterPairFilterForm } from '../lib';
 import styles from './SortPairsItems.module.scss';
 import { useMediaQuery } from '@shared/lib/hooks';
 import { SortPairsItemsMobile } from './mobile/SortPairsItems.mobile';
 import { INTERESTS_FOR_LOOP } from '@/entities/user/lib';
+import type { PairFilterForm } from '@/entities/user/model/pair';
+import type { Control } from 'react-hook-form';
 
 interface SortPairsItemsProps {
   isSortPopupOpen: boolean;
   setIsSortPopupOpen: Dispatch<SetStateAction<boolean>>;
+  control: Control<PairFilterForm>;
+  handleSubmit: () => void;
 }
 
 export const SortPairsItems: FC<SortPairsItemsProps> = ({
   isSortPopupOpen,
   setIsSortPopupOpen,
+  control,
+  handleSubmit,
 }) => {
   const isSmallMobile = useMediaQuery('(max-width: 600px)');
 
@@ -24,7 +30,7 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
     forcedToggleHasInterests,
     interests,
     forcedToggleInterest,
-  } = usePairSorts();
+  } = useOuterPairFilterForm(control, handleSubmit);
 
   if (isSmallMobile) {
     return (

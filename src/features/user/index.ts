@@ -2,7 +2,7 @@ export { RatePairPopup } from './RatePairPopup/RatePairPopup';
 export { SortPairsItems } from './SortPairsItems/SortPairsItems';
 export { PicturesDND } from './PicturesDND/PicturesDND';
 export { UploadImagePopups } from './UploadImagePopups/UploadImagePopups';
-export { PairsSortPopup } from './PairsSortPopup/PairsSortPopup';
+export { PairsFilterPopup } from './PairsFilterPopup/PairsFilterPopup';
 export { ProfileSubmit } from './ProfileSubmit/ProfileSubmit';
 export { LoginForm } from './LoginForm/LoginForm';
 export { RegistrationForm } from './RegistrationForm/RegistrationForm';
