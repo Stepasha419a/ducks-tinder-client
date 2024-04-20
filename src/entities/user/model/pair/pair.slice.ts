@@ -29,9 +29,23 @@ const pairSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getUserPairsThunk.pending, (state) => {
-        state.isPairsLoading = true;
-      })
+      .addCase(
+        getUserPairsThunk.pending,
+        (
+          state,
+          {
+            meta: {
+              arg: { isInitial },
+            },
+          }
+        ) => {
+          if (isInitial) {
+            state.pairs = [];
+            state.isPairsEnded = false;
+          }
+          state.isPairsLoading = true;
+        }
+      )
       .addCase(
         getUserPairsThunk.fulfilled,
         (state, { payload }: PayloadAction<GetUserPairsThunkReturn>) => {
