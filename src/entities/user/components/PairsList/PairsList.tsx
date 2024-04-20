@@ -1,7 +1,10 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHeart,
+  faMagnifyingGlassMinus,
+} from '@fortawesome/free-solid-svg-icons';
 import {
   useAppDispatch,
   useAppSelector,
@@ -22,6 +25,10 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
   const pairs = useAppSelector((state) => state.pair.pairs);
+  const pairsInfoCount = useAppSelector((state) => state.pair.pairsInfo.count);
+  const isPairsInfoLoading = useAppSelector(
+    (state) => state.pair.isPairsInfoLoading
+  );
   const isPairsLoading = useAppSelector((state) => state.pair.isPairsLoading);
   const isPairsEnded = useAppSelector((state) => state.pair.isPairsEnded);
 
@@ -31,11 +38,23 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
     dispatch(getUserPairsThunk({ isInitial: false }));
   });
 
-  if (!pairs.length && isPairsEnded) {
+  if (!pairsInfoCount && !isPairsInfoLoading) {
     return (
       <div className={styles.noPairs}>
         <FontAwesomeIcon icon={faHeart} className={styles.icon} />
         <div>You don't have likes. Like someone to have a like too</div>
+      </div>
+    );
+  }
+
+  if (!pairs.length && isPairsEnded) {
+    return (
+      <div className={styles.noPairs}>
+        <FontAwesomeIcon
+          icon={faMagnifyingGlassMinus}
+          className={styles.icon}
+        />
+        <div>There is no any suitable pair. Try to change settings</div>
       </div>
     );
   }
