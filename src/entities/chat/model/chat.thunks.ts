@@ -6,7 +6,6 @@ import type {
 import { chatService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
-import type { ReceivedChatBlock, ReceivedMessage } from './chat.interfaces';
 import {
   blockChat,
   deleteChat,
@@ -17,7 +16,12 @@ import {
 } from './chat.slice';
 import { checkAuthThunk } from '@/entities/user/model/auth';
 import { PAGINATION_TAKE } from '@/shared/lib/constants';
-import type { Message } from '@/shared/api/interfaces';
+import type {
+  Message,
+  ReceivedChatBlock,
+  ReceivedMessage,
+  ReceivedNewMessage,
+} from '@/shared/api/interfaces';
 
 export const getChatThunk = createAsyncThunk(
   'chat/getChat',
@@ -80,7 +84,7 @@ export const connectChatsThunk = createAsyncThunk(
         }
       });
 
-      socket.on('send-message', (data: ReceivedMessage) => {
+      socket.on('send-message', (data: ReceivedNewMessage) => {
         dispatch(pushNewMessage(data));
       });
 

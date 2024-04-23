@@ -1,11 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { Chat, ShortUser } from '@shared/api/interfaces';
 import type {
+  Chat,
   ReceivedChatBlock,
-  ChatInitialState,
   ReceivedMessage,
-} from './chat.interfaces';
+  ReceivedNewMessage,
+  ShortUser,
+} from '@shared/api/interfaces';
+import type { ChatInitialState } from './chat.interfaces';
 import {
   getChatsThunk,
   disconnectChatThunk,
@@ -46,12 +48,18 @@ const chatSlice = createSlice({
       state.isNotFound = false;
 
       const chat = state.chats.find((item) => item.id === payload);
-      if (chat) {
+      if (chat?.newMessagesCount) {
         chat.newMessagesCount = 0;
+        if (state.newMessagesCount) {
+          state.newMessagesCount--;
+        }
       }
     },
-    pushNewMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
-      const { chatId, ...message } = payload;
+    pushNewMessage: (state, { payload }: PayloadAction<ReceivedNewMessage>) => {
+      const {
+        message: { chatId, ...message },
+        newMessagesCount,
+      } = payload;
 
       const existingChatIndex = state.chats.findIndex(
         (item) => item.id === chatId
@@ -60,7 +68,7 @@ const chatSlice = createSlice({
         state.chats.unshift(state.chats.splice(existingChatIndex, 1)[0]);
 
         state.chats[0].lastMessage = message;
-        state.chats[0].newMessagesCount++;
+        state.chats[0].newMessagesCount = newMessagesCount;
       } else {
         state.chats.unshift({
           avatar: message.avatar,
@@ -68,6 +76,7 @@ const chatSlice = createSlice({
           name: message.name,
           memberId: message.userId,
           lastMessage: message,
+          newMessagesCount,
         } as Chat);
       }
 
@@ -76,12 +85,18 @@ const chatSlice = createSlice({
       if (isActiveChat && isFirstChat) {
         state.chats[0].lastSeenAt = message.createdAt;
         state.messages.push(message);
+
+        state.chats[0].newMessagesCount = 0;
       } else {
         const messageText =
           message.text.length > 20
             ? `${message.text.slice(0, 20)}...`
             : message.text;
         toast(`${message.name}: ${messageText}`);
+
+        if (newMessagesCount === 1 && state.newMessagesCount !== null) {
+          state.newMessagesCount++;
+        }
       }
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
@@ -153,6 +168,14 @@ const chatSlice = createSlice({
         (state, { payload }: PayloadAction<Chat>) => {
           state.chat = payload;
           state.isChatLoading = false;
+
+          if (
+            payload.newMessagesCount &&
+            state.newMessagesCount &&
+            state.newMessagesCount > 0
+          ) {
+            state.newMessagesCount--;
+          }
         }
       )
       .addCase(getChatsThunk.pending, (state) => {

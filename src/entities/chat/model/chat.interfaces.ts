@@ -15,9 +15,3 @@ export interface ChatInitialState {
   currentChatId: string | null;
   chatMember: ShortUser | null;
 }
-
-export interface ReceivedMessage extends Message {
-  chatId: string;
-}
-
-export type ReceivedChatBlock = Pick<Chat, 'id' | 'blocked' | 'blockedById'>;

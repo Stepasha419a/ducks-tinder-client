@@ -30,3 +30,14 @@ export interface RepliedMessage {
   text: string;
   userId: string;
 }
+
+export interface ReceivedMessage extends Message {
+  chatId: string;
+}
+
+export interface ReceivedNewMessage {
+  message: ReceivedMessage;
+  newMessagesCount: number;
+}
+
+export type ReceivedChatBlock = Pick<Chat, 'id' | 'blocked' | 'blockedById'>;
