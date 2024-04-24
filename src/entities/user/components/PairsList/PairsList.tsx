@@ -25,7 +25,7 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   const dispatch = useAppDispatch();
 
   const pairs = useAppSelector((state) => state.pair.pairs);
-  const pairsInfoCount = useAppSelector((state) => state.pair.pairsInfo.count);
+  const pairsInfoCount = useAppSelector((state) => state.pair.pairsInfo?.count);
   const isPairsInfoLoading = useAppSelector(
     (state) => state.pair.isPairsInfoLoading
   );

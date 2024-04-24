@@ -3,20 +3,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { makeImageUrl } from '@shared/helpers';
 import styles from './PairLink.module.scss';
-import { useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { FailedPair, Loading } from './components';
+import { getPairsInfoThunk } from '@/entities/user/model/pair';
+import { useEffect } from 'react';
 
 export const PairLink = () => {
+  const dispatch = useAppDispatch();
+
   const pairsInfo = useAppSelector((state) => state.pair.pairsInfo);
   const isPairsInfoLoading = useAppSelector(
     (state) => state.pair.isPairsInfoLoading
   );
 
+  useEffect(() => {
+    if (!pairsInfo) {
+      dispatch(getPairsInfoThunk());
+    }
+  }, [dispatch, pairsInfo]);
+
   if (isPairsInfoLoading) {
     return <Loading />;
   }
 
-  if (!pairsInfo.count) {
+  if (!pairsInfo) {
     return <FailedPair />;
   }
 

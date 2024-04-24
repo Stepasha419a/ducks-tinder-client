@@ -81,7 +81,3 @@ export const mixUserPicturesThunk = createAsyncThunk(
     }
   }
 );
-
-// 0 1 2
-// 1 2 0
-// 2 0 1

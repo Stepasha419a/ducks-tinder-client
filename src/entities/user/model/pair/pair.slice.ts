@@ -11,16 +11,14 @@ import {
   refusePairThunk,
 } from './pair.thunks';
 import { PAGINATION_TAKE } from '@/shared/lib/constants';
+import type { PairsInfo } from '@/shared/api/services/user/user-service.interface';
 
 const initialState: PairInitialState = {
   pairs: [],
   isPairsLoading: false,
   isPairsEnded: false,
   isPairsInfoLoading: true,
-  pairsInfo: {
-    count: 0,
-    picture: null,
-  },
+  pairsInfo: null,
 };
 
 const pairSlice = createSlice({
@@ -66,24 +64,33 @@ const pairSlice = createSlice({
       .addCase(
         acceptPairThunk.fulfilled,
         (state, { payload: pairId }: PayloadAction<string>) => {
-          state.pairsInfo.count--;
+          if (state.pairsInfo !== null) {
+            state.pairsInfo.count--;
+          }
+
           state.pairs = state.pairs.filter((pair) => pair.id !== pairId);
         }
       )
       .addCase(
         refusePairThunk.fulfilled,
         (state, { payload: pairId }: PayloadAction<string>) => {
-          state.pairsInfo.count--;
+          if (state.pairsInfo !== null) {
+            state.pairsInfo.count--;
+          }
+
           state.pairs = state.pairs.filter((pair) => pair.id !== pairId);
         }
       )
       .addCase(getPairsInfoThunk.pending, (state) => {
         state.isPairsInfoLoading = true;
       })
-      .addCase(getPairsInfoThunk.fulfilled, (state, { payload }) => {
-        state.pairsInfo = payload;
-        state.isPairsInfoLoading = false;
-      });
+      .addCase(
+        getPairsInfoThunk.fulfilled,
+        (state, { payload }: PayloadAction<PairsInfo>) => {
+          state.pairsInfo = payload;
+          state.isPairsInfoLoading = false;
+        }
+      );
   },
 });
 

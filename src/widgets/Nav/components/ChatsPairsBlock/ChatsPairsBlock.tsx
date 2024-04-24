@@ -8,21 +8,14 @@ import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
 import { getIsChatPage } from '@entities/chat/lib';
 import { ChatList } from '@entities/chat/components';
 import styles from './ChatsPairsBlock.module.scss';
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks';
-import { getPairsInfoThunk } from '@/entities/user/model/pair';
+import { useAppSelector } from '@/shared/lib/hooks';
 
 export const ChatsPairsBlock: FC = () => {
   const { pathname } = useLocation();
 
-  const dispatch = useAppDispatch();
-
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
-
-  useEffect(() => {
-    dispatch(getPairsInfoThunk());
-  }, [dispatch]);
 
   useEffect(() => {
     setIsPairsOpened(!getIsChatPage(pathname));

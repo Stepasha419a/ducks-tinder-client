@@ -15,7 +15,7 @@ export interface PairInitialState {
   isPairsLoading: boolean;
   isPairsEnded: boolean;
   isPairsInfoLoading: boolean;
-  pairsInfo: PairsInfo;
+  pairsInfo: PairsInfo | null;
 }
 
 export interface GetUserPairsProps {
