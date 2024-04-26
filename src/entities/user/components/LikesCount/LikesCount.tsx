@@ -18,8 +18,8 @@ export const LikesCount: FC = (): ReactElement => {
           icon={faHeartCircleExclamation}
           className={styles.icon}
         />
-        <Skeleton height={25} width={20} />
-        &nbsp;likes
+        <Skeleton className={styles.loading} height={25} width={20} />
+        likes
       </div>
     );
   }
