@@ -48,7 +48,11 @@ export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
   return (
     <div className={styles.profile}>
       <div onClick={handleOpen} className={styles.user}>
-        <Avatar size="m" fullUrl={chat.avatar} extraClassName={styles.avatar} />
+        <Avatar
+          size="m"
+          avatarUrl={chat.avatar}
+          extraClassName={styles.avatar}
+        />
         <div className={styles.name}>{chat.name}</div>
       </div>
     </div>

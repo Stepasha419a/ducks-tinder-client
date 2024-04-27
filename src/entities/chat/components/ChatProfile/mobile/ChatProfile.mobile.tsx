@@ -36,7 +36,11 @@ export const ChatProfileMobile: FC<ChatProfileProps> = ({ handleOpen }) => {
         <FontAwesomeIcon className={styles.icon} icon={faAngleLeft} />
       </Link>
       <div onClick={handleOpen} className={styles.user}>
-        <Avatar size="m" fullUrl={chat.avatar} extraClassName={styles.avatar} />
+        <Avatar
+          size="m"
+          avatarUrl={chat.avatar}
+          extraClassName={styles.avatar}
+        />
         <div className={styles.name}>{chat.name}</div>
       </div>
     </div>

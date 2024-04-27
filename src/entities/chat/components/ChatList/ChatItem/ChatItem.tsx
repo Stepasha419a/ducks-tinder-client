@@ -32,7 +32,7 @@ export const ChatItem: FC<ChatInterface> = ({
       to={chatLink}
       className={classNames(styles.item, isActive && styles.active)}
     >
-      <Avatar size="m" fullUrl={chat.avatar} />
+      <Avatar size="m" avatarUrl={chat.avatar} />
       <div className={styles.descr}>
         <div className={styles.name}>{chat.name}</div>
         <div className={styles.message}>

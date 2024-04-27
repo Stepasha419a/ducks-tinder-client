@@ -1,7 +1,7 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { Reorder } from 'framer-motion';
 import type { Picture } from '@shared/api/interfaces';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { deleteUserPictureThunk } from '@/entities/user/model/user';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
@@ -19,8 +19,6 @@ export const PicturesDND: FC<PicturesDNDProps> = ({
   handleOpenUpload,
 }) => {
   const dispatch = useAppDispatch();
-
-  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
   const handleDeletePicture = (id: string): void => {
     dispatch(deleteUserPictureThunk(id));
@@ -40,7 +38,7 @@ export const PicturesDND: FC<PicturesDNDProps> = ({
             buttonHandler={() => handleDeletePicture(picture.id)}
             handler={handleOpenUpload}
             picture={picture}
-            src={makeImageUrl(currentUserId, picture.name)}
+            src={makeImageUrl(picture.name)}
           />
         );
       })}

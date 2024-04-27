@@ -19,8 +19,7 @@ interface UserLinksProps {
 }
 
 export const UserLinks: FC<UserLinksProps> = memo(({ isProfilePage }) => {
-  const { avatarName, currentUserId, currentUserName } =
-    useAppSelector(selectAvatar);
+  const { avatarName, currentUserName } = useAppSelector(selectAvatar);
 
   return (
     <div className={styles.links}>
@@ -49,7 +48,7 @@ export const UserLinks: FC<UserLinksProps> = memo(({ isProfilePage }) => {
               className={classNames(styles.mainLink, styles.person)}
               to="/profile"
             >
-              <Avatar userId={currentUserId} avatarUrl={avatarName} />
+              <Avatar avatarUrl={avatarName} />
               <div className={styles.name}>{currentUserName}</div>
             </Link>
           </motion.div>

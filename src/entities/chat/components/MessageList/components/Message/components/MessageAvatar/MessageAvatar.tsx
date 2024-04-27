@@ -7,8 +7,6 @@ interface MessageAvatarProps {
   avatar?: string;
 }
 
-export const MessageAvatar: FC<MessageAvatarProps> = ({ userId, avatar }) => {
-  return (
-    <Avatar userId={userId} fullUrl={avatar} extraClassName={styles.avatar} />
-  );
+export const MessageAvatar: FC<MessageAvatarProps> = ({ avatar }) => {
+  return <Avatar avatarUrl={avatar} extraClassName={styles.avatar} />;
 };

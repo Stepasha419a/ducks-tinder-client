@@ -13,7 +13,7 @@ const Pair: FC<PairPropsInterface> = ({ user, setCurrentPair }) => {
     return <div>loading...</div>;
   }
 
-  const imageUrl = makeImageUrl(user.id, user.pictures[0]?.name);
+  const imageUrl = makeImageUrl(user.pictures[0]?.name);
 
   return (
     <div onClick={setCurrentPair} className={styles.pair}>

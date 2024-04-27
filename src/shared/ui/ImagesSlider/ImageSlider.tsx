@@ -97,7 +97,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
           return (
             <div key={image.id}>
               <img
-                src={makeImageUrl(userId, image.name)}
+                src={makeImageUrl(image.name)}
                 alt="imagesSlider"
                 onError={showDefaultImage}
                 onLoad={handleFinishLoading}

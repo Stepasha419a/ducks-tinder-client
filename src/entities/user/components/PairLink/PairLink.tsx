@@ -32,7 +32,7 @@ export const PairLink = () => {
 
   const picture = pairsInfo.picture;
 
-  const imageUrl = makeImageUrl(picture?.userId, picture?.name);
+  const imageUrl = makeImageUrl(picture?.name);
 
   return (
     <div className={styles.pairs}>

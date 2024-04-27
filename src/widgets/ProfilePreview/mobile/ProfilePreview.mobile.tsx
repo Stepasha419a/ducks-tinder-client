@@ -26,7 +26,6 @@ export const ProfilePreviewMobile = () => {
             <Link to={`${ROUTES.PROFILE}/edit`} className={styles.user}>
               <div className={styles.avatarWrapper}>
                 <Avatar
-                  userId={user.id}
                   avatarUrl={user.pictures[0]?.name}
                   size="xl"
                   extraClassName={styles.avatar}
