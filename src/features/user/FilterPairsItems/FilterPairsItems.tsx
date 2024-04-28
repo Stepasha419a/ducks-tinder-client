@@ -3,23 +3,22 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ListItem } from '@shared/ui';
 import { useOuterPairFilterForm } from '../lib';
-import styles from './SortPairsItems.module.scss';
+import styles from './FilterPairsItems.module.scss';
 import { useMediaQuery } from '@shared/lib/hooks';
-import { SortPairsItemsMobile } from './mobile/SortPairsItems.mobile';
 import { INTERESTS_FOR_LOOP } from '@/entities/user/lib';
 import type { PairFilterForm } from '@/entities/user/model/pair';
 import type { Control } from 'react-hook-form';
 
-interface SortPairsItemsProps {
-  isSortPopupOpen: boolean;
-  setIsSortPopupOpen: Dispatch<SetStateAction<boolean>>;
+interface FilterPairsItemsProps {
+  isFilterPopupOpen: boolean;
+  setIsFilterPopupOpen: Dispatch<SetStateAction<boolean>>;
   control: Control<PairFilterForm>;
   handleSubmit: () => void;
 }
 
-export const SortPairsItems: FC<SortPairsItemsProps> = ({
-  isSortPopupOpen,
-  setIsSortPopupOpen,
+export const FilterPairsItems: FC<FilterPairsItemsProps> = ({
+  isFilterPopupOpen,
+  setIsFilterPopupOpen,
   control,
   handleSubmit,
 }) => {
@@ -32,41 +31,31 @@ export const SortPairsItems: FC<SortPairsItemsProps> = ({
     forcedToggleInterest,
   } = useOuterPairFilterForm(control, handleSubmit);
 
-  if (isSmallMobile) {
-    return (
-      <SortPairsItemsMobile
-        isSortPopupOpen={isSortPopupOpen}
-        setIsSortPopupOpen={setIsSortPopupOpen}
-        hasInterests={hasInterests}
-        forcedHasInterests={forcedToggleHasInterests}
-      />
-    );
-  }
-
   return (
     <>
-      <div className={styles.sorting}>
+      <div className={styles.filtering}>
         <ListItem
-          onClick={() => setIsSortPopupOpen(true)}
+          onClick={() => setIsFilterPopupOpen(true)}
           pointer
-          isActive={isSortPopupOpen}
+          isActive={isFilterPopupOpen}
           extraClassName={styles.item}
         >
           <FontAwesomeIcon className={styles.icon} icon={faSliders} />
         </ListItem>
-        {INTERESTS_FOR_LOOP.map((item) => {
-          return (
-            <ListItem
-              onClick={() => forcedToggleInterest(item)}
-              pointer
-              isActive={interests.some((interest) => interest === item)}
-              extraClassName={styles.item}
-              key={item}
-            >
-              {item}
-            </ListItem>
-          );
-        })}
+        {!isSmallMobile &&
+          INTERESTS_FOR_LOOP.map((item) => {
+            return (
+              <ListItem
+                onClick={() => forcedToggleInterest(item)}
+                pointer
+                isActive={interests.some((interest) => interest === item)}
+                extraClassName={styles.item}
+                key={item}
+              >
+                {item}
+              </ListItem>
+            );
+          })}
         <ListItem
           onClick={forcedToggleHasInterests}
           pointer

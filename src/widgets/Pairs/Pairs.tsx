@@ -6,9 +6,9 @@ import {
 import type { ShortUser } from '@/shared/api/interfaces';
 import { useAppDispatch } from '@/shared/lib/hooks';
 import {
+  FilterPairsItems,
   PairsFilterPopup,
   RatePairPopup,
-  SortPairsItems,
 } from '@features/user';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,7 +26,7 @@ export const Pairs = () => {
   const dispatch = useAppDispatch();
 
   const [currentPair, setCurrentPair] = useState<ShortUser | null>(null);
-  const [isSortPopupOpen, setIsSortPopupOpen] = useState(false);
+  const [isFilterPopupOpen, setIsFilterPopupOpen] = useState(false);
   const { control, handleSubmit, reset } = useForm<PairFilterForm>({
     defaultValues: pairFilterFormDefaultValues,
   });
@@ -46,9 +46,9 @@ export const Pairs = () => {
 
   return (
     <>
-      <SortPairsItems
-        isSortPopupOpen={isSortPopupOpen}
-        setIsSortPopupOpen={setIsSortPopupOpen}
+      <FilterPairsItems
+        isFilterPopupOpen={isFilterPopupOpen}
+        setIsFilterPopupOpen={setIsFilterPopupOpen}
         control={control}
         handleSubmit={submitHandler}
       />
@@ -59,12 +59,12 @@ export const Pairs = () => {
           currentPair={currentPair}
         />
       )}
-      {isSortPopupOpen && (
+      {isFilterPopupOpen && (
         <PairsFilterPopup
           control={control}
           handleReset={handleReset}
           handleSubmit={submitHandler}
-          setIsSortPopupOpen={setIsSortPopupOpen}
+          setIsFilterPopupOpen={setIsFilterPopupOpen}
         />
       )}
     </>

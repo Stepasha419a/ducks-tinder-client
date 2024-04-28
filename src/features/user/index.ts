@@ -1,5 +1,5 @@
 export { RatePairPopup } from './RatePairPopup/RatePairPopup';
-export { SortPairsItems } from './SortPairsItems/SortPairsItems';
+export { FilterPairsItems } from './FilterPairsItems/FilterPairsItems';
 export { PicturesDND } from './PicturesDND/PicturesDND';
 export { UploadImagePopups } from './UploadImagePopups/UploadImagePopups';
 export { PairsFilterPopup } from './PairsFilterPopup/PairsFilterPopup';

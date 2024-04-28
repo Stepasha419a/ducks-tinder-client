@@ -17,14 +17,14 @@ import type { PairFilterForm } from '@/entities/user/model/pair';
 import type { Control, UseFormReset } from 'react-hook-form';
 
 interface PairsFilterPopupProps {
-  setIsSortPopupOpen: Dispatch<SetStateAction<boolean>>;
+  setIsFilterPopupOpen: Dispatch<SetStateAction<boolean>>;
   control: Control<PairFilterForm>;
   handleSubmit: () => void;
   handleReset: UseFormReset<PairFilterForm>;
 }
 
 export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
-  setIsSortPopupOpen,
+  setIsFilterPopupOpen,
   control,
   handleReset,
   handleSubmit,
@@ -43,7 +43,7 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
 
   const submitHandler = () => {
     handleSubmit();
-    setIsSortPopupOpen(false);
+    setIsFilterPopupOpen(false);
   };
 
   return (

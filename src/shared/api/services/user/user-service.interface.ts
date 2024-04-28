@@ -29,17 +29,6 @@ export interface PartialUser {
   trainingAttitude?: string;
 }
 
-export interface QuerySorts {
-  distance: number;
-  onlyNear: boolean;
-  age: number;
-  preferAgeFrom: number;
-  preferAgeTo: number;
-  sex: 'male' | 'female';
-  preferSex: 'male' | 'female';
-  userIds?: string[];
-}
-
 export interface PairFilterParams extends PaginationParams {
   distance?: number;
   ageFrom?: number;
