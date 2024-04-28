@@ -7,9 +7,9 @@ import type {
 } from './user-service.interface';
 
 export const userService = {
-  async getSortedUser() {
+  async getMatchUser() {
     return instance.get<ShortUser>(
-      `${import.meta.env.VITE_USER_SERVICE_URL}/user/sorted`
+      `${import.meta.env.VITE_USER_SERVICE_URL}/user/match`
     );
   },
 

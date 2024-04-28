@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 
-export const getSortedUserThunk = createAsyncThunk(
-  'users/getSortedUser',
+export const getMatchUserThunk = createAsyncThunk(
+  'users/getMatchUser',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await userService.getSortedUser();
+      const response = await userService.getMatchUser();
 
       return response.data;
     } catch (error: unknown) {
@@ -24,7 +24,7 @@ export const likeUserThunk = createAsyncThunk(
 
       if (tinderUser) {
         await userService.likeUser(tinderUser.id);
-        const response = await userService.getSortedUser();
+        const response = await userService.getMatchUser();
         return response.data;
       }
     } catch (error: unknown) {
@@ -60,7 +60,7 @@ export const dislikeUserThunk = createAsyncThunk(
 
       if (tinderUser) {
         await userService.dislikeUser(tinderUser.id);
-        const response = await userService.getSortedUser();
+        const response = await userService.getMatchUser();
         return response.data;
       }
     } catch (error: unknown) {

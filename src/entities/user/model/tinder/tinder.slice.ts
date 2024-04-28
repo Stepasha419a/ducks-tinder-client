@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { ShortUser } from '@shared/api/interfaces';
 import {
   dislikeUserThunk,
-  getSortedUserThunk,
+  getMatchUserThunk,
   likeUserThunk,
   returnUserThunk,
 } from './tinder.thunks';
@@ -28,17 +28,17 @@ const tinderSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getSortedUserThunk.pending, (state) => {
+      .addCase(getMatchUserThunk.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(
-        getSortedUserThunk.fulfilled,
+        getMatchUserThunk.fulfilled,
         (state, { payload }: PayloadAction<ShortUser>) => {
           state.tinderUser = payload;
           state.isLoading = false;
         }
       )
-      .addCase(getSortedUserThunk.rejected, (state) => {
+      .addCase(getMatchUserThunk.rejected, (state) => {
         state.isFailed = true;
       })
       .addCase(returnUserThunk.pending, (state) => {

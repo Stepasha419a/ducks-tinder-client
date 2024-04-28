@@ -11,7 +11,7 @@ import {
 } from '@shared/lib/hooks';
 import { Preview } from '@entities/user/components';
 import {
-  getSortedUserThunk,
+  getMatchUserThunk,
   selectTinderData,
 } from '@entities/user/model/tinder';
 import { useKeyboardEvents, useSwipeProps } from '../../user/lib';
@@ -43,7 +43,7 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
   const motionProps = useSwipeProps(controls, !isFullPreview);
 
   useEffect(() => {
-    dispatch(getSortedUserThunk());
+    dispatch(getMatchUserThunk());
   }, [dispatch]);
 
   if (!tinderUser || isLoading) {
