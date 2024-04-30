@@ -4,33 +4,37 @@ import { Places } from '@entities/user/components';
 import { updateUserPlaceThunk } from '@/entities/user/model/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import styles from './PlacesGeolocation.module.scss';
+import { getAreDifferentPlaces } from '../lib';
 
 export const PlacesGeolocation = () => {
   const dispatch = useAppDispatch();
 
   const place = useAppSelector((state) => state.user.currentUser!.place);
 
-  const handlePlaceUpdate = (pos: GeolocationPosition) => {
+  const handleGetCurrentPosition = (pos: GeolocationPosition) => {
     if (
-      pos.coords.longitude === place?.longitude &&
-      pos.coords.latitude === place.latitude
+      !place ||
+      getAreDifferentPlaces(
+        place.latitude,
+        place.longitude,
+        pos.coords.latitude,
+        pos.coords.longitude
+      )
     ) {
-      toast('Your position is remained unchanged');
+      dispatch(
+        updateUserPlaceThunk({
+          latitude: pos.coords.longitude,
+          longitude: pos.coords.latitude,
+        })
+      );
     } else {
-      if (!place) {
-        dispatch(
-          updateUserPlaceThunk({
-            latitude: pos.coords.longitude,
-            longitude: pos.coords.latitude,
-          })
-        );
-      }
+      toast('Your position is remained unchanged');
     }
   };
 
   const handlePlace = () => {
     navigator.geolocation.getCurrentPosition(
-      handlePlaceUpdate,
+      handleGetCurrentPosition,
       () => {
         toast(
           'Enable your geolocation, otherwise we wont be able to set your location'

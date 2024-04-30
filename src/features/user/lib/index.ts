@@ -11,4 +11,4 @@ export {
   useSelectFormControl,
 } from './hooks';
 export { WithAuthRedirect, WithCheckedFields } from './hocs';
-export { getProfileSettingWrapperData } from './helpers';
+export { getProfileSettingWrapperData, getAreDifferentPlaces } from './helpers';
