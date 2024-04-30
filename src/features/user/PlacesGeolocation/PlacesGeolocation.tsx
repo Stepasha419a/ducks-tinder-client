@@ -23,8 +23,8 @@ export const PlacesGeolocation = () => {
     ) {
       dispatch(
         updateUserPlaceThunk({
-          latitude: pos.coords.longitude,
-          longitude: pos.coords.latitude,
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
         })
       );
     } else {
