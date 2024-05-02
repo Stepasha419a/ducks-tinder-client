@@ -14,7 +14,7 @@ export const FoodPreferenceSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Food preference"
-      value={value}
+      value={value as string}
       isPointer
     />
   );

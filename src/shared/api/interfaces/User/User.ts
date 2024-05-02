@@ -1,19 +1,4 @@
-import type {
-  ALCOHOL_ATTITUDES,
-  ATTENTION_SIGNS,
-  CHILDREN_ATTITUDES,
-  CHRONOTYPES,
-  COMMUNICATION_STYLES,
-  EDUCATIONS,
-  FOOD_PREFERENCES,
-  INTERESTS,
-  PERSONAL_TYPES,
-  PETS,
-  SMOKING_ATTITUDES,
-  SOCIAL_NETWORK_ACTIVITIES,
-  TRAINING_ATTITUDES,
-  ZODIAC_SIGNS,
-} from '../../constant';
+import type { INTERESTS } from '../../constant';
 
 export type Range = { from: number; to: number };
 
@@ -43,8 +28,6 @@ export interface ShortPlace {
   name: string;
 }
 
-type OneOfOrNull<A extends ReadonlyArray<unknown>> = A[number] | null;
-
 export interface User {
   id: string;
   email: string;
@@ -61,19 +44,19 @@ export interface User {
   preferAgeTo: number | null;
 
   interests: (typeof INTERESTS)[number][];
-  zodiacSign: OneOfOrNull<typeof ZODIAC_SIGNS>;
-  education: OneOfOrNull<typeof EDUCATIONS>;
-  alcoholAttitude: OneOfOrNull<typeof ALCOHOL_ATTITUDES>;
-  chronotype: OneOfOrNull<typeof CHRONOTYPES>;
-  foodPreference: OneOfOrNull<typeof FOOD_PREFERENCES>;
-  pet: OneOfOrNull<typeof PETS>;
-  smokingAttitude: OneOfOrNull<typeof SMOKING_ATTITUDES>;
-  socialNetworksActivity: OneOfOrNull<typeof SOCIAL_NETWORK_ACTIVITIES>;
-  trainingAttitude: OneOfOrNull<typeof TRAINING_ATTITUDES>;
-  childrenAttitude: OneOfOrNull<typeof CHILDREN_ATTITUDES>;
-  personalityType: OneOfOrNull<typeof PERSONAL_TYPES>;
-  communicationStyle: OneOfOrNull<typeof COMMUNICATION_STYLES>;
-  attentionSign: OneOfOrNull<typeof ATTENTION_SIGNS>;
+  zodiacSign: ZodiacSign | null;
+  education: Education | null;
+  alcoholAttitude: AlcoholAttitude | null;
+  chronotype: Chronotype | null;
+  foodPreference: FoodPreference | null;
+  pet: Pet | null;
+  smokingAttitude: SmokingAttitude | null;
+  socialNetworksActivity: SocialNetworksActivity | null;
+  trainingAttitude: TrainingAttitude | null;
+  childrenAttitude: ChildrenAttitude | null;
+  personalityType: PersonalityType | null;
+  communicationStyle: CommunicationStyle | null;
+  attentionSign: AttentionSign | null;
 
   place: Place | null;
 
@@ -110,4 +93,139 @@ export interface ShortUser
 
 export interface ShortUserWithoutDistance extends Omit<ShortUser, 'distance'> {
   distance: never;
+}
+
+export enum AlcoholAttitude {
+  'Not for me',
+  'Sober',
+  'Sober curious',
+  'On special occasions',
+  'Socially on weekends',
+  'Most Nights',
+}
+
+export enum AttentionSign {
+  'Attention gestures',
+  'Gifts',
+  'Touches',
+  'Compliments',
+  'Time together',
+}
+
+export enum ChildrenAttitude {
+  'I want children',
+  'I do not want children',
+  'I have children and I want more',
+  'I have children, but I do not want any more',
+  'Do not know yet',
+}
+
+export enum Chronotype {
+  'Early bird',
+  'Night owl',
+  'In a spectrum',
+}
+
+export enum CommunicationStyle {
+  'Messaging a lot',
+  'Phone communication',
+  'Video chats',
+  'Do not like messaging',
+  'Meet in person',
+}
+
+export enum Education {
+  'Bachelor',
+  'College',
+  'Middle school',
+  'Doctor of sciences',
+  'Postgraduate',
+  'Magistracy',
+  'Technical school',
+}
+
+export enum FoodPreference {
+  'Vegan',
+  'Vegetarian',
+  'Pescatarian',
+  'Kosher',
+  'Halal',
+  'Carnivore',
+  'Omnivore',
+  'Other',
+}
+
+export enum PersonalityType {
+  'INTJ',
+  'INTP',
+  'ENTJ',
+  'ENTP',
+  'INFJ',
+  'INFP',
+  'ENFJ',
+  'ENFP',
+  'ISTJ',
+  'ISFJ',
+  'ESTJ',
+  'ESFJ',
+  'ISTP',
+  'ISFP',
+  'ESTP',
+  'Entertainer',
+}
+
+export enum Pet {
+  'Dog',
+  'Cat',
+  'Reptile',
+  'Amphibian',
+  'Bird',
+  'Fish',
+  'Other',
+  'Turtle',
+  'Hamster',
+  'Rabbit',
+  'Pet-free',
+  'All the pets',
+  'Want a pet',
+  'Allergic to pets',
+}
+
+export enum SmokingAttitude {
+  'Social smoker',
+  'Smoker when drinking',
+  'Non-smoker',
+  'Smoker',
+  'Trying to quit',
+}
+
+export enum SocialNetworksActivity {
+  'Influencer status',
+  'Socially active',
+  'Off the grid',
+  'Passive scroller',
+}
+
+export enum TrainingAttitude {
+  'Everyday',
+  'Often',
+  'Sometimes',
+  'Gym rat',
+  'Occasionally',
+  'Never',
+}
+
+export enum ZodiacSign {
+  'Aries',
+  'Taurus',
+  'Gemini',
+  'Cancer',
+  'Leo',
+  'Virgo',
+  'Libra',
+  'Scorpius',
+  'Sagittarius',
+  'Capricornus',
+  'Aquarius',
+  'Pisces',
 }

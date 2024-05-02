@@ -14,7 +14,7 @@ export const ChildrenAttitudeSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Children attitude"
-      value={value}
+      value={value as string}
       isPointer
       isOverflow
     />

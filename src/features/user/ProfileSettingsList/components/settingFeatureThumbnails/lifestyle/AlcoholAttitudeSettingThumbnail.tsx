@@ -11,6 +11,11 @@ export const AlcoholAttitudeSettingThumbnail = () => {
   const value = alcoholAttitude ? alcoholAttitude : 'Add';
 
   return (
-    <LinkSettingThumbnail url={url} title="Drinking" value={value} isPointer />
+    <LinkSettingThumbnail
+      url={url}
+      title="Drinking"
+      value={value as string}
+      isPointer
+    />
   );
 };

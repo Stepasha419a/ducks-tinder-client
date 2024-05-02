@@ -14,7 +14,7 @@ export const SocialNetworksActivitySettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Social media"
-      value={value}
+      value={value as string}
       isPointer
     />
   );

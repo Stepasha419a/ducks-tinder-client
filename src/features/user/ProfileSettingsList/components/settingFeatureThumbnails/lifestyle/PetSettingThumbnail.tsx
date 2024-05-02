@@ -9,6 +9,11 @@ export const PetSettingThumbnail = () => {
   const value = pet ? pet : 'Add';
 
   return (
-    <LinkSettingThumbnail url={url} title="Pets" value={value} isPointer />
+    <LinkSettingThumbnail
+      url={url}
+      title="Pets"
+      value={value as string}
+      isPointer
+    />
   );
 };

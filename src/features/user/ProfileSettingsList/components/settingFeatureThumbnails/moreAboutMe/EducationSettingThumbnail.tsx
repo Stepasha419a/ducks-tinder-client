@@ -11,6 +11,11 @@ export const EducationSettingThumbnail = () => {
   const value = education ? education : 'Add';
 
   return (
-    <LinkSettingThumbnail url={url} title="Education" value={value} isPointer />
+    <LinkSettingThumbnail
+      url={url}
+      title="Education"
+      value={value as string}
+      isPointer
+    />
   );
 };

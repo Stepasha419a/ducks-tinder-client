@@ -14,7 +14,7 @@ export const ChronotypeSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Chronotype"
-      value={value}
+      value={value as string}
       isPointer
     />
   );

@@ -9,5 +9,5 @@ export function getMoreAboutMe(user: User | ShortUser): string[] {
     user.communicationStyle,
     user.personalityType,
   ].filter((item) => item !== null);
-  return arr as string[];
+  return arr as unknown as string[];
 }

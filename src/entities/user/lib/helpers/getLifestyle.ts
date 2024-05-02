@@ -10,5 +10,5 @@ export function getLifestyle(user: User | ShortUser): string[] {
     user.socialNetworksActivity,
     user.trainingAttitude,
   ].filter((item) => item !== null);
-  return arr as string[];
+  return arr as unknown as string[];
 }

@@ -11,6 +11,11 @@ export const TrainingAttitudeSettingThumbnail = () => {
   const value = trainingAttitude ? trainingAttitude : 'Add';
 
   return (
-    <LinkSettingThumbnail url={url} title="Workout" value={value} isPointer />
+    <LinkSettingThumbnail
+      url={url}
+      title="Workout"
+      value={value as string}
+      isPointer
+    />
   );
 };

@@ -14,7 +14,7 @@ export const PersonalityTypeSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Personality type"
-      value={value}
+      value={value as string}
       isPointer
     />
   );

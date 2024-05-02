@@ -11,6 +11,11 @@ export const ZodiacSignSettingThumbnail = () => {
   const value = zodiacSign ? zodiacSign : 'Add';
 
   return (
-    <LinkSettingThumbnail url={url} title="Zodiac" value={value} isPointer />
+    <LinkSettingThumbnail
+      url={url}
+      title="Zodiac"
+      value={value as string}
+      isPointer
+    />
   );
 };

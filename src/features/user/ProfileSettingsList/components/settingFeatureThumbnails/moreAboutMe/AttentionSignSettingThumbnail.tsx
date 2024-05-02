@@ -14,7 +14,7 @@ export const AttentionSignSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Attention sign"
-      value={value}
+      value={value as string}
       isPointer
     />
   );

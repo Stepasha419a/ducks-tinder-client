@@ -14,7 +14,7 @@ export const CommunicationStyleSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title="Communication"
-      value={value}
+      value={value as string}
       isPointer
     />
   );
