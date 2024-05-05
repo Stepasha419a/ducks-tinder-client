@@ -1,4 +1,3 @@
-import { INTERESTS } from '@/shared/api/constant';
 import type { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 import {
   AlcoholAttitude,
@@ -8,6 +7,7 @@ import {
   CommunicationStyle,
   Education,
   FoodPreference,
+  Interest,
   PersonalityType,
   Pet,
   SmokingAttitude,
@@ -16,22 +16,19 @@ import {
   ZodiacSign,
 } from '@/shared/api/interfaces';
 
-export const SELECT_LISTS: Record<
-  ProfileSettingSelectNameEnum,
-  ReadonlyArray<string> | string[]
-> = {
-  interests: INTERESTS,
-  attentionSign: Object.values(AttentionSign) as string[],
-  childrenAttitude: Object.values(ChildrenAttitude) as string[],
-  communicationStyle: Object.values(CommunicationStyle) as string[],
-  education: Object.values(Education) as string[],
-  personalityType: Object.values(PersonalityType) as string[],
-  zodiacSign: Object.values(ZodiacSign) as string[],
-  pet: Object.values(Pet) as string[],
-  alcoholAttitude: Object.values(AlcoholAttitude) as string[],
-  smokingAttitude: Object.values(SmokingAttitude) as string[],
-  trainingAttitude: Object.values(TrainingAttitude) as string[],
-  foodPreference: Object.values(FoodPreference) as string[],
-  socialNetworksActivity: Object.values(SocialNetworksActivity) as string[],
-  chronotype: Object.values(Chronotype) as string[],
+export const SELECT_LISTS: Record<ProfileSettingSelectNameEnum, string[]> = {
+  interests: Object.values(Interest),
+  attentionSign: Object.values(AttentionSign),
+  childrenAttitude: Object.values(ChildrenAttitude),
+  communicationStyle: Object.values(CommunicationStyle),
+  education: Object.values(Education),
+  personalityType: Object.values(PersonalityType),
+  zodiacSign: Object.values(ZodiacSign),
+  pet: Object.values(Pet),
+  alcoholAttitude: Object.values(AlcoholAttitude),
+  smokingAttitude: Object.values(SmokingAttitude),
+  trainingAttitude: Object.values(TrainingAttitude),
+  foodPreference: Object.values(FoodPreference),
+  socialNetworksActivity: Object.values(SocialNetworksActivity),
+  chronotype: Object.values(Chronotype),
 };

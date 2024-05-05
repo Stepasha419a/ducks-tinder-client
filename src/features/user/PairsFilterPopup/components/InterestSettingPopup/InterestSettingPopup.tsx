@@ -1,27 +1,23 @@
 import type { FC } from 'react';
 import { Button, ListItem, Popup } from '@shared/ui';
-import styles from './ItemsSettingPopup.module.scss';
+import styles from './InterestSettingPopup.module.scss';
+import { Interest } from '@/shared/api/interfaces';
 
-interface ItemsSettingPopupProps {
-  list: string[] | ReadonlyArray<string>;
+interface InterestSettingPopupProps {
   activeItems: string[];
   toggleItem: (item: string) => void;
-  setIsItemsSettingPopupOpen: (setting: boolean) => void;
+  handleClose: () => void;
 }
 
-export const ItemsSettingPopup: FC<ItemsSettingPopupProps> = ({
-  list,
+export const InterestSettingPopup: FC<InterestSettingPopupProps> = ({
   activeItems,
   toggleItem,
-  setIsItemsSettingPopupOpen,
+  handleClose,
 }) => {
   return (
-    <Popup
-      title="Interests"
-      closeHandler={() => setIsItemsSettingPopupOpen(false)}
-    >
+    <Popup title="Interests" closeHandler={handleClose}>
       <div className={styles.items}>
-        {list.map((selectItem) => {
+        {Object.values(Interest).map((selectItem) => {
           const isActive = activeItems.some((item) => selectItem === item);
           return (
             <ListItem
@@ -35,10 +31,7 @@ export const ItemsSettingPopup: FC<ItemsSettingPopupProps> = ({
           );
         })}
       </div>
-      <Button
-        extraClassName={styles.btn}
-        onClick={() => setIsItemsSettingPopupOpen(false)}
-      >
+      <Button extraClassName={styles.btn} onClick={handleClose}>
         Confirm
       </Button>
     </Popup>

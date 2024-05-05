@@ -8,7 +8,6 @@ export { Map } from './Map/Map';
 export { Loading } from './Loading/Loading';
 export { AuthLayout } from './AuthLayout/AuthLayout';
 export { SettingsGroup } from './SettingsGroup/SettingsGroup';
-export { ItemsSettingPopup } from './ItemsSettingPopup/ItemsSettingPopup';
 export { NotFoundSetting } from './NotFoundSetting/NotFoundSetting';
 export {
   LinkSettingThumbnail,

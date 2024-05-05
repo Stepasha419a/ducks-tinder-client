@@ -1,7 +1,6 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import { Popup } from '@shared/ui';
-import { ItemsSettingPopup } from '@entities/user/components';
 import { usePairFilterForm } from '../lib';
 import {
   AgeSetting,
@@ -10,9 +9,9 @@ import {
   DistanceSetting,
   InterestsSetting,
   PicturesSetting,
+  InterestSettingPopup,
 } from './components';
 import styles from './PairsFilterPopup.module.scss';
-import { INTERESTS } from '@/shared/api/constant';
 import type { PairFilterForm } from '@/entities/user/model/pair';
 import type { Control, UseFormReset } from 'react-hook-form';
 
@@ -46,6 +45,10 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
     setIsFilterPopupOpen(false);
   };
 
+  const handleCloseInterestSettingPopup = () => {
+    setIsInterestsSettingPopupOpen(false);
+  };
+
   return (
     <>
       <Popup
@@ -72,11 +75,10 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
         </form>
       </Popup>
       {isInterestsSettingPopupOpen && (
-        <ItemsSettingPopup
-          list={INTERESTS}
+        <InterestSettingPopup
           activeItems={interests}
           toggleItem={toggleInterest}
-          setIsItemsSettingPopupOpen={setIsInterestsSettingPopupOpen}
+          handleClose={handleCloseInterestSettingPopup}
         />
       )}
     </>
