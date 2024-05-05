@@ -26,7 +26,7 @@ export const PairLink = () => {
     return <Loading />;
   }
 
-  if (!pairsInfo) {
+  if (!pairsInfo?.count) {
     return <FailedPair />;
   }
 

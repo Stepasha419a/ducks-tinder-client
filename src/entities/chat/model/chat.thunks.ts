@@ -46,7 +46,7 @@ export const getChatsThunk = createAsyncThunk(
 
       const params: PaginationParams = {
         skip: chats.length,
-        take: 1,
+        take: PAGINATION_TAKE,
       };
 
       if (chats.length > 0) {
