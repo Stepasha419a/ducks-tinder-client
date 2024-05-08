@@ -22,6 +22,7 @@ import type {
   ReceivedMessage,
   ReceivedNewMessage,
 } from '@/shared/api/interfaces';
+import { ChatSocketEvent } from '@/shared/api/services/chat/chat-service.interface';
 
 export const getChatThunk = createAsyncThunk(
   'chat/getChat',
@@ -66,9 +67,9 @@ export const connectChatsThunk = createAsyncThunk(
   'chat/connectChats',
   (_, { rejectWithValue, dispatch }) => {
     try {
-      const socket = chatService.connect();
+      const { on, onAny } = chatService.connect();
 
-      socket.onAny((event: string, ...errors: unknown[]) => {
+      onAny((event: string, ...errors: unknown[]) => {
         if (event === 'exception' && (errors[0] as WsExceptionError).message) {
           switch ((errors[0] as WsExceptionError).message) {
             case 'Unauthorized':
@@ -84,27 +85,27 @@ export const connectChatsThunk = createAsyncThunk(
         }
       });
 
-      socket.on('send-message', (data: ReceivedNewMessage) => {
+      on(ChatSocketEvent.SendMessage, (data: ReceivedNewMessage) => {
         dispatch(pushNewMessage(data));
       });
 
-      socket.on('edit-message', (data: ReceivedMessage) => {
+      on(ChatSocketEvent.EditMessage, (data: ReceivedMessage) => {
         dispatch(editMessage(data));
       });
 
-      socket.on('delete-message', (data: ReceivedMessage) => {
+      on(ChatSocketEvent.DeleteMessage, (data: ReceivedMessage) => {
         dispatch(deleteMessage(data));
       });
 
-      socket.on('block-chat', (data: ReceivedChatBlock) => {
+      on(ChatSocketEvent.BlockChat, (data: ReceivedChatBlock) => {
         dispatch(blockChat(data));
       });
 
-      socket.on('unblock-chat', (data: ReceivedChatBlock) => {
+      on(ChatSocketEvent.UnblockChat, (data: ReceivedChatBlock) => {
         dispatch(unblockChat(data));
       });
 
-      socket.on('delete-chat', (deletedChatId: string) => {
+      on(ChatSocketEvent.DeleteChat, (deletedChatId: string) => {
         dispatch(deleteChat(deletedChatId));
       });
     } catch (error: unknown) {
@@ -119,9 +120,9 @@ export const connectChatThunk = createAsyncThunk(
     try {
       const { chatId } = args;
 
-      const socket = chatService.connectChat(chatId);
+      const socketReturn = chatService.connectChat(chatId);
 
-      socket.once('connect-chat', () => {
+      socketReturn?.once('connect-chat', () => {
         dispatch(setCurrentChatData(chatId));
       });
     } catch (error: unknown) {

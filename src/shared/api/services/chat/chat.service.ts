@@ -1,8 +1,11 @@
-import type { Socket } from 'socket.io-client';
 import { instance } from '@shared/api';
 import type { Chat, ShortUser } from '@shared/api/interfaces';
 import { chatSocket } from './chat.socket';
-import type { ShortMessagesPagination } from './chat-service.interface';
+import type {
+  ChatConnectReturn,
+  ChatsConnectReturn,
+  ShortMessagesPagination,
+} from './chat-service.interface';
 import type { PaginationParams } from '@shared/lib/interfaces';
 
 export const chatService = {
@@ -35,10 +38,10 @@ export const chatService = {
       `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/member/${memberId}`
     );
   },
-  connect(): Socket {
+  connect(): ChatsConnectReturn {
     return chatSocket.connect();
   },
-  connectChat(chatId: string): Socket {
+  connectChat(chatId: string): ChatConnectReturn | null {
     return chatSocket.connectChat(chatId);
   },
   sendMessage(
