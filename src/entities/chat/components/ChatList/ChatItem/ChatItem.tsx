@@ -25,6 +25,9 @@ export const ChatItem: FC<ChatInterface> = ({
 
   const isNewMessages = chat.newMessagesCount > 0 && !isActive;
 
+  const newMessagesCount =
+    chat.newMessagesCount > 9 ? '9+' : chat.newMessagesCount;
+
   const chatLink = `${ROUTES.CHAT}/${chat.id}`;
 
   return (
@@ -41,7 +44,7 @@ export const ChatItem: FC<ChatInterface> = ({
         </div>
         {isNewMessages && (
           <div className={styles.newMessages}>
-            <div className={styles.count}>{chat.newMessagesCount}</div>
+            <div className={styles.count}>{newMessagesCount}</div>
           </div>
         )}
       </div>
