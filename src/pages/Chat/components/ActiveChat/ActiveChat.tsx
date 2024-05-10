@@ -1,44 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useState } from 'react';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { ChatProfilePopup, Messages } from '@widgets';
-import { Status } from './components';
-import {
-  connectChatThunk,
-  disconnectChatThunk,
-  getMemberThunk,
-  nullMember,
-} from '@entities/chat/model';
+import { getMemberThunk, nullMember } from '@entities/chat/model';
 
 export const ActiveChat = () => {
-  const { chatId } = useParams<'chatId'>() as { chatId: string | undefined };
-
   const dispatch = useAppDispatch();
 
-  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
-  const isSocketConnected = useAppSelector(
-    (state) => state.chat.isSocketConnected
-  );
-
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
-  useEffect(() => {
-    return () => {
-      if (chatId) {
-        dispatch(disconnectChatThunk(chatId));
-      }
-    };
-  }, [dispatch, chatId]);
-
-  useEffect(() => {
-    if (chatId && isSocketConnected) {
-      dispatch(connectChatThunk({ chatId }));
-    }
-  }, [dispatch, chatId, isSocketConnected]);
-
-  if (!currentChatId) {
-    return <Status />;
-  }
 
   const handleClosePopup = () => {
     setIsPopupOpen(false);

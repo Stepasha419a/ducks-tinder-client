@@ -1,8 +1,15 @@
-import { useState, type FC, type ReactElement } from 'react';
+import { useEffect, useState, type FC, type ReactElement } from 'react';
 import { ChatProfile, MessageList } from '@entities/chat/components';
 import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat';
-import { useMediaQuery } from '@/shared/lib/hooks';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useMediaQuery,
+} from '@/shared/lib/hooks';
 import type { Message } from '@/shared/api/interfaces';
+import { useParams } from 'react-router-dom';
+import { connectChatThunk, disconnectChatThunk } from '@/entities/chat/model';
+import { Status } from './components';
 
 interface MessagesProps {
   handleOpenPopup: () => void;
@@ -11,13 +18,38 @@ interface MessagesProps {
 export const Messages: FC<MessagesProps> = ({
   handleOpenPopup,
 }): ReactElement => {
+  const dispatch = useAppDispatch();
+
+  const { chatId } = useParams<'chatId'>() as { chatId: string | undefined };
+
   const isMobile = useMediaQuery('(max-width: 900px)');
+
+  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
+  const isSocketConnected = useAppSelector(
+    (state) => state.chat.isSocketConnected
+  );
 
   const [selectedMessage, setSelectedMessage] = useState<null | Message>(null);
   const [repliedMessage, setRepliedMessage] = useState<null | Message>(null);
   const [isMessageEditing, setIsMessageEditing] = useState(false);
 
-  const isMobileSelected = selectedMessage && !isMessageEditing && isMobile;
+  useEffect(() => {
+    return () => {
+      if (chatId) {
+        dispatch(disconnectChatThunk(chatId));
+      }
+    };
+  }, [dispatch, chatId]);
+
+  useEffect(() => {
+    if (chatId && isSocketConnected) {
+      dispatch(connectChatThunk({ chatId }));
+    }
+  }, [dispatch, chatId, isSocketConnected]);
+
+  if (!currentChatId) {
+    return <Status />;
+  }
 
   const handleStopMessageEditing = () => {
     setIsMessageEditing(false);
@@ -32,6 +64,8 @@ export const Messages: FC<MessagesProps> = ({
     setRepliedMessage(null);
     setSelectedMessage(message);
   };
+
+  const isMobileSelected = selectedMessage && !isMessageEditing && isMobile;
 
   return (
     <>
