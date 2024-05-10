@@ -34,11 +34,7 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
   return (
     <div className={cn}>
       <div className={styles.slider}>
-        <ImageSlider
-          images={user.pictures}
-          userId={user.id}
-          extraClassName={styles.image}
-        />
+        <ImageSlider images={user.pictures} extraClassName={styles.image} />
         {setIsFullPreview && (
           <Button
             variant="mark"

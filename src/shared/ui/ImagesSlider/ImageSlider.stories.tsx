@@ -31,6 +31,5 @@ export const Primary: Story = {
       { id: '2', name: '2.jpg', order: 1 },
       { id: '3', name: '3.jpg', order: 2 },
     ],
-    userId: 'user-id',
   },
 };

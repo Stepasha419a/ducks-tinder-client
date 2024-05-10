@@ -25,7 +25,6 @@ import Skeleton from 'react-loading-skeleton';
 
 interface ImageSliderProps {
   images: Picture[];
-  userId: string;
   currentSlide?: number;
   setCurrentSlide?: Dispatch<SetStateAction<number>>;
   content?: ReactElement;
@@ -36,7 +35,6 @@ interface ImageSliderProps {
 
 export const ImageSlider: FC<ImageSliderProps> = ({
   images,
-  userId,
   currentSlide = null,
   setCurrentSlide = null,
   content,
@@ -59,7 +57,6 @@ export const ImageSlider: FC<ImageSliderProps> = ({
       <NotFoundImages
         cnWrapper={cnWrapper}
         extraClassName={extraClassName}
-        userId={userId}
         content={content}
       />
     );

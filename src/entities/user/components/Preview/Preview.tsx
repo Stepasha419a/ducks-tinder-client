@@ -56,7 +56,6 @@ export const Preview: FC<PreviewPropsInterface> = ({
       <div className={classNames(styles.slider)}>
         <UserSlider
           user={user}
-          userId={user.id}
           extraClassName={styles.image}
           isShadow={isShadow}
           sliderRef={sliderRef}

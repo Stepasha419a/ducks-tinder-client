@@ -6,7 +6,6 @@ import { SliderContent } from './components';
 
 interface ImageSliderProps {
   user: User | ShortUser;
-  userId: string;
   extraClassName?: string;
   isShadow?: boolean;
   sliderRef?: RefObject<Slider>;
