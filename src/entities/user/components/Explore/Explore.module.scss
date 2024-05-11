@@ -1,0 +1,45 @@
+.explore {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .close {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 24px;
+
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      height: 4px;
+      width: 30px;
+      background-color: var(--color--white-100);
+      border-radius: 4px;
+      position: absolute;
+      top: 11px;
+      left: 2px;
+    }
+    &::before {
+      transform: rotate(45deg);
+    }
+    &::after {
+      transform: rotate(135deg);
+    }
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    background-color: var(--bg-explore-title);
+    padding: 8px 16px;
+    color: var(--color--white-100);
+  }
+}

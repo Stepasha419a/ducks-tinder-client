@@ -10,8 +10,28 @@
   user-select: none;
   overflow: hidden;
 
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+
   &.open {
     width: 100%;
+  }
+
+  &.explore {
+    .items {
+      .instruction {
+        .icon,
+        .text {
+          color: var(--color--white-100);
+        }
+
+        .icon_space {
+          border-color: var(--color--white-100);
+        }
+      }
+    }
   }
 
   .toggle {

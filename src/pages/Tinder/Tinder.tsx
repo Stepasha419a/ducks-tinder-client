@@ -2,11 +2,15 @@ import type { FC, ReactElement } from 'react';
 import { TinderUser } from '@/widgets/TinderUser/TinderUser';
 import { Instructions } from './components';
 
-const Tinder: FC = (): ReactElement => {
+interface TinderProps {
+  explore?: boolean;
+}
+
+const Tinder: FC<TinderProps> = ({ explore }): ReactElement => {
   return (
     <>
-      <TinderUser />
-      <Instructions />
+      <TinderUser explore={explore} />
+      <Instructions explore={explore} />
     </>
   );
 };

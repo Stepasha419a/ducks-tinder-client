@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100% - 50px);
+  height: 100%;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -25,5 +25,12 @@
       width: 100%;
       max-height: none;
     }
+  }
+
+  &.explore {
+    background: linear-gradient(
+      var(--color--purple-100) 0%,
+      var(--color--red-90) 100%
+    );
   }
 }

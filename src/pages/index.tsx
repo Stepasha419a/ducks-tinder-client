@@ -25,6 +25,7 @@ const Routing = (): ReactElement => {
 
       <Route path={ROUTES.MAIN} element={<NavLayout />}>
         <Route index element={<TinderPage />} />
+        <Route path={ROUTES.EXPLORE} element={<TinderPage explore />} />
         <Route path={ROUTES.PROFILE} element={<ProfilePage />}>
           <Route index element={<ProfilePreview />} />
           <Route path="edit" element={<ProfileEdit />} />

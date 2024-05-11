@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { FC } from 'react';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -13,7 +13,11 @@ import { Button } from '@shared/ui';
 import styles from './Instructions.module.scss';
 import classNames from 'classnames';
 
-export const Instructions = (): ReactElement => {
+interface InstructionsProps {
+  explore?: boolean;
+}
+
+export const Instructions: FC<InstructionsProps> = ({ explore }) => {
   const [isInstructionsOpen, setIsInstructionsOpen] = useState(true);
 
   return (
@@ -24,7 +28,8 @@ export const Instructions = (): ReactElement => {
       animate={{ width: isInstructionsOpen ? '100%' : '97px' }}
       className={classNames(
         styles.instructions,
-        isInstructionsOpen && styles.open
+        isInstructionsOpen && styles.open,
+        explore && styles.explore
       )}
     >
       <Button

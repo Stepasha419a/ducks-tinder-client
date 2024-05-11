@@ -9,6 +9,7 @@ export { Loading } from './Loading/Loading';
 export { AuthLayout } from './AuthLayout/AuthLayout';
 export { SettingsGroup } from './SettingsGroup/SettingsGroup';
 export { NotFoundSetting } from './NotFoundSetting/NotFoundSetting';
+export { Explore } from './Explore/Explore';
 export {
   LinkSettingThumbnail,
   LinkThumbnail,
