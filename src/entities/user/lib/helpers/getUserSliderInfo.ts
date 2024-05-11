@@ -14,7 +14,7 @@ export interface UserPlaceInfo extends UserInfo {
 
 type UserListInfo = string[];
 
-type UserSliderInfo = UserInfo | UserPlaceInfo | UserListInfo;
+export type UserSliderInfo = UserInfo | UserPlaceInfo | UserListInfo;
 
 export function getUserSliderInfo(user: User | ShortUser): UserSliderInfo[] {
   const result: UserSliderInfo[] = [];

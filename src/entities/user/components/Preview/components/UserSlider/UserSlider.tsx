@@ -3,6 +3,7 @@ import type Slider from 'react-slick';
 import type { ShortUser, User } from '@/shared/api/interfaces';
 import { ImageSlider } from '@/shared/ui';
 import { SliderContent } from './components';
+import { getUserSliderInfo } from '@/entities/user/lib';
 
 interface ImageSliderProps {
   user: User | ShortUser;
@@ -20,7 +21,14 @@ export const UserSlider: FC<ImageSliderProps> = ({ user, ...sliderProps }) => {
         images={user.pictures}
         currentSlide={currentSlide}
         setCurrentSlide={setCurrentSlide}
-        content={<SliderContent currentSlide={currentSlide} user={user} />}
+        content={
+          <SliderContent
+            currentSlide={currentSlide}
+            age={user.age}
+            info={getUserSliderInfo(user)}
+            name={user.name}
+          />
+        }
         {...sliderProps}
       />
     </>
