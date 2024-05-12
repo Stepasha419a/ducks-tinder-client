@@ -1,0 +1,18 @@
+.block {
+  &.profile {
+    height: 100%;
+  }
+
+  &.explore {
+    padding: 8px;
+
+    .title {
+      font-size: 18px;
+      color: var(--main-primary);
+    }
+
+    .text {
+      color: var(--main-secondary);
+    }
+  }
+}

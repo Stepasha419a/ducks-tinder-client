@@ -1,6 +1,7 @@
 export enum ROUTES {
   MAIN = '/',
   EXPLORE = '/explore',
+  EXPLORE_TAG = '/explore/:explore_tag',
   LOGIN = '/login',
   REGISTRATION = '/reg',
   PROFILE = '/profile',

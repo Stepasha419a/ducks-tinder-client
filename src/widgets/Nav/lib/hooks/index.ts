@@ -1,2 +1,2 @@
 export { useIsMobileNavAvailable } from './useIsMobileNavAvailable';
-export { useIsCheckedProfilePage } from './useIsCheckedProfilePage';
+export { useNavBlock, NavBlockEnum } from './useNavBlock';

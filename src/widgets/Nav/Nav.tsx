@@ -1,18 +1,16 @@
 import type { FC, ReactElement } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { UserLinks, ChatsPairsBlock } from './components';
-import { chatPairsVariants, profileVariants } from './Nav.variants';
+import { AnimatePresence } from 'framer-motion';
+import { NavBlock, UserLinks } from './components';
 import { NavMobile } from './mobile/Nav.mobile';
-import { SettingsBlock } from '@features/user';
 import styles from './Nav.module.scss';
-import { useIsCheckedProfilePage } from './lib/hooks';
+import { useNavBlock, NavBlockEnum } from './lib';
 
 interface NavProps {
   isMobile?: boolean;
 }
 
 export const Nav: FC<NavProps> = ({ isMobile }): ReactElement => {
-  const isProfilePage = useIsCheckedProfilePage();
+  const navBlock = useNavBlock();
 
   if (isMobile) {
     return <NavMobile />;
@@ -20,32 +18,9 @@ export const Nav: FC<NavProps> = ({ isMobile }): ReactElement => {
 
   return (
     <aside className={styles.nav}>
-      <UserLinks isProfilePage={isProfilePage} />
+      <UserLinks isProfilePage={navBlock === NavBlockEnum.Setting} />
       <AnimatePresence initial={false} mode="wait">
-        {isProfilePage ? (
-          <motion.div
-            key="profile"
-            variants={profileVariants}
-            initial={'slideOut'}
-            animate={'slideIn'}
-            exit={'slideOut'}
-            transition={{ duration: 0.25 }}
-            className={styles.profile}
-          >
-            <SettingsBlock />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="chats-pairs"
-            variants={chatPairsVariants}
-            initial={'slideOut'}
-            animate={'slideIn'}
-            exit={'slideOut'}
-            transition={{ duration: 0.25 }}
-          >
-            <ChatsPairsBlock />
-          </motion.div>
-        )}
+        <NavBlock navBlock={navBlock} />
       </AnimatePresence>
     </aside>
   );
