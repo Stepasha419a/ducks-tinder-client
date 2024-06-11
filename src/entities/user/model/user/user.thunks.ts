@@ -1,12 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { PartialUser } from '@shared/api/services/user/user-service.interface';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
-import type { Picture } from '@/shared/api/interfaces';
+import type { Picture, User } from '@/shared/api/interfaces';
 
 export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
-  async (data: PartialUser, { rejectWithValue }) => {
+  async (data: Partial<User>, { rejectWithValue }) => {
     try {
       const response = await userService.updateUser(data);
 

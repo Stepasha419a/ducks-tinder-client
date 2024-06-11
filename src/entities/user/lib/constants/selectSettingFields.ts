@@ -1,11 +1,11 @@
-import type { PartialUser } from '@/shared/api/services/user/user-service.interface';
 import type { ProfileSettingNameEnum } from './profileSettingName';
 import { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
+import type { User } from '@/shared/api/interfaces';
 
 // array as fields of user model like user.interests
 export const SELECT_SETTING_FIELDS: Record<
   ProfileSettingNameEnum,
-  ProfileSettingSelectNameEnum[] & PartialUser
+  ProfileSettingSelectNameEnum[] & Partial<User>
 > = {
   interests: [ProfileSettingSelectNameEnum.INTERESTS],
   moreAboutMe: [

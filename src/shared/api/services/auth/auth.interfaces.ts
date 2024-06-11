@@ -1,3 +1,4 @@
+import type { AxiosResponse } from 'axios';
 import type { User } from '../../interfaces';
 
 export interface LoginParams {
@@ -13,4 +14,15 @@ export interface AuthResponse extends User {
   accessToken: {
     value: string;
   };
+}
+
+export interface AuthService {
+  refresh(): Promise<AxiosResponse<AuthResponse>>;
+  registration(
+    email: string,
+    name: string,
+    password: string
+  ): Promise<AxiosResponse<AuthResponse>>;
+  login(email: string, password: string): Promise<AxiosResponse<AuthResponse>>;
+  logout(): Promise<AxiosResponse<void>>;
 }
