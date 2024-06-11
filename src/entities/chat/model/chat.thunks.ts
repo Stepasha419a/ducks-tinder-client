@@ -109,6 +109,7 @@ export const connectChatsThunk = createAsyncThunk(
         dispatch(deleteChat(deletedChatId));
       });
     } catch (error: unknown) {
+      console.log(error);
       return rejectWithValue(returnErrorMessage(error));
     }
   }

@@ -6,11 +6,14 @@ import type {
   PairFilterParams,
 } from '../../user/user-service.interface';
 import { mockStorage, resolveAxiosResponse } from '../mock';
-import { pairsInfoStub, shortUserStub, userStub } from './user.stub';
+import { matchingUserStubs, pairsInfoStub } from './user.stub';
+import { chatStub } from '../chat/chat.stub';
 
 export const userMockService: UserService = {
   async getMatchUser() {
-    return resolveAxiosResponse(shortUserStub);
+    return resolveAxiosResponse(
+      matchingUserStubs[mockStorage.currentMatchingIndex]
+    );
   },
 
   async updateUser(data: Partial<User>) {
@@ -44,7 +47,7 @@ export const userMockService: UserService = {
   },
 
   async getPairs(params: PairFilterParams) {
-    return resolveAxiosResponse([shortUserStub, shortUserStub, shortUserStub]);
+    return resolveAxiosResponse(matchingUserStubs);
   },
 
   async getPairsInfo() {
@@ -52,22 +55,28 @@ export const userMockService: UserService = {
   },
 
   async acceptPair(pairId: string) {
-    return resolveAxiosResponse('id');
+    mockStorage.chats.unshift({ ...chatStub, id: pairId });
+    return resolveAxiosResponse(pairId);
   },
 
   async deletePair(pairId: string) {
-    return resolveAxiosResponse('id');
+    return resolveAxiosResponse(pairId);
   },
 
   async likeUser(userId: string) {
+    mockStorage.setCurrentMatchingIndex(mockStorage.currentMatchingIndex + 1);
     return resolveAxiosResponse();
   },
 
   async dislikeUser(userId: string) {
+    mockStorage.setCurrentMatchingIndex(mockStorage.currentMatchingIndex + 1);
     return resolveAxiosResponse();
   },
 
   async returnUser() {
-    return resolveAxiosResponse(shortUserStub);
+    mockStorage.setCurrentMatchingIndex(mockStorage.currentMatchingIndex - 1);
+    return resolveAxiosResponse(
+      matchingUserStubs[mockStorage.currentMatchingIndex]
+    );
   },
 };

@@ -1,5 +1,7 @@
 import type { Socket } from 'socket.io-client';
-import type { Message } from '../../interfaces';
+import type { Chat, Message, ShortUser } from '../../interfaces';
+import type { AxiosResponse } from 'axios';
+import type { PaginationParams } from '@/shared/lib/interfaces';
 
 export interface ShortMessagesPagination {
   chatId: string;
@@ -33,4 +35,27 @@ export enum ChatSocketEvent {
   UnblockChat = 'unblock-chat',
   DeleteChat = 'delete-chat',
   DisconnectChat = 'disconnect-chat',
+}
+
+export interface ChatService {
+  getChat(chatId: string): Promise<AxiosResponse<Chat>>;
+  getChats(params: PaginationParams): Promise<AxiosResponse<Chat[]>>;
+  getMessages(
+    chatId: string,
+    params: PaginationParams
+  ): Promise<AxiosResponse<ShortMessagesPagination>>;
+  getNewMessagesCount(): Promise<AxiosResponse<number>>;
+  getMember(memberId: string): Promise<AxiosResponse<ShortUser>>;
+  getNewMessagesCount(chatId: string): Promise<AxiosResponse<number>>;
+  getNewMessagesCount(chatId: string): Promise<AxiosResponse<number>>;
+  connect(): ChatsConnectReturn;
+  connectChat(chatId: string): ChatConnectReturn | null;
+  sendMessage(chatId: string, text: string, repliedId: string | null): void;
+  deleteMessage(messageId: string): void;
+  editMessage(messageId: string, text: string): void;
+  blockChat(chatId: string): void;
+  unblockChat(chatId: string): void;
+  deleteChat(chatId: string): void;
+  disconnectChat(chatId: string): void;
+  disconnect(): void;
 }
