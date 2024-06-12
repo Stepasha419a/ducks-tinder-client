@@ -1,9 +1,9 @@
-import { SettingThumbnail } from '@/entities/user/ui';
+import { SettingThumbnail } from '@entities/user/ui';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { useState } from 'react';
 import { RangeInput } from '@shared/ui';
 import styles from '../SettingFeatureThumbnails.module.scss';
-import { updateUserThunk } from '@/entities/user/model/user';
+import { updateUserThunk } from '@entities/user/model/user';
 
 export const PartnerAgeSettingThumbnail = () => {
   const dispatch = useAppDispatch();

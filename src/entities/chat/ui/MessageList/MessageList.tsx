@@ -17,7 +17,7 @@ import { Message, MessageSelect, Timestamp, Status } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import classNames from 'classnames';
 import styles from './MessageList.module.scss';
-import { InfinityScroll } from '@/shared/ui';
+import { InfinityScroll } from '@shared/ui';
 import { useParams } from 'react-router-dom';
 
 interface MessagesProps {

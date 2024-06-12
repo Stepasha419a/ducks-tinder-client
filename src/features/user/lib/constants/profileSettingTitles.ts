@@ -1,4 +1,4 @@
-import type { ProfileSettingSelectNameEnum } from '@/entities/user/lib';
+import type { ProfileSettingSelectNameEnum } from '@entities/user/lib';
 
 export const PROFILE_SETTING_TITLES: Record<
   ProfileSettingSelectNameEnum,

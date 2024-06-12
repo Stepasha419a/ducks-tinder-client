@@ -1,9 +1,9 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { Picture } from '@shared/api/interfaces';
-import { Preview } from '@/entities/user/ui';
+import { Preview } from '@entities/user/ui';
 import { Tabs } from './components';
-import { ProfileSettingBlock } from '@/widgets/ui';
+import { ProfileSettingBlock } from '@widgets/ui';
 import { useAppSelector } from '@shared/lib/hooks';
 import styles from './ProfileSettingWrapper.module.scss';
 

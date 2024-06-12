@@ -2,7 +2,7 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { Reorder } from 'framer-motion';
 import type { Picture } from '@shared/api/interfaces';
 import { useAppDispatch } from '@shared/lib/hooks';
-import { deleteUserPictureThunk } from '@/entities/user/model/user';
+import { deleteUserPictureThunk } from '@entities/user/model/user';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { Card } from './components';
 import styles from './PicturesDND.module.scss';

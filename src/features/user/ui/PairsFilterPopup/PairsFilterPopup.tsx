@@ -12,7 +12,7 @@ import {
   InterestSettingPopup,
 } from './components';
 import styles from './PairsFilterPopup.module.scss';
-import type { PairFilterForm } from '@/entities/user/model/pair';
+import type { PairFilterForm } from '@entities/user/model/pair';
 import type { Control, UseFormReset } from 'react-hook-form';
 
 interface PairsFilterPopupProps {

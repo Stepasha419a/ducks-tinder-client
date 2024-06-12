@@ -10,7 +10,7 @@ import ChatPage from '@pages/Chat';
 import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
 import SettingsPage from '@pages/Settings';
-import { PlaceSetting, ProfilePreview } from '@/widgets/ui';
+import { PlaceSetting, ProfilePreview } from '@widgets/ui';
 import { ActiveChat, IndexChatPage } from './Chat/components';
 import NotFound from './NotFound/NotFound';
 import { SettingsIndexPage } from './Settings/components';

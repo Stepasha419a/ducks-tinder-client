@@ -7,7 +7,7 @@ import { BlockedChat, ReplyBlock } from './components';
 import styles from './SendMessageForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import type { Message } from '@/shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 
 interface ChatFormValues {
   input: string;

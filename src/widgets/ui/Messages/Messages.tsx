@@ -1,8 +1,8 @@
 import { useState, type FC, type ReactElement } from 'react';
 import { ChatProfile, MessageList } from '@entities/chat/ui';
 import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat/ui';
-import { useMediaQuery } from '@/shared/lib/hooks';
-import type { Message } from '@/shared/api/interfaces';
+import { useMediaQuery } from '@shared/lib/hooks';
+import type { Message } from '@shared/api/interfaces';
 
 interface MessagesProps {
   handleOpenPopup: () => void;

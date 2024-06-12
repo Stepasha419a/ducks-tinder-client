@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
 import { useMediaQuery } from '@shared/lib/hooks';
-import { Map } from '@/entities/user/ui';
+import { Map } from '@entities/user/ui';
 import { PlacesGeolocation } from '@features/user/ui';
 import styles from './PlaceSetting.module.scss';
 

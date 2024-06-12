@@ -1,4 +1,4 @@
-import type { PaginationParams } from '@/shared/lib/interfaces';
+import type { PaginationParams } from '@shared/lib/interfaces';
 import type { FullPicture, ShortUser, User } from '../../interfaces';
 import type { AxiosResponse } from 'axios';
 

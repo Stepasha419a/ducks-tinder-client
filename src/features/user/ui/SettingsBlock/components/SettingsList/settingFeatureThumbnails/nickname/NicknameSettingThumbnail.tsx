@@ -1,5 +1,5 @@
 import { ROUTES } from '@shared/lib/constants';
-import { LinkSettingThumbnail } from '@/entities/user/ui';
+import { LinkSettingThumbnail } from '@entities/user/ui';
 import { useAppSelector } from '@shared/lib/hooks';
 
 export const NicknameSettingThumbnail = () => {

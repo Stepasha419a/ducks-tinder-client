@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
-import type { Picture, User } from '@/shared/api/interfaces';
+import type { Picture, User } from '@shared/api/interfaces';
 
 export const updateUserThunk = createAsyncThunk(
   'users/updateUser',

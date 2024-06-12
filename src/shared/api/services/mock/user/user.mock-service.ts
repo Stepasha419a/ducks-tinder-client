@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import type { User } from '@/shared/api/interfaces';
+import type { User } from '@shared/api/interfaces';
 import type {
   UserService,
   PairFilterParams,

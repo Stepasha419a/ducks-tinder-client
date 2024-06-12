@@ -14,7 +14,7 @@ import {
   SocialNetworksActivity,
   TrainingAttitude,
   ZodiacSign,
-} from '@/shared/api/interfaces';
+} from '@shared/api/interfaces';
 
 export const SELECT_LISTS: Record<ProfileSettingSelectNameEnum, string[]> = {
   interests: Object.values(Interest),

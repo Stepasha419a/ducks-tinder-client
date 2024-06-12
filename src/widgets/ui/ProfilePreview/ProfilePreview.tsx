@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { Button } from '@shared/ui';
 import { ROUTES } from '@shared/constants';
-import { Preview } from '@/entities/user/ui';
+import { Preview } from '@entities/user/ui';
 import { ProfilePreviewMobile } from './mobile/ProfilePreview.mobile';
 import styles from './ProfilePreview.module.scss';
 

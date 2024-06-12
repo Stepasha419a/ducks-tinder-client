@@ -1,15 +1,15 @@
-import { PairsList } from '@/entities/user/ui';
+import { PairsList } from '@entities/user/ui';
 import {
   getUserPairsThunk,
   type PairFilterForm,
-} from '@/entities/user/model/pair';
-import type { ShortUser } from '@/shared/api/interfaces';
-import { useAppDispatch } from '@/shared/lib/hooks';
+} from '@entities/user/model/pair';
+import type { ShortUser } from '@shared/api/interfaces';
+import { useAppDispatch } from '@shared/lib/hooks';
 import {
   FilterPairsItems,
   PairsFilterPopup,
   RatePairPopup,
-} from '@/features/user/ui';
+} from '@features/user/ui';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 

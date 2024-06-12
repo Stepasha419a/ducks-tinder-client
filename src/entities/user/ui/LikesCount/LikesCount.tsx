@@ -3,7 +3,7 @@ import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from '@shared/lib/hooks';
 import styles from './LikesCount.module.scss';
-import { Skeleton } from '@/shared/ui';
+import { Skeleton } from '@shared/ui';
 
 export const LikesCount: FC = (): ReactElement => {
   const likes = useAppSelector((state) => state.pair.pairsInfo?.count);

@@ -8,7 +8,7 @@ import {
 import { getChatsThunk, selectChatList } from '@entities/chat/model';
 import styles from './ChatList.module.scss';
 import { ChatListLazy } from './ChatList.lazy';
-import { InfinityScroll } from '@/shared/ui';
+import { InfinityScroll } from '@shared/ui';
 import { ChatItem, FailedChats } from './components';
 
 interface ChatListProps {

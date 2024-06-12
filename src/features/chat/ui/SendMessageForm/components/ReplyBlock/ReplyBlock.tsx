@@ -1,7 +1,7 @@
 import { useAppSelector } from '@shared/lib/hooks';
 import styles from './ReplyBlock.module.scss';
 import type { Dispatch, FC, SetStateAction } from 'react';
-import type { Message } from '@/shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 
 interface ReplyBlockProps {
   repliedMessage: Message;

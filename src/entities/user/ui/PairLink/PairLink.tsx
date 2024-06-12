@@ -5,7 +5,7 @@ import { makeImageUrl } from '@shared/helpers';
 import styles from './PairLink.module.scss';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { FailedPair, Loading } from './components';
-import { getPairsInfoThunk } from '@/entities/user/model/pair';
+import { getPairsInfoThunk } from '@entities/user/model/pair';
 import { useEffect } from 'react';
 
 export const PairLink = () => {

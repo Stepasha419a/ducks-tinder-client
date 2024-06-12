@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import type {
   MultiSelectForm,
   ProfileSettingSelectNameEnum,
-} from '@/entities/user/lib';
+} from '@entities/user/lib';
 
 interface SelectSettingProps {
   control: Control<MultiSelectForm>;

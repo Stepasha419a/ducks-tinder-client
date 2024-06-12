@@ -18,8 +18,8 @@ import {
   getChatThunk,
 } from './chat.thunks';
 import { toast } from 'react-toastify';
-import type { ShortMessagesPagination } from '@/shared/api/services/chat/chat-service.interface';
-import { PAGINATION_TAKE } from '@/shared/lib/constants';
+import type { ShortMessagesPagination } from '@shared/api/services/chat/chat-service.interface';
+import { PAGINATION_TAKE } from '@shared/lib/constants';
 
 const initialState: ChatInitialState = {
   chat: null,

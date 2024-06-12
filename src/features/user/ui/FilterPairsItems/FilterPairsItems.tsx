@@ -5,8 +5,8 @@ import { ListItem } from '@shared/ui';
 import { useOuterPairFilterForm } from '@features/user/lib';
 import styles from './FilterPairsItems.module.scss';
 import { useMediaQuery } from '@shared/lib/hooks';
-import { INTERESTS_FOR_LOOP } from '@/entities/user/lib';
-import type { PairFilterForm } from '@/entities/user/model/pair';
+import { INTERESTS_FOR_LOOP } from '@entities/user/lib';
+import type { PairFilterForm } from '@entities/user/model/pair';
 import type { Control } from 'react-hook-form';
 
 interface FilterPairsItemsProps {

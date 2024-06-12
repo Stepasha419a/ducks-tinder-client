@@ -10,7 +10,7 @@ import classNames from 'classnames';
 import { ROUTES } from '@shared/lib/constants';
 import { useAppSelector } from '@shared/lib/hooks';
 import styles from './Nav.mobile.module.scss';
-import { getIsProfilePage } from '@/widgets/lib';
+import { getIsProfilePage } from '@widgets/lib';
 import { getIsChatPage } from '@entities/chat/lib';
 
 export const NavMobile = () => {

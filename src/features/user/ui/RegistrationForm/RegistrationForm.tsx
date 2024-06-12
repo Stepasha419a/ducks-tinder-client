@@ -9,7 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Button, TextField } from '@shared/ui';
 import { useAuthForm } from '@entities/user/lib';
-import { AuthLayout } from '@/entities/user/ui';
+import { AuthLayout } from '@entities/user/ui';
 import styles from './RegistrationForm.module.scss';
 
 export const RegistrationForm = (): ReactElement => {

@@ -3,7 +3,7 @@
 import { mockStorage, resolveAxiosResponse } from '../mock';
 import { chatStub, shortMessagesPaginationStub } from './chat.stub';
 import { shortUserStub } from '../user/user.stub';
-import type { PaginationParams } from '@/shared/lib/interfaces';
+import type { PaginationParams } from '@shared/lib/interfaces';
 import EventEmitter from 'events';
 import type {
   ChatConnectReturn,
@@ -15,7 +15,7 @@ import type {
   ReceivedChatBlock,
   ReceivedMessage,
   ReceivedNewMessage,
-} from '@/shared/api/interfaces';
+} from '@shared/api/interfaces';
 
 const eventEmitter = new EventEmitter();
 

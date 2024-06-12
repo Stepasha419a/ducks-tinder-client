@@ -4,7 +4,7 @@ import { Avatar } from '@shared/ui';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/constants';
 import styles from './ChatItem.module.scss';
-import type { Chat } from '@/shared/api/interfaces';
+import type { Chat } from '@shared/api/interfaces';
 
 interface ChatInterface {
   chat: Chat;

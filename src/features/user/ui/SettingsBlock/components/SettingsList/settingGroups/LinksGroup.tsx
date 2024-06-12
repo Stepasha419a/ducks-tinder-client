@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren, ReactElement } from 'react';
-import { SettingsGroup } from '@/entities/user/ui';
+import { SettingsGroup } from '@entities/user/ui';
 
 export const LinksGroup: FC<PropsWithChildren> = ({
   children,

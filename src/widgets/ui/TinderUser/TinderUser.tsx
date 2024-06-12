@@ -2,11 +2,11 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useAnimationControls } from 'framer-motion';
 import classNames from 'classnames';
-import { useAppSelector, useMediaQuery } from '@/shared/lib/hooks';
-import { RateButtons, SwipeUser } from '@/features/user/ui';
+import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
+import { RateButtons, SwipeUser } from '@features/user/ui';
 import { Failed } from './components';
 import styles from './TinderUser.module.scss';
-import { Explore } from '@/entities/user/ui';
+import { Explore } from '@entities/user/ui';
 
 interface TinderUserProps {
   explore?: boolean;

@@ -1,4 +1,4 @@
-import type { Message } from '@/shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 import { editMessageThunk } from '@entities/chat/model';
 import { useAppDispatch } from '@shared/lib/hooks';
 

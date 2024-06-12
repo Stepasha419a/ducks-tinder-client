@@ -2,13 +2,13 @@ import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { PairLink } from '@/entities/user/ui';
+import { PairLink } from '@entities/user/ui';
 import { Tabs } from './Tabs/Tabs';
 import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
 import { getIsChatPage } from '@entities/chat/lib';
 import { ChatList } from '@entities/chat/ui';
 import styles from './ChatsPairsBlock.module.scss';
-import { useAppSelector } from '@/shared/lib/hooks';
+import { useAppSelector } from '@shared/lib/hooks';
 
 export const ChatsPairsBlock: FC = () => {
   const { pathname } = useLocation();

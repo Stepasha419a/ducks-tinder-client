@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui';
+import { Button } from '@shared/ui';
 import styles from './Explore.module.scss';
 
 export const Explore = () => {

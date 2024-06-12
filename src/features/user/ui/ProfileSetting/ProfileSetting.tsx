@@ -1,5 +1,5 @@
 import { useProfileSettingUrl } from '@entities/user/lib';
-import { NotFoundSetting } from '@/entities/user/ui';
+import { NotFoundSetting } from '@entities/user/ui';
 import { ROUTES } from '@shared/lib/constants';
 import { SelectForm } from './components';
 

@@ -1,5 +1,5 @@
-import type { PairFilterParams } from '@/shared/api/services/user/user-service.interface';
-import { PAGINATION_TAKE } from '@/shared/lib/constants';
+import type { PairFilterParams } from '@shared/api/services/user/user-service.interface';
+import { PAGINATION_TAKE } from '@shared/lib/constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';

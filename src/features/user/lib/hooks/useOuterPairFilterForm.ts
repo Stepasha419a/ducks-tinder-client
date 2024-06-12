@@ -1,4 +1,4 @@
-import type { PairFilterForm } from '@/entities/user/model/pair/pair.interface';
+import type { PairFilterForm } from '@entities/user/model/pair/pair.interface';
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 

@@ -1,4 +1,4 @@
-import type { ProfileSettingNameEnum } from '@/entities/user/lib';
+import type { ProfileSettingNameEnum } from '@entities/user/lib';
 
 export interface ProfileSettingWrapperData {
   title: string;

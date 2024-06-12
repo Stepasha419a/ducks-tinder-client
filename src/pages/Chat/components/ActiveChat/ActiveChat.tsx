@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch } from '@shared/lib/hooks';
-import { ChatProfilePopup, Messages } from '@/widgets/ui';
+import { ChatProfilePopup, Messages } from '@widgets/ui';
 import { getMemberThunk, nullMember } from '@entities/chat/model';
 
 export const ActiveChat = () => {

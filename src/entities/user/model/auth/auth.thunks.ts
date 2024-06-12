@@ -5,7 +5,7 @@ import type {
   RegistrationParams,
 } from '@shared/api/services/auth';
 import { returnErrorMessage } from '@shared/helpers';
-import { setCurrentUser } from '@/entities/user/model/user';
+import { setCurrentUser } from '@entities/user/model/user';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',

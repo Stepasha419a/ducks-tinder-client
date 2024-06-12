@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
-import { UploadImagePopups } from '@/features/user/ui';
+import { UploadImagePopups } from '@features/user/ui';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import { ROUTES } from '@shared/constants';

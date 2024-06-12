@@ -14,15 +14,15 @@ import {
   setIsNotFound,
   unblockChat,
 } from './chat.slice';
-import { checkAuthThunk } from '@/entities/user/model/auth';
-import { PAGINATION_TAKE } from '@/shared/lib/constants';
+import { checkAuthThunk } from '@entities/user/model/auth';
+import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type {
   Message,
   ReceivedChatBlock,
   ReceivedMessage,
   ReceivedNewMessage,
-} from '@/shared/api/interfaces';
-import { ChatSocketEvent } from '@/shared/api/services/chat/chat-service.interface';
+} from '@shared/api/interfaces';
+import { ChatSocketEvent } from '@shared/api/services/chat/chat-service.interface';
 
 export const getChatThunk = createAsyncThunk(
   'chat/getChat',

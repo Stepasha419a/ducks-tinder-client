@@ -11,11 +11,11 @@ import {
   useDebouncedCallback,
 } from '@shared/lib/hooks';
 import type { ShortUser } from '@shared/api/interfaces';
-import { getUserPairsThunk } from '@/entities/user/model/pair';
+import { getUserPairsThunk } from '@entities/user/model/pair';
 import Pair from './Pair/Pair';
 import styles from './PairsList.module.scss';
 import { PairsListLazy } from './PairsList.lazy';
-import { InfinityScroll, Skeleton } from '@/shared/ui';
+import { InfinityScroll, Skeleton } from '@shared/ui';
 
 interface PairsListProps {
   setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;

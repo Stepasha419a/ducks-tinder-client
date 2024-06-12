@@ -3,9 +3,9 @@ import type { Control } from 'react-hook-form';
 import { InterestsSettingGroup } from './InterestsSettingGroup';
 import { MoreAboutMeSettingGroup } from './MoreAboutMeSettingGroup';
 import { LifestyleSettingGroup } from './LifestyleSettingGroup';
-import type { MultiSelectForm } from '@/entities/user/lib';
-import { useProfileSettingUrl } from '@/entities/user/lib';
-import { ProfileSettingNameEnum } from '@/entities/user/lib/constants';
+import type { MultiSelectForm } from '@entities/user/lib';
+import { useProfileSettingUrl } from '@entities/user/lib';
+import { ProfileSettingNameEnum } from '@entities/user/lib/constants';
 
 interface SettingsGroupProps {
   control: Control<MultiSelectForm>;

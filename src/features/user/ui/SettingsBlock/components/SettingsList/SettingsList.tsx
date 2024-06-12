@@ -12,8 +12,8 @@ import {
   PreferSexSettingThumbnail,
   SexSettingThumbnail,
   SwitchThemeThumbnail,
-} from '@/features/user/ui';
-import { LinkThumbnail, SettingsGroup } from '@/entities/user/ui';
+} from '@features/user/ui';
+import { LinkThumbnail, SettingsGroup } from '@entities/user/ui';
 import {
   AccountGroup,
   FindGroup,

@@ -12,7 +12,7 @@ import { Avatar } from '@shared/ui';
 import { useAppSelector } from '@shared/lib/hooks';
 import { variants } from './UserLinks.variants';
 import styles from './UserLinks.module.scss';
-import { selectAvatar } from '@/entities/user/model/user';
+import { selectAvatar } from '@entities/user/model/user';
 
 interface UserLinksProps {
   isProfilePage: boolean;

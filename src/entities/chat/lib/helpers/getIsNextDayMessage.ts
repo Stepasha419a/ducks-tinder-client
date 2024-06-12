@@ -1,4 +1,4 @@
-import { getFormattedDateString } from '@/shared/lib/helpers';
+import { getFormattedDateString } from '@shared/lib/helpers';
 import type { Message } from '@shared/api/interfaces';
 
 export function getIsNextDayMessage(

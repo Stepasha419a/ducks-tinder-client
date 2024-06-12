@@ -8,7 +8,7 @@ import { getDatesHourDiff } from '@shared/helpers';
 import { useMessageSelect } from '../../lib';
 import { MessageSelectMobile } from './mobile/MessageSelect.mobile';
 import styles from './MessageSelect.module.scss';
-import type { Message } from '@/shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 
 interface MessageSelectProps {
   isMobile?: boolean;

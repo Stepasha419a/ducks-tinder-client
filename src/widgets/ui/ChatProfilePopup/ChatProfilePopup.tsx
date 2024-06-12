@@ -4,7 +4,7 @@ import { useAppSelector } from '@shared/lib/hooks';
 import { Popup } from '@shared/ui';
 import { BlockChat, DeleteChat, UnblockChat } from '@features/chat/ui';
 import styles from './ChatProfilePopup.module.scss';
-import { Preview } from '@/entities/user/ui';
+import { Preview } from '@entities/user/ui';
 import { ChatProfilePopupLazy } from './ChatProfilePopup.lazy';
 
 interface ChatProfilePopupProps {

@@ -1,7 +1,7 @@
 import { ROUTES } from '@shared/lib/constants';
-import { LinkSettingThumbnail } from '@/entities/user/ui';
+import { LinkSettingThumbnail } from '@entities/user/ui';
 import { useAppSelector } from '@shared/lib/hooks';
-import { SettingNameEnum } from '@/entities/user/lib';
+import { SettingNameEnum } from '@entities/user/lib';
 
 export const DescriptionSettingThumbnail = () => {
   const description = useAppSelector(

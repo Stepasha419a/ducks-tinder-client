@@ -9,7 +9,7 @@ import {
   useAppSelector,
   useMediaQuery,
 } from '@shared/lib/hooks';
-import { Preview } from '@/entities/user/ui';
+import { Preview } from '@entities/user/ui';
 import {
   getMatchUserThunk,
   selectTinderData,

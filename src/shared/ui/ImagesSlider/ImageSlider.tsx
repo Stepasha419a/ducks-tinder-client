@@ -20,7 +20,7 @@ import {
 import styles from './ImageSlider.module.scss';
 import 'slick-carousel/slick/slick.scss';
 import './override.scss';
-import { makeImageUrl, showDefaultImage } from '@/shared/lib/helpers';
+import { makeImageUrl, showDefaultImage } from '@shared/lib/helpers';
 import Skeleton from 'react-loading-skeleton';
 
 interface ImageSliderProps {

@@ -1,7 +1,7 @@
 import type { Socket } from 'socket.io-client';
 import type { Chat, Message, ShortUser } from '../../interfaces';
 import type { AxiosResponse } from 'axios';
-import type { PaginationParams } from '@/shared/lib/interfaces';
+import type { PaginationParams } from '@shared/lib/interfaces';
 
 export interface ShortMessagesPagination {
   chatId: string;

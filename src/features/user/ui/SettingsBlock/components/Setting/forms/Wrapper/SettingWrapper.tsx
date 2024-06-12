@@ -6,7 +6,7 @@ import { Button } from '@shared/ui';
 import styles from './SettingWrapper.module.scss';
 import classNames from 'classnames';
 import { useMediaQuery } from '@shared/lib/hooks';
-import type { SettingFieldValues } from '@/features/user/lib/hooks';
+import type { SettingFieldValues } from '@features/user/lib/hooks';
 
 interface SettingFieldInterestsArray {
   input: string[];

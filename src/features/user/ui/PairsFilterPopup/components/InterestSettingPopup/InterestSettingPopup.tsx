@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Button, ListItem, Popup } from '@shared/ui';
 import styles from './InterestSettingPopup.module.scss';
-import { Interest } from '@/shared/api/interfaces';
+import { Interest } from '@shared/api/interfaces';
 
 interface InterestSettingPopupProps {
   activeItems: string[];

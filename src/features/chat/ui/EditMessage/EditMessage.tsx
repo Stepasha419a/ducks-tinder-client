@@ -6,7 +6,7 @@ import styles from './EditMessage.module.scss';
 import classNames from 'classnames';
 import { useForm } from 'react-hook-form';
 import type { FC } from 'react';
-import type { Message } from '@/shared/api/interfaces';
+import type { Message } from '@shared/api/interfaces';
 
 interface EditMessageProps {
   handleStopMessageEditing: () => void;

@@ -6,7 +6,7 @@ import type {
 } from '@entities/user/lib';
 import { getSelectData } from '@entities/user/lib';
 import { getProfileSettingTitles } from '../helpers';
-import type { SelectValidation } from '@/entities/user/lib/constants/selectValidation';
+import type { SelectValidation } from '@entities/user/lib/constants/selectValidation';
 
 export function useSelectFormControl(
   control: Control<MultiSelectForm>,
