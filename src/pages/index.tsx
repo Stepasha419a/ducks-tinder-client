@@ -10,12 +10,12 @@ import ChatPage from '@pages/Chat';
 import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
 import SettingsPage from '@pages/Settings';
-import { PlaceSetting, ProfilePreview } from '@widgets';
+import { PlaceSetting, ProfilePreview } from '@/widgets/ui';
 import { ActiveChat, IndexChatPage } from './Chat/components';
 import NotFound from './NotFound/NotFound';
 import { SettingsIndexPage } from './Settings/components';
 import { ProfileEdit } from './Profile/components';
-import { ProfileSetting } from '@features/user/components';
+import { ProfileSetting } from '@features/user/ui';
 
 const Routing = (): ReactElement => {
   return (

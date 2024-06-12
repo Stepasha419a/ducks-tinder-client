@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react';
-import { LikesCount } from '@entities/user/components';
-import { Pairs } from '@widgets';
+import { LikesCount } from '@/entities/user/ui';
+import { Pairs } from '@/widgets/ui';
 
 const PairsPage: FC = (): ReactElement => (
   <>

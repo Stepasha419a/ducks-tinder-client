@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Nav } from '@widgets';
+import { Nav } from '@/widgets/ui';
 import { withPrivatePageHocs } from '@hocs';
 import styles from './NavLayout.module.scss';
 import { useMediaQuery } from '@shared/lib/hooks';
