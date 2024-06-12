@@ -5,9 +5,9 @@ import type {
   UserService,
   PairFilterParams,
 } from '../../user/user-service.interface';
+import { chatStub } from '../chat/chat.stub';
 import { mockStorage, resolveAxiosResponse } from '../mock';
 import { matchingUserStubs, pairsInfoStub } from './user.stub';
-import { chatStub } from '../chat/chat.stub';
 
 export const userMockService: UserService = {
   async getMatchUser() {

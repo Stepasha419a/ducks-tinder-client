@@ -1,13 +1,13 @@
-import type { FC } from 'react';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ListItem } from '@shared/ui';
-import styles from './SliderContent.module.scss';
 import classNames from 'classnames';
+import type { FC } from 'react';
 import type {
   UserPlaceInfo,
   UserSliderInfo,
 } from '@entities/user/lib/helpers/getUserSliderInfo';
+import { ListItem } from '@shared/ui';
+import styles from './SliderContent.module.scss';
 
 interface SliderContentProps {
   name: string;

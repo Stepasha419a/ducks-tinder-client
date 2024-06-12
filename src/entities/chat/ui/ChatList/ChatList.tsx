@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { useRef } from 'react';
+import { getChatsThunk, selectChatList } from '@entities/chat/model';
 import {
   useAppDispatch,
   useAppSelector,
   useDebouncedCallback,
 } from '@shared/lib/hooks';
-import { getChatsThunk, selectChatList } from '@entities/chat/model';
-import styles from './ChatList.module.scss';
-import { ChatListLazy } from './ChatList.lazy';
 import { InfinityScroll } from '@shared/ui';
+import { ChatListLazy } from './ChatList.lazy';
+import styles from './ChatList.module.scss';
 import { ChatItem, FailedChats } from './components';
 
 interface ChatListProps {

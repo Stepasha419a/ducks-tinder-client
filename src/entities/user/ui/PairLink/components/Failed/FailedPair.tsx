@@ -1,6 +1,6 @@
-import type { FC } from "react";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import type { FC } from "react";
 import styles from "./FailedPair.module.scss";
 
 export const FailedPair: FC = () => {

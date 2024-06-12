@@ -1,10 +1,10 @@
-import type { ReactElement } from 'react';
-import { motion } from 'framer-motion';
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { motion } from 'framer-motion';
+import type { ReactElement } from 'react';
 import { useAppSelector } from '@shared/lib/hooks';
-import { variants } from './Loading.variants';
 import styles from './Loading.module.scss';
+import { variants } from './Loading.variants';
 
 export const Loading = (): ReactElement => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);

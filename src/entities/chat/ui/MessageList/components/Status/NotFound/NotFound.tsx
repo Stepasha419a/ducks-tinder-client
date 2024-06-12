@@ -1,6 +1,6 @@
-import type { ReactElement } from 'react';
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { ReactElement } from 'react';
 import styles from './NotFound.module.scss';
 
 const NotFoundChats = (): ReactElement => {

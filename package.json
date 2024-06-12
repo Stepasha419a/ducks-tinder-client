@@ -57,6 +57,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
+    "@feature-sliced/eslint-config": "^0.1.1",
     "@storybook/addon-essentials": "^7.1.1",
     "@storybook/addon-interactions": "^7.2.1",
     "@storybook/addon-links": "^7.1.1",
@@ -82,6 +83,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "dotenv": "^16.4.5",
     "eslint": "^8.37.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.15",
     "husky": "^8.0.3",

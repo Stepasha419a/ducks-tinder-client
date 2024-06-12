@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
+import { PlacesGeolocation } from '@features/user/ui';
+import { Map } from '@entities/user/ui';
 import { ROUTES } from '@shared/constants';
 import { useMediaQuery } from '@shared/lib/hooks';
-import { Map } from '@entities/user/ui';
-import { PlacesGeolocation } from '@features/user/ui';
 import styles from './PlaceSetting.module.scss';
 
 export const PlaceSetting = () => {

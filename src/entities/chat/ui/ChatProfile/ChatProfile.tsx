@@ -1,15 +1,15 @@
 import { useEffect, type FC } from 'react';
-import { Avatar } from '@shared/ui';
+import Skeleton from 'react-loading-skeleton';
+import { useParams } from 'react-router-dom';
 import {
   useAppDispatch,
   useAppSelector,
   useMediaQuery,
 } from '@shared/lib/hooks';
+import { Avatar } from '@shared/ui';
 import { getChatThunk } from '../../model';
 import styles from './ChatProfile.module.scss';
 import { ChatProfileMobile } from './mobile/ChatProfile.mobile';
-import { useParams } from 'react-router-dom';
-import Skeleton from 'react-loading-skeleton';
 
 interface ChatProfileProps {
   handleOpen: () => void;

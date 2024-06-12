@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
-import styles from './Settings.module.scss';
 import { useMediaQuery } from '@shared/lib/hooks';
+import styles from './Settings.module.scss';
 
 export const SettingsPage = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');

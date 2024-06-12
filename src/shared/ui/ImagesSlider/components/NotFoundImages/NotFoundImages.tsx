@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import type { FC, ReactElement } from 'react';
 import { makeImageUrl } from '@shared/lib/helpers';
-import classNames from 'classnames';
 import styles from '../../ImageSlider.module.scss';
 import '../../override.scss';
 

@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react';
-import { SettingWrapper } from '../Wrapper/SettingWrapper';
 import { useProfileSelectForm } from '@features/user/lib';
+import { SettingWrapper } from '../Wrapper/SettingWrapper';
 import { SettingsGroup } from './components';
 
 export const SelectForm: FC = (): ReactElement => {

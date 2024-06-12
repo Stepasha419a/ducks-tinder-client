@@ -1,11 +1,11 @@
-import type { FC } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPen,
   faReply,
   faTrash,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { FC } from 'react';
 import styles from './MessageSelect.mobile.module.scss';
 
 interface MessageSelectMobileProps {

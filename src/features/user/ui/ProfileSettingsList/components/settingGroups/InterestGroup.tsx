@@ -1,5 +1,5 @@
-import { SettingsGroup } from '@entities/user/ui';
 import type { FC, PropsWithChildren } from 'react';
+import { SettingsGroup } from '@entities/user/ui';
 
 export const InterestGroup: FC<PropsWithChildren> = ({ children }) => {
   return (

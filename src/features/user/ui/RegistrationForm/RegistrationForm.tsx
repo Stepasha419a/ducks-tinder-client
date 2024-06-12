@@ -1,15 +1,15 @@
-import type { ReactElement } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRightLong,
   faEnvelope,
   faLock,
   faFileText,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, TextField } from '@shared/ui';
 import { useAuthForm } from '@entities/user/lib';
 import { AuthLayout } from '@entities/user/ui';
+import { Button, TextField } from '@shared/ui';
 import styles from './RegistrationForm.module.scss';
 
 export const RegistrationForm = (): ReactElement => {

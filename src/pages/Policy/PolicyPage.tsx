@@ -1,7 +1,7 @@
+import { withPrivatePageHocs } from '@hocs';
 import type { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import headerImg from '@shared/assets/images/auth-duck.png';
-import { withPrivatePageHocs } from '@hocs';
 import styles from './PolicyPage.module.scss';
 
 const PolicyPage: FC = (): ReactElement => {

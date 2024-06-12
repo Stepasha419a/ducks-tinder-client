@@ -1,11 +1,11 @@
-import type { FC } from 'react';
 import classNames from 'classnames';
+import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
+import type { PairFilterForm } from '@entities/user/model/pair';
 import { createEmptyArray } from '@shared/helpers';
 import { ListItem } from '@shared/ui';
 import styles from '../../PairsFilterPopup.module.scss';
-import type { PairFilterForm } from '@entities/user/model/pair';
 
 interface PicturesSettingProps {
   control: Control<PairFilterForm>;

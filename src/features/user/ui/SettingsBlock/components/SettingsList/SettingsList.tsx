@@ -14,6 +14,8 @@ import {
   SwitchThemeThumbnail,
 } from '@features/user/ui';
 import { LinkThumbnail, SettingsGroup } from '@entities/user/ui';
+import { useMediaQuery } from '@shared/lib/hooks';
+import { MobileTitle } from './MobileTitle/MobileTitle';
 import {
   AccountGroup,
   FindGroup,
@@ -21,8 +23,6 @@ import {
   NicknameGroup,
 } from './settingGroups';
 import styles from './SettingsList.module.scss';
-import { useMediaQuery } from '@shared/lib/hooks';
-import { MobileTitle } from './MobileTitle/MobileTitle';
 
 export const SettingsList = (): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');

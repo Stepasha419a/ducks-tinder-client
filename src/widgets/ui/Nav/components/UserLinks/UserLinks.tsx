@@ -1,18 +1,18 @@
-import { memo, type FC } from 'react';
-import { Link } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import classNames from 'classnames';
 import {
   faBriefcase,
   faFireFlameCurved,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Avatar } from '@shared/ui';
-import { useAppSelector } from '@shared/lib/hooks';
-import { variants } from './UserLinks.variants';
-import styles from './UserLinks.module.scss';
+import classNames from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
+import { memo, type FC } from 'react';
+import { Link } from 'react-router-dom';
 import { selectAvatar } from '@entities/user/model/user';
+import { useAppSelector } from '@shared/lib/hooks';
+import { Avatar } from '@shared/ui';
+import styles from './UserLinks.module.scss';
+import { variants } from './UserLinks.variants';
 
 interface UserLinksProps {
   isProfilePage: boolean;

@@ -1,21 +1,21 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
-import { useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHeart,
   faMagnifyingGlassMinus,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { Dispatch, FC, SetStateAction } from 'react';
+import { useRef } from 'react';
+import { getUserPairsThunk } from '@entities/user/model/pair';
+import type { ShortUser } from '@shared/api/interfaces';
 import {
   useAppDispatch,
   useAppSelector,
   useDebouncedCallback,
 } from '@shared/lib/hooks';
-import type { ShortUser } from '@shared/api/interfaces';
-import { getUserPairsThunk } from '@entities/user/model/pair';
-import Pair from './Pair/Pair';
-import styles from './PairsList.module.scss';
-import { PairsListLazy } from './PairsList.lazy';
 import { InfinityScroll, Skeleton } from '@shared/ui';
+import Pair from './Pair/Pair';
+import { PairsListLazy } from './PairsList.lazy';
+import styles from './PairsList.module.scss';
 
 interface PairsListProps {
   setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;

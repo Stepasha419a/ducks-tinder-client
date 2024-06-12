@@ -1,13 +1,13 @@
+import classNames from 'classnames';
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
-import styles from './SelectSetting.module.scss';
-import { ListItem } from '@shared/ui';
 import { useSelectFormControl } from '@features/user/lib/hooks';
-import classNames from 'classnames';
 import type {
   MultiSelectForm,
   ProfileSettingSelectNameEnum,
 } from '@entities/user/lib';
+import { ListItem } from '@shared/ui';
+import styles from './SelectSetting.module.scss';
 
 interface SelectSettingProps {
   control: Control<MultiSelectForm>;

@@ -1,7 +1,7 @@
 import type { ChangeEvent, FC } from 'react';
+import { createFileUrl } from '@shared/lib/helpers';
 import { Popup } from '@shared/ui';
 import styles from './DialogUpload.module.scss';
-import { createFileUrl } from '@shared/lib/helpers';
 
 interface DialogUploadProps {
   handleCloseDialogUpload: () => void;

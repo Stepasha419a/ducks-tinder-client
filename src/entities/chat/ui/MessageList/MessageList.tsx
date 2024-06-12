@@ -1,24 +1,24 @@
+import classNames from 'classnames';
 import { Fragment, useEffect, type FC, type ReactElement } from 'react';
-import type { Message as MessageInterface } from '@shared/api/interfaces';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useDebouncedCallback,
-} from '@shared/lib/hooks';
+import { useParams } from 'react-router-dom';
+import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
+import { getIsNextDayMessage } from '@entities/chat/lib';
 import {
   connectChatThunk,
   disconnectChatThunk,
   getMessagesThunk,
   selectMessages,
 } from '@entities/chat/model';
-import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
-import { getIsNextDayMessage } from '@entities/chat/lib';
+import type { Message as MessageInterface } from '@shared/api/interfaces';
+import {
+  useAppDispatch,
+  useAppSelector,
+  useDebouncedCallback,
+} from '@shared/lib/hooks';
+import { InfinityScroll } from '@shared/ui';
 import { Message, MessageSelect, Timestamp, Status } from './components';
 import { MessagesLazy } from './MessageList.lazy';
-import classNames from 'classnames';
 import styles from './MessageList.module.scss';
-import { InfinityScroll } from '@shared/ui';
-import { useParams } from 'react-router-dom';
 
 interface MessagesProps {
   select: ReactElement;

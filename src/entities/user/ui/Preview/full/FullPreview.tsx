@@ -1,17 +1,17 @@
-import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
-import { useState } from 'react';
-import type { ShortUser, User } from '@shared/api/interfaces';
-import classNames from 'classnames';
-import styles from './FullPreview.module.scss';
-import { Button, ImageSlider } from '@shared/ui';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleDown,
   faHouse,
   faLocationDot,
 } from '@fortawesome/free-solid-svg-icons';
-import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
+import { useState } from 'react';
+import type { ShortUser, User } from '@shared/api/interfaces';
+import { Button, ImageSlider } from '@shared/ui';
 import { InterestsListPopup } from '../../InterestsListPopup/InterestsListPopup';
+import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
+import styles from './FullPreview.module.scss';
 
 interface FullPreviewPropsInterface {
   user: User | ShortUser;

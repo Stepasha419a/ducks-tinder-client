@@ -1,7 +1,9 @@
-import { toast } from 'react-toastify';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import type { User } from '@shared/api/interfaces';
+import { checkUserFields } from './helpers';
+import type { UserInitialState } from './user.interface';
 import {
   deleteUserPictureThunk,
   mixUserPicturesThunk,
@@ -9,8 +11,6 @@ import {
   updateUserThunk,
   updateUserPlaceThunk,
 } from './user.thunks';
-import type { UserInitialState } from './user.interface';
-import { checkUserFields } from './helpers';
 
 const initialState: UserInitialState = {
   // auth always set currentUser object after registration/login/refresh

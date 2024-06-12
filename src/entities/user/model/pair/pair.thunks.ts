@@ -1,8 +1,8 @@
-import type { PairFilterParams } from '@shared/api/services/user/user-service.interface';
-import { PAGINATION_TAKE } from '@shared/lib/constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api/services';
+import type { PairFilterParams } from '@shared/api/services/user/user-service.interface';
 import { returnErrorMessage } from '@shared/helpers';
+import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type { GetUserPairsProps } from './pair.interface';
 
 export const getUserPairsThunk = createAsyncThunk(

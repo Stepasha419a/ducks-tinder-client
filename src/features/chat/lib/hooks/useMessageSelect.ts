@@ -1,7 +1,7 @@
-import type { Message } from '@shared/api/interfaces';
-import { deleteMessageThunk } from '@entities/chat/model';
-import { useAppDispatch } from '@shared/lib/hooks';
 import type { Dispatch, SetStateAction } from 'react';
+import { deleteMessageThunk } from '@entities/chat/model';
+import type { Message } from '@shared/api/interfaces';
+import { useAppDispatch } from '@shared/lib/hooks';
 
 export function useMessageSelect(
   setRepliedMessage: Dispatch<SetStateAction<Message | null>>,

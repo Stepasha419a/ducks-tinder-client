@@ -1,10 +1,10 @@
 import type { User } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
-import { getSelectSettingFields } from '../helpers';
 import type {
   ProfileSettingNameEnum,
   ProfileSettingSelectNameEnum,
 } from '../constants';
+import { getSelectSettingFields } from '../helpers';
 
 export interface MultiSelectForm {
   input: Record<ProfileSettingSelectNameEnum, string[] | string | null>;

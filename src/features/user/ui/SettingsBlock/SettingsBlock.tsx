@@ -1,12 +1,12 @@
-import type { ReactElement } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { useMediaQuery } from '@hooks';
-import { Setting, SettingsList } from './components';
-import { settingVariants } from './SettingsBlock.variants';
-import styles from './SettingsBlock.module.scss';
+import { AnimatePresence, motion } from 'framer-motion';
+import type { ReactElement } from 'react';
+import { useFoundSetting } from '@entities/user/lib/hooks';
 import { NotFoundSetting } from '@entities/user/ui';
 import { ROUTES } from '@shared/lib/constants';
-import { useFoundSetting } from '@entities/user/lib/hooks';
+import { Setting, SettingsList } from './components';
+import styles from './SettingsBlock.module.scss';
+import { settingVariants } from './SettingsBlock.variants';
 
 export const SettingsBlock = (): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');

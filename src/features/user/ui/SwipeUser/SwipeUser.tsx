@@ -1,19 +1,19 @@
-import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
-import { useEffect, useRef } from 'react';
+import classNames from 'classnames';
 import type { AnimationControls } from 'framer-motion';
 import { motion } from 'framer-motion';
+import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
+import { useEffect, useRef } from 'react';
 import type Slider from 'react-slick';
-import classNames from 'classnames';
+import {
+  getMatchUserThunk,
+  selectTinderData,
+} from '@entities/user/model/tinder';
+import { Preview } from '@entities/user/ui';
 import {
   useAppDispatch,
   useAppSelector,
   useMediaQuery,
 } from '@shared/lib/hooks';
-import { Preview } from '@entities/user/ui';
-import {
-  getMatchUserThunk,
-  selectTinderData,
-} from '@entities/user/model/tinder';
 import { useKeyboardEvents, useSwipeProps } from '../../lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';

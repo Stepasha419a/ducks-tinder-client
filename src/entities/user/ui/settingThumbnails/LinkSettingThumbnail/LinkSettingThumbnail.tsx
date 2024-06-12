@@ -1,7 +1,7 @@
-import type { FC, PropsWithChildren } from 'react';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import type { FC, PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './LinkSettingThumbnail.module.scss';
 

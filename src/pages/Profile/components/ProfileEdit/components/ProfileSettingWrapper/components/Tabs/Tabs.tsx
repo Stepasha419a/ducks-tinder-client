@@ -1,5 +1,5 @@
-import type { FC } from 'react';
 import classNames from 'classnames';
+import type { FC } from 'react';
 import { Button } from '@shared/ui';
 import styles from './Tabs.module.scss';
 

@@ -1,6 +1,6 @@
 import { SettingThumbnail } from '@entities/user/ui';
-import { setTheme } from '@shared/model/theme';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { setTheme } from '@shared/model/theme';
 import { CheckboxInput } from '@shared/ui';
 
 export const SwitchThemeThumbnail = () => {

@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
-import { getSettingType, getSettingUrl } from '../helpers';
 import { SETTING_LIST, SettingNameEnum } from '../constants';
+import { getSettingType, getSettingUrl } from '../helpers';
 
 const settingRegex = /\/settings\/([a-z]+(?:(?:-)(?:[a-z]+))*)/;
 

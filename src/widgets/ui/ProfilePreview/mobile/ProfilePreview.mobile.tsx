@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { UploadImagePopups } from '@features/user/ui';
+import { ROUTES } from '@shared/constants';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
-import { ROUTES } from '@shared/constants';
 import styles from './ProfilePreview.mobile.module.scss';
-import { useState } from 'react';
 
 export const ProfilePreviewMobile = () => {
   const user = useAppSelector((state) => state.user.currentUser!);

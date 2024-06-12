@@ -1,5 +1,5 @@
-import type { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import classNames from 'classnames';
+import type { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import styles from './ListItem.module.scss';
 
 interface ListItemProps extends HTMLAttributes<HTMLDivElement> {

@@ -1,14 +1,14 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { PairLink } from '@entities/user/ui';
-import { Tabs } from './Tabs/Tabs';
-import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
 import { getIsChatPage } from '@entities/chat/lib';
 import { ChatList } from '@entities/chat/ui';
-import styles from './ChatsPairsBlock.module.scss';
+import { PairLink } from '@entities/user/ui';
 import { useAppSelector } from '@shared/lib/hooks';
+import styles from './ChatsPairsBlock.module.scss';
+import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
+import { Tabs } from './Tabs/Tabs';
 
 export const ChatsPairsBlock: FC = () => {
   const { pathname } = useLocation();

@@ -1,12 +1,12 @@
-import { useSelectMessageEdit } from '@features/chat/lib';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faPen, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import type { FC } from 'react';
+import { useForm } from 'react-hook-form';
+import { useSelectMessageEdit } from '@features/chat/lib';
+import type { Message } from '@shared/api/interfaces';
 import { TextField } from '@shared/ui';
 import styles from './EditMessage.module.scss';
-import classNames from 'classnames';
-import { useForm } from 'react-hook-form';
-import type { FC } from 'react';
-import type { Message } from '@shared/api/interfaces';
 
 interface EditMessageProps {
   handleStopMessageEditing: () => void;

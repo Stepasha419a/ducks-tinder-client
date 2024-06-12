@@ -1,5 +1,5 @@
-import type { FC } from 'react';
 import classNames from 'classnames';
+import type { FC } from 'react';
 import styles from './Dot.module.scss';
 
 interface DotProps {

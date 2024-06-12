@@ -1,7 +1,7 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
+import { INTERESTS_FOR_LOOP } from '@entities/user/lib';
 import { ListItem } from '@shared/ui';
 import styles from '../../PairsFilterPopup.module.scss';
-import { INTERESTS_FOR_LOOP } from '@entities/user/lib';
 
 interface InterestsSettingProps {
   interests: string[];

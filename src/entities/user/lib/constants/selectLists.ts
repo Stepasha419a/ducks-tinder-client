@@ -1,4 +1,3 @@
-import type { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 import {
   AlcoholAttitude,
   AttentionSign,
@@ -15,6 +14,7 @@ import {
   TrainingAttitude,
   ZodiacSign,
 } from '@shared/api/interfaces';
+import type { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 
 export const SELECT_LISTS: Record<ProfileSettingSelectNameEnum, string[]> = {
   interests: Object.values(Interest),

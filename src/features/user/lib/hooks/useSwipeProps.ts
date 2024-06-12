@@ -1,6 +1,6 @@
-import { useTinderAnimations } from '@entities/user/lib';
 import type { AnimationControls, PanInfo } from 'framer-motion';
 import { useMotionValue } from 'framer-motion';
+import { useTinderAnimations } from '@entities/user/lib';
 
 export function useSwipeProps(
   controls: AnimationControls,

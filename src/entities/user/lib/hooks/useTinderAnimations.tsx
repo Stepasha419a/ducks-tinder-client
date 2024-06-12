@@ -1,5 +1,5 @@
-import { useAppDispatch } from '@shared/lib/hooks';
 import type { AnimationControls } from 'framer-motion';
+import { useAppDispatch } from '@shared/lib/hooks';
 import { dislikeUserThunk, likeUserThunk } from '../../model/tinder';
 
 export function useTinderAnimations(controls: AnimationControls) {

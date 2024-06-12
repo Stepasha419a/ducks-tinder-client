@@ -1,9 +1,9 @@
+import { useState } from 'react';
+import { updateUserThunk } from '@entities/user/model/user';
 import { SettingThumbnail } from '@entities/user/ui';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import styles from '../SettingFeatureThumbnails.module.scss';
-import { useState } from 'react';
 import { CheckboxInput, RangeInput } from '@shared/ui';
-import { updateUserThunk } from '@entities/user/model/user';
+import styles from '../SettingFeatureThumbnails.module.scss';
 
 export const DistanceSettingThumbnail = () => {
   const dispatch = useAppDispatch();

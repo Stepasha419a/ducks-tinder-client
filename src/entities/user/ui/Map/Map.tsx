@@ -1,7 +1,7 @@
-import type { FC } from 'react';
 import { YMaps, Map as YMap, Placemark } from '@pbe/react-yandex-maps';
-import { MapLazy } from './Map.lazy';
+import type { FC } from 'react';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
+import { MapLazy } from './Map.lazy';
 
 export const Map: FC = () => {
   const place = useAppSelector((state) => state.user.currentUser!.place);

@@ -1,21 +1,21 @@
 import type { ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ROUTES } from '@shared/constants';
-import Login from '@pages/Login';
-import Registration from '@pages/Registration';
-import NavLayout from '@pages/NavLayout';
-import TinderPage from '@pages/Tinder';
-import ProfilePage from '@pages/Profile';
 import ChatPage from '@pages/Chat';
+import Login from '@pages/Login';
+import NavLayout from '@pages/NavLayout';
 import PairsPage from '@pages/Pairs';
 import PolicyPage from '@pages/Policy';
+import ProfilePage from '@pages/Profile';
+import Registration from '@pages/Registration';
 import SettingsPage from '@pages/Settings';
+import TinderPage from '@pages/Tinder';
 import { PlaceSetting, ProfilePreview } from '@widgets/ui';
+import { ProfileSetting } from '@features/user/ui';
+import { ROUTES } from '@shared/constants';
 import { ActiveChat, IndexChatPage } from './Chat/components';
 import NotFound from './NotFound/NotFound';
-import { SettingsIndexPage } from './Settings/components';
 import { ProfileEdit } from './Profile/components';
-import { ProfileSetting } from '@features/user/ui';
+import { SettingsIndexPage } from './Settings/components';
 
 const Routing = (): ReactElement => {
   return (

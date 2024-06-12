@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { PairsInfo } from '@shared/api/services/user/user-service.interface';
+import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type {
   GetUserPairsThunkReturn,
   PairInitialState,
@@ -10,8 +12,6 @@ import {
   getUserPairsThunk,
   refusePairThunk,
 } from './pair.thunks';
-import { PAGINATION_TAKE } from '@shared/lib/constants';
-import type { PairsInfo } from '@shared/api/services/user/user-service.interface';
 
 const initialState: PairInitialState = {
   pairs: [],

@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { getPairsInfoThunk } from '@entities/user/model/pair';
 import { makeImageUrl } from '@shared/helpers';
-import styles from './PairLink.module.scss';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { FailedPair, Loading } from './components';
-import { getPairsInfoThunk } from '@entities/user/model/pair';
-import { useEffect } from 'react';
+import styles from './PairLink.module.scss';
 
 export const PairLink = () => {
   const dispatch = useAppDispatch();

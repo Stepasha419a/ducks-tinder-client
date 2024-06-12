@@ -1,11 +1,11 @@
-import type { FC, PropsWithChildren } from 'react';
-import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
+import type { FC, PropsWithChildren } from 'react';
+import ReactDOM from 'react-dom';
+import { useMediaQuery } from '@shared/lib/hooks';
 import styles from './Popup.module.scss';
 import type { PopupProps } from './Popup.types';
 import { mobileVariants, variants } from './Popup.variants';
-import { useMediaQuery } from '@shared/lib/hooks';
 
 const portalElement = document.getElementById('portal');
 

@@ -1,11 +1,11 @@
-import type { FC, ReactElement } from 'react';
 import {
   faLocationDot,
   faSquareCheck,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import styles from './Places.module.scss';
+import type { FC, ReactElement } from 'react';
 import { useAppSelector } from '@shared/lib/hooks';
+import styles from './Places.module.scss';
 
 interface PlacesProps {
   refreshFeature: ReactElement;

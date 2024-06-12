@@ -1,11 +1,11 @@
-import { NavBlockEnum } from '@widgets/lib';
-import { motion } from 'framer-motion';
-import styles from './NavBlock.module.scss';
-import { SettingsBlock } from '@features/user/ui';
-import type { FC } from 'react';
-import { chatPairsVariants, profileVariants } from './NavBlock.variants';
-import { ChatsPairsBlock } from './components';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
+import type { FC } from 'react';
+import { NavBlockEnum } from '@widgets/lib';
+import { SettingsBlock } from '@features/user/ui';
+import { ChatsPairsBlock } from './components';
+import styles from './NavBlock.module.scss';
+import { chatPairsVariants, profileVariants } from './NavBlock.variants';
 
 interface NavBlockProps {
   navBlock: NavBlockEnum;

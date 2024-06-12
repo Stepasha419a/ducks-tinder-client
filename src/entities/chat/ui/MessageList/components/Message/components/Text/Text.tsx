@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import type { FC } from 'react';
 import styles from './Text.module.scss';
-import classNames from 'classnames';
 
 interface TextProps {
   text: string;

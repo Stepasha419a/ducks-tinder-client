@@ -1,11 +1,11 @@
 import type { FC } from 'react';
+import { BlockChat, DeleteChat, UnblockChat } from '@features/chat/ui';
 import { selectChatProfile } from '@entities/chat/model';
+import { Preview } from '@entities/user/ui';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Popup } from '@shared/ui';
-import { BlockChat, DeleteChat, UnblockChat } from '@features/chat/ui';
-import styles from './ChatProfilePopup.module.scss';
-import { Preview } from '@entities/user/ui';
 import { ChatProfilePopupLazy } from './ChatProfilePopup.lazy';
+import styles from './ChatProfilePopup.module.scss';
 
 interface ChatProfilePopupProps {
   handleClose: () => void;

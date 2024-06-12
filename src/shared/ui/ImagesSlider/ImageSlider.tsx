@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import type {
   Dispatch,
   FC,
@@ -6,10 +7,11 @@ import type {
   SetStateAction,
 } from 'react';
 import { useState } from 'react';
-import classNames from 'classnames';
+import Skeleton from 'react-loading-skeleton';
 import type Slider from 'react-slick';
 import Carousel from 'react-slick';
 import type { Picture } from '@shared/api/interfaces';
+import { makeImageUrl, showDefaultImage } from '@shared/lib/helpers';
 import {
   NotFoundImages,
   DotsWrapper,
@@ -20,8 +22,6 @@ import {
 import styles from './ImageSlider.module.scss';
 import 'slick-carousel/slick/slick.scss';
 import './override.scss';
-import { makeImageUrl, showDefaultImage } from '@shared/lib/helpers';
-import Skeleton from 'react-loading-skeleton';
 
 interface ImageSliderProps {
   images: Picture[];

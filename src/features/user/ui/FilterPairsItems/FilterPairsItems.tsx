@@ -1,13 +1,13 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ListItem } from '@shared/ui';
+import type { Dispatch, FC, SetStateAction } from 'react';
+import type { Control } from 'react-hook-form';
 import { useOuterPairFilterForm } from '@features/user/lib';
-import styles from './FilterPairsItems.module.scss';
-import { useMediaQuery } from '@shared/lib/hooks';
 import { INTERESTS_FOR_LOOP } from '@entities/user/lib';
 import type { PairFilterForm } from '@entities/user/model/pair';
-import type { Control } from 'react-hook-form';
+import { useMediaQuery } from '@shared/lib/hooks';
+import { ListItem } from '@shared/ui';
+import styles from './FilterPairsItems.module.scss';
 
 interface FilterPairsItemsProps {
   isFilterPopupOpen: boolean;

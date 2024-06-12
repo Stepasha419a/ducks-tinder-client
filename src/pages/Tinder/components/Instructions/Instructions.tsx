@@ -1,6 +1,3 @@
-import type { FC } from 'react';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   faArrowTurnDown,
   faDownLong,
@@ -9,9 +6,12 @@ import {
   faUpLong,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
+import type { FC } from 'react';
+import { useState } from 'react';
 import { Button } from '@shared/ui';
 import styles from './Instructions.module.scss';
-import classNames from 'classnames';
 
 interface InstructionsProps {
   explore?: boolean;

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { Places } from '@entities/user/ui';
 import { updateUserPlaceThunk } from '@entities/user/model/user';
+import { Places } from '@entities/user/ui';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import styles from './PlacesGeolocation.module.scss';
 import { getAreDifferentPlaces } from '../../lib';
+import styles from './PlacesGeolocation.module.scss';
 
 export const PlacesGeolocation = () => {
   const dispatch = useAppDispatch();

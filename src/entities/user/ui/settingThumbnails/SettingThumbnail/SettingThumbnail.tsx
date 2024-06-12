@@ -1,7 +1,7 @@
-import type { FC, PropsWithChildren } from 'react';
-import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import type { FC, PropsWithChildren } from 'react';
 import styles from './SettingThumbnail.module.scss';
 
 interface SettingThumbnailProps {

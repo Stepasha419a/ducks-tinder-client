@@ -1,10 +1,10 @@
-import type { FC } from 'react';
 import classNames from 'classnames';
-import { Avatar } from '@shared/ui';
+import type { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@shared/constants';
-import styles from './ChatItem.module.scss';
 import type { Chat } from '@shared/api/interfaces';
+import { ROUTES } from '@shared/constants';
+import { Avatar } from '@shared/ui';
+import styles from './ChatItem.module.scss';
 
 interface ChatInterface {
   chat: Chat;

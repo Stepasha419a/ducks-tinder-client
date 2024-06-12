@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { withPrivatePageHocs } from '@shared/lib/hocs';
+import { Link } from 'react-router-dom';
 import duckImg from '@shared/assets/images/auth-duck.png';
 import { ROUTES } from '@shared/lib/constants';
+import { withPrivatePageHocs } from '@shared/lib/hocs';
+import styles from './NotFound.module.scss';
 import {
   contentVariants,
   imgVariants,
   lineVariants,
 } from './NotFound.variants';
-import styles from './NotFound.module.scss';
 
 export const NotFound = () => {
   return (

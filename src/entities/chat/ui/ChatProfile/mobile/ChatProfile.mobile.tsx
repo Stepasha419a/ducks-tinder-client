@@ -1,12 +1,12 @@
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC } from 'react';
+import Skeleton from 'react-loading-skeleton';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '@shared/lib/constants';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import styles from './ChatProfile.mobile.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import { ROUTES } from '@shared/lib/constants';
-import Skeleton from 'react-loading-skeleton';
 
 interface ChatProfileProps {
   handleOpen: () => void;

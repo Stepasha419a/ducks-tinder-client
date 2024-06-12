@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { useMediaQuery } from '@shared/lib/hooks';
 import {
   Body,
   Content,
@@ -9,7 +10,6 @@ import {
   Username,
 } from './components';
 import './Message.scss';
-import { useMediaQuery } from '@shared/lib/hooks';
 import { MessageMobile } from './mobile/Message.mobile';
 
 interface MessageProps {

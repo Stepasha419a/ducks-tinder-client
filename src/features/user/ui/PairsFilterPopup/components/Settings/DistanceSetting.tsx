@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
-import { RangeInput } from '@shared/ui';
 import type { PairFilterForm } from '@entities/user/model/pair';
+import { RangeInput } from '@shared/ui';
 import styles from '../../PairsFilterPopup.module.scss';
 
 interface DistanceSettingProps {

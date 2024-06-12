@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useAppSelector } from '@shared/lib/hooks';
-import NotFoundChats from './NotFound/NotFound';
 import FailedChats from './Failed/NoChats';
+import NotFoundChats from './NotFound/NotFound';
 
 export const Status: FC = () => {
   const chats = useAppSelector((state) => state.chat.chats);

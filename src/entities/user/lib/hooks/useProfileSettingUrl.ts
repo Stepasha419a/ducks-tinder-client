@@ -1,5 +1,5 @@
-import { getSettingUrl } from '@entities/user/lib';
 import { useLocation } from 'react-router-dom';
+import { getSettingUrl } from '@entities/user/lib';
 import { PROFILE_SETTING_REGEX } from '../constants';
 import { ProfileSettingNameEnum } from '../constants/profileSettingName';
 

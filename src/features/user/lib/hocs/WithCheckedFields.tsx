@@ -1,9 +1,9 @@
 import type { FC, ReactElement } from 'react';
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { toast } from 'react-toastify';
 import { checkFields } from '@entities/user/model/user';
+import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
   const Wrapper = (props: P): ReactElement<P> => {

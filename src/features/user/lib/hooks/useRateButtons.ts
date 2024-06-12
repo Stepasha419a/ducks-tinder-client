@@ -1,9 +1,3 @@
-import type { AnimationControls } from 'framer-motion';
-import {
-  dislikeUserThunk,
-  likeUserThunk,
-  returnUserThunk,
-} from '@entities/user/model/tinder';
 import {
   faBolt,
   faHeart,
@@ -11,6 +5,12 @@ import {
   faStar,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
+import type { AnimationControls } from 'framer-motion';
+import {
+  dislikeUserThunk,
+  likeUserThunk,
+  returnUserThunk,
+} from '@entities/user/model/tinder';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function useRateButtons(

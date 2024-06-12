@@ -1,8 +1,8 @@
-import type Slider from 'react-slick';
-import type { Dispatch, RefObject, SetStateAction } from 'react';
 import type { AnimationControls } from 'framer-motion';
-import { useEventListener } from '@shared/lib/hooks';
+import type { Dispatch, RefObject, SetStateAction } from 'react';
+import type Slider from 'react-slick';
 import { useTinderAnimations } from '@entities/user/lib';
+import { useEventListener } from '@shared/lib/hooks';
 
 export function useKeyboardEvents(
   controls: AnimationControls,

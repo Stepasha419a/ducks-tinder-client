@@ -1,17 +1,17 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link, useLocation } from 'react-router-dom';
 import {
   faComments,
   faFireFlameCurved,
   faStar,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
+import { Link, useLocation } from 'react-router-dom';
+import { getIsProfilePage } from '@widgets/lib';
+import { getIsChatPage } from '@entities/chat/lib';
 import { ROUTES } from '@shared/lib/constants';
 import { useAppSelector } from '@shared/lib/hooks';
 import styles from './Nav.mobile.module.scss';
-import { getIsProfilePage } from '@widgets/lib';
-import { getIsChatPage } from '@entities/chat/lib';
 
 export const NavMobile = () => {
   const { pathname } = useLocation();

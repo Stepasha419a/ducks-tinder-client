@@ -1,8 +1,8 @@
+import type { Meta, StoryObj } from '@storybook/react';
 import type { FC } from 'react';
 import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import type { RangeInputProps } from './RangeInput.types';
 import { RangeInput } from './RangeInput';
+import type { RangeInputProps } from './RangeInput.types';
 
 const meta = {
   title: 'UI/Input/Range',

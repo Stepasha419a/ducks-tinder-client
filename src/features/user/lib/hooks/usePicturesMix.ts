@@ -1,7 +1,7 @@
-import type { Picture } from '@shared/api/interfaces';
-import { checkChangedPictures } from '../helpers';
-import { useAppDispatch } from '@shared/lib/hooks';
 import { mixUserPicturesThunk } from '@entities/user/model/user';
+import type { Picture } from '@shared/api/interfaces';
+import { useAppDispatch } from '@shared/lib/hooks';
+import { checkChangedPictures } from '../helpers';
 
 export function usePicturesMix() {
   const dispatch = useAppDispatch();

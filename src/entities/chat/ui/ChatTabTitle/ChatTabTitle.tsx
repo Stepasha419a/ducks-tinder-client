@@ -1,7 +1,7 @@
-import type { FC } from 'react';
 import { motion } from 'framer-motion';
-import styles from './ChatTabTitle.module.scss';
+import type { FC } from 'react';
 import { useAppSelector } from '@shared/lib/hooks';
+import styles from './ChatTabTitle.module.scss';
 
 interface ChatTabTitleProps {
   handleClick: () => void;

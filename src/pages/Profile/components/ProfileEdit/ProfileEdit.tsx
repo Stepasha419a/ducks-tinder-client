@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
-import { Preview } from '@entities/user/ui';
 import { useUserPictures } from '@features/user/lib';
+import { ProfileSubmit } from '@features/user/ui';
+import { Preview } from '@entities/user/ui';
+import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { ProfileSettingWrapper } from './components';
 import styles from './ProfileEdit.module.scss';
-import { ProfileSubmit } from '@features/user/ui';
 
 export const ProfileEdit = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');

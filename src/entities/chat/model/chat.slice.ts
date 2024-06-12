@@ -1,5 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import type {
   Chat,
   ReceivedChatBlock,
@@ -7,6 +8,8 @@ import type {
   ReceivedNewMessage,
   ShortUser,
 } from '@shared/api/interfaces';
+import type { ShortMessagesPagination } from '@shared/api/services/chat/chat-service.interface';
+import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type { ChatInitialState } from './chat.interfaces';
 import {
   getChatsThunk,
@@ -17,9 +20,6 @@ import {
   getNewMessagesCountThunk,
   getChatThunk,
 } from './chat.thunks';
-import { toast } from 'react-toastify';
-import type { ShortMessagesPagination } from '@shared/api/services/chat/chat-service.interface';
-import { PAGINATION_TAKE } from '@shared/lib/constants';
 
 const initialState: ChatInitialState = {
   chat: null,

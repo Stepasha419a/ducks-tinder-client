@@ -1,6 +1,6 @@
+import { LinkSettingThumbnail } from '@entities/user/ui';
 import { ROUTES } from '@shared/lib/constants';
 import { useAppSelector } from '@shared/lib/hooks';
-import { LinkSettingThumbnail } from '@entities/user/ui';
 
 export const ZodiacSignSettingThumbnail = () => {
   const zodiacSign = useAppSelector(

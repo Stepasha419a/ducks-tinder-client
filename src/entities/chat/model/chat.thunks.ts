@@ -1,11 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
+import { checkAuthThunk } from '@entities/user/model/auth';
+import type {
+  Message,
+  ReceivedChatBlock,
+  ReceivedMessage,
+  ReceivedNewMessage,
+} from '@shared/api/interfaces';
+import { chatService } from '@shared/api/services';
+import { ChatSocketEvent } from '@shared/api/services/chat/chat-service.interface';
+import { returnErrorMessage } from '@shared/helpers';
+import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type {
   PaginationParams,
   WsExceptionError,
 } from '@shared/lib/interfaces';
-import { chatService } from '@shared/api/services';
-import { returnErrorMessage } from '@shared/helpers';
-import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
 import {
   blockChat,
   deleteChat,
@@ -14,15 +23,6 @@ import {
   setIsNotFound,
   unblockChat,
 } from './chat.slice';
-import { checkAuthThunk } from '@entities/user/model/auth';
-import { PAGINATION_TAKE } from '@shared/lib/constants';
-import type {
-  Message,
-  ReceivedChatBlock,
-  ReceivedMessage,
-  ReceivedNewMessage,
-} from '@shared/api/interfaces';
-import { ChatSocketEvent } from '@shared/api/services/chat/chat-service.interface';
 
 export const getChatThunk = createAsyncThunk(
   'chat/getChat',

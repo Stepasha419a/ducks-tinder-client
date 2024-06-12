@@ -1,12 +1,12 @@
+import classNames from 'classnames';
 import type { FC, PropsWithChildren } from 'react';
 import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import type { SettingFieldValues } from '@features/user/lib/hooks';
 import { ROUTES } from '@shared/constants';
+import { useMediaQuery } from '@shared/lib/hooks';
 import { Button } from '@shared/ui';
 import styles from './SettingWrapper.module.scss';
-import classNames from 'classnames';
-import { useMediaQuery } from '@shared/lib/hooks';
-import type { SettingFieldValues } from '@features/user/lib/hooks';
 
 interface SettingFieldInterestsArray {
   input: string[];

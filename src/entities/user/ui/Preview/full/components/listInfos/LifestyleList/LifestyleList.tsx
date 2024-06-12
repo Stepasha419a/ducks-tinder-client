@@ -1,7 +1,7 @@
 import type { FC } from 'react';
+import { getLifestyle } from '@entities/user/lib';
 import type { ShortUser, User } from '@shared/api/interfaces';
 import { ListInfo } from '../ListInfo/ListInfo';
-import { getLifestyle } from '@entities/user/lib';
 
 interface LifestyleListProps {
   user: User | ShortUser;

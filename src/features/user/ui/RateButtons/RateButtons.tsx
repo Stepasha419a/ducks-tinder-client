@@ -1,9 +1,9 @@
-import type { FC } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { AnimationControls } from 'framer-motion';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from '@shared/ui';
+import type { FC } from 'react';
 import { useRateButtons } from '@features/user/lib';
+import { Button } from '@shared/ui';
 import styles from './RateButtons.module.scss';
 
 interface RateButtonsProps {

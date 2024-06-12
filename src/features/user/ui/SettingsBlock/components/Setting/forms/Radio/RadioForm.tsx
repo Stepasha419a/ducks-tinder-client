@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
+import { useRadioForm } from '@features/user/lib';
 import { RadioInput } from '@shared/ui';
 import SettingWrapper from '../Wrapper/SettingWrapper';
-import { useRadioForm } from '@features/user/lib';
 import styles from './RadioForm.module.scss';
 
 export const RadioForm: FC = (): ReactElement => {

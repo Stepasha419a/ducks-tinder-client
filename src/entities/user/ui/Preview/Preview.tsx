@@ -1,3 +1,6 @@
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import type {
   Dispatch,
   FC,
@@ -5,18 +8,15 @@ import type {
   RefObject,
   SetStateAction,
 } from 'react';
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type Slider from 'react-slick';
-import classNames from 'classnames';
 import type {
   ShortUser,
   ShortUserWithoutDistance,
   User,
 } from '@shared/api/interfaces';
 import { Button } from '@shared/ui';
-import { FullPreview } from './full/FullPreview';
 import { UserSlider } from './components';
+import { FullPreview } from './full/FullPreview';
 import styles from './Preview.module.scss';
 
 interface PreviewPropsInterface {

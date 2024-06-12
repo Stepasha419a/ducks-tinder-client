@@ -1,5 +1,5 @@
-import type { Message } from '@shared/api/interfaces';
 import { editMessageThunk } from '@entities/chat/model';
+import type { Message } from '@shared/api/interfaces';
 import { useAppDispatch } from '@shared/lib/hooks';
 
 export function useSelectMessageEdit(

@@ -1,6 +1,6 @@
+import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '@shared/lib/hooks';
 import { getIsExplorePage, getIsProfilePage } from '../helpers';
-import { useLocation } from 'react-router-dom';
 
 export enum NavBlockEnum {
   Setting,

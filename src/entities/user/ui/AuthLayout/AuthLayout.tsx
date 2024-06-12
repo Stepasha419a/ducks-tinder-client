@@ -1,8 +1,8 @@
 import type { FC, PropsWithChildren, ReactNode } from 'react';
 import type { FieldErrors } from 'react-hook-form';
+import type { RegistrationParams } from '@shared/api/services/auth';
 import authImg from '@shared/assets/images/auth-duck.png';
 import styles from './AuthLayout.module.scss';
-import type { RegistrationParams } from '@shared/api/services/auth';
 
 interface AuthLayoutProps {
   errors: FieldErrors<RegistrationParams>;

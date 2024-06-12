@@ -1,5 +1,5 @@
-import { ROUTES } from '@shared/lib/constants';
 import { Link } from 'react-router-dom';
+import { ROUTES } from '@shared/lib/constants';
 import styles from './MobileTitle.module.scss';
 
 export const MobileTitle = () => {

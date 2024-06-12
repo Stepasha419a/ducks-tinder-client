@@ -1,6 +1,6 @@
+import type { User } from '@shared/api/interfaces';
 import type { ProfileSettingNameEnum } from './profileSettingName';
 import { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
-import type { User } from '@shared/api/interfaces';
 
 // array as fields of user model like user.interests
 export const SELECT_SETTING_FIELDS: Record<

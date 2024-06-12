@@ -1,12 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import {
   checkAuthThunk,
   loginThunk,
   logoutThunk,
   registerThunk,
 } from './auth.thunks';
-import { toast } from 'react-toastify';
 
 interface InitialState {
   isAuth: boolean | null;
