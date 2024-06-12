@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector, useOnClickOutside } from '@shared/lib/hooks';
 import { getDatesHourDiff } from '@shared/helpers';
-import { useMessageSelect } from '../lib';
+import { useMessageSelect } from '../../lib';
 import { MessageSelectMobile } from './mobile/MessageSelect.mobile';
 import styles from './MessageSelect.module.scss';
 import type { Message } from '@/shared/api/interfaces';

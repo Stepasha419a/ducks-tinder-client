@@ -9,7 +9,7 @@ import {
   FilterPairsItems,
   PairsFilterPopup,
   RatePairPopup,
-} from '@features/user';
+} from '@/features/user/components';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 

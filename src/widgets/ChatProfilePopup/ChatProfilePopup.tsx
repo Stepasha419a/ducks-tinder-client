@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { selectChatProfile } from '@entities/chat/model';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Popup } from '@shared/ui';
-import { BlockChat, DeleteChat, UnblockChat } from '@features/chat';
+import { BlockChat, DeleteChat, UnblockChat } from '@features/chat/components';
 import styles from './ChatProfilePopup.module.scss';
 import { Preview } from '@/entities/user/components';
 import { ChatProfilePopupLazy } from './ChatProfilePopup.lazy';

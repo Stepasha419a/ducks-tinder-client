@@ -4,7 +4,7 @@ import { Places } from '@entities/user/components';
 import { updateUserPlaceThunk } from '@/entities/user/model/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import styles from './PlacesGeolocation.module.scss';
-import { getAreDifferentPlaces } from '../lib';
+import { getAreDifferentPlaces } from '../../lib';
 
 export const PlacesGeolocation = () => {
   const dispatch = useAppDispatch();

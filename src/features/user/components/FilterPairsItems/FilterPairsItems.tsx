@@ -2,7 +2,7 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ListItem } from '@shared/ui';
-import { useOuterPairFilterForm } from '../lib';
+import { useOuterPairFilterForm } from '@features/user/lib';
 import styles from './FilterPairsItems.module.scss';
 import { useMediaQuery } from '@shared/lib/hooks';
 import { INTERESTS_FOR_LOOP } from '@/entities/user/lib';

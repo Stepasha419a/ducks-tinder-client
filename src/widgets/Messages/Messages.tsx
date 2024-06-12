@@ -1,6 +1,10 @@
 import { useEffect, useState, type FC, type ReactElement } from 'react';
 import { ChatProfile, MessageList } from '@entities/chat/components';
-import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat';
+import {
+  EditMessage,
+  MessageSelect,
+  SendMessageForm,
+} from '@features/chat/components';
 import {
   useAppDispatch,
   useAppSelector,

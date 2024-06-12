@@ -1,4 +1,4 @@
-import { SettingsBlock } from '@features/user';
+import { SettingsBlock } from '@/features/user/components';
 import { useMediaQuery } from '@shared/lib/hooks';
 import { ProfilePreview } from '@widgets';
 

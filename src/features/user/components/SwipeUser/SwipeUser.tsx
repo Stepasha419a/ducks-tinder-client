@@ -14,7 +14,7 @@ import {
   getMatchUserThunk,
   selectTinderData,
 } from '@entities/user/model/tinder';
-import { useKeyboardEvents, useSwipeProps } from '../../user/lib';
+import { useKeyboardEvents, useSwipeProps } from '../../lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';
 

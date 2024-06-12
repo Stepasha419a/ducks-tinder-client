@@ -9,6 +9,8 @@ export {
   useProfileSelectForm,
   useCurrentValidation,
   useSelectFormControl,
+  usePicturesMix,
+  useUserPictures,
 } from './hooks';
 export { WithAuthRedirect, WithCheckedFields } from './hocs';
 export { getProfileSettingWrapperData, getAreDifferentPlaces } from './helpers';

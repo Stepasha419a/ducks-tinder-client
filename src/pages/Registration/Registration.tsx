@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { RegistrationForm } from '@features/user';
+import { RegistrationForm } from '@/features/user/components';
 import { WithAuthRedirect } from '@/features/user/lib';
 
 const Registration = (): ReactElement => {

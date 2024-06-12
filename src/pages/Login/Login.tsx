@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { LoginForm } from '@features/user';
+import { LoginForm } from '@/features/user/components';
 import { WithAuthRedirect } from '@/features/user/lib';
 
 const Login = (): ReactElement => {

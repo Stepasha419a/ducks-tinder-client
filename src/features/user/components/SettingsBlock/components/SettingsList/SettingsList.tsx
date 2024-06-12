@@ -12,7 +12,7 @@ import {
   PreferSexSettingThumbnail,
   SexSettingThumbnail,
   SwitchThemeThumbnail,
-} from '@features/user';
+} from '@/features/user/components';
 import { LinkThumbnail, SettingsGroup } from '@entities/user/components';
 import {
   AccountGroup,

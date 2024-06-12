@@ -1,7 +1,7 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import { Popup } from '@shared/ui';
-import { usePairFilterForm } from '../lib';
+import { usePairFilterForm } from '../../lib';
 import {
   AgeSetting,
   Buttons,

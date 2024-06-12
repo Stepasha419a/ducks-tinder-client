@@ -1,10 +1,10 @@
 import { useState, type Dispatch, type FC, type SetStateAction } from 'react';
 import type { Picture } from '@shared/api/interfaces';
 import { useMediaQuery } from '@shared/lib/hooks';
-import { PicturesDND, ProfileSubmit } from '@features/user';
-import { ProfileSettingsList } from '@features/user';
+import { PicturesDND, ProfileSubmit } from '@/features/user/components';
+import { ProfileSettingsList } from '@/features/user/components';
 import styles from './ProfileSettingBlock.module.scss';
-import { UploadImagePopups } from '@/features/user/UploadImagePopups/UploadImagePopups';
+import { UploadImagePopups } from '@/features/user/components/UploadImagePopups/UploadImagePopups';
 
 interface ProfileSettingProps {
   pictures: Picture[];

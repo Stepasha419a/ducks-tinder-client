@@ -6,11 +6,10 @@ import {
   useDebouncedCallback,
 } from '@shared/lib/hooks';
 import { getChatsThunk, selectChatList } from '@entities/chat/model';
-import FailedChats from './Failed/FailedChats';
-import { ChatItem } from './ChatItem/ChatItem';
 import styles from './ChatList.module.scss';
 import { ChatListLazy } from './ChatList.lazy';
 import { InfinityScroll } from '@/shared/ui';
+import { ChatItem, FailedChats } from './components';
 
 interface ChatListProps {
   currentUserId: string;

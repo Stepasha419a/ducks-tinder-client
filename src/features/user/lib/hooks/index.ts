@@ -9,3 +9,5 @@ export { useProfileSelectForm } from './useProfileSelectForm';
 export { useSelectFormControl } from './useSelectFormControl';
 export { useCurrentValidation } from './useCurrentValidation';
 export type { SettingFieldValues } from './useCurrentValidation';
+export { usePicturesMix } from './usePicturesMix';
+export { useUserPictures } from './useUserPictures';

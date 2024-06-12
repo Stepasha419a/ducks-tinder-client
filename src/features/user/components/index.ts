@@ -30,3 +30,4 @@ export {
   TextForm,
   TextareaForm,
 } from './SettingsBlock/components/Setting/forms';
+export { PlacesGeolocation } from './PlacesGeolocation/PlacesGeolocation';

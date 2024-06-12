@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useAnimationControls } from 'framer-motion';
 import classNames from 'classnames';
 import { useAppSelector, useMediaQuery } from '@/shared/lib/hooks';
-import { RateButtons, SwipeUser } from '@/features/user';
+import { RateButtons, SwipeUser } from '@/features/user/components';
 import { Failed } from './components';
 import styles from './TinderUser.module.scss';
 import { Explore } from '@/entities/user/components';

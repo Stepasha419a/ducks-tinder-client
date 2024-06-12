@@ -3,7 +3,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './FailedChats.module.scss';
 
-const FailedChats = (): ReactElement => (
+export const FailedChats = (): ReactElement => (
   <div className={styles.noPairs}>
     <FontAwesomeIcon icon={faHeart} className={styles.icon} />
     <div>
@@ -11,5 +11,3 @@ const FailedChats = (): ReactElement => (
     </div>
   </div>
 );
-
-export default FailedChats;
