@@ -1,5 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
-import { getProfileSettingWrapperData } from '@features/user/lib';
+import { getProfileSettingWrapperData } from '@features/user';
 import type { ProfileSettingNameEnum } from '@entities/user/lib/constants';
 import { Button } from '@shared/ui';
 import styles from './SettingWrapper.module.scss';

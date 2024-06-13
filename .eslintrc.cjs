@@ -24,7 +24,14 @@ module.exports = {
     '@feature-sliced/eslint-config/rules/public-api',
     '@feature-sliced/eslint-config/rules/layers-slices',
   ],
-  overrides: [],
+  overrides: [
+    {
+      files: ['index.ts'],
+      rules: {
+        'import/no-internal-modules': 0,
+      },
+    },
+  ],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',

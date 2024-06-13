@@ -6,15 +6,15 @@ import type {
   ReceivedMessage,
   ReceivedNewMessage,
 } from '@shared/api/interfaces';
+import {
+  ChatSocketEvent,
+  shortUserStub,
+  type ChatConnectReturn,
+  type ChatService,
+  type ChatsConnectReturn,
+} from '@shared/api/services';
 import type { PaginationParams } from '@shared/lib/interfaces';
-import type {
-  ChatConnectReturn,
-  ChatService,
-  ChatsConnectReturn,
-} from '../../chat/chat-service.interface';
-import { ChatSocketEvent } from '../../chat/chat-service.interface';
 import { mockStorage, resolveAxiosResponse } from '../mock';
-import { shortUserStub } from '../user/user.stub';
 import { chatStub, shortMessagesPaginationStub } from './chat.stub';
 
 const eventEmitter = new EventEmitter();

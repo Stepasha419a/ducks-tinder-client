@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { withAppHocs } from '@hocs';
 import Routing from '@pages/index';
-import { Loading } from '@entities/user/ui';
+import { Loading } from '@entities/user';
 import { ToastContainer } from '@shared/ui';
 import './styles/index.scss';
 

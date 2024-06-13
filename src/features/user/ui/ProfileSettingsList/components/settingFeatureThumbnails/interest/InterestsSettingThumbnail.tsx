@@ -1,4 +1,4 @@
-import { LinkSettingThumbnail } from '@entities/user/ui';
+import { LinkSettingThumbnail } from '@entities/user';
 import { ROUTES } from '@shared/lib/constants';
 import { useAppSelector } from '@shared/lib/hooks';
 

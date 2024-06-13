@@ -3,8 +3,7 @@ import type { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { makeRangeStyles } from './helpers';
 import styles from './RangeInput.module.scss';
 import type { RangeInputProps } from './RangeInput.types';
-import MultiRangeInput from './variants/MultiRangeInput';
-import SingleRangeInput from './variants/SingleRangeInput';
+export { MultiRangeInput, SingleRangeInput } from './variants';
 
 export const RangeInput: FC<RangeInputProps> = ({
   value,
@@ -21,7 +20,7 @@ export const RangeInput: FC<RangeInputProps> = ({
   const cnWrapper = classNames(
     styles.slider,
     styles.flat,
-    extraWrapperClassName,
+    extraWrapperClassName
   );
 
   const handleRangeChange = (firstValue: number, secondValue: number): void => {

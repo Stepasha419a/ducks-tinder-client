@@ -1,6 +1,6 @@
 import { useState, type FC, type ReactElement } from 'react';
-import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat/ui';
-import { ChatProfile, MessageList } from '@entities/chat/ui';
+import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat';
+import { ChatProfile, MessageList } from '@entities/chat';
 import type { Message } from '@shared/api/interfaces';
 import { useMediaQuery } from '@shared/lib/hooks';
 

@@ -1,7 +1,7 @@
 import { instance } from '@shared/api';
 import type { User, ShortUser } from '@shared/api/interfaces';
-import { getMockableService } from '../mock/mock';
-import { userMockService } from '../mock/user/user.mock-service';
+import { getMockableService } from '@shared/api/services';
+import { userMockService } from '../mock';
 import type { PairFilterParams, PairsInfo } from './user-service.interface';
 import type { UserService } from './user-service.interface';
 

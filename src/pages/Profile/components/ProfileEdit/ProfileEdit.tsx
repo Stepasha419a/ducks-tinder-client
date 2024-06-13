@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ProfileSubmit } from '@features/user';
-import { useUserPictures } from '@features/user/lib';
-import { Preview } from '@entities/user/ui';
+import { useUserPictures } from '@features/user';
+import { Preview } from '@entities/user';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { ProfileSettingWrapper } from './components';
 import styles from './ProfileEdit.module.scss';

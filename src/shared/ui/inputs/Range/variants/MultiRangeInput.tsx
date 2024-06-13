@@ -1,8 +1,8 @@
 import type { FC, PropsWithChildren } from 'react';
 import type { MultiRangeInputProps } from '../RangeInput.types';
-import SingleRangeInput from './SingleRangeInput';
+import { SingleRangeInput } from './SingleRangeInput';
 
-const MultiRangeInput: FC<PropsWithChildren<MultiRangeInputProps>> = ({
+export const MultiRangeInput: FC<PropsWithChildren<MultiRangeInputProps>> = ({
   value,
   setValue,
   completeValue,
@@ -39,5 +39,3 @@ const MultiRangeInput: FC<PropsWithChildren<MultiRangeInputProps>> = ({
     </>
   );
 };
-
-export default MultiRangeInput;

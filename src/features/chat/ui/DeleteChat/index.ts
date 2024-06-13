@@ -1,0 +1,1 @@
+export { DeleteChat } from './DeleteChat';

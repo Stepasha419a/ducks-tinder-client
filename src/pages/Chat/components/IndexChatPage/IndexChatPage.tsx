@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { ChatList } from '@entities/chat/ui';
+import { ChatList } from '@entities/chat';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { Choose } from './components';
 

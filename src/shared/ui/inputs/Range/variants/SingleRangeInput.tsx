@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren, ReactElement } from 'react';
 import type { SingleRangeInputProps } from '../RangeInput.types';
 
-const SingleRangeInput: FC<PropsWithChildren<SingleRangeInputProps>> = ({
+export const SingleRangeInput: FC<PropsWithChildren<SingleRangeInputProps>> = ({
   value,
   setValue,
   completeValue,
@@ -19,5 +19,3 @@ const SingleRangeInput: FC<PropsWithChildren<SingleRangeInputProps>> = ({
     {children}
   </>
 );
-
-export default SingleRangeInput;

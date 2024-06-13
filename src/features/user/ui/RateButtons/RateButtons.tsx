@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { AnimationControls } from 'framer-motion';
 import type { FC } from 'react';
-import { useRateButtons } from '@features/user/lib';
+import { useRateButtons } from '@features/user';
 import { Button } from '@shared/ui';
 import styles from './RateButtons.module.scss';
 

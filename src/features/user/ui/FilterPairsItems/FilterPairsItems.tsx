@@ -2,7 +2,7 @@ import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import type { Control } from 'react-hook-form';
-import { useOuterPairFilterForm } from '@features/user/lib';
+import { useOuterPairFilterForm } from '@features/user';
 import { INTERESTS_FOR_LOOP } from '@entities/user/lib';
 import type { PairFilterForm } from '@entities/user/model/pair';
 import { useMediaQuery } from '@shared/lib/hooks';

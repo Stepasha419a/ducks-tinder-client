@@ -1,4 +1,4 @@
-import { SettingThumbnail } from '@entities/user/ui';
+import { SettingThumbnail } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { setTheme } from '@shared/model/theme';
 import { CheckboxInput } from '@shared/ui';

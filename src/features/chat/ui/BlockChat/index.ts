@@ -1,0 +1,1 @@
+export { BlockChat } from './BlockChat';

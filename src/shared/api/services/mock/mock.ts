@@ -1,7 +1,11 @@
 import type { AxiosResponse } from 'axios';
+import {
+  chatStub,
+  messageStub,
+  matchingUserStubs,
+  userStub,
+} from '@shared/api/services';
 import type { Chat } from '../../interfaces';
-import { chatStub, messageStub } from './chat/chat.stub';
-import { matchingUserStubs, userStub } from './user/user.stub';
 
 export async function resolveAxiosResponse<T>(
   data?: T
