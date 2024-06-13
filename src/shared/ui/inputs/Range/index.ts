@@ -1,2 +1,2 @@
 export type { RangeValue } from './RangeInput.types';
-export type { RangeInput } from './RangeInput';
+export { RangeInput } from './RangeInput';

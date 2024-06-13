@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
-import { useSelectFormControl } from '@features/user/lib/hooks';
+import { useSelectFormControl } from '@features/user';
 import type {
   MultiSelectForm,
   ProfileSettingSelectNameEnum,
-} from '@entities/user/lib';
+} from '@entities/user';
 import { ListItem } from '@shared/ui';
 import styles from './SelectSetting.module.scss';
 

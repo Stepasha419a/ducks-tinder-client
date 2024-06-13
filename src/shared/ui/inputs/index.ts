@@ -1,5 +1,5 @@
-export { Checkbox } from './Checkbox';
-export { Radio } from './Radio';
+export { CheckboxInput } from './Checkbox';
+export { RadioInput } from './Radio';
 export { RangeInput } from './Range';
 export { TextField } from './TextField';
 export { Textarea } from './Textarea';

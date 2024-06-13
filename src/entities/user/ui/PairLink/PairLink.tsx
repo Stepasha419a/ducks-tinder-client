@@ -2,7 +2,7 @@ import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getPairsInfoThunk } from '@entities/user/model/pair';
+import { getPairsInfoThunk } from '@entities/user';
 import { makeImageUrl } from '@shared/helpers';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { FailedPair, Loading } from './components';

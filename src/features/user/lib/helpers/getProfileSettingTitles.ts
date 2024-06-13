@@ -1,4 +1,4 @@
-import type { ProfileSettingSelectNameEnum } from '@entities/user/lib';
+import type { ProfileSettingSelectNameEnum } from '@entities/user';
 import { PROFILE_SETTING_TITLES } from '../constants';
 
 export function getProfileSettingTitles(

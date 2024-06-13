@@ -1,6 +1,6 @@
 import type { RegisterOptions } from 'react-hook-form';
+import { useSettingUrl } from '@entities/user';
 import { EMAIL_REGEXP } from '@shared/constants';
-import { useSettingUrl } from '../../../../entities/user/lib/hooks/useSettingUrl';
 
 export interface SettingFieldValues {
   input: string;

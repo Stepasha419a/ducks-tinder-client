@@ -1,5 +1,5 @@
 import type { Chat, Message } from '@shared/api/interfaces';
-import type { ShortMessagesPagination } from '../../chat/chat-service.interface';
+import type { ShortMessagesPagination } from '@shared/api/services';
 
 export const chatStub: Chat = {
   id: 'id',

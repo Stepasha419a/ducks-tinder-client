@@ -1,7 +1,7 @@
 import type { FormEventHandler } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import { loginThunk, registerThunk } from '@entities/user/model/auth';
+import { loginThunk, registerThunk } from '@entities/user';
 import type { RegistrationParams } from '@shared/api/services/auth';
 import { EMAIL_REGEXP } from '@shared/constants';
 import { useAppDispatch } from '@shared/lib/hooks';

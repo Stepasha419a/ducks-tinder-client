@@ -2,7 +2,7 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
-import { selectCurrentChat, sendMessageThunk } from '@entities/chat/model';
+import { selectCurrentChat, sendMessageThunk } from '@entities/chat';
 import type { Message } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Button, TextField } from '@shared/ui';

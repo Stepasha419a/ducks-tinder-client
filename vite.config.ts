@@ -28,9 +28,10 @@ export default defineConfig({
     alias: {
       '@app': path.resolve(__dirname, './src/app'),
       '@pages': path.resolve(__dirname, './src/pages'),
-      '@widgets': path.resolve(__dirname, './src/widgets'),
+      '@pages/*': path.resolve(__dirname, './src/pages'),
+      '@widgets': path.resolve(__dirname, './src/widgets/index'),
+      '@widgets/*': path.resolve(__dirname, './src/widgets'),
       '@hooks': path.resolve(__dirname, './src/shared/lib/hooks'),
-      '@hocs': path.resolve(__dirname, './src/shared/lib/hocs'),
       '@features': path.resolve(__dirname, './src/features'),
       '@entities': path.resolve(__dirname, './src/entities'),
       '@shared/constants': path.resolve(

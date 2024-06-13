@@ -1,4 +1,4 @@
-import { mixUserPicturesThunk } from '@entities/user/model/user';
+import { mixUserPicturesThunk } from '@entities/user';
 import type { Picture } from '@shared/api/interfaces';
 import { useAppDispatch } from '@shared/lib/hooks';
 import { checkChangedPictures } from '../helpers';

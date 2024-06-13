@@ -1,6 +1,6 @@
 import { useState, type FC, type RefObject } from 'react';
 import type Slider from 'react-slick';
-import { getUserSliderInfo } from '@entities/user/lib';
+import { getUserSliderInfo } from '@entities/user';
 import type { ShortUser, User } from '@shared/api/interfaces';
 import { ImageSlider } from '@shared/ui';
 import { SliderContent } from './components';

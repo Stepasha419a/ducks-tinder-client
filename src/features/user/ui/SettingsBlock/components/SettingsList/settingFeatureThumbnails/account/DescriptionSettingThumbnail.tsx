@@ -1,5 +1,5 @@
 import { LinkSettingThumbnail } from '@entities/user';
-import { SettingNameEnum } from '@entities/user/lib';
+import { SettingNameEnum } from '@entities/user';
 import { ROUTES } from '@shared/lib/constants';
 import { useAppSelector } from '@shared/lib/hooks';
 

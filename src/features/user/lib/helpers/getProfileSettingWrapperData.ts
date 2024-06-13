@@ -1,6 +1,6 @@
-import type { ProfileSettingNameEnum } from '@entities/user/lib';
+import type { ProfileSettingWrapperData } from '@features/user';
+import type { ProfileSettingNameEnum } from '@entities/user';
 import { PROFILE_SETTING_WRAPPER_DATA } from '../constants';
-import type { ProfileSettingWrapperData } from '../constants/profileSettingWrapperData';
 
 export function getProfileSettingWrapperData(
   settingName: ProfileSettingNameEnum | null

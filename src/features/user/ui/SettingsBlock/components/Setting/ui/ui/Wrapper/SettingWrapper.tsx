@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import type { FC, PropsWithChildren } from 'react';
 import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import type { SettingFieldValues } from '@features/user/lib/hooks';
+import type { SettingFieldValues } from '@features/user';
 import { ROUTES } from '@shared/constants';
 import { useMediaQuery } from '@shared/lib/hooks';
 import { Button } from '@shared/ui';
@@ -19,7 +19,7 @@ interface SettingWrapperProps {
   submitHandler: () => void;
 }
 
-const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
+export const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   formName,
   children,
   isValid = true,
@@ -55,5 +55,3 @@ const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
     </form>
   );
 };
-
-export default SettingWrapper;

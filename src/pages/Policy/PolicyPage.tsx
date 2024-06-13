@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { withPrivatePageHocs } from '@hocs';
-import headerImg from '@shared/assets/images/auth-duck.png';
+import { authDuck } from '@shared/assets/images';
+import { withPrivatePageHocs } from '../../features/lib';
 import styles from './PolicyPage.module.scss';
 
 const PolicyPage: FC = (): ReactElement => {
@@ -10,7 +10,7 @@ const PolicyPage: FC = (): ReactElement => {
       <header className={styles.header}>
         <div className={styles.container}>
           <Link to="/" className={styles.link}>
-            <img src={headerImg} alt="IMG" className={styles.image} />
+            <img src={authDuck.default} alt="IMG" className={styles.image} />
             <span className={styles.text}>ducks tinder</span>
           </Link>
         </div>

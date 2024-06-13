@@ -1,7 +1,7 @@
 import type {
   MultiSelectForm,
   ProfileSettingSelectNameEnum,
-} from '@entities/user/lib';
+} from '@entities/user';
 
 export function parseSelectData(data: MultiSelectForm) {
   return Object.keys(data.input).reduce((res, key) => {

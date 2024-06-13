@@ -7,7 +7,7 @@ import {
   type ShortUser,
   type User,
 } from '@shared/api/interfaces';
-import type { PairsInfo } from '../../user/user-service.interface';
+import type { PairsInfo } from '@shared/api/services';
 
 export const shortUserStub: ShortUser = {
   age: 18,

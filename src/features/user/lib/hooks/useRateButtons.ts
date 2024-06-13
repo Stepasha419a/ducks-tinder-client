@@ -10,7 +10,7 @@ import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
-} from '@entities/user/model/tinder';
+} from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function useRateButtons(

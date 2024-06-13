@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import { withPrivatePageHocs } from '@hocs';
-import { Nav } from '@widgets/ui';
+import { Nav } from '@widgets';
+import { withPrivatePageHocs } from '@features/lib';
 import { useMediaQuery } from '@shared/lib/hooks';
-import { NavLayoutMobile } from './mobile/NavLayout.mobile';
 import styles from './NavLayout.module.scss';
+import { NavLayoutMobile } from './ui';
 
 export const NavLayout = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');

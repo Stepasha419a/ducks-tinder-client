@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import type { AuthResponse, AuthService } from '../../auth/auth.interfaces';
+import type { AuthResponse, AuthService } from '@shared/api/services';
 import { mockStorage, resolveAxiosResponse } from '../mock';
 import { authResponseStub } from './auth.stub';
 

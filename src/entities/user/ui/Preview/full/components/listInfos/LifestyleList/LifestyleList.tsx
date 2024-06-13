@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { getLifestyle } from '@entities/user/lib';
+import { getLifestyle } from '@entities/user';
 import type { ShortUser, User } from '@shared/api/interfaces';
 import { ListInfo } from '../ListInfo/ListInfo';
 

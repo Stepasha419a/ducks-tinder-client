@@ -1,11 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import type { MultiSelectForm } from '@entities/user/lib';
-import {
-  useDefaultProfileValues,
-  useProfileSettingUrl,
-} from '@entities/user/lib';
-import { updateUserThunk } from '@entities/user/model/user';
+import type { MultiSelectForm } from '@entities/user';
+import { useDefaultProfileValues, useProfileSettingUrl } from '@entities/user';
+import { updateUserThunk } from '@entities/user';
 import { ROUTES } from '@shared/lib/constants';
 import { useAppDispatch } from '@shared/lib/hooks';
 import { parseSelectData } from '../helpers';

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthLayout } from '@entities/user';
-import { useAuthForm } from '@entities/user/lib';
+import { useAuthForm } from '@entities/user';
 import { Button, TextField } from '@shared/ui';
 import styles from './LoginForm.module.scss';
 

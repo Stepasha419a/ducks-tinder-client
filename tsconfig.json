@@ -18,10 +18,11 @@
     "baseUrl": "./src",
     "paths": {
       "@app/*": ["./app/*"],
+      "@pages": ["./pages"],
       "@pages/*": ["./pages/*"],
       "@widgets/*": ["./widgets/*"],
+      "@widgets": ["./widgets"],
       "@hooks": ["./shared/lib/hooks"],
-      "@hocs": ["./shared/lib/hocs"],
       "@features/*": ["./features/*"],
       "@entities/*": ["./entities/*"],
       "@shared/*": ["./shared/*"],

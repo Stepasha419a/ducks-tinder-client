@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import { RadioForm, TextareaForm, TextForm } from '@features/user';
-import { SettingTypeEnum } from '@entities/user/lib';
-import type { SettingNameEnum } from '@entities/user/lib';
-import { getSettingType } from '@entities/user/lib/helpers';
+import type { SettingNameEnum } from '@entities/user';
+import { SettingTypeEnum } from '@entities/user';
+import { getSettingType } from '@entities/user';
 
 interface SettingProps {
   settingName: SettingNameEnum;

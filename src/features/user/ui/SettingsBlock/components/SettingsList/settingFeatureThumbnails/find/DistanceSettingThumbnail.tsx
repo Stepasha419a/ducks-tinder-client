@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { SettingThumbnail } from '@entities/user';
-import { updateUserThunk } from '@entities/user/model/user';
+import { updateUserThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { CheckboxInput, RangeInput } from '@shared/ui';
 import styles from '../SettingFeatureThumbnails.module.scss';

@@ -1,7 +1,6 @@
 import type { FC, ReactElement } from 'react';
 import { useProfileSelectForm } from '@features/user';
-import { SettingWrapper } from '../Wrapper/SettingWrapper';
-import { SettingsGroup } from './components';
+import { SettingsGroup, SettingWrapper } from './components';
 
 export const SelectForm: FC = (): ReactElement => {
   const { control, settingName, submitHandler } = useProfileSelectForm();

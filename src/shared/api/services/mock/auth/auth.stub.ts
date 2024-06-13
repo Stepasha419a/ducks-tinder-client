@@ -1,4 +1,4 @@
-import type { AuthResponse } from '../../auth/auth.interfaces';
+import type { AuthResponse } from '@shared/api/services';
 
 export const authResponseStub: AuthResponse = {
   email: 'email@gmail.com',

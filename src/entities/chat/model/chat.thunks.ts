@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
-import { checkAuthThunk } from '@entities/user/model/auth';
+import { checkAuthThunk } from '@entities/user';
 import type {
   Message,
   ReceivedChatBlock,

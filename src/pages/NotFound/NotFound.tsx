@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { withPrivatePageHocs } from '@features/lib';
 import { authDuck } from '@shared/assets/images';
 import { ROUTES } from '@shared/lib/constants';
-import { withPrivatePageHocs } from '@shared/lib/hocs';
 import styles from './NotFound.module.scss';
 import {
   contentVariants,

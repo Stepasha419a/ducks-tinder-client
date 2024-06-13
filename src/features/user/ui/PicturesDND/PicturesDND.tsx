@@ -1,6 +1,6 @@
 import { Reorder } from 'framer-motion';
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { deleteUserPictureThunk } from '@entities/user/model/user';
+import { deleteUserPictureThunk } from '@entities/user';
 import type { Picture } from '@shared/api/interfaces';
 import { createEmptyArray, makeImageUrl } from '@shared/helpers';
 import { useAppDispatch } from '@shared/lib/hooks';

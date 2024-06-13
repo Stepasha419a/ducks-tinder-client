@@ -1,8 +1,8 @@
 import { useController, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useDefaultValues } from '@entities/user/lib';
-import { useMemoriedSettingUrl } from '@entities/user/lib/hooks';
-import { updateUserThunk } from '@entities/user/model/user';
+import { useDefaultValues } from '@entities/user';
+import { useMemoriedSettingUrl } from '@entities/user';
+import { updateUserThunk } from '@entities/user';
 import { ROUTES } from '@shared/lib/constants';
 import { useAppDispatch, useMediaQuery } from '@shared/lib/hooks';
 import type { SettingFieldValues } from './useCurrentValidation';

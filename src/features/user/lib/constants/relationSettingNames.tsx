@@ -1,4 +1,4 @@
-import { ProfileSettingNameEnum } from '@entities/user/lib';
+import { ProfileSettingNameEnum } from '@entities/user';
 
 export const RELATION_SETTING_NAMES: ProfileSettingNameEnum[] = [
   ProfileSettingNameEnum.INTERESTS,
