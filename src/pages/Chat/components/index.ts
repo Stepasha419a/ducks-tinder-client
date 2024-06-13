@@ -1,2 +1,2 @@
-export { IndexChatPage } from './IndexChatPage/IndexChatPage';
-export { ActiveChat } from './ActiveChat/ActiveChat';
+export { IndexChatPage } from './IndexChatPage';
+export { ActiveChat } from './ActiveChat';

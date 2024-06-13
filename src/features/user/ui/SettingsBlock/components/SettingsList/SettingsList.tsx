@@ -12,10 +12,10 @@ import {
   PreferSexSettingThumbnail,
   SexSettingThumbnail,
   SwitchThemeThumbnail,
-} from '@features/user/ui';
-import { LinkThumbnail, SettingsGroup } from '@entities/user/ui';
+} from '@features/user';
+import { LinkThumbnail, SettingsGroup } from '@entities/user';
 import { useMediaQuery } from '@shared/lib/hooks';
-import { MobileTitle } from './MobileTitle/MobileTitle';
+import { MobileTitle } from './MobileTitle';
 import {
   AccountGroup,
   FindGroup,

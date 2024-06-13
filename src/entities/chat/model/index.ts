@@ -23,3 +23,4 @@ export {
   selectChatProfile,
   selectCurrentChat,
 } from './chat.selectors';
+export { chatReducer } from './chat.slice';

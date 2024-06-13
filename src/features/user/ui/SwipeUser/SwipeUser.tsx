@@ -4,11 +4,8 @@ import { motion } from 'framer-motion';
 import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
 import { useEffect, useRef } from 'react';
 import type Slider from 'react-slick';
-import {
-  getMatchUserThunk,
-  selectTinderData,
-} from '@entities/user/model/tinder';
-import { Preview } from '@entities/user/ui';
+import { getMatchUserThunk, selectTinderData } from '@entities/user';
+import { Preview } from '@entities/user';
 import {
   useAppDispatch,
   useAppSelector,

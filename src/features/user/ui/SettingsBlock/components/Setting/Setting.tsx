@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { RadioForm, TextareaForm, TextForm } from '@features/user/ui';
+import { RadioForm, TextareaForm, TextForm } from '@features/user';
 import { SettingTypeEnum } from '@entities/user/lib';
 import type { SettingNameEnum } from '@entities/user/lib';
 import { getSettingType } from '@entities/user/lib/helpers';

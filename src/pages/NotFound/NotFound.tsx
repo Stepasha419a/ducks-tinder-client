@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import duckImg from '@shared/assets/images/auth-duck.png';
+import { authDuck } from '@shared/assets/images';
 import { ROUTES } from '@shared/lib/constants';
 import { withPrivatePageHocs } from '@shared/lib/hocs';
 import styles from './NotFound.module.scss';
@@ -26,7 +26,7 @@ export const NotFound = () => {
           <motion.img
             variants={imgVariants}
             className={styles.img}
-            src={duckImg}
+            src={authDuck as unknown as string}
             alt="duck"
           />
         </Link>

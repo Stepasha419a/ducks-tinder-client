@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Button } from '../Button/Button';
+import { Button } from '@shared/ui';
 import { Popup } from './Popup';
 import type { PopupProps } from './Popup.types';
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import { ProfileSubmit } from '@features/user';
 import { useUserPictures } from '@features/user/lib';
-import { ProfileSubmit } from '@features/user/ui';
 import { Preview } from '@entities/user/ui';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
 import { ProfileSettingWrapper } from './components';

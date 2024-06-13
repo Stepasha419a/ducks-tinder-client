@@ -1,0 +1,1 @@
+export { SwipeUser } from './SwipeUser';

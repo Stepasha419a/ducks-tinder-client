@@ -1,5 +1,5 @@
-import { withPrivatePageHocs } from '@hocs';
 import { Outlet } from 'react-router-dom';
+import { withPrivatePageHocs } from '@hocs';
 import { Nav } from '@widgets/ui';
 import { useMediaQuery } from '@shared/lib/hooks';
 import { NavLayoutMobile } from './mobile/NavLayout.mobile';

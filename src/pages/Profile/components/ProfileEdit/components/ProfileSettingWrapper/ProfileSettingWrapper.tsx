@@ -1,7 +1,7 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
-import { ProfileSettingBlock } from '@widgets/ui';
-import { Preview } from '@entities/user/ui';
+import { ProfileSettingBlock } from '@widgets';
+import { Preview } from '@entities/user';
 import type { Picture } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Tabs } from './components';

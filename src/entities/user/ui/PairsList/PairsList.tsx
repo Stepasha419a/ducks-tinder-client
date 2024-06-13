@@ -5,7 +5,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useRef } from 'react';
-import { getUserPairsThunk } from '@entities/user/model/pair';
+import { getUserPairsThunk } from '@entities/user';
 import type { ShortUser } from '@shared/api/interfaces';
 import {
   useAppDispatch,
@@ -13,9 +13,9 @@ import {
   useDebouncedCallback,
 } from '@shared/lib/hooks';
 import { InfinityScroll, Skeleton } from '@shared/ui';
-import Pair from './Pair/Pair';
 import { PairsListLazy } from './PairsList.lazy';
 import styles from './PairsList.module.scss';
+import { Pair } from './ui';
 
 interface PairsListProps {
   setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;

@@ -1,33 +1,15 @@
-export { RatePairPopup } from './RatePairPopup/RatePairPopup';
-export { FilterPairsItems } from './FilterPairsItems/FilterPairsItems';
-export { PicturesDND } from './PicturesDND/PicturesDND';
-export { UploadImagePopups } from './UploadImagePopups/UploadImagePopups';
-export { PairsFilterPopup } from './PairsFilterPopup/PairsFilterPopup';
-export { ProfileSubmit } from './ProfileSubmit/ProfileSubmit';
-export { LoginForm } from './LoginForm/LoginForm';
-export { RegistrationForm } from './RegistrationForm/RegistrationForm';
-export { RateButtons } from './RateButtons/RateButtons';
-export { SwipeUser } from './SwipeUser/SwipeUser';
-export {
-  PlaceSettingThumbnail,
-  DistanceSettingThumbnail,
-  PreferSexSettingThumbnail,
-  PartnerAgeSettingThumbnail,
-  EmailSettingThumbnail,
-  NameSettingThumbnail,
-  DescriptionSettingThumbnail,
-  SexSettingThumbnail,
-  AgeSettingThumbnail,
-  NicknameSettingThumbnail,
-  SwitchThemeThumbnail,
-} from './SettingsBlock/components/SettingsList/settingFeatureThumbnails';
-export { LogoutButton } from './LogoutButton/LogoutButton';
-export { SettingsBlock } from './SettingsBlock/SettingsBlock';
-export { ProfileSetting } from './ProfileSetting/ProfileSetting';
-export { ProfileSettingsList } from './ProfileSettingsList/ProfileSettingsList';
-export {
-  RadioForm,
-  TextForm,
-  TextareaForm,
-} from './SettingsBlock/components/Setting/forms';
-export { PlacesGeolocation } from './PlacesGeolocation/PlacesGeolocation';
+export { RatePairPopup } from './RatePairPopup';
+export { FilterPairsItems } from './FilterPairsItems';
+export { PicturesDND } from './PicturesDND';
+export { UploadImagePopups } from './UploadImagePopups';
+export { PairsFilterPopup } from './PairsFilterPopup';
+export { ProfileSubmit } from './ProfileSubmit';
+export { LoginForm } from './LoginForm';
+export { RegistrationForm } from './RegistrationForm';
+export { RateButtons } from './RateButtons';
+export { SwipeUser } from './SwipeUser';
+export * from './SettingsBlock';
+export { LogoutButton } from './LogoutButton';
+export { ProfileSetting } from './ProfileSetting';
+export { ProfileSettingsList } from './ProfileSettingsList';
+export { PlacesGeolocation } from './PlacesGeolocation';

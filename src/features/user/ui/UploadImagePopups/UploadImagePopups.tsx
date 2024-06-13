@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { saveUserImageThunk } from '@entities/user/model/user';
+import { saveUserImageThunk } from '@entities/user';
 import { useAppDispatch } from '@shared/lib/hooks';
 import { CropImage, DialogUpload } from './components';
 

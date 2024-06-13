@@ -9,13 +9,13 @@ import ProfilePage from '@pages/Profile';
 import Registration from '@pages/Registration';
 import SettingsPage from '@pages/Settings';
 import TinderPage from '@pages/Tinder';
-import { PlaceSetting, ProfilePreview } from '@widgets/ui';
-import { ProfileSetting } from '@features/user/ui';
+import { PlaceSetting, ProfilePreview } from '@widgets';
+import { ProfileSetting } from '@features/user';
 import { ROUTES } from '@shared/constants';
-import { ActiveChat, IndexChatPage } from './Chat/components';
+import { ActiveChat, IndexChatPage } from './Chat';
 import NotFound from './NotFound/NotFound';
-import { ProfileEdit } from './Profile/components';
-import { SettingsIndexPage } from './Settings/components';
+import { ProfileEdit } from './Profile';
+import { SettingsIndexPage } from './Settings';
 
 const Routing = (): ReactElement => {
   return (

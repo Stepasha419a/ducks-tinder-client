@@ -1,2 +1,2 @@
-export { CropImage } from './CropImage/CropImage';
-export { DialogUpload } from './DialogUpload/DialogUpload';
+export { CropImage } from './CropImage';
+export { DialogUpload } from './DialogUpload';

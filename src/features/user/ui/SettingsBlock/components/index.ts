@@ -1,2 +1,2 @@
-export { SettingsList } from './SettingsList/SettingsList';
-export { Setting } from './Setting/Setting';
+export * from './SettingsList';
+export * from './Setting';

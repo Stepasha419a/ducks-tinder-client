@@ -1,0 +1,1 @@
+export { IndexChatPage } from './IndexChatPage';

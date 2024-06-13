@@ -1,8 +1,8 @@
-import { useMediaQuery } from '@hooks';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { ReactElement } from 'react';
-import { useFoundSetting } from '@entities/user/lib/hooks';
-import { NotFoundSetting } from '@entities/user/ui';
+import { useMediaQuery } from '@hooks';
+import { useFoundSetting } from '@entities/user';
+import { NotFoundSetting } from '@entities/user';
 import { ROUTES } from '@shared/lib/constants';
 import { Setting, SettingsList } from './components';
 import styles from './SettingsBlock.module.scss';

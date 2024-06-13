@@ -1,5 +1,5 @@
-import { withAppHocs } from '@hocs';
 import type { ReactElement } from 'react';
+import { withAppHocs } from '@hocs';
 import Routing from '@pages/index';
 import { Loading } from '@entities/user/ui';
 import { ToastContainer } from '@shared/ui';
