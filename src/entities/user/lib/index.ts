@@ -18,17 +18,5 @@ export {
   useSettingUrl,
 } from './hooks';
 export type { MultiSelectForm } from './hooks';
-export {
-  PROFILE_SETTING_REGEX,
-  ProfileSettingNameEnum,
-  SELECT_LISTS,
-  SELECT_SETTING_FIELDS,
-  SELECT_VALIDATION,
-  SettingNameEnum,
-  SettingTypeEnum,
-  ProfileSettingSelectNameEnum,
-  INTERESTS_FOR_LOOP,
-  SETTING_LIST,
-  type SelectValidation,
-} from './constants';
+export * from './constants';
 export * from './hocs';

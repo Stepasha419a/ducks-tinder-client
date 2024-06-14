@@ -1,1 +1,1 @@
-export { checkUserFields } from './checkUserFields';
+export { checkUserFields } from '../../../lib/helpers/checkUserFields';

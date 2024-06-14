@@ -1,5 +1,5 @@
 import type { FC, ReactElement } from 'react';
-import { TinderUser } from '@widgets/TinderUser/TinderUser';
+import { TinderUser } from '@widgets';
 import { Instructions } from './components';
 
 interface TinderProps {

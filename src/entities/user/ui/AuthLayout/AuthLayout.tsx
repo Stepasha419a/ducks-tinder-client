@@ -23,7 +23,7 @@ export const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
           <img
             className={styles.img}
             draggable={false}
-            src={authDuck.default}
+            src={authDuck}
             alt="IMG"
           />
           <div className={styles.formWrapper}>

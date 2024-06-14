@@ -2,8 +2,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import type { User } from '@shared/api/interfaces';
-import { checkUserFields } from './helpers';
-import type { UserInitialState } from './user.interface';
+import type { Setting, UserInitialState } from './user.interface';
 import {
   deleteUserPictureThunk,
   mixUserPicturesThunk,
@@ -25,8 +24,8 @@ const userSlice = createSlice({
     setCurrentUser: (state, { payload }: PayloadAction<User>) => {
       state.currentUser = payload;
     },
-    checkFields: (state, { payload }: PayloadAction<User>) => {
-      state.errorFields = checkUserFields(payload);
+    checkFields: (state, { payload }: PayloadAction<Setting[]>) => {
+      state.errorFields = payload;
     },
   },
   extraReducers: (builder) => {

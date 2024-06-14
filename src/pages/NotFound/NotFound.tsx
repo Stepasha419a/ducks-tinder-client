@@ -26,7 +26,7 @@ export const NotFound = () => {
           <motion.img
             variants={imgVariants}
             className={styles.img}
-            src={authDuck as unknown as string}
+            src={authDuck}
             alt="duck"
           />
         </Link>

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { checkFields } from '@entities/user/';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { checkUserFields } from '../helpers';
 
 export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
   const Wrapper = (props: P): ReactElement<P> => {
@@ -18,7 +19,7 @@ export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
 
     useEffect(() => {
       if (isAuth && currentUser) {
-        dispatch(checkFields(currentUser));
+        dispatch(checkFields(checkUserFields(currentUser)));
 
         const isError = getIsError(pathname, errorFields.length);
         if (isError) {

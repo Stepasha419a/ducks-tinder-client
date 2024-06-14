@@ -10,7 +10,7 @@ const PolicyPage: FC = (): ReactElement => {
       <header className={styles.header}>
         <div className={styles.container}>
           <Link to="/" className={styles.link}>
-            <img src={authDuck.default} alt="IMG" className={styles.image} />
+            <img src={authDuck} alt="IMG" className={styles.image} />
             <span className={styles.text}>ducks tinder</span>
           </Link>
         </div>
