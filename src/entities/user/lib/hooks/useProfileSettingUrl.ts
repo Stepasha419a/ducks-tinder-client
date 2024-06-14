@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { getSettingUrl } from '@entities/user';
 import { PROFILE_SETTING_REGEX } from '../constants';
-import { ProfileSettingNameEnum } from '../constants/profileSettingName';
+import { ProfileSettingNameEnum } from '../constants';
 
 export function useProfileSettingUrl() {
   const { pathname } = useLocation();

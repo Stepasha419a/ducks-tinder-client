@@ -8,9 +8,9 @@ import {
   Select,
   Text,
   Username,
+  MessageMobile,
 } from './components';
 import './Message.scss';
-import { MessageMobile } from './mobile/Message.mobile';
 
 interface MessageProps {
   children: ReactNode;

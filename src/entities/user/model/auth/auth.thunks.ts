@@ -1,10 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCurrentUser } from '@entities/user/model/user';
+import { setCurrentUser } from '@entities/user';
 import { authService } from '@shared/api/services';
-import type {
-  LoginParams,
-  RegistrationParams,
-} from '@shared/api/services/auth';
+import type { LoginParams, RegistrationParams } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 
 export const registerThunk = createAsyncThunk(

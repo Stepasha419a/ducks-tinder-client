@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { getMoreAboutMe } from '@entities/user';
 import type { ShortUser, User } from '@shared/api/interfaces';
-import { ListInfo } from '../ListInfo/ListInfo';
+import { ListInfo } from '../ui';
 
 interface MoreAboutMeListProps {
   user: User | ShortUser;

@@ -1,4 +1,4 @@
-import { SettingNameEnum } from '@entities/user/lib/constants/settingName';
+import { SettingNameEnum } from '@entities/user';
 import type { User } from '@shared/api/interfaces';
 import type { Setting } from '../user.interface';
 

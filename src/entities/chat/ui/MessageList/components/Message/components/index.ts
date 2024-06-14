@@ -5,3 +5,4 @@ export { Text } from './Text/Text';
 export { Username } from './Username/Username';
 export { Reply } from './Reply/Reply';
 export { Body } from './Body/Body';
+export { MessageMobile } from './mobile/Message.mobile';

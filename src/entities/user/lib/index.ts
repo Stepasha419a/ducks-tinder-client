@@ -6,6 +6,7 @@ export {
   getSelectData,
   getSettingType,
 } from './helpers';
+export type { UserPlaceInfo, UserSliderInfo } from './helpers';
 export {
   useAuthForm,
   useTinderAnimations,

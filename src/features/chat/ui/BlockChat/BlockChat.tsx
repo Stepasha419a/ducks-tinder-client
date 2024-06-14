@@ -1,4 +1,4 @@
-import { blockChatThunk } from '@entities/chat/model/chat.thunks';
+import { blockChatThunk } from '@entities/chat';
 import { useAppDispatch } from '@shared/lib/hooks';
 import { Button } from '@shared/ui';
 import styles from './BlockChat.module.scss';

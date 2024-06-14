@@ -1,14 +1,14 @@
 import classNames from 'classnames';
 import { Fragment, useEffect, type FC, type ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMessagesProps, useMessagesScroll } from '@entities/chat/lib';
-import { getIsNextDayMessage } from '@entities/chat/lib';
 import {
   connectChatThunk,
   disconnectChatThunk,
   getMessagesThunk,
   selectMessages,
-} from '@entities/chat/model';
+} from '@entities/chat';
+import { useMessagesProps, useMessagesScroll } from '@entities/chat';
+import { getIsNextDayMessage } from '@entities/chat';
 import type { Message as MessageInterface } from '@shared/api/interfaces';
 import {
   useAppDispatch,

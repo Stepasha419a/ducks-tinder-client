@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { ListInfo } from '../ListInfo/ListInfo';
+import { ListInfo } from '../ui';
 
 interface InterestsListProps {
   interests: string[];

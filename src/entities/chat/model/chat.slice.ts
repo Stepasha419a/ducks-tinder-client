@@ -8,7 +8,7 @@ import type {
   ReceivedNewMessage,
   ShortUser,
 } from '@shared/api/interfaces';
-import type { ShortMessagesPagination } from '@shared/api/services/chat/chat-service.interface';
+import type { ShortMessagesPagination } from '@shared/api/services';
 import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type { ChatInitialState } from './chat.interfaces';
 import {

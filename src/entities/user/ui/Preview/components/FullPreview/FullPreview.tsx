@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
+import { InterestsListPopup } from '@entities/user';
 import type { ShortUser, User } from '@shared/api/interfaces';
 import { Button, ImageSlider } from '@shared/ui';
-import { InterestsListPopup } from '../../InterestsListPopup/InterestsListPopup';
 import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
 import styles from './FullPreview.module.scss';
 

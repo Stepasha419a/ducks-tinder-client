@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { PairsInfo } from '@shared/api/services/user/user-service.interface';
+import type { PairsInfo } from '@shared/api/services';
 import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type {
   GetUserPairsThunkReturn,

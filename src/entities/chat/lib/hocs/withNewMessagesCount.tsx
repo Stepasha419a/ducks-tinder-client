@@ -1,5 +1,5 @@
 import { useEffect, type FC } from 'react';
-import { getNewMessagesCountThunk } from '@entities/chat/model';
+import { getNewMessagesCountThunk } from '@entities/chat';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function WithNewMessagesCount<P extends object>(

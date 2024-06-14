@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { pushNewMessage, setCurrentChatData } from '@entities/chat/model';
+import { pushNewMessage, setCurrentChatData } from '@entities/chat';
 import { checkAuthThunk } from '@entities/user';
 import type {
   Message,
@@ -8,7 +8,7 @@ import type {
   ReceivedNewMessage,
 } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
-import { ChatSocketEvent } from '@shared/api/services/chat/chat-service.interface';
+import { ChatSocketEvent } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type {

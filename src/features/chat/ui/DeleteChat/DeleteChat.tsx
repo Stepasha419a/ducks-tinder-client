@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useState } from 'react';
-import { deleteChatThunk } from '@entities/chat/model';
+import { deleteChatThunk } from '@entities/chat';
 import { useAppDispatch } from '@shared/lib/hooks';
 import { Button, Popup } from '@shared/ui';
 import styles from './DeleteChat.module.scss';

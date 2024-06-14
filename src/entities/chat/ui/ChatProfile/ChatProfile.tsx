@@ -9,7 +9,7 @@ import {
 import { Avatar } from '@shared/ui';
 import { getChatThunk } from '../../model';
 import styles from './ChatProfile.module.scss';
-import { ChatProfileMobile } from './mobile/ChatProfile.mobile';
+import { ChatProfileMobile } from './ui';
 
 interface ChatProfileProps {
   handleOpen: () => void;

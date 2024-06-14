@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren, ReactNode } from 'react';
 import type { FieldErrors } from 'react-hook-form';
-import type { RegistrationParams } from '@shared/api/services/auth';
-import authImg from '@shared/assets/images/auth-duck.png';
+import type { RegistrationParams } from '@shared/api/services';
+import { authDuck } from '@shared/assets/images';
 import styles from './AuthLayout.module.scss';
 
 interface AuthLayoutProps {
@@ -23,7 +23,7 @@ export const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
           <img
             className={styles.img}
             draggable={false}
-            src={authImg}
+            src={authDuck.default}
             alt="IMG"
           />
           <div className={styles.formWrapper}>

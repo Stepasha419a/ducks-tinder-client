@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useAppSelector } from '@shared/lib/hooks';
-import FailedChats from './Failed/NoChats';
-import NotFoundChats from './NotFound/NotFound';
+import { NoChats, NotFoundChat } from './ui';
 
 export const Status: FC = () => {
   const chats = useAppSelector((state) => state.chat.chats);
@@ -12,12 +11,12 @@ export const Status: FC = () => {
   );
 
   if (!chats.length && !isLoading && isSocketConnected) {
-    return <FailedChats />;
+    return <NoChats />;
   }
 
   if (isNotFound) {
-    return <NotFoundChats />;
+    return <NotFoundChat />;
   }
 
-  return <></>;
+  return null;
 };

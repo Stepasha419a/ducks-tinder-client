@@ -1,5 +1,5 @@
 import { useEffect, type FC } from 'react';
-import { connectChatsThunk } from '@entities/chat/model';
+import { connectChatsThunk } from '@entities/chat';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function WithChatConnection<P extends object>(Component: FC<P>): FC<P> {

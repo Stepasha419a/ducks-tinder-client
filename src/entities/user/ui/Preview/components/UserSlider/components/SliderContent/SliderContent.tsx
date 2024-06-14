@@ -2,10 +2,7 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { FC } from 'react';
-import type {
-  UserPlaceInfo,
-  UserSliderInfo,
-} from '@entities/user/lib/helpers/getUserSliderInfo';
+import type { UserPlaceInfo, UserSliderInfo } from '@entities/user';
 import { ListItem } from '@shared/ui';
 import styles from './SliderContent.module.scss';
 

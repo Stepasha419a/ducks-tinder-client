@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useRef } from 'react';
-import { getChatsThunk, selectChatList } from '@entities/chat/model';
+import { getChatsThunk, selectChatList } from '@entities/chat';
 import {
   useAppDispatch,
   useAppSelector,

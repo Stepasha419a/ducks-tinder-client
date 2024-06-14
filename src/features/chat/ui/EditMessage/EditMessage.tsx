@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSelectMessageEdit } from '@features/chat/lib';
+import { useSelectMessageEdit } from '@features/chat';
 import type { Message } from '@shared/api/interfaces';
 import { TextField } from '@shared/ui';
 import styles from './EditMessage.module.scss';
