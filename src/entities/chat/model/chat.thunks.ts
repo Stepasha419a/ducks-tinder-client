@@ -1,28 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { pushNewMessage, setCurrentChatData } from '@entities/chat';
-import { checkAuthThunk } from '@entities/user';
-import type {
-  Message,
-  ReceivedChatBlock,
-  ReceivedMessage,
-  ReceivedNewMessage,
-} from '@shared/api/interfaces';
+import { setCurrentChatData } from '@entities/chat';
+import type { Message } from '@shared/api/interfaces';
 import { chatService } from '@shared/api/services';
-import { ChatSocketEvent } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 import { PAGINATION_TAKE } from '@shared/lib/constants';
-import type {
-  PaginationParams,
-  WsExceptionError,
-} from '@shared/lib/interfaces';
-import {
-  blockChat,
-  deleteChat,
-  deleteMessage,
-  editMessage,
-  setIsNotFound,
-  unblockChat,
-} from './chat.slice';
+import type { PaginationParams } from '@shared/lib/interfaces';
 
 export const getChatThunk = createAsyncThunk(
   'chat/getChat',
@@ -58,58 +40,6 @@ export const getChatsThunk = createAsyncThunk(
 
       return response.data;
     } catch (error: unknown) {
-      return rejectWithValue(returnErrorMessage(error));
-    }
-  }
-);
-
-export const connectChatsThunk = createAsyncThunk(
-  'chat/connectChats',
-  (_, { rejectWithValue, dispatch }) => {
-    try {
-      const { on, onAny } = chatService.connect();
-
-      onAny((event: string, ...errors: unknown[]) => {
-        if (event === 'exception' && (errors[0] as WsExceptionError).message) {
-          switch ((errors[0] as WsExceptionError).message) {
-            case 'Unauthorized':
-              dispatch(checkAuthThunk());
-              break;
-            case 'Validation failed (uuid v 4 is expected)':
-            case 'Not Found':
-              dispatch(setIsNotFound(true));
-              break;
-            default:
-              break;
-          }
-        }
-      });
-
-      on(ChatSocketEvent.SendMessage, (data: ReceivedNewMessage) => {
-        dispatch(pushNewMessage(data));
-      });
-
-      on(ChatSocketEvent.EditMessage, (data: ReceivedMessage) => {
-        dispatch(editMessage(data));
-      });
-
-      on(ChatSocketEvent.DeleteMessage, (data: ReceivedMessage) => {
-        dispatch(deleteMessage(data));
-      });
-
-      on(ChatSocketEvent.BlockChat, (data: ReceivedChatBlock) => {
-        dispatch(blockChat(data));
-      });
-
-      on(ChatSocketEvent.UnblockChat, (data: ReceivedChatBlock) => {
-        dispatch(unblockChat(data));
-      });
-
-      on(ChatSocketEvent.DeleteChat, (deletedChatId: string) => {
-        dispatch(deleteChat(deletedChatId));
-      });
-    } catch (error: unknown) {
-      console.log(error);
       return rejectWithValue(returnErrorMessage(error));
     }
   }

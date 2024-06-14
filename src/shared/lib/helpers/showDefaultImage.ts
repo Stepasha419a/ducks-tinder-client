@@ -6,5 +6,5 @@ export function showDefaultImage(
   event: SyntheticEvent<HTMLImageElement, Event>
 ) {
   event.currentTarget.onerror = null;
-  event.currentTarget.src = defaultDuck as unknown as string;
+  event.currentTarget.src = defaultDuck;
 }

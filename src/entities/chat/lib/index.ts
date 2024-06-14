@@ -4,4 +4,4 @@ export {
   getIsActiveChatPage,
   getIsChatPage,
 } from './helpers';
-export { WithNewMessagesCount, WithChatConnection } from './hocs';
+export { WithNewMessagesCount } from './hocs';

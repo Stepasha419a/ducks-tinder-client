@@ -3,7 +3,7 @@ import type { DetailedHTMLProps, FC, HTMLAttributes } from 'react';
 import { makeRangeStyles } from './helpers';
 import styles from './RangeInput.module.scss';
 import type { RangeInputProps } from './RangeInput.types';
-export { MultiRangeInput, SingleRangeInput } from './variants';
+import { MultiRangeInput, SingleRangeInput } from './variants';
 
 export const RangeInput: FC<RangeInputProps> = ({
   value,

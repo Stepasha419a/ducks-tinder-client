@@ -14,7 +14,6 @@ import type { ChatInitialState } from './chat.interfaces';
 import {
   getChatsThunk,
   disconnectChatThunk,
-  connectChatsThunk,
   getMessagesThunk,
   getMemberThunk,
   getNewMessagesCountThunk,
@@ -41,6 +40,9 @@ const chatSlice = createSlice({
   name: 'chatSlice',
   initialState,
   reducers: {
+    setConnectedSocket: (state) => {
+      state.isSocketConnected = true;
+    },
     setCurrentChatData: (state, { payload }: PayloadAction<string>) => {
       state.currentChatId = payload;
       state.messages = [];
@@ -199,22 +201,6 @@ const chatSlice = createSlice({
           state.chats = state.chats.concat(payload);
         }
       )
-      .addCase(connectChatsThunk.fulfilled, (state) => {
-        state.isSocketConnected = true;
-      })
-      /* .addCase(connectChatThunk.pending, (state) => {
-        const wasConnectedBefore = state.currentChatId;
-        if (wasConnectedBefore) {
-          const chat = state.chats.find(
-            (item) => item.id === state.currentChatId
-          );
-          if (!chat) {
-            return;
-          }
-
-          chat.lastSeenAt = new Date().toISOString();
-        }
-      }) */
       .addCase(getMessagesThunk.pending, (state) => {
         state.isMessagesLoading = true;
       })
@@ -276,6 +262,7 @@ const chatSlice = createSlice({
 });
 
 export const {
+  setConnectedSocket,
   pushNewMessage,
   setCurrentChatData,
   deleteMessage,

@@ -8,7 +8,7 @@ import {
 import { Link } from 'react-router-dom';
 import { ChatTabTitle } from '@entities/chat';
 import { ROUTES } from '@shared/constants';
-import styles from '../ChatsPairsBlock.module.scss';
+import styles from '../../ChatsPairsBlock.module.scss';
 
 interface TabsProps {
   isPairsOpened: boolean;
