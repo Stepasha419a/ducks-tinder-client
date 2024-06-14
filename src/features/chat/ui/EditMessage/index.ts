@@ -1,1 +1,0 @@
-export { EditMessage } from './EditMessage';

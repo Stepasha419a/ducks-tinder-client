@@ -1,1 +1,0 @@
-export { SettingsIndexPage } from './SettingsIndexPage';

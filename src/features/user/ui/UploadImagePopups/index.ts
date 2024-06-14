@@ -1,1 +1,0 @@
-export { UploadImagePopups } from './UploadImagePopups';

@@ -1,1 +1,1 @@
-export { Pair } from './Pair';
+export { Pair } from './Pair/Pair';

@@ -1,1 +1,0 @@
-export { ProfileSettingsList } from './ProfileSettingsList';

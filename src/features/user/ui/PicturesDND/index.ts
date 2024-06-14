@@ -1,1 +1,0 @@
-export { PicturesDND } from './PicturesDND';

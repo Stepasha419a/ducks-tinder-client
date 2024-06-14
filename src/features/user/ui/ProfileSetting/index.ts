@@ -1,1 +1,0 @@
-export { ProfileSetting } from './ProfileSetting';

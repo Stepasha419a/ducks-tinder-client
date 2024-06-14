@@ -1,1 +1,1 @@
-export { Failed } from './Failed';
+export { Failed } from './Failed/Failed';

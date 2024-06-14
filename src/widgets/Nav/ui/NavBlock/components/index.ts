@@ -1,1 +1,1 @@
-export { ChatsPairsBlock } from './ChatsPairsBlock';
+export { ChatsPairsBlock } from './ChatsPairsBlock/ChatsPairsBlock';

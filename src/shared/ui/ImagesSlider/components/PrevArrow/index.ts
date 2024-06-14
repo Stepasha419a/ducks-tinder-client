@@ -1,1 +1,0 @@
-export { PrevArrow } from './PrevArrow';

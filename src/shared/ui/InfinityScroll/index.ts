@@ -1,1 +1,0 @@
-export { InfinityScroll } from './InfinityScroll';

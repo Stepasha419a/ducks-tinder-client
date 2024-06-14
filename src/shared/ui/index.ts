@@ -1,9 +1,9 @@
-export { Avatar } from './Avatar';
+export { Avatar } from './Avatar/Avatar';
 export * from './inputs';
-export { Button } from './Button';
-export { Popup } from './Popup';
-export { ListItem } from './ListItem';
-export { ImageSlider } from './ImagesSlider';
-export { Skeleton } from './Skeleton';
-export { ToastContainer } from './ToastContainer';
-export { InfinityScroll } from './InfinityScroll';
+export { Button } from './Button/Button';
+export { Popup } from './Popup/Popup';
+export { ListItem } from './ListItem/ListItem';
+export { ImageSlider } from './ImagesSlider/ImageSlider';
+export { Skeleton } from './Skeleton/Skeleton';
+export { ToastContainer } from './ToastContainer/ToastContainer';
+export { InfinityScroll } from './InfinityScroll/InfinityScroll';
