@@ -9,7 +9,7 @@ import {
 import { InfinityScroll } from '@shared/ui';
 import { ChatListLazy } from './ChatList.lazy';
 import styles from './ChatList.module.scss';
-import { ChatItem, FailedChats } from './components';
+import { ChatItem, FailedChats } from './ui';
 
 interface ChatListProps {
   currentUserId: string;

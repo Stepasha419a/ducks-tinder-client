@@ -10,8 +10,8 @@ import { useState } from 'react';
 import { InterestsListPopup } from '@entities/user';
 import type { ShortUser, User } from '@shared/api/interfaces';
 import { Button, ImageSlider } from '@shared/ui';
-import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
 import styles from './FullPreview.module.scss';
+import { InterestsList, LifestyleList, MoreAboutMeList } from './ui';
 
 interface FullPreviewPropsInterface {
   user: User | ShortUser;

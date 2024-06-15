@@ -9,7 +9,7 @@ export { RegistrationForm } from './RegistrationForm/RegistrationForm';
 export { RateButtons } from './RateButtons/RateButtons';
 export { SwipeUser } from './SwipeUser/SwipeUser';
 export { SettingsBlock } from './SettingsBlock/SettingsBlock';
-export * from './SettingsBlock/components';
+export * from './SettingsBlock/ui';
 export { LogoutButton } from './LogoutButton/LogoutButton';
 export { ProfileSetting } from './ProfileSetting/ProfileSetting';
 export { ProfileSettingsList } from './ProfileSettingsList/ProfileSettingsList';

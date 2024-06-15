@@ -15,8 +15,8 @@ import type {
   User,
 } from '@shared/api/interfaces';
 import { Button } from '@shared/ui';
-import { UserSlider, FullPreview } from './components';
 import styles from './Preview.module.scss';
+import { UserSlider, FullPreview } from './ui';
 
 interface PreviewPropsInterface {
   user: User | ShortUser | ShortUserWithoutDistance;

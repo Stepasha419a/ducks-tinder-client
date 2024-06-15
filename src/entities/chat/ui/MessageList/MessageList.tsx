@@ -16,9 +16,9 @@ import {
   useDebouncedCallback,
 } from '@shared/lib/hooks';
 import { InfinityScroll } from '@shared/ui';
-import { Message, MessageSelect, Timestamp, Status } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';
+import { Message, Timestamp, Status } from './ui';
 
 interface MessagesProps {
   select: ReactElement;
@@ -113,7 +113,7 @@ export const MessageList: FC<MessagesProps> = ({
                     <Message.Text {...getTextProps(message)} />
                   </Message.Content>
                 </Message.Body>
-                <MessageSelect
+                <Message.Select
                   getSelectProps={() => getSelectProps(message)}
                   handleSelectMessage={() => handleSelectMessage(message)}
                   isSelectOpen={isSelectOpen}

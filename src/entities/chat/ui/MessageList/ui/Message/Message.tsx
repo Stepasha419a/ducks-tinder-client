@@ -9,7 +9,7 @@ import {
   Text,
   Username,
   MessageMobile,
-} from './components';
+} from './ui';
 import './Message.scss';
 
 interface MessageProps {

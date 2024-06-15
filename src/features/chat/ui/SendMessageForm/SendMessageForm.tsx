@@ -6,8 +6,8 @@ import { selectCurrentChat, sendMessageThunk } from '@entities/chat';
 import type { Message } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Button, TextField } from '@shared/ui';
-import { BlockedChat, ReplyBlock } from './components';
 import styles from './SendMessageForm.module.scss';
+import { BlockedChat, ReplyBlock } from './ui';
 
 interface ChatFormValues {
   input: string;

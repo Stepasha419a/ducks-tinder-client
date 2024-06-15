@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import { getPairsInfoThunk } from '@entities/user';
 import { makeImageUrl } from '@shared/helpers';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import { FailedPair, Loading } from './components';
 import styles from './PairLink.module.scss';
+import { FailedPair, Loading } from './ui';
 
 export const PairLink = () => {
   const dispatch = useAppDispatch();
