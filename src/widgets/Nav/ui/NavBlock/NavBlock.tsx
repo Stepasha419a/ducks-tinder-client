@@ -3,9 +3,9 @@ import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { SettingsBlock } from '@features/user';
 import { NavBlockEnum } from '../../lib';
-import { ChatsPairsBlock } from './components';
 import styles from './NavBlock.module.scss';
 import { chatPairsVariants, profileVariants } from './NavBlock.variants';
+import { ChatsPairsBlock } from './ui';
 
 interface NavBlockProps {
   navBlock: NavBlockEnum;

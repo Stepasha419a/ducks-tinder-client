@@ -4,9 +4,9 @@ import { useMediaQuery } from '@hooks';
 import { useFoundSetting } from '@entities/user';
 import { NotFoundSetting } from '@entities/user';
 import { ROUTES } from '@shared/lib/constants';
-import { Setting, SettingsList } from './components';
 import styles from './SettingsBlock.module.scss';
 import { settingVariants } from './SettingsBlock.variants';
+import { Setting, SettingsList } from './ui';
 
 export const SettingsBlock = (): ReactElement => {
   const isMobile = useMediaQuery('(max-width: 900px)');

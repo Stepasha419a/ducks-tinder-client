@@ -1,6 +1,6 @@
 import type { FC, ReactElement } from 'react';
 import { TinderUser } from '@widgets';
-import { Instructions } from './components';
+import { Instructions } from './ui';
 
 interface TinderProps {
   explore?: boolean;

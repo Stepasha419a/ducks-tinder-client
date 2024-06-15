@@ -8,13 +8,9 @@ interface SelectProps {
   isMessageEditing: boolean;
   select: ReactElement;
   handleSelectMessage: () => void;
-  getSelectProps: () => {
-    isSelectOpen: boolean;
-  };
 }
 
 export const Select: FC<SelectProps> = ({
-  getSelectProps,
   handleSelectMessage,
   isSelectOpen,
   isMessageEditing,
@@ -35,7 +31,6 @@ export const Select: FC<SelectProps> = ({
       onClick={handleSelectMessage}
       className="dots"
       icon={faEllipsis}
-      {...getSelectProps()}
     />
   );
 };

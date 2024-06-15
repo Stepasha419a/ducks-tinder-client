@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { RateButtons, SwipeUser } from '@features/user';
 import { Explore } from '@entities/user';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
-import { Failed } from './components';
 import styles from './TinderUser.module.scss';
+import { Failed } from './ui';
 
 interface TinderUserProps {
   explore?: boolean;

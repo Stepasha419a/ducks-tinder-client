@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { ChatList } from '@entities/chat';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
-import { Choose } from './components';
+import { Choose } from './ui';
 
 export const IndexChatPage: FC = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');

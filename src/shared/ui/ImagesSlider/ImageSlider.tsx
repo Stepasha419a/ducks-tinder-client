@@ -12,14 +12,8 @@ import type Slider from 'react-slick';
 import Carousel from 'react-slick';
 import type { Picture } from '@shared/api/interfaces';
 import { makeImageUrl, showDefaultImage } from '@shared/lib/helpers';
-import {
-  NotFoundImages,
-  DotsWrapper,
-  NextArrow,
-  PrevArrow,
-  Dot,
-} from './components';
 import styles from './ImageSlider.module.scss';
+import { NotFoundImages, DotsWrapper, NextArrow, PrevArrow, Dot } from './ui';
 import 'slick-carousel/slick/slick.scss';
 import './override.scss';
 

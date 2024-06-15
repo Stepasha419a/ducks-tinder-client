@@ -1,2 +1,2 @@
 export { default } from './ProfilePage';
-export * from './components';
+export * from './ui';

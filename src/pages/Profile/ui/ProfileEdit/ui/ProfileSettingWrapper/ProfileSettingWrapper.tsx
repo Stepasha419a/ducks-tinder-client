@@ -4,8 +4,8 @@ import { ProfileSettingBlock } from '@widgets';
 import { Preview } from '@entities/user';
 import type { Picture } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
-import { Tabs } from './components';
 import styles from './ProfileSettingWrapper.module.scss';
+import { Tabs } from './ui';
 
 interface ProfileSettingWrapperProps {
   pictures: Picture[];

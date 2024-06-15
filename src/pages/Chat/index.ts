@@ -1,2 +1,2 @@
 export { default } from './ChatPage';
-export * from './components';
+export * from './ui';

@@ -3,8 +3,8 @@ import { ProfileSubmit } from '@features/user';
 import { useUserPictures } from '@features/user';
 import { Preview } from '@entities/user';
 import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
-import { ProfileSettingWrapper } from './components';
 import styles from './ProfileEdit.module.scss';
+import { ProfileSettingWrapper } from './ui';
 
 export const ProfileEdit = () => {
   const isMobile = useMediaQuery('(max-width: 900px)');

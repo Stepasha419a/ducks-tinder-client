@@ -95,7 +95,6 @@ export const MessageList: FC<MessagesProps> = ({
         isReversed
       >
         {messages.map((message: MessageInterface, i) => {
-          const isSelectOpen = selectedMessage?.id === message.id;
           const isNextDayMessage =
             messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
 
@@ -114,9 +113,8 @@ export const MessageList: FC<MessagesProps> = ({
                   </Message.Content>
                 </Message.Body>
                 <Message.Select
-                  getSelectProps={() => getSelectProps(message)}
+                  {...getSelectProps(message)}
                   handleSelectMessage={() => handleSelectMessage(message)}
-                  isSelectOpen={isSelectOpen}
                   isMessageEditing={isMessageEditing}
                   select={select}
                 />
