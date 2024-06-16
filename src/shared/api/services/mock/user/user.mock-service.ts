@@ -3,7 +3,7 @@
 import type { User } from '@shared/api/interfaces';
 import type { UserService, PairFilterParams } from '@shared/api/services';
 import { chatStub } from '@shared/api/services';
-import { mockStorage, resolveAxiosResponse } from '../mock';
+import { mockStorage, resolveAxiosResponse, saveTestUser } from '../mock';
 import { matchingUserStubs, pairsInfoStub } from './user.stub';
 
 export const userMockService: UserService = {
@@ -15,6 +15,8 @@ export const userMockService: UserService = {
 
   async updateUser(data: Partial<User>) {
     mockStorage.currentUser = { ...mockStorage.currentUser, ...data };
+    saveTestUser(mockStorage.currentUser);
+
     return resolveAxiosResponse(mockStorage.currentUser);
   },
 
@@ -28,6 +30,8 @@ export const userMockService: UserService = {
         name: 'place-name',
       },
     };
+    saveTestUser(mockStorage.currentUser);
+
     return resolveAxiosResponse(mockStorage.currentUser);
   },
 
