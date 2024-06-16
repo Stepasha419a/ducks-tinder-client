@@ -1,12 +1,12 @@
 import { YMaps, Map as YMap, Placemark } from '@pbe/react-yandex-maps';
 import type { FC } from 'react';
-import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
+import { useAppSelector, useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import { MapLazy } from './Map.lazy';
 
 export const Map: FC = () => {
   const place = useAppSelector((state) => state.user.currentUser!.place);
 
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   if (!place) {
     return <MapLazy isMobile />;

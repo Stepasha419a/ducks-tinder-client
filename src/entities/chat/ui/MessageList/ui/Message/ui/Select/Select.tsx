@@ -1,7 +1,7 @@
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC, ReactElement } from 'react';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 
 interface SelectProps {
   isSelectOpen: boolean;
@@ -16,7 +16,7 @@ export const Select: FC<SelectProps> = ({
   isMessageEditing,
   select,
 }) => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   if (isMobile) {
     return null;

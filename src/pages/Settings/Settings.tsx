@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import styles from './Settings.module.scss';
 
 export const SettingsPage = () => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   if (isMobile) {
     return (

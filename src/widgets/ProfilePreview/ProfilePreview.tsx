@@ -2,13 +2,13 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Preview } from '@entities/user';
 import { ROUTES } from '@shared/constants';
-import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
+import { useAppSelector, useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import { Button } from '@shared/ui';
 import { ProfilePreviewMobile } from './mobile';
 import styles from './ProfilePreview.module.scss';
 
 export const ProfilePreview: FC = () => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const user = useAppSelector((state) => state.user.currentUser!);
 

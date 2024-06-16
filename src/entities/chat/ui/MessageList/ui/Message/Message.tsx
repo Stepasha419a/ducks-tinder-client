@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import {
   Body,
   Content,
@@ -18,7 +18,7 @@ interface MessageProps {
 }
 
 export const Message = ({ children, handleSelectMessage }: MessageProps) => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   if (isMobile) {
     return (

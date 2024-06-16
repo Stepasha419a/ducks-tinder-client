@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { RateButtons, SwipeUser } from '@features/user';
 import { Explore } from '@entities/user';
-import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
+import { useAppSelector, useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import styles from './TinderUser.module.scss';
 import { Failed } from './ui';
 
@@ -13,7 +13,7 @@ interface TinderUserProps {
 }
 
 export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const isFailed = useAppSelector((state: RootState) => state.tinder.isFailed);
 

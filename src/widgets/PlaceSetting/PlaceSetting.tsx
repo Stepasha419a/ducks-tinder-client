@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { PlacesGeolocation } from '@features/user';
 import { Map } from '@entities/user';
 import { ROUTES } from '@shared/constants';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import styles from './PlaceSetting.module.scss';
 
 export const PlaceSetting = () => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const url = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 

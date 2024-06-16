@@ -4,14 +4,14 @@ import { useDefaultValues } from '@entities/user';
 import { useMemoriedSettingUrl } from '@entities/user';
 import { updateUserThunk } from '@entities/user';
 import { ROUTES } from '@shared/lib/constants';
-import { useAppDispatch, useMediaQuery } from '@shared/lib/hooks';
+import { useAppDispatch, useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import type { SettingFieldValues } from './useCurrentValidation';
 
 export function useRadioForm() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const { settingName, formName } = useMemoriedSettingUrl();
 

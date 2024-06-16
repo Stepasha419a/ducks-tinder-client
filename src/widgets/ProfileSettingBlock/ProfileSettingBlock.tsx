@@ -6,7 +6,7 @@ import {
   ProfileSettingsList,
 } from '@features/user';
 import type { Picture } from '@shared/api/interfaces';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import styles from './ProfileSettingBlock.module.scss';
 
 interface ProfileSettingProps {
@@ -18,7 +18,7 @@ export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
   pictures,
   setPictures,
 }) => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const [isUploadOpen, setIsUploadOpen] = useState(false);
 

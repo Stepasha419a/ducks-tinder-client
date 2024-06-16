@@ -14,7 +14,7 @@ import {
   SwitchThemeThumbnail,
 } from '@features/user';
 import { LinkThumbnail, SettingsGroup } from '@entities/user';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import { MobileTitle } from './MobileTitle';
 import {
   AccountGroup,
@@ -25,7 +25,7 @@ import {
 import styles from './SettingsList.module.scss';
 
 export const SettingsList = (): ReactElement => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   return (
     <>

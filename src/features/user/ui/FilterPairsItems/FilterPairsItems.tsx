@@ -5,7 +5,7 @@ import type { Control } from 'react-hook-form';
 import { useOuterPairFilterForm } from '@features/user';
 import { INTERESTS_FOR_LOOP } from '@entities/user';
 import type { PairFilterForm } from '@entities/user';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import { ListItem } from '@shared/ui';
 import styles from './FilterPairsItems.module.scss';
 
@@ -22,7 +22,7 @@ export const FilterPairsItems: FC<FilterPairsItemsProps> = ({
   control,
   handleSubmit,
 }) => {
-  const isSmallMobile = useMediaQuery('(max-width: 600px)');
+  const isSmallMobile = useAdaptiveMediaQuery('(max-width: 600px)');
 
   const {
     hasInterests,

@@ -9,7 +9,7 @@ import { Preview } from '@entities/user';
 import {
   useAppDispatch,
   useAppSelector,
-  useMediaQuery,
+  useAdaptiveMediaQuery,
 } from '@shared/lib/hooks';
 import { useKeyboardEvents, useSwipeProps } from '../../lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';
@@ -31,7 +31,7 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
 
   const sliderRef = useRef<Slider>(null);
 
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const { tinderUser } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);

@@ -2,7 +2,7 @@ import { useState, type FC, type ReactElement } from 'react';
 import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat';
 import { ChatProfile, MessageList } from '@entities/chat';
 import type { Message } from '@shared/api/interfaces';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 
 interface MessagesProps {
   handleOpenPopup: () => void;
@@ -11,7 +11,7 @@ interface MessagesProps {
 export const Messages: FC<MessagesProps> = ({
   handleOpenPopup,
 }): ReactElement => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const [selectedMessage, setSelectedMessage] = useState<null | Message>(null);
   const [repliedMessage, setRepliedMessage] = useState<null | Message>(null);

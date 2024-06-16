@@ -4,7 +4,7 @@ import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import type { SettingFieldValues } from '@features/user';
 import { ROUTES } from '@shared/constants';
-import { useMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import { Button } from '@shared/ui';
 import styles from './SettingWrapper.module.scss';
 
@@ -26,7 +26,7 @@ export const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   errors,
   submitHandler,
 }) => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
   const cancelUrl = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 
   return (

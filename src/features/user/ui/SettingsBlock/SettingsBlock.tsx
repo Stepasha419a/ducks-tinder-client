@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import type { ReactElement } from 'react';
-import { useMediaQuery } from '@hooks';
+import { useAdaptiveMediaQuery } from '@hooks';
 import { useFoundSetting } from '@entities/user';
 import { NotFoundSetting } from '@entities/user';
 import { ROUTES } from '@shared/lib/constants';
@@ -9,7 +9,7 @@ import { settingVariants } from './SettingsBlock.variants';
 import { Setting, SettingsList } from './ui';
 
 export const SettingsBlock = (): ReactElement => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const setting = useFoundSetting();
 
@@ -31,6 +31,7 @@ export const SettingsBlock = (): ReactElement => {
             animate={slideIn}
             exit={slideOut}
             transition={{ duration: 0.25 }}
+            className={styles.setting}
           >
             <Setting settingName={setting} />
           </motion.div>
@@ -42,6 +43,7 @@ export const SettingsBlock = (): ReactElement => {
             animate={slideIn}
             exit={slideOut}
             transition={{ duration: 0.25 }}
+            className={styles.setting}
           >
             <SettingsList />
           </motion.div>

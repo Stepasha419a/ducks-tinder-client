@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { ProfileSubmit } from '@features/user';
 import { useUserPictures } from '@features/user';
 import { Preview } from '@entities/user';
-import { useAppSelector, useMediaQuery } from '@shared/lib/hooks';
+import { useAppSelector, useAdaptiveMediaQuery } from '@shared/lib/hooks';
 import styles from './ProfileEdit.module.scss';
 import { ProfileSettingWrapper } from './ui';
 
 export const ProfileEdit = () => {
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const user = useAppSelector((state) => state.user.currentUser!);
 

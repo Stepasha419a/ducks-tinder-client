@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import {
   useAppDispatch,
   useAppSelector,
-  useMediaQuery,
+  useAdaptiveMediaQuery,
 } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import { getChatThunk } from '../../model';
@@ -22,7 +22,7 @@ export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
 
   const chat = useAppSelector((state) => state.chat.chat);
   const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
-  const isMobile = useMediaQuery('(max-width: 900px)');
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   useEffect(() => {
     if (chatId) {
