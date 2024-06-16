@@ -1,5 +1,6 @@
 .container {
   padding: 24px;
+  height: calc(100% - 66px);
 
   .cropper {
     width: 392px;
@@ -36,25 +37,7 @@
 
     .cropper {
       width: calc(100vw - 48px);
-      height: calc(100vh - 204px - 86px - 40px);
-    }
-  }
-}
-
-@media (max-height: 800px) {
-  .container {
-    .cropper {
-      height: calc(100vh - 204px - 86px);
-    }
-  }
-}
-
-@media (max-height: 600px) {
-  .container {
-    padding: 0 24px 24px;
-
-    .cropper {
-      height: calc(100vh - 204px - 62px);
+      height: calc(100% - 124px);
     }
   }
 }

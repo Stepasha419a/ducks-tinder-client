@@ -1,8 +1,14 @@
 .chats {
   margin-top: 20px;
   width: 100%;
-  height: calc(100vh - 147px);
+  height: calc(100% - 147px);
   overflow: auto;
+
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .lazy_wrapper {

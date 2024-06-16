@@ -1,16 +1,16 @@
 .messages {
   position: relative;
   overflow: auto;
-  height: calc(100vh - 110px);
+  height: calc(100% - 110px);
   padding-left: 14vw;
   padding-bottom: 8px;
 
   &.replying {
-    height: calc(100vh - 170px);
+    height: calc(100% - 170px);
   }
 
   &.messageEditing {
-    height: calc(100vh - 160px);
+    height: calc(100% - 160px);
   }
 
   .loadMessages {

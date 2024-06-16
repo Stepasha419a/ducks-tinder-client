@@ -34,6 +34,7 @@ export const ChatsPairsBlock: FC = () => {
               animate={'slideIn'}
               exit={'slideOut'}
               transition={{ duration: 0.25 }}
+              className={styles.block}
             >
               <PairLink />
             </motion.div>
@@ -45,6 +46,7 @@ export const ChatsPairsBlock: FC = () => {
               animate={'slideIn'}
               exit={'slideExit'}
               transition={{ duration: 0.25 }}
+              className={styles.block}
             >
               <ChatList currentUserId={currentUserId} />
             </motion.div>

@@ -1,3 +1,5 @@
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import type { Message } from '@shared/api/interfaces';
 import { useAppSelector } from '@shared/lib/hooks';
@@ -24,8 +26,9 @@ export const ReplyBlock: FC<ReplyBlockProps> = ({
         <div className={styles.username}>{repliedName}</div>
         <div className={styles.text}>{repliedMessage.text}</div>
       </div>
+
       <div onClick={() => setRepliedMessage(null)} className={styles.close}>
-        <div className={styles.mark} />
+        <FontAwesomeIcon className={styles.icon} icon={faXmark} />
       </div>
     </div>
   );

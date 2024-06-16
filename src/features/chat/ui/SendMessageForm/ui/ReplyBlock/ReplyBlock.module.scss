@@ -35,36 +35,38 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 10px;
-    padding: 20px;
+    right: 16px;
+    padding: 10px;
     cursor: pointer;
 
-    .mark {
+    .icon {
       width: 24px;
       height: 24px;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      right: 10px;
+      padding: 0 10px;
+    }
+  }
+}
 
-      &::before,
-      &::after {
-        content: '';
-        display: block;
-        height: 4px;
-        width: 20px;
-        background-color: var(--color--black-85);
-        border-radius: 4px;
-        position: absolute;
-        top: 11px;
-        left: 2px;
-      }
-      &::before {
-        transform: rotate(45deg);
-      }
-      &::after {
-        transform: rotate(135deg);
-      }
+@media (max-width: 600px) {
+  .reply {
+    .close {
+      right: 6px;
+    }
+  }
+}
+
+@media (max-width: 470px) {
+  .reply {
+    .close {
+      right: 4px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .reply {
+    .close {
+      right: 1px;
     }
   }
 }

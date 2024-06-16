@@ -53,6 +53,7 @@ export const NavBlock: FC<NavBlockProps> = ({ navBlock }) => {
       animate={'slideIn'}
       exit={'slideOut'}
       transition={{ duration: 0.25 }}
+      className={styles.block}
     >
       <ChatsPairsBlock />
     </motion.div>

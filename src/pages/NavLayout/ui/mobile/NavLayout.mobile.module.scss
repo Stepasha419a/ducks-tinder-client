@@ -1,15 +1,16 @@
 .main {
   display: block;
+  height: 100%;
 
   .content {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     background-color: var(--bg-primary);
     position: relative;
     overflow: auto;
 
     &.isNav {
-      height: calc(100vh - 48px);
+      height: calc(100% - 48px);
     }
   }
 }
