@@ -1,10 +1,14 @@
 import type { ReactElement } from 'react';
+import { LogoutButton } from '@features/user';
+import { LinkThumbnail, SettingsGroup } from '@entities/user';
+import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
+import styles from './SettingsList.module.scss';
 import {
+  MobileTitle,
   AgeSettingThumbnail,
   DescriptionSettingThumbnail,
   DistanceSettingThumbnail,
   EmailSettingThumbnail,
-  LogoutButton,
   NameSettingThumbnail,
   NicknameSettingThumbnail,
   PartnerAgeSettingThumbnail,
@@ -12,17 +16,11 @@ import {
   PreferSexSettingThumbnail,
   SexSettingThumbnail,
   SwitchThemeThumbnail,
-} from '@features/user';
-import { LinkThumbnail, SettingsGroup } from '@entities/user';
-import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
-import { MobileTitle } from './MobileTitle';
-import {
   AccountGroup,
   FindGroup,
   LinksGroup,
   NicknameGroup,
-} from './settingGroups';
-import styles from './SettingsList.module.scss';
+} from './ui';
 
 export const SettingsList = (): ReactElement => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
