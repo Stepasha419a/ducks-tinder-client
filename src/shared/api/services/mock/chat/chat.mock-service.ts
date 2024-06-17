@@ -70,25 +70,55 @@ export const chatMockService: ChatService = {
     return { once: listenEventOnce } as unknown as ChatConnectReturn;
   },
   sendMessage(chatId: string, text: string, repliedId: string | null) {
-    eventEmitter.emit(ChatSocketEvent.SendMessage, {
-      message: {
-        avatar: '',
-        chatId,
-        text,
-        replied: repliedId && {
-          id: repliedId,
-          name: 'replied',
-          text: 'replied-text',
-          userId: 'id',
-        },
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        id: new Date().toISOString(),
-        name: mockStorage.currentUser.name,
-        userId: mockStorage.currentUser.id,
+    const message = {
+      avatar: '',
+      chatId,
+      text,
+      replied: repliedId && {
+        id: repliedId,
+        name: 'replied',
+        text: 'replied-text',
+        userId: 'id',
       },
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      id: new Date().toISOString(),
+      name: mockStorage.currentUser.name,
+      userId: mockStorage.currentUser.id,
+    };
+
+    eventEmitter.emit(ChatSocketEvent.SendMessage, {
+      message,
       newMessagesCount: 1,
     } as ReceivedNewMessage);
+
+    setTimeout(() => {
+      const chat = mockStorage.chats.find((item) => item.id === chatId);
+      console.log(chat?.blocked);
+      if (!chat || chat.blocked) {
+        return;
+      }
+
+      eventEmitter.emit(ChatSocketEvent.SendMessage, {
+        message: {
+          avatar: '',
+          chatId,
+          text: 'response text. Hello :>',
+          replied: {
+            id: message.id,
+            name: message.name,
+            text: message.text,
+            userId: message.userId,
+          },
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          id: new Date().toISOString(),
+          name: chat.name,
+          userId: chat.memberId,
+        },
+        newMessagesCount: chat.newMessagesCount + 1,
+      } as ReceivedNewMessage);
+    }, 5000);
   },
   deleteMessage(messageId: string) {
     eventEmitter.emit(ChatSocketEvent.DeleteMessage, {
@@ -110,6 +140,16 @@ export const chatMockService: ChatService = {
       blocked: true,
       blockedById: mockStorage.currentUser.id,
     } as ReceivedChatBlock);
+
+    const chatIndex = mockStorage.chats.findIndex((item) => item.id === chatId);
+    if (~chatIndex) {
+      const chat = mockStorage.chats[chatIndex];
+      mockStorage.chats[chatIndex] = {
+        ...chat,
+        blocked: true,
+        blockedById: mockStorage.currentUser.id,
+      };
+    }
   },
   unblockChat(chatId: string) {
     eventEmitter.emit(ChatSocketEvent.BlockChat, {
@@ -117,8 +157,19 @@ export const chatMockService: ChatService = {
       blocked: false,
       blockedById: undefined,
     } as ReceivedChatBlock);
+
+    const chatIndex = mockStorage.chats.findIndex((item) => item.id === '');
+    if (~chatIndex) {
+      const chat = mockStorage.chats[chatIndex];
+      mockStorage.chats[chatIndex] = {
+        ...chat,
+        blocked: false,
+        blockedById: '',
+      };
+    }
   },
   deleteChat(chatId: string) {
+    mockStorage.chats = mockStorage.chats.filter((chat) => chat.id !== chatId);
     eventEmitter.emit(ChatSocketEvent.DeleteChat, chatId);
   },
   disconnectChat(chatId: string) {
