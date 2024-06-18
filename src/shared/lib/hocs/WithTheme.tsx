@@ -1,9 +1,10 @@
-import { useEffect, type FC, type ReactElement } from 'react';
+import type { ComponentType } from 'react';
+import { useEffect, type ReactElement } from 'react';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import type { Theme } from '@shared/model/theme';
 import { setTheme } from '@shared/model/theme';
 
-export function WithTheme<P extends object>(Component: FC<P>) {
+export function WithTheme<P extends object>(Component: ComponentType<P>) {
   const Wrapper = (props: P): ReactElement<P> => {
     const dispatch = useAppDispatch();
     const theme = useAppSelector((state) => state.theme.theme);

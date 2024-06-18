@@ -1,10 +1,12 @@
-import type { ErrorInfo, FC } from 'react';
+import type { ComponentType, ErrorInfo } from 'react';
 import { Component as ReactComponent } from 'react';
 import { toast } from 'react-toastify';
 // eslint-disable-next-line boundaries/element-types
 import { store } from '@app/store';
 
-export function WithErrorFallback<P extends object>(Component: FC<P>) {
+export function WithErrorFallback<P extends object>(
+  Component: ComponentType<P>
+) {
   class Wrapper extends ReactComponent<P, { hasError: boolean }> {
     constructor(props: P) {
       super(props);

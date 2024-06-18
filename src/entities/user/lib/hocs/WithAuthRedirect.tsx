@@ -1,11 +1,13 @@
-import type { FC } from 'react';
+import type { ComponentType, FC } from 'react';
 import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { checkAuthThunk } from '@entities/user';
 import { ROUTES } from '@shared/constants';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
-export const WithAuthRedirect = <P extends object>(Component: FC<P>): FC<P> => {
+export const WithAuthRedirect = <P extends object>(
+  Component: ComponentType<P>
+): FC<P> => {
   const Wrapper = (props: P) => {
     const { pathname } = useLocation();
     const dispatch = useAppDispatch();

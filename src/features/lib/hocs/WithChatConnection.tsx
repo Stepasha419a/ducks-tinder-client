@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { ComponentType, FC } from 'react';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@hooks';
 import {
@@ -20,7 +20,9 @@ import type {
 import { ChatSocketEvent, chatService } from '@shared/api/services';
 import type { WsExceptionError } from '@shared/lib/interfaces';
 
-export function WithChatConnection<P extends object>(Component: FC<P>): FC<P> {
+export function WithChatConnection<P extends object>(
+  Component: ComponentType<P>
+): FC<P> {
   const Wrapper = (props: P) => {
     useChatConnection();
 

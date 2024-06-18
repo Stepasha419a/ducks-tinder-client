@@ -1,4 +1,4 @@
-import type { FC, ReactElement } from 'react';
+import type { ComponentType, ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -6,7 +6,9 @@ import { checkFields } from '@entities/user/';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { checkUserFields } from '../helpers';
 
-export const WithCheckedFields = <P extends object>(Component: FC<P>) => {
+export const WithCheckedFields = <P extends object>(
+  Component: ComponentType<P>
+) => {
   const Wrapper = (props: P): ReactElement<P> => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
