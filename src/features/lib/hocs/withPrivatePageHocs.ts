@@ -5,9 +5,9 @@ import { WithErrorFallback } from '@shared/lib/hocs';
 import { WithChatConnection } from './WithChatConnection';
 
 export const withPrivatePageHocs = compose(
-  WithAuthRedirect,
-  WithErrorFallback,
-  WithCheckedFields,
+  WithNewMessagesCount,
   WithChatConnection,
-  WithNewMessagesCount
+  WithCheckedFields,
+  WithAuthRedirect,
+  (Component) => WithErrorFallback(Component, { redirect: true })
 );
