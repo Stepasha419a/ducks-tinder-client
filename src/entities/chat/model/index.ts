@@ -30,7 +30,7 @@ export {
   selectChatList,
   selectCurrentMessagesLength,
   selectMessages,
-  selectChatProfile,
   selectCurrentChat,
+  selectBlockedActiveChat,
 } from './chat.selectors';
 export { chatReducer } from './chat.slice';

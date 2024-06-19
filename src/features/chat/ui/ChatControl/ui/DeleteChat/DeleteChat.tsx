@@ -6,17 +6,17 @@ import { Button, Popup } from '@shared/ui';
 import styles from './DeleteChat.module.scss';
 
 interface DeleteChatProps {
-  handleClose: () => void;
+  submitDelete?: () => void;
 }
 
-export const DeleteChat: FC<DeleteChatProps> = ({ handleClose }) => {
+export const DeleteChat: FC<DeleteChatProps> = ({ submitDelete }) => {
   const dispatch = useAppDispatch();
 
   const [isChatDeleting, setIsChatDeleting] = useState(false);
 
   const handleDelete = () => {
     dispatch(deleteChatThunk());
-    handleClose();
+    submitDelete?.();
   };
 
   return (

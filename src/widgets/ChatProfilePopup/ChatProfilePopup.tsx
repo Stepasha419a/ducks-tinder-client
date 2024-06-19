@@ -1,6 +1,5 @@
 import type { FC } from 'react';
-import { BlockChat, DeleteChat, UnblockChat } from '@features/chat';
-import { selectChatProfile } from '@entities/chat';
+import { ChatControl } from '@features/chat';
 import { Preview } from '@entities/user';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Popup } from '@shared/ui';
@@ -14,10 +13,7 @@ interface ChatProfilePopupProps {
 export const ChatProfilePopup: FC<ChatProfilePopupProps> = ({
   handleClose,
 }) => {
-  const { blocked, blockedById, chatMember } =
-    useAppSelector(selectChatProfile);
-
-  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
+  const chatMember = useAppSelector((state) => state.chat.chatMember);
 
   return (
     <Popup closeHandler={handleClose} size="l" extraClassName={styles.popup}>
@@ -25,16 +21,7 @@ export const ChatProfilePopup: FC<ChatProfilePopupProps> = ({
         <Preview
           user={chatMember}
           isFull
-          extraContent={
-            <div className={styles.btns}>
-              {blocked ? (
-                blockedById === currentUserId && <UnblockChat />
-              ) : (
-                <BlockChat />
-              )}
-              <DeleteChat handleClose={handleClose} />
-            </div>
-          }
+          extraContent={<ChatControl submitDelete={handleClose} />}
         />
       ) : (
         <ChatProfilePopupLazy />

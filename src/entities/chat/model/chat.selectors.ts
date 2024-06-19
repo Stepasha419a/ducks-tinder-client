@@ -40,18 +40,16 @@ export const selectCurrentMessagesLength = createSelector(
   (messages) => messages.length
 );
 
-export const selectChatProfile = createSelector(
+export const selectBlockedActiveChat = createSelector(
   [
     (state: RootState) => state.chat.chats,
     (state: RootState) => state.chat.currentChatId,
-    (state: RootState) => state.chat.chatMember,
   ],
-  (chats, currentChatId, chatMember) => {
+  (chats, currentChatId) => {
     const currentChat = chats.find((chat) => chat.id === currentChatId);
     return {
       blocked: currentChat?.blocked,
       blockedById: currentChat?.blockedById,
-      chatMember,
     };
   }
 );
