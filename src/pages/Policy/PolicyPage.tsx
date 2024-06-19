@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { authDuck } from '@shared/assets/images';
-import { withPrivatePageHocs } from '../../features/lib';
+import { withPublicPageHocs } from '../../features/lib';
 import styles from './PolicyPage.module.scss';
 
 const PolicyPage: FC = (): ReactElement => {
@@ -37,4 +37,4 @@ const PolicyPage: FC = (): ReactElement => {
   );
 };
 
-export default withPrivatePageHocs(PolicyPage);
+export default withPublicPageHocs(PolicyPage);
