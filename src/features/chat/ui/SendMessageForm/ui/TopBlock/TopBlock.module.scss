@@ -1,10 +1,18 @@
-.reply {
+.block {
   display: flex;
   align-items: center;
-  padding: 10px;
-  width: calc(100% - 30px);
-  margin-left: 20px;
+  height: 60px;
   position: relative;
+
+  .icon {
+    width: 24px;
+    height: 24px;
+    padding: 0 10px;
+
+    &.colored {
+      color: var(--color--red-90);
+    }
+  }
 
   .border {
     height: 40px;
@@ -17,7 +25,7 @@
     margin-left: 10px;
     max-width: calc(100% - 80px);
 
-    .username {
+    .title {
       font-weight: 600;
       font-size: 15px;
       margin-bottom: 2px;
@@ -35,8 +43,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 16px;
-    padding: 10px;
+    right: -2px;
+    padding: 10px 0;
     cursor: pointer;
 
     .icon {
@@ -47,16 +55,45 @@
   }
 }
 
+@media (max-width: 1150px) {
+  .message {
+    .text {
+      max-width: 350px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .message {
+    .text {
+      max-width: calc(100vw - 200px);
+    }
+  }
+}
+
 @media (max-width: 600px) {
-  .reply {
+  .block {
     .close {
       right: 6px;
     }
   }
 }
 
+@media (max-width: 550px) {
+  .block {
+    width: calc(100% - 10px);
+    margin-left: 10px;
+  }
+}
+
 @media (max-width: 470px) {
-  .reply {
+  .block {
+    .message {
+      .text {
+        font-size: 12px;
+      }
+    }
+
     .close {
       right: 4px;
     }
@@ -71,25 +108,8 @@
   }
 }
 
-@media (max-width: 550px) {
-  .reply {
-    width: calc(100% - 10px);
-    margin-left: 10px;
-  }
-}
-
-@media (max-width: 470px) {
-  .reply {
-    .message {
-      .text {
-        font-size: 12px;
-      }
-    }
-  }
-}
-
 @media (max-width: 300px) {
-  .reply {
+  .block {
     .message {
       .text {
         max-width: 120px;

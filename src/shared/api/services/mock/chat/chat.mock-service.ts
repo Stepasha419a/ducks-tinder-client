@@ -94,7 +94,6 @@ export const chatMockService: ChatService = {
 
     setTimeout(() => {
       const chat = mockStorage.chats.find((item) => item.id === chatId);
-      console.log(chat?.blocked);
       if (!chat || chat.blocked) {
         return;
       }

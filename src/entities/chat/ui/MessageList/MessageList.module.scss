@@ -5,12 +5,9 @@
   padding-left: 14vw;
   padding-bottom: 8px;
 
-  &.replying {
-    height: calc(100% - 170px);
-  }
-
+  &.replying,
   &.messageEditing {
-    height: calc(100% - 160px);
+    height: calc(100% - 170px);
   }
 
   .loadMessages {

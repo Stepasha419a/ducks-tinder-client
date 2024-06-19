@@ -1,5 +1,5 @@
-import { useState, type FC, type ReactElement } from 'react';
-import { EditMessage, MessageSelect, SendMessageForm } from '@features/chat';
+import { useCallback, useState, type FC, type ReactElement } from 'react';
+import { MessageSelect, MessageForm } from '@features/chat';
 import { ChatProfile, MessageList } from '@entities/chat';
 import type { Message } from '@shared/api/interfaces';
 import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
@@ -17,19 +17,21 @@ export const Messages: FC<MessagesProps> = ({
   const [repliedMessage, setRepliedMessage] = useState<null | Message>(null);
   const [isMessageEditing, setIsMessageEditing] = useState(false);
 
-  const handleStopMessageEditing = () => {
-    setIsMessageEditing(false);
-  };
-
-  const handleNullSelectedMessage = () => {
+  const handleNullSelectedMessage = useCallback(() => {
     setSelectedMessage(null);
-  };
+  }, []);
 
-  const handleSelectMessage = (message: Message) => {
-    handleStopMessageEditing();
+  const handleSelectMessage = useCallback((message: Message) => {
+    setIsMessageEditing(false);
     setRepliedMessage(null);
     setSelectedMessage(message);
-  };
+  }, []);
+
+  const handleResetEditReplied = useCallback(() => {
+    setRepliedMessage(null);
+    setIsMessageEditing(false);
+    setSelectedMessage(null);
+  }, []);
 
   const isMobileSelected = selectedMessage && !isMessageEditing && isMobile;
 
@@ -62,18 +64,12 @@ export const Messages: FC<MessagesProps> = ({
         selectedMessage={selectedMessage}
         handleSelectMessage={handleSelectMessage}
       />
-      {isMessageEditing ? (
-        <EditMessage
-          handleStopMessageEditing={handleStopMessageEditing}
-          selectedMessage={selectedMessage}
-          handleNullSelectedMessage={handleNullSelectedMessage}
-        />
-      ) : (
-        <SendMessageForm
-          setRepliedMessage={setRepliedMessage}
-          repliedMessage={repliedMessage}
-        />
-      )}
+      <MessageForm
+        repliedMessage={repliedMessage}
+        selectedMessage={selectedMessage}
+        isMessageEditing={isMessageEditing}
+        handleResetEditReplied={handleResetEditReplied}
+      />
     </>
   );
 };

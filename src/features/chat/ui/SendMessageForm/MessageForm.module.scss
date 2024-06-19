@@ -1,5 +1,6 @@
 .wrapper {
   background-color: var(--bg-chat-form);
+  padding: 4px 20px;
 
   .blocked {
     display: flex;
@@ -8,7 +9,6 @@
     width: 100%;
     min-width: 200px;
     max-width: 600px;
-    padding: 4px 0;
     margin-left: 14vw;
 
     .icon {
@@ -34,11 +34,10 @@
   }
 
   .form {
-    height: 50px;
+    height: 42px;
     width: 100%;
     min-width: 200px;
     display: flex;
-    padding: 4px 20px;
 
     .input {
       font-size: 20px;
@@ -48,6 +47,7 @@
 
     .button {
       width: 42px;
+      min-width: 42px;
       height: 42px;
       transition: 0.2s;
       font-size: 24px;
@@ -74,7 +74,6 @@
     .form {
       justify-content: space-between;
       max-width: none;
-      padding: 4px 20px;
 
       .input {
         max-width: none;
@@ -86,8 +85,6 @@
 @media (max-width: 550px) {
   .wrapper {
     .form {
-      padding: 4px 10px;
-
       .button {
         min-width: 42px;
         font-size: 20px;

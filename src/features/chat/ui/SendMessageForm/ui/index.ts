@@ -1,2 +1,2 @@
 export { BlockedChat } from './BlockedChat/BlockedChat';
-export { ReplyBlock } from './ReplyBlock/ReplyBlock';
+export { TopBlock } from './TopBlock/TopBlock';
