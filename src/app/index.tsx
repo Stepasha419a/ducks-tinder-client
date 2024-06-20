@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import type { ReactElement } from 'react';
 import Routing from '@pages/index';
 import { Loading } from '@entities/user';
@@ -11,6 +12,7 @@ function App(): ReactElement {
       <Loading />
       <Routing />
       <ToastContainer />
+      <Analytics />
     </>
   );
 }
