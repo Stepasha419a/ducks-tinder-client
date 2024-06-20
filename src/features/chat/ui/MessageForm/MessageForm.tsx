@@ -47,18 +47,19 @@ export const MessageForm: FC<MessageFormProps> = ({
     const trimmedValue = data.input.trim();
     if (trimmedValue) {
       if (isMessageEditing && selectedMessage) {
-        dispatch(
-          editMessageThunk({
-            messageId: selectedMessage.id,
-            text: trimmedValue,
-          })
-        );
+        if (selectedMessage.text !== trimmedValue) {
+          dispatch(
+            editMessageThunk({
+              messageId: selectedMessage.id,
+              text: trimmedValue,
+            })
+          );
+        }
       } else {
         dispatch(sendMessageThunk({ text: trimmedValue, repliedMessage }));
       }
-
-      handleResetEditReplied();
     }
+    handleResetEditReplied();
     reset();
   });
 
