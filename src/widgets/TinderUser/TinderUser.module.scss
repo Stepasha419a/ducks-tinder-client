@@ -34,3 +34,12 @@
     );
   }
 }
+
+@media (max-height: 800px) {
+  .wrapper {
+    .users {
+      max-height: calc(100% - 100px);
+      width: calc(min(375px, calc(100% / 1.75)));
+    }
+  }
+}
