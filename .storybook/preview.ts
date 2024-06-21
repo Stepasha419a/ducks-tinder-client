@@ -1,5 +1,5 @@
 import type { Preview } from '@storybook/react';
-import '../src/application/styles/index.scss';
+import '../src/app/styles/index.scss';
 
 document.querySelector('html')!.dataset.theme = 'light';
 
