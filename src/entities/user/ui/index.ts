@@ -5,7 +5,7 @@ export { Preview } from './Preview/Preview';
 export { LikesCount } from './LikesCount/LikesCount';
 export { Places } from './Places/Places';
 export { Map } from './Map/Map';
-export { Loading } from './Loading/Loading';
+export { InitialLoading } from './InitialLoading/InitialLoading';
 export { AuthLayout } from './AuthLayout/AuthLayout';
 export { SettingsGroup } from './SettingsGroup/SettingsGroup';
 export { NotFoundSetting } from './NotFoundSetting/NotFoundSetting';

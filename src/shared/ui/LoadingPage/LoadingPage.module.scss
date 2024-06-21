@@ -1,0 +1,59 @@
+.loadingPage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: visible;
+  overflow: hidden;
+  opacity: 1;
+  z-index: 100;
+  transition: opacity, visibility 1.5s;
+
+  .background {
+    position: absolute;
+    height: max(100vh, 100vw);
+    width: max(100vh, 100vw);
+    background-image: linear-gradient(
+      45deg,
+      var(--color--pink-100),
+      var(--color--orange-90)
+    );
+    z-index: 100;
+
+    &.animate {
+      animation-name: gradientAnimation;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      transition: background-image 1s;
+    }
+  }
+
+  .icon {
+    color: var(--color--white-100);
+    height: 100px;
+    width: 100px;
+    z-index: 101;
+  }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    transform: rotate(0deg) scale(1.3);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.4);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.3);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.4);
+  }
+  100% {
+    transform: rotate(360deg) scale(1.3);
+  }
+}
