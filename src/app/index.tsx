@@ -1,4 +1,5 @@
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import type { ReactElement } from 'react';
 import Routing from '@pages/index';
 import { Loading } from '@entities/user';
@@ -13,6 +14,7 @@ function App(): ReactElement {
       <Routing />
       <ToastContainer />
       <Analytics />
+      <SpeedInsights />
     </>
   );
 }
