@@ -1,20 +1,26 @@
 import type { ReactElement } from 'react';
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import ChatPage from '@pages/Chat';
 import Login from '@pages/Login';
 import NavLayout from '@pages/NavLayout';
-import PairsPage from '@pages/Pairs';
-import PolicyPage from '@pages/Policy';
-import ProfilePage from '@pages/Profile';
-import Registration from '@pages/Registration';
-import SettingsPage from '@pages/Settings';
 import TinderPage from '@pages/Tinder';
+
 import { PlaceSetting, ProfileEdit, ProfilePreview } from '@widgets';
 import { ProfileSetting } from '@features/user';
 import { ROUTES } from '@shared/constants';
+import { WithSuspense } from '@shared/lib/hocs';
 import { ActiveChat, IndexChatPage } from './Chat';
 import NotFound from './NotFound/NotFound';
 import { SettingsIndexPage } from './Settings';
+
+const ChatPage = WithSuspense(lazy(async () => import('@pages/Chat')));
+const PairsPage = WithSuspense(lazy(async () => import('@pages/Pairs')));
+const PolicyPage = WithSuspense(lazy(async () => import('@pages/Policy')));
+const ProfilePage = WithSuspense(lazy(async () => import('@pages/Profile')));
+const Registration = WithSuspense(
+  lazy(async () => import('@pages/Registration'))
+);
+const SettingsPage = WithSuspense(lazy(async () => import('@pages/Settings')));
 
 const Routing = (): ReactElement => {
   return (
