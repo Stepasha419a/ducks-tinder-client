@@ -1,11 +1,13 @@
 import type { AnimationControls, PanInfo } from 'framer-motion';
 import { useMotionValue } from 'framer-motion';
+import { useAdaptiveMediaQuery } from '@hooks';
 import { useTinderAnimations } from '@entities/user';
 
 export function useSwipeProps(
   controls: AnimationControls,
   isDraggable: boolean
 ) {
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -16,13 +18,18 @@ export function useSwipeProps(
     e: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) {
-    if (info.offset.y < -100) {
+    if (info.offset.y < -25) {
       handleSuperLike();
-    } else if (info.offset.x < -100) {
+    } else if (info.offset.x < -25) {
       handleDislike();
-    } else if (info.offset.x > 100) {
+    } else if (info.offset.x > 25) {
       handleLike();
     }
+  }
+
+  let swipeDistance = Math.max(window.screen.height, window.screen.width);
+  if (!isMobile) {
+    swipeDistance /= 2;
   }
 
   return {
@@ -35,13 +42,13 @@ export function useSwipeProps(
     variants: {
       center: { x: 0, y: 0, transition: { duration: 0 } },
       superLike: {
-        y: -window.screen.height,
+        y: -swipeDistance,
       },
       like: {
-        x: window.screen.width,
+        x: swipeDistance,
       },
       dislike: {
-        x: -window.screen.width,
+        x: -swipeDistance,
       },
     },
     initial: 'center',
