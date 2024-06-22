@@ -14,7 +14,7 @@
   overflow: hidden;
   color: var(--color--white-100);
 
-  &.high{
+  &.high {
     height: 164px;
   }
 
@@ -38,6 +38,7 @@
     font-size: 36px;
     font-weight: 700;
     height: 43px;
+    margin-bottom: 4px;
 
     .years {
       font-size: 28px;
@@ -49,6 +50,7 @@
     display: flex;
     align-items: baseline;
     font-size: 16px;
+    margin-bottom: 4px;
 
     .name {
       display: inline-block;
@@ -68,7 +70,7 @@
     font-size: 16px;
 
     .icon {
-      margin: 0 8px 0 1px;
+      margin: 0 7px 0 2px;
     }
   }
 }

@@ -1,8 +1,8 @@
-import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { FC } from 'react';
-import type { UserPlaceInfo, UserSliderInfo } from '@entities/user';
+import type { UserSliderInfo } from '@entities/user';
 import { ListItem } from '@shared/ui';
 import styles from './SliderContent.module.scss';
 
@@ -38,8 +38,7 @@ export const SliderContent: FC<SliderContentProps> = ({
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  if ((currentInfo as UserPlaceInfo)?.place) {
+  if ('place' in currentInfo && currentInfo.place !== null) {
     return (
       <div className={styles.wrapper}>
         <div className={styles.person}>
@@ -49,7 +48,13 @@ export const SliderContent: FC<SliderContentProps> = ({
           <FontAwesomeIcon icon={faHouse} className={styles.icon} />
           <span className={styles.name}>
             Lives in&nbsp;
-            {(currentInfo as UserPlaceInfo).place.name}
+            {currentInfo.place.name}
+          </span>
+        </div>
+        <div className={styles.distance}>
+          <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
+          <span className={styles.name}>
+            {currentInfo.distance} km from you
           </span>
         </div>
       </div>

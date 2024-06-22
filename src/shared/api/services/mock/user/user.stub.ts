@@ -27,7 +27,9 @@ export const shortUserStub: ShortUser = {
   personalityType: null,
   pet: null,
   pictures: [],
-  place: null,
+  place: {
+    name: 'place-name',
+  },
   smokingAttitude: null,
   socialNetworksActivity: null,
   trainingAttitude: null,

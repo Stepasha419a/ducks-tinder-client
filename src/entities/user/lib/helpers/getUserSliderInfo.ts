@@ -8,7 +8,7 @@ export interface UserInfo {
 }
 
 export interface UserPlaceInfo extends UserInfo {
-  place: ShortPlace;
+  place: ShortPlace | null;
   distance: number;
 }
 
