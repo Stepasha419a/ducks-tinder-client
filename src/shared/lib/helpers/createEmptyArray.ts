@@ -1,3 +1,3 @@
 export function createEmptyArray(length: number): undefined[] {
-  return [...(new Array(length) as undefined[])];
+  return Array(length).fill(undefined) as undefined[];
 }
