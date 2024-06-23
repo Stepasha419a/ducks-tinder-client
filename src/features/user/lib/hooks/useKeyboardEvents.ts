@@ -18,6 +18,7 @@ export function useKeyboardEvents(
         sliderRef.current?.slickNext();
         break;
       case 'ArrowUp':
+        controls.set('center');
         setIsFullPreview(true);
         break;
       case 'ArrowDown':

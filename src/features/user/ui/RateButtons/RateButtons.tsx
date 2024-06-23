@@ -9,13 +9,20 @@ import styles from './RateButtons.module.scss';
 interface RateButtonsProps {
   controls: AnimationControls;
   isFullPreview: boolean;
+  handleSubmitAction: () => void;
 }
 
 export const RateButtons: FC<RateButtonsProps> = ({
   controls,
   isFullPreview,
+  handleSubmitAction,
 }) => {
-  const buttons = useRateButtons(controls, isFullPreview, styles);
+  const buttons = useRateButtons(
+    controls,
+    isFullPreview,
+    handleSubmitAction,
+    styles
+  );
 
   return (
     <div

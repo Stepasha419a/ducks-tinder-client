@@ -41,6 +41,10 @@ export function useSwipeProps(
     e: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) {
+    isDragRef.current = false;
+    if (!isDraggable) {
+      return;
+    }
     if (info.offset.x < -50) {
       handleDislike();
     } else if (info.offset.x > 50) {
@@ -48,7 +52,6 @@ export function useSwipeProps(
     } else if (info.offset.y < -50) {
       handleSuperLike();
     }
-    isDragRef.current = false;
   }
 
   function handleDragStart(

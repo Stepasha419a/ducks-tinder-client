@@ -36,6 +36,10 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
     );
   }
 
+  const handleSubmitAction = () => {
+    setIsFullPreview(false);
+  };
+
   return (
     <div className={cn}>
       {explore && <Explore />}
@@ -45,7 +49,11 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
           setIsFullPreview={setIsFullPreview}
           controls={controls}
         >
-          <RateButtons isFullPreview={isFullPreview} controls={controls} />
+          <RateButtons
+            isFullPreview={isFullPreview}
+            handleSubmitAction={handleSubmitAction}
+            controls={controls}
+          />
         </SwipeUser>
       </div>
     </div>

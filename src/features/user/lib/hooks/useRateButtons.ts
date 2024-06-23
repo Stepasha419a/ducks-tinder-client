@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 export function useRateButtons(
   controls: AnimationControls,
   isMinimum: boolean,
+  handleSubmitAction: () => void,
   styles: Record<string, string>
 ) {
   const dispatch = useAppDispatch();
@@ -23,6 +24,7 @@ export function useRateButtons(
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
 
   function startCenter() {
+    handleSubmitAction();
     setTimeout(() => {
       controls.start('center');
     }, 400);
