@@ -15,7 +15,9 @@ import { InterestsList, LifestyleList, MoreAboutMeList } from './ui';
 
 interface FullPreviewPropsInterface {
   user: User | ShortUser;
-  setIsFullPreview?: Dispatch<SetStateAction<boolean>>;
+  setIsFullPreview?:
+    | Dispatch<SetStateAction<boolean>>
+    | ((value: boolean) => void);
   extraContent?: ReactElement;
   extraClassName?: string;
 }

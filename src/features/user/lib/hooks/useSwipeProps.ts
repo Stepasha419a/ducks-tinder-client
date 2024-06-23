@@ -1,16 +1,20 @@
 import type { AnimationControls, MotionProps, PanInfo } from 'framer-motion';
 import { useMotionValue, useTransform } from 'framer-motion';
-import type { RefAttributes } from 'react';
+import type { RefAttributes, RefObject } from 'react';
 import { useRef } from 'react';
 import { useAdaptiveMediaQuery } from '@hooks';
 import { useTinderAnimations } from '@entities/user';
 
 type SlantSide = 'top' | 'bottom' | null;
 
+interface ExtraSwipeProps {
+  isDragRef: RefObject<boolean>;
+}
+
 export function useSwipeProps(
   controls: AnimationControls,
   isDraggable: boolean
-): MotionProps & RefAttributes<HTMLDivElement> {
+): MotionProps & RefAttributes<HTMLDivElement> & ExtraSwipeProps {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -28,10 +32,12 @@ export function useSwipeProps(
   });
   const dragItemRef = useRef<HTMLDivElement>(null);
 
+  const isDragRef = useRef(false);
+
   const { handleDislike, handleLike, handleSuperLike } =
     useTinderAnimations(controls);
 
-  function handleDrag(
+  function handleDragEnd(
     e: MouseEvent | TouchEvent | PointerEvent,
     info: PanInfo
   ) {
@@ -42,6 +48,27 @@ export function useSwipeProps(
     } else if (info.offset.y < -50) {
       handleSuperLike();
     }
+    isDragRef.current = false;
+  }
+
+  function handleDragStart(
+    e: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) {
+    if (!dragItemRef.current) {
+      return;
+    }
+    isDragRef.current = true;
+
+    const rect = dragItemRef.current.getBoundingClientRect();
+
+    const pointY = info.point.y - rect.y;
+    const half = rect.height / 2;
+    if (pointY > half) {
+      slantSide.current = 'bottom';
+    } else {
+      slantSide.current = 'top';
+    }
   }
 
   let swipeDistance = Math.max(window.screen.height, window.screen.width);
@@ -50,6 +77,7 @@ export function useSwipeProps(
   }
 
   return {
+    isDragRef,
     style: { x, y, rotate, height: '100%', width: '100%' },
     drag: isDraggable,
     dragElastic: 1,
@@ -69,21 +97,8 @@ export function useSwipeProps(
       },
     },
     initial: 'center',
-    onDragEnd: handleDrag,
-    onDragStart(e: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
-      if (!dragItemRef.current) {
-        return;
-      }
-      const rect = dragItemRef.current.getBoundingClientRect();
-
-      const pointY = info.point.y - rect.y;
-      const half = rect.height / 2;
-      if (pointY > half) {
-        slantSide.current = 'bottom';
-      } else {
-        slantSide.current = 'top';
-      }
-    },
+    onDragEnd: handleDragEnd,
+    onDragStart: handleDragStart,
     ref: dragItemRef,
   };
 }

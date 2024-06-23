@@ -20,7 +20,9 @@ import { UserSlider, FullPreview } from './ui';
 
 interface PreviewPropsInterface {
   user: User | ShortUser | ShortUserWithoutDistance;
-  setIsFullPreview?: Dispatch<SetStateAction<boolean>>;
+  setIsFullPreview?:
+    | Dispatch<SetStateAction<boolean>>
+    | ((value: boolean) => void);
   isFull?: boolean;
   isShadow?: boolean;
   extraContent?: ReactElement;

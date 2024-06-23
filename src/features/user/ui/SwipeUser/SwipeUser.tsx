@@ -37,7 +37,7 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
 
   useKeyboardEvents(controls, setIsFullPreview, sliderRef);
-  const motionProps = useSwipeProps(controls, !isFullPreview);
+  const { isDragRef, ...motionProps } = useSwipeProps(controls, !isFullPreview);
 
   useEffect(() => {
     dispatch(getMatchUserThunk());
@@ -47,11 +47,18 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
     return <SwipeUserLazy />;
   }
 
+  const handleOpenFullPreview = (value: boolean) => {
+    if (isDragRef.current && !isFullPreview) {
+      return;
+    }
+    setIsFullPreview(value);
+  };
+
   return (
     <motion.div {...motionProps}>
       <Preview
         user={tinderUser}
-        setIsFullPreview={setIsFullPreview}
+        setIsFullPreview={handleOpenFullPreview}
         extraClassName={classNames(
           isFullPreview ? styles.padding : styles.grabbing,
           isMobile && styles.mobile
