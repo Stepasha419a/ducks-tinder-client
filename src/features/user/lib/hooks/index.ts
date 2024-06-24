@@ -1,8 +1,7 @@
 export { usePairFilterForm } from './usePairFilterForm';
 export { useOuterPairFilterForm } from './useOuterPairFilterForm';
 export { useRateButtons } from './useRateButtons';
-export { useSwipeProps } from './useSwipeProps';
-export { useKeyboardEvents } from './useKeyboardEvents';
+export { useSwipe } from './useSwipe';
 export { useRadioForm } from './useRadioForm';
 export { useTextForm } from './useTextForm';
 export { useProfileSelectForm } from './useProfileSelectForm';

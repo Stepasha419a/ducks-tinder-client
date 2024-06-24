@@ -1,9 +1,38 @@
-import type { AnimationControls, MotionProps, PanInfo } from 'framer-motion';
 import { useMotionValue, useTransform } from 'framer-motion';
+import type { AnimationControls, MotionProps, PanInfo } from 'framer-motion';
+import { useRef, useState } from 'react';
 import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
-import { useRef } from 'react';
+import type Slider from 'react-slick';
 import { useAdaptiveMediaQuery } from '@hooks';
 import { useTinderAnimations } from '@entities/user';
+import { useEventListener } from '@shared/lib/hooks';
+
+export function useSwipe(
+  controls: AnimationControls,
+  isFullPreview: boolean,
+  setIsFullPreview: Dispatch<SetStateAction<boolean>>
+) {
+  const [isLockedSubmission, setIsLockedSubmission] = useState(false);
+
+  const sliderRef = useRef<Slider>(null);
+
+  const { isDragRef, ...motionProps } = useSwipeProps(
+    controls,
+    !isFullPreview,
+    isLockedSubmission,
+    setIsLockedSubmission
+  );
+
+  const setIsFullPreviewKeyboard = (value: boolean) => {
+    if (isDragRef.current && value) {
+      setIsLockedSubmission(true);
+    }
+    setIsFullPreview(value);
+  };
+  useKeyboardEvents(controls, setIsFullPreviewKeyboard, sliderRef);
+
+  return { isDragRef, motionProps, sliderRef };
+}
 
 type SlantSide = 'top' | 'bottom' | null;
 
@@ -11,7 +40,7 @@ interface ExtraSwipeProps {
   isDragRef: RefObject<boolean>;
 }
 
-export function useSwipeProps(
+function useSwipeProps(
   controls: AnimationControls,
   isDraggable: boolean,
   isLockedSubmission: boolean,
@@ -109,4 +138,39 @@ export function useSwipeProps(
     onDragStart: handleDragStart,
     ref: dragItemRef,
   };
+}
+
+function useKeyboardEvents(
+  controls: AnimationControls,
+  setIsFullPreview: (value: boolean) => void,
+  sliderRef: RefObject<Slider>
+) {
+  const { handleDislike, handleLike, handleSuperLike } =
+    useTinderAnimations(controls);
+
+  function handleKeyboardEvent(e: KeyboardEvent) {
+    switch (e.code) {
+      case 'Space':
+        sliderRef.current?.slickNext();
+        break;
+      case 'ArrowUp':
+        controls.set('center');
+        setIsFullPreview(true);
+        break;
+      case 'ArrowDown':
+        setIsFullPreview(false);
+        break;
+      case 'ArrowLeft':
+        handleDislike();
+        break;
+      case 'ArrowRight':
+        handleLike();
+        break;
+      case 'Enter':
+        handleSuperLike();
+        break;
+    }
+  }
+
+  useEventListener('keyup', handleKeyboardEvent);
 }
