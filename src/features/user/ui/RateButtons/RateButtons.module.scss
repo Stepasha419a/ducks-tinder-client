@@ -48,7 +48,7 @@
     border-radius: 50%;
     cursor: pointer;
 
-    transition: 0.2s;
+    transition: color 0.2s, background 0.2s;
 
     &.blocked {
       border-color: var(--border-main);

@@ -28,12 +28,12 @@ export const RateButtons: FC<RateButtonsProps> = ({
     <div
       className={classNames(styles.buttons, isFullPreview && styles.minimized)}
     >
-      {buttons.map((buttonData, index) => {
+      {buttons.map((buttonData) => {
         return (
           <Button
             onClick={buttonData.onClick}
             extraClassName={classNames(styles.btn, buttonData.extraClassName)}
-            key={index}
+            key={buttonData.cnIcon}
           >
             <div className={styles.background} />
             <FontAwesomeIcon
