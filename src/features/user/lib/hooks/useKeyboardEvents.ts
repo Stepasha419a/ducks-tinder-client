@@ -1,12 +1,12 @@
 import type { AnimationControls } from 'framer-motion';
-import type { Dispatch, RefObject, SetStateAction } from 'react';
+import type { RefObject } from 'react';
 import type Slider from 'react-slick';
 import { useTinderAnimations } from '@entities/user';
 import { useEventListener } from '@shared/lib/hooks';
 
 export function useKeyboardEvents(
   controls: AnimationControls,
-  setIsFullPreview: Dispatch<SetStateAction<boolean>>,
+  setIsFullPreview: (value: boolean) => void,
   sliderRef: RefObject<Slider>
 ) {
   const { handleDislike, handleLike, handleSuperLike } =

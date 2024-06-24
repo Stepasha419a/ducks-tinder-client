@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import type { AnimationControls } from 'framer-motion';
 import { motion } from 'framer-motion';
 import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type Slider from 'react-slick';
 import { getMatchUserThunk, selectTinderData } from '@entities/user';
 import { Preview } from '@entities/user';
@@ -33,11 +33,25 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
+  const [isLockedSubmission, setIsLockedSubmission] = useState(false);
+
+  const { isDragRef, ...motionProps } = useSwipeProps(
+    controls,
+    !isFullPreview,
+    isLockedSubmission,
+    setIsLockedSubmission
+  );
+
+  const setIsFullPreviewTest = (value: boolean) => {
+    if (isDragRef.current && value) {
+      setIsLockedSubmission(true);
+    }
+    setIsFullPreview(value);
+  };
+  useKeyboardEvents(controls, setIsFullPreviewTest, sliderRef);
+
   const { tinderUser } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
-
-  useKeyboardEvents(controls, setIsFullPreview, sliderRef);
-  const { isDragRef, ...motionProps } = useSwipeProps(controls, !isFullPreview);
 
   useEffect(() => {
     dispatch(getMatchUserThunk());

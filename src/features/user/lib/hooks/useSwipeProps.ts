@@ -1,6 +1,6 @@
 import type { AnimationControls, MotionProps, PanInfo } from 'framer-motion';
 import { useMotionValue, useTransform } from 'framer-motion';
-import type { RefAttributes, RefObject } from 'react';
+import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
 import { useRef } from 'react';
 import { useAdaptiveMediaQuery } from '@hooks';
 import { useTinderAnimations } from '@entities/user';
@@ -13,7 +13,9 @@ interface ExtraSwipeProps {
 
 export function useSwipeProps(
   controls: AnimationControls,
-  isDraggable: boolean
+  isDraggable: boolean,
+  isLockedSubmission: boolean,
+  setIsLockedSubmission: Dispatch<SetStateAction<boolean>>
 ): MotionProps & RefAttributes<HTMLDivElement> & ExtraSwipeProps {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
   const x = useMotionValue(0);
@@ -42,7 +44,10 @@ export function useSwipeProps(
     info: PanInfo
   ) {
     isDragRef.current = false;
-    if (!isDraggable) {
+    if (!isDraggable || isLockedSubmission) {
+      if (isLockedSubmission) {
+        setIsLockedSubmission(false);
+      }
       return;
     }
     if (info.offset.x < -50) {
@@ -82,7 +87,7 @@ export function useSwipeProps(
   return {
     isDragRef,
     style: { x, y, rotate, height: '100%', width: '100%' },
-    drag: isDraggable,
+    drag: isDraggable && !isLockedSubmission,
     dragElastic: 1,
     dragConstraints: { bottom: 0, left: 0, right: 0, top: 0 },
     animate: controls,
