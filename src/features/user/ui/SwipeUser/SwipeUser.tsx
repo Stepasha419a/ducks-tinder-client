@@ -13,6 +13,7 @@ import {
 } from '@shared/lib/hooks';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';
+import { Status } from './ui';
 
 interface SwipeUserProps {
   controls: AnimationControls;
@@ -33,7 +34,7 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
   const { tinderUser } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
 
-  const { isDragRef, motionProps, sliderRef } = useSwipe(
+  const { isDragRef, motionProps, sliderRef, x, y } = useSwipe(
     controls,
     isFullPreview,
     setIsFullPreview
@@ -56,6 +57,7 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
 
   return (
     <motion.div {...motionProps}>
+      <Status x={x} y={y} />
       <Preview
         user={tinderUser}
         setIsFullPreview={handleOpenFullPreview}

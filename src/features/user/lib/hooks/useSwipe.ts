@@ -1,5 +1,10 @@
 import { useMotionValue, useTransform } from 'framer-motion';
-import type { AnimationControls, MotionProps, PanInfo } from 'framer-motion';
+import type {
+  AnimationControls,
+  MotionProps,
+  MotionValue,
+  PanInfo,
+} from 'framer-motion';
 import { useRef, useState } from 'react';
 import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
 import type Slider from 'react-slick';
@@ -16,7 +21,7 @@ export function useSwipe(
 
   const sliderRef = useRef<Slider>(null);
 
-  const { isDragRef, ...motionProps } = useSwipeProps(
+  const { isDragRef, x, y, ...motionProps } = useSwipeProps(
     controls,
     !isFullPreview,
     isLockedSubmission,
@@ -31,13 +36,15 @@ export function useSwipe(
   };
   useKeyboardEvents(controls, setIsFullPreviewKeyboard, sliderRef);
 
-  return { isDragRef, motionProps, sliderRef };
+  return { isDragRef, motionProps, sliderRef, x, y };
 }
 
 type SlantSide = 'top' | 'bottom' | null;
 
 interface ExtraSwipeProps {
   isDragRef: RefObject<boolean>;
+  x: MotionValue<number>;
+  y: MotionValue<number>;
 }
 
 function useSwipeProps(
@@ -61,8 +68,8 @@ function useSwipeProps(
 
     return newValue < 0 ? Math.max(-15, newValue) : Math.min(15, newValue);
   });
-  const dragItemRef = useRef<HTMLDivElement>(null);
 
+  const dragItemRef = useRef<HTMLDivElement>(null);
   const isDragRef = useRef(false);
 
   const { handleDislike, handleLike, handleSuperLike } =
@@ -114,6 +121,8 @@ function useSwipeProps(
   }
 
   return {
+    x,
+    y,
     isDragRef,
     style: { x, y, rotate, height: '100%', width: '100%' },
     drag: isDraggable && !isLockedSubmission,
