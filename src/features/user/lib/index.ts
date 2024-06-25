@@ -11,6 +11,7 @@ export {
   useSwipe,
   useUserPictures,
   type SettingFieldValues,
+  type SwipeProps,
 } from './hooks';
 export {
   WithAuthRedirect,

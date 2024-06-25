@@ -38,6 +38,10 @@
     }
   }
 
+  .wrapper {
+    border-radius: 50%;
+  }
+
   .btn {
     display: flex;
     justify-content: center;
@@ -123,7 +127,7 @@
       }
 
       &.red {
-        background-color: var(--color--red-70);
+        background-color: var(--color--red-70) !important;
 
         .icon {
           color: var(--color--red-100);
@@ -131,7 +135,7 @@
       }
 
       &.blue {
-        background-color: var(--color--blue-90);
+        background-color: var(--color--blue-90) !important;
 
         .icon {
           color: var(--color--blue-100);
@@ -139,7 +143,7 @@
       }
 
       &.green {
-        background-color: var(--color--green-80);
+        background-color: var(--color--green-80) !important;
 
         .icon {
           color: var(--color--green-100);

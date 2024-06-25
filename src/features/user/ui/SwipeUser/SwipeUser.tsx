@@ -1,9 +1,16 @@
 import classNames from 'classnames';
-import type { AnimationControls } from 'framer-motion';
+import type { MotionProps } from 'framer-motion';
 import { motion } from 'framer-motion';
-import type { Dispatch, FC, PropsWithChildren, SetStateAction } from 'react';
+import type {
+  Dispatch,
+  FC,
+  PropsWithChildren,
+  RefObject,
+  SetStateAction,
+} from 'react';
 import { useEffect } from 'react';
-import { useSwipe } from '@features/user';
+import type Slider from 'react-slick';
+import type { SwipeProps } from '@features/user';
 import { getMatchUserThunk, selectTinderData } from '@entities/user';
 import { Preview } from '@entities/user';
 import {
@@ -15,17 +22,22 @@ import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';
 import { Status } from './ui';
 
-interface SwipeUserProps {
-  controls: AnimationControls;
+interface SwipeUserProps extends SwipeProps {
   isFullPreview: boolean;
   setIsFullPreview: Dispatch<SetStateAction<boolean>>;
+  sliderRef: RefObject<Slider>;
+  motionProps: MotionProps;
 }
 
 export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
   children,
-  controls,
   isFullPreview,
   setIsFullPreview,
+  sliderRef,
+  x,
+  y,
+  isDragRef,
+  motionProps,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -33,12 +45,6 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
 
   const { tinderUser } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
-
-  const { isDragRef, motionProps, sliderRef, x, y } = useSwipe(
-    controls,
-    isFullPreview,
-    setIsFullPreview
-  );
 
   useEffect(() => {
     dispatch(getMatchUserThunk());

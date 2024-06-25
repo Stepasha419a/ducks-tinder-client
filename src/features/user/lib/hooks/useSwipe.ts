@@ -47,12 +47,16 @@ interface ExtraSwipeProps {
   y: MotionValue<number>;
 }
 
+export type SwipeProps = MotionProps &
+  RefAttributes<HTMLDivElement> &
+  ExtraSwipeProps;
+
 function useSwipeProps(
   controls: AnimationControls,
   isDraggable: boolean,
   isLockedSubmission: boolean,
   setIsLockedSubmission: Dispatch<SetStateAction<boolean>>
-): MotionProps & RefAttributes<HTMLDivElement> & ExtraSwipeProps {
+): SwipeProps {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
   const x = useMotionValue(0);
   const y = useMotionValue(0);

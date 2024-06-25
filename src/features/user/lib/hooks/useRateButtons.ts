@@ -46,7 +46,9 @@ export function useRateButtons(
   function handleSuperLike() {
     controls.start('superLike');
     startCenter();
-    handleLike();
+    setTimeout(() => {
+      dispatch(likeUserThunk());
+    }, 300);
   }
 
   return { handleReturn, handleDislike, handleSuperLike, handleLike };
