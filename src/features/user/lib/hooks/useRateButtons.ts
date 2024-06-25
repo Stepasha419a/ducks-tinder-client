@@ -1,10 +1,3 @@
-import {
-  faBolt,
-  faHeart,
-  faRotateLeft,
-  faStar,
-  faXmark,
-} from '@fortawesome/free-solid-svg-icons';
 import type { AnimationControls } from 'framer-motion';
 import {
   dislikeUserThunk,
@@ -15,9 +8,7 @@ import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 
 export function useRateButtons(
   controls: AnimationControls,
-  isMinimum: boolean,
-  handleSubmitAction: () => void,
-  styles: Record<string, string>
+  handleSubmitAction: () => void
 ) {
   const dispatch = useAppDispatch();
 
@@ -30,85 +21,33 @@ export function useRateButtons(
     }, 400);
   }
 
+  function handleReturn() {
+    if (isReturnUser) {
+      dispatch(returnUserThunk());
+    }
+  }
+
   function handleLike() {
+    controls.start('like');
+    startCenter();
     setTimeout(() => {
       dispatch(likeUserThunk());
     }, 300);
   }
 
   function handleDislike() {
+    controls.start('dislike');
+    startCenter();
     setTimeout(() => {
       dispatch(dislikeUserThunk());
     }, 300);
   }
 
-  const buttons = [
-    {
-      onClick: () => {
-        if (isReturnUser) {
-          dispatch(returnUserThunk());
-        }
-      },
-      extraClassName: [
-        styles.btn,
-        styles.small,
-        isReturnUser ? styles.gold : styles.blocked,
-      ],
-      icon: faRotateLeft,
-      cnIcon: `${styles.icon} ${isReturnUser ? styles.gold : styles.blocked}`,
-    },
-    {
-      onClick: () => {
-        controls.start('dislike');
-        startCenter();
-        handleDislike();
-      },
-      extraClassName: [
-        styles.btn,
-        styles.large,
-        styles.red,
-        isMinimum ? styles.minimized : '',
-      ],
-      icon: faXmark,
-      cnIcon: `${styles.icon} ${styles.red} ${styles.large}`,
-    },
-    {
-      onClick: () => {
-        controls.start('superLike');
-        startCenter();
-        handleLike();
-      },
-      extraClassName: [
-        styles.btn,
-        styles.small,
-        styles.blue,
-        isMinimum ? styles.minimized : '',
-      ],
-      icon: faStar,
-      cnIcon: `${styles.icon} ${styles.blue}`,
-    },
-    {
-      onClick: () => {
-        controls.start('like');
-        startCenter();
-        handleLike();
-      },
-      extraClassName: [
-        styles.btn,
-        styles.large,
-        styles.green,
-        isMinimum ? styles.minimized : '',
-      ],
-      icon: faHeart,
-      cnIcon: `${styles.icon} ${styles.green}`,
-    },
-    {
-      extraClassName: [styles.btn, styles.small, styles.purple],
-      icon: faBolt,
-      cnIcon: `${styles.icon} ${styles.purple}`,
-    },
-  ];
+  function handleSuperLike() {
+    controls.start('superLike');
+    startCenter();
+    handleLike();
+  }
 
-  // there are only 3 buttons in minimum version
-  return isMinimum ? buttons.slice(1, 4) : buttons;
+  return { handleReturn, handleDislike, handleSuperLike, handleLike };
 }
