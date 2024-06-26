@@ -9,13 +9,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import {
   motion,
-  useTransform,
   type AnimationControls,
   type MotionValue,
 } from 'framer-motion';
 import type { FC } from 'react';
 import { useAppSelector } from '@hooks';
-import { useRateButtons } from '@features/user';
+import { useRateButtons, useRateButtonsStyle } from '@features/user';
 import { Button } from '@shared/ui';
 import styles from './RateButtons.module.scss';
 
@@ -36,32 +35,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
 }) => {
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
 
-  const dislikeBackground = useTransform(
-    x,
-    [-100, -40],
-    ['#ff6574ff', '#ff657400']
-  );
-  const likeBackground = useTransform(x, [40, 100], ['#31ca8f00', '#31ca8fff']);
-  const superLikeBackground = useTransform(y, (yValue) => {
-    const xValue = x.get();
-    if (xValue <= 35 && xValue >= -35 && yValue < -40) {
-      return (
-        '#429dff' + Math.min(255, Math.floor((yValue + 40) * -4)).toString(16)
-      );
-    }
-    return '#429dff00';
-  });
-  const dislikeIconColor = useTransform(x, [-100, -40], ['#ff4458', '#ff6574']);
-  const likeIconColor = useTransform(x, [40, 100], ['#31ca8f', '#129e68']);
-  const superLikeIconColor = useTransform(y, (yValue) => {
-    const xValue = x.get();
-    if (xValue <= 35 && xValue >= -35 && yValue < -40) {
-      return (
-        '#1786ff' + Math.min(255, Math.floor((yValue + 40) * -4)).toString(16)
-      );
-    }
-    return '#429dff';
-  });
+  const { dislikeStyle, superLikeStyle, likeStyle } = useRateButtonsStyle(x, y);
 
   const { handleReturn, handleDislike, handleSuperLike, handleLike } =
     useRateButtons(controls, handleSubmitAction);
@@ -91,7 +65,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
       )}
       <motion.div
         className={classNames(styles.wrapper)}
-        style={{ backgroundColor: dislikeBackground, color: dislikeIconColor }}
+        style={dislikeStyle}
         key="dislike"
       >
         <Button
@@ -111,7 +85,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
       </motion.div>
       <motion.div
         className={classNames(styles.wrapper)}
-        style={{ backgroundColor: superLikeBackground }}
+        style={superLikeStyle}
         key="superLike"
       >
         <Button
@@ -123,17 +97,12 @@ export const RateButtons: FC<RateButtonsProps> = ({
             isFullPreview && styles.minimized
           )}
         >
-          <motion.div style={{ color: superLikeIconColor }}>
-            <FontAwesomeIcon
-              icon={faStar}
-              className={classNames(styles.icon)}
-            />
-          </motion.div>
+          <FontAwesomeIcon icon={faStar} className={classNames(styles.icon)} />
         </Button>
       </motion.div>
       <motion.div
         className={classNames(styles.wrapper)}
-        style={{ backgroundColor: likeBackground }}
+        style={likeStyle}
         key="like"
       >
         <Button
@@ -145,9 +114,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
             isFullPreview && styles.minimized
           )}
         >
-          <motion.div style={{ color: likeIconColor }}>
-            <FontAwesomeIcon icon={faHeart} className={styles.icon} />
-          </motion.div>
+          <FontAwesomeIcon icon={faHeart} className={styles.icon} />
         </Button>
       </motion.div>
       {!isFullPreview && (

@@ -10,6 +10,7 @@ export {
   usePicturesMix,
   useSwipe,
   useUserPictures,
+  useRateButtonsStyle,
   type SettingFieldValues,
   type SwipeProps,
 } from './hooks';
