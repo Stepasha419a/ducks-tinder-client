@@ -1,16 +1,8 @@
 import classNames from 'classnames';
-import type { MotionProps } from 'framer-motion';
-import { motion } from 'framer-motion';
-import type {
-  Dispatch,
-  FC,
-  PropsWithChildren,
-  RefObject,
-  SetStateAction,
-} from 'react';
-import { useEffect } from 'react';
-import type Slider from 'react-slick';
-import type { SwipeProps } from '@features/user';
+import { motion, useAnimationControls } from 'framer-motion';
+import type { FC } from 'react';
+import { useEffect, useState } from 'react';
+import { useSwipe } from '@features/user';
 import { getMatchUserThunk, selectTinderData } from '@entities/user';
 import { Preview } from '@entities/user';
 import {
@@ -20,31 +12,25 @@ import {
 } from '@shared/lib/hooks';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';
-import { Status } from './ui';
+import { RateButtons, Status } from './ui';
 
-interface SwipeUserProps extends SwipeProps {
-  isFullPreview: boolean;
-  setIsFullPreview: Dispatch<SetStateAction<boolean>>;
-  sliderRef: RefObject<Slider>;
-  motionProps: MotionProps;
-}
-
-export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
-  children,
-  isFullPreview,
-  setIsFullPreview,
-  sliderRef,
-  x,
-  y,
-  isDragRef,
-  motionProps,
-}) => {
+export const SwipeUser: FC = () => {
   const dispatch = useAppDispatch();
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const { tinderUser } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
+
+  const [isFullPreview, setIsFullPreview] = useState(false);
+
+  const controls = useAnimationControls();
+
+  const { x, y, sliderRef, isDragRef, motionProps } = useSwipe(
+    controls,
+    isFullPreview,
+    setIsFullPreview
+  );
 
   useEffect(() => {
     dispatch(getMatchUserThunk());
@@ -61,6 +47,10 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
     setIsFullPreview(value);
   };
 
+  const handleSubmitAction = () => {
+    setIsFullPreview(false);
+  };
+
   return (
     <motion.div {...motionProps}>
       <Status x={x} y={y} />
@@ -75,7 +65,13 @@ export const SwipeUser: FC<PropsWithChildren<SwipeUserProps>> = ({
         isShadow={!isFullPreview}
         sliderRef={sliderRef}
       />
-      {children}
+      <RateButtons
+        isFullPreview={isFullPreview}
+        handleSubmitAction={handleSubmitAction}
+        controls={controls}
+        x={x}
+        y={y}
+      />
     </motion.div>
   );
 };

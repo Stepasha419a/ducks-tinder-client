@@ -9,7 +9,6 @@ import { PlacesGeolocation as PlacesGeolocationRaw } from './PlacesGeolocation/P
 import { ProfileSetting as ProfileSettingRaw } from './ProfileSetting/ProfileSetting';
 import { ProfileSettingsList as ProfileSettingsListRaw } from './ProfileSettingsList/ProfileSettingsList';
 import { ProfileSubmit as ProfileSubmitRaw } from './ProfileSubmit/ProfileSubmit';
-import { RateButtons as RateButtonsRaw } from './RateButtons/RateButtons';
 import { RatePairPopup as RatePairPopupRaw } from './RatePairPopup/RatePairPopup';
 import { RegistrationForm as RegistrationFormRaw } from './RegistrationForm/RegistrationForm';
 import { SettingsBlock as SettingsBlockRaw } from './SettingsBlock/SettingsBlock';
@@ -25,7 +24,6 @@ export const PlacesGeolocation = WithErrorFallback(PlacesGeolocationRaw);
 export const ProfileSetting = WithErrorFallback(ProfileSettingRaw);
 export const ProfileSettingsList = WithErrorFallback(ProfileSettingsListRaw);
 export const ProfileSubmit = WithErrorFallback(ProfileSubmitRaw);
-export const RateButtons = WithErrorFallback(RateButtonsRaw);
 export const RatePairPopup = WithErrorFallback(RatePairPopupRaw);
 export const RegistrationForm = WithErrorFallback(RegistrationFormRaw);
 export const SettingsBlock = WithErrorFallback(SettingsBlockRaw);
