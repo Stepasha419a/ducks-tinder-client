@@ -12,3 +12,4 @@ export type { SettingFieldValues } from './useCurrentValidation';
 export { usePicturesMix } from './usePicturesMix';
 export { useUserPictures } from './useUserPictures';
 export { useRateButtonsStyle } from './useRateButtonsStyle';
+export { useSwipeStatusStyle } from './useSwipeStatusStyle';

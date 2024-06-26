@@ -11,6 +11,7 @@ export {
   useSwipe,
   useUserPictures,
   useRateButtonsStyle,
+  useSwipeStatusStyle,
   type SettingFieldValues,
   type SwipeProps,
 } from './hooks';
