@@ -51,6 +51,17 @@ export const RateButtons: FC<RateButtonsProps> = ({
     }
     return '#429dff00';
   });
+  const dislikeIconColor = useTransform(x, [-100, -40], ['#ff4458', '#ff6574']);
+  const likeIconColor = useTransform(x, [40, 100], ['#31ca8f', '#129e68']);
+  const superLikeIconColor = useTransform(y, (yValue) => {
+    const xValue = x.get();
+    if (xValue <= 35 && xValue >= -35 && yValue < -40) {
+      return (
+        '#1786ff' + Math.min(255, Math.floor((yValue + 40) * -4)).toString(16)
+      );
+    }
+    return '#429dff';
+  });
 
   const { handleReturn, handleDislike, handleSuperLike, handleLike } =
     useRateButtons(controls, handleSubmitAction);
@@ -80,7 +91,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
       )}
       <motion.div
         className={classNames(styles.wrapper)}
-        style={{ backgroundColor: dislikeBackground }}
+        style={{ backgroundColor: dislikeBackground, color: dislikeIconColor }}
         key="dislike"
       >
         <Button
@@ -94,7 +105,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
         >
           <FontAwesomeIcon
             icon={faXmark}
-            className={classNames(styles.icon, styles.red, styles.large)}
+            className={classNames(styles.icon, styles.large)}
           />
         </Button>
       </motion.div>
@@ -112,10 +123,12 @@ export const RateButtons: FC<RateButtonsProps> = ({
             isFullPreview && styles.minimized
           )}
         >
-          <FontAwesomeIcon
-            icon={faStar}
-            className={classNames(styles.icon, styles.blue)}
-          />
+          <motion.div style={{ color: superLikeIconColor }}>
+            <FontAwesomeIcon
+              icon={faStar}
+              className={classNames(styles.icon)}
+            />
+          </motion.div>
         </Button>
       </motion.div>
       <motion.div
@@ -132,10 +145,9 @@ export const RateButtons: FC<RateButtonsProps> = ({
             isFullPreview && styles.minimized
           )}
         >
-          <FontAwesomeIcon
-            icon={faHeart}
-            className={classNames(styles.icon, styles.green)}
-          />
+          <motion.div style={{ color: likeIconColor }}>
+            <FontAwesomeIcon icon={faHeart} className={styles.icon} />
+          </motion.div>
         </Button>
       </motion.div>
       {!isFullPreview && (
