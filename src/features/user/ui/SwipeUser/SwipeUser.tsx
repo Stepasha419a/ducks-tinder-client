@@ -12,14 +12,14 @@ import {
 } from '@shared/lib/hooks';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';
-import { RateButtons, Status } from './ui';
+import { Failed, RateButtons, Status } from './ui';
 
 export const SwipeUser: FC = () => {
   const dispatch = useAppDispatch();
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  const { tinderUser } = useAppSelector(selectTinderData);
+  const { tinderUser, isFailed } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
 
   const { motionProps, statusProps, previewProps, rateButtonsProps } =
@@ -28,6 +28,10 @@ export const SwipeUser: FC = () => {
   useEffect(() => {
     dispatch(getMatchUserThunk());
   }, [dispatch]);
+
+  if (isFailed) {
+    return <Failed />;
+  }
 
   if (!tinderUser || isLoading) {
     return <SwipeUserLazy />;
