@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import { motion, useAnimationControls } from 'framer-motion';
+import { motion } from 'framer-motion';
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSwipe } from '@features/user';
 import { getMatchUserThunk, selectTinderData } from '@entities/user';
 import { Preview } from '@entities/user';
@@ -22,15 +22,8 @@ export const SwipeUser: FC = () => {
   const { tinderUser } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
 
-  const [isFullPreview, setIsFullPreview] = useState(false);
-
-  const controls = useAnimationControls();
-
-  const { x, y, sliderRef, isDragRef, motionProps } = useSwipe(
-    controls,
-    isFullPreview,
-    setIsFullPreview
-  );
+  const { motionProps, statusProps, previewProps, rateButtonsProps } =
+    useSwipe();
 
   useEffect(() => {
     dispatch(getMatchUserThunk());
@@ -40,38 +33,18 @@ export const SwipeUser: FC = () => {
     return <SwipeUserLazy />;
   }
 
-  const handleOpenFullPreview = (value: boolean) => {
-    if (isDragRef.current && !isFullPreview) {
-      return;
-    }
-    setIsFullPreview(value);
-  };
-
-  const handleSubmitAction = () => {
-    setIsFullPreview(false);
-  };
-
   return (
     <motion.div {...motionProps}>
-      <Status x={x} y={y} />
+      <Status {...statusProps} />
       <Preview
         user={tinderUser}
-        setIsFullPreview={handleOpenFullPreview}
         extraClassName={classNames(
-          isFullPreview ? styles.padding : styles.grabbing,
+          previewProps.isFull ? styles.padding : styles.grabbing,
           isMobile && styles.mobile
         )}
-        isFull={isFullPreview}
-        isShadow={!isFullPreview}
-        sliderRef={sliderRef}
+        {...previewProps}
       />
-      <RateButtons
-        isFullPreview={isFullPreview}
-        handleSubmitAction={handleSubmitAction}
-        controls={controls}
-        x={x}
-        y={y}
-      />
+      <RateButtons {...rateButtonsProps} />
     </motion.div>
   );
 };

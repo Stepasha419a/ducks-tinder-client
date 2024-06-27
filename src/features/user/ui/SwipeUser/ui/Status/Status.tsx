@@ -1,18 +1,20 @@
 import classNames from 'classnames';
-import type { MotionValue } from 'framer-motion';
+import type { MotionStyle } from 'framer-motion';
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
-import { useSwipeStatusStyle } from '@features/user';
 import styles from './Status.module.scss';
 
 interface StatusProps {
-  x: MotionValue<number>;
-  y: MotionValue<number>;
+  dislikeStyle: MotionStyle;
+  superLikeStyle: MotionStyle;
+  likeStyle: MotionStyle;
 }
 
-export const Status: FC<StatusProps> = ({ x, y }) => {
-  const { dislikeStyle, superLikeStyle, likeStyle } = useSwipeStatusStyle(x, y);
-
+export const Status: FC<StatusProps> = ({
+  dislikeStyle,
+  superLikeStyle,
+  likeStyle,
+}) => {
   return (
     <>
       <motion.div
@@ -22,13 +24,13 @@ export const Status: FC<StatusProps> = ({ x, y }) => {
         DISLIKE
       </motion.div>
       <motion.div
-        style={superLikeStyle}
+        style={likeStyle}
         className={classNames(styles.status, styles.green)}
       >
         LIKE
       </motion.div>
       <motion.div
-        style={likeStyle}
+        style={superLikeStyle}
         className={classNames(styles.status, styles.blue)}
       >
         SUPER LIKE

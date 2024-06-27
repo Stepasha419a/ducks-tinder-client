@@ -7,14 +7,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import {
-  motion,
-  type AnimationControls,
-  type MotionValue,
-} from 'framer-motion';
+import type { MotionStyle } from 'framer-motion';
+import { motion, type AnimationControls } from 'framer-motion';
 import type { FC } from 'react';
 import { useAppSelector } from '@hooks';
-import { useRateButtons, useRateButtonsStyle } from '@features/user';
+import { useRateButtons } from '@features/user';
 import { Button } from '@shared/ui';
 import styles from './RateButtons.module.scss';
 
@@ -22,20 +19,20 @@ interface RateButtonsProps {
   controls: AnimationControls;
   isFullPreview: boolean;
   handleSubmitAction: () => void;
-  x: MotionValue<number>;
-  y: MotionValue<number>;
+  dislikeStyle: MotionStyle;
+  superLikeStyle: MotionStyle;
+  likeStyle: MotionStyle;
 }
 
 export const RateButtons: FC<RateButtonsProps> = ({
   controls,
   isFullPreview,
   handleSubmitAction,
-  x,
-  y,
+  dislikeStyle,
+  superLikeStyle,
+  likeStyle,
 }) => {
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
-
-  const { dislikeStyle, superLikeStyle, likeStyle } = useRateButtonsStyle(x, y);
 
   const { handleReturn, handleDislike, handleSuperLike, handleLike } =
     useRateButtons(controls, handleSubmitAction);

@@ -1,4 +1,8 @@
-import { useMotionValue, useTransform } from 'framer-motion';
+import {
+  useAnimationControls,
+  useMotionValue,
+  useTransform,
+} from 'framer-motion';
 import type {
   AnimationControls,
   MotionProps,
@@ -11,13 +15,14 @@ import type Slider from 'react-slick';
 import { useAdaptiveMediaQuery } from '@hooks';
 import { useTinderAnimations } from '@entities/user';
 import { useEventListener } from '@shared/lib/hooks';
+import { useRateButtonsStyle } from './useRateButtonsStyle';
+import { useSwipeStatusStyle } from './useSwipeStatusStyle';
 
-export function useSwipe(
-  controls: AnimationControls,
-  isFullPreview: boolean,
-  setIsFullPreview: Dispatch<SetStateAction<boolean>>
-) {
+export function useSwipe() {
+  const [isFullPreview, setIsFullPreview] = useState(false);
   const [isLockedSubmission, setIsLockedSubmission] = useState(false);
+
+  const controls = useAnimationControls();
 
   const sliderRef = useRef<Slider>(null);
 
@@ -36,7 +41,35 @@ export function useSwipe(
   };
   useKeyboardEvents(controls, setIsFullPreviewKeyboard, sliderRef);
 
-  return { isDragRef, motionProps, sliderRef, x, y };
+  const handleBlockActiveDragFullPreview = (value: boolean) => {
+    if (isDragRef.current && !isFullPreview) {
+      return;
+    }
+    setIsFullPreview(value);
+  };
+
+  const handleSubmitAction = () => {
+    setIsFullPreview(false);
+  };
+
+  return {
+    motionProps,
+    previewProps: {
+      setIsFullPreview: handleBlockActiveDragFullPreview,
+      isFull: isFullPreview,
+      isShadow: !isFullPreview,
+      sliderRef,
+    },
+    statusProps: {
+      ...useSwipeStatusStyle(x, y),
+    },
+    rateButtonsProps: {
+      isFullPreview,
+      handleSubmitAction,
+      controls,
+      ...useRateButtonsStyle(x, y),
+    },
+  };
 }
 
 type SlantSide = 'top' | 'bottom' | null;
