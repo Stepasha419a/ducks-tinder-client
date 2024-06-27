@@ -20,7 +20,7 @@ export async function resolveAxiosResponse<T>(
 }
 
 export function getMockableService<T>(service: T, mockService: T): T {
-  return import.meta.env.VITE_MODE === 'test' ? mockService : service;
+  return import.meta.env.VITE_MODE === 'demo' ? mockService : service;
 }
 
 export const mockStorage = {

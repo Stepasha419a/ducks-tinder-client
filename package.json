@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite --host --mode dev",
+    "demo": "vite --host --mode demo",
     "build": "vite build",
     "preview": "vite preview",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
@@ -12,8 +13,7 @@
     "lint": "eslint ./src/**/*{.ts,.tsx,.js,.jsx}",
     "lint:fix": "eslint ./src/**/*{.ts,.tsx,.js,.jsx} --fix",
     "storybook": "storybook dev -p 6006",
-    "test-storybook": "test-storybook",
-    "build-storybook": "storybook build"
+    "storybook:test": "test-storybook"
   },
   "browserslist": {
     "production": [
