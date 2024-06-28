@@ -17,19 +17,20 @@ Ducks Tinder is a Tinder clone project
 
 ## Demo
 
-You can check online demo on vercel deployment (link is in "about" of the repository) or run it by yourself using npm run demo
+You can check online demo on [vercel deployment](https://ducks-tinder-client.vercel.app/) or run it by yourself using npm run demo
 
 - `npm i` to install dependencies
 - `npm run demo` to run the app in the development mode with mocks (default port is 3000);
 
 ## Development
 
-- `npm i` to install dependencies
+- `npm i` to install dependencies<br/>
+
   in progress...
 
 ## Feature-Sliced Design
 
-Frontend implements Feature-Sliced Design architectural methodology with some differences:
+Frontend implements [Feature-Sliced Design](https://feature-sliced.design/) architectural methodology with some differences:
 
 - `app` layer has more explicit slices like `store`, `styles` etc;
 - `pages` layer is collection of standalone pages (f.e. page could have its own lib);
