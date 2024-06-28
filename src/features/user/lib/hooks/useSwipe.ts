@@ -62,6 +62,7 @@ export function useSwipe() {
     },
     statusProps: {
       ...useSwipeStatusStyle(x, y),
+      isFullPreview,
     },
     rateButtonsProps: {
       isFullPreview,

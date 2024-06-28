@@ -8,15 +8,17 @@ interface StatusProps {
   dislikeStyle: MotionStyle;
   superLikeStyle: MotionStyle;
   likeStyle: MotionStyle;
+  isFullPreview: boolean;
 }
 
 export const Status: FC<StatusProps> = ({
   dislikeStyle,
   superLikeStyle,
   likeStyle,
+  isFullPreview,
 }) => {
   return (
-    <>
+    <div className={classNames(styles.wrapper, !isFullPreview && styles.grab)}>
       <motion.div
         style={dislikeStyle}
         className={classNames(styles.status, styles.red)}
@@ -35,6 +37,6 @@ export const Status: FC<StatusProps> = ({
       >
         SUPER LIKE
       </motion.div>
-    </>
+    </div>
   );
 };
