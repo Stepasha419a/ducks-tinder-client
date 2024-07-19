@@ -7,4 +7,9 @@
   right: 6px;
   padding: 10px;
   cursor: pointer;
+
+  &.disabled {
+    color: var(--main-secondary);
+    cursor: default;
+  }
 }

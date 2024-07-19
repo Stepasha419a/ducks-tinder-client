@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import classNames from 'classnames';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Places } from '@entities/user';
 import { updateUserPlaceThunk } from '@entities/user';
@@ -11,28 +12,39 @@ export const PlacesGeolocation = () => {
 
   const place = useAppSelector((state) => state.user.currentUser!.place);
 
-  const handleGetCurrentPosition = (pos: GeolocationPosition) => {
-    if (
-      !place ||
-      getAreDifferentPlaces(
-        place.latitude,
-        place.longitude,
-        pos.coords.latitude,
-        pos.coords.longitude
-      )
-    ) {
-      dispatch(
-        updateUserPlaceThunk({
-          latitude: pos.coords.latitude,
-          longitude: pos.coords.longitude,
-        })
-      );
-    } else {
-      toast('Your position is remained unchanged');
-    }
-  };
+  const [loading, setLoading] = useState(false);
 
-  const handlePlace = () => {
+  const handleGetCurrentPosition = useCallback(
+    (pos: GeolocationPosition) => {
+      if (
+        !place ||
+        getAreDifferentPlaces(
+          place.latitude,
+          place.longitude,
+          pos.coords.latitude,
+          pos.coords.longitude
+        )
+      ) {
+        dispatch(
+          updateUserPlaceThunk({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+          })
+        );
+      } else {
+        toast('Your position is remained unchanged');
+      }
+    },
+    [dispatch, place]
+  );
+
+  const handlePlace = useCallback(() => {
+    if (loading) {
+      toast('Refreshing is already in progress');
+      return;
+    }
+
+    setLoading(true);
     navigator.geolocation.getCurrentPosition(
       handleGetCurrentPosition,
       () => {
@@ -42,16 +54,20 @@ export const PlacesGeolocation = () => {
       },
       { enableHighAccuracy: true }
     );
-  };
+    setLoading(false);
+  }, [handleGetCurrentPosition, loading]);
 
   useEffect(() => {
     handlePlace();
-  });
+  }, [handlePlace]);
 
   return (
     <Places
       refreshFeature={
-        <div onClick={handlePlace} className={styles.refresh}>
+        <div
+          onClick={handlePlace}
+          className={classNames(styles.refresh, loading && styles.disabled)}
+        >
           Refresh
         </div>
       }

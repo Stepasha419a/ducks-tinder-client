@@ -54,8 +54,8 @@ export const PartnerAgeSettingThumbnail = () => {
       <div className={styles.slider}>
         <RangeInput
           value={{
-            min: preferAgeSetting.preferAgeFrom || 28,
-            max: preferAgeSetting.preferAgeTo || 90,
+            min: preferAgeSetting.preferAgeFrom || 18,
+            max: preferAgeSetting.preferAgeTo || 30,
           }}
           setValue={(value) =>
             setPreferAgeSetting({
