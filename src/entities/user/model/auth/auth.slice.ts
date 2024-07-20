@@ -55,6 +55,7 @@ const authSlice = createSlice({
         (state, action: PayloadAction<string>) => {
           if (action.type.split('/')[0] === 'auth') {
             // if it's auth error (refresh request) => set unauthorized
+            state.isAuth = false;
             state.authData = null;
 
             const thunkName = action.type.split('/')[1];
