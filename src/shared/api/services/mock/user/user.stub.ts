@@ -37,7 +37,6 @@ export const shortUserStub: ShortUser = {
 };
 
 export const userStub: User = {
-  email: 'email@gmail.com',
   age: 18,
   alcoholAttitude: null,
   attentionSign: null,

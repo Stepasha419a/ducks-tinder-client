@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import {
-  userStub,
-  type AuthResponse,
-  type AuthService,
-} from '@shared/api/services';
+import type { AuthResponse, AuthService } from '@shared/api/services';
 import {
   deleteTestUser,
   getTestUser,
@@ -16,7 +12,7 @@ import { authResponseStub } from './auth.stub';
 
 export const authMockService: AuthService = {
   async registration(email, name, password) {
-    mockStorage.currentUser = { ...mockStorage.currentUser, email, name };
+    mockStorage.currentUser = { ...mockStorage.currentUser, name };
     saveTestUser(mockStorage.currentUser);
 
     return resolveAxiosResponse({
@@ -25,7 +21,6 @@ export const authMockService: AuthService = {
     });
   },
   async login(email, password) {
-    mockStorage.currentUser = { ...mockStorage.currentUser, email };
     saveTestUser(mockStorage.currentUser);
 
     return resolveAxiosResponse({

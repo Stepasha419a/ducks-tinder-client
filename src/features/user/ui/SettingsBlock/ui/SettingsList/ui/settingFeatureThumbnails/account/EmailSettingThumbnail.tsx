@@ -3,7 +3,7 @@ import { ROUTES } from '@shared/lib/constants';
 import { useAppSelector } from '@shared/lib/hooks';
 
 export const EmailSettingThumbnail = () => {
-  const email = useAppSelector((state) => state.user.currentUser!.email);
+  const email = useAppSelector((state) => state.auth.authData!.email);
 
   const url = `${ROUTES.SETTINGS}/email`;
   return (

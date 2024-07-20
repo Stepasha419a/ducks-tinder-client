@@ -31,7 +31,7 @@ instance.interceptors.response.use(
           withCredentials: true,
         }
       );
-      localStorage.setItem('accessToken', response.data.accessToken.value);
+      localStorage.setItem('accessToken', response.data.accessToken);
 
       return instance.request(originalRequest);
     }

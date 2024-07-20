@@ -1,12 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCurrentUser } from '@entities/user';
 import { authService } from '@shared/api/services';
 import type { LoginParams, RegistrationParams } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',
-  async (params: RegistrationParams, { rejectWithValue, dispatch }) => {
+  async (params: RegistrationParams, { rejectWithValue }) => {
     try {
       const response = await authService.registration(
         params.email,
@@ -14,11 +13,10 @@ export const registerThunk = createAsyncThunk(
         params.password
       );
 
-      const { accessToken, ...user } = response.data;
-      localStorage.setItem('accessToken', accessToken.value);
+      const { accessToken, ...data } = response.data;
+      localStorage.setItem('accessToken', accessToken);
 
-      dispatch(setCurrentUser(user));
-      return response.data;
+      return data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -27,15 +25,14 @@ export const registerThunk = createAsyncThunk(
 
 export const loginThunk = createAsyncThunk(
   'auth/loginUser',
-  async (params: LoginParams, { rejectWithValue, dispatch }) => {
+  async (params: LoginParams, { rejectWithValue }) => {
     try {
       const response = await authService.login(params.email, params.password);
 
-      const { accessToken, ...user } = response.data;
-      localStorage.setItem('accessToken', accessToken.value);
+      const { accessToken, ...data } = response.data;
+      localStorage.setItem('accessToken', accessToken);
 
-      dispatch(setCurrentUser(user));
-      return response.data;
+      return data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -44,15 +41,14 @@ export const loginThunk = createAsyncThunk(
 
 export const checkAuthThunk = createAsyncThunk(
   'auth/checkAuth',
-  async (_, { rejectWithValue, dispatch }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await authService.refresh();
 
-      const { accessToken, ...user } = response.data;
-      localStorage.setItem('accessToken', accessToken.value);
+      const { accessToken, ...data } = response.data;
+      localStorage.setItem('accessToken', accessToken);
 
-      dispatch(setCurrentUser(user));
-      return response.data;
+      return data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

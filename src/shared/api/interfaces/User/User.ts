@@ -28,7 +28,6 @@ export interface ShortPlace {
 
 export interface User {
   id: string;
-  email: string;
   name: string;
   description: string | null;
   nickname: string | null;
