@@ -3,6 +3,19 @@ import type { Picture, User } from '@shared/api/interfaces';
 import { userService } from '@shared/api/services';
 import { returnErrorMessage } from '@shared/helpers';
 
+export const getCurrentUser = createAsyncThunk(
+  'users/getCurrentUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await userService.getMe();
+
+      return response.data;
+    } catch (error: unknown) {
+      return rejectWithValue(returnErrorMessage(error));
+    }
+  }
+);
+
 export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
   async (data: Partial<User>, { rejectWithValue }) => {

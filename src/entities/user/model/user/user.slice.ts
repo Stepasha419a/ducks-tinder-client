@@ -1,6 +1,5 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
 import type { User } from '@shared/api/interfaces';
 import type { Setting, UserInitialState } from './user.interface';
 import {
@@ -9,6 +8,7 @@ import {
   saveUserImageThunk,
   updateUserThunk,
   updateUserPlaceThunk,
+  getCurrentUser,
 } from './user.thunks';
 
 const initialState: UserInitialState = {
@@ -30,10 +30,8 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(updateUserThunk.rejected, (_, { payload }) => {
-        if (payload === 'User already exists') {
-          toast('This email address is already used, try another one');
-        }
+      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
+        state.currentUser = payload;
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;

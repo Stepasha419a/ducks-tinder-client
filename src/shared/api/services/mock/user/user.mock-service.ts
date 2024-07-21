@@ -7,6 +7,10 @@ import { mockStorage, resolveAxiosResponse, saveTestUser } from '../mock';
 import { matchingUserStubs, pairsInfoStub } from './user.stub';
 
 export const userMockService: UserService = {
+  async getMe() {
+    return resolveAxiosResponse(mockStorage.currentUser);
+  },
+
   async getMatchUser() {
     return resolveAxiosResponse(
       matchingUserStubs[mockStorage.currentMatchingIndex]

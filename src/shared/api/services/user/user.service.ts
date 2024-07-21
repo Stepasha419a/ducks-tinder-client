@@ -7,6 +7,12 @@ import type { UserService } from './user-service.interface';
 
 export const userService: UserService = getMockableService(
   {
+    async getMe() {
+      return instance.get<User>(
+        `${import.meta.env.VITE_USER_SERVICE_URL}/user/me`
+      );
+    },
+
     async getMatchUser() {
       return instance.get<ShortUser>(
         `${import.meta.env.VITE_USER_SERVICE_URL}/user/match`
