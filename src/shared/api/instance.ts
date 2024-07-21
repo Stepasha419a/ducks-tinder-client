@@ -20,6 +20,10 @@ instance.interceptors.response.use(
   (config: AxiosEditedConfig) => config,
   async (error: AxiosError<{ message: string; status: string }>) => {
     const originalRequest = error.config as AxiosEditedConfig;
+    if (error.config.url?.endsWith('/auth/refresh')) {
+      return;
+    }
+
     if (
       error.response?.status === 401 &&
       !(error.config as AxiosEditedConfig)._isRetry
