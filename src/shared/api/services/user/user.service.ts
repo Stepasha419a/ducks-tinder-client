@@ -77,13 +77,13 @@ export const userService: UserService = getMockableService(
     },
 
     async acceptPair(pairId: string) {
-      return instance.post<string>(
+      return instance.post<ShortUser>(
         `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs/${pairId}`
       );
     },
 
     async deletePair(pairId: string) {
-      return instance.put<string>(
+      return instance.put<ShortUser>(
         `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs/${pairId}`
       );
     },

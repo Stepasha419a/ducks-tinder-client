@@ -32,8 +32,8 @@ export interface UserService {
   mixPictures(pictureOrders: number[]): Promise<AxiosResponse<User>>;
   getPairs(params: PairFilterParams): Promise<AxiosResponse<ShortUser[]>>;
   getPairsInfo(): Promise<AxiosResponse<PairsInfo>>;
-  acceptPair(pairId: string): Promise<AxiosResponse<string>>;
-  deletePair(pairId: string): Promise<AxiosResponse<string>>;
+  acceptPair(pairId: string): Promise<AxiosResponse<ShortUser>>;
+  deletePair(pairId: string): Promise<AxiosResponse<ShortUser>>;
   likeUser(userId: string): Promise<AxiosResponse<void>>;
   dislikeUser(userId: string): Promise<AxiosResponse<void>>;
   returnUser(): Promise<AxiosResponse<ShortUser>>;

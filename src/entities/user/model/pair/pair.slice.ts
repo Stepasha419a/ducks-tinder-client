@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import type { ShortUser } from '@shared/api/interfaces';
 import type { PairsInfo } from '@shared/api/services';
 import { PAGINATION_TAKE } from '@shared/lib/constants';
 import type {
@@ -63,22 +64,22 @@ const pairSlice = createSlice({
       )
       .addCase(
         acceptPairThunk.fulfilled,
-        (state, { payload: pairId }: PayloadAction<string>) => {
+        (state, { payload: pair }: PayloadAction<ShortUser>) => {
           if (state.pairsInfo !== null) {
             state.pairsInfo.count--;
           }
 
-          state.pairs = state.pairs.filter((pair) => pair.id !== pairId);
+          state.pairs = state.pairs.filter((item) => item.id !== pair.id);
         }
       )
       .addCase(
         refusePairThunk.fulfilled,
-        (state, { payload: pairId }: PayloadAction<string>) => {
+        (state, { payload: pair }: PayloadAction<ShortUser>) => {
           if (state.pairsInfo !== null) {
             state.pairsInfo.count--;
           }
 
-          state.pairs = state.pairs.filter((pair) => pair.id !== pairId);
+          state.pairs = state.pairs.filter((item) => item.id !== pair.id);
         }
       )
       .addCase(getPairsInfoThunk.pending, (state) => {

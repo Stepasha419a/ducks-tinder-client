@@ -4,7 +4,7 @@ import type { User } from '@shared/api/interfaces';
 import type { UserService, PairFilterParams } from '@shared/api/services';
 import { chatStub } from '@shared/api/services';
 import { mockStorage, resolveAxiosResponse, saveTestUser } from '../mock';
-import { matchingUserStubs, pairsInfoStub } from './user.stub';
+import { matchingUserStubs, pairsInfoStub, shortUserStub } from './user.stub';
 
 export const userMockService: UserService = {
   async getMe() {
@@ -61,11 +61,11 @@ export const userMockService: UserService = {
 
   async acceptPair(pairId: string) {
     mockStorage.chats.unshift({ ...chatStub, id: pairId });
-    return resolveAxiosResponse(pairId);
+    return resolveAxiosResponse({ ...shortUserStub, id: pairId });
   },
 
   async deletePair(pairId: string) {
-    return resolveAxiosResponse(pairId);
+    return resolveAxiosResponse({ ...shortUserStub, id: pairId });
   },
 
   async likeUser(userId: string) {
