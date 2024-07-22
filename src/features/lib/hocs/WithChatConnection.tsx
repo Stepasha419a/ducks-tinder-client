@@ -79,5 +79,9 @@ export function useChatConnection() {
     on(ChatSocketEvent.DeleteChat, (deletedChatId: string) => {
       dispatch(deleteChat(deletedChatId));
     });
+
+    return () => {
+      chatService.disconnect();
+    };
   }, [dispatch]);
 }

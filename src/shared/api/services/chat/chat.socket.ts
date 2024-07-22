@@ -61,5 +61,6 @@ export const chatSocket: ChatSocket = {
   },
   disconnect(): void {
     this._socket?.close();
+    this._socket = null;
   },
 };
