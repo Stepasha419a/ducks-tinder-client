@@ -11,7 +11,6 @@
   letter-spacing: 0.7px;
   padding: 5px 0 25px 20px;
   cursor: pointer;
-  overflow: hidden;
   color: var(--color--white-100);
 
   &.high {
@@ -31,7 +30,7 @@
     margin: 3px 1px;
     background-color: var(--bg-tinder-list-item);
     color: var(--main-tinder-list-item);
-    border-color: var(--border-tinder-list-item);
+    border-color: var(--main-primary);
   }
 
   .person {

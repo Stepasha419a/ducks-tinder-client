@@ -14,7 +14,11 @@ export interface UserPlaceInfo extends UserInfo {
 
 type UserListInfo = string[];
 
-export type UserSliderInfo = UserInfo | UserPlaceInfo | UserListInfo;
+export type UserSliderInfo =
+  | UserInfo
+  | UserPlaceInfo
+  | UserListInfo
+  | undefined;
 
 export function getUserSliderInfo(user: User | ShortUser): UserSliderInfo[] {
   const result: UserSliderInfo[] = [];
@@ -28,12 +32,12 @@ export function getUserSliderInfo(user: User | ShortUser): UserSliderInfo[] {
 
   const lifestyle = getLifestyle(user);
   if (lifestyle.length > 0) {
-    result.push(lifestyle as UserListInfo);
+    result.push(lifestyle.slice(0, 4) as UserListInfo);
   }
 
   const moreAboutMe = getMoreAboutMe(user);
   if (moreAboutMe.length > 0) {
-    result.push(moreAboutMe as UserListInfo);
+    result.push(moreAboutMe.slice(0, 4) as UserListInfo);
   }
 
   result.push({ name: user.name, age: user.age! } as UserInfo);

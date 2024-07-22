@@ -38,7 +38,7 @@ export const SliderContent: FC<SliderContentProps> = ({
     );
   }
 
-  if ('place' in currentInfo && currentInfo.place !== null) {
+  if (currentInfo && 'place' in currentInfo && currentInfo.place !== null) {
     return (
       <div className={styles.wrapper}>
         <div className={styles.person}>
