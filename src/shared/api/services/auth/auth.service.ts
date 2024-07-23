@@ -12,7 +12,7 @@ export const authService: AuthService = getMockableService(
     },
     async registration(email: string, name: string, password: string) {
       return instance.post<AuthResponse>(
-        `${import.meta.env.VITE_AUTH_SERVICE_URL}/auth/registration`,
+        `${import.meta.env.VITE_AUTH_SERVICE_URL}/auth/register`,
         {
           email,
           name,
