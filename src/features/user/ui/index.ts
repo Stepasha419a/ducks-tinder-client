@@ -4,6 +4,7 @@ import { FilterPairsItems as FilterPairsItemsRaw } from './FilterPairsItems/Filt
 import { LoginForm as LoginFormRaw } from './LoginForm/LoginForm';
 import { LogoutButton as LogoutButtonRaw } from './LogoutButton/LogoutButton';
 import { PairsFilterPopup as PairsFilterPopupRaw } from './PairsFilterPopup/PairsFilterPopup';
+import { PairsList as PairsListRaw } from './PairsList/PairsList';
 import { PicturesDND as PicturesDNDRaw } from './PicturesDND/PicturesDND';
 import { PlacesGeolocation as PlacesGeolocationRaw } from './PlacesGeolocation/PlacesGeolocation';
 import { ProfileSetting as ProfileSettingRaw } from './ProfileSetting/ProfileSetting';
@@ -19,6 +20,7 @@ export const FilterPairsItems = WithErrorFallback(FilterPairsItemsRaw);
 export const LoginForm = WithErrorFallback(LoginFormRaw);
 export const LogoutButton = WithErrorFallback(LogoutButtonRaw);
 export const PairsFilterPopup = WithErrorFallback(PairsFilterPopupRaw);
+export const PairsList = WithErrorFallback(PairsListRaw);
 export const PicturesDND = WithErrorFallback(PicturesDNDRaw);
 export const PlacesGeolocation = WithErrorFallback(PlacesGeolocationRaw);
 export const ProfileSetting = WithErrorFallback(ProfileSettingRaw);

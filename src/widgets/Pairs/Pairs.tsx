@@ -3,13 +3,10 @@ import { useForm } from 'react-hook-form';
 import {
   FilterPairsItems,
   PairsFilterPopup,
+  PairsList,
   RatePairPopup,
 } from '@features/user';
-import {
-  getUserPairsThunk,
-  PairsList,
-  type PairFilterForm,
-} from '@entities/user';
+import { getUserPairsThunk, type PairFilterForm } from '@entities/user';
 import type { ShortUser } from '@shared/api/interfaces';
 import { useAppDispatch } from '@shared/lib/hooks';
 
