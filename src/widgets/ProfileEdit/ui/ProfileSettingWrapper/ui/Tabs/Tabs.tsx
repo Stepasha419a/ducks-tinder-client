@@ -4,28 +4,25 @@ import { Button } from '@shared/ui';
 import styles from './Tabs.module.scss';
 
 interface TabsProps {
-  isPreviewSetting: boolean;
-  setIsPreviewSetting: (value: boolean) => void;
+  isPreviewTab: boolean;
+  setIsPreviewTab: (value: boolean) => void;
 }
 
-export const Tabs: FC<TabsProps> = ({
-  isPreviewSetting,
-  setIsPreviewSetting,
-}) => {
+export const Tabs: FC<TabsProps> = ({ isPreviewTab, setIsPreviewTab }) => {
   return (
     <div className={styles.btns}>
       <Button
-        onClick={() => setIsPreviewSetting(false)}
+        onClick={() => setIsPreviewTab(false)}
         extraClassName={classNames(
-          !isPreviewSetting && styles.active,
+          !isPreviewTab && styles.active,
           styles.border
         )}
       >
         Change
       </Button>
       <Button
-        onClick={() => setIsPreviewSetting(true)}
-        extraClassName={isPreviewSetting ? styles.active : ''}
+        onClick={() => setIsPreviewTab(true)}
+        extraClassName={isPreviewTab ? styles.active : ''}
       >
         Preview
       </Button>

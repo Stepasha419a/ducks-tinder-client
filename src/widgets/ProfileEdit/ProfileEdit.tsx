@@ -11,22 +11,26 @@ export const ProfileEdit = () => {
 
   const user = useAppSelector((state) => state.user.currentUser!);
 
-  const [isFullPreviewSetting, setIsFullPreviewSetting] = useState(false);
+  const [isFullPreview, setIsFullPreview] = useState(false);
+  const [isPreviewTab, setIsPreviewTab] = useState(false);
   const { pictures, setPictures } = useUserPictures();
+
+  const handleCloseFullPreview = () => {
+    setIsFullPreview(false);
+    setIsPreviewTab(true);
+  };
 
   return (
     <div className={styles.change}>
       {isMobile && <ProfileSubmit isMobile pictures={pictures} />}
-      {isFullPreviewSetting ? (
-        <Preview
-          user={user}
-          setIsFullPreview={setIsFullPreviewSetting}
-          isFull
-        />
+      {isFullPreview ? (
+        <Preview user={user} setIsFullPreview={handleCloseFullPreview} isFull />
       ) : (
         <ProfileSettingWrapper
           pictures={pictures}
-          setIsFullPreviewSetting={setIsFullPreviewSetting}
+          setIsFullPreview={setIsFullPreview}
+          isPreviewTab={isPreviewTab}
+          setIsPreviewTab={setIsPreviewTab}
           setPictures={setPictures}
         />
       )}

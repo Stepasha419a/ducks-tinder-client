@@ -16,21 +16,19 @@ export const UserSlider: FC<ImageSliderProps> = ({ user, ...sliderProps }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <>
-      <ImageSlider
-        images={user.pictures}
-        currentSlide={currentSlide}
-        setCurrentSlide={setCurrentSlide}
-        content={
-          <SliderContent
-            currentSlide={currentSlide}
-            age={user.age}
-            info={getUserSliderInfo(user)}
-            name={user.name}
-          />
-        }
-        {...sliderProps}
-      />
-    </>
+    <ImageSlider
+      images={user.pictures}
+      currentSlide={currentSlide}
+      setCurrentSlide={setCurrentSlide}
+      content={
+        <SliderContent
+          currentSlide={currentSlide}
+          age={user.age}
+          info={getUserSliderInfo(user)}
+          name={user.name}
+        />
+      }
+      {...sliderProps}
+    />
   );
 };

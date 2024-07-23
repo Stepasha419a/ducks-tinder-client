@@ -1,5 +1,4 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { useState } from 'react';
 import { ProfileSettingBlock } from '@widgets';
 import { Preview } from '@entities/user';
 import type { Picture } from '@shared/api/interfaces';
@@ -10,27 +9,26 @@ import { Tabs } from './ui';
 interface ProfileSettingWrapperProps {
   pictures: Picture[];
   setPictures: Dispatch<SetStateAction<Picture[]>>;
-  setIsFullPreviewSetting: Dispatch<SetStateAction<boolean>>;
+  setIsPreviewTab: Dispatch<SetStateAction<boolean>>;
+  isPreviewTab: boolean;
+  setIsFullPreview: Dispatch<SetStateAction<boolean>>;
 }
 
 export const ProfileSettingWrapper: FC<ProfileSettingWrapperProps> = ({
   pictures,
   setPictures,
-  setIsFullPreviewSetting,
+  setIsPreviewTab,
+  isPreviewTab,
+  setIsFullPreview,
 }) => {
   const user = useAppSelector((state) => state.user.currentUser!);
 
-  const [isPreviewSetting, setIsPreviewSetting] = useState(false);
-
   return (
     <>
-      <Tabs
-        isPreviewSetting={isPreviewSetting}
-        setIsPreviewSetting={setIsPreviewSetting}
-      />
+      <Tabs isPreviewTab={isPreviewTab} setIsPreviewTab={setIsPreviewTab} />
       <div className={styles.panel}>
-        {isPreviewSetting ? (
-          <Preview user={user} setIsFullPreview={setIsFullPreviewSetting} />
+        {isPreviewTab ? (
+          <Preview user={user} setIsFullPreview={setIsFullPreview} />
         ) : (
           <ProfileSettingBlock pictures={pictures} setPictures={setPictures} />
         )}
