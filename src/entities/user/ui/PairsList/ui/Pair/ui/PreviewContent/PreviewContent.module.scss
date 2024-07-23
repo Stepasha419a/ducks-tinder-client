@@ -1,0 +1,35 @@
+.info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: var(--color--white-100);
+  font-size: 20px;
+  font-weight: 600;
+
+  .descr {
+    display: flex;
+
+    .years {
+      padding-left: 10px;
+    }
+  }
+
+  .distance {
+    font-size: 18px;
+    font-weight: 300;
+
+    .text {
+      padding-left: 5px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .info {
+    font-size: 16px;
+
+    .distance {
+      font-size: 14px;
+    }
+  }
+}

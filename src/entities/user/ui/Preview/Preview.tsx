@@ -16,7 +16,7 @@ import type {
 } from '@shared/api/interfaces';
 import { Button } from '@shared/ui';
 import styles from './Preview.module.scss';
-import { UserSlider, FullPreview } from './ui';
+import { UserSlider, FullPreview, NoSlider } from './ui';
 
 interface PreviewPropsInterface {
   user: User | ShortUser | ShortUserWithoutDistance;
@@ -28,6 +28,7 @@ interface PreviewPropsInterface {
   extraContent?: ReactElement;
   extraClassName?: string;
   sliderRef?: RefObject<Slider>;
+  noSlider?: boolean;
 }
 
 export const Preview: FC<PreviewPropsInterface> = ({
@@ -38,6 +39,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
   extraContent,
   extraClassName,
   sliderRef,
+  noSlider,
 }) => {
   if (isFull) {
     return (
@@ -55,18 +57,23 @@ export const Preview: FC<PreviewPropsInterface> = ({
   return (
     <div className={cn}>
       <div className={classNames(styles.slider)}>
-        <UserSlider
-          user={user}
-          extraClassName={styles.image}
-          isShadow={isShadow}
-          sliderRef={sliderRef}
-        />
+        {noSlider ? (
+          <NoSlider
+            avatar={user.pictures[0]?.name}
+            extraContent={extraContent}
+            imageCn={cn}
+          />
+        ) : (
+          <UserSlider
+            user={user}
+            extraClassName={styles.image}
+            isShadow={isShadow}
+            sliderRef={sliderRef}
+          />
+        )}
       </div>
-      <div
-        onClick={() => setIsFullPreview && setIsFullPreview(true)}
-        className={styles.descr}
-      >
-        {setIsFullPreview && (
+      {setIsFullPreview && (
+        <div onClick={() => setIsFullPreview(true)} className={styles.descr}>
           <Button
             variant="mark"
             onClick={() => setIsFullPreview(true)}
@@ -74,8 +81,8 @@ export const Preview: FC<PreviewPropsInterface> = ({
           >
             <FontAwesomeIcon icon={faCircleInfo} />
           </Button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

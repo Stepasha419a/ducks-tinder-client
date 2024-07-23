@@ -9,7 +9,7 @@ import styles from './SliderContent.module.scss';
 interface SliderContentProps {
   name: string;
   age: number | null;
-  info: UserSliderInfo[];
+  info?: UserSliderInfo[];
   currentSlide: number;
 }
 
@@ -19,7 +19,7 @@ export const SliderContent: FC<SliderContentProps> = ({
   info,
   currentSlide,
 }) => {
-  const currentInfo = info[currentSlide];
+  const currentInfo = info?.[currentSlide];
 
   if (Array.isArray(currentInfo)) {
     return (
