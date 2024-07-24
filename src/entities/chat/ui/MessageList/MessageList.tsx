@@ -18,7 +18,7 @@ import {
 import { InfinityScroll } from '@shared/ui';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';
-import { Message, Timestamp, Status } from './ui';
+import { Message, NotFound, Timestamp } from './ui';
 
 interface MessagesProps {
   select: ReactElement;
@@ -44,7 +44,7 @@ export const MessageList: FC<MessagesProps> = ({
   const isSocketConnected = useAppSelector(
     (state) => state.chat.isSocketConnected
   );
-  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
+  const isNotFound = useAppSelector((state) => state.chat.isNotFound);
 
   const {
     getSelectProps,
@@ -80,8 +80,8 @@ export const MessageList: FC<MessagesProps> = ({
     }
   }, [dispatch, chatId, isSocketConnected]);
 
-  if (!currentChatId) {
-    return <Status />;
+  if (isNotFound) {
+    return <NotFound />;
   }
 
   return (

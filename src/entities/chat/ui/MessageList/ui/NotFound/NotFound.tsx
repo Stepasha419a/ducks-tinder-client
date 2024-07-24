@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { ReactElement } from 'react';
 import styles from './NotFound.module.scss';
 
-export const NotFoundChat = (): ReactElement => {
+export const NotFound = (): ReactElement => {
   return (
     <div className={styles.noChats}>
       <div className={styles.inner}>

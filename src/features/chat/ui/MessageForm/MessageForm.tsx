@@ -10,6 +10,7 @@ import {
 import type { Message } from '@shared/api/interfaces';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { Button, TextField } from '@shared/ui';
+import { MessageFormLazy } from './MessageForm.lazy';
 import styles from './MessageForm.module.scss';
 import { BlockedChat, TopBlock } from './ui';
 
@@ -34,6 +35,8 @@ export const MessageForm: FC<MessageFormProps> = ({
 
   const currentChat = useAppSelector(selectCurrentChat);
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
+  const chat = useAppSelector((state) => state.chat.chat);
+  const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
 
   const {
     register,
@@ -68,6 +71,10 @@ export const MessageForm: FC<MessageFormProps> = ({
       setValue('input', selectedMessage.text);
     }
   }, [isMessageEditing, selectedMessage, setValue]);
+
+  if (isChatLoading || !chat) {
+    return <MessageFormLazy />;
+  }
 
   if (currentChat?.blocked) {
     const blockedByName =
