@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom';
-import { useAppSelector } from '@shared/lib/hooks';
 import { getIsExplorePage, getIsProfilePage } from '../helpers';
 
 export enum NavBlockEnum {
@@ -10,11 +9,8 @@ export enum NavBlockEnum {
 
 export function useNavBlock(): NavBlockEnum {
   const { pathname } = useLocation();
-  const errorFieldsLength = useAppSelector(
-    (state) => state.user.errorFields.length
-  );
 
-  const isProfilePage = getIsProfilePage(pathname) || errorFieldsLength !== 0;
+  const isProfilePage = getIsProfilePage(pathname);
   if (isProfilePage) {
     return NavBlockEnum.Setting;
   }

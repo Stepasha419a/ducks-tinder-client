@@ -1,6 +1,6 @@
 import type { ComponentType, ReactElement } from 'react';
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { checkFields } from '@entities/user/';
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
@@ -10,7 +10,6 @@ export const WithCheckedFields = <P extends object>(
   Component: ComponentType<P>
 ) => {
   const Wrapper = (props: P): ReactElement<P> => {
-    const navigate = useNavigate();
     const { pathname } = useLocation();
 
     const dispatch = useAppDispatch();
@@ -22,13 +21,8 @@ export const WithCheckedFields = <P extends object>(
     useEffect(() => {
       if (isAuth && currentUser) {
         dispatch(checkFields(checkUserFields(currentUser)));
-
-        const isError = getIsError(pathname, errorFields.length);
-        if (isError) {
-          return navigate('/profile');
-        }
       }
-    }, [isAuth, navigate, currentUser, dispatch, errorFields.length, pathname]);
+    }, [isAuth, currentUser, dispatch, errorFields.length]);
 
     useEffect(() => {
       if (errorFields.length) {
@@ -36,28 +30,10 @@ export const WithCheckedFields = <P extends object>(
           toastId: 'toast-checked-fields',
         });
       }
-    }, [errorFields.length]);
+    }, [errorFields.length, pathname]);
 
     return <Component {...props} />;
   };
 
   return Wrapper;
 };
-
-function getIsError(pathname: string, errorFieldsLength: number): boolean {
-  const isError = errorFieldsLength && isWrongPage(pathname);
-
-  return Boolean(isError);
-}
-
-function isWrongPage(pathname: string): boolean {
-  return !(isProfilePage(pathname) || isProfileEditPage(pathname));
-}
-
-function isProfilePage(pathname: string): boolean {
-  return /^\/(profile|settings)(\/([a-z]+)-?([a-z]*))?$/.test(pathname);
-}
-
-function isProfileEditPage(pathname: string): boolean {
-  return /^\/profile\/edit(\/([a-z]+)-?([a-z]*))?$/.test(pathname);
-}
