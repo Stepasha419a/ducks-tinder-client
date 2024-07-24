@@ -1,19 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getIsMobileNavAvailable } from '../helpers';
 
 export function useIsMobileNavAvailable(): boolean {
   const { pathname } = useLocation();
 
-  const isAvailableRef = useRef(true);
+  const [isAvailable, setIsAvailable] = useState(true);
 
   useEffect(() => {
     if (getIsMobileNavAvailable(pathname)) {
-      isAvailableRef.current = true;
+      setIsAvailable(true);
     } else {
-      isAvailableRef.current = false;
+      setIsAvailable(false);
     }
   }, [pathname]);
 
-  return isAvailableRef.current;
+  return isAvailable;
 }
