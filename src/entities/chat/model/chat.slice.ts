@@ -29,6 +29,7 @@ const initialState: ChatInitialState = {
   isSocketConnected: false,
   isLoading: false,
   isEnded: false,
+  isFetched: false,
   isNotFound: false,
   isMessagesLoading: false,
   isMessagesEnded: false,
@@ -187,6 +188,7 @@ const chatSlice = createSlice({
         getChatsThunk.fulfilled,
         (state, { payload }: PayloadAction<Chat[] | undefined>) => {
           state.isLoading = false;
+          state.isFetched = true;
           if (!payload) {
             return;
           }

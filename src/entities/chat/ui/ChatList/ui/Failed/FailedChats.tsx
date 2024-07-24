@@ -1,13 +1,19 @@
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import type { ReactElement } from 'react';
+import { useAdaptiveMediaQuery } from '@hooks';
 import styles from './FailedChats.module.scss';
 
-export const FailedChats = (): ReactElement => (
-  <div className={styles.noPairs}>
-    <FontAwesomeIcon icon={faHeart} className={styles.icon} />
-    <div>
-      You don't have chats. Accept some pairs to have personal chats with them
+export const FailedChats = (): ReactElement => {
+  const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
+
+  return (
+    <div className={classNames(styles.noPairs, isMobile && styles.mobile)}>
+      <FontAwesomeIcon icon={faHeart} className={styles.icon} />
+      <div>
+        You don't have chats. Accept some pairs to have personal chats with them
+      </div>
     </div>
-  </div>
-);
+  );
+};

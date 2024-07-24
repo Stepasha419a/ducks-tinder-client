@@ -8,18 +8,13 @@ export const IndexChatPage: FC = () => {
 
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
   const chatsLength = useAppSelector((state) => state.chat.chats.length);
-  const isSocketConnected = useAppSelector(
-    (state) => state.chat.isSocketConnected
-  );
-  const newMessagesCount = useAppSelector(
-    (state) => state.chat.newMessagesCount
-  );
+  const isFetched = useAppSelector((state) => state.chat.isFetched);
 
   if (isMobile) {
     return <ChatList currentUserId={currentUserId} />;
   }
 
-  if (!chatsLength && isSocketConnected && newMessagesCount !== null) {
+  if (!chatsLength && isFetched) {
     return <NoChats />;
   }
 

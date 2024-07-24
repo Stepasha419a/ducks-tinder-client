@@ -1,11 +1,11 @@
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC } from 'react';
-import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/lib/constants';
 import { useAppSelector } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
+import { ChatProfileMobileLazy } from './ChatProfile.mobile-lazy';
 import styles from './ChatProfile.mobile.module.scss';
 
 interface ChatProfileProps {
@@ -17,17 +17,7 @@ export const ChatProfileMobile: FC<ChatProfileProps> = ({ handleOpen }) => {
   const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
 
   if (isChatLoading || !chat) {
-    return (
-      <div className={styles.profile}>
-        <Link className={styles.link} to={ROUTES.CHAT}>
-          <FontAwesomeIcon className={styles.icon} icon={faAngleLeft} />
-        </Link>
-        <div className={styles.user}>
-          <Skeleton circle height={40} width={40} />
-          <Skeleton className={styles.name} height={22} width={80} />
-        </div>
-      </div>
-    );
+    return <ChatProfileMobileLazy />;
   }
 
   return (

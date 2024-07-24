@@ -9,6 +9,7 @@ export interface ChatInitialState {
   isSocketConnected: boolean;
   isLoading: boolean;
   isEnded: boolean;
+  isFetched: boolean;
   isNotFound: boolean;
   isMessagesLoading: boolean;
   isMessagesEnded: boolean;

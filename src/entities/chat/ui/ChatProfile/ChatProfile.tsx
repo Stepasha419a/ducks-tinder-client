@@ -1,5 +1,4 @@
 import { useEffect, type FC } from 'react';
-import Skeleton from 'react-loading-skeleton';
 import { useParams } from 'react-router-dom';
 import {
   useAppDispatch,
@@ -8,6 +7,7 @@ import {
 } from '@shared/lib/hooks';
 import { Avatar } from '@shared/ui';
 import { getChatThunk } from '../../model';
+import { ChatProfileLazy } from './ChatProfile.lazy';
 import styles from './ChatProfile.module.scss';
 import { ChatProfileMobile } from './ui';
 
@@ -35,14 +35,7 @@ export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
   }
 
   if (isChatLoading || !chat) {
-    return (
-      <div className={styles.profile}>
-        <div className={styles.user}>
-          <Skeleton circle height={40} width={40} />
-          <Skeleton className={styles.name} height={22} width={80} />
-        </div>
-      </div>
-    );
+    return <ChatProfileLazy />;
   }
 
   return (

@@ -37,6 +37,7 @@ export const MessageForm: FC<MessageFormProps> = ({
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
   const chat = useAppSelector((state) => state.chat.chat);
   const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
+  const isNotFound = useAppSelector((state) => state.chat.isNotFound);
 
   const {
     register,
@@ -71,6 +72,10 @@ export const MessageForm: FC<MessageFormProps> = ({
       setValue('input', selectedMessage.text);
     }
   }, [isMessageEditing, selectedMessage, setValue]);
+
+  if (isNotFound) {
+    return null;
+  }
 
   if (isChatLoading || !chat) {
     return <MessageFormLazy />;
