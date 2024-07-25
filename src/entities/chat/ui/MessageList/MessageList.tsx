@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Fragment, useEffect, type FC, type ReactElement } from 'react';
+import { Fragment, useEffect, useRef, type FC, type ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   connectChatThunk,
@@ -46,6 +46,8 @@ export const MessageList: FC<MessagesProps> = ({
   );
   const isNotFound = useAppSelector((state) => state.chat.isNotFound);
 
+  const prevChatIdRef = useRef<string | null>(null);
+
   const {
     getSelectProps,
     getBodyProps,
@@ -55,6 +57,7 @@ export const MessageList: FC<MessagesProps> = ({
   } = useMessagesProps(selectedMessage);
 
   const { messagesRef, messagesBottomRef } = useMessagesScroll();
+  const controlRef = useRef<null | object>({});
 
   const delayedGetMessages = useDebouncedCallback(() => {
     dispatch(getMessagesThunk());
@@ -65,6 +68,20 @@ export const MessageList: FC<MessagesProps> = ({
     repliedMessage && styles.replying,
     isMessageEditing && styles.messageEditing
   );
+
+  useEffect(() => {
+    if (chatId && prevChatIdRef.current !== chatId) {
+      if (
+        controlRef.current &&
+        'forceReset' in controlRef.current &&
+        typeof controlRef.current.forceReset === 'function'
+      ) {
+        controlRef.current.forceReset();
+      }
+
+      prevChatIdRef.current = chatId;
+    }
+  }, [chatId]);
 
   useEffect(() => {
     return () => {
@@ -92,6 +109,7 @@ export const MessageList: FC<MessagesProps> = ({
         isLoading={isMessagesLoading}
         isMore={!isMessagesEnded}
         listRef={messagesRef}
+        ref={controlRef}
         isReversed
       >
         {messages.map((message: MessageInterface, i) => {
