@@ -22,6 +22,7 @@ export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
 
   const chat = useAppSelector((state) => state.chat.chat);
   const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
+  const isNotFound = useAppSelector((state) => state.chat.isNotFound);
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   useEffect(() => {
@@ -32,6 +33,10 @@ export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
 
   if (isMobile) {
     return <ChatProfileMobile handleOpen={handleOpen} />;
+  }
+
+  if (isNotFound) {
+    return null;
   }
 
   if (isChatLoading || !chat) {
