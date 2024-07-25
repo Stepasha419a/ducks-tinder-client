@@ -160,6 +160,9 @@ const chatSlice = createSlice({
     nullMember: (state) => {
       state.chatMember = null;
     },
+    resetChatSlice: (state) => {
+      Object.assign(state, initialState);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -274,6 +277,7 @@ export const {
   deleteChat,
   setIsNotFound,
   nullMember,
+  resetChatSlice,
 } = chatSlice.actions;
 
 export const chatReducer = chatSlice.reducer;

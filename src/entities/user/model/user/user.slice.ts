@@ -12,7 +12,6 @@ import {
 } from './user.thunks';
 
 const initialState: UserInitialState = {
-  // auth always set currentUser object after registration/login/refresh
   currentUser: null,
   errorFields: [],
 };
@@ -26,6 +25,9 @@ const userSlice = createSlice({
     },
     checkFields: (state, { payload }: PayloadAction<Setting[]>) => {
       state.errorFields = payload;
+    },
+    resetUserSlice: (state) => {
+      Object.assign(state, initialState);
     },
   },
   extraReducers: (builder) => {
@@ -51,6 +53,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { setCurrentUser, checkFields } = userSlice.actions;
+export const { setCurrentUser, checkFields, resetUserSlice } =
+  userSlice.actions;
 
 export const userReducer = userSlice.reducer;

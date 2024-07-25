@@ -25,7 +25,11 @@ const initialState: InitialState = {
 const tinderSlice = createSlice({
   name: 'tinderSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    resetTinderSlice: (state) => {
+      Object.assign(state, initialState);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getMatchUserThunk.pending, (state) => {
@@ -88,5 +92,7 @@ const tinderSlice = createSlice({
       });
   },
 });
+
+export const { resetTinderSlice } = tinderSlice.actions;
 
 export const tinderReducer = tinderSlice.reducer;

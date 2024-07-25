@@ -28,7 +28,8 @@ export const WithUserData = <P extends object>(
           toast('Something went wrong during the initial check.');
         }
       }
-    }, [dispatch, requested, user, count]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch, requested, count]);
 
     if (user) return <Component {...props} />;
 

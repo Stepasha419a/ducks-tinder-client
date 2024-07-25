@@ -9,6 +9,7 @@ export {
   editMessage,
   setIsNotFound,
   unblockChat,
+  resetChatSlice,
 } from './chat.slice';
 export {
   connectChatThunk,

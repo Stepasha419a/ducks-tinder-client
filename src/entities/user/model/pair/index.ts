@@ -1,4 +1,4 @@
-export { pairReducer } from './pair.slice';
+export { pairReducer, resetPairSlice } from './pair.slice';
 export {
   acceptPairThunk,
   getPairsInfoThunk,

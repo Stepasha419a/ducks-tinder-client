@@ -1,4 +1,9 @@
-export { userReducer, setCurrentUser, checkFields } from './user.slice';
+export {
+  userReducer,
+  setCurrentUser,
+  checkFields,
+  resetUserSlice,
+} from './user.slice';
 export {
   getCurrentUser,
   updateUserThunk,

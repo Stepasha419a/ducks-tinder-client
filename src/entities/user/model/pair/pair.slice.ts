@@ -25,7 +25,11 @@ const initialState: PairInitialState = {
 const pairSlice = createSlice({
   name: 'pairSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    resetPairSlice: (state) => {
+      Object.assign(state, initialState);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(
@@ -94,5 +98,7 @@ const pairSlice = createSlice({
       );
   },
 });
+
+export const { resetPairSlice } = pairSlice.actions;
 
 export const pairReducer = pairSlice.reducer;
