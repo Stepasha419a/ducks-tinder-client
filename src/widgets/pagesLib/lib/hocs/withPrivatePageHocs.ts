@@ -1,10 +1,10 @@
 import { WithChatConnection } from '@features/chat';
-import { WithNewMessagesCount } from '@entities/chat';
 import {
   WithCheckedFields,
   WithAuthRedirect,
   WithUserData,
-} from '@entities/user';
+} from '@features/user';
+import { WithNewMessagesCount } from '@entities/chat';
 import { compose } from '@shared/lib';
 import { WithErrorFallback } from '@shared/lib';
 

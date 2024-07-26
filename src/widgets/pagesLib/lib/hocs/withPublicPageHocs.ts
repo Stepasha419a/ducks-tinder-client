@@ -1,4 +1,4 @@
-import { WithAuthRedirect } from '@entities/user';
+import { WithAuthRedirect } from '@features/user';
 import { compose } from '@shared/lib';
 import { WithErrorFallback } from '@shared/lib';
 
