@@ -34,6 +34,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, './src/shared/lib/hooks'),
       '@features': path.resolve(__dirname, './src/features'),
       '@entities': path.resolve(__dirname, './src/entities'),
+      '@shared/assets/*': path.resolve(__dirname, './src/shared/ui/assets'),
       '@shared/constants': path.resolve(
         __dirname,
         './src/shared/lib/constants'

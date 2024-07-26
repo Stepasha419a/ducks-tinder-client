@@ -9,14 +9,10 @@ import type {
   SetStateAction,
 } from 'react';
 import type Slider from 'react-slick';
-import type {
-  ShortUser,
-  ShortUserWithoutDistance,
-  User,
-} from '@shared/api/interfaces';
+import type { ShortUser, ShortUserWithoutDistance, User } from '@shared/api';
 import { Button } from '@shared/ui';
+import { UserSlider, FullPreview, NoSlider } from './components';
 import styles from './Preview.module.scss';
-import { UserSlider, FullPreview, NoSlider } from './ui';
 
 interface PreviewPropsInterface {
   user: User | ShortUser | ShortUserWithoutDistance;

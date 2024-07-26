@@ -1,4 +1,4 @@
-import type { Picture } from '@shared/api/interfaces';
+import type { Picture } from '@shared/api';
 
 export function checkChangedPictures(pictures: Picture[]): boolean {
   let isChanged = false;

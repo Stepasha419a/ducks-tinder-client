@@ -1,4 +1,4 @@
-import type { User } from '@shared/api/interfaces';
+import type { User } from '@shared/api';
 import type { ProfileSettingNameEnum } from './profileSettingName';
 import { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 

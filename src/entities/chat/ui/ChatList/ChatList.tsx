@@ -5,11 +5,11 @@ import {
   useAppDispatch,
   useAppSelector,
   useDebouncedCallback,
-} from '@shared/lib/hooks';
+} from '@shared/lib';
 import { InfinityScroll } from '@shared/ui';
 import { ChatListLazy } from './ChatList.lazy';
 import styles from './ChatList.module.scss';
-import { ChatItem, FailedChats } from './ui';
+import { ChatItem, FailedChats } from './components';
 
 interface ChatListProps {
   currentUserId: string;

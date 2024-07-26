@@ -1,5 +1,5 @@
-import type { Place } from '@shared/api/interfaces';
-import { useAppSelector } from '@shared/lib/hooks';
+import type { Place } from '@shared/api';
+import { useAppSelector } from '@shared/lib';
 import type { Setting } from '../../model';
 import { SettingNameEnum } from '../constants';
 

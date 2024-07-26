@@ -1,6 +1,6 @@
 import { editMessageThunk } from '@entities/chat';
-import type { Message } from '@shared/api/interfaces';
-import { useAppDispatch } from '@shared/lib/hooks';
+import type { Message } from '@shared/api';
+import { useAppDispatch } from '@shared/lib';
 
 export function useSelectMessageEdit(
   handleStopMessageEditing: () => void,

@@ -5,7 +5,7 @@ import type { Control } from 'react-hook-form';
 import { useOuterPairFilterForm } from '@features/user';
 import { INTERESTS_FOR_LOOP } from '@entities/user';
 import type { PairFilterForm } from '@entities/user';
-import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib';
 import { ListItem } from '@shared/ui';
 import styles from './FilterPairsItems.module.scss';
 

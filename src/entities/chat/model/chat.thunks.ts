@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCurrentChatData } from '@entities/chat';
-import type { Message } from '@shared/api/interfaces';
+import type { Message } from '@shared/api';
 import { chatService } from '@shared/api/services';
-import { returnErrorMessage } from '@shared/helpers';
-import { PAGINATION_TAKE } from '@shared/lib/constants';
+import { returnErrorMessage } from '@shared/lib';
+import { PAGINATION_TAKE } from '@shared/lib';
 import type { PaginationParams } from '@shared/lib/interfaces';
 
 export const getChatThunk = createAsyncThunk(

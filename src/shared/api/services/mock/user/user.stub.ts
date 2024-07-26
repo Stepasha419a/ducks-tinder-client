@@ -6,7 +6,7 @@ import {
   Interest,
   type ShortUser,
   type User,
-} from '@shared/api/interfaces';
+} from '@shared/api';
 import type { PairsInfo } from '@shared/api/services';
 
 export const shortUserStub: ShortUser = {

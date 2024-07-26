@@ -4,7 +4,6 @@ import type { Control, UseFormReset } from 'react-hook-form';
 import type { PairFilterForm } from '@entities/user';
 import { Popup } from '@shared/ui';
 import { usePairFilterForm } from '../../lib';
-import styles from './PairsFilterPopup.module.scss';
 import {
   AgeSetting,
   Buttons,
@@ -13,7 +12,8 @@ import {
   InterestsSetting,
   PicturesSetting,
   InterestSettingPopup,
-} from './ui';
+} from './components';
+import styles from './PairsFilterPopup.module.scss';
 
 interface PairsFilterPopupProps {
   setIsFilterPopupOpen: Dispatch<SetStateAction<boolean>>;

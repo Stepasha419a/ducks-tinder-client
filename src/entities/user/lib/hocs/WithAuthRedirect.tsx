@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { checkAuthThunk } from '@entities/user';
 import { ROUTES } from '@shared/constants';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 export const WithAuthRedirect = <P extends object>(
   Component: ComponentType<P>

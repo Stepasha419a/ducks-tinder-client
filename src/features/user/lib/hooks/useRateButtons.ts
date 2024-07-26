@@ -4,7 +4,7 @@ import {
   likeUserThunk,
   returnUserThunk,
 } from '@entities/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 export function useRateButtons(
   controls: AnimationControls,

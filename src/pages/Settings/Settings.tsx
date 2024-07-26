@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib';
 import styles from './Settings.module.scss';
 
 export const SettingsPage = () => {

@@ -26,6 +26,7 @@
       "@features/*": ["./features/*"],
       "@entities/*": ["./entities/*"],
       "@shared/*": ["./shared/*"],
+      "@shared/assets/*": ["./shared/ui/assets/*"],
       "@shared/constants": ["./shared/lib/constants"],
       "@shared/helpers": ["./shared/lib/helpers"]
     }

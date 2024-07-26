@@ -7,12 +7,12 @@ import {
   selectCurrentChat,
   sendMessageThunk,
 } from '@entities/chat';
-import type { Message } from '@shared/api/interfaces';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import type { Message } from '@shared/api';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 import { Button, TextField } from '@shared/ui';
+import { BlockedChat, TopBlock } from './components';
 import { MessageFormLazy } from './MessageForm.lazy';
 import styles from './MessageForm.module.scss';
-import { BlockedChat, TopBlock } from './ui';
 
 interface ChatFormValues {
   input: string;

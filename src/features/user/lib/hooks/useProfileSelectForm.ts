@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import type { MultiSelectForm } from '@entities/user';
 import { useDefaultProfileValues, useProfileSettingUrl } from '@entities/user';
 import { updateUserThunk } from '@entities/user';
-import { ROUTES } from '@shared/lib/constants';
-import { useAppDispatch } from '@shared/lib/hooks';
+import { ROUTES } from '@shared/lib';
+import { useAppDispatch } from '@shared/lib';
 import { parseSelectData } from '../helpers';
 
 export function useProfileSelectForm() {

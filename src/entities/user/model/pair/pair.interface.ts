@@ -1,4 +1,4 @@
-import type { Range, ShortUser } from '@shared/api/interfaces';
+import type { Range, ShortUser } from '@shared/api';
 import type { PairsInfo } from '@shared/api/services';
 
 export interface PairFilterForm {

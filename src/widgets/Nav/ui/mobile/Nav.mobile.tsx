@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 import { getIsChatPage } from '@entities/chat';
-import { ROUTES } from '@shared/lib/constants';
-import { useAppSelector } from '@shared/lib/hooks';
+import { ROUTES } from '@shared/lib';
+import { useAppSelector } from '@shared/lib';
 import { getIsProfilePage } from '../../lib';
 import styles from './Nav.mobile.module.scss';
 

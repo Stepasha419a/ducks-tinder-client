@@ -1,4 +1,4 @@
-import type { ShortUser, User } from '@shared/api/interfaces';
+import type { ShortUser, User } from '@shared/api';
 
 export function getMoreAboutMe(user: User | ShortUser): string[] {
   const arr = [

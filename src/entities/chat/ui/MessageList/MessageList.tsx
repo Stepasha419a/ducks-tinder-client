@@ -9,16 +9,16 @@ import {
 } from '@entities/chat';
 import { useMessagesProps, useMessagesScroll } from '@entities/chat';
 import { getIsNextDayMessage } from '@entities/chat';
-import type { Message as MessageInterface } from '@shared/api/interfaces';
+import type { Message as MessageInterface } from '@shared/api';
 import {
   useAppDispatch,
   useAppSelector,
   useDebouncedCallback,
-} from '@shared/lib/hooks';
+} from '@shared/lib';
 import { InfinityScroll } from '@shared/ui';
+import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';
-import { Message, MessageMemo, NotFound, Timestamp } from './ui';
 
 interface MessagesProps {
   select: ReactElement;

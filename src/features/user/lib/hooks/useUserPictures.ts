@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { Picture } from '@shared/api/interfaces';
-import { useAppSelector } from '@shared/lib/hooks';
+import type { Picture } from '@shared/api';
+import { useAppSelector } from '@shared/lib';
 
 export function useUserPictures() {
   const userPictures = useAppSelector(

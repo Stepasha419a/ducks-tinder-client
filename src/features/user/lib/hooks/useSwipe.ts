@@ -12,9 +12,9 @@ import type {
 import { useRef, useState } from 'react';
 import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
 import type Slider from 'react-slick';
-import { useAdaptiveMediaQuery } from '@hooks';
 import { useTinderAnimations } from '@entities/user';
-import { useEventListener } from '@shared/lib/hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib';
+import { useEventListener } from '@shared/lib';
 import { useRateButtonsStyle } from './useRateButtonsStyle';
 import { useSwipeStatusStyle } from './useSwipeStatusStyle';
 

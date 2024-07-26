@@ -1,6 +1,6 @@
-import type { Message } from '@shared/api/interfaces';
-import { getTime } from '@shared/helpers';
-import { useAppSelector } from '@shared/lib/hooks';
+import type { Message } from '@shared/api';
+import { getTime } from '@shared/lib';
+import { useAppSelector } from '@shared/lib';
 
 export function useMessagesProps(selectedMessage: Message | null) {
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);

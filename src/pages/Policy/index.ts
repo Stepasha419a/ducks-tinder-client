@@ -1,1 +1,1 @@
-export { default } from './PolicyPage';
+export { default } from './ui/PolicyPage';

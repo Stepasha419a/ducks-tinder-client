@@ -1,7 +1,7 @@
 import { NotFoundSetting } from '@entities/user';
 import { useProfileSettingUrl } from '@entities/user';
-import { ROUTES } from '@shared/lib/constants';
-import { SelectForm } from './ui';
+import { ROUTES } from '@shared/lib';
+import { SelectForm } from './components';
 
 export const ProfileSetting = () => {
   const profileSetting = useProfileSettingUrl();

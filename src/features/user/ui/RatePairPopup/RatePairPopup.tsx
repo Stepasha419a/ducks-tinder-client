@@ -3,8 +3,8 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import { InterestsListPopup, Preview } from '@entities/user';
 import { refusePairThunk, acceptPairThunk } from '@entities/user';
-import type { ShortUser } from '@shared/api/interfaces';
-import { useAppDispatch } from '@shared/lib/hooks';
+import type { ShortUser } from '@shared/api';
+import { useAppDispatch } from '@shared/lib';
 import { Button, Popup } from '@shared/ui';
 import styles from './RatePairPopup.module.scss';
 

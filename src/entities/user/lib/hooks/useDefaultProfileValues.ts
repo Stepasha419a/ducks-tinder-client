@@ -1,5 +1,5 @@
-import type { User } from '@shared/api/interfaces';
-import { useAppSelector } from '@shared/lib/hooks';
+import type { User } from '@shared/api';
+import { useAppSelector } from '@shared/lib';
 import type {
   ProfileSettingNameEnum,
   ProfileSettingSelectNameEnum,

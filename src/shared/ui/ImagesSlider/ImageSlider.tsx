@@ -10,10 +10,16 @@ import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import type Slider from 'react-slick';
 import Carousel from 'react-slick';
-import type { Picture } from '@shared/api/interfaces';
-import { makeImageUrl, showDefaultImage } from '@shared/lib/helpers';
+import type { Picture } from '@shared/api';
+import { makeImageUrl, showDefaultImage } from '@shared/lib';
+import {
+  NotFoundImages,
+  DotsWrapper,
+  NextArrow,
+  PrevArrow,
+  Dot,
+} from './components';
 import styles from './ImageSlider.module.scss';
-import { NotFoundImages, DotsWrapper, NextArrow, PrevArrow, Dot } from './ui';
 import 'slick-carousel/slick/slick.scss';
 import './override.scss';
 

@@ -4,7 +4,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC, ReactElement } from 'react';
-import { useAppSelector } from '@shared/lib/hooks';
+import { useAppSelector } from '@shared/lib';
 import styles from './Places.module.scss';
 
 interface PlacesProps {

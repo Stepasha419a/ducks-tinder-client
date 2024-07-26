@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
 import { useEffect, type ReactElement } from 'react';
-import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 import type { Theme } from '@shared/model/theme';
 import { setTheme } from '@shared/model/theme';
 

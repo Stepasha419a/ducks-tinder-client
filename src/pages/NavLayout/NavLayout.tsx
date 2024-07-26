@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { Nav } from '@widgets';
-import { withPrivatePageHocs } from '@features/lib';
-import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
+import { withPrivatePageHocs } from '@widgets/pagesLib';
+import { useAdaptiveMediaQuery } from '@shared/lib';
 import styles from './NavLayout.module.scss';
 import { NavLayoutMobile } from './ui';
 

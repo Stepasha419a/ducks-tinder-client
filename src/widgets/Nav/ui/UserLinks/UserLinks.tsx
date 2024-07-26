@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { memo, type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { selectAvatar } from '@entities/user';
-import { useAppSelector } from '@shared/lib/hooks';
+import { useAppSelector } from '@shared/lib';
 import { Avatar } from '@shared/ui';
 import styles from './UserLinks.module.scss';
 import { variants } from './UserLinks.variants';

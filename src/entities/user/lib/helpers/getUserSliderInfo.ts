@@ -1,4 +1,4 @@
-import type { ShortPlace, ShortUser, User } from '@shared/api/interfaces';
+import type { ShortPlace, ShortUser, User } from '@shared/api';
 import { getLifestyle } from './getLifestyle';
 import { getMoreAboutMe } from './getMoreAboutMe';
 

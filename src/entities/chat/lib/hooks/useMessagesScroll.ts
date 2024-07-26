@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { useAppSelector } from '@shared/lib/hooks';
+import { useAppSelector } from '@shared/lib';
 
 export function useMessagesScroll() {
   const messagesLength = useAppSelector((state) => state.chat.messages.length);

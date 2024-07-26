@@ -1,4 +1,4 @@
-import { WithErrorFallback } from '@shared/lib/hocs';
+import { WithErrorFallback } from '@shared/lib';
 
 import { FilterPairsItems as FilterPairsItemsRaw } from './FilterPairsItems/FilterPairsItems';
 import { LoginForm as LoginFormRaw } from './LoginForm/LoginForm';

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { saveUserImageThunk } from '@entities/user';
-import { useAppDispatch } from '@shared/lib/hooks';
-import { CropImage, DialogUpload } from './ui';
+import { useAppDispatch } from '@shared/lib';
+import { CropImage, DialogUpload } from './components';
 
 interface UploadImagePopupsProps {
   isUploadOpen: boolean;

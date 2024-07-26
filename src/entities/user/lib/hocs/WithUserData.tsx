@@ -1,8 +1,8 @@
 import type { ComponentType, FC } from 'react';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '@hooks';
 import { getCurrentUser } from '@entities/user';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 export const WithUserData = <P extends object>(
   Component: ComponentType<P>

@@ -16,7 +16,7 @@ import {
   SocialNetworksActivitySettingThumbnail,
   TrainingAttitudeSettingThumbnail,
   ZodiacSignSettingThumbnail,
-} from './ui';
+} from './components';
 
 export const ProfileSettingsList = () => {
   return (

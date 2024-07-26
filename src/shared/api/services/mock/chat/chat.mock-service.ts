@@ -5,7 +5,7 @@ import type {
   ReceivedChatBlock,
   ReceivedMessage,
   ReceivedNewMessage,
-} from '@shared/api/interfaces';
+} from '@shared/api';
 import {
   ChatSocketEvent,
   shortUserStub,

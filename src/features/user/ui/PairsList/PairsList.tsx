@@ -6,16 +6,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useRef } from 'react';
 import { getUserPairsThunk } from '@entities/user';
-import type { ShortUser } from '@shared/api/interfaces';
+import type { ShortUser } from '@shared/api';
 import {
   useAppDispatch,
   useAppSelector,
   useDebouncedCallback,
-} from '@shared/lib/hooks';
+} from '@shared/lib';
 import { InfinityScroll, Skeleton } from '@shared/ui';
+import { Pair } from './components';
 import { PairsListLazy } from './PairsList.lazy';
 import styles from './PairsList.module.scss';
-import { Pair } from './ui';
 
 interface PairsListProps {
   setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;

@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDefaultValues } from '@entities/user';
 import { useMemoriedSettingUrl } from '@entities/user';
 import { updateUserThunk } from '@entities/user';
-import { ROUTES } from '@shared/lib/constants';
-import { useAppDispatch, useAdaptiveMediaQuery } from '@shared/lib/hooks';
+import { ROUTES } from '@shared/lib';
+import { useAppDispatch, useAdaptiveMediaQuery } from '@shared/lib';
 import type { SettingFieldValues } from './useCurrentValidation';
 import { useCurrentValidation } from './useCurrentValidation';
 

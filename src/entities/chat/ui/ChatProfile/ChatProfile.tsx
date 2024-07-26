@@ -4,12 +4,12 @@ import {
   useAppDispatch,
   useAppSelector,
   useAdaptiveMediaQuery,
-} from '@shared/lib/hooks';
+} from '@shared/lib';
 import { Avatar } from '@shared/ui';
 import { getChatThunk } from '../../model';
 import { ChatProfileLazy } from './ChatProfile.lazy';
 import styles from './ChatProfile.module.scss';
-import { ChatProfileMobile } from './ui';
+import { ChatProfileMobile } from './components';
 
 interface ChatProfileProps {
   handleOpen: () => void;

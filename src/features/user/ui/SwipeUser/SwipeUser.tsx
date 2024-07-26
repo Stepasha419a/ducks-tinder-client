@@ -9,10 +9,10 @@ import {
   useAppDispatch,
   useAppSelector,
   useAdaptiveMediaQuery,
-} from '@shared/lib/hooks';
+} from '@shared/lib';
+import { Failed, RateButtons, Status } from './components';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import styles from './SwipeUser.module.scss';
-import { Failed, RateButtons, Status } from './ui';
 
 export const SwipeUser: FC = () => {
   const dispatch = useAppDispatch();

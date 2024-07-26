@@ -1,4 +1,4 @@
-import { WithErrorFallback } from '@shared/lib/hocs';
+import { WithErrorFallback } from '@shared/lib';
 
 import { ChatControl as ChatControlRaw } from './ChatControl/ChatControl';
 import { MessageForm as MessageFormRaw } from './MessageForm/MessageForm';

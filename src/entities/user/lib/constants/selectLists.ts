@@ -13,7 +13,7 @@ import {
   SocialNetworksActivity,
   TrainingAttitude,
   ZodiacSign,
-} from '@shared/api/interfaces';
+} from '@shared/api';
 import type { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 
 export const SELECT_LISTS: Record<ProfileSettingSelectNameEnum, string[]> = {

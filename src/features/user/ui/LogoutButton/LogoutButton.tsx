@@ -6,7 +6,7 @@ import {
   resetTinderSlice,
   resetUserSlice,
 } from '@entities/user';
-import { useAppDispatch } from '@shared/lib/hooks';
+import { useAppDispatch } from '@shared/lib';
 import { Button } from '@shared/ui';
 import styles from './LogoutButton.module.scss';
 

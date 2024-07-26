@@ -1,5 +1,5 @@
 import { instance } from '@shared/api';
-import type { Chat, ShortUser } from '@shared/api/interfaces';
+import type { Chat, ShortUser } from '@shared/api';
 import { chatMockService } from '@shared/api/services';
 import { getMockableService } from '@shared/api/services';
 import type { PaginationParams } from '@shared/lib/interfaces';

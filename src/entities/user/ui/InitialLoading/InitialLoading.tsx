@@ -1,4 +1,4 @@
-import { useAppSelector } from '@hooks';
+import { useAppSelector } from '@shared/lib';
 import { LoadingPage } from '@shared/ui';
 
 export const InitialLoading = () => {

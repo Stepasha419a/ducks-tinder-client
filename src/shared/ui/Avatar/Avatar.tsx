@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import type { FC } from 'react';
-import { makeImageUrl, showDefaultImage } from '@shared/helpers';
+import { makeImageUrl, showDefaultImage } from '@shared/lib';
 import styles from './Avatar.module.scss';
 import type { AvatarProps } from './Avatar.types';
 
