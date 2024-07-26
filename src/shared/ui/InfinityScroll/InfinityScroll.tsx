@@ -104,7 +104,7 @@ export const InfinityScroll = forwardRef<
 
     if (isReversed) {
       return (
-        <>
+        <div>
           <LoadMore
             key="load-scroll"
             isMore={isMore}
@@ -112,12 +112,12 @@ export const InfinityScroll = forwardRef<
             ref={loadRef}
           />
           {children}
-        </>
+        </div>
       );
     }
 
     return (
-      <>
+      <div>
         {children}
         <LoadMore
           key="load-scroll"
@@ -125,7 +125,7 @@ export const InfinityScroll = forwardRef<
           loader={loader}
           ref={loadRef}
         />
-      </>
+      </div>
     );
   }
 );

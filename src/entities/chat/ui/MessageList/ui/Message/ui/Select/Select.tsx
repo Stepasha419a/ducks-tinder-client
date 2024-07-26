@@ -1,19 +1,22 @@
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC, ReactElement } from 'react';
+import type { Message } from '@shared/api/interfaces';
 import { useAdaptiveMediaQuery } from '@shared/lib/hooks';
 
 interface SelectProps {
   isSelectOpen: boolean;
   isMessageEditing: boolean;
   select: ReactElement;
-  handleSelectMessage: () => void;
+  message: Message;
+  handleSelectMessage: (message: Message) => void;
 }
 
 export const Select: FC<SelectProps> = ({
   handleSelectMessage,
   isSelectOpen,
   isMessageEditing,
+  message,
   select,
 }) => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
@@ -28,7 +31,7 @@ export const Select: FC<SelectProps> = ({
     select
   ) : (
     <FontAwesomeIcon
-      onClick={handleSelectMessage}
+      onClick={() => handleSelectMessage(message)}
       className="dots"
       icon={faEllipsis}
     />

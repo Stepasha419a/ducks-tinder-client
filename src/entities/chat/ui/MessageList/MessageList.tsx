@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Fragment, useEffect, useRef, type FC, type ReactElement } from 'react';
+import { useEffect, useRef, type FC, type ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   connectChatThunk,
@@ -18,7 +18,7 @@ import {
 import { InfinityScroll } from '@shared/ui';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';
-import { Message, NotFound, Timestamp } from './ui';
+import { Message, MessageMemo, NotFound, Timestamp } from './ui';
 
 interface MessagesProps {
   select: ReactElement;
@@ -117,8 +117,12 @@ export const MessageList: FC<MessagesProps> = ({
             messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
 
           return (
-            <Fragment key={message.id}>
-              <Message handleSelectMessage={() => handleSelectMessage(message)}>
+            <div key={message.id}>
+              <MessageMemo
+                handleSelectMessage={handleSelectMessage}
+                selectedMessage={selectedMessage}
+                message={message}
+              >
                 <Message.Avatar
                   userId={message.userId}
                   avatar={message.avatar}
@@ -132,15 +136,16 @@ export const MessageList: FC<MessagesProps> = ({
                 </Message.Body>
                 <Message.Select
                   {...getSelectProps(message)}
-                  handleSelectMessage={() => handleSelectMessage(message)}
+                  handleSelectMessage={handleSelectMessage}
+                  message={message}
                   isMessageEditing={isMessageEditing}
                   select={select}
                 />
-              </Message>
+              </MessageMemo>
               {isNextDayMessage && (
                 <Timestamp createdAt={messages[i + 1].createdAt} />
               )}
-            </Fragment>
+            </div>
           );
         })}
       </InfinityScroll>

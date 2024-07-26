@@ -7,7 +7,6 @@ export const selectMessages = createSelector(
     (state: RootState) => state.chat.isMessagesEnded,
   ],
   (messages, isMessagesLoading, isMessagesEnded) => ({
-    messagesLength: messages.length,
     messages,
     isMessagesLoading,
     isMessagesEnded,
