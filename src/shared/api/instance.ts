@@ -1,6 +1,6 @@
 import type { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios';
 import axios from 'axios';
-import type { AuthResponse } from '@shared/api/services';
+import type { AuthResponse } from '@shared/api';
 
 export const instance = axios.create({
   withCredentials: true,

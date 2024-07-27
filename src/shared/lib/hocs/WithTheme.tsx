@@ -1,8 +1,8 @@
 import type { ComponentType } from 'react';
 import { useEffect, type ReactElement } from 'react';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
-import type { Theme } from '@shared/model/theme';
-import { setTheme } from '@shared/model/theme';
+import type { Theme } from '@shared/model';
+import { setTheme } from '@shared/model';
 
 export function WithTheme<P extends object>(Component: ComponentType<P>) {
   const Wrapper = (props: P): ReactElement<P> => {

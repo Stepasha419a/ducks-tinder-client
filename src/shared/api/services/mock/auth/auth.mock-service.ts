@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import type { AuthResponse, AuthService } from '@shared/api/services';
+import type { AuthResponse, AuthService } from '@shared/api';
 import {
   deleteTestUser,
   getTestUser,

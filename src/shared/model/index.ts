@@ -1,1 +1,1 @@
-export { themeReducer } from './theme';
+export * from './theme';

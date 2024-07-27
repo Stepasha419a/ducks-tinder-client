@@ -1,7 +1,7 @@
 import type { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { withPublicPageHocs } from '@widgets/pagesLib';
-import { authDuck } from '@shared/assets/images';
+import { authDuck } from '@shared/ui';
 import styles from './PolicyPage.module.scss';
 
 const PolicyPage: FC = (): ReactElement => {

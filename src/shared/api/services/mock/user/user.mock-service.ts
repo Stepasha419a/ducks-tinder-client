@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import type { User } from '@shared/api';
-import type { UserService, PairFilterParams } from '@shared/api/services';
-import { chatStub } from '@shared/api/services';
+import type { UserService, PairFilterParams } from '@shared/api';
+import { chatStub } from '@shared/api';
 import { mockStorage, resolveAxiosResponse, saveTestUser } from '../mock';
 import { matchingUserStubs, pairsInfoStub, shortUserStub } from './user.stub';
 

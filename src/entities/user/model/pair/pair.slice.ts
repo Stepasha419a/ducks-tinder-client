@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { ShortUser } from '@shared/api';
-import type { PairsInfo } from '@shared/api/services';
+import type { PairsInfo } from '@shared/api';
 import { PAGINATION_TAKE } from '@shared/lib';
 import type {
   GetUserPairsThunkReturn,

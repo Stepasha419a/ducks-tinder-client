@@ -3,7 +3,7 @@ import type { FC, PropsWithChildren } from 'react';
 import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import type { SettingFieldValues } from '@features/user';
-import { ROUTES } from '@shared/constants';
+import { ROUTES } from '@shared/lib';
 import { useAdaptiveMediaQuery } from '@shared/lib';
 import { Button } from '@shared/ui';
 import styles from './SettingWrapper.module.scss';

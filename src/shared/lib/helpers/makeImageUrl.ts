@@ -1,4 +1,4 @@
-import { defaultDuck } from '@shared/assets/images';
+import { defaultDuck } from '@shared/ui';
 
 export function makeImageUrl(avatarUrl?: string): string {
   return avatarUrl

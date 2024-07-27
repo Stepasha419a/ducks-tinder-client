@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Preview } from '@entities/user';
-import { ROUTES } from '@shared/constants';
+import { ROUTES } from '@shared/lib';
 import { useAppSelector, useAdaptiveMediaQuery } from '@shared/lib';
 import { Button } from '@shared/ui';
 import { ProfilePreviewMobile } from './mobile';

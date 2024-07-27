@@ -6,5 +6,6 @@ export { ListItem } from './ListItem/ListItem';
 export { ImageSlider } from './ImagesSlider/ImageSlider';
 export { Skeleton } from './Skeleton/Skeleton';
 export { ToastContainer } from './ToastContainer/ToastContainer';
-export { InfinityScroll } from './InfinityScroll/InfinityScroll';
+export * from './InfinityScroll/InfinityScroll';
 export { LoadingPage } from './LoadingPage/LoadingPage';
+export * from './assets';

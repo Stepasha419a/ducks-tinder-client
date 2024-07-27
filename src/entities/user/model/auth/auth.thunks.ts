@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authService } from '@shared/api/services';
-import type { LoginParams, RegistrationParams } from '@shared/api/services';
+import { authService } from '@shared/api';
+import type { LoginParams, RegistrationParams } from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
 
 export const registerThunk = createAsyncThunk(

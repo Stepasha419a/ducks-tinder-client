@@ -4,7 +4,7 @@ import {
   messageStub,
   matchingUserStubs,
   userStub,
-} from '@shared/api/services';
+} from '@shared/api';
 import type { Chat, User } from '../../interfaces';
 
 export async function resolveAxiosResponse<T>(

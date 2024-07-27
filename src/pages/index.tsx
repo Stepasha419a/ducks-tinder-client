@@ -10,7 +10,7 @@ import TinderPage from '@pages/Tinder';
 
 import { PlaceSetting, ProfileEdit, ProfilePreview } from '@widgets';
 import { ProfileSetting } from '@features/user';
-import { ROUTES } from '@shared/constants';
+import { ROUTES } from '@shared/lib';
 import { WithSuspense } from '@shared/lib';
 
 const ChatPage = WithSuspense(lazy(async () => import('@pages/Chat')));

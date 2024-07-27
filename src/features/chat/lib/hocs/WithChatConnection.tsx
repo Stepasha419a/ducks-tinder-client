@@ -16,9 +16,9 @@ import type {
   ReceivedMessage,
   ReceivedNewMessage,
 } from '@shared/api';
-import { ChatSocketEvent, chatService } from '@shared/api/services';
+import { ChatSocketEvent, chatService } from '@shared/api';
 import { useAppDispatch } from '@shared/lib';
-import type { WsExceptionError } from '@shared/lib/interfaces';
+import type { WsExceptionError } from '@shared/lib';
 
 export function WithChatConnection<P extends object>(
   Component: ComponentType<P>

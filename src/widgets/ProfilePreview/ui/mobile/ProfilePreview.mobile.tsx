@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UploadImagePopups } from '@features/user';
-import { ROUTES } from '@shared/constants';
+import { ROUTES } from '@shared/lib';
 import { useAppSelector } from '@shared/lib';
 import { Avatar } from '@shared/ui';
 import styles from './ProfilePreview.mobile.module.scss';

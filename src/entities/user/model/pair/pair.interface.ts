@@ -1,5 +1,5 @@
 import type { Range, ShortUser } from '@shared/api';
-import type { PairsInfo } from '@shared/api/services';
+import type { PairsInfo } from '@shared/api';
 
 export interface PairFilterForm {
   distance?: number;

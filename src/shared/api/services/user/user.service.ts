@@ -1,6 +1,6 @@
-import { instance } from '@shared/api';
 import type { User, ShortUser } from '@shared/api';
-import { getMockableService } from '@shared/api/services';
+import { instance } from '@shared/api';
+import { getMockableService } from '@shared/api';
 import { userMockService } from '../mock';
 import type { PairFilterParams, PairsInfo } from './user-service.interface';
 import type { UserService } from './user-service.interface';

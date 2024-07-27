@@ -1,6 +1,6 @@
 import { instance } from '@shared/api';
-import { authMockService } from '@shared/api/services';
-import { getMockableService } from '@shared/api/services';
+import { authMockService } from '@shared/api';
+import { getMockableService } from '@shared/api';
 import type { AuthResponse, AuthService } from './auth.interfaces';
 
 export const authService: AuthService = getMockableService(

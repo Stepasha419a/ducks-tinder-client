@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userService } from '@shared/api/services';
+import { userService } from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
 
 export const getMatchUserThunk = createAsyncThunk(

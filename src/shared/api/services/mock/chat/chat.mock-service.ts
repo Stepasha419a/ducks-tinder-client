@@ -12,8 +12,8 @@ import {
   type ChatConnectReturn,
   type ChatService,
   type ChatsConnectReturn,
-} from '@shared/api/services';
-import type { PaginationParams } from '@shared/lib/interfaces';
+} from '@shared/api';
+import type { PaginationParams } from '@shared/lib';
 import { mockStorage, resolveAxiosResponse } from '../mock';
 import { chatStub, shortMessagesPaginationStub } from './chat.stub';
 
