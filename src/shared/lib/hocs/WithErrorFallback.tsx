@@ -1,8 +1,6 @@
 import type { ComponentType, ErrorInfo } from 'react';
 import { Component as ReactComponent } from 'react';
 import { toast } from 'react-toastify';
-// eslint-disable-next-line boundaries/element-types
-import { store } from '@app/store';
 
 interface Options {
   redirect?: boolean;
@@ -19,7 +17,7 @@ export function WithErrorFallback<P extends object>(
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-      console.log({ error, errorInfo, store: store.getState() });
+      console.log({ error, errorInfo });
 
       toast('Some error occurred! The view is blocked to prevent an error.', {
         autoClose: 10000,

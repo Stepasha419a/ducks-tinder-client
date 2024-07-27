@@ -1,4 +1,4 @@
-import type { SettingNameEnum } from '../../lib';
+import type { SettingNameEnum } from './settingName';
 
 export interface Validation {
   min?: number;

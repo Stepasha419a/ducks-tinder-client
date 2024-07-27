@@ -19,3 +19,5 @@ export const ProfileEdit = WithErrorFallback(ProfileEditRaw);
 export const ProfilePreview = WithErrorFallback(ProfilePreviewRaw);
 export const ProfileSettingBlock = WithErrorFallback(ProfileSettingBlockRaw);
 export const TinderUser = WithErrorFallback(TinderUserRaw);
+
+export * from './pagesLib';

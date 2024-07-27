@@ -29,12 +29,12 @@ export default defineConfig({
       '@app': path.resolve(__dirname, './src/app'),
       '@pages': path.resolve(__dirname, './src/pages'),
       '@pages/*': path.resolve(__dirname, './src/pages'),
-      '@widgets': path.resolve(__dirname, './src/widgets/index'),
+      '@widgets': path.resolve(__dirname, './src/widgets'),
       '@widgets/*': path.resolve(__dirname, './src/widgets'),
       '@hooks': path.resolve(__dirname, './src/shared/lib/hooks'),
       '@features': path.resolve(__dirname, './src/features'),
       '@entities': path.resolve(__dirname, './src/entities'),
-      '@shared/assets/*': path.resolve(__dirname, './src/shared/ui/assets'),
+      '@shared/assets': path.resolve(__dirname, './src/shared/ui/assets'),
       '@shared/constants': path.resolve(
         __dirname,
         './src/shared/lib/constants'
