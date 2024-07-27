@@ -46,13 +46,13 @@ export const InfinityScroll = forwardRef<
 
     const [isIntersecting, setIntersecting] = useState(false);
     const [isRequested, setRequested] = useState(false);
-    const [forceReset, setForceReset] = useState(false);
 
     useImperativeHandle<ControlRef, ControlRef>(
       controlRef,
       () => ({
         forceReset() {
-          setForceReset(true);
+          setIntersecting(true);
+          setRequested(false);
         },
         scrollToInitial(smooth?: boolean) {
           if (listRef.current) {
@@ -75,14 +75,6 @@ export const InfinityScroll = forwardRef<
       }),
       []
     );
-
-    useEffect(() => {
-      if (forceReset) {
-        setIntersecting(true);
-        setRequested(false);
-        setForceReset(false);
-      }
-    }, [forceReset]);
 
     useEffect(() => {
       if (listRef.current && !isLoading) {

@@ -1,4 +1,4 @@
-import { ProfilePreview } from '@widgets';
+import { ProfilePreview } from '@widgets/ProfilePreview';
 import { SettingsBlock } from '@features/user';
 import { useAdaptiveMediaQuery } from '@shared/lib';
 

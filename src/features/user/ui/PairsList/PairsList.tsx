@@ -60,7 +60,7 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
     <InfinityScroll
       handleLoadMore={delayedGetUserPairs}
       isLoading={isPairsLoading}
-      isMore={true}
+      isMore={!isPairsEnded}
       loader={<PairsListLazy />}
       className={styles.pairs}
       loaderClassName={styles.loader}

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { ChatProfilePopup, Messages } from '@widgets';
+import { ChatProfilePopup } from '@widgets/ChatProfilePopup';
+import { Messages } from '@widgets/Messages';
 import { getMemberThunk, nullMember } from '@entities/chat';
 import { useAppDispatch } from '@shared/lib';
 

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { Outlet } from 'react-router-dom';
-import { Nav } from '@widgets';
+import { Nav } from '@widgets/Nav';
 import { useIsMobileNavAvailable } from '../../lib';
 import styles from './NavLayout.mobile.module.scss';
 

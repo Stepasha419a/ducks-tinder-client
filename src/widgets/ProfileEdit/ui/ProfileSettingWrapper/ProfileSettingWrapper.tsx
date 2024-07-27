@@ -1,9 +1,8 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { ProfileSettingBlock } from '@widgets';
 import { Preview } from '@entities/user';
 import type { Picture } from '@shared/api';
 import { useAppSelector } from '@shared/lib';
-import { Tabs } from './components';
+import { ProfileSettingBlock, Tabs } from './components';
 import styles from './ProfileSettingWrapper.module.scss';
 
 interface ProfileSettingWrapperProps {

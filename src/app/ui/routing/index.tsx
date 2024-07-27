@@ -8,7 +8,9 @@ import NotFound from '@pages/NotFound';
 import { SettingsIndexPage } from '@pages/Settings';
 import TinderPage from '@pages/Tinder';
 
-import { PlaceSetting, ProfileEdit, ProfilePreview } from '@widgets';
+import { PlaceSetting } from '@widgets/PlaceSetting';
+import { ProfileEdit } from '@widgets/ProfileEdit';
+import { ProfilePreview } from '@widgets/ProfilePreview';
 import { ProfileSetting } from '@features/user';
 import { ROUTES } from '@shared/lib';
 import { WithSuspense } from '@shared/lib';
@@ -22,7 +24,7 @@ const Registration = WithSuspense(
 );
 const SettingsPage = WithSuspense(lazy(async () => import('@pages/Settings')));
 
-const Routing = (): ReactElement => {
+export const Routing = (): ReactElement => {
   return (
     <Routes>
       <Route path={ROUTES.LOGIN} element={<Login />} />
@@ -54,5 +56,3 @@ const Routing = (): ReactElement => {
     </Routes>
   );
 };
-
-export default Routing;
