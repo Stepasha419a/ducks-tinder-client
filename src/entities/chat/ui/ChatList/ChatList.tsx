@@ -38,7 +38,6 @@ export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
         handleLoadMore={delayedGetChats}
         isLoading={isLoading}
         isMore={!isEnded}
-        listRef={chatListRef}
       >
         {chats.map((chat) => {
           const isActive = currentChatId === chat.id;

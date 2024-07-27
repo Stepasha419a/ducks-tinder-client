@@ -16,6 +16,7 @@ import {
   useDebouncedCallback,
 } from '@shared/lib';
 import { InfinityScroll } from '@shared/ui';
+import type { ControlRef } from '@shared/ui';
 import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';
@@ -56,8 +57,8 @@ export const MessageList: FC<MessagesProps> = ({
     getTextProps,
   } = useMessagesProps(selectedMessage);
 
-  const { messagesRef, messagesBottomRef } = useMessagesScroll();
-  const controlRef = useRef<null | object>({});
+  const controlRef = useRef<ControlRef>(null);
+  useMessagesScroll(controlRef);
 
   const delayedGetMessages = useDebouncedCallback(() => {
     dispatch(getMessagesThunk());
@@ -71,11 +72,7 @@ export const MessageList: FC<MessagesProps> = ({
 
   useEffect(() => {
     if (chatId && prevChatIdRef.current !== chatId) {
-      if (
-        controlRef.current &&
-        'forceReset' in controlRef.current &&
-        typeof controlRef.current.forceReset === 'function'
-      ) {
+      if (controlRef.current) {
         controlRef.current.forceReset();
       }
 
@@ -102,54 +99,48 @@ export const MessageList: FC<MessagesProps> = ({
   }
 
   return (
-    <div className={cn} ref={messagesRef}>
-      {!isMessagesEnded && <MessagesLazy count={4} />}
-      <InfinityScroll
-        handleLoadMore={delayedGetMessages}
-        isLoading={isMessagesLoading}
-        isMore={!isMessagesEnded}
-        listRef={messagesRef}
-        ref={controlRef}
-        isReversed
-      >
-        {messages.map((message: MessageInterface, i) => {
-          const isNextDayMessage =
-            messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
+    <InfinityScroll
+      handleLoadMore={delayedGetMessages}
+      isLoading={isMessagesLoading}
+      isMore={!isMessagesEnded}
+      ref={controlRef}
+      loader={<MessagesLazy count={4} />}
+      className={cn}
+      isReversed
+    >
+      {messages.map((message: MessageInterface, i) => {
+        const isNextDayMessage =
+          messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
 
-          return (
-            <div key={message.id}>
-              <MessageMemo
+        return (
+          <div key={message.id}>
+            <MessageMemo
+              handleSelectMessage={handleSelectMessage}
+              selectedMessage={selectedMessage}
+              message={message}
+            >
+              <Message.Avatar userId={message.userId} avatar={message.avatar} />
+              <Message.Body {...getBodyProps(message)}>
+                <Message.Username {...getUsernameProps(message)} />
+                <Message.Content>
+                  <Message.Reply {...getReplyProps(message)} />
+                  <Message.Text {...getTextProps(message)} />
+                </Message.Content>
+              </Message.Body>
+              <Message.Select
+                {...getSelectProps(message)}
                 handleSelectMessage={handleSelectMessage}
-                selectedMessage={selectedMessage}
                 message={message}
-              >
-                <Message.Avatar
-                  userId={message.userId}
-                  avatar={message.avatar}
-                />
-                <Message.Body {...getBodyProps(message)}>
-                  <Message.Username {...getUsernameProps(message)} />
-                  <Message.Content>
-                    <Message.Reply {...getReplyProps(message)} />
-                    <Message.Text {...getTextProps(message)} />
-                  </Message.Content>
-                </Message.Body>
-                <Message.Select
-                  {...getSelectProps(message)}
-                  handleSelectMessage={handleSelectMessage}
-                  message={message}
-                  isMessageEditing={isMessageEditing}
-                  select={select}
-                />
-              </MessageMemo>
-              {isNextDayMessage && (
-                <Timestamp createdAt={messages[i + 1].createdAt} />
-              )}
-            </div>
-          );
-        })}
-      </InfinityScroll>
-      <div ref={messagesBottomRef}></div>
-    </div>
+                isMessageEditing={isMessageEditing}
+                select={select}
+              />
+            </MessageMemo>
+            {isNextDayMessage && (
+              <Timestamp createdAt={messages[i + 1].createdAt} />
+            )}
+          </div>
+        );
+      })}
+    </InfinityScroll>
   );
 };

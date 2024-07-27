@@ -1,13 +1,9 @@
-import type { ReactElement } from 'react';
+import type { HTMLAttributes } from 'react';
 import { forwardRef } from 'react';
 
-interface LoadMoreProps {
-  isMore: boolean;
-  loader?: ReactElement;
-}
-
-export const LoadMore = forwardRef<HTMLDivElement, LoadMoreProps>(
-  ({ isMore, loader }, loadRef) => {
-    return <div ref={loadRef}>{isMore && loader}</div>;
-  }
-);
+export const LoadMore = forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>((divProps, loadRef) => {
+  return <div {...divProps} ref={loadRef}></div>;
+});

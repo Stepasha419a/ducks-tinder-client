@@ -4,7 +4,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { useRef } from 'react';
 import { getUserPairsThunk } from '@entities/user';
 import type { ShortUser } from '@shared/api';
 import {
@@ -12,7 +11,7 @@ import {
   useAppSelector,
   useDebouncedCallback,
 } from '@shared/lib';
-import { InfinityScroll, Skeleton } from '@shared/ui';
+import { InfinityScroll } from '@shared/ui';
 import { Pair } from './components';
 import { PairsListLazy } from './PairsList.lazy';
 import styles from './PairsList.module.scss';
@@ -31,8 +30,6 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   );
   const isPairsLoading = useAppSelector((state) => state.pair.isPairsLoading);
   const isPairsEnded = useAppSelector((state) => state.pair.isPairsEnded);
-
-  const listRef = useRef(null);
 
   const delayedGetUserPairs = useDebouncedCallback(() => {
     dispatch(getUserPairsThunk({ isInitial: false }));
@@ -60,25 +57,23 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   }
 
   return (
-    <div className={styles.pairs} ref={listRef}>
-      <InfinityScroll
-        handleLoadMore={delayedGetUserPairs}
-        isLoading={isPairsLoading}
-        isMore={!isPairsEnded}
-        listRef={listRef}
-        loader={<Skeleton count={1} width={244} height={305} duration={1} />}
-      >
-        {pairs.map((user: ShortUser) => {
-          return (
-            <Pair
-              key={user.id}
-              user={user}
-              setCurrentPair={() => setCurrentPair(user)}
-            />
-          );
-        })}
-      </InfinityScroll>
-      {!isPairsEnded && <PairsListLazy />}
-    </div>
+    <InfinityScroll
+      handleLoadMore={delayedGetUserPairs}
+      isLoading={isPairsLoading}
+      isMore={true}
+      loader={<PairsListLazy />}
+      className={styles.pairs}
+      loaderClassName={styles.loader}
+    >
+      {pairs.map((user: ShortUser) => {
+        return (
+          <Pair
+            key={user.id}
+            user={user}
+            setCurrentPair={() => setCurrentPair(user)}
+          />
+        );
+      })}
+    </InfinityScroll>
   );
 };

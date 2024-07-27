@@ -1,4 +1,4 @@
-import type { MutableRefObject, PropsWithChildren, ReactElement } from 'react';
+import type { HTMLAttributes, PropsWithChildren, ReactElement } from 'react';
 import {
   useRef,
   useEffect,
@@ -8,17 +8,23 @@ import {
 } from 'react';
 import { LoadMore } from './LoadMore';
 
-interface InfinityScrollProps {
+interface InfinityScrollProps extends HTMLAttributes<HTMLDivElement> {
   isReversed?: boolean;
   isMore: boolean;
   isLoading: boolean;
   handleLoadMore: () => void;
-  listRef: MutableRefObject<HTMLElement | null>;
+  loaderClassName?: string;
   loader?: ReactElement;
 }
 
+export interface ControlRef {
+  forceReset: () => void;
+  scrollToInitial: (smooth: boolean) => void;
+  getIsNearWithInitial: (distance: number) => boolean;
+}
+
 export const InfinityScroll = forwardRef<
-  unknown,
+  ControlRef,
   PropsWithChildren<InfinityScrollProps>
 >(
   (
@@ -28,11 +34,13 @@ export const InfinityScroll = forwardRef<
       isMore,
       isLoading,
       handleLoadMore,
-      listRef,
       loader,
+      loaderClassName,
+      ...divAttributes
     },
     controlRef
   ) => {
+    const listRef = useRef<null | HTMLDivElement>(null);
     const loadRef = useRef<null | HTMLDivElement>(null);
     const lastScroll = useRef(0);
 
@@ -40,11 +48,29 @@ export const InfinityScroll = forwardRef<
     const [isRequested, setRequested] = useState(false);
     const [forceReset, setForceReset] = useState(false);
 
-    useImperativeHandle<unknown, { forceReset: () => void }>(
+    useImperativeHandle<ControlRef, ControlRef>(
       controlRef,
       () => ({
         forceReset() {
           setForceReset(true);
+        },
+        scrollToInitial(smooth?: boolean) {
+          if (listRef.current) {
+            listRef.current.scrollTo({
+              top: listRef.current.scrollHeight,
+              behavior: smooth ? 'smooth' : 'auto',
+            });
+          }
+        },
+        getIsNearWithInitial(distance: number): boolean {
+          if (listRef.current) {
+            return (
+              listRef.current.scrollHeight - listRef.current.scrollTop <
+              listRef.current.clientHeight + distance
+            );
+          }
+
+          return false;
         },
       }),
       []
@@ -104,11 +130,11 @@ export const InfinityScroll = forwardRef<
 
     if (isReversed) {
       return (
-        <div>
+        <div {...divAttributes} ref={listRef}>
+          {isMore && loader}
           <LoadMore
+            className={loaderClassName}
             key="load-scroll"
-            isMore={isMore}
-            loader={loader}
             ref={loadRef}
           />
           {children}
@@ -117,14 +143,10 @@ export const InfinityScroll = forwardRef<
     }
 
     return (
-      <div>
+      <div {...divAttributes} ref={listRef}>
         {children}
-        <LoadMore
-          key="load-scroll"
-          isMore={isMore}
-          loader={loader}
-          ref={loadRef}
-        />
+        <LoadMore className={loaderClassName} key="load-scroll" ref={loadRef} />
+        {isMore && loader}
       </div>
     );
   }

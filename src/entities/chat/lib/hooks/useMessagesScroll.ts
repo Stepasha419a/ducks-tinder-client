@@ -1,38 +1,31 @@
+import type { RefObject } from 'react';
 import { useCallback, useEffect, useRef } from 'react';
 import { useAppSelector } from '@shared/lib';
+import type { ControlRef } from '@shared/ui';
 
-export function useMessagesScroll() {
+export function useMessagesScroll(controlRef: RefObject<ControlRef>) {
   const messagesLength = useAppSelector((state) => state.chat.messages.length);
 
-  const messagesRef = useRef<HTMLDivElement | null>(null);
-  const messagesBottomRef = useRef<HTMLDivElement | null>(null);
   const previousMessagesLength = useRef(0);
 
   const isValidSmoothScroll = useCallback(() => {
-    if (messagesBottomRef.current && messagesRef.current) {
-      const isNearBottom =
-        messagesRef.current.scrollHeight - messagesRef.current.scrollTop <
-        messagesRef.current.clientHeight + 300;
+    if (controlRef.current) {
+      const isNearBottom = controlRef.current.getIsNearWithInitial(300);
       const isAddedMessage = previousMessagesLength.current < messagesLength;
 
       return isNearBottom && isAddedMessage;
     }
-  }, [messagesLength]);
+  }, [controlRef, messagesLength]);
 
   useEffect(() => {
-    if (messagesBottomRef.current && messagesRef.current) {
+    if (controlRef.current) {
       setTimeout(() => {
         if (isValidSmoothScroll()) {
-          messagesBottomRef.current!.scrollIntoView({ behavior: 'smooth' });
+          controlRef.current?.scrollToInitial(true);
         }
 
         previousMessagesLength.current = messagesLength;
       }, 0);
     }
-  }, [isValidSmoothScroll, messagesLength]);
-
-  return {
-    messagesRef,
-    messagesBottomRef,
-  };
+  }, [controlRef, isValidSmoothScroll, messagesLength]);
 }
