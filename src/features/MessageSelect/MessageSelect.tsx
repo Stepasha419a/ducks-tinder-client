@@ -3,12 +3,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useRef } from 'react';
-import { useMessageSelect } from '@features/chat';
 import type { Message } from '@shared/api';
-import { getDatesHourDiff } from '@shared/lib';
-import { useAppSelector, useOnClickOutside } from '@shared/lib';
-import { MessageSelectMobile } from './components';
+import {
+  getDatesHourDiff,
+  useAppSelector,
+  useOnClickOutside,
+} from '@shared/lib';
+import { useMessageSelect } from './lib';
 import styles from './MessageSelect.module.scss';
+import { MessageSelectMobile } from './ui';
 
 interface MessageSelectProps {
   isMobile?: boolean;

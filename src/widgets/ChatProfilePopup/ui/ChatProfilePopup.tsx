@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { ChatControl } from '@features/chat';
+import { ChatControl } from '@features/ChatControl';
 import { Preview } from '@entities/user';
 import { useAppSelector } from '@shared/lib';
 import { Popup } from '@shared/ui';

@@ -1,5 +1,6 @@
 import { useCallback, useState, type FC, type ReactElement } from 'react';
-import { MessageSelect, MessageForm } from '@features/chat';
+import { MessageForm } from '@features/MessageForm';
+import { MessageSelect } from '@features/MessageSelect';
 import { ChatProfile, MessageList } from '@entities/chat';
 import type { Message } from '@shared/api';
 import { useAdaptiveMediaQuery } from '@shared/lib';
