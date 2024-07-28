@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Nav } from '@widgets/Nav';
-import { withPrivatePageHocs } from '@widgets/pagesLib';
+import { withPrivateHocs } from '@features/withPrivateHocs';
 import { useAdaptiveMediaQuery } from '@shared/lib';
 import styles from './NavLayout.module.scss';
 import { NavLayoutMobile } from './ui';
@@ -22,4 +22,4 @@ export const NavLayout = () => {
   );
 };
 
-export default withPrivatePageHocs(NavLayout);
+export default withPrivateHocs(NavLayout);

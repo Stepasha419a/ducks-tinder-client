@@ -1,3 +1,5 @@
+// just composition of feature-hocs
+/* eslint-disable boundaries/element-types */
 import { WithAuthRedirect } from '@features/WithAuthRedirect';
 import { WithChatConnection } from '@features/WithChatConnection';
 import { WithCheckedFields } from '@features/WithCheckedFields';
@@ -6,7 +8,7 @@ import { WithNewMessagesCount } from '@entities/chat';
 import { compose } from '@shared/lib';
 import { WithErrorFallback } from '@shared/lib';
 
-export const withPrivatePageHocs = compose(
+export const withPrivateHocs = compose(
   WithAuthRedirect,
   WithUserData,
   WithCheckedFields,

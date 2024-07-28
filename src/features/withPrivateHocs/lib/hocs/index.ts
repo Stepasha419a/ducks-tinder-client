@@ -1,0 +1,1 @@
+export { withPrivateHocs } from './withPrivateHocs';

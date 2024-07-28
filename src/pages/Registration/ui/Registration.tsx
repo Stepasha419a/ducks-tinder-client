@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react';
-import { withPublicPageHocs } from '@widgets/pagesLib';
 import { RegistrationForm } from '@features/RegistrationForm';
+import { withPublicHocs } from '@features/withPublicHocs';
 
 const Registration = (): ReactElement => {
   return <RegistrationForm />;
 };
 
-export default withPublicPageHocs(Registration);
+export default withPublicHocs(Registration);
