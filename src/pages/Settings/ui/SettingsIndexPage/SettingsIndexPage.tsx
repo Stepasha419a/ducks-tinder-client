@@ -1,5 +1,5 @@
 import { ProfilePreview } from '@widgets/ProfilePreview';
-import { SettingsBlock } from '@features/user';
+import { SettingsBlock } from '@features/SettingsBlock';
 import { useAdaptiveMediaQuery } from '@shared/lib';
 
 export const SettingsIndexPage = () => {

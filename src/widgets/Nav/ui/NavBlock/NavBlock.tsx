@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
-import { SettingsBlock } from '@features/user';
+import { SettingsBlock } from '@features/SettingsBlock';
 import { NavBlockEnum } from '../../lib';
 import { ChatsPairsBlock } from './components';
 import styles from './NavBlock.module.scss';

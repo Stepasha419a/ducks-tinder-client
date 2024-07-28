@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { UploadImagePopups } from '@features/user';
+import { UploadImagePopups } from '@features/UploadImagePopups';
 import { ROUTES } from '@shared/lib';
 import { useAppSelector } from '@shared/lib';
 import { Avatar } from '@shared/ui';

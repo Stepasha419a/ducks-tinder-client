@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { ProfileSubmit } from '@features/user';
-import { useUserPictures } from '@features/user';
+import { ProfileSubmit } from '@features/ProfileSubmit';
 import { Preview } from '@entities/user';
 import { useAppSelector, useAdaptiveMediaQuery } from '@shared/lib';
+import { useUserPictures } from './lib';
 import styles from './ProfileEdit.module.scss';
 import { ProfileSettingWrapper } from './ui';
 

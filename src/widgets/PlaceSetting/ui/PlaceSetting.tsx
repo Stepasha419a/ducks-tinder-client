@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { PlacesGeolocation } from '@features/user';
+import { PlacesGeolocation } from '@features/PlacesGeolocation';
 import { Map } from '@entities/user';
 import { ROUTES } from '@shared/lib';
 import { useAdaptiveMediaQuery } from '@shared/lib';

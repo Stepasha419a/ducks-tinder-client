@@ -1,0 +1,1 @@
+export { UploadImagePopups } from './UploadImagePopups';

@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { withPublicPageHocs } from '@widgets/pagesLib';
-import { LoginForm } from '@features/user';
+import { LoginForm } from '@features/LoginForm';
 
 const Login = (): ReactElement => {
   return <LoginForm />;

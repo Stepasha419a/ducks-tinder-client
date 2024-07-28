@@ -5,6 +5,7 @@ export {
   getSettingUrl,
   getSelectData,
   getSettingType,
+  parseSelectData,
 } from './helpers';
 export type { UserPlaceInfo, UserSliderInfo } from './helpers';
 export {

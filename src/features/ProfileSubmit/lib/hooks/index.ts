@@ -1,0 +1,1 @@
+export { usePicturesMix } from './usePicturesMix';

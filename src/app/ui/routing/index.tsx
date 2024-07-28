@@ -11,7 +11,7 @@ import TinderPage from '@pages/Tinder';
 import { PlaceSetting } from '@widgets/PlaceSetting';
 import { ProfileEdit } from '@widgets/ProfileEdit';
 import { ProfilePreview } from '@widgets/ProfilePreview';
-import { ProfileSetting } from '@features/user';
+import { ProfileSetting } from '@features/ProfileSetting';
 import { ROUTES } from '@shared/lib';
 import { WithSuspense } from '@shared/lib';
 

@@ -1,0 +1,1 @@
+export { getAreDifferentPlaces } from './getAreDifferentPlaces';

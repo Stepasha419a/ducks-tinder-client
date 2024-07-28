@@ -6,3 +6,4 @@ export { getSettingUrl } from './getSettingUrl';
 export { getSelectSettingFields } from './getSelectSettingFields';
 export { getSelectData } from './getSelectData';
 export { getSettingType } from './getSettingType';
+export { parseSelectData } from './parseSelectData';

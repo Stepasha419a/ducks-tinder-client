@@ -1,11 +1,9 @@
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  FilterPairsItems,
-  PairsFilterPopup,
-  PairsList,
-  RatePairPopup,
-} from '@features/user';
+import { FilterPairsItems } from '@features/FilterPairsItems';
+import { PairsFilterPopup } from '@features/PairsFilterPopup';
+import { PairsList } from '@features/PairsList';
+import { RatePairPopup } from '@features/RatePairPopup';
 import { getUserPairsThunk, type PairFilterForm } from '@entities/user';
 import type { ShortUser } from '@shared/api';
 import { useAppDispatch } from '@shared/lib';
