@@ -16,25 +16,25 @@ export const Messages: FC<MessagesProps> = ({
 
   const [selectedMessage, setSelectedMessage] = useState<null | Message>(null);
   const [repliedMessage, setRepliedMessage] = useState<null | Message>(null);
-  const [isMessageEditing, setIsMessageEditing] = useState(false);
+  const [editingMessage, setEditingMessage] = useState<null | Message>(null);
 
   const handleNullSelectedMessage = useCallback(() => {
     setSelectedMessage(null);
   }, []);
 
   const handleSelectMessage = useCallback((message: Message) => {
-    setIsMessageEditing(false);
+    setEditingMessage(null);
     setRepliedMessage(null);
     setSelectedMessage(message);
   }, []);
 
   const handleResetEditReplied = useCallback(() => {
     setRepliedMessage(null);
-    setIsMessageEditing(false);
+    setEditingMessage(null);
     setSelectedMessage(null);
   }, []);
 
-  const isMobileSelected = selectedMessage && !isMessageEditing && isMobile;
+  const isMobileSelected = selectedMessage && !editingMessage && isMobile;
 
   return (
     <>
@@ -42,8 +42,8 @@ export const Messages: FC<MessagesProps> = ({
         <MessageSelect
           isMobile
           setRepliedMessage={setRepliedMessage}
-          isMessageEditing={isMessageEditing}
-          setIsMessageEditing={setIsMessageEditing}
+          editingMessage={editingMessage}
+          setEditingMessage={setEditingMessage}
           selectedMessage={selectedMessage}
           handleNullSelectedMessage={handleNullSelectedMessage}
         />
@@ -52,12 +52,12 @@ export const Messages: FC<MessagesProps> = ({
       )}
       <MessageList
         repliedMessage={repliedMessage}
-        isMessageEditing={isMessageEditing}
+        isMessageEditing={Boolean(editingMessage)}
         select={
           <MessageSelect
             setRepliedMessage={setRepliedMessage}
-            isMessageEditing={isMessageEditing}
-            setIsMessageEditing={setIsMessageEditing}
+            editingMessage={editingMessage}
+            setEditingMessage={setEditingMessage}
             selectedMessage={selectedMessage}
             handleNullSelectedMessage={handleNullSelectedMessage}
           />
@@ -67,8 +67,7 @@ export const Messages: FC<MessagesProps> = ({
       />
       <MessageForm
         repliedMessage={repliedMessage}
-        selectedMessage={selectedMessage}
-        isMessageEditing={isMessageEditing}
+        editingMessage={editingMessage}
         handleResetEditReplied={handleResetEditReplied}
       />
     </>

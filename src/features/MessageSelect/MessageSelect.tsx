@@ -16,8 +16,8 @@ import { MessageSelectMobile } from './ui';
 interface MessageSelectProps {
   isMobile?: boolean;
   setRepliedMessage: Dispatch<SetStateAction<Message | null>>;
-  isMessageEditing: boolean;
-  setIsMessageEditing: Dispatch<SetStateAction<boolean>>;
+  editingMessage: Message | null;
+  setEditingMessage: Dispatch<SetStateAction<Message | null>>;
   selectedMessage: Message | null;
   handleNullSelectedMessage: () => void;
 }
@@ -25,8 +25,8 @@ interface MessageSelectProps {
 export const MessageSelect: FC<MessageSelectProps> = ({
   isMobile,
   setRepliedMessage,
-  isMessageEditing,
-  setIsMessageEditing,
+  editingMessage,
+  setEditingMessage,
   selectedMessage,
   handleNullSelectedMessage,
 }) => {
@@ -42,8 +42,8 @@ export const MessageSelect: FC<MessageSelectProps> = ({
     handleRepliedMessage,
   } = useMessageSelect(
     setRepliedMessage,
-    isMessageEditing,
-    setIsMessageEditing,
+    editingMessage,
+    setEditingMessage,
     selectedMessage,
     handleNullSelectedMessage
   );

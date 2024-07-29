@@ -5,15 +5,15 @@ import { useAppDispatch } from '@shared/lib';
 
 export function useMessageSelect(
   setRepliedMessage: Dispatch<SetStateAction<Message | null>>,
-  isMessageEditing: boolean,
-  setIsMessageEditing: Dispatch<SetStateAction<boolean>>,
+  editingMessage: Message | null,
+  setEditingMessage: Dispatch<SetStateAction<Message | null>>,
   selectedMessage: Message | null,
   handleNullSelectedMessage: () => void
 ) {
   const dispatch = useAppDispatch();
 
   const handleSelectClickOutside = () => {
-    if (!isMessageEditing) {
+    if (!editingMessage) {
       handleNullSelectedMessage();
     }
   };
@@ -23,7 +23,7 @@ export function useMessageSelect(
   };
 
   const handleEditMessage = () => {
-    setIsMessageEditing(true);
+    setEditingMessage(selectedMessage);
   };
 
   const handleRepliedMessage = () => {

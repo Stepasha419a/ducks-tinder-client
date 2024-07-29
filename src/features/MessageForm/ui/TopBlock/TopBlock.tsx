@@ -8,16 +8,14 @@ import styles from './TopBlock.module.scss';
 
 interface TopBlockProps {
   repliedMessage: Message | null;
-  selectedMessage: Message | null;
+  editingMessage: Message | null;
   cancelTopBlock: () => void;
-  isMessageEditing: boolean;
 }
 
 export const TopBlock: FC<TopBlockProps> = ({
   repliedMessage,
-  selectedMessage,
+  editingMessage,
   cancelTopBlock,
-  isMessageEditing,
 }) => {
   const currentUserId = useAppSelector((state) => state.user.currentUser?.id);
 
@@ -26,13 +24,13 @@ export const TopBlock: FC<TopBlockProps> = ({
     ? repliedMessage?.name
     : repliedMessage?.name;
 
-  const title = isMessageEditing ? 'Editing' : repliedName;
-  const text = isMessageEditing ? selectedMessage?.text : repliedMessage?.text;
+  const title = editingMessage ? 'Editing' : repliedName;
+  const text = editingMessage ? editingMessage.text : repliedMessage?.text;
 
   return (
     <div className={styles.block}>
       {repliedMessage && <div className={styles.border} />}
-      {isMessageEditing && (
+      {editingMessage && (
         <FontAwesomeIcon
           className={classNames(styles.icon, styles.colored)}
           icon={faPen}

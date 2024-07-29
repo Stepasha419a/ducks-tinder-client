@@ -1,6 +1,6 @@
 import { faCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, type FC } from 'react';
+import { useEffect, type FC, memo } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   editMessageThunk,
@@ -21,101 +21,98 @@ interface ChatFormValues {
 interface MessageFormProps {
   repliedMessage: Message | null;
   handleResetEditReplied: () => void;
-  selectedMessage: null | Message;
-  isMessageEditing: boolean;
+  editingMessage: null | Message;
 }
 
-export const MessageForm: FC<MessageFormProps> = ({
-  repliedMessage,
-  handleResetEditReplied,
-  selectedMessage,
-  isMessageEditing,
-}) => {
-  const dispatch = useAppDispatch();
+export const MessageForm: FC<MessageFormProps> = memo(
+  ({ repliedMessage, handleResetEditReplied, editingMessage }) => {
+    const dispatch = useAppDispatch();
 
-  const currentChat = useAppSelector(selectCurrentChat);
-  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
-  const chat = useAppSelector((state) => state.chat.chat);
-  const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
-  const isNotFound = useAppSelector((state) => state.chat.isNotFound);
+    const currentChat = useAppSelector(selectCurrentChat);
+    const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
+    const chat = useAppSelector((state) => state.chat.chat);
+    const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
+    const isNotFound = useAppSelector((state) => state.chat.isNotFound);
 
-  const {
-    register,
-    formState: { isValid },
-    handleSubmit,
-    setValue,
-    reset,
-  } = useForm<ChatFormValues>({ mode: 'onChange' });
+    const {
+      register,
+      formState: { isValid },
+      handleSubmit,
+      setValue,
+      reset,
+    } = useForm<ChatFormValues>({ mode: 'onChange' });
 
-  const submitForm = handleSubmit((data) => {
-    const trimmedValue = data.input.trim();
-    if (trimmedValue) {
-      if (isMessageEditing && selectedMessage) {
-        if (selectedMessage.text !== trimmedValue) {
-          dispatch(
-            editMessageThunk({
-              messageId: selectedMessage.id,
-              text: trimmedValue,
-            })
-          );
+    const submitForm = handleSubmit((data) => {
+      const trimmedValue = data.input.trim();
+      if (trimmedValue) {
+        if (editingMessage) {
+          if (editingMessage.text !== trimmedValue) {
+            dispatch(
+              editMessageThunk({
+                messageId: editingMessage.id,
+                text: trimmedValue,
+              })
+            );
+          }
+        } else {
+          dispatch(sendMessageThunk({ text: trimmedValue, repliedMessage }));
         }
-      } else {
-        dispatch(sendMessageThunk({ text: trimmedValue, repliedMessage }));
       }
+      handleResetEditReplied();
+      reset();
+    });
+
+    useEffect(() => {
+      if (editingMessage) {
+        setValue('input', editingMessage.text);
+      }
+    }, [editingMessage, setValue]);
+
+    if (isNotFound) {
+      return null;
     }
-    handleResetEditReplied();
-    reset();
-  });
 
-  useEffect(() => {
-    if (isMessageEditing && selectedMessage) {
-      setValue('input', selectedMessage.text);
+    if (isChatLoading || !chat) {
+      return <MessageFormLazy />;
     }
-  }, [isMessageEditing, selectedMessage, setValue]);
 
-  if (isNotFound) {
-    return null;
-  }
+    if (currentChat?.blocked) {
+      const blockedByName =
+        currentChat.blockedById === currentUserId ? 'You' : currentChat.name;
 
-  if (isChatLoading || !chat) {
-    return <MessageFormLazy />;
-  }
+      return <BlockedChat blockedByName={blockedByName} />;
+    }
 
-  if (currentChat?.blocked) {
-    const blockedByName =
-      currentChat.blockedById === currentUserId ? 'You' : currentChat.name;
-
-    return <BlockedChat blockedByName={blockedByName} />;
-  }
-
-  const isTopBlock = repliedMessage || (isMessageEditing && selectedMessage);
-  return (
-    <div className={styles.wrapper}>
-      {isTopBlock && (
-        <TopBlock
-          isMessageEditing={isMessageEditing}
-          repliedMessage={repliedMessage}
-          selectedMessage={selectedMessage}
-          cancelTopBlock={handleResetEditReplied}
-        />
-      )}
-      <form onSubmit={submitForm} className={styles.form}>
-        <TextField
-          {...register('input', { required: true })}
-          variant="low-rounded"
-          extraClassName={styles.input}
-        />
-        <Button
-          disabled={!isValid}
-          type="submit"
-          extraClassName={styles.button}
-        >
-          <FontAwesomeIcon
-            className={styles.icon}
-            icon={isMessageEditing ? faCheck : faPaperPlane}
+    const isTopBlock = repliedMessage || editingMessage;
+    return (
+      <div className={styles.wrapper}>
+        {isTopBlock && (
+          <TopBlock
+            editingMessage={editingMessage}
+            repliedMessage={repliedMessage}
+            cancelTopBlock={handleResetEditReplied}
           />
-        </Button>
-      </form>
-    </div>
-  );
-};
+        )}
+        <form onSubmit={submitForm} className={styles.form}>
+          <TextField
+            {...register('input', { required: true })}
+            variant="low-rounded"
+            extraClassName={styles.input}
+          />
+          <Button
+            disabled={!isValid}
+            type="submit"
+            extraClassName={styles.button}
+          >
+            <FontAwesomeIcon
+              className={styles.icon}
+              icon={editingMessage ? faCheck : faPaperPlane}
+            />
+          </Button>
+        </form>
+      </div>
+    );
+  }
+);
+
+MessageForm.displayName = 'MessageForm';
