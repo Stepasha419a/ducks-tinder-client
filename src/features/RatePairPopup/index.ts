@@ -1,1 +1,1 @@
-export { RatePairPopup } from './RatePairPopup';
+export { RatePairPopup } from './ui/RatePairPopup';
