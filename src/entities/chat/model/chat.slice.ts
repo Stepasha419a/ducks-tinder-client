@@ -114,8 +114,8 @@ const chatSlice = createSlice({
     editMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
 
-      const activeChat = state.chats.find((chat) => chat.id === chatId);
-      if (!activeChat) {
+      const isActive = chatId === state.currentChatId;
+      if (!isActive) {
         return;
       }
 
@@ -126,7 +126,8 @@ const chatSlice = createSlice({
         foundMessage.text = message.text;
         foundMessage.updatedAt = message.updatedAt;
 
-        if (activeChat.lastMessage?.id === foundMessage.id) {
+        const activeChat = state.chats.find((chat) => chat.id === chatId);
+        if (activeChat && activeChat.lastMessage?.id === foundMessage.id) {
           activeChat.lastMessage = foundMessage;
         }
       }
