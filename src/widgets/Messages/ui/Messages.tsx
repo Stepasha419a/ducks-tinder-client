@@ -34,11 +34,11 @@ export const Messages: FC<MessagesProps> = ({
     setSelectedMessage(null);
   }, []);
 
-  const isMobileSelected = selectedMessage && !editingMessage && isMobile;
+  const isMobileSelected = selectedMessage && isMobile;
 
   return (
     <>
-      {isMobileSelected ? (
+      {isMobileSelected && (
         <MessageSelect
           isMobile
           setRepliedMessage={setRepliedMessage}
@@ -47,9 +47,8 @@ export const Messages: FC<MessagesProps> = ({
           selectedMessage={selectedMessage}
           handleNullSelectedMessage={handleNullSelectedMessage}
         />
-      ) : (
-        <ChatProfile handleOpen={handleOpenPopup} />
       )}
+      <ChatProfile handleOpen={handleOpenPopup} />
       <MessageList
         repliedMessage={repliedMessage}
         isMessageEditing={Boolean(editingMessage)}

@@ -1,4 +1,4 @@
-import { useEffect, type FC } from 'react';
+import { useEffect, type FC, memo } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   useAppDispatch,
@@ -15,7 +15,7 @@ interface ChatProfileProps {
   handleOpen: () => void;
 }
 
-export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
+export const ChatProfile: FC<ChatProfileProps> = memo(({ handleOpen }) => {
   const dispatch = useAppDispatch();
 
   const { chatId } = useParams<{ chatId: string }>();
@@ -55,4 +55,6 @@ export const ChatProfile: FC<ChatProfileProps> = ({ handleOpen }) => {
       </div>
     </div>
   );
-};
+});
+
+ChatProfile.displayName = 'ChatProfile';

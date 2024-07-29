@@ -144,6 +144,8 @@ export const InfinityScroll = forwardRef<
   }
 );
 
+InfinityScroll.displayName = 'InfinityScroll';
+
 function getNewScrollTop(
   isReversed: boolean,
   lastScroll: number,

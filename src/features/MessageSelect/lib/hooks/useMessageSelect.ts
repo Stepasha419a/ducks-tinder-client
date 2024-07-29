@@ -20,10 +20,12 @@ export function useMessageSelect(
 
   const handleDeleteMessage = () => {
     dispatch(deleteMessageThunk(selectedMessage!.id));
+    handleNullSelectedMessage();
   };
 
   const handleEditMessage = () => {
     setEditingMessage(selectedMessage);
+    handleNullSelectedMessage();
   };
 
   const handleRepliedMessage = () => {
