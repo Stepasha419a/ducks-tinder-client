@@ -133,22 +133,22 @@ const chatSlice = createSlice({
       }
     },
     blockChat: (state, { payload }: PayloadAction<ReceivedChatBlock>) => {
-      const chat = state.chats.find((item) => item.id === payload.id);
-      if (!chat) {
+      const isActive = state.chat?.id === payload.id;
+      if (!state.chat || !isActive) {
         return;
       }
 
-      chat.blocked = payload.blocked;
-      chat.blockedById = payload.blockedById;
+      state.chat.blocked = payload.blocked;
+      state.chat.blockedById = payload.blockedById;
     },
     unblockChat: (state, { payload }: PayloadAction<ReceivedChatBlock>) => {
-      const chat = state.chats.find((item) => item.id === payload.id);
-      if (!chat) {
+      const isActive = state.chat?.id === payload.id;
+      if (!state.chat || !isActive) {
         return;
       }
 
-      chat.blocked = payload.blocked;
-      chat.blockedById = payload.blockedById;
+      state.chat.blocked = payload.blocked;
+      state.chat.blockedById = payload.blockedById;
     },
     deleteChat: (state, { payload }: PayloadAction<string>) => {
       state.chats = state.chats.filter((chat) => chat.id !== payload);

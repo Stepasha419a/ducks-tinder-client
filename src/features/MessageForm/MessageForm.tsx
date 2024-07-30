@@ -2,11 +2,7 @@ import { faCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, type FC, memo } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  editMessageThunk,
-  selectCurrentChat,
-  sendMessageThunk,
-} from '@entities/chat';
+import { editMessageThunk, sendMessageThunk } from '@entities/chat';
 import type { Message } from '@shared/api';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import { Button, TextField } from '@shared/ui';
@@ -28,7 +24,6 @@ export const MessageForm: FC<MessageFormProps> = memo(
   ({ repliedMessage, handleResetEditReplied, editingMessage }) => {
     const dispatch = useAppDispatch();
 
-    const currentChat = useAppSelector(selectCurrentChat);
     const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
     const chat = useAppSelector((state) => state.chat.chat);
     const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
@@ -76,9 +71,9 @@ export const MessageForm: FC<MessageFormProps> = memo(
       return <MessageFormLazy />;
     }
 
-    if (currentChat?.blocked) {
+    if (chat.blocked) {
       const blockedByName =
-        currentChat.blockedById === currentUserId ? 'You' : currentChat.name;
+        chat.blockedById === currentUserId ? 'You' : chat.name;
 
       return <BlockedChat blockedByName={blockedByName} />;
     }
