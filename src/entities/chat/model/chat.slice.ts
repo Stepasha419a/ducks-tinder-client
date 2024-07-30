@@ -5,12 +5,11 @@ import type {
   Chat,
   ReceivedChatBlock,
   ReceivedMessage,
-  ReceivedNewMessage,
   ShortUser,
 } from '@shared/api';
 import type { ShortMessagesPagination } from '@shared/api';
 import { PAGINATION_TAKE } from '@shared/lib';
-import type { ChatInitialState } from './chat.interfaces';
+import type { ChatInitialState, PushNewMessage } from './chat.interfaces';
 import {
   getChatsThunk,
   disconnectChatThunk,
@@ -58,10 +57,11 @@ const chatSlice = createSlice({
         }
       }
     },
-    pushNewMessage: (state, { payload }: PayloadAction<ReceivedNewMessage>) => {
+    pushNewMessage: (state, { payload }: PayloadAction<PushNewMessage>) => {
       const {
         message: { chatId, ...message },
         newMessagesCount,
+        currentUserId,
       } = payload;
 
       const existingChatIndex = state.chats.findIndex(
@@ -73,14 +73,20 @@ const chatSlice = createSlice({
         state.chats[0].lastMessage = message;
         state.chats[0].newMessagesCount = newMessagesCount;
       } else {
-        state.chats.unshift({
-          avatar: message.avatar,
-          id: chatId,
-          name: message.name,
-          memberId: message.userId,
-          lastMessage: message,
-          newMessagesCount,
-        } as Chat);
+        const isOwnMessage = currentUserId === message.userId;
+
+        if (!isOwnMessage) {
+          state.chats.unshift({
+            avatar: message.avatar,
+            id: chatId,
+            name: message.name,
+            memberId: message.userId,
+            lastMessage: message,
+            newMessagesCount,
+          } as Chat);
+        } else if (state.chat) {
+          state.chats.unshift(state.chat);
+        }
       }
 
       const isActiveChat = state.currentChatId === chatId;

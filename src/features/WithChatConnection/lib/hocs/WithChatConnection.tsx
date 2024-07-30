@@ -17,7 +17,7 @@ import type {
   ReceivedNewMessage,
 } from '@shared/api';
 import { ChatSocketEvent, chatService } from '@shared/api';
-import { useAppDispatch } from '@shared/lib';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 import type { WsExceptionError } from '@shared/lib';
 
 export function WithChatConnection<P extends object>(
@@ -35,7 +35,13 @@ export function WithChatConnection<P extends object>(
 export function useChatConnection() {
   const dispatch = useAppDispatch();
 
+  const currentUserId = useAppSelector((state) => state.user.currentUser?.id);
+
   useEffect(() => {
+    if (!currentUserId) {
+      return;
+    }
+
     const { on, onAny } = chatService.connect();
 
     dispatch(setConnectedSocket());
@@ -57,7 +63,7 @@ export function useChatConnection() {
     });
 
     on(ChatSocketEvent.SendMessage, (data: ReceivedNewMessage) => {
-      dispatch(pushNewMessage(data));
+      dispatch(pushNewMessage({ ...data, currentUserId }));
     });
 
     on(ChatSocketEvent.EditMessage, (data: ReceivedMessage) => {
@@ -83,5 +89,6 @@ export function useChatConnection() {
     return () => {
       chatService.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 }

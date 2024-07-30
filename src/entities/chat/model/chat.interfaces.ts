@@ -1,4 +1,4 @@
-import type { Chat, Message, ShortUser } from '@shared/api';
+import type { Chat, Message, ReceivedNewMessage, ShortUser } from '@shared/api';
 
 export interface ChatInitialState {
   chat: Chat | null;
@@ -15,4 +15,8 @@ export interface ChatInitialState {
   isMessagesEnded: boolean;
   currentChatId: string | null;
   chatMember: ShortUser | null;
+}
+
+export interface PushNewMessage extends ReceivedNewMessage {
+  currentUserId: string;
 }
