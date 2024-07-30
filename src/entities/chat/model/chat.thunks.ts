@@ -32,10 +32,6 @@ export const getChatsThunk = createAsyncThunk(
         take: PAGINATION_TAKE,
       };
 
-      if (chats.length > 0) {
-        return [];
-      }
-
       const response = await chatService.getChats(params);
 
       return response.data;
