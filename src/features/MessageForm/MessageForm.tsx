@@ -60,10 +60,14 @@ export const MessageForm: FC<MessageFormProps> = memo(
       reset();
     });
 
-    useEffect(() => {
-      prevInputRef.current = '';
-      setValue('input', '');
-    }, [chat?.id, setValue]);
+    useEffect(
+      () => () => {
+        prevInputRef.current = '';
+        setValue('input', '');
+        handleResetEditReplied();
+      },
+      [chat?.id, handleResetEditReplied, setValue]
+    );
 
     useEffect(() => {
       if (editingMessage) {

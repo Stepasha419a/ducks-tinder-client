@@ -5,8 +5,8 @@
   padding-left: 14vw;
   padding-bottom: 8px;
 
-  &.replying,
-  &.messageEditing {
+  &.replying:not(.noMessages),
+  &.messageEditing:not(.noMessages) {
     height: calc(100% - 170px);
   }
 

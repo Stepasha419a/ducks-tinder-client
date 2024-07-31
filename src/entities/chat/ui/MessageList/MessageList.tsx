@@ -73,7 +73,8 @@ export const MessageList: FC<MessagesProps> = ({
   const cn = classNames(
     styles.messages,
     repliedMessage && styles.replying,
-    isMessageEditing && styles.messageEditing
+    isMessageEditing && styles.messageEditing,
+    messages.length === 0 && styles.noMessages
   );
 
   useEffect(() => {
