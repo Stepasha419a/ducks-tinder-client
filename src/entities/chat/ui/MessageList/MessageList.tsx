@@ -102,7 +102,7 @@ export const MessageList: FC<MessagesProps> = ({
   }, [dispatch, chatId, isSocketConnected]);
 
   if (isNotFound) {
-    return <NotFound /> || true;
+    return <NotFound />;
   }
 
   if (isChatLoading || !chat || !currentChatId) {
