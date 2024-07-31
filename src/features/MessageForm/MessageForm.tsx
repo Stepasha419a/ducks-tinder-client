@@ -1,6 +1,6 @@
 import { faCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, type FC, memo } from 'react';
+import { useEffect, type FC, memo, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { editMessageThunk, sendMessageThunk } from '@entities/chat';
 import type { Message } from '@shared/api';
@@ -29,12 +29,15 @@ export const MessageForm: FC<MessageFormProps> = memo(
     const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
     const isNotFound = useAppSelector((state) => state.chat.isNotFound);
 
+    const prevInputRef = useRef('');
+
     const {
       register,
       formState: { isValid },
       handleSubmit,
       setValue,
       reset,
+      getValues,
     } = useForm<ChatFormValues>({ mode: 'onChange' });
 
     const submitForm = handleSubmit((data) => {
@@ -58,10 +61,18 @@ export const MessageForm: FC<MessageFormProps> = memo(
     });
 
     useEffect(() => {
+      prevInputRef.current = '';
+      setValue('input', '');
+    }, [chat?.id, setValue]);
+
+    useEffect(() => {
       if (editingMessage) {
+        prevInputRef.current = getValues('input');
         setValue('input', editingMessage.text);
+      } else {
+        setValue('input', prevInputRef.current);
       }
-    }, [editingMessage, setValue]);
+    }, [editingMessage, getValues, setValue]);
 
     if (isNotFound) {
       return null;
