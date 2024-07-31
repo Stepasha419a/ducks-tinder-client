@@ -17,10 +17,9 @@ import {
 } from '@shared/lib';
 import { InfinityScroll } from '@shared/ui';
 import type { ControlRef } from '@shared/ui';
-import { Message, MessageMemo, NotFound } from './components';
+import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';
-import { Timestamp } from './components/Timestamp/Timestamp';
 
 interface MessagesProps {
   select: ReactElement;
@@ -102,8 +101,8 @@ export const MessageList: FC<MessagesProps> = ({
     }
   }, [dispatch, chatId, isSocketConnected]);
 
-  if (isNotFound || true) {
-    return <NotFound />;
+  if (isNotFound) {
+    return <NotFound /> || true;
   }
 
   if (isChatLoading || !chat || !currentChatId) {
