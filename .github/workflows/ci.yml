@@ -3,7 +3,7 @@ name: continuous-integration
 on: [push]
 
 jobs:
-  build:
+  continuous-integration:
     runs-on: ubuntu-latest
 
     steps:
@@ -12,6 +12,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-      - run: npm ci
-      - run: npm run build
-      - run: npm run lint
+      - name: install-dependencies
+        run: npm ci
+      - name: build
+        run: npm run build
+      - name: linter
+        run: npm run lint
