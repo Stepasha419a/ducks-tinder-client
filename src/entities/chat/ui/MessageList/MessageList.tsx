@@ -46,6 +46,9 @@ export const MessageList: FC<MessagesProps> = ({
     (state) => state.chat.isSocketConnected
   );
   const isNotFound = useAppSelector((state) => state.chat.isNotFound);
+  const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
+  const chat = useAppSelector((state) => state.chat.chat);
+  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
 
   const prevChatIdRef = useRef<string | null>(null);
 
@@ -60,9 +63,12 @@ export const MessageList: FC<MessagesProps> = ({
   const controlRef = useRef<ControlRef>(null);
   useMessagesScroll(controlRef);
 
-  const delayedGetMessages = useDebouncedCallback(() => {
-    dispatch(getMessagesThunk());
-  });
+  const delayedGetMessages = useDebouncedCallback(
+    () => {
+      dispatch(getMessagesThunk());
+    },
+    { wait: 300, incremental: true, incrementalAfter: 5 }
+  );
 
   const cn = classNames(
     styles.messages,
@@ -96,6 +102,14 @@ export const MessageList: FC<MessagesProps> = ({
 
   if (isNotFound) {
     return <NotFound />;
+  }
+
+  if (isChatLoading || !chat || !currentChatId) {
+    return (
+      <div className={cn}>
+        <MessagesLazy count={10} />
+      </div>
+    );
   }
 
   return (

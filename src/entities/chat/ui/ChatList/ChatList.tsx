@@ -24,9 +24,12 @@ export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
 
   const chatListRef = useRef<null | HTMLDivElement>(null);
 
-  const delayedGetChats = useDebouncedCallback(() => {
-    dispatch(getChatsThunk());
-  }, 300);
+  const delayedGetChats = useDebouncedCallback(
+    () => {
+      dispatch(getChatsThunk());
+    },
+    { wait: 1000, incremental: true, incrementalAfter: 5, initialWait: 0 }
+  );
 
   if (!chatsLength && isEnded) {
     return <FailedChats />;
@@ -38,6 +41,7 @@ export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
         handleLoadMore={delayedGetChats}
         isLoading={isLoading}
         isMore={!isEnded}
+        loader={<ChatListLazy />}
       >
         {chats.map((chat) => {
           const isActive = currentChatId === chat.id;
@@ -51,7 +55,6 @@ export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
           );
         })}
       </InfinityScroll>
-      {!isEnded && <ChatListLazy />}
     </div>
   );
 };

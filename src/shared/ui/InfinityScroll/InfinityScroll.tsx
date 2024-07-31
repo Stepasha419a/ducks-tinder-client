@@ -94,7 +94,7 @@ export const InfinityScroll = forwardRef<
           lastScroll.current = listRef.current.scrollTop;
         }
       }
-    }, [isLoading, isReversed, listRef]);
+    }, [isLoading, isReversed]);
 
     useEffect(() => {
       if (!isLoading && isIntersecting && !isRequested && isMore) {
