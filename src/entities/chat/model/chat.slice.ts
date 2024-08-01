@@ -20,7 +20,7 @@ import {
 } from './chat.thunks';
 
 const initialState: ChatInitialState = {
-  chat: null,
+  activeChat: null,
   isChatLoading: false,
   chats: [],
   messages: [],
@@ -32,7 +32,6 @@ const initialState: ChatInitialState = {
   isNotFound: false,
   isMessagesLoading: false,
   isMessagesEnded: false,
-  currentChatId: null,
   chatMember: null,
 };
 
@@ -44,7 +43,6 @@ const chatSlice = createSlice({
       state.isSocketConnected = true;
     },
     setCurrentChatData: (state, { payload }: PayloadAction<string>) => {
-      state.currentChatId = payload;
       state.messages = [];
       state.isMessagesEnded = false;
       state.isNotFound = false;
@@ -84,12 +82,12 @@ const chatSlice = createSlice({
             lastMessage: message,
             newMessagesCount,
           } as Chat);
-        } else if (state.chat) {
-          state.chats.unshift(state.chat);
+        } else if (state.activeChat) {
+          state.chats.unshift(state.activeChat);
         }
       }
 
-      const isActiveChat = state.currentChatId === chatId;
+      const isActiveChat = state.activeChat?.id === chatId;
       const isFirstChat = state.chats[0].id === chatId;
       if (isActiveChat && isFirstChat) {
         state.chats[0].lastSeenAt = message.createdAt;
@@ -110,7 +108,7 @@ const chatSlice = createSlice({
     },
     deleteMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
-      const isActive = chatId === state.currentChatId;
+      const isActive = chatId === state.activeChat?.id;
       if (!isActive) {
         return;
       }
@@ -120,7 +118,7 @@ const chatSlice = createSlice({
     editMessage: (state, { payload }: PayloadAction<ReceivedMessage>) => {
       const { chatId, ...message } = payload;
 
-      const isActive = chatId === state.currentChatId;
+      const isActive = chatId === state.activeChat?.id;
       if (!isActive) {
         return;
       }
@@ -139,27 +137,27 @@ const chatSlice = createSlice({
       }
     },
     blockChat: (state, { payload }: PayloadAction<ReceivedChatBlock>) => {
-      const isActive = state.chat?.id === payload.id;
-      if (!state.chat || !isActive) {
+      const isActive = state.activeChat?.id === payload.id;
+      if (!state.activeChat || !isActive) {
         return;
       }
 
-      state.chat.blocked = payload.blocked;
-      state.chat.blockedById = payload.blockedById;
+      state.activeChat.blocked = payload.blocked;
+      state.activeChat.blockedById = payload.blockedById;
     },
     unblockChat: (state, { payload }: PayloadAction<ReceivedChatBlock>) => {
-      const isActive = state.chat?.id === payload.id;
-      if (!state.chat || !isActive) {
+      const isActive = state.activeChat?.id === payload.id;
+      if (!state.activeChat || !isActive) {
         return;
       }
 
-      state.chat.blocked = payload.blocked;
-      state.chat.blockedById = payload.blockedById;
+      state.activeChat.blocked = payload.blocked;
+      state.activeChat.blockedById = payload.blockedById;
     },
     deleteChat: (state, { payload }: PayloadAction<string>) => {
       state.chats = state.chats.filter((chat) => chat.id !== payload);
       state.messages = [];
-      state.currentChatId = '';
+      state.activeChat = null;
     },
     setIsNotFound: (state, { payload }: PayloadAction<boolean>) => {
       state.isNotFound = payload;
@@ -179,7 +177,7 @@ const chatSlice = createSlice({
       .addCase(
         getChatThunk.fulfilled,
         (state, { payload }: PayloadAction<Chat>) => {
-          state.chat = payload;
+          state.activeChat = payload;
           state.isChatLoading = false;
 
           if (
@@ -234,7 +232,7 @@ const chatSlice = createSlice({
             }
           }
 
-          const isActive = payload.chatId === state.currentChatId;
+          const isActive = payload.chatId === state.activeChat?.id;
           if (!isActive) {
             return;
           }
@@ -249,9 +247,9 @@ const chatSlice = createSlice({
         }
       )
       .addCase(disconnectChatThunk.fulfilled, (state) => {
-        if (state.currentChatId) {
+        if (state.activeChat) {
           const chat = state.chats.find(
-            (item) => item.id === state.currentChatId
+            (item) => item.id === state.activeChat!.id
           );
           if (chat) {
             chat.lastSeenAt = new Date().toISOString();
@@ -260,7 +258,7 @@ const chatSlice = createSlice({
         }
 
         state.messages = [];
-        state.currentChatId = '';
+        state.activeChat = null;
       })
       .addCase(
         getMemberThunk.fulfilled,

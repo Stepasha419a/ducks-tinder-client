@@ -1,7 +1,7 @@
 import type { Chat, Message, ReceivedNewMessage, ShortUser } from '@shared/api';
 
 export interface ChatInitialState {
-  chat: Chat | null;
+  activeChat: Chat | null;
   isChatLoading: boolean;
   chats: Chat[];
   messages: Message[];
@@ -13,7 +13,6 @@ export interface ChatInitialState {
   isNotFound: boolean;
   isMessagesLoading: boolean;
   isMessagesEnded: boolean;
-  currentChatId: string | null;
   chatMember: ShortUser | null;
 }
 

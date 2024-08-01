@@ -47,8 +47,7 @@ export const MessageList: FC<MessagesProps> = ({
   );
   const isNotFound = useAppSelector((state) => state.chat.isNotFound);
   const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
-  const chat = useAppSelector((state) => state.chat.chat);
-  const currentChatId = useAppSelector((state) => state.chat.currentChatId);
+  const activeChat = useAppSelector((state) => state.chat.activeChat);
 
   const prevChatIdRef = useRef<string | null>(null);
 
@@ -105,7 +104,7 @@ export const MessageList: FC<MessagesProps> = ({
     return <NotFound />;
   }
 
-  if (isChatLoading || !chat || !currentChatId) {
+  if (isChatLoading || !activeChat) {
     return (
       <div className={cn}>
         <MessagesLazy count={10} />

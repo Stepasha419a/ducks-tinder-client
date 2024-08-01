@@ -16,12 +16,12 @@ export const selectMessages = createSelector(
 export const selectChatList = createSelector(
   [
     (state: RootState) => state.chat.chats,
-    (state: RootState) => state.chat.currentChatId,
+    (state: RootState) => state.chat.activeChat,
     (state: RootState) => state.chat.isLoading,
   ],
-  (chats, currentChatId, isLoading) => ({
+  (chats, activeChat, isLoading) => ({
     chats,
-    currentChatId,
+    activeChat,
     isLoading,
   })
 );
