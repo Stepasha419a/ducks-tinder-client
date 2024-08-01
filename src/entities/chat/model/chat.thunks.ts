@@ -85,15 +85,15 @@ export const getMessagesThunk = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const { chat } = getState() as RootState;
-      const { currentChatId, messages } = chat;
+      const { activeChat, messages } = chat;
 
-      if (currentChatId) {
+      if (activeChat?.id) {
         const params: PaginationParams = {
           skip: messages.length,
           take: PAGINATION_TAKE,
         };
 
-        const response = await chatService.getMessages(currentChatId, params);
+        const response = await chatService.getMessages(activeChat.id, params);
         return response.data;
       }
     } catch (error: unknown) {
@@ -141,10 +141,10 @@ export const blockChatThunk = createAsyncThunk(
   (_, { rejectWithValue, getState }) => {
     try {
       const { chat } = getState() as RootState;
-      const { currentChatId } = chat;
+      const { activeChat } = chat;
 
-      if (currentChatId) {
-        chatService.blockChat(currentChatId);
+      if (activeChat?.id) {
+        chatService.blockChat(activeChat.id);
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -157,10 +157,10 @@ export const unblockChatThunk = createAsyncThunk(
   (_, { rejectWithValue, getState }) => {
     try {
       const { chat } = getState() as RootState;
-      const { currentChatId } = chat;
+      const { activeChat } = chat;
 
-      if (currentChatId) {
-        chatService.unblockChat(currentChatId);
+      if (activeChat?.id) {
+        chatService.unblockChat(activeChat.id);
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -173,10 +173,10 @@ export const deleteChatThunk = createAsyncThunk(
   (_, { rejectWithValue, getState }) => {
     try {
       const { chat } = getState() as RootState;
-      const { currentChatId } = chat;
+      const { activeChat } = chat;
 
-      if (currentChatId) {
-        chatService.deleteChat(currentChatId);
+      if (activeChat?.id) {
+        chatService.deleteChat(activeChat.id);
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -192,7 +192,7 @@ export const sendMessageThunk = createAsyncThunk(
   ) => {
     try {
       const { chat } = getState() as RootState;
-      const { currentChatId } = chat;
+      const { activeChat } = chat;
 
       const { text, repliedMessage } = args;
 
@@ -201,8 +201,8 @@ export const sendMessageThunk = createAsyncThunk(
         repliedId = repliedMessage.id;
       }
 
-      if (currentChatId) {
-        chatService.sendMessage(currentChatId, text, repliedId);
+      if (activeChat?.id) {
+        chatService.sendMessage(activeChat.id, text, repliedId);
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -215,11 +215,11 @@ export const getMemberThunk = createAsyncThunk(
   async (_, { rejectWithValue, getState }) => {
     try {
       const {
-        chat: { chat: currentChat },
+        chat: { activeChat },
       } = getState() as RootState;
 
-      if (currentChat) {
-        const response = await chatService.getMember(currentChat.memberId);
+      if (activeChat) {
+        const response = await chatService.getMember(activeChat.memberId);
         return response.data;
       }
     } catch (error: unknown) {

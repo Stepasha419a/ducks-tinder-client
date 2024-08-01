@@ -6,30 +6,30 @@ import styles from './BlockChat.module.scss';
 export const BlockChat = () => {
   const dispatch = useAppDispatch();
 
-  const chat = useAppSelector((state) => state.chat.chat);
+  const activeChat = useAppSelector((state) => state.chat.activeChat);
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
-  if (!chat) {
+  if (!activeChat) {
     return null;
   }
 
-  const isOwnBlocked = chat.blockedById === currentUserId;
+  const isOwnBlocked = activeChat.blockedById === currentUserId;
 
   const handleClick = () => {
     if (isOwnBlocked) {
       dispatch(unblockChatThunk());
-    } else if (!chat.blocked) {
+    } else if (!activeChat.blocked) {
       dispatch(blockChatThunk());
     }
   };
 
-  if (chat.blocked && !isOwnBlocked) {
+  if (activeChat.blocked && !isOwnBlocked) {
     return null;
   }
 
   return (
     <Button onClick={handleClick} extraClassName={styles.btn}>
-      {chat.blocked ? 'Unblock' : 'Block'}
+      {activeChat.blocked ? 'Unblock' : 'Block'}
     </Button>
   );
 };

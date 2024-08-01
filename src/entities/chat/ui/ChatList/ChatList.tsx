@@ -19,7 +19,7 @@ export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
   const dispatch = useAppDispatch();
 
   const isEnded = useAppSelector((state) => state.chat.isEnded);
-  const { chats, currentChatId, isLoading } = useAppSelector(selectChatList);
+  const { chats, activeChat, isLoading } = useAppSelector(selectChatList);
   const chatsLength = chats.length;
 
   const chatListRef = useRef<null | HTMLDivElement>(null);
@@ -44,7 +44,7 @@ export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
         loader={<ChatListLazy />}
       >
         {chats.map((chat) => {
-          const isActive = currentChatId === chat.id;
+          const isActive = activeChat?.id === chat.id;
           return (
             <ChatItem
               currentUserId={currentUserId}

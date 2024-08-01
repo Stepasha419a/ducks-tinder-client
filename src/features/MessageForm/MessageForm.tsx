@@ -25,7 +25,7 @@ export const MessageForm: FC<MessageFormProps> = memo(
     const dispatch = useAppDispatch();
 
     const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
-    const chat = useAppSelector((state) => state.chat.chat);
+    const activeChat = useAppSelector((state) => state.chat.activeChat);
     const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
     const isNotFound = useAppSelector((state) => state.chat.isNotFound);
 
@@ -66,7 +66,7 @@ export const MessageForm: FC<MessageFormProps> = memo(
         setValue('input', '');
         handleResetEditReplied();
       },
-      [chat?.id, handleResetEditReplied, setValue]
+      [activeChat?.id, handleResetEditReplied, setValue]
     );
 
     useEffect(() => {
@@ -82,13 +82,13 @@ export const MessageForm: FC<MessageFormProps> = memo(
       return null;
     }
 
-    if (isChatLoading || !chat) {
+    if (isChatLoading || !activeChat) {
       return <MessageFormLazy />;
     }
 
-    if (chat.blocked) {
+    if (activeChat.blocked) {
       const blockedByName =
-        chat.blockedById === currentUserId ? 'You' : chat.name;
+        activeChat.blockedById === currentUserId ? 'You' : activeChat.name;
 
       return <BlockedChat blockedByName={blockedByName} />;
     }

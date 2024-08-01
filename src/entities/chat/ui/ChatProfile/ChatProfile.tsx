@@ -20,7 +20,7 @@ export const ChatProfile: FC<ChatProfileProps> = memo(({ handleOpen }) => {
 
   const { chatId } = useParams<{ chatId: string }>();
 
-  const chat = useAppSelector((state) => state.chat.chat);
+  const activeChat = useAppSelector((state) => state.chat.activeChat);
   const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
   const isNotFound = useAppSelector((state) => state.chat.isNotFound);
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
@@ -39,7 +39,7 @@ export const ChatProfile: FC<ChatProfileProps> = memo(({ handleOpen }) => {
     return null;
   }
 
-  if (isChatLoading || !chat) {
+  if (isChatLoading || !activeChat) {
     return <ChatProfileLazy />;
   }
 
@@ -48,10 +48,10 @@ export const ChatProfile: FC<ChatProfileProps> = memo(({ handleOpen }) => {
       <div onClick={handleOpen} className={styles.user}>
         <Avatar
           size="m"
-          avatarUrl={chat.avatar}
+          avatarUrl={activeChat.avatar}
           extraClassName={styles.avatar}
         />
-        <div className={styles.name}>{chat.name}</div>
+        <div className={styles.name}>{activeChat.name}</div>
       </div>
     </div>
   );
