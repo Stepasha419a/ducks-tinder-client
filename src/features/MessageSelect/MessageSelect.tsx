@@ -2,6 +2,7 @@ import { faPen, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { Dispatch, FC, SetStateAction } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useRef } from 'react';
 import type { Message } from '@shared/api';
 import {
@@ -35,6 +36,8 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
   const isOwn = selectedMessage?.userId === currentUserId;
 
+  const [position, setPosition] = useState(0);
+
   const {
     handleSelectClickOutside,
     handleDeleteMessage,
@@ -57,6 +60,18 @@ export const MessageSelect: FC<MessageSelectProps> = ({
     isOwn &&
     getDatesHourDiff(new Date(), new Date(selectedMessage.createdAt)) < 12;
 
+  useLayoutEffect(() => {
+    if (selectRef.current) {
+      const rect = selectRef.current.getBoundingClientRect();
+      const chatProfileHeight = 60;
+
+      if (rect.y > window.innerHeight - chatProfileHeight - rect.height) {
+        const minimalMessageHeight = 34;
+        setPosition((rect.height - minimalMessageHeight) * -1);
+      }
+    }
+  }, []);
+
   if (isMobile) {
     return (
       <MessageSelectMobile
@@ -71,7 +86,7 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   }
 
   return (
-    <div ref={selectRef} className={styles.select}>
+    <div ref={selectRef} className={styles.select} style={{ top: position }}>
       <div onClick={handleRepliedMessage} className={styles.item}>
         <p>Reply</p>
         <FontAwesomeIcon className={styles.icon} icon={faReply} />
