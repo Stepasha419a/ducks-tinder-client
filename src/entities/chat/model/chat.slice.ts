@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import type {
   Chat,
+  NewMessagesCount,
   ReceivedChatBlock,
   ReceivedMessage,
   ShortUser,
@@ -242,8 +243,8 @@ const chatSlice = createSlice({
       )
       .addCase(
         getNewMessagesCountThunk.fulfilled,
-        (state, { payload }: PayloadAction<number>) => {
-          state.newMessagesCount = payload;
+        (state, { payload }: PayloadAction<NewMessagesCount>) => {
+          state.newMessagesCount = payload.count;
         }
       )
       .addCase(disconnectChatThunk.fulfilled, (state) => {

@@ -7,6 +7,7 @@ import type {
   ChatConnectReturn,
   ChatService,
   ChatsConnectReturn,
+  NewMessagesCount,
   ShortMessagesPagination,
 } from './chat-service.interface';
 import { chatSocket } from './chat.socket';
@@ -33,7 +34,7 @@ export const chatService: ChatService = getMockableService(
       );
     },
     async getNewMessagesCount() {
-      return instance.get<number>(
+      return instance.get<NewMessagesCount>(
         `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/new`
       );
     },

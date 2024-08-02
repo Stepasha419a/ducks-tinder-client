@@ -52,7 +52,7 @@ export const chatMockService: ChatService = {
     });
   },
   async getNewMessagesCount() {
-    return resolveAxiosResponse(1);
+    return resolveAxiosResponse({ count: 1 });
   },
   async getMember(memberId: string) {
     const member = mockStorage.chats.find((item) => item.memberId === memberId);

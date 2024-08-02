@@ -11,6 +11,10 @@ export interface ShortMessagesPagination {
 export type ChatsConnectReturn = Pick<Socket, 'on' | 'onAny'>;
 export type ChatConnectReturn = Pick<Socket, 'once'>;
 
+export interface NewMessagesCount {
+  count: number;
+}
+
 export interface ChatSocket {
   _socket: Socket | null;
   connect: () => ChatsConnectReturn;
@@ -44,10 +48,8 @@ export interface ChatService {
     chatId: string,
     params: PaginationParams
   ): Promise<AxiosResponse<ShortMessagesPagination>>;
-  getNewMessagesCount(): Promise<AxiosResponse<number>>;
+  getNewMessagesCount(): Promise<AxiosResponse<NewMessagesCount>>;
   getMember(memberId: string): Promise<AxiosResponse<ShortUser>>;
-  getNewMessagesCount(chatId: string): Promise<AxiosResponse<number>>;
-  getNewMessagesCount(chatId: string): Promise<AxiosResponse<number>>;
   connect(): ChatsConnectReturn;
   connectChat(chatId: string): ChatConnectReturn | null;
   sendMessage(chatId: string, text: string, repliedId: string | null): void;
