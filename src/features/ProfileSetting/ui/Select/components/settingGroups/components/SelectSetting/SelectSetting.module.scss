@@ -23,7 +23,6 @@
 
   .item {
     font-weight: 400;
-    text-wrap: nowrap;
 
     &.disabled:not(.active) {
       color: var(--sub-border-main);
