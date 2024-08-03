@@ -7,13 +7,13 @@
     .flex {
       position: relative;
       display: flex;
+      gap: 8px;
     }
 
     .dots {
       font-size: 20px;
       cursor: pointer;
       padding: 8px;
-      margin-left: 8px;
       opacity: 0;
       visibility: hidden;
       transition: 0.1s;
@@ -35,6 +35,16 @@
   .wrapper {
     .container {
       position: relative;
+    }
+
+    &.own {
+      .container {
+        justify-content: end;
+
+        .flex {
+          flex-direction: row-reverse;
+        }
+      }
     }
   }
 }

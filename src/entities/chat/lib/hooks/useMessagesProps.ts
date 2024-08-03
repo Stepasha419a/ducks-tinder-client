@@ -5,6 +5,12 @@ import { useAppSelector } from '@shared/lib';
 export function useMessagesProps(selectedMessage: Message | null) {
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
 
+  const getMessageProps = (message: Message) => {
+    return {
+      isOwn: getIsOwn(message.userId, currentUserId),
+    };
+  };
+
   const getSelectProps = (message: Message) => {
     return {
       isSelectOpen: getIsSelectOpen(message, selectedMessage),
@@ -51,6 +57,7 @@ export function useMessagesProps(selectedMessage: Message | null) {
   };
 
   return {
+    getMessageProps,
     getBodyProps,
     getUsernameProps,
     getReplyProps,

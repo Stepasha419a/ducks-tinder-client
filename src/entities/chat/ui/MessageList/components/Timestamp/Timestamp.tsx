@@ -8,7 +8,8 @@ interface TimestampProps {
 export const Timestamp: FC<TimestampProps> = memo(({ createdAt }) => {
   return (
     <div className={styles.date}>
-      {new Date(createdAt).toLocaleDateString()}
+      <div className={styles.border}></div>
+      <span>{new Date(createdAt).toLocaleDateString()}</span>
       <div className={styles.border}></div>
     </div>
   );

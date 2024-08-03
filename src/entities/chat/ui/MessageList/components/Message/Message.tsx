@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { memo, type ReactNode } from 'react';
 import type { Message as MessageInterface } from '@shared/api';
 import { useAdaptiveMediaQuery } from '@shared/lib';
@@ -16,6 +17,7 @@ import './Message.scss';
 interface MessageProps {
   children: ReactNode;
   message: MessageInterface;
+  isOwn: boolean;
   selectedMessage: MessageInterface | null;
   handleSelectMessage: (message: MessageInterface) => void;
 }
@@ -23,20 +25,26 @@ interface MessageProps {
 export const Message = ({
   children,
   handleSelectMessage,
+  isOwn,
   message,
 }: MessageProps) => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   if (isMobile) {
     return (
-      <MessageMobile handleSelectMessage={() => handleSelectMessage(message)}>
+      <MessageMobile
+        handleSelectMessage={() => handleSelectMessage(message)}
+        isOwn={isOwn}
+      >
         {children}
       </MessageMobile>
     );
   }
 
+  const cn = classNames('wrapper', isOwn && 'own');
+
   return (
-    <div className="wrapper">
+    <div className={cn}>
       <div className="container">
         <span className="flex">{children}</span>
       </div>

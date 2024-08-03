@@ -85,8 +85,10 @@ export const MessageSelect: FC<MessageSelectProps> = ({
     );
   }
 
+  const cn = classNames(styles.select, isOwn && styles.own);
+
   return (
-    <div ref={selectRef} className={styles.select} style={{ top: position }}>
+    <div ref={selectRef} className={cn} style={{ top: position }}>
       <div onClick={handleRepliedMessage} className={styles.item}>
         <p>Reply</p>
         <FontAwesomeIcon className={styles.icon} icon={faReply} />

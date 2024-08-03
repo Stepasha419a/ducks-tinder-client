@@ -1,14 +1,15 @@
-import type { FC, ReactNode } from 'react';
-import styles from './Message.mobile.module.scss';
+import classNames from 'classnames';
+import type { FC, PropsWithChildren } from 'react';
 
 interface MessageProps {
-  children: ReactNode;
   handleSelectMessage: () => void;
+  isOwn: boolean;
 }
 
-export const MessageMobile: FC<MessageProps> = ({
-  children,
+export const MessageMobile: FC<PropsWithChildren<MessageProps>> = ({
   handleSelectMessage,
+  isOwn,
+  children,
 }) => {
   let timer: null | NodeJS.Timeout = null;
 
@@ -24,16 +25,18 @@ export const MessageMobile: FC<MessageProps> = ({
     }
   };
 
+  const cn = classNames('wrapper', isOwn && 'own');
+
   return (
-    <div className={styles.wrapper}>
+    <div className={cn}>
       <div
-        className={styles.container}
+        className="container"
         onTouchStart={handleEventStart}
         onTouchEnd={handleEventEnd}
         onMouseDown={handleEventStart}
         onMouseUp={handleEventEnd}
       >
-        <span className={styles.flex}>{children}</span>
+        <span className="flex">{children}</span>
       </div>
     </div>
   );

@@ -2,8 +2,7 @@
   position: relative;
   overflow: auto;
   height: calc(100% - 110px);
-  padding-left: 14vw;
-  padding-bottom: 8px;
+  padding: 0 30px 8px;
 
   &.replying:not(.noMessages),
   &.messageEditing:not(.noMessages) {
@@ -26,31 +25,13 @@
 
 @media (max-width: 1260px) {
   .messages {
-    padding-left: 70px;
-  }
-}
-
-@media (max-width: 1150px) {
-  .messages {
-    padding-left: 30px;
-  }
-}
-
-@media (max-width: 1050px) {
-  .messages {
-    padding-left: 20px;
-  }
-}
-
-@media (max-width: 900px) {
-  .messages {
-    padding-left: 30px;
+    padding: 0 20px 8px;
   }
 }
 
 @media (max-width: 550px) {
   .messages {
-    padding-left: 10px;
+    padding: 0 10px 8px;
   }
 
   .lazy_wrapper {

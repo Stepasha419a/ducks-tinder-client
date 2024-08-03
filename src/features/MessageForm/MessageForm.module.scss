@@ -107,11 +107,17 @@
 
 @media (max-width: 550px) {
   .wrapper {
+    padding: 4px;
+
     .form {
       .button {
         min-width: 42px;
         font-size: 20px;
       }
     }
+  }
+
+  .lazy {
+    padding: 4px;
   }
 }

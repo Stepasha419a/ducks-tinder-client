@@ -52,6 +52,7 @@ export const MessageList: FC<MessagesProps> = ({
   const prevChatIdRef = useRef<string | null>(null);
 
   const {
+    getMessageProps,
     getSelectProps,
     getBodyProps,
     getUsernameProps,
@@ -131,6 +132,7 @@ export const MessageList: FC<MessagesProps> = ({
             <MessageMemo
               handleSelectMessage={handleSelectMessage}
               selectedMessage={selectedMessage}
+              {...getMessageProps(message)}
               message={message}
             >
               <Message.Avatar userId={message.userId} avatar={message.avatar} />

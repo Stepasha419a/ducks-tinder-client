@@ -55,22 +55,6 @@
   }
 }
 
-@media (max-width: 1150px) {
-  .message {
-    .text {
-      max-width: 350px;
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  .message {
-    .text {
-      max-width: calc(100vw - 200px);
-    }
-  }
-}
-
 @media (max-width: 600px) {
   .block {
     .close {
@@ -96,24 +80,6 @@
 
     .close {
       right: 4px;
-    }
-  }
-}
-
-@media (max-width: 400px) {
-  .reply {
-    .close {
-      right: 1px;
-    }
-  }
-}
-
-@media (max-width: 300px) {
-  .block {
-    .message {
-      .text {
-        max-width: 120px;
-      }
     }
   }
 }
