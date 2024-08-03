@@ -10,6 +10,7 @@ interface SelectProps {
   select: ReactElement;
   message: Message;
   handleSelectMessage: (message: Message) => void;
+  isChatBlocked?: boolean;
 }
 
 export const Select: FC<SelectProps> = ({
@@ -18,10 +19,11 @@ export const Select: FC<SelectProps> = ({
   isMessageEditing,
   message,
   select,
+  isChatBlocked,
 }) => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  if (isMobile) {
+  if (isMobile || isChatBlocked) {
     return null;
   }
 

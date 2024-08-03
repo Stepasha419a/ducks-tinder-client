@@ -1,9 +1,15 @@
-import { useCallback, useState, type FC, type ReactElement } from 'react';
+import {
+  useCallback,
+  useState,
+  type FC,
+  type ReactElement,
+  useEffect,
+} from 'react';
 import { MessageForm } from '@features/MessageForm';
 import { MessageSelect } from '@features/MessageSelect';
 import { ChatProfile, MessageList } from '@entities/chat';
 import type { Message } from '@shared/api';
-import { useAdaptiveMediaQuery } from '@shared/lib';
+import { useAdaptiveMediaQuery, useAppSelector } from '@shared/lib';
 
 interface MessagesProps {
   handleOpenPopup: () => void;
@@ -14,6 +20,10 @@ export const Messages: FC<MessagesProps> = ({
 }): ReactElement => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
+  const isChatBlocked = useAppSelector(
+    (state) => state.chat.activeChat?.blocked
+  );
+
   const [selectedMessage, setSelectedMessage] = useState<null | Message>(null);
   const [repliedMessage, setRepliedMessage] = useState<null | Message>(null);
   const [editingMessage, setEditingMessage] = useState<null | Message>(null);
@@ -22,17 +32,30 @@ export const Messages: FC<MessagesProps> = ({
     setSelectedMessage(null);
   }, []);
 
-  const handleSelectMessage = useCallback((message: Message) => {
-    setEditingMessage(null);
-    setRepliedMessage(null);
-    setSelectedMessage(message);
-  }, []);
+  const handleSelectMessage = useCallback(
+    (message: Message) => {
+      if (isChatBlocked) {
+        return;
+      }
+
+      setEditingMessage(null);
+      setRepliedMessage(null);
+      setSelectedMessage(message);
+    },
+    [isChatBlocked]
+  );
 
   const handleResetEditReplied = useCallback(() => {
     setRepliedMessage(null);
     setEditingMessage(null);
     setSelectedMessage(null);
   }, []);
+
+  useEffect(() => {
+    if (isChatBlocked) {
+      handleResetEditReplied();
+    }
+  }, [handleResetEditReplied, isChatBlocked]);
 
   const isMobileSelected = selectedMessage && isMobile;
 

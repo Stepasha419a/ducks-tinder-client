@@ -4,6 +4,9 @@ import { useAppSelector } from '@shared/lib';
 
 export function useMessagesProps(selectedMessage: Message | null) {
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
+  const isChatBlocked = useAppSelector(
+    (state) => state.chat.activeChat?.blocked
+  );
 
   const getMessageProps = (message: Message) => {
     return {
@@ -14,6 +17,7 @@ export function useMessagesProps(selectedMessage: Message | null) {
   const getSelectProps = (message: Message) => {
     return {
       isSelectOpen: getIsSelectOpen(message, selectedMessage),
+      isChatBlocked,
     };
   };
 
