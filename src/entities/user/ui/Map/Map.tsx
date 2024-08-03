@@ -9,7 +9,7 @@ export const Map: FC = () => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   if (!place) {
-    return <MapLazy isMobile />;
+    return <MapLazy isMobile={isMobile} />;
   }
 
   const width = isMobile ? '100%' : 375;
@@ -19,11 +19,10 @@ export const Map: FC = () => {
       <YMaps>
         <YMap
           defaultOptions={{
-            restrictMapArea: true,
             maxZoom: 8,
             minZoom: 8,
           }}
-          defaultState={{
+          state={{
             center: [place.latitude, place.longitude],
             zoom: 8,
           }}
