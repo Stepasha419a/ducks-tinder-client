@@ -1,6 +1,5 @@
 import type { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { withPublicHocs } from '@features/withPublicHocs';
 import { authDuck } from '@shared/ui';
 import styles from './PolicyPage.module.scss';
 
@@ -37,4 +36,4 @@ const PolicyPage: FC = (): ReactElement => {
   );
 };
 
-export default withPublicHocs(PolicyPage);
+export default PolicyPage;

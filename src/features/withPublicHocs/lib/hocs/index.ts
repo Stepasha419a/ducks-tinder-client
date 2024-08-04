@@ -1,1 +1,0 @@
-export { withPublicHocs } from './withPublicHocs';

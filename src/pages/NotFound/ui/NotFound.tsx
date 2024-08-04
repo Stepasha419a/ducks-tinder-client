@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { withPrivateHocs } from '@features/withPrivateHocs';
 import { ROUTES } from '@shared/lib';
 import { authDuck } from '@shared/ui';
 import styles from './NotFound.module.scss';
@@ -35,4 +34,4 @@ export const NotFound = () => {
   );
 };
 
-export default withPrivateHocs(NotFound);
+export default NotFound;
