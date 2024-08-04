@@ -34,7 +34,6 @@ export const Routing = (): ReactElement => {
       <Route path={ROUTES.MAIN} element={<AuthPageHocComposition />}>
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.REGISTRATION} element={<Registration />} />
-        <Route path={ROUTES.POLICY} element={<PolicyPage />} />
       </Route>
 
       <Route path={ROUTES.MAIN} element={<PrivatePageHocComposition />}>
@@ -61,9 +60,10 @@ export const Routing = (): ReactElement => {
           </Route>
           <Route path={ROUTES.PAIRS} element={<PairsPage />} />
         </Route>
-
-        <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
       </Route>
+
+      <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
+      <Route path={ROUTES.POLICY} element={<PolicyPage />} />
     </Routes>
   );
 };
