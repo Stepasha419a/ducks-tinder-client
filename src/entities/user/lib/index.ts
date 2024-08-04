@@ -20,3 +20,4 @@ export {
 } from './hooks';
 export type { MultiSelectForm } from './hooks';
 export * from './constants';
+export * from './hocs';

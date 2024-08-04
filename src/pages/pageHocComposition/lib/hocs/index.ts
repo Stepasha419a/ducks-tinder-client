@@ -1,2 +1,2 @@
-export { withPublicHocs } from './withPublicHocs';
+export { withAuthHocs } from './withAuthHocs';
 export { withPrivateHocs } from './withPrivateHocs';

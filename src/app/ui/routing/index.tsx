@@ -6,7 +6,7 @@ import Login from '@pages/Login';
 import NavLayout from '@pages/NavLayout';
 import NotFound from '@pages/NotFound';
 import {
-  PublicPageHocComposition,
+  AuthPageHocComposition,
   PrivatePageHocComposition,
 } from '@pages/pageHocComposition';
 import { SettingsIndexPage } from '@pages/Settings';
@@ -31,7 +31,7 @@ const SettingsPage = WithSuspense(lazy(async () => import('@pages/Settings')));
 export const Routing = (): ReactElement => {
   return (
     <Routes>
-      <Route path={ROUTES.MAIN} element={<PublicPageHocComposition />}>
+      <Route path={ROUTES.MAIN} element={<AuthPageHocComposition />}>
         <Route path={ROUTES.LOGIN} element={<Login />} />
         <Route path={ROUTES.REGISTRATION} element={<Registration />} />
         <Route path={ROUTES.POLICY} element={<PolicyPage />} />
