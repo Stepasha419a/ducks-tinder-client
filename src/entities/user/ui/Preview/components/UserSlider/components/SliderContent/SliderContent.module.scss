@@ -21,13 +21,13 @@
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
+    gap: 5px;
 
     bottom: 100px;
   }
 
   .listItem {
     font-weight: 500;
-    margin: 3px 1px;
     background-color: var(--bg-tinder-list-item);
     color: var(--main-tinder-list-item);
     border-color: var(--main-primary);

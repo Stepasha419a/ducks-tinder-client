@@ -5,7 +5,7 @@ import type { Control } from 'react-hook-form';
 import { INTERESTS_FOR_LOOP } from '@entities/user';
 import type { PairFilterForm } from '@entities/user';
 import { useAdaptiveMediaQuery } from '@shared/lib';
-import { ListItem } from '@shared/ui';
+import { ListItemButton } from '@shared/ui';
 import styles from './FilterPairsItems.module.scss';
 import { useOuterPairFilterForm } from './lib';
 
@@ -34,36 +34,33 @@ export const FilterPairsItems: FC<FilterPairsItemsProps> = ({
   return (
     <>
       <div className={styles.filtering}>
-        <ListItem
+        <ListItemButton
           onClick={() => setIsFilterPopupOpen(true)}
-          pointer
           isActive={isFilterPopupOpen}
           extraClassName={styles.item}
         >
           <FontAwesomeIcon className={styles.icon} icon={faSliders} />
-        </ListItem>
+        </ListItemButton>
         {!isSmallMobile &&
           INTERESTS_FOR_LOOP.map((item) => {
             return (
-              <ListItem
+              <ListItemButton
                 onClick={() => forcedToggleInterest(item)}
-                pointer
                 isActive={interests.some((interest) => interest === item)}
                 extraClassName={styles.item}
                 key={item}
               >
                 {item}
-              </ListItem>
+              </ListItemButton>
             );
           })}
-        <ListItem
+        <ListItemButton
           onClick={forcedToggleHasInterests}
-          pointer
           isActive={hasInterests}
           extraClassName={styles.item}
         >
           have interests
-        </ListItem>
+        </ListItemButton>
       </div>
     </>
   );

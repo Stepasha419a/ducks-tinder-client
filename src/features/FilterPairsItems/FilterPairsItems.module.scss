@@ -1,6 +1,7 @@
 .filtering {
   display: flex;
   justify-content: center;
+  gap: 10px;
   margin: 25px 0;
 
   .item {
@@ -11,6 +12,5 @@
 @media (max-width: 1000px) {
   .item {
     padding: 5px 8px;
-    margin: 3px;
   }
 }

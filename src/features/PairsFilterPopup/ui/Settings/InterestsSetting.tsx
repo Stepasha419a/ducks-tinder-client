@@ -1,6 +1,6 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { INTERESTS_FOR_LOOP } from '@entities/user';
-import { ListItem } from '@shared/ui';
+import { ListItemButton } from '@shared/ui';
 import styles from '../../PairsFilterPopup.module.scss';
 
 interface InterestsSettingProps {
@@ -20,14 +20,14 @@ export const InterestsSetting: FC<InterestsSettingProps> = ({
       <div className={`${styles.change} ${styles.flex}`}>
         {INTERESTS_FOR_LOOP.slice(0, 3).map((item) => {
           return (
-            <ListItem
+            <ListItemButton
               onClick={() => toggleInterest(item)}
               isActive={interests.some((interest) => interest === item)}
               key={item}
-              pointer
+              type="button"
             >
               {item}
-            </ListItem>
+            </ListItemButton>
           );
         })}
       </div>

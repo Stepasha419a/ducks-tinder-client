@@ -7,13 +7,15 @@
       font-size: 20px;
       font-weight: 600;
       color: var(--main-secondary);
+      margin-bottom: 15px;
     }
 
     .items {
       display: flex;
       flex-wrap: wrap;
       align-items: baseline;
-      padding: 10px 15px 0;
+      padding: 0 15px;
+      gap: 10px;
 
       .item {
         border: 2px solid var(--bg-secondary);

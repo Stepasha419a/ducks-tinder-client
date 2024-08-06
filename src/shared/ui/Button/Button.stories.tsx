@@ -29,7 +29,7 @@ export const Primary: Story = {
 };
 
 export const Gradient: Story = {
-  render: () => (
+  render: (args) => (
     <Button
       variant="gradient"
       style={{
@@ -37,10 +37,14 @@ export const Gradient: Story = {
         width: '180px',
         color: 'var(--color--white-100)',
       }}
+      {...args}
     >
       Click me!
     </Button>
   ),
+  args: {
+    variant: 'gradient',
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -49,11 +53,14 @@ export const Gradient: Story = {
 };
 
 export const Mark: Story = {
-  render: () => (
-    <Button variant="mark">
+  render: (args) => (
+    <Button variant="mark" {...args}>
       <FontAwesomeIcon icon={faCircleInfo} />
     </Button>
   ),
+  args: {
+    variant: 'mark',
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 

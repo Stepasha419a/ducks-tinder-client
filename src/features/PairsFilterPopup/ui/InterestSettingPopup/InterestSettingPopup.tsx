@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Interest } from '@shared/api';
-import { Button, ListItem, Popup } from '@shared/ui';
+import { Button, ListItemButton, Popup } from '@shared/ui';
 import styles from './InterestSettingPopup.module.scss';
 
 interface InterestSettingPopupProps {
@@ -20,14 +20,13 @@ export const InterestSettingPopup: FC<InterestSettingPopupProps> = ({
         {Object.values(Interest).map((selectItem) => {
           const isActive = activeItems.some((item) => selectItem === item);
           return (
-            <ListItem
+            <ListItemButton
               onClick={() => toggleItem(selectItem)}
               isActive={isActive}
-              pointer
               key={selectItem}
             >
               {selectItem}
-            </ListItem>
+            </ListItemButton>
           );
         })}
       </div>

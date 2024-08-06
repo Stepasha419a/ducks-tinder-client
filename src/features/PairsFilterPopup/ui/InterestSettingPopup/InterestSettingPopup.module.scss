@@ -5,6 +5,7 @@
   padding: 0 10px;
   overflow: auto;
   scrollbar-width: none;
+  gap: 10px;
 
   &::-webkit-scrollbar {
     display: none;

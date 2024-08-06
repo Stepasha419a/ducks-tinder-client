@@ -4,7 +4,7 @@ import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import type { PairFilterForm } from '@entities/user';
 import { createEmptyArray } from '@shared/lib';
-import { ListItem } from '@shared/ui';
+import { ListItemButton } from '@shared/ui';
 import styles from '../../PairsFilterPopup.module.scss';
 
 interface PicturesSettingProps {
@@ -16,23 +16,22 @@ export const PicturesSetting: FC<PicturesSettingProps> = ({ control }) => {
     field: { value: picturesCount, onChange: setPicturesCount },
   } = useController({ name: 'pictures', control });
 
-  const picturesCountArrForLoop: undefined[] = createEmptyArray(9);
+  const picturesCountArrForLoop: undefined[] = createEmptyArray(10);
 
   return (
     <div className={styles.setting}>
       <div className={styles.name}>Min pictures count</div>
       <div className={classNames(styles.change, styles.flex)}>
         {picturesCountArrForLoop.map((_, i) => {
-          const content = i + 1;
           return (
-            <ListItem
-              onClick={() => setPicturesCount(content)}
-              isActive={picturesCount === content}
+            <ListItemButton
+              onClick={() => setPicturesCount(i)}
+              isActive={picturesCount === i}
               key={i}
-              pointer
+              type="button"
             >
-              {content}
-            </ListItem>
+              {i}
+            </ListItemButton>
           );
         })}
       </div>

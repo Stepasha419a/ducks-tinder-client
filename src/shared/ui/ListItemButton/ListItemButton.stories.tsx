@@ -1,19 +1,25 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ListItem } from './ListItem';
+import { userEvent, within } from '@storybook/testing-library';
+import { ListItemButton } from './ListItemButton';
 
 const meta = {
-  title: 'UI/ListItem',
-  component: ListItem,
+  title: 'UI/ListItemButton',
+  component: ListItemButton,
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof ListItem>;
+} satisfies Meta<typeof ListItemButton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Single: Story = {
-  render: (args) => <ListItem {...args}>list item</ListItem>,
+  render: (args) => <ListItemButton {...args}>list item</ListItemButton>,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    await userEvent.click(canvas.getByRole('button'));
+  },
 };
 
 export const Many: Story = {
@@ -31,9 +37,9 @@ export const Many: Story = {
       }}
     >
       {new Array(18).fill(null).map((_, i) => (
-        <ListItem key={i} {...args}>
+        <ListItemButton key={i} {...args}>
           list item {i}
-        </ListItem>
+        </ListItemButton>
       ))}
     </div>
   ),

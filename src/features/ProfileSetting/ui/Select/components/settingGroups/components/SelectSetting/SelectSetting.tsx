@@ -6,7 +6,7 @@ import type {
   MultiSelectForm,
   ProfileSettingSelectNameEnum,
 } from '@entities/user';
-import { ListItem } from '@shared/ui';
+import { ListItemButton } from '@shared/ui';
 import styles from './SelectSetting.module.scss';
 
 interface SelectSettingProps {
@@ -47,15 +47,15 @@ export const SelectSetting: FC<SelectSettingProps> = ({
           );
 
           return (
-            <ListItem
+            <ListItemButton
               onClick={() => toggleItem(selectItem)}
               isActive={isActive}
-              pointer
               key={selectItem}
               extraClassName={cn}
+              type="button"
             >
               {selectItem}
-            </ListItem>
+            </ListItemButton>
           );
         })}
       </div>
