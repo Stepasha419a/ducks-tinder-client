@@ -1,7 +1,15 @@
+@mixin pair-list($pairWidth, $pairCols) {
+  .pairs {
+    width: calc(($pairWidth + 20px) * $pairCols - 20px);
+  }
+}
+
+@include pair-list(244px, 5);
+
 .pairs {
   display: flex;
   flex-wrap: wrap;
-  margin: 60px 40px 30px;
+  margin: 60px auto 30px;
   gap: 20px;
 
   .loader {
@@ -25,8 +33,50 @@
   }
 }
 
+@media (max-width: 1690px) {
+  @include pair-list(244px, 4);
+}
+
+@media (max-width: 1420px) {
+  @include pair-list(244px, 3);
+}
+
+@media (max-width: 1170px) {
+  @include pair-list(244px, 2);
+}
+
+@media (max-width: 1000px) {
+  @include pair-list(220px, 2);
+}
+
+@media (max-width: 950px) {
+  @include pair-list(192px, 2);
+}
+
+@media (max-width: 900px) {
+  @include pair-list(220px, 3);
+}
+
+@media (max-width: 760px) {
+  @include pair-list(220px, 2);
+}
+
 @media (max-width: 575px) {
+  @include pair-list(192px, 2);
+
   .pairs {
-    margin: 30px 15px 20px;
+    margin: 30px auto 20px;
   }
+}
+
+@media (max-width: 480px) {
+  @include pair-list(160px, 2);
+}
+
+@media (max-width: 410px) {
+  @include pair-list(144px, 2);
+}
+
+@media (max-width: 370px) {
+  @include pair-list(144px, 1);
 }

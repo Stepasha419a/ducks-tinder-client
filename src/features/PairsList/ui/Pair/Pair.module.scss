@@ -8,7 +8,11 @@
   overflow: hidden;
   transition: 0.1s;
 
-  &:hover {
+  &.lazy {
+    cursor: default;
+  }
+
+  &:not(.lazy):hover {
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
     scale: 1.01;
   }
