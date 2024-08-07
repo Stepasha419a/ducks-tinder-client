@@ -10,10 +10,10 @@
   .users {
     width: 375px;
     max-height: 667px;
-    height: 100%;
+    height: calc(100% - 56px);
     position: absolute;
     z-index: 1;
-    top: 50%;
+    top: calc(50% - 48px);
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
   }
@@ -38,8 +38,19 @@
 @media (max-height: 800px) {
   .wrapper {
     .users {
-      max-height: calc(100% - 100px);
+      max-height: calc(100% - 60px);
+      top: calc(50% - 20px);
+      height: 100%;
       width: calc(min(375px, calc(100% / 1.75)));
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    .users {
+      top: 50%;
+      height: 100%;
     }
   }
 }
