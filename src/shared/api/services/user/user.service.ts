@@ -1,4 +1,5 @@
 import type { User, ShortUser } from '@shared/api';
+import { getOptionalAbortControllerConfig } from '@shared/api';
 import { instance } from '@shared/api';
 import { getMockableService } from '@shared/api';
 import { userMockService } from '../mock';
@@ -63,11 +64,18 @@ export const userService: UserService = getMockableService(
       );
     },
 
-    async getPairs(params: PairFilterParams) {
-      return instance.get<ShortUser[]>(
-        `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs`,
-        { params }
+    async getPairs(params: PairFilterParams, abortPrevious?: boolean) {
+      const config = getOptionalAbortControllerConfig(
+        'user/pairs',
+        abortPrevious
       );
+
+      const res = await instance.get<ShortUser[]>(
+        `${import.meta.env.VITE_USER_SERVICE_URL}/user/pairs`,
+        { params, ...config }
+      );
+
+      return res;
     },
 
     async getPairsInfo() {

@@ -35,7 +35,7 @@ export const getUserPairsThunk = createAsyncThunk(
         params.identifyConfirmed = filter.identifyConfirmed;
       }
 
-      const response = await userService.getPairs(params);
+      const response = await userService.getPairs(params, true);
 
       return { pairs: response.data, isInitial };
     } catch (error: unknown) {

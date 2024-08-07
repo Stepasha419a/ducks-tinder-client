@@ -30,7 +30,10 @@ export interface UserService {
   savePicture(picture: Blob): Promise<AxiosResponse<User>>;
   deletePicture(id: string): Promise<AxiosResponse<User>>;
   mixPictures(pictureOrders: number[]): Promise<AxiosResponse<User>>;
-  getPairs(params: PairFilterParams): Promise<AxiosResponse<ShortUser[]>>;
+  getPairs(
+    params: PairFilterParams,
+    abortPrevious?: boolean
+  ): Promise<AxiosResponse<ShortUser[]>>;
   getPairsInfo(): Promise<AxiosResponse<PairsInfo>>;
   acceptPair(pairId: string): Promise<AxiosResponse<ShortUser>>;
   deletePair(pairId: string): Promise<AxiosResponse<ShortUser>>;
