@@ -26,9 +26,12 @@ export const WithCheckedFields = <P extends object>(
 
     useEffect(() => {
       if (errorFields.length) {
-        toast('You have some empty fields, they are selected with red color', {
-          toastId: 'toast-checked-fields',
-        });
+        toast(
+          'You have some empty fields, they are selected with red color in your profile settings',
+          {
+            toastId: 'toast-checked-fields',
+          }
+        );
       }
     }, [errorFields.length, pathname]);
 
