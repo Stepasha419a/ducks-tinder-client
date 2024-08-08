@@ -31,9 +31,12 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   const isPairsLoading = useAppSelector((state) => state.pair.isPairsLoading);
   const isPairsEnded = useAppSelector((state) => state.pair.isPairsEnded);
 
-  const delayedGetUserPairs = useDebouncedCallback(() => {
-    dispatch(getUserPairsThunk({ isInitial: false }));
-  });
+  const delayedGetUserPairs = useDebouncedCallback(
+    () => {
+      dispatch(getUserPairsThunk({ isInitial: false }));
+    },
+    { wait: 300, incremental: true, incrementalAfter: 3 }
+  );
 
   if (!pairsInfoCount && !isPairsInfoLoading) {
     return (
