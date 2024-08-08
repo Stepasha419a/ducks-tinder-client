@@ -1,26 +1,16 @@
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getPairsInfoThunk } from '@entities/user';
 import { makeImageUrl } from '@shared/lib';
-import { useAppDispatch, useAppSelector } from '@shared/lib';
+import { useAppSelector } from '@shared/lib';
 import { FailedPair, Loading } from './components';
 import styles from './PairLink.module.scss';
 
 export const PairLink = () => {
-  const dispatch = useAppDispatch();
-
   const pairsInfo = useAppSelector((state) => state.pair.pairsInfo);
   const isPairsInfoLoading = useAppSelector(
     (state) => state.pair.isPairsInfoLoading
   );
-
-  useEffect(() => {
-    if (!pairsInfo) {
-      dispatch(getPairsInfoThunk());
-    }
-  }, [dispatch, pairsInfo]);
 
   if (isPairsInfoLoading) {
     return <Loading />;
