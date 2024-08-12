@@ -5,14 +5,10 @@
 
 .timestamp {
   position: absolute;
-  bottom: 0;
-  right: -30px;
+  bottom: 8px;
+  right: 8px;
   color: var(--primary-chat);
   font-size: 12px;
-
-  &.edited {
-    right: -70px;
-  }
 }
 
 @media (max-width: 900px) {

@@ -27,8 +27,10 @@ export const TopBlock: FC<TopBlockProps> = ({
   const title = editingMessage ? 'Editing' : repliedName;
   const text = editingMessage ? editingMessage.text : repliedMessage?.text;
 
+  const cn = classNames(styles.block, repliedMessage && styles.replied);
+
   return (
-    <div className={styles.block}>
+    <div className={cn}>
       {repliedMessage && <div className={styles.border} />}
       {editingMessage && (
         <FontAwesomeIcon

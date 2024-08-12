@@ -3,9 +3,21 @@
   padding: 8px;
   padding-right: 40px;
   border-radius: 8px;
-  min-height: 36px;
+  position: relative;
+  padding-top: 24px;
+
+  &.replied {
+    min-width: 150px;
+    padding-top: 78px;
+
+    &.own {
+      padding-top: 54px;
+    }
+  }
 
   &.own {
+    padding-top: 8px;
+
     background: linear-gradient(
       45deg,
       var(--primary-message),

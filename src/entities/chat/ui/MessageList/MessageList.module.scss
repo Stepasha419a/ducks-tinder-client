@@ -2,7 +2,7 @@
   position: relative;
   overflow: auto;
   height: calc(100% - 110px);
-  padding: 0 30px 8px;
+  padding: 8px 30px;
 
   &.replying:not(.noMessages),
   &.messageEditing:not(.noMessages) {
@@ -25,13 +25,13 @@
 
 @media (max-width: 1260px) {
   .messages {
-    padding: 0 20px 8px;
+    padding: 8px 20px;
   }
 }
 
 @media (max-width: 550px) {
   .messages {
-    padding: 0 10px 8px;
+    padding: 8px 10px;
   }
 
   .lazy_wrapper {

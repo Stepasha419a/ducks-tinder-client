@@ -1,14 +1,17 @@
+import classNames from 'classnames';
 import type { FC } from 'react';
 import styles from './Reply.module.scss';
 
 interface ReplyProps {
   repliedUsername: string | undefined;
   repliedMessageText: string | undefined;
+  isOwn: boolean;
 }
 
 export const Reply: FC<ReplyProps> = ({
   repliedUsername,
   repliedMessageText,
+  isOwn,
 }) => {
   const isReply = repliedUsername && repliedMessageText;
 
@@ -16,8 +19,10 @@ export const Reply: FC<ReplyProps> = ({
     return null;
   }
 
+  const cn = classNames(styles.reply, isOwn && styles.own);
+
   return (
-    <div className={styles.reply}>
+    <div className={cn}>
       <div className={styles.border} />
       <div className={styles.reply_message}>
         <div className={styles.reply_username}>{repliedUsername}</div>

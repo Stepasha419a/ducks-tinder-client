@@ -1,10 +1,16 @@
 .reply {
   display: flex;
   align-items: center;
-  padding: 4px 0;
   padding-left: 10px;
-  max-width: 400px;
-  position: relative;
+  position: absolute;
+  top: 32px;
+  left: 8px;
+
+  width: calc(100% - 48px);
+
+  &.own {
+    top: 8px;
+  }
 
   .border {
     height: 40px;
@@ -17,7 +23,8 @@
   .reply_message {
     margin-left: 10px;
     background: inherit;
-    max-width: 370px;
+    width: 100%;
+    min-width: 90px;
 
     .reply_username {
       font-weight: 600;
@@ -30,38 +37,6 @@
       white-space: nowrap;
       text-overflow: ellipsis;
       font-size: 14px;
-      max-width: 400px;
-    }
-  }
-}
-
-@media (max-width: 1150px) {
-  .reply {
-    .reply_message {
-      max-width: 320px;
-    }
-  }
-}
-
-@media (max-width: 1050px) {
-  .reply {
-    .reply_message {
-      max-width: 280px;
-    }
-  }
-}
-
-@media (max-width: 950px) {
-  .reply {
-    .reply_message {
-      max-width: 230px;
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  .reply {
-    .reply_message {
       max-width: calc(100% - 20px);
     }
   }

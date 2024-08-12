@@ -4,6 +4,14 @@
   height: 60px;
   position: relative;
 
+  &.replied {
+    padding-left: 10px;
+
+    .message {
+      max-width: calc(100% - 74px);
+    }
+  }
+
   .icon {
     width: 24px;
     height: 24px;
@@ -23,7 +31,7 @@
 
   .message {
     margin-left: 10px;
-    max-width: calc(100% - 80px);
+    max-width: calc(100% - 110px);
 
     .title {
       font-weight: 600;
@@ -43,7 +51,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: -2px;
+    right: -1px;
     padding: 10px 0;
     cursor: pointer;
 

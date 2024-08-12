@@ -38,6 +38,7 @@ export function useMessagesProps(selectedMessage: Message | null) {
   };
 
   const getReplyProps = (message: Message) => {
+    const isOwn = getIsOwn(message.userId, currentUserId);
     const repliedMessage = message.replied;
     const repliedMessageText = repliedMessage?.text;
     const repliedMessageName = repliedMessage?.name;
@@ -45,6 +46,7 @@ export function useMessagesProps(selectedMessage: Message | null) {
     return {
       repliedUsername: repliedMessageName,
       repliedMessageText,
+      isOwn,
     };
   };
 
@@ -52,11 +54,13 @@ export function useMessagesProps(selectedMessage: Message | null) {
     const isOwn = getIsOwn(message.userId, currentUserId);
     const isEdited = getIsEdited(message);
     const isSelectOpen = getIsSelectOpen(message, selectedMessage);
+    const isReplied = !!message.replied;
 
     return {
       isOwn,
       isEdited,
       isSelectOpen,
+      isReplied,
     };
   };
 
