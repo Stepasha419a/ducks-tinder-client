@@ -1,4 +1,3 @@
-export { useRateButtonsStyle } from './useRateButtonsStyle';
-export { useSwipeStatusStyle } from './useSwipeStatusStyle';
+export { useSwipeStyles } from './useSwipeStyles';
 export { useSwipe } from './useSwipe';
 export { useRateButtons } from './useRateButtons';

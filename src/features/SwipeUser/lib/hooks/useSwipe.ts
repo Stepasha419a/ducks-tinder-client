@@ -13,10 +13,15 @@ import { useRef, useState } from 'react';
 import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
 import type Slider from 'react-slick';
 import { useTinderAnimations } from '@entities/user';
+import {
+  useAdaptiveMediaQuery,
 import { useAdaptiveMediaQuery } from '@shared/lib';
 import { useEventListener } from '@shared/lib';
 import { useRateButtonsStyle } from './useRateButtonsStyle';
 import { useSwipeStatusStyle } from './useSwipeStatusStyle';
+  useEventListener,
+} from '@shared/lib';
+import { useSwipeStyles } from './useSwipeStyles';
 
 export function useSwipe() {
   const [isFullPreview, setIsFullPreview] = useState(false);
@@ -52,6 +57,8 @@ export function useSwipe() {
     setIsFullPreview(false);
   };
 
+  const { statusStyles, rateButtonStyles } = useSwipeStyles(x, y);
+
   return {
     motionProps,
     previewProps: {
@@ -61,14 +68,14 @@ export function useSwipe() {
       sliderRef,
     },
     statusProps: {
-      ...useSwipeStatusStyle(x, y),
+      ...statusStyles,
       isFullPreview,
     },
     rateButtonsProps: {
+      ...rateButtonStyles,
       isFullPreview,
       handleSubmitAction,
       controls,
-      ...useRateButtonsStyle(x, y),
     },
   };
 }
