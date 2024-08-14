@@ -12,15 +12,7 @@ import type {
 import { useRef, useState } from 'react';
 import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
 import type Slider from 'react-slick';
-import { useTinderAnimations } from '@entities/user';
-import {
-  useAdaptiveMediaQuery,
-import { useAdaptiveMediaQuery } from '@shared/lib';
-import { useEventListener } from '@shared/lib';
-import { useRateButtonsStyle } from './useRateButtonsStyle';
-import { useSwipeStatusStyle } from './useSwipeStatusStyle';
-  useEventListener,
-} from '@shared/lib';
+import { useAppSelector } from '@shared/lib';
 import { useSwipeStyles } from './useSwipeStyles';
 
 export function useSwipe() {
@@ -30,6 +22,10 @@ export function useSwipe() {
   const controls = useAnimationControls();
 
   const sliderRef = useRef<Slider>(null);
+
+  useEffect(() => {
+    controls.start('center');
+  }, [controls, tinderUser]);
 
   const { isDragRef, x, y, ...motionProps } = useSwipeProps(
     controls,
