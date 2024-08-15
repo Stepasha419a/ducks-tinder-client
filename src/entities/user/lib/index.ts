@@ -10,7 +10,6 @@ export {
 export type { UserPlaceInfo, UserSliderInfo } from './helpers';
 export {
   useAuthForm,
-  useTinderAnimations,
   useDefaultValues,
   useDefaultProfileValues,
   useProfileSettingUrl,

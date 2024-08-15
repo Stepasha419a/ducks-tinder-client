@@ -1,5 +1,4 @@
 export { useAuthForm } from './useAuthForm';
-export { useTinderAnimations } from './useTinderAnimations';
 export { useDefaultValues } from './useDefaultValues';
 export { useDefaultProfileValues } from './useDefaultProfileValues';
 export { useProfileSettingUrl } from './useProfileSettingUrl';
