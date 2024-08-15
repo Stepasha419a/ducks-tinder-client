@@ -1,7 +1,8 @@
 import type { AnimationControls } from 'framer-motion';
 import type { RefObject } from 'react';
+import { useEffect, useState } from 'react';
 import type Slider from 'react-slick';
-import { useEventListener } from '@hooks';
+import { useAppSelector, useEventListener } from '@hooks';
 import { useTinderAnimations } from './useTinderAnimations';
 
 export function useKeyboardEvents(
@@ -9,10 +10,23 @@ export function useKeyboardEvents(
   setIsFullPreview: (value: boolean) => void,
   sliderRef: RefObject<Slider>
 ) {
+  const isLoading = useAppSelector((state) => state.tinder.isLoading);
+  const [isLocalLoading, setIsLocalLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLocalLoading(isLoading);
+  }, [isLoading]);
+
   const { handleDislike, handleLike, handleSuperLike } =
     useTinderAnimations(controls);
 
   function handleKeyboardEvent(e: KeyboardEvent) {
+    if (isLocalLoading) {
+      return;
+    }
+
+    setIsLocalLoading(true);
+
     switch (e.code) {
       case 'Space':
         sliderRef.current?.slickNext();
