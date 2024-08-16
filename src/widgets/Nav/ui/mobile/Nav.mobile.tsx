@@ -20,9 +20,13 @@ export const NavMobile = () => {
   const newMessageChatsCount = useAppSelector(
     (state) => state.chat.newMessagesCount
   );
+  const pairsInfo = useAppSelector((state) => state.pair.pairsInfo);
 
   const isLoadedNewMessagesCount = newMessageChatsCount !== null;
   const isNewMessages = isLoadedNewMessagesCount && newMessageChatsCount > 0;
+
+  const isLoadedPairsCount = pairsInfo !== null;
+  const isPairsCount = isLoadedPairsCount && pairsInfo.count > 0;
 
   return (
     <aside className={styles.nav}>
@@ -36,6 +40,13 @@ export const NavMobile = () => {
         />
       </Link>
       <Link to={ROUTES.PAIRS} className={styles.link}>
+        {isPairsCount && (
+          <div className={styles.newMessages}>
+            <div className={styles.count}>
+              {pairsInfo.count > 9 ? '9+' : pairsInfo.count}
+            </div>
+          </div>
+        )}
         <FontAwesomeIcon
           className={classNames(
             styles.icon,
