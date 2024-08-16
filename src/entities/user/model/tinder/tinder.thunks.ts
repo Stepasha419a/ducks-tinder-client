@@ -17,15 +17,14 @@ export const getMatchUserThunk = createAsyncThunk(
 
 export const likeUserThunk = createAsyncThunk(
   'users/likeUser',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue, dispatch, getState }) => {
     try {
       const { tinder } = getState() as RootState;
       const { tinderUser } = tinder;
 
       if (tinderUser) {
         await userService.likeUser(tinderUser.id);
-        const response = await userService.getMatchUser();
-        return response.data;
+        dispatch(getMatchUserThunk());
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
@@ -53,15 +52,14 @@ export const returnUserThunk = createAsyncThunk(
 
 export const dislikeUserThunk = createAsyncThunk(
   'users/dislikeUser',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue, dispatch, getState }) => {
     try {
       const { tinder } = getState() as RootState;
       const { tinderUser } = tinder;
 
       if (tinderUser) {
         await userService.dislikeUser(tinderUser.id);
-        const response = await userService.getMatchUser();
-        return response.data;
+        dispatch(getMatchUserThunk());
       }
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

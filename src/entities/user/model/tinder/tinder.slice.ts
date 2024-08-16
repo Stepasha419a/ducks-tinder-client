@@ -33,7 +33,9 @@ const tinderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMatchUserThunk.pending, (state) => {
+        state.tinderUser = null;
         state.isLoading = true;
+        state.isFailed = false;
       })
       .addCase(
         getMatchUserThunk.fulfilled,
@@ -44,6 +46,7 @@ const tinderSlice = createSlice({
       )
       .addCase(getMatchUserThunk.rejected, (state) => {
         state.isFailed = true;
+        state.isLoading = false;
       })
       .addCase(returnUserThunk.pending, (state) => {
         state.isLoading = true;
@@ -61,34 +64,22 @@ const tinderSlice = createSlice({
       .addCase(likeUserThunk.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(
-        likeUserThunk.fulfilled,
-        (state, { payload }: PayloadAction<ShortUser | undefined>) => {
-          if (payload) {
-            state.tinderUser = payload;
-          }
-          state.isReturnUser = false;
-          state.isLoading = false;
-        }
-      )
+      .addCase(likeUserThunk.fulfilled, (state) => {
+        state.isReturnUser = false;
+      })
       .addCase(likeUserThunk.rejected, (state) => {
         state.isFailed = true;
+        state.isLoading = false;
       })
       .addCase(dislikeUserThunk.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(
-        dislikeUserThunk.fulfilled,
-        (state, { payload }: PayloadAction<ShortUser | undefined>) => {
-          if (payload) {
-            state.tinderUser = payload;
-          }
-          state.isReturnUser = true;
-          state.isLoading = false;
-        }
-      )
+      .addCase(dislikeUserThunk.fulfilled, (state) => {
+        state.isReturnUser = true;
+      })
       .addCase(dislikeUserThunk.rejected, (state) => {
         state.isFailed = true;
+        state.isLoading = false;
       });
   },
 });
