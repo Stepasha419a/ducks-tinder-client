@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import type { ShortUser } from '@shared/api';
 import { userService } from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
 
@@ -6,7 +7,17 @@ export const getMatchUserThunk = createAsyncThunk(
   'users/getMatchUser',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await userService.getMatchUser();
+      /* const {
+        tinder: { tinderUsers },
+      } = getState() as RootState;
+
+      const take = Math.max(1, 3 - tinderUsers.length);
+      const skipUserIds = tinderUsers.length
+        ? tinderUsers.map((user) => user.id)
+        : undefined; */
+
+      //const response = await userService.getMatchUsers(take, skipUserIds);
+      const response = await userService.getMatchUsers(1);
 
       return response.data;
     } catch (error: unknown) {
@@ -20,10 +31,11 @@ export const likeUserThunk = createAsyncThunk(
   async (_, { rejectWithValue, dispatch, getState }) => {
     try {
       const { tinder } = getState() as RootState;
-      const { tinderUser } = tinder;
+      const { tinderUsers } = tinder;
 
-      if (tinderUser) {
-        await userService.likeUser(tinderUser.id);
+      const currentUser = tinderUsers[0] as ShortUser | undefined;
+      if (currentUser) {
+        await userService.likeUser(currentUser.id);
         dispatch(getMatchUserThunk());
       }
     } catch (error: unknown) {
@@ -55,10 +67,11 @@ export const dislikeUserThunk = createAsyncThunk(
   async (_, { rejectWithValue, dispatch, getState }) => {
     try {
       const { tinder } = getState() as RootState;
-      const { tinderUser } = tinder;
+      const { tinderUsers } = tinder;
 
-      if (tinderUser) {
-        await userService.dislikeUser(tinderUser.id);
+      const currentUser = tinderUsers[0] as ShortUser | undefined;
+      if (currentUser) {
+        await userService.dislikeUser(currentUser.id);
         dispatch(getMatchUserThunk());
       }
     } catch (error: unknown) {

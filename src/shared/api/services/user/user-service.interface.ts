@@ -21,7 +21,10 @@ export interface PairsInfo {
 
 export interface UserService {
   getMe(): Promise<AxiosResponse<User>>;
-  getMatchUser(): Promise<AxiosResponse<ShortUser>>;
+  getMatchUsers(
+    take: number,
+    skipUserIds?: string[]
+  ): Promise<AxiosResponse<ShortUser[]>>;
   updateUser(data: Partial<User>): Promise<AxiosResponse<User>>;
   updateUserPlace(
     latitude: number,

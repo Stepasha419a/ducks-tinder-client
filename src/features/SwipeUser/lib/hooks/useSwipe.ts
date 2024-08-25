@@ -7,7 +7,9 @@ import { useSwipeProps } from './useSwipeProps';
 import { useSwipeStyles } from './useSwipeStyles';
 
 export function useSwipe() {
-  const tinderUser = useAppSelector((state) => state.tinder.tinderUser);
+  const tinderUsersLength = useAppSelector(
+    (state) => state.tinder.tinderUsers.length
+  );
 
   const [isFullPreview, setIsFullPreview] = useState(false);
   const [isLockedSubmission, setIsLockedSubmission] = useState(false);
@@ -18,7 +20,7 @@ export function useSwipe() {
 
   useEffect(() => {
     controls.start('center');
-  }, [controls, tinderUser]);
+  }, [controls, tinderUsersLength]);
 
   const { isDragRef, x, y, ...motionProps } = useSwipeProps(
     controls,

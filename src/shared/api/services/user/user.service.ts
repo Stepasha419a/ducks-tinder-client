@@ -14,9 +14,15 @@ export const userService: UserService = getMockableService(
       );
     },
 
-    async getMatchUser() {
-      return instance.get<ShortUser>(
-        `${import.meta.env.VITE_USER_SERVICE_URL}/user/match`
+    async getMatchUsers(take: number, skipUserIds?: string[]) {
+      return instance.get<ShortUser[]>(
+        `${import.meta.env.VITE_USER_SERVICE_URL}/user/match`,
+        {
+          params: {
+            take,
+            skipUserIds,
+          },
+        }
       );
     },
 

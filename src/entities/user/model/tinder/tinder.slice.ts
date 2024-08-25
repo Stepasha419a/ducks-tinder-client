@@ -9,14 +9,14 @@ import {
 } from './tinder.thunks';
 
 interface InitialState {
-  tinderUser: ShortUser | null;
+  tinderUsers: ShortUser[];
   isReturnUser: boolean;
   isLoading: boolean;
   isFailed: boolean;
 }
 
 const initialState: InitialState = {
-  tinderUser: null,
+  tinderUsers: [],
   isReturnUser: false,
   isLoading: true,
   isFailed: false,
@@ -33,14 +33,13 @@ const tinderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMatchUserThunk.pending, (state) => {
-        state.tinderUser = null;
         state.isLoading = true;
         state.isFailed = false;
       })
       .addCase(
         getMatchUserThunk.fulfilled,
-        (state, { payload }: PayloadAction<ShortUser>) => {
-          state.tinderUser = payload;
+        (state, { payload }: PayloadAction<ShortUser[]>) => {
+          state.tinderUsers = state.tinderUsers.concat(payload);
           state.isLoading = false;
         }
       )
@@ -55,7 +54,7 @@ const tinderSlice = createSlice({
         returnUserThunk.fulfilled,
         (state, { payload }: PayloadAction<ShortUser | undefined>) => {
           if (payload) {
-            state.tinderUser = payload;
+            state.tinderUsers.unshift(payload);
           }
           state.isReturnUser = false;
           state.isLoading = false;

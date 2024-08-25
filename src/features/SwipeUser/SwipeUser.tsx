@@ -19,7 +19,7 @@ export const SwipeUser: FC = () => {
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  const { tinderUser, isFailed } = useAppSelector(selectTinderData);
+  const { tinderUsers, isFailed } = useAppSelector(selectTinderData);
   const isLoading = useAppSelector((state) => state.tinder.isLoading);
 
   const { motionProps, statusProps, previewProps, rateButtonsProps } =
@@ -33,7 +33,7 @@ export const SwipeUser: FC = () => {
     return <Failed />;
   }
 
-  if (!tinderUser || isLoading) {
+  if (!tinderUsers.length || isLoading) {
     return <SwipeUserLazy />;
   }
 
@@ -41,7 +41,7 @@ export const SwipeUser: FC = () => {
     <motion.div {...motionProps}>
       <Status {...statusProps} />
       <Preview
-        user={tinderUser}
+        user={tinderUsers[0]}
         extraClassName={classNames(
           previewProps.isFull ? styles.padding : styles.grabbing,
           isMobile && styles.mobile

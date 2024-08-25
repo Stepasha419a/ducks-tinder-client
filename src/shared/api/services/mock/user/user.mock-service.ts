@@ -11,9 +11,14 @@ export const userMockService: UserService = {
     return resolveAxiosResponse(mockStorage.currentUser);
   },
 
-  async getMatchUser() {
+  async getMatchUsers(take: number, skipUserIds: string[]) {
     return resolveAxiosResponse(
-      matchingUserStubs[mockStorage.currentMatchingIndex]
+      matchingUserStubs
+        .filter((user) => !skipUserIds.includes(user.id))
+        .slice(
+          mockStorage.currentMatchingIndex,
+          mockStorage.currentMatchingIndex + take
+        )
     );
   },
 
