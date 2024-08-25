@@ -5,10 +5,6 @@ import { ActiveChat, IndexChatPage } from '@pages/Chat';
 import Login from '@pages/Login';
 import NavLayout from '@pages/NavLayout';
 import NotFound from '@pages/NotFound';
-import {
-  AuthPageHocComposition,
-  PrivatePageHocComposition,
-} from '@pages/pageHocComposition';
 import { SettingsIndexPage } from '@pages/Settings';
 import TinderPage from '@pages/Tinder';
 
@@ -31,35 +27,28 @@ const SettingsPage = WithSuspense(lazy(async () => import('@pages/Settings')));
 export const Routing = (): ReactElement => {
   return (
     <Routes>
-      <Route path={ROUTES.MAIN} element={<AuthPageHocComposition />}>
-        <Route path={ROUTES.LOGIN} element={<Login />} />
-        <Route path={ROUTES.REGISTRATION} element={<Registration />} />
-      </Route>
+      <Route path={ROUTES.LOGIN} element={<Login />} />
+      <Route path={ROUTES.REGISTRATION} element={<Registration />} />
 
-      <Route path={ROUTES.MAIN} element={<PrivatePageHocComposition />}>
-        <Route path={ROUTES.MAIN} element={<NavLayout />}>
-          <Route index element={<TinderPage />} />
-          <Route path={ROUTES.EXPLORE} element={<TinderPage explore />} />
-          <Route path={ROUTES.EXPLORE_TAG} element={<TinderPage explore />} />
-          <Route path={ROUTES.PROFILE} element={<ProfilePage />}>
-            <Route index element={<ProfilePreview />} />
-            <Route path="edit" element={<ProfileEdit />} />
-            <Route
-              path="edit/:profileSettingName"
-              element={<ProfileSetting />}
-            />
-          </Route>
-          <Route path={ROUTES.SETTINGS} element={<SettingsPage />}>
-            <Route index element={<SettingsIndexPage />} />
-            <Route path="place" element={<PlaceSetting />} />
-            <Route path=":settingName" element={<SettingsIndexPage />} />
-          </Route>
-          <Route path={ROUTES.CHAT} element={<ChatPage />}>
-            <Route index element={<IndexChatPage />} />
-            <Route path=":chatId" element={<ActiveChat />} />
-          </Route>
-          <Route path={ROUTES.PAIRS} element={<PairsPage />} />
+      <Route path={ROUTES.MAIN} element={<NavLayout />}>
+        <Route index element={<TinderPage />} />
+        <Route path={ROUTES.EXPLORE} element={<TinderPage explore />} />
+        <Route path={ROUTES.EXPLORE_TAG} element={<TinderPage explore />} />
+        <Route path={ROUTES.PROFILE} element={<ProfilePage />}>
+          <Route index element={<ProfilePreview />} />
+          <Route path="edit" element={<ProfileEdit />} />
+          <Route path="edit/:profileSettingName" element={<ProfileSetting />} />
         </Route>
+        <Route path={ROUTES.SETTINGS} element={<SettingsPage />}>
+          <Route index element={<SettingsIndexPage />} />
+          <Route path="place" element={<PlaceSetting />} />
+          <Route path=":settingName" element={<SettingsIndexPage />} />
+        </Route>
+        <Route path={ROUTES.CHAT} element={<ChatPage />}>
+          <Route index element={<IndexChatPage />} />
+          <Route path=":chatId" element={<ActiveChat />} />
+        </Route>
+        <Route path={ROUTES.PAIRS} element={<PairsPage />} />
       </Route>
 
       <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />

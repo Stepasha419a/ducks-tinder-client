@@ -1,4 +1,3 @@
-import type { ComponentType, FC } from 'react';
 import { useEffect } from 'react';
 import {
   blockChat,
@@ -19,18 +18,6 @@ import type {
 import { ChatSocketEvent, chatService } from '@shared/api';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import type { WsExceptionError } from '@shared/lib';
-
-export function WithChatConnection<P extends object>(
-  Component: ComponentType<P>
-): FC<P> {
-  const Wrapper = (props: P) => {
-    useChatConnection();
-
-    return <Component {...props} />;
-  };
-
-  return Wrapper;
-}
 
 export function useChatConnection() {
   const dispatch = useAppDispatch();

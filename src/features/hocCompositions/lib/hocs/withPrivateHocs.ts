@@ -1,11 +1,11 @@
-import { WithAuthRedirect } from '@features/WithAuthRedirect';
-import { WithChatConnection } from '@features/WithChatConnection';
-import { WithCheckedFields } from '@features/WithCheckedFields';
-import { WithUserData } from '@features/WithUserData';
 import { WithNewMessagesCount } from '@entities/chat';
 import { WithInitialLoading, WithPairsInfo } from '@entities/user';
 import { compose } from '@shared/lib';
 import { WithErrorFallback } from '@shared/lib';
+import { WithAuthRedirect } from './WithAuthRedirect';
+import { WithChatConnection } from './WithChatConnection';
+import { WithCheckedFields } from './WithCheckedFields';
+import { WithUserData } from './WithUserData';
 
 export const withPrivateHocs = compose(
   WithInitialLoading,
