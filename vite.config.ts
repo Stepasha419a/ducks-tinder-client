@@ -31,7 +31,6 @@ export default defineConfig({
       '@pages/*': path.resolve(__dirname, './src/pages'),
       '@widgets': path.resolve(__dirname, './src/widgets'),
       '@widgets/*': path.resolve(__dirname, './src/widgets'),
-      '@hooks': path.resolve(__dirname, './src/shared/lib/hooks'),
       '@features': path.resolve(__dirname, './src/features'),
       '@entities': path.resolve(__dirname, './src/entities'),
       '@shared/assets': path.resolve(__dirname, './src/shared/ui/assets'),

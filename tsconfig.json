@@ -22,7 +22,6 @@
       "@pages/*": ["./pages/*"],
       "@widgets/*": ["./widgets/*"],
       "@widgets": ["./widgets"],
-      "@hooks": ["./shared/lib/hooks"],
       "@features/*": ["./features/*"],
       "@entities/*": ["./entities/*"],
       "@shared/*": ["./shared/*"],

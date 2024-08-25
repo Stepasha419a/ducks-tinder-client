@@ -7,7 +7,7 @@ import type {
 import { useMotionValue, useTransform } from 'framer-motion';
 import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
 import { useRef } from 'react';
-import { useAdaptiveMediaQuery } from '@hooks';
+import { useAdaptiveMediaQuery } from '@shared/lib';
 import { useTinderAnimations } from './useTinderAnimations';
 
 type SlantSide = 'top' | 'bottom' | null;
