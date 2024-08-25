@@ -4,6 +4,7 @@ import type { PairFilterParams } from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
 import { PAGINATION_TAKE } from '@shared/lib';
 import type { GetUserPairsProps } from './pair.interface';
+import { deletePairById } from './pair.slice';
 
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
@@ -59,8 +60,10 @@ export const getPairsInfoThunk = createAsyncThunk(
 
 export const acceptPairThunk = createAsyncThunk(
   'users/acceptPair',
-  async (pairId: string, { rejectWithValue }) => {
+  async (pairId: string, { rejectWithValue, dispatch }) => {
     try {
+      dispatch(deletePairById(pairId));
+
       const response = await userService.acceptPair(pairId);
 
       return response.data;
@@ -72,8 +75,10 @@ export const acceptPairThunk = createAsyncThunk(
 
 export const refusePairThunk = createAsyncThunk(
   'users/refusePair',
-  async (pairId: string, { rejectWithValue }) => {
+  async (pairId: string, { rejectWithValue, dispatch }) => {
     try {
+      dispatch(deletePairById(pairId));
+
       const response = await userService.deletePair(pairId);
 
       return response.data;

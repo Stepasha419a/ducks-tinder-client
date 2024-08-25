@@ -1,18 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { ShortUser } from '@shared/api';
 import type { PairsInfo } from '@shared/api';
 import { PAGINATION_TAKE } from '@shared/lib';
 import type {
   GetUserPairsThunkReturn,
   PairInitialState,
 } from './pair.interface';
-import {
-  acceptPairThunk,
-  getPairsInfoThunk,
-  getUserPairsThunk,
-  refusePairThunk,
-} from './pair.thunks';
+import { getPairsInfoThunk, getUserPairsThunk } from './pair.thunks';
 
 const initialState: PairInitialState = {
   pairs: [],
@@ -28,6 +22,13 @@ const pairSlice = createSlice({
   reducers: {
     resetPairSlice: (state) => {
       Object.assign(state, initialState);
+    },
+    deletePairById: (state, { payload }: PayloadAction<string>) => {
+      if (state.pairsInfo !== null) {
+        state.pairsInfo.count--;
+      }
+
+      state.pairs = state.pairs.filter((item) => item.id !== payload);
     },
   },
   extraReducers: (builder) => {
@@ -66,26 +67,6 @@ const pairSlice = createSlice({
           state.isPairsLoading = false;
         }
       )
-      .addCase(
-        acceptPairThunk.fulfilled,
-        (state, { payload: pair }: PayloadAction<ShortUser>) => {
-          if (state.pairsInfo !== null) {
-            state.pairsInfo.count--;
-          }
-
-          state.pairs = state.pairs.filter((item) => item.id !== pair.id);
-        }
-      )
-      .addCase(
-        refusePairThunk.fulfilled,
-        (state, { payload: pair }: PayloadAction<ShortUser>) => {
-          if (state.pairsInfo !== null) {
-            state.pairsInfo.count--;
-          }
-
-          state.pairs = state.pairs.filter((item) => item.id !== pair.id);
-        }
-      )
       .addCase(getPairsInfoThunk.pending, (state) => {
         state.isPairsInfoLoading = true;
       })
@@ -99,6 +80,6 @@ const pairSlice = createSlice({
   },
 });
 
-export const { resetPairSlice } = pairSlice.actions;
+export const { resetPairSlice, deletePairById } = pairSlice.actions;
 
 export const pairReducer = pairSlice.reducer;
