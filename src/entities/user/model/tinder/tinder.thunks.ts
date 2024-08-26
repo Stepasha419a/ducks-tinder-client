@@ -11,12 +11,12 @@ export const getMatchUserThunk = createAsyncThunk(
         tinder: { tinderUsers },
       } = getState() as RootState;
 
-      //const take = Math.max(1, 3 - tinderUsers.length);
+      const take = Math.max(1, 3 - tinderUsers.length);
       const skipUserIds = tinderUsers.length
         ? tinderUsers.map((user) => user.id)
         : undefined;
 
-      const response = await userService.getMatchUsers(1, skipUserIds);
+      const response = await userService.getMatchUsers(take, skipUserIds);
 
       return response.data;
     } catch (error: unknown) {
@@ -41,7 +41,7 @@ export const likeUserThunk = createAsyncThunk(
 
       await userService.likeUser(currentUserId);
 
-      if (tinderUsers.length < 3) {
+      if (tinderUsers.length < 4) {
         dispatch(getMatchUserThunk());
       }
     } catch (error: unknown) {
@@ -84,7 +84,7 @@ export const dislikeUserThunk = createAsyncThunk(
 
       await userService.dislikeUser(currentUserId);
 
-      if (tinderUsers.length < 3) {
+      if (tinderUsers.length < 4) {
         dispatch(getMatchUserThunk());
       }
     } catch (error: unknown) {
