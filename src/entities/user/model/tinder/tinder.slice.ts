@@ -18,7 +18,7 @@ interface InitialState {
 const initialState: InitialState = {
   tinderUsers: [],
   isReturnUser: false,
-  isLoading: true,
+  isLoading: false,
   isFailed: false,
 };
 
@@ -36,7 +36,6 @@ const tinderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getMatchUserThunk.pending, (state) => {
-        state.isLoading = true;
         state.isFailed = false;
       })
       .addCase(
@@ -47,12 +46,10 @@ const tinderSlice = createSlice({
           }
 
           state.tinderUsers = state.tinderUsers.concat(payload);
-          state.isLoading = false;
         }
       )
       .addCase(getMatchUserThunk.rejected, (state) => {
         state.isFailed = true;
-        state.isLoading = false;
       })
       .addCase(returnUserThunk.pending, (state) => {
         state.isLoading = true;
@@ -72,14 +69,12 @@ const tinderSlice = createSlice({
       })
       .addCase(likeUserThunk.rejected, (state) => {
         state.isFailed = true;
-        state.isLoading = false;
       })
       .addCase(dislikeUserThunk.fulfilled, (state) => {
         state.isReturnUser = true;
       })
       .addCase(dislikeUserThunk.rejected, (state) => {
         state.isFailed = true;
-        state.isLoading = false;
       });
   },
 });
