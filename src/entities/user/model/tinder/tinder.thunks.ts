@@ -1,23 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { ShortUser } from '@shared/api';
 import { userService } from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
+import { deleteCurrentTinderUser } from './tinder.slice';
 
 export const getMatchUserThunk = createAsyncThunk(
   'users/getMatchUser',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
     try {
-      /* const {
+      const {
         tinder: { tinderUsers },
       } = getState() as RootState;
 
-      const take = Math.max(1, 3 - tinderUsers.length);
+      //const take = Math.max(1, 3 - tinderUsers.length);
       const skipUserIds = tinderUsers.length
         ? tinderUsers.map((user) => user.id)
-        : undefined; */
+        : undefined;
 
-      //const response = await userService.getMatchUsers(take, skipUserIds);
-      const response = await userService.getMatchUsers(1);
+      const response = await userService.getMatchUsers(1, skipUserIds);
 
       return response.data;
     } catch (error: unknown) {
@@ -33,9 +32,16 @@ export const likeUserThunk = createAsyncThunk(
       const { tinder } = getState() as RootState;
       const { tinderUsers } = tinder;
 
-      const currentUser = tinderUsers[0] as ShortUser | undefined;
-      if (currentUser) {
-        await userService.likeUser(currentUser.id);
+      const currentUserId = tinderUsers[0]?.id;
+      if (!currentUserId) {
+        return;
+      }
+
+      dispatch(deleteCurrentTinderUser());
+
+      await userService.likeUser(currentUserId);
+
+      if (tinderUsers.length < 3) {
         dispatch(getMatchUserThunk());
       }
     } catch (error: unknown) {
@@ -69,9 +75,16 @@ export const dislikeUserThunk = createAsyncThunk(
       const { tinder } = getState() as RootState;
       const { tinderUsers } = tinder;
 
-      const currentUser = tinderUsers[0] as ShortUser | undefined;
-      if (currentUser) {
-        await userService.dislikeUser(currentUser.id);
+      const currentUserId = tinderUsers[0]?.id;
+      if (!currentUserId) {
+        return;
+      }
+
+      dispatch(deleteCurrentTinderUser());
+
+      await userService.dislikeUser(currentUserId);
+
+      if (tinderUsers.length < 3) {
         dispatch(getMatchUserThunk());
       }
     } catch (error: unknown) {

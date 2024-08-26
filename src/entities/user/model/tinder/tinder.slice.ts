@@ -29,6 +29,9 @@ const tinderSlice = createSlice({
     resetTinderSlice: (state) => {
       Object.assign(state, initialState);
     },
+    deleteCurrentTinderUser: (state) => {
+      state.tinderUsers.shift();
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -39,6 +42,10 @@ const tinderSlice = createSlice({
       .addCase(
         getMatchUserThunk.fulfilled,
         (state, { payload }: PayloadAction<ShortUser[]>) => {
+          if (payload.length === 0 && state.tinderUsers.length === 0) {
+            state.isFailed = true;
+          }
+
           state.tinderUsers = state.tinderUsers.concat(payload);
           state.isLoading = false;
         }
@@ -60,18 +67,12 @@ const tinderSlice = createSlice({
           state.isLoading = false;
         }
       )
-      .addCase(likeUserThunk.pending, (state) => {
-        state.isLoading = true;
-      })
       .addCase(likeUserThunk.fulfilled, (state) => {
         state.isReturnUser = false;
       })
       .addCase(likeUserThunk.rejected, (state) => {
         state.isFailed = true;
         state.isLoading = false;
-      })
-      .addCase(dislikeUserThunk.pending, (state) => {
-        state.isLoading = true;
       })
       .addCase(dislikeUserThunk.fulfilled, (state) => {
         state.isReturnUser = true;
@@ -83,6 +84,7 @@ const tinderSlice = createSlice({
   },
 });
 
-export const { resetTinderSlice } = tinderSlice.actions;
+export const { resetTinderSlice, deleteCurrentTinderUser } =
+  tinderSlice.actions;
 
 export const tinderReducer = tinderSlice.reducer;
