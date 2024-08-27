@@ -15,6 +15,8 @@ export const userService: UserService = getMockableService(
     },
 
     async getMatchUsers(take: number, skipUserIds?: string[]) {
+      const config = getOptionalAbortControllerConfig('user/match', true);
+
       return instance.get<ShortUser[]>(
         `${import.meta.env.VITE_USER_SERVICE_URL}/user/match`,
         {
@@ -22,6 +24,7 @@ export const userService: UserService = getMockableService(
             take,
             skipUserIds,
           },
+          ...config,
         }
       );
     },
