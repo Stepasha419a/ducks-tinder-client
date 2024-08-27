@@ -19,21 +19,21 @@ export const SwipeUser: FC = () => {
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  const { tinderUsers, isFailed } = useAppSelector(selectTinderData);
-  const isLoading = useAppSelector((state) => state.tinder.isLoading);
+  const { tinderUsers, isFailed, isReturnLoading } =
+    useAppSelector(selectTinderData);
 
   const { motionProps, statusProps, previewProps, rateButtonsProps } =
     useSwipe();
 
   useEffect(() => {
-    dispatch(getMatchUserThunk());
+    dispatch(getMatchUsersThunk());
   }, [dispatch]);
 
   if (isFailed) {
     return <Failed />;
   }
 
-  if (!tinderUsers.length || isLoading) {
+  if (!tinderUsers.length || isReturnLoading) {
     return <SwipeUserLazy />;
   }
 

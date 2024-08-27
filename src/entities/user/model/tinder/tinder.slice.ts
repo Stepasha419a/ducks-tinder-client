@@ -10,9 +10,10 @@ import {
 
 interface InitialState {
   tinderUsers: ShortUser[];
-pendingUserIds: string[];
+  pendingUserIds: string[];
   isReturnUser: boolean;
   isLoading: boolean;
+  isReturnLoading: boolean;
   isFailed: boolean;
 }
 
@@ -21,6 +22,7 @@ const initialState: InitialState = {
   pendingUserIds: [],
   isReturnUser: false,
   isLoading: false,
+  isReturnLoading: false,
   isFailed: false,
 };
 
@@ -56,15 +58,21 @@ const tinderSlice = createSlice({
             state.isFailed = true;
           }
 
-          state.tinderUsers = state.tinderUsers.concat(payload);
+          const tinderUserIds = state.tinderUsers.map((user) => user.id);
+          const withNoJustReturned = payload.filter(
+            (user) => !tinderUserIds.includes(user.id)
+          );
+
+          state.isLoading = false;
+          state.tinderUsers = state.tinderUsers.concat(withNoJustReturned);
         }
       )
-      .addCase(getMatchUserThunk.rejected, (state) => {
+      /* .addCase(getMatchUsersThunk.rejected, (state) => {
         state.isFailed = true;
-      })
+      }) */
       .addCase(returnUserThunk.pending, (state) => {
-        state.isLoading = true;
         state.isReturnUser = false;
+        state.isReturnLoading = true;
       })
       .addCase(
         returnUserThunk.fulfilled,
@@ -72,9 +80,12 @@ const tinderSlice = createSlice({
           if (payload) {
             state.tinderUsers.unshift(payload);
           }
-          state.isLoading = false;
+          state.isReturnLoading = false;
         }
       )
+      .addCase(returnUserThunk.rejected, (state) => {
+        state.isReturnLoading = false;
+      })
       .addCase(likeUserThunk.pending, (state) => {
         state.isReturnUser = false;
       })
