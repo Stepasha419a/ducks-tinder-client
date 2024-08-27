@@ -53,6 +53,7 @@ const tinderSlice = createSlice({
       })
       .addCase(returnUserThunk.pending, (state) => {
         state.isLoading = true;
+        state.isReturnUser = false;
       })
       .addCase(
         returnUserThunk.fulfilled,
@@ -60,17 +61,16 @@ const tinderSlice = createSlice({
           if (payload) {
             state.tinderUsers.unshift(payload);
           }
-          state.isReturnUser = false;
           state.isLoading = false;
         }
       )
-      .addCase(likeUserThunk.fulfilled, (state) => {
+      .addCase(likeUserThunk.pending, (state) => {
         state.isReturnUser = false;
       })
       .addCase(likeUserThunk.rejected, (state) => {
         state.isFailed = true;
       })
-      .addCase(dislikeUserThunk.fulfilled, (state) => {
+      .addCase(dislikeUserThunk.pending, (state) => {
         state.isReturnUser = true;
       })
       .addCase(dislikeUserThunk.rejected, (state) => {

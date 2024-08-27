@@ -52,16 +52,11 @@ export const likeUserThunk = createAsyncThunk(
 
 export const returnUserThunk = createAsyncThunk(
   'users/returnUser',
-  async (_, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const { tinder } = getState() as RootState;
-      const { isReturnUser } = tinder;
+      const response = await userService.returnUser();
 
-      if (isReturnUser) {
-        const response = await userService.returnUser();
-
-        return response.data;
-      }
+      return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }

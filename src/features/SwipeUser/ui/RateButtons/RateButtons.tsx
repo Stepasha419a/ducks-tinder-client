@@ -50,6 +50,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
             isReturnUser ? styles.gold : styles.blocked
           )}
           key="return"
+          disabled={!isReturnUser}
         >
           <FontAwesomeIcon
             icon={faRotateLeft}
