@@ -40,7 +40,7 @@ export interface UserService {
   getPairsInfo(): Promise<AxiosResponse<PairsInfo>>;
   acceptPair(pairId: string): Promise<AxiosResponse<ShortUser>>;
   deletePair(pairId: string): Promise<AxiosResponse<ShortUser>>;
-  likeUser(userId: string): Promise<AxiosResponse<void>>;
-  dislikeUser(userId: string): Promise<AxiosResponse<void>>;
+  likeUser(userId: string): Promise<AxiosResponse<ShortUser>>;
+  dislikeUser(userId: string): Promise<AxiosResponse<ShortUser>>;
   returnUser(): Promise<AxiosResponse<ShortUser>>;
 }

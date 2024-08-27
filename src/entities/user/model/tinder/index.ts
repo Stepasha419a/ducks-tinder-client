@@ -1,6 +1,6 @@
 export { tinderReducer, resetTinderSlice } from './tinder.slice';
 export {
-  getMatchUserThunk,
+  getMatchUsersThunk,
   returnUserThunk,
   likeUserThunk,
   dislikeUserThunk,

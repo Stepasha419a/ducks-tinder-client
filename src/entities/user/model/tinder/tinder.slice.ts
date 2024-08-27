@@ -3,13 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { ShortUser } from '@shared/api';
 import {
   dislikeUserThunk,
-  getMatchUserThunk,
+  getMatchUsersThunk,
   likeUserThunk,
   returnUserThunk,
 } from './tinder.thunks';
 
 interface InitialState {
   tinderUsers: ShortUser[];
+pendingUserIds: string[];
   isReturnUser: boolean;
   isLoading: boolean;
   isFailed: boolean;
@@ -17,6 +18,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   tinderUsers: [],
+  pendingUserIds: [],
   isReturnUser: false,
   isLoading: false,
   isFailed: false,
@@ -29,17 +31,26 @@ const tinderSlice = createSlice({
     resetTinderSlice: (state) => {
       Object.assign(state, initialState);
     },
-    deleteCurrentTinderUser: (state) => {
-      state.tinderUsers.shift();
+    skipCurrentTinderUser: (state) => {
+      const user = state.tinderUsers.shift();
+      if (user) {
+        state.pendingUserIds.push(user.id);
+      }
+    },
+    deletePendingUserId: (state, { payload }: PayloadAction<string>) => {
+      state.pendingUserIds = state.pendingUserIds.filter(
+        (id) => id !== payload
+      );
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getMatchUserThunk.pending, (state) => {
+      .addCase(getMatchUsersThunk.pending, (state) => {
         state.isFailed = false;
+        state.isLoading = true;
       })
       .addCase(
-        getMatchUserThunk.fulfilled,
+        getMatchUsersThunk.fulfilled,
         (state, { payload }: PayloadAction<ShortUser[]>) => {
           if (payload.length === 0 && state.tinderUsers.length === 0) {
             state.isFailed = true;
@@ -79,7 +90,7 @@ const tinderSlice = createSlice({
   },
 });
 
-export const { resetTinderSlice, deleteCurrentTinderUser } =
+export const { resetTinderSlice, skipCurrentTinderUser, deletePendingUserId } =
   tinderSlice.actions;
 
 export const tinderReducer = tinderSlice.reducer;

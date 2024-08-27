@@ -103,13 +103,13 @@ export const userService: UserService = getMockableService(
     },
 
     async likeUser(userId: string) {
-      return instance.post<undefined>(
+      return instance.post<ShortUser>(
         `${import.meta.env.VITE_USER_SERVICE_URL}/user/like/${userId}`
       );
     },
 
     async dislikeUser(userId: string) {
-      return instance.post<undefined>(
+      return instance.post<ShortUser>(
         `${import.meta.env.VITE_USER_SERVICE_URL}/user/dislike/${userId}`
       );
     },

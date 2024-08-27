@@ -74,13 +74,17 @@ export const userMockService: UserService = {
   },
 
   async likeUser(userId: string) {
+const user = matchingUserStubs[mockStorage.currentMatchingIndex];
+
     mockStorage.setCurrentMatchingIndex(mockStorage.currentMatchingIndex + 1);
-    return resolveAxiosResponse();
+    return resolveAxiosResponse(user);
   },
 
   async dislikeUser(userId: string) {
+const user = matchingUserStubs[mockStorage.currentMatchingIndex];
+
     mockStorage.setCurrentMatchingIndex(mockStorage.currentMatchingIndex + 1);
-    return resolveAxiosResponse();
+    return resolveAxiosResponse(user);
   },
 
   async returnUser() {

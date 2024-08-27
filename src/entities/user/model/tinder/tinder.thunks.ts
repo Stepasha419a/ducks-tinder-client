@@ -1,20 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
-import { deleteCurrentTinderUser } from './tinder.slice';
+import { deletePendingUserId, skipCurrentTinderUser } from './tinder.slice';
 
-export const getMatchUserThunk = createAsyncThunk(
-  'users/getMatchUser',
+export const getMatchUsersThunk = createAsyncThunk(
+  'users/getMatchUsers',
   async (_, { rejectWithValue, getState }) => {
     try {
       const {
-        tinder: { tinderUsers },
+        tinder: { tinderUsers, pendingUserIds },
       } = getState() as RootState;
 
       const take = Math.max(1, 3 - tinderUsers.length);
-      const skipUserIds = tinderUsers.length
-        ? tinderUsers.map((user) => user.id)
-        : undefined;
+
+      const tinderUserIds = tinderUsers.map((user) => user.id);
+      const skipUserIds = pendingUserIds.concat(tinderUserIds);
 
       const response = await userService.getMatchUsers(take, skipUserIds);
 
@@ -37,13 +37,17 @@ export const likeUserThunk = createAsyncThunk(
         return;
       }
 
-      dispatch(deleteCurrentTinderUser());
+      dispatch(skipCurrentTinderUser());
 
-      await userService.likeUser(currentUserId);
+      const response = await userService.likeUser(currentUserId);
+
+      dispatch(deletePendingUserId(response.data.id));
 
       if (tinderUsers.length < 4) {
-        dispatch(getMatchUserThunk());
+        dispatch(getMatchUsersThunk());
       }
+
+      return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
@@ -75,13 +79,17 @@ export const dislikeUserThunk = createAsyncThunk(
         return;
       }
 
-      dispatch(deleteCurrentTinderUser());
+      dispatch(skipCurrentTinderUser());
 
-      await userService.dislikeUser(currentUserId);
+      const response = await userService.dislikeUser(currentUserId);
+
+      dispatch(deletePendingUserId(response.data.id));
 
       if (tinderUsers.length < 4) {
-        dispatch(getMatchUserThunk());
+        dispatch(getMatchUsersThunk());
       }
+
+      return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
