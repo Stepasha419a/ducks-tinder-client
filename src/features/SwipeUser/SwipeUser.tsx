@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useEffect } from 'react';
-import { getMatchUserThunk, selectTinderData } from '@entities/user';
+import { getMatchUsersThunk, selectTinderData } from '@entities/user';
 import { Preview } from '@entities/user';
 import {
   useAppDispatch,
