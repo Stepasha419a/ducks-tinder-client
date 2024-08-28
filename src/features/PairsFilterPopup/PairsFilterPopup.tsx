@@ -53,6 +53,7 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
     <>
       <Popup
         title="Likes filter"
+        size="l"
         closeHandler={submitHandler}
         extraClassName={styles.popup}
       >
