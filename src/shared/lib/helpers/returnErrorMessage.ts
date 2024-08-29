@@ -1,13 +1,11 @@
-import type { AxiosError } from 'axios';
 import axios from 'axios';
 
-export type AxiosErrorResponse = AxiosError<{
-  message: string;
-  statusCode: number;
-}>;
-
-export function returnErrorMessage(error: unknown) {
-  return axios.isAxiosError(error)
-    ? (error as AxiosErrorResponse).response!.data.message
-    : (error as Error).message;
+export function returnErrorMessage(error: unknown): string {
+  if (error instanceof Error || axios.isAxiosError(error)) {
+    return error.message;
+  }
+  if (typeof error === 'string') {
+    return error;
+  }
+  return 'undefined error';
 }
