@@ -39,7 +39,12 @@ export const likeUserThunk = createAsyncThunk(
 
       dispatch(skipCurrentTinderUser());
 
-      const response = await userService.likeUser(currentUserId);
+      const response = await userService
+        .likeUser(currentUserId)
+        .catch((error) => {
+          dispatch(deletePendingUserId(currentUserId));
+          throw error;
+        });
 
       dispatch(deletePendingUserId(response.data.id));
 
@@ -81,7 +86,12 @@ export const dislikeUserThunk = createAsyncThunk(
 
       dispatch(skipCurrentTinderUser());
 
-      const response = await userService.dislikeUser(currentUserId);
+      const response = await userService
+        .dislikeUser(currentUserId)
+        .catch((error) => {
+          dispatch(deletePendingUserId(currentUserId));
+          throw error;
+        });
 
       dispatch(deletePendingUserId(response.data.id));
 
