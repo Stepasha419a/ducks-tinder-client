@@ -19,14 +19,17 @@ export const SwipeUser: FC = () => {
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  const { tinderUsers, isFailed, isReturnLoading } =
+  const { tinderUsers, tinderUsersLength, isFailed, isReturnLoading } =
     useAppSelector(selectTinderData);
 
   const { motionProps, statusProps, previewProps, rateButtonsProps } =
     useSwipe();
 
   useEffect(() => {
-    dispatch(getMatchUsersThunk());
+    if (tinderUsersLength < 3) {
+      dispatch(getMatchUsersThunk());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   if (isFailed) {
