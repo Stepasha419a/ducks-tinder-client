@@ -22,7 +22,7 @@ export function setUpInterceptors(instance: AxiosInstance) {
     async (error: AxiosError<{ message: string; status: string }>) => {
       const originalRequest = error.config as AxiosEditedConfig;
       if (error.config?.url?.endsWith('/auth/refresh')) {
-        return;
+        throw error;
       }
 
       if (
