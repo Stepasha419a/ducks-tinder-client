@@ -89,14 +89,8 @@ const tinderSlice = createSlice({
       .addCase(likeUserThunk.pending, (state) => {
         state.isReturnUser = false;
       })
-      .addCase(likeUserThunk.rejected, (state) => {
-        state.isFailed = true;
-      })
       .addCase(dislikeUserThunk.pending, (state) => {
         state.isReturnUser = true;
-      })
-      .addCase(dislikeUserThunk.rejected, (state) => {
-        state.isFailed = true;
       });
   },
 });
