@@ -67,9 +67,13 @@ const tinderSlice = createSlice({
           state.tinderUsers = state.tinderUsers.concat(withNoJustReturned);
         }
       )
-      /* .addCase(getMatchUsersThunk.rejected, (state) => {
+      .addCase(getMatchUsersThunk.rejected, (state, { payload }) => {
+        if (payload === 'canceled') {
+          return;
+        }
+
         state.isFailed = true;
-      }) */
+      })
       .addCase(returnUserThunk.pending, (state) => {
         state.isReturnUser = false;
         state.isReturnLoading = true;
