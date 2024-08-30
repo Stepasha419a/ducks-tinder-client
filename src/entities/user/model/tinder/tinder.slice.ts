@@ -58,9 +58,11 @@ const tinderSlice = createSlice({
             state.isFailed = true;
           }
 
-          const tinderUserIds = state.tinderUsers.map((user) => user.id);
+          const allUserIds = state.tinderUsers
+            .map((user) => user.id)
+            .concat(state.pendingUserIds);
           const withNoJustReturned = payload.filter(
-            (user) => !tinderUserIds.includes(user.id)
+            (user) => !allUserIds.includes(user.id)
           );
 
           state.isLoading = false;
