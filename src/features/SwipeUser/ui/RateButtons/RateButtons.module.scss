@@ -160,6 +160,14 @@
   }
 }
 
+@media (max-width: 900px) {
+  .buttons {
+    &.minimized {
+      justify-content: space-around;
+    }
+  }
+}
+
 @media (max-width: 400px) {
   .buttons {
     .large {

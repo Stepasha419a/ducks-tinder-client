@@ -1,12 +1,28 @@
-.grabbing {
-  cursor: grab;
+.swipeUser {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  .grabbing {
+    cursor: grab;
+  }
+
+  .padding {
+    padding-bottom: 90px;
+  }
+
+  .mobile {
+    width: 100%;
+    height: 100%;
+  }
 }
 
-.padding {
-  padding-bottom: 90px;
-}
-
-.mobile {
+.pending {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 }

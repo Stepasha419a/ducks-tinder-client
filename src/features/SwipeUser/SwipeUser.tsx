@@ -41,17 +41,27 @@ export const SwipeUser: FC = () => {
   }
 
   return (
-    <motion.div {...motionProps}>
-      <Status {...statusProps} />
-      <Preview
-        user={tinderUsers[0]}
-        extraClassName={classNames(
-          previewProps.isFull ? styles.padding : styles.grabbing,
-          isMobile && styles.mobile
-        )}
-        {...previewProps}
-      />
+    <div>
+      {tinderUsers[1] && (
+        <Preview
+          user={tinderUsers[1]}
+          extraClassName={classNames(styles.pending, isMobile && styles.mobile)}
+          {...previewProps}
+          disabled
+        />
+      )}
+      <motion.div className={styles.swipeUser} {...motionProps}>
+        <Status {...statusProps} />
+        <Preview
+          user={tinderUsers[0]}
+          extraClassName={classNames(
+            previewProps.isFull ? styles.padding : styles.grabbing,
+            isMobile && styles.mobile
+          )}
+          {...previewProps}
+        />
+      </motion.div>
       <RateButtons {...rateButtonsProps} />
-    </motion.div>
+    </div>
   );
 };
