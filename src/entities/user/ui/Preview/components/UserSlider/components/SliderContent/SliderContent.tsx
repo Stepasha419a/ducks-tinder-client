@@ -11,6 +11,7 @@ interface SliderContentProps {
   age: number | null;
   info?: UserSliderInfo[];
   currentSlide: number;
+  disabled?: boolean;
 }
 
 export const SliderContent: FC<SliderContentProps> = ({
@@ -18,12 +19,15 @@ export const SliderContent: FC<SliderContentProps> = ({
   age,
   info,
   currentSlide,
+  disabled,
 }) => {
   const currentInfo = info?.[currentSlide];
 
+  const cn = classNames(styles.wrapper, disabled && styles.disabled);
+
   if (Array.isArray(currentInfo)) {
     return (
-      <div className={classNames(styles.wrapper, styles.high)}>
+      <div className={classNames(cn, styles.high)}>
         <div className={styles.person}>
           {name} <span className={styles.years}>{age}</span>
         </div>
@@ -40,7 +44,7 @@ export const SliderContent: FC<SliderContentProps> = ({
 
   if (currentInfo && 'place' in currentInfo && currentInfo.place !== null) {
     return (
-      <div className={styles.wrapper}>
+      <div className={cn}>
         <div className={styles.person}>
           {name} <span className={styles.years}>{age}</span>
         </div>
@@ -62,7 +66,7 @@ export const SliderContent: FC<SliderContentProps> = ({
   }
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cn}>
       <div className={styles.person}>
         {name} <span className={styles.years}>{age}</span>
       </div>

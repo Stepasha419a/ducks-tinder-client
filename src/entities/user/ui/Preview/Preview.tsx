@@ -25,6 +25,7 @@ interface PreviewPropsInterface {
   extraClassName?: string;
   sliderRef?: RefObject<Slider>;
   noSlider?: boolean;
+  disabled?: boolean;
 }
 
 export const Preview: FC<PreviewPropsInterface> = ({
@@ -36,6 +37,7 @@ export const Preview: FC<PreviewPropsInterface> = ({
   extraClassName,
   sliderRef,
   noSlider,
+  disabled,
 }) => {
   if (isFull) {
     return (
@@ -65,10 +67,11 @@ export const Preview: FC<PreviewPropsInterface> = ({
             extraClassName={styles.image}
             isShadow={isShadow}
             sliderRef={sliderRef}
+            disabled={disabled}
           />
         )}
       </div>
-      {setIsFullPreview && (
+      {!disabled && setIsFullPreview && (
         <div onClick={() => setIsFullPreview(true)} className={styles.descr}>
           <Button
             variant="mark"

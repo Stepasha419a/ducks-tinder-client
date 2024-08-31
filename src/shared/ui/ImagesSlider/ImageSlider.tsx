@@ -31,6 +31,7 @@ interface ImageSliderProps {
   extraClassName?: string;
   isShadow?: boolean;
   sliderRef?: RefObject<Slider>;
+  disabled?: boolean;
 }
 
 export const ImageSlider: FC<ImageSliderProps> = ({
@@ -41,6 +42,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
   extraClassName = null,
   isShadow,
   sliderRef,
+  disabled,
 }) => {
   const [current, setCurrent] = useSliderState(currentSlide, setCurrentSlide);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,8 +80,9 @@ export const ImageSlider: FC<ImageSliderProps> = ({
       <Carousel
         ref={sliderRef}
         speed={100}
-        dots={true}
-        arrows={true}
+        dots={!disabled}
+        arrows={!disabled}
+        draggable={!disabled}
         infinite={false}
         lazyLoad="ondemand"
         onLazyLoad={handleStartLoading}
@@ -87,7 +90,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
         nextArrow={isLastImage ? <></> : <NextArrow />}
         beforeChange={(prev, next: number) => setCurrent(next)}
         customPaging={(i) => <Dot isActive={i === current} />}
-        appendDots={(dots) => <DotsWrapper>{dots}</DotsWrapper>}
+        appendDots={(node) => <DotsWrapper>{node}</DotsWrapper>}
         className={styles.carousel}
       >
         {images.map((image) => {

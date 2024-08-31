@@ -13,6 +13,10 @@
   cursor: pointer;
   color: var(--color--white-100);
 
+  &.disabled {
+    cursor: default;
+  }
+
   &.high {
     height: 164px;
   }

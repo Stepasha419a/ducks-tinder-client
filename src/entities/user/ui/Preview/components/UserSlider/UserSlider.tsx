@@ -10,9 +10,14 @@ interface ImageSliderProps {
   extraClassName?: string;
   isShadow?: boolean;
   sliderRef?: RefObject<Slider>;
+  disabled?: boolean;
 }
 
-export const UserSlider: FC<ImageSliderProps> = ({ user, ...sliderProps }) => {
+export const UserSlider: FC<ImageSliderProps> = ({
+  user,
+  disabled,
+  ...sliderProps
+}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
@@ -20,12 +25,14 @@ export const UserSlider: FC<ImageSliderProps> = ({ user, ...sliderProps }) => {
       images={user.pictures}
       currentSlide={currentSlide}
       setCurrentSlide={setCurrentSlide}
+      disabled={disabled}
       content={
         <SliderContent
           currentSlide={currentSlide}
           age={user.age}
           info={getUserSliderInfo(user)}
           name={user.name}
+          disabled={disabled}
         />
       }
       {...sliderProps}
