@@ -108,6 +108,14 @@
   }
 }
 
+@media (max-width: 900px) {
+  .preview .slider {
+    $widthWithHeightAspectRatio: 100vw * 1.25;
+
+    height: $widthWithHeightAspectRatio;
+  }
+}
+
 @media (max-width: 400px) {
   .preview {
     .descr {

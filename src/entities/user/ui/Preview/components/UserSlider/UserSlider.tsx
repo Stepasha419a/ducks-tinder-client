@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { memo } from 'react';
 import type {
   FC,
@@ -48,12 +49,14 @@ export const UserSlider: FC<ImageSliderProps> = memo(
       );
     }
 
+    const cn = classNames(styles.image, isFull && styles.full);
+
     return (
       <ImageSlider
         images={user.pictures}
         currentSlide={currentSlide}
         setCurrentSlide={setCurrentSlide}
-        extraClassName={styles.image}
+        extraClassName={cn}
         disabled={disabled}
         content={
           !isFull ? (
