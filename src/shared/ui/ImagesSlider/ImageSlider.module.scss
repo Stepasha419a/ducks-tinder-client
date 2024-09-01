@@ -20,3 +20,11 @@
     list-style: none;
   }
 }
+
+@media (max-width: 900px) and (min-aspect-ratio: 3/4) {
+  .slider {
+    .item {
+      object-fit: contain;
+    }
+  }
+}

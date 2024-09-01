@@ -2,3 +2,11 @@
   position: relative;
   z-index: -1;
 }
+
+@media (max-width: 900px) {
+  .image {
+    &.full {
+      object-fit: cover;
+    }
+  }
+}
