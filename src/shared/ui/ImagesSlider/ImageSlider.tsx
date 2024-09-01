@@ -6,6 +6,7 @@ import type {
   RefObject,
   SetStateAction,
 } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import type Slider from 'react-slick';
@@ -54,6 +55,13 @@ export const ImageSlider: FC<ImageSliderProps> = ({
     'slider'
   );
 
+  useEffect(() => {
+    if (sliderRef?.current) {
+      sliderRef.current.slickGoTo(current);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current]);
+
   if (!Array.isArray(images) || images.length === 0) {
     return (
       <NotFoundImages
@@ -91,6 +99,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
         beforeChange={(prev, next: number) => setCurrent(next)}
         customPaging={(i) => <Dot isActive={i === current} />}
         appendDots={(node) => <DotsWrapper>{node}</DotsWrapper>}
+        initialSlide={current}
         className={styles.carousel}
       >
         {images.map((image) => {

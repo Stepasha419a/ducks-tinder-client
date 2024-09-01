@@ -9,12 +9,13 @@ import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
 import { InterestsListPopup } from '@entities/user';
 import type { ShortUser, User } from '@shared/api';
-import { Button, ImageSlider } from '@shared/ui';
+import { Button } from '@shared/ui';
 import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
 import styles from './FullPreview.module.scss';
 
 interface FullPreviewPropsInterface {
   user: User | ShortUser;
+  slider: ReactElement;
   setIsFullPreview?:
     | Dispatch<SetStateAction<boolean>>
     | ((value: boolean) => void);
@@ -24,6 +25,7 @@ interface FullPreviewPropsInterface {
 
 export const FullPreview: FC<FullPreviewPropsInterface> = ({
   user,
+  slider,
   setIsFullPreview,
   extraContent,
   extraClassName,
@@ -36,7 +38,7 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
   return (
     <div className={cn}>
       <div className={styles.slider}>
-        <ImageSlider images={user.pictures} extraClassName={styles.image} />
+        {slider}
         {setIsFullPreview && (
           <Button
             variant="mark"

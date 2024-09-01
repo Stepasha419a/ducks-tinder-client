@@ -46,7 +46,7 @@ export const SwipeUser: FC = () => {
         <Preview
           user={tinderUsers[1]}
           extraClassName={classNames(styles.pending, isMobile && styles.mobile)}
-          {...previewProps}
+          isShadow
           disabled
         />
       )}

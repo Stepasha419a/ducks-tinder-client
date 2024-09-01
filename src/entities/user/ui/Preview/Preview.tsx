@@ -1,6 +1,3 @@
-import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import type {
   Dispatch,
   FC,
@@ -8,11 +5,10 @@ import type {
   RefObject,
   SetStateAction,
 } from 'react';
+import { useState } from 'react';
 import type Slider from 'react-slick';
 import type { ShortUser, ShortUserWithoutDistance, User } from '@shared/api';
-import { Button } from '@shared/ui';
-import { UserSlider, FullPreview, NoSlider } from './components';
-import styles from './Preview.module.scss';
+import { UserSlider, PreviewWrapper } from './components';
 
 interface PreviewPropsInterface {
   user: User | ShortUser | ShortUserWithoutDistance;
@@ -39,49 +35,29 @@ export const Preview: FC<PreviewPropsInterface> = ({
   noSlider,
   disabled,
 }) => {
-  if (isFull) {
-    return (
-      <FullPreview
-        user={user}
-        setIsFullPreview={setIsFullPreview}
-        extraClassName={extraClassName}
-        extraContent={extraContent}
-      />
-    );
-  }
-
-  const cn = classNames(styles.preview, extraClassName);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <div className={cn}>
-      <div className={classNames(styles.slider)}>
-        {noSlider ? (
-          <NoSlider
-            avatar={user.pictures[0]?.name}
-            extraContent={extraContent}
-            imageCn={cn}
-          />
-        ) : (
-          <UserSlider
-            user={user}
-            extraClassName={styles.image}
-            isShadow={isShadow}
-            sliderRef={sliderRef}
-            disabled={disabled}
-          />
-        )}
-      </div>
-      {!disabled && setIsFullPreview && (
-        <div onClick={() => setIsFullPreview(true)} className={styles.descr}>
-          <Button
-            variant="mark"
-            onClick={() => setIsFullPreview(true)}
-            extraClassName={styles.openFullPreview}
-          >
-            <FontAwesomeIcon icon={faCircleInfo} />
-          </Button>
-        </div>
-      )}
-    </div>
+    <PreviewWrapper
+      user={user}
+      extraContent={extraContent}
+      disabled={disabled}
+      extraClassName={extraClassName}
+      setIsFullPreview={setIsFullPreview}
+      isFull={isFull}
+      slider={
+        <UserSlider
+          user={user}
+          currentSlide={currentSlide}
+          setCurrentSlide={setCurrentSlide}
+          isFull={isFull}
+          isShadow={isShadow}
+          sliderRef={sliderRef}
+          disabled={disabled}
+          extraContent={extraContent}
+          noSlider={noSlider}
+        />
+      }
+    />
   );
 };
