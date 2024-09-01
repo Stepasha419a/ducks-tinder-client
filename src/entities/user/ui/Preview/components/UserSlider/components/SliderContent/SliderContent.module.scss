@@ -77,3 +77,26 @@
     }
   }
 }
+
+@media (max-width: 400px) {
+  .wrapper {
+    .person {
+      font-size: 28px;
+
+      .years {
+        font-size: 24px;
+      }
+    }
+
+    .place {
+      .name {
+        max-width: 170px;
+        font-size: 14px;
+      }
+    }
+
+    .distance {
+      font-size: 14px;
+    }
+  }
+}
