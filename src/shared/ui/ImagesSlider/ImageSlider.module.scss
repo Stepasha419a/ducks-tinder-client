@@ -21,7 +21,15 @@
   }
 }
 
-@media (max-width: 900px) and (min-aspect-ratio: 3/4) {
+@media (max-width: 900px) and (max-aspect-ratio: 5/8) {
+  .slider {
+    .item {
+      object-fit: contain;
+    }
+  }
+}
+
+@media (max-width: 900px) and (min-aspect-ratio: 1) {
   .slider {
     .item {
       object-fit: contain;

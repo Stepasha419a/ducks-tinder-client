@@ -108,7 +108,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px) or (hover: none) {
   .preview .slider {
     $widthWithHeightAspectRatio: 100vw * 1.25;
 

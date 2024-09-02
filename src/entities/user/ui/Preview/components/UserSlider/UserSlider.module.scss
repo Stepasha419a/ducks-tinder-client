@@ -3,7 +3,7 @@
   z-index: -1;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px) or (hover: none) {
   .image {
     &.full {
       object-fit: cover;
