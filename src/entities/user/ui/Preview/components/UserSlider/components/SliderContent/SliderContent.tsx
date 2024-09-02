@@ -25,6 +25,17 @@ export const SliderContent: FC<SliderContentProps> = ({
 
   const cn = classNames(styles.wrapper, disabled && styles.disabled);
 
+  if (typeof currentInfo === 'string') {
+    return (
+      <div className={cn}>
+        <div className={styles.person}>
+          {name} <span className={styles.years}>{age}</span>
+        </div>
+        <span className={styles.longText}>{currentInfo}</span>
+      </div>
+    );
+  }
+
   if (Array.isArray(currentInfo)) {
     return (
       <div className={classNames(cn, styles.high)}>

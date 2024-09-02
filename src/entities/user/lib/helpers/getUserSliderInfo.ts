@@ -14,14 +14,21 @@ export interface UserPlaceInfo extends UserInfo {
 
 type UserListInfo = string[];
 
+type UserDescription = string;
+
 export type UserSliderInfo =
   | UserInfo
   | UserPlaceInfo
   | UserListInfo
+  | UserDescription
   | undefined;
 
 export function getUserSliderInfo(user: User | ShortUser): UserSliderInfo[] {
   const result: UserSliderInfo[] = [];
+
+  if (user.description) {
+    result.push(user.description);
+  }
 
   result.push({
     name: user.name,

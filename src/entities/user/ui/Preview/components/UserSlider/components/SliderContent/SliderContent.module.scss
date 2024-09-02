@@ -1,7 +1,7 @@
 .wrapper {
   max-width: calc(100% - 70px);
   width: 100%;
-  height: 120px;
+  min-height: 120px;
 
   position: absolute;
   bottom: 100px;
@@ -9,7 +9,7 @@
   z-index: 1;
 
   letter-spacing: 0.7px;
-  padding: 5px 0 25px 20px;
+  padding: 5px 0 15px 20px;
   cursor: pointer;
   color: var(--color--white-100);
 
@@ -18,7 +18,8 @@
   }
 
   &.high {
-    height: 164px;
+    min-height: 120px;
+    padding: 5px 0 25px 20px;
   }
 
   .items {
@@ -75,6 +76,24 @@
     .icon {
       margin: 0 7px 0 2px;
     }
+  }
+
+  .longText {
+    font-size: 17px;
+    line-height: 130%;
+    font-weight: 300;
+
+    max-height: 120px;
+    -webkit-line-clamp: 5;
+
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 }
 
