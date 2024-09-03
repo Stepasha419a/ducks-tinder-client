@@ -10,6 +10,9 @@ export function useSwipe() {
   const tinderUsersLength = useAppSelector(
     (state) => state.tinder.tinderUsers.length
   );
+  const isReturnLoading = useAppSelector(
+    (state) => state.tinder.isReturnLoading
+  );
 
   const [isFullPreview, setIsFullPreview] = useState(false);
   const [isLockedSubmission, setIsLockedSubmission] = useState(false);
@@ -24,7 +27,7 @@ export function useSwipe() {
 
   const { isDragRef, x, y, ...motionProps } = useSwipeProps(
     controls,
-    !isFullPreview,
+    !isFullPreview && !isReturnLoading,
     isLockedSubmission,
     setIsLockedSubmission
   );

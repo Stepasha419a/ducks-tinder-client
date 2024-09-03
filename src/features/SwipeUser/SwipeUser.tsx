@@ -36,12 +36,9 @@ export const SwipeUser: FC = () => {
     return <Failed />;
   }
 
-  if (!tinderUsers.length || isReturnLoading) {
-    return <SwipeUserLazy />;
-  }
-
   return (
     <div>
+      <SwipeUserLazy />
       {tinderUsers[1] && (
         <Preview
           user={tinderUsers[1]}
@@ -50,17 +47,20 @@ export const SwipeUser: FC = () => {
           disabled
         />
       )}
-      <motion.div className={styles.swipeUser} {...motionProps}>
-        {!previewProps.isFull && <Status {...statusProps} />}
-        <Preview
-          user={tinderUsers[0]}
-          extraClassName={classNames(
-            previewProps.isFull ? styles.padding : styles.grabbing,
-            isMobile && styles.mobile
-          )}
-          {...previewProps}
-        />
-      </motion.div>
+      {tinderUsers[0] && (
+        <motion.div className={styles.swipeUser} {...motionProps}>
+          {!previewProps.isFull && <Status {...statusProps} />}
+          <Preview
+            user={tinderUsers[0]}
+            extraClassName={classNames(
+              previewProps.isFull ? styles.padding : styles.grabbing,
+              isMobile && styles.mobile
+            )}
+            {...previewProps}
+          />
+        </motion.div>
+      )}
+      {isReturnLoading && <SwipeUserLazy />}
       <RateButtons {...rateButtonsProps} />
     </div>
   );
