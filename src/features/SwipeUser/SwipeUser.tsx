@@ -51,7 +51,7 @@ export const SwipeUser: FC = () => {
         />
       )}
       <motion.div className={styles.swipeUser} {...motionProps}>
-        <Status {...statusProps} />
+        {!previewProps.isFull && <Status {...statusProps} />}
         <Preview
           user={tinderUsers[0]}
           extraClassName={classNames(
