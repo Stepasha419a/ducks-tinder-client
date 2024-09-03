@@ -38,7 +38,7 @@ export const SwipeUser: FC = () => {
 
   return (
     <div>
-      <SwipeUserLazy />
+      <SwipeUserLazy small />
       {tinderUsers[1] && (
         <Preview
           user={tinderUsers[1]}
