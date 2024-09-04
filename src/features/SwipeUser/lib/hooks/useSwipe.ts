@@ -25,9 +25,10 @@ export function useSwipe() {
     controls.start('center');
   }, [controls, tinderUsersLength]);
 
+  const isDraggable = !isFullPreview && !isReturnLoading;
   const { isDragRef, x, y, ...motionProps } = useSwipeProps(
     controls,
-    !isFullPreview && !isReturnLoading,
+    isDraggable,
     isLockedSubmission,
     setIsLockedSubmission
   );

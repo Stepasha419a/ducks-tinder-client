@@ -33,31 +33,36 @@ export const RateButtons: FC<RateButtonsProps> = ({
   likeStyle,
 }) => {
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
+  const isReturnLoading = useAppSelector(
+    (state) => state.tinder.isReturnLoading
+  );
+  const tinderUsersLength = useAppSelector(
+    (state) => state.tinder.tinderUsers.length
+  );
 
   const { handleReturn, handleDislike, handleSuperLike, handleLike } =
     useRateButtons(controls, handleSubmitAction);
 
+  const disabled = isReturnLoading || !tinderUsersLength;
+
   return (
     <div
-      className={classNames(styles.buttons, isFullPreview && styles.minimized)}
+      className={classNames(
+        styles.buttons,
+        isFullPreview && styles.minimized,
+        disabled && styles.disabled
+      )}
     >
       {!isFullPreview && (
         <Button
           onClick={handleReturn}
-          extraClassName={classNames(
-            styles.btn,
-            styles.small,
-            isReturnUser ? styles.gold : styles.blocked
-          )}
+          extraClassName={classNames(styles.btn, styles.small, styles.gold)}
           key="return"
-          disabled={!isReturnUser}
+          disabled={!isReturnUser || disabled}
         >
           <FontAwesomeIcon
             icon={faRotateLeft}
-            className={classNames(
-              styles.icon,
-              isReturnUser ? styles.gold : styles.blocked
-            )}
+            className={classNames(styles.icon, styles.gold)}
           />
         </Button>
       )}
@@ -74,6 +79,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
             styles.red,
             isFullPreview && styles.minimized
           )}
+          disabled={disabled}
         >
           <FontAwesomeIcon
             icon={faXmark}
@@ -94,6 +100,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
             styles.blue,
             isFullPreview && styles.minimized
           )}
+          disabled={disabled}
         >
           <FontAwesomeIcon icon={faStar} className={classNames(styles.icon)} />
         </Button>
@@ -111,6 +118,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
             styles.green,
             isFullPreview && styles.minimized
           )}
+          disabled={disabled}
         >
           <FontAwesomeIcon icon={faHeart} className={styles.icon} />
         </Button>
@@ -119,6 +127,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
         <Button
           extraClassName={classNames(styles.btn, styles.small, styles.purple)}
           key="boost"
+          disabled={disabled}
         >
           <FontAwesomeIcon
             icon={faBolt}
