@@ -1,6 +1,6 @@
 import { faHouse, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
+import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
 import { InterestsListPopup } from '@entities/user';
 import type { ShortUser, User } from '@shared/api';
@@ -9,15 +9,11 @@ import styles from './FullPreview.module.scss';
 
 interface FullPreviewPropsInterface {
   user: User | ShortUser;
-  setIsFullPreview?:
-    | Dispatch<SetStateAction<boolean>>
-    | ((value: boolean) => void);
   extraContent?: ReactElement;
 }
 
 export const FullPreview: FC<FullPreviewPropsInterface> = ({
   user,
-  setIsFullPreview,
   extraContent,
 }) => {
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
@@ -25,10 +21,7 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
 
   return (
     <div>
-      <div
-        onClick={() => setIsFullPreview && setIsFullPreview(true)}
-        className={styles.descr}
-      >
+      <div className={styles.descr}>
         <div className={styles.person}>
           {user.name} <span className={styles.years}>{user.age}</span>
         </div>

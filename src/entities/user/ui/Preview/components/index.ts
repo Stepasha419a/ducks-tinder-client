@@ -1,2 +1,3 @@
 export { UserSlider } from './UserSlider/UserSlider';
-export { PreviewWrapper } from './PreviewWrapper/PreviewWrapper';
+export { FullPreview } from './FullPreview/FullPreview';
+export { TogglePreview } from './TogglePreview/TogglePreview';

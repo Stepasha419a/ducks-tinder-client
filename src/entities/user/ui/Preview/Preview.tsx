@@ -1,20 +1,14 @@
-import type {
-  Dispatch,
-  FC,
-  ReactElement,
-  RefObject,
-  SetStateAction,
-} from 'react';
+import classNames from 'classnames';
+import type { FC, ReactElement, RefObject } from 'react';
 import { useState } from 'react';
 import type Slider from 'react-slick';
 import type { ShortUser, ShortUserWithoutDistance, User } from '@shared/api';
-import { UserSlider, PreviewWrapper } from './components';
+import { FullPreview, TogglePreview, UserSlider } from './components';
+import styles from './Preview.module.scss';
 
 interface PreviewPropsInterface {
   user: User | ShortUser | ShortUserWithoutDistance;
-  setIsFullPreview?:
-    | Dispatch<SetStateAction<boolean>>
-    | ((value: boolean) => void);
+  setIsFullPreview?: (value: boolean) => void;
   isFull?: boolean;
   isShadow?: boolean;
   extraContent?: ReactElement;
@@ -37,15 +31,11 @@ export const Preview: FC<PreviewPropsInterface> = ({
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const cn = classNames(styles.preview, isFull && styles.full, extraClassName);
+
   return (
-    <PreviewWrapper
-      user={user}
-      extraContent={extraContent}
-      disabled={disabled}
-      extraClassName={extraClassName}
-      setIsFullPreview={setIsFullPreview}
-      isFull={isFull}
-      slider={
+    <div className={cn}>
+      <div className={styles.slider}>
         <UserSlider
           user={user}
           currentSlide={currentSlide}
@@ -57,7 +47,11 @@ export const Preview: FC<PreviewPropsInterface> = ({
           extraContent={extraContent}
           noSlider={noSlider}
         />
-      }
-    />
+        {!disabled && setIsFullPreview && (
+          <TogglePreview setIsFullPreview={setIsFullPreview} isFull={isFull} />
+        )}
+      </div>
+      {isFull && <FullPreview user={user} extraContent={extraContent} />}
+    </div>
   );
 };
