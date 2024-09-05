@@ -1,54 +1,30 @@
-import {
-  faCircleDown,
-  faHouse,
-  faLocationDot,
-} from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 import { useState } from 'react';
 import { InterestsListPopup } from '@entities/user';
 import type { ShortUser, User } from '@shared/api';
-import { Button } from '@shared/ui';
 import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
 import styles from './FullPreview.module.scss';
 
 interface FullPreviewPropsInterface {
   user: User | ShortUser;
-  slider: ReactElement;
   setIsFullPreview?:
     | Dispatch<SetStateAction<boolean>>
     | ((value: boolean) => void);
   extraContent?: ReactElement;
-  extraClassName?: string;
 }
 
 export const FullPreview: FC<FullPreviewPropsInterface> = ({
   user,
-  slider,
   setIsFullPreview,
   extraContent,
-  extraClassName,
 }) => {
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
 
-  const cn = classNames(styles.preview, extraClassName);
-
   return (
-    <div className={cn}>
-      <div className={styles.slider}>
-        {slider}
-        {setIsFullPreview && (
-          <Button
-            variant="mark"
-            onClick={() => setIsFullPreview(false)}
-            extraClassName={styles.closeFullPreview}
-          >
-            <FontAwesomeIcon icon={faCircleDown} className={styles.icon} />
-          </Button>
-        )}
-      </div>
+    <div>
       <div
         onClick={() => setIsFullPreview && setIsFullPreview(true)}
         className={styles.descr}
