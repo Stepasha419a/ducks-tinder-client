@@ -57,7 +57,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
 
   useEffect(() => {
     if (sliderRef?.current) {
-      sliderRef.current.slickGoTo(current);
+      sliderRef.current.slickGoTo(current, true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);

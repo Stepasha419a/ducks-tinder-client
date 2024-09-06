@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import type {
   FC,
   RefObject,
@@ -39,6 +39,12 @@ export const UserSlider: FC<ImageSliderProps> = memo(
     extraClassName,
     ...sliderProps
   }) => {
+    useEffect(() => {
+      setCurrentSlide(0);
+
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user.id]);
+
     if (noSlider) {
       return (
         <NoSlider
