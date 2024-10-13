@@ -1,7 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import { Nav } from '@widgets/Nav';
-import { withPrivateHocs } from '@features/hocCompositions';
-import { useAdaptiveMediaQuery } from '@shared/lib';
+import {
+  WithHocSubscription,
+  useAdaptiveMediaQuery,
+  privateHocComposition,
+} from '@shared/lib';
 import styles from './NavLayout.module.scss';
 import { NavLayoutMobile } from './ui';
 
@@ -22,4 +25,4 @@ export const NavLayout = () => {
   );
 };
 
-export default withPrivateHocs(NavLayout);
+export default WithHocSubscription(privateHocComposition, NavLayout);

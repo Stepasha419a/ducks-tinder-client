@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react';
-import { withAuthHocs } from '@features/hocCompositions';
 import { LoginForm } from '@features/LoginForm';
+import { WithHocSubscription, authHocComposition } from '@shared/lib';
 
 const Login = (): ReactElement => {
   return <LoginForm />;
 };
 
-export default withAuthHocs(Login);
+export default WithHocSubscription(authHocComposition, Login);

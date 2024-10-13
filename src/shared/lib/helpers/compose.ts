@@ -1,9 +1,9 @@
 import type { ComponentType } from 'react';
+import type { HocFunc } from '../interfaces';
 
-type Func = (Component: ComponentType) => ComponentType;
-
-export function compose(...funcs: Func[]): Func {
+export function compose(...funcs: HocFunc[]): HocFunc {
+  console.log(funcs);
   return function composedFunc(arg: ComponentType): ComponentType {
-    return funcs.reduceRight((acc: ComponentType, fn: Func) => fn(acc), arg);
+    return funcs.reduceRight((acc: ComponentType, fn: HocFunc) => fn(acc), arg);
   };
 }
