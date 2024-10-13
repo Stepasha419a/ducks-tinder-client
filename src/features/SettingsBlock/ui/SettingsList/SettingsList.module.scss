@@ -1,5 +1,7 @@
 .groups {
-  max-height: calc(100% - 90px);
+  $linksBarHeight: 90px;
+
+  max-height: calc(100% - $linksBarHeight);
   overflow: auto;
   scrollbar-width: none;
   border-right: 1px solid var(--border-main);
@@ -13,6 +15,8 @@
 
 @media (max-width: 900px) {
   .groups {
-    max-height: calc(100% - 50px);
+    $submitBarHeight: 50px;
+
+    max-height: calc(100% - $submitBarHeight);
   }
 }
