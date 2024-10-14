@@ -1,4 +1,4 @@
-import type { AxiosResponse } from 'axios';
+import type { AxiosError, AxiosResponse } from 'axios';
 import {
   chatStub,
   messageStub,
@@ -15,6 +15,19 @@ export async function resolveAxiosResponse<T>(
     data: data as T,
     headers: {},
     status: 200,
+    statusText: '',
+  });
+}
+
+export async function rejectWithAxiosResponseError<T>(
+  status: number,
+  data?: T
+): Promise<AxiosError<T>> {
+  return Promise.reject({
+    config: {},
+    data: data as T,
+    headers: {},
+    status,
     statusText: '',
   });
 }
