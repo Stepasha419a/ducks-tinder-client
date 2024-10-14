@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import type { AxiosResponse } from 'axios';
 import type { AuthResponse, AuthService } from '@shared/api';
 import {
   deleteTestUser,
   getTestUser,
   mockStorage,
+  rejectWithAxiosResponseError,
   resolveAxiosResponse,
   saveTestUser,
 } from '../mock';
@@ -31,7 +33,9 @@ export const authMockService: AuthService = {
   async refresh() {
     const savedUser = getTestUser();
     if (!savedUser) {
-      return resolveAxiosResponse({} as AuthResponse);
+      return rejectWithAxiosResponseError(
+        401
+      ) as unknown as AxiosResponse<AuthResponse>;
     }
 
     mockStorage.currentUser = savedUser;
