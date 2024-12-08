@@ -1,7 +1,6 @@
-export * from './mock';
-export { getMockableService } from './mock/mock';
-
 export * from './helper';
+
+export * from './mock';
 
 export { authService } from './auth/auth.service';
 export { chatService } from './chat/chat.service';

@@ -5,17 +5,18 @@ import type {
   ReceivedChatBlock,
   ReceivedMessage,
   ReceivedNewMessage,
+  ChatConnectReturn,
+  ChatService,
+  ChatsConnectReturn,
 } from '@shared/api';
 import {
   ChatSocketEvent,
+  chatStub,
   shortUserStub,
-  type ChatConnectReturn,
-  type ChatService,
-  type ChatsConnectReturn,
+  mockStorage,
+  resolveAxiosResponse,
 } from '@shared/api';
 import type { PaginationParams } from '@shared/lib';
-import { mockStorage, resolveAxiosResponse } from '../mock';
-import { chatStub, shortMessagesPaginationStub } from './chat.stub';
 
 const eventEmitter = new EventEmitter();
 

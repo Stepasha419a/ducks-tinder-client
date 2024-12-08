@@ -1,10 +1,9 @@
 import type { User, ShortUser } from '@shared/api';
-import { getOptionalAbortControllerConfig } from '@shared/api';
-import { instance } from '@shared/api';
-import { getMockableService } from '@shared/api';
-import { userMockService } from '../mock';
+import { getOptionalAbortControllerConfig, instance } from '@shared/api';
+import { getMockableService } from '../mock';
 import type { PairFilterParams, PairsInfo } from './user-service.interface';
 import type { UserService } from './user-service.interface';
+import { userMockService } from './user.mock-service';
 
 export const userService: UserService = getMockableService(
   {

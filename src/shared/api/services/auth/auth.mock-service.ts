@@ -9,8 +9,8 @@ import {
   rejectWithAxiosResponseError,
   resolveAxiosResponse,
   saveTestUser,
-} from '../mock';
-import { authResponseStub } from './auth.stub';
+  authResponseStub,
+} from '@shared/api';
 
 export const authMockService: AuthService = {
   async registration(email, name, password) {

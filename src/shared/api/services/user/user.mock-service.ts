@@ -2,9 +2,15 @@
 
 import type { User } from '@shared/api';
 import type { UserService, PairFilterParams } from '@shared/api';
-import { chatStub } from '@shared/api';
-import { mockStorage, resolveAxiosResponse, saveTestUser } from '../mock';
-import { matchingUserStubs, pairsInfoStub, shortUserStub } from './user.stub';
+import {
+  chatStub,
+  matchingUserStubs,
+  pairsInfoStub,
+  shortUserStub,
+  mockStorage,
+  resolveAxiosResponse,
+  saveTestUser,
+} from '@shared/api';
 
 export const userMockService: UserService = {
   async getMe() {
