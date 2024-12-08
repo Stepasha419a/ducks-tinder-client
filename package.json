@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host --mode dev",
+    "dev": "webpack serve --config config/development.config.js",
     "demo": "vite --host --mode demo",
     "build": "vite build",
     "preview": "vite preview",
