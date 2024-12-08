@@ -89,7 +89,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPlugin({
-      template: './public/index.html',
+      template: './index.html',
     }),
     new FaviconsWebpackPlugin({
       logo: './public/favicon.ico',
@@ -104,7 +104,7 @@ module.exports = {
       emitWarning: true,
       failOnError: false,
       extensions: ['ts', 'tsx'],
-      overrideConfigFile: './.eslintrc.js',
+      overrideConfigFile: './.eslintrc.cjs',
     }),
     new Dotenv({
       path: '.env',
