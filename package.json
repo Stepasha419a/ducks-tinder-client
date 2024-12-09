@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "webpack serve --config config/development.config.js --mode=development",
     "demo": "vite --host --mode demo",
+    "prod": "webpack --config config/production.config.js --mode=production",
     "build": "vite build",
     "preview": "vite preview",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
