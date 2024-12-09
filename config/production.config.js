@@ -83,7 +83,8 @@ module.exports = {
       template: './index.html',
     }),
     new FaviconsWebpackPlugin({
-      logo: './public/favicon.ico',
+      logo: './public/favicon.png',
+      manifest: './public/manifest.json',
     }),
     new Dotenv({
       path: '.env',
