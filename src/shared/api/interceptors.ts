@@ -31,7 +31,7 @@ export function setUpInterceptors(instance: AxiosInstance) {
       ) {
         originalRequest._isRetry = true;
         const response = await axios.get<AuthResponse>(
-          `${import.meta.env.VITE_AUTH_SERVICE_URL}/auth/refresh`,
+          `${process.env.VITE_AUTH_SERVICE_URL}/auth/refresh`,
           {
             withCredentials: true,
           }

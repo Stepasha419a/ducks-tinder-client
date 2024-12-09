@@ -28,7 +28,7 @@ export async function rejectWithAxiosResponseError<T>(
 }
 
 export function getMockableService<T>(service: T, mockService: T): T {
-  return import.meta.env.VITE_MODE === 'demo' ? mockService : service;
+  return process.env.VITE_MODE === 'demo' ? mockService : service;
 }
 
 export const mockStorage = {

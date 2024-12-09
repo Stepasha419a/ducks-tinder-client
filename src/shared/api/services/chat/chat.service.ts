@@ -16,31 +16,28 @@ export const chatService: ChatService = getMockableService(
   {
     async getChat(chatId: string) {
       return instance.get<Chat>(
-        `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/${chatId}`
+        `${process.env.VITE_CHAT_SERVICE_URL}/chat/${chatId}`
       );
     },
     async getChats(params: PaginationParams) {
-      return instance.get<Chat[]>(
-        `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat`,
-        {
-          params,
-        }
-      );
+      return instance.get<Chat[]>(`${process.env.VITE_CHAT_SERVICE_URL}/chat`, {
+        params,
+      });
     },
     async getMessages(chatId: string, params: PaginationParams) {
       return instance.get<ShortMessagesPagination>(
-        `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/${chatId}/messages`,
+        `${process.env.VITE_CHAT_SERVICE_URL}/chat/${chatId}/messages`,
         { params }
       );
     },
     async getNewMessagesCount() {
       return instance.get<NewMessagesCount>(
-        `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/new`
+        `${process.env.VITE_CHAT_SERVICE_URL}/chat/new`
       );
     },
     async getMember(memberId: string) {
       return instance.get<ShortUser>(
-        `${import.meta.env.VITE_CHAT_SERVICE_URL}/chat/member/${memberId}`
+        `${process.env.VITE_CHAT_SERVICE_URL}/chat/member/${memberId}`
       );
     },
     connect(): ChatsConnectReturn {

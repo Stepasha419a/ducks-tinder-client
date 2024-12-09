@@ -7,12 +7,12 @@ export const authService: AuthService = getMockableService(
   {
     async refresh() {
       return instance.get<AuthResponse>(
-        `${import.meta.env.VITE_AUTH_SERVICE_URL}/auth/refresh`
+        `${process.env.VITE_AUTH_SERVICE_URL}/auth/refresh`
       );
     },
     async registration(email: string, name: string, password: string) {
       return instance.post<AuthResponse>(
-        `${import.meta.env.VITE_AUTH_SERVICE_URL}/auth/register`,
+        `${process.env.VITE_AUTH_SERVICE_URL}/auth/register`,
         {
           email,
           name,
@@ -22,14 +22,12 @@ export const authService: AuthService = getMockableService(
     },
     async login(email: string, password: string) {
       return instance.post<AuthResponse>(
-        `${import.meta.env.VITE_AUTH_SERVICE_URL}/auth/login`,
+        `${process.env.VITE_AUTH_SERVICE_URL}/auth/login`,
         { email, password }
       );
     },
     async logout() {
-      return instance.patch(
-        `${import.meta.env.VITE_AUTH_SERVICE_URL}/auth/logout`
-      );
+      return instance.patch(`${process.env.VITE_AUTH_SERVICE_URL}/auth/logout`);
     },
   },
   authMockService
