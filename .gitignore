@@ -3,6 +3,7 @@
 dist
 .env
 .vscode
+.yarn
 
 # dev mutations for window to test much easily
 /src/application/dev

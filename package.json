@@ -169,5 +169,6 @@
       "jest-watch-typeahead/testname"
     ],
     "resetMocks": true
-  }
+  },
+  "packageManager": "yarn@4.5.3"
 }
