@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "webpack serve --config config/development.config.js --mode=development",
-    "demo": "vite --host --mode demo",
-    "prod": "webpack --config config/production.config.js --mode=production",
+    "dev": "webpack serve --config config/development.config.js --mode=development --env envPath=.env.dev",
+    "dev:demo": "webpack serve --config config/development.config.js --mode=development --env envPath=.env.demo",
+    "prod": "webpack --config config/production.config.js --mode=production --env envPath=.env.prod",
+    "prod:demo": "webpack --config config/production.config.js --mode=production --env envPath=.env.demo",
     "build": "vite build",
     "preview": "vite preview",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
