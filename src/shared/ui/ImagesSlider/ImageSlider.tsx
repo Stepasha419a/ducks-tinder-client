@@ -3,6 +3,7 @@ import type {
   Dispatch,
   FC,
   ReactElement,
+  ReactNode,
   RefObject,
   SetStateAction,
 } from 'react';
@@ -85,6 +86,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
 
   return (
     <div className={cnWrapper}>
+      {/* @ts-expect-error TODO fix invalid types dependency */}
       <Carousel
         ref={sliderRef}
         speed={100}
@@ -98,7 +100,7 @@ export const ImageSlider: FC<ImageSliderProps> = ({
         nextArrow={isLastImage ? <></> : <NextArrow />}
         beforeChange={(prev, next: number) => setCurrent(next)}
         customPaging={(i) => <Dot isActive={i === current} />}
-        appendDots={(node) => <DotsWrapper>{node}</DotsWrapper>}
+        appendDots={(node) => <DotsWrapper>{node as ReactNode}</DotsWrapper>}
         initialSlide={current}
         className={styles.carousel}
       >
