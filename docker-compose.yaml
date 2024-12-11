@@ -1,0 +1,10 @@
+name: 'ducks-tinder-client'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:1.27.2-alpine
+    volumes:
+      - ./nginx/nginx-dev.conf:/etc/nginx/nginx.conf.template
+    env_file: .env.dev
+    ports:
+      - '${PROXY_PORT}:${PROXY_PORT}'
