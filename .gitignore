@@ -5,6 +5,8 @@ dist
 .vscode
 .yarn
 
+cert
+
 # dev mutations for window to test much easily
 /src/application/dev
 
