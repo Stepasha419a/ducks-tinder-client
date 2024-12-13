@@ -15,7 +15,9 @@ services:
       \$\{PROXY_PORT\}
       \$\{CLIENT_URL\}
       \$\{PROXY_USER_SERVICE\}
+      \$\{PROXY_CHAT_SERVICE\}
       \$\{PROXY_AUTH_SERVICE\}
       \$\{AUTH_SERVICE_URL\}
       \$\{USER_SERVICE_URL\}
+      \$\{CHAT_SERVICE_URL\}
       ' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
