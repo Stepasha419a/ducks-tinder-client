@@ -33,7 +33,7 @@ module.exports = (env) => {
         directory: path.resolve(__dirname, '..', 'dist'),
       },
       compress: true,
-      port: 3000,
+      port: 3001,
       hot: true,
       historyApiFallback: true,
     },
