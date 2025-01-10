@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "install:classic-version": "yarn set version 1.22.1 && yarn install",
     "dev": "webpack serve --config config/development.config.js --mode=development --env envPath=.env.dev",
     "dev:demo": "webpack serve --config config/development.config.js --mode=development --env envPath=.env.demo",
     "prod": "webpack --config config/production.config.js --mode=production --env envPath=.env.prod",
