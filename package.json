@@ -1,6 +1,9 @@
 {
   "private": true,
   "license": "MIT",
+  "workspaces": [
+    "apps/root"
+  ],
   "dependencies": {
     "@fortawesome/fontawesome-common-types": "^6.4.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
