@@ -2,7 +2,7 @@
   "private": true,
   "license": "MIT",
   "workspaces": [
-    "apps/root"
+    "apps/*"
   ],
   "dependencies": {
     "@fortawesome/fontawesome-common-types": "^6.4.0",
