@@ -1,0 +1,6 @@
+.eslintrc.сjs
+development.config.js
+production.config.js
+node_modules/
+dist/
+vite.config.ts

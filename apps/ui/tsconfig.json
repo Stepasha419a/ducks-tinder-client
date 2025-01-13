@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "paths": {
+      "@app/*": ["./app/*"],
+      "@pages": ["./pages"],
+      "@pages/*": ["./pages/*"],
+      "@widgets/*": ["./widgets/*"],
+      "@widgets": ["./widgets"],
+      "@features/*": ["./features/*"],
+      "@entities/*": ["./entities/*"],
+      "@shared/*": ["./shared/*"],
+      "@shared/assets": ["./shared/ui/assets"],
+      "@shared/constants": ["./shared/lib/constants"],
+      "@shared/helpers": ["./shared/lib/helpers"]
+    }
+  }
+}
