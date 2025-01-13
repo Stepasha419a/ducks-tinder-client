@@ -1,0 +1,103 @@
+.slider {
+  .slick-slider {
+    width: 100%;
+    height: 100%;
+
+    .slick-list {
+      height: 100%;
+
+      .slick-track {
+        height: 100%;
+
+        .slick-slide {
+          position: relative;
+          height: 100%;
+
+          & > div {
+            height: 100%;
+
+            & > div {
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .nextArrowWrapper,
+    .prevArrowWrapper {
+      height: 100%;
+      width: 50%;
+      cursor: pointer;
+    }
+
+    .nextArrowWrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 1;
+      float: right;
+
+      .nextArrow {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        color: var(--color--white-100);
+        font-size: 30px;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.2s;
+      }
+
+      &:hover .nextArrow {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+
+    .prevArrowWrapper {
+      position: absolute;
+      top: 0;
+      z-index: 1;
+      float: left;
+
+      .prevArrow {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        color: var(--color--white-100);
+        font-size: 30px;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.2s;
+      }
+
+      &:hover .prevArrow {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+  .default-wrapper {
+    height: 100%;
+    width: 100%;
+  }
+
+  &.isShadow {
+    .slick-slide {
+      box-shadow: rgb(0 0 0) 0px -205px 55px -70px inset;
+    }
+
+    .default-wrapper {
+      box-shadow: rgb(0 0 0) 0px -205px 55px -70px inset;
+    }
+  }
+
+  &.smallArrowWrappers {
+    .nextArrowWrapper,
+    .prevArrowWrapper {
+      width: 15%;
+    }
+  }
+}

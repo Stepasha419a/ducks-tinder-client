@@ -1,0 +1,20 @@
+.Toastify__toast {
+  background-color: var(--bg-sub-primary);
+  border: 2px solid var(--border-main);
+
+  .Toastify__toast-body {
+    color: var(--main-primary);
+  }
+
+  .Toastify__close-button {
+    color: var(--main-primary);
+  }
+
+  .Toastify__progress-bar {
+    background: linear-gradient(
+      45deg,
+      var(--color--pink-100),
+      var(--color--orange-90)
+    );
+  }
+}
