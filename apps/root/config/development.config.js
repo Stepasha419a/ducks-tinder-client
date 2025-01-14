@@ -84,6 +84,7 @@ module.exports = (env) => {
             options: {
               cacheDirectory: true,
               cacheCompression: false,
+              configFile: './.babelrc',
             },
           },
           exclude: /node_modules/,
@@ -95,8 +96,8 @@ module.exports = (env) => {
         template: './index.html',
       }),
       new FaviconsWebpackPlugin({
-        logo: './public/favicon.png',
-        manifest: './public/manifest.json',
+        logo: '../../public/favicon.png',
+        manifest: '../../public/manifest.json',
       }),
       new ReactRefreshWebpackPlugin({
         overlay: false,

@@ -75,6 +75,7 @@ module.exports = (env) => {
             options: {
               cacheDirectory: true,
               cacheCompression: false,
+              configFile: './.babelrc',
             },
           },
           exclude: /node_modules/,
