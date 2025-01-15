@@ -2,6 +2,8 @@
 
 Ducks Tinder is a Tinder clone project
 
+## Currently under the refactoring, the below may be mistaken
+
 ## Available Scripts
 
 - `npm run dev` - runs the app in the development mode (default port is 3000);
