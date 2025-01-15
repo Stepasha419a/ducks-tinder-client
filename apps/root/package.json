@@ -9,8 +9,6 @@
     "prod:demo": "webpack --config ./config/production.config.js --mode=production --env envPath=.env.demo",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
     "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
-    "lint": "eslint ./src/**/*{.ts,.tsx,.js,.jsx} --max-warnings=0",
-    "lint:fix": "eslint ./src/**/*{.ts,.tsx,.js,.jsx} --fix --max-warnings=0",
     "storybook": "storybook dev -p 6006",
     "storybook:test": "test-storybook"
   },
@@ -27,6 +25,7 @@
     ]
   },
   "dependencies": {
+    "@ducks-tinder/ui": "^1.0.0",
     "@pbe/react-yandex-maps": "^1.2.4",
     "events": "^3.3.0",
     "react-easy-crop": "^4.5.0",
