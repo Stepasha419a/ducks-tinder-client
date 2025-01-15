@@ -7,6 +7,7 @@
   "scripts": {
     "lint:root": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
     "lint:ui": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
+    "lint": "concurrently --kill-others \"yarn lint:root\" \"yarn lint:ui\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-common-types": "^6.4.0",
