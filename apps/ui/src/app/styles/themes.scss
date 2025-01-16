@@ -1,0 +1,51 @@
+html[data-theme='light'] {
+  --main-primary: #21262e;
+  --main-secondary: #505965;
+
+  --bg-primary: #f0f2f4;
+  --bg-sub-primary: #fff;
+  --bg-secondary: #b9bfc5;
+  --bg-sub-secondary: #e6e9ec;
+
+  --bg-chat-form: #e6e9ec;
+
+  --primary-chat: #000000bb;
+
+  --primary-message: #ffdeeb;
+  --second-message: #ff623623;
+  --selected-message: #dadada;
+
+  --border-main: #d6d6d6;
+  --sub-border-main: #0000001f;
+
+  --primary-instruction: #00000073;
+
+  --danger-main: #992626;
+  --danger-light: #c62c1e;
+}
+
+html[data-theme='dark'] {
+  --main-primary: #e1e4e9;
+  --main-secondary: #b0b7c0;
+
+  --bg-primary: #111418;
+  --bg-sub-primary: rgb(24, 26, 29);
+  --bg-secondary: #000;
+  --bg-sub-secondary: #0c0e11;
+
+  --bg-chat-form: #252525;
+
+  --primary-chat: #e1e4e9;
+
+  --primary-message: #ff54989d;
+  --second-message: #ff62369c;
+  --selected-message: #383838;
+
+  --border-main: #21262e;
+  --sub-border-main: #353535;
+
+  --primary-instruction: #e1e4e9;
+
+  --danger-main: #df3838;
+  --danger-light: #ff4458;
+}
