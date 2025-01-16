@@ -1,0 +1,6 @@
+{
+  "references": [{ "path": "./apps/root" }, { "path": "./apps/ui" }],
+  "files": [],
+  "include": [],
+  "exclude": ["**/node_modules"]
+}
