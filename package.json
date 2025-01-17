@@ -7,7 +7,10 @@
   "scripts": {
     "lint:root": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
     "lint:ui": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
-    "lint": "concurrently --kill-others \"yarn lint:root\" \"yarn lint:ui\""
+    "lint": "concurrently --kill-others \"yarn lint:root\" \"yarn lint:ui\"",
+    "lint:fix:root": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --fix --max-warnings=0",
+    "lint:fix:ui": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --fix --max-warnings=0",
+    "lint:fix": "concurrently --kill-others \"yarn lint:fix:root\" \"yarn lint:fix:ui\""
   },
   "dependencies": {
     "@fortawesome/fontawesome-common-types": "^6.4.0",
@@ -78,5 +81,6 @@
     "webpack": "5.77.0",
     "webpack-cli": "5.0.1",
     "webpack-dev-server": "^4.13.2"
-  }
+  },
+  "packageManager": "yarn@4.6.0"
 }
