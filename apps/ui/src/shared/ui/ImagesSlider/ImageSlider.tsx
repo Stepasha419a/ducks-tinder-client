@@ -12,7 +12,6 @@ import { useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import type Slider from 'react-slick';
 import Carousel from 'react-slick';
-import type { Picture } from '@shared/api';
 import { makeImageUrl, showDefaultImage } from '@shared/lib';
 import {
   NotFoundImages,
@@ -22,6 +21,7 @@ import {
   Dot,
 } from './components';
 import styles from './ImageSlider.module.scss';
+import type { Picture } from './ImageSlider.types';
 import 'slick-carousel/slick/slick.scss';
 import './override.scss';
 
