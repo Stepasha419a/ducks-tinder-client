@@ -104,7 +104,6 @@ module.exports = (env) => {
       }),
       new ForkTsCheckerWebpackPlugin(),
       new EslintWebpackPlugin({
-        context: '../',
         emitWarning: true,
         failOnError: false,
         extensions: ['ts', 'tsx'],
