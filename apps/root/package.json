@@ -1,5 +1,5 @@
 {
-  "name": "@ducks-tinder/root",
+  "name": "@ducks-tinder-client/root",
   "version": "0.1.0",
   "private": true,
   "scripts": {
