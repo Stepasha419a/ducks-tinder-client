@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "storybook:test": "test-storybook"
+    "storybook:test": "test-storybook",
+    "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
+    "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0"
   },
   "browserslist": {
     "production": [
