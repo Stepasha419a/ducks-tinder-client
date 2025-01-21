@@ -10,6 +10,9 @@ export default defineConfig(({ mode }) => {
     base: '/',
     publicDir: 'public',
     logLevel: 'warn',
+    define: {
+      'process.env': env,
+    },
 
     plugins: [
       react({ include: '**/*.tsx' }),
