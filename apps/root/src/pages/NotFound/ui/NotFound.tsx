@@ -1,7 +1,7 @@
+import { authDuck } from '@ducks-tinder-client/ui';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@shared/lib';
-import { authDuck } from '@shared/ui';
 import styles from './NotFound.module.scss';
 import {
   contentVariants,

@@ -1,7 +1,7 @@
+import { Button } from '@ducks-tinder-client/ui';
 import type { FC, PropsWithChildren } from 'react';
 import { getProfileSettingWrapperData } from '@features/ProfileSetting';
 import type { ProfileSettingNameEnum } from '@entities/user';
-import { Button } from '@shared/ui';
 import styles from './SettingWrapper.module.scss';
 
 interface SettingWrapperProps {

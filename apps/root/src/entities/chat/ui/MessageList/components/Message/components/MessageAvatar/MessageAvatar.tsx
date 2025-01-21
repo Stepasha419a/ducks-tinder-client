@@ -1,5 +1,5 @@
+import { Avatar } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
-import { Avatar } from '@shared/ui';
 import styles from './MessageAvatar.module.scss';
 
 interface MessageAvatarProps {

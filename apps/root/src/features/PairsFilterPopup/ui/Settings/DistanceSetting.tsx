@@ -1,8 +1,8 @@
+import { RangeInput } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 import type { PairFilterForm } from '@entities/user';
-import { RangeInput } from '@shared/ui';
 import styles from '../../PairsFilterPopup.module.scss';
 
 interface DistanceSettingProps {

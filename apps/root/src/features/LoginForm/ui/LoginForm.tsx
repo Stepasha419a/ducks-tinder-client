@@ -1,3 +1,4 @@
+import { Button, TextField } from '@ducks-tinder-client/ui';
 import {
   faArrowRightLong,
   faEnvelope,
@@ -8,7 +9,6 @@ import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthLayout } from '@entities/user';
 import { useAuthForm } from '@entities/user';
-import { Button, TextField } from '@shared/ui';
 import styles from './LoginForm.module.scss';
 
 export const LoginForm = (): ReactElement => {

@@ -1,4 +1,4 @@
-import { defaultDuck } from '@shared/ui';
+import { defaultDuck } from '@ducks-tinder-client/ui';
 
 export function makeImageUrl(avatarUrl?: string): string {
   return avatarUrl

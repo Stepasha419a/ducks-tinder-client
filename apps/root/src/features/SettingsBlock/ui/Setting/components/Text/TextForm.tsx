@@ -1,6 +1,6 @@
+import { TextField } from '@ducks-tinder-client/ui';
 import type { FC, ReactElement } from 'react';
 import { useTextForm } from '@features/SettingsBlock';
-import { TextField } from '@shared/ui';
 import { SettingWrapper } from '../components';
 import styles from './TextForm.module.scss';
 

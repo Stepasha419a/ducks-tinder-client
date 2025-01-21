@@ -1,6 +1,6 @@
+import { Textarea } from '@ducks-tinder-client/ui';
 import type { FC, ReactElement } from 'react';
 import { useTextForm } from '@features/SettingsBlock';
-import { Textarea } from '@shared/ui';
 import { SettingWrapper } from '../components';
 import styles from './TextareaForm.module.scss';
 

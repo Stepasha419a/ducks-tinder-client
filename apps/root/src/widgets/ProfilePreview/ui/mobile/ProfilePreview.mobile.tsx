@@ -1,3 +1,4 @@
+import { Avatar } from '@ducks-tinder-client/ui';
 import { faCamera, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -6,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { UploadImagePopups } from '@features/UploadImagePopups';
 import { ROUTES } from '@shared/lib';
 import { useAppSelector } from '@shared/lib';
-import { Avatar } from '@shared/ui';
 import styles from './ProfilePreview.mobile.module.scss';
 
 export const ProfilePreviewMobile = () => {

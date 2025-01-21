@@ -1,4 +1,4 @@
-import { Skeleton } from '@shared/ui';
+import { Skeleton } from '@ducks-tinder-client/ui';
 import styles from './MessageForm.module.scss';
 
 export const MessageFormLazy = () => {

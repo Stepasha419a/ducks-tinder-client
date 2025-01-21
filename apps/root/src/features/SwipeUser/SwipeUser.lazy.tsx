@@ -1,6 +1,6 @@
+import { Skeleton } from '@ducks-tinder-client/ui';
 import classNames from 'classnames';
 import type { FC } from 'react';
-import { Skeleton } from '@shared/ui';
 import styles from './SwipeUser.module.scss';
 
 interface SwipeUserLazyProps {

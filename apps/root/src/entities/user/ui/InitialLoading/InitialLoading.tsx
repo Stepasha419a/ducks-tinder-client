@@ -1,5 +1,5 @@
+import { LoadingPage } from '@ducks-tinder-client/ui';
 import { useAppSelector } from '@shared/lib';
-import { LoadingPage } from '@shared/ui';
 
 export const InitialLoading = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);

@@ -1,9 +1,9 @@
+import { ListItem } from '@ducks-tinder-client/ui';
 import { faHouse, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { FC } from 'react';
 import type { UserSliderInfo } from '@entities/user';
-import { ListItem } from '@shared/ui';
 import styles from './SliderContent.module.scss';
 
 interface SliderContentProps {

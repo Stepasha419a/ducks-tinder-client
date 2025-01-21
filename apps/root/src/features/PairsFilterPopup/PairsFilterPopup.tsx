@@ -1,8 +1,8 @@
+import { Popup } from '@ducks-tinder-client/ui';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { Control, UseFormReset } from 'react-hook-form';
 import type { PairFilterForm } from '@entities/user';
-import { Popup } from '@shared/ui';
 import { usePairFilterForm } from './lib';
 import styles from './PairsFilterPopup.module.scss';
 import {

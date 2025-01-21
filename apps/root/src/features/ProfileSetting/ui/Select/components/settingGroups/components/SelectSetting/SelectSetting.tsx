@@ -1,3 +1,4 @@
+import { ListItemButton } from '@ducks-tinder-client/ui';
 import classNames from 'classnames';
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
@@ -6,7 +7,6 @@ import type {
   MultiSelectForm,
   ProfileSettingSelectNameEnum,
 } from '@entities/user';
-import { ListItemButton } from '@shared/ui';
 import styles from './SelectSetting.module.scss';
 
 interface SelectSettingProps {

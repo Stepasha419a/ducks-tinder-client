@@ -1,3 +1,4 @@
+import { ImageSlider } from '@ducks-tinder-client/ui';
 import classNames from 'classnames';
 import { memo, useEffect } from 'react';
 import type {
@@ -10,7 +11,6 @@ import type {
 import type Slider from 'react-slick';
 import { getUserSliderInfo } from '@entities/user';
 import type { ShortUser, User } from '@shared/api';
-import { ImageSlider } from '@shared/ui';
 import { NoSlider, SliderContent } from './components';
 import styles from './UserSlider.module.scss';
 

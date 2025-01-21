@@ -1,10 +1,10 @@
+import { Button } from '@ducks-tinder-client/ui';
 import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { Reorder } from 'framer-motion';
 import type { FC } from 'react';
 import type { Picture } from '@shared/api';
-import { Button } from '@shared/ui';
 import styles from './Card.module.scss';
 
 interface CardProps {

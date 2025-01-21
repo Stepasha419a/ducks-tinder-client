@@ -1,3 +1,4 @@
+import { InfinityScroll } from '@ducks-tinder-client/ui';
 import {
   faHeart,
   faMagnifyingGlassMinus,
@@ -11,7 +12,6 @@ import {
   useAppSelector,
   useDebouncedCallback,
 } from '@shared/lib';
-import { InfinityScroll } from '@shared/ui';
 import { PairsListLazy } from './PairsList.lazy';
 import styles from './PairsList.module.scss';
 import { Pair } from './ui';

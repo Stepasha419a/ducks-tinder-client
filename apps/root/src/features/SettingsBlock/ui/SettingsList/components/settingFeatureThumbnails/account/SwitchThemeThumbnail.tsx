@@ -1,7 +1,7 @@
+import { CheckboxInput } from '@ducks-tinder-client/ui';
 import { SettingThumbnail } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import { setTheme } from '@shared/model';
-import { CheckboxInput } from '@shared/ui';
 
 export const SwitchThemeThumbnail = () => {
   const dispatch = useAppDispatch();

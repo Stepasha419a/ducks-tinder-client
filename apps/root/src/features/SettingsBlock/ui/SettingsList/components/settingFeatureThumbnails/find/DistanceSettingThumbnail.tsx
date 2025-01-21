@@ -1,8 +1,8 @@
+import { CheckboxInput, RangeInput } from '@ducks-tinder-client/ui';
 import { useState } from 'react';
 import { SettingThumbnail } from '@entities/user';
 import { updateUserThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
-import { CheckboxInput, RangeInput } from '@shared/ui';
 import styles from '../SettingFeatureThumbnails.module.scss';
 
 export const DistanceSettingThumbnail = () => {

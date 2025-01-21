@@ -1,3 +1,4 @@
+import { Button } from '@ducks-tinder-client/ui';
 import type { FC, ReactElement } from 'react';
 import { disconnectThunk, resetChatSlice } from '@entities/chat';
 import {
@@ -7,7 +8,6 @@ import {
   resetUserSlice,
 } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
-import { Button } from '@shared/ui';
 import styles from './LogoutButton.module.scss';
 
 export const LogoutButton: FC = (): ReactElement => {

@@ -1,3 +1,5 @@
+import { InfinityScroll } from '@ducks-tinder-client/ui';
+import type { ControlRef } from '@ducks-tinder-client/ui';
 import classNames from 'classnames';
 import { useEffect, useRef, type FC, type ReactElement } from 'react';
 import { useParams } from 'react-router-dom';
@@ -15,8 +17,6 @@ import {
   useAppSelector,
   useDebouncedCallback,
 } from '@shared/lib';
-import { InfinityScroll } from '@shared/ui';
-import type { ControlRef } from '@shared/ui';
 import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';

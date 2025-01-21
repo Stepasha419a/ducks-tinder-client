@@ -1,8 +1,8 @@
+import { Button } from '@ducks-tinder-client/ui';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { Dispatch, FC, ReactElement, SetStateAction } from 'react';
-import { Button } from '@shared/ui';
 import styles from './OuterPreview.module.scss';
 
 interface OuterPreviewPropsInterface {

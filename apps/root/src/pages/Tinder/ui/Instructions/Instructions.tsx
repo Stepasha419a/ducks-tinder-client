@@ -1,3 +1,4 @@
+import { Button } from '@ducks-tinder-client/ui';
 import {
   faArrowTurnDown,
   faDownLong,
@@ -10,7 +11,6 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useState } from 'react';
-import { Button } from '@shared/ui';
 import styles from './Instructions.module.scss';
 
 interface InstructionsProps {

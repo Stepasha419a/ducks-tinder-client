@@ -1,3 +1,4 @@
+import { Button } from '@ducks-tinder-client/ui';
 import {
   faBolt,
   faHeart,
@@ -12,7 +13,6 @@ import { motion, type AnimationControls } from 'framer-motion';
 import type { FC } from 'react';
 import { useRateButtons } from '@features/SwipeUser';
 import { useAppSelector } from '@shared/lib';
-import { Button } from '@shared/ui';
 import styles from './RateButtons.module.scss';
 
 interface RateButtonsProps {

@@ -1,7 +1,7 @@
+import type { ControlRef } from '@ducks-tinder-client/ui';
 import type { RefObject } from 'react';
 import { useCallback, useEffect, useRef } from 'react';
 import { useAppSelector } from '@shared/lib';
-import type { ControlRef } from '@shared/ui';
 
 export function useMessagesScroll(controlRef: RefObject<ControlRef>) {
   const messagesLength = useAppSelector((state) => state.chat.messages.length);

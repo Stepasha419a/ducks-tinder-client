@@ -1,3 +1,4 @@
+import { Avatar } from '@ducks-tinder-client/ui';
 import { useEffect, type FC, memo } from 'react';
 import { useParams } from 'react-router-dom';
 import {
@@ -5,7 +6,6 @@ import {
   useAppSelector,
   useAdaptiveMediaQuery,
 } from '@shared/lib';
-import { Avatar } from '@shared/ui';
 import { getChatThunk } from '../../model';
 import { ChatProfileLazy } from './ChatProfile.lazy';
 import styles from './ChatProfile.module.scss';

@@ -1,5 +1,5 @@
+import { defaultDuck } from '@ducks-tinder-client/ui';
 import type { SyntheticEvent } from 'react';
-import { defaultDuck } from '@shared/ui';
 
 // uses for <img /> when onError is triggered
 export function showDefaultImage(

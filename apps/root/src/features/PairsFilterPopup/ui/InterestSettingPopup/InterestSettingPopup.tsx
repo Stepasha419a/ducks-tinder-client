@@ -1,6 +1,6 @@
+import { Button, ListItemButton, Popup } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
 import { Interest } from '@shared/api';
-import { Button, ListItemButton, Popup } from '@shared/ui';
 import styles from './InterestSettingPopup.module.scss';
 
 interface InterestSettingPopupProps {

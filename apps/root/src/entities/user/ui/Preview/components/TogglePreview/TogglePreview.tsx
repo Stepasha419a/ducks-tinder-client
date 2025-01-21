@@ -1,7 +1,7 @@
+import { Button } from '@ducks-tinder-client/ui';
 import { faCircleDown, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC } from 'react';
-import { Button } from '@shared/ui';
 import styles from './TogglePreview.module.scss';
 
 interface TogglePreviewProps {
