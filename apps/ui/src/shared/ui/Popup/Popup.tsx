@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import type { FC, PropsWithChildren } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 import { useAdaptiveMediaQuery } from '@shared/lib';
 import styles from './Popup.module.scss';
 import type { PopupProps } from './Popup.types';
@@ -23,7 +23,7 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
   const adaptiveVariants = isMobile ? mobileVariants : variants;
   const duration = isMobile ? 0.2 : 0.1;
 
-  return ReactDOM.createPortal(
+  return createPortal(
     <div className={styles.popup}>
       <motion.div
         className={styles.body}
