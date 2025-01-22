@@ -652,6 +652,7 @@ __metadata:
     "@storybook/test-runner": "npm:^0.21.0"
     "@storybook/testing-library": "npm:0.2.2"
     "@types/react": "npm:^18.0.31"
+    "@types/react-dom": "npm:^19.0.3"
     "@types/react-slick": "npm:^0.23.13"
     "@types/toastify-js": "npm:^1.11.1"
     "@typescript-eslint/eslint-plugin": "npm:^7.4.0"
@@ -2639,6 +2640,15 @@ __metadata:
   version: 15.7.14
   resolution: "@types/prop-types@npm:15.7.14"
   checksum: 10c0/1ec775160bfab90b67a782d735952158c7e702ca4502968aa82565bd8e452c2de8601c8dfe349733073c31179116cf7340710160d3836aa8a1ef76d1532893b1
+  languageName: node
+  linkType: hard
+
+"@types/react-dom@npm:^19.0.3":
+  version: 19.0.3
+  resolution: "@types/react-dom@npm:19.0.3"
+  peerDependencies:
+    "@types/react": ^19.0.0
+  checksum: 10c0/3867427b333cbe8cbba496d7cc20ec9676d32c25ae44f4d1263a4129d42e57cf4adf0039ad263432f1215b88075c27d326e7eb4ed646128235d01a76e661d48f
   languageName: node
   linkType: hard
 
