@@ -36,6 +36,7 @@ export const Single: Story = {
     max: 100,
     min: 2,
     value: { value: 50 },
+    setValue: () => {},
   },
 };
 
@@ -66,5 +67,6 @@ export const Multiple: Story = {
     max: 100,
     min: 2,
     value: { min: 20, max: 60 },
+    setValue: () => {},
   },
 };

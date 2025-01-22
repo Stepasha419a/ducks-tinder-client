@@ -50,5 +50,6 @@ export const Primary: Story = {
   args: {
     size: 'm',
     title: 'Popup title',
+    closeHandler: () => {},
   },
 };

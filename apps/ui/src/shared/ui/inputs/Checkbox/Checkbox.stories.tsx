@@ -29,5 +29,6 @@ export const Primary: Story = {
   args: {
     checked: true,
     text: 'Show people only in this range',
+    onChange: () => {},
   },
 };
