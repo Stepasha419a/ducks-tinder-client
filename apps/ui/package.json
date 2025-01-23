@@ -2,10 +2,17 @@
   "name": "@ducks-tinder-client/ui",
   "version": "1.0.0",
   "private": true,
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "storybook": "storybook dev -p 6006",
     "storybook:test": "test-storybook",
+    "build": "vite build",
     "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0"
   },
