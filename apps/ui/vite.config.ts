@@ -50,5 +50,14 @@ export default defineConfig(({ mode }) => {
         '@shared': path.resolve(__dirname, './src/shared'),
       },
     },
+    build: {
+      sourcemap: true,
+      lib: {
+        entry: path.resolve(__dirname, 'src/index.ts'),
+        name: 'ducksTinderClientUi',
+        formats: ['es', 'cjs', 'umd', 'iife'],
+        fileName: (format) => `index.${format}.js`,
+      },
+    },
   };
 });
