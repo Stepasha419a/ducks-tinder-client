@@ -1,3 +1,5 @@
+import { peerDependencies } from './package.json';
+
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import { defineConfig, loadEnv } from 'vite';
@@ -50,6 +52,7 @@ export default defineConfig(({ mode }) => {
         '@shared': path.resolve(__dirname, './src/shared'),
       },
     },
+
     build: {
       sourcemap: true,
       lib: {
@@ -57,6 +60,13 @@ export default defineConfig(({ mode }) => {
         name: 'ducksTinderClientUi',
         formats: ['es', 'cjs', 'umd', 'iife'],
         fileName: (format) => `index.${format}.js`,
+      },
+      rollupOptions: {
+        external: [
+          ...Object.keys(peerDependencies),
+          'react/jsx-runtime',
+          'react-toastify/dist/ReactToastify.css',
+        ],
       },
     },
   };
