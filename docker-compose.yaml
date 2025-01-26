@@ -7,7 +7,7 @@ services:
       - ./nginx/nginx-dev.conf:/etc/nginx/nginx.conf.template
       - ./cert:/etc/nginx/cert
     env_file:
-    - .env.dev
+      - .env.dev
     ports:
       - '${PROXY_PORT}:${PROXY_PORT}'
     command: >
@@ -23,3 +23,16 @@ services:
       \$\{CHAT_SERVICE_URL\}
       \$\{FILE_SERVICE_URL\}      
       ' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+  verdaccio:
+    image: verdaccio/verdaccio
+    container_name: verdaccio
+    networks:
+      - node-network
+    environment:
+      - VERDACCIO_PORT=4873
+    ports:
+      - '4873:4873'
+
+networks:
+  node-network:
+    driver: bridge
