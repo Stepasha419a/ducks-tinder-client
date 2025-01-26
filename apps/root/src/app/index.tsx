@@ -5,6 +5,7 @@ import type { ReactElement } from 'react';
 import { withAppHocs } from './lib';
 import { Routing } from './routing';
 import './styles/index.scss';
+import '@ducks-tinder-client/ui/dist/ui.css';
 
 function App(): ReactElement {
   return (
