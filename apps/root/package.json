@@ -115,9 +115,6 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.13.2"
   },
-  "resolutions": {
-    "@ducks-tinder-client/ui": "portal:../ui"
-  },
   "jest": {
     "roots": [
       "<rootDir>/src"
