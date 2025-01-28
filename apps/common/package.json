@@ -12,6 +12,8 @@
     "build": "tsc",
     "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
+    "publish:dev": "npm publish --registry http://localhost:4873/",
+    "publish:dev:override": "npm unpublish --force --registry http://localhost:4873/ && yarn publish:dev"
   },
   "browserslist": {
     "production": [
