@@ -8,6 +8,11 @@
   "files": [
     "dist"
   ],
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
+    "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
+  },
   "browserslist": {
     "production": [
       ">0.2%",
