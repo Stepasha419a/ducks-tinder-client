@@ -1,2 +1,3 @@
-export type { Theme } from './theme.interfaces';
-export { themeReducer, setTheme } from './theme.slice';
+export { ThemeContext, useThemeContext } from './theme.context';
+export { Theme } from './theme.interface';
+export type { ThemeContextValue } from './theme.interface';
