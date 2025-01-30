@@ -1,15 +1,17 @@
 {
   "name": "@ducks-tinder-client/common",
   "version": "1.0.0",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
   "type": "module",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rimraf ./dist && yarn build:tsc && yarn build:tsc:cjs",
+    "build:tsc": "tsc --outDir dist/esm",
+    "build:tsc:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
     "publish:dev": "npm publish --registry http://localhost:4873/",
