@@ -47,6 +47,7 @@
     "@feature-sliced/eslint-config": "^0.1.1",
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
+    "@types/react": "^19.0.8",
     "@types/toastify-js": "^1.11.1",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
@@ -60,6 +61,7 @@
     "eslint-webpack-plugin": "^4.2.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
+    "rimraf": "^6.0.1",
     "typescript": "^5.0.3"
   }
 }
