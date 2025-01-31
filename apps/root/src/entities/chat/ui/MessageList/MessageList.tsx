@@ -1,5 +1,5 @@
-import { InfinityScroll } from '@ducks-tinder-client/ui';
 import type { ControlRef } from '@ducks-tinder-client/ui';
+import { InfinityScroll } from '@ducks-tinder-client/ui';
 import classNames from 'classnames';
 import { useEffect, useRef, type FC, type ReactElement } from 'react';
 import { useParams } from 'react-router-dom';

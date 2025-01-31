@@ -1,16 +1,13 @@
-import { CheckboxInput } from '@ducks-tinder-client/ui';
+import { CheckboxInput, Theme, useThemeContext } from '@ducks-tinder-client/ui';
 import { SettingThumbnail } from '@entities/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib';
-import { setTheme } from '@shared/model';
 
 export const SwitchThemeThumbnail = () => {
-  const dispatch = useAppDispatch();
-  const theme = useAppSelector((state) => state.theme.theme);
+  const { theme, setTheme } = useThemeContext();
 
   const isChecked = theme === 'dark';
 
   const handleChange = () => {
-    dispatch(setTheme(!isChecked ? 'dark' : 'light'));
+    setTheme(!isChecked ? Theme.Dark : Theme.Light);
   };
 
   return (
