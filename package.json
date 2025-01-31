@@ -8,7 +8,10 @@
     "lint": "concurrently --kill-others \"yarn lint:root\" \"yarn lint:ui\"",
     "lint:fix:root": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --fix --max-warnings=0",
     "lint:fix:ui": "eslint \"./apps/ui/src/**/*.{ts,tsx,js,jsx}\" --fix --max-warnings=0",
-    "lint:fix": "concurrently --kill-others \"yarn lint:fix:root\" \"yarn lint:fix:ui\""
+    "lint:fix": "concurrently --kill-others \"yarn lint:fix:root\" \"yarn lint:fix:ui\"",
+    "init:dev:common": "yarn --cwd apps/common install && yarn --cwd apps/common run build:dev:publish",
+    "init:dev:ui": "yarn --cwd apps/ui run install:dev && yarn --cwd apps/ui run build:dev:publish",
+    "init:dev:root": "yarn --cwd apps/root run install:dev",
   },
   "packageManager": "yarn@4.6.0"
 }
