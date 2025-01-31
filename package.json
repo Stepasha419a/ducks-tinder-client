@@ -12,6 +12,7 @@
     "init:dev:common": "yarn --cwd apps/common install && yarn --cwd apps/common run build:dev:publish",
     "init:dev:ui": "yarn --cwd apps/ui run install:dev && yarn --cwd apps/ui run build:dev:publish",
     "init:dev:root": "yarn --cwd apps/root run install:dev",
+    "init:dev": "yarn init:dev:common && yarn init:dev:ui && yarn init:dev:root"
   },
   "packageManager": "yarn@4.6.0"
 }
