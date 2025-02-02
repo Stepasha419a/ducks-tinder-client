@@ -7,7 +7,7 @@
     "dev:demo": "webpack serve --config ./config/development.config.js --mode=development --env envPath=.env.demo",
     "prod": "webpack --config ./config/production.config.js --mode=production --env envPath=.env.prod",
     "prod:demo": "webpack --config ./config/production.config.js --mode=production --env envPath=.env.demo",
-    "install:dev": "rimraf ./yarn.lock && copy NUL yarn.lock && rimraf ./node_modules/@ducks-tinder-client && yarn cache clean && yarn install",
+    "up:dev:packages": "pnpm cache delete @ducks-tinder-client/* && pnpm up @ducks-tinder-client/*",
     "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
