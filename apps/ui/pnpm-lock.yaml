@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@ducks-tinder-client/common':
-        specifier: 1.0.0
-        version: 1.0.0(axios@0.28.1)(browserslist@4.24.4)(react-toastify@9.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        specifier: ^1.0.1
+        version: 1.0.1(axios@0.28.1)(browserslist@4.24.4)(react-toastify@9.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@fortawesome/fontawesome-common-types':
         specifier: ^6.4.0
         version: 6.7.2
@@ -425,8 +425,8 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@ducks-tinder-client/common@1.0.0':
-    resolution: {integrity: sha512-V9s9a/VeuBnKrteIqytEED61w+r2iZgmEuw8uROeMO3/KcHlD3cSF75vc5ShitdcH2mmagR3AqhEprGarXJMsQ==}
+  '@ducks-tinder-client/common@1.0.1':
+    resolution: {integrity: sha512-gheAnaG1kZFJZZF7jO/S1Qx324x8uLpbmJfNbF3c+e4YC57N/yCTLDwtIbTNV8LqNmP2G6m5aoXx/Pr2AMrVPw==}
     peerDependencies:
       axios: ^0.28.1
       browserslist: ^4.18.1
@@ -4788,7 +4788,7 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@ducks-tinder-client/common@1.0.0(axios@0.28.1)(browserslist@4.24.4)(react-toastify@9.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@ducks-tinder-client/common@1.0.1(axios@0.28.1)(browserslist@4.24.4)(react-toastify@9.1.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
       axios: 0.28.1
       browserslist: 4.24.4
