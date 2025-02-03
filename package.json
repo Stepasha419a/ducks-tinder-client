@@ -5,14 +5,14 @@
   "scripts": {
     "lint:root": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
     "lint:ui": "eslint \"./apps/ui/src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
-    "lint": "concurrently --kill-others \"yarn lint:root\" \"yarn lint:ui\"",
+    "lint": "concurrently --kill-others \"pnpm lint:root\" \"pnpm lint:ui\"",
     "lint:fix:root": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --fix --max-warnings=0",
     "lint:fix:ui": "eslint \"./apps/ui/src/**/*.{ts,tsx,js,jsx}\" --fix --max-warnings=0",
-    "lint:fix": "concurrently --kill-others \"yarn lint:fix:root\" \"yarn lint:fix:ui\"",
-    "init:dev:common": "yarn --cwd apps/common install && yarn --cwd apps/common run build:dev:publish",
-    "init:dev:ui": "yarn --cwd apps/ui run install:dev && yarn --cwd apps/ui run build:dev:publish",
-    "init:dev:root": "yarn --cwd apps/root run install:dev",
-    "init:dev": "yarn init:dev:common && yarn init:dev:ui && yarn init:dev:root"
+    "lint:fix": "concurrently --kill-others \"pnpm lint:fix:root\" \"pnpm lint:fix:ui\"",
+    "init:dev:common": "pnpm -F common install && pnpm -F common build:dev:publish",
+    "init:dev:ui": "pnpm -F ui install && pnpm -F ui build:dev:publish",
+    "init:dev:root": "pnpm -F root install",
+    "init:dev": "pnpm init:dev:common && pnpm init:dev:ui && pnpm init:dev:root",
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b"
 }
