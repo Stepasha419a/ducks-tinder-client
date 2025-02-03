@@ -13,6 +13,8 @@
     "build:tsc:cjs": "tsc --module CommonJS --outDir dist/cjs",
     "build:dev:publish": "pnpm build && pnpm publish:dev",
     "build:dev:publish:override": "pnpm build && pnpm publish:dev:override",
+    "up:dev:patch": "pnpm version patch && pnpm build:dev:publish:override",
+    "up:dev:minor": "pnpm version minor && pnpm build:dev:publish:override",
     "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
     "publish:dev": "npm publish --registry http://localhost:4873/",
