@@ -1,8 +1,6 @@
-import type { MutableRefObject } from 'react';
+import type { RefObject } from 'react';
 
-export function isRefElementVisible(
-  ref: MutableRefObject<HTMLDivElement | null>
-) {
+export function isRefElementVisible(ref: RefObject<HTMLDivElement | null>) {
   const rect = ref.current?.lastElementChild?.getBoundingClientRect();
   if (rect) {
     return (

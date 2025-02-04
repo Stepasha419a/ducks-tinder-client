@@ -1,7 +1,7 @@
-import type { MutableRefObject } from 'react';
+import type { RefObject } from 'react';
 
 export function scrollToBottom(
-  ref: MutableRefObject<HTMLDivElement | null>,
+  ref: RefObject<HTMLDivElement | null>,
   behavior?: boolean
 ): void {
   if (!behavior) {
