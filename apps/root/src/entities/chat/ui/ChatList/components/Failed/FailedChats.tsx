@@ -1,8 +1,8 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { ReactElement } from 'react';
-import { useAdaptiveMediaQuery } from '@shared/lib';
 import styles from './FailedChats.module.scss';
 
 export const FailedChats = (): ReactElement => {

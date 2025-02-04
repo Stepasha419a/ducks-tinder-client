@@ -1,3 +1,4 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { ListItemButton } from '@ducks-tinder-client/ui';
 import { faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -5,7 +6,6 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import type { Control } from 'react-hook-form';
 import { INTERESTS_FOR_LOOP } from '@entities/user';
 import type { PairFilterForm } from '@entities/user';
-import { useAdaptiveMediaQuery } from '@shared/lib';
 import styles from './FilterPairsItems.module.scss';
 import { useOuterPairFilterForm } from './lib';
 

@@ -1,3 +1,4 @@
+import type { WsExceptionError } from '@ducks-tinder-client/common';
 import { useEffect } from 'react';
 import {
   blockChat,
@@ -17,7 +18,6 @@ import type {
 } from '@shared/api';
 import { ChatSocketEvent, chatService } from '@shared/api';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
-import type { WsExceptionError } from '@shared/lib';
 
 export function useChatConnection() {
   const dispatch = useAppDispatch();

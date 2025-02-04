@@ -1,10 +1,10 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { useController, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDefaultValues } from '@entities/user';
 import { useMemoriedSettingUrl } from '@entities/user';
 import { updateUserThunk } from '@entities/user';
-import { ROUTES } from '@shared/lib';
-import { useAppDispatch, useAdaptiveMediaQuery } from '@shared/lib';
+import { ROUTES, useAppDispatch } from '@shared/lib';
 import type { SettingFieldValues } from './useCurrentValidation';
 
 export function useRadioForm() {

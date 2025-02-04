@@ -1,8 +1,8 @@
+import { returnErrorMessage } from '@ducks-tinder-client/common';
+import { PAGINATION_TAKE } from '@ducks-tinder-client/common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { userService } from '@shared/api';
 import type { PairFilterParams } from '@shared/api';
-import { returnErrorMessage } from '@shared/lib';
-import { PAGINATION_TAKE } from '@shared/lib';
 import type { GetUserPairsProps } from './pair.interface';
 import { deletePairById } from './pair.slice';
 

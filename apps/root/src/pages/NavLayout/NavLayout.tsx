@@ -1,10 +1,10 @@
-import { Outlet } from 'react-router-dom';
-import { Nav } from '@widgets/Nav';
 import {
   WithHocSubscription,
   useAdaptiveMediaQuery,
-  privateHocComposition,
-} from '@shared/lib';
+} from '@ducks-tinder-client/common';
+import { Outlet } from 'react-router-dom';
+import { Nav } from '@widgets/Nav';
+import { privateHocComposition } from '@shared/lib';
 import styles from './NavLayout.module.scss';
 import { NavLayoutMobile } from './ui';
 

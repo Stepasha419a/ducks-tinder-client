@@ -1,6 +1,6 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import type { FC, ReactElement } from 'react';
 import { Outlet } from 'react-router-dom';
-import { useAdaptiveMediaQuery } from '@shared/lib';
 import styles from './ProfilePage.module.scss';
 
 const ProfilePage: FC = (): ReactElement => {

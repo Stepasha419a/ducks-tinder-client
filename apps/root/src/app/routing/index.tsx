@@ -1,3 +1,5 @@
+import { WithSuspense } from '@ducks-tinder-client/common';
+import { LoadingPage } from '@ducks-tinder-client/ui';
 import type { ReactElement } from 'react';
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -13,16 +15,28 @@ import { ProfileEdit } from '@widgets/ProfileEdit';
 import { ProfilePreview } from '@widgets/ProfilePreview';
 import { ProfileSetting } from '@features/ProfileSetting';
 import { ROUTES } from '@shared/lib';
-import { WithSuspense } from '@shared/lib';
 
-const ChatPage = WithSuspense(lazy(async () => import('@pages/Chat')));
-const PairsPage = WithSuspense(lazy(async () => import('@pages/Pairs')));
-const PolicyPage = WithSuspense(lazy(async () => import('@pages/Policy')));
-const ProfilePage = WithSuspense(lazy(async () => import('@pages/Profile')));
-const Registration = WithSuspense(
+const defaultFallbackSuspense = (Component: React.ComponentType) =>
+  WithSuspense(Component, <LoadingPage />);
+
+const ChatPage = defaultFallbackSuspense(
+  lazy(async () => import('@pages/Chat'))
+);
+const PairsPage = defaultFallbackSuspense(
+  lazy(async () => import('@pages/Pairs'))
+);
+const PolicyPage = defaultFallbackSuspense(
+  lazy(async () => import('@pages/Policy'))
+);
+const ProfilePage = defaultFallbackSuspense(
+  lazy(async () => import('@pages/Profile'))
+);
+const Registration = defaultFallbackSuspense(
   lazy(async () => import('@pages/Registration'))
 );
-const SettingsPage = WithSuspense(lazy(async () => import('@pages/Settings')));
+const SettingsPage = defaultFallbackSuspense(
+  lazy(async () => import('@pages/Settings'))
+);
 
 export const Routing = (): ReactElement => {
   return (

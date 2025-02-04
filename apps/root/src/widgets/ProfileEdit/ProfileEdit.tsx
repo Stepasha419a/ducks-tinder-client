@@ -1,7 +1,8 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { useState } from 'react';
 import { ProfileSubmit } from '@features/ProfileSubmit';
 import { Preview } from '@entities/user';
-import { useAppSelector, useAdaptiveMediaQuery } from '@shared/lib';
+import { useAppSelector } from '@shared/lib';
 import { useUserPictures } from './lib';
 import styles from './ProfileEdit.module.scss';
 import { ProfileSettingWrapper } from './ui';

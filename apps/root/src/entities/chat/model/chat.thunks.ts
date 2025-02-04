@@ -1,10 +1,12 @@
+import {
+  returnErrorMessage,
+  PAGINATION_TAKE,
+} from '@ducks-tinder-client/common';
+import type { PaginationParams } from '@ducks-tinder-client/common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setCurrentChatData } from '@entities/chat';
 import type { Message } from '@shared/api';
 import { chatService } from '@shared/api';
-import { returnErrorMessage } from '@shared/lib';
-import { PAGINATION_TAKE } from '@shared/lib';
-import type { PaginationParams } from '@shared/lib';
 
 export const getChatThunk = createAsyncThunk(
   'chat/getChat',

@@ -1,3 +1,4 @@
+import { useDebouncedCallback } from '@ducks-tinder-client/common';
 import { InfinityScroll } from '@ducks-tinder-client/ui';
 import {
   faHeart,
@@ -7,11 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { getUserPairsThunk } from '@entities/user';
 import type { ShortUser } from '@shared/api';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useDebouncedCallback,
-} from '@shared/lib';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 import { PairsListLazy } from './PairsList.lazy';
 import styles from './PairsList.module.scss';
 import { Pair } from './ui';

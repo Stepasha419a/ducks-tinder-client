@@ -1,3 +1,4 @@
+import { useDebouncedCallback } from '@ducks-tinder-client/common';
 import type { ControlRef } from '@ducks-tinder-client/ui';
 import { InfinityScroll } from '@ducks-tinder-client/ui';
 import classNames from 'classnames';
@@ -12,11 +13,7 @@ import {
 import { useMessagesProps, useMessagesScroll } from '@entities/chat';
 import { getIsNextDayMessage } from '@entities/chat';
 import type { Message as MessageInterface } from '@shared/api';
-import {
-  useAppDispatch,
-  useAppSelector,
-  useDebouncedCallback,
-} from '@shared/lib';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';

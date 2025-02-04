@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import EventEmitter from 'events';
+import type { PaginationParams } from '@ducks-tinder-client/common';
 import type {
   ReceivedChatBlock,
   ReceivedMessage,
@@ -16,7 +17,6 @@ import {
   mockStorage,
   resolveAxiosResponse,
 } from '@shared/api';
-import type { PaginationParams } from '@shared/lib';
 
 const eventEmitter = new EventEmitter();
 

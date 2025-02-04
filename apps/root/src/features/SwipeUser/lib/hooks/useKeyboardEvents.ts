@@ -1,7 +1,8 @@
+import { useEventListener } from '@ducks-tinder-client/common';
 import type { AnimationControls } from 'framer-motion';
 import type { RefObject } from 'react';
 import type Slider from 'react-slick';
-import { useAppSelector, useEventListener } from '@shared/lib';
+import { useAppSelector } from '@shared/lib';
 import { useTinderAnimations } from './useTinderAnimations';
 
 export function useKeyboardEvents(

@@ -1,3 +1,4 @@
+import { PAGINATION_TAKE } from '@ducks-tinder-client/common';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
@@ -9,7 +10,6 @@ import type {
   ShortUser,
 } from '@shared/api';
 import type { ShortMessagesPagination } from '@shared/api';
-import { PAGINATION_TAKE } from '@shared/lib';
 import type { ChatInitialState, PushNewMessage } from './chat.interfaces';
 import {
   getChatsThunk,

@@ -1,7 +1,7 @@
+import { returnErrorMessage } from '@ducks-tinder-client/common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import type { Picture, User } from '@shared/api';
 import { userService } from '@shared/api';
-import { returnErrorMessage } from '@shared/lib';
 
 export const getCurrentUser = createAsyncThunk(
   'users/getCurrentUser',

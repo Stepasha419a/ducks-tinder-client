@@ -1,6 +1,6 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { ProfilePreview } from '@widgets/ProfilePreview';
 import { SettingsBlock } from '@features/SettingsBlock';
-import { useAdaptiveMediaQuery } from '@shared/lib';
 
 export const SettingsIndexPage = () => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');

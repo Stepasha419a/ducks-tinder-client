@@ -1,3 +1,4 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import {
   useCallback,
   useState,
@@ -9,7 +10,7 @@ import { MessageForm } from '@features/MessageForm';
 import { MessageSelect } from '@features/MessageSelect';
 import { ChatProfile, MessageList } from '@entities/chat';
 import type { Message } from '@shared/api';
-import { useAdaptiveMediaQuery, useAppSelector } from '@shared/lib';
+import { useAppSelector } from '@shared/lib';
 
 interface MessagesProps {
   handleOpenPopup: () => void;

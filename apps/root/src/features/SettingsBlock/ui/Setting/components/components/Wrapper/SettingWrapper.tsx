@@ -1,3 +1,4 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 import classNames from 'classnames';
 import type { FC, PropsWithChildren } from 'react';
@@ -5,7 +6,6 @@ import type { FieldErrors, FieldError } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import type { SettingFieldValues } from '@features/SettingsBlock';
 import { ROUTES } from '@shared/lib';
-import { useAdaptiveMediaQuery } from '@shared/lib';
 import styles from './SettingWrapper.module.scss';
 
 interface SettingFieldInterestsArray {

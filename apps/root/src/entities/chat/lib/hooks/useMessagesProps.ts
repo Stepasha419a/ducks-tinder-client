@@ -1,5 +1,5 @@
+import { getTime } from '@ducks-tinder-client/common';
 import type { Message } from '@shared/api';
-import { getTime } from '@shared/lib';
 import { useAppSelector } from '@shared/lib';
 
 export function useMessagesProps(selectedMessage: Message | null) {

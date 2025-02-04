@@ -1,6 +1,7 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import type { FC } from 'react';
 import { ChatList } from '@entities/chat';
-import { useAppSelector, useAdaptiveMediaQuery } from '@shared/lib';
+import { useAppSelector } from '@shared/lib';
 import { Choose, Loading, NoChats } from './components';
 
 export const IndexChatPage: FC = () => {

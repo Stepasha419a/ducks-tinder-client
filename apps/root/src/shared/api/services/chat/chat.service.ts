@@ -1,6 +1,6 @@
+import type { PaginationParams } from '@ducks-tinder-client/common';
 import type { Chat, ShortUser } from '@shared/api';
 import { instance } from '@shared/api';
-import type { PaginationParams } from '@shared/lib';
 import { getMockableService } from '../mock';
 import type {
   ChatConnectReturn,
