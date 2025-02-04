@@ -9,7 +9,7 @@ interface Options {
 export function WithErrorFallback<P extends object>(
   Component: ComponentType<P>,
   options?: Options
-) {
+): ComponentType<P> {
   class Wrapper extends ReactComponent<P, { hasError: boolean }> {
     constructor(props: P) {
       super(props);
