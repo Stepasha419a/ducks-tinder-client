@@ -1,6 +1,10 @@
 .radioInput {
-  height: 53px;
+  height: 53px !important;
   padding: 16px;
   background-color: var(--bg-sub-primary);
   border-bottom: 1px solid var(--border-main);
+}
+
+.radioWrapper {
+  border-top: 1px solid var(--border-main);
 }

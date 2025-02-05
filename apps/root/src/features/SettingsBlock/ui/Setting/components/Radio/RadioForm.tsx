@@ -15,22 +15,24 @@ export const RadioForm: FC = (): ReactElement => {
       isValid={isValid}
       submitHandler={submitHandler}
     >
-      <RadioInput
-        onChange={onChange}
-        checked={value === 'male'}
-        name="sex"
-        value="male"
-        text="Male"
-        extraClassName={styles.radioInput}
-      />
-      <RadioInput
-        onChange={onChange}
-        checked={value === 'female'}
-        name="sex"
-        value="female"
-        text="Female"
-        extraClassName={styles.radioInput}
-      />
+      <div className={styles.radioWrapper}>
+        <RadioInput
+          onChange={onChange}
+          checked={value === 'male'}
+          name="sex"
+          value="male"
+          text="Male"
+          extraClassName={styles.radioInput}
+        />
+        <RadioInput
+          onChange={onChange}
+          checked={value === 'female'}
+          name="sex"
+          value="female"
+          text="Female"
+          extraClassName={styles.radioInput}
+        />
+      </div>
     </SettingWrapper>
   );
 };

@@ -1,10 +1,8 @@
 .setting {
-  border-right: 1px solid var(--border-main);
   height: calc(100% - 90px);
   background-color: var(--bg-primary);
 
   .name {
-    border-bottom: 1px solid var(--border-main);
     padding: 20px 16px 10px;
     text-transform: uppercase;
     color: var(--main-secondary);
@@ -30,7 +28,9 @@
   .btn {
     max-height: 53px;
     background-color: var(--bg-sub-primary);
-    border-right: none;
+    border-right: none !important;
+    border-left: none !important;
+    border-width: 1px !important;
     padding: 16px;
     cursor: pointer;
     color: var(--danger-light);

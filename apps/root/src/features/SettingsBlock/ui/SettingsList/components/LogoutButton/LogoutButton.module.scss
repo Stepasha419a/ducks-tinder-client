@@ -1,7 +1,7 @@
 .button {
-  height: 46px;
+  height: 46px !important;
   border: 1px solid var(--border-main);
   border-right: none;
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 400 !important;
 }

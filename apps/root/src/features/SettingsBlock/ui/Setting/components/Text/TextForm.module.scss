@@ -1,6 +1,7 @@
 .textInput {
-  height: 53px;
+  height: 53px !important;
   padding: 16px;
-  border: none;
-  border-bottom: 1px solid var(--border-main);
+  border-right: none !important;
+  border-left: none !important;
+  border-width: 1px !important;
 }
