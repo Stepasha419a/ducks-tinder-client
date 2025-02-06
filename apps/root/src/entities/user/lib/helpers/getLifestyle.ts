@@ -1,4 +1,4 @@
-import type { ShortUser, User } from '@shared/api';
+import type { ShortUser, User } from '@ducks-tinder-client/common';
 
 export function getLifestyle(user: User | ShortUser): string[] {
   const arr = [

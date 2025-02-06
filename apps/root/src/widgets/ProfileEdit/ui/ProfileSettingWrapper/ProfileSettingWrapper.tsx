@@ -1,6 +1,6 @@
+import type { Picture } from '@ducks-tinder-client/common';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { Preview } from '@entities/user';
-import type { Picture } from '@shared/api';
 import { useAppSelector } from '@shared/lib';
 import { ProfileSettingBlock, Tabs } from './components';
 import styles from './ProfileSettingWrapper.module.scss';

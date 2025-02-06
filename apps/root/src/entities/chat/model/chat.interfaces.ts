@@ -1,4 +1,9 @@
-import type { Chat, Message, ReceivedNewMessage, ShortUser } from '@shared/api';
+import type {
+  Chat,
+  Message,
+  ReceivedNewMessage,
+  ShortUser,
+} from '@ducks-tinder-client/common';
 
 export interface ChatInitialState {
   activeChat: Chat | null;

@@ -1,6 +1,6 @@
+import type { User } from '@ducks-tinder-client/common';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import type { User } from '@shared/api';
 import type { Setting, UserInitialState } from './user.interface';
 import {
   deleteUserPictureThunk,

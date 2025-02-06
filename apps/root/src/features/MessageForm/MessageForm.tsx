@@ -1,10 +1,10 @@
+import type { Message } from '@ducks-tinder-client/common';
 import { Button, TextField } from '@ducks-tinder-client/ui';
 import { faCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, type FC, memo, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { editMessageThunk, sendMessageThunk } from '@entities/chat';
-import type { Message } from '@shared/api';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import { MessageFormLazy } from './MessageForm.lazy';
 import styles from './MessageForm.module.scss';

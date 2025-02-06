@@ -1,5 +1,5 @@
-import type { Range, ShortUser } from '@shared/api';
-import type { PairsInfo } from '@shared/api';
+import type { Range, ShortUser } from '@ducks-tinder-client/common';
+import type { PairsInfo } from '@ducks-tinder-client/common';
 
 export interface PairFilterForm {
   distance?: number;

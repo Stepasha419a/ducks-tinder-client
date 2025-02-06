@@ -1,4 +1,4 @@
-import type { ShortPlace, ShortUser, User } from '@shared/api';
+import type { ShortPlace, ShortUser, User } from '@ducks-tinder-client/common';
 import { getLifestyle } from './getLifestyle';
 import { getMoreAboutMe } from './getMoreAboutMe';
 

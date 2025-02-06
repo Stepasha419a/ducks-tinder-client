@@ -1,6 +1,6 @@
+import type { ShortUser, User } from '@ducks-tinder-client/common';
 import type { FC } from 'react';
 import { getLifestyle } from '@entities/user';
-import type { ShortUser, User } from '@shared/api';
 import { ListInfo } from '../components';
 
 interface LifestyleListProps {

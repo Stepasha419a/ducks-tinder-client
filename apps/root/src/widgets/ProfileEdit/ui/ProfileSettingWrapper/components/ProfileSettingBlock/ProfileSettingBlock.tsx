@@ -1,10 +1,10 @@
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import type { Picture } from '@ducks-tinder-client/common';
 import { useState, type Dispatch, type FC, type SetStateAction } from 'react';
 import { PicturesDND } from '@features/PicturesDND';
 import { ProfileSettingsList } from '@features/ProfileSettingsList';
 import { ProfileSubmit } from '@features/ProfileSubmit';
 import { UploadImagePopups } from '@features/UploadImagePopups';
-import type { Picture } from '@shared/api';
 import styles from './ProfileSettingBlock.module.scss';
 
 interface ProfileSettingProps {

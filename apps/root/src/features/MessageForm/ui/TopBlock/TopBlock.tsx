@@ -1,8 +1,8 @@
+import type { Message } from '@ducks-tinder-client/common';
 import { faPen, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { FC } from 'react';
-import type { Message } from '@shared/api';
 import { useAppSelector } from '@shared/lib';
 import styles from './TopBlock.module.scss';
 

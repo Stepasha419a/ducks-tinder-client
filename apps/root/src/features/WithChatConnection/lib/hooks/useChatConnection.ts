@@ -1,4 +1,10 @@
 import type { WsExceptionError } from '@ducks-tinder-client/common';
+import type {
+  ReceivedChatBlock,
+  ReceivedMessage,
+  ReceivedNewMessage,
+} from '@ducks-tinder-client/common';
+import { ChatSocketEvent, chatService } from '@ducks-tinder-client/common';
 import { useEffect } from 'react';
 import {
   blockChat,
@@ -11,12 +17,6 @@ import {
   unblockChat,
 } from '@entities/chat';
 import { checkAuthThunk } from '@entities/user';
-import type {
-  ReceivedChatBlock,
-  ReceivedMessage,
-  ReceivedNewMessage,
-} from '@shared/api';
-import { ChatSocketEvent, chatService } from '@shared/api';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 export function useChatConnection() {

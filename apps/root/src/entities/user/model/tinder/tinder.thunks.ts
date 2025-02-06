@@ -1,6 +1,6 @@
 import { returnErrorMessage } from '@ducks-tinder-client/common';
+import { userService } from '@ducks-tinder-client/common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userService } from '@shared/api';
 import { deletePendingUserId, skipCurrentTinderUser } from './tinder.slice';
 
 export const getMatchUsersThunk = createAsyncThunk(

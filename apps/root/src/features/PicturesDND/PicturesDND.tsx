@@ -1,9 +1,9 @@
 import { createEmptyArray } from '@ducks-tinder-client/common';
+import type { Picture } from '@ducks-tinder-client/common';
 import { makeImageUrl } from '@ducks-tinder-client/ui';
 import { Reorder } from 'framer-motion';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { deleteUserPictureThunk } from '@entities/user';
-import type { Picture } from '@shared/api';
 import { useAppDispatch } from '@shared/lib';
 import styles from './PicturesDND.module.scss';
 import { Card } from './ui';

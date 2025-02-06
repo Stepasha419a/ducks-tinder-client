@@ -1,10 +1,10 @@
 import { EMAIL_REGEXP } from '@ducks-tinder-client/common';
+import type { RegistrationParams } from '@ducks-tinder-client/common';
 import type { TextFieldProps } from '@ducks-tinder-client/ui';
 import type { FormEventHandler } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { loginThunk, registerThunk } from '@entities/user';
-import type { RegistrationParams } from '@shared/api';
 import { useAppDispatch } from '@shared/lib';
 
 interface AuthFormReturn {

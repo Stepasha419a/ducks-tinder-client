@@ -1,6 +1,6 @@
+import type { User } from '@ducks-tinder-client/common';
 import { SettingNameEnum } from '@entities/user';
 import type { Setting } from '@entities/user';
-import type { User } from '@shared/api';
 
 const potentialFields: Setting[] = [
   SettingNameEnum.DESCRIPTION,

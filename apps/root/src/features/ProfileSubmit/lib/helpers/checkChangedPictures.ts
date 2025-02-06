@@ -1,4 +1,4 @@
-import type { Picture } from '@shared/api';
+import type { Picture } from '@ducks-tinder-client/common';
 
 export function checkChangedPictures(pictures: Picture[]): boolean {
   let isChanged = false;

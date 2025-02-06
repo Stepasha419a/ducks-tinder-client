@@ -2,13 +2,13 @@ import {
   getDatesHourDiff,
   useOnClickOutside,
 } from '@ducks-tinder-client/common';
+import type { Message } from '@ducks-tinder-client/common';
 import { faPen, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useLayoutEffect, useState } from 'react';
 import { useRef } from 'react';
-import type { Message } from '@shared/api';
 import { useAppSelector } from '@shared/lib';
 import { useMessageSelect } from './lib';
 import styles from './MessageSelect.module.scss';

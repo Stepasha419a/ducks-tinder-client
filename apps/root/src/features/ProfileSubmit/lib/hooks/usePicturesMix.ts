@@ -1,5 +1,5 @@
+import type { Picture } from '@ducks-tinder-client/common';
 import { mixUserPicturesThunk } from '@entities/user';
-import type { Picture } from '@shared/api';
 import { useAppDispatch } from '@shared/lib';
 import { checkChangedPictures } from '../helpers';
 

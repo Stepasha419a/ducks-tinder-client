@@ -1,4 +1,5 @@
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import type { Message } from '@ducks-tinder-client/common';
 import {
   useCallback,
   useState,
@@ -9,7 +10,6 @@ import {
 import { MessageForm } from '@features/MessageForm';
 import { MessageSelect } from '@features/MessageSelect';
 import { ChatProfile, MessageList } from '@entities/chat';
-import type { Message } from '@shared/api';
 import { useAppSelector } from '@shared/lib';
 
 interface MessagesProps {

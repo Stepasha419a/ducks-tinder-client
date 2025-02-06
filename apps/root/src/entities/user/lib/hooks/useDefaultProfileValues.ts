@@ -1,4 +1,4 @@
-import type { User } from '@shared/api';
+import type { User } from '@ducks-tinder-client/common';
 import { useAppSelector } from '@shared/lib';
 import type {
   ProfileSettingNameEnum,

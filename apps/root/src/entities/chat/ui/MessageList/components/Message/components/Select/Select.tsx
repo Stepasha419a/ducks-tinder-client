@@ -1,8 +1,8 @@
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import type { Message } from '@ducks-tinder-client/common';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC, ReactElement } from 'react';
-import type { Message } from '@shared/api';
 
 interface SelectProps {
   isSelectOpen: boolean;
