@@ -1,5 +1,6 @@
 import type { SyntheticEvent } from 'react';
-import { defaultDuck } from '@shared/ui';
+// eslint-disable-next-line import/no-internal-modules
+import { defaultDuck } from '@shared/ui/assets';
 
 // uses for <img /> when onError is triggered
 export function showDefaultImage(
