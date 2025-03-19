@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "pnpm -F root lint && pnpm -F common lint && pnpm -F ui lint",
+    "lint:fix": "pnpm -F root lint:fix && pnpm -F common lint:fix && pnpm -F ui lint:fix",
     "init:dev:common": "pnpm -F common install && pnpm -F common build:dev:publish",
     "init:dev:ui": "pnpm -F ui install && pnpm -F ui build:dev:publish",
     "init:dev:root": "pnpm -F root install",
