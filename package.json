@@ -3,12 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "lint:root": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
-    "lint:ui": "eslint \"./apps/ui/src/**/*.{ts,tsx,js,jsx}\" --max-warnings=0",
-    "lint": "concurrently --kill-others \"pnpm lint:root\" \"pnpm lint:ui\"",
-    "lint:fix:root": "eslint \"./apps/root/src/**/*.{ts,tsx,js,jsx}\" --fix --max-warnings=0",
-    "lint:fix:ui": "eslint \"./apps/ui/src/**/*.{ts,tsx,js,jsx}\" --fix --max-warnings=0",
-    "lint:fix": "concurrently --kill-others \"pnpm lint:fix:root\" \"pnpm lint:fix:ui\"",
+    "lint": "pnpm -F root lint && pnpm -F common lint && pnpm -F ui lint",
     "init:dev:common": "pnpm -F common install && pnpm -F common build:dev:publish",
     "init:dev:ui": "pnpm -F ui install && pnpm -F ui build:dev:publish",
     "init:dev:root": "pnpm -F root install",
