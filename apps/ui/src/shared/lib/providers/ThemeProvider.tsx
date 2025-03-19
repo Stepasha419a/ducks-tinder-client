@@ -8,15 +8,13 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<Theme>(Theme.Light);
 
   useEffect(() => {
-    let savedTheme = localStorage.getItem('theme');
+    let savedTheme = localStorage.getItem('theme') as Theme;
     if (!isValidTheme(savedTheme)) {
       savedTheme = Theme.Light;
-      return;
     }
 
     setTheme(savedTheme);
     applyTheme(savedTheme);
-    document.documentElement.setAttribute('data-theme', savedTheme);
   }, []);
 
   const handleSetTheme = useCallback((value: Theme) => {
