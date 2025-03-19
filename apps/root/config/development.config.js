@@ -36,6 +36,7 @@ module.exports = (env) => {
       port: 3001,
       hot: true,
       historyApiFallback: true,
+      server: 'https',
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
