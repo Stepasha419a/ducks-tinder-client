@@ -1,7 +1,7 @@
+import { makeImageUrl } from '@ducks-tinder-client/ui';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { makeImageUrl } from '@shared/lib';
 import { useAppSelector } from '@shared/lib';
 import { FailedPair, Loading } from './components';
 import styles from './PairLink.module.scss';

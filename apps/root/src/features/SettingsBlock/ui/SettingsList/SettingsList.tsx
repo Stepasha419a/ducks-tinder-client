@@ -1,6 +1,6 @@
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import type { ReactElement } from 'react';
 import { LinkThumbnail, SettingsGroup } from '@entities/user';
-import { useAdaptiveMediaQuery } from '@shared/lib';
 import {
   MobileTitle,
   AgeSettingThumbnail,
