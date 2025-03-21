@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@ducks-tinder-client/common": "^1.1.2",
-    "@ducks-tinder-client/ui": "^1.0.3",
+    "@ducks-tinder-client/ui": "^1.0.4",
     "@fortawesome/fontawesome-common-types": "^6.4.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
