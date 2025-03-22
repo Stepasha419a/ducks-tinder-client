@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@ducks-tinder-client/common':
         specifier: 1.1.x
-        version: 1.1.2(axios@0.28.1)(browserslist@4.18.1)(react-toastify@9.1.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
+        version: 1.1.3(browserslist@4.18.1)(react-toastify@9.1.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)
       '@fortawesome/fontawesome-common-types':
         specifier: 6.4.x
         version: 6.4.2
@@ -425,10 +425,9 @@ packages:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
 
-  '@ducks-tinder-client/common@1.1.2':
-    resolution: {integrity: sha512-uQsEH0sMwzZFls9BuX4KglyJti7keMfsfxzGZl0qkW0kIIXKJQyygyZY6ei55QyRclfdsbl+O2VP3YY5LAG2HQ==}
+  '@ducks-tinder-client/common@1.1.3':
+    resolution: {integrity: sha512-PdqIoWtmJl3YPmDavlmjde4qh1hD0/8iToLgIqYF5hDQR2Y6xlvS1gmtJ/Pkn9A34/pDVkfs+k3ItQGNWWWKlg==}
     peerDependencies:
-      axios: 0.28.x
       browserslist: 4.18.x
       react: 18.2.x
       react-toastify: 9.1.x
@@ -1738,8 +1737,8 @@ packages:
   axios@0.28.1:
     resolution: {integrity: sha512-iUcGA5a7p0mVb4Gm/sy+FSECNkPFT4y7wt6OM/CDpO/OnNCvSs3PoMG8ibrC9jRoGYU0gUK5pXVC4NPXq6lHRQ==}
 
-  axios@1.7.9:
-    resolution: {integrity: sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==}
+  axios@1.8.4:
+    resolution: {integrity: sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==}
 
   babel-jest@29.7.0:
     resolution: {integrity: sha512-BrvGY3xZSwEcCzKvKsCi2GgHqDqsYkOP4/by5xCgIwGXQxIEh+8ew3gmrE1y7XRR6LHZIj6yLYnUi/mm2KXKBg==}
@@ -2391,6 +2390,10 @@ packages:
   esutils@2.0.3:
     resolution: {integrity: sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==}
     engines: {node: '>=0.10.0'}
+
+  events@3.3.0:
+    resolution: {integrity: sha512-mQw+2fkQbALzQ7V0MY0IqdnXNOeTtP4r0lN9z7AAawCXgqea7bDii20AYrIBrFd/Hx0M2Ocz6S111CaFkUcb0Q==}
+    engines: {node: '>=0.8.x'}
 
   execa@5.1.1:
     resolution: {integrity: sha512-8uSpZZocAZRBAPIEINJj3Lo9HyGitllczc27Eh5YYojjMFMn8yHMDMaUHE2Jqfq05D/wucwI4JGURyXt1vchyg==}
@@ -4836,15 +4839,17 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
-  '@ducks-tinder-client/common@1.1.2(axios@0.28.1)(browserslist@4.18.1)(react-toastify@9.1.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
+  '@ducks-tinder-client/common@1.1.3(browserslist@4.18.1)(react-toastify@9.1.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react@18.2.0)':
     dependencies:
       axios: 0.28.1
       browserslist: 4.18.1
+      events: 3.3.0
       react: 18.2.0
       react-toastify: 9.1.3(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       socket.io-client: 4.8.1
     transitivePeerDependencies:
       - bufferutil
+      - debug
       - supports-color
       - utf-8-validate
 
@@ -6306,7 +6311,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  axios@1.7.9:
+  axios@1.8.4:
     dependencies:
       follow-redirects: 1.15.9
       form-data: 4.0.1
@@ -7121,6 +7126,8 @@ snapshots:
       '@types/estree': 1.0.6
 
   esutils@2.0.3: {}
+
+  events@3.3.0: {}
 
   execa@5.1.1:
     dependencies:
@@ -9358,7 +9365,7 @@ snapshots:
 
   wait-on@7.2.0:
     dependencies:
-      axios: 1.7.9
+      axios: 1.8.4
       joi: 17.13.3
       lodash: 4.17.21
       minimist: 1.2.8
