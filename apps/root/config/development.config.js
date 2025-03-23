@@ -7,6 +7,7 @@ const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 module.exports = (env) => {
   const envPath = env.envPath || '.env';
 
@@ -102,6 +103,11 @@ module.exports = (env) => {
       }),
       new ReactRefreshWebpackPlugin({
         overlay: false,
+      }),
+      new ModuleFederationPlugin({
+        name: 'rootApp',
+        filename: 'remoteEntry.js',
+        shared: sharedDepsConfig,
       }),
       new ForkTsCheckerWebpackPlugin(),
       new EslintWebpackPlugin({
