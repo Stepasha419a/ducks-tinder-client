@@ -7,6 +7,7 @@ const Dotenv = require('dotenv-webpack');
 /* const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin; */
 
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 module.exports = (env) => {
   const envPath = env.envPath || '.env';
 
@@ -92,6 +93,12 @@ module.exports = (env) => {
       }),
       new Dotenv({
         path: envPath,
+      }),
+      new ModuleFederationPlugin({
+        name: 'rootApp',
+        filename: 'remoteEntry.js',
+
+        shared: sharedDepsConfig,
       }),
       //new BundleAnalyzerPlugin(),
     ],
