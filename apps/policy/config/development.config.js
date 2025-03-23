@@ -35,10 +35,9 @@ module.exports = (env) => {
         directory: path.resolve(__dirname, '..', 'dist'),
       },
       compress: true,
-      port: 3001,
+      port: 3002,
       hot: true,
       historyApiFallback: true,
-      server: 'https',
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
