@@ -8,6 +8,24 @@ const Dotenv = require('dotenv-webpack');
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin; */
 
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+
+var sharedPackage = require('../package.json');
+
+var sharedDepsConfig = Object.entries(sharedPackage.dependencies)
+  // TODO: fix events package eager problem
+  .filter(([package]) => package !== 'events')
+  .reduce(function (res, entry) {
+    var dependency = entry[0];
+    var version = entry[1];
+
+    res[dependency] = {
+      requiredVersion: version,
+      singleton: true,
+    };
+
+    return res;
+  }, {});
+
 module.exports = (env) => {
   const envPath = env.envPath || '.env';
 
