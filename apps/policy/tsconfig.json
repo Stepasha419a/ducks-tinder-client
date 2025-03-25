@@ -29,5 +29,6 @@
       "@shared/constants": ["./shared/lib/constants"],
       "@shared/helpers": ["./shared/lib/helpers"]
     }
-  }
+  },
+  "include": ["src"]
 }
