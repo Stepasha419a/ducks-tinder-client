@@ -1,4 +1,6 @@
 declare module 'policyApp/Policy' {
-  const src: React.ComponentType;
-  export default src;
+  import type { PolicyAppDeclaration } from '@ducks-tinder-client/common';
+
+  const component: PolicyAppDeclaration;
+  export default component;
 }
