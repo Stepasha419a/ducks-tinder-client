@@ -34,13 +34,13 @@ module.exports = (env) => {
     stats: 'errors-warnings',
     mode: 'development',
     devtool: 'inline-source-map',
-    entry: './src/index.tsx',
+    entry: './src/index.ts',
     output: {
       filename: 'js/[name].bundle.js',
       chunkFilename: 'js/[name].chunk.js',
       path: path.resolve(__dirname, '..', 'dist'),
       assetModuleFilename: 'media/[name].[hash][ext]',
-      publicPath: '/',
+      publicPath: 'auto',
       clean: true,
     },
     cache: {
