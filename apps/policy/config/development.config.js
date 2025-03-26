@@ -128,6 +128,7 @@ module.exports = (env) => {
           './Policy': './src/app/policy.ts',
         },
         shared: sharedDepsConfig,
+        runtime: false,
       }),
       new ForkTsCheckerWebpackPlugin(),
       new EslintWebpackPlugin({
