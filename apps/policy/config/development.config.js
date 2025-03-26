@@ -55,6 +55,9 @@ module.exports = (env) => {
       port: 3002,
       hot: true,
       historyApiFallback: true,
+      devMiddleware: {
+        writeToDisk: true,
+      },
     },
     resolve: {
       extensions: ['.tsx', '.ts', '.js'],
