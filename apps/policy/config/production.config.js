@@ -7,6 +7,25 @@ const Dotenv = require('dotenv-webpack');
 /* const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin; */
 
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
+
+var sharedPackage = require('../package.json');
+
+var sharedDepsConfig = Object.entries(sharedPackage.dependencies).reduce(
+  function (res, entry) {
+    var dependency = entry[0];
+    var version = entry[1];
+
+    res[dependency] = {
+      requiredVersion: version,
+      singleton: true,
+    };
+
+    return res;
+  },
+  {}
+);
+
 module.exports = (env) => {
   const envPath = env.envPath || '.env';
 
@@ -92,6 +111,14 @@ module.exports = (env) => {
       }),
       new Dotenv({
         path: envPath,
+      }),
+      new ModuleFederationPlugin({
+        name: 'policyApp',
+        filename: 'remoteEntry.js',
+        exposes: {
+          './Policy': './src/app/policy.ts',
+        },
+        shared: sharedDepsConfig,
       }),
       //new BundleAnalyzerPlugin(),
     ],
