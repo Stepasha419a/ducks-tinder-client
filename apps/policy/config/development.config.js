@@ -124,6 +124,9 @@ module.exports = (env) => {
       new ModuleFederationPlugin({
         name: 'policyApp',
         filename: 'remoteEntry.js',
+        exposes: {
+          './Policy': './src/app/policy.ts',
+        },
         shared: sharedDepsConfig,
       }),
       new ForkTsCheckerWebpackPlugin(),
