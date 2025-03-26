@@ -141,15 +141,6 @@ module.exports = (env) => {
       usedExports: true,
       moduleIds: 'deterministic',
       runtimeChunk: 'single',
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-          },
-        },
-      },
     },
     watchOptions: {
       ignored: /node_modules/,
