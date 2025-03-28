@@ -34,7 +34,7 @@ module.exports = (env) => {
     stats: 'errors-warnings',
     mode: 'development',
     devtool: 'inline-source-map',
-    entry: './src/index.tsx',
+    entry: './src/index.ts',
     output: {
       filename: 'js/[name].bundle.js',
       chunkFilename: 'js/[name].chunk.js',
@@ -124,16 +124,6 @@ module.exports = (env) => {
     ],
     optimization: {
       moduleIds: 'deterministic',
-      runtimeChunk: 'multiple',
-      splitChunks: {
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name: 'vendors',
-            chunks: 'all',
-          },
-        },
-      },
       minimize: true,
       minimizer: [new TerserPlugin()],
     },
