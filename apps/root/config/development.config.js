@@ -124,6 +124,9 @@ module.exports = (env) => {
       new ModuleFederationPlugin({
         name: 'rootApp',
         filename: 'remoteEntry.js',
+        remotes: {
+          policyApp: 'policyApp@http://localhost:3002/remoteEntry.js',
+        },
         shared: sharedDepsConfig,
       }),
       new ForkTsCheckerWebpackPlugin(),
