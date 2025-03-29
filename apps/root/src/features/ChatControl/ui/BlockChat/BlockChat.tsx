@@ -1,5 +1,5 @@
+import { blockChatThunk, unblockChatThunk } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
-import { blockChatThunk, unblockChatThunk } from '@entities/chat';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import styles from './BlockChat.module.scss';
 

@@ -1,9 +1,11 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import {
+  useAdaptiveMediaQuery,
+  getChatThunk,
+} from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 import { useEffect, type FC, memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
-import { getChatThunk } from '../../model';
 import { ChatProfileLazy } from './ChatProfile.lazy';
 import styles from './ChatProfile.module.scss';
 import { ChatProfileMobile } from './components';

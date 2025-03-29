@@ -1,6 +1,6 @@
+import { disconnectThunk, resetChatSlice } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 import type { FC, ReactElement } from 'react';
-import { disconnectThunk, resetChatSlice } from '@entities/chat';
 import {
   logoutThunk,
   resetPairSlice,

@@ -1,6 +1,6 @@
 import type { Message } from '@ducks-tinder-client/common';
+import { deleteMessageThunk } from '@ducks-tinder-client/common';
 import type { Dispatch, SetStateAction } from 'react';
-import { deleteMessageThunk } from '@entities/chat';
 import { useAppDispatch } from '@shared/lib';
 
 export function useMessageSelect(

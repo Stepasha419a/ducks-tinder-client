@@ -1,8 +1,8 @@
 import { useDebouncedCallback } from '@ducks-tinder-client/common';
+import { getChatsThunk, selectChatList } from '@ducks-tinder-client/common';
 import { InfinityScroll } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
 import { useRef } from 'react';
-import { getChatsThunk, selectChatList } from '@entities/chat';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 import { ChatListLazy } from './ChatList.lazy';

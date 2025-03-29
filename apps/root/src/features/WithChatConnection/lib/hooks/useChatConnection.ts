@@ -5,7 +5,6 @@ import type {
   ReceivedNewMessage,
 } from '@ducks-tinder-client/common';
 import { ChatSocketEvent, chatService } from '@ducks-tinder-client/common';
-import { useEffect } from 'react';
 import {
   blockChat,
   deleteChat,
@@ -15,7 +14,8 @@ import {
   setConnectedSocket,
   setIsNotFound,
   unblockChat,
-} from '@entities/chat';
+} from '@ducks-tinder-client/common';
+import { useEffect } from 'react';
 import { checkAuthThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 

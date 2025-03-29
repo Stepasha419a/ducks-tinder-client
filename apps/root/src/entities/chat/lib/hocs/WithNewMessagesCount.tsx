@@ -1,6 +1,6 @@
+import { getNewMessagesCountThunk } from '@ducks-tinder-client/common';
 import type { ComponentType } from 'react';
 import { useEffect, type FC } from 'react';
-import { getNewMessagesCountThunk } from '@entities/chat';
 import { useAppDispatch } from '@shared/lib';
 
 export function WithNewMessagesCount<P extends object>(

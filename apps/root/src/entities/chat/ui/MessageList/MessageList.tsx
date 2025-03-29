@@ -1,16 +1,16 @@
-import { useDebouncedCallback } from '@ducks-tinder-client/common';
 import type { Message as MessageInterface } from '@ducks-tinder-client/common';
-import type { ControlRef } from '@ducks-tinder-client/ui';
-import { InfinityScroll } from '@ducks-tinder-client/ui';
-import classNames from 'classnames';
-import { useEffect, useRef, type FC, type ReactElement } from 'react';
-import { useParams } from 'react-router-dom';
+import { useDebouncedCallback } from '@ducks-tinder-client/common';
 import {
   connectChatThunk,
   disconnectChatThunk,
   getMessagesThunk,
   selectMessages,
-} from '@entities/chat';
+} from '@ducks-tinder-client/common';
+import type { ControlRef } from '@ducks-tinder-client/ui';
+import { InfinityScroll } from '@ducks-tinder-client/ui';
+import classNames from 'classnames';
+import { useEffect, useRef, type FC, type ReactElement } from 'react';
+import { useParams } from 'react-router-dom';
 import { useMessagesProps, useMessagesScroll } from '@entities/chat';
 import { getIsNextDayMessage } from '@entities/chat';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
