@@ -38,6 +38,7 @@
     "react-toastify": "9.1.x"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.1",
     "axios": "^0.28.1",
     "events": "^3.3.0",
     "socket.io-client": "^4.8.1"
