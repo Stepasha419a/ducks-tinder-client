@@ -9,12 +9,12 @@ import {
   registerThunk,
 } from './auth.thunks';
 
-interface InitialState {
+export interface AuthInitialState {
   authData: AuthData | null;
   isAuth: boolean | null;
 }
 
-const initialState: InitialState = {
+const initialState: AuthInitialState = {
   authData: null,
   isAuth: null,
 };
