@@ -1,0 +1,73 @@
+.preview {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-sub-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider {
+    height: 100%;
+    position: relative;
+
+    .arrows {
+      height: 85%;
+    }
+  }
+
+  &.full {
+    overflow: auto;
+
+    .slider {
+      height: 470px;
+      position: relative;
+
+      .image {
+        max-height: 470px;
+        position: relative;
+        z-index: -1;
+      }
+
+      .arrows {
+        height: 85%;
+      }
+
+      .wrapper {
+        box-shadow: none;
+      }
+
+      .closeFullPreview {
+        z-index: 1;
+        font-size: 44px;
+        height: 44px;
+        width: 44px;
+        bottom: -20px;
+        right: 18px;
+        transition: 0.3s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+
+        .icon {
+          color: rgba(224, 48, 48, 0.747);
+          background-color: var(--color--white-100);
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 900px) or (hover: none) {
+  .preview.full .slider {
+    $widthWithHeightAspectRatio: 100vw * 1.25;
+
+    height: $widthWithHeightAspectRatio;
+  }
+}

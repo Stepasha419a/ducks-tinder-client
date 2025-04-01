@@ -1,0 +1,12 @@
+.image {
+  position: relative;
+  z-index: -1;
+}
+
+@media (max-width: 900px) or (hover: none) {
+  .image {
+    &.full {
+      object-fit: cover;
+    }
+  }
+}

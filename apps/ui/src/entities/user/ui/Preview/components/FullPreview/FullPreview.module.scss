@@ -1,0 +1,87 @@
+.descr {
+  width: 100%;
+  color: var(--main-secondary);
+  letter-spacing: 0.7px;
+  padding: 25px;
+
+  .person {
+    height: 43px;
+    font-size: 36px;
+    font-weight: 700;
+    text-shadow: 0 1px 1px var(--color--black-90);
+    color: var(--main-primary);
+    margin-bottom: 10px;
+
+    .years {
+      font-size: 28px;
+      font-weight: 300;
+    }
+  }
+
+  .place {
+    margin-bottom: 6px;
+    display: flex;
+    align-items: baseline;
+    font-size: 18px;
+
+    .name {
+      display: inline-block;
+      margin-left: 2px;
+    }
+
+    .icon {
+      font-size: 14px;
+      margin-right: 5px;
+    }
+  }
+
+  .distance {
+    font-size: 18px;
+
+    .icon {
+      margin: 0 5px 0 1px;
+    }
+
+    .text {
+      margin-left: 2px;
+    }
+  }
+}
+
+.description {
+  border-top: 2px solid var(--border-main);
+  padding: 16px;
+  word-wrap: break-word;
+}
+
+@media (max-width: 400px) {
+  .descr {
+    .person {
+      font-size: 28px;
+
+      .years {
+        font-size: 24px;
+      }
+    }
+
+    .place {
+      .icon {
+        font-size: 12px;
+      }
+
+      .name {
+        font-size: 16px;
+      }
+    }
+
+    .distance {
+      .icon {
+        font-size: 14px;
+      }
+
+      .text {
+        font-size: 16px;
+      }
+    }
+  }
+}
