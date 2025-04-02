@@ -6,3 +6,5 @@ export * from './entities/user';
 
 export * from './app/lib';
 export * from './app/model';
+
+export * from './features/WithUserData';
