@@ -1,3 +1,4 @@
+import { ROUTES } from '@ducks-tinder-client/common';
 import { motion } from 'framer-motion';
 import {
   useCallback,
@@ -7,7 +8,6 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { ChatTabTitle } from '@entities/chat';
-import { ROUTES } from '@shared/lib';
 import styles from '../../ChatsPairsBlock.module.scss';
 
 interface TabsProps {

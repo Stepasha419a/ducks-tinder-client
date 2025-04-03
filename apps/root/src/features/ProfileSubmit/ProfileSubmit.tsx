@@ -1,8 +1,8 @@
 import type { Picture } from '@ducks-tinder-client/common';
+import { ROUTES } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@shared/lib';
 import { usePicturesMix } from './lib';
 import styles from './ProfileSubmit.module.scss';
 import { ProfileSubmitMobile } from './ui';

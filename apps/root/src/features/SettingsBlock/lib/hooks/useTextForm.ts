@@ -1,10 +1,10 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import { useAdaptiveMediaQuery, ROUTES } from '@ducks-tinder-client/common';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDefaultValues } from '@entities/user';
 import { useMemoriedSettingUrl } from '@entities/user';
 import { updateUserThunk } from '@entities/user';
-import { ROUTES, useAppDispatch } from '@shared/lib';
+import { useAppDispatch } from '@shared/lib';
 import type { SettingFieldValues } from './useCurrentValidation';
 import { useCurrentValidation } from './useCurrentValidation';
 
