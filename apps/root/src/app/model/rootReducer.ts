@@ -1,5 +1,5 @@
+import { chatReducer } from '@ducks-tinder-client/common';
 import { combineReducers } from '@reduxjs/toolkit';
-import { chatReducer } from '@entities/chat';
 import { authReducer } from '@entities/user';
 import { tinderReducer } from '@entities/user';
 import { userReducer } from '@entities/user';
