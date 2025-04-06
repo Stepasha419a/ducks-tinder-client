@@ -1,0 +1,32 @@
+.chats {
+  margin-top: 20px;
+  width: 100%;
+  height: calc(100% - 147px);
+  overflow: auto;
+
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.lazy_wrapper {
+  display: flex;
+  margin-bottom: 10px;
+  padding: 4px;
+
+  .lazy_descr {
+    margin-left: 10px;
+
+    .lazy_name {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .chats {
+    padding: 20px;
+  }
+}

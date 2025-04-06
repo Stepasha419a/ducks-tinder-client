@@ -1,0 +1,59 @@
+.item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 4px;
+  border-radius: 36px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+
+  &.active {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.171);
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.171);
+  }
+
+  .descr {
+    margin-left: 10px;
+
+    .name {
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .message {
+      margin-top: 8px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 200px;
+      overflow: hidden;
+    }
+
+    .newMessages {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 16px;
+      background-color: var(--color--red-100);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+
+      .count {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+
+        font-size: 14px;
+        color: var(--color--white-100);
+      }
+    }
+  }
+}

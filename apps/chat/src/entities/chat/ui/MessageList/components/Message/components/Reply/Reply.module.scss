@@ -1,0 +1,43 @@
+.reply {
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  position: absolute;
+  top: 32px;
+  left: 8px;
+
+  width: calc(100% - 48px);
+
+  &.own {
+    top: 8px;
+  }
+
+  .border {
+    height: 40px;
+    width: 4px;
+    min-width: 4px;
+    background-color: var(--color--red-90);
+    border-radius: 2px;
+  }
+
+  .reply_message {
+    margin-left: 10px;
+    background: inherit;
+    width: 100%;
+    min-width: 90px;
+
+    .reply_username {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+
+    .reply_text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      max-width: calc(100% - 20px);
+    }
+  }
+}
