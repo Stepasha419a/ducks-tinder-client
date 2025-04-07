@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+
+  background-color: rgb(238, 238, 238);
+}
+
+.list {
+  width: 300px;
+  margin-right: 12px;
+}
+
+.messages {
+  width: 700px;
+  position: relative;
+}
