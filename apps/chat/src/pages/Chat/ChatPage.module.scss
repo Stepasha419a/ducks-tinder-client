@@ -1,0 +1,12 @@
+.main {
+  display: flex;
+  height: 100%;
+
+  .content {
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-primary);
+    position: relative;
+    overflow: auto;
+  }
+}
