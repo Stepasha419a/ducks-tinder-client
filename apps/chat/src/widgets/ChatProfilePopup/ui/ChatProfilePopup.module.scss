@@ -1,0 +1,37 @@
+.popup {
+  overflow: hidden;
+
+  .wrapper {
+    padding: 24px 48px 0;
+
+    .chatInfo {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 24px;
+
+      .name {
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .btns {
+    background-color: var(--color--white-100);
+    width: 100%;
+
+    .btn {
+      height: 46px;
+      font-size: 22px;
+      text-transform: uppercase;
+      font-weight: 400;
+      border-top: 2px solid var(--color--black-90);
+      transition: 0.2s;
+
+      &:hover {
+        color: var(--color--red-90);
+      }
+    }
+  }
+}
