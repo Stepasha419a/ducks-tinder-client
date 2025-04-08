@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react';
-import { useMemo } from 'react';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useMemo , useReducer } from 'react';
+
 import type { HocComposition } from '../helpers';
 
 export function WithHocSubscription(

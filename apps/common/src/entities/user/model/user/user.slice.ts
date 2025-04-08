@@ -1,14 +1,16 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+
 import type { User } from '@shared/api';
+
 import type { Setting, UserInitialState } from './user.interface';
 import {
   deleteUserPictureThunk,
+  getCurrentUser,
   mixUserPicturesThunk,
   saveUserImageThunk,
-  updateUserThunk,
   updateUserPlaceThunk,
-  getCurrentUser,
+  updateUserThunk,
 } from './user.thunks';
 
 const initialState: UserInitialState = {

@@ -1,10 +1,11 @@
 import type {
-  AxiosResponse,
-  AxiosRequestConfig,
-  AxiosInstance,
   AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
 } from 'axios';
 import axios from 'axios';
+
 import type { AuthResponse } from '@shared/api';
 
 interface AxiosEditedConfig extends AxiosResponse {

@@ -1,6 +1,7 @@
 import type { AxiosError, AxiosResponse } from 'axios';
+
 import type { Chat, User } from '../../interfaces';
-import { chatStub, messageStub, matchingUserStubs, userStub } from './stub';
+import { chatStub, matchingUserStubs, messageStub, userStub } from './stub';
 
 export async function resolveAxiosResponse<T>(
   data?: T

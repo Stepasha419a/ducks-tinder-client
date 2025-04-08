@@ -1,4 +1,5 @@
 import type { ComponentType } from 'react';
+
 import type { HocFunc } from '../interfaces';
 import { compose } from './compose';
 

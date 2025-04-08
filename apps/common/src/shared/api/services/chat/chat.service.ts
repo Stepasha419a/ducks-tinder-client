@@ -1,16 +1,17 @@
 import type { Chat, ShortUser } from '@shared/api';
 import { instance } from '@shared/api';
 import type { PaginationParams } from '@shared/lib';
+
 import { getMockableService } from '../mock';
+import { chatMockService } from './chat.mock-service';
+import { chatSocket } from './chat.socket';
 import type {
   ChatConnectReturn,
-  ChatService,
   ChatsConnectReturn,
+  ChatService,
   NewMessagesCount,
   ShortMessagesPagination,
 } from './chat-service.interface';
-import { chatMockService } from './chat.mock-service';
-import { chatSocket } from './chat.socket';
 
 export const chatService: ChatService = getMockableService(
   {

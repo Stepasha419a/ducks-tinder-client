@@ -1,5 +1,6 @@
 import type { RefObject } from 'react';
 import { useEffect } from 'react';
+
 import { isRefElementVisible, scrollToBottom } from '../helpers';
 
 // uses deps to trigger useEffect hooks

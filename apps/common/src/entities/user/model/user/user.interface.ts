@@ -1,4 +1,5 @@
 import type { User } from '@shared/api';
+
 import type { SettingNameEnum } from '../../lib';
 
 export interface UserInitialState {

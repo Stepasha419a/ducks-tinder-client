@@ -1,13 +1,12 @@
-import {
-  AttentionSign,
+import type {   AttentionSign,
   ChildrenAttitude,
   Education,
   FoodPreference,
   Interest,
+PairsInfo ,
   type ShortUser,
   type User,
 } from '@shared/api';
-import type { PairsInfo } from '@shared/api';
 
 export const shortUserStub: ShortUser = {
   age: 18,

@@ -1,20 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import EventEmitter from 'events';
+
 import type {
+  ChatConnectReturn,
+  ChatsConnectReturn,
+  ChatService,
   ReceivedChatBlock,
   ReceivedMessage,
   ReceivedNewMessage,
-  ChatConnectReturn,
-  ChatService,
-  ChatsConnectReturn,
 } from '@shared/api';
 import {
   ChatSocketEvent,
   chatStub,
-  shortUserStub,
   mockStorage,
   resolveAxiosResponse,
+  shortUserStub,
 } from '@shared/api';
 import type { PaginationParams } from '@shared/lib';
 

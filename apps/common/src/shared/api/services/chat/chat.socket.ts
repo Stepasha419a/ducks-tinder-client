@@ -1,4 +1,5 @@
 import { io } from 'socket.io-client';
+
 import type { ChatSocket } from './chat-service.interface';
 import { ChatSocketEvent } from './chat-service.interface';
 

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { userService } from '@shared/api';
+
 import type { Picture, User } from '@shared/api';
+import { userService } from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
 
 export const getCurrentUser = createAsyncThunk(

@@ -1,5 +1,7 @@
 import type { AxiosResponse } from 'axios';
+
 import type { PaginationParams } from '@shared/lib';
+
 import type { FullPicture, ShortUser, User } from '../../interfaces';
 
 export interface PairFilterParams extends PaginationParams {

@@ -1,4 +1,5 @@
 import { instance } from '@shared/api';
+
 import { getMockableService } from '../mock';
 import type { AuthResponse, AuthService } from './auth.interfaces';
 import { authMockService } from './auth.mock-service';

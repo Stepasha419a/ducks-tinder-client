@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import type { AxiosResponse } from 'axios';
+
 import type { AuthResponse, AuthService } from '@shared/api';
 import {
+  authResponseStub,
   deleteTestUser,
   getTestUser,
   mockStorage,
   rejectWithAxiosResponseError,
   resolveAxiosResponse,
   saveTestUser,
-  authResponseStub,
 } from '@shared/api';
 
 export const authMockService: AuthService = {

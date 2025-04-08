@@ -1,5 +1,6 @@
 import type { Selector } from '@reduxjs/toolkit';
 import { createSelector } from '@reduxjs/toolkit';
+
 import type { Chat, Message } from '@shared/api';
 
 interface SelectMessagesResult {
