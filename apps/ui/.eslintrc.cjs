@@ -45,8 +45,28 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'import', 'simple-import-sort'],
   rules: {
+    'import/no-duplicates': 'error',
+    'import/order': 'off',
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          ['^react', '^w*'],
+          ['^@ducks-tinder-client/*'],
+          [
+            '@app/*',
+            '@pages/*',
+            '@widgets/*',
+            '@features/*',
+            '@entities/*',
+            '@shared/*',
+          ],
+          ['^[./]', '^.+\\.s?css$'],
+        ],
+      },
+    ],
     '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/ban-types': 'warn',
     '@typescript-eslint/consistent-type-imports': 'warn',
