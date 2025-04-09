@@ -1,8 +1,10 @@
-import { ThemeProvider } from '@ducks-tinder-client/ui';
 import ReactDOM from 'react-dom/client';
-import '@ducks-tinder-client/ui/dist/ui.css';
 import { BrowserRouter } from 'react-router-dom';
+
+import { ThemeProvider } from '@ducks-tinder-client/ui';
+
 import PolicyPage from './policy';
+import '@ducks-tinder-client/ui/dist/ui.css';
 
 const App = () => {
   return (
