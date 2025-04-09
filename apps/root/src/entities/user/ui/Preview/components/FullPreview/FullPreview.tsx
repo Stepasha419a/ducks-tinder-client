@@ -1,9 +1,12 @@
-import type { ShortUser, User } from '@ducks-tinder-client/common';
-import { faHouse, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC, ReactElement } from 'react';
 import { useState } from 'react';
+import { faHouse, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import type { ShortUser, User } from '@ducks-tinder-client/common';
+
 import { InterestsListPopup } from '@entities/user';
+
 import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
 import styles from './FullPreview.module.scss';
 

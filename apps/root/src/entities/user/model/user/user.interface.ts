@@ -1,4 +1,5 @@
 import type { User } from '@ducks-tinder-client/common';
+
 import type { SettingNameEnum } from '../../lib';
 
 export interface UserInitialState {

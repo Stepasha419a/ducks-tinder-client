@@ -1,15 +1,17 @@
-import { Button, TextField } from '@ducks-tinder-client/ui';
+import type { ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 import {
   faArrowRightLong,
   faEnvelope,
-  faLock,
   faFileText,
+  faLock,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import { AuthLayout } from '@entities/user';
-import { useAuthForm } from '@entities/user';
+
+import { Button, TextField } from '@ducks-tinder-client/ui';
+
+import { AuthLayout , useAuthForm } from '@entities/user';
+
 import styles from './RegistrationForm.module.scss';
 
 export const RegistrationForm = (): ReactElement => {

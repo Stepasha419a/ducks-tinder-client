@@ -1,6 +1,7 @@
 import type { FC } from 'react';
-import styles from './ChatControl.module.scss';
+
 import { BlockChat, DeleteChat } from './ui';
+import styles from './ChatControl.module.scss';
 
 interface ChatControlProps {
   submitDelete?: () => void;

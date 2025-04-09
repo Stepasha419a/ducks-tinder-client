@@ -1,5 +1,7 @@
+import { useEffect,useState } from 'react';
+
 import type { Picture } from '@ducks-tinder-client/common';
-import { useState, useEffect } from 'react';
+
 import { useAppSelector } from '@shared/lib';
 
 export function useUserPictures() {

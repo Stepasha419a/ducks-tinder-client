@@ -1,4 +1,5 @@
-import { memo, type FC } from 'react';
+import { type FC,memo } from 'react';
+
 import styles from './Timestamp.module.scss';
 
 interface TimestampProps {

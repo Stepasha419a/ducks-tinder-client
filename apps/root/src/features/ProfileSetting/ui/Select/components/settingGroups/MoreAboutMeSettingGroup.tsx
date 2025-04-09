@@ -1,7 +1,9 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
-import { ProfileSettingSelectNameEnum } from '@entities/user';
+
 import type { MultiSelectForm } from '@entities/user';
+import { ProfileSettingSelectNameEnum } from '@entities/user';
+
 import { SelectSetting } from './components';
 
 interface MoreAboutMeSettingGroupProps {

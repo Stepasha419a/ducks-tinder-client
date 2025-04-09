@@ -1,6 +1,8 @@
-import type { ControlRef } from '@ducks-tinder-client/ui';
 import type { RefObject } from 'react';
 import { useCallback, useEffect, useRef } from 'react';
+
+import type { ControlRef } from '@ducks-tinder-client/ui';
+
 import { useAppSelector } from '@shared/lib';
 
 export function useMessagesScroll(controlRef: RefObject<ControlRef>) {

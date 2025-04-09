@@ -1,8 +1,11 @@
-import { deleteChatThunk } from '@ducks-tinder-client/common';
-import { Button, Popup } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
 import { useState } from 'react';
+
+import { deleteChatThunk } from '@ducks-tinder-client/common';
+import { Button, Popup } from '@ducks-tinder-client/ui';
+
 import { useAppDispatch } from '@shared/lib';
+
 import styles from './DeleteChat.module.scss';
 
 interface DeleteChatProps {

@@ -1,4 +1,5 @@
 import { CheckboxInput, Theme, useThemeContext } from '@ducks-tinder-client/ui';
+
 import { SettingThumbnail } from '@entities/user';
 
 export const SwitchThemeThumbnail = () => {

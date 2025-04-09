@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
 import { getIsMobileNavAvailable } from '../helpers';
 
 export function useIsMobileNavAvailable(): boolean {

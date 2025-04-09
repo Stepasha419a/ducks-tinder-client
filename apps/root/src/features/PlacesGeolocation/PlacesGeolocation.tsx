@@ -1,9 +1,10 @@
-import classNames from 'classnames';
 import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Places } from '@entities/user';
-import { updateUserPlaceThunk } from '@entities/user';
+import classNames from 'classnames';
+
+import { Places , updateUserPlaceThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
+
 import { getAreDifferentPlaces } from './lib';
 import styles from './PlacesGeolocation.module.scss';
 

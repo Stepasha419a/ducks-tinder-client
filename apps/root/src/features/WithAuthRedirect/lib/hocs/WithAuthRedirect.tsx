@@ -1,7 +1,9 @@
-import { ROUTES } from '@ducks-tinder-client/common';
 import type { ComponentType, FC } from 'react';
 import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+
+import { ROUTES } from '@ducks-tinder-client/common';
+
 import { checkAuthThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 

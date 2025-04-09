@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 import type { Control } from 'react-hook-form';
+
 import type { MultiSelectForm } from '@entities/user';
-import { useProfileSettingUrl } from '@entities/user';
-import { ProfileSettingNameEnum } from '@entities/user';
+import { ProfileSettingNameEnum,useProfileSettingUrl  } from '@entities/user';
+
 import { InterestsSettingGroup } from './InterestsSettingGroup';
 import { LifestyleSettingGroup } from './LifestyleSettingGroup';
 import { MoreAboutMeSettingGroup } from './MoreAboutMeSettingGroup';

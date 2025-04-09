@@ -1,12 +1,14 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
-import type { Message } from '@ducks-tinder-client/common';
 import {
-  useCallback,
-  useState,
   type FC,
   type ReactElement,
+  useCallback,
   useEffect,
+  useState,
 } from 'react';
+
+import type { Message } from '@ducks-tinder-client/common';
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+
 import { MessageForm } from '@features/MessageForm';
 import { MessageSelect } from '@features/MessageSelect';
 import { ChatProfile, MessageList } from '@entities/chat';

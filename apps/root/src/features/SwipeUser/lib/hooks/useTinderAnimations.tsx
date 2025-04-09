@@ -1,4 +1,5 @@
 import type { AnimationControls } from 'framer-motion';
+
 import { dislikeUserThunk, likeUserThunk } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
 

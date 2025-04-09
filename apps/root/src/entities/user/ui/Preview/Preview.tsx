@@ -1,12 +1,14 @@
+import type { FC, ReactElement, RefObject } from 'react';
+import { useState } from 'react';
+import type Slider from 'react-slick';
+import classNames from 'classnames';
+
 import type {
   ShortUser,
   ShortUserWithoutDistance,
   User,
 } from '@ducks-tinder-client/common';
-import classNames from 'classnames';
-import type { FC, ReactElement, RefObject } from 'react';
-import { useState } from 'react';
-import type Slider from 'react-slick';
+
 import { FullPreview, TogglePreview, UserSlider } from './components';
 import styles from './Preview.module.scss';
 

@@ -1,7 +1,9 @@
-import type { RegistrationParams } from '@ducks-tinder-client/common';
-import { authDuck } from '@ducks-tinder-client/ui';
 import type { FC, PropsWithChildren, ReactNode } from 'react';
 import type { FieldErrors } from 'react-hook-form';
+
+import type { RegistrationParams } from '@ducks-tinder-client/common';
+import { authDuck } from '@ducks-tinder-client/ui';
+
 import styles from './AuthLayout.module.scss';
 
 interface AuthLayoutProps {

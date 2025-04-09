@@ -1,4 +1,5 @@
 import { WithErrorFallback } from '@ducks-tinder-client/common';
+
 import { WithAuthRedirect } from '@features/WithAuthRedirect';
 import { WithChatConnection } from '@features/WithChatConnection';
 import { WithCheckedFields } from '@features/WithCheckedFields';

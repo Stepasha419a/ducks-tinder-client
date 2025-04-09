@@ -1,8 +1,10 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
-import { ROUTES } from '@ducks-tinder-client/common';
 import { Link } from 'react-router-dom';
+
+import { ROUTES,useAdaptiveMediaQuery  } from '@ducks-tinder-client/common';
+
 import { PlacesGeolocation } from '@features/PlacesGeolocation';
 import { Map } from '@entities/user';
+
 import styles from './PlaceSetting.module.scss';
 
 export const PlaceSetting = () => {

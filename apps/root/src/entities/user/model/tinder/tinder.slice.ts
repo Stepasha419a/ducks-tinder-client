@@ -1,6 +1,8 @@
-import type { ShortUser } from '@ducks-tinder-client/common';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+
+import type { ShortUser } from '@ducks-tinder-client/common';
+
 import {
   dislikeUserThunk,
   getMatchUsersThunk,

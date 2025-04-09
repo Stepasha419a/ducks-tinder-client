@@ -1,8 +1,9 @@
-import { AnimatePresence } from 'framer-motion';
 import type { FC, ReactElement } from 'react';
-import { useNavBlock, NavBlockEnum } from './lib';
+import { AnimatePresence } from 'framer-motion';
+
+import { NavBlockEnum,useNavBlock } from './lib';
+import { NavBlock, NavMobile,UserLinks } from './ui';
 import styles from './Nav.module.scss';
-import { NavBlock, UserLinks, NavMobile } from './ui';
 
 interface NavProps {
   isMobile?: boolean;

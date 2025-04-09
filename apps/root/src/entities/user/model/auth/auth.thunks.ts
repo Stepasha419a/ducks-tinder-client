@@ -1,10 +1,11 @@
-import { returnErrorMessage } from '@ducks-tinder-client/common';
-import { authService } from '@ducks-tinder-client/common';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
 import type {
   LoginParams,
   RegistrationParams,
 } from '@ducks-tinder-client/common';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { authService,returnErrorMessage  } from '@ducks-tinder-client/common';
+
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',

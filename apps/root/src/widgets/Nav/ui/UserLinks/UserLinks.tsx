@@ -1,4 +1,5 @@
-import { Avatar } from '@ducks-tinder-client/ui';
+import { type FC,memo } from 'react';
+import { Link } from 'react-router-dom';
 import {
   faBriefcase,
   faFireFlameCurved,
@@ -7,12 +8,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
-import { memo, type FC } from 'react';
-import { Link } from 'react-router-dom';
+
+import { Avatar } from '@ducks-tinder-client/ui';
+
 import { selectAvatar } from '@entities/user';
 import { useAppSelector } from '@shared/lib';
-import styles from './UserLinks.module.scss';
+
 import { variants } from './UserLinks.variants';
+import styles from './UserLinks.module.scss';
 
 interface UserLinksProps {
   isProfilePage: boolean;

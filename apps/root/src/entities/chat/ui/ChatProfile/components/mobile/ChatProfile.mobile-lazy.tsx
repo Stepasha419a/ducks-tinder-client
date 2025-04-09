@@ -1,10 +1,13 @@
-import { ROUTES } from '@ducks-tinder-client/common';
+import Skeleton from 'react-loading-skeleton';
+import { Link } from 'react-router-dom';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import Skeleton from 'react-loading-skeleton';
-import { Link } from 'react-router-dom';
+
+import { ROUTES } from '@ducks-tinder-client/common';
+
 import { useAppSelector } from '@shared/lib';
+
 import styles from './ChatProfile.mobile.module.scss';
 
 export const ChatProfileMobileLazy = () => {

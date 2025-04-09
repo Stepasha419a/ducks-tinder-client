@@ -1,5 +1,7 @@
-import { WithHocSubscription } from '@ducks-tinder-client/common';
 import type { ReactElement } from 'react';
+
+import { WithHocSubscription } from '@ducks-tinder-client/common';
+
 import { RegistrationForm } from '@features/RegistrationForm';
 import { authHocComposition } from '@shared/lib';
 

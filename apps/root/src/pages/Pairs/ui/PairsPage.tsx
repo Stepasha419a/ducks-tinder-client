@@ -1,4 +1,5 @@
 import type { FC, ReactElement } from 'react';
+
 import { Pairs } from '@widgets/Pairs';
 import { LikesCount } from '@entities/user';
 

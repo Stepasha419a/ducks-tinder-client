@@ -1,16 +1,18 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
-import type { Message as MessageInterface } from '@ducks-tinder-client/common';
-import classNames from 'classnames';
 import { memo, type ReactNode } from 'react';
+import classNames from 'classnames';
+
+import type { Message as MessageInterface } from '@ducks-tinder-client/common';
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+
 import {
   Body,
   Content,
   MessageAvatar,
+  MessageMobile,
   Reply,
   Select,
   Text,
   Username,
-  MessageMobile,
 } from './components';
 import './Message.scss';
 

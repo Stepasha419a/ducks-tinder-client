@@ -1,4 +1,5 @@
 import type { ComponentType, FC } from 'react';
+
 import { InitialLoading } from '@entities/user';
 
 export const WithInitialLoading = <P extends object>(

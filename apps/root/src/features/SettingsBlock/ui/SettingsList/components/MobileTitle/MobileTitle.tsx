@@ -1,5 +1,7 @@
-import { ROUTES } from '@ducks-tinder-client/common';
 import { Link } from 'react-router-dom';
+
+import { ROUTES } from '@ducks-tinder-client/common';
+
 import styles from './MobileTitle.module.scss';
 
 export const MobileTitle = () => {

@@ -1,4 +1,5 @@
 import type { ProfileSettingNameEnum } from '@entities/user';
+
 import type { ProfileSettingWrapperData } from '../constants';
 import { PROFILE_SETTING_WRAPPER_DATA } from '../constants';
 

@@ -1,6 +1,7 @@
+import { toast } from 'react-toastify';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
+
 import type { AuthData } from './auth.interface';
 import {
   checkAuthThunk,

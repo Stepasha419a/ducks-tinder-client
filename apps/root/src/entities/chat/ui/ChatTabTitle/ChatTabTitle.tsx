@@ -1,6 +1,8 @@
-import { motion } from 'framer-motion';
 import type { FC } from 'react';
+import { motion } from 'framer-motion';
+
 import { useAppSelector } from '@shared/lib';
+
 import styles from './ChatTabTitle.module.scss';
 
 interface ChatTabTitleProps {

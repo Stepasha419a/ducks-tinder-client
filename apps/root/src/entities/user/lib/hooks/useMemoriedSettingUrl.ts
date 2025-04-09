@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+
 import type { SettingNameEnum } from '../constants';
 import { useSettingUrl } from './useSettingUrl';
 

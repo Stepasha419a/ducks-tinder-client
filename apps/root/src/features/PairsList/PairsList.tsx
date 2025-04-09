@@ -1,17 +1,20 @@
-import { useDebouncedCallback } from '@ducks-tinder-client/common';
-import type { ShortUser } from '@ducks-tinder-client/common';
-import { InfinityScroll } from '@ducks-tinder-client/ui';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import {
   faHeart,
   faMagnifyingGlassMinus,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { Dispatch, FC, SetStateAction } from 'react';
+
+import type { ShortUser } from '@ducks-tinder-client/common';
+import { useDebouncedCallback } from '@ducks-tinder-client/common';
+import { InfinityScroll } from '@ducks-tinder-client/ui';
+
 import { getUserPairsThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
+
 import { PairsListLazy } from './PairsList.lazy';
-import styles from './PairsList.module.scss';
 import { Pair } from './ui';
+import styles from './PairsList.module.scss';
 
 interface PairsListProps {
   setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;

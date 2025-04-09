@@ -1,5 +1,6 @@
 import { faComment } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import styles from './Choose.module.scss';
 
 export const Choose = () => {

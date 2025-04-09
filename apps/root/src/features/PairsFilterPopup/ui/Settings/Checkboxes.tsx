@@ -1,5 +1,7 @@
-import { CheckboxInput } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
+
+import { CheckboxInput } from '@ducks-tinder-client/ui';
+
 import styles from '../../PairsFilterPopup.module.scss';
 
 interface CheckboxesProps {

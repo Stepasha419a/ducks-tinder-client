@@ -1,14 +1,17 @@
+import { type FC, memo,useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 import {
-  useAdaptiveMediaQuery,
   getChatThunk,
+  useAdaptiveMediaQuery,
 } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
-import { useEffect, type FC, memo } from 'react';
-import { useParams } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '@shared/lib';
+
 import { ChatProfileLazy } from './ChatProfile.lazy';
-import styles from './ChatProfile.module.scss';
 import { ChatProfileMobile } from './components';
+import styles from './ChatProfile.module.scss';
 
 interface ChatProfileProps {
   handleOpen: () => void;

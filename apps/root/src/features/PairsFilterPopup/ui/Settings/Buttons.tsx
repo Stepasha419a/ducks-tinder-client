@@ -1,5 +1,7 @@
-import { Button } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
+
+import { Button } from '@ducks-tinder-client/ui';
+
 import styles from '../../PairsFilterPopup.module.scss';
 
 interface ButtonsProps {

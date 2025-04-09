@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+
 import styles from './Username.module.scss';
 
 interface UsernameProps {

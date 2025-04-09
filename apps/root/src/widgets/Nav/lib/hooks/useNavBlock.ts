@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+
 import { getIsExplorePage, getIsProfilePage } from '../helpers';
 
 export enum NavBlockEnum {

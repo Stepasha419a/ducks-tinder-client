@@ -1,4 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
+
 import { SettingsGroup } from '@entities/user';
 
 export const InterestGroup: FC<PropsWithChildren> = ({ children }) => {

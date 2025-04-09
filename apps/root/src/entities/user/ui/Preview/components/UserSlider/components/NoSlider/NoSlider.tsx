@@ -1,6 +1,8 @@
-import { makeImageUrl, showDefaultImage } from '@ducks-tinder-client/ui';
-import classNames from 'classnames';
 import type { FC, ReactElement } from 'react';
+import classNames from 'classnames';
+
+import { makeImageUrl, showDefaultImage } from '@ducks-tinder-client/ui';
+
 import styles from './NoSlider.module.scss';
 
 interface NoSliderProps {

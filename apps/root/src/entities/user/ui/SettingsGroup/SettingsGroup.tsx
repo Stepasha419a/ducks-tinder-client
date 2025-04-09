@@ -1,4 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
+
 import styles from './SettingsGroup.module.scss';
 
 interface SettingsGroupProps {

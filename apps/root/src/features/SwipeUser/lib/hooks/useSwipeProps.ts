@@ -1,4 +1,5 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
+import { useRef } from 'react';
 import type {
   AnimationControls,
   MotionProps,
@@ -6,8 +7,9 @@ import type {
   PanInfo,
 } from 'framer-motion';
 import { useMotionValue, useTransform } from 'framer-motion';
-import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
-import { useRef } from 'react';
+
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+
 import { useTinderAnimations } from './useTinderAnimations';
 
 type SlantSide = 'top' | 'bottom' | null;

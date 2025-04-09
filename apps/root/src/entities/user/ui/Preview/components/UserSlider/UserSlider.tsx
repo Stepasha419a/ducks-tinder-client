@@ -1,16 +1,19 @@
-import type { ShortUser, User } from '@ducks-tinder-client/common';
-import { ImageSlider } from '@ducks-tinder-client/ui';
-import classNames from 'classnames';
-import { memo, useEffect } from 'react';
 import type {
-  FC,
-  RefObject,
   Dispatch,
+  FC,
   ReactElement,
+  RefObject,
   SetStateAction,
 } from 'react';
+import { memo, useEffect } from 'react';
 import type Slider from 'react-slick';
+import classNames from 'classnames';
+
+import type { ShortUser, User } from '@ducks-tinder-client/common';
+import { ImageSlider } from '@ducks-tinder-client/ui';
+
 import { getUserSliderInfo } from '@entities/user';
+
 import { NoSlider, SliderContent } from './components';
 import styles from './UserSlider.module.scss';
 

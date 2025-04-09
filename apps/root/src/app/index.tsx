@@ -1,7 +1,9 @@
-import { ThemeProvider, ToastContainer } from '@ducks-tinder-client/ui';
+import type { ReactElement } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
-import type { ReactElement } from 'react';
+
+import { ThemeProvider, ToastContainer } from '@ducks-tinder-client/ui';
+
 import { withAppHocs } from './lib';
 import { Routing } from './routing';
 import './styles/index.scss';

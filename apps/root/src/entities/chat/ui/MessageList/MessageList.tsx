@@ -1,19 +1,20 @@
+import { type FC, type ReactElement,useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
+
 import type { Message as MessageInterface } from '@ducks-tinder-client/common';
-import { useDebouncedCallback } from '@ducks-tinder-client/common';
-import {
-  connectChatThunk,
+import {   connectChatThunk,
   disconnectChatThunk,
   getMessagesThunk,
   selectMessages,
+useDebouncedCallback ,
 } from '@ducks-tinder-client/common';
 import type { ControlRef } from '@ducks-tinder-client/ui';
 import { InfinityScroll } from '@ducks-tinder-client/ui';
-import classNames from 'classnames';
-import { useEffect, useRef, type FC, type ReactElement } from 'react';
-import { useParams } from 'react-router-dom';
-import { useMessagesProps, useMessagesScroll } from '@entities/chat';
-import { getIsNextDayMessage } from '@entities/chat';
+
+import { getIsNextDayMessage,useMessagesProps, useMessagesScroll  } from '@entities/chat';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
+
 import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import styles from './MessageList.module.scss';

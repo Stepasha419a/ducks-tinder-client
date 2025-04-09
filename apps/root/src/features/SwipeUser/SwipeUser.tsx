@@ -1,15 +1,17 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
-import classNames from 'classnames';
-import { motion } from 'framer-motion';
 import type { FC } from 'react';
 import { useEffect } from 'react';
-import { getMatchUsersThunk, selectTinderData } from '@entities/user';
-import { Preview } from '@entities/user';
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
+
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+
+import { getMatchUsersThunk, Preview,selectTinderData  } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
+
 import { useSwipe } from './lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';
-import styles from './SwipeUser.module.scss';
 import { Failed, RateButtons, Status } from './ui';
+import styles from './SwipeUser.module.scss';
 
 export const SwipeUser: FC = () => {
   const dispatch = useAppDispatch();

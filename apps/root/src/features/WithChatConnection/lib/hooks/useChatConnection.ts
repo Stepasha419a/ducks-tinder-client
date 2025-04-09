@@ -1,12 +1,12 @@
-import type { WsExceptionError } from '@ducks-tinder-client/common';
-import type {
-  ReceivedChatBlock,
+import { useEffect } from 'react';
+
+import type {   ReceivedChatBlock,
   ReceivedMessage,
   ReceivedNewMessage,
+WsExceptionError ,
 } from '@ducks-tinder-client/common';
-import { ChatSocketEvent, chatService } from '@ducks-tinder-client/common';
-import {
-  blockChat,
+import {   blockChat,
+chatService,ChatSocketEvent ,
   deleteChat,
   deleteMessage,
   editMessage,
@@ -15,7 +15,7 @@ import {
   setIsNotFound,
   unblockChat,
 } from '@ducks-tinder-client/common';
-import { useEffect } from 'react';
+
 import { checkAuthThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 

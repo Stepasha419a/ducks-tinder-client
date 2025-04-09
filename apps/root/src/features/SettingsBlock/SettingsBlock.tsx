@@ -1,11 +1,13 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
-import { ROUTES } from '@ducks-tinder-client/common';
-import { AnimatePresence, motion } from 'framer-motion';
 import type { ReactElement } from 'react';
-import { useFoundSetting, NotFoundSetting } from '@entities/user';
-import styles from './SettingsBlock.module.scss';
+import { AnimatePresence, motion } from 'framer-motion';
+
+import { ROUTES,useAdaptiveMediaQuery  } from '@ducks-tinder-client/common';
+
+import { NotFoundSetting,useFoundSetting } from '@entities/user';
+
 import { settingVariants } from './SettingsBlock.variants';
 import { Setting, SettingsList } from './ui';
+import styles from './SettingsBlock.module.scss';
 
 export const SettingsBlock = (): ReactElement => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');

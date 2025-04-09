@@ -1,5 +1,7 @@
-import { getMemberThunk, nullMember } from '@ducks-tinder-client/common';
 import { useState } from 'react';
+
+import { getMemberThunk, nullMember } from '@ducks-tinder-client/common';
+
 import { ChatProfilePopup } from '@widgets/ChatProfilePopup';
 import { Messages } from '@widgets/Messages';
 import { useAppDispatch } from '@shared/lib';

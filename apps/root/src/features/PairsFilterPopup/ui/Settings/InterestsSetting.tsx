@@ -1,6 +1,9 @@
-import { ListItemButton } from '@ducks-tinder-client/ui';
 import type { Dispatch, FC, SetStateAction } from 'react';
+
+import { ListItemButton } from '@ducks-tinder-client/ui';
+
 import { INTERESTS_FOR_LOOP } from '@entities/user';
+
 import styles from '../../PairsFilterPopup.module.scss';
 
 interface InterestsSettingProps {

@@ -1,4 +1,4 @@
-import { ROUTES } from '@ducks-tinder-client/common';
+import { Link, useLocation } from 'react-router-dom';
 import {
   faComments,
   faFireFlameCurved,
@@ -7,9 +7,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { Link, useLocation } from 'react-router-dom';
+
+import { ROUTES } from '@ducks-tinder-client/common';
+
 import { getIsChatPage } from '@entities/chat';
 import { useAppSelector } from '@shared/lib';
+
 import { getIsProfilePage } from '../../lib';
 import styles from './Nav.mobile.module.scss';
 

@@ -1,4 +1,5 @@
 import type { User } from '@ducks-tinder-client/common';
+
 import type { ProfileSettingNameEnum } from './profileSettingName';
 import { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 

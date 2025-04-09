@@ -1,19 +1,22 @@
-import { Popup } from '@ducks-tinder-client/ui';
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 import type { Control, UseFormReset } from 'react-hook-form';
+
+import { Popup } from '@ducks-tinder-client/ui';
+
 import type { PairFilterForm } from '@entities/user';
+
 import { usePairFilterForm } from './lib';
-import styles from './PairsFilterPopup.module.scss';
 import {
   AgeSetting,
   Buttons,
   Checkboxes,
   DistanceSetting,
+  InterestSettingPopup,
   InterestsSetting,
   PicturesSetting,
-  InterestSettingPopup,
 } from './ui';
+import styles from './PairsFilterPopup.module.scss';
 
 interface PairsFilterPopupProps {
   setIsFilterPopupOpen: Dispatch<SetStateAction<boolean>>;

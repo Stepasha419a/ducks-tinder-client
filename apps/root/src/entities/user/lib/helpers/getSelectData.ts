@@ -1,6 +1,6 @@
 import type { ProfileSettingSelectNameEnum } from '../constants';
-import { SELECT_VALIDATION } from '../constants';
-import { SELECT_LISTS } from '../constants';
+import { SELECT_LISTS,SELECT_VALIDATION  } from '../constants';
+
 
 export function getSelectData(
   selectSettingField: ProfileSettingSelectNameEnum

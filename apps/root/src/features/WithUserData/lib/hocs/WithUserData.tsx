@@ -1,7 +1,7 @@
 import type { ComponentType, FC } from 'react';
-import { useRef } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef , useState } from 'react';
 import { toast } from 'react-toastify';
+
 import { getCurrentUser } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 

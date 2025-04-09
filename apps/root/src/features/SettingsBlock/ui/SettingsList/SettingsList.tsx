@@ -1,24 +1,27 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import type { ReactElement } from 'react';
+
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+
 import { LinkThumbnail, SettingsGroup } from '@entities/user';
+
 import {
-  MobileTitle,
+  AccountGroup,
   AgeSettingThumbnail,
   DescriptionSettingThumbnail,
   DistanceSettingThumbnail,
   EmailSettingThumbnail,
+  FindGroup,
+  LinksGroup,
+  LogoutButton,
+  MobileTitle,
   NameSettingThumbnail,
+  NicknameGroup,
   NicknameSettingThumbnail,
   PartnerAgeSettingThumbnail,
   PlaceSettingThumbnail,
   PreferSexSettingThumbnail,
   SexSettingThumbnail,
   SwitchThemeThumbnail,
-  AccountGroup,
-  FindGroup,
-  LinksGroup,
-  NicknameGroup,
-  LogoutButton,
 } from './components';
 import styles from './SettingsList.module.scss';
 

@@ -1,10 +1,10 @@
-import { ROUTES } from '@ducks-tinder-client/common';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+
+import { ROUTES } from '@ducks-tinder-client/common';
+
 import type { MultiSelectForm } from '@entities/user';
-import { parseSelectData } from '@entities/user';
-import { useDefaultProfileValues, useProfileSettingUrl } from '@entities/user';
-import { updateUserThunk } from '@entities/user';
+import { parseSelectData , updateUserThunk,useDefaultProfileValues, useProfileSettingUrl  } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
 
 export function useProfileSelectForm() {

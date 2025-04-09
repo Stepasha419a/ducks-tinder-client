@@ -1,4 +1,5 @@
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+
 import { ProfilePreview } from '@widgets/ProfilePreview';
 import { SettingsBlock } from '@features/SettingsBlock';
 

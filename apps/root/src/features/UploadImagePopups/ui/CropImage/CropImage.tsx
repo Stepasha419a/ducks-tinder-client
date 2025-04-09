@@ -1,10 +1,12 @@
-import { Button, Popup, RangeInput } from '@ducks-tinder-client/ui';
 import type { FC } from 'react';
 import { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import styles from './CropImage.module.scss';
+
+import { Button, Popup, RangeInput } from '@ducks-tinder-client/ui';
+
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';
+import styles from './CropImage.module.scss';
 
 interface CropImageProps {
   imageUrl: string | null;

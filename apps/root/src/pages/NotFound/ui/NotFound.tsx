@@ -1,13 +1,15 @@
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
 import { ROUTES } from '@ducks-tinder-client/common';
 import { authDuck } from '@ducks-tinder-client/ui';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import styles from './NotFound.module.scss';
+
 import {
   contentVariants,
   imgVariants,
   lineVariants,
 } from './NotFound.variants';
+import styles from './NotFound.module.scss';
 
 export const NotFound = () => {
   return (

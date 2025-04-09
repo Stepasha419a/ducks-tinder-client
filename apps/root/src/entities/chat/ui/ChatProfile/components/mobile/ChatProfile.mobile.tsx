@@ -1,10 +1,13 @@
-import { ROUTES } from '@ducks-tinder-client/common';
-import { Avatar } from '@ducks-tinder-client/ui';
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { ROUTES } from '@ducks-tinder-client/common';
+import { Avatar } from '@ducks-tinder-client/ui';
+
 import { useAppSelector } from '@shared/lib';
+
 import { ChatProfileMobileLazy } from './ChatProfile.mobile-lazy';
 import styles from './ChatProfile.mobile.module.scss';
 

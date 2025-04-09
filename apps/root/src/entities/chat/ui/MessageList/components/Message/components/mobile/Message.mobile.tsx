@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import type { FC, PropsWithChildren } from 'react';
+import classNames from 'classnames';
 
 interface MessageProps {
   handleSelectMessage: () => void;

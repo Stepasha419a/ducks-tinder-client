@@ -1,5 +1,7 @@
-import { EMAIL_REGEXP } from '@ducks-tinder-client/common';
 import type { RegisterOptions } from 'react-hook-form';
+
+import { EMAIL_REGEXP } from '@ducks-tinder-client/common';
+
 import { useSettingUrl } from '@entities/user';
 
 export interface SettingFieldValues {

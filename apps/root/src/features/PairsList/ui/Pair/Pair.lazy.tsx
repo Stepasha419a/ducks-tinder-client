@@ -1,5 +1,7 @@
-import { Skeleton } from '@ducks-tinder-client/ui';
 import classNames from 'classnames';
+
+import { Skeleton } from '@ducks-tinder-client/ui';
+
 import styles from './Pair.module.scss';
 
 export const PairLazy = () => {

@@ -1,11 +1,12 @@
 import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
-import { getSelectData } from '@entities/user';
+
 import type {
   MultiSelectForm,
   ProfileSettingSelectNameEnum,
-} from '@entities/user';
-import type { SelectValidation } from '@entities/user';
+ SelectValidation } from '@entities/user';
+import { getSelectData } from '@entities/user';
+
 import { getProfileSettingTitles } from '../helpers';
 
 export function useSelectFormControl(

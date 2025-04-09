@@ -1,6 +1,8 @@
-import { Button } from '@ducks-tinder-client/ui';
-import classNames from 'classnames';
 import type { FC } from 'react';
+import classNames from 'classnames';
+
+import { Button } from '@ducks-tinder-client/ui';
+
 import styles from './Tabs.module.scss';
 
 interface TabsProps {

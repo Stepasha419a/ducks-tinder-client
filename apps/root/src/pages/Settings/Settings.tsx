@@ -1,5 +1,7 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { Outlet } from 'react-router-dom';
+
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+
 import styles from './Settings.module.scss';
 
 export const SettingsPage = () => {

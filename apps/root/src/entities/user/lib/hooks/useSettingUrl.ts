@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom';
+
 import { SETTING_LIST, SettingNameEnum } from '../constants';
 import { getSettingType, getSettingUrl } from '../helpers';
 

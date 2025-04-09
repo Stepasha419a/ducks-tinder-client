@@ -1,9 +1,11 @@
+import type { FC } from 'react';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
+
 import type { Chat } from '@ducks-tinder-client/common';
 import { ROUTES } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
-import classNames from 'classnames';
-import type { FC } from 'react';
-import { Link } from 'react-router-dom';
+
 import styles from './ChatItem.module.scss';
 
 interface ChatInterface {

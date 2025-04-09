@@ -1,4 +1,5 @@
 import type { ComponentType, FC } from 'react';
+
 import { useChatConnection } from '../hooks';
 
 export function WithChatConnection<P extends object>(

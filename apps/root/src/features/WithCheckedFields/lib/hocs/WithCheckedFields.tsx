@@ -2,8 +2,10 @@ import type { ComponentType, ReactElement } from 'react';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import { checkFields } from '@entities/user/';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
+
 import { checkUserFields } from '../helpers';
 
 export const WithCheckedFields = <P extends object>(

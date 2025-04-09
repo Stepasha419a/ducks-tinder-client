@@ -1,6 +1,8 @@
-import type { ShortUser } from '@ducks-tinder-client/common';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import type { ShortUser } from '@ducks-tinder-client/common';
+
 import { FilterPairsItems } from '@features/FilterPairsItems';
 import { PairsFilterPopup } from '@features/PairsFilterPopup';
 import { PairsList } from '@features/PairsList';

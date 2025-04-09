@@ -1,20 +1,19 @@
-import { WithSuspense } from '@ducks-tinder-client/common';
-import { LoadingPage } from '@ducks-tinder-client/ui';
 import type { ReactElement } from 'react';
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ActiveChat, IndexChatPage } from '@pages/Chat';
+
+import { ROUTES, WithSuspense } from '@ducks-tinder-client/common';
+import { LoadingPage } from '@ducks-tinder-client/ui';
+
 import Login from '@pages/Login';
 import NavLayout from '@pages/NavLayout';
 import NotFound from '@pages/NotFound';
 import { SettingsIndexPage } from '@pages/Settings';
 import TinderPage from '@pages/Tinder';
-
 import { PlaceSetting } from '@widgets/PlaceSetting';
 import { ProfileEdit } from '@widgets/ProfileEdit';
 import { ProfilePreview } from '@widgets/ProfilePreview';
 import { ProfileSetting } from '@features/ProfileSetting';
-import { ROUTES } from '@shared/lib';
 
 const defaultFallbackSuspense = (Component: React.ComponentType) =>
   WithSuspense(Component, <LoadingPage />);

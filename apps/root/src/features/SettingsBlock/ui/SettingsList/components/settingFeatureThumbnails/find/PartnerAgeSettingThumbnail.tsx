@@ -1,8 +1,10 @@
-import { RangeInput } from '@ducks-tinder-client/ui';
 import { useState } from 'react';
-import { SettingThumbnail } from '@entities/user';
-import { updateUserThunk } from '@entities/user';
+
+import { RangeInput } from '@ducks-tinder-client/ui';
+
+import { SettingThumbnail , updateUserThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
+
 import styles from '../SettingFeatureThumbnails.module.scss';
 
 export const PartnerAgeSettingThumbnail = () => {

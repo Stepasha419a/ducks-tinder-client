@@ -1,4 +1,5 @@
 import { LoadingPage } from '@ducks-tinder-client/ui';
+
 import { useAppSelector } from '@shared/lib';
 
 export const InitialLoading = () => {

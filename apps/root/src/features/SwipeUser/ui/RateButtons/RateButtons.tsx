@@ -1,4 +1,4 @@
-import { Button } from '@ducks-tinder-client/ui';
+import type { FC } from 'react';
 import {
   faBolt,
   faHeart,
@@ -8,11 +8,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import type { MotionStyle } from 'framer-motion';
-import { motion, type AnimationControls } from 'framer-motion';
-import type { FC } from 'react';
+import type { type AnimationControls,motion,MotionStyle  } from 'framer-motion';
+
+import { Button } from '@ducks-tinder-client/ui';
+
 import { useRateButtons } from '@features/SwipeUser';
 import { useAppSelector } from '@shared/lib';
+
 import styles from './RateButtons.module.scss';
 
 interface RateButtonsProps {

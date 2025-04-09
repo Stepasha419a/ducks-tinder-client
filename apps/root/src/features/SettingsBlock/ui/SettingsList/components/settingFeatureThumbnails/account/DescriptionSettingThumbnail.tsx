@@ -1,6 +1,6 @@
 import { ROUTES } from '@ducks-tinder-client/common';
-import { LinkSettingThumbnail } from '@entities/user';
-import { SettingNameEnum } from '@entities/user';
+
+import { LinkSettingThumbnail , SettingNameEnum } from '@entities/user';
 import { useAppSelector } from '@shared/lib';
 
 export const DescriptionSettingThumbnail = () => {

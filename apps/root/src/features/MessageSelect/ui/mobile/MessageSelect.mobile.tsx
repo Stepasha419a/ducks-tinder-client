@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import {
   faPen,
   faReply,
@@ -5,7 +6,7 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import type { FC } from 'react';
+
 import styles from './MessageSelect.mobile.module.scss';
 
 interface MessageSelectMobileProps {
