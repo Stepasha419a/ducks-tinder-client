@@ -1,8 +1,10 @@
-import classNames from 'classnames';
 import type { FC } from 'react';
+import classNames from 'classnames';
+
 import { makeImageUrl, showDefaultImage } from '@shared/lib';
-import styles from './Avatar.module.scss';
+
 import type { AvatarProps } from './Avatar.types';
+import styles from './Avatar.module.scss';
 
 export const Avatar: FC<AvatarProps> = ({
   size = 's',

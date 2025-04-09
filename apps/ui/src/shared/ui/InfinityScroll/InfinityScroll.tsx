@@ -1,11 +1,12 @@
 import type { HTMLAttributes, PropsWithChildren, ReactElement } from 'react';
 import {
-  useRef,
-  useEffect,
-  useState,
-  useImperativeHandle,
   forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
 } from 'react';
+
 import { LoadMore } from './LoadMore';
 
 interface InfinityScrollProps extends HTMLAttributes<HTMLDivElement> {

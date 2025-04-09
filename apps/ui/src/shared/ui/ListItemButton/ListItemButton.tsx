@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import type { ButtonHTMLAttributes, FC, PropsWithChildren } from 'react';
+import classNames from 'classnames';
+
 import styles from './ListItemButton.module.scss';
 
 interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

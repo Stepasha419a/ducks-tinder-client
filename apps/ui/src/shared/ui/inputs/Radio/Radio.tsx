@@ -1,8 +1,9 @@
+import type { InputHTMLAttributes, PropsWithChildren } from 'react';
+import { forwardRef } from 'react';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import type { InputHTMLAttributes, PropsWithChildren } from 'react';
-import { forwardRef } from 'react';
+
 import styles from './Radio.module.scss';
 
 export interface RadioInputProps extends InputHTMLAttributes<HTMLInputElement> {

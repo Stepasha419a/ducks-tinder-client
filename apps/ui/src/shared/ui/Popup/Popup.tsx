@@ -1,11 +1,13 @@
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
-import classNames from 'classnames';
-import { motion } from 'framer-motion';
 import type { FC, PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
-import styles from './Popup.module.scss';
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
+
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+
 import type { PopupProps } from './Popup.types';
 import { mobileVariants, variants } from './Popup.variants';
+import styles from './Popup.module.scss';
 
 const portalElement = document.getElementById('portal');
 

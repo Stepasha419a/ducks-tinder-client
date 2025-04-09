@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+
 import type { ThemeContextValue } from './theme.interface';
 import { Theme } from './theme.interface';
 

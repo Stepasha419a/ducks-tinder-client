@@ -1,7 +1,9 @@
 import type { PropsWithChildren } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+
 import type { ThemeContextValue } from '@shared/model';
 import { Theme, ThemeContext } from '@shared/model';
+
 import { applyTheme, isValidTheme } from './ThemeProvider.utils';
 
 export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {

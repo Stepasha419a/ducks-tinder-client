@@ -1,8 +1,10 @@
-import classNames from 'classnames';
 import type { FC, ReactElement } from 'react';
+import classNames from 'classnames';
+
 import { makeImageUrl } from '@shared/lib';
-import styles from '../../ImageSlider.module.scss';
+
 import '../../override.scss';
+import styles from '../../ImageSlider.module.scss';
 
 interface NotFoundImagesProps {
   extraClassName: string | null;

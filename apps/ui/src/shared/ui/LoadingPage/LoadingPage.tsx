@@ -1,10 +1,11 @@
+import type { FC, ReactElement } from 'react';
 import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import type { FC, ReactElement } from 'react';
-import styles from './LoadingPage.module.scss';
+
 import { variants } from './LoadingPage.variants';
+import styles from './LoadingPage.module.scss';
 
 interface LoadingPageProps {
   visible?: boolean;

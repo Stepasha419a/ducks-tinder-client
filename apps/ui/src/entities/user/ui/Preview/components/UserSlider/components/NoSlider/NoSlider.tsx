@@ -1,6 +1,8 @@
-import classNames from 'classnames';
 import type { FC, ReactElement } from 'react';
+import classNames from 'classnames';
+
 import { makeImageUrl, showDefaultImage } from '@shared/lib';
+
 import styles from './NoSlider.module.scss';
 
 interface NoSliderProps {

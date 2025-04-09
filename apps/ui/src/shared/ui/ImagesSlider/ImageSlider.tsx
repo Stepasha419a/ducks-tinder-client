@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import type {
   Dispatch,
   FC,
@@ -6,23 +5,25 @@ import type {
   RefObject,
   SetStateAction,
 } from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect , useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import type Slider from 'react-slick';
 import Carousel from 'react-slick';
+import classNames from 'classnames';
+
 import { makeImageUrl, showDefaultImage } from '@shared/lib';
+
 import {
-  NotFoundImages,
+  Dot,
   DotsWrapper,
   NextArrow,
+  NotFoundImages,
   PrevArrow,
-  Dot,
 } from './components';
-import styles from './ImageSlider.module.scss';
 import type { Picture } from './ImageSlider.types';
 import 'slick-carousel/slick/slick.scss';
 import './override.scss';
+import styles from './ImageSlider.module.scss';
 
 interface ImageSliderProps {
   images: Picture[];

@@ -1,4 +1,5 @@
 import type { FC, PropsWithChildren } from 'react';
+
 import styles from './DotsWrapper.module.scss';
 
 export const DotsWrapper: FC<PropsWithChildren> = ({ children }) => (

@@ -1,5 +1,7 @@
 import type { FC } from 'react';
+
 import { ListItem } from '@shared/ui';
+
 import styles from './ListInfo.module.scss';
 
 interface ListInfoProps {

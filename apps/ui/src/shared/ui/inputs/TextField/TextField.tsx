@@ -1,7 +1,8 @@
-import classNames from 'classnames';
 import { forwardRef } from 'react';
-import styles from './TextField.module.scss';
+import classNames from 'classnames';
+
 import type { TextFieldProps } from './TextField.types';
+import styles from './TextField.module.scss';
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ variant = 'default', extraClassName, ...props }, ref) => {

@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react';
 import type { SkeletonProps } from 'react-loading-skeleton';
+import type { Meta, StoryObj } from '@storybook/react';
+
 import { Skeleton } from './Skeleton';
 
 const meta = {

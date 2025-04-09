@@ -1,7 +1,8 @@
-import classNames from 'classnames';
 import type { FC } from 'react';
-import styles from './Checkbox.module.scss';
+import classNames from 'classnames';
+
 import type { CheckboxProps } from './Checkbox.types';
+import styles from './Checkbox.module.scss';
 
 export const CheckboxInput: FC<CheckboxProps> = ({
   variant = 'full',
