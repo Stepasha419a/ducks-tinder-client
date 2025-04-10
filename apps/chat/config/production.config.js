@@ -115,6 +115,11 @@ module.exports = (env) => {
       new ModuleFederationPlugin({
         name: 'chatApp',
         filename: 'remoteEntry.js',
+        exposes: {
+          './ActiveChat': './src/app/activeChat.ts',
+          './IndexChat': './src/app/indexChat.ts',
+          './chat': './src/app/chat.ts',
+        },
         shared: sharedDepsConfig,
       }),
       //new BundleAnalyzerPlugin(),
