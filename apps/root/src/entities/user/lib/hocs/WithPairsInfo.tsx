@@ -1,4 +1,5 @@
-import type { ComponentType , type FC,useEffect } from 'react';
+import type { ComponentType, FC } from 'react';
+import { useEffect } from 'react';
 
 import { getPairsInfoThunk } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';

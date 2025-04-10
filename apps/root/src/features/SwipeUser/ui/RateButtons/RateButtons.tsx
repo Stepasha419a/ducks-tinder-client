@@ -8,7 +8,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import type { type AnimationControls,motion,MotionStyle  } from 'framer-motion';
+import type { AnimationControls, MotionStyle } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { Button } from '@ducks-tinder-client/ui';
 

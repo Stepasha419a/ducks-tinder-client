@@ -1,4 +1,5 @@
-import type { ComponentType , type FC,useEffect } from 'react';
+import type { ComponentType, FC } from 'react';
+import { useEffect } from 'react';
 
 import { getNewMessagesCountThunk } from '@ducks-tinder-client/common';
 
