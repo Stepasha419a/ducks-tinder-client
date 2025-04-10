@@ -1,7 +1,9 @@
-import type { ComponentType , type FC,useEffect } from 'react';
+import { type ComponentType, type FC, useEffect } from 'react';
 
-import { getNewMessagesCountThunk , useAppDispatch } from '@ducks-tinder-client/common';
-
+import {
+  getNewMessagesCountThunk,
+  useAppDispatch,
+} from '@ducks-tinder-client/common';
 
 export function WithNewMessagesCount<P extends object>(
   Component: ComponentType<P>
