@@ -115,7 +115,10 @@ module.exports = (env) => {
       new ModuleFederationPlugin({
         name: 'rootApp',
         filename: 'remoteEntry.js',
-
+        remotes: {
+          policyApp:
+            'policyApp@https://localhost:3000/remote/policy/remoteEntry.js',
+        },
         shared: sharedDepsConfig,
       }),
       //new BundleAnalyzerPlugin(),
