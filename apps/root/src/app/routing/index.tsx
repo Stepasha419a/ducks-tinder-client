@@ -21,14 +21,20 @@ const defaultFallbackSuspense = (Component: React.ComponentType) =>
 const RemotePolicyPage = defaultFallbackSuspense(
   lazy(async () => import('policyApp/Policy'))
 );
+
+const RemoteIndexChatPage = defaultFallbackSuspense(
+  lazy(async () => import('chatApp/IndexChat'))
+);
+
+const RemoteActiveChatPage = defaultFallbackSuspense(
+  lazy(async () => import('chatApp/ActiveChat'))
+);
+
 const ChatPage = defaultFallbackSuspense(
   lazy(async () => import('@pages/Chat'))
 );
 const PairsPage = defaultFallbackSuspense(
   lazy(async () => import('@pages/Pairs'))
-);
-const PolicyPage = defaultFallbackSuspense(
-  lazy(async () => import('@pages/Policy'))
 );
 const ProfilePage = defaultFallbackSuspense(
   lazy(async () => import('@pages/Profile'))
@@ -61,8 +67,8 @@ export const Routing = (): ReactElement => {
           <Route path=":settingName" element={<SettingsIndexPage />} />
         </Route>
         <Route path={ROUTES.CHAT} element={<ChatPage />}>
-          <Route index element={<IndexChatPage />} />
-          <Route path=":chatId" element={<ActiveChat />} />
+          <Route index element={<RemoteIndexChatPage />} />
+          <Route path=":chatId" element={<RemoteActiveChatPage />} />
         </Route>
         <Route path={ROUTES.PAIRS} element={<PairsPage />} />
       </Route>
