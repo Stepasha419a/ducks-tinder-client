@@ -36,8 +36,8 @@ module.exports = (env) => {
     devtool: 'inline-source-map',
     entry: './src/index.ts',
     output: {
-      filename: 'js/[name].bundle.js',
-      chunkFilename: 'js/[name].chunk.js',
+      filename: 'remote/policy/[name].bundle.js',
+      chunkFilename: 'remote/policy/[name].chunk.js',
       path: path.resolve(__dirname, '..', 'dist'),
       assetModuleFilename: 'media/[name].[hash][ext]',
       publicPath: 'remote/policy/',
