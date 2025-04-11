@@ -118,6 +118,7 @@ module.exports = (env) => {
         remotes: {
           policyApp:
             'policyApp@https://localhost:3000/remote/policy/remoteEntry.js',
+          chatApp: 'chatApp@https://localhost:3000/remote/chat/remoteEntry.js',
         },
         shared: sharedDepsConfig,
       }),
