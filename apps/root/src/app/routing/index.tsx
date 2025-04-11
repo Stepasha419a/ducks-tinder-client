@@ -18,6 +18,9 @@ import { ProfileSetting } from '@features/ProfileSetting';
 const defaultFallbackSuspense = (Component: React.ComponentType) =>
   WithSuspense(Component, <LoadingPage />);
 
+const RemotePolicyPage = defaultFallbackSuspense(
+  lazy(async () => import('policyApp/Policy'))
+);
 const ChatPage = defaultFallbackSuspense(
   lazy(async () => import('@pages/Chat'))
 );
@@ -65,7 +68,7 @@ export const Routing = (): ReactElement => {
       </Route>
 
       <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />
-      <Route path={ROUTES.POLICY} element={<PolicyPage />} />
+      <Route path={ROUTES.POLICY} element={<RemotePolicyPage />} />
     </Routes>
   );
 };
