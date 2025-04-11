@@ -40,7 +40,7 @@ module.exports = (env) => {
       chunkFilename: 'remote/policy/[name].chunk.js',
       path: path.resolve(__dirname, '..', 'dist'),
       assetModuleFilename: 'media/[name].[hash][ext]',
-      publicPath: 'remote/policy/',
+      publicPath: '/',
       clean: true,
     },
     cache: {
