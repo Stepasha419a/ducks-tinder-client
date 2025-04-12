@@ -1,0 +1,60 @@
+{
+  "name": "@ducks-tinder-client/config",
+  "version": "1.0.0",
+  "description": "base configs for internal development",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rimraf ./dist && pnpm build:tsc && pnpm build:tsc:cjs",
+    "build:tsc": "tsc --outDir dist/esm",
+    "build:tsc:cjs": "tsc --module CommonJS --outDir dist/cjs",
+    "build:dev:publish": "pnpm build && pnpm publish:dev",
+    "build:dev:publish:override": "pnpm build && pnpm publish:dev:override",
+    "up:dev:patch": "pnpm version patch && pnpm build:dev:publish:override",
+    "up:dev:minor": "pnpm version minor && pnpm build:dev:publish:override",
+    "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
+    "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
+    "publish:dev": "npm publish --registry http://localhost:4873/",
+    "publish:dev:override": "npm unpublish --force --registry http://localhost:4873/ && pnpm publish:dev"
+  },
+  "dependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.4",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "dotenv": "^16.4.5",
+    "dotenv-webpack": "^8.0.1",
+    "eslint-webpack-plugin": "^4.2.0",
+    "favicons-webpack-plugin": "^6.0.1",
+    "fork-ts-checker-webpack-plugin": "^8.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "react-refresh": "^0.14.0",
+    "sass": "^1.82.0",
+    "sass-loader": "^16.0.4",
+    "style-loader": "^3.3.2",
+    "tsconfig-paths-webpack-plugin": "^4.0.1",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.13.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "@types/node": "^18.15.11",
+    "prettier": "^2.8.8",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.0.3"
+  },
+  "keywords": [
+    "webpack"
+  ],
+  "author": "Stepasha419a",
+  "license": "ISC"
+}
