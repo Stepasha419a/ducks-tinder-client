@@ -5,7 +5,13 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  ignorePatterns: ['dist', 'tsconfig.json', 'node_modules', '.eslintrc.cjs'],
+  ignorePatterns: [
+    'dist',
+    'tsconfig.json',
+    'node_modules',
+    '.eslintrc.cjs',
+    'esbuild.js',
+  ],
   settings: {
     react: {
       version: 'detect',
