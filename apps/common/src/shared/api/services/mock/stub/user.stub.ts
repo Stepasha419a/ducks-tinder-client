@@ -1,11 +1,10 @@
-import type {   AttentionSign,
+import type { PairsInfo, ShortUser, User } from '@shared/api';
+import {
+  AttentionSign,
   ChildrenAttitude,
   Education,
   FoodPreference,
   Interest,
-PairsInfo ,
-  type ShortUser,
-  type User,
 } from '@shared/api';
 
 export const shortUserStub: ShortUser = {
