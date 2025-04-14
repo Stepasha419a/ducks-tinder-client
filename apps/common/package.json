@@ -8,9 +8,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "rimraf ./dist && pnpm build:tsc && pnpm build:tsc:cjs",
-    "build:tsc": "tsc --outDir dist/esm && tsc-alias --outDir dist/esm",
-    "build:tsc:cjs": "tsc --module CommonJS --outDir dist/cjs && tsc-alias --outDir dist/cjs",
+    "build": "rimraf ./dist && pnpm build:types && node esbuild.js",
+    "build:types": "tsc && tsc-alias",
     "build:dev:publish": "pnpm build && pnpm publish:dev",
     "build:dev:publish:override": "pnpm build && pnpm publish:dev:override",
     "up:dev:patch": "pnpm version patch && pnpm build:dev:publish:override",
