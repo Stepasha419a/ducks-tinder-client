@@ -10,7 +10,7 @@ module.exports = {
     'tsconfig.json',
     'node_modules',
     '.eslintrc.cjs',
-    'vite.config.ts',
+    'esbuild.js',
   ],
   settings: {
     react: {
