@@ -106,8 +106,8 @@ importers:
         specifier: ^17.6.3
         version: 17.8.1
       '@ducks-tinder-client/config':
-        specifier: ^1.0.0
-        version: 1.0.0(@swc/core@1.10.12)(esbuild@0.18.20)(eslint@8.57.1)(favicons@7.2.0)(type-fest@2.19.0)(typescript@5.7.3)(webpack-bundle-analyzer@4.10.2)
+        specifier: 1.1.0
+        version: 1.1.0(@swc/core@1.10.12)(esbuild@0.18.20)(eslint@8.57.1)(favicons@7.2.0)(type-fest@2.19.0)(typescript@5.7.3)
       '@feature-sliced/eslint-config':
         specifier: ^0.1.1
         version: 0.1.1(eslint-plugin-boundaries@5.0.1(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.7.3))(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1))(eslint-plugin-import@2.31.0)
@@ -1014,8 +1014,8 @@ packages:
       react: 18.2.x
       react-toastify: 9.1.x
 
-  '@ducks-tinder-client/config@1.0.0':
-    resolution: {integrity: sha512-jITwsOa1IjUUaDjCzLMZ/a8eY26rqDjp6xt7EhDzTc4Mdv1ZOqUcXwGiYsKhx4kdmqxDoKNyPKSE+GU2FdhqcA==}
+  '@ducks-tinder-client/config@1.1.0':
+    resolution: {integrity: sha512-5Z/2MqFxMwbTG0+gx4/pgaOQPNgE/kAz23l1z/c8ebP34pHFFI1C1E3FGAY1nMlcZwEoJ2May1ZUsUSaNiuMdA==}
 
   '@ducks-tinder-client/ui@1.1.1':
     resolution: {integrity: sha512-zk/mAM89Bdb0eKZaJa1BP8YwE1mT61BU+dAE2Ssr/W3/UgMYuJVJG2fpEM4Npl39ub6f52aq8g/D0z+TDnHk5A==}
@@ -1033,8 +1033,8 @@ packages:
       react-dom: 18.2.x
       react-toastify: 9.1.x
 
-  '@emnapi/runtime@1.4.1':
-    resolution: {integrity: sha512-LMshMVP0ZhACNjQNYXiU1iZJ6QCcv0lUdPDPugqGvCGXt5xtRVBPdtA0qU12pEXZzpWAhWlZYptfdAFq10DOVQ==}
+  '@emnapi/runtime@1.4.3':
+    resolution: {integrity: sha512-pBPWdu6MLKROBX05wSNKcNb++m5Er+KQ9QkB+WVM+pW2Kx9hoSrVTnu3BdkI5eBLZoKu/J6mW/B6i6bJB2ytXQ==}
 
   '@emotion/is-prop-valid@0.8.8':
     resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
@@ -7341,6 +7341,22 @@ packages:
       uglify-js:
         optional: true
 
+  terser-webpack-plugin@5.3.14:
+    resolution: {integrity: sha512-vkZjpUjb6OMS7dhV+tILUW6BhpDR7P2L/aQSAv+Uwk+m8KATX9EccViHTJR2qDtACKPIYndLGCyl3FMo+r2LMw==}
+    engines: {node: '>= 10.13.0'}
+    peerDependencies:
+      '@swc/core': '*'
+      esbuild: '*'
+      uglify-js: '*'
+      webpack: ^5.1.0
+    peerDependenciesMeta:
+      '@swc/core':
+        optional: true
+      esbuild:
+        optional: true
+      uglify-js:
+        optional: true
+
   terser@5.37.0:
     resolution: {integrity: sha512-B8wRRkmre4ERucLM/uXx4MOV5cbnOlVAqUst+1+iLKPI0dOgFO28f84ptoQt9HEI537PMzfYa/d+GEPKTRXmYA==}
     engines: {node: '>=10'}
@@ -8950,7 +8966,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@ducks-tinder-client/config@1.0.0(@swc/core@1.10.12)(esbuild@0.18.20)(eslint@8.57.1)(favicons@7.2.0)(type-fest@2.19.0)(typescript@5.7.3)(webpack-bundle-analyzer@4.10.2)':
+  '@ducks-tinder-client/config@1.1.0(@swc/core@1.10.12)(esbuild@0.18.20)(eslint@8.57.1)(favicons@7.2.0)(type-fest@2.19.0)(typescript@5.7.3)':
     dependencies:
       '@babel/core': 7.26.7
       '@babel/preset-env': 7.26.7(@babel/core@7.26.7)
@@ -8969,8 +8985,10 @@ snapshots:
       sass: 1.83.4
       sass-loader: 16.0.4(sass@1.83.4)(webpack@5.97.1)
       style-loader: 3.3.4(webpack@5.97.1)
+      terser-webpack-plugin: 5.3.14(@swc/core@1.10.12)(esbuild@0.18.20)(webpack@5.97.1)
       tsconfig-paths-webpack-plugin: 4.2.0
       webpack: 5.97.1(@swc/core@1.10.12)(esbuild@0.18.20)(webpack-cli@5.1.4)
+      webpack-bundle-analyzer: 4.10.2
       webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@4.15.2)(webpack@5.97.1)
       webpack-dev-server: 4.15.2(webpack-cli@5.1.4)(webpack@5.97.1)
     transitivePeerDependencies:
@@ -8991,7 +9009,6 @@ snapshots:
       - typescript
       - uglify-js
       - utf-8-validate
-      - webpack-bundle-analyzer
       - webpack-hot-middleware
       - webpack-plugin-serve
 
@@ -9016,7 +9033,7 @@ snapshots:
     transitivePeerDependencies:
       - jquery
 
-  '@emnapi/runtime@1.4.1':
+  '@emnapi/runtime@1.4.3':
     dependencies:
       tslib: 2.8.1
     optional: true
@@ -9321,7 +9338,7 @@ snapshots:
 
   '@img/sharp-wasm32@0.33.5':
     dependencies:
-      '@emnapi/runtime': 1.4.1
+      '@emnapi/runtime': 1.4.3
     optional: true
 
   '@img/sharp-win32-ia32@0.33.5':
@@ -16535,6 +16552,18 @@ snapshots:
       supports-hyperlinks: 2.3.0
 
   terser-webpack-plugin@5.3.11(@swc/core@1.10.12)(esbuild@0.18.20)(webpack@5.97.1):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 4.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.37.0
+      webpack: 5.97.1(@swc/core@1.10.12)(esbuild@0.18.20)(webpack-cli@5.1.4)
+    optionalDependencies:
+      '@swc/core': 1.10.12
+      esbuild: 0.18.20
+
+  terser-webpack-plugin@5.3.14(@swc/core@1.10.12)(esbuild@0.18.20)(webpack@5.97.1):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1

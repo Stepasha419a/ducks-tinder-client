@@ -62,7 +62,7 @@
     "@babel/preset-typescript": "^7.21.4",
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
-    "@ducks-tinder-client/config": "^1.0.0",
+    "@ducks-tinder-client/config": "1.1.0",
     "@feature-sliced/eslint-config": "^0.1.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@storybook/addon-essentials": "^7.1.1",
