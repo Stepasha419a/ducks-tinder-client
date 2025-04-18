@@ -1,5 +1,5 @@
 import * as path from 'path';
-import * as fs from 'fs';
+import { getSharedDepsConfig } from 'utils';
 import { Configuration } from 'webpack';
 
 const HtmlWebPlugin = require('html-webpack-plugin');
@@ -11,40 +11,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
-
-interface PackageDependencies {
-  dependencies: Record<string, string>;
-}
-
-interface SharedDependencies {
-  [K: string]: {
-    requiredVersion: string;
-    singleton: boolean;
-  };
-}
-
-function getSharedDepsConfig(packagePath: string) {
-  const sharedPackage = JSON.parse(
-    fs.readFileSync(packagePath).toString()
-  ) as PackageDependencies;
-
-  return (
-    Object.entries(sharedPackage.dependencies)
-      // TODO: fix events package eager problem
-      .filter(([packageName]) => packageName !== 'events')
-      .reduce<SharedDependencies>(function (res, entry) {
-        const dependency = entry[0];
-        const version = entry[1];
-
-        res[dependency] = {
-          requiredVersion: version,
-          singleton: true,
-        };
-
-        return res;
-      }, {})
-  );
-}
 
 interface Options {
   envPath: string;

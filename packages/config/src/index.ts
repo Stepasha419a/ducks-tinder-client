@@ -1,1 +1,2 @@
-export * from './webpack-dev.base';
+export * from './webpack-dev';
+export * from './webpack-prod';
