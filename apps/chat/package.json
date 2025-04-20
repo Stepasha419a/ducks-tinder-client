@@ -53,7 +53,6 @@
     "@commitlint/config-conventional": "^17.6.3",
     "@ducks-tinder-client/config": "1.1.0",
     "@feature-sliced/eslint-config": "^0.1.1",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.31",
     "@types/react-dom": "^18.0.11",
@@ -62,7 +61,6 @@
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
     "dotenv": "^16.4.5",
-    "dotenv-webpack": "^8.0.1",
     "eslint": "^8.37.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-boundaries": "^5.0.1",
@@ -70,20 +68,11 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-storybook": "^0.6.15",
-    "eslint-webpack-plugin": "^4.2.0",
-    "favicons-webpack-plugin": "^6.0.1",
-    "fork-ts-checker-webpack-plugin": "^8.0.0",
-    "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.8",
-    "react-refresh": "^0.14.0",
-    "sass": "^1.82.0",
-    "sass-loader": "^16.0.4",
+    "sass-loader": "^16.0.5",
     "style-loader": "^3.3.2",
-    "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "^5.0.3",
-    "webpack": "^5.97.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.13.2"
+    "webpack": "^5.97.1"
   }
 }
