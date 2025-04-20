@@ -16,7 +16,7 @@ import ChatPage, { ActiveChat, IndexChatPage } from '@pages/Chat';
 import { WithChatConnection } from '@features/WithChatConnection';
 import { ChatList, WithNewMessagesCount } from '@entities/chat';
 
-import '@ducks-tinder-client/ui/dist/ui.css';
+import '@ducks-tinder-client/ui/dist/esm/index.css';
 import styles from './App.module.scss';
 
 const privateHocComposition = new HocComposition();
