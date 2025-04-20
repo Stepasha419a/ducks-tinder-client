@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@ducks-tinder-client/ui';
 
 import PolicyPage from './policy';
-import '@ducks-tinder-client/ui/dist/ui.css';
+import '@ducks-tinder-client/ui/dist/esm/index.css';
 
 const App = () => {
   return (
