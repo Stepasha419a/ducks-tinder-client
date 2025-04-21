@@ -27,6 +27,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:storybook/recommended',
+    'plugin:jsx-a11y/strict',
     '@feature-sliced/eslint-config/rules/import-order',
     '@feature-sliced/eslint-config/rules/public-api',
     '@feature-sliced/eslint-config/rules/layers-slices',
@@ -45,7 +46,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['@typescript-eslint', 'import', 'simple-import-sort'],
+  plugins: ['@typescript-eslint', 'import', 'simple-import-sort', 'jsx-a11y'],
   rules: {
     'import/no-duplicates': 'error',
     'import/order': 'off',
