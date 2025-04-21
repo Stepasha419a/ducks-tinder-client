@@ -11,7 +11,7 @@
     "storybook": "storybook dev -p 6006",
     "storybook:test": "test-storybook",
     "build": "rimraf ./dist && pnpm build:types && node esbuild.js",
-    "build:types": "tsc && tsc-alias",
+    "build:types": "tsc -p ./tsconfig.build.json && tsc-alias -p ./tsconfig.build.json",
     "build:dev:publish": "pnpm build && pnpm publish:dev",
     "build:dev:publish:override": "pnpm build && pnpm publish:dev:override",
     "up:dev:packages": "pnpm cache delete @ducks-tinder-client/* && pnpm up @ducks-tinder-client/*",
