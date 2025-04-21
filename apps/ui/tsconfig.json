@@ -32,6 +32,5 @@
       "@shared/helpers": ["./shared/lib/helpers"]
     }
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.stories.tsx"]
+  "include": ["src"]
 }
