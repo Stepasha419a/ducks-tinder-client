@@ -3,7 +3,8 @@ import classNames from 'classnames';
 
 import styles from './ListItemButton.module.scss';
 
-interface ListItemButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ListItemButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   isActive?: boolean;
   xmark?: boolean;
   extraClassName?: string;

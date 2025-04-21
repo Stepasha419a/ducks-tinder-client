@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import styles from './ListItem.module.scss';
 
-interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
   isActive?: boolean;
   extraClassName?: string;
 }

@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { variants } from './LoadingPage.variants';
 import styles from './LoadingPage.module.scss';
 
-interface LoadingPageProps {
+export interface LoadingPageProps {
   visible?: boolean;
   duration?: number;
 }

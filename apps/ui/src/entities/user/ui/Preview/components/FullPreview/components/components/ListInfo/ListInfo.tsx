@@ -30,9 +30,13 @@ export const ListInfo: FC<ListInfoProps> = ({
         </div>
       </div>
       {handleShowAll && (
-        <div onClick={handleShowAll} className={styles.showAll}>
+        <button
+          aria-label="show all interests"
+          onClick={handleShowAll}
+          className={styles.showAll}
+        >
           Show all
-        </div>
+        </button>
       )}
     </div>
   );

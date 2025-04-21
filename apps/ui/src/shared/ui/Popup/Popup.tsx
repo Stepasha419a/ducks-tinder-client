@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from 'react';
+import { type FC, type PropsWithChildren, useId } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -18,6 +18,8 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
   size = 'm',
   extraClassName,
 }) => {
+  const titleId = useId();
+  const contentId = useId();
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const cn = classNames(styles.content, styles[size], extraClassName);
@@ -36,12 +38,25 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
         transition={{ duration }}
         key="popup"
       >
-        <div className={cn}>
-          {title && <div className={styles.title}>{title}</div>}
-          <div onClick={closeHandler} className={styles.close} />
-          {children}
-        </div>
-        <div onClick={closeHandler} className={styles.closeArea}></div>
+        <dialog
+          aria-labelledby={titleId}
+          aria-describedby={contentId}
+          open={true}
+          className={cn}
+        >
+          {title && (
+            <h3 id={titleId} className={styles.title}>
+              {title}
+            </h3>
+          )}
+          <button
+            aria-label="close dialog"
+            onClick={closeHandler}
+            className={styles.close}
+          />
+          <div id={contentId}>{children}</div>
+        </dialog>
+        <button onClick={closeHandler} className={styles.closeArea}></button>
       </motion.div>
     </div>,
     portalElement!

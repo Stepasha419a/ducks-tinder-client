@@ -28,14 +28,14 @@ export const TogglePreview: FC<TogglePreviewProps> = ({
   }
 
   return (
-    <div onClick={() => setIsFullPreview(true)} className={styles.descr}>
-      <Button
-        variant="mark"
-        onClick={() => setIsFullPreview(true)}
-        extraClassName={styles.openFullPreview}
-      >
+    <button
+      aria-label="open user full preview"
+      onClick={() => setIsFullPreview(true)}
+      className={styles.descr}
+    >
+      <Button variant="mark" extraClassName={styles.openFullPreview}>
         <FontAwesomeIcon icon={faCircleInfo} />
       </Button>
-    </div>
+    </button>
   );
 };

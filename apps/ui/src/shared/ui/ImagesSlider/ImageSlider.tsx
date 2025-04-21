@@ -5,7 +5,7 @@ import type {
   RefObject,
   SetStateAction,
 } from 'react';
-import { useEffect , useState } from 'react';
+import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import type Slider from 'react-slick';
 import Carousel from 'react-slick';
@@ -25,7 +25,7 @@ import 'slick-carousel/slick/slick.scss';
 import './override.scss';
 import styles from './ImageSlider.module.scss';
 
-interface ImageSliderProps {
+export interface ImageSliderProps {
   images: Picture[];
   currentSlide?: number;
   setCurrentSlide?: Dispatch<SetStateAction<number>>;
