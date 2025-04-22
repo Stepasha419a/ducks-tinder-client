@@ -47,7 +47,7 @@
       display: none;
 
       &:checked ~ .icon {
-        background-color: var(--color--red-100);
+        background-color: var(--color--orange-100);
       }
 
       &:checked ~ .icon::before {
@@ -75,7 +75,7 @@
         display: block;
         height: 3px;
         width: 14px;
-        background-color: var(--color--red-90);
+        background-color: var(--color--orange-100);
         position: absolute;
         top: 7px;
         left: 3px;

@@ -1,5 +1,5 @@
 .slider {
-  --primary-color: var(--color--red-100);
+  --primary-color: var(--color--orange-100);
 
   --value-offset-y: var(--ticks-gap);
   --value-active-color: white;
@@ -63,7 +63,7 @@
     transition: 0.1s;
 
     &:hover {
-      border-color: var(--color--red-100);
+      border-color: var(--color--orange-100);
     }
 
     &:active {
