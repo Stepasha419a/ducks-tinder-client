@@ -12,7 +12,7 @@ import type {
 import { FullPreview, TogglePreview, UserSlider } from './components';
 import styles from './Preview.module.scss';
 
-interface PreviewPropsInterface {
+export interface PreviewProps {
   user: User | ShortUser | ShortUserWithoutDistance;
   setIsFullPreview?: (value: boolean) => void;
   isFull?: boolean;
@@ -24,7 +24,7 @@ interface PreviewPropsInterface {
   disabled?: boolean;
 }
 
-export const Preview: FC<PreviewPropsInterface> = ({
+export const Preview: FC<PreviewProps> = ({
   user,
   setIsFullPreview,
   isFull = false,

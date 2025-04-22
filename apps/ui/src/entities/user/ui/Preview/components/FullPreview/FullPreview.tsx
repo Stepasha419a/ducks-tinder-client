@@ -5,9 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import type { ShortUser, User } from '@ducks-tinder-client/common';
 
-import { InterestsListPopup } from '@entities/user';
-
-import { InterestsList, LifestyleList, MoreAboutMeList } from './components';
+import {
+  InterestsList,
+  InterestsListPopup,
+  LifestyleList,
+  MoreAboutMeList,
+} from './components';
 import styles from './FullPreview.module.scss';
 
 interface FullPreviewPropsInterface {
