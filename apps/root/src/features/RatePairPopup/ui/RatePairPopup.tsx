@@ -1,11 +1,10 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { useState } from 'react';
 import classNames from 'classnames';
 
 import type { ShortUser } from '@ducks-tinder-client/common';
 import { Button, Popup } from '@ducks-tinder-client/ui';
 
-import { acceptPairThunk,InterestsListPopup, Preview , refusePairThunk } from '@entities/user';
+import { acceptPairThunk, Preview, refusePairThunk } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
 
 import styles from './RatePairPopup.module.scss';
@@ -20,9 +19,6 @@ export const RatePairPopup: FC<RatePairPopupProps> = ({
   setCurrentPair,
 }) => {
   const dispatch = useAppDispatch();
-
-  const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
-    useState(false);
 
   const handleAccept = (): void => {
     dispatch(acceptPairThunk(currentPair.id));
@@ -54,12 +50,6 @@ export const RatePairPopup: FC<RatePairPopupProps> = ({
           </Button>
         </div>
       </Popup>
-      {isInterestsListPopupOpen && (
-        <InterestsListPopup
-          interestsList={currentPair.interests}
-          setIsInterestsListPopupOpen={setIsInterestsListPopupOpen}
-        />
-      )}
     </>
   );
 };

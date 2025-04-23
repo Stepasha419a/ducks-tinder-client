@@ -35,7 +35,7 @@ export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
         {isPairsOpened && (
           <motion.div
             animate={{
-              borderBottom: '3px solid var(--color--red-100)',
+              borderBottom: '3px solid var(--color--orange-100)',
             }}
             layoutId="selected"
           />

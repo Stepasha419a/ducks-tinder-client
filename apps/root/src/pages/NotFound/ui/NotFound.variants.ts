@@ -21,7 +21,7 @@ export const lineVariants = {
     width: '4px',
     height: '64px',
     background:
-      'linear-gradient( 5deg, var(--color--pink-100), var(--color--orange-90))',
+      'linear-gradient( 5deg, var(--color--orange-100), var(--color--orange-90))',
     transition: { duration: 0.1 },
   },
   initial: {

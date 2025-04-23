@@ -15,7 +15,7 @@
       transition: 0.2s;
 
       &.active {
-        color: var(--color--red-100);
+        color: var(--color--orange-100);
       }
     }
 
@@ -24,7 +24,7 @@
       top: 20%;
       transform: translateY(-50%);
       right: 10px;
-      background-color: var(--color--red-100);
+      background-color: var(--color--orange-100);
       width: 18px;
       height: 18px;
       border-radius: 50%;
