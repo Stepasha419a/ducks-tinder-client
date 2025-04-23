@@ -1,5 +1,5 @@
 import type { FC, ReactElement } from 'react';
-import { faFireFlameCurved } from '@fortawesome/free-solid-svg-icons';
+import { faFeather } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
@@ -25,7 +25,7 @@ export const LoadingPage: FC<LoadingPageProps> = ({
       className={styles.loadingPage}
     >
       <div className={classNames(styles.background, styles.animate)}></div>
-      <FontAwesomeIcon icon={faFireFlameCurved} className={styles.icon} />
+      <FontAwesomeIcon icon={faFeather} className={styles.icon} />
     </motion.div>
   );
 };
