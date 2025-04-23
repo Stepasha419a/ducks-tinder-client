@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
   faComments,
-  faFireFlameCurved,
+  faFeather,
   faStar,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
@@ -39,7 +39,7 @@ export const NavMobile = () => {
             styles.icon,
             activePath === '' && styles.active
           )}
-          icon={faFireFlameCurved}
+          icon={faFeather}
         />
       </Link>
       <Link to={ROUTES.PAIRS} className={styles.link}>

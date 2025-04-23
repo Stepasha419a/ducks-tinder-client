@@ -1,8 +1,8 @@
-import { type FC,memo } from 'react';
+import { type FC, memo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   faBriefcase,
-  faFireFlameCurved,
+  faFeather,
   faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,7 +36,7 @@ export const UserLinks: FC<UserLinksProps> = memo(({ isProfilePage }) => {
             transition={{ duration: 0.1 }}
           >
             <Link className={classNames(styles.mainLink, styles.main)} to="/">
-              <FontAwesomeIcon icon={faFireFlameCurved} />
+              <FontAwesomeIcon icon={faFeather} />
             </Link>
           </motion.div>
         ) : (
