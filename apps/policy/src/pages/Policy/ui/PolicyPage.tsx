@@ -12,7 +12,7 @@ const PolicyPage: FC = (): ReactElement => {
         <div className={styles.container}>
           <Link to="/" className={styles.link}>
             <img src={authDuck} alt="IMG" className={styles.image} />
-            <span className={styles.text}>ducks tinder</span>
+            <span className={styles.text}>Ducks Date</span>
           </Link>
         </div>
       </header>
@@ -21,7 +21,7 @@ const PolicyPage: FC = (): ReactElement => {
         <div className={styles.container}>
           <h1 className={styles.title}>Community Rules</h1>
           <p className={styles.text}>
-            Welcome to the Ducks Tinder community. If you are honest, kind and
+            Welcome to the Ducks Date community. If you are honest, kind and
             respectful towards others, we will always be glad to see you here.
             However, if you behave differently, unfortunately, we will be forced
             to part with you. Our goal is for users to be able to express
