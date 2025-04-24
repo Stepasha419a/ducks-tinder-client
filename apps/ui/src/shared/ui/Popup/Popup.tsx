@@ -22,7 +22,7 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
   const contentId = useId();
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  const cn = classNames(styles.content, styles[size], extraClassName);
+  const cn = classNames(styles.dialog, styles[size], extraClassName);
 
   const adaptiveVariants = isMobile ? mobileVariants : variants;
   const duration = isMobile ? 0.2 : 0.1;
@@ -54,7 +54,9 @@ export const Popup: FC<PropsWithChildren<PopupProps>> = ({
             onClick={closeHandler}
             className={styles.close}
           />
-          <div id={contentId}>{children}</div>
+          <div className={styles.content} id={contentId}>
+            {children}
+          </div>
         </dialog>
         <button onClick={closeHandler} className={styles.closeArea}></button>
       </motion.div>
