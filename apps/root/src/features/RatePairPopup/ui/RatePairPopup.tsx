@@ -37,7 +37,7 @@ export const RatePairPopup: FC<RatePairPopupProps> = ({
         size="l"
         extraClassName={styles.overflow}
       >
-        <Preview user={currentPair} isFull extraClassName={styles.padding} />
+        <Preview user={currentPair} isFull extraClassName={styles.preview} />
         <div className={styles.btns}>
           <Button
             onClick={handleAccept}

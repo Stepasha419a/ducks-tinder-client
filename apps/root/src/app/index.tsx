@@ -1,6 +1,4 @@
 import type { ReactElement } from 'react';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 
 import { ThemeProvider, ToastContainer } from '@ducks-tinder-client/ui';
 
@@ -15,8 +13,6 @@ function App(): ReactElement {
     <ThemeProvider>
       <Routing />
       <ToastContainer />
-      <Analytics />
-      <SpeedInsights />
     </ThemeProvider>
   );
 }
