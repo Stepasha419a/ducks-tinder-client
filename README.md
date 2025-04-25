@@ -19,7 +19,7 @@ Ducks Tinder is a Tinder clone project
 
 ## Demo
 
-You can check online demo on [vercel deployment](https://ducks-tinder-client.vercel.app/) or run it by yourself using npm run demo
+You can check legacy online demo on [vercel deployment](https://ducks-tinder-client.vercel.app/) or run it by yourself using npm run demo
 
 - `npm i` to install dependencies
 - `npm run demo` to run the app in the development mode with mocks (default port is 3000);
