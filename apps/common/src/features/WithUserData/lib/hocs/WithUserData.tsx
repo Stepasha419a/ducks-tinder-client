@@ -1,5 +1,5 @@
 import type { ComponentType, FC } from 'react';
-import { useEffect, useRef , useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { getCurrentUser } from '@entities/user';

@@ -1,13 +1,13 @@
 .btn {
-  height: 46px;
-  font-size: 22px;
+  height: 46px !important;
+  font-size: 22px !important;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 400 !important;
   border-top: 2px solid var(--color--black-90);
   transition: 0.2s;
 
   &:hover {
-    color: var(--color--red-90);
+    color: var(--color--orange-100);
   }
 }
 
