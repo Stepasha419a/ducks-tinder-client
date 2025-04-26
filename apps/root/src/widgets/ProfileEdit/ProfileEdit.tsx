@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import { Preview } from '@ducks-tinder-client/ui';
 
 import { ProfileSubmit } from '@features/ProfileSubmit';
-import { Preview } from '@entities/user';
 import { useAppSelector } from '@shared/lib';
 
 import { useUserPictures } from './lib';

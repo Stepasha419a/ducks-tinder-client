@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 
 import type { ShortUser } from '@ducks-tinder-client/common';
-
-import { Preview } from '@entities/user';
+import { Preview } from '@ducks-tinder-client/ui';
 
 import { PreviewContent } from './components';
 import styles from './Pair.module.scss';

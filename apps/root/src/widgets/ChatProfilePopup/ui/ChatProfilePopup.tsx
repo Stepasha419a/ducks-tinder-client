@@ -1,9 +1,8 @@
 import type { FC } from 'react';
 
-import { Popup } from '@ducks-tinder-client/ui';
+import { Popup, Preview } from '@ducks-tinder-client/ui';
 
 import { ChatControl } from '@features/ChatControl';
-import { Preview } from '@entities/user';
 import { useAppSelector } from '@shared/lib';
 
 import { ChatProfilePopupLazy } from './ChatProfilePopup.lazy';
