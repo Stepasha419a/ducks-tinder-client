@@ -37,7 +37,7 @@ export const SwipeUser: FC = () => {
   }
 
   return (
-    <div>
+    <div className={styles.usersContainer}>
       <SwipeUserLazy small />
       {tinderUsers[1] && (
         <Preview
