@@ -8,3 +8,4 @@ export * from './app/lib';
 export * from './app/model';
 
 export * from './features/WithUserData';
+export * from './features/WithChatConnection';
