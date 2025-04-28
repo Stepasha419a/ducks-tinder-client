@@ -7,14 +7,16 @@ import {
   ROUTES,
   store,
   useAppSelector,
+  WithChatConnection,
   WithErrorFallback,
+  WithNewMessagesCount,
   WithUserData,
 } from '@ducks-tinder-client/common';
 import { ThemeProvider } from '@ducks-tinder-client/ui';
 
-import ChatPage, { ActiveChat, IndexChatPage } from '@pages/Chat';
-import { WithChatConnection } from '@features/WithChatConnection';
-import { ChatList, WithNewMessagesCount } from '@entities/chat';
+import { ActiveChat } from '@pages/ActiveChat';
+import { IndexChatPage } from '@pages/IndexChatPage';
+import { ChatList } from '@entities/chat';
 
 import '@ducks-tinder-client/ui/dist/esm/index.css';
 import styles from './App.module.scss';
@@ -50,7 +52,7 @@ const WrappedRoutes = privateHocComposition.appendHocs(() => {
       </div>
       <div className={styles.messages}>
         <Routes>
-          <Route path={ROUTES.CHAT} element={<ChatPage />}>
+          <Route path={ROUTES.CHAT}>
             <Route index element={<IndexChatPage />} />
             <Route path=":chatId" element={<ActiveChat />} />
           </Route>
