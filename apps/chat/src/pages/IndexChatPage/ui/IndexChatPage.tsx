@@ -1,6 +1,9 @@
 import type { FC } from 'react';
 
-import { useAdaptiveMediaQuery , useAppSelector } from '@ducks-tinder-client/common';
+import {
+  useAdaptiveMediaQuery,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 
 import { ChatList } from '@entities/chat';
 
