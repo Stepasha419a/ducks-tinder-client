@@ -1,6 +1,6 @@
 import * as esbuild from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
-import { sassPlugin } from 'esbuild-sass-plugin';
+import { sassPlugin, postcssModules } from 'esbuild-sass-plugin';
 
 import packageData from './package.json' with { type: "json" };
 
@@ -18,7 +18,7 @@ const build = (format) =>
       nodeExternalsPlugin(),
       sassPlugin({
         filter: /\.module\.scss$/,
-        type: 'local-css',
+        transform: postcssModules({})
       }),
       sassPlugin({
         filter: /\.scss$/,
