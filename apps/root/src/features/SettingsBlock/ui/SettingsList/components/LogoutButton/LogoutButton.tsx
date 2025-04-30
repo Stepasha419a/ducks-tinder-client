@@ -1,14 +1,14 @@
 import type { FC, ReactElement } from 'react';
 
-import { disconnectThunk, resetChatSlice } from '@ducks-tinder-client/common';
+import {
+  disconnectThunk,
+  logoutThunk,
+  resetChatSlice,
+  resetUserSlice,
+} from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
-import {
-  logoutThunk,
-  resetPairSlice,
-  resetTinderSlice,
-  resetUserSlice,
-} from '@entities/user';
+import { resetPairSlice, resetTinderSlice } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
 
 import styles from './LogoutButton.module.scss';

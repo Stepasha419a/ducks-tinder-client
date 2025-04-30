@@ -1,9 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { ROUTES,useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import {
+  ROUTES,
+  updateUserThunk,
+  useAdaptiveMediaQuery,
+} from '@ducks-tinder-client/common';
 
-import { updateUserThunk,useDefaultValues , useMemoriedSettingUrl  } from '@entities/user';
+import { useDefaultValues, useMemoriedSettingUrl } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
 
 import type { SettingFieldValues } from './useCurrentValidation';

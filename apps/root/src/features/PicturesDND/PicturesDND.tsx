@@ -2,10 +2,12 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import { Reorder } from 'framer-motion';
 
 import type { Picture } from '@ducks-tinder-client/common';
-import { createEmptyArray } from '@ducks-tinder-client/common';
+import {
+  createEmptyArray,
+  deleteUserPictureThunk,
+} from '@ducks-tinder-client/common';
 import { makeImageUrl } from '@ducks-tinder-client/ui';
 
-import { deleteUserPictureThunk } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
 
 import { Card } from './ui';

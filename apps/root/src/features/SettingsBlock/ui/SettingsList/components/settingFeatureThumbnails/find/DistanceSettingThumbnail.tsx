@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
+import { updateUserThunk } from '@ducks-tinder-client/common';
 import { CheckboxInput, RangeInput } from '@ducks-tinder-client/ui';
 
-import { SettingThumbnail , updateUserThunk } from '@entities/user';
+import { SettingThumbnail } from '@entities/user';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 import styles from '../SettingFeatureThumbnails.module.scss';
