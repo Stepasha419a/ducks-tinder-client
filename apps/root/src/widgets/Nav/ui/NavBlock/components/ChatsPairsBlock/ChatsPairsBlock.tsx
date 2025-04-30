@@ -1,10 +1,11 @@
 import type { FC } from 'react';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ChatList } from 'chatApp/chat';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { getIsChatPage } from '@entities/chat';
+import { getIsChatPage } from '@ducks-tinder-client/common';
+
 import { PairLink } from '@entities/user';
 import { useAppSelector } from '@shared/lib';
 

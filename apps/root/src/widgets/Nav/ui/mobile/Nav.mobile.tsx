@@ -8,9 +8,8 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { ROUTES } from '@ducks-tinder-client/common';
+import { getIsChatPage, ROUTES } from '@ducks-tinder-client/common';
 
-import { getIsChatPage } from '@entities/chat';
 import { useAppSelector } from '@shared/lib';
 
 import { getIsProfilePage } from '../../lib';
