@@ -30,9 +30,6 @@ const RemoteActiveChatPage = defaultFallbackSuspense(
   lazy(async () => import('chatApp/ActiveChat'))
 );
 
-const ChatPage = defaultFallbackSuspense(
-  lazy(async () => import('@pages/Chat'))
-);
 const PairsPage = defaultFallbackSuspense(
   lazy(async () => import('@pages/Pairs'))
 );
@@ -66,7 +63,7 @@ export const Routing = (): ReactElement => {
           <Route path="place" element={<PlaceSetting />} />
           <Route path=":settingName" element={<SettingsIndexPage />} />
         </Route>
-        <Route path={ROUTES.CHAT} element={<ChatPage />}>
+        <Route path={ROUTES.CHAT}>
           <Route index element={<RemoteIndexChatPage />} />
           <Route path=":chatId" element={<RemoteActiveChatPage />} />
         </Route>
