@@ -1,4 +1,4 @@
-import { getIsActiveChatPage } from '@entities/chat';
+import { getIsActiveChatPage } from '@ducks-tinder-client/common';
 
 export function getIsMobileNavAvailable(pathname: string) {
   return !getIsActiveChatPage(pathname) && !getIsProfileEditPage(pathname);
