@@ -1,1 +1,0 @@
-export { ChatControl } from './ChatControl';
