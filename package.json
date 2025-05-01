@@ -5,8 +5,11 @@
   "scripts": {
     "lint": "pnpm -F root lint && pnpm -F common lint && pnpm -F ui lint",
     "lint:fix": "pnpm -F root lint:fix && pnpm -F common lint:fix && pnpm -F ui lint:fix",
+"init:dev:config": "pnpm -F config install && pnpm -F config build:dev:publish",
     "init:dev:common": "pnpm -F common install && pnpm -F common build:dev:publish",
     "init:dev:ui": "pnpm -F ui install && pnpm -F ui build:dev:publish",
+"init:dev:policy": "pnpm -F policy install",
+    "init:dev:chat": "pnpm -F chat install",
     "init:dev:root": "pnpm -F root install",
     "init:dev": "pnpm init:dev:common && pnpm init:dev:ui && pnpm init:dev:root"
   },
