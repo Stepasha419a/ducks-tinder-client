@@ -1,8 +1,7 @@
-import type { Place } from '@ducks-tinder-client/common';
+import type { Place, Setting } from '@ducks-tinder-client/common';
 
 import { useAppSelector } from '@shared/lib';
 
-import type { Setting } from '../../model';
 import { SettingNameEnum } from '../constants';
 
 export function useDefaultValues(

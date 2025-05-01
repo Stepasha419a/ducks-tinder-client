@@ -3,10 +3,13 @@ import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import type { RegistrationParams } from '@ducks-tinder-client/common';
-import { EMAIL_REGEXP } from '@ducks-tinder-client/common';
+import {
+  EMAIL_REGEXP,
+  loginThunk,
+  registerThunk,
+} from '@ducks-tinder-client/common';
 import type { TextFieldProps } from '@ducks-tinder-client/ui';
 
-import { loginThunk, registerThunk } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
 
 interface AuthFormReturn {
