@@ -9,5 +9,5 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     const cn = classNames(styles.input, styles[variant], extraClassName);
 
     return <input ref={ref} className={cn} {...props} />;
-  },
+  }
 );

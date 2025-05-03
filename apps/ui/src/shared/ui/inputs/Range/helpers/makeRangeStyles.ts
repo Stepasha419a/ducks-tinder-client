@@ -4,7 +4,7 @@ export function makeRangeStyles(
   isMultiple: boolean,
   min: number,
   max: number,
-  value: RangeValue,
+  value: RangeValue
 ): RangeStyles {
   if (isMultiple) {
     return {

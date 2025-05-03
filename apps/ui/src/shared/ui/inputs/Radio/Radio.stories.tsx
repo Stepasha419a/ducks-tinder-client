@@ -1,4 +1,4 @@
-import { type FC,useState } from 'react';
+import { type FC, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import type { RadioInputProps } from './Radio';
