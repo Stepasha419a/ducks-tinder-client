@@ -2,10 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import classNames from 'classnames';
 
-import { updateUserPlaceThunk } from '@ducks-tinder-client/common';
+import { updateUserPlaceThunk , useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
 
 import { Places } from '@entities/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 import { getAreDifferentPlaces } from './lib';
 import styles from './PlacesGeolocation.module.scss';

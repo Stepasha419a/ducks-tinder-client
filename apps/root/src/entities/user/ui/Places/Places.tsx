@@ -5,7 +5,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useAppSelector } from '@shared/lib';
+import { useAppSelector } from '@ducks-tinder-client/common';
 
 import styles from './Places.module.scss';
 

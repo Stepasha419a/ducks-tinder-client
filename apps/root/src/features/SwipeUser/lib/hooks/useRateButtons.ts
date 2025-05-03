@@ -1,11 +1,12 @@
 import type { AnimationControls } from 'framer-motion';
 
+import { useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
+
 import {
   dislikeUserThunk,
   likeUserThunk,
   returnUserThunk,
 } from '@entities/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 export function useRateButtons(
   controls: AnimationControls,

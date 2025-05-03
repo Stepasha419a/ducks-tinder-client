@@ -4,10 +4,9 @@ import { useLocation } from 'react-router-dom';
 import { ChatList } from 'chatApp/chat';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { getIsChatPage } from '@ducks-tinder-client/common';
+import { getIsChatPage , useAppSelector } from '@ducks-tinder-client/common';
 
 import { PairLink } from '@entities/user';
-import { useAppSelector } from '@shared/lib';
 
 import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
 import { Tabs } from './components';

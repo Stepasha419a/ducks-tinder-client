@@ -3,11 +3,10 @@ import { useEffect } from 'react';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 
-import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import { useAdaptiveMediaQuery , useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
 import { Preview } from '@ducks-tinder-client/ui';
 
 import { getMatchUsersThunk, selectTinderData } from '@entities/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 import { useSwipe } from './lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';

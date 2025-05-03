@@ -6,11 +6,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import type { ShortUser } from '@ducks-tinder-client/common';
-import { useDebouncedCallback } from '@ducks-tinder-client/common';
+import { useAppDispatch, useAppSelector,useDebouncedCallback  } from '@ducks-tinder-client/common';
 import { InfinityScroll } from '@ducks-tinder-client/ui';
 
 import { getUserPairsThunk } from '@entities/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 import { PairsListLazy } from './PairsList.lazy';
 import { Pair } from './ui';

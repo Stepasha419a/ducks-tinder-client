@@ -1,10 +1,12 @@
 import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ROUTES, useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
+import {
+  ROUTES,
+  useAdaptiveMediaQuery,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 import { Button, Preview } from '@ducks-tinder-client/ui';
-
-import { useAppSelector } from '@shared/lib';
 
 import { ProfilePreviewMobile } from './mobile';
 import styles from './ProfilePreview.module.scss';

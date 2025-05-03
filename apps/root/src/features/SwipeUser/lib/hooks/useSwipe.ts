@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type Slider from 'react-slick';
 import { useAnimationControls } from 'framer-motion';
 
-import { useAppSelector } from '@shared/lib';
+import { useAppSelector } from '@ducks-tinder-client/common';
 
 import { useKeyboardEvents } from './useKeyboardEvents';
 import { useSwipeProps } from './useSwipeProps';

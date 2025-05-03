@@ -1,8 +1,9 @@
 import type { ComponentType, FC } from 'react';
 import { useEffect } from 'react';
 
+import { useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
+
 import { getPairsInfoThunk } from '@entities/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 export function WithPairsInfo<P extends object>(
   Component: ComponentType<P>

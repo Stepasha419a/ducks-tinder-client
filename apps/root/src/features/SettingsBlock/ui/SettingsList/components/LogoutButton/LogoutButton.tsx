@@ -5,11 +5,10 @@ import {
   logoutThunk,
   resetChatSlice,
   resetUserSlice,
-} from '@ducks-tinder-client/common';
+ useAppDispatch } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
 import { resetPairSlice, resetTinderSlice } from '@entities/user';
-import { useAppDispatch } from '@shared/lib';
 
 import styles from './LogoutButton.module.scss';
 

@@ -5,10 +5,8 @@ import type { Picture } from '@ducks-tinder-client/common';
 import {
   createEmptyArray,
   deleteUserPictureThunk,
-} from '@ducks-tinder-client/common';
+ useAppDispatch } from '@ducks-tinder-client/common';
 import { makeImageUrl } from '@ducks-tinder-client/ui';
-
-import { useAppDispatch } from '@shared/lib';
 
 import { Card } from './ui';
 import styles from './PicturesDND.module.scss';

@@ -11,10 +11,10 @@ import classNames from 'classnames';
 import type { AnimationControls, MotionStyle } from 'framer-motion';
 import { motion } from 'framer-motion';
 
+import { useAppSelector } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
 import { useRateButtons } from '@features/SwipeUser';
-import { useAppSelector } from '@shared/lib';
 
 import styles from './RateButtons.module.scss';
 

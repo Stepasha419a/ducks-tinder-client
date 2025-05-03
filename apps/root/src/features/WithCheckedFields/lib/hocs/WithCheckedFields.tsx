@@ -3,9 +3,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { checkFields } from '@ducks-tinder-client/common';
-
-import { useAppDispatch, useAppSelector } from '@shared/lib';
+import { checkFields , useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
 
 import { checkUserFields } from '../helpers';
 

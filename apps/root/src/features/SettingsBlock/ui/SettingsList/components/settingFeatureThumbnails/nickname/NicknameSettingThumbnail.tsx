@@ -1,7 +1,6 @@
-import { ROUTES } from '@ducks-tinder-client/common';
+import { ROUTES , useAppSelector } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail } from '@entities/user';
-import { useAppSelector } from '@shared/lib';
 
 export const NicknameSettingThumbnail = () => {
   const nickname = useAppSelector((state) => state.user.currentUser!.nickname);

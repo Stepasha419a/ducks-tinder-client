@@ -2,13 +2,13 @@ import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import type { ShortUser } from '@ducks-tinder-client/common';
+import { useAppDispatch } from '@ducks-tinder-client/common';
 
 import { FilterPairsItems } from '@features/FilterPairsItems';
 import { PairsFilterPopup } from '@features/PairsFilterPopup';
 import { PairsList } from '@features/PairsList';
 import { RatePairPopup } from '@features/RatePairPopup';
 import { getUserPairsThunk, type PairFilterForm } from '@entities/user';
-import { useAppDispatch } from '@shared/lib';
 
 export const pairFilterFormDefaultValues: PairFilterForm = {
   distance: 100,

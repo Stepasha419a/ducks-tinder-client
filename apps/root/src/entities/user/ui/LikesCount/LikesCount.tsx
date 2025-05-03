@@ -2,9 +2,8 @@ import type { FC, ReactElement } from 'react';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { useAppSelector } from '@ducks-tinder-client/common';
 import { Skeleton } from '@ducks-tinder-client/ui';
-
-import { useAppSelector } from '@shared/lib';
 
 import styles from './LikesCount.module.scss';
 

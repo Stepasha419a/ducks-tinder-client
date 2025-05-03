@@ -1,6 +1,5 @@
 import type { Place, Setting } from '@ducks-tinder-client/common';
-
-import { useAppSelector } from '@shared/lib';
+import { useAppSelector } from '@ducks-tinder-client/common';
 
 import { SettingNameEnum } from '../constants';
 

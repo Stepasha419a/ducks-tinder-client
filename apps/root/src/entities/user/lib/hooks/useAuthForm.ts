@@ -7,10 +7,9 @@ import {
   EMAIL_REGEXP,
   loginThunk,
   registerThunk,
+  useAppDispatch,
 } from '@ducks-tinder-client/common';
 import type { TextFieldProps } from '@ducks-tinder-client/ui';
-
-import { useAppDispatch } from '@shared/lib';
 
 interface AuthFormReturn {
   fields: {

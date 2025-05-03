@@ -9,10 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { selectAvatar } from '@ducks-tinder-client/common';
+import { selectAvatar , useAppSelector } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
-
-import { useAppSelector } from '@shared/lib';
 
 import { variants } from './UserLinks.variants';
 import styles from './UserLinks.module.scss';

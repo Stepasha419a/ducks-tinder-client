@@ -4,11 +4,10 @@ import { faCamera, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { ROUTES } from '@ducks-tinder-client/common';
+import { ROUTES , useAppSelector } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import { UploadImagePopups } from '@features/UploadImagePopups';
-import { useAppSelector } from '@shared/lib';
 
 import styles from './ProfilePreview.mobile.module.scss';
 

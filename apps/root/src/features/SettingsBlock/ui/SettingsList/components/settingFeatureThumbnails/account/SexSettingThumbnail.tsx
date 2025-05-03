@@ -1,7 +1,6 @@
-import { ROUTES } from '@ducks-tinder-client/common';
+import { ROUTES , useAppSelector } from '@ducks-tinder-client/common';
 
-import { LinkSettingThumbnail , SettingNameEnum } from '@entities/user';
-import { useAppSelector } from '@shared/lib';
+import { LinkSettingThumbnail, SettingNameEnum } from '@entities/user';
 
 export const SexSettingThumbnail = () => {
   const sex = useAppSelector((state) => state.user.currentUser!.sex);

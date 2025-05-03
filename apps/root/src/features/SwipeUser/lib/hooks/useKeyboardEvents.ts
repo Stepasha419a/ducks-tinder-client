@@ -2,9 +2,7 @@ import type { RefObject } from 'react';
 import type Slider from 'react-slick';
 import type { AnimationControls } from 'framer-motion';
 
-import { useEventListener } from '@ducks-tinder-client/common';
-
-import { useAppSelector } from '@shared/lib';
+import { useAppSelector,useEventListener  } from '@ducks-tinder-client/common';
 
 import { useTinderAnimations } from './useTinderAnimations';
 

@@ -1,7 +1,8 @@
 import type { AnimationControls } from 'framer-motion';
 
+import { useAppDispatch } from '@ducks-tinder-client/common';
+
 import { dislikeUserThunk, likeUserThunk } from '@entities/user';
-import { useAppDispatch } from '@shared/lib';
 
 export function useTinderAnimations(controls: AnimationControls) {
   const dispatch = useAppDispatch();
