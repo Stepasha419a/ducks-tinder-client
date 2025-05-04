@@ -1,7 +1,10 @@
 import type { Dispatch, SetStateAction } from 'react';
 
 import type { Message } from '@ducks-tinder-client/common';
-import { deleteMessageThunk , useAppDispatch } from '@ducks-tinder-client/common';
+import {
+  deleteMessageThunk,
+  useAppDispatch,
+} from '@ducks-tinder-client/common';
 
 export function useMessageSelect(
   setRepliedMessage: Dispatch<SetStateAction<Message | null>>,

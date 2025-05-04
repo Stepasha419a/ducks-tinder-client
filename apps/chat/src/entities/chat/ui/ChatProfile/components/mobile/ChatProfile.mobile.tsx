@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { ROUTES , useAppSelector } from '@ducks-tinder-client/common';
+import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import { ChatProfileMobileLazy } from './ChatProfile.mobile-lazy';

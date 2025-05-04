@@ -7,17 +7,14 @@ import type { Message } from '@ducks-tinder-client/common';
 import {
   editMessageThunk,
   sendMessageThunk,
- useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
+  useAppDispatch,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 import { Button, TextField } from '@ducks-tinder-client/ui';
 
 import { MessageFormLazy } from './MessageForm.lazy';
 import { BlockedChat, TopBlock } from './ui';
 import styles from './MessageForm.module.scss';
-
-
-
-
-
 
 interface ChatFormValues {
   input: string;

@@ -4,7 +4,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { ROUTES , useAppSelector } from '@ducks-tinder-client/common';
+import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 
 import styles from './ChatProfile.mobile.module.scss';
 

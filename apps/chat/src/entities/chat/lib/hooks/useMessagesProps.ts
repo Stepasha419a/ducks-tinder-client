@@ -1,6 +1,5 @@
 import type { Message } from '@ducks-tinder-client/common';
-import { getTime , useAppSelector } from '@ducks-tinder-client/common';
-
+import { getTime, useAppSelector } from '@ducks-tinder-client/common';
 
 export function useMessagesProps(selectedMessage: Message | null) {
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);

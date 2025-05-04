@@ -1,17 +1,18 @@
 import type { FC } from 'react';
 import { useRef } from 'react';
 
-import { getChatsThunk, selectChatList , useAppDispatch, useAppSelector,useDebouncedCallback  } from '@ducks-tinder-client/common';
+import {
+  getChatsThunk,
+  selectChatList,
+  useAppDispatch,
+  useAppSelector,
+  useDebouncedCallback,
+} from '@ducks-tinder-client/common';
 import { InfinityScroll } from '@ducks-tinder-client/ui';
 
 import { ChatListLazy } from './ChatList.lazy';
 import { ChatItem, FailedChats } from './components';
 import styles from './ChatList.module.scss';
-
-
-
-
-
 
 interface ChatListProps {
   currentUserId: string;
