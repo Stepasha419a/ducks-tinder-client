@@ -11,9 +11,7 @@
     "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
-    "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
-    "storybook": "storybook dev -p 6006",
-    "storybook:test": "test-storybook"
+    "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}"
   },
   "browserslist": {
     "production": [
