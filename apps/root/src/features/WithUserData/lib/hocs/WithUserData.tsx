@@ -2,8 +2,11 @@ import type { ComponentType, FC } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
-import { getCurrentUser , useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
-
+import {
+  getCurrentUser,
+  useAppDispatch,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 
 export const WithUserData = <P extends object>(
   Component: ComponentType<P>

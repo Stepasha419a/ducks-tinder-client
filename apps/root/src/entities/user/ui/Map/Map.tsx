@@ -1,7 +1,10 @@
 import type { FC } from 'react';
 import { Map as YMap, Placemark, YMaps } from '@pbe/react-yandex-maps';
 
-import { useAdaptiveMediaQuery , useAppSelector } from '@ducks-tinder-client/common';
+import {
+  useAdaptiveMediaQuery,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 
 import { MapLazy } from './Map.lazy';
 

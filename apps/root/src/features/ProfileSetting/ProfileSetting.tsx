@@ -1,6 +1,6 @@
 import { ROUTES } from '@ducks-tinder-client/common';
 
-import { NotFoundSetting , useProfileSettingUrl } from '@entities/user';
+import { NotFoundSetting, useProfileSettingUrl } from '@entities/user';
 
 import { SelectForm } from './ui';
 

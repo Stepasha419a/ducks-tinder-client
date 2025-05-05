@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { ROUTES,useAdaptiveMediaQuery  } from '@ducks-tinder-client/common';
+import { ROUTES, useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
 import { PlacesGeolocation } from '@features/PlacesGeolocation';
 import { Map } from '@entities/user';

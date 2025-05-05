@@ -2,7 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import classNames from 'classnames';
 
-import { updateUserPlaceThunk , useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
+import {
+  updateUserPlaceThunk,
+  useAppDispatch,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 
 import { Places } from '@entities/user';
 

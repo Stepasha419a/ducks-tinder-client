@@ -1,7 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { ROUTES, updateUserThunk , useAppDispatch } from '@ducks-tinder-client/common';
+import {
+  ROUTES,
+  updateUserThunk,
+  useAppDispatch,
+} from '@ducks-tinder-client/common';
 
 import type { MultiSelectForm } from '@entities/user';
 import {

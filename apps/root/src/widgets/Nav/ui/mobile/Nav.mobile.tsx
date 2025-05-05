@@ -8,7 +8,11 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { getIsChatPage, ROUTES , useAppSelector } from '@ducks-tinder-client/common';
+import {
+  getIsChatPage,
+  ROUTES,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 
 import { getIsProfilePage } from '../../lib';
 import styles from './Nav.mobile.module.scss';

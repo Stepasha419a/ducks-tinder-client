@@ -5,7 +5,8 @@ import {
   logoutThunk,
   resetChatSlice,
   resetUserSlice,
- useAppDispatch } from '@ducks-tinder-client/common';
+  useAppDispatch,
+} from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
 import { resetPairSlice, resetTinderSlice } from '@entities/user';

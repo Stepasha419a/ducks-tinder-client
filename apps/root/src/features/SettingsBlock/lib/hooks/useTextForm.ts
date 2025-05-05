@@ -5,7 +5,8 @@ import {
   ROUTES,
   updateUserThunk,
   useAdaptiveMediaQuery,
- useAppDispatch } from '@ducks-tinder-client/common';
+  useAppDispatch,
+} from '@ducks-tinder-client/common';
 
 import { useDefaultValues, useMemoriedSettingUrl } from '@entities/user';
 

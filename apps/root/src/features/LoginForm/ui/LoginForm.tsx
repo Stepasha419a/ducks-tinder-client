@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button, TextField } from '@ducks-tinder-client/ui';
 
-import { AuthLayout , useAuthForm } from '@entities/user';
+import { AuthLayout, useAuthForm } from '@entities/user';
 
 import styles from './LoginForm.module.scss';
 

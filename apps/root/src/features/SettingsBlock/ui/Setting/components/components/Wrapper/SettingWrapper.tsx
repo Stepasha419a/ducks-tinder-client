@@ -1,9 +1,9 @@
 import type { FC, PropsWithChildren } from 'react';
-import type { FieldError,FieldErrors } from 'react-hook-form';
+import type { FieldError, FieldErrors } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import { ROUTES,useAdaptiveMediaQuery  } from '@ducks-tinder-client/common';
+import { ROUTES, useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
 import type { SettingFieldValues } from '@features/SettingsBlock';

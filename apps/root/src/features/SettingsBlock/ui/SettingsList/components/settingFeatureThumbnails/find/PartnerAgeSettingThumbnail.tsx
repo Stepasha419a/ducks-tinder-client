@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-import { updateUserThunk , useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
+import {
+  updateUserThunk,
+  useAppDispatch,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 import { RangeInput } from '@ducks-tinder-client/ui';
 
 import { SettingThumbnail } from '@entities/user';

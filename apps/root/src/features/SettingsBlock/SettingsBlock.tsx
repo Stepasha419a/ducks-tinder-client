@@ -1,9 +1,9 @@
 import type { ReactElement } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { ROUTES,useAdaptiveMediaQuery  } from '@ducks-tinder-client/common';
+import { ROUTES, useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
-import { NotFoundSetting,useFoundSetting } from '@entities/user';
+import { NotFoundSetting, useFoundSetting } from '@entities/user';
 
 import { settingVariants } from './SettingsBlock.variants';
 import { Setting, SettingsList } from './ui';

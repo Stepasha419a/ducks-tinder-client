@@ -2,8 +2,12 @@ import type { ComponentType, FC } from 'react';
 import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
-import { checkAuthThunk, ROUTES , useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
-
+import {
+  checkAuthThunk,
+  ROUTES,
+  useAppDispatch,
+  useAppSelector,
+} from '@ducks-tinder-client/common';
 
 export const WithAuthRedirect = <P extends object>(
   Component: ComponentType<P>

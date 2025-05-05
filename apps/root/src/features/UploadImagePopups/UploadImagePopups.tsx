@@ -1,7 +1,10 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 import { useState } from 'react';
 
-import { saveUserImageThunk , useAppDispatch } from '@ducks-tinder-client/common';
+import {
+  saveUserImageThunk,
+  useAppDispatch,
+} from '@ducks-tinder-client/common';
 
 import { CropImage, DialogUpload } from './ui';
 

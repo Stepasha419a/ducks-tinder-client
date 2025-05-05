@@ -1,4 +1,4 @@
-import { ROUTES , useAppSelector } from '@ducks-tinder-client/common';
+import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail, SettingNameEnum } from '@entities/user';
 

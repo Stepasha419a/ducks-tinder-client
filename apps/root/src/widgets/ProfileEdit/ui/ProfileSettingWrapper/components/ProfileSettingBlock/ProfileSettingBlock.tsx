@@ -1,4 +1,4 @@
-import { type Dispatch, type FC, type SetStateAction,useState } from 'react';
+import { type Dispatch, type FC, type SetStateAction, useState } from 'react';
 
 import type { Picture } from '@ducks-tinder-client/common';
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
