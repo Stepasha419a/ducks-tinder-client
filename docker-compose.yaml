@@ -25,7 +25,9 @@ services:
       ' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
   nginx-prod:
     container_name: nginx-prod
-    image: nginx:1.27.2-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
       - ./nginx/nginx-prod.conf:/etc/nginx/nginx.conf.template
       - ./cert:/etc/nginx/cert
