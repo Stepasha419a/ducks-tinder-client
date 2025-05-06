@@ -27,7 +27,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:storybook/recommended',
     '@feature-sliced/eslint-config/rules/import-order',
     '@feature-sliced/eslint-config/rules/public-api',
     '@feature-sliced/eslint-config/rules/layers-slices',
