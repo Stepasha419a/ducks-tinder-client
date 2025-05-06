@@ -3,7 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "lint": "pnpm -F root lint && pnpm -F common lint && pnpm -F ui lint",
+    "lint:fix": "pnpm -F config lint:fix && pnpm -F root lint:fix && pnpm -F common lint:fix && pnpm -F ui lint:fix && pnpm -F policy lint:fix && pnpm -F chat lint:fix",
     "prettier:fix": "pnpm -F config prettier:fix && pnpm -F root prettier:fix && pnpm -F common prettier:fix && pnpm -F ui prettier:fix && pnpm -F policy prettier:fix && pnpm -F chat prettier:fix",
 "init:dev:config": "pnpm -F config install && pnpm -F config build:dev:publish",
     "init:dev:common": "pnpm -F common install && pnpm -F common build:dev:publish",
