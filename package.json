@@ -8,7 +8,7 @@
     "init:dev:config": "pnpm -F config install && pnpm -F config build:dev:publish",
     "init:dev:common": "pnpm -F common install && pnpm -F common build:dev:publish",
     "init:dev:ui": "pnpm -F ui install && pnpm -F ui build:dev:publish",
-"init:dev:policy": "pnpm -F policy install",
+    "init:dev:policy": "pnpm -F policy install",
     "init:dev:chat": "pnpm -F chat install",
     "init:dev:root": "pnpm -F root install",
     "init:dev": "pnpm init:dev:common && pnpm init:dev:ui && pnpm init:dev:root"
