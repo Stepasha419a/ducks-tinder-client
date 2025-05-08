@@ -1,5 +1,14 @@
 import * as fs from 'fs';
 
+export interface ModuleFederationOptions {
+  name: string;
+  filename: string;
+  remotes?: Record<string, string>;
+  exposes?: Record<string, string>;
+  shared: SharedDependencies;
+  runtime?: boolean;
+}
+
 interface PackageDependencies {
   dependencies: Record<string, string>;
 }

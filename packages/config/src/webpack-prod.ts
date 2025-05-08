@@ -1,5 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 import * as path from 'path';
-import { Configuration } from 'webpack';
+import type { Configuration } from 'webpack';
+import type { ModuleFederationOptions } from 'utils';
 import { getSharedDepsConfig } from 'utils';
 
 const HtmlWebPlugin = require('html-webpack-plugin');
@@ -29,7 +36,7 @@ export function getWebpackProdConfig(options: Options): Config {
   const envPath = options.envPath || '.env';
   const isRoot = options.remotes && !options.exposes;
 
-  const moduleFederationOptions: any = {
+  const moduleFederationOptions: ModuleFederationOptions = {
     name: options.name,
     filename: 'remoteEntry.js',
     exposes: options.exposes,

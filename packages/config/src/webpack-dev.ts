@@ -1,6 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
 import * as path from 'path';
+import type { ModuleFederationOptions } from 'utils';
 import { getSharedDepsConfig } from 'utils';
-import { Configuration } from 'webpack';
+import type { Configuration } from 'webpack';
 
 const HtmlWebPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -22,13 +29,13 @@ interface Options {
   mediaPublicPath: string;
 }
 
-type Config = Configuration & { devServer: Object };
+type Config = Configuration & { devServer: object };
 
 export function getWebpackDevConfig(options: Options): Config {
   const envPath = options.envPath || '.env';
   const isRoot = options.remotes && !options.exposes;
 
-  const moduleFederationOptions: any = {
+  const moduleFederationOptions: ModuleFederationOptions = {
     name: options.name,
     filename: 'remoteEntry.js',
     exposes: options.exposes,
