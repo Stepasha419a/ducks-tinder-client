@@ -1,6 +1,13 @@
 {
   "name": "@ducks-tinder-client/ui",
   "version": "1.1.4",
+  "author": "Stepan B <dark_magic419a@mail.ru> (https://github.com/Stepasha419a)",
+  "license": "MIT",
+  "description": "A module of ui components",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stepasha419a/ducks-tinder-client"
+  },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
