@@ -1,7 +1,13 @@
 {
   "name": "@ducks-tinder-client/config",
   "version": "1.1.0",
-  "description": "base configs for internal development",
+  "author": "Stepan B <dark_magic419a@mail.ru> (https://github.com/Stepasha419a)",
+  "license": "MIT",
+  "description": "A module of configs for internal development",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stepasha419a/ducks-tinder-client"
+  },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/index.d.ts",
@@ -66,7 +72,5 @@
   },
   "keywords": [
     "webpack"
-  ],
-  "author": "Stepasha419a",
-  "license": "ISC"
+  ]
 }
