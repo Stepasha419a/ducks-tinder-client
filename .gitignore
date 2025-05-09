@@ -20,6 +20,7 @@ node_modules
 # production
 /build
 nginx-prod.conf
+.npmrc
 
 # misc
 .DS_Store
