@@ -1,26 +1,33 @@
 import * as esbuild from 'esbuild';
 import { nodeExternalsPlugin } from 'esbuild-node-externals';
 
-await esbuild.build({
+import packageData from './package.json' with { type: "json" };
+
+const build = (format) =>
+  esbuild.build({
   entryPoints: ['./src/index.ts'],
-  outfile: 'dist/cjs/index.js',
+  outdir: `dist/${format}`,
   bundle: true,
   minify: true,
   treeShaking: true,
   platform: 'browser',
-  format: 'cjs',
+  format,
   target: 'esnext',
   plugins: [nodeExternalsPlugin()],
+  external: [].concat(
+    Object.keys(packageData.dependencies),
+    Object.keys(packageData.peerDependencies)
+  ),
 });
 
-await esbuild.build({
-  entryPoints: ['./src/index.ts'],
-  outfile: 'dist/esm/index.js',
-  bundle: true,
-  minify: true,
-  treeShaking: true,
-  platform: 'browser',
-  format: 'esm',
-  target: 'esnext',
-  plugins: [nodeExternalsPlugin()],
-});
+build('cjs')
+  .then(async () => {
+    console.log('CJS Build complete');
+  })
+  .catch(() => process.exit(1));
+
+build('esm')
+  .then(async () => {
+    console.log('ESM Build complete');
+  })
+  .catch(() => process.exit(1));
