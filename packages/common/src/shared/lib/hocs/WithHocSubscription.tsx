@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { useEffect, useMemo , useReducer } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
 
 import type { HocComposition } from '../helpers';
 

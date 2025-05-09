@@ -4,7 +4,7 @@ import { setCurrentChatData } from '@entities/chat';
 import type { Message } from '@shared/api';
 import { chatService } from '@shared/api';
 import type { PaginationParams } from '@shared/lib';
-import { PAGINATION_TAKE,returnErrorMessage } from '@shared/lib';
+import { PAGINATION_TAKE, returnErrorMessage } from '@shared/lib';
 
 export const getChatThunk = createAsyncThunk(
   'chat/getChat',

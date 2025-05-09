@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import type { PairFilterParams,User , UserService } from '@shared/api';
+import type { PairFilterParams, User, UserService } from '@shared/api';
 import {
   chatStub,
   matchingUserStubs,
