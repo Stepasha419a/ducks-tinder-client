@@ -3,15 +3,19 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "lint:fix": "pnpm -F config lint:fix && pnpm -F root lint:fix && pnpm -F common lint:fix && pnpm -F ui lint:fix && pnpm -F policy lint:fix && pnpm -F chat lint:fix",
-    "prettier:fix": "pnpm -F config prettier:fix && pnpm -F root prettier:fix && pnpm -F common prettier:fix && pnpm -F ui prettier:fix && pnpm -F policy prettier:fix && pnpm -F chat prettier:fix",
-    "init:dev:config": "pnpm -F config install && pnpm -F config build:dev:publish",
-    "init:dev:common": "pnpm -F common install && pnpm -F common build:dev:publish",
-    "init:dev:ui": "pnpm -F ui install && pnpm -F ui build:dev:publish",
-    "init:dev:policy": "pnpm -F policy install",
-    "init:dev:chat": "pnpm -F chat install",
-    "init:dev:root": "pnpm -F root install",
-    "init:dev": "pnpm init:dev:common && pnpm init:dev:ui && pnpm init:dev:root"
+  "devDependencies": {
+    "@nx/eslint": "21.0.3",
+    "@nx/js": "21.0.3",
+    "@nx/node": "^21.0.3",
+    "@nx/storybook": "21.0.3",
+    "@nx/web": "21.0.3",
+    "@nx/webpack": "21.0.3",
+    "@swc-node/register": "~1.9.2",
+    "@swc/core": "~1.5.29",
+    "@swc/helpers": "~0.5.17",
+    "eslint": "~8.57.1",
+    "nx": "21.0.3",
+    "webpack-cli": "^5.1.4"
   },
   "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b"
 }
