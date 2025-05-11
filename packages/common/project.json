@@ -1,0 +1,6 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@ducks-tinder-client/common",
+  "root": "packages/common",
+  "projectType": "library"
+}
