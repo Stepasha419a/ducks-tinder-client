@@ -1,0 +1,6 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "@ducks-tinder-client/chat",
+  "root": "apps/chat",
+  "projectType": "application"
+}
