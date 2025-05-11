@@ -24,8 +24,8 @@
     "up:dev:minor": "pnpm version minor && pnpm build:dev:publish:override",
     "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
-    "publish:dev": "npm publish --registry http://localhost:4873/",
-    "publish:dev:override": "npm unpublish --force --registry http://localhost:4873/ && pnpm publish:dev"
+    "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
+    "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
   },
   "browserslist": {
     "production": [
