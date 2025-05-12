@@ -13,6 +13,7 @@ cert
 node_modules
 /.pnp
 .pnp.js
+.nx
 
 # testing
 /coverage
