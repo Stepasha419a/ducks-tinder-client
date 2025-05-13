@@ -1,0 +1,45 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "packages"
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*"]
+  },
+  "neverConnectToCloud": true,
+  "targetDefaults": {
+    "build": {
+      "cache": true
+    },
+    "prod:demo": {
+      "cache": true
+    },
+    "prod": {
+      "cache": true
+    },
+    "lint:fix": {
+      "cache": true
+    },
+    "prettier:fix": {
+      "cache": true
+    }
+  },
+  "release": {
+    "projects": [
+      "@ducks-tinder-client/config",
+      "@ducks-tinder-client/common",
+      "@ducks-tinder-client/ui",
+      "@ducks-tinder-client/root",
+      "@ducks-tinder-client/chat",
+      "@ducks-tinder-client/policy"
+    ],
+    "version": {
+      "git": {
+        "commit": false,
+        "tag": false
+      }
+    },
+    "projectsRelationship": "independent"
+  }
+}
