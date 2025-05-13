@@ -28,8 +28,7 @@
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
     "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
-    "publish:dev": "npm publish --registry http://localhost:4873/",
-    "publish:dev:override": "npm unpublish --force --registry http://localhost:4873/ && pnpm publish:dev"
+    "publish": "npm publish"
   },
   "browserslist": {
     "production": [
