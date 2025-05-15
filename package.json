@@ -6,6 +6,7 @@
     "up:dev:patch:config": "pnpm -F config up:dev:patch && pnpm -F root up:dev:packages && pnpm -F policy up:dev:packages && pnpm -F chat up:dev:packages",
     "up:dev:minor:config": "pnpm -F config up:dev:minor && pnpm -F root up:dev:packages && pnpm -F policy up:dev:packages && pnpm -F chat up:dev:packages",
     "up:dev:patch:common": "pnpm -F common up:dev:patch && pnpm -F ui up:dev:packages && pnpm -F root up:dev:packages && pnpm -F chat up:dev:packages",
+    "up:dev:minor:common": "pnpm -F common up:dev:minor && pnpm -F ui up:dev:packages && pnpm -F root up:dev:packages && pnpm -F chat up:dev:packages",
   "devDependencies": {
     "@nx/eslint": "21.0.3",
     "@nx/js": "21.0.3",
