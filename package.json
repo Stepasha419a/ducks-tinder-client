@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "init-deps": "pnpm install && pnpm -F config install && pnpm -F common install && pnpm -F ui install && pnpm -F policy install && pnpm -F chat install && pnpm -F root install",
     "up:dev:patch:config": "pnpm -F config up:dev:patch && pnpm -F root up:dev:packages && pnpm -F policy up:dev:packages && pnpm -F chat up:dev:packages",
     "up:dev:minor:config": "pnpm -F config up:dev:minor && pnpm -F root up:dev:packages && pnpm -F policy up:dev:packages && pnpm -F chat up:dev:packages",
     "up:dev:patch:common": "pnpm -F common up:dev:patch && pnpm -F ui up:dev:packages && pnpm -F root up:dev:packages && pnpm -F chat up:dev:packages",
