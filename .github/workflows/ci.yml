@@ -20,3 +20,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
+      - name: Run lint:fix
+        # TODO: replace with package scripts
+        run: pnpm nx run-many --target=lint:fix
+      - name: Run prettier:fix
+        run: pnpm nx run-many --target=prettier:fix
