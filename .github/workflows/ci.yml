@@ -22,6 +22,9 @@ jobs:
         run: pnpm install
       - name: Run lint:fix
         # TODO: replace with package scripts
+        # TODO: maybe only check, without fix?
         run: pnpm nx run-many --target=lint:fix
       - name: Run prettier:fix
         run: pnpm nx run-many --target=prettier:fix
+      - name: Run build
+        run: pnpm nx run-many --target=build && pnpm run-many --target=prod
