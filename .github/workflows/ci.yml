@@ -27,4 +27,4 @@ jobs:
       - name: Run prettier:fix
         run: pnpm nx run-many --target=prettier:fix
       - name: Run build
-        run: pnpm nx run-many --target=build && pnpm run-many --target=prod
+        run: pnpm nx run-many --target=build && pnpm nx run-many --target=prod
