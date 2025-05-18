@@ -20,11 +20,11 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
-      - name: Run lint:fix
+      - name: Run lint
         # TODO: replace with package scripts
         # TODO: maybe only check, without fix?
-        run: pnpm nx run-many --target=lint:fix
-      - name: Run prettier:fix
-        run: pnpm nx run-many --target=prettier:fix
+        run: pnpm nx run-many --target=lint
+      - name: Run prettier
+        run: pnpm nx run-many --target=prettier
       - name: Run build
         run: pnpm nx run-many --target=build && pnpm nx run-many --target=prod
