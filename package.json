@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "nx:build": "nx run-many --target=build && nx run-many --target=prod",
     "nx:lint": "nx run-many --target=lint",
     "nx:prettier": "nx run-many --target=prettier",
     "init-deps": "pnpm install && pnpm -F config install && pnpm -F common install && pnpm -F ui install && pnpm -F policy install && pnpm -F chat install && pnpm -F root install",
