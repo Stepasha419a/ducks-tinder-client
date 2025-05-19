@@ -23,8 +23,8 @@ jobs:
       - name: Run lint
         # TODO: replace with package scripts
         # TODO: maybe only check, without fix?
-        run: pnpm nx run-many --target=lint
+        run: pnpm nx:lint
       - name: Run prettier
-        run: pnpm nx run-many --target=prettier
+        run: pnpm nx:prettier
       - name: Run build
-        run: pnpm nx run-many --target=build && pnpm nx run-many --target=prod
+        run: pnpm nx:build
