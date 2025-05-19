@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "nx:build:demo": "nx run-many --target=build && nx run-many --target=prod:demo",
     "nx:build": "nx run-many --target=build && nx run-many --target=prod",
     "nx:lint": "nx run-many --target=lint",
     "nx:prettier": "nx run-many --target=prettier",
