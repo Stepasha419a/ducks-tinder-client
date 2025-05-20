@@ -4,6 +4,17 @@ const path = require('path');
 const semver = require('semver');
 const os = require('process');
 
+const packages = fs.readdirSync('packages');
+
+packages.map((package) => {
+  try {
+    publishPackage(package);
+  } catch (error) {
+    console.error(`package ${package} error:`, err);
+    os.exit(1);
+  }
+});
+
 function publishPackage(package) {
   const packageRootPath = path.join('packages', package);
   const packageJsonPath = path.join(packageRootPath, 'package.json');
