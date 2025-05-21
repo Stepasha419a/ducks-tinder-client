@@ -3,7 +3,7 @@ name: continuous-integration
 on: [push]
 
 jobs:
-  continuous-integration:
+  check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,10 +21,26 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Run lint
-        # TODO: replace with package scripts
-        # TODO: maybe only check, without fix?
         run: pnpm nx:lint
       - name: Run prettier
         run: pnpm nx:prettier
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
       - name: Run build
         run: pnpm nx:build
