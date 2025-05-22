@@ -10,7 +10,7 @@ packages.map((package) => {
   try {
     publishPackage(package);
   } catch (error) {
-    console.error(`package ${package} error:`, err);
+    console.error(`package ${package} error:`, error);
     os.exit(1);
   }
 });
