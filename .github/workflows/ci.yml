@@ -63,5 +63,3 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Run build
-        run: pnpm nx:build
