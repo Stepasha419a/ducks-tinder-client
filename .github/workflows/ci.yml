@@ -67,3 +67,5 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Publish packages
+        run: pnpm publish-packages
