@@ -16,8 +16,8 @@ packages.map((package) => {
 });
 
 function publishPackage(package) {
-  const packageRootPath = path.join('packages', package);
-  const packageJsonPath = path.join(packageRootPath, 'package.json');
+  const packageRootPath = path.resolve('packages', package);
+  const packageJsonPath = path.resolve(packageRootPath, 'package.json');
 
   const res = fs.readFileSync(packageJsonPath);
   const packageContent = JSON.parse(res);
@@ -37,6 +37,7 @@ function publishPackage(package) {
 
   console.log(`${packageName} - publish version: ${version}`);
 
+  console.log({ packageRootPath, packageName, packageJsonPath });
   execSync(`npm publish ${packageRootPath}`);
 
   console.log(`${packageName} - finished`);
