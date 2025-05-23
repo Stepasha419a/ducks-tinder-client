@@ -72,4 +72,3 @@ jobs:
         run: pnpm publish-packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GIT_SSH_COMMAND: 'ssh -oStrictHostKeyChecking=accept-new'
