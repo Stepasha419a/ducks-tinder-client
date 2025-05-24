@@ -5,6 +5,7 @@ on: [push]
 jobs:
   check:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       - uses: actions/checkout@v4
@@ -24,6 +25,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
+    environment: production
     needs: check
 
     steps:
@@ -67,8 +69,6 @@ jobs:
           node-version: 22
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
-      - name: Configure npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Publish packages
