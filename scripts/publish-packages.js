@@ -37,7 +37,6 @@ function publishPackage(package) {
 
   console.log(`${packageName} - publish version: ${version}`);
 
-  console.log({ packageRootPath, packageName, packageJsonPath });
   execSync(`npm publish ${packageRootPath}`);
 
   console.log(`${packageName} - finished`);
