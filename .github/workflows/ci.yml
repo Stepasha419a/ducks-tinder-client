@@ -66,6 +66,8 @@ jobs:
           node-version: 22
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
+      - name: Configure npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Publish packages
