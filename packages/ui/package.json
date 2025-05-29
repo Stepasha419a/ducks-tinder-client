@@ -19,8 +19,6 @@
     "storybook:test": "test-storybook",
     "build": "rimraf ./dist && pnpm build:types && node esbuild.js",
     "build:types": "tsc -p ./tsconfig.build.json && tsc-alias -p ./tsconfig.build.json",
-    "build:publish": "pnpm build && pnpm publish:dev",
-    "up:packages": "pnpm up @ducks-tinder-client/*",
     "lint": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --max-warnings=0",
     "lint:fix": "eslint \"./src/**/*{.ts,.tsx,.js,.jsx}\" --fix --max-warnings=0",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
