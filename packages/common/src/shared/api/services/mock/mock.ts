@@ -12,7 +12,7 @@ export async function resolveAxiosResponse<T>(
     headers: {},
     status: 200,
     statusText: '',
-  });
+  } as AxiosResponse<T>);
 }
 
 export async function rejectWithAxiosResponseError<T>(
