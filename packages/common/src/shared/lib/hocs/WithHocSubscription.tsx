@@ -18,7 +18,6 @@ export function WithHocSubscription(
 
     const ComposedComponent = useMemo(
       () => composition.appendHocs(Component),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       [value]
     );
 

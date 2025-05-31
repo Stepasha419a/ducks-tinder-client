@@ -13,7 +13,7 @@ interface AxiosEditedConfig extends AxiosResponse {
 }
 export function setUpInterceptors(instance: AxiosInstance) {
   instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-    config.headers!.Authorization =
+    config.headers.Authorization =
       'Bearer ' + localStorage.getItem('accessToken')!;
     return config;
   });

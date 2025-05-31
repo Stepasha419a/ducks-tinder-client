@@ -43,7 +43,6 @@ export const WithUserData = <P extends object>(
       if (user && failedOnceWithToast.current) {
         toast('Successful connection');
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, requested, count]);
 
     if (user) return <Component {...props} />;
