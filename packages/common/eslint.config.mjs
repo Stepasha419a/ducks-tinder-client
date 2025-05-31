@@ -1,12 +1,13 @@
-const parser = require('@typescript-eslint/parser');
-const eslint = require('@eslint/js');
-const globals = require('globals');
-const typescriptEslint = require('@typescript-eslint/eslint-plugin');
-const importPlugin = require('eslint-plugin-import');
-const sortImportPlugin = require('eslint-plugin-simple-import-sort');
+import parser from '@typescript-eslint/parser';
+import eslint from '@eslint/js';
+import globals from 'globals';
+import importPlugin from 'eslint-plugin-import';
+import sortImportPlugin from 'eslint-plugin-simple-import-sort';
+import tseslint from 'typescript-eslint';
 
-module.exports = [
+export default tseslint.config(
   eslint.configs.recommended,
+  tseslint.configs.recommended,
   {
     languageOptions: {
       parser,
@@ -14,7 +15,7 @@ module.exports = [
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: './tsconfig.json',
-        tsconfigRootDir: __dirname,
+        tsconfigRootDir: './',
       },
       globals: {
         ...globals.browser,
@@ -36,7 +37,6 @@ module.exports = [
       },
     },
     plugins: {
-      '@typescript-eslint': typescriptEslint,
       import: importPlugin,
       'simple-import-sort': sortImportPlugin,
     },
@@ -89,5 +89,5 @@ module.exports = [
       '@typescript-eslint/return-await': 'warn',
       '@typescript-eslint/require-await': 'warn',
     },
-  },
-];
+  }
+);
