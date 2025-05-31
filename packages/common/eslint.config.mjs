@@ -22,13 +22,7 @@ export default tseslint.config(
         ...globals.node,
       },
     },
-    ignores: [
-      'dist',
-      'tsconfig.json',
-      'node_modules',
-      '.eslintrc.cjs',
-      'esbuild.js',
-    ],
+    ignores: ['dist', 'node_modules', 'eslint.config.mjs', 'esbuild.js'],
     settings: {
       'import/resolver': {
         typescript: {
@@ -85,7 +79,6 @@ export default tseslint.config(
       '@typescript-eslint/no-redeclare': 'warn',
       '@typescript-eslint/no-shadow': 'warn',
       '@typescript-eslint/no-unused-expressions': 'warn',
-      '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/return-await': 'warn',
       '@typescript-eslint/require-await': 'warn',
     },
