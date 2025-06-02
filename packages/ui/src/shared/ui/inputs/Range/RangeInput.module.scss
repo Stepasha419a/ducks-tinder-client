@@ -25,7 +25,8 @@
   --maxTicksAllowed: 30;
   --too-many-ticks: Min(1, Max(var(--ticks-count) - var(--maxTicksAllowed), 0));
   --x-step: Max(var(--step), var(--too-many-ticks) * (var(--max) - var(--min)));
-  --tickInterval: 100/ ((var(--max) - var(--min)) / var(--step)) * var(--tickEvery, 1);
+  --tickInterval: 100/ ((var(--max) - var(--min)) / var(--step)) *
+    var(--tickEvery, 1);
   --tickIntervalPerc: calc(
     (100% - var(--thumb-size)) / ((var(--max) - var(--min)) / var(--x-step)) *
       var(--tickEvery, 1)
@@ -214,7 +215,9 @@
             var(--flip)
         )
       );
-      transition: all 0.12s ease-out, left 0s;
+      transition:
+        all 0.12s ease-out,
+        left 0s;
     }
   }
 }

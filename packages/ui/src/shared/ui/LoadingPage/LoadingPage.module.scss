@@ -11,7 +11,9 @@
   overflow: hidden;
   opacity: 1;
   z-index: 100;
-  transition: opacity, visibility 1.5s;
+  transition:
+    opacity,
+    visibility 1.5s;
 
   .background {
     position: absolute;
