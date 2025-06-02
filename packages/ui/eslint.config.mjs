@@ -5,11 +5,14 @@ import importPlugin from 'eslint-plugin-import';
 import sortImportPlugin from 'eslint-plugin-simple-import-sort';
 import tseslint from 'typescript-eslint';
 import * as reactHooks from 'eslint-plugin-react-hooks';
+// TODO: storybook 9 version for all packages (that time there were conflicts and some packages were still 8 version)
+// import storybook from 'eslint-plugin-storybook';
 
 export default tseslint.config(
   eslint.configs.recommended,
   tseslint.configs.recommended,
   reactHooks.configs.recommended,
+  // ...storybook.configs['flat/recommended'],
   {
     languageOptions: {
       parser,
