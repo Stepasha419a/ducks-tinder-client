@@ -24,6 +24,7 @@ interface Options {
   name: string;
   packagePath: string;
   mediaPublicPath: string;
+  eslintConfigPath: string;
 }
 
 type Config = Configuration & { devServer: object };
@@ -163,7 +164,7 @@ export function getWebpackDevConfig(options: Options): Config {
         emitWarning: true,
         failOnError: false,
         extensions: ['ts', 'tsx'],
-        overrideConfigFile: './.eslintrc.cjs',
+        overrideConfigFile: options.eslintConfigPath,
       }),
       new Dotenv({
         path: envPath,
