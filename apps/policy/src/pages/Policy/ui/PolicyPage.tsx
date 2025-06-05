@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { authDuck } from '@ducks-tinder-client/ui';
 
-import styles from './PolicyPage.module.scss';
+import * as styles from './PolicyPage.module.scss';
+
+console.log(styles);
 
 const PolicyPage: FC = (): ReactElement => {
   return (
