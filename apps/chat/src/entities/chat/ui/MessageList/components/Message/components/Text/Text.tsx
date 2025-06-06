@@ -6,11 +6,10 @@ import * as styles from './Text.module.scss';
 interface TextProps {
   text: string;
   time: string;
-  isEdited: boolean;
 }
 
-export const Text: FC<TextProps> = ({ text, time, isEdited }) => {
-  const cnTimestamp = classNames(styles.timestamp, isEdited && styles.edited);
+export const Text: FC<TextProps> = ({ text, time }) => {
+  const cnTimestamp = classNames(styles.timestamp);
 
   return (
     <>

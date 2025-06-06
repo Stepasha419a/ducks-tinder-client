@@ -29,23 +29,23 @@ export const MessageSelectMobile: FC<MessageSelectMobileProps> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.closeWrapper}>
-        <div onClick={handleSelectClickOutside} className={styles.close}>
+        <div onClick={handleSelectClickOutside}>
           <FontAwesomeIcon icon={faXmark} className={styles.icon} />
         </div>
         <div className={styles.selected}>1</div>
       </div>
       <div className={styles.featuresWrapper}>
         {isMessageDeleting && (
-          <div onClick={handleDeleteMessage} className={styles.item}>
+          <div onClick={handleDeleteMessage}>
             <FontAwesomeIcon icon={faTrash} className={styles.icon} />
           </div>
         )}
         {isMessageEditable && (
-          <div onClick={handleEditMessage} className={styles.item}>
+          <div onClick={handleEditMessage}>
             <FontAwesomeIcon icon={faPen} className={styles.icon} />
           </div>
         )}
-        <div onClick={handleRepliedMessage} className={styles.item}>
+        <div onClick={handleRepliedMessage}>
           <FontAwesomeIcon icon={faReply} className={styles.icon} />
         </div>
       </div>

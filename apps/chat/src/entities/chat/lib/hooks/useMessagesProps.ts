@@ -23,7 +23,6 @@ export function useMessagesProps(selectedMessage: Message | null) {
   const getTextProps = (message: Message) => ({
     time: getMessageTime(message),
     text: message.text,
-    isEdited: getIsEdited(message),
   });
 
   const getUsernameProps = (message: Message) => {

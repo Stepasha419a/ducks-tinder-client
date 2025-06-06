@@ -17,11 +17,7 @@ export const ChatListLazy = () => {
                   width={100}
                   height={20}
                 />
-                <Skeleton
-                  className={styles.lazy_message}
-                  width={160}
-                  height={20}
-                />
+                <Skeleton width={160} height={20} />
               </div>
             </div>
           );
