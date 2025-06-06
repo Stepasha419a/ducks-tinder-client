@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
 
-import styles from './Reply.module.scss';
+import * as styles from './Reply.module.scss';
 
 interface ReplyProps {
   repliedUsername: string | undefined;

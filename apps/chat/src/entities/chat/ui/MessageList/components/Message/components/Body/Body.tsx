@@ -1,7 +1,7 @@
 import type { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-import styles from './Body.module.scss';
+import * as styles from './Body.module.scss';
 
 interface MessageBodyProps {
   isOwn: boolean;

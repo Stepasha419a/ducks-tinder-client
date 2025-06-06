@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
-import styles from './FailedChats.module.scss';
+import * as styles from './FailedChats.module.scss';
 
 export const FailedChats = (): ReactElement => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');

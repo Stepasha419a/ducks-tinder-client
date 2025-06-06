@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import type { Message } from '@ducks-tinder-client/common';
 import { useAppSelector } from '@ducks-tinder-client/common';
 
-import styles from './TopBlock.module.scss';
+import * as styles from './TopBlock.module.scss';
 
 interface TopBlockProps {
   repliedMessage: Message | null;

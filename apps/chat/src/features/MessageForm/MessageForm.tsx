@@ -14,7 +14,7 @@ import { Button, TextField } from '@ducks-tinder-client/ui';
 
 import { MessageFormLazy } from './MessageForm.lazy';
 import { BlockedChat, TopBlock } from './ui';
-import styles from './MessageForm.module.scss';
+import * as styles from './MessageForm.module.scss';
 
 interface ChatFormValues {
   input: string;

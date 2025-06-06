@@ -6,7 +6,7 @@ import {
 } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
-import styles from './BlockChat.module.scss';
+import * as styles from './BlockChat.module.scss';
 
 export const BlockChat = () => {
   const dispatch = useAppDispatch();

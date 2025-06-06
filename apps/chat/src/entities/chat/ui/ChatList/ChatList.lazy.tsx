@@ -1,6 +1,6 @@
 import { Skeleton } from '@ducks-tinder-client/ui';
 
-import styles from './ChatList.module.scss';
+import * as styles from './ChatList.module.scss';
 
 export const ChatListLazy = () => {
   return (

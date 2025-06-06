@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Avatar } from '@ducks-tinder-client/ui';
 
-import styles from './MessageAvatar.module.scss';
+import * as styles from './MessageAvatar.module.scss';
 
 interface MessageAvatarProps {
   userId: string;

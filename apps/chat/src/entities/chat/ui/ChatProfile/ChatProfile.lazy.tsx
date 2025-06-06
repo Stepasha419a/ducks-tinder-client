@@ -1,7 +1,7 @@
 import Skeleton from 'react-loading-skeleton';
 import classNames from 'classnames';
 
-import styles from './ChatProfile.module.scss';
+import * as styles from './ChatProfile.module.scss';
 
 export const ChatProfileLazy = () => {
   return (

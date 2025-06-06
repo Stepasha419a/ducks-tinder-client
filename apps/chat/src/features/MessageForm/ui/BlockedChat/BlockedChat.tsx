@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import styles from './BlockedChat.module.scss';
+import * as styles from './BlockedChat.module.scss';
 
 interface BlockedChatProps {
   blockedByName: string;

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 
-import styles from './ChatProfile.mobile.module.scss';
+import * as styles from './ChatProfile.mobile.module.scss';
 
 export const ChatProfileMobileLazy = () => {
   const isNotFound = useAppSelector((state) => state.chat.isNotFound);

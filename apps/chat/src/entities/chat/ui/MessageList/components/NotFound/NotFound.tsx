@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import styles from './NotFound.module.scss';
+import * as styles from './NotFound.module.scss';
 
 export const NotFound = (): ReactElement => {
   return (

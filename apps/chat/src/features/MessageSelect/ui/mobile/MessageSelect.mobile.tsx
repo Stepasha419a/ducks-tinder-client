@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import styles from './MessageSelect.mobile.module.scss';
+import * as styles from './MessageSelect.mobile.module.scss';
 
 interface MessageSelectMobileProps {
   handleSelectClickOutside: () => void;

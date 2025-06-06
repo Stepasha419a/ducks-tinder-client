@@ -1,6 +1,6 @@
 import { Skeleton } from '@ducks-tinder-client/ui';
 
-import styles from './Loading.module.scss';
+import * as styles from './Loading.module.scss';
 
 export const Loading = () => {
   return (

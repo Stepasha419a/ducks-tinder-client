@@ -23,7 +23,7 @@ import {
 
 import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
-import styles from './MessageList.module.scss';
+import * as styles from './MessageList.module.scss';
 
 interface MessagesProps {
   select: ReactElement;
