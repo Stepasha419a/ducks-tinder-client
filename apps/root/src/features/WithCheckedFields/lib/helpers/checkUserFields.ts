@@ -14,6 +14,7 @@ const potentialFields: Setting[] = [
 ];
 
 function checkField(user: User, field: Setting): Setting | boolean {
+  // eslint-disable-next-line @typescript-eslint/switch-exhaustiveness-check
   switch (field) {
     case SettingNameEnum.DESCRIPTION:
       if (user.description === '') {

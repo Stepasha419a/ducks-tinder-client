@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-useless-empty-export */
 /* eslint-disable @typescript-eslint/consistent-type-imports */
 import { store } from './store';
 

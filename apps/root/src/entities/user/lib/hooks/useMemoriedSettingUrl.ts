@@ -15,7 +15,7 @@ export function useMemoriedSettingUrl() {
     if (setting?.formName) {
       lastExistingValues.current.formName = setting.formName;
     }
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+
     if (setting?.settingName) {
       lastExistingValues.current.settingName = setting.settingName;
     }

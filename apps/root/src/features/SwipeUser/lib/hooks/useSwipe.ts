@@ -21,7 +21,7 @@ export function useSwipe() {
 
   const controls = useAnimationControls();
 
-  const sliderRef = useRef<Slider>(null);
+  const sliderRef = useRef<Slider | null>(null);
 
   useEffect(() => {
     controls.start('center');
