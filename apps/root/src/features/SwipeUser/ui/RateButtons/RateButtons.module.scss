@@ -58,7 +58,9 @@
     border-radius: 50%;
     cursor: pointer;
 
-    transition: color 0.2s, background 0.2s;
+    transition:
+      color 0.2s,
+      background 0.2s;
 
     &.gold {
       border-color: var(--color--yellow-100);
