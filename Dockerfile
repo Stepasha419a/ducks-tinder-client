@@ -1,6 +1,7 @@
 FROM alpine:3.22.0
 
-# TODO: check if script has no unused deps, unused steps in build
+ENV NGINX_VERSION=1.27.2
+
 RUN apk add --no-cache \
     git \
     gcc \
