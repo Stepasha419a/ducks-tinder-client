@@ -7,7 +7,7 @@ import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import { ChatProfileMobileLazy } from './ChatProfile.mobile-lazy';
-import styles from './ChatProfile.mobile.module.scss';
+import * as styles from './ChatProfile.mobile.module.scss';
 
 interface ChatProfileProps {
   handleOpen: () => void;

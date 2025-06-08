@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { deleteChatThunk, useAppDispatch } from '@ducks-tinder-client/common';
 import { Button, Popup } from '@ducks-tinder-client/ui';
 
-import styles from './DeleteChat.module.scss';
+import * as styles from './DeleteChat.module.scss';
 
 interface DeleteChatProps {
   submitDelete?: () => void;

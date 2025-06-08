@@ -1,6 +1,6 @@
 import { type FC, memo } from 'react';
 
-import styles from './Timestamp.module.scss';
+import * as styles from './Timestamp.module.scss';
 
 interface TimestampProps {
   createdAt: string;

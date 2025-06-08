@@ -19,7 +19,7 @@ import { IndexChatPage } from '@pages/IndexChatPage';
 import { ChatList } from '@entities/chat';
 
 import '@ducks-tinder-client/ui/dist/esm/index.css';
-import styles from './App.module.scss';
+import * as styles from './App.module.scss';
 
 const privateHocComposition = new HocComposition();
 

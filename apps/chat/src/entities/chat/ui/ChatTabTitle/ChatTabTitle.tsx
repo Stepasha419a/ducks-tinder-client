@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 import { useAppSelector } from '@ducks-tinder-client/common';
 
-import styles from './ChatTabTitle.module.scss';
+import * as styles from './ChatTabTitle.module.scss';
 
 interface ChatTabTitleProps {
   handleClick: () => void;

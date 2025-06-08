@@ -13,7 +13,7 @@ import {
 
 import { useMessageSelect } from './lib';
 import { MessageSelectMobile } from './ui';
-import styles from './MessageSelect.module.scss';
+import * as styles from './MessageSelect.module.scss';
 
 interface MessageSelectProps {
   isMobile?: boolean;

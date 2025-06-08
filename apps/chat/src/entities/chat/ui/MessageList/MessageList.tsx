@@ -23,7 +23,7 @@ import {
 
 import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
-import styles from './MessageList.module.scss';
+import * as styles from './MessageList.module.scss';
 
 interface MessagesProps {
   select: ReactElement;
@@ -64,7 +64,7 @@ export const MessageList: FC<MessagesProps> = ({
     getTextProps,
   } = useMessagesProps(selectedMessage);
 
-  const controlRef = useRef<ControlRef>(null);
+  const controlRef = useRef<ControlRef | null>(null);
   useMessagesScroll(controlRef);
 
   const delayedGetMessages = useDebouncedCallback(

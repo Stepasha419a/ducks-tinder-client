@@ -12,7 +12,7 @@ import { InfinityScroll } from '@ducks-tinder-client/ui';
 
 import { ChatListLazy } from './ChatList.lazy';
 import { ChatItem, FailedChats } from './components';
-import styles from './ChatList.module.scss';
+import * as styles from './ChatList.module.scss';
 
 interface ChatListProps {
   currentUserId: string;

@@ -6,7 +6,7 @@ import { Popup, Preview } from '@ducks-tinder-client/ui';
 import { ChatControl } from '@features/ChatControl';
 
 import { ChatProfilePopupLazy } from './ChatProfilePopup.lazy';
-import styles from './ChatProfilePopup.module.scss';
+import * as styles from './ChatProfilePopup.module.scss';
 
 interface ChatProfilePopupProps {
   handleClose: () => void;

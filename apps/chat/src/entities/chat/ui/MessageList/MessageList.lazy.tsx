@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Skeleton } from '@ducks-tinder-client/ui';
 
-import styles from './MessageList.module.scss';
+import * as styles from './MessageList.module.scss';
 
 const heights = [35, 55, 75];
 const widths = [150, 200, 250, 300, 350];
