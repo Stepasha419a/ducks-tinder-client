@@ -9,7 +9,7 @@ import { useTinderAnimations } from './useTinderAnimations';
 export function useKeyboardEvents(
   controls: AnimationControls,
   setIsFullPreview: (value: boolean) => void,
-  sliderRef: RefObject<Slider>
+  sliderRef: RefObject<Slider | null>
 ) {
   const tinderUsersLength = useAppSelector(
     (state) => state.tinder.tinderUsers.length
