@@ -10,4 +10,5 @@ export default (env) =>
     },
     packagePath: './package.json',
     mediaPublicPath: '../../public',
+    eslintConfigPath: './eslint.config.mjs',
   });
