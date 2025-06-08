@@ -1,4 +1,4 @@
-FROM nginx:1.27.2-alpine
+FROM alpine:3.22.0
 
 # TODO: check if script has no unused deps, unused steps in build
 RUN apk add --no-cache \
