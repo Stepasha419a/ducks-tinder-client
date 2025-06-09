@@ -5,8 +5,6 @@ import { authDuck } from '@ducks-tinder-client/ui';
 
 import * as styles from './PolicyPage.module.scss';
 
-console.log(styles);
-
 const PolicyPage: FC = (): ReactElement => {
   return (
     <div className={styles.policy}>
