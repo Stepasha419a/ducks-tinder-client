@@ -1,8 +1,8 @@
 import type {
   AxiosError,
   AxiosInstance,
-  AxiosRequestConfig,
   AxiosResponse,
+  InternalAxiosRequestConfig,
 } from 'axios';
 import axios from 'axios';
 
@@ -12,8 +12,8 @@ interface AxiosEditedConfig extends AxiosResponse {
   _isRetry?: boolean;
 }
 export function setUpInterceptors(instance: AxiosInstance) {
-  instance.interceptors.request.use((config: AxiosRequestConfig) => {
-    config.headers!.Authorization =
+  instance.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+    config.headers.Authorization =
       'Bearer ' + localStorage.getItem('accessToken')!;
     return config;
   });

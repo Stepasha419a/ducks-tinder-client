@@ -77,6 +77,5 @@ export function useChatConnection() {
     return () => {
       chatService.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 }
