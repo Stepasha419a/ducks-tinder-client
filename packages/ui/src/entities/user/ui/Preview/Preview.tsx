@@ -1,4 +1,4 @@
-import type { FC, ReactElement, RefObject } from 'react';
+import type { ReactElement, RefObject } from 'react';
 import { useState } from 'react';
 import type Slider from 'react-slick';
 import classNames from 'classnames';
@@ -24,7 +24,7 @@ export interface PreviewProps {
   disabled?: boolean;
 }
 
-export const Preview: FC<PreviewProps> = ({
+export const Preview: React.FC<PreviewProps> = ({
   user,
   setIsFullPreview,
   isFull = false,

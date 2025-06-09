@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -59,6 +60,9 @@ const user: ShortUser = {
 
 const meta = {
   title: 'Entities/Preview',
+  // TODO: has required user prop and throws errors to pass required props
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   component: Preview,
   parameters: {
     layout: 'centered',
@@ -74,7 +78,12 @@ export const Primary: Story = {
 
     return (
       <div style={{ height: '650px', width: '440px' }}>
-        <Preview {...args} isFull={isFull} setIsFullPreview={setIsFull} />
+        <Preview
+          {...args}
+          user={user}
+          isFull={isFull}
+          setIsFullPreview={setIsFull}
+        />
       </div>
     );
   },
@@ -82,7 +91,7 @@ export const Primary: Story = {
     disabled: false,
     isShadow: false,
     noSlider: false,
-    user: user,
+    user,
   },
 };
 
@@ -92,7 +101,12 @@ export const Disabled: Story = {
 
     return (
       <div style={{ height: '650px', width: '440px' }}>
-        <Preview {...args} isFull={isFull} setIsFullPreview={setIsFull} />
+        <Preview
+          {...args}
+          user={user}
+          isFull={isFull}
+          setIsFullPreview={setIsFull}
+        />
       </div>
     );
   },
@@ -100,7 +114,7 @@ export const Disabled: Story = {
     disabled: true,
     isShadow: false,
     noSlider: false,
-    user: user,
+    user,
   },
 };
 
@@ -110,7 +124,12 @@ export const Shadow: Story = {
 
     return (
       <div style={{ height: '650px', width: '440px' }}>
-        <Preview {...args} isFull={isFull} setIsFullPreview={setIsFull} />
+        <Preview
+          {...args}
+          user={user}
+          isFull={isFull}
+          setIsFullPreview={setIsFull}
+        />
       </div>
     );
   },
@@ -118,7 +137,7 @@ export const Shadow: Story = {
     disabled: false,
     isShadow: true,
     noSlider: false,
-    user: user,
+    user,
   },
 };
 
@@ -128,7 +147,12 @@ export const WithoutSlider: Story = {
 
     return (
       <div style={{ height: '650px', width: '440px' }}>
-        <Preview {...args} isFull={isFull} setIsFullPreview={setIsFull} />
+        <Preview
+          {...args}
+          user={user}
+          isFull={isFull}
+          setIsFullPreview={setIsFull}
+        />
       </div>
     );
   },
@@ -136,7 +160,7 @@ export const WithoutSlider: Story = {
     disabled: false,
     isShadow: false,
     noSlider: true,
-    user: user,
+    user,
   },
 };
 
@@ -146,7 +170,12 @@ export const ExtraContent: Story = {
 
     return (
       <div style={{ height: '650px', width: '440px' }}>
-        <Preview {...args} isFull={isFull} setIsFullPreview={setIsFull} />
+        <Preview
+          {...args}
+          user={user}
+          isFull={isFull}
+          setIsFullPreview={setIsFull}
+        />
       </div>
     );
   },
@@ -155,6 +184,6 @@ export const ExtraContent: Story = {
     isShadow: false,
     extraContent: <div>extra content</div>,
     noSlider: false,
-    user: user,
+    user,
   },
 };

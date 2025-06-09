@@ -6,6 +6,10 @@ export const applyTheme = (theme: Theme) => {
 };
 
 export const isValidTheme = (theme: string | null): theme is Theme => {
+  if (!theme) {
+    return false;
+  }
+
   switch (theme) {
     case 'light':
     case 'dark':
