@@ -11,6 +11,7 @@ RUN apk add --no-cache \
     zlib-dev \
     openssl-dev \
     wget \
+    git \
     gettext
 
 RUN git clone --recursive https://github.com/google/brotli.git /tmp/brotli
