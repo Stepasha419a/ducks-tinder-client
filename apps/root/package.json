@@ -51,10 +51,10 @@
     "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.21.4",
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1",
+    "@babel/preset-typescript": "^7.27.1",
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
     "@ducks-tinder-client/config": "1.1.1-alpha.8",
@@ -72,7 +72,7 @@
     "@types/toastify-js": "^1.11.1",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
-    "babel-loader": "^9.1.2",
+    "babel-loader": "^10.0.0",
     "concurrently": "^9.1.2",
     "css-loader": "^6.7.3",
     "dotenv": "^16.4.5",
@@ -90,6 +90,7 @@
     "sass-loader": "^16.0.4",
     "style-loader": "^3.3.2",
     "typescript": "^5.0.3",
+    "typescript-eslint": "^8.33.1",
     "webpack": "^5.99.9"
   },
   "jest": {
