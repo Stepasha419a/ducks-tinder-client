@@ -1,4 +1,3 @@
-import parser from '@typescript-eslint/parser';
 import eslint from '@eslint/js';
 import globals from 'globals';
 import importPlugin from 'eslint-plugin-import';
@@ -15,12 +14,11 @@ export default tseslint.config(
   // ...storybook.configs['flat/recommended'],
   {
     languageOptions: {
-      parser,
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: './tsconfig.json',
-        tsconfigRootDir: './',
       },
       globals: {
         ...globals.browser,
@@ -38,6 +36,7 @@ export default tseslint.config(
     plugins: {
       import: importPlugin,
       'simple-import-sort': sortImportPlugin,
+      '@typescript-eslint': tseslint.plugin,
     },
     rules: {
       'import/no-duplicates': 'error',
