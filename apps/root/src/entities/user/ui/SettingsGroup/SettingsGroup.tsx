@@ -15,7 +15,7 @@ export const SettingsGroup: FC<PropsWithChildren<SettingsGroupProps>> = ({
   return (
     <div className={styles.group}>
       {title && <div className={styles.title}>{title}</div>}
-      <div className={styles.items}>{children}</div>
+      <div>{children}</div>
       {descr && <div className={styles.descr}>{descr}</div>}
     </div>
   );

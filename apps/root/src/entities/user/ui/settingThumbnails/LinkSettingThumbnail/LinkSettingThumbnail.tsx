@@ -52,7 +52,7 @@ export const LinkSettingThumbnail: FC<
           </div>
         </div>
       )}
-      {children && <div className={styles.setting}>{children}</div>}
+      {children && <div>{children}</div>}
     </Link>
   );
 };
