@@ -47,7 +47,7 @@ export const SettingThumbnail: FC<PropsWithChildren<SettingThumbnailProps>> = ({
           </div>
         </div>
       )}
-      {children && <div className={styles.setting}>{children}</div>}
+      {children && <div>{children}</div>}
     </div>
   );
 };

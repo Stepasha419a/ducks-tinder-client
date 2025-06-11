@@ -11,7 +11,7 @@ interface NotFoundSettingProps {
 
 export const NotFoundSetting: FC<NotFoundSettingProps> = ({ url }) => {
   return (
-    <div className={styles.block}>
+    <div>
       <div className={styles.notFound}>
         <Link to={url} className={styles.link}>
           <FontAwesomeIcon icon={faArrowLeft} className={styles.icon} />

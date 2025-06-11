@@ -16,7 +16,7 @@ export const LinkThumbnail: FC<LinkThumbnailProps> = ({ title, href }) => {
       <Link to={href} className={styles.link} target="_blank">
         <div className={styles.descr}>
           <div className={styles.title}>{title}</div>
-          <div className={styles.setting}>
+          <div>
             <FontAwesomeIcon
               icon={faArrowUpRightFromSquare}
               className={styles.icon}

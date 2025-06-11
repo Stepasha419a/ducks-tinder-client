@@ -26,7 +26,7 @@ export const Places: FC<PlacesProps> = ({ refreshFeature }) => {
         <div className={styles.item}>
           <FontAwesomeIcon className={styles.icon} icon={faLocationDot} />
           <div className={styles.position}>
-            <div className={styles.current}>My current position</div>
+            <div>My current position</div>
             <div className={styles.name}>
               {place.name} {place.address}
             </div>

@@ -16,7 +16,7 @@ export const PreviewContent: FC<PreviewContentProps> = ({
   return (
     <div className={styles.info}>
       <div className={styles.descr}>
-        <div className={styles.name}>{name}</div>
+        <div>{name}</div>
         <div className={styles.years}>{age}</div>
       </div>
       {distance !== null && (
