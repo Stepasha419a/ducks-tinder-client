@@ -42,7 +42,7 @@ export const FilterPairsItems: FC<FilterPairsItemsProps> = ({
           isActive={isFilterPopupOpen}
           extraClassName={styles.item}
         >
-          <FontAwesomeIcon className={styles.icon} icon={faSliders} />
+          <FontAwesomeIcon icon={faSliders} />
         </ListItemButton>
         {!isSmallMobile &&
           INTERESTS_FOR_LOOP.map((item) => {
