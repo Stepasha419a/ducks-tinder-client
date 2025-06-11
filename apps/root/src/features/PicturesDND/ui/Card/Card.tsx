@@ -7,7 +7,7 @@ import { Reorder } from 'framer-motion';
 import type { Picture } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
-import styles from './Card.module.scss';
+import * as styles from './Card.module.scss';
 
 interface CardProps {
   picture?: Picture;

@@ -4,7 +4,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import styles from './LinkSettingThumbnail.module.scss';
+import * as styles from './LinkSettingThumbnail.module.scss';
 
 interface SettingThumbnailProps {
   url: string;

@@ -9,7 +9,7 @@ import {
 import { Button, Preview } from '@ducks-tinder-client/ui';
 
 import { ProfilePreviewMobile } from './mobile';
-import styles from './ProfilePreview.module.scss';
+import * as styles from './ProfilePreview.module.scss';
 
 export const ProfilePreview: FC = () => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');

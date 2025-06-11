@@ -7,7 +7,7 @@ import { Button, Popup, Preview } from '@ducks-tinder-client/ui';
 
 import { acceptPairThunk, refusePairThunk } from '@entities/user';
 
-import styles from './RatePairPopup.module.scss';
+import * as styles from './RatePairPopup.module.scss';
 
 interface RatePairPopupProps {
   currentPair: ShortUser;
@@ -32,11 +32,7 @@ export const RatePairPopup: FC<RatePairPopupProps> = ({
 
   return (
     <>
-      <Popup
-        closeHandler={() => setCurrentPair(null)}
-        size="l"
-        extraClassName={styles.overflow}
-      >
+      <Popup closeHandler={() => setCurrentPair(null)} size="l">
         <Preview user={currentPair} isFull extraClassName={styles.preview} />
         <div className={styles.btns}>
           <Button

@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 
 import { ROUTES } from '@ducks-tinder-client/common';
 
-import styles from '../../ChatsPairsBlock.module.scss';
+import * as styles from '../../ChatsPairsBlock.module.scss';
 
 interface TabsProps {
   isPairsOpened: boolean;

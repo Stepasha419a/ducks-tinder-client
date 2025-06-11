@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import { Skeleton } from '@ducks-tinder-client/ui';
 
-import styles from './SwipeUser.module.scss';
+import * as styles from './SwipeUser.module.scss';
 
 interface SwipeUserLazyProps {
   small?: boolean;

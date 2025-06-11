@@ -3,7 +3,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import styles from './SettingThumbnail.module.scss';
+import * as styles from './SettingThumbnail.module.scss';
 
 interface SettingThumbnailProps {
   title?: string;

@@ -3,7 +3,7 @@ import type { ChangeEvent, FC } from 'react';
 import { createFileUrl } from '@ducks-tinder-client/common';
 import { Popup } from '@ducks-tinder-client/ui';
 
-import styles from './DialogUpload.module.scss';
+import * as styles from './DialogUpload.module.scss';
 
 interface DialogUploadProps {
   handleCloseDialogUpload: () => void;

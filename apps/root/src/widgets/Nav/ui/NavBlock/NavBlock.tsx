@@ -7,7 +7,7 @@ import { SettingsBlock } from '@features/SettingsBlock';
 import { NavBlockEnum } from '../../lib';
 import { ChatsPairsBlock } from './components';
 import { chatPairsVariants, profileVariants } from './NavBlock.variants';
-import styles from './NavBlock.module.scss';
+import * as styles from './NavBlock.module.scss';
 
 interface NavBlockProps {
   navBlock: NavBlockEnum;

@@ -11,7 +11,7 @@ import { Button, TextField } from '@ducks-tinder-client/ui';
 
 import { AuthLayout, useAuthForm } from '@entities/user';
 
-import styles from './LoginForm.module.scss';
+import * as styles from './LoginForm.module.scss';
 
 export const LoginForm = (): ReactElement => {
   const {

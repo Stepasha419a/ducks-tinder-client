@@ -4,7 +4,7 @@ import type { FieldErrors } from 'react-hook-form';
 import type { RegistrationParams } from '@ducks-tinder-client/common';
 import { authDuck } from '@ducks-tinder-client/ui';
 
-import styles from './AuthLayout.module.scss';
+import * as styles from './AuthLayout.module.scss';
 
 interface AuthLayoutProps {
   errors: FieldErrors<RegistrationParams>;
@@ -22,12 +22,7 @@ export const AuthLayout: FC<PropsWithChildren<AuthLayoutProps>> = ({
     <div className={styles.auth}>
       <div className={styles.container}>
         <div className={styles.wrapper}>
-          <img
-            className={styles.img}
-            draggable={false}
-            src={authDuck}
-            alt="IMG"
-          />
+          <img draggable={false} src={authDuck} alt="IMG" />
           <div className={styles.formWrapper}>
             <span className={styles.title}>{title}</span>
             <div className={styles.validation}>

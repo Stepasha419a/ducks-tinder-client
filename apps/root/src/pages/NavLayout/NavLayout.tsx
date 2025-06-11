@@ -9,7 +9,7 @@ import { Nav } from '@widgets/Nav';
 import { privateHocComposition } from '@shared/lib';
 
 import { NavLayoutMobile } from './ui';
-import styles from './NavLayout.module.scss';
+import * as styles from './NavLayout.module.scss';
 
 export const NavLayout = () => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');

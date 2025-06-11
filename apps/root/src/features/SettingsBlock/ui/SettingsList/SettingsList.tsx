@@ -23,7 +23,7 @@ import {
   SexSettingThumbnail,
   SwitchThemeThumbnail,
 } from './components';
-import styles from './SettingsList.module.scss';
+import * as styles from './SettingsList.module.scss';
 
 export const SettingsList = (): ReactElement => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');

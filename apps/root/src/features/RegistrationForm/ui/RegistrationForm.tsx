@@ -12,7 +12,7 @@ import { Button, TextField } from '@ducks-tinder-client/ui';
 
 import { AuthLayout, useAuthForm } from '@entities/user';
 
-import styles from './RegistrationForm.module.scss';
+import * as styles from './RegistrationForm.module.scss';
 
 export const RegistrationForm = (): ReactElement => {
   const {

@@ -9,7 +9,7 @@ import {
   imgVariants,
   lineVariants,
 } from './NotFound.variants';
-import styles from './NotFound.module.scss';
+import * as styles from './NotFound.module.scss';
 
 export const NotFound = () => {
   return (

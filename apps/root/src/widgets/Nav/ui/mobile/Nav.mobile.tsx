@@ -15,7 +15,7 @@ import {
 } from '@ducks-tinder-client/common';
 
 import { getIsProfilePage } from '../../lib';
-import styles from './Nav.mobile.module.scss';
+import * as styles from './Nav.mobile.module.scss';
 
 export const NavMobile = () => {
   const { pathname } = useLocation();

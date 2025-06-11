@@ -13,7 +13,7 @@ import { motion } from 'framer-motion';
 
 import { Button } from '@ducks-tinder-client/ui';
 
-import styles from './Instructions.module.scss';
+import * as styles from './Instructions.module.scss';
 
 interface InstructionsProps {
   explore?: boolean;

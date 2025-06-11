@@ -6,7 +6,7 @@ import { Button, Popup, RangeInput } from '@ducks-tinder-client/ui';
 
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';
-import styles from './CropImage.module.scss';
+import * as styles from './CropImage.module.scss';
 
 interface CropImageProps {
   imageUrl: string | null;

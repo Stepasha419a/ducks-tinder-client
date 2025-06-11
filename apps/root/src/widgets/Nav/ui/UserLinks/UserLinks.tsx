@@ -13,7 +13,7 @@ import { selectAvatar, useAppSelector } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import { variants } from './UserLinks.variants';
-import styles from './UserLinks.module.scss';
+import * as styles from './UserLinks.module.scss';
 
 interface UserLinksProps {
   isProfilePage: boolean;

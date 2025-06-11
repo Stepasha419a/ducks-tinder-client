@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import styles from './PreviewContent.module.scss';
+import * as styles from './PreviewContent.module.scss';
 
 interface PreviewContentProps {
   name: string;

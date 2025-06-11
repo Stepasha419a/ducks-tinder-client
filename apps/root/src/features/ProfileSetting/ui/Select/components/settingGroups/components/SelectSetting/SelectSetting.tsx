@@ -10,7 +10,7 @@ import type {
   ProfileSettingSelectNameEnum,
 } from '@entities/user';
 
-import styles from './SelectSetting.module.scss';
+import * as styles from './SelectSetting.module.scss';
 
 interface SelectSettingProps {
   control: Control<MultiSelectForm>;

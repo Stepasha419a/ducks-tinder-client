@@ -8,7 +8,7 @@ import { Button } from '@ducks-tinder-client/ui';
 
 import type { SettingFieldValues } from '@features/SettingsBlock';
 
-import styles from './SettingWrapper.module.scss';
+import * as styles from './SettingWrapper.module.scss';
 
 interface SettingFieldInterestsArray {
   input: string[];

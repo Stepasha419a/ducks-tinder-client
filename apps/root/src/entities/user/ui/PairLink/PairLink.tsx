@@ -6,7 +6,7 @@ import { useAppSelector } from '@ducks-tinder-client/common';
 import { makeImageUrl } from '@ducks-tinder-client/ui';
 
 import { FailedPair, Loading } from './components';
-import styles from './PairLink.module.scss';
+import * as styles from './PairLink.module.scss';
 
 export const PairLink = () => {
   const pairsInfo = useAppSelector((state) => state.pair.pairsInfo);

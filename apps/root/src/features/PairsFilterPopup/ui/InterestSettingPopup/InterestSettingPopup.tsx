@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { Interest } from '@ducks-tinder-client/common';
 import { Button, ListItemButton, Popup } from '@ducks-tinder-client/ui';
 
-import styles from './InterestSettingPopup.module.scss';
+import * as styles from './InterestSettingPopup.module.scss';
 
 interface InterestSettingPopupProps {
   activeItems: string[];

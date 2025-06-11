@@ -15,7 +15,7 @@ import { getMatchUsersThunk, selectTinderData } from '@entities/user';
 import { useSwipe } from './lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import { Failed, RateButtons, Status } from './ui';
-import styles from './SwipeUser.module.scss';
+import * as styles from './SwipeUser.module.scss';
 
 export const SwipeUser: FC = () => {
   const dispatch = useAppDispatch();
@@ -55,6 +55,7 @@ export const SwipeUser: FC = () => {
           {!previewProps.isFull && <Status {...statusProps} />}
           {/* TODO: update ui-package to fix types */}
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-expect-error */}
           <Preview
             user={tinderUsers[0]}
             extraClassName={classNames(
