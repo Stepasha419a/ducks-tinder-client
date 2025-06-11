@@ -14,12 +14,6 @@ RUN apk add --no-cache \
     git \
     gettext
 
-RUN git clone --recursive https://github.com/google/brotli.git /tmp/brotli
-
-RUN cd /tmp/brotli && \
-    git submodule init && git submodule update && \
-    cd /tmp/brotli && \
-    mkdir build && cd build && \
-    cmake .. && make && make install
-
-RUN rm -rf /tmp/brotli
+WORKDIR /usr/src
+RUN wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
+    tar -zxvf nginx-${NGINX_VERSION}.tar.gz
