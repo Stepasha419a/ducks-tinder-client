@@ -10,7 +10,7 @@ import { ProfileSubmit } from '@features/ProfileSubmit';
 
 import { useUserPictures } from './lib';
 import { ProfileSettingWrapper } from './ui';
-import styles from './ProfileEdit.module.scss';
+import * as styles from './ProfileEdit.module.scss';
 
 export const ProfileEdit = () => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');

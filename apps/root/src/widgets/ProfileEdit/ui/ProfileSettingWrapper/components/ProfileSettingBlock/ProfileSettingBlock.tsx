@@ -8,7 +8,7 @@ import { ProfileSettingsList } from '@features/ProfileSettingsList';
 import { ProfileSubmit } from '@features/ProfileSubmit';
 import { UploadImagePopups } from '@features/UploadImagePopups';
 
-import styles from './ProfileSettingBlock.module.scss';
+import * as styles from './ProfileSettingBlock.module.scss';
 
 interface ProfileSettingProps {
   pictures: Picture[];

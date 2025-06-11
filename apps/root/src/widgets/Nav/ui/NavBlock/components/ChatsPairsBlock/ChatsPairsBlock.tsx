@@ -10,7 +10,7 @@ import { PairLink } from '@entities/user';
 
 import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
 import { Tabs } from './components';
-import styles from './ChatsPairsBlock.module.scss';
+import * as styles from './ChatsPairsBlock.module.scss';
 
 export const ChatsPairsBlock: FC = () => {
   const { pathname } = useLocation();

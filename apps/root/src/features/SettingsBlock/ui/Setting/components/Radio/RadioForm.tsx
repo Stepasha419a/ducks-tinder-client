@@ -5,7 +5,7 @@ import { RadioInput } from '@ducks-tinder-client/ui';
 import { useRadioForm } from '@features/SettingsBlock';
 
 import { SettingWrapper } from '../components';
-import styles from './RadioForm.module.scss';
+import * as styles from './RadioForm.module.scss';
 
 export const RadioForm: FC = (): ReactElement => {
   const { formName, errors, isValid, value, onChange, submitHandler } =

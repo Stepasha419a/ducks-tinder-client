@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './Failed.module.scss';
+import * as styles from './Failed.module.scss';
 
 export const Failed = (): ReactElement => {
   return (

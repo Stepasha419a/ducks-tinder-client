@@ -17,7 +17,7 @@ import { getUserPairsThunk } from '@entities/user';
 
 import { PairsListLazy } from './PairsList.lazy';
 import { Pair } from './ui';
-import styles from './PairsList.module.scss';
+import * as styles from './PairsList.module.scss';
 
 interface PairsListProps {
   setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;

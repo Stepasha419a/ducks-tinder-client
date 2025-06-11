@@ -1,6 +1,6 @@
 import { Button } from '@ducks-tinder-client/ui';
 
-import styles from './Explore.module.scss';
+import * as styles from './Explore.module.scss';
 
 export const Explore = () => {
   return (

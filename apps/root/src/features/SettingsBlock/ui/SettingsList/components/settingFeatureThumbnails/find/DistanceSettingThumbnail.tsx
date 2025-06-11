@@ -9,7 +9,7 @@ import { CheckboxInput, RangeInput } from '@ducks-tinder-client/ui';
 
 import { SettingThumbnail } from '@entities/user';
 
-import styles from '../SettingFeatureThumbnails.module.scss';
+import * as styles from '../SettingFeatureThumbnails.module.scss';
 
 export const DistanceSettingThumbnail = () => {
   const dispatch = useAppDispatch();

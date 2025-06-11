@@ -10,7 +10,7 @@ import {
 import { makeImageUrl } from '@ducks-tinder-client/ui';
 
 import { Card } from './ui';
-import styles from './PicturesDND.module.scss';
+import * as styles from './PicturesDND.module.scss';
 
 interface PicturesDNDProps {
   pictures: Picture[];

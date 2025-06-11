@@ -16,7 +16,7 @@ import { Button } from '@ducks-tinder-client/ui';
 
 import { useRateButtons } from '@features/SwipeUser';
 
-import styles from './RateButtons.module.scss';
+import * as styles from './RateButtons.module.scss';
 
 interface RateButtonsProps {
   controls: AnimationControls;

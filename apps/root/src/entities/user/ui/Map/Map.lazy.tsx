@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import { Skeleton } from '@ducks-tinder-client/ui';
 
-import styles from './Map.module.scss';
+import * as styles from './Map.module.scss';
 
 interface MapLazyProps {
   isMobile: boolean;

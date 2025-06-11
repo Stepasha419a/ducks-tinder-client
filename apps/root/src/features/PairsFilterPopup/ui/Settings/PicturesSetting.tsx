@@ -8,7 +8,7 @@ import { ListItemButton } from '@ducks-tinder-client/ui';
 
 import type { PairFilterForm } from '@entities/user';
 
-import styles from '../../PairsFilterPopup.module.scss';
+import * as styles from '../../PairsFilterPopup.module.scss';
 
 interface PicturesSettingProps {
   control: Control<PairFilterForm>;

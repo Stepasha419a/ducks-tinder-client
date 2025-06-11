@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppSelector } from '@ducks-tinder-client/common';
 
-import styles from './Places.module.scss';
+import * as styles from './Places.module.scss';
 
 interface PlacesProps {
   refreshFeature: ReactElement;

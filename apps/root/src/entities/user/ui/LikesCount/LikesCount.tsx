@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppSelector } from '@ducks-tinder-client/common';
 import { Skeleton } from '@ducks-tinder-client/ui';
 
-import styles from './LikesCount.module.scss';
+import * as styles from './LikesCount.module.scss';
 
 export const LikesCount: FC = (): ReactElement => {
   const likes = useAppSelector((state) => state.pair.pairsInfo?.count);

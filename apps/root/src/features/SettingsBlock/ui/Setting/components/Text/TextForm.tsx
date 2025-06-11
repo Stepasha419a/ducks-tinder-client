@@ -5,7 +5,7 @@ import { TextField } from '@ducks-tinder-client/ui';
 import { useTextForm } from '@features/SettingsBlock';
 
 import { SettingWrapper } from '../components';
-import styles from './TextForm.module.scss';
+import * as styles from './TextForm.module.scss';
 
 export const TextForm: FC = (): ReactElement => {
   const { formName, errors, isValid, registerProps, submitHandler } =
