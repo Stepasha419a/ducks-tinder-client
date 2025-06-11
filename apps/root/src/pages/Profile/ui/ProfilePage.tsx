@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
-import styles from './ProfilePage.module.scss';
+import * as styles from './ProfilePage.module.scss';
 
 const ProfilePage: FC = (): ReactElement => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');

@@ -11,7 +11,7 @@ import {
 import { Places } from '@entities/user';
 
 import { getAreDifferentPlaces } from './lib';
-import styles from './PlacesGeolocation.module.scss';
+import * as styles from './PlacesGeolocation.module.scss';
 
 export const PlacesGeolocation = () => {
   const dispatch = useAppDispatch();

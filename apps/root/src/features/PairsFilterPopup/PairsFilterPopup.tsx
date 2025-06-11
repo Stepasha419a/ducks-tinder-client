@@ -16,7 +16,7 @@ import {
   InterestsSetting,
   PicturesSetting,
 } from './ui';
-import styles from './PairsFilterPopup.module.scss';
+import * as styles from './PairsFilterPopup.module.scss';
 
 interface PairsFilterPopupProps {
   setIsFilterPopupOpen: Dispatch<SetStateAction<boolean>>;

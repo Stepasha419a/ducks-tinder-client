@@ -4,7 +4,7 @@ import type { ShortUser } from '@ducks-tinder-client/common';
 import { Preview } from '@ducks-tinder-client/ui';
 
 import { PreviewContent } from './components';
-import styles from './Pair.module.scss';
+import * as styles from './Pair.module.scss';
 
 interface PairPropsInterface {
   user: ShortUser;

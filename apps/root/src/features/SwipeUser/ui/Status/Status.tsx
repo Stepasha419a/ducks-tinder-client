@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import type { MotionStyle } from 'framer-motion';
 import { motion } from 'framer-motion';
 
-import styles from './Status.module.scss';
+import * as styles from './Status.module.scss';
 
 interface StatusProps {
   dislikeStyle: MotionStyle;

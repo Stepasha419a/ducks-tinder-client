@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { ROUTES } from '@ducks-tinder-client/common';
 
-import styles from './ProfileSubmit.mobile.module.scss';
+import * as styles from './ProfileSubmit.mobile.module.scss';
 
 interface ProfileSubmitMobileProps {
   handleSubmit: () => void;

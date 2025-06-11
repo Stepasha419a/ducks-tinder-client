@@ -15,7 +15,7 @@ import { getMatchUsersThunk, selectTinderData } from '@entities/user';
 import { useSwipe } from './lib';
 import { SwipeUserLazy } from './SwipeUser.lazy';
 import { Failed, RateButtons, Status } from './ui';
-import styles from './SwipeUser.module.scss';
+import * as styles from './SwipeUser.module.scss';
 
 export const SwipeUser: FC = () => {
   const dispatch = useAppDispatch();

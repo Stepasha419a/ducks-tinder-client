@@ -7,7 +7,7 @@ import { Button } from '@ducks-tinder-client/ui';
 
 import { usePicturesMix } from './lib';
 import { ProfileSubmitMobile } from './ui';
-import styles from './ProfileSubmit.module.scss';
+import * as styles from './ProfileSubmit.module.scss';
 
 interface ProfileSubmitProps {
   pictures: Picture[];

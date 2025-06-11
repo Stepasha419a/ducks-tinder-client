@@ -4,7 +4,7 @@ import { ListItemButton } from '@ducks-tinder-client/ui';
 
 import { INTERESTS_FOR_LOOP } from '@entities/user';
 
-import styles from '../../PairsFilterPopup.module.scss';
+import * as styles from '../../PairsFilterPopup.module.scss';
 
 interface InterestsSettingProps {
   interests: string[];

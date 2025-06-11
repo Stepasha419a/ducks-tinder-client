@@ -9,7 +9,7 @@ import { Avatar } from '@ducks-tinder-client/ui';
 
 import { UploadImagePopups } from '@features/UploadImagePopups';
 
-import styles from './ProfilePreview.mobile.module.scss';
+import * as styles from './ProfilePreview.mobile.module.scss';
 
 export const ProfilePreviewMobile = () => {
   const user = useAppSelector((state) => state.user.currentUser!);

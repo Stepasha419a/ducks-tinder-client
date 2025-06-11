@@ -10,7 +10,7 @@ import type { PairFilterForm } from '@entities/user';
 import { INTERESTS_FOR_LOOP } from '@entities/user';
 
 import { useOuterPairFilterForm } from './lib';
-import styles from './FilterPairsItems.module.scss';
+import * as styles from './FilterPairsItems.module.scss';
 
 interface FilterPairsItemsProps {
   isFilterPopupOpen: boolean;
