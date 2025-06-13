@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { Dispatch, FC, SetStateAction } from 'react';
 import {
   faBolt,
   faHeart,
@@ -8,18 +8,19 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import type { AnimationControls, MotionStyle } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { MotionStyle } from 'motion/react';
+import { motion } from 'motion/react';
 
 import { useAppSelector } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
+import type { TinderAnimations } from '@features/SwipeUser';
 import { useRateButtons } from '@features/SwipeUser';
 
 import * as styles from './RateButtons.module.scss';
 
 interface RateButtonsProps {
-  controls: AnimationControls;
+  setAnimation: Dispatch<SetStateAction<TinderAnimations>>;
   isFullPreview: boolean;
   handleSubmitAction: () => void;
   dislikeStyle: MotionStyle;
@@ -28,7 +29,7 @@ interface RateButtonsProps {
 }
 
 export const RateButtons: FC<RateButtonsProps> = ({
-  controls,
+  setAnimation,
   isFullPreview,
   handleSubmitAction,
   dislikeStyle,
@@ -44,7 +45,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
   );
 
   const { handleReturn, handleDislike, handleSuperLike, handleLike } =
-    useRateButtons(controls, handleSubmitAction);
+    useRateButtons(setAnimation, handleSubmitAction);
 
   const disabled = isReturnLoading || !tinderUsersLength;
 

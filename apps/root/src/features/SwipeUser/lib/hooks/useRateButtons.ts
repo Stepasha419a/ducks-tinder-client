@@ -1,5 +1,3 @@
-import type { AnimationControls } from 'framer-motion';
-
 import { useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
 
 import {
@@ -7,9 +5,11 @@ import {
   likeUserThunk,
   returnUserThunk,
 } from '@entities/user';
+import type { Dispatch, SetStateAction } from 'react';
+import { TinderAnimations } from '../constants';
 
 export function useRateButtons(
-  controls: AnimationControls,
+  setAnimation: Dispatch<SetStateAction<TinderAnimations>>,
   handleSubmitAction: () => void
 ) {
   const dispatch = useAppDispatch();
@@ -19,7 +19,7 @@ export function useRateButtons(
   function startCenter() {
     handleSubmitAction();
     setTimeout(() => {
-      controls.start('center');
+      setAnimation(TinderAnimations.Center);
     }, 400);
   }
 
@@ -30,7 +30,7 @@ export function useRateButtons(
   }
 
   function handleLike() {
-    controls.start('like');
+    setAnimation(TinderAnimations.Like);
     startCenter();
     setTimeout(() => {
       dispatch(likeUserThunk());
@@ -38,7 +38,7 @@ export function useRateButtons(
   }
 
   function handleDislike() {
-    controls.start('dislike');
+    setAnimation(TinderAnimations.Dislike);
     startCenter();
     setTimeout(() => {
       dispatch(dislikeUserThunk());
@@ -46,7 +46,7 @@ export function useRateButtons(
   }
 
   function handleSuperLike() {
-    controls.start('superLike');
+    setAnimation(TinderAnimations.SuperLike);
     startCenter();
     setTimeout(() => {
       dispatch(likeUserThunk());

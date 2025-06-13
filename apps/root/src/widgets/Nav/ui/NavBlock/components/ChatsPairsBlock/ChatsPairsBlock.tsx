@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { ChatList } from 'chatApp/chat';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { getIsChatPage, useAppSelector } from '@ducks-tinder-client/common';
 

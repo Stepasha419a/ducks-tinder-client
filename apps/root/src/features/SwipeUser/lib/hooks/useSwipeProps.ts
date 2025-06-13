@@ -1,16 +1,12 @@
 import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
 import { useRef } from 'react';
-import type {
-  AnimationControls,
-  MotionProps,
-  MotionValue,
-  PanInfo,
-} from 'framer-motion';
-import { useMotionValue, useTransform } from 'framer-motion';
+import type { MotionProps, MotionValue, PanInfo } from 'motion/react';
+import { useMotionValue, useTransform } from 'motion/react';
 
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
 import { useTinderAnimations } from './useTinderAnimations';
+import { TinderAnimations } from '../constants';
 
 type SlantSide = 'top' | 'bottom' | null;
 
@@ -25,7 +21,8 @@ export type SwipeProps = MotionProps &
   ExtraSwipeProps;
 
 export function useSwipeProps(
-  controls: AnimationControls,
+  animation: TinderAnimations,
+  setAnimation: Dispatch<SetStateAction<TinderAnimations>>,
   isDraggable: boolean,
   isLockedSubmission: boolean,
   setIsLockedSubmission: Dispatch<SetStateAction<boolean>>
@@ -50,7 +47,7 @@ export function useSwipeProps(
   const isDragRef = useRef(false);
 
   const { handleDislike, handleLike, handleSuperLike } =
-    useTinderAnimations(controls);
+    useTinderAnimations(setAnimation);
 
   function handleDragEnd(
     e: MouseEvent | TouchEvent | PointerEvent,
@@ -105,17 +102,22 @@ export function useSwipeProps(
     drag: isDraggable && !isLockedSubmission,
     dragElastic: 1,
     dragConstraints: { bottom: 0, left: 0, right: 0, top: 0 },
-    animate: controls,
+    animate: animation,
     transition: { duration: 0.4 },
     variants: {
-      center: { x: 0, y: 0, rotate: 0, transition: { duration: 0 } },
-      superLike: {
+      [TinderAnimations.Center]: {
+        x: 0,
+        y: 0,
+        rotate: 0,
+        transition: { duration: 0 },
+      },
+      [TinderAnimations.SuperLike]: {
         y: -swipeDistance,
       },
-      like: {
+      [TinderAnimations.Like]: {
         x: swipeDistance,
       },
-      dislike: {
+      [TinderAnimations.Dislike]: {
         x: -swipeDistance,
       },
     },
