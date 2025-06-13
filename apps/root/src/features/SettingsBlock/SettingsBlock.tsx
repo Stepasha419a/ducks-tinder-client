@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'motion/react';
 
 import { ROUTES, useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 

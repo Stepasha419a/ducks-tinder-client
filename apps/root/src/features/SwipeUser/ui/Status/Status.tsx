@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
-import type { MotionStyle } from 'framer-motion';
-import { motion } from 'framer-motion';
+import type { MotionStyle } from 'motion/react';
+import { motion } from 'motion/react';
 
 import * as styles from './Status.module.scss';
 

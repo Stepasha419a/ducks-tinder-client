@@ -1,5 +1,5 @@
 import type { FC, ReactElement } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'motion/react';
 
 import { NavBlockEnum, useNavBlock } from './lib';
 import { NavBlock, NavMobile, UserLinks } from './ui';
