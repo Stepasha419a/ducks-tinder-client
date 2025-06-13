@@ -1,5 +1,5 @@
-import type { MotionStyle, MotionValue } from 'framer-motion';
-import { useMotionValue, useMotionValueEvent } from 'framer-motion';
+import type { MotionStyle, MotionValue } from 'motion/react';
+import { useMotionValue, useMotionValueEvent } from 'motion/react';
 
 interface SwipeStylesReturn {
   statusStyles: {

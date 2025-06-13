@@ -6,7 +6,7 @@ import {
 } from 'react';
 import { Link } from 'react-router-dom';
 import { ChatTabTitle } from 'chatApp/chat';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import { ROUTES } from '@ducks-tinder-client/common';
 

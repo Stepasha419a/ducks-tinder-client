@@ -1,5 +1,5 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
-import { Reorder } from 'framer-motion';
+import { Reorder } from 'motion/react';
 
 import type { Picture } from '@ducks-tinder-client/common';
 import {

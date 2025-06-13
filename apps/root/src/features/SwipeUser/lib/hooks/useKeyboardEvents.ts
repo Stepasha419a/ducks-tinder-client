@@ -1,13 +1,13 @@
-import type { RefObject } from 'react';
+import type { Dispatch, RefObject, SetStateAction } from 'react';
 import type Slider from 'react-slick';
-import type { AnimationControls } from 'framer-motion';
 
 import { useAppSelector, useEventListener } from '@ducks-tinder-client/common';
 
 import { useTinderAnimations } from './useTinderAnimations';
+import type { TinderAnimations } from '../constants';
 
 export function useKeyboardEvents(
-  controls: AnimationControls,
+  setAnimation: Dispatch<SetStateAction<TinderAnimations>>,
   setIsFullPreview: (value: boolean) => void,
   sliderRef: RefObject<Slider | null>
 ) {
@@ -16,7 +16,7 @@ export function useKeyboardEvents(
   );
 
   const { handleDislike, handleLike, handleSuperLike } =
-    useTinderAnimations(controls);
+    useTinderAnimations(setAnimation);
 
   function handleKeyboardEvent(e: KeyboardEvent) {
     if (!tinderUsersLength) {
@@ -28,7 +28,6 @@ export function useKeyboardEvents(
         sliderRef.current?.slickNext();
         break;
       case 'ArrowUp':
-        controls.set('center');
         setIsFullPreview(true);
         break;
       case 'ArrowDown':

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { Reorder } from 'framer-motion';
+import { Reorder } from 'motion/react';
 
 import type { Picture } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';

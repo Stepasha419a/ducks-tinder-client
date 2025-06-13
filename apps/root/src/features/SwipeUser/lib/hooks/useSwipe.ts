@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import type Slider from 'react-slick';
-import { useAnimationControls } from 'framer-motion';
 
 import { useAppSelector } from '@ducks-tinder-client/common';
 
 import { useKeyboardEvents } from './useKeyboardEvents';
 import { useSwipeProps } from './useSwipeProps';
 import { useSwipeStyles } from './useSwipeStyles';
+import { TinderAnimations } from '../constants';
 
 export function useSwipe() {
   const tinderUsersLength = useAppSelector(
@@ -18,18 +18,20 @@ export function useSwipe() {
 
   const [isFullPreview, setIsFullPreview] = useState(false);
   const [isLockedSubmission, setIsLockedSubmission] = useState(false);
-
-  const controls = useAnimationControls();
+  const [animation, setAnimation] = useState<TinderAnimations>(
+    TinderAnimations.Center
+  );
 
   const sliderRef = useRef<Slider | null>(null);
 
   useEffect(() => {
-    controls.start('center');
-  }, [controls, tinderUsersLength]);
+    setAnimation(TinderAnimations.Center);
+  }, [tinderUsersLength]);
 
   const isDraggable = !isFullPreview && !isReturnLoading;
   const { isDragRef, x, y, ...motionProps } = useSwipeProps(
-    controls,
+    animation,
+    setAnimation,
     isDraggable,
     isLockedSubmission,
     setIsLockedSubmission
@@ -41,7 +43,7 @@ export function useSwipe() {
     }
     setIsFullPreview(value);
   };
-  useKeyboardEvents(controls, setIsFullPreviewKeyboard, sliderRef);
+  useKeyboardEvents(setAnimation, setIsFullPreviewKeyboard, sliderRef);
 
   const handleBlockActiveDragFullPreview = (value: boolean) => {
     if (isDragRef.current && !isFullPreview) {
@@ -72,7 +74,7 @@ export function useSwipe() {
       ...rateButtonStyles,
       isFullPreview,
       handleSubmitAction,
-      controls,
+      setAnimation,
     },
   };
 }
