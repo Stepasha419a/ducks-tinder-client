@@ -45,7 +45,7 @@
     "axios": "1.9.x",
     "browserslist": "4.25.x",
     "classnames": "2.5.x",
-    "framer-motion": "12.17.x",
+    "motion": "12.17.x",
     "react": "19.1.x",
     "react-dom": "19.1.x",
     "react-toastify": "11.0.x"
