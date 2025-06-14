@@ -34,7 +34,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "browserslist": "^4.25.0",
     "classnames": "^2.5.1",
-    "framer-motion": "^12.17.0",
+    "motion": "^12.17.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.57.0",
