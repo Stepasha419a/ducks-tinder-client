@@ -2,7 +2,7 @@ import type { FC, ReactElement } from 'react';
 import { faFeather } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import { variants } from './LoadingPage.variants';
 import styles from './LoadingPage.module.scss';

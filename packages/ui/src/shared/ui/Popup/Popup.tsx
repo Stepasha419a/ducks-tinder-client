@@ -1,7 +1,7 @@
 import { type FC, type PropsWithChildren, useId } from 'react';
 import { createPortal } from 'react-dom';
 import classNames from 'classnames';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 

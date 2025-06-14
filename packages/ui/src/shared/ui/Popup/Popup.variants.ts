@@ -1,4 +1,4 @@
-import type { Variants } from 'framer-motion';
+import type { Variants } from 'motion/react';
 
 export const variants: Variants = {
   initial: { scale: 0.9 },
