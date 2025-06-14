@@ -121,7 +121,7 @@ export function useSwipeProps(
         x: -swipeDistance,
       },
     },
-    initial: 'center',
+    initial: TinderAnimations.Center,
     onDragEnd: handleDragEnd,
     onDragStart: handleDragStart,
     ref: dragItemRef,
