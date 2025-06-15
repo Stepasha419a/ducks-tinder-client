@@ -17,7 +17,7 @@
     "publish-packages": "node scripts/publish-packages.js"
   },
   "devDependencies": {
-    "nx": "21.0.3",
+    "nx": "21.2.0",
     "semver": "^7.7.2",
     "webpack": "^5.99.9"
   },
