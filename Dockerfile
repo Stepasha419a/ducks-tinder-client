@@ -17,3 +17,6 @@ RUN apk add --no-cache \
 WORKDIR /usr/src
 RUN wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
     tar -zxvf nginx-${NGINX_VERSION}.tar.gz
+
+RUN git clone --recurse-submodules -j8 https://github.com/google/ngx_brotli.git
+
