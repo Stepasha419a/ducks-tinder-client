@@ -1,6 +1,6 @@
 {
   "name": "@ducks-tinder-client/config",
-  "version": "1.1.1-alpha.8",
+  "version": "1.1.1-alpha.9",
   "author": "Stepan B <dark_magic419a@mail.ru> (https://github.com/Stepasha419a)",
   "license": "MIT",
   "description": "A module of configs for internal development",
