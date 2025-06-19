@@ -17,7 +17,7 @@ jobs:
           node-version: 22
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install:webpack --frozen-lockfile
       - name: Run lint
         run: pnpm nx:lint
       - name: Run prettier
@@ -38,7 +38,7 @@ jobs:
           node-version: 22
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install:webpack --frozen-lockfile
       - name: Run build
         run: pnpm nx:build
       - name: Upload build packages artifacts
@@ -71,7 +71,7 @@ jobs:
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install:webpack --frozen-lockfile
       - name: Publish packages
         run: pnpm publish-packages
         env:
