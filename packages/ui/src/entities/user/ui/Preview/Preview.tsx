@@ -19,7 +19,7 @@ export interface PreviewProps {
   isShadow?: boolean;
   extraContent?: ReactElement;
   extraClassName?: string;
-  sliderRef?: RefObject<Slider>;
+  sliderRef?: RefObject<Slider | null>;
   noSlider?: boolean;
   disabled?: boolean;
 }
