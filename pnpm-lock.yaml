@@ -57,8 +57,8 @@ importers:
         specifier: 1.6.1-alpha.8
         version: 1.6.1-alpha.8(@types/react@19.1.8)(browserslist@4.25.0)(react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@5.0.1)
       '@ducks-tinder-client/ui':
-        specifier: 1.1.5-alpha.8
-        version: 1.1.5-alpha.8(@ducks-tinder-client/common@1.6.1-alpha.8(@types/react@19.1.8)(browserslist@4.25.0)(react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@5.0.1))(@fortawesome/fontawesome-common-types@6.7.2)(@fortawesome/fontawesome-svg-core@6.7.2)(@fortawesome/free-solid-svg-icons@6.7.2)(@fortawesome/react-fontawesome@0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0))(axios@1.10.0)(browserslist@4.25.0)(classnames@2.5.1)(jquery@3.7.1)(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+        specifier: 1.1.5-alpha.9
+        version: 1.1.5-alpha.9(@ducks-tinder-client/common@1.6.1-alpha.8(@types/react@19.1.8)(browserslist@4.25.0)(react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@5.0.1))(@fortawesome/fontawesome-common-types@6.7.2)(@fortawesome/fontawesome-svg-core@6.7.2)(@fortawesome/free-solid-svg-icons@6.7.2)(@fortawesome/react-fontawesome@0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0))(axios@1.10.0)(browserslist@4.25.0)(classnames@2.5.1)(jquery@3.7.1)(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
       '@fortawesome/fontawesome-common-types':
         specifier: ^6.7.2
         version: 6.7.2
@@ -316,6 +316,124 @@ importers:
       webpack:
         specifier: ^5.99.9
         version: 5.99.9(@swc/core@1.12.1)(webpack-cli@5.1.4(webpack@5.99.9))
+
+  apps/policy:
+    dependencies:
+      '@ducks-tinder-client/ui':
+        specifier: 1.1.5-alpha.9
+        version: 1.1.5-alpha.9(@ducks-tinder-client/common@1.6.1-alpha.8(@types/react@19.1.8)(browserslist@4.25.0)(react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@5.0.1))(@fortawesome/fontawesome-common-types@6.7.2)(@fortawesome/fontawesome-svg-core@6.7.2)(@fortawesome/free-solid-svg-icons@6.7.2)(@fortawesome/react-fontawesome@0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0))(axios@1.10.0)(browserslist@4.25.0)(classnames@2.5.1)(jquery@3.7.1)(motion@12.18.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)
+      browserslist:
+        specifier: ^4.25.0
+        version: 4.25.0
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
+      react-dom:
+        specifier: ^19.1.0
+        version: 19.1.0(react@19.1.0)
+      react-refresh:
+        specifier: ^0.17.0
+        version: 0.17.0
+      react-router-dom:
+        specifier: ^7.6.2
+        version: 7.6.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react-toastify:
+        specifier: ^11.0.5
+        version: 11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+    devDependencies:
+      '@babel/core':
+        specifier: ^7.27.4
+        version: 7.27.4
+      '@babel/preset-env':
+        specifier: ^7.27.2
+        version: 7.27.2(@babel/core@7.27.4)
+      '@babel/preset-react':
+        specifier: ^7.27.1
+        version: 7.27.1(@babel/core@7.27.4)
+      '@babel/preset-typescript':
+        specifier: ^7.27.1
+        version: 7.27.1(@babel/core@7.27.4)
+      '@commitlint/cli':
+        specifier: ^19.8.1
+        version: 19.8.1(@types/node@22.15.32)(typescript@5.8.3)
+      '@commitlint/config-conventional':
+        specifier: ^19.8.1
+        version: 19.8.1
+      '@ducks-tinder-client/config':
+        specifier: 1.1.1-alpha.11
+        version: 1.1.1-alpha.11(@swc/core@1.12.1)(eslint@9.29.0(jiti@2.4.2))(favicons@7.2.0)(sass-embedded@1.89.2)(type-fest@2.19.0)(typescript@5.8.3)
+      '@eslint/js':
+        specifier: ^9.28.0
+        version: 9.29.0
+      '@feature-sliced/eslint-config':
+        specifier: ^0.1.1
+        version: 0.1.1(eslint-plugin-boundaries@5.0.1(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@4.4.3)(eslint@9.29.0(jiti@2.4.2)))(eslint-plugin-import@2.31.0)
+      '@types/node':
+        specifier: ^22.15.30
+        version: 22.15.32
+      '@types/react':
+        specifier: ^19.1.8
+        version: 19.1.8
+      '@types/react-dom':
+        specifier: ^19.1.6
+        version: 19.1.6(@types/react@19.1.8)
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^8.34.0
+        version: 8.34.1(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3))(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)
+      '@typescript-eslint/parser':
+        specifier: ^8.34.0
+        version: 8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)
+      babel-loader:
+        specifier: ^10.0.0
+        version: 10.0.0(@babel/core@7.27.4)(webpack@5.99.9)
+      css-loader:
+        specifier: ^7.1.2
+        version: 7.1.2(webpack@5.99.9)
+      dotenv:
+        specifier: ^16.5.0
+        version: 16.5.0
+      eslint:
+        specifier: ^9.28.0
+        version: 9.29.0(jiti@2.4.2)
+      eslint-import-resolver-typescript:
+        specifier: ^4.4.3
+        version: 4.4.3(eslint-plugin-import@2.31.0)(eslint@9.29.0(jiti@2.4.2))
+      eslint-plugin-boundaries:
+        specifier: ^5.0.1
+        version: 5.0.1(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@4.4.3)(eslint@9.29.0(jiti@2.4.2))
+      eslint-plugin-import:
+        specifier: ^2.31.0
+        version: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@4.4.3)(eslint@9.29.0(jiti@2.4.2))
+      eslint-plugin-react-hooks:
+        specifier: 6.0.0-rc1
+        version: 6.0.0-rc1(eslint@9.29.0(jiti@2.4.2))
+      eslint-plugin-simple-import-sort:
+        specifier: ^12.1.1
+        version: 12.1.1(eslint@9.29.0(jiti@2.4.2))
+      globals:
+        specifier: ^16.2.0
+        version: 16.2.0
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
+      sass-loader:
+        specifier: ^16.0.5
+        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.99.9)
+      style-loader:
+        specifier: ^4.0.0
+        version: 4.0.0(webpack@5.99.9)
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
+      typescript-eslint:
+        specifier: ^8.34.0
+        version: 8.34.1(eslint@9.29.0(jiti@2.4.2))(typescript@5.8.3)
+      webpack:
+        specifier: ^5.99.9
+        version: 5.99.9(@swc/core@1.12.1)(webpack-cli@6.0.1)
 
   apps/root:
     dependencies:
@@ -602,7 +720,7 @@ importers:
         version: 12.1.1(eslint@9.29.0(jiti@2.4.2))
       eslint-webpack-plugin:
         specifier: ^5.0.2
-        version: 5.0.2(eslint@9.29.0(jiti@2.4.2))(webpack@5.99.9(@swc/core@1.12.1)(esbuild@0.25.5)(webpack-cli@5.1.4(webpack@5.99.9)))
+        version: 5.0.2(eslint@9.29.0(jiti@2.4.2))(webpack@5.99.9)
       globals:
         specifier: ^16.2.0
         version: 16.2.0
@@ -1671,8 +1789,8 @@ packages:
   '@ducks-tinder-client/config@1.1.1-alpha.11':
     resolution: {integrity: sha512-o3uI05wQ0vz2oCenlp9VzEB0zp2tkrLZlHnof9Usfu5FSTBs7QK8uB+/KC1JPjs9eONdf4RIHOvRhj44J2M5ig==}
 
-  '@ducks-tinder-client/ui@1.1.5-alpha.8':
-    resolution: {integrity: sha512-mx9Pcdlmm/NfTI++zRAEeuZXJSH3XWVQny1TSBpIFJYrY9GigkwH2/lmEp40jYBGhyiqAi+x3KNYgE0ERPXLxA==}
+  '@ducks-tinder-client/ui@1.1.5-alpha.9':
+    resolution: {integrity: sha512-FpnNnc/KphMxxPJaUcEeJ+3fBl45Tbrdpp7PB/PFnUh0aNOwrAYQ7ea0fjM+y+hm6QQeJDYxUyiljTQCf6JImg==}
     peerDependencies:
       '@ducks-tinder-client/common': 1.6.1-alpha.8
       '@fortawesome/fontawesome-common-types': 6.7.x
