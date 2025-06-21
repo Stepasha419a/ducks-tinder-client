@@ -53,9 +53,6 @@ export const SwipeUser: FC = () => {
       {tinderUsers[0] && (
         <motion.div className={styles.swipeUser} {...motionProps}>
           {!previewProps.isFull && <Status {...statusProps} />}
-          {/* TODO: update ui-package to fix types */}
-          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-          {/* @ts-expect-error */}
           <Preview
             user={tinderUsers[0]}
             extraClassName={classNames(
