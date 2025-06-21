@@ -24,7 +24,7 @@ interface ImageSliderProps {
   extraClassName?: string;
   isShadow?: boolean;
   isFull?: boolean;
-  sliderRef?: RefObject<Slider>;
+  sliderRef?: RefObject<Slider | null>;
   disabled?: boolean;
   noSlider?: boolean;
   extraContent?: ReactElement;

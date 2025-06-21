@@ -32,7 +32,7 @@ export interface ImageSliderProps {
   content?: ReactElement;
   extraClassName?: string;
   isShadow?: boolean;
-  sliderRef?: RefObject<Slider>;
+  sliderRef?: RefObject<Slider | null>;
   disabled?: boolean;
 }
 
