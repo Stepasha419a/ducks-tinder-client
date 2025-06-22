@@ -5,4 +5,5 @@ export { useProfileSettingUrl } from './useProfileSettingUrl';
 export { useSettingUrl } from './useSettingUrl';
 export { useFoundSetting } from './useFoundSetting';
 export { useMemoriedSettingUrl } from './useMemoriedSettingUrl';
+export { useTinderAnimations } from './useTinderAnimations';
 export type { MultiSelectForm } from './useDefaultProfileValues';
