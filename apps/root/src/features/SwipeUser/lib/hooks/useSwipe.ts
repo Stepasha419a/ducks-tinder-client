@@ -1,41 +1,77 @@
+import type { Dispatch, SetStateAction } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import type Slider from 'react-slick';
-
-import { useAppSelector } from '@ducks-tinder-client/common';
 
 import { useKeyboardEvents } from './useKeyboardEvents';
 import { useSwipeProps } from './useSwipeProps';
 import { useSwipeStyles } from './useSwipeStyles';
-import { TinderAnimations } from '../constants';
+import { TinderAnimations } from '@entities/user';
+import { useMotionValue } from 'motion/react';
 
-export function useSwipe() {
-  const tinderUsersLength = useAppSelector(
-    (state) => state.tinder.tinderUsers.length
-  );
-  const isReturnLoading = useAppSelector(
-    (state) => state.tinder.isReturnLoading
-  );
+export interface Commands {
+  onDislike: () => void;
+  onLike: () => void;
+  onSuperLike: () => void;
+}
 
-  const [isFullPreview, setIsFullPreview] = useState(false);
-  const [isLockedSubmission, setIsLockedSubmission] = useState(false);
+export function useSwipe({
+  isFullPreview,
+  setIsFullPreview,
+  disabled,
+  onChangeX,
+  onChangeY,
+  userId,
+  onSubmit,
+  overriddenAnimation,
+}: {
+  isFullPreview: boolean;
+  setIsFullPreview: Dispatch<SetStateAction<boolean>>;
+  disabled?: boolean;
+  onChangeX?: (value: number, userId: string) => void;
+  onChangeY?: (value: number, userId: string) => void;
+  userId: string;
+  onSubmit: () => void;
+  overriddenAnimation: {
+    userId: string;
+    animation: TinderAnimations;
+  } | null;
+}) {
   const [animation, setAnimation] = useState<TinderAnimations>(
     TinderAnimations.Center
   );
+  const [isLockedSubmission, setIsLockedSubmission] = useState(false);
+
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
   const sliderRef = useRef<Slider | null>(null);
 
-  useEffect(() => {
-    setAnimation(TinderAnimations.Center);
-  }, [tinderUsersLength]);
-
-  const isDraggable = !isFullPreview && !isReturnLoading;
-  const { isDragRef, x, y, ...motionProps } = useSwipeProps(
+  const isDraggable = !disabled && !isFullPreview;
+  const { isDragRef, ...motionProps } = useSwipeProps(
     animation,
     setAnimation,
     isDraggable,
     isLockedSubmission,
-    setIsLockedSubmission
+    setIsLockedSubmission,
+    x,
+    y,
+    onSubmit
   );
+
+  useEffect(() => {
+    if (overriddenAnimation && userId === overriddenAnimation.userId) {
+      setAnimation(overriddenAnimation.animation);
+    }
+  }, [overriddenAnimation, userId]);
+
+  useEffect(() => {
+    x.on('change', (value) => {
+      onChangeX?.(value, userId);
+    });
+    y.on('change', (value) => {
+      onChangeY?.(value, userId);
+    });
+  }, [onChangeX, onChangeY, userId, x, y]);
 
   const setIsFullPreviewKeyboard = (value: boolean) => {
     if (isDragRef.current && value) {
@@ -43,20 +79,24 @@ export function useSwipe() {
     }
     setIsFullPreview(value);
   };
-  useKeyboardEvents(setAnimation, setIsFullPreviewKeyboard, sliderRef);
+
+  useKeyboardEvents(
+    setAnimation,
+    setIsFullPreviewKeyboard,
+    onSubmit,
+    sliderRef,
+    disabled
+  );
 
   const handleBlockActiveDragFullPreview = (value: boolean) => {
     if (isDragRef.current && !isFullPreview) {
       return;
     }
+
     setIsFullPreview(value);
   };
 
-  const handleSubmitAction = () => {
-    setIsFullPreview(false);
-  };
-
-  const { statusStyles, rateButtonStyles } = useSwipeStyles(x, y);
+  const { statusStyles } = useSwipeStyles(x, y);
 
   return {
     motionProps,
@@ -69,12 +109,6 @@ export function useSwipe() {
     statusProps: {
       ...statusStyles,
       isFullPreview,
-    },
-    rateButtonsProps: {
-      ...rateButtonStyles,
-      isFullPreview,
-      handleSubmitAction,
-      setAnimation,
     },
   };
 }
