@@ -3,23 +3,26 @@ import type Slider from 'react-slick';
 
 import { useAppSelector, useEventListener } from '@ducks-tinder-client/common';
 
-import { useTinderAnimations } from './useTinderAnimations';
-import type { TinderAnimations } from '../constants';
+import { useTinderAnimations, type TinderAnimations } from '@entities/user';
 
 export function useKeyboardEvents(
   setAnimation: Dispatch<SetStateAction<TinderAnimations>>,
   setIsFullPreview: (value: boolean) => void,
-  sliderRef: RefObject<Slider | null>
+  onSubmit: () => void,
+  sliderRef: RefObject<Slider | null>,
+  disabled?: boolean
 ) {
   const tinderUsersLength = useAppSelector(
     (state) => state.tinder.tinderUsers.length
   );
 
-  const { handleDislike, handleLike, handleSuperLike } =
-    useTinderAnimations(setAnimation);
+  const { handleDislike, handleLike, handleSuperLike } = useTinderAnimations(
+    setAnimation,
+    onSubmit
+  );
 
   function handleKeyboardEvent(e: KeyboardEvent) {
-    if (!tinderUsersLength) {
+    if (disabled || !tinderUsersLength) {
       return;
     }
 
