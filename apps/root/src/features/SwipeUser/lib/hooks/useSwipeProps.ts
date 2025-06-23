@@ -1,12 +1,11 @@
 import type { Dispatch, RefAttributes, RefObject, SetStateAction } from 'react';
 import { useRef } from 'react';
 import type { MotionProps, MotionValue, PanInfo } from 'motion/react';
-import { useMotionValue, useTransform } from 'motion/react';
+import { useTransform } from 'motion/react';
 
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
-import { useTinderAnimations } from './useTinderAnimations';
-import { TinderAnimations } from '../constants';
+import { TinderAnimations, useTinderAnimations } from '@entities/user';
 
 type SlantSide = 'top' | 'bottom' | null;
 
@@ -25,11 +24,12 @@ export function useSwipeProps(
   setAnimation: Dispatch<SetStateAction<TinderAnimations>>,
   isDraggable: boolean,
   isLockedSubmission: boolean,
-  setIsLockedSubmission: Dispatch<SetStateAction<boolean>>
+  setIsLockedSubmission: Dispatch<SetStateAction<boolean>>,
+  x: MotionValue<number>,
+  y: MotionValue<number>,
+  onSubmit: () => void
 ): SwipeProps {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
   const slantSide = useRef<SlantSide>(null);
   const rotate = useTransform(x, (xInput) => {
     let newValue = xInput / 20;
@@ -46,8 +46,10 @@ export function useSwipeProps(
   const dragItemRef = useRef<HTMLDivElement>(null);
   const isDragRef = useRef(false);
 
-  const { handleDislike, handleLike, handleSuperLike } =
-    useTinderAnimations(setAnimation);
+  const { handleDislike, handleLike, handleSuperLike } = useTinderAnimations(
+    setAnimation,
+    onSubmit
+  );
 
   function handleDragEnd(
     e: MouseEvent | TouchEvent | PointerEvent,
