@@ -4,7 +4,6 @@ import type Slider from 'react-slick';
 
 import { useKeyboardEvents } from './useKeyboardEvents';
 import { useSwipeProps } from './useSwipeProps';
-import { useSwipeStyles } from './useSwipeStyles';
 import { TinderAnimations } from '@entities/user';
 import { useMotionValue } from 'motion/react';
 
@@ -96,8 +95,6 @@ export function useSwipe({
     setIsFullPreview(value);
   };
 
-  const { statusStyles } = useSwipeStyles(x, y);
-
   return {
     motionProps,
     previewProps: {
@@ -107,8 +104,9 @@ export function useSwipe({
       sliderRef,
     },
     statusProps: {
-      ...statusStyles,
       isFullPreview,
+      x,
+      y,
     },
   };
 }
