@@ -17,6 +17,7 @@ export {
   useMemoriedSettingUrl,
   useSettingUrl,
   useTinderAnimations,
+  useSwipeStyles,
 } from './hooks';
 export type { MultiSelectForm } from './hooks';
 export * from './constants';
