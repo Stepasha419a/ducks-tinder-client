@@ -10,3 +10,4 @@ export { ProfileSettingSelectNameEnum } from './profileSettingSelectName';
 export { SETTING_LIST } from './settingList';
 export { INTERESTS_FOR_LOOP } from './interestsForLoop';
 export { TinderAnimations } from './tinderAnimations';
+export { DataRoles } from './dataRoles';
