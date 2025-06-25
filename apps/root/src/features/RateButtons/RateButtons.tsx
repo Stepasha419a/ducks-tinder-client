@@ -16,8 +16,11 @@ import { Button } from '@ducks-tinder-client/ui';
 
 import * as styles from './RateButtons.module.scss';
 import { useRateButtons } from './lib';
-import { useSwipeStyles } from '@features/SwipeUser';
-import type { TinderAnimations } from '@entities/user';
+import {
+  DataRoles,
+  useSwipeStyles,
+  type TinderAnimations,
+} from '@entities/user';
 
 interface RateButtonsProps {
   onAnimation: (animation: TinderAnimations) => void;
@@ -98,6 +101,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
         className={classNames(styles.wrapper)}
         style={superLikeStyle}
         key="superLike"
+        data-role={DataRoles.SuperLikeButton}
       >
         <Button
           onClick={handleSuperLike}
