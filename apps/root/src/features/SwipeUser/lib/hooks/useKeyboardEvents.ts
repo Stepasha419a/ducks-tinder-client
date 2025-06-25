@@ -3,7 +3,11 @@ import type Slider from 'react-slick';
 
 import { useAppSelector, useEventListener } from '@ducks-tinder-client/common';
 
-import { useTinderAnimations, type TinderAnimations } from '@entities/user';
+import {
+  DataRoles,
+  useTinderAnimations,
+  type TinderAnimations,
+} from '@entities/user';
 
 export function useKeyboardEvents(
   setAnimation: Dispatch<SetStateAction<TinderAnimations>>,
@@ -43,6 +47,10 @@ export function useKeyboardEvents(
         handleLike();
         break;
       case 'Enter':
+        if (isInteractiveElement(e.target) && !isSuperLikeButton(e.target)) {
+          return;
+        }
+
         handleSuperLike();
         break;
     }
@@ -83,4 +91,12 @@ const isInteractiveElement = (target: EventTarget | null): boolean => {
   }
 
   return false;
+};
+
+const isSuperLikeButton = (target: EventTarget | null): boolean => {
+  if (!(target instanceof HTMLButtonElement)) {
+    return false;
+  }
+
+  return target.dataset.role === DataRoles.SuperLikeButton;
 };
