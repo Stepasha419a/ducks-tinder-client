@@ -1,39 +1,36 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
-import type { MotionStyle } from 'motion/react';
+import type { MotionValue } from 'motion/react';
 import { motion } from 'motion/react';
 
 import * as styles from './Status.module.scss';
+import { useSwipeStyles } from '@entities/user';
 
 interface StatusProps {
-  dislikeStyle: MotionStyle;
-  superLikeStyle: MotionStyle;
-  likeStyle: MotionStyle;
   isFullPreview: boolean;
+  x: MotionValue<number>;
+  y: MotionValue<number>;
 }
 
-export const Status: FC<StatusProps> = ({
-  dislikeStyle,
-  superLikeStyle,
-  likeStyle,
-  isFullPreview,
-}) => {
+export const Status: FC<StatusProps> = ({ isFullPreview, x, y }) => {
+  const { statusStyles } = useSwipeStyles(x, y);
+
   return (
     <div className={classNames(styles.wrapper, !isFullPreview && styles.grab)}>
       <motion.div
-        style={dislikeStyle}
+        style={statusStyles.dislikeStyle}
         className={classNames(styles.status, styles.red)}
       >
         DISLIKE
       </motion.div>
       <motion.div
-        style={likeStyle}
+        style={statusStyles.likeStyle}
         className={classNames(styles.status, styles.green)}
       >
         LIKE
       </motion.div>
       <motion.div
-        style={superLikeStyle}
+        style={statusStyles.superLikeStyle}
         className={classNames(styles.status, styles.blue)}
       >
         SUPER LIKE
