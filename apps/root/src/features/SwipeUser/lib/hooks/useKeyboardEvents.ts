@@ -50,3 +50,37 @@ export function useKeyboardEvents(
 
   useEventListener('keyup', handleKeyboardEvent);
 }
+
+const isInteractiveElement = (target: EventTarget | null): boolean => {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  const tag = target.tagName;
+  console.log({ tag });
+
+  const interactiveTags = [
+    'BUTTON',
+    'A',
+    'INPUT',
+    'TEXTAREA',
+    'SELECT',
+    'DETAILS',
+  ];
+
+  if (interactiveTags.includes(tag)) {
+    return true;
+  }
+
+  const tabIndex = target.getAttribute('tabindex');
+  const role = target.getAttribute('role');
+
+  if (tabIndex !== null && parseInt(tabIndex) >= 0) {
+    return true;
+  }
+  if (role === 'button' || role === 'link') {
+    return true;
+  }
+
+  return false;
+};
