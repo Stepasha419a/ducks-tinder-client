@@ -28,7 +28,12 @@ export function useAnimationActions() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  const onBeforeAction = useCallback(() => {
+    console.log('onBeforeAction');
+  }, []);
+
   const onSubmit = useCallback(() => {
+    console.log('onSubmit');
     const id = tinderUsers[0].id;
     if (id) {
       submittingUserIdRef.current = id;
@@ -96,6 +101,7 @@ export function useAnimationActions() {
     onChangeX,
     onChangeY,
     onSubmit,
+    onBeforeAction,
     overriddenAnimation,
     isFullPreview,
     setIsFullPreview,

@@ -4,6 +4,7 @@ import type Slider from 'react-slick';
 
 import { useKeyboardEvents } from './useKeyboardEvents';
 import { useSwipeProps } from './useSwipeProps';
+import type { TinderActions } from '@entities/user';
 import { TinderAnimations } from '@entities/user';
 import { useMotionValue } from 'motion/react';
 
@@ -21,6 +22,7 @@ export function useSwipe({
   onChangeY,
   userId,
   onSubmit,
+  onBeforeAction,
   overriddenAnimation,
 }: {
   isFullPreview: boolean;
@@ -30,6 +32,7 @@ export function useSwipe({
   onChangeY?: (value: number, userId: string) => void;
   userId: string;
   onSubmit: () => void;
+  onBeforeAction: (action: TinderActions) => void;
   overriddenAnimation: {
     userId: string;
     animation: TinderAnimations;
@@ -54,7 +57,8 @@ export function useSwipe({
     setIsLockedSubmission,
     x,
     y,
-    onSubmit
+    onSubmit,
+    onBeforeAction
   );
 
   useEffect(() => {
@@ -83,6 +87,7 @@ export function useSwipe({
     setAnimation,
     setIsFullPreviewKeyboard,
     onSubmit,
+    onBeforeAction,
     sliderRef,
     disabled
   );

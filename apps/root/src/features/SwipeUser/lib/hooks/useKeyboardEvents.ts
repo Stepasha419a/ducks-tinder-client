@@ -4,15 +4,17 @@ import type Slider from 'react-slick';
 import { useAppSelector, useEventListener } from '@ducks-tinder-client/common';
 
 import {
+  type TinderActions,
   DataRoles,
-  useTinderAnimations,
   type TinderAnimations,
+  useTinderAnimations,
 } from '@entities/user';
 
 export function useKeyboardEvents(
   setAnimation: Dispatch<SetStateAction<TinderAnimations>>,
   setIsFullPreview: (value: boolean) => void,
   onSubmit: () => void,
+  onBeforeAction: (action: TinderActions) => void,
   sliderRef: RefObject<Slider | null>,
   disabled?: boolean
 ) {
@@ -22,7 +24,8 @@ export function useKeyboardEvents(
 
   const { handleDislike, handleLike, handleSuperLike } = useTinderAnimations(
     setAnimation,
-    onSubmit
+    onSubmit,
+    onBeforeAction
   );
 
   function handleKeyboardEvent(e: KeyboardEvent) {

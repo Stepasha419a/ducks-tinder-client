@@ -9,7 +9,7 @@ import { Preview } from '@ducks-tinder-client/ui';
 import { useSwipe } from './lib';
 import { Status } from './ui';
 import * as styles from './SwipeUser.module.scss';
-import type { TinderAnimations } from '@entities/user';
+import type { TinderActions, TinderAnimations } from '@entities/user';
 
 interface Props {
   user: ShortUser;
@@ -23,6 +23,7 @@ interface Props {
     animation: TinderAnimations;
   } | null;
   onSubmit: () => void;
+  onBeforeAction: (action: TinderActions) => void;
 }
 
 export const SwipeUser: FC<Props> = ({
@@ -33,6 +34,7 @@ export const SwipeUser: FC<Props> = ({
   isFullPreview,
   setIsFullPreview,
   onSubmit,
+  onBeforeAction,
   overriddenAnimation,
 }) => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
@@ -45,6 +47,7 @@ export const SwipeUser: FC<Props> = ({
     onChangeY,
     userId: user.id,
     onSubmit,
+    onBeforeAction,
     overriddenAnimation,
   });
 

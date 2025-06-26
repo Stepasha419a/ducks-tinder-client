@@ -5,6 +5,7 @@ import { useTransform } from 'motion/react';
 
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
+import type { TinderActions } from '@entities/user';
 import { TinderAnimations, useTinderAnimations } from '@entities/user';
 
 type SlantSide = 'top' | 'bottom' | null;
@@ -27,7 +28,8 @@ export function useSwipeProps(
   setIsLockedSubmission: Dispatch<SetStateAction<boolean>>,
   x: MotionValue<number>,
   y: MotionValue<number>,
-  onSubmit: () => void
+  onSubmit: () => void,
+  onBeforeAction: (action: TinderActions) => void
 ): SwipeProps {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
   const slantSide = useRef<SlantSide>(null);
@@ -48,7 +50,8 @@ export function useSwipeProps(
 
   const { handleDislike, handleLike, handleSuperLike } = useTinderAnimations(
     setAnimation,
-    onSubmit
+    onSubmit,
+    onBeforeAction
   );
 
   function handleDragEnd(

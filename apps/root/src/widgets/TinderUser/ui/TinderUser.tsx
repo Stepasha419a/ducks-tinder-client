@@ -30,6 +30,7 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
     onChangeX,
     onChangeY,
     onSubmit,
+    onBeforeAction,
     overriddenAnimation,
     setIsFullPreview,
     tinderUsers,
@@ -47,7 +48,7 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
     >
       {explore && <Explore />}
       <div className={styles.users}>
-        <SwipeUserLazy key="loading" />
+        <SwipeUserLazy key="loading" small />
         {tinderUsers.toReversed().map((user, index) => {
           const isActive = index === tinderUsers.length - 1;
 
@@ -62,6 +63,7 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
               onChangeX={isActive ? onChangeX : undefined}
               onChangeY={isActive ? onChangeY : undefined}
               onSubmit={onSubmit}
+              onBeforeAction={onBeforeAction}
             />
           );
         })}
@@ -73,6 +75,7 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
           x={x}
           y={y}
           onSubmit={onSubmit}
+          onBeforeAction={onBeforeAction}
         />
       </div>
     </div>

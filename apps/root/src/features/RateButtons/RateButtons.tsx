@@ -16,11 +16,8 @@ import { Button } from '@ducks-tinder-client/ui';
 
 import * as styles from './RateButtons.module.scss';
 import { useRateButtons } from './lib';
-import {
-  DataRoles,
-  useSwipeStyles,
-  type TinderAnimations,
-} from '@entities/user';
+import type { TinderActions, TinderAnimations } from '@entities/user';
+import { DataRoles, useSwipeStyles } from '@entities/user';
 
 interface RateButtonsProps {
   onAnimation: (animation: TinderAnimations) => void;
@@ -28,6 +25,7 @@ interface RateButtonsProps {
   x: MotionValue<number>;
   y: MotionValue<number>;
   onSubmit: () => void;
+  onBeforeAction: (action: TinderActions) => void;
 }
 
 export const RateButtons: FC<RateButtonsProps> = ({
@@ -36,6 +34,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
   x,
   y,
   onSubmit,
+  onBeforeAction,
 }) => {
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
   const isReturnLoading = useAppSelector(
@@ -46,7 +45,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
   );
 
   const { handleReturn, handleDislike, handleSuperLike, handleLike } =
-    useRateButtons(onAnimation, onSubmit);
+    useRateButtons(onAnimation, onSubmit, onBeforeAction);
 
   const {
     rateButtonStyles: { dislikeStyle, likeStyle, superLikeStyle },
