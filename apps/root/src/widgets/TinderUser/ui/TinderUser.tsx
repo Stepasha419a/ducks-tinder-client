@@ -57,6 +57,14 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
             />
           );
         })}
+        <RateButtons
+          key="rate-buttons"
+          onAnimation={onAnimation}
+          isFullPreview={isFullPreview}
+          x={x}
+          y={y}
+          onSubmit={onSubmit}
+        />
       </div>
     </div>
   );
