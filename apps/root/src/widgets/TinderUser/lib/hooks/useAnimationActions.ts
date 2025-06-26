@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
 import { getMatchUsersThunk, TinderAnimations } from '@entities/user';
-import { useMotionValue } from 'motion/dist/react';
+import { useMotionValue } from 'motion/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useAnimationActions() {
