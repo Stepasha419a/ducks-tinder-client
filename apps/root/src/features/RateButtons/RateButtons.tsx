@@ -26,7 +26,7 @@ interface RateButtonsProps {
   y: MotionValue<number>;
   onSubmit: () => void;
   onBeforeAction: (action: TinderActions) => void;
-  disabled?: boolean;
+  disabledActions?: boolean;
 }
 
 export const RateButtons: FC<RateButtonsProps> = ({
@@ -36,7 +36,7 @@ export const RateButtons: FC<RateButtonsProps> = ({
   y,
   onSubmit,
   onBeforeAction,
-  disabled,
+  disabledActions,
 }) => {
   const isReturnUser = useAppSelector((state) => state.tinder.isReturnUser);
   const isReturnLoading = useAppSelector(
@@ -47,13 +47,13 @@ export const RateButtons: FC<RateButtonsProps> = ({
   );
 
   const { handleReturn, handleDislike, handleSuperLike, handleLike } =
-    useRateButtons(onAnimation, onSubmit, onBeforeAction);
+    useRateButtons({ onAnimation, onSubmit, onBeforeAction, disabledActions });
 
   const {
     rateButtonStyles: { dislikeStyle, likeStyle, superLikeStyle },
   } = useSwipeStyles(x, y);
 
-  const disabledButtons = disabled || isReturnLoading || !tinderUsersLength;
+  const disabledButtons = isReturnLoading || !tinderUsersLength;
 
   return (
     <div

@@ -79,7 +79,7 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
           y={y}
           onSubmit={onSubmit}
           onBeforeAction={onBeforeAction}
-          disabled={!activeUserId || currentUserId !== activeUserId}
+          disabledActions={!activeUserId || currentUserId !== activeUserId}
         />
       </div>
     </div>
