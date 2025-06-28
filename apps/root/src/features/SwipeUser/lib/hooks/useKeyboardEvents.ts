@@ -22,11 +22,11 @@ export function useKeyboardEvents(
     (state) => state.tinder.tinderUsers.length
   );
 
-  const { handleDislike, handleLike, handleSuperLike } = useTinderAnimations(
+  const { handleDislike, handleLike, handleSuperLike } = useTinderAnimations({
     setAnimation,
     onSubmit,
-    onBeforeAction
-  );
+    onBeforeAction,
+  });
 
   function handleKeyboardEvent(e: KeyboardEvent) {
     if (disabled || !tinderUsersLength) {

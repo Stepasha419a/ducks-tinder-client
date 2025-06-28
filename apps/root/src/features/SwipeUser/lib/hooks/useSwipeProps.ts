@@ -48,11 +48,11 @@ export function useSwipeProps(
   const dragItemRef = useRef<HTMLDivElement>(null);
   const isDragRef = useRef(false);
 
-  const { handleDislike, handleLike, handleSuperLike } = useTinderAnimations(
+  const { handleDislike, handleLike, handleSuperLike } = useTinderAnimations({
     setAnimation,
     onSubmit,
-    onBeforeAction
-  );
+    onBeforeAction,
+  });
 
   function handleDragEnd(
     e: MouseEvent | TouchEvent | PointerEvent,
