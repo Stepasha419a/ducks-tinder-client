@@ -9,6 +9,7 @@ export function useAnimationActions() {
   const tinderUsers = useAppSelector((state) => state.tinder.tinderUsers);
   const currentUserId = tinderUsers[0]?.id;
 
+  const [activeUserId, setActiveUserId] = useState<string | null>(null);
   const submittingUserIdRef = useRef<string | null>(null);
 
   const [overriddenAnimation, setOverriddenAnimation] = useState<{
@@ -28,9 +29,18 @@ export function useAnimationActions() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  useEffect(() => {
+    const id = tinderUsers[0]?.id;
+    if (activeUserId === null && id) {
+      setActiveUserId(id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tinderUsers]);
+
   const onBeforeAction = useCallback(() => {
-    console.log('onBeforeAction');
-  }, []);
+    const id = tinderUsers[1]?.id || null;
+    setActiveUserId(id);
+  }, [tinderUsers]);
 
   const onSubmit = useCallback(() => {
     console.log('onSubmit');
@@ -108,5 +118,7 @@ export function useAnimationActions() {
     tinderUsers,
     x,
     y,
+    activeUserId,
+    currentUserId,
   };
 }
