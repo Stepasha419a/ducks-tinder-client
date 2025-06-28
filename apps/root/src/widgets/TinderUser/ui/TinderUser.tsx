@@ -36,6 +36,8 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
     tinderUsers,
     x,
     y,
+    activeUserId,
+    currentUserId,
   } = useAnimationActions();
 
   return (
@@ -50,7 +52,8 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
       <div className={styles.users}>
         <SwipeUserLazy key="loading" small />
         {tinderUsers.toReversed().map((user, index) => {
-          const isActive = index === tinderUsers.length - 1;
+          const isActive =
+            user.id === activeUserId && index === tinderUsers.length - 1;
 
           return (
             <SwipeUser
@@ -76,6 +79,7 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
           y={y}
           onSubmit={onSubmit}
           onBeforeAction={onBeforeAction}
+          disabled={!activeUserId || currentUserId !== activeUserId}
         />
       </div>
     </div>
