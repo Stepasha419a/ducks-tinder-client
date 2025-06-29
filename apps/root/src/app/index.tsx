@@ -4,7 +4,6 @@ import { ThemeProvider, ToastContainer } from '@ducks-tinder-client/ui';
 
 import { withAppHocs } from './lib';
 import { Routing } from './routing';
-import './styles/index.scss';
 import '@ducks-tinder-client/ui/dist/esm/index.css';
 
 // TODO: decompose ThemeProvider into hoc
