@@ -33,9 +33,7 @@ export const TogglePreview: FC<TogglePreviewProps> = ({
       onClick={() => setIsFullPreview(true)}
       className={styles.descr}
     >
-      <Button variant="mark" extraClassName={styles.openFullPreview}>
-        <FontAwesomeIcon icon={faCircleInfo} />
-      </Button>
+      <FontAwesomeIcon icon={faCircleInfo} className={styles.openFullPreview} />
     </button>
   );
 };
