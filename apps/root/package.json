@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@ducks-tinder-client/common": "1.6.1-alpha.8",
-    "@ducks-tinder-client/ui": "1.1.5-alpha.9",
+    "@ducks-tinder-client/ui": "1.1.5-alpha.10",
     "@fortawesome/fontawesome-common-types": "^6.7.2",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
