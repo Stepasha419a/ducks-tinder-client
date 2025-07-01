@@ -60,9 +60,6 @@ const user: ShortUser = {
 
 const meta = {
   title: 'Entities/Preview',
-  // TODO: has required user prop and throws errors to pass required props
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
   component: Preview,
   parameters: {
     layout: 'centered',
