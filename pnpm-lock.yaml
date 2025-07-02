@@ -122,10 +122,10 @@ importers:
         version: 8.35.1(eslint@9.30.0(jiti@2.4.2))(typescript@5.8.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.27.7)(webpack@5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4))
+        version: 10.0.0(@babel/core@7.27.7)(webpack@5.99.9)
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4))
+        version: 7.1.2(webpack@5.99.9)
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -158,13 +158,13 @@ importers:
         version: 3.6.2
       sass-loader:
         specifier: ^16.0.5
-        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4))
+        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.99.9)
       steiger:
         specifier: ^0.5.7
         version: 0.5.7(typescript@5.8.3)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4))
+        version: 4.0.0(webpack@5.99.9)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -173,7 +173,7 @@ importers:
         version: 8.35.1(eslint@9.30.0(jiti@2.4.2))(typescript@5.8.3)
       webpack:
         specifier: ^5.99.9
-        version: 5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4)
+        version: 5.99.9(@swc/core@1.12.7)(webpack-cli@6.0.1)
 
   apps/policy:
     dependencies:
@@ -246,10 +246,10 @@ importers:
         version: 8.35.1(eslint@9.30.0(jiti@2.4.2))(typescript@5.8.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.27.7)(webpack@5.99.9)
+        version: 10.0.0(@babel/core@7.27.7)(webpack@5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4))
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.99.9)
+        version: 7.1.2(webpack@5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4))
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -282,13 +282,13 @@ importers:
         version: 3.6.2
       sass-loader:
         specifier: ^16.0.5
-        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.99.9)
+        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4))
       steiger:
         specifier: ^0.5.7
         version: 0.5.7(typescript@5.8.3)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.99.9)
+        version: 4.0.0(webpack@5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4))
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -297,7 +297,7 @@ importers:
         version: 8.35.1(eslint@9.30.0(jiti@2.4.2))(typescript@5.8.3)
       webpack:
         specifier: ^5.99.9
-        version: 5.99.9(@swc/core@1.12.7)(webpack-cli@6.0.1)
+        version: 5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4)
 
   apps/root:
     dependencies:
@@ -543,6 +543,9 @@ importers:
       '@feature-sliced/eslint-config':
         specifier: ^0.1.1
         version: 0.1.1(eslint-plugin-boundaries@5.0.1(@typescript-eslint/parser@8.35.1(eslint@9.30.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.30.0(jiti@2.4.2)))(eslint-plugin-import@2.32.0)
+      '@feature-sliced/steiger-plugin':
+        specifier: ^0.5.6
+        version: 0.5.6(typescript@5.8.3)
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -603,6 +606,9 @@ importers:
       rimraf:
         specifier: ^6.0.1
         version: 6.0.1
+      steiger:
+        specifier: ^0.5.7
+        version: 0.5.7(typescript@5.8.3)
       tsc-alias:
         specifier: ^1.8.16
         version: 1.8.16
@@ -803,6 +809,9 @@ importers:
       '@feature-sliced/eslint-config':
         specifier: ^0.1.1
         version: 0.1.1(eslint-plugin-boundaries@5.0.1(@typescript-eslint/parser@8.35.1(eslint@9.30.0(jiti@2.4.2))(typescript@5.8.3))(eslint-import-resolver-typescript@4.4.4)(eslint@9.30.0(jiti@2.4.2)))(eslint-plugin-import@2.32.0)
+      '@feature-sliced/steiger-plugin':
+        specifier: ^0.5.6
+        version: 0.5.6(typescript@5.8.3)
       '@storybook/addon-essentials':
         specifier: ^8.6.14
         version: 8.6.14(@types/react@19.1.8)(storybook@8.6.14(prettier@3.6.2))
@@ -908,6 +917,9 @@ importers:
       sass:
         specifier: ^1.89.2
         version: 1.89.2
+      steiger:
+        specifier: ^0.5.7
+        version: 0.5.7(typescript@5.8.3)
       storybook:
         specifier: ^8.6.14
         version: 8.6.14(prettier@3.6.2)
@@ -14942,7 +14954,7 @@ snapshots:
       schema-utils: 4.3.2
       serialize-javascript: 6.0.2
       terser: 5.43.1
-      webpack: 5.99.9(@swc/core@1.12.7)(webpack-cli@6.0.1)
+      webpack: 5.99.9(@swc/core@1.12.7)(webpack-cli@5.1.4)
     optionalDependencies:
       '@swc/core': 1.12.7
 
