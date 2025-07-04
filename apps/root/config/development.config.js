@@ -1,6 +1,6 @@
-const { getWebpackDevConfig } = require('@ducks-tinder-client/config');
+import { getWebpackDevConfig } from '@ducks-tinder-client/config';
 
-module.exports = (env) =>
+export default (env) =>
   getWebpackDevConfig({
     name: 'rootApp',
     port: 3001,
