@@ -1,6 +1,6 @@
-const { getWebpackProdConfig } = require('@ducks-tinder-client/config');
+import { getWebpackProdConfig } from '@ducks-tinder-client/config';
 
-module.exports = (env) =>
+export default (env) =>
   getWebpackProdConfig({
     name: 'rootApp',
     envPath: env.envPath,
