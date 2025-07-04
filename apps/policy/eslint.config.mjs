@@ -26,9 +26,9 @@ export default tseslint.config(
       'dist',
       'node_modules',
       'eslint.config.mjs',
-      'esbuild.js',
-      'development.config.js',
-      'production.config.js',
+      'config/development.config.js',
+      'config/production.config.js',
+      'steiger.config.js',
     ],
     settings: {
       'import/resolver': {
