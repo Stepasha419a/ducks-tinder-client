@@ -34,3 +34,13 @@ RUN mkdir out && cd out && \
 WORKDIR /usr/src/nginx-${NGINX_VERSION}
 ENV CFLAGS="-m64 -march=native -mtune=native -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"
 ENV LDFLAGS="-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
+
+RUN ./configure \
+    --prefix=/etc/nginx \
+    --sbin-path=/usr/sbin/nginx \
+    --conf-path=/etc/nginx/nginx.conf \
+    --pid-path=/var/run/nginx.pid \
+    --with-http_ssl_module \
+    --with-http_v2_module \
+    --with-threads \
+    --add-module=/usr/src/ngx_brotli && \
