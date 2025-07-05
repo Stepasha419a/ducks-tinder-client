@@ -49,6 +49,9 @@ jobs:
             packages/config/dist
             packages/common/dist
             packages/ui/dist
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.REGISTRY_URL }}/ducks-tinder-client:latest .
 
   publish-packages:
     runs-on: ubuntu-latest
