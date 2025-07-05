@@ -44,3 +44,5 @@ RUN ./configure \
     --with-http_v2_module \
     --with-threads \
     --add-module=/usr/src/ngx_brotli && \
+    make -j$(nproc) && \
+    make install
