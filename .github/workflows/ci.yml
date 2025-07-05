@@ -52,6 +52,8 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.REGISTRY_URL }}/ducks-tinder-client:latest .
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
 
   publish-packages:
     runs-on: ubuntu-latest
