@@ -44,6 +44,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          key: ${{ secrets.SSH_KEY }}
       - name: Install dependencies
         run: pnpm install:webpack --frozen-lockfile
       - name: Run build
