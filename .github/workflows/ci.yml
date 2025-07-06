@@ -56,12 +56,12 @@ jobs:
             packages/ui/dist
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ducks-tinder-client-demo:latest .
-
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ducks-tinder-client-demo:latest
+      - name: Test SSH command
+        run: ssh ${{ secrets.SSH_USER_HOST }} -p ${{ secrets.SSH_PORT }} 'uptime'
 
   publish-packages:
     runs-on: ubuntu-latest
