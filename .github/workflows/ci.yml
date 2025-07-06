@@ -61,7 +61,7 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ducks-tinder-client-demo:latest
       - name: Test SSH command
-        run: ssh ${{ secrets.SSH_USER_HOST }} -p ${{ secrets.SSH_PORT }} 'uptime'
+        run: ssh ${{ secrets.SSH_USER_HOST }} -p ${{ secrets.SSH_PORT }} -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} 'uptime'
 
   publish-packages:
     runs-on: ubuntu-latest
