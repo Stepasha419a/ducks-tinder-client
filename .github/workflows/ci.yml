@@ -45,6 +45,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
+          script: uptime
       - name: Install dependencies
         run: pnpm install:webpack --frozen-lockfile
       - name: Run build
