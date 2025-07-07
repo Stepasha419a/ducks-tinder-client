@@ -1,5 +1,9 @@
 import { useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
-import { getMatchUsersThunk, TinderAnimations } from '@entities/user';
+import {
+  getMatchUsersThunk,
+  TinderActions,
+  TinderAnimations,
+} from '@entities/user';
 import { useMotionValue } from 'motion/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -37,10 +41,18 @@ export function useAnimationActions() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tinderUsers]);
 
-  const onBeforeAction = useCallback(() => {
-    const id = tinderUsers[1]?.id || null;
-    setActiveUserId(id);
-  }, [tinderUsers]);
+  const onBeforeAction = useCallback(
+    (action: TinderActions) => {
+      let id = tinderUsers[1]?.id || null;
+
+      if (action === TinderActions.Return) {
+        id = null;
+      }
+
+      setActiveUserId(id);
+    },
+    [tinderUsers]
+  );
 
   const onSubmit = useCallback(() => {
     console.log('onSubmit');
