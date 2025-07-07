@@ -55,7 +55,6 @@ export function useAnimationActions() {
   );
 
   const onSubmit = useCallback(() => {
-    console.log('onSubmit');
     const id = tinderUsers[0].id;
     if (id) {
       submittingUserIdRef.current = id;
