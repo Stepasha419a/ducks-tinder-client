@@ -20,7 +20,13 @@ export default tseslint.config(
         ...globals.node,
       },
     },
-    ignores: ['dist', 'node_modules', 'eslint.config.mjs', 'esbuild.js'],
+    ignores: [
+      'dist',
+      'node_modules',
+      'eslint.config.mjs',
+      'esbuild.js',
+      'steiger.config.js',
+    ],
     settings: {
       'import/resolver': {
         typescript: {
