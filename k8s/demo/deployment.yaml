@@ -27,3 +27,10 @@ spec:
               memory: '64Mi'
           ports:
             - containerPort: 3000
+      volumes:
+        - name: tls-volume
+          secret:
+            secretName: common-ca-tls-secret
+        - name: config-volume
+          secret:
+            secretName: frontend-demo-secret
