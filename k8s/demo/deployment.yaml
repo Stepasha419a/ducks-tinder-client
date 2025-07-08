@@ -18,5 +18,12 @@ spec:
         - name: frontend-demo-app-deployment
           image: stepasha419a/ducks-tinder-client-demo:latest
           imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: '0.125'
+              memory: '128Mi'
+            requests:
+              cpu: '0.0625'
+              memory: '64Mi'
           ports:
             - containerPort: 3000
