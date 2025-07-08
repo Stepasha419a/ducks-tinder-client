@@ -13,3 +13,10 @@ spec:
     metadata:
       labels:
         app: frontend-demo-app-deployment
+    spec:
+      containers:
+        - name: frontend-demo-app-deployment
+          image: stepasha419a/ducks-tinder-client-demo:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
