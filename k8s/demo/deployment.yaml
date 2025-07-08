@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-demo-deployment
+  labels:
+    app: frontend-demo-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-demo-app-deployment
+  template:
+    metadata:
+      labels:
+        app: frontend-demo-app-deployment
