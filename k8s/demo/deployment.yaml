@@ -27,6 +27,14 @@ spec:
               memory: '64Mi'
           ports:
             - containerPort: 3000
+          volumeMounts:
+            - name: tls-volume
+              mountPath: /etc/nginx/cert/prod
+              readOnly: true
+            - name: config-volume
+              mountPath: /usr/src/app/.env
+              subPath: .env
+              readOnly: true
       volumes:
         - name: tls-volume
           secret:
