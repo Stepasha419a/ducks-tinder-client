@@ -37,14 +37,6 @@ jobs:
         with:
           node-version: 22
           cache: 'pnpm'
-      - name: Execute remote SSH commands
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          port: ${{ secrets.SSH_PORT }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          key: ${{ secrets.SSH_KEY }}
       - name: Install dependencies
         run: pnpm install:webpack --frozen-lockfile
       - name: Run build
@@ -63,6 +55,14 @@ jobs:
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ducks-tinder-client-demo:latest .
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/ducks-tinder-client-demo:latest
+      - name: Deploy demo app
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          key: ${{ secrets.SSH_KEY }}
 
   publish-packages:
     runs-on: ubuntu-latest
