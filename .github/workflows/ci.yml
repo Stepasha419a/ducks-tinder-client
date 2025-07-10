@@ -63,6 +63,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
+          script: |
+            ${{ github.sha }}
 
   publish-packages:
     runs-on: ubuntu-latest
