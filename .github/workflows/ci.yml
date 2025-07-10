@@ -43,7 +43,8 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
           envs: SHA
-          script: echo "Value of SHA env: $SHA"
+          script: \
+          echo "Value of SHA env: $SHA"
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
