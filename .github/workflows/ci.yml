@@ -64,7 +64,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            ${{ github.sha }}
+            sudo /opt/cicd_demo.sh ${{ github.sha }}
 
   publish-packages:
     runs-on: ubuntu-latest
