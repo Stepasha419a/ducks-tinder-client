@@ -11,6 +11,23 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
+      - name: Test ssh
+        uses: appleboy/ssh-action@v1
+        env:
+          FOO: 'BAR'
+          BAR: 'FOO'
+          SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          key: ${{ secrets.SSH_KEY }}
+          envs: FOO,BAR,SHA
+          script: |
+            echo "I am $FOO"
+            echo "I am $BAR"
+            echo "sha: $SHA"
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
@@ -32,19 +49,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-      - name: Test ssh
-        uses: appleboy/ssh-action@v1
-        env:
-          SHA: ${{ github.sha }}
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          port: ${{ secrets.SSH_PORT }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          key: ${{ secrets.SSH_KEY }}
-          envs: SHA
-          script: |
-            echo "sha: $SHA"
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
