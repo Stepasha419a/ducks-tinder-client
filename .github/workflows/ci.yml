@@ -20,7 +20,11 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
           debug: true
-          script: uptime
+          script: |
+            echo "SHELL=$SHELL"
+            echo "0=$0"
+            ps -p $$ -o args=
+            whoami
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
