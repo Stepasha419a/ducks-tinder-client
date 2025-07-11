@@ -24,6 +24,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
           envs: FOO,BAR,SHA
+          capture_stdout: true
           script: |
             echo "I am $FOO"
             echo "I am $BAR"
