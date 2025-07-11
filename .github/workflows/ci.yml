@@ -25,10 +25,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           envs: FOO,BAR,SHA
           capture_stdout: true
-          script: |
-            echo "I am $FOO"
-            echo "I am $BAR"
-            echo "sha: $SHA"
+          script: uptime
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
