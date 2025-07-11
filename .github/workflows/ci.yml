@@ -13,18 +13,16 @@ jobs:
         uses: pnpm/action-setup@v4
       - name: Test ssh
         uses: appleboy/ssh-action@v1
+        env:
+          SHA: ${{ github.sha }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
-          debug: true
-          script: |
-            echo "SHELL=$SHELL"
-            echo "0=$0"
-            ps -p $$ -o args=
-            whoami
+          envs: SHA
+          script: /opt/cicd_demo.sh "$SHA"
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
