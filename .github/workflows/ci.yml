@@ -19,6 +19,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
+          debug: true
           script: uptime
       - name: Use Node.js 22
         uses: actions/setup-node@v4
