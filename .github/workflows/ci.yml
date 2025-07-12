@@ -22,7 +22,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           key: ${{ secrets.SSH_KEY }}
           envs: SHA
-          script: /opt/cicd_demo.sh
+          script: /opt/cicd_demo.sh "$SHA"
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
