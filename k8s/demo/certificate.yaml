@@ -1,0 +1,23 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: frontend-demo-certificate
+spec:
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  isCA: true
+  usages:
+    - frontend demo ssl
+  subject:
+    organizations:
+      - cert-manager
+  commonName: frontend-demo.com
+
+  dnsNames:
+    - frontend-demo.com
+  emailAddresses:
+    - dark_magic419a@mail.ru
+
+  issuerRef:
+    # TODO: prod
+    name: letsencrypt-staging
