@@ -3,6 +3,7 @@ kind: Certificate
 metadata:
   name: frontend-demo-certificate
 spec:
+  secretName: frontend-demo-tls
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   isCA: true
