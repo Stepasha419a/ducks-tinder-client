@@ -26,6 +26,7 @@ nginx-prod.conf
 # misc
 .DS_Store
 .env.prod
+.env
 
 npm-debug.log*
 yarn-debug.log*
