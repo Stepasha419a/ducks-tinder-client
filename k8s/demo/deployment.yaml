@@ -38,7 +38,7 @@ spec:
       volumes:
         - name: tls-volume
           secret:
-            secretName: common-ca-tls-secret
+            secretName: frontend-demo-tls
         - name: config-volume
           secret:
             secretName: frontend-demo-secret
