@@ -12,7 +12,7 @@ spec:
   renewBefore: 360h # 15d
   isCA: true
   usages:
-    - frontend demo ssl
+    - server auth
   subject:
     organizations:
       - cert-manager
