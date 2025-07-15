@@ -13,6 +13,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const EslintWebpackPlugin = require('eslint-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
@@ -169,6 +170,9 @@ export function getWebpackDevConfig(options: Options): Config {
       }),
       new Dotenv({
         path: envPath,
+      }),
+      new CopyPlugin({
+        patterns: [{ from: './env-config.js', to: './js/env-config.js' }],
       }),
     ],
     optimization,
