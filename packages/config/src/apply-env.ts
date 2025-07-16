@@ -1,13 +1,13 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-enum Modes {
+export enum EnvModes {
   Dev = 'dev',
   Demo = 'demo',
   Prod = 'prod',
 }
 
-export function applyEnv(mode: Modes) {
+export function applyEnv(mode: EnvModes) {
   console.log(`Env mode: ${mode}`);
 
   const envPath = path.resolve(__dirname, path.join('..', `.env.${mode}`));
