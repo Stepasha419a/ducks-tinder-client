@@ -22,6 +22,9 @@
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
     "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}"
   },
+  "bin": {
+    "dtc": "./dist/esm/cli.js"
+  },
   "dependencies": {
     "@babel/core": "^7.27.3",
     "@babel/preset-env": "^7.27.2",
