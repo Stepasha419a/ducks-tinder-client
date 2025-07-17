@@ -2,6 +2,10 @@ import { applyEnv, EnvModes } from './apply-env';
 
 import { Command, Option } from 'commander';
 
+interface ApplyEnvOptions {
+  mode: EnvModes;
+}
+
 const program = new Command();
 
 program.name('dtc').description('Ducks Tinder Client CLI').version('1.0.0');
@@ -14,6 +18,6 @@ program
       .choices([EnvModes.Dev, EnvModes.Prod, EnvModes.Demo])
       .default(EnvModes.Dev)
   )
-  .action((options) => {
+  .action((options: ApplyEnvOptions) => {
     applyEnv(options.mode);
   });
