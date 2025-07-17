@@ -3,7 +3,7 @@ import { nodeExternalsPlugin } from 'esbuild-node-externals';
 
 const build = (format) =>
   esbuild.build({
-    entryPoints: ['./src/index.ts'],
+    entryPoints: { index: './src/index.ts', cli: './src/cli.ts' },
     outdir: `dist/${format}`,
     bundle: true,
     minify: true,
