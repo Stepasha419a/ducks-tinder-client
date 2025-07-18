@@ -1,6 +1,6 @@
 import type { Chat, ShortUser } from '@shared/api';
 import { instance } from '@shared/api';
-import type { PaginationParams } from '@shared/lib';
+import { LIB_SETTINGS, type PaginationParams } from '@shared/lib';
 
 import { getMockableService } from '../mock';
 import { chatMockService } from './chat.mock-service';
@@ -17,28 +17,28 @@ export const chatService: ChatService = getMockableService(
   {
     async getChat(chatId: string) {
       return instance.get<Chat>(
-        `${process.env.VITE_CHAT_SERVICE_URL}/chat/${chatId}`
+        `${LIB_SETTINGS.CHAT_SERVICE_URL}/chat/${chatId}`
       );
     },
     async getChats(params: PaginationParams) {
-      return instance.get<Chat[]>(`${process.env.VITE_CHAT_SERVICE_URL}/chat`, {
+      return instance.get<Chat[]>(`${LIB_SETTINGS.CHAT_SERVICE_URL}/chat`, {
         params,
       });
     },
     async getMessages(chatId: string, params: PaginationParams) {
       return instance.get<ShortMessagesPagination>(
-        `${process.env.VITE_CHAT_SERVICE_URL}/chat/${chatId}/messages`,
+        `${LIB_SETTINGS.CHAT_SERVICE_URL}/chat/${chatId}/messages`,
         { params }
       );
     },
     async getNewMessagesCount() {
       return instance.get<NewMessagesCount>(
-        `${process.env.VITE_CHAT_SERVICE_URL}/chat/new`
+        `${LIB_SETTINGS.CHAT_SERVICE_URL}/chat/new`
       );
     },
     async getMember(memberId: string) {
       return instance.get<ShortUser>(
-        `${process.env.VITE_CHAT_SERVICE_URL}/chat/member/${memberId}`
+        `${LIB_SETTINGS.CHAT_SERVICE_URL}/chat/member/${memberId}`
       );
     },
     connect(): ChatsConnectReturn {

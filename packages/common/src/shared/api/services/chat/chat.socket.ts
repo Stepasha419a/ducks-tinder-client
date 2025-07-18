@@ -2,13 +2,14 @@ import { io } from 'socket.io-client';
 
 import type { ChatSocket } from './chat-service.interface';
 import { ChatSocketEvent } from './chat-service.interface';
+import { LIB_SETTINGS } from '@shared/lib';
 
 export const chatSocket: ChatSocket = {
   _socket: null,
   connect() {
     if (!this._socket) {
       const accessToken = 'Bearer ' + localStorage.getItem('accessToken')!;
-      this._socket = io(`${process.env.VITE_CHAT_SERVICE_URL}/chat/socket`, {
+      this._socket = io(`${LIB_SETTINGS.CHAT_SERVICE_URL}/chat/socket`, {
         withCredentials: true,
         transports: ['websocket'],
         auth: {
