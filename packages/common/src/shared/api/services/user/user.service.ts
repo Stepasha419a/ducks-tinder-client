@@ -8,18 +8,19 @@ import type {
   PairsInfo,
   UserService,
 } from './user-service.interface';
+import { LIB_SETTINGS } from '@shared/lib';
 
 export const userService: UserService = getMockableService(
   {
     async getMe() {
-      return instance.get<User>(`${process.env.VITE_USER_SERVICE_URL}/user/me`);
+      return instance.get<User>(`${LIB_SETTINGS.USER_SERVICE_URL}/user/me`);
     },
 
     async getMatchUsers(take: number, skipUserIds?: string[]) {
       const config = getOptionalAbortControllerConfig('user/match', true);
 
       return instance.get<ShortUser[]>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/match`,
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/match`,
         {
           params: {
             take,
@@ -32,14 +33,14 @@ export const userService: UserService = getMockableService(
 
     async updateUser(data: Partial<User>) {
       return instance.patch<User>(
-        `${process.env.VITE_USER_SERVICE_URL}/user`,
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user`,
         data
       );
     },
 
     async updateUserPlace(latitude: number, longitude: number) {
       return instance.patch<User>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/place`,
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/place`,
         {
           latitude,
           longitude,
@@ -49,7 +50,7 @@ export const userService: UserService = getMockableService(
 
     async savePicture(picture: Blob) {
       return instance.post<User>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/picture`,
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/picture`,
         { picture },
         {
           headers: {
@@ -61,13 +62,13 @@ export const userService: UserService = getMockableService(
 
     async deletePicture(id: string) {
       return instance.put<User>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/picture/${id}`
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/picture/${id}`
       );
     },
 
     async mixPictures(pictureOrders: number[]) {
       return instance.put<User>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/picture/mix`,
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/picture/mix`,
         {
           pictureOrders,
         }
@@ -81,7 +82,7 @@ export const userService: UserService = getMockableService(
       );
 
       const res = await instance.get<ShortUser[]>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/pairs`,
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/pairs`,
         { params, ...config }
       );
 
@@ -90,37 +91,37 @@ export const userService: UserService = getMockableService(
 
     async getPairsInfo() {
       return instance.get<PairsInfo>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/pairs/info`
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/pairs/info`
       );
     },
 
     async acceptPair(pairId: string) {
       return instance.post<ShortUser>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/pairs/${pairId}`
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/pairs/${pairId}`
       );
     },
 
     async deletePair(pairId: string) {
       return instance.put<ShortUser>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/pairs/${pairId}`
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/pairs/${pairId}`
       );
     },
 
     async likeUser(userId: string) {
       return instance.post<ShortUser>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/like/${userId}`
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/like/${userId}`
       );
     },
 
     async dislikeUser(userId: string) {
       return instance.post<ShortUser>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/dislike/${userId}`
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/dislike/${userId}`
       );
     },
 
     async returnUser() {
       return instance.put<ShortUser>(
-        `${process.env.VITE_USER_SERVICE_URL}/user/return`
+        `${LIB_SETTINGS.USER_SERVICE_URL}/user/return`
       );
     },
   },
