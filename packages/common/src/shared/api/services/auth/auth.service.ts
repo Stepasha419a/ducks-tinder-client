@@ -3,17 +3,18 @@ import { instance } from '@shared/api';
 import { getMockableService } from '../mock';
 import type { AuthResponse, AuthService } from './auth.interfaces';
 import { authMockService } from './auth.mock-service';
+import { LIB_SETTINGS } from '@shared/lib';
 
 export const authService: AuthService = getMockableService(
   {
     async refresh() {
       return instance.get<AuthResponse>(
-        `${process.env.VITE_AUTH_SERVICE_URL}/auth/refresh`
+        `${LIB_SETTINGS.AUTH_SERVICE_URL}/auth/refresh`
       );
     },
     async registration(email: string, name: string, password: string) {
       return instance.post<AuthResponse>(
-        `${process.env.VITE_AUTH_SERVICE_URL}/auth/register`,
+        `${LIB_SETTINGS.AUTH_SERVICE_URL}/auth/register`,
         {
           email,
           name,
@@ -23,12 +24,12 @@ export const authService: AuthService = getMockableService(
     },
     async login(email: string, password: string) {
       return instance.post<AuthResponse>(
-        `${process.env.VITE_AUTH_SERVICE_URL}/auth/login`,
+        `${LIB_SETTINGS.AUTH_SERVICE_URL}/auth/login`,
         { email, password }
       );
     },
     async logout() {
-      return instance.patch(`${process.env.VITE_AUTH_SERVICE_URL}/auth/logout`);
+      return instance.patch(`${LIB_SETTINGS.AUTH_SERVICE_URL}/auth/logout`);
     },
   },
   authMockService

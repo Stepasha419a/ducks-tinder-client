@@ -7,6 +7,7 @@ import type {
 import axios from 'axios';
 
 import type { AuthResponse } from '@shared/api';
+import { LIB_SETTINGS } from '@shared/lib';
 
 interface AxiosEditedConfig extends AxiosResponse {
   _isRetry?: boolean;
@@ -32,7 +33,7 @@ export function setUpInterceptors(instance: AxiosInstance) {
       ) {
         originalRequest._isRetry = true;
         const response = await axios.get<AuthResponse>(
-          `${process.env.VITE_AUTH_SERVICE_URL}/auth/refresh`,
+          `${LIB_SETTINGS.AUTH_SERVICE_URL}/auth/refresh`,
           {
             withCredentials: true,
           }
