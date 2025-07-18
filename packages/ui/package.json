@@ -1,6 +1,6 @@
 {
   "name": "@ducks-tinder-client/ui",
-  "version": "1.1.5-alpha.11",
+  "version": "1.1.6",
   "author": "Stepan B <dark_magic419a@mail.ru> (https://github.com/Stepasha419a)",
   "license": "MIT",
   "description": "A module of ui components",
@@ -22,7 +22,8 @@
     "lint": "eslint src/** --ext .ts --ext .tsx --ext .js  --max-warnings=0",
     "lint:fix": "eslint src/** --ext .ts --ext .tsx --ext .js --fix --max-warnings=0",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
-    "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}"
+    "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
+    "steiger": "steiger ./src"
   },
   "browserslist": {
     "production": [
