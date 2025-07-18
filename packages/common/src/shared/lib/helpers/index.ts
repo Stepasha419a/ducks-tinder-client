@@ -8,3 +8,4 @@ export { getDatesHourDiff } from './getDatesHourDiff';
 export { getTime } from './getTime';
 export { getFormattedDateString } from './getFormattedDateString';
 export { HocComposition } from './hocComposition';
+export { setLibSettings } from './setLibSettings';
