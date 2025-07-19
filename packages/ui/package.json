@@ -1,6 +1,6 @@
 {
   "name": "@ducks-tinder-client/ui",
-  "version": "1.1.6",
+  "version": "1.1.7-alpha.0",
   "author": "Stepan B <dark_magic419a@mail.ru> (https://github.com/Stepasha419a)",
   "license": "MIT",
   "description": "A module of ui components",
