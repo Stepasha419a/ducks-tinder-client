@@ -10,7 +10,7 @@ export enum EnvModes {
 export function applyEnv(mode: EnvModes) {
   console.log(`Env mode: ${mode}`);
 
-  const envPath = path.resolve(__dirname, path.join('..', `.env.${mode}`));
+  const envPath = path.resolve(process.cwd(), `.env.${mode}`);
 
   const envFile = fs.readFileSync(envPath, 'utf-8');
 
@@ -35,7 +35,7 @@ export function applyEnv(mode: EnvModes) {
     '};',
   ].join('\n');
 
-  fs.writeFileSync(path.resolve(__dirname, '../env-config.js'), output);
+  fs.writeFileSync(path.resolve(process.cwd(), 'env-config.js'), output);
 
   console.log('Create env-config.js');
 }
