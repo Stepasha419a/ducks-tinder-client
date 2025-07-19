@@ -21,3 +21,5 @@ program
   .action((options: ApplyEnvOptions) => {
     applyEnv(options.mode);
   });
+
+program.parse();
