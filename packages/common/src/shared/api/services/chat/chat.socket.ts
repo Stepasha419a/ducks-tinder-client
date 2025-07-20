@@ -2,14 +2,14 @@ import { io } from 'socket.io-client';
 
 import type { ChatSocket } from './chat-service.interface';
 import { ChatSocketEvent } from './chat-service.interface';
-import { LIB_SETTINGS } from '@shared/lib';
+import { COMMON_LIB_SETTINGS } from '@shared/lib';
 
-export const chatSocket: ChatSocket = {
+export const createChatSocket = (): ChatSocket => ({
   _socket: null,
   connect() {
     if (!this._socket) {
       const accessToken = 'Bearer ' + localStorage.getItem('accessToken')!;
-      this._socket = io(`${LIB_SETTINGS.CHAT_SERVICE_URL}/chat/socket`, {
+      this._socket = io(`${COMMON_LIB_SETTINGS.CHAT_SERVICE_URL}/chat/socket`, {
         withCredentials: true,
         transports: ['websocket'],
         auth: {
@@ -62,4 +62,4 @@ export const chatSocket: ChatSocket = {
     this._socket?.close();
     this._socket = null;
   },
-};
+});
