@@ -1,14 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import type { Picture, User } from '@shared/api';
-import { userService } from '@shared/api';
+import { serviceGetter } from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
 
 export const getCurrentUser = createAsyncThunk(
   'users/getCurrentUser',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await userService.getMe();
+      const response = await serviceGetter.getUserService().getMe();
 
       return response.data;
     } catch (error: unknown) {
@@ -21,7 +21,7 @@ export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
   async (data: Partial<User>, { rejectWithValue }) => {
     try {
-      const response = await userService.updateUser(data);
+      const response = await serviceGetter.getUserService().updateUser(data);
 
       return response.data;
     } catch (error: unknown) {
@@ -40,10 +40,9 @@ export const updateUserPlaceThunk = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await userService.updateUserPlace(
-        args.latitude,
-        args.longitude
-      );
+      const response = await serviceGetter
+        .getUserService()
+        .updateUserPlace(args.latitude, args.longitude);
 
       return response.data;
     } catch (error: unknown) {
@@ -56,7 +55,9 @@ export const saveUserImageThunk = createAsyncThunk(
   'users/saveUserImage',
   async (picture: Blob, { rejectWithValue }) => {
     try {
-      const response = await userService.savePicture(picture);
+      const response = await serviceGetter
+        .getUserService()
+        .savePicture(picture);
 
       return response.data;
     } catch (error: unknown) {
@@ -69,7 +70,7 @@ export const deleteUserPictureThunk = createAsyncThunk(
   'users/deleteUserPicture',
   async (id: string, { rejectWithValue }) => {
     try {
-      const response = await userService.deletePicture(id);
+      const response = await serviceGetter.getUserService().deletePicture(id);
 
       return response.data;
     } catch (error: unknown) {
@@ -87,7 +88,9 @@ export const mixUserPicturesThunk = createAsyncThunk(
         newOrders.push(pictures.findIndex((item) => item.order === i));
       }
 
-      const response = await userService.mixPictures(newOrders);
+      const response = await serviceGetter
+        .getUserService()
+        .mixPictures(newOrders);
       return response.data;
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));

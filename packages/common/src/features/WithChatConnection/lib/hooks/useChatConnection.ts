@@ -16,7 +16,7 @@ import type {
   ReceivedMessage,
   ReceivedNewMessage,
 } from '@shared/api';
-import { chatService, ChatSocketEvent } from '@shared/api';
+import { serviceGetter, ChatSocketEvent } from '@shared/api';
 import type { WsExceptionError } from '@shared/lib';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 
@@ -30,7 +30,7 @@ export function useChatConnection() {
       return;
     }
 
-    const { on, onAny } = chatService.connect();
+    const { on, onAny } = serviceGetter.getChatService().connect();
 
     dispatch(setConnectedSocket());
 
@@ -75,7 +75,7 @@ export function useChatConnection() {
     });
 
     return () => {
-      chatService.disconnect();
+      serviceGetter.getChatService().disconnect();
     };
   }, [dispatch]);
 }

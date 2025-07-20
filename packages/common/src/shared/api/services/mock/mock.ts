@@ -2,7 +2,7 @@ import type { AxiosError, AxiosResponse } from 'axios';
 
 import type { Chat, User } from '../../interfaces';
 import { chatStub, matchingUserStubs, messageStub, userStub } from './stub';
-import { LIB_SETTINGS } from '@shared/lib';
+import { COMMON_LIB_SETTINGS } from '@shared/lib';
 
 export async function resolveAxiosResponse<T>(
   data?: T
@@ -30,7 +30,7 @@ export async function rejectWithAxiosResponseError<T>(
 }
 
 export function getMockableService<T>(service: T, mockService: T): T {
-  return LIB_SETTINGS.WITH_MOCKS ? mockService : service;
+  return COMMON_LIB_SETTINGS.WITH_MOCKS ? mockService : service;
 }
 
 export const mockStorage = {

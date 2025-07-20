@@ -1,18 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import type { LoginParams, RegistrationParams } from '@shared/api';
-import { authService } from '@shared/api';
+import {
+  serviceGetter,
+  type LoginParams,
+  type RegistrationParams,
+} from '@shared/api';
 import { returnErrorMessage } from '@shared/lib';
 
 export const registerThunk = createAsyncThunk(
   'auth/registerUser',
   async (params: RegistrationParams, { rejectWithValue }) => {
     try {
-      const response = await authService.registration(
-        params.email,
-        params.name,
-        params.password
-      );
+      const response = await serviceGetter
+        .getAuthService()
+        .registration(params.email, params.name, params.password);
 
       const { accessToken, ...data } = response.data;
       localStorage.setItem('accessToken', accessToken);
@@ -28,7 +29,9 @@ export const loginThunk = createAsyncThunk(
   'auth/loginUser',
   async (params: LoginParams, { rejectWithValue }) => {
     try {
-      const response = await authService.login(params.email, params.password);
+      const response = await serviceGetter
+        .getAuthService()
+        .login(params.email, params.password);
 
       const { accessToken, ...data } = response.data;
       localStorage.setItem('accessToken', accessToken);
@@ -44,7 +47,7 @@ export const checkAuthThunk = createAsyncThunk(
   'auth/checkAuth',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await authService.refresh();
+      const response = await serviceGetter.getAuthService().refresh();
 
       const { accessToken, ...data } = response.data;
       localStorage.setItem('accessToken', accessToken);
@@ -60,7 +63,7 @@ export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await authService.logout();
+      await serviceGetter.getAuthService().logout();
     } catch (error: unknown) {
       return rejectWithValue(returnErrorMessage(error));
     }
