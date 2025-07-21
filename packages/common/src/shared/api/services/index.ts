@@ -6,11 +6,11 @@ export * from './chat/chat-service.interface';
 export * from './user/user-service.interface';
 export * from './auth/auth.interfaces';
 
-import { AuthService } from './auth/auth.interfaces';
+import type { AuthService } from './auth/auth.interfaces';
 import { createAuthService } from './auth/auth.service';
-import { ChatService } from './chat/chat-service.interface';
+import type { ChatService } from './chat/chat-service.interface';
 import { createChatService } from './chat/chat.service';
-import { UserService } from './user/user-service.interface';
+import type { UserService } from './user/user-service.interface';
 import { createUserService } from './user/user.service';
 
 interface Instances {
