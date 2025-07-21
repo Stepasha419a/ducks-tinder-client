@@ -25,7 +25,7 @@
     ]
   },
   "dependencies": {
-    "@ducks-tinder-client/ui": "1.1.5-alpha.11",
+    "@ducks-tinder-client/ui": "^1.1.6",
     "browserslist": "^4.25.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -40,7 +40,7 @@
     "@babel/preset-typescript": "^7.27.1",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@ducks-tinder-client/config": "1.1.1-alpha.13",
+    "@ducks-tinder-client/config": "^1.1.1-alpha.14",
     "@eslint/js": "^9.28.0",
     "@feature-sliced/eslint-config": "^0.1.1",
     "@feature-sliced/steiger-plugin": "^0.5.6",
