@@ -25,8 +25,8 @@
     ]
   },
   "dependencies": {
-    "@ducks-tinder-client/common": "1.6.1-alpha.8",
-    "@ducks-tinder-client/ui": "1.1.5-alpha.11",
+    "@ducks-tinder-client/common": "^1.6.3",
+    "@ducks-tinder-client/ui": "^1.1.6",
     "@fortawesome/fontawesome-common-types": "^6.7.2",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
@@ -50,7 +50,7 @@
     "@babel/preset-typescript": "^7.27.1",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@ducks-tinder-client/config": "1.1.1-alpha.13",
+    "@ducks-tinder-client/config": "^1.1.1-alpha.14",
     "@eslint/js": "^9.28.0",
     "@feature-sliced/eslint-config": "^0.1.1",
     "@feature-sliced/steiger-plugin": "^0.5.6",
