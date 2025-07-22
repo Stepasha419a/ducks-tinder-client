@@ -38,7 +38,7 @@
     ]
   },
   "peerDependencies": {
-    "@ducks-tinder-client/common": "1.6.3",
+    "@ducks-tinder-client/common": "1.7.0-alpha.0",
     "@fortawesome/fontawesome-common-types": "6.7.x",
     "@fortawesome/fontawesome-svg-core": "6.7.x",
     "@fortawesome/free-solid-svg-icons": "6.7.x",
