@@ -1,6 +1,5 @@
 import { withoutVitePlugins } from '@storybook/builder-vite';
 import type { StorybookConfig } from '@storybook/react-vite';
-import { loadEnv } from 'vite';
 import * as path from 'path';
 
 const config: StorybookConfig = {
@@ -18,12 +17,8 @@ const config: StorybookConfig = {
     autodocs: 'tag',
   },
   viteFinal: async (config) => {
-    const env = loadEnv('demo', process.cwd(), '');
     return {
       ...config,
-      define: {
-        'process.env': env,
-      },
       resolve: {
         alias: {
           '@app': path.resolve('./src/app'),
