@@ -4,7 +4,7 @@ import type { PairFilterParams } from '@ducks-tinder-client/common';
 import {
   PAGINATION_TAKE,
   returnErrorMessage,
-  userService,
+  serviceGetter,
 } from '@ducks-tinder-client/common';
 
 import type { GetUserPairsProps } from './pair.interface';
@@ -40,7 +40,9 @@ export const getUserPairsThunk = createAsyncThunk(
         params.identifyConfirmed = filter.identifyConfirmed;
       }
 
-      const response = await userService.getPairs(params, true);
+      const response = await serviceGetter
+        .getUserService()
+        .getPairs(params, true);
 
       return { pairs: response.data, isInitial };
     } catch (error: unknown) {
@@ -53,7 +55,7 @@ export const getPairsInfoThunk = createAsyncThunk(
   'users/getPairsInfo',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await userService.getPairsInfo();
+      const response = await serviceGetter.getUserService().getPairsInfo();
 
       return response.data;
     } catch (error: unknown) {
@@ -68,7 +70,7 @@ export const acceptPairThunk = createAsyncThunk(
     try {
       dispatch(deletePairById(pairId));
 
-      const response = await userService.acceptPair(pairId);
+      const response = await serviceGetter.getUserService().acceptPair(pairId);
 
       return response.data;
     } catch (error: unknown) {
@@ -83,7 +85,7 @@ export const refusePairThunk = createAsyncThunk(
     try {
       dispatch(deletePairById(pairId));
 
-      const response = await userService.deletePair(pairId);
+      const response = await serviceGetter.getUserService().deletePair(pairId);
 
       return response.data;
     } catch (error: unknown) {

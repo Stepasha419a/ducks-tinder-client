@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { returnErrorMessage, userService } from '@ducks-tinder-client/common';
+import { returnErrorMessage, serviceGetter } from '@ducks-tinder-client/common';
 
 import { deletePendingUserId, skipCurrentTinderUser } from './tinder.slice';
 
@@ -17,7 +17,9 @@ export const getMatchUsersThunk = createAsyncThunk(
       const tinderUserIds = tinderUsers.map((user) => user.id);
       const skipUserIds = pendingUserIds.concat(tinderUserIds);
 
-      const response = await userService.getMatchUsers(take, skipUserIds);
+      const response = await serviceGetter
+        .getUserService()
+        .getMatchUsers(take, skipUserIds);
 
       return response.data;
     } catch (error: unknown) {
@@ -40,7 +42,8 @@ export const likeUserThunk = createAsyncThunk(
 
       dispatch(skipCurrentTinderUser());
 
-      const response = await userService
+      const response = await serviceGetter
+        .getUserService()
         .likeUser(currentUserId)
         .catch((error) => {
           dispatch(deletePendingUserId(currentUserId));
@@ -64,7 +67,7 @@ export const returnUserThunk = createAsyncThunk(
   'users/returnUser',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await userService.returnUser();
+      const response = await serviceGetter.getUserService().returnUser();
 
       return response.data;
     } catch (error: unknown) {
@@ -87,7 +90,8 @@ export const dislikeUserThunk = createAsyncThunk(
 
       dispatch(skipCurrentTinderUser());
 
-      const response = await userService
+      const response = await serviceGetter
+        .getUserService()
         .dislikeUser(currentUserId)
         .catch((error) => {
           dispatch(deletePendingUserId(currentUserId));
