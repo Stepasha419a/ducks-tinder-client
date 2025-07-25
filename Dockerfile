@@ -15,8 +15,7 @@ RUN apk add --no-cache \
     zlib-dev \
     openssl-dev \
     wget \
-    git \
-    gettext
+    git
 
 WORKDIR /usr/src
 RUN wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
