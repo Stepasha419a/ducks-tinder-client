@@ -9,10 +9,10 @@ services:
     env_file:
       - .env.dev
     ports:
-      - '${PROXY_PORT}:${PROXY_PORT}'
+      - '${VAR_PROXY_PORT}:${VAR_PROXY_PORT}'
     command: >
       /bin/sh -c "envsubst '
-      \$\{PROXY_PORT\}
+      \$\{VAR_PROXY_PORT\}
       \$\{CLIENT_URL\}
       \$\{PROXY_USER_SERVICE\}
       \$\{PROXY_CHAT_SERVICE\}
@@ -37,7 +37,7 @@ services:
     env_file:
       - .env.dev
     ports:
-      - '${PROXY_PORT}:${PROXY_PORT}'
+      - '${VAR_PROXY_PORT}:${VAR_PROXY_PORT}'
     command: >
       /bin/sh -c "envsubst '
       \$\{PROXY_PORT\}
