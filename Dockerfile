@@ -2,7 +2,7 @@
 # TODO: pass certs
 # TODO: pass env
 
-FROM alpine:3.22.0
+FROM alpine:3.22.0 AS nginx-build
 
 ENV NGINX_VERSION=1.27.2
 
@@ -50,3 +50,7 @@ RUN ./configure \
     --add-module=/usr/src/ngx_brotli && \
     make -j$(nproc) && \
     make install
+FROM alpine:3.22.0
+
+RUN apk add --no-cache gettext pcre
+ENTRYPOINT ["./entrypoint.sh"]
