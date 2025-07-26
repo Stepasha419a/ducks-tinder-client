@@ -59,6 +59,9 @@ jobs:
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }} .
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }}
+      - name: Remove redundant unstable docker images
+        run: pnpm remove-redundant-images
+        continue-on-error: true
       # - name: Deploy demo app
       #   uses: appleboy/ssh-action@v1
       #   env:
