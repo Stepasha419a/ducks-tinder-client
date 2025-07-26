@@ -97,6 +97,8 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: pnpm install:webpack --frozen-lockfile
+      - name: Run build packages
+        run: pnpm nx:build:packages-only
       - name: Publish packages
         run: pnpm publish-packages
         env:
