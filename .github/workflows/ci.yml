@@ -53,14 +53,6 @@ jobs:
         run: pnpm install:webpack --frozen-lockfile
       - name: Run apps build
         run: pnpm nx:build:apps
-      - name: Upload build packages artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: packages-build-artifacts
-          path: |
-            packages/config/dist
-            packages/common/dist
-            packages/ui/dist
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
       - name: Build Docker image
