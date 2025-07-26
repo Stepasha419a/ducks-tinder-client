@@ -93,7 +93,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install:webpack --frozen-lockfile
       - name: Run build packages
-        run: pnpm nx:build:packages-only
+        run: pnpm nx:build:packages
       - name: Publish packages
         run: pnpm publish-packages
         env:
