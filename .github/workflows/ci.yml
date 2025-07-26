@@ -51,8 +51,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install:webpack --frozen-lockfile
-      - name: Run build
-        run: pnpm nx:build
+      - name: Run apps build
+        run: pnpm nx:build:apps
       - name: Upload build packages artifacts
         uses: actions/upload-artifact@v4
         with:
