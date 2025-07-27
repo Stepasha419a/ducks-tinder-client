@@ -49,6 +49,16 @@ RUN ./configure \
     --add-module=/usr/src/ngx_brotli && \
     make -j$(nproc) && \
     make install
+
+FROM node:22.17-alpine3.22 AS frontend-build
+
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
+
+WORKDIR /usr/src/app/frontend
+
+COPY . /usr/src/app/frontend
 FROM alpine:3.22.0
 
 RUN apk add --no-cache gettext pcre
