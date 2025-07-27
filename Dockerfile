@@ -59,6 +59,10 @@ RUN corepack enable
 WORKDIR /usr/src/app/frontend
 
 COPY . /usr/src/app/frontend
+
+RUN pnpm run install:webpack
+RUN pnpm run nx:build:apps
+
 FROM alpine:3.22.0
 
 RUN apk add --no-cache gettext pcre
