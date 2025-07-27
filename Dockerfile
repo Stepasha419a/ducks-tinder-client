@@ -66,4 +66,8 @@ RUN pnpm run nx:build:apps
 FROM alpine:3.22.0
 
 RUN apk add --no-cache gettext pcre
+
+COPY --from=nginx-build /usr/sbin/nginx /usr/sbin/nginx
+COPY --from=nginx-build /etc/nginx /etc/nginx
+COPY --from=nginx-build /var/run /var/run
 ENTRYPOINT ["./entrypoint.sh"]
