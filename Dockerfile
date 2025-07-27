@@ -70,4 +70,9 @@ RUN apk add --no-cache gettext pcre
 COPY --from=nginx-build /usr/sbin/nginx /usr/sbin/nginx
 COPY --from=nginx-build /etc/nginx /etc/nginx
 COPY --from=nginx-build /var/run /var/run
+
+COPY --from=frontend-build /usr/src/app/frontend/apps/root/dist /usr/share/nginx/html/root
+COPY --from=frontend-build /usr/src/app/frontend/apps/policy/dist /usr/share/nginx/html/policy
+COPY --from=frontend-build /usr/src/app/frontend/apps/chat/dist /usr/share/nginx/html/chat
+
 ENTRYPOINT ["./entrypoint.sh"]
