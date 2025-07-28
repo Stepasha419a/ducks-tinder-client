@@ -39,3 +39,39 @@ async function deleteTag(tag) {
     console.error(`Failed to delete tag ${tag}: ${res.statusText}`);
   }
 }
+
+async function main() {
+  let allTags = [];
+  let page = 1;
+  let hasNext = true;
+
+  console.log('Fetching tags from DockerHub...');
+
+  while (hasNext) {
+    const result = await listTags(page);
+    allTags = allTags.concat(result.results);
+    hasNext = !!result.next;
+    page += 1;
+  }
+
+  const unstableTags = allTags
+    .filter((tag) => tag.name.startsWith(TAG_PREFIX))
+    .sort((a, b) => new Date(b.last_updated) - new Date(a.last_updated));
+
+  const toDelete = unstableTags.slice(KEEP_LAST);
+
+  if (toDelete.length === 0) {
+    console.log(`Nothing to delete. ${unstableTags.length} tags found`);
+    return;
+  }
+
+  console.log(`Deleting ${toDelete.length} old unstable tags...`);
+
+  for (const tag of toDelete) {
+    await deleteTag(tag.name);
+  }
+
+  console.log('Done');
+}
+
+main();
