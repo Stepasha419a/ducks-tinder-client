@@ -24,3 +24,18 @@ async function listTags(page = 1) {
 
   return json;
 }
+
+async function deleteTag(tag) {
+  const url = `https://hub.docker.com/v2/repositories/${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}/tags/${tag}/`;
+
+  const res = await fetch(url, {
+    method: 'DELETE',
+    headers,
+  });
+
+  if (res.status === 204) {
+    console.log(`Deleted tag: ${tag}`);
+  } else {
+    console.error(`Failed to delete tag ${tag}: ${res.statusText}`);
+  }
+}
