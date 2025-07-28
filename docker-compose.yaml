@@ -38,10 +38,6 @@ services:
       - .env.dev
     ports:
       - '${VAR_PROXY_PORT}:${VAR_PROXY_PORT}'
-    command: >
-      /bin/sh -c "envsubst '
-      \$\{PROXY_PORT\}
-      ' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
   verdaccio:
     image: verdaccio/verdaccio
     container_name: verdaccio
