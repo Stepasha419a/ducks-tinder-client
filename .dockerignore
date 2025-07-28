@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+
+.env
+
+.nx
+.vscode
+.husky
+.github
+.git
