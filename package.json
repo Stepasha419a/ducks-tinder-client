@@ -16,6 +16,7 @@
     "up:dev:patch:ui": "pnpm -F ui up:dev:patch && pnpm -F root up:dev:packages && pnpm -F policy up:dev:packages && pnpm -F chat up:dev:packages",
     "up:dev:minor:ui": "pnpm -F ui up:dev:minor && pnpm -F root up:dev:packages && pnpm -F policy up:dev:packages && pnpm -F chat up:dev:packages",
     "publish-packages": "node scripts/publish-packages.js",
+    "remove-redundant-images": "node scripts/remove-redundant-images.js",
     "install:webpack": "pnpm install && node scripts/remove-webpack-error.js"
   },
   "devDependencies": {
