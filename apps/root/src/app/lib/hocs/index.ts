@@ -15,13 +15,13 @@ import { setUiLibSettings } from '@ducks-tinder-client/ui';
 export { WithBrowserRouter } from './BrowserRouter';
 export { withAppHocs } from './withAppHocs';
 
-setUiLibSettings({ IMAGE_BASE_URL: window._env_.VITE_FILE_SERVICE_URL });
+setUiLibSettings({ IMAGE_BASE_URL: window._env_.VAR_FILE_SERVICE_URL });
 setCommonLibSettings({
-  AUTH_SERVICE_URL: window._env_.VITE_AUTH_SERVICE_URL,
-  CHAT_SERVICE_URL: window._env_.VITE_CHAT_SERVICE_URL,
-  FILE_SERVICE_URL: window._env_.VITE_FILE_SERVICE_URL,
-  USER_SERVICE_URL: window._env_.VITE_USER_SERVICE_URL,
-  WITH_MOCKS: window._env_.VITE_MODE === 'demo',
+  AUTH_SERVICE_URL: window._env_.VAR_AUTH_SERVICE_URL,
+  CHAT_SERVICE_URL: window._env_.VAR_CHAT_SERVICE_URL,
+  FILE_SERVICE_URL: window._env_.VAR_FILE_SERVICE_URL,
+  USER_SERVICE_URL: window._env_.VAR_USER_SERVICE_URL,
+  WITH_MOCKS: window._env_.VAR_MODE === 'demo',
 });
 
 privateHocComposition.addHocs([
