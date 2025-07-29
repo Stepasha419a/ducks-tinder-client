@@ -6,6 +6,8 @@ dist
 
 cert
 
+env-config.js
+
 # dev mutations for window to test much easily
 /src/application/dev
 
