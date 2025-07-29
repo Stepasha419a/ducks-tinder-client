@@ -3,11 +3,11 @@ export {};
 declare global {
   interface Window {
     _env_: {
-      VITE_USER_SERVICE_URL: string;
-      VITE_CHAT_SERVICE_URL: string;
-      VITE_FILE_SERVICE_URL: string;
-      VITE_AUTH_SERVICE_URL: string;
-      VITE_MODE: string;
+      VAR_USER_SERVICE_URL: string;
+      VAR_CHAT_SERVICE_URL: string;
+      VAR_FILE_SERVICE_URL: string;
+      VAR_AUTH_SERVICE_URL: string;
+      VAR_MODE: string;
     };
   }
 }
