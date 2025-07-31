@@ -31,9 +31,6 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf.template
       - ./cert:/etc/nginx/cert
-      - ./apps/root/dist:/usr/share/nginx/html/root
-      - ./apps/policy/dist:/usr/share/nginx/html/policy
-      - ./apps/chat/dist:/usr/share/nginx/html/chat
     env_file:
       - .env.dev
     ports:
