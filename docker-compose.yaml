@@ -1,6 +1,6 @@
 name: 'ducks-tinder-client'
 services:
-  nginx-prod:
+  nginx:
     container_name: nginx-prod
     build:
       context: .
