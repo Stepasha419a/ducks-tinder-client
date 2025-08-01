@@ -90,8 +90,8 @@ export function getWebpackProdConfig(options: Options): Config {
     devtool: 'inline-source-map',
     entry: './src/index.ts',
     output: {
-      filename: `${options.jsOutputPath}/[name].bundle.js`,
-      chunkFilename: `${options.jsOutputPath}/[name].chunk.js`,
+      filename: `js/[name].[hash].bundle.js`,
+      chunkFilename: `js/[name].[hash].chunk.js`,
       path: path.resolve('./dist'),
       assetModuleFilename: 'media/[name].[hash][ext]',
       publicPath: '/',
