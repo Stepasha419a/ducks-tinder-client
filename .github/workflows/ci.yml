@@ -62,6 +62,10 @@ jobs:
       - name: Remove redundant unstable docker images
         run: pnpm remove-redundant-images
         continue-on-error: true
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_REPO }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       # - name: Deploy demo app
       #   uses: appleboy/ssh-action@v1
       #   env:
