@@ -72,8 +72,8 @@ export function getWebpackDevConfig(options: Options): Config {
     devtool: 'inline-source-map',
     entry: './src/index.ts',
     output: {
-      filename: `js/[name].bundle.js`,
-      chunkFilename: `js/[name].chunk.js`,
+      filename: `js/[name].[hash].bundle.js`,
+      chunkFilename: `js/[name].[hash].chunk.js`,
       path: path.resolve(__dirname, '..', 'dist'),
       assetModuleFilename: 'media/[name].[hash][ext]',
       publicPath: publicPath,
