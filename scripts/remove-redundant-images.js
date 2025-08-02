@@ -41,7 +41,7 @@ async function listTags(headers, page = 1) {
 
   const res = await fetch(url, { headers });
   if (!res.ok) {
-    throw new Error(`Failed to list tags: ${res.statusText}`);
+    throw new Error(`Failed to list tags: ${res.statusText} ${res.statusText}`);
   }
 
   const json = await res.json();
@@ -60,7 +60,9 @@ async function deleteTag(tag) {
   if (res.status === 204) {
     console.log(`Deleted tag: ${tag}`);
   } else {
-    throw new Error(`Failed to delete tag ${tag}: ${res.statusText}`);
+    throw new Error(
+      `Failed to delete tag ${tag}: ${res.statusText} ${res.statusText}`
+    );
   }
 }
 
