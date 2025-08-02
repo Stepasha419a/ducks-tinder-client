@@ -15,7 +15,28 @@ const getHeaders = (token) => ({
   Accept: 'application/json',
 });
 
-async function listTags(page = 1) {
+async function fetchToken() {
+  const res = await fetch(
+    `https://auth.docker.io/token?service=registry.docker.io&scope=${encodeURIComponent(
+      REPO_SCOPE
+    )}`,
+    {
+      headers: {
+        Authorization: BASIC_AUTH_HEADER,
+        Accept: 'application/json',
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch token: ${res.status} ${res.statusText}`);
+  }
+
+  const data = await res.json();
+  return data.token;
+}
+
+async function listTags(headers, page = 1) {
   const url = `https://hub.docker.com/v2/repositories/${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}/tags?page=${page}&page_size=100`;
 
   const res = await fetch(url, { headers });
