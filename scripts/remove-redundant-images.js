@@ -36,7 +36,7 @@ async function deleteTag(tag) {
   if (res.status === 204) {
     console.log(`Deleted tag: ${tag}`);
   } else {
-    console.error(`Failed to delete tag ${tag}: ${res.statusText}`);
+    throw new Error(`Failed to delete tag ${tag}: ${res.statusText}`);
   }
 }
 
