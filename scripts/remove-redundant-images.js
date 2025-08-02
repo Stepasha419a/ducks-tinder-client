@@ -6,9 +6,7 @@ const TAG_PREFIX = 'unstable-dev-';
 const KEEP_LAST = 10;
 
 const headers = {
-  Authorization: `Basic ${Buffer.from(
-    `${DOCKERHUB_USERNAME}:${DOCKERHUB_TOKEN}`
-  ).toString('base64')}`,
+  Authorization: `Bearer ${DOCKERHUB_TOKEN}`,
   Accept: 'application/json',
 };
 
