@@ -49,7 +49,7 @@ async function listTags(headers, page = 1) {
   return json;
 }
 
-async function deleteTag(tag) {
+async function deleteTag(tag, headers) {
   const url = `https://hub.docker.com/v2/repositories/${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}/tags/${tag}/`;
 
   const res = await fetch(url, {
@@ -79,7 +79,7 @@ async function main() {
   console.log('Fetching tags from DockerHub...');
 
   while (hasNext) {
-    const result = await listTags(page);
+    const result = await listTags(headers, page);
     allTags = allTags.concat(result.results);
     hasNext = !!result.next;
     page += 1;
@@ -99,7 +99,7 @@ async function main() {
   console.log(`Deleting ${toDelete.length} old unstable tags...`);
 
   for (const tag of toDelete) {
-    await deleteTag(tag.name);
+    await deleteTag(tag.name, headers);
   }
 
   console.log('Done');
