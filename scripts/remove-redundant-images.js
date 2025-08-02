@@ -1,14 +1,19 @@
 const DOCKERHUB_USERNAME = process.env.DOCKERHUB_USERNAME;
+const DOCKERHUB_PASSWORD = process.env.DOCKERHUB_PASSWORD;
 const DOCKERHUB_REPO = process.env.DOCKERHUB_REPO;
-const DOCKERHUB_TOKEN = process.env.DOCKERHUB_TOKEN;
 
 const TAG_PREFIX = 'unstable-dev-';
 const KEEP_LAST = 10;
+const REPO_SCOPE = `repository:${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}:pull,push,delete`;
 
-const headers = {
-  Authorization: `Bearer ${DOCKERHUB_TOKEN}`,
+const BASIC_AUTH_HEADER =
+  'Basic ' +
+  Buffer.from(`${DOCKERHUB_USERNAME}:${DOCKERHUB_PASSWORD}`).toString('base64');
+
+const getHeaders = (token) => ({
+  Authorization: `Bearer ${token}`,
   Accept: 'application/json',
-};
+});
 
 async function listTags(page = 1) {
   const url = `https://hub.docker.com/v2/repositories/${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}/tags?page=${page}&page_size=100`;
