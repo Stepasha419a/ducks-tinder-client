@@ -71,6 +71,11 @@ async function main() {
   let page = 1;
   let hasNext = true;
 
+  console.log('Fetching token from DockerHub...');
+
+  const token = await fetchToken();
+  const headers = getHeaders(token);
+
   console.log('Fetching tags from DockerHub...');
 
   while (hasNext) {
