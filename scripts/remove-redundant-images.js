@@ -50,8 +50,8 @@ async function listTags(headers, page = 1) {
   return json;
 }
 
-async function deleteTag(tag, headers) {
-  const url = `https://hub.docker.com/v2/repositories/${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}/tags/${tag}/`;
+async function deleteTag(tagName, headers) {
+  const url = `https://hub.docker.com/v2/repositories/${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}/tags/${tagName}`;
 
   const res = await fetch(url, {
     method: 'DELETE',
@@ -59,10 +59,10 @@ async function deleteTag(tag, headers) {
   });
 
   if (res.status === 204) {
-    console.log(`Deleted tag: ${tag}`);
+    console.log(`Deleted tag: ${tagName}`);
   } else {
     throw new Error(
-      `Failed to delete tag ${tag}: ${res.statusText} ${res.statusText}`
+      `Failed to delete tag ${tagName}: ${res.status} ${res.statusText}`
     );
   }
 }
