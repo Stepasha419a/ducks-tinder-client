@@ -17,17 +17,17 @@ const getHeaders = (token) => ({
 });
 
 async function fetchToken() {
-  const res = await fetch(
-    `https://auth.docker.io/token?service=registry.docker.io&scope=${encodeURIComponent(
-      REPO_SCOPE
-    )}`,
-    {
-      headers: {
-        Authorization: BASIC_AUTH_HEADER,
-        Accept: 'application/json',
-      },
-    }
-  );
+  const res = await fetch('https://hub.docker.com/v2/users/login/', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: DOCKERHUB_USERNAME,
+      password: DOCKERHUB_PASSWORD,
+    }),
+  });
 
   if (!res.ok) {
     throw new Error(`Failed to fetch token: ${res.status} ${res.statusText}`);
