@@ -11,8 +11,9 @@ const BASIC_AUTH_HEADER =
   Buffer.from(`${DOCKERHUB_USERNAME}:${DOCKERHUB_PASSWORD}`).toString('base64');
 
 const getHeaders = (token) => ({
-  Authorization: `Bearer ${token}`,
+  Authorization: `JWT ${token}`,
   Accept: 'application/json',
+  'Content-Type': 'application/json',
 });
 
 async function fetchToken() {
