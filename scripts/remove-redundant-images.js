@@ -4,11 +4,6 @@ const DOCKERHUB_REPO = process.env.DOCKERHUB_REPO;
 
 const TAG_PREFIX = 'unstable-dev-';
 const KEEP_LAST = 10;
-const REPO_SCOPE = `repository:${DOCKERHUB_USERNAME}/${DOCKERHUB_REPO}:pull,push,delete`;
-
-const BASIC_AUTH_HEADER =
-  'Basic ' +
-  Buffer.from(`${DOCKERHUB_USERNAME}:${DOCKERHUB_PASSWORD}`).toString('base64');
 
 const getHeaders = (token) => ({
   Authorization: `JWT ${token}`,
@@ -42,7 +37,7 @@ async function listTags(headers, page = 1) {
 
   const res = await fetch(url, { headers });
   if (!res.ok) {
-    throw new Error(`Failed to list tags: ${res.statusText} ${res.statusText}`);
+    throw new Error(`Failed to list tags: ${res.status} ${res.statusText}`);
   }
 
   const json = await res.json();
