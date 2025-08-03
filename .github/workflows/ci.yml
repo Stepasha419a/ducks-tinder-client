@@ -64,8 +64,8 @@ jobs:
         continue-on-error: true
         env:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
           DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_REPO }}
-          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       # - name: Deploy demo app
       #   uses: appleboy/ssh-action@v1
       #   env:
