@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 /usr/src/app/env-config.sh
 
