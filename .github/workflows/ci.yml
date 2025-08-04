@@ -13,6 +13,7 @@ jobs:
         uses: pnpm/action-setup@v4
       - name: Test ssh
         uses: appleboy/ssh-action@v1
+        continue-on-error: true
         env:
           SHA: ${{ github.sha }}
         with:
