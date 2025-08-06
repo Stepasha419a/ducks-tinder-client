@@ -11,7 +11,8 @@ services:
     env_file:
       - .env.dev
     ports:
-      - '${VAR_PROXY_PORT}:${VAR_PROXY_PORT}'
+      - "80:80"
+      - "443:443"
   verdaccio:
     image: verdaccio/verdaccio
     container_name: verdaccio
