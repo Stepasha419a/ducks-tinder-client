@@ -65,6 +65,9 @@ COPY ./apps/policy/package.json ./apps/policy/
 COPY ./apps/root/package.json ./apps/root/
 
 RUN pnpm run install:webpack
+
+COPY . .
+
 RUN pnpm run nx:build:apps
 
 FROM alpine:3.22.0
