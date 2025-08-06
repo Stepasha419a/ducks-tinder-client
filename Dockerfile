@@ -58,7 +58,11 @@ RUN corepack enable
 
 WORKDIR /usr/src/app/frontend
 
-COPY . /usr/src/app/frontend
+COPY ./package.json ./pnpm-lock.yaml ./pnpm-workspace.yaml ./
+COPY ./scripts/remove-webpack-error.js ./scripts/
+COPY ./apps/chat/package.json ./apps/chat/
+COPY ./apps/policy/package.json ./apps/policy/
+COPY ./apps/root/package.json ./apps/root/
 
 RUN pnpm run install:webpack
 RUN pnpm run nx:build:apps
