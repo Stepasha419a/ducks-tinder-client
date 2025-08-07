@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend-demo-app-deployment
-          image: stepasha419a/ducks-tinder-client-demo:latest
+          image: ${FULL_IMAGE}
           imagePullPolicy: Always
           resources:
             limits:
