@@ -26,7 +26,10 @@ spec:
               cpu: '0.0625'
               memory: '64Mi'
           ports:
-            - containerPort: 3000
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
           volumeMounts:
             - name: tls-volume
               mountPath: /etc/nginx/cert/prod
