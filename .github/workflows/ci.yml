@@ -11,19 +11,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-      - name: Test ssh
-        uses: appleboy/ssh-action@v1
-        continue-on-error: true
-        env:
-          SHA: ${{ github.sha }}
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          port: ${{ secrets.SSH_PORT }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          key: ${{ secrets.SSH_KEY }}
-          envs: SHA
-          script: /opt/cicd_demo.sh "$SHA"
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
