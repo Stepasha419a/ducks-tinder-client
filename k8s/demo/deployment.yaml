@@ -35,6 +35,13 @@ spec:
               mountPath: /usr/src/app/.env
               subPath: .env
               readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 443
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            failureThreshold: 3
       volumes:
         - name: tls-volume
           secret:
