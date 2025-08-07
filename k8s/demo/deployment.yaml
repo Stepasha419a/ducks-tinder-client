@@ -45,6 +45,13 @@ spec:
             initialDelaySeconds: 3
             periodSeconds: 5
             failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 443
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
       volumes:
         - name: tls-volume
           secret:
