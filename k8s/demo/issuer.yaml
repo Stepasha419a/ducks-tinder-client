@@ -2,6 +2,5 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: frontend-issuer
-  namespace: sandbox
 spec:
   selfSigned: {}
