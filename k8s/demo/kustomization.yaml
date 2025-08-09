@@ -5,3 +5,5 @@ secretGenerator:
     files:
       - .env=frontend-demo-secret-template.env
     type: Opaque
+generatorOptions:
+  disableNameSuffixHash: true
