@@ -3,26 +3,14 @@ kind: Certificate
 metadata:
   name: frontend-demo-certificate
 spec:
+  isCA: true
+  commonName: frontend-demo.com
   secretName: frontend-demo-tls
   privateKey:
     algorithm: RSA
     encoding: PKCS8
     size: 2048
-  duration: 2160h # 90d
-  renewBefore: 360h # 15d
-  isCA: true
-  usages:
-    - server auth
-  subject:
-    organizations:
-      - cert-manager
-  commonName: frontend-demo.com
-
-  dnsNames:
-    - frontend-demo.com
-  emailAddresses:
-    - dark_magic419a@mail.ru
-
   issuerRef:
-    # TODO: prod
-    name: letsencrypt-staging
+    name: frontend-issuer
+    kind: Issuer
+    group: cert-manager.io
