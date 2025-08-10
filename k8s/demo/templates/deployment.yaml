@@ -33,6 +33,8 @@ spec:
             {{- toYaml .Values.deployment.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.deployment.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.deployment.resources | nindent 12 }}
           volumeMounts:
             {{- toYaml .Values.deployment.volumeMounts | nindent 12 }}
       volumes:
