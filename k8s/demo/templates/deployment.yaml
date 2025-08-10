@@ -17,4 +17,16 @@ spec:
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+          imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
+          ports:
+            - name: https
+              containerPort: {{ .Values.service.httpsPort }}
+              protocol: TCP
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
     
