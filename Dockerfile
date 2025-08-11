@@ -85,4 +85,6 @@ COPY --from=frontend-build /usr/src/app/frontend/apps/chat/dist /usr/share/nginx
 COPY ./scripts/env-config.sh /usr/src/app/env-config.sh
 COPY ./scripts/entrypoint.sh ./entrypoint.sh
 
+RUN chmod +x ./entrypoint.sh
+
 ENTRYPOINT ["./entrypoint.sh"]
