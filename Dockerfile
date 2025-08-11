@@ -4,6 +4,7 @@
 
 FROM alpine:3.22.0 AS nginx-build
 
+ARG TARGETARCH
 ENV NGINX_VERSION=1.27.2
 
 RUN apk add --no-cache \
@@ -42,18 +43,26 @@ RUN set -eux; \
 
 # build nginx
 WORKDIR /usr/src/nginx-${NGINX_VERSION}
-ENV CFLAGS="-m64 -march=native -mtune=native -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"
-ENV LDFLAGS="-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
+ENV CFLAGS=""
+ENV LDFLAGS=""
 
-RUN ./configure \
-    --prefix=/etc/nginx \
-    --sbin-path=/usr/sbin/nginx \
-    --conf-path=/etc/nginx/nginx.conf \
-    --pid-path=/var/run/nginx.pid \
-    --with-http_ssl_module \
-    --with-http_v2_module \
-    --with-threads \
-    --add-module=/usr/src/ngx_brotli && \
+RUN set -eux; \
+    if [ "${TARGETARCH}" = "amd64" ]; then \
+      export CFLAGS="-m64 -march=native -mtune=native -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
+      export LDFLAGS="-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"; \
+    else \
+      export CFLAGS="-Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
+      export LDFLAGS="-Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"; \
+    fi; \
+    ./configure \
+      --prefix=/etc/nginx \
+      --sbin-path=/usr/sbin/nginx \
+      --conf-path=/etc/nginx/nginx.conf \
+      --pid-path=/var/run/nginx.pid \
+      --with-http_ssl_module \
+      --with-http_v2_module \
+      --with-threads \
+      --add-module=/usr/src/ngx_brotli && \
     make -j$(nproc) && \
     make install
 
