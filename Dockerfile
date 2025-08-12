@@ -97,6 +97,7 @@ COPY --from=nginx-build /var/run /var/run
 COPY --from=frontend-build /usr/src/app/frontend/apps/root/dist /usr/share/nginx/html/root
 COPY --from=frontend-build /usr/src/app/frontend/apps/policy/dist /usr/share/nginx/html/policy
 COPY --from=frontend-build /usr/src/app/frontend/apps/chat/dist /usr/share/nginx/html/chat
+COPY --from=frontend-build /usr/src/app/frontend/nginx/nginx.conf /etc/nginx/nginx.conf.template
 
 COPY ./scripts/env-config.sh /usr/src/app/env-config.sh
 COPY ./scripts/entrypoint.sh ./entrypoint.sh
