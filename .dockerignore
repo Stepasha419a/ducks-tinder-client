@@ -7,7 +7,6 @@
 ./setup
 ./k8s
 ./cert
-./nginx
 
 .nx
 .vscode
