@@ -102,6 +102,6 @@ COPY --from=frontend-build /usr/src/app/frontend/nginx/nginx.conf /etc/nginx/ngi
 COPY ./scripts/env-config.sh /usr/src/app/env-config.sh
 COPY ./scripts/entrypoint.sh ./entrypoint.sh
 
-RUN chmod +x ./entrypoint.sh
+RUN chmod +x ./env-config.sh ./entrypoint.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
