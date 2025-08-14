@@ -1,0 +1,15 @@
+name: build-arm
+
+on:
+  workflow_run:
+    workflows: ['continuous-integration']
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
