@@ -1,6 +1,7 @@
 name: build-arm
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ['continuous-integration']
     types:
