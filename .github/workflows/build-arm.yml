@@ -22,5 +22,3 @@ jobs:
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-cache
-      - name: Set up pnpm
-        uses: pnpm/action-setup@v4
