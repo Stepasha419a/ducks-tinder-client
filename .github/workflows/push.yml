@@ -36,7 +36,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-cache
+          key: ${{ runner.os }}-buildx-cache-amd64
       - name: Install pnpm
         uses: pnpm/action-setup@v4
       - name: Use Node.js 22
