@@ -85,7 +85,24 @@ async function main() {
     .filter((tag) => tag.name.startsWith(TAG_PREFIX))
     .sort((a, b) => new Date(b.last_updated) - new Date(a.last_updated));
 
-  const toDelete = unstableTags.slice(KEEP_LAST);
+  const tempTagsMap = allTags
+    .filter((tag) => tag.name.startsWith(TAG_PREFIX))
+    .sort((a, b) => new Date(b.last_updated) - new Date(a.last_updated))
+    .reduce((res, item) => {
+      const key = item.name.replaceAll('-amd64', '').replaceAll('-arm64', '');
+      if (!res[key]) {
+        res[key] = [];
+      }
+
+      res[key].push(item);
+
+      return res;
+    }, {});
+
+  const tempTags = Object.values(tempTagsMap)
+    .filter((tags) => tags.length >= 2)
+    .flatMap((tags) => tags)
+    .filter((tag) => tag.name.includes('amd64') || tag.name.includes('arm64'));
 
   if (toDelete.length === 0) {
     console.log(`Nothing to delete. ${unstableTags.length} tags found`);
