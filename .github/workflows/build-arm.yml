@@ -35,9 +35,9 @@ jobs:
       - name: Create multi-arch manifest
         run: |
           docker buildx imagetools create \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/myapp:sha-${{ github.sha }} \
-            ${{ secrets.DOCKERHUB_USERNAME }}/myapp:sha-${{ github.sha }}-amd64 \
-            ${{ secrets.DOCKERHUB_USERNAME }}/myapp:sha-${{ github.sha }}-arm64
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }} \
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }}-amd64 \
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }}-arm64
 
   deploy:
     runs-on: ubuntu-latest
