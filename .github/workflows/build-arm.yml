@@ -32,6 +32,12 @@ jobs:
             --cache-to type=local,dest=/tmp/.buildx-cache,mode=max \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }}-arm64 \
             --push .
+      - name: Create multi-arch manifest
+        run: |
+          docker buildx imagetools create \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/myapp:sha-${{ github.sha }} \
+            ${{ secrets.DOCKERHUB_USERNAME }}/myapp:sha-${{ github.sha }}-amd64 \
+            ${{ secrets.DOCKERHUB_USERNAME }}/myapp:sha-${{ github.sha }}-arm64
 
   deploy:
     runs-on: ubuntu-latest
