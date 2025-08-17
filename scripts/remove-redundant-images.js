@@ -104,6 +104,8 @@ async function main() {
     .flatMap((tags) => tags)
     .filter((tag) => tag.name.includes('amd64') || tag.name.includes('arm64'));
 
+  const toDelete = unstableTags.slice(KEEP_LAST).concat(tempTags);
+
   if (toDelete.length === 0) {
     console.log(`Nothing to delete. ${unstableTags.length} tags found`);
     return;
