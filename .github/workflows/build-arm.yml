@@ -45,6 +45,13 @@ jobs:
             -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }} \
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }}-amd64 \
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }}-arm64
+      - name: Remove redundant unstable docker images
+        run: pnpm remove-redundant-images
+        continue-on-error: true
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_REPO }}
 
   deploy:
     runs-on: ubuntu-latest
