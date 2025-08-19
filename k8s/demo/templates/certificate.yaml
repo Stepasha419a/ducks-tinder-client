@@ -8,6 +8,10 @@ spec:
   isCA: true
   commonName: {{ .Values.secret.serverName }}
   secretName: frontend-tls
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS8
+    size: 2048
   issuerRef:
     name: frontend-issuer
     kind: Issuer
