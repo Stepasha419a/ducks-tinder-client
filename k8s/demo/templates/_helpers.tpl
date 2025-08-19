@@ -33,4 +33,11 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
+{{/*
+Selector labels
+*/}}
+{{- define "ducks-tinder-client.selectorLabels" -}}
+app: {{ include "ducks-tinder-client.app.name" . }}
+app.kubernetes.io/name: {{ include "ducks-tinder-client.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
