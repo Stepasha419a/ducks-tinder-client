@@ -13,3 +13,7 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - port: {{ .Values.service.httpsPort }}
+      targetPort: https
+      protocol: TCP
+      name: https
