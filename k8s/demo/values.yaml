@@ -36,3 +36,11 @@ service:
   type: ClusterIP
   port: 80
   httpsPort: 443
+
+# This is for secret settings
+secret:
+  name: ducks-tinder-client-secret
+  mode: prod
+  serverName: example.com
+  certPath: /etc/nginx/cert/tls.crt
+  keyPath: /etc/nginx/cert/tls.key
