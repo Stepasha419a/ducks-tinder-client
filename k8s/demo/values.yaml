@@ -2,3 +2,30 @@
 
 # This is to override the chart name.
 nameOverride: ''
+
+# This is for deployment settings
+deployment:
+  name: frontend-deployment
+  replicaCount: 1
+  # This is for setting Kubernetes Annotations to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podAnnotations: {}
+  image:
+    repository: example/repository
+    tag: latest
+    pullPolicy: IfNotPresent
+  livenessProbe:
+    httpGet:
+      path: /
+      port: https
+  readinessProbe:
+    httpGet:
+      path: /
+      port: https
+  env: []
+  resources: {}
+  volumes: []
+  volumeMounts: []
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
