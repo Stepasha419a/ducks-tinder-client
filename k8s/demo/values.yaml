@@ -29,3 +29,10 @@ deployment:
   nodeSelector: {}
   tolerations: []
   affinity: {}
+
+# This is for service settings
+service:
+  name: ducks-tinder-client
+  type: ClusterIP
+  port: 80
+  httpsPort: 443
