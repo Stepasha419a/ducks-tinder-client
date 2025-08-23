@@ -18,10 +18,12 @@ deployment:
     httpGet:
       path: /
       port: https
+      scheme: HTTPS
   readinessProbe:
     httpGet:
       path: /
       port: https
+      scheme: HTTPS
   env: []
   resources: {}
   volumes: []
