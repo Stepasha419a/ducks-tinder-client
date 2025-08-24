@@ -19,11 +19,15 @@ deployment:
       path: /
       port: https
       scheme: HTTPS
+    initialDelaySeconds: 15
+    periodSeconds: 10
   readinessProbe:
     httpGet:
       path: /
       port: https
       scheme: HTTPS
+    initialDelaySeconds: 15
+    periodSeconds: 10
   env: []
   resources: {}
   volumes: []
