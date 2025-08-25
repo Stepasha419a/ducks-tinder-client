@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "webpack serve --config ./config/development.config.js --mode=development --env envPath=.env.dev",
-    "dev:demo": "webpack serve --config ./config/development.config.js --mode=development --env envPath=.env.demo",
-    "prod": "webpack --config ./config/production.config.js --mode=production --env envPath=.env.prod",
-    "prod:demo": "webpack --config ./config/production.config.js --mode=production --env envPath=.env.demo",
+    "dev": "dtc apply-env -m dev && webpack serve --config ./config/development.config.js --mode=development",
+    "demo": "dtc apply-env -m demo && webpack serve --config ./config/development.config.js --mode=development",
+    "build": "webpack --config ./config/production.config.js --mode=production",
     "lint": "eslint src/** --ext .ts --ext .tsx --ext .js  --max-warnings=0",
     "lint:fix": "eslint src/** --ext .ts --ext .tsx --ext .js --fix --max-warnings=0",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
