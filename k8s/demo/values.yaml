@@ -1,0 +1,52 @@
+# Default values for ducks-tinder-client.
+
+# This is to override the chart name.
+nameOverride: ''
+
+# This is for deployment settings
+deployment:
+  name: frontend-deployment
+  replicaCount: 1
+  # This is for setting Kubernetes Annotations to a Pod.
+  # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+  podAnnotations: {}
+  image:
+    repository: example/repository
+    tag: latest
+    pullPolicy: IfNotPresent
+  livenessProbe:
+    httpGet:
+      path: /
+      port: https
+      scheme: HTTPS
+    initialDelaySeconds: 15
+    periodSeconds: 10
+  readinessProbe:
+    httpGet:
+      path: /
+      port: https
+      scheme: HTTPS
+    initialDelaySeconds: 15
+    periodSeconds: 10
+  env: []
+  resources: {}
+  volumes: []
+  volumeMounts: []
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+
+# This is for service settings
+service:
+  name: ducks-tinder-client
+  type: ClusterIP
+  port: 80
+  httpsPort: 443
+
+# This is for secret settings
+secret:
+  name: ducks-tinder-client-secret
+  mode: prod
+  serverName: example.com
+  certPath: /etc/nginx/cert/tls.crt
+  keyPath: /etc/nginx/cert/tls.key

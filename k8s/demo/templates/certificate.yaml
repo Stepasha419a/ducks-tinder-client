@@ -1,11 +1,13 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: frontend-demo-certificate
+  name: frontend-certificate
+  labels: 
+    {{- include "ducks-tinder-client.labels" . | nindent 4 }}
 spec:
   isCA: true
-  commonName: frontend-demo.com
-  secretName: frontend-demo-tls
+  commonName: {{ .Values.secret.serverName }}
+  secretName: frontend-tls
   privateKey:
     algorithm: RSA
     encoding: PKCS8
