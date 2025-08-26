@@ -9,7 +9,8 @@
     "lint": "eslint src/** --ext .ts --ext .tsx --ext .js  --max-warnings=0",
     "lint:fix": "eslint src/** --ext .ts --ext .tsx --ext .js --fix --max-warnings=0",
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
-    "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}"
+    "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
+    "steiger": "steiger ./src"
   },
   "browserslist": {
     "production": [
