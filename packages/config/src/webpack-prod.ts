@@ -94,7 +94,7 @@ export function getWebpackProdConfig(options: Options): Config {
       chunkFilename: `${options.jsOutputPath}/[name].[hash].chunk.js`,
       path: path.resolve('./dist'),
       assetModuleFilename: 'media/[name].[hash][ext]',
-      publicPath: '/',
+      publicPath: '',
       clean: true,
     },
     cache: {
