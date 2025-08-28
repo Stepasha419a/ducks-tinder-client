@@ -8,6 +8,7 @@ declare global {
       VAR_FILE_SERVICE_URL: string;
       VAR_AUTH_SERVICE_URL: string;
       VAR_MODE: string;
+      VAR_ROOT_PATH?: string;
     };
   }
 }
