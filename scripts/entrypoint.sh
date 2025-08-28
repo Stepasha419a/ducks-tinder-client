@@ -11,6 +11,17 @@ for var in $REQUIRED_VARS; do
   fi
 done
 
+: "${PROXY_ROOT_PATH:=/}"
+if [ "$PROXY_ROOT_PATH" = "/" ]; then
+  PROXY_ALIAS_OPTIONAL_SLASH="/"
+  PROXY_ROOT_PATH_WITH_OPTIONAL_SLASH=""
+else
+  PROXY_ALIAS_OPTIONAL_SLASH=""
+  PROXY_ROOT_PATH_WITH_OPTIONAL_SLASH="$PROXY_ROOT_PATH"
+fi
+
+export PROXY_ROOT_PATH PROXY_ROOT_PATH_WITH_OPTIONAL_SLASH PROXY_ALIAS_OPTIONAL_SLASH
+
 SUBST_LIST=$(printf '${%s} ' $REQUIRED_VARS)
 
 envsubst "$SUBST_LIST" < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
