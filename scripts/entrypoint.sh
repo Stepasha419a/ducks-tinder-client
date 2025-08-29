@@ -25,6 +25,8 @@ export PROXY_ROOT_PATH PROXY_ROOT_PATH_WITH_OPTIONAL_SLASH PROXY_ALIAS_OPTIONAL_
 SUBST_LIST=$(printf '${%s} ' $REQUIRED_VARS)
 SUBST_LIST+="\${PROXY_ROOT_PATH} \${PROXY_ROOT_PATH_WITH_OPTIONAL_SLASH} \${PROXY_ALIAS_OPTIONAL_SLASH}"
 
+envsubst "$SUBST_LIST" < /usr/share/nginx/html/root/index.html > /usr/share/nginx/html/root/index.runtime.html
+
 envsubst "$SUBST_LIST" < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 exec nginx -g 'daemon off;'
