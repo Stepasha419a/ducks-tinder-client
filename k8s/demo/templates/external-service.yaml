@@ -7,3 +7,10 @@ metadata:
 spec:
   type: ExternalName
   externalName:  {{ .Values.service.name }}.{{ .Release.Namespace }}.svc.cluster.local
+  ports:
+    - name: http
+      port: {{ .Values.service.port }}
+      protocol: TCP
+    - name: https
+      port: {{ .Values.service.httpsPort }}
+      protocol: TCP
