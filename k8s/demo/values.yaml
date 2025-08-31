@@ -43,6 +43,12 @@ service:
   port: 80
   httpsPort: 443
 
+# This is for external service settings
+# Used to have main ingress for whole application
+# and route to other namespaces
+externalService:
+  namespace: default
+
 # This is for secret settings
 secret:
   name: ducks-tinder-client-secret
