@@ -21,6 +21,18 @@ Check online [demo stand](https://echo419a.ru/ducks-tinder/demo)
 
 Also you can check legacy [vercel deployment](https://ducks-tinder-client.vercel.app/)
 
+### Local demo stands
+
+Install dependencies with:
+
+- `pnpm install:webpack`
+
+Then for each app run:
+
+- `pnpm run demo`
+
+Then check http://localhost:3001 for local root-app demo stand
+
 ## Development
 
 - `npm i` to install dependencies<br/>
