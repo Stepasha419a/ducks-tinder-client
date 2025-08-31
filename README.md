@@ -6,16 +6,14 @@ Ducks Tinder is a Tinder clone project
 
 ## Available Scripts
 
-- `npm run dev` - runs the app in the development mode (default port is 3000);
-- `npm run demo` - runs the app in the development mode with mocks (default port is 3000);
-- `npm run build` - builds the app;
-- `npm run preview` - previews the builded app before (default port is 3000);
-- `npm run prettier` - runs prettier check;
-- `npm run prettier:fix` - runs prettier check with fix;
-- `npm run lint` - runs eslint;
-- `npm run lint:fix` - runs eslint with fix;
-- `npm run storybook` - runs storybook in the development mode (default port is 6006);
-- `npm run storybook:test` - runs storybook tests (run `npm run storybook` in the background for testing);
+- `nx:build:packages` - builds packages;
+- `nx:build:apps` - builds apps;
+- `nx:build` - builds apps and packages;
+- `nx:lint` - lints all projects;
+- `nx:prettier` - checks prettier for all projects;
+- `publish-packages` - publish new versions of packages (ci-cd only);
+- `remove-redundant-images` - removes old unstable-dev images (ci-cd only);
+- `install:webpack` - installs dependencies for temporary unstable webpack behavior (unstable);
 
 ## Demo
 
