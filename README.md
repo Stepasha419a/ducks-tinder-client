@@ -35,9 +35,17 @@ Then check http://localhost:3001 for local root-app demo stand
 
 ## Development
 
-- `npm i` to install dependencies<br/>
+Development is a mode to use an external api like [ducks-tinder-server](https://github.com/Stepasha419a/ducks-tinder-server)
 
-  in progress...
+Due to [ducks-tinder-server](https://github.com/Stepasha419a/ducks-tinder-server) is still in progress - I recommend using demo stands
+
+Install dependencies with:
+
+- `pnpm install:webpack` to install dependencies
+
+Then for each app run:
+
+- `pnpm run dev`
 
 ## Feature-Sliced Design
 
