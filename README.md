@@ -2,8 +2,6 @@
 
 Ducks Tinder is a Tinder clone project
 
-## Currently under the refactoring, the below may be mistaken
-
 ## Available Scripts
 
 - `nx:build:packages` - builds packages;
