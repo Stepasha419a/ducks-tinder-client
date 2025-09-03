@@ -14,3 +14,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Deploy demo app
+        uses: appleboy/ssh-action@v1
+        env:
+          SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          key: ${{ secrets.SSH_KEY }}
+          envs: SHA
+          script: /opt/cicd_demo.sh "$SHA"
