@@ -6,7 +6,9 @@ metadata:
     {{- include "ducks-tinder-client.labels" . | nindent 4 }}
 spec:
   isCA: true
-  commonName: {{ .Values.secret.serverName }}
+  commonName: "{{ .Values.service.name }}.{{ .Release.Namespace }}.svc.cluster.local"
+  dnsNames:
+    - "{{ .Values.service.name }}.{{ .Release.Namespace }}.svc.cluster.local"
   secretName: frontend-tls
   privateKey:
     algorithm: RSA
