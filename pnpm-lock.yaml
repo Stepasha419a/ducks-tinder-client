@@ -122,10 +122,10 @@ importers:
         version: 8.37.0(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2)
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 7.1.2(webpack@5.100.2)
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -158,13 +158,13 @@ importers:
         version: 3.6.2
       sass-loader:
         specifier: ^16.0.5
-        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2)
       steiger:
         specifier: ^0.5.7
         version: 0.5.8(typescript@5.8.3)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 4.0.0(webpack@5.100.2)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -246,10 +246,10 @@ importers:
         version: 8.37.0(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2)
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 7.1.2(webpack@5.100.2)
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -282,13 +282,13 @@ importers:
         version: 3.6.2
       sass-loader:
         specifier: ^16.0.5
-        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2)
       steiger:
         specifier: ^0.5.7
         version: 0.5.8(typescript@5.8.3)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 4.0.0(webpack@5.100.2)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -301,6 +301,9 @@ importers:
 
   apps/root:
     dependencies:
+      '@datapunt/matomo-tracker-react':
+        specifier: ^0.5.1
+        version: 0.5.1(react@19.1.0)
       '@ducks-tinder-client/common':
         specifier: ^1.7.0-alpha.0
         version: 1.7.0-alpha.0(@types/react@19.1.8)(browserslist@4.25.1)(react-toastify@11.0.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(redux@5.0.1)
@@ -442,13 +445,13 @@ importers:
         version: 8.37.0(eslint@9.31.0(jiti@2.4.2))(typescript@5.8.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2)
       concurrently:
         specifier: ^9.1.2
         version: 9.2.0
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 7.1.2(webpack@5.100.2)
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -487,13 +490,13 @@ importers:
         version: 6.0.1
       sass-loader:
         specifier: ^16.0.5
-        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2)
       steiger:
         specifier: ^0.5.7
         version: 0.5.8(typescript@5.8.3)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 4.0.0(webpack@5.100.2)
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
@@ -638,13 +641,13 @@ importers:
         version: 0.6.1(react-refresh@0.17.0)(type-fest@2.19.0)(webpack-dev-server@4.15.2)(webpack@5.100.2)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2)
       copy-webpack-plugin:
         specifier: ^13.0.0
         version: 13.0.0(webpack@5.100.2)
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 7.1.2(webpack@5.100.2)
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -671,10 +674,10 @@ importers:
         version: 1.89.2
       sass-loader:
         specifier: ^16.0.5
-        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+        version: 4.0.0(webpack@5.100.2)
       terser-webpack-plugin:
         specifier: ^5.3.14
         version: 5.3.14(@swc/core@1.12.14)(esbuild@0.25.6)(webpack@5.100.2)
@@ -1665,6 +1668,14 @@ packages:
   '@commitlint/types@19.8.1':
     resolution: {integrity: sha512-/yCrWGCoA1SVKOks25EGadP9Pnj0oAIHGpl2wH2M2Y46dPM2ueb8wyCVOD7O3WCTkaJ0IkKvzhl1JY7+uCT2Dw==}
     engines: {node: '>=v18'}
+
+  '@datapunt/matomo-tracker-js@0.5.1':
+    resolution: {integrity: sha512-9/MW9vt/BA5Db7tO6LqCeQKtuvBNjyq51faF3AzUmPMlYsJCnASIxcut3VqJKiribhUoey7aYbPIYuj9x4DLPA==}
+
+  '@datapunt/matomo-tracker-react@0.5.1':
+    resolution: {integrity: sha512-lrNYM9hFL6XK0VAdtMb7MwZrLWhaAconx4c7gOGAMvoWuoVm+ZZIYFuKtfYdYMeBf0avxWtmKRwjZEg7T8jV2A==}
+    peerDependencies:
+      react: '>= 16.8.0'
 
   '@dependents/detective-less@5.0.1':
     resolution: {integrity: sha512-Y6+WUMsTFWE5jb20IFP4YGa5IrGY/+a/FbOSjDF/wz9gepU2hwCYSXRHP/vPwBvwcY3SVMASt4yXxbXNXigmZQ==}
@@ -8600,6 +8611,13 @@ snapshots:
       '@types/conventional-commits-parser': 5.0.1
       chalk: 5.4.1
 
+  '@datapunt/matomo-tracker-js@0.5.1': {}
+
+  '@datapunt/matomo-tracker-react@0.5.1(react@19.1.0)':
+    dependencies:
+      '@datapunt/matomo-tracker-js': 0.5.1
+      react: 19.1.0
+
   '@dependents/detective-less@5.0.1':
     dependencies:
       gonzales-pe: 4.3.0
@@ -8632,9 +8650,9 @@ snapshots:
       '@babel/preset-react': 7.27.1(@babel/core@7.28.0)
       '@babel/preset-typescript': 7.27.1(@babel/core@7.28.0)
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.1(react-refresh@0.17.0)(type-fest@2.19.0)(webpack-dev-server@4.15.2)(webpack@5.100.2)
-      babel-loader: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+      babel-loader: 10.0.0(@babel/core@7.28.0)(webpack@5.100.2)
       copy-webpack-plugin: 13.0.0(webpack@5.100.2)
-      css-loader: 7.1.2(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+      css-loader: 7.1.2(webpack@5.100.2)
       dotenv: 16.6.1
       dotenv-webpack: 8.1.1(webpack@5.100.2)
       eslint-webpack-plugin: 5.0.2(eslint@9.31.0(jiti@2.4.2))(webpack@5.100.2)
@@ -8643,8 +8661,8 @@ snapshots:
       html-webpack-plugin: 5.6.3(webpack@5.100.2)
       react-refresh: 0.17.0
       sass: 1.89.2
-      sass-loader: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
-      style-loader: 4.0.0(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2)))
+      sass-loader: 16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2)
+      style-loader: 4.0.0(webpack@5.100.2)
       terser-webpack-plugin: 5.3.14(@swc/core@1.12.14)(webpack@5.100.2)
       tsconfig-paths-webpack-plugin: 4.2.0
       webpack: 5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2))
@@ -10369,12 +10387,10 @@ snapshots:
       webpack: 5.100.2(@swc/core@1.12.14)(esbuild@0.25.6)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@4.15.2)(webpack@5.100.2)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack@5.100.2))(webpack-dev-server@4.15.2)(webpack@5.100.2)':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack@5.100.2))(webpack@5.100.2)':
     dependencies:
       webpack: 5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2))
       webpack-cli: 5.1.4(webpack@5.100.2)
-    optionalDependencies:
-      webpack-dev-server: 4.15.2(webpack-cli@5.1.4(webpack@5.100.2))(webpack@5.100.2)
 
   '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack-dev-server@4.15.2)(webpack@5.100.2)':
     dependencies:
@@ -10618,7 +10634,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-loader@10.0.0(@babel/core@7.28.0)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2))):
+  babel-loader@10.0.0(@babel/core@7.28.0)(webpack@5.100.2):
     dependencies:
       '@babel/core': 7.28.0
       find-up: 5.0.0
@@ -11077,7 +11093,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-loader@7.1.2(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2))):
+  css-loader@7.1.2(webpack@5.100.2):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.6)
       postcss: 8.5.6
@@ -14295,7 +14311,7 @@ snapshots:
       sass-embedded-win32-arm64: 1.89.2
       sass-embedded-win32-x64: 1.89.2
 
-  sass-loader@16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2))):
+  sass-loader@16.0.5(sass-embedded@1.89.2)(sass@1.89.2)(webpack@5.100.2):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
@@ -14722,7 +14738,7 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  style-loader@4.0.0(webpack@5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2))):
+  style-loader@4.0.0(webpack@5.100.2):
     dependencies:
       webpack: 5.100.2(@swc/core@1.12.14)(webpack-cli@5.1.4(webpack@5.100.2))
 
@@ -15140,7 +15156,7 @@ snapshots:
       '@discoveryjs/json-ext': 0.5.7
       '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack@5.100.2))(webpack@5.100.2)
       '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack@5.100.2))(webpack@5.100.2)
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack@5.100.2))(webpack-dev-server@4.15.2)(webpack@5.100.2)
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack@5.100.2))(webpack@5.100.2)
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.6
