@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 
 import { ThemeProvider, ToastContainer } from '@ducks-tinder-client/ui';
 
-import { withAppHocs } from './lib';
+import { withAppHocs, OptionalMetricsProvider } from './lib';
 import { Routing } from './routing';
 import '@ducks-tinder-client/ui/dist/esm/index.css';
 
@@ -11,6 +11,7 @@ function App(): ReactElement {
   return (
     <ThemeProvider>
       <Routing />
+      <OptionalMetricsProvider />
       <ToastContainer />
     </ThemeProvider>
   );
