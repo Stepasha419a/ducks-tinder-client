@@ -27,7 +27,7 @@
   "dependencies": {
     "@datapunt/matomo-tracker-react": "^0.5.1",
     "@ducks-tinder-client/common": "^1.7.0-alpha.0",
-    "@ducks-tinder-client/ui": "^1.1.6",
+    "@ducks-tinder-client/ui": "^1.1.7-alpha.1",
     "@fortawesome/fontawesome-common-types": "^6.7.2",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
