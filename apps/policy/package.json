@@ -24,7 +24,7 @@
     ]
   },
   "dependencies": {
-    "@ducks-tinder-client/ui": "^1.1.6",
+    "@ducks-tinder-client/ui": "^1.1.7-alpha.1",
     "browserslist": "^4.25.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
