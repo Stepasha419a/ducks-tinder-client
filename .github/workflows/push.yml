@@ -23,34 +23,10 @@ jobs:
       - name: Run prettier
         run: pnpm nx:prettier
 
-  build:
-    runs-on: ubuntu-latest
-    environment: production
-    needs: check
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Set up Cache
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-cache
-      - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
-      - name: Build and push image
-        run: |
-          docker buildx build \
-            --cache-from type=local,src=/tmp/.buildx-cache \
-            --cache-to type=local,dest=/tmp/.buildx-cache,mode=max \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:unstable-dev-${{ github.sha }} \
-            --push .
-
   publish-packages:
     runs-on: ubuntu-latest
     environment: production
-    needs: build
+    needs: check
 
     steps:
       - uses: actions/checkout@v4
