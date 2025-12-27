@@ -1,1 +1,6 @@
 name: deploy
+
+on:
+  push:
+    tags:
+      - 'v*'
