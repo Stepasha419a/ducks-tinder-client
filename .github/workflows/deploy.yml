@@ -48,3 +48,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           envs: APP_TAG
           script: /opt/cicd_demo.sh "$APP_TAG"
+      - name: Remove redundant unstable docker images
+        run: npm run remove-redundant-images
+        continue-on-error: true
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_REPO }}
