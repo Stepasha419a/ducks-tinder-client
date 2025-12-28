@@ -36,3 +36,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Deploy demo app
+        uses: appleboy/ssh-action@v1
+        env:
+          APP_TAG: ${{ github.ref_name }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          key: ${{ secrets.SSH_KEY }}
+          envs: APP_TAG
+          script: /opt/cicd_demo.sh "$APP_TAG"
