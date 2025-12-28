@@ -25,7 +25,7 @@ jobs:
           APP_TAG: ${{ steps.get_version.outputs.VERSION }}
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:$APP_TAG
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:${{ env.APP_TAG }}
 
   deploy-demo:
     if: startsWith(github.ref, 'refs/tags/v') && contains(github.ref_name, 'alpha')
