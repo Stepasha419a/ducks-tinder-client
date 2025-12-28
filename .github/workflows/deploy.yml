@@ -21,6 +21,8 @@ jobs:
         run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
       - name: Build and push
         uses: docker/build-push-action@v6
+        env:
+          APP_TAG: ${{ steps.get_version.outputs.VERSION }}
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:$APP_TAG
