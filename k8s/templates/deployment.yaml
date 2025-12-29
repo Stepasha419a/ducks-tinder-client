@@ -33,6 +33,9 @@ spec:
             {{- toYaml .Values.deployment.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.deployment.readinessProbe | nindent 12 }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.secret.name }}
           env:
             {{- toYaml .Values.deployment.env | nindent 12 }}
           resources:
