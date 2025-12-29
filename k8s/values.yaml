@@ -53,6 +53,26 @@ externalService:
 secret:
   name: ducks-tinder-client-secret
   mode: prod
-  serverName: example.com
+  proxyMode: prod
+
+  serverName: localhost
   certPath: /etc/nginx/cert/tls.crt
   keyPath: /etc/nginx/cert/tls.key
+  proxyRootPath: /
+
+  userServiceUrl: https://localhost/user-service-url
+  chatServiceUrl: https://localhost/chat-service-url
+  fileServiceUrl: https://localhost/file-service-url
+  authServiceUrl: https://localhost/auth-service-url
+
+  proxyUserService: /user-service-url
+  proxyChatService: /chat-service-url
+  proxyFileService: /file-service-url
+  proxyAuthService: /auth-service-url
+
+  proxyUserServiceUrl: https://host.docker.internal:5000
+  proxyChatServiceUrl: https://host.docker.internal:5001
+  proxyFileServiceUrl: https://host.docker.internal:5002
+  proxyAuthServiceUrl: https://host.docker.internal:5003
+
+  rootPath: /
