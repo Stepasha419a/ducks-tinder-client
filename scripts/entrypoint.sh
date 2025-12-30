@@ -25,6 +25,7 @@ export PROXY_ROOT_PATH PROXY_ROOT_PATH_WITH_OPTIONAL_SLASH PROXY_ALIAS_OPTIONAL_
 SUBST_LIST=$(printf '${%s} ' $REQUIRED_VARS)
 SUBST_LIST+="\${PROXY_ROOT_PATH} \${PROXY_ROOT_PATH_WITH_OPTIONAL_SLASH} \${PROXY_ALIAS_OPTIONAL_SLASH}"
 
+echo "Injecting env to runtime html"
 envsubst "$SUBST_LIST" < /usr/share/nginx/html/root/index.html > /usr/share/nginx/html/root/index.runtime.html
 sed -i 's/base-placeholder/base/' /usr/share/nginx/html/root/index.runtime.html
 
@@ -32,6 +33,8 @@ if [ -n "$PROXY_ROOT_PATH" ]; then
   echo "Using runtime js paths with PROXY_ROOT_PATH=$PROXY_ROOT_PATH"
   sed -i "s|src=\"/js/|src=\"${PROXY_ROOT_PATH}/js/|g" /usr/share/nginx/html/root/index.runtime.html
 fi
+
+echo "Injecting env to nginx conf"
 envsubst "$SUBST_LIST" < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 exec nginx -g 'daemon off;'
