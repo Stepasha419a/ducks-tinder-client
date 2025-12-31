@@ -76,3 +76,14 @@ secret:
   proxyAuthServiceUrl: https://host.docker.internal:5003
 
   rootPath: /
+
+# This is for certificate settings
+certificate:
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS8
+    size: 2048
+  issuerRef:
+    name: client-issuer
+    kind: Issuer
+    group: cert-manager.io
