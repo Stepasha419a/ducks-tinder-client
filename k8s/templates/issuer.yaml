@@ -1,8 +1,0 @@
-apiVersion: cert-manager.io/v1
-kind: Issuer
-metadata:
-  name: frontend-issuer
-  labels: 
-    {{- include "ducks-tinder-client.labels" . | nindent 4 }}
-spec:
-  selfSigned: {}
