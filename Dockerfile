@@ -29,7 +29,7 @@ WORKDIR /usr/src/ngx_brotli/deps/brotli
 
 RUN set -eux; \
     if [ "${TARGETARCH}" = "amd64" ]; then \
-       ARCH_FLAGS="-m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
+       ARCH_FLAGS="-m64 -march=x86-64-v3 -mtune=generic -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
     else \
        ARCH_FLAGS="-Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
     fi; \
@@ -48,7 +48,7 @@ ENV LDFLAGS=""
 
 RUN set -eux; \
     if [ "${TARGETARCH}" = "amd64" ]; then \
-      export CFLAGS="-m64 -march=native -mtune=native -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
+      export CFLAGS="-m64 -march=x86-64-v3 -mtune=generic -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
       export LDFLAGS="-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"; \
     else \
       export CFLAGS="-Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
