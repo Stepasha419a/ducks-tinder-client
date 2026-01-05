@@ -56,6 +56,8 @@ secret:
   proxyMode: prod
 
   serverName: localhost
+  proxyDns: 8.8.8.8
+  proxyDnsValidTime: 30s
   certPath: /etc/nginx/cert/tls.crt
   keyPath: /etc/nginx/cert/tls.key
   proxyRootPath: /
