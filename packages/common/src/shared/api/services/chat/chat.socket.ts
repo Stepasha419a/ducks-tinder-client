@@ -9,12 +9,13 @@ export const createChatSocket = (): ChatSocket => ({
   connect() {
     if (!this._socket) {
       const accessToken = 'Bearer ' + localStorage.getItem('accessToken')!;
-      this._socket = io(`${COMMON_LIB_SETTINGS.CHAT_SERVICE_URL}/chat/socket`, {
+      this._socket = io(COMMON_LIB_SETTINGS.CLIENT_ROOT_URL, {
         withCredentials: true,
         transports: ['websocket'],
         auth: {
           authorization: accessToken,
         },
+        path: COMMON_LIB_SETTINGS.CHAT_SERVICE_SOCKET_PATH,
       });
 
       this._socket.emit(ChatSocketEvent.Connect);
