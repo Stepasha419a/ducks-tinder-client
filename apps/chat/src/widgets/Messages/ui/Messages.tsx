@@ -58,6 +58,7 @@ export const Messages: FC<MessagesProps> = ({
 
   useEffect(() => {
     if (isChatBlocked) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       handleResetEditReplied();
     }
   }, [handleResetEditReplied, isChatBlocked]);

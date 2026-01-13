@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from 'react';
+import { useRef, type FC, type PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
 interface MessageProps {
@@ -11,17 +11,17 @@ export const MessageMobile: FC<PropsWithChildren<MessageProps>> = ({
   isOwn,
   children,
 }) => {
-  let timer: null | NodeJS.Timeout = null;
+  const timerRef = useRef<null | NodeJS.Timeout>(null);
 
   const handleEventStart = () => {
-    timer = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       handleSelectMessage();
     }, 500);
   };
 
   const handleEventEnd = () => {
-    if (timer) {
-      clearTimeout(timer);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
     }
   };
 
