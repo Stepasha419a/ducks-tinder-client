@@ -1,14 +1,20 @@
 import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import importPlugin from 'eslint-plugin-import';
 import sortImportPlugin from 'eslint-plugin-simple-import-sort';
 import tseslint from 'typescript-eslint';
 import * as reactHooks from 'eslint-plugin-react-hooks';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-export default tseslint.config(
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default defineConfig([
   eslint.configs.recommended,
-  tseslint.configs.recommended,
-  reactHooks.configs.recommended,
+  ...tseslint.configs.recommended,
+  reactHooks.configs.flat.recommended,
   {
     languageOptions: {
       parser: tseslint.parser,
@@ -16,6 +22,7 @@ export default tseslint.config(
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
       },
       globals: {
         ...globals.browser,
@@ -90,5 +97,5 @@ export default tseslint.config(
       '@typescript-eslint/return-await': 'warn',
       '@typescript-eslint/require-await': 'warn',
     },
-  }
-);
+  },
+]);
