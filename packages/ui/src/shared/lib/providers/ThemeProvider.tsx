@@ -15,6 +15,7 @@ export const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
       savedTheme = Theme.Light;
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(savedTheme);
     applyTheme(savedTheme);
   }, []);

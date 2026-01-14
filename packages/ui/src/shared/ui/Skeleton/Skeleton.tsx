@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import SkeletonLib from 'react-loading-skeleton';
-import type { SkeletonProps } from 'react-loading-skeleton/dist/Skeleton';
+import type { SkeletonProps } from 'react-loading-skeleton';
 
 import 'react-loading-skeleton/dist/skeleton.css';
 
