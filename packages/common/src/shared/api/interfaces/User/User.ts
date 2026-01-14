@@ -60,31 +60,30 @@ export interface User {
   pictures: Picture[];
 }
 
-export interface ShortUser
-  extends Pick<
-    User,
-    | 'id'
-    | 'name'
-    | 'age'
-    | 'description'
-    | 'isActivated'
-    | 'distance'
-    | 'interests'
-    | 'zodiacSign'
-    | 'education'
-    | 'alcoholAttitude'
-    | 'childrenAttitude'
-    | 'chronotype'
-    | 'communicationStyle'
-    | 'attentionSign'
-    | 'foodPreference'
-    | 'personalityType'
-    | 'pet'
-    | 'pictures'
-    | 'smokingAttitude'
-    | 'socialNetworksActivity'
-    | 'trainingAttitude'
-  > {
+export interface ShortUser extends Pick<
+  User,
+  | 'id'
+  | 'name'
+  | 'age'
+  | 'description'
+  | 'isActivated'
+  | 'distance'
+  | 'interests'
+  | 'zodiacSign'
+  | 'education'
+  | 'alcoholAttitude'
+  | 'childrenAttitude'
+  | 'chronotype'
+  | 'communicationStyle'
+  | 'attentionSign'
+  | 'foodPreference'
+  | 'personalityType'
+  | 'pet'
+  | 'pictures'
+  | 'smokingAttitude'
+  | 'socialNetworksActivity'
+  | 'trainingAttitude'
+> {
   place: ShortPlace | null;
 }
 

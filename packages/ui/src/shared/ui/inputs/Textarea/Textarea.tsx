@@ -4,8 +4,7 @@ import classNames from 'classnames';
 
 import styles from './Textarea.module.scss';
 
-export interface TextareaProps
-  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   extraClassName?: string;
 }
 
