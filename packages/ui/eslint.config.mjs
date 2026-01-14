@@ -1,16 +1,23 @@
 import eslint from '@eslint/js';
 import globals from 'globals';
+import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import sortImportPlugin from 'eslint-plugin-simple-import-sort';
 import tseslint from 'typescript-eslint';
 import * as reactHooks from 'eslint-plugin-react-hooks';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
 // TODO: storybook 9 version for all packages (that time there were conflicts and some packages were still 8 version)
 // import storybook from 'eslint-plugin-storybook';
 
-export default tseslint.config(
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export default defineConfig([
   eslint.configs.recommended,
   tseslint.configs.recommended,
-  reactHooks.configs.recommended,
+  reactHooks.configs.flat.recommended,
   // ...storybook.configs['flat/recommended'],
   {
     languageOptions: {
@@ -19,6 +26,7 @@ export default tseslint.config(
         ecmaVersion: 'latest',
         sourceType: 'module',
         project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
       },
       globals: {
         ...globals.browser,
@@ -92,5 +100,5 @@ export default tseslint.config(
       '@typescript-eslint/return-await': 'warn',
       '@typescript-eslint/require-await': 'warn',
     },
-  }
-);
+  },
+]);
