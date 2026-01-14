@@ -63,6 +63,7 @@ export function useSwipe({
 
   useEffect(() => {
     if (overriddenAnimation && userId === overriddenAnimation.userId) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAnimation(overriddenAnimation.animation);
     }
   }, [overriddenAnimation, userId]);

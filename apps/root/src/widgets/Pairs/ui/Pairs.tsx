@@ -30,6 +30,7 @@ export const Pairs = () => {
 
   const prevFilter = useRef<PairFilterForm>(pairFilterFormDefaultValues);
 
+  // eslint-disable-next-line react-hooks/refs
   const submitHandler = handleSubmit((data) => {
     if (JSON.stringify(data) !== JSON.stringify(prevFilter.current)) {
       dispatch(getUserPairsThunk({ isInitial: true, filter: data }));

@@ -20,6 +20,7 @@ export const ChatsPairsBlock: FC = () => {
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsPairsOpened(!getIsChatPage(pathname));
   }, [pathname]);
 
