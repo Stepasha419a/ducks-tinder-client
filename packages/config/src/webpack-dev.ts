@@ -74,7 +74,7 @@ export function getWebpackDevConfig(options: Options): Config {
     output: {
       filename: `js/[name].[hash].bundle.js`,
       chunkFilename: `js/[name].[hash].chunk.js`,
-      path: path.resolve(__dirname, '..', 'dist'),
+      path: path.resolve(process.cwd(), 'dist'),
       assetModuleFilename: 'media/[name].[hash][ext]',
       publicPath: publicPath,
       clean: true,
@@ -85,7 +85,7 @@ export function getWebpackDevConfig(options: Options): Config {
     },
     devServer: {
       static: {
-        directory: path.resolve(__dirname, '..', 'dist'),
+        directory: path.resolve(process.cwd(), 'dist'),
       },
       compress: true,
       port: options.port,
