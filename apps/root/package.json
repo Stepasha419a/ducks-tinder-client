@@ -58,7 +58,7 @@
     "@babel/preset-typescript": "^7.28.5",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
-    "@ducks-tinder-client/config": "1.1.1-alpha.18",
+    "@ducks-tinder-client/config": "1.1.1-alpha.19",
     "@eslint/js": "^9.39.1",
     "@feature-sliced/eslint-config": "^0.1.1",
     "@feature-sliced/steiger-plugin": "^0.5.7",

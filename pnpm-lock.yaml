@@ -94,8 +94,8 @@ importers:
         specifier: ^20.0.0
         version: 20.3.1
       '@ducks-tinder-client/config':
-        specifier: 1.1.1-alpha.18
-        version: 1.1.1-alpha.18(@swc/core@1.15.8)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)
+        specifier: 1.1.1-alpha.19
+        version: 1.1.1-alpha.19(@swc/core@1.15.8)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.2
@@ -218,8 +218,8 @@ importers:
         specifier: ^20.0.0
         version: 20.3.1
       '@ducks-tinder-client/config':
-        specifier: 1.1.1-alpha.18
-        version: 1.1.1-alpha.18(@swc/core@1.15.8)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)
+        specifier: 1.1.1-alpha.19
+        version: 1.1.1-alpha.19(@swc/core@1.15.8)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.2
@@ -396,8 +396,8 @@ importers:
         specifier: ^20.0.0
         version: 20.3.1
       '@ducks-tinder-client/config':
-        specifier: 1.1.1-alpha.18
-        version: 1.1.1-alpha.18(@swc/core@1.15.8)(debug@4.4.3)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)
+        specifier: 1.1.1-alpha.19
+        version: 1.1.1-alpha.19(@swc/core@1.15.8)(debug@4.4.3)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.2
@@ -1699,8 +1699,8 @@ packages:
       react: 19.1.x
       react-toastify: 11.0.x
 
-  '@ducks-tinder-client/config@1.1.1-alpha.18':
-    resolution: {integrity: sha512-pD1Z/8ymTWa4JF9/n06MjxcAvQ1oMc4MVfBuOnsMVCYL/4J8BcwDaOthlQxF9L/rH5i951k8qN9LEWCyUx4GSQ==}
+  '@ducks-tinder-client/config@1.1.1-alpha.19':
+    resolution: {integrity: sha512-HZ/3wdmPoxvqVtIAibIMQTUvkAcTZO2SN1E1nCEw50h7J1mpsLNr13SwMNVtWpEJLtLlBVFuIqKbPquO0pbLHA==}
     hasBin: true
 
   '@ducks-tinder-client/ui@1.1.7-alpha.2':
@@ -8922,7 +8922,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@ducks-tinder-client/config@1.1.1-alpha.18(@swc/core@1.15.8)(debug@4.4.3)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)':
+  '@ducks-tinder-client/config@1.1.1-alpha.19(@swc/core@1.15.8)(debug@4.4.3)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)':
     dependencies:
       '@babel/core': 7.28.6
       '@babel/preset-env': 7.28.6(@babel/core@7.28.6)
@@ -8968,7 +8968,7 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  '@ducks-tinder-client/config@1.1.1-alpha.18(@swc/core@1.15.8)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)':
+  '@ducks-tinder-client/config@1.1.1-alpha.19(@swc/core@1.15.8)(eslint@9.39.2(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.97.2)(type-fest@0.21.3)(typescript@5.9.3)':
     dependencies:
       '@babel/core': 7.28.6
       '@babel/preset-env': 7.28.6(@babel/core@7.28.6)
