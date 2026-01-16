@@ -23,7 +23,7 @@ jobs:
       - name: Run prettier
         run: pnpm nx:prettier
       - name: Run build
-        run: pnpm nx:prettier
+        run: pnpm nx:build
 
   publish-packages:
     runs-on: ubuntu-latest
