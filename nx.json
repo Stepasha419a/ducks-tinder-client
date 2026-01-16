@@ -41,5 +41,6 @@
       }
     },
     "projectsRelationship": "independent"
-  }
+  },
+  "parallel": 10
 }
