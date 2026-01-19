@@ -1,7 +1,7 @@
 # Default values for ducks-tinder-client.
 
 # This is to override the chart name.
-nameOverride: ''
+nameOverride: ""
 
 # This is for deployment settings
 deployment:
@@ -62,8 +62,10 @@ secret:
   keyPath: /etc/nginx/cert/tls.key
   proxyRootPath: /
 
+  clientRootUrl: https://localhost
   userServiceUrl: https://localhost/user-service-url
   chatServiceUrl: https://localhost/chat-service-url
+  chatServiceSocketPath: /chat-service-url/chat/socket
   fileServiceUrl: https://localhost/file-service-url
   authServiceUrl: https://localhost/auth-service-url
 
