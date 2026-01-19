@@ -7,4 +7,5 @@ printenv | grep '^VAR_' | while IFS='=' read -r key value; do
   echo "  \"$key\": \"$esc_value\"," >> /usr/share/nginx/html/env-config.js
 done
 
+echo "Create runtime env-config"
 echo "}" >> /usr/share/nginx/html/env-config.js
