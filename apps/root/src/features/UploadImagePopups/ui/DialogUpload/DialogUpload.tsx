@@ -35,7 +35,7 @@ export const DialogUpload: FC<DialogUploadProps> = ({
             </span>
             <input
               onChange={(e) => handleImage(e)}
-              accept="image/*"
+              accept="image/png, image/jpeg, image/jpg"
               type="file"
               name=""
               className={styles.input}
