@@ -4,6 +4,8 @@ import { createFileUrl } from '@ducks-tinder-client/common';
 import { Popup } from '@ducks-tinder-client/ui';
 
 import * as styles from './DialogUpload.module.scss';
+import { toast } from 'react-toastify';
+
 const MB_BYTES = 1_048_576;
 
 const ALLOWED_MIME_TYPES = ['image/png', 'image/jpeg', 'image/jpg'];
@@ -18,6 +20,31 @@ export const DialogUpload: FC<DialogUploadProps> = ({
   handleSubmit,
 }) => {
   const handleImage = (e: ChangeEvent<HTMLInputElement>): void => {
+    if (e.target.files && e.target.files.length > 1) {
+      toast('You can upload only 1 photo at once');
+
+      return;
+    }
+
+    const file = e.target.files?.[0];
+    if (!file) {
+      toast('Photo not found');
+
+      return;
+    }
+
+    if (file.size > MB_BYTES) {
+      toast('Size should not be more than 1 MB');
+
+      return;
+    }
+
+    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+      toast('You can only upload photos of type png or jpg');
+
+      return;
+    }
+
     handleSubmit(createFileUrl(e.target.files![0]));
   };
 
