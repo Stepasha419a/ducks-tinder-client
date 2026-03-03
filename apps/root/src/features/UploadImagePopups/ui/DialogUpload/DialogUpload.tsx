@@ -4,6 +4,9 @@ import { createFileUrl } from '@ducks-tinder-client/common';
 import { Popup } from '@ducks-tinder-client/ui';
 
 import * as styles from './DialogUpload.module.scss';
+const MB_BYTES = 1_048_576;
+
+const ALLOWED_MIME_TYPES = ['image/png', 'image/jpeg', 'image/jpg'];
 
 interface DialogUploadProps {
   handleCloseDialogUpload: () => void;
