@@ -39,7 +39,7 @@ SUBST_LIST+="
 
 echo "Injecting env to runtime html"
 envsubst "$SUBST_LIST" < /usr/share/nginx/html/root/index.html > /usr/share/nginx/html/root/index.runtime.html
-sed -i 's/base-placeholder/base/' /usr/share/nginx/html/root/index.runtime.html
+sed -i "s|<base href=\"/\"|<base href=\"${PROXY_ROOT_PATH_WITH_OPTIONAL_SLASH}/\"|g" /usr/share/nginx/html/root/index.runtime.html
 
 if [ -n "$PROXY_ROOT_PATH" ]; then
   echo "Using runtime js paths with PROXY_ROOT_PATH=$PROXY_ROOT_PATH"
