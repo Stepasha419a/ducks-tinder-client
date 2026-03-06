@@ -2,8 +2,11 @@ const DOCKERHUB_USERNAME = process.env.DOCKERHUB_USERNAME;
 const DOCKERHUB_PASSWORD = process.env.DOCKERHUB_PASSWORD;
 const DOCKERHUB_REPO = process.env.DOCKERHUB_REPO;
 
-const TAG_PREFIX = 'unstable-dev-';
 const KEEP_LAST = 10;
+
+const isAlphaTag = (tagName) => {
+  return tagName.includes('alpha');
+};
 
 const getHeaders = (token) => ({
   Authorization: `JWT ${token}`,
