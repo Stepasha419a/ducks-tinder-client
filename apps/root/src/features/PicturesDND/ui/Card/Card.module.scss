@@ -12,12 +12,6 @@
     background-color: var(--bg-sub-primary);
     cursor: pointer;
     transition: 0.2s opacity;
-
-    &.hasImage {
-      border: none;
-      cursor: grab;
-      object-fit: cover;
-    }
   }
 
   .btn {
@@ -33,16 +27,6 @@
         color: var(--color--white-100);
       }
     }
-
-    &.xmark {
-      background-color: var(--color--white-100);
-
-      .mark {
-        width: 20px;
-        height: 20px;
-        color: var(--color--red-80);
-      }
-    }
   }
 }
 
@@ -56,13 +40,6 @@
       height: 40px;
 
       &.plus {
-        .mark {
-          width: 24px;
-          height: 24px;
-        }
-      }
-
-      &.xmark {
         .mark {
           width: 24px;
           height: 24px;
@@ -84,13 +61,6 @@
           height: 12px;
         }
       }
-
-      &.xmark {
-        .mark {
-          width: 20px;
-          height: 20px;
-        }
-      }
     }
   }
 }
@@ -105,13 +75,6 @@
         .mark {
           width: 10px;
           height: 10px;
-        }
-      }
-
-      &.xmark {
-        .mark {
-          width: 12px;
-          height: 12px;
         }
       }
     }

@@ -1,8 +1,7 @@
 import type { FC } from 'react';
-import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { Reorder } from 'motion/react';
 
 import type { Picture } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
@@ -12,56 +11,18 @@ import * as styles from './Card.module.scss';
 interface CardProps {
   picture?: Picture;
   src?: string;
-  handler?: () => void;
-  buttonHandler?: () => void;
+  onAdd: () => void;
 }
 
-export const Card: FC<CardProps> = ({
-  picture,
-  src,
-  handler,
-  buttonHandler,
-}) => {
-  const isEmpty = !src;
-
-  if (isEmpty) {
-    return (
-      <div onClick={handler} className={styles.item}>
-        <div className={styles.image} />
-        <Button
-          onClick={handler}
-          variant="mark"
-          extraClassName={classNames(styles.btn, styles.plus)}
-        >
-          <FontAwesomeIcon className={styles.mark} icon={faPlus} />
-        </Button>
-      </div>
-    );
-  }
-
-  return (
-    <Reorder.Item
-      drag
-      whileDrag={{
-        scale: 1.1,
-      }}
-      as="div"
-      value={picture}
-      className={styles.item}
+export const Card: FC<CardProps> = ({ onAdd }) => (
+  <div onClick={onAdd} className={styles.item}>
+    <div className={styles.image} />
+    <Button
+      onClick={onAdd}
+      variant="mark"
+      extraClassName={classNames(styles.btn, styles.plus)}
     >
-      <img
-        className={classNames(styles.image, styles.hasImage)}
-        src={src}
-        alt="item"
-        draggable={false}
-      />
-      <Button
-        onClick={buttonHandler}
-        variant="mark"
-        extraClassName={classNames(styles.btn, styles.xmark)}
-      >
-        <FontAwesomeIcon className={styles.mark} icon={faXmark} />
-      </Button>
-    </Reorder.Item>
-  );
-};
+      <FontAwesomeIcon className={styles.mark} icon={faPlus} />
+    </Button>
+  </div>
+);
