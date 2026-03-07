@@ -16,7 +16,7 @@ importers:
         version: 7.7.3
       webpack:
         specifier: ^5.102.1
-        version: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+        version: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
       webpack-cli:
         specifier: ^6.0.1
         version: 6.0.1(webpack@5.104.1)
@@ -28,7 +28,7 @@ importers:
         version: 1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1)
       '@ducks-tinder-client/ui':
         specifier: 1.1.7-alpha.2
-        version: 1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2(debug@4.4.3))(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+        version: 1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2)(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@12.35.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       '@fortawesome/fontawesome-common-types':
         specifier: ^7.1.0
         version: 7.1.0
@@ -51,8 +51,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       motion:
-        specifier: ^12.23.24
-        version: 12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: ^12.35.0
+        version: 12.35.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react:
         specifier: ^19.2.0
         version: 19.2.3
@@ -122,10 +122,10 @@ importers:
         version: 8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1)
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 7.1.2(webpack@5.104.1)
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
@@ -158,13 +158,13 @@ importers:
         version: 3.8.0
       sass-loader:
         specifier: ^16.0.6
-        version: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1)
       steiger:
         specifier: ^0.5.11
         version: 0.5.11(typescript@5.9.3)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 4.0.0(webpack@5.104.1)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -173,13 +173,13 @@ importers:
         version: 8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       webpack:
         specifier: ^5.102.1
-        version: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+        version: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
 
   apps/policy:
     dependencies:
       '@ducks-tinder-client/ui':
         specifier: 1.1.7-alpha.2
-        version: 1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2(debug@4.4.3))(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+        version: 1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2)(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@12.35.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       browserslist:
         specifier: ^4.28.0
         version: 4.28.1
@@ -246,10 +246,10 @@ importers:
         version: 8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1)
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 7.1.2(webpack@5.104.1)
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
@@ -282,13 +282,13 @@ importers:
         version: 3.8.0
       sass-loader:
         specifier: ^16.0.6
-        version: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1)
       steiger:
         specifier: ^0.5.11
         version: 0.5.11(typescript@5.9.3)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 4.0.0(webpack@5.104.1)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -297,7 +297,7 @@ importers:
         version: 8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       webpack:
         specifier: ^5.102.1
-        version: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+        version: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
 
   apps/root:
     dependencies:
@@ -309,7 +309,7 @@ importers:
         version: 1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1)
       '@ducks-tinder-client/ui':
         specifier: 1.1.7-alpha.2
-        version: 1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2(debug@4.4.3))(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
+        version: 1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2(debug@4.4.3))(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@10.18.0)(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       '@fortawesome/fontawesome-common-types':
         specifier: ^7.1.0
         version: 7.1.0
@@ -335,8 +335,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       motion:
-        specifier: ^12.23.24
-        version: 12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        specifier: ^10.18.0
+        version: 10.18.0
       react:
         specifier: ^19.2.0
         version: 19.2.3
@@ -445,13 +445,13 @@ importers:
         version: 8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1)
       concurrently:
         specifier: ^9.2.1
         version: 9.2.1
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 7.1.2(webpack@5.104.1)
       debug:
         specifier: ^4.4.3
         version: 4.4.3
@@ -493,13 +493,13 @@ importers:
         version: 6.1.2
       sass-loader:
         specifier: ^16.0.6
-        version: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1)
       steiger:
         specifier: ^0.5.11
         version: 0.5.11(typescript@5.9.3)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 4.0.0(webpack@5.104.1)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -508,7 +508,7 @@ importers:
         version: 8.53.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
       webpack:
         specifier: ^5.102.1
-        version: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+        version: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
 
   packages/common:
     dependencies:
@@ -644,13 +644,13 @@ importers:
         version: 0.6.2(react-refresh@0.18.0)(type-fest@0.21.3)(webpack-dev-server@5.2.3)(webpack@5.104.1)
       babel-loader:
         specifier: ^10.0.0
-        version: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1)
       copy-webpack-plugin:
         specifier: ^13.0.1
         version: 13.0.1(webpack@5.104.1)
       css-loader:
         specifier: ^7.1.2
-        version: 7.1.2(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 7.1.2(webpack@5.104.1)
       dotenv:
         specifier: ^17.2.3
         version: 17.2.3
@@ -677,10 +677,10 @@ importers:
         version: 1.97.2
       sass-loader:
         specifier: ^16.0.6
-        version: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1)
       style-loader:
         specifier: ^4.0.0
-        version: 4.0.0(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+        version: 4.0.0(webpack@5.104.1)
       terser-webpack-plugin:
         specifier: ^5.3.14
         version: 5.3.16(@swc/core@1.15.8)(esbuild@0.27.2)(webpack@5.104.1)
@@ -2285,6 +2285,24 @@ packages:
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
+
+  '@motionone/animation@10.18.0':
+    resolution: {integrity: sha512-9z2p5GFGCm0gBsZbi8rVMOAJCtw1WqBTIPw3ozk06gDvZInBPIsQcHgYogEJ4yuHJ+akuW8g1SEIOpTOvYs8hw==}
+
+  '@motionone/dom@10.18.0':
+    resolution: {integrity: sha512-bKLP7E0eyO4B2UaHBBN55tnppwRnaE3KFfh3Ps9HhnAkar3Cb69kUCJY9as8LrccVYKgHA+JY5dOQqJLOPhF5A==}
+
+  '@motionone/easing@10.18.0':
+    resolution: {integrity: sha512-VcjByo7XpdLS4o9T8t99JtgxkdMcNWD3yHU/n6CLEz3bkmKDRZyYQ/wmSf6daum8ZXqfUAgFeCZSpJZIMxaCzg==}
+
+  '@motionone/generators@10.18.0':
+    resolution: {integrity: sha512-+qfkC2DtkDj4tHPu+AFKVfR/C30O1vYdvsGYaR13W/1cczPrrcjdvYCj0VLFuRMN+lP1xvpNZHCRNM4fBzn1jg==}
+
+  '@motionone/types@10.17.1':
+    resolution: {integrity: sha512-KaC4kgiODDz8hswCrS0btrVrzyU2CSQKO7Ps90ibBVSQmjkrt2teqta6/sOG59v7+dPnKMAg13jyqtMKV2yJ7A==}
+
+  '@motionone/utils@10.18.0':
+    resolution: {integrity: sha512-3XVF7sgyTSI2KWvTf6uLlBJ5iAgRgmvp3bpuOiQJvInd4nZ19ET8lX5unn30SlmRH7hXbBbH+Gxd0m0klJ3Xtw==}
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -4930,6 +4948,20 @@ packages:
       react-dom:
         optional: true
 
+  framer-motion@12.35.0:
+    resolution: {integrity: sha512-w8hghCMQ4oq10j6aZh3U2yeEQv5K69O/seDI/41PK4HtgkLrcBovUNc0ayBC3UyyU7V1mrY2yLzvYdWJX9pGZQ==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -5158,6 +5190,9 @@ packages:
 
   hermes-parser@0.25.1:
     resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
+
+  hey-listen@1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
 
   homedir-polyfill@1.0.3:
     resolution: {integrity: sha512-eSmmWE5bZTK2Nou4g0AI3zZ9rswp7GRKoKXS1BLUkvPviOqs4YTN1djQIqrXy9k5gEtdLPy86JjRwsNM9tnDcA==}
@@ -6050,8 +6085,17 @@ packages:
   motion-dom@12.26.2:
     resolution: {integrity: sha512-KLMT1BroY8oKNeliA3JMNJ+nbCIsTKg6hJpDb4jtRAJ7nCKnnpg/LTq/NGqG90Limitz3kdAnAVXecdFVGlWTw==}
 
+  motion-dom@12.35.0:
+    resolution: {integrity: sha512-FFMLEnIejK/zDABn+vqGVAUN4T0+3fw+cVAY8MMT65yR+j5uMuvWdd4npACWhh94OVWQs79CrBBuwOwGRZAQiA==}
+
   motion-utils@12.24.10:
     resolution: {integrity: sha512-x5TFgkCIP4pPsRLpKoI86jv/q8t8FQOiM/0E8QKBzfMozWHfkKap2gA1hOki+B5g3IsBNpxbUnfOum1+dgvYww==}
+
+  motion-utils@12.29.2:
+    resolution: {integrity: sha512-G3kc34H2cX2gI63RqU+cZq+zWRRPSsNIOjpdl9TN4AQwC4sgwYPl/Q/Obf/d53nOm569T0fYK+tcoSV50BWx8A==}
+
+  motion@10.18.0:
+    resolution: {integrity: sha512-MVAZZmwM/cp77BrNe1TxTMldxRPjwBNHheU5aPToqT4rJdZxLiADk58H+a0al5jKLxkB0OdgNq6DiVn11cjvIQ==}
 
   motion@12.17.3:
     resolution: {integrity: sha512-zf4+ppV5HE2bvaGZDWK6oySvS7uig/9eniq0JX/JuM0G9LqrLGxtFUF7b8CUMJ/0bo2ReID6yGWbS0LUxKzYZQ==}
@@ -6067,8 +6111,8 @@ packages:
       react-dom:
         optional: true
 
-  motion@12.26.2:
-    resolution: {integrity: sha512-2Q6g0zK1gUJKhGT742DAe42LgietcdiJ3L3OcYAHCQaC1UkLnn6aC8S/obe4CxYTLAgid2asS1QdQ/blYfo5dw==}
+  motion@12.35.0:
+    resolution: {integrity: sha512-BQUhNUIGvUcwXCzwmnT1JpjUqab34lIwxHnXUyWRht1WC1vAyp7/4qgMiUXxN3K6hgUhyoR+HNnLeQMwUZjVjw==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -8928,10 +8972,10 @@ snapshots:
       '@babel/preset-env': 7.28.6(@babel/core@7.28.6)
       '@babel/preset-react': 7.28.5(@babel/core@7.28.6)
       '@babel/preset-typescript': 7.28.5(@babel/core@7.28.6)
-      '@pmmmwh/react-refresh-webpack-plugin': 0.6.2(react-refresh@0.18.0)(type-fest@0.21.3)(webpack-dev-server@5.2.3)(webpack@5.104.1)
-      babel-loader: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+      '@pmmmwh/react-refresh-webpack-plugin': 0.6.2(react-refresh@0.18.0)(type-fest@0.21.3)(webpack-dev-server@5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))
+      babel-loader: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1)
       copy-webpack-plugin: 13.0.1(webpack@5.104.1)
-      css-loader: 7.1.2(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+      css-loader: 7.1.2(webpack@5.104.1)
       dotenv: 17.2.3
       dotenv-webpack: 8.1.1(webpack@5.104.1)
       eslint-webpack-plugin: 5.0.2(eslint@9.39.2(jiti@2.6.1))(webpack@5.104.1)
@@ -8940,14 +8984,14 @@ snapshots:
       html-webpack-plugin: 5.6.5(webpack@5.104.1)
       react-refresh: 0.18.0
       sass: 1.97.2
-      sass-loader: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
-      style-loader: 4.0.0(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+      sass-loader: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1)
+      style-loader: 4.0.0(webpack@5.104.1)
       terser-webpack-plugin: 5.3.16(@swc/core@1.15.8)(webpack@5.104.1)
       tsconfig-paths-webpack-plugin: 4.2.0
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
       webpack-bundle-analyzer: 4.10.2
-      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.104.1)
-      webpack-dev-server: 5.2.3(debug@4.4.3)(webpack-cli@6.0.1)(webpack@5.104.1)
+      webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))
+      webpack-dev-server: 5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))
     transitivePeerDependencies:
       - '@rspack/core'
       - '@swc/core'
@@ -8975,9 +9019,9 @@ snapshots:
       '@babel/preset-react': 7.28.5(@babel/core@7.28.6)
       '@babel/preset-typescript': 7.28.5(@babel/core@7.28.6)
       '@pmmmwh/react-refresh-webpack-plugin': 0.6.2(react-refresh@0.18.0)(type-fest@0.21.3)(webpack-dev-server@5.2.3)(webpack@5.104.1)
-      babel-loader: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+      babel-loader: 10.0.0(@babel/core@7.28.6)(webpack@5.104.1)
       copy-webpack-plugin: 13.0.1(webpack@5.104.1)
-      css-loader: 7.1.2(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+      css-loader: 7.1.2(webpack@5.104.1)
       dotenv: 17.2.3
       dotenv-webpack: 8.1.1(webpack@5.104.1)
       eslint-webpack-plugin: 5.0.2(eslint@9.39.2(jiti@2.6.1))(webpack@5.104.1)
@@ -8986,14 +9030,14 @@ snapshots:
       html-webpack-plugin: 5.6.5(webpack@5.104.1)
       react-refresh: 0.18.0
       sass: 1.97.2
-      sass-loader: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
-      style-loader: 4.0.0(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+      sass-loader: 16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1)
+      style-loader: 4.0.0(webpack@5.104.1)
       terser-webpack-plugin: 5.3.16(@swc/core@1.15.8)(webpack@5.104.1)
       tsconfig-paths-webpack-plugin: 4.2.0
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
       webpack-bundle-analyzer: 4.10.2
       webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.104.1)
-      webpack-dev-server: 5.2.3(webpack-cli@6.0.1)(webpack@5.104.1)
+      webpack-dev-server: 5.2.3(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1)
     transitivePeerDependencies:
       - '@rspack/core'
       - '@swc/core'
@@ -9014,7 +9058,7 @@ snapshots:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  '@ducks-tinder-client/ui@1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2(debug@4.4.3))(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
+  '@ducks-tinder-client/ui@1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2(debug@4.4.3))(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@10.18.0)(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@ducks-tinder-client/common': 1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1)
       '@fortawesome/fontawesome-common-types': 7.1.0
@@ -9024,7 +9068,28 @@ snapshots:
       axios: 1.13.2(debug@4.4.3)
       browserslist: 4.28.1
       classnames: 2.5.1
-      motion: 12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      motion: 10.18.0
+      react: 19.2.3
+      react-dom: 19.2.3(react@19.2.3)
+      react-infinite-scroller: 1.2.6(react@19.2.3)
+      react-loading-skeleton: 3.5.0(react@19.2.3)
+      react-slick: 0.31.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      react-toastify: 11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      slick-carousel: 1.8.1(jquery@3.7.1)
+    transitivePeerDependencies:
+      - jquery
+
+  '@ducks-tinder-client/ui@1.1.7-alpha.2(@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.1.0)(@fortawesome/fontawesome-svg-core@7.1.0)(@fortawesome/free-solid-svg-icons@7.1.0)(@fortawesome/react-fontawesome@3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3))(axios@1.13.2)(browserslist@4.28.1)(classnames@2.5.1)(jquery@3.7.1)(motion@12.35.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-dom@19.2.3(react@19.2.3))(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      '@ducks-tinder-client/common': 1.7.0-alpha.1(@types/react@19.2.8)(browserslist@4.28.1)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)(redux@5.0.1)
+      '@fortawesome/fontawesome-common-types': 7.1.0
+      '@fortawesome/fontawesome-svg-core': 7.1.0
+      '@fortawesome/free-solid-svg-icons': 7.1.0
+      '@fortawesome/react-fontawesome': 3.1.1(@fortawesome/fontawesome-svg-core@7.1.0)(react@19.2.3)
+      axios: 1.13.2(debug@4.4.3)
+      browserslist: 4.28.1
+      classnames: 2.5.1
+      motion: 12.35.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
       react-infinite-scroller: 1.2.6(react@19.2.3)
@@ -9613,6 +9678,41 @@ snapshots:
       '@types/react': 19.2.8
       react: 19.2.3
 
+  '@motionone/animation@10.18.0':
+    dependencies:
+      '@motionone/easing': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      tslib: 2.8.1
+
+  '@motionone/dom@10.18.0':
+    dependencies:
+      '@motionone/animation': 10.18.0
+      '@motionone/generators': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      hey-listen: 1.0.8
+      tslib: 2.8.1
+
+  '@motionone/easing@10.18.0':
+    dependencies:
+      '@motionone/utils': 10.18.0
+      tslib: 2.8.1
+
+  '@motionone/generators@10.18.0':
+    dependencies:
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      tslib: 2.8.1
+
+  '@motionone/types@10.17.1': {}
+
+  '@motionone/utils@10.18.0':
+    dependencies:
+      '@motionone/types': 10.17.1
+      hey-listen: 1.0.8
+      tslib: 2.8.1
+
   '@napi-rs/wasm-runtime@0.2.12':
     dependencies:
       '@emnapi/core': 1.8.1
@@ -9830,6 +9930,20 @@ snapshots:
     optional: true
 
   '@pkgr/core@0.2.9': {}
+
+  '@pmmmwh/react-refresh-webpack-plugin@0.6.2(react-refresh@0.18.0)(type-fest@0.21.3)(webpack-dev-server@5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))':
+    dependencies:
+      anser: 2.3.5
+      core-js-pure: 3.47.0
+      error-stack-parser: 2.1.4
+      html-entities: 2.6.0
+      react-refresh: 0.18.0
+      schema-utils: 4.3.3
+      source-map: 0.7.6
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
+    optionalDependencies:
+      type-fest: 0.21.3
+      webpack-dev-server: 5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))
 
   '@pmmmwh/react-refresh-webpack-plugin@0.6.2(react-refresh@0.18.0)(type-fest@0.21.3)(webpack-dev-server@5.2.3)(webpack@5.104.1)':
     dependencies:
@@ -10920,9 +11034,9 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))':
+  '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1)':
     dependencies:
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
       webpack-cli: 6.0.1(webpack@5.104.1)
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.104.1)':
@@ -10930,9 +11044,9 @@ snapshots:
       webpack: 5.104.1(@swc/core@1.15.8)(esbuild@0.27.2)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.104.1)
 
-  '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))':
+  '@webpack-cli/info@3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1)':
     dependencies:
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
       webpack-cli: 6.0.1(webpack@5.104.1)
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.104.1)':
@@ -10940,17 +11054,26 @@ snapshots:
       webpack: 5.104.1(@swc/core@1.15.8)(esbuild@0.27.2)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.104.1)
 
+  '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack-dev-server@5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))':
+    dependencies:
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
+      webpack-cli: 6.0.1(webpack@5.104.1)
+    optionalDependencies:
+      webpack-dev-server: 5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))
+
+  '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack-dev-server@5.2.3)(webpack@5.104.1)':
+    dependencies:
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
+      webpack-cli: 6.0.1(webpack@5.104.1)
+    optionalDependencies:
+      webpack-dev-server: 5.2.3(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1)
+
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack-dev-server@5.2.3)(webpack@5.104.1)':
     dependencies:
       webpack: 5.104.1(@swc/core@1.15.8)(esbuild@0.27.2)(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.104.1)
     optionalDependencies:
       webpack-dev-server: 5.2.3(webpack-cli@6.0.1)(webpack@5.104.1)
-
-  '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))':
-    dependencies:
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
-      webpack-cli: 6.0.1(webpack@5.104.1)
 
   '@xtuc/ieee754@1.2.0': {}
 
@@ -11195,11 +11318,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  babel-loader@10.0.0(@babel/core@7.28.6)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)):
+  babel-loader@10.0.0(@babel/core@7.28.6)(webpack@5.104.1):
     dependencies:
       '@babel/core': 7.28.6
       find-up: 5.0.0
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
 
   babel-plugin-istanbul@7.0.1:
     dependencies:
@@ -11643,7 +11766,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-loader@7.1.2(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)):
+  css-loader@7.1.2(webpack@5.104.1):
     dependencies:
       icss-utils: 5.1.0(postcss@8.5.6)
       postcss: 8.5.6
@@ -11654,7 +11777,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.7.3
     optionalDependencies:
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
 
   css-select@4.3.0:
     dependencies:
@@ -12654,10 +12777,10 @@ snapshots:
       react: 19.1.4
       react-dom: 19.1.4(react@19.1.4)
 
-  framer-motion@12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  framer-motion@12.35.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
-      motion-dom: 12.26.2
-      motion-utils: 12.24.10
+      motion-dom: 12.35.0
+      motion-utils: 12.29.2
       tslib: 2.8.1
     optionalDependencies:
       react: 19.2.3
@@ -12907,6 +13030,8 @@ snapshots:
     dependencies:
       hermes-estree: 0.25.1
 
+  hey-listen@1.0.8: {}
+
   homedir-polyfill@1.0.3:
     dependencies:
       parse-passwd: 1.0.0
@@ -12940,7 +13065,7 @@ snapshots:
       pretty-error: 4.0.0
       tapable: 2.3.0
     optionalDependencies:
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
 
   htmlparser2@3.10.1:
     dependencies:
@@ -13957,7 +14082,20 @@ snapshots:
     dependencies:
       motion-utils: 12.24.10
 
+  motion-dom@12.35.0:
+    dependencies:
+      motion-utils: 12.29.2
+
   motion-utils@12.24.10: {}
+
+  motion-utils@12.29.2: {}
+
+  motion@10.18.0:
+    dependencies:
+      '@motionone/animation': 10.18.0
+      '@motionone/dom': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
 
   motion@12.17.3(react-dom@19.1.4(react@19.1.4))(react@19.1.4):
     dependencies:
@@ -13967,9 +14105,9 @@ snapshots:
       react: 19.1.4
       react-dom: 19.1.4(react@19.1.4)
 
-  motion@12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  motion@12.35.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
     dependencies:
-      framer-motion: 12.26.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      framer-motion: 12.35.0(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       tslib: 2.8.1
     optionalDependencies:
       react: 19.2.3
@@ -14975,13 +15113,13 @@ snapshots:
       sass-embedded-win32-arm64: 1.97.2
       sass-embedded-win32-x64: 1.97.2
 
-  sass-loader@16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)):
+  sass-loader@16.0.6(sass-embedded@1.97.2)(sass@1.97.2)(webpack@5.104.1):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
       sass: 1.97.2
       sass-embedded: 1.97.2
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
 
   sass@1.97.2:
     dependencies:
@@ -15414,9 +15552,9 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  style-loader@4.0.0(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)):
+  style-loader@4.0.0(webpack@5.104.1):
     dependencies:
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
 
   supports-color@5.5.0:
     dependencies:
@@ -15483,7 +15621,7 @@ snapshots:
       schema-utils: 4.3.3
       serialize-javascript: 6.0.2
       terser: 5.44.1
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
     optionalDependencies:
       '@swc/core': 1.15.8
 
@@ -15839,6 +15977,26 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
+  webpack-cli@6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))):
+    dependencies:
+      '@discoveryjs/json-ext': 0.6.3
+      '@webpack-cli/configtest': 3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1)
+      '@webpack-cli/info': 3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1)
+      '@webpack-cli/serve': 3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack-dev-server@5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))
+      colorette: 2.0.20
+      commander: 12.1.0
+      cross-spawn: 7.0.6
+      envinfo: 7.21.0
+      fastest-levenshtein: 1.0.16
+      import-local: 3.2.0
+      interpret: 3.1.1
+      rechoir: 0.8.0
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
+      webpack-merge: 6.0.1
+    optionalDependencies:
+      webpack-bundle-analyzer: 4.10.2
+      webpack-dev-server: 5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)))
+
   webpack-cli@6.0.1(webpack-bundle-analyzer@4.10.2)(webpack-dev-server@5.2.3)(webpack@5.104.1):
     dependencies:
       '@discoveryjs/json-ext': 0.6.3
@@ -15862,9 +16020,9 @@ snapshots:
   webpack-cli@6.0.1(webpack@5.104.1):
     dependencies:
       '@discoveryjs/json-ext': 0.6.3
-      '@webpack-cli/configtest': 3.0.1(webpack-cli@6.0.1)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
-      '@webpack-cli/info': 3.0.1(webpack-cli@6.0.1)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
-      '@webpack-cli/serve': 3.0.1(webpack-cli@6.0.1)(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1))
+      '@webpack-cli/configtest': 3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1)
+      '@webpack-cli/info': 3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1)
+      '@webpack-cli/serve': 3.0.1(webpack-cli@6.0.1(webpack@5.104.1))(webpack-dev-server@5.2.3)(webpack@5.104.1)
       colorette: 2.0.20
       commander: 12.1.0
       cross-spawn: 7.0.6
@@ -15873,7 +16031,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
       webpack-merge: 6.0.1
 
   webpack-dev-middleware@7.4.5(webpack@5.104.1):
@@ -15887,7 +16045,7 @@ snapshots:
     optionalDependencies:
       webpack: 5.104.1(@swc/core@1.15.8)(esbuild@0.27.2)(webpack-cli@6.0.1)
 
-  webpack-dev-server@5.2.3(debug@4.4.3)(webpack-cli@6.0.1)(webpack@5.104.1):
+  webpack-dev-server@5.2.3(debug@4.4.3)(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))):
     dependencies:
       '@types/bonjour': 3.5.13
       '@types/connect-history-api-fallback': 1.5.4
@@ -15918,7 +16076,46 @@ snapshots:
       webpack-dev-middleware: 7.4.5(webpack@5.104.1)
       ws: 8.19.0
     optionalDependencies:
-      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1)
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
+      webpack-cli: 6.0.1(webpack@5.104.1)
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - supports-color
+      - utf-8-validate
+
+  webpack-dev-server@5.2.3(webpack-cli@6.0.1(webpack@5.104.1))(webpack@5.104.1):
+    dependencies:
+      '@types/bonjour': 3.5.13
+      '@types/connect-history-api-fallback': 1.5.4
+      '@types/express': 4.17.25
+      '@types/express-serve-static-core': 4.19.8
+      '@types/serve-index': 1.9.4
+      '@types/serve-static': 1.15.10
+      '@types/sockjs': 0.3.36
+      '@types/ws': 8.18.1
+      ansi-html-community: 0.0.8
+      bonjour-service: 1.3.0
+      chokidar: 3.6.0
+      colorette: 2.0.20
+      compression: 1.8.1
+      connect-history-api-fallback: 2.0.0
+      express: 4.22.1
+      graceful-fs: 4.2.11
+      http-proxy-middleware: 2.0.9(@types/express@4.17.25)(debug@4.4.3)
+      ipaddr.js: 2.3.0
+      launch-editor: 2.12.0
+      open: 10.2.0
+      p-retry: 6.2.1
+      schema-utils: 4.3.3
+      selfsigned: 5.5.0
+      serve-index: 1.9.1
+      sockjs: 0.3.24
+      spdy: 4.0.2
+      webpack-dev-middleware: 7.4.5(webpack@5.104.1)
+      ws: 8.19.0
+    optionalDependencies:
+      webpack: 5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1))
       webpack-cli: 6.0.1(webpack@5.104.1)
     transitivePeerDependencies:
       - bufferutil
@@ -16043,7 +16240,7 @@ snapshots:
       - esbuild
       - uglify-js
 
-  webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1):
+  webpack@5.104.1(@swc/core@1.15.8)(webpack-cli@6.0.1(webpack@5.104.1)):
     dependencies:
       '@types/eslint-scope': 3.7.7
       '@types/estree': 1.0.8
