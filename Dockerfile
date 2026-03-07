@@ -66,7 +66,7 @@ RUN set -eux; \
     make -j$(nproc) && \
     make install
 
-FROM node:22.17-alpine3.22 AS frontend-build
+FROM node:24.14.0-alpine3.22 AS frontend-build
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
