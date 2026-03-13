@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 
 import * as styles from './Failed.module.scss';
 
-export const Failed = (): ReactElement => {
+interface FailedProps {
+  title: string;
+  text: string;
+}
+
+export const Failed: React.FC<FailedProps> = ({
+  text,
+  title,
+}): ReactElement => {
   return (
     <Link to="/profile" className={styles.failed}>
-      <div className={styles.text}>You don't have users currently</div>
-      <div className={styles.subtext}>
-        Click to change your prefer settings to get more opportunities
-      </div>
+      <div className={styles.text}>{title}</div>
+      <div className={styles.subtext}>{text}</div>
     </Link>
   );
 };

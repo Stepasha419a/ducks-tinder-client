@@ -10,6 +10,8 @@
   border: 3px solid var(--border-main);
   border-radius: 8px;
   transition: 0.2s;
+  position: relative;
+  z-index: 1;
 
   &:hover {
     background: var(--color--black-pink);
