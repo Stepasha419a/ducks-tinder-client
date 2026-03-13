@@ -11,6 +11,7 @@ export function useAnimationActions() {
   const dispatch = useAppDispatch();
 
   const tinderUsers = useAppSelector((state) => state.tinder.tinderUsers);
+  const isFailed = useAppSelector((state) => state.tinder.isFailed);
   const currentUserId = tinderUsers[0]?.id;
 
   const [activeUserId, setActiveUserId] = useState<string | null>(null);
@@ -127,6 +128,7 @@ export function useAnimationActions() {
     isFullPreview,
     setIsFullPreview,
     tinderUsers,
+    isFailed,
     x,
     y,
     activeUserId,

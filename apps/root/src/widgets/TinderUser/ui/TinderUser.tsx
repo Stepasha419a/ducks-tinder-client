@@ -12,6 +12,7 @@ import * as styles from './TinderUser.module.scss';
 import { SwipeUser, SwipeUserLazy } from '@features/SwipeUser';
 import { RateButtons } from '@features/RateButtons';
 import { useAnimationActions } from '../lib';
+import { FailedTinderUser } from './components';
 
 interface TinderUserProps {
   explore?: boolean;
@@ -23,6 +24,7 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
   const isReturnLoading = useAppSelector(
     (state) => state.tinder.isReturnLoading
   );
+  const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const {
     isFullPreview,
@@ -34,11 +36,17 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
     overriddenAnimation,
     setIsFullPreview,
     tinderUsers,
+    isFailed,
     x,
     y,
     activeUserId,
     currentUserId,
   } = useAnimationActions();
+
+  const hasErrorFields = errorFields.length > 0;
+  const failedNoNearby = tinderUsers.length === 0 && isFailed;
+
+  const showUsers = !failedNoNearby && !hasErrorFields;
 
   return (
     <div
@@ -50,26 +58,31 @@ export const TinderUser: FC<TinderUserProps> = ({ explore }) => {
     >
       {explore && <Explore />}
       <div className={styles.users}>
-        <SwipeUserLazy key="loading" small />
-        {tinderUsers.toReversed().map((user, index) => {
-          const isActive =
-            user.id === activeUserId && index === tinderUsers.length - 1;
+        <FailedTinderUser
+          failedNoNearby={failedNoNearby}
+          hasErrorFields={hasErrorFields}
+          showUsers={showUsers}
+        />
+        {showUsers &&
+          tinderUsers.toReversed().map((user, index) => {
+            const isActive =
+              user.id === activeUserId && index === tinderUsers.length - 1;
 
-          return (
-            <SwipeUser
-              overriddenAnimation={overriddenAnimation}
-              key={user.id}
-              user={user}
-              disabled={!isActive}
-              isFullPreview={isFullPreview}
-              setIsFullPreview={setIsFullPreview}
-              onChangeX={isActive ? onChangeX : undefined}
-              onChangeY={isActive ? onChangeY : undefined}
-              onSubmit={onSubmit}
-              onBeforeAction={onBeforeAction}
-            />
-          );
-        })}
+            return (
+              <SwipeUser
+                overriddenAnimation={overriddenAnimation}
+                key={user.id}
+                user={user}
+                disabled={!isActive}
+                isFullPreview={isFullPreview}
+                setIsFullPreview={setIsFullPreview}
+                onChangeX={isActive ? onChangeX : undefined}
+                onChangeY={isActive ? onChangeY : undefined}
+                onSubmit={onSubmit}
+                onBeforeAction={onBeforeAction}
+              />
+            );
+          })}
         {isReturnLoading && <SwipeUserLazy key="return-loading" />}
         <RateButtons
           key="rate-buttons"
