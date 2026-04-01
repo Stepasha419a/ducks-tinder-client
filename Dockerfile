@@ -28,11 +28,6 @@ RUN git clone --recurse-submodules -j8 https://github.com/google/ngx_brotli.git
 WORKDIR /usr/src/ngx_brotli/deps/brotli
 
 RUN set -eux; \
-    if [ "${TARGETARCH}" = "amd64" ]; then \
-       ARCH_FLAGS="-m64 -march=x86-64-v3 -mtune=generic -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
-    else \
-       ARCH_FLAGS="-Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
-    fi; \
     mkdir out && cd out && \
     cmake -DCMAKE_BUILD_TYPE=Release \
           -DBUILD_SHARED_LIBS=OFF \
