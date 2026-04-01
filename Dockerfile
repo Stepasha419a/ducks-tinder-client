@@ -31,8 +31,8 @@ RUN set -eux; \
     mkdir out && cd out && \
     cmake -DCMAKE_BUILD_TYPE=Release \
           -DBUILD_SHARED_LIBS=OFF \
-          -DCMAKE_C_FLAGS="${ARCH_FLAGS}" \
-          -DCMAKE_CXX_FLAGS="${ARCH_FLAGS}" \
+          -DCMAKE_C_FLAGS="-m64 -march=x86-64-v3 -mtune=generic -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" \
+          -DCMAKE_CXX_FLAGS="-m64 -march=x86-64-v3 -mtune=generic -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" \
           -DCMAKE_INSTALL_PREFIX=./installed .. && \
     cmake --build . --config Release --target brotlienc
 
