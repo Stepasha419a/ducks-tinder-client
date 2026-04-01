@@ -42,13 +42,8 @@ ENV CFLAGS=""
 ENV LDFLAGS=""
 
 RUN set -eux; \
-    if [ "${TARGETARCH}" = "amd64" ]; then \
-      export CFLAGS="-m64 -march=x86-64-v3 -mtune=generic -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
-      export LDFLAGS="-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"; \
-    else \
-      export CFLAGS="-Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
-      export LDFLAGS="-Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"; \
-    fi; \
+    export CFLAGS="-m64 -march=x86-64-v3 -mtune=generic -Ofast -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections"; \
+    export LDFLAGS="-m64 -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"; \
     ./configure \
       --prefix=/etc/nginx \
       --sbin-path=/usr/sbin/nginx \
