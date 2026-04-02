@@ -85,7 +85,8 @@ export function getWebpackDevConfig(options: Options): Config {
     },
     devServer: {
       static: {
-        directory: path.resolve(process.cwd(), 'dist'),
+        directory: path.resolve(process.cwd(), options.staticPath),
+      },
       },
       compress: true,
       port: options.port,
