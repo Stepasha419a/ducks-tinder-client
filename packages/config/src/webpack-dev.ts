@@ -25,7 +25,7 @@ interface Options {
   exposes?: Record<string, string>;
   name: string;
   packagePath: string;
-  mediaPublicPath: string;
+  staticPath: string;
   eslintConfigPath: string;
 }
 
@@ -153,8 +153,8 @@ export function getWebpackDevConfig(options: Options): Config {
         template: './index.html',
       }),
       new FaviconsWebpackPlugin({
-        logo: path.join(options.mediaPublicPath, 'favicon.png'),
-        manifest: path.join(options.mediaPublicPath, 'manifest.json'),
+        logo: path.join(options.staticPath, 'favicon.png'),
+        manifest: path.join(options.staticPath, 'manifest.json'),
       }),
       new ReactRefreshWebpackPlugin({
         overlay: false,
