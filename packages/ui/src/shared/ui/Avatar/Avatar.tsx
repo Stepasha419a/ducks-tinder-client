@@ -5,12 +5,15 @@ import { makeImageUrl, showDefaultImage } from '@shared/lib';
 
 import type { AvatarProps } from './Avatar.types';
 import styles from './Avatar.module.scss';
+import { useLocaleContext } from '@shared/model';
 
 export const Avatar: FC<AvatarProps> = ({
   size = 's',
   extraClassName,
   avatarUrl,
 }) => {
+  const locale = useLocaleContext();
+
   const imageUrl = makeImageUrl(avatarUrl);
 
   const cnContainer = classNames(
@@ -27,7 +30,7 @@ export const Avatar: FC<AvatarProps> = ({
         className={cn}
         src={imageUrl}
         onError={showDefaultImage}
-        alt="avatar"
+        alt={locale.altAvatar}
       />
     </div>
   );
