@@ -7,6 +7,7 @@ import type { UserSliderInfo } from '@entities/user';
 import { ListItem } from '@shared/ui';
 
 import styles from './SliderContent.module.scss';
+import { useLocaleContext } from '@shared/model';
 
 interface SliderContentProps {
   name: string;
@@ -23,6 +24,7 @@ export const SliderContent: FC<SliderContentProps> = ({
   currentSlide,
   disabled,
 }) => {
+  const locale = useLocaleContext();
   const currentInfo = info?.[currentSlide];
 
   const cn = classNames(styles.wrapper, disabled && styles.disabled);
@@ -64,14 +66,13 @@ export const SliderContent: FC<SliderContentProps> = ({
         <div className={styles.place}>
           <FontAwesomeIcon icon={faHouse} className={styles.icon} />
           <span className={styles.name}>
-            Lives in&nbsp;
-            {currentInfo.place.name}
+            {`${locale.livesIn} ${currentInfo.place.name}`}
           </span>
         </div>
         <div className={styles.distance}>
           <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
           <span className={styles.name}>
-            {currentInfo.distance} km from you
+            {`${currentInfo.distance} ${locale.distance}`}
           </span>
         </div>
       </div>

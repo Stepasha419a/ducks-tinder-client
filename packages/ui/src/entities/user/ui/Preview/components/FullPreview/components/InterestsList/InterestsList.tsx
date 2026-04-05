@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import { ListInfo } from '../components';
+import { useLocaleContext } from '@shared/model';
 
 interface InterestsListProps {
   interests: string[];
@@ -11,11 +12,13 @@ export const InterestsList: FC<InterestsListProps> = ({
   interests,
   handleShowAll,
 }) => {
+  const locale = useLocaleContext();
+
   const interestsForLoop = interests.slice(0, 4);
 
   return (
     <ListInfo
-      title="Interests"
+      title={locale.interests}
       items={interestsForLoop}
       handleShowAll={handleShowAll}
     />

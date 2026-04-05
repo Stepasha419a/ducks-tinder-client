@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { Button, ListItem, Popup } from '@shared/ui';
 
 import styles from './InterestsListPopup.module.scss';
+import { useLocaleContext } from '@shared/model';
 
 interface InterestsListPopupProps {
   setIsInterestsListPopupOpen: (setting: boolean) => void;
@@ -13,9 +14,11 @@ export const InterestsListPopup: FC<InterestsListPopupProps> = ({
   interestsList,
   setIsInterestsListPopupOpen,
 }) => {
+  const locale = useLocaleContext();
+
   return (
     <Popup
-      title="Interests"
+      title={locale.interests}
       closeHandler={() => setIsInterestsListPopupOpen(false)}
     >
       <div className={styles.items}>
@@ -27,7 +30,7 @@ export const InterestsListPopup: FC<InterestsListPopupProps> = ({
         extraClassName={styles.btn}
         onClick={() => setIsInterestsListPopupOpen(false)}
       >
-        Close
+        {locale.close}
       </Button>
     </Popup>
   );

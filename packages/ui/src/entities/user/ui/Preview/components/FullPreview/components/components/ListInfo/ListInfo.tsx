@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import { ListItem } from '@shared/ui';
 
 import styles from './ListInfo.module.scss';
+import { useLocaleContext } from '@shared/model';
 
 interface ListInfoProps {
   title: string;
@@ -15,6 +16,8 @@ export const ListInfo: FC<ListInfoProps> = ({
   items,
   handleShowAll,
 }) => {
+  const locale = useLocaleContext();
+
   if (!items.length) {
     return null;
   }
@@ -31,11 +34,11 @@ export const ListInfo: FC<ListInfoProps> = ({
       </div>
       {handleShowAll && (
         <button
-          aria-label="show all interests"
+          aria-label={locale.ariaShowAllInterests}
           onClick={handleShowAll}
           className={styles.showAll}
         >
-          Show all
+          {locale.showAll}
         </button>
       )}
     </div>

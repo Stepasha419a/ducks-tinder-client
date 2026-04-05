@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { makeImageUrl, showDefaultImage } from '@shared/lib';
 
 import styles from './NoSlider.module.scss';
+import { useLocaleContext } from '@shared/model';
 
 interface NoSliderProps {
   avatar?: string;
@@ -16,13 +17,14 @@ export const NoSlider: FC<NoSliderProps> = ({
   extraContent,
   extraClassName,
 }) => {
+  const locale = useLocaleContext();
   const cn = classNames(styles.image, extraClassName);
 
   return (
     <>
       <img
         src={makeImageUrl(avatar)}
-        alt="user"
+        alt={locale.altAvatar}
         onError={showDefaultImage}
         className={cn}
       ></img>

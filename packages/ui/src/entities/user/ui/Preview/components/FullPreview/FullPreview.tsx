@@ -12,6 +12,7 @@ import {
   MoreAboutMeList,
 } from './components';
 import styles from './FullPreview.module.scss';
+import { useLocaleContext } from '@shared/model';
 
 interface FullPreviewPropsInterface {
   user: User | ShortUser;
@@ -22,6 +23,8 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
   user,
   extraContent,
 }) => {
+  const locale = useLocaleContext();
+
   const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
     useState(false);
 
@@ -34,14 +37,15 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
         <div className={styles.place}>
           <FontAwesomeIcon icon={faHouse} className={styles.icon} />
           <span className={styles.name}>
-            Lives in&nbsp;
-            {user.place?.name || 'unknown place'}
+            {`${locale.livesIn} ${user.place?.name || locale.unknownPlace}`}
           </span>
         </div>
         {user.distance !== null && (
           <div className={styles.distance}>
             <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
-            <span className={styles.text}>{user.distance} km from you</span>
+            <span
+              className={styles.text}
+            >{`${user.distance} ${locale.distance}`}</span>
           </div>
         )}
       </div>

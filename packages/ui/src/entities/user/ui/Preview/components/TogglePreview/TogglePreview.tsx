@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '@shared/ui';
 
 import styles from './TogglePreview.module.scss';
+import { useLocaleContext } from '@shared/model';
 
 interface TogglePreviewProps {
   isFull?: boolean;
@@ -15,6 +16,8 @@ export const TogglePreview: FC<TogglePreviewProps> = ({
   isFull,
   setIsFullPreview,
 }) => {
+  const locale = useLocaleContext();
+
   if (isFull) {
     return (
       <Button
@@ -29,7 +32,7 @@ export const TogglePreview: FC<TogglePreviewProps> = ({
 
   return (
     <button
-      aria-label="open user full preview"
+      aria-label={locale.ariaOpenFullPreview}
       onClick={() => setIsFullPreview(true)}
       className={styles.descr}
     >
