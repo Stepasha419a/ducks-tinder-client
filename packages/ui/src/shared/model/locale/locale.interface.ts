@@ -75,4 +75,19 @@ export interface Locale {
     ski: string;
     volleyball: string;
   };
+  };
+  zodiacSign: {
+    Aries: string;
+    Taurus: string;
+    Gemini: string;
+    Cancer: string;
+    Leo: string;
+    Virgo: string;
+    Libra: string;
+    Scorpius: string;
+    Sagittarius: string;
+    Capricornus: string;
+    Aquarius: string;
+    Pisces: string;
+  };
 }
