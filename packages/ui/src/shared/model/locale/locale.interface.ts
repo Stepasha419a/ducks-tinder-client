@@ -75,6 +75,98 @@ export interface Locale {
     ski: string;
     volleyball: string;
   };
+  attentionSign: {
+    'Attention gestures': string;
+    Gifts: string;
+    Touches: string;
+    Compliments: string;
+    'Time together': string;
+  };
+  childrenAttitude: {
+    'I want children': string;
+    'I do not want children': string;
+    'I have children and I want more': string;
+    'I have children, but I do not want any more': string;
+    'Do not know yet': string;
+  };
+  chronotype: {
+    'Early bird': string;
+    'Night owl': string;
+    'In a spectrum': string;
+  };
+  communicationStyle: {
+    'Messaging a lot': string;
+    'Phone communication': string;
+    'Video chats': string;
+    'Do not like messaging': string;
+    'Meet in person': string;
+  };
+  education: {
+    Bachelor: string;
+    College: string;
+    'Middle school': string;
+    'Doctor of sciences': string;
+    Postgraduate: string;
+    Magistracy: string;
+    'Technical school': string;
+  };
+  foodPreference: {
+    Vegan: string;
+    Vegetarian: string;
+    Pescatarian: string;
+    Kosher: string;
+    Halal: string;
+    Carnivore: string;
+    Omnivore: string;
+    Other: string;
+  };
+  personalityType: {
+    INTJ: string;
+    INTP: string;
+    ENTJ: string;
+    ENTP: string;
+    INFJ: string;
+    INFP: string;
+    ENFJ: string;
+    ENFP: string;
+    ISTJ: string;
+    ISFJ: string;
+    ESTJ: string;
+    ESFJ: string;
+    ISTP: string;
+    ISFP: string;
+    ESTP: string;
+    Entertainer: string;
+  };
+  pet: {
+    Dog: string;
+    Cat: string;
+    Reptile: string;
+    Amphibian: string;
+    Bird: string;
+    Fish: string;
+    Other: string;
+    Turtle: string;
+    Hamster: string;
+    Rabbit: string;
+    'Pet-free': string;
+    'All the pets': string;
+    'Want a pet': string;
+    'Allergic to pets': string;
+  };
+  smokingAttitude: {
+    'Social smoker': string;
+    'Smoker when drinking': string;
+    'Non-smoker': string;
+    Smoker: string;
+    'Trying to quit': string;
+  };
+  socialNetworksActivity: {
+    'Influencer status': string;
+    'Socially active': string;
+    'Off the grid': string;
+    'Passive scroller': string;
+  };
   trainingAttitude: {
     Everyday: string;
     Often: string;
