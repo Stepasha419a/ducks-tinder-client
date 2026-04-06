@@ -14,7 +14,7 @@ interface MoreAboutMeListProps {
 export const MoreAboutMeList: FC<MoreAboutMeListProps> = ({ user }) => {
   const locale = useLocaleContext();
 
-  const items = getMoreAboutMe(user);
+  const items = getMoreAboutMe(user, locale);
 
   return <ListInfo title={locale.moreAboutMe} items={items} />;
 };

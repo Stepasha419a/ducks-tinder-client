@@ -2,6 +2,7 @@ import type { ShortPlace, ShortUser, User } from '@ducks-tinder-client/common';
 
 import { getLifestyle } from './getLifestyle';
 import { getMoreAboutMe } from './getMoreAboutMe';
+import type { Locale } from '@shared/model';
 
 export interface UserInfo {
   name: string;
@@ -24,7 +25,10 @@ export type UserSliderInfo =
   | UserDescription
   | undefined;
 
-export function getUserSliderInfo(user: User | ShortUser): UserSliderInfo[] {
+export function getUserSliderInfo(
+  user: User | ShortUser,
+  locale: Locale
+): UserSliderInfo[] {
   const result: UserSliderInfo[] = [];
 
   if (user.description) {
@@ -43,7 +47,7 @@ export function getUserSliderInfo(user: User | ShortUser): UserSliderInfo[] {
     result.push(lifestyle.slice(0, 4) as UserListInfo);
   }
 
-  const moreAboutMe = getMoreAboutMe(user);
+  const moreAboutMe = getMoreAboutMe(user, locale);
   if (moreAboutMe.length > 0) {
     result.push(moreAboutMe.slice(0, 4) as UserListInfo);
   }
