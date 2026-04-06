@@ -75,6 +75,13 @@ export interface Locale {
     ski: string;
     volleyball: string;
   };
+  trainingAttitude: {
+    Everyday: string;
+    Often: string;
+    Sometimes: string;
+    'Gym rat': string;
+    Occasionally: string;
+    Never: string;
   };
   zodiacSign: {
     Aries: string;
