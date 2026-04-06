@@ -16,6 +16,7 @@ import { ImageSlider } from '@shared/ui';
 
 import { NoSlider, SliderContent } from './components';
 import styles from './UserSlider.module.scss';
+import { useLocaleContext } from '@shared/model';
 
 interface ImageSliderProps {
   user: User | ShortUser;
@@ -42,6 +43,8 @@ export const UserSlider: FC<ImageSliderProps> = memo(
     extraClassName,
     ...sliderProps
   }) => {
+    const locale = useLocaleContext();
+
     useEffect(() => {
       setCurrentSlide(0);
 
@@ -72,7 +75,7 @@ export const UserSlider: FC<ImageSliderProps> = memo(
             <SliderContent
               currentSlide={currentSlide}
               age={user.age}
-              info={getUserSliderInfo(user)}
+              info={getUserSliderInfo(user, locale)}
               name={user.name}
               disabled={disabled}
             />
