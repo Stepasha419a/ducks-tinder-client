@@ -75,6 +75,14 @@ export interface Locale {
     ski: string;
     volleyball: string;
   };
+  alcoholAttitude: {
+    'Not for me': string;
+    Sober: string;
+    'Sober curious': string;
+    'On special occasions': string;
+    'Socially on weekends': string;
+    'Most Nights': string;
+  };
   attentionSign: {
     'Attention gestures': string;
     Gifts: string;
