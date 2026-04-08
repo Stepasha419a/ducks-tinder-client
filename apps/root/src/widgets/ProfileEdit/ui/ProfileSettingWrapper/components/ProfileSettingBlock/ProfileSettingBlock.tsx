@@ -9,6 +9,7 @@ import { ProfileSubmit } from '@features/ProfileSubmit';
 import { UploadImagePopups } from '@features/UploadImagePopups';
 
 import * as styles from './ProfileSettingBlock.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface ProfileSettingProps {
   pictures: Picture[];
@@ -19,6 +20,8 @@ export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
   pictures,
   setPictures,
 }) => {
+  const { t } = useTranslation();
+
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const [isUploadOpen, setIsUploadOpen] = useState(false);
@@ -34,11 +37,7 @@ export const ProfileSettingBlock: FC<ProfileSettingProps> = ({
         pictures={pictures}
         setPictures={setPictures}
       />
-      <div className={styles.descr}>
-        Add more photos to fill out your profile
-        <br />
-        by another 4% and get more likes.
-      </div>
+      <div className={styles.descr}>{t('profile.addMorePhotos')}</div>
       <ProfileSettingsList />
       {!isMobile && <ProfileSubmit pictures={pictures} />}
 

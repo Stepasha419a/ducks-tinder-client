@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Button } from '@ducks-tinder-client/ui';
 
 import * as styles from './Tabs.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface TabsProps {
   isPreviewTab: boolean;
@@ -11,6 +12,8 @@ interface TabsProps {
 }
 
 export const Tabs: FC<TabsProps> = ({ isPreviewTab, setIsPreviewTab }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.btns}>
       <Button
@@ -20,13 +23,13 @@ export const Tabs: FC<TabsProps> = ({ isPreviewTab, setIsPreviewTab }) => {
           styles.border
         )}
       >
-        Change
+        {t('change')}
       </Button>
       <Button
         onClick={() => setIsPreviewTab(true)}
         extraClassName={isPreviewTab ? styles.active : ''}
       >
-        Preview
+        {t('preview')}
       </Button>
     </div>
   );

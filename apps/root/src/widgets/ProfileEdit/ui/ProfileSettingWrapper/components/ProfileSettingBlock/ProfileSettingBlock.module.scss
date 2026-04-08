@@ -5,9 +5,10 @@
   .descr {
     text-align: center;
     padding: 0 16px;
-    margin: 10px 0 14px;
+    margin: 10px auto 14px;
     color: var(--main-secondary);
     font-size: 14px;
+    max-width: 280px;
   }
 }
 
