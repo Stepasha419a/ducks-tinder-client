@@ -10,8 +10,11 @@ import { Avatar } from '@ducks-tinder-client/ui';
 import { UploadImagePopups } from '@features/UploadImagePopups';
 
 import * as styles from './ProfilePreview.mobile.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const ProfilePreviewMobile = () => {
+  const { t } = useTranslation();
+
   const user = useAppSelector((state) => state.user.currentUser!);
 
   const [isUploadOpen, setIsUploadOpen] = useState(false);
@@ -46,13 +49,13 @@ export const ProfilePreviewMobile = () => {
                 <div className={styles.iconWrapper}>
                   <FontAwesomeIcon className={styles.icon} icon={faGear} />
                 </div>
-                Settings
+                {t('profile.settingsMobile')}
               </Link>
               <Link to={`${ROUTES.PROFILE}/edit`} className={styles.action}>
                 <div className={styles.iconWrapper}>
                   <FontAwesomeIcon className={styles.icon} icon={faPen} />
                 </div>
-                Change profile
+                {t('profile.changeProfile')}
               </Link>
               <div
                 onClick={openSettingHandler}
@@ -65,12 +68,11 @@ export const ProfilePreviewMobile = () => {
                 <div className={styles.iconWrapper}>
                   <FontAwesomeIcon className={styles.icon} icon={faCamera} />
                 </div>
-                Add photos
+                {t('profile.addPhotos')}
               </div>
             </div>
           </div>
         </div>
-        <div className={styles.membership}>membership</div>
       </div>
       <UploadImagePopups
         isUploadOpen={isUploadOpen}

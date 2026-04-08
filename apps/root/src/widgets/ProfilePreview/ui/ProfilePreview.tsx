@@ -10,8 +10,11 @@ import { Button, Preview } from '@ducks-tinder-client/ui';
 
 import { ProfilePreviewMobile } from './mobile';
 import * as styles from './ProfilePreview.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const ProfilePreview: FC = () => {
+  const { t } = useTranslation();
+
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   const user = useAppSelector((state) => state.user.currentUser!);
@@ -26,7 +29,7 @@ export const ProfilePreview: FC = () => {
       <div className={styles.edit}>
         <Link to={`${ROUTES.PROFILE}/edit`} className={styles.link}>
           <Button variant="gradient" extraClassName={styles.btn}>
-            Edit Info
+            {t('profile.editInfo')}
           </Button>
         </Link>
       </div>

@@ -99,19 +99,6 @@
       }
     }
   }
-
-  .membership {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    min-height: 360px;
-    height: 410px;
-    width: 100%;
-    padding-top: 40px;
-
-    background-color: var(--bg-sub-secondary);
-  }
 }
 
 @media (max-width: 340px) {
