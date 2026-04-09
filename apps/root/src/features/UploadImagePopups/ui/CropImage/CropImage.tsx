@@ -7,6 +7,7 @@ import { Button, Popup, RangeInput } from '@ducks-tinder-client/ui';
 import type { PixelCrop, ReturnGetCroppedImg } from './cropImageScript';
 import getCroppedImg from './cropImageScript';
 import * as styles from './CropImage.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface CropImageProps {
   imageUrl: string | null;
@@ -19,6 +20,8 @@ export const CropImage: FC<CropImageProps> = ({
   handleCloseImageCrop,
   handleSubmit,
 }) => {
+  const { t } = useTranslation();
+
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<PixelCrop | null>(
@@ -41,7 +44,11 @@ export const CropImage: FC<CropImageProps> = ({
   };
 
   return (
-    <Popup size="l" title="Redact photo" closeHandler={handleCloseImageCrop}>
+    <Popup
+      size="l"
+      title={t('profile.settings.photo.gallery')}
+      closeHandler={handleCloseImageCrop}
+    >
       <div className={styles.container}>
         <Cropper
           image={imageUrl!}
@@ -64,13 +71,13 @@ export const CropImage: FC<CropImageProps> = ({
         </div>
         <div className={styles.btns}>
           <Button onClick={handleCloseImageCrop} extraClassName={styles.btn}>
-            Cancel
+            {t('cancel')}
           </Button>
           <Button
             onClick={submitHandler}
             extraClassName={[styles.btn, styles.select]}
           >
-            Select
+            {t('select')}
           </Button>
         </div>
       </div>

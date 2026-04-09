@@ -5,6 +5,7 @@ import { Popup } from '@ducks-tinder-client/ui';
 
 import * as styles from './DialogUpload.module.scss';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 const MB_BYTES = 1_048_576;
 
@@ -19,28 +20,30 @@ export const DialogUpload: FC<DialogUploadProps> = ({
   handleCloseDialogUpload,
   handleSubmit,
 }) => {
+  const { t } = useTranslation();
+
   const handleImage = (e: ChangeEvent<HTMLInputElement>): void => {
     if (e.target.files && e.target.files.length > 1) {
-      toast('You can upload only 1 photo at once');
+      toast(t('profile.settings.photo.onlyOnePhoto'));
 
       return;
     }
 
     const file = e.target.files?.[0];
     if (!file) {
-      toast('Photo not found');
+      toast(t('profile.settings.photo.notFound'));
 
       return;
     }
 
     if (file.size > MB_BYTES) {
-      toast('Size should not be more than 1 MB');
+      toast(t('profile.settings.photo.sizeLimit'));
 
       return;
     }
 
     if (!ALLOWED_MIME_TYPES.includes(file.type)) {
-      toast('You can only upload photos of type png or jpg');
+      toast(t('profile.settings.photo.extension'));
 
       return;
     }
@@ -50,15 +53,19 @@ export const DialogUpload: FC<DialogUploadProps> = ({
 
   return (
     <Popup size="s" closeHandler={handleCloseDialogUpload}>
-      <div className={styles.title}>Upload</div>
-      <div className={styles.descr}>Choose context type</div>
+      <div className={styles.title}>{t('profile.settings.photo.upload')}</div>
+      <div className={styles.descr}>
+        {t('profile.settings.photo.chooseContext')}
+      </div>
       <div className={styles.wrapper}>
         <div className={styles.input}>
           <label className={styles.label}>
             <span className={styles.span}>
-              Upload from
+              {t('profile.settings.photo.uploadFrom')}
               <br />
-              <span className={styles.boldSpan}>Gallery</span>
+              <span className={styles.boldSpan}>
+                {t('profile.settings.photo.gallery')}
+              </span>
             </span>
             <input
               onChange={(e) => handleImage(e)}
