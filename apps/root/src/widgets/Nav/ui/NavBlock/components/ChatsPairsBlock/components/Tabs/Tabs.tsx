@@ -11,6 +11,7 @@ import { motion } from 'motion/react';
 import { ROUTES } from '@ducks-tinder-client/common';
 
 import * as styles from '../../ChatsPairsBlock.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface TabsProps {
   isPairsOpened: boolean;
@@ -18,6 +19,8 @@ interface TabsProps {
 }
 
 export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
+  const { t } = useTranslation();
+
   const handlePairsOpen = useCallback(() => {
     setIsPairsOpened(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -31,7 +34,7 @@ export const Tabs: FC<TabsProps> = ({ isPairsOpened, setIsPairsOpened }) => {
   return (
     <div className={styles.titles}>
       <Link to={ROUTES.MAIN} onClick={handlePairsOpen} className={styles.title}>
-        Pairs
+        {t('nav_pairs')}
         {isPairsOpened && (
           <motion.div
             animate={{
