@@ -30,17 +30,14 @@
     }
 
     .icon {
-      font-size: 14px;
-      margin-right: 5px;
+      // TODO: layout on root app and storybook differs, why?
+      font-size: 17px;
+      margin: 0 2px 0 1px;
     }
   }
 
   .distance {
     font-size: 18px;
-
-    .icon {
-      margin: 0 5px 0 1px;
-    }
 
     .text {
       margin-left: 2px;
