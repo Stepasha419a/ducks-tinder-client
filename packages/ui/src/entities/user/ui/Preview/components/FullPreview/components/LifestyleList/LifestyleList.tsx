@@ -14,7 +14,7 @@ interface LifestyleListProps {
 export const LifestyleList: FC<LifestyleListProps> = ({ user }) => {
   const locale = useLocaleContext();
 
-  const items = getLifestyle(user);
+  const items = getLifestyle(user, locale);
 
   return <ListInfo title={locale.lifestyle} items={items} />;
 };
