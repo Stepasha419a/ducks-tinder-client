@@ -42,7 +42,7 @@ export function getUserSliderInfo(
     place: user.place as ShortPlace,
   } as UserPlaceInfo);
 
-  const lifestyle = getLifestyle(user);
+  const lifestyle = getLifestyle(user, locale);
   if (lifestyle.length > 0) {
     result.push(lifestyle.slice(0, 4) as UserListInfo);
   }
