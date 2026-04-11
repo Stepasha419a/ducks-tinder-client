@@ -19,7 +19,7 @@ export function useTextForm() {
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  const { settingName, formName } = useMemoriedSettingUrl();
+  const { settingName } = useMemoriedSettingUrl();
 
   const {
     register,
@@ -33,6 +33,10 @@ export function useTextForm() {
   });
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
+    if (!settingName) {
+      return;
+    }
+
     const url = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 
     dispatch(updateUserThunk({ [settingName]: data.input }));
@@ -42,7 +46,7 @@ export function useTextForm() {
   const registerProps = register('input', useCurrentValidation());
 
   return {
-    formName,
+    settingName,
     errors,
     isValid,
     registerProps,

@@ -18,7 +18,7 @@ export function useRadioForm() {
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  const { settingName, formName } = useMemoriedSettingUrl();
+  const { settingName } = useMemoriedSettingUrl();
 
   const {
     control,
@@ -33,6 +33,10 @@ export function useRadioForm() {
   } = useController({ name: 'input', control, rules: { required: true } });
 
   const submitHandler = handleSubmit((data: SettingFieldValues) => {
+    if (!settingName) {
+      return;
+    }
+
     const url = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 
     dispatch(updateUserThunk({ [settingName]: data.input }));
@@ -40,11 +44,11 @@ export function useRadioForm() {
   });
 
   return {
-    formName,
     errors,
     isValid,
     value,
     onChange,
     submitHandler,
+    settingName,
   };
 }
