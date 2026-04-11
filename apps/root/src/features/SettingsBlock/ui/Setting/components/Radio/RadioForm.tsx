@@ -8,12 +8,12 @@ import { SettingWrapper } from '../components';
 import * as styles from './RadioForm.module.scss';
 
 export const RadioForm: FC = (): ReactElement => {
-  const { formName, errors, isValid, value, onChange, submitHandler } =
+  const { errors, isValid, value, onChange, submitHandler, settingName } =
     useRadioForm();
 
   return (
     <SettingWrapper
-      formName={formName}
+      formName={settingName}
       errors={errors}
       isValid={isValid}
       submitHandler={submitHandler}
