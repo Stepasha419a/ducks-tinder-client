@@ -19,14 +19,11 @@ export function useSettingUrl() {
 
   const settingProperties = SETTING_LIST[settingName as SettingNameEnum];
 
-  const formName = settingProperties?.formName || settingName;
-
   const settingType = getSettingType(settingName as SettingNameEnum);
 
   return {
     settingName: settingName as SettingNameEnum,
     settingType,
-    formName,
     validation: settingProperties?.validation,
   };
 }

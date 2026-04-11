@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/refs */
 import { useEffect, useRef } from 'react';
 
 import type { SettingNameEnum } from '../constants';
@@ -7,28 +6,19 @@ import { useSettingUrl } from './useSettingUrl';
 export function useMemoriedSettingUrl() {
   const setting = useSettingUrl();
 
-  const lastExistingValues = useRef<{
-    settingName: SettingNameEnum | null;
-    formName: string | null;
-  }>({ settingName: null, formName: null });
+  const lastExistingValue = useRef<SettingNameEnum | null>(null);
 
   useEffect(() => {
-    if (setting?.formName) {
-      lastExistingValues.current.formName = setting.formName;
-    }
-
     if (setting?.settingName) {
-      lastExistingValues.current.settingName = setting.settingName;
+      lastExistingValue.current = setting.settingName;
     }
-  }, [setting?.formName, setting?.settingName]);
+  }, [setting?.settingName]);
 
-  const settingName = (setting?.settingName ||
-    lastExistingValues.current.settingName)!;
-  const formName = (setting?.formName || lastExistingValues.current.formName)!;
+  // eslint-disable-next-line react-hooks/refs
+  const settingName = setting?.settingName || lastExistingValue.current;
 
   return {
     ...setting,
     settingName,
-    formName,
   };
 }
