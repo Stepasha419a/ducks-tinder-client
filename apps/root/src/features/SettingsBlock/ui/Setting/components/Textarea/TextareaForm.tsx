@@ -8,12 +8,12 @@ import { SettingWrapper } from '../components';
 import * as styles from './TextareaForm.module.scss';
 
 export const TextareaForm: FC = (): ReactElement => {
-  const { formName, errors, isValid, registerProps, submitHandler } =
+  const { errors, isValid, registerProps, submitHandler, settingName } =
     useTextForm();
 
   return (
     <SettingWrapper
-      formName={formName}
+      formName={settingName}
       isValid={isValid}
       errors={errors}
       submitHandler={submitHandler}
