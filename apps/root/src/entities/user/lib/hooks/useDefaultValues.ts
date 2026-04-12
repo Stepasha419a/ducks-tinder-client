@@ -1,4 +1,4 @@
-import type { Place, Setting } from '@ducks-tinder-client/common';
+import type { Place, Setting, User } from '@ducks-tinder-client/common';
 import { useAppSelector } from '@ducks-tinder-client/common';
 
 import { SettingNameEnum } from '../constants';
@@ -24,5 +24,11 @@ export function useDefaultValues(
     return language;
   }
 
-  return currentUser[settingName];
+  return currentUser[settingName as keyof User] as
+    | string
+    | number
+    | boolean
+    | string[]
+    | Place
+    | null;
 }
