@@ -37,7 +37,7 @@
   .toggle {
     width: auto;
     height: 25px;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 700;
     background-color: var(--color--black-80);
     color: var(--color--white-100);
@@ -55,15 +55,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 8px;
     height: 25px;
 
     .instruction {
       display: flex;
       align-items: center;
-      margin-right: 20px;
 
       .icon {
-        font-size: 20px;
+        font-size: 14px;
         color: var(--primary-instruction);
         margin-right: 8px;
 
@@ -82,7 +82,7 @@
       .text {
         color: var(--primary-instruction);
         font-weight: 900;
-        font-size: 14px;
+        font-size: 10px;
         white-space: nowrap;
         text-transform: uppercase;
       }
@@ -128,8 +128,24 @@
   .instructions {
     max-width: 600px;
     .items {
+      gap: 2px;
+
       .instruction {
         margin-right: 10px;
+
+        .icon {
+          font-size: 10px;
+
+          &_space {
+            border-width: 1px;
+            width: 30px;
+            height: 12px;
+          }
+        }
+
+        .text {
+          font-size: 8px;
+        }
       }
     }
   }
@@ -140,13 +156,19 @@
     max-width: 500px;
 
     .toggle {
-      font-size: 12px;
+      font-size: 10px;
     }
 
     .items {
+      gap: 2px;
+
       .instruction {
+        .icon {
+          font-size: 9px;
+        }
+
         .text {
-          font-size: 10px;
+          font-size: 8px;
         }
       }
     }
