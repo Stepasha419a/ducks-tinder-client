@@ -8,6 +8,7 @@ import { Button, Popup, Preview } from '@ducks-tinder-client/ui';
 import { acceptPairThunk, refusePairThunk } from '@entities/user';
 
 import * as styles from './RatePairPopup.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface RatePairPopupProps {
   currentPair: ShortUser;
@@ -18,6 +19,8 @@ export const RatePairPopup: FC<RatePairPopupProps> = ({
   currentPair,
   setCurrentPair,
 }) => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
 
   const handleAccept = (): void => {
@@ -39,10 +42,10 @@ export const RatePairPopup: FC<RatePairPopupProps> = ({
             onClick={handleAccept}
             extraClassName={classNames(styles.btn, styles.border)}
           >
-            Accept
+            {t('pairs.accept')}
           </Button>
           <Button onClick={handleRefuse} extraClassName={styles.btn}>
-            Refuse
+            {t('pairs.refuse')}
           </Button>
         </div>
       </Popup>
