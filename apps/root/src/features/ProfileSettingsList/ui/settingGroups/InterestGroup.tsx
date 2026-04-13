@@ -1,12 +1,15 @@
 import type { FC, PropsWithChildren } from 'react';
 
 import { SettingsGroup } from '@entities/user';
+import { useTranslation } from 'react-i18next';
 
 export const InterestGroup: FC<PropsWithChildren> = ({ children }) => {
+  const { t } = useTranslation();
+
   return (
     <SettingsGroup
-      descr="Choose the interests that you would like to share with your couples"
-      title="Interests"
+      descr={t('profile.settings.interests.description')}
+      title={t('profile.settings.interests.title')}
     >
       {children}
     </SettingsGroup>
