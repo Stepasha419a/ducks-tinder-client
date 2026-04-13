@@ -1,20 +1,23 @@
 import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail } from '@entities/user';
+import { useTranslation } from 'react-i18next';
 
 export const ChronotypeSettingThumbnail = () => {
+  const { t } = useTranslation();
+
   const chronotype = useAppSelector(
     (state) => state.user.currentUser!.chronotype
   );
 
   const url = `${ROUTES.PROFILE}/edit/lifestyle`;
-  const value = chronotype ? chronotype : 'Add';
+  const value = chronotype ? t(`user.chronotype.${chronotype}`) : t('add');
 
   return (
     <LinkSettingThumbnail
       url={url}
-      title="Chronotype"
-      value={value as string}
+      title={t('profile.settings.lifestyle.chronotype')}
+      value={value}
       isPointer
     />
   );

@@ -1,20 +1,25 @@
 import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail } from '@entities/user';
+import { useTranslation } from 'react-i18next';
 
 export const SmokingAttitudeSettingThumbnail = () => {
+  const { t } = useTranslation();
+
   const smokingAttitude = useAppSelector(
     (state) => state.user.currentUser!.smokingAttitude
   );
 
   const url = `${ROUTES.PROFILE}/edit/lifestyle`;
-  const value = smokingAttitude ? smokingAttitude : 'Add';
+  const value = smokingAttitude
+    ? t(`user.smokingAttitude.${smokingAttitude}`)
+    : t('add');
 
   return (
     <LinkSettingThumbnail
       url={url}
-      title="Smoking"
-      value={value as string}
+      title={t('profile.settings.lifestyle.smoking')}
+      value={value}
       isPointer
     />
   );
