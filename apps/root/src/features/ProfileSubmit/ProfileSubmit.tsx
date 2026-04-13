@@ -8,6 +8,7 @@ import { Button } from '@ducks-tinder-client/ui';
 import { usePicturesMix } from './lib';
 import { ProfileSubmitMobile } from './ui';
 import * as styles from './ProfileSubmit.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface ProfileSubmitProps {
   pictures: Picture[];
@@ -18,6 +19,8 @@ export const ProfileSubmit: FC<ProfileSubmitProps> = ({
   pictures,
   isMobile,
 }) => {
+  const { t } = useTranslation();
+
   const handleMixPictures = usePicturesMix();
   const handleSubmit = () => {
     handleMixPictures(pictures);
@@ -35,7 +38,7 @@ export const ProfileSubmit: FC<ProfileSubmitProps> = ({
           variant="gradient"
           extraClassName={styles.btn}
         >
-          Save changes
+          {t('saveChanges')}
         </Button>
       </Link>
     </div>
