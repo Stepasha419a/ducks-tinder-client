@@ -1,16 +1,26 @@
 import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail } from '@entities/user';
+import { useTranslation } from 'react-i18next';
 
 export const InterestsSettingThumbnail = () => {
+  const { t } = useTranslation();
+
   const interests = useAppSelector(
     (state) => state.user.currentUser!.interests
   );
 
   const url = `${ROUTES.PROFILE}/edit/interests`;
-  const value = interests.length ? `${interests[0]} and so on...` : 'Add';
+  const value = interests.length
+    ? `${t(`user.interests.${interests[0]}`)} ${t('andSoOn')}`
+    : t('add');
 
   return (
-    <LinkSettingThumbnail url={url} title="Interests" value={value} isPointer />
+    <LinkSettingThumbnail
+      url={url}
+      title={t('profile.settings.interests.thumbnail')}
+      value={value}
+      isPointer
+    />
   );
 };
