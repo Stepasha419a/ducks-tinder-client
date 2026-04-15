@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   updateUserThunk,
@@ -12,6 +13,8 @@ import { SettingThumbnail } from '@entities/user';
 import * as styles from '../SettingFeatureThumbnails.module.scss';
 
 export const AgeSettingThumbnail = () => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
 
   const age = useAppSelector((state) => state.user.currentUser!.age);
@@ -29,8 +32,14 @@ export const AgeSettingThumbnail = () => {
 
   return (
     <SettingThumbnail
-      title="Age"
-      value={ageSetting ? `${ageSetting} years old` : 'unknown'}
+      title={t('profile.settings.account.thumbnails.age.title')}
+      value={
+        ageSetting
+          ? t('profile.settings.account.thumbnails.age.years', {
+              count: ageSetting,
+            })
+          : t('unknown')
+      }
       isError={errorFields.includes('age')}
     >
       <div className={styles.slider}>

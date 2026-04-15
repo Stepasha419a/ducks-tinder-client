@@ -1,8 +1,10 @@
 import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
-
 import { LinkSettingThumbnail, SettingNameEnum } from '@entities/user';
+import { useTranslation } from 'react-i18next';
 
 export const DescriptionSettingThumbnail = () => {
+  const { t } = useTranslation();
+
   const description = useAppSelector(
     (state) => state.user.currentUser!.description
   );
@@ -12,7 +14,7 @@ export const DescriptionSettingThumbnail = () => {
   return (
     <LinkSettingThumbnail
       url={url}
-      title="Description"
+      title={t('profile.settings.account.thumbnails.description')}
       value={description || 'unknown'}
       isPointer
       isError={errorFields.includes(SettingNameEnum.DESCRIPTION)}
