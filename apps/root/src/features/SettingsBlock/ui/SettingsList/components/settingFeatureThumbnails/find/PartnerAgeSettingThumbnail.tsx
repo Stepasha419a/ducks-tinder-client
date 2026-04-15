@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   updateUserThunk,
@@ -12,6 +13,8 @@ import { SettingThumbnail } from '@entities/user';
 import * as styles from '../SettingFeatureThumbnails.module.scss';
 
 export const PartnerAgeSettingThumbnail = () => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
 
   const preferAgeFrom = useAppSelector(
@@ -46,11 +49,11 @@ export const PartnerAgeSettingThumbnail = () => {
 
   return (
     <SettingThumbnail
-      title="Partner age"
+      title={t('profile.settings.find.thumbnails.partnerAge')}
       value={
         areValuesDefined
-          ? `from ${preferAgeSetting.preferAgeFrom!} to ${preferAgeSetting.preferAgeTo!}`
-          : 'unknown'
+          ? `${t('age.from')} ${preferAgeSetting.preferAgeFrom!} ${t('age.to')} ${preferAgeSetting.preferAgeTo!}`
+          : t('unknown')
       }
       isError={
         errorFields.includes('preferAgeFrom') ||
