@@ -10,6 +10,6 @@ export {
   DescriptionSettingThumbnail,
   SexSettingThumbnail,
   AgeSettingThumbnail,
-  SwitchThemeThumbnail,
+  NicknameSettingThumbnail,
 } from './account';
-export { NicknameSettingThumbnail } from './nickname';
+export { SwitchThemeThumbnail, SelectLanguageThumbnail } from './display';

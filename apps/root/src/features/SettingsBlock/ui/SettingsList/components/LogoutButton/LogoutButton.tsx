@@ -12,8 +12,11 @@ import { Button } from '@ducks-tinder-client/ui';
 import { resetPairSlice, resetTinderSlice } from '@entities/user';
 
 import * as styles from './LogoutButton.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const LogoutButton: FC = (): ReactElement => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
@@ -27,7 +30,7 @@ export const LogoutButton: FC = (): ReactElement => {
 
   return (
     <Button onClick={handleLogout} extraClassName={styles.button}>
-      Log out
+      {t('profile.logout')}
     </Button>
   );
 };
