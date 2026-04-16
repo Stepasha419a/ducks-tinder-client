@@ -24,8 +24,11 @@ import {
   SwitchThemeThumbnail,
 } from './components';
 import * as styles from './SettingsList.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsList = (): ReactElement => {
+  const { t } = useTranslation();
+
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   return (
@@ -50,12 +53,18 @@ export const SettingsList = (): ReactElement => {
           <NicknameSettingThumbnail />
         </NicknameGroup>
         <LinksGroup>
-          <LinkThumbnail href="/policy" title="Community Rules" />
           <LinkThumbnail
             href="/policy"
-            title="Security and Policy Development Center"
+            title={t('profile.settings.safety.links.community')}
           />
-          <LinkThumbnail href="/policy" title="Safety Tips" />
+          <LinkThumbnail
+            href="/policy"
+            title={t('profile.settings.safety.links.security')}
+          />
+          <LinkThumbnail
+            href="/policy"
+            title={t('profile.settings.safety.links.tips')}
+          />
         </LinksGroup>
         <SettingsGroup>
           <LogoutButton />
