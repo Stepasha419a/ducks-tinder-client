@@ -1,5 +1,5 @@
-import type { FC, PropsWithChildren } from 'react';
-import type { FieldError, FieldErrors } from 'react-hook-form';
+import type { FC, PropsWithChildren, SubmitEventHandler } from 'react';
+import type { FieldErrors } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
@@ -9,6 +9,7 @@ import { Button } from '@ducks-tinder-client/ui';
 import type { SettingFieldValues } from '@features/SettingsBlock';
 
 import * as styles from './SettingWrapper.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface SettingFieldInterestsArray {
   input: string[];
@@ -17,8 +18,8 @@ interface SettingFieldInterestsArray {
 interface SettingWrapperProps {
   formName: string | null;
   isValid?: boolean;
-  errors: FieldErrors<SettingFieldValues | SettingFieldInterestsArray>;
-  submitHandler: () => void;
+  errors?: FieldErrors<SettingFieldValues | SettingFieldInterestsArray>;
+  submitHandler: SubmitEventHandler<HTMLFormElement>;
 }
 
 export const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
@@ -28,22 +29,33 @@ export const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   errors,
   submitHandler,
 }) => {
+  const { t } = useTranslation();
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
   const cancelUrl = isMobile ? ROUTES.SETTINGS : ROUTES.PROFILE;
 
+  const errorMessages = [
+    errors?.form?.message,
+    errors?.input?.message,
+    errors?.root?.message,
+  ].filter((item) => item !== undefined);
+
   return (
     <form onSubmit={submitHandler} className={styles.setting}>
-      {Object.values(errors).map((error: FieldError) => (
-        <div key={error.message} className={`${styles.name} ${styles.error}`}>
-          {error.message!.toString()}
+      {errorMessages.map((error: string) => (
+        <div key={error} className={`${styles.name} ${styles.error}`}>
+          {error.toString()}
         </div>
       ))}
-      <div className={styles.name}>{formName}</div>
+      <div className={styles.name}>
+        {t(`profile.settings.fields.${formName}`)}
+      </div>
       {children}
-      <div className={styles.title}>Your {formName}</div>
+      <div className={styles.title}>
+        {t(`profile.settings.fields.your.${formName}`)}
+      </div>
       <Link to={cancelUrl} className={styles.link}>
         <Button border extraClassName={classNames(styles.btn, styles.noBorder)}>
-          Cancel
+          {t('cancel')}
         </Button>
       </Link>
       <Button
@@ -52,7 +64,7 @@ export const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
         disabled={!isValid}
         extraClassName={styles.btn}
       >
-        Update my {formName}
+        {t(`profile.settings.fields.update.${formName}`)}
       </Button>
     </form>
   );
