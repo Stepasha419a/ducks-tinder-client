@@ -8,6 +8,7 @@ import {
   AccountGroup,
   AgeSettingThumbnail,
   DescriptionSettingThumbnail,
+  DisplayGroup,
   DistanceSettingThumbnail,
   EmailSettingThumbnail,
   FindGroup,
@@ -15,11 +16,11 @@ import {
   LogoutButton,
   MobileTitle,
   NameSettingThumbnail,
-  NicknameGroup,
   NicknameSettingThumbnail,
   PartnerAgeSettingThumbnail,
   PlaceSettingThumbnail,
   PreferSexSettingThumbnail,
+  SelectLanguageThumbnail,
   SexSettingThumbnail,
   SwitchThemeThumbnail,
 } from './components';
@@ -41,7 +42,7 @@ export const SettingsList = (): ReactElement => {
           <DescriptionSettingThumbnail />
           <SexSettingThumbnail />
           <AgeSettingThumbnail />
-          <SwitchThemeThumbnail />
+          <NicknameSettingThumbnail />
         </AccountGroup>
         <FindGroup>
           <PlaceSettingThumbnail />
@@ -49,9 +50,10 @@ export const SettingsList = (): ReactElement => {
           <PreferSexSettingThumbnail />
           <PartnerAgeSettingThumbnail />
         </FindGroup>
-        <NicknameGroup>
-          <NicknameSettingThumbnail />
-        </NicknameGroup>
+        <DisplayGroup>
+          <SwitchThemeThumbnail />
+          <SelectLanguageThumbnail />
+        </DisplayGroup>
         <LinksGroup>
           <LinkThumbnail
             href="/policy"
