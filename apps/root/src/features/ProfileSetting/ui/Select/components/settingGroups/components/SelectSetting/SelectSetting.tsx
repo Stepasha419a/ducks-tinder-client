@@ -11,6 +11,7 @@ import type {
 } from '@entities/user';
 
 import * as styles from './SelectSetting.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface SelectSettingProps {
   control: Control<MultiSelectForm>;
@@ -21,6 +22,8 @@ export const SelectSetting: FC<SelectSettingProps> = ({
   control,
   settingFieldName,
 }) => {
+  const { t } = useTranslation();
+
   const {
     title,
     list,
@@ -35,7 +38,7 @@ export const SelectSetting: FC<SelectSettingProps> = ({
   return (
     <>
       <div className={styles.subhead}>
-        <div className={styles.title}>{title}</div>
+        <div className={styles.title}>{t(title)}</div>
         <div className={styles.limit}>
           ({activeLength}/{validation.maxLength})
         </div>
