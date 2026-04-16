@@ -1,20 +1,20 @@
 import type { ProfileSettingSelectNameEnum } from '@entities/user';
 
 const PROFILE_SETTING_TITLES: Record<ProfileSettingSelectNameEnum, string> = {
-  interests: 'Interests',
-  zodiacSign: 'What is your zodiac sign?',
-  education: 'What is your education level?',
-  childrenAttitude: 'Do you want children?',
-  personalityType: 'What`s your personality type?',
-  communicationStyle: 'What is your communication style?',
-  attentionSign: 'How do you receive love?',
-  pet: 'Do you have any pets?',
-  alcoholAttitude: 'How often do you drink?',
-  smokingAttitude: 'How often do you smoke?',
-  trainingAttitude: 'Do you workout?',
-  foodPreference: 'What are your dietary preferences?',
-  socialNetworksActivity: 'How active are you on social media?',
-  chronotype: 'What are your sleeping habits?',
+  interests: 'profile.settings.interests.title',
+  zodiacSign: 'profile.settings.moreAboutMe.zodiacSetting',
+  education: 'profile.settings.moreAboutMe.educationSetting',
+  childrenAttitude: 'profile.settings.moreAboutMe.childrenSetting',
+  personalityType: 'profile.settings.moreAboutMe.personalitySetting',
+  communicationStyle: 'profile.settings.moreAboutMe.communicationSetting',
+  attentionSign: 'profile.settings.moreAboutMe.attentionSetting',
+  alcoholAttitude: 'profile.settings.lifestyle.drinkingSetting',
+  chronotype: 'profile.settings.lifestyle.chronotypeSetting',
+  foodPreference: 'profile.settings.lifestyle.foodSetting',
+  pet: 'profile.settings.lifestyle.petSetting',
+  smokingAttitude: 'profile.settings.lifestyle.smokingSetting',
+  socialNetworksActivity: 'profile.settings.lifestyle.socialSetting',
+  trainingAttitude: 'profile.settings.lifestyle.workoutSetting',
 };
 
 export function getProfileSettingTitles(
