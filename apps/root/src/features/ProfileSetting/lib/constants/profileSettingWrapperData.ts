@@ -10,21 +10,19 @@ export const PROFILE_SETTING_WRAPPER_DATA: Record<
   ProfileSettingWrapperData
 > = {
   interests: {
-    title: 'Edit interests',
-    description:
-      'Choose the interests that you would like to share with your couples. Specify at least 3 interests.',
+    title: 'profile.settings.interests.editTitle',
+    description: 'profile.settings.interests.editDescription',
   },
   moreAboutMe: {
-    title: 'More about me',
-    description:
-      'Reveal yourself from the best side by telling more about yourself',
+    title: 'profile.settings.moreAboutMe.title',
+    description: 'profile.settings.moreAboutMe.editDescription',
   },
   lifestyle: {
-    title: 'Lifestyle',
-    description: 'Bring your best self forward by adding your lifestyle',
+    title: 'profile.settings.lifestyle.title',
+    description: 'profile.settings.lifestyle.editDescription',
   },
   default: {
-    title: 'Default title',
-    description: 'Default description.',
+    title: 'profile.settings.default.editTitle',
+    description: 'profile.settings.default.editDescription',
   },
 };
