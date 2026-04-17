@@ -12,8 +12,11 @@ import { Places } from '@entities/user';
 
 import { getAreDifferentPlaces } from './lib';
 import * as styles from './PlacesGeolocation.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const PlacesGeolocation = () => {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
 
   const place = useAppSelector((state) => state.user.currentUser!.place);
@@ -75,7 +78,7 @@ export const PlacesGeolocation = () => {
           onClick={handlePlace}
           className={classNames(styles.refresh, loading && styles.disabled)}
         >
-          Refresh
+          {t('profile.settings.place.refresh')}
         </div>
       }
     />
