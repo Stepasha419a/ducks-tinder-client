@@ -5,6 +5,7 @@ import { Preview } from '@ducks-tinder-client/ui';
 
 import { PreviewContent } from './components';
 import * as styles from './Pair.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface PairPropsInterface {
   user: ShortUser;
@@ -12,8 +13,10 @@ interface PairPropsInterface {
 }
 
 export const Pair: FC<PairPropsInterface> = ({ user, setCurrentPair }) => {
+  const { t } = useTranslation();
+
   if (!user.name) {
-    return <div>loading...</div>;
+    return <div>{t('pairs.list.loading')}</div>;
   }
 
   return (

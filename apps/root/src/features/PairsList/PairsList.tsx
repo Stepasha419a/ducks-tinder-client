@@ -18,6 +18,7 @@ import { getUserPairsThunk } from '@entities/user';
 import { PairsListLazy } from './PairsList.lazy';
 import { Pair } from './ui';
 import * as styles from './PairsList.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface PairsListProps {
   setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;
@@ -25,7 +26,6 @@ interface PairsListProps {
 
 export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   const dispatch = useAppDispatch();
-
   const pairs = useAppSelector((state) => state.pair.pairs);
   const pairsInfoCount = useAppSelector((state) => state.pair.pairsInfo?.count);
   const isPairsInfoLoading = useAppSelector(
@@ -33,6 +33,8 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
   );
   const isPairsLoading = useAppSelector((state) => state.pair.isPairsLoading);
   const isPairsEnded = useAppSelector((state) => state.pair.isPairsEnded);
+
+  const { t } = useTranslation();
 
   const delayedGetUserPairs = useDebouncedCallback(
     () => {
@@ -45,7 +47,7 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
     return (
       <div className={styles.noPairs}>
         <FontAwesomeIcon icon={faHeart} className={styles.icon} />
-        <div>You don't have likes. Like someone to have a like too</div>
+        <div>{t('pairs.list.noLikes')}</div>
       </div>
     );
   }
@@ -57,7 +59,7 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
           icon={faMagnifyingGlassMinus}
           className={styles.icon}
         />
-        <div>There is no any suitable pair. Try to change settings</div>
+        <div>{t('pairs.list.noSuitable')}</div>
       </div>
     );
   }
