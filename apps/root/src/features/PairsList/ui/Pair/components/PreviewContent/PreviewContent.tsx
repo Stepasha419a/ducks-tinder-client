@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import * as styles from './PreviewContent.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface PreviewContentProps {
   name: string;
@@ -13,6 +14,8 @@ export const PreviewContent: FC<PreviewContentProps> = ({
   distance,
   name,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.info}>
       <div className={styles.descr}>
@@ -22,7 +25,7 @@ export const PreviewContent: FC<PreviewContentProps> = ({
       {distance !== null && (
         <div className={styles.distance}>
           {distance}
-          <span className={styles.text}>km from you</span>
+          <span className={styles.text}>{t('pairs.preview.distance')}</span>
         </div>
       )}
     </div>
