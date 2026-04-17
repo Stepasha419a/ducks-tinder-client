@@ -9,6 +9,7 @@ import { Button } from '@ducks-tinder-client/ui';
 import * as styles from './DraggableCard.module.scss';
 
 import { useSortable } from '@dnd-kit/react/sortable';
+import { useTranslation } from 'react-i18next';
 
 interface DraggableCardProps {
   picture: Picture;
@@ -21,6 +22,8 @@ export const DraggableCard: FC<DraggableCardProps> = ({
   src,
   onDelete,
 }) => {
+  const { t } = useTranslation();
+
   const { ref, isDragging } = useSortable({
     id: picture.id,
     index: picture.order,
@@ -33,7 +36,7 @@ export const DraggableCard: FC<DraggableCardProps> = ({
       <img
         className={classNames(styles.image, styles.hasImage)}
         src={src}
-        alt="item"
+        alt={t('profile.settings.photo.altDraggablePhoto')}
         draggable={false}
       />
       <Button
