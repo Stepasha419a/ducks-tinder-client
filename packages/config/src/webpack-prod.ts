@@ -17,6 +17,7 @@ const Dotenv = require('dotenv-webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin =
   require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CopyPlugin = require('copy-webpack-plugin');
 
 const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
@@ -77,6 +78,14 @@ export function getWebpackProdConfig(options: Options): Config {
     new ModuleFederationPlugin(moduleFederationOptions),
     new Dotenv({
       path: envPath,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(process.cwd(), options.staticPath, 'locales'),
+          to: path.resolve(process.cwd(), 'dist/locales'),
+        },
+      ],
     }),
   ];
   if (options.withBundleAnalyzer) {
