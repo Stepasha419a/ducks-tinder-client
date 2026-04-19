@@ -8,6 +8,6 @@ export default (env) =>
       './Policy': './src/app/policy.ts',
     },
     packagePath: './package.json',
-    mediaPublicPath: '../../public',
+    staticPath: './public',
     jsOutputPath: 'remote/policy',
   });
