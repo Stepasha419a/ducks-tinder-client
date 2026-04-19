@@ -51,6 +51,6 @@ export default (env) =>
       })`,
     },
     packagePath: './package.json',
-    mediaPublicPath: '../../public',
+    staticPath: './public',
     jsOutputPath: 'js',
   });
