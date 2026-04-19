@@ -10,6 +10,6 @@ export default (env) =>
       './chat': './src/app/chat.ts',
     },
     packagePath: './package.json',
-    mediaPublicPath: '../../public',
+    staticPath: './public',
     jsOutputPath: 'remote/chat',
   });
