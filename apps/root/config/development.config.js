@@ -10,6 +10,6 @@ export default (env) =>
       chatApp: 'chatApp@http://localhost:3003/remoteEntry.js',
     },
     packagePath: './package.json',
-    mediaPublicPath: '../../public',
     eslintConfigPath: './eslint.config.mjs',
+    staticPath: 'public',
   });
