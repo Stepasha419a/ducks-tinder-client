@@ -11,6 +11,6 @@ export default (env) =>
       './chat': './src/app/chat.ts',
     },
     packagePath: './package.json',
-    mediaPublicPath: '../../public',
     eslintConfigPath: './eslint.config.mjs',
+    staticPath: 'public',
   });
