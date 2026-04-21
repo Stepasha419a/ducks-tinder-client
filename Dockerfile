@@ -89,6 +89,8 @@ COPY --from=frontend-build /usr/src/app/frontend/apps/policy/dist /usr/share/ngi
 COPY --from=frontend-build /usr/src/app/frontend/apps/chat/dist /usr/share/nginx/html/chat
 COPY --from=frontend-build /usr/src/app/frontend/nginx/nginx.conf /etc/nginx/nginx.conf.template
 
+RUN mkdir -p /usr/share/nginx/html/locales
+
 COPY ./scripts/env-config.sh /usr/src/app/env-config.sh
 COPY ./scripts/entrypoint.sh ./entrypoint.sh
 
