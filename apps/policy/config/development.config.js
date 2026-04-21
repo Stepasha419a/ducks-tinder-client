@@ -9,6 +9,6 @@ export default (env) =>
       './Policy': './src/app/policy.ts',
     },
     packagePath: './package.json',
-    mediaPublicPath: '../../public',
     eslintConfigPath: './eslint.config.mjs',
+    staticPath: 'public',
   });
