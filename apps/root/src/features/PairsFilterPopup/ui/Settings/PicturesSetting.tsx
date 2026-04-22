@@ -9,12 +9,15 @@ import { ListItemButton } from '@ducks-tinder-client/ui';
 import type { PairFilterForm } from '@entities/user';
 
 import * as styles from '../../PairsFilterPopup.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface PicturesSettingProps {
   control: Control<PairFilterForm>;
 }
 
 export const PicturesSetting: FC<PicturesSettingProps> = ({ control }) => {
+  const { t } = useTranslation();
+
   const {
     field: { value: picturesCount, onChange: setPicturesCount },
   } = useController({ name: 'pictures', control });
@@ -23,7 +26,7 @@ export const PicturesSetting: FC<PicturesSettingProps> = ({ control }) => {
 
   return (
     <div className={styles.setting}>
-      <div className={styles.name}>Min pictures count</div>
+      <div className={styles.name}>{t('pairs.filter.pictures.title')}</div>
       <div className={classNames(styles.change, styles.flex)}>
         {picturesCountArrForLoop.map((_, i) => {
           return (
