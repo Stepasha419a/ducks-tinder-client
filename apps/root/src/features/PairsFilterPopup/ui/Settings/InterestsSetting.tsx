@@ -5,6 +5,7 @@ import { ListItemButton } from '@ducks-tinder-client/ui';
 import { INTERESTS_FOR_LOOP } from '@entities/user';
 
 import * as styles from '../../PairsFilterPopup.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface InterestsSettingProps {
   interests: string[];
@@ -17,9 +18,11 @@ export const InterestsSetting: FC<InterestsSettingProps> = ({
   toggleInterest,
   setIsInterestsSettingPopupOpen,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles.setting}>
-      <div className={styles.name}>Interests</div>
+      <div className={styles.name}>{t('pairs.filter.interests.title')}</div>
       <div className={`${styles.change} ${styles.flex}`}>
         {INTERESTS_FOR_LOOP.slice(0, 3).map((item) => {
           return (
@@ -29,7 +32,7 @@ export const InterestsSetting: FC<InterestsSettingProps> = ({
               key={item}
               type="button"
             >
-              {item}
+              {t(`user.interests.${item}`)}
             </ListItemButton>
           );
         })}
@@ -38,7 +41,7 @@ export const InterestsSetting: FC<InterestsSettingProps> = ({
         onClick={() => setIsInterestsSettingPopupOpen(true)}
         className={styles.showAll}
       >
-        Show all
+        {t('pairs.filter.interests.showAll')}
       </div>
     </div>
   );
