@@ -17,6 +17,7 @@ import {
   PicturesSetting,
 } from './ui';
 import * as styles from './PairsFilterPopup.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface PairsFilterPopupProps {
   setIsFilterPopupOpen: Dispatch<SetStateAction<boolean>>;
@@ -31,6 +32,8 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
   handleReset,
   handleSubmit,
 }) => {
+  const { t } = useTranslation();
+
   const {
     interests,
     toggleInterest,
@@ -55,7 +58,7 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
   return (
     <>
       <Popup
-        title="Likes filter"
+        title={t('pairs.filter.title')}
         size="l"
         closeHandler={submitHandler}
         extraClassName={styles.popup}
