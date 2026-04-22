@@ -6,6 +6,7 @@ import { getProfileSettingWrapperData } from '@features/ProfileSetting';
 import type { ProfileSettingNameEnum } from '@entities/user';
 
 import * as styles from './SettingWrapper.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface SettingWrapperProps {
   settingName: ProfileSettingNameEnum | null;
@@ -17,18 +18,20 @@ export const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
   handleSubmit,
   children,
 }) => {
+  const { t } = useTranslation();
+
   const data = getProfileSettingWrapperData(settingName);
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.head}>
-        <div className={styles.title}>{data.title}</div>
+        <div className={styles.title}>{t(data.title)}</div>
         <Button type="submit" className={styles.submit}>
           Submit
         </Button>
       </div>
       <div className={styles.setting}>
-        <div className={styles.descr}>{data.description}</div>
+        <div className={styles.descr}>{t(data.description)}</div>
         {children}
       </div>
     </form>
