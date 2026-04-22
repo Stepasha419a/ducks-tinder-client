@@ -91,6 +91,10 @@ COPY --from=frontend-build /usr/src/app/frontend/nginx/nginx.conf /etc/nginx/ngi
 
 RUN mkdir -p /usr/share/nginx/html/locales
 
+RUN if [ -d /usr/share/nginx/html/root/locales ]; then cp -r /usr/share/nginx/html/root/locales/* /usr/share/nginx/html/locales/; fi
+RUN if [ -d /usr/share/nginx/html/policy/locales ]; then cp -r /usr/share/nginx/html/policy/locales/* /usr/share/nginx/html/locales/; fi
+RUN if [ -d /usr/share/nginx/html/chat/locales ]; then cp -r /usr/share/nginx/html/chat/locales/* /usr/share/nginx/html/locales/; fi
+
 COPY ./scripts/env-config.sh /usr/src/app/env-config.sh
 COPY ./scripts/entrypoint.sh ./entrypoint.sh
 
