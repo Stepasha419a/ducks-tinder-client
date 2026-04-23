@@ -11,6 +11,7 @@ import { INTERESTS_FOR_LOOP } from '@entities/user';
 
 import { useOuterPairFilterForm } from './lib';
 import * as styles from './FilterPairsItems.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface FilterPairsItemsProps {
   isFilterPopupOpen: boolean;
@@ -25,6 +26,8 @@ export const FilterPairsItems: FC<FilterPairsItemsProps> = ({
   control,
   handleSubmit,
 }) => {
+  const { t } = useTranslation();
+
   const isSmallMobile = useAdaptiveMediaQuery('(max-width: 600px)');
 
   const {
@@ -53,7 +56,7 @@ export const FilterPairsItems: FC<FilterPairsItemsProps> = ({
                 extraClassName={styles.item}
                 key={item}
               >
-                {item}
+                {t(`user.interests.${item}`)}
               </ListItemButton>
             );
           })}
@@ -62,7 +65,7 @@ export const FilterPairsItems: FC<FilterPairsItemsProps> = ({
           isActive={hasInterests}
           extraClassName={styles.item}
         >
-          have interests
+          {t('pairs.filter.haveInterests')}
         </ListItemButton>
       </div>
     </>
