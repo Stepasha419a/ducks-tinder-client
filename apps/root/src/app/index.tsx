@@ -12,8 +12,8 @@ import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 
 const MFE_URLS: Record<string, string> = {
-  policy: 'http://localhost:3002',
-  chat: 'http://localhost:3003',
+  policy: window._env_.VAR_POLICY_MFE_URL,
+  chat: window._env_.VAR_CHAT_MFE_URL,
 };
 
 i18n
