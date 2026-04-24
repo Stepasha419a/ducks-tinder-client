@@ -10,6 +10,7 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
+import { LibLocaleProvider } from './lib/providers';
 
 const MFE_URLS: Record<string, string> = {
   policy: window._env_.VAR_POLICY_MFE_URL,
@@ -37,14 +38,17 @@ i18n
     ns: ['common'],
     defaultNS: 'common',
   });
+
 // TODO: decompose ThemeProvider into hoc
 function App(): ReactElement {
   return (
-    <ThemeProvider>
-      <Routing />
-      <OptionalMetricsProvider />
-      <ToastContainer />
-    </ThemeProvider>
+    <LibLocaleProvider>
+      <ThemeProvider>
+        <Routing />
+        <OptionalMetricsProvider />
+        <ToastContainer />
+      </ThemeProvider>
+    </LibLocaleProvider>
   );
 }
 
