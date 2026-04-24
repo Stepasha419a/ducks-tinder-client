@@ -30,7 +30,7 @@ i18n
     backend: {
       loadPath: (lngs: string[], namespaces: string[]) => {
         const ns = namespaces[0];
-        const baseUrl = MFE_URLS[ns] || '';
+        const baseUrl = MFE_URLS[ns] || window._env_.VAR_ROOT_PATH;
         return `${baseUrl}/locales/${lngs[0]}/${ns}.json`;
       },
     },
