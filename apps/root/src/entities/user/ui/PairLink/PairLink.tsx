@@ -7,8 +7,11 @@ import { makeImageUrl } from '@ducks-tinder-client/ui';
 
 import { FailedPair, Loading } from './components';
 import * as styles from './PairLink.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const PairLink = () => {
+  const { t } = useTranslation();
+
   const pairsInfo = useAppSelector((state) => state.pair.pairsInfo);
   const isPairsInfoLoading = useAppSelector(
     (state) => state.pair.isPairsInfoLoading
@@ -37,7 +40,9 @@ export const PairLink = () => {
             draggable="false"
           />
           <div className={styles.likes}>{pairsInfo.count}</div>
-          <div className={styles.text}>{pairsInfo.count} likes</div>
+          <div className={styles.text}>
+            {t('likes_count', { count: pairsInfo.count })}
+          </div>
           <FontAwesomeIcon
             icon={faHeartCircleExclamation}
             className={styles.icon}
