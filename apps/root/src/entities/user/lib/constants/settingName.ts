@@ -5,4 +5,5 @@ export enum SettingNameEnum {
   SEX = 'sex',
   PREFER_SEX = 'preferSex',
   NICKNAME = 'nickname',
+  LANGUAGE = 'language',
 }
