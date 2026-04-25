@@ -23,6 +23,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+    load: 'languageOnly',
     ns: ['policy'],
     defaultNS: 'policy',
   });
