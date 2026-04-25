@@ -14,6 +14,7 @@ import {
 import { useMessageSelect } from './lib';
 import { MessageSelectMobile } from './ui';
 import * as styles from './MessageSelect.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface MessageSelectProps {
   isMobile?: boolean;
@@ -32,6 +33,8 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   selectedMessage,
   handleNullSelectedMessage,
 }) => {
+  const { t } = useTranslation('chat');
+
   const selectRef = useRef<HTMLDivElement | null>(null);
 
   const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
@@ -95,12 +98,12 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   return (
     <div ref={selectRef} className={cn} style={{ top: position }}>
       <div onClick={handleRepliedMessage} className={styles.item}>
-        <p>Reply</p>
+        <p>{t('reply')}</p>
         <FontAwesomeIcon className={styles.icon} icon={faReply} />
       </div>
       {isMessageEditable && (
         <div onClick={handleEditMessage} className={styles.item}>
-          <p>Edit</p>
+          <p>{t('edit')}</p>
           <FontAwesomeIcon className={styles.icon} icon={faPen} />
         </div>
       )}
@@ -109,7 +112,7 @@ export const MessageSelect: FC<MessageSelectProps> = ({
           onClick={handleDeleteMessage}
           className={classNames(styles.item, styles.remove)}
         >
-          <p>Remove</p>
+          <p>{t('remove')}</p>
           <FontAwesomeIcon className={styles.icon} icon={faTrash} />
         </div>
       )}
