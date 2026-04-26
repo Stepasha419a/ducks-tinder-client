@@ -7,7 +7,6 @@ export interface Validation {
 }
 
 export interface SettingProperties {
-  formName?: string;
   validation?: Validation;
 }
 
@@ -22,9 +21,8 @@ export const SETTING_LIST: Record<SettingNameEnum, SettingProperties | null> = {
     validation: { min: 50, max: 400 },
   },
   sex: null,
-  preferSex: {
-    formName: 'Interested in',
-  },
+  language: null,
+  preferSex: null,
   nickname: {
     validation: { min: 6, max: 16 },
   },
