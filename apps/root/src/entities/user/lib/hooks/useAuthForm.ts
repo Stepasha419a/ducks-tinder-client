@@ -1,4 +1,4 @@
-import type { FormEventHandler } from 'react';
+import type { SubmitEventHandler } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
@@ -10,6 +10,7 @@ import {
   useAppDispatch,
 } from '@ducks-tinder-client/common';
 import type { TextFieldProps } from '@ducks-tinder-client/ui';
+import { useTranslation } from 'react-i18next';
 
 interface AuthFormReturn {
   fields: {
@@ -21,10 +22,12 @@ interface AuthFormReturn {
     errors: FieldErrors<RegistrationParams>;
     isValid: boolean;
   };
-  submitHandler: FormEventHandler<HTMLFormElement>;
+  submitHandler: SubmitEventHandler<HTMLFormElement>;
 }
 
 export function useAuthForm(isRegisterForm?: boolean): AuthFormReturn {
+  const { t } = useTranslation();
+
   const dispatch = useAppDispatch();
 
   const {
@@ -43,29 +46,29 @@ export function useAuthForm(isRegisterForm?: boolean): AuthFormReturn {
 
   const emailFieldProps = {
     type: 'text',
-    placeholder: 'Email',
+    placeholder: t('auth.email'),
     ...register('email', {
-      required: 'Email is required',
-      pattern: { value: EMAIL_REGEXP, message: 'Incorrect email' },
+      required: t('auth.emailRequired'),
+      pattern: { value: EMAIL_REGEXP, message: t('auth.emailIncorrect') },
       maxLength: {
         value: 30,
-        message: 'Email must be less than 30 symbols',
+        message: t('auth.emailLengthMax', { count: 30 }),
       },
     }),
   };
 
   const passwordFieldProps = {
     type: 'password',
-    placeholder: 'Password',
+    placeholder: t('auth.password'),
     ...register('password', {
-      required: 'Password is required',
+      required: t('auth.passwordRequired'),
       minLength: {
         value: 6,
-        message: 'Password must be more than 6 symbols',
+        message: t('auth.passwordLengthMin', { count: 6 }),
       },
       maxLength: {
         value: 30,
-        message: 'Password must be less than 30 symbols',
+        message: t('auth.passwordLengthMax', { count: 30 }),
       },
     }),
   };
@@ -85,11 +88,17 @@ export function useAuthForm(isRegisterForm?: boolean): AuthFormReturn {
   if (isRegisterForm) {
     props.fields.name = {
       type: 'text',
-      placeholder: 'First name',
+      placeholder: t('auth.name'),
       ...register('name', {
-        required: 'Name is required',
-        minLength: { value: 2, message: 'Name must be more than 2 symbols' },
-        maxLength: { value: 14, message: 'Name must be less than 14 symbols' },
+        required: t('auth.nameRequired'),
+        minLength: {
+          value: 2,
+          message: t('auth.nameLengthMin', { count: 2 }),
+        },
+        maxLength: {
+          value: 14,
+          message: t('auth.nameLengthMax', { count: 14 }),
+        },
       }),
     };
   }
