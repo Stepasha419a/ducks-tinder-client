@@ -13,8 +13,11 @@ import { Button, TextField } from '@ducks-tinder-client/ui';
 import { AuthLayout, useAuthForm } from '@entities/user';
 
 import * as styles from './RegistrationForm.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const RegistrationForm = (): ReactElement => {
+  const { t } = useTranslation();
+
   const {
     fields: { name, email, password },
     validation: { errors, isValid },
@@ -24,10 +27,10 @@ export const RegistrationForm = (): ReactElement => {
   return (
     <AuthLayout
       errors={errors}
-      title="Member Sign Up"
+      title={t('auth.memberSignUp')}
       link={
         <Link className={styles.link} to="/login">
-          Log in your Account
+          {t('auth.loginAccount')}
           <FontAwesomeIcon className={styles.icon} icon={faArrowRightLong} />
         </Link>
       }
@@ -64,7 +67,7 @@ export const RegistrationForm = (): ReactElement => {
           disabled={!isValid}
           extraClassName={[styles.btn, isValid ? '' : styles.disabled]}
         >
-          Sign up
+          {t('auth.signUp')}
         </Button>
       </form>
     </AuthLayout>
