@@ -7,8 +7,11 @@ import {
 import { Button } from '@ducks-tinder-client/ui';
 
 import * as styles from './BlockChat.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const BlockChat = () => {
+  const { t } = useTranslation('chat');
+
   const dispatch = useAppDispatch();
 
   const activeChat = useAppSelector((state) => state.chat.activeChat);
@@ -34,7 +37,7 @@ export const BlockChat = () => {
 
   return (
     <Button onClick={handleClick} extraClassName={styles.btn}>
-      {activeChat.blocked ? 'Unblock' : 'Block'}
+      {activeChat.blocked ? t('unblock') : t('block')}
     </Button>
   );
 };
