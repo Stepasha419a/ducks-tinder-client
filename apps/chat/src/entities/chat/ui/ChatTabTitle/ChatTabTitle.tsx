@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { useAppSelector } from '@ducks-tinder-client/common';
 
 import * as styles from './ChatTabTitle.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface ChatTabTitleProps {
   handleClick: () => void;
@@ -14,6 +15,8 @@ export const ChatTabTitle: FC<ChatTabTitleProps> = ({
   handleClick,
   isActive,
 }) => {
+  const { t } = useTranslation('chat');
+
   const newMessageChatsCount = useAppSelector(
     (state) => state.chat.newMessagesCount
   );
@@ -30,7 +33,7 @@ export const ChatTabTitle: FC<ChatTabTitleProps> = ({
           </div>
         </div>
       )}
-      Messages
+      {t('navChat')}
       {isActive && (
         <motion.div
           animate={{
