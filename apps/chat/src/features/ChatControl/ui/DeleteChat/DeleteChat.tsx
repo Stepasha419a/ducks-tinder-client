@@ -5,12 +5,15 @@ import { deleteChatThunk, useAppDispatch } from '@ducks-tinder-client/common';
 import { Button, Popup } from '@ducks-tinder-client/ui';
 
 import * as styles from './DeleteChat.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface DeleteChatProps {
   submitDelete?: () => void;
 }
 
 export const DeleteChat: FC<DeleteChatProps> = ({ submitDelete }) => {
+  const { t } = useTranslation('chat');
+
   const dispatch = useAppDispatch();
 
   const [isChatDeleting, setIsChatDeleting] = useState(false);
@@ -26,7 +29,7 @@ export const DeleteChat: FC<DeleteChatProps> = ({ submitDelete }) => {
         onClick={() => setIsChatDeleting(true)}
         extraClassName={styles.btn}
       >
-        Delete
+        {t('delete')}
       </Button>
       {isChatDeleting && (
         <Popup
@@ -34,22 +37,20 @@ export const DeleteChat: FC<DeleteChatProps> = ({ submitDelete }) => {
           closeHandler={() => setIsChatDeleting(false)}
           size="s"
         >
-          <div className={styles.title}>Delete</div>
+          <div className={styles.title}>{t('delete')}</div>
           <div className={styles.descr}>
-            <div className={styles.text}>Are you sure to delete this chat?</div>
-            <div className={styles.attention}>
-              It will not be available to recover it!
-            </div>
+            <div className={styles.text}>{t('sureWantToDelete')}</div>
+            <div className={styles.attention}>{t('noRecover')}</div>
           </div>
           <div className={styles.wrapper}>
             <Button
               onClick={() => setIsChatDeleting(false)}
               extraClassName={styles.btn}
             >
-              Cancel
+              {t('cancel')}
             </Button>
             <Button onClick={handleDelete} extraClassName={styles.btn}>
-              Delete
+              {t('delete')}
             </Button>
           </div>
         </Popup>
