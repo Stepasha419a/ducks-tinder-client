@@ -15,6 +15,7 @@ import { Button, TextField } from '@ducks-tinder-client/ui';
 import { MessageFormLazy } from './MessageForm.lazy';
 import { BlockedChat, TopBlock } from './ui';
 import * as styles from './MessageForm.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface ChatFormValues {
   input: string;
@@ -28,6 +29,8 @@ interface MessageFormProps {
 
 export const MessageForm: FC<MessageFormProps> = memo(
   ({ repliedMessage, handleResetEditReplied, editingMessage }) => {
+    const { t } = useTranslation('chat');
+
     const dispatch = useAppDispatch();
 
     const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
@@ -94,7 +97,7 @@ export const MessageForm: FC<MessageFormProps> = memo(
 
     if (activeChat.blocked) {
       const blockedByName =
-        activeChat.blockedById === currentUserId ? 'You' : activeChat.name;
+        activeChat.blockedById === currentUserId ? t('you') : activeChat.name;
 
       return <BlockedChat blockedByName={blockedByName} />;
     }
