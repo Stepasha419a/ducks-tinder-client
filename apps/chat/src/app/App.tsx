@@ -21,6 +21,8 @@ import { ChatList } from '@entities/chat';
 
 import '@ducks-tinder-client/ui/dist/esm/index.css';
 import * as styles from './App.module.scss';
+import { LibLocaleProvider } from './lib/providers';
+
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
@@ -65,9 +67,11 @@ const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <ThemeProvider>
-          <WrappedRoutes />
-        </ThemeProvider>
+        <LibLocaleProvider>
+          <ThemeProvider>
+            <WrappedRoutes />
+          </ThemeProvider>
+        </LibLocaleProvider>
       </BrowserRouter>
     </Provider>
   );
