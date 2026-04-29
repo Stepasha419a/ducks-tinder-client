@@ -108,3 +108,83 @@
       "Magistracy": "Magistracy",
       "Technical school": "Technical school"
     },
+    "foodPreference": {
+      "Vegan": "Vegan",
+      "Vegetarian": "Vegetarian",
+      "Pescatarian": "Pescatarian",
+      "Kosher": "Kosher",
+      "Halal": "Halal",
+      "Carnivore": "Carnivore",
+      "Omnivore": "Omnivore",
+      "Other": "Other"
+    },
+    "personalityType": {
+      "INTJ": "INTJ",
+      "INTP": "INTP",
+      "ENTJ": "ENTJ",
+      "ENTP": "ENTP",
+      "INFJ": "INFJ",
+      "INFP": "INFP",
+      "ENFJ": "ENFJ",
+      "ENFP": "ENFP",
+      "ISTJ": "ISTJ",
+      "ISFJ": "ISFJ",
+      "ESTJ": "ESTJ",
+      "ESFJ": "ESFJ",
+      "ISTP": "ISTP",
+      "ISFP": "ISFP",
+      "ESTP": "ESTP",
+      "Entertainer": "Entertainer"
+    },
+    "pet": {
+      "Dog": "Dog",
+      "Cat": "Cat",
+      "Reptile": "Reptile",
+      "Amphibian": "Amphibian",
+      "Bird": "Bird",
+      "Fish": "Fish",
+      "Other": "Other",
+      "Turtle": "Turtle",
+      "Hamster": "Hamster",
+      "Rabbit": "Rabbit",
+      "Pet-free": "Pet-free",
+      "All the pets": "All the pets",
+      "Want a pet": "Want a pet",
+      "Allergic to pets": "Allergic to pets"
+    },
+    "smokingAttitude": {
+      "Social smoker": "Social smoker",
+      "Smoker when drinking": "Smoker when drinking",
+      "Non-smoker": "Non-smoker",
+      "Smoker": "Smoker",
+      "Trying to quit": "Trying to quit"
+    },
+    "socialNetworksActivity": {
+      "Influencer status": "Influencer status",
+      "Socially active": "Socially active",
+      "Off the grid": "Off the grid",
+      "Passive scroller": "Passive scroller"
+    },
+    "trainingAttitude": {
+      "Everyday": "Everyday",
+      "Often": "Often",
+      "Sometimes": "Sometimes",
+      "Gym rat": "Gym rat",
+      "Occasionally": "Occasionally",
+      "Never": "Never"
+    },
+    "zodiacSign": {
+      "Aries": "Aries",
+      "Taurus": "Taurus",
+      "Gemini": "Gemini",
+      "Cancer": "Cancer",
+      "Leo": "Leo",
+      "Virgo": "Virgo",
+      "Libra": "Libra",
+      "Scorpius": "Scorpius",
+      "Sagittarius": "Sagittarius",
+      "Capricornus": "Capricornus",
+      "Aquarius": "Aquarius",
+      "Pisces": "Pisces"
+    }
+  },
