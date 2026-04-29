@@ -13,6 +13,8 @@ declare global {
       VAR_ROOT_PATH?: string;
       VAR_MATOMO_URL?: string;
       VAR_MATOMO_SITE_ID?: string;
+      VAR_POLICY_MFE_URL: string;
+      VAR_CHAT_MFE_URL: string;
     };
   }
 }
