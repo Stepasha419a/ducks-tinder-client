@@ -65,4 +65,46 @@
       "ski": "Ski",
       "volleyball": "Volleyball"
     },
-  }
+    "alcoholAttitude": {
+      "Not for me": "Not for me",
+      "Sober": "Sober",
+      "Sober curious": "Sober curious",
+      "On special occasions": "On special occasions",
+      "Socially on weekends": "Socially on weekends",
+      "Most Nights": "Most Nights"
+    },
+    "attentionSign": {
+      "Attention gestures": "Attention gestures",
+      "Gifts": "Gifts",
+      "Touches": "Touches",
+      "Compliments": "Compliments",
+      "Time together": "Time together"
+    },
+    "childrenAttitude": {
+      "I want children": "I want children",
+      "I do not want children": "I do not want children",
+      "I have children and I want more": "I have children and I want more",
+      "I have children, but I do not want any more": "I have children, but I do not want any more",
+      "Do not know yet": "Do not know yet"
+    },
+    "chronotype": {
+      "Early bird": "Early bird",
+      "Night owl": "Night owl",
+      "In a spectrum": "In a spectrum"
+    },
+    "communicationStyle": {
+      "Messaging a lot": "Messaging a lot",
+      "Phone communication": "Phone communication",
+      "Video chats": "Video chats",
+      "Do not like messaging": "Do not like messaging",
+      "Meet in person": "Meet in person"
+    },
+    "education": {
+      "Bachelor": "Bachelor",
+      "College": "College",
+      "Middle school": "Middle school",
+      "Doctor of sciences": "Doctor of sciences",
+      "Postgraduate": "Postgraduate",
+      "Magistracy": "Magistracy",
+      "Technical school": "Technical school"
+    },
