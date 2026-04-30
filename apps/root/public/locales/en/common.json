@@ -257,6 +257,18 @@
     "accept": "Accept",
     "refuse": "Refuse"
   },
+  "age": {
+    "from": "from",
+    "to": "to"
+  },
+  "distance": {
+    "km": "{{count}} km."
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
   "cancel": "Cancel",
   "select": "Select",
   "preview": "Preview",
