@@ -217,6 +217,46 @@
   "likes_count_one": "{{count}} like",
   "likes_count_few": "{{count}} likes",
   "likes_count_other": "{{count}} likes",
+  "pairs": {
+    "filter": {
+      "title": "Likes filter",
+      "haveInterests": "Have interests",
+      "distance": {
+        "title": "Max distance",
+        "unit": "km"
+      },
+      "age": {
+        "title": "Age range",
+        "from": "from",
+        "to": "to"
+      },
+      "pictures": {
+        "title": "Min pictures count"
+      },
+      "interests": {
+        "title": "Interests",
+        "showAll": "Show all"
+      },
+      "checkboxes": {
+        "identifyConfirmed": "Identify confirmed",
+        "haveInterests": "Have interests"
+      },
+      "buttons": {
+        "clear": "Clear",
+        "confirm": "Confirm"
+      }
+    },
+    "list": {
+      "noLikes": "You don't have likes. Like someone to have a like too",
+      "noSuitable": "There is no any suitable pair. Try to change settings",
+      "loading": "loading..."
+    },
+    "preview": {
+      "distance": "km from you"
+    },
+    "accept": "Accept",
+    "refuse": "Refuse"
+  },
   "cancel": "Cancel",
   "select": "Select",
   "preview": "Preview",
