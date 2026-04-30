@@ -201,3 +201,13 @@
     "showAll": "Show all",
     "ariaShowAllInterests": "show all interests"
   },
+  "instructions": {
+    "hide": "hide",
+    "show": "show",
+    "no": "no",
+    "like": "like",
+    "openProfile": "open profile",
+    "closeProfile": "close profile",
+    "superlike": "superlike",
+    "next": "next"
+  },
