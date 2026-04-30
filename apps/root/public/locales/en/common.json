@@ -188,3 +188,16 @@
       "Pisces": "Pisces"
     }
   },
+  "ui": {
+    "distance": "km from you",
+    "livesIn": "Lives in",
+    "altAvatar": "avatar",
+    "ariaOpenFullPreview": "open user full preview",
+    "unknownPlace": "unknown place",
+    "moreAboutMe": "More about me",
+    "lifestyle": "Lifestyle",
+    "interests": "Interests",
+    "close": "Close",
+    "showAll": "Show all",
+    "ariaShowAllInterests": "show all interests"
+  },
