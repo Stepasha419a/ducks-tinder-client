@@ -201,6 +201,7 @@
     "showAll": "Show all",
     "ariaShowAllInterests": "show all interests"
   },
+  "nav_pairs": "Pairs",
   "instructions": {
     "hide": "hide",
     "show": "show",
@@ -211,3 +212,16 @@
     "superlike": "superlike",
     "next": "next"
   },
+  "unknown": "unknown",
+  "likes_label": "likes",
+  "likes_count_one": "{{count}} like",
+  "likes_count_few": "{{count}} likes",
+  "likes_count_other": "{{count}} likes",
+  "cancel": "Cancel",
+  "select": "Select",
+  "preview": "Preview",
+  "change": "Change",
+  "saveChanges": "Save changes",
+  "submit": "Submit",
+  "andSoOn": "and so on...",
+  "add": "Add",
