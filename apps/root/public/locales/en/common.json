@@ -277,3 +277,42 @@
   "submit": "Submit",
   "andSoOn": "and so on...",
   "add": "Add",
+  "profile": {
+    "settings": {
+      "notFound": "Such setting was not found",
+      "fields": {
+        "email": "Email",
+        "name": "Name",
+        "description": "Description",
+        "sex": "Sex",
+        "preferSex": "Interested in",
+        "nickname": "Nickname",
+        "language": "Language",
+        "your": {
+          "email": "Your email",
+          "name": "Your name",
+          "description": "Your description",
+          "sex": "Your sex",
+          "preferSex": "Your interested in",
+          "nickname": "Your nickname",
+          "language": "Your language"
+        },
+        "update": {
+          "email": "Update my email",
+          "name": "Update my name",
+          "description": "Update my description",
+          "sex": "Update my sex",
+          "preferSex": "Update my interested in",
+          "nickname": "Update my nickname",
+          "language": "Update my language"
+        }
+      },
+    },
+    "logout": "Log out",
+    "addMorePhotos": "Add more photos to fill out your profile by another 4% and get more likes.",
+    "editProfile": "Edit profile",
+    "editInfo": "Edit Info",
+    "settingsMobile": "Settings",
+    "changeProfile": "Change profile",
+    "addPhotos": "Add photos"
+  },
