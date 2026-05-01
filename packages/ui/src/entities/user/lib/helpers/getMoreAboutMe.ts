@@ -5,7 +5,6 @@ export function getMoreAboutMe(
   user: User | ShortUser,
   locale: Locale
 ): string[] {
-  console.log({ locale });
   const arr = [
     user.attentionSign ? locale.attentionSign[user.attentionSign] : null,
     user.zodiacSign ? locale.zodiacSign[user.zodiacSign] : null,
