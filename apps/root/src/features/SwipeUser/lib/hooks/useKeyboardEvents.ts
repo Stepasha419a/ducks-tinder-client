@@ -68,7 +68,6 @@ const isInteractiveElement = (target: EventTarget | null): boolean => {
   }
 
   const tag = target.tagName;
-  console.log({ tag });
 
   const interactiveTags = [
     'BUTTON',
