@@ -7,6 +7,7 @@ import { ROUTES } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import * as styles from './ChatItem.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface ChatInterface {
   chat: Chat;
@@ -19,11 +20,15 @@ export const ChatItem: FC<ChatInterface> = ({
   isActive,
   currentUserId,
 }) => {
+  const { t } = useTranslation('chat');
+
   const username =
     chat.lastMessage &&
-    (currentUserId === chat.lastMessage.userId ? 'you' : chat.lastMessage.name);
+    (currentUserId === chat.lastMessage.userId
+      ? t('you')
+      : chat.lastMessage.name);
 
-  const messageName = username ? `${username}: ` : 'send first message';
+  const messageName = username ? `${username}: ` : t('sendFirstMessage');
 
   const isNewMessages = chat.newMessagesCount > 0 && !isActive;
 
