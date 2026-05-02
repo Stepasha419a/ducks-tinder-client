@@ -307,6 +307,44 @@
           "language": "Update my language"
         }
       },
+      "account": {
+        "title": "Account Settings",
+        "descr": "Verified email address helps to protect your account.",
+        "thumbnails": {
+          "age": {
+            "title": "Age",
+            "years": "{{count}} years old"
+          },
+          "description": "Description",
+          "email": "Email",
+          "name": "Name",
+          "sex": "Sex",
+          "nickname": "Nickname"
+        }
+      },
+      "find": {
+        "title": "Find Settings",
+        "descr": "When the local profiles are over, you will be able to switch to the Global Mode for dating people from all over the world.",
+        "thumbnails": {
+          "partnerAge": "Partner age",
+          "distance": {
+            "title": "Distance",
+            "range": "Show people only in this range"
+          },
+          "place": "Place",
+          "preferSex": "Interested in"
+        }
+      },
+      "display": {
+        "title": "Display preference",
+        "thumbnails": {
+          "theme": {
+            "title": "Theme",
+            "darkMode": "Dark Mode"
+          },
+          "language": "Language"
+        }
+      },
     },
     "logout": "Log out",
     "addMorePhotos": "Add more photos to fill out your profile by another 4% and get more likes.",
