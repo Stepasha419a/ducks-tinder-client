@@ -3,13 +3,16 @@ import { faCommentSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import * as styles from './NoChats.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const NoChats = (): ReactElement => {
+  const { t } = useTranslation('chat');
+
   return (
     <div className={styles.noChats}>
       <div className={styles.inner}>
         <FontAwesomeIcon icon={faCommentSlash} className={styles.icon} />
-        <div className={styles.text}>You don't have chats yet</div>
+        <div className={styles.text}>{t('noChatsYet')}</div>
       </div>
     </div>
   );
