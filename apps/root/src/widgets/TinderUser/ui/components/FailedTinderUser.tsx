@@ -1,5 +1,6 @@
 import { SwipeUserLazy } from '@features/SwipeUser';
 import { Failed } from '@features/SwipeUser/ui';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   hasErrorFields: boolean;
@@ -12,6 +13,8 @@ export const FailedTinderUser: React.FC<Props> = ({
   hasErrorFields,
   showUsers,
 }) => {
+  const { t } = useTranslation();
+
   if (showUsers) {
     return <SwipeUserLazy key="loading" small />;
   }
@@ -19,8 +22,8 @@ export const FailedTinderUser: React.FC<Props> = ({
   if (hasErrorFields) {
     return (
       <Failed
-        title="You have empty profile information fields"
-        text="Click to fill out your profile information"
+        title={t('tinder.errorFields')}
+        text={t('tinder.errorFieldsDescription')}
       />
     );
   }
@@ -28,8 +31,8 @@ export const FailedTinderUser: React.FC<Props> = ({
   if (failedNoNearby) {
     return (
       <Failed
-        title="You don't have users currently"
-        text="Click to change your prefer settings to get more opportunities"
+        title={t('tinder.noUsers')}
+        text={t('tinder.noUsersDescription')}
       />
     );
   }
