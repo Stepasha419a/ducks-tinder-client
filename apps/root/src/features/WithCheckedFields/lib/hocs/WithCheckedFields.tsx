@@ -10,11 +10,14 @@ import {
 } from '@ducks-tinder-client/common';
 
 import { checkUserFields } from '../helpers';
+import { useTranslation } from 'react-i18next';
 
 export const WithCheckedFields = <P extends object>(
   Component: ComponentType<P>
 ) => {
   const Wrapper = (props: P): ReactElement<P> => {
+    const { t } = useTranslation();
+
     const { pathname } = useLocation();
 
     const dispatch = useAppDispatch();
@@ -31,14 +34,11 @@ export const WithCheckedFields = <P extends object>(
 
     useEffect(() => {
       if (errorFields.length) {
-        toast(
-          'You have some empty fields, they are selected with red color in your profile settings',
-          {
-            toastId: 'toast-checked-fields',
-          }
-        );
+        toast(t('profile.emptyFields'), {
+          toastId: 'toast-checked-fields',
+        });
       }
-    }, [errorFields.length, pathname]);
+    }, [errorFields.length, pathname, t]);
 
     return <Component {...props} />;
   };
