@@ -278,6 +278,7 @@
   "andSoOn": "and so on...",
   "add": "Add",
   "profile": {
+    "emptyFields": "You have some empty fields, they are selected with red color in your profile settings",
     "settings": {
       "notFound": "Such setting was not found",
       "fields": {
