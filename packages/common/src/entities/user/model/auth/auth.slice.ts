@@ -62,6 +62,7 @@ const authSlice = createSlice({
             const thunkName = action.type.split('/')[1];
             // if it's auth form error => set error message
             if (thunkName === 'loginUser' || thunkName === 'registerUser') {
+              // TODO: show 401 error with i18n keys mapping, fix prod 401 oauth response (overrides error message from auth-service)
               toast(action.payload, { autoClose: 15000 });
             }
           }
