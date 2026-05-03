@@ -13,7 +13,7 @@ export const SexSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title={t('profile.settings.account.thumbnails.sex')}
-      value={t(`gender.${sex}`) || t('unknown')}
+      value={sex ? t(`gender.${sex}`) : t('unknown')}
       isPointer
       isError={errorFields.includes(SettingNameEnum.SEX)}
     />
