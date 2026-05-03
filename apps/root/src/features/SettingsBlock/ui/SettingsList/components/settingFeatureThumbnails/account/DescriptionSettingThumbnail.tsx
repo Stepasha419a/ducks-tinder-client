@@ -15,7 +15,7 @@ export const DescriptionSettingThumbnail = () => {
     <LinkSettingThumbnail
       url={url}
       title={t('profile.settings.account.thumbnails.description')}
-      value={description || 'unknown'}
+      value={description || t('unknown')}
       isPointer
       isError={errorFields.includes(SettingNameEnum.DESCRIPTION)}
       isOverflow
