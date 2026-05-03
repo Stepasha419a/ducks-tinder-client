@@ -41,15 +41,15 @@ export const PlacesGeolocation = () => {
           })
         );
       } else {
-        toast('Your position is remained unchanged');
+        toast(t('profile.settings.place.unchanged'));
       }
     },
-    [dispatch, place]
+    [dispatch, place, t]
   );
 
   const handlePlace = useCallback(() => {
     if (loading) {
-      toast('Refreshing is already in progress');
+      toast(t('profile.settings.place.refreshing'));
       return;
     }
 
@@ -57,14 +57,12 @@ export const PlacesGeolocation = () => {
     navigator.geolocation.getCurrentPosition(
       handleGetCurrentPosition,
       () => {
-        toast(
-          'Enable your geolocation, otherwise we wont be able to set your location'
-        );
+        toast(t('profile.settings.place.enableGeolocation'));
       },
       { enableHighAccuracy: true }
     );
     setLoading(false);
-  }, [handleGetCurrentPosition, loading]);
+  }, [handleGetCurrentPosition, loading, t]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
