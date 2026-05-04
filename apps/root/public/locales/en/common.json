@@ -346,6 +346,15 @@
           "language": "Language"
         }
       },
+      "safety": {
+        "title": "Safety Tips",
+        "descr": "Stay safe and be safe out there.",
+        "links": {
+          "community": "Community Rules",
+          "security": "Security and Policy Development Center",
+          "tips": "Safety Tips"
+        }
+      },
     },
     "logout": "Log out",
     "addMorePhotos": "Add more photos to fill out your profile by another 4% and get more likes.",
