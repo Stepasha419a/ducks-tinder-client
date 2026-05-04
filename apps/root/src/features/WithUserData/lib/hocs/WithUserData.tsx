@@ -7,11 +7,15 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '@ducks-tinder-client/common';
+import { useTranslation } from 'react-i18next';
 
+// TODO: use from common-package - duplicate!
 export const WithUserData = <P extends object>(
   Component: ComponentType<P>
 ): FC<P> => {
   const Wrapper = (props: P) => {
+    const { t } = useTranslation();
+
     const dispatch = useAppDispatch();
 
     const user = useAppSelector((state) => state.user.currentUser);
@@ -37,14 +41,12 @@ export const WithUserData = <P extends object>(
           timeout.current *= 2;
 
           failedOnceWithToast.current = true;
-          toast(
-            'Something went wrong during the initial check. Trying to reconnect...'
-          );
+          toast(t('auth.reconnection'));
         }
       }
 
       if (user && failedOnceWithToast.current) {
-        toast('Successful connection');
+        toast(t('auth.successConnect'));
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch, requested, count]);
