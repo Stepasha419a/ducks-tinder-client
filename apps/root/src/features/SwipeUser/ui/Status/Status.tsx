@@ -5,6 +5,7 @@ import { motion } from 'motion/react';
 
 import * as styles from './Status.module.scss';
 import { useSwipeStyles } from '@entities/user';
+import { useTranslation } from 'react-i18next';
 
 interface StatusProps {
   isFullPreview: boolean;
@@ -13,6 +14,8 @@ interface StatusProps {
 }
 
 export const Status: FC<StatusProps> = ({ isFullPreview, x, y }) => {
+  const { t } = useTranslation();
+
   const { statusStyles } = useSwipeStyles(x, y);
 
   return (
@@ -21,19 +24,19 @@ export const Status: FC<StatusProps> = ({ isFullPreview, x, y }) => {
         style={statusStyles.dislikeStyle}
         className={classNames(styles.status, styles.red)}
       >
-        DISLIKE
+        {t('tinder.dislike')}
       </motion.div>
       <motion.div
         style={statusStyles.likeStyle}
         className={classNames(styles.status, styles.green)}
       >
-        LIKE
+        {t('tinder.like')}
       </motion.div>
       <motion.div
         style={statusStyles.superLikeStyle}
         className={classNames(styles.status, styles.blue)}
       >
-        SUPER LIKE
+        {t('tinder.superLike')}
       </motion.div>
     </div>
   );
