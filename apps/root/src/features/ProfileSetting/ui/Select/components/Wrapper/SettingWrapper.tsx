@@ -27,7 +27,7 @@ export const SettingWrapper: FC<PropsWithChildren<SettingWrapperProps>> = ({
       <div className={styles.head}>
         <div className={styles.title}>{t(data.title)}</div>
         <Button type="submit" className={styles.submit}>
-          Submit
+          {t('submit')}
         </Button>
       </div>
       <div className={styles.setting}>
