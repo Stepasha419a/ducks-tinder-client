@@ -60,7 +60,7 @@ export const SelectSetting: FC<SelectSettingProps> = ({
               extraClassName={cn}
               type="button"
             >
-              {selectItem}
+              {t(`user.${settingFieldName}.${selectItem}`)}
             </ListItemButton>
           );
         })}
