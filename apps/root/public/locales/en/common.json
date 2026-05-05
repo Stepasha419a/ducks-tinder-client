@@ -355,6 +355,18 @@
           "tips": "Safety Tips"
         }
       },
+      "photo": {
+        "upload": "Upload",
+        "uploadFrom": "Upload from",
+        "gallery": "Gallery",
+        "chooseContext": "Choose context type",
+        "onlyOnePhoto": "You can upload only 1 photo at once",
+        "notFound": "Photo not found",
+        "sizeLimit": "Size should not be more than 1 MB",
+        "extension": "You can only upload photos of type png or jpg",
+        "redactPhoto": "Redact photo",
+        "altDraggablePhoto": "draggable photo"
+      },
     },
     "logout": "Log out",
     "addMorePhotos": "Add more photos to fill out your profile by another 4% and get more likes.",
