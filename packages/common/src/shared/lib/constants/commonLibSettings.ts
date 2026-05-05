@@ -27,4 +27,15 @@ export const COMMON_LIB_SETTINGS: CommonLibSettings = {
   FILE_SERVICE_URL: '',
   USER_SERVICE_URL: '',
   WITH_MOCKS: false,
+  TEXTS: {
+    reconnection: '',
+    successConnect: '',
+    incorrectEmailOrPassword: '',
+    unauthorized: '',
+    userAlreadyExists: '',
+    errorOccurred: '',
+    redirection: '',
+    clickToStay: '',
+    redirectionCancelled: '',
+  },
 };
