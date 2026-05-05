@@ -3,7 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 
 import { getCurrentUser } from '@entities/user';
-import { useAppDispatch, useAppSelector } from '@shared/lib';
+import {
+  COMMON_LIB_SETTINGS,
+  useAppDispatch,
+  useAppSelector,
+} from '@shared/lib';
 
 export const WithUserData = <P extends object>(
   Component: ComponentType<P>
@@ -34,14 +38,12 @@ export const WithUserData = <P extends object>(
           timeout.current *= 2;
 
           failedOnceWithToast.current = true;
-          toast(
-            'Something went wrong during the initial check. Trying to reconnect...'
-          );
+          toast(COMMON_LIB_SETTINGS.TEXTS.reconnection);
         }
       }
 
       if (user && failedOnceWithToast.current) {
-        toast('Successful connection');
+        toast(COMMON_LIB_SETTINGS.TEXTS.successConnect);
       }
     }, [dispatch, requested, count]);
 
