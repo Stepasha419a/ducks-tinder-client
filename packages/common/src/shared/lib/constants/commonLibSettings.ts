@@ -6,6 +6,17 @@ export interface CommonLibSettings {
   FILE_SERVICE_URL: string;
   USER_SERVICE_URL: string;
   WITH_MOCKS: boolean;
+  TEXTS: {
+    reconnection: string;
+    successConnect: string;
+    incorrectEmailOrPassword: string;
+    unauthorized: string;
+    userAlreadyExists: string;
+    errorOccurred: string;
+    redirection: string;
+    clickToStay: string;
+    redirectionCancelled: string;
+  };
 }
 
 export const COMMON_LIB_SETTINGS: CommonLibSettings = {
