@@ -1,6 +1,7 @@
 import type { ComponentType, ErrorInfo } from 'react';
 import { Component as ReactComponent } from 'react';
 import { toast } from 'react-toastify';
+import { COMMON_LIB_SETTINGS } from '../constants';
 
 interface Options {
   redirect?: boolean;
@@ -19,15 +20,15 @@ export function WithErrorFallback<P extends object>(
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
       console.log({ error, errorInfo });
 
-      toast('Some error occurred! The view is blocked to prevent an error.', {
+      toast(COMMON_LIB_SETTINGS.TEXTS.errorOccurred, {
         autoClose: 10000,
       });
 
       if (options?.redirect) {
-        toast('You will be redirected in 10 seconds.', {
+        toast(COMMON_LIB_SETTINGS.TEXTS.redirection, {
           autoClose: 10000,
         });
-        toast('Click here to stay.', {
+        toast(COMMON_LIB_SETTINGS.TEXTS.clickToStay, {
           autoClose: 10000,
           toastId: 'prevent-close-toast',
         });
@@ -37,7 +38,7 @@ export function WithErrorFallback<P extends object>(
           if (item.id === 'prevent-close-toast' && item.status === 'removed') {
             redirect = false;
 
-            toast('Redirection canceled!');
+            toast(COMMON_LIB_SETTINGS.TEXTS.redirectionCancelled);
           }
         });
 
