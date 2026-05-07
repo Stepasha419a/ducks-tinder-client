@@ -201,6 +201,17 @@
     "showAll": "Show all",
     "ariaShowAllInterests": "show all interests"
   },
+  "commonPackage": {
+    "reconnection": "Something went wrong during the initial check. Trying to reconnect...",
+    "successConnect": "Successful connection",
+    "incorrectEmailOrPassword": "Incorrect email or password",
+    "unauthorized": "Unauthorized",
+    "userAlreadyExists": "User already exists",
+    "errorOccurred": "Some error occurred! The view is blocked to prevent an error.",
+    "redirection": "You will be redirected in 10 seconds.",
+    "clickToStay": "Click here to stay",
+    "redirectionCancelled": "Redirection canceled!"
+  },
   "nav_pairs": "Pairs",
   "instructions": {
     "hide": "hide",
