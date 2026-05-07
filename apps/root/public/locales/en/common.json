@@ -378,6 +378,13 @@
         "redactPhoto": "Redact photo",
         "altDraggablePhoto": "draggable photo"
       },
+      "interests": {
+        "title": "Interests",
+        "editTitle": "Edit interests",
+        "description": "Choose the interests that you would like to share with your couples",
+        "editDescription": "Choose the interests that you would like to share with your couples. Specify at least 3 interests.",
+        "thumbnail": "Interests"
+      },
     },
     "logout": "Log out",
     "addMorePhotos": "Add more photos to fill out your profile by another 4% and get more likes.",
