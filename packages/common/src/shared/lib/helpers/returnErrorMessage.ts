@@ -13,10 +13,14 @@ export function returnErrorMessage(error: unknown): string {
   ) {
     return error.response.data.message;
   }
+
+  if (error instanceof Error) {
     return error.message;
   }
+
   if (typeof error === 'string') {
     return error;
   }
-  return 'undefined error';
+
+  return 'unknown error';
 }
