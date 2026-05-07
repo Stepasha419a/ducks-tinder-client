@@ -385,6 +385,22 @@
         "editDescription": "Choose the interests that you would like to share with your couples. Specify at least 3 interests.",
         "thumbnail": "Interests"
       },
+      "moreAboutMe": {
+        "title": "More about me",
+        "editDescription": "Reveal yourself from the best side by telling more about yourself",
+        "zodiac": "Zodiac",
+        "zodiacSetting": "What is your zodiac sign?",
+        "education": "Education",
+        "educationSetting": "What is your education level?",
+        "children": "Children attitude",
+        "childrenSetting": "Do you want children?",
+        "personality": "Personality type",
+        "personalitySetting": "What's your personality type?",
+        "communication": "Communication",
+        "communicationSetting": "What is your communication style?",
+        "attention": "Attention sign",
+        "attentionSetting": "How do you receive love?"
+      },
     },
     "logout": "Log out",
     "addMorePhotos": "Add more photos to fill out your profile by another 4% and get more likes.",
