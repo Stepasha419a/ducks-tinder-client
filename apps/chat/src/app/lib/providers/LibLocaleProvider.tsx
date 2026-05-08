@@ -1,3 +1,4 @@
+import { setCommonLibSettings } from '@ducks-tinder-client/common';
 import { LocaleProvider, type Locale } from '@ducks-tinder-client/ui';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -218,6 +219,16 @@ export const LibLocaleProvider: React.FC<React.PropsWithChildren> = ({
     }),
     [t]
   );
+
+  setCommonLibSettings({
+    CLIENT_ROOT_URL: window._env_.VAR_CLIENT_ROOT_URL,
+    AUTH_SERVICE_URL: window._env_.VAR_AUTH_SERVICE_URL,
+    CHAT_SERVICE_URL: window._env_.VAR_CHAT_SERVICE_URL,
+    CHAT_SERVICE_SOCKET_PATH: window._env_.VAR_CHAT_SERVICE_SOCKET_PATH,
+    FILE_SERVICE_URL: window._env_.VAR_FILE_SERVICE_URL,
+    USER_SERVICE_URL: window._env_.VAR_USER_SERVICE_URL,
+    WITH_MOCKS: window._env_.VAR_MODE === 'demo',
+  });
 
   return <LocaleProvider locale={locale}>{children}</LocaleProvider>;
 };
