@@ -228,6 +228,17 @@ export const LibLocaleProvider: React.FC<React.PropsWithChildren> = ({
     FILE_SERVICE_URL: window._env_.VAR_FILE_SERVICE_URL,
     USER_SERVICE_URL: window._env_.VAR_USER_SERVICE_URL,
     WITH_MOCKS: window._env_.VAR_MODE === 'demo',
+    TEXTS: {
+      reconnection: t('commonPackage.reconnection'),
+      successConnect: t('commonPackage.successConnect'),
+      incorrectEmailOrPassword: t('commonPackage.incorrectEmailOrPassword'),
+      unauthorized: t('commonPackage.unauthorized'),
+      userAlreadyExists: t('commonPackage.userAlreadyExists'),
+      errorOccurred: t('commonPackage.errorOccurred'),
+      redirection: t('commonPackage.redirection'),
+      clickToStay: t('commonPackage.clickToStay'),
+      redirectionCancelled: t('commonPackage.redirectionCancelled'),
+    },
   });
 
   return <LocaleProvider locale={locale}>{children}</LocaleProvider>;
