@@ -2,7 +2,6 @@
 
 import type { PairFilterParams, User, UserService } from '@shared/api';
 import {
-  chatStub,
   matchingUserStubs,
   mockStorage,
   pairsInfoStub,
@@ -10,6 +9,7 @@ import {
   saveTestUser,
   shortUserStub,
 } from '@shared/api';
+import { globalEventEmitter } from '@shared/lib';
 
 export const userMockService: UserService = {
   async getMe() {
@@ -70,7 +70,7 @@ export const userMockService: UserService = {
   },
 
   async acceptPair(pairId: string) {
-    mockStorage.chats.unshift({ ...chatStub, id: pairId });
+    globalEventEmitter.emit('accept-pair', { id: pairId });
     return resolveAxiosResponse({ ...shortUserStub, id: pairId });
   },
 
