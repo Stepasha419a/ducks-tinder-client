@@ -25,7 +25,7 @@ const instances: Instances = {
   userService: null,
 };
 
-const getOrCreateService = <T extends Instances[keyof Instances]>(
+export const getOrCreateService = <T extends Instances[keyof Instances]>(
   key: keyof Instances,
   createService: () => T
 ): T => {
