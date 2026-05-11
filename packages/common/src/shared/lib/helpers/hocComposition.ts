@@ -3,6 +3,19 @@ import type { ComponentType } from 'react';
 import type { HocFunc } from '../interfaces';
 import { compose } from './compose';
 
+export enum HocCompositionStage {
+  BOOTSTRAPPING = 'BOOTSTRAPPING',
+  AUTH_CHECK = 'AUTH_CHECK',
+  USER_HYDRATION = 'USER_HYDRATION',
+  DATA_SYNCING = 'DATA_SYNCING',
+  COMPLETE = 'COMPLETE',
+}
+
+interface HocStage {
+  hocs: HocFunc[];
+  stage: HocCompositionStage;
+}
+
 export class HocComposition {
   hocs: HocFunc[];
   subscribers: Array<() => void> = [];
