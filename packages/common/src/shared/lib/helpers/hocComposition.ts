@@ -62,3 +62,6 @@ export class HocComposition {
     this.subscribers.push(callback);
   }
 }
+
+export const APP_PRIVATE_HOC_COMPOSITION = new HocComposition();
+export const APP_AUTH_HOC_COMPOSITION = new HocComposition();
