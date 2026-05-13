@@ -12,7 +12,7 @@ import {
 import {
   APP_PRIVATE_HOC_COMPOSITION,
   HocCompositionStage,
-} from '@ducks-tinder-client/common/dist/shared/lib';
+} from '@ducks-tinder-client/common/dist/shared/lib/helpers/hocComposition';
 import { setUiLibSettings, ThemeProvider } from '@ducks-tinder-client/ui';
 
 import { ActiveChat } from '@pages/ActiveChat';
