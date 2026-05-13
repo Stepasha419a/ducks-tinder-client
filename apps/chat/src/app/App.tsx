@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import {
-  HocComposition,
+  APP_PRIVATE_HOC_COMPOSITION,
+  AppContextProvider,
+  HocCompositionStage,
   ROUTES,
-  store,
   useAppSelector,
-  WithChatConnection,
   WithErrorFallback,
-  WithNewMessagesCount,
   WithUserData,
+  store,
 } from '@ducks-tinder-client/common';
 import { setUiLibSettings, ThemeProvider } from '@ducks-tinder-client/ui';
 
@@ -45,12 +45,10 @@ i18n
     defaultNS: 'chat',
   });
 
-const privateHocComposition = new HocComposition();
-
-privateHocComposition.addHocs([
+APP_PRIVATE_HOC_COMPOSITION.addHocs(HocCompositionStage.USER_HYDRATION, [
   WithUserData,
-  WithChatConnection,
-  WithNewMessagesCount,
+]);
+APP_PRIVATE_HOC_COMPOSITION.addHocs(HocCompositionStage.COMPLETE, [
   (Component) => WithErrorFallback(Component, { redirect: true }),
 ]);
 
@@ -68,7 +66,7 @@ const App = () => {
   );
 };
 
-const WrappedRoutes = privateHocComposition.appendHocs(() => {
+const WrappedRoutes = APP_PRIVATE_HOC_COMPOSITION.appendHocs(() => {
   const userId = useAppSelector((state) => state.user.currentUser?.id);
 
   return (
