@@ -7,5 +7,10 @@ export { createEmptyArray } from './createEmptyArray';
 export { getDatesHourDiff } from './getDatesHourDiff';
 export { getTime } from './getTime';
 export { getFormattedDateString } from './getFormattedDateString';
-export { HocComposition } from './hocComposition';
+export {
+  HocComposition,
+  APP_AUTH_HOC_COMPOSITION,
+  APP_PRIVATE_HOC_COMPOSITION,
+  HocCompositionStage,
+} from './hocComposition';
 export { setCommonLibSettings } from './setCommonLibSettings';
