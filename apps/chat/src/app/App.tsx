@@ -3,8 +3,6 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import {
-  APP_PRIVATE_HOC_COMPOSITION,
-  AppContextProvider,
   HocCompositionStage,
   ROUTES,
   useAppSelector,
@@ -12,6 +10,7 @@ import {
   WithUserData,
   store,
 } from '@ducks-tinder-client/common';
+import { APP_PRIVATE_HOC_COMPOSITION } from '@ducks-tinder-client/common/dist/shared/lib';
 import { setUiLibSettings, ThemeProvider } from '@ducks-tinder-client/ui';
 
 import { ActiveChat } from '@pages/ActiveChat';
