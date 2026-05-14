@@ -1,3 +1,4 @@
+import type { Reducer } from '@reduxjs/toolkit';
 import type { ComponentType } from 'react';
 
 export type ChatAppActiveChat = ComponentType;
@@ -12,3 +13,7 @@ export interface ChatAppComponentsDeclaration {
     currentUserId: string;
   }>;
 }
+
+export type ChatAppSliceResetHook = () => { handleResetChatSlice: () => void };
+
+export type ChatReducer = Reducer<unknown>;
