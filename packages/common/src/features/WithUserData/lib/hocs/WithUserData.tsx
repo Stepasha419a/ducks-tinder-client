@@ -8,11 +8,13 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '@shared/lib';
+import { useAppContext } from '@shared/model';
 
 export const WithUserData = <P extends object>(
   Component: ComponentType<P>
 ): FC<P> => {
   const Wrapper = (props: P) => {
+    const { setUserId } = useAppContext();
     const dispatch = useAppDispatch();
 
     const user = useAppSelector((state) => state.user.currentUser);
@@ -21,6 +23,10 @@ export const WithUserData = <P extends object>(
     const timeout = useRef(2000);
 
     const failedOnceWithToast = useRef(false);
+
+    useEffect(() => {
+      setUserId(user?.id || null);
+    }, [user, setUserId]);
 
     useEffect(() => {
       if (user === null && !requested) {
