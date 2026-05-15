@@ -1,5 +1,7 @@
 import {
-  WithChatConnection,
+  APP_AUTH_HOC_COMPOSITION,
+  APP_PRIVATE_HOC_COMPOSITION,
+  HocCompositionStage,
   WithErrorFallback,
   WithNewMessagesCount,
 } from '@ducks-tinder-client/common';
@@ -13,11 +15,6 @@ import { setUiLibSettings } from '@ducks-tinder-client/ui';
 export { WithBrowserRouter } from './BrowserRouter';
 export { withAppHocs } from './withAppHocs';
 
-import {
-  APP_AUTH_HOC_COMPOSITION,
-  APP_PRIVATE_HOC_COMPOSITION,
-  HocCompositionStage,
-} from '@ducks-tinder-client/common/dist/shared/lib/helpers/hocComposition';
 
 setUiLibSettings({ IMAGE_BASE_URL: window._env_.VAR_FILE_SERVICE_URL });
 
