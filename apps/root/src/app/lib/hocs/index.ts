@@ -3,7 +3,6 @@ import {
   APP_PRIVATE_HOC_COMPOSITION,
   HocCompositionStage,
   WithErrorFallback,
-  WithNewMessagesCount,
 } from '@ducks-tinder-client/common';
 
 import { WithAuthRedirect } from '@features/WithAuthRedirect';
@@ -32,9 +31,6 @@ APP_PRIVATE_HOC_COMPOSITION.addHocs(HocCompositionStage.DATA_SYNCING, [
 ]);
 APP_PRIVATE_HOC_COMPOSITION.addHocs(HocCompositionStage.COMPLETE, [
   WithCheckedFields,
-  WithPairsInfo,
-  WithChatConnection,
-  WithNewMessagesCount,
   (Component) => WithErrorFallback(Component, { redirect: true }),
 ]);
 
