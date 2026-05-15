@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.10.1",
+    "@tanstack/react-query": "^5.100.10",
     "axios": "^1.13.2",
     "events": "^3.3.0",
     "react-redux": "^9.2.0",
