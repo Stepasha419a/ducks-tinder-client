@@ -3,6 +3,9 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import {
+  APP_PRIVATE_HOC_COMPOSITION,
+  AppContextProvider,
+  HocCompositionStage,
   ROUTES,
   useAppSelector,
   WithErrorFallback,
