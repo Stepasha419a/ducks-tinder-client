@@ -7,7 +7,7 @@ import {
   AppContextProvider,
   HocCompositionStage,
   ROUTES,
-  useAppSelector,
+  useAppContext,
   WithErrorFallback,
   WithUserData,
   store,
@@ -56,18 +56,21 @@ const App = () => {
   return (
     <Provider store={store as Store}>
       <BrowserRouter>
-        <LibLocaleProvider>
-          <ThemeProvider>
-            <WrappedRoutes />
-          </ThemeProvider>
-        </LibLocaleProvider>
+        {/* TODO: global state and auth hoc to reuse auth logic - but there is no login page, its in root */}
+        <AppContextProvider userId="id">
+          <LibLocaleProvider>
+            <ThemeProvider>
+              <WrappedRoutes />
+            </ThemeProvider>
+          </LibLocaleProvider>
+        </AppContextProvider>
       </BrowserRouter>
     </Provider>
   );
 };
 
 const WrappedRoutes = APP_PRIVATE_HOC_COMPOSITION.appendHocs(() => {
-  const userId = useAppSelector((state) => state.user.currentUser?.id);
+  const { userId } = useAppContext();
 
   return (
     <div className={styles.container}>
