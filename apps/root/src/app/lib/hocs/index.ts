@@ -14,7 +14,6 @@ import { setUiLibSettings } from '@ducks-tinder-client/ui';
 export { WithBrowserRouter } from './BrowserRouter';
 export { withAppHocs } from './withAppHocs';
 
-
 setUiLibSettings({ IMAGE_BASE_URL: window._env_.VAR_FILE_SERVICE_URL });
 
 APP_PRIVATE_HOC_COMPOSITION.addHocs(HocCompositionStage.BOOTSTRAPPING, [
