@@ -25,3 +25,7 @@ export const mockStorage = {
     },
   ] as Chat[],
 };
+
+globalEventEmitter.on('accept-pair', ({ id }: { id: string }) => {
+  mockStorage.chats.unshift({ ...chatStub, id });
+});
