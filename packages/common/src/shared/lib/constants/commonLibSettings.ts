@@ -16,6 +16,28 @@ export interface CommonLibSettings {
     redirection: string;
     clickToStay: string;
     redirectionCancelled: string;
+    auth: {
+      create: string;
+      memberLogin: string;
+      login: string;
+      loginAccount: string;
+      memberSignUp: string;
+      signUp: string;
+      email: string;
+      emailRequired: string;
+      emailIncorrect: string;
+      getEmailLengthMax: (count: number) => string;
+      password: string;
+      passwordRequired: string;
+      getPasswordLengthMin: (count: number) => string;
+      getPasswordLengthMax: (count: number) => string;
+      name: string;
+      nameRequired: string;
+      getNameLengthMin: (count: number) => string;
+      getNameLengthMax: (count: number) => string;
+      reconnection: string;
+      successConnect: string;
+    };
   };
 }
 
@@ -37,5 +59,27 @@ export const COMMON_LIB_SETTINGS: CommonLibSettings = {
     redirection: '',
     clickToStay: '',
     redirectionCancelled: '',
+    auth: {
+      create: '',
+      memberLogin: '',
+      login: '',
+      loginAccount: '',
+      memberSignUp: '',
+      signUp: '',
+      email: '',
+      emailRequired: '',
+      emailIncorrect: '',
+      getEmailLengthMax: () => '',
+      password: '',
+      passwordRequired: '',
+      getPasswordLengthMin: () => '',
+      getPasswordLengthMax: () => '',
+      name: '',
+      nameRequired: '',
+      getNameLengthMin: () => '',
+      getNameLengthMax: () => '',
+      reconnection: '',
+      successConnect: '',
+    },
   },
 };
