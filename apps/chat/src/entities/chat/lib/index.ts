@@ -1,2 +1,7 @@
-export { useMessagesScroll, useMessagesProps } from './hooks';
+export {
+  useMessagesScroll,
+  useMessagesProps,
+  useChatSliceReset,
+} from './hooks';
 export { getIsNextDayMessage } from './helpers';
+export { WithNewMessagesCount } from './hocs';
