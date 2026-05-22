@@ -10,7 +10,6 @@ import {
   useAppContext,
   WithErrorFallback,
   WithUserData,
-  store,
 } from '@ducks-tinder-client/common';
 import { setUiLibSettings, ThemeProvider } from '@ducks-tinder-client/ui';
 
@@ -26,6 +25,7 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
+import { chatStore } from './model';
 import type { Store } from '@reduxjs/toolkit';
 
 setUiLibSettings({ IMAGE_BASE_URL: window._env_.VAR_FILE_SERVICE_URL });
@@ -54,7 +54,7 @@ APP_PRIVATE_HOC_COMPOSITION.addHocs(HocCompositionStage.COMPLETE, [
 
 const App = () => {
   return (
-    <Provider store={store as Store}>
+    <Provider store={chatStore as Store}>
       <BrowserRouter>
         {/* TODO: global state and auth hoc to reuse auth logic - but there is no login page, its in root */}
         <AppContextProvider userId="id">
