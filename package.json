@@ -3,7 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "nx:build:packages": "nx run-many -t=build -p @ducks-tinder-client/common @ducks-tinder-client/config @ducks-tinder-client/ui",
+    "nx:build:packages": "nx run-many -t=build -p @ducks-tinder-client/common @ducks-tinder-client/config @ducks-tinder-client/ui @ducks-tinder-client/auth",
     "nx:build:apps": "nx run-many -t=build -p @ducks-tinder-client/policy @ducks-tinder-client/chat @ducks-tinder-client/root",
     "nx:build": "nx run-many -t=build",
     "nx:lint": "nx run-many -t=lint",
