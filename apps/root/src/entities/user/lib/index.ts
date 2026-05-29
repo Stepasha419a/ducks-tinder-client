@@ -9,7 +9,6 @@ export {
 } from './helpers';
 export type { UserPlaceInfo, UserSliderInfo } from './helpers';
 export {
-  useAuthForm,
   useDefaultValues,
   useDefaultProfileValues,
   useProfileSettingUrl,
