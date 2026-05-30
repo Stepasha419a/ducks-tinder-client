@@ -1,11 +1,11 @@
 import type { User } from '@ducks-tinder-client/common';
-import { useAppSelector } from '@ducks-tinder-client/common';
 
 import type {
   ProfileSettingNameEnum,
   ProfileSettingSelectNameEnum,
 } from '../constants';
 import { getSelectSettingFields } from '../helpers';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export interface MultiSelectForm {
   input: Record<ProfileSettingSelectNameEnum, string[] | string | null>;
@@ -14,7 +14,7 @@ export interface MultiSelectForm {
 export function useDefaultProfileValues(
   settingName: ProfileSettingNameEnum
 ): MultiSelectForm {
-  const currentUser = useAppSelector((state) => state.user.currentUser!);
+  const currentUser = useUserStore((state) => state.currentUser);
 
   return {
     input: getProfileSelectData(settingName, currentUser),
@@ -23,8 +23,12 @@ export function useDefaultProfileValues(
 
 function getProfileSelectData(
   settingName: ProfileSettingNameEnum,
-  currentUser: User
+  currentUser: User | null
 ) {
+  if (!currentUser) {
+    return null;
+  }
+
   const fields = getSelectSettingFields(settingName);
 
   return fields.reduce(
