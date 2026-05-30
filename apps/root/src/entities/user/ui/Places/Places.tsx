@@ -5,10 +5,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useAppSelector } from '@ducks-tinder-client/common';
-
 import * as styles from './Places.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 interface PlacesProps {
   refreshFeature: ReactElement;
@@ -17,7 +16,7 @@ interface PlacesProps {
 export const Places: FC<PlacesProps> = ({ refreshFeature }) => {
   const { t } = useTranslation();
 
-  const place = useAppSelector((state) => state.user.currentUser!.place);
+  const place = useUserStore((state) => state.currentUser?.place);
 
   return (
     <div className={styles.places}>

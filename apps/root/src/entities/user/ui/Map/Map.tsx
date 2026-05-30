@@ -1,15 +1,13 @@
 import type { FC } from 'react';
 import { Map as YMap, Placemark, YMaps } from '@pbe/react-yandex-maps';
 
-import {
-  useAdaptiveMediaQuery,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
 import { MapLazy } from './Map.lazy';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const Map: FC = () => {
-  const place = useAppSelector((state) => state.user.currentUser!.place);
+  const place = useUserStore((state) => state.currentUser?.place);
 
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
