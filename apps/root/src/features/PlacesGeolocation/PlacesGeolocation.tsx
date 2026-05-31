@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import {
   updateUserPlaceThunk,
   useAppDispatch,
-  useAppSelector,
 } from '@ducks-tinder-client/common';
 
 import { Places } from '@entities/user';
@@ -13,13 +12,14 @@ import { Places } from '@entities/user';
 import { getAreDifferentPlaces } from './lib';
 import * as styles from './PlacesGeolocation.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const PlacesGeolocation = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
-  const place = useAppSelector((state) => state.user.currentUser!.place);
+  const place = useUserStore((state) => state.currentUser?.place);
 
   const [loading, setLoading] = useState(false);
 
