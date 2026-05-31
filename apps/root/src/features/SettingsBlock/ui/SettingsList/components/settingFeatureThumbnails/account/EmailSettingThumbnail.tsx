@@ -1,11 +1,12 @@
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { useAuthStore } from '@ducks-tinder-client/auth';
+import { ROUTES } from '@ducks-tinder-client/common';
 import { LinkSettingThumbnail } from '@entities/user';
 import { useTranslation } from 'react-i18next';
 
 export const EmailSettingThumbnail = () => {
   const { t } = useTranslation();
 
-  const email = useAppSelector((state) => state.auth.authData!.email);
+  const email = useAuthStore((state) => state.authData?.email) || null;
 
   const url = `${ROUTES.SETTINGS}/email`;
   return (

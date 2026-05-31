@@ -11,18 +11,17 @@ import { RangeInput } from '@ducks-tinder-client/ui';
 import { SettingThumbnail } from '@entities/user';
 
 import * as styles from '../SettingFeatureThumbnails.module.scss';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const PartnerAgeSettingThumbnail = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
-  const preferAgeFrom = useAppSelector(
-    (state) => state.user.currentUser!.preferAgeFrom
+  const preferAgeFrom = useUserStore(
+    (state) => state.currentUser?.preferAgeFrom
   );
-  const preferAgeTo = useAppSelector(
-    (state) => state.user.currentUser!.preferAgeTo
-  );
+  const preferAgeTo = useUserStore((state) => state.currentUser?.preferAgeTo);
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const [preferAgeSetting, setPreferAgeSetting] = useState({

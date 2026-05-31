@@ -11,15 +11,16 @@ import { SettingThumbnail } from '@entities/user';
 
 import * as styles from '../SettingFeatureThumbnails.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const DistanceSettingThumbnail = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
-  const distance = useAppSelector((state) => state.user.currentUser!.distance);
-  const usersOnlyInDistance = useAppSelector(
-    (state) => state.user.currentUser!.usersOnlyInDistance
+  const distance = useUserStore((state) => state.currentUser?.distance);
+  const usersOnlyInDistance = useUserStore(
+    (state) => state.currentUser?.usersOnlyInDistance
   );
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
@@ -53,14 +54,14 @@ export const DistanceSettingThumbnail = () => {
       <div className={styles.slider}>
         <RangeInput
           value={{ value: distanceSetting }}
-          setValue={(value) => setDistanceSetting(value.value!)}
+          setValue={(value) => setDistanceSetting(value.value)}
           completeValue={distanceHandler}
           min={2}
           max={100}
         />
       </div>
       <CheckboxInput
-        checked={usersOnlyInDistance}
+        checked={usersOnlyInDistance || false}
         onChange={setUsersOnlyInDistanceHandler}
         variant="small"
         text={t('profile.settings.find.thumbnails.distance.range')}

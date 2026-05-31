@@ -11,13 +11,14 @@ import { RangeInput } from '@ducks-tinder-client/ui';
 import { SettingThumbnail } from '@entities/user';
 
 import * as styles from '../SettingFeatureThumbnails.module.scss';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const AgeSettingThumbnail = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
-  const age = useAppSelector((state) => state.user.currentUser!.age);
+  const age = useUserStore((state) => state.currentUser?.age);
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const [ageSetting, setAgeSetting] = useState(age);
@@ -45,7 +46,7 @@ export const AgeSettingThumbnail = () => {
       <div className={styles.slider}>
         <RangeInput
           value={{ value: ageSetting }}
-          setValue={(value) => setAgeSetting(value.value!)}
+          setValue={(value) => setAgeSetting(value.value)}
           completeValue={ageSubmitHandler}
           min={18}
           max={100}

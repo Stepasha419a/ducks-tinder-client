@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
 import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 import { LinkSettingThumbnail } from '@entities/user';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const PlaceSettingThumbnail = () => {
   const { t } = useTranslation();
-  const place = useAppSelector((state) => state.user.currentUser!.place);
+  const place = useUserStore((state) => state.currentUser?.place);
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const url = `${ROUTES.SETTINGS}/place`;

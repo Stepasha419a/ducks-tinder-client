@@ -1,4 +1,5 @@
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { useUserStore } from '@ducks-tinder-client/auth';
+import { ROUTES } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail } from '@entities/user';
 import { useTranslation } from 'react-i18next';
@@ -6,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 export const NicknameSettingThumbnail = () => {
   const { t } = useTranslation();
 
-  const nickname = useAppSelector((state) => state.user.currentUser!.nickname);
+  const nickname = useUserStore((state) => state.currentUser?.nickname);
 
   const url = `${ROUTES.SETTINGS}/nickname`;
   return (

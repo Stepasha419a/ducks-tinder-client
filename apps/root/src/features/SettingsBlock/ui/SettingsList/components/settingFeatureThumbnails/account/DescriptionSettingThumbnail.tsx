@@ -1,3 +1,4 @@
+import { useUserStore } from '@ducks-tinder-client/auth';
 import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 import { LinkSettingThumbnail, SettingNameEnum } from '@entities/user';
 import { useTranslation } from 'react-i18next';
@@ -5,9 +6,7 @@ import { useTranslation } from 'react-i18next';
 export const DescriptionSettingThumbnail = () => {
   const { t } = useTranslation();
 
-  const description = useAppSelector(
-    (state) => state.user.currentUser!.description
-  );
+  const description = useUserStore((state) => state.currentUser?.description);
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const url = `${ROUTES.SETTINGS}/description`;
