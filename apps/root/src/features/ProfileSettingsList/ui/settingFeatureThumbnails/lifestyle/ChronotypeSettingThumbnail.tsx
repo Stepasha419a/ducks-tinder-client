@@ -1,4 +1,5 @@
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { useUserStore } from '@ducks-tinder-client/auth';
+import { ROUTES } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail } from '@entities/user';
 import { useTranslation } from 'react-i18next';
@@ -6,9 +7,7 @@ import { useTranslation } from 'react-i18next';
 export const ChronotypeSettingThumbnail = () => {
   const { t } = useTranslation();
 
-  const chronotype = useAppSelector(
-    (state) => state.user.currentUser!.chronotype
-  );
+  const chronotype = useUserStore((state) => state.currentUser?.chronotype);
 
   const url = `${ROUTES.PROFILE}/edit/lifestyle`;
   const value = chronotype ? t(`user.chronotype.${chronotype}`) : t('add');

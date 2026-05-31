@@ -1,4 +1,5 @@
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { useUserStore } from '@ducks-tinder-client/auth';
+import { ROUTES } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail } from '@entities/user';
 import { useTranslation } from 'react-i18next';
@@ -6,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 export const AlcoholAttitudeSettingThumbnail = () => {
   const { t } = useTranslation();
 
-  const alcoholAttitude = useAppSelector(
-    (state) => state.user.currentUser!.alcoholAttitude
+  const alcoholAttitude = useUserStore(
+    (state) => state.currentUser?.alcoholAttitude
   );
 
   const url = `${ROUTES.PROFILE}/edit/lifestyle`;

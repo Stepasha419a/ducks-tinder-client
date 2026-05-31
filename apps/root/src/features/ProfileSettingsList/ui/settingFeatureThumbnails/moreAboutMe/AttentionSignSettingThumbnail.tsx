@@ -1,4 +1,5 @@
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { useUserStore } from '@ducks-tinder-client/auth';
+import { ROUTES } from '@ducks-tinder-client/common';
 
 import { LinkSettingThumbnail } from '@entities/user';
 import { useTranslation } from 'react-i18next';
@@ -6,8 +7,8 @@ import { useTranslation } from 'react-i18next';
 export const AttentionSignSettingThumbnail = () => {
   const { t } = useTranslation();
 
-  const attentionSign = useAppSelector(
-    (state) => state.user.currentUser!.attentionSign
+  const attentionSign = useUserStore(
+    (state) => state.currentUser?.attentionSign
   );
 
   const url = `${ROUTES.PROFILE}/edit/more-about-me`;
