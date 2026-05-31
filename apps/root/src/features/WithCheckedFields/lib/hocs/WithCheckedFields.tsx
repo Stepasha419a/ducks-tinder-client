@@ -11,6 +11,7 @@ import {
 
 import { checkUserFields } from '../helpers';
 import { useTranslation } from 'react-i18next';
+import { useAuthStore, useUserStore } from '@ducks-tinder-client/auth';
 
 export const WithCheckedFields = <P extends object>(
   Component: ComponentType<P>
@@ -22,8 +23,8 @@ export const WithCheckedFields = <P extends object>(
 
     const dispatch = useAppDispatch();
 
-    const isAuth = useAppSelector((state) => state.auth.isAuth);
-    const currentUser = useAppSelector((state) => state.user.currentUser);
+    const isAuth = useAuthStore((state) => state.isAuth);
+    const currentUser = useUserStore((state) => state.currentUser);
     const errorFields = useAppSelector((state) => state.user.errorFields);
 
     useEffect(() => {
