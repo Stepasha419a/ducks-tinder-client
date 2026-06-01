@@ -9,18 +9,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { selectAvatar, useAppSelector } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import { variants } from './UserLinks.variants';
 import * as styles from './UserLinks.module.scss';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 interface UserLinksProps {
   isProfilePage: boolean;
 }
 
 export const UserLinks: FC<UserLinksProps> = memo(({ isProfilePage }) => {
-  const { avatarName, currentUserName } = useAppSelector(selectAvatar);
+  const avatarName = useUserStore(
+    (state) => state.currentUser?.pictures.at(0)?.name
+  );
+  const currentUserName = useUserStore((state) => state.currentUser?.name);
 
   return (
     <div className={styles.links}>

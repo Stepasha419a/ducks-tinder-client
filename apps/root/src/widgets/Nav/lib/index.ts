@@ -1,2 +1,2 @@
 export { useNavBlock, NavBlockEnum } from './hooks';
-export { getIsProfilePage } from './helpers';
+export { getIsProfilePage, getIsChatPage, getIsExplorePage } from './helpers';
