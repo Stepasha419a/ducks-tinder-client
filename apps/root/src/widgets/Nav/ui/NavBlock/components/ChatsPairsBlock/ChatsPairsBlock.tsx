@@ -4,18 +4,18 @@ import { useLocation } from 'react-router-dom';
 import { ChatList } from 'chatApp/chat';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { getIsChatPage, useAppSelector } from '@ducks-tinder-client/common';
-
 import { PairLink } from '@entities/user';
 
 import { chatListVariants, pairLinkVariants } from './ChatsPairsBlock.variants';
 import { Tabs } from './components';
 import * as styles from './ChatsPairsBlock.module.scss';
+import { getIsChatPage } from '@widgets/Nav/lib';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const ChatsPairsBlock: FC = () => {
   const { pathname } = useLocation();
 
-  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
+  const currentUserId = useUserStore((state) => state.currentUser?.id);
 
   const [isPairsOpened, setIsPairsOpened] = useState<boolean>(true);
 
@@ -23,6 +23,10 @@ export const ChatsPairsBlock: FC = () => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsPairsOpened(!getIsChatPage(pathname));
   }, [pathname]);
+
+  if (!currentUserId) {
+    return null;
+  }
 
   return (
     <>
