@@ -1,4 +1,6 @@
-import { getIsActiveChatPage } from '@ducks-tinder-client/common';
+function getIsActiveChatPage(pathname: string): boolean {
+  return /^\/chat\/[a-z0-9-]*$/.test(pathname);
+}
 
 export function getIsMobileNavAvailable(pathname: string) {
   return !getIsActiveChatPage(pathname) && !getIsProfileEditPage(pathname);
