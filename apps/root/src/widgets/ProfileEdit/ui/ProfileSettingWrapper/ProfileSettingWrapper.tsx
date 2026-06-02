@@ -1,11 +1,11 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 
 import type { Picture } from '@ducks-tinder-client/common';
-import { useAppSelector } from '@ducks-tinder-client/common';
 import { Preview } from '@ducks-tinder-client/ui';
 
 import { ProfileSettingBlock, Tabs } from './components';
 import * as styles from './ProfileSettingWrapper.module.scss';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 interface ProfileSettingWrapperProps {
   pictures: Picture[];
@@ -22,7 +22,11 @@ export const ProfileSettingWrapper: FC<ProfileSettingWrapperProps> = ({
   isPreviewTab,
   setIsFullPreview,
 }) => {
-  const user = useAppSelector((state) => state.user.currentUser!);
+  const user = useUserStore((state) => state.currentUser);
+
+  if (!user) {
+    return null;
+  }
 
   return (
     <>
