@@ -10,4 +10,4 @@ const Login = (): ReactElement => {
   return <LoginForm />;
 };
 
-export default WithHocSubscription(authHocComposition, Login);
+export default WithHocSubscription(APP_AUTH_HOC_COMPOSITION, Login);
