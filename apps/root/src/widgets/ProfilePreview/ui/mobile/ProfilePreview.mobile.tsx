@@ -4,18 +4,19 @@ import { faCamera, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { ROUTES } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import { UploadImagePopups } from '@features/UploadImagePopups';
 
 import * as styles from './ProfilePreview.mobile.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const ProfilePreviewMobile = () => {
   const { t } = useTranslation();
 
-  const user = useAppSelector((state) => state.user.currentUser!);
+  const user = useUserStore((state) => state.currentUser);
 
   const [isUploadOpen, setIsUploadOpen] = useState(false);
 
@@ -31,14 +32,14 @@ export const ProfilePreviewMobile = () => {
             <Link to={`${ROUTES.PROFILE}/edit`} className={styles.user}>
               <div className={styles.avatarWrapper}>
                 <Avatar
-                  avatarUrl={user.pictures[0]?.name}
+                  avatarUrl={user?.pictures[0]?.name}
                   size="xl"
                   extraClassName={styles.avatar}
                 />
               </div>
               <div className={styles.descr}>
-                <div className={styles.name}>{user.name}</div>
-                <div className={styles.age}>{user.age}</div>
+                <div className={styles.name}>{user?.name}</div>
+                <div className={styles.age}>{user?.age}</div>
               </div>
             </Link>
             <div className={styles.actions}>
