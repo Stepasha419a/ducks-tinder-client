@@ -10,4 +10,4 @@ const Registration = (): ReactElement => {
   return <RegistrationForm />;
 };
 
-export default WithHocSubscription(authHocComposition, Registration);
+export default WithHocSubscription(APP_AUTH_HOC_COMPOSITION, Registration);
