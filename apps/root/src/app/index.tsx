@@ -5,6 +5,7 @@ import { ThemeProvider, ToastContainer } from '@ducks-tinder-client/ui';
 import { withAppHocs, OptionalMetricsProvider } from './lib';
 import { Routing } from './routing';
 import '@ducks-tinder-client/ui/dist/esm/index.css';
+import '@ducks-tinder-client/auth/dist/esm/index.css';
 
 import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
