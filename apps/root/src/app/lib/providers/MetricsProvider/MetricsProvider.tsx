@@ -1,5 +1,5 @@
 import { createInstance, MatomoProvider } from '@datapunt/matomo-tracker-react';
-import { useAppSelector } from '@ducks-tinder-client/common';
+import { useUserStore } from '@ducks-tinder-client/auth';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ export const MetricsProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const location = useLocation();
 
-  const user = useAppSelector((state) => state.user.currentUser);
+  const user = useUserStore((state) => state.currentUser);
 
   const instance = createInstance({
     urlBase: window._env_.VAR_MATOMO_URL || '',
