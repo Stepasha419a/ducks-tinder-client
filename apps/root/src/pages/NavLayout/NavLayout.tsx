@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom';
 
 import {
+  APP_PRIVATE_HOC_COMPOSITION,
   useAdaptiveMediaQuery,
   WithHocSubscription,
 } from '@ducks-tinder-client/common';
 
 import { Nav } from '@widgets/Nav';
-import { privateHocComposition } from '@shared/lib';
 
 import { NavLayoutMobile } from './ui';
 import * as styles from './NavLayout.module.scss';
@@ -28,4 +28,4 @@ export const NavLayout = () => {
   );
 };
 
-export default WithHocSubscription(privateHocComposition, NavLayout);
+export default WithHocSubscription(APP_PRIVATE_HOC_COMPOSITION, NavLayout);
