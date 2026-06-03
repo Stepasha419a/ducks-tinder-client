@@ -238,6 +238,31 @@ export const LibLocaleProvider: React.FC<React.PropsWithChildren> = ({
       redirection: t('commonPackage.redirection'),
       clickToStay: t('commonPackage.clickToStay'),
       redirectionCancelled: t('commonPackage.redirectionCancelled'),
+      auth: {
+        create: t('auth.create'),
+        memberLogin: t('auth.memberLogin'),
+        login: t('auth.login'),
+        loginAccount: t('auth.loginAccount'),
+        memberSignUp: t('auth.memberSignUp'),
+        signUp: t('auth.signUp'),
+        email: t('auth.email'),
+        emailRequired: t('auth.emailRequired'),
+        emailIncorrect: t('auth.emailIncorrect'),
+        getEmailLengthMax: (count: number) =>
+          t('auth.emailLengthMax', { count }),
+        password: t('auth.password'),
+        passwordRequired: t('auth.passwordRequired'),
+        getPasswordLengthMin: (count: number) =>
+          t('auth.passwordLengthMin', { count }),
+        getPasswordLengthMax: (count: number) =>
+          t('auth.passwordLengthMax', { count }),
+        name: t('auth.name'),
+        nameRequired: t('auth.nameRequired'),
+        getNameLengthMin: (count: number) => t('auth.nameLengthMin', { count }),
+        getNameLengthMax: (count: number) => t('auth.nameLengthMax', { count }),
+        reconnection: t('auth.reconnection'),
+        successConnect: t('auth.successConnect'),
+      },
     },
   });
 
