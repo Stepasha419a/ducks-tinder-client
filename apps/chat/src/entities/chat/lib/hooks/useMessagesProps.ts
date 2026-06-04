@@ -1,15 +1,18 @@
-import type { Message } from '@ducks-tinder-client/common';
-import { getTime, useAppSelector } from '@ducks-tinder-client/common';
+import { useUserStore } from '@ducks-tinder-client/auth';
+import { getTime } from '@ducks-tinder-client/common';
+import type { Message } from '@shared/api';
+import { useChatSelector } from '@shared/lib/hooks';
 
 export function useMessagesProps(selectedMessage: Message | null) {
-  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
-  const isChatBlocked = useAppSelector(
+  const userId = useUserStore((state) => state.currentUser?.id) || null;
+
+  const isChatBlocked = useChatSelector(
     (state) => state.chat.activeChat?.blocked
   );
 
   const getMessageProps = (message: Message) => {
     return {
-      isOwn: getIsOwn(message.userId, currentUserId),
+      isOwn: getIsOwn(message.userId, userId),
     };
   };
 
@@ -26,7 +29,7 @@ export function useMessagesProps(selectedMessage: Message | null) {
   });
 
   const getUsernameProps = (message: Message) => {
-    const isOwn = getIsOwn(message.userId, currentUserId);
+    const isOwn = getIsOwn(message.userId, userId);
     const username = message.name;
 
     return {
@@ -36,7 +39,7 @@ export function useMessagesProps(selectedMessage: Message | null) {
   };
 
   const getReplyProps = (message: Message) => {
-    const isOwn = getIsOwn(message.userId, currentUserId);
+    const isOwn = getIsOwn(message.userId, userId);
     const repliedMessage = message.replied;
     const repliedMessageText = repliedMessage?.text;
     const repliedMessageName = repliedMessage?.name;
@@ -49,7 +52,7 @@ export function useMessagesProps(selectedMessage: Message | null) {
   };
 
   const getBodyProps = (message: Message) => {
-    const isOwn = getIsOwn(message.userId, currentUserId);
+    const isOwn = getIsOwn(message.userId, userId);
     const isEdited = getIsEdited(message);
     const isSelectOpen = getIsSelectOpen(message, selectedMessage);
     const isReplied = !!message.replied;
@@ -74,7 +77,7 @@ export function useMessagesProps(selectedMessage: Message | null) {
 
 function getIsOwn(
   messageUserId: string | undefined,
-  currentUserId: string
+  currentUserId: string | null
 ): boolean {
   return messageUserId === currentUserId;
 }
