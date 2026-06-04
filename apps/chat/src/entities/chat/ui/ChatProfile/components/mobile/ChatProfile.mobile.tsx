@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { ROUTES } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import { ChatProfileMobileLazy } from './ChatProfile.mobile-lazy';
 import * as styles from './ChatProfile.mobile.module.scss';
+import { useChatSelector } from '@shared/lib/hooks';
 
 interface ChatProfileProps {
   handleOpen: () => void;
 }
 
 export const ChatProfileMobile: FC<ChatProfileProps> = ({ handleOpen }) => {
-  const activeChat = useAppSelector((state) => state.chat.activeChat);
-  const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
+  const activeChat = useChatSelector((state) => state.chat.activeChat);
+  const isChatLoading = useChatSelector((state) => state.chat.isChatLoading);
 
   if (isChatLoading || !activeChat) {
     return <ChatProfileMobileLazy />;

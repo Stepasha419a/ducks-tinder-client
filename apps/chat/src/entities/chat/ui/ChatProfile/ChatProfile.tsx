@@ -1,30 +1,27 @@
 import { type FC, memo, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-  getChatThunk,
-  useAdaptiveMediaQuery,
-  useAppDispatch,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import { ChatProfileLazy } from './ChatProfile.lazy';
 import { ChatProfileMobile } from './components';
 import * as styles from './ChatProfile.module.scss';
+import { useChatDispatch, useChatSelector } from '@shared/lib/hooks';
+import { getChatThunk } from '@entities/chat/model';
 
 interface ChatProfileProps {
   handleOpen: () => void;
 }
 
 export const ChatProfile: FC<ChatProfileProps> = memo(({ handleOpen }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useChatDispatch();
 
   const { chatId } = useParams<{ chatId: string }>();
 
-  const activeChat = useAppSelector((state) => state.chat.activeChat);
-  const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
-  const isNotFound = useAppSelector((state) => state.chat.isNotFound);
+  const activeChat = useChatSelector((state) => state.chat.activeChat);
+  const isChatLoading = useChatSelector((state) => state.chat.isChatLoading);
+  const isNotFound = useChatSelector((state) => state.chat.isNotFound);
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
   useEffect(() => {
