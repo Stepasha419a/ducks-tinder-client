@@ -1,28 +1,24 @@
 import type { FC } from 'react';
 import { useRef } from 'react';
 
-import {
-  getChatsThunk,
-  selectChatList,
-  useAppDispatch,
-  useAppSelector,
-  useDebouncedCallback,
-} from '@ducks-tinder-client/common';
+import { useDebouncedCallback } from '@ducks-tinder-client/common';
 import { InfinityScroll } from '@ducks-tinder-client/ui';
 
 import { ChatListLazy } from './ChatList.lazy';
 import { ChatItem, FailedChats } from './components';
 import * as styles from './ChatList.module.scss';
+import { useChatDispatch, useChatSelector } from '@shared/lib/hooks';
+import { getChatsThunk, selectChatList } from '@entities/chat/model';
 
 interface ChatListProps {
   currentUserId: string;
 }
 
 export const ChatList: FC<ChatListProps> = ({ currentUserId }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useChatDispatch();
 
-  const isEnded = useAppSelector((state) => state.chat.isEnded);
-  const { chats, activeChat, isLoading } = useAppSelector(selectChatList);
+  const isEnded = useChatSelector((state) => state.chat.isEnded);
+  const { chats, activeChat, isLoading } = useChatSelector(selectChatList);
   const chatsLength = chats.length;
 
   const chatListRef = useRef<null | HTMLDivElement>(null);

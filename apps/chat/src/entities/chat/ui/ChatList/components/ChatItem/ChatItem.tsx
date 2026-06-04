@@ -2,12 +2,12 @@ import type { FC } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
-import type { Chat } from '@ducks-tinder-client/common';
 import { ROUTES } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
 import * as styles from './ChatItem.module.scss';
 import { useTranslation } from 'react-i18next';
+import type { Chat } from '@shared/api';
 
 interface ChatInterface {
   chat: Chat;
