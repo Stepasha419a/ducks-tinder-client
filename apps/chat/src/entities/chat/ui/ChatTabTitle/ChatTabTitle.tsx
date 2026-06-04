@@ -1,10 +1,9 @@
 import type { FC } from 'react';
 import { motion } from 'motion/react';
 
-import { useAppSelector } from '@ducks-tinder-client/common';
-
 import * as styles from './ChatTabTitle.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useChatSelector } from '@shared/lib/hooks';
 
 interface ChatTabTitleProps {
   handleClick: () => void;
@@ -17,7 +16,7 @@ export const ChatTabTitle: FC<ChatTabTitleProps> = ({
 }) => {
   const { t } = useTranslation('chat');
 
-  const newMessageChatsCount = useAppSelector(
+  const newMessageChatsCount = useChatSelector(
     (state) => state.chat.newMessagesCount
   );
 
