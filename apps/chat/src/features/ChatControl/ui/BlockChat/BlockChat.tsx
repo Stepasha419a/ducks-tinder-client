@@ -1,27 +1,25 @@
-import {
-  blockChatThunk,
-  unblockChatThunk,
-  useAppDispatch,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
 import * as styles from './BlockChat.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useChatDispatch, useChatSelector } from '@shared/lib/hooks';
+import { blockChatThunk, unblockChatThunk } from '@entities/chat';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 export const BlockChat = () => {
+  const userId = useUserStore((state) => state.currentUser?.id);
+
   const { t } = useTranslation('chat');
 
-  const dispatch = useAppDispatch();
+  const dispatch = useChatDispatch();
 
-  const activeChat = useAppSelector((state) => state.chat.activeChat);
-  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
+  const activeChat = useChatSelector((state) => state.chat.activeChat);
 
   if (!activeChat) {
     return null;
   }
 
-  const isOwnBlocked = activeChat.blockedById === currentUserId;
+  const isOwnBlocked = userId && activeChat.blockedById === userId;
 
   const handleClick = () => {
     if (isOwnBlocked) {

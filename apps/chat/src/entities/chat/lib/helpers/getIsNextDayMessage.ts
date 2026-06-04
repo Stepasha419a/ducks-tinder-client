@@ -1,5 +1,5 @@
-import type { Message } from '@ducks-tinder-client/common';
 import { getFormattedDateString } from '@ducks-tinder-client/common';
+import type { Message } from '@shared/api';
 
 export function getIsNextDayMessage(
   message1: Message,

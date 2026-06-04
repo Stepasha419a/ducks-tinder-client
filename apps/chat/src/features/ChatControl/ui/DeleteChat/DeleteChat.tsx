@@ -1,11 +1,12 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 
-import { deleteChatThunk, useAppDispatch } from '@ducks-tinder-client/common';
 import { Button, Popup } from '@ducks-tinder-client/ui';
 
 import * as styles from './DeleteChat.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useChatDispatch } from '@shared/lib/hooks';
+import { deleteChatThunk } from '@entities/chat';
 
 interface DeleteChatProps {
   submitDelete?: () => void;
@@ -14,7 +15,7 @@ interface DeleteChatProps {
 export const DeleteChat: FC<DeleteChatProps> = ({ submitDelete }) => {
   const { t } = useTranslation('chat');
 
-  const dispatch = useAppDispatch();
+  const dispatch = useChatDispatch();
 
   const [isChatDeleting, setIsChatDeleting] = useState(false);
 
