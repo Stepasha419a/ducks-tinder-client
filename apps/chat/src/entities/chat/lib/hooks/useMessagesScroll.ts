@@ -1,11 +1,11 @@
 import type { RefObject } from 'react';
 import { useCallback, useEffect, useRef } from 'react';
 
-import { useAppSelector } from '@ducks-tinder-client/common';
 import type { ControlRef } from '@ducks-tinder-client/ui';
+import { useChatSelector } from '@shared/lib/hooks';
 
 export function useMessagesScroll(controlRef: RefObject<ControlRef | null>) {
-  const messagesLength = useAppSelector((state) => state.chat.messages.length);
+  const messagesLength = useChatSelector((state) => state.chat.messages.length);
 
   const previousMessagesLength = useRef(0);
 
