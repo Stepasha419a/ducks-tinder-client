@@ -1,7 +1,7 @@
 import { memo, type ReactNode } from 'react';
 import classNames from 'classnames';
 
-import type { Message as MessageInterface } from '@ducks-tinder-client/common';
+import type { Message as MessageInterface } from '@shared/api';
 import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
 import {

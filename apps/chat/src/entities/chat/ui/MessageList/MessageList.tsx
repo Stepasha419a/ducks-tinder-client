@@ -2,21 +2,17 @@ import { type FC, type ReactElement, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
-import type { Message as MessageInterface } from '@ducks-tinder-client/common';
-import {
-  connectChatThunk,
-  disconnectChatThunk,
-  getMessagesThunk,
-  selectMessages,
-  useAppDispatch,
-  useAppSelector,
-  useDebouncedCallback,
-} from '@ducks-tinder-client/common';
+import type { Message as MessageInterface } from '@shared/api';
+import { useDebouncedCallback } from '@ducks-tinder-client/common';
 import type { ControlRef } from '@ducks-tinder-client/ui';
 import { InfinityScroll } from '@ducks-tinder-client/ui';
 
 import {
+  connectChatThunk,
+  disconnectChatThunk,
   getIsNextDayMessage,
+  getMessagesThunk,
+  selectMessages,
   useMessagesProps,
   useMessagesScroll,
 } from '@entities/chat';
@@ -24,6 +20,7 @@ import {
 import { Message, MessageMemo, NotFound, Timestamp } from './components';
 import { MessagesLazy } from './MessageList.lazy';
 import * as styles from './MessageList.module.scss';
+import { useChatDispatch, useChatSelector } from '@shared/lib/hooks';
 
 interface MessagesProps {
   select: ReactElement;
@@ -40,18 +37,18 @@ export const MessageList: FC<MessagesProps> = ({
   selectedMessage,
   handleSelectMessage,
 }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useChatDispatch();
 
   const { chatId } = useParams<'chatId'>() as { chatId: string | undefined };
 
   const { isMessagesLoading, isMessagesEnded, messages } =
-    useAppSelector(selectMessages);
-  const isSocketConnected = useAppSelector(
+    useChatSelector(selectMessages);
+  const isSocketConnected = useChatSelector(
     (state) => state.chat.isSocketConnected
   );
-  const isNotFound = useAppSelector((state) => state.chat.isNotFound);
-  const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
-  const activeChat = useAppSelector((state) => state.chat.activeChat);
+  const isNotFound = useChatSelector((state) => state.chat.isNotFound);
+  const isChatLoading = useChatSelector((state) => state.chat.isChatLoading);
+  const activeChat = useChatSelector((state) => state.chat.activeChat);
 
   const prevChatIdRef = useRef<string | null>(null);
 
