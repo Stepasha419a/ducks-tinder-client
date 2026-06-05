@@ -4,10 +4,8 @@ import { faPen, faReply, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import type { Message } from '@ducks-tinder-client/common';
 import {
   getDatesHourDiff,
-  useAppSelector,
   useOnClickOutside,
 } from '@ducks-tinder-client/common';
 
@@ -15,6 +13,8 @@ import { useMessageSelect } from './lib';
 import { MessageSelectMobile } from './ui';
 import * as styles from './MessageSelect.module.scss';
 import { useTranslation } from 'react-i18next';
+import type { Message } from '@shared/api';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 interface MessageSelectProps {
   isMobile?: boolean;
@@ -33,12 +33,13 @@ export const MessageSelect: FC<MessageSelectProps> = ({
   selectedMessage,
   handleNullSelectedMessage,
 }) => {
+  const userId = useUserStore((state) => state.currentUser?.id);
+
   const { t } = useTranslation('chat');
 
   const selectRef = useRef<HTMLDivElement | null>(null);
 
-  const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
-  const isOwn = selectedMessage?.userId === currentUserId;
+  const isOwn = Boolean(userId) && selectedMessage?.userId === userId;
 
   const [position, setPosition] = useState(0);
 
