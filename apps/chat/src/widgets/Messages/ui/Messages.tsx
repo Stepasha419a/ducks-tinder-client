@@ -6,15 +6,13 @@ import {
   useState,
 } from 'react';
 
-import type { Message } from '@ducks-tinder-client/common';
-import {
-  useAdaptiveMediaQuery,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
 import { MessageForm } from '@features/MessageForm';
 import { MessageSelect } from '@features/MessageSelect';
 import { ChatProfile, MessageList } from '@entities/chat';
+import type { Message } from '@shared/api';
+import { useChatSelector } from '@shared/lib/hooks';
 
 interface MessagesProps {
   handleOpenPopup: () => void;
@@ -25,7 +23,7 @@ export const Messages: FC<MessagesProps> = ({
 }): ReactElement => {
   const isMobile = useAdaptiveMediaQuery('(max-width: 900px)');
 
-  const isChatBlocked = useAppSelector(
+  const isChatBlocked = useChatSelector(
     (state) => state.chat.activeChat?.blocked
   );
 
