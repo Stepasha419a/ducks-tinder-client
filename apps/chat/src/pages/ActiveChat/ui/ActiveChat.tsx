@@ -1,16 +1,12 @@
 import { useState } from 'react';
 
-import {
-  getMemberThunk,
-  nullMember,
-  useAppDispatch,
-} from '@ducks-tinder-client/common';
-
 import { ChatProfilePopup } from '@widgets/ChatProfilePopup';
 import { Messages } from '@widgets/Messages';
+import { useChatDispatch } from '@shared/lib/hooks';
+import { getMemberThunk, nullMember } from '@entities/chat';
 
 export const ActiveChat = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useChatDispatch();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
