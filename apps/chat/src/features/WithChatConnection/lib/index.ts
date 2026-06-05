@@ -1,0 +1,1 @@
+export { WithChatConnection } from './hocs';
