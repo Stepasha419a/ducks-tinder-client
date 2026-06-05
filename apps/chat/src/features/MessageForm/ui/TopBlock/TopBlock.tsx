@@ -3,10 +3,9 @@ import { faPen, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import type { Message } from '@ducks-tinder-client/common';
-import { useAppSelector } from '@ducks-tinder-client/common';
-
 import * as styles from './TopBlock.module.scss';
+import type { Message } from '@shared/api';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 interface TopBlockProps {
   repliedMessage: Message | null;
@@ -19,12 +18,10 @@ export const TopBlock: FC<TopBlockProps> = ({
   editingMessage,
   cancelTopBlock,
 }) => {
-  const currentUserId = useAppSelector((state) => state.user.currentUser?.id);
+  const userId = useUserStore((state) => state.currentUser?.id);
 
-  const isOwnReplied = repliedMessage?.userId === currentUserId;
-  const repliedName = isOwnReplied
-    ? repliedMessage?.name
-    : repliedMessage?.name;
+  const isOwnReplied = userId && repliedMessage?.userId === userId;
+  const repliedName = isOwnReplied ? repliedMessage.name : repliedMessage?.name;
 
   const title = editingMessage ? 'Editing' : repliedName;
   const text = editingMessage ? editingMessage.text : repliedMessage?.text;

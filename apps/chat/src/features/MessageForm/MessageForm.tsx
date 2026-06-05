@@ -3,19 +3,16 @@ import { useForm } from 'react-hook-form';
 import { faCheck, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import type { Message } from '@ducks-tinder-client/common';
-import {
-  editMessageThunk,
-  sendMessageThunk,
-  useAppDispatch,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
 import { Button, TextField } from '@ducks-tinder-client/ui';
 
 import { MessageFormLazy } from './MessageForm.lazy';
 import { BlockedChat, TopBlock } from './ui';
 import * as styles from './MessageForm.module.scss';
 import { useTranslation } from 'react-i18next';
+import type { Message } from '@shared/api';
+import { useChatDispatch, useChatSelector } from '@shared/lib/hooks';
+import { editMessageThunk, sendMessageThunk } from '@entities/chat';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 interface ChatFormValues {
   input: string;
@@ -29,14 +26,15 @@ interface MessageFormProps {
 
 export const MessageForm: FC<MessageFormProps> = memo(
   ({ repliedMessage, handleResetEditReplied, editingMessage }) => {
+    const userId = useUserStore((state) => state.currentUser?.id);
+
     const { t } = useTranslation('chat');
 
-    const dispatch = useAppDispatch();
+    const dispatch = useChatDispatch();
 
-    const currentUserId = useAppSelector((state) => state.user.currentUser!.id);
-    const activeChat = useAppSelector((state) => state.chat.activeChat);
-    const isChatLoading = useAppSelector((state) => state.chat.isChatLoading);
-    const isNotFound = useAppSelector((state) => state.chat.isNotFound);
+    const activeChat = useChatSelector((state) => state.chat.activeChat);
+    const isChatLoading = useChatSelector((state) => state.chat.isChatLoading);
+    const isNotFound = useChatSelector((state) => state.chat.isNotFound);
 
     const prevInputRef = useRef('');
 
@@ -97,7 +95,9 @@ export const MessageForm: FC<MessageFormProps> = memo(
 
     if (activeChat.blocked) {
       const blockedByName =
-        activeChat.blockedById === currentUserId ? t('you') : activeChat.name;
+        userId && activeChat.blockedById === userId
+          ? t('you')
+          : activeChat.name;
 
       return <BlockedChat blockedByName={blockedByName} />;
     }
