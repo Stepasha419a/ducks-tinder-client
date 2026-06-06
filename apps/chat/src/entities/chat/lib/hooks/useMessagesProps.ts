@@ -2,6 +2,7 @@ import { useUserStore } from '@ducks-tinder-client/auth';
 import { getTime } from '@ducks-tinder-client/common';
 import type { Message } from '@shared/api';
 import { useChatSelector } from '@shared/lib/hooks';
+import { t } from 'i18next';
 
 export function useMessagesProps(selectedMessage: Message | null) {
   const userId = useUserStore((state) => state.currentUser?.id) || null;
@@ -92,7 +93,7 @@ function getIsSelectOpen(message: Message, currentMessage: Message | null) {
 
 function getMessageTime(message: Message) {
   return getIsEdited(message)
-    ? `edited ${getTime(
+    ? `${t('edited', { ns: 'chat' })} ${getTime(
         new Date(message.updatedAt).toLocaleTimeString()
       )!.toString()}`
     : getTime(new Date(message.createdAt).toLocaleTimeString())!.toString();
