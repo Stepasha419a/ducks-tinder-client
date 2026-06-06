@@ -1,1 +1,1 @@
-export { ChatTabTitle, ChatList } from '@entities/chat';
+export { ChatTabTitle, ChatList, NewMessagesCount } from '@entities/chat';
