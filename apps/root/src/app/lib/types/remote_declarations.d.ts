@@ -24,4 +24,19 @@ declare module 'chatApp/chat' {
 
   export const ChatList: ChatAppComponentsDeclaration['ChatList'];
   export const ChatTabTitle: ChatAppComponentsDeclaration['ChatTabTitle'];
+  export const NewMessagesCount: ChatAppComponentsDeclaration['NewMessagesCount'];
+}
+
+declare module 'chatApp/hooks' {
+  import type { ChatAppSliceResetHook } from '@ducks-tinder-client/common';
+
+  export const useChatSliceReset: ChatAppSliceResetHook;
+}
+
+declare module 'chatApp/hocs' {}
+
+declare module 'chatApp/models' {
+  import type { ChatReducer } from '@ducks-tinder-client/common';
+
+  export const chatReducer: ChatReducer;
 }
