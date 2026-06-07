@@ -48,11 +48,11 @@ export class HocComposition {
 
   appendHocs<T extends ComponentType>(component: T): T {
     const hocs = [
-      ...(this.stages.get(HocCompositionStage.COMPLETE) ?? []),
+      ...(this.stages.get(HocCompositionStage.BOOTSTRAPPING) ?? []),
+      ...(this.stages.get(HocCompositionStage.AUTH_CHECK) ?? []),
       ...(this.stages.get(HocCompositionStage.DATA_SYNCING) ?? []),
       ...(this.stages.get(HocCompositionStage.USER_HYDRATION) ?? []),
-      ...(this.stages.get(HocCompositionStage.AUTH_CHECK) ?? []),
-      ...(this.stages.get(HocCompositionStage.BOOTSTRAPPING) ?? []),
+      ...(this.stages.get(HocCompositionStage.COMPLETE) ?? []),
     ];
 
     return compose(...hocs)(component) as T;
