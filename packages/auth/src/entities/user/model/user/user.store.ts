@@ -8,8 +8,11 @@ export interface UserState {
 }
 
 export const useUserStore = create<UserState>()(
-  devtools((set) => ({
-    currentUser: null,
-    setCurrentUser: (value) => set(() => ({ currentUser: value })),
-  }))
+  devtools(
+    (set) => ({
+      currentUser: null,
+      setCurrentUser: (value) => set(() => ({ currentUser: value })),
+    }),
+    { name: 'userStore' }
+  )
 );
