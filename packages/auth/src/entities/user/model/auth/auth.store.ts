@@ -10,10 +10,13 @@ export interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>()(
-  devtools((set) => ({
-    isAuth: null,
-    authData: null,
-    setIsAuth: (value) => set(() => ({ isAuth: value })),
-    setAuthData: (value) => set(() => ({ authData: value })),
-  }))
+  devtools(
+    (set) => ({
+      isAuth: null,
+      authData: null,
+      setIsAuth: (value) => set(() => ({ isAuth: value })),
+      setAuthData: (value) => set(() => ({ authData: value })),
+    }),
+    { name: 'authStore' }
+  )
 );
