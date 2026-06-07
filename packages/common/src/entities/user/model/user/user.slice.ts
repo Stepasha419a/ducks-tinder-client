@@ -12,6 +12,7 @@ import {
   updateUserPlaceThunk,
   updateUserThunk,
 } from './user.thunks';
+import { globalEventEmitter } from '@shared/lib';
 
 const initialState: UserInitialState = {
   currentUser: null,
@@ -36,21 +37,28 @@ const userSlice = createSlice({
     builder
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+        // TODO: remove it when root-app actions move from common-package
+        globalEventEmitter.emit('set-user', payload);
       })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+        globalEventEmitter.emit('set-user', payload);
       })
       .addCase(updateUserPlaceThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+        globalEventEmitter.emit('set-user', payload);
       })
       .addCase(saveUserImageThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+        globalEventEmitter.emit('set-user', payload);
       })
       .addCase(deleteUserPictureThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+        globalEventEmitter.emit('set-user', payload);
       })
       .addCase(mixUserPicturesThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
+        globalEventEmitter.emit('set-user', payload);
       });
   },
 });
