@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   updateUserThunk,
@@ -25,6 +25,10 @@ export const DistanceSettingThumbnail = () => {
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const [distanceSetting, setDistanceSetting] = useState(distance);
+
+  useEffect(() => {
+    setDistanceSetting(distance);
+  }, [distance]);
 
   const distanceHandler = (): void => {
     dispatch(
