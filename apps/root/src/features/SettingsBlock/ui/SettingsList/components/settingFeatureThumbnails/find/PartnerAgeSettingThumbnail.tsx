@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -28,6 +28,14 @@ export const PartnerAgeSettingThumbnail = () => {
     preferAgeFrom,
     preferAgeTo,
   });
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setPreferAgeSetting({
+      preferAgeFrom,
+      preferAgeTo,
+    });
+  }, [preferAgeFrom, preferAgeTo]);
 
   const partnerAgeHandler = (): void => {
     if (
