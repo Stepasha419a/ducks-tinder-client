@@ -8,26 +8,18 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import {
-  getIsChatPage,
-  ROUTES,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
+import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
 
-import { getIsProfilePage } from '../../lib';
+import { getIsChatPage, getIsProfilePage } from '../../lib';
 import * as styles from './Nav.mobile.module.scss';
+
+import { NewMessagesCount } from 'chatApp/chat';
 
 export const NavMobile = () => {
   const { pathname } = useLocation();
   const activePath = pathname.split('/')[1];
 
-  const newMessageChatsCount = useAppSelector(
-    (state) => state.chat.newMessagesCount
-  );
   const pairsInfo = useAppSelector((state) => state.pair.pairsInfo);
-
-  const isLoadedNewMessagesCount = newMessageChatsCount !== null;
-  const isNewMessages = isLoadedNewMessagesCount && newMessageChatsCount > 0;
 
   const isLoadedPairsCount = pairsInfo !== null;
   const isPairsCount = isLoadedPairsCount && pairsInfo.count > 0;
@@ -60,13 +52,7 @@ export const NavMobile = () => {
         />
       </Link>
       <Link to={ROUTES.CHAT} className={styles.link}>
-        {isNewMessages && (
-          <div className={styles.newMessages}>
-            <div className={styles.count}>
-              {newMessageChatsCount > 9 ? '9+' : newMessageChatsCount}
-            </div>
-          </div>
-        )}
+        <NewMessagesCount />
         <FontAwesomeIcon
           className={classNames(
             styles.icon,
