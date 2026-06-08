@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -22,6 +22,10 @@ export const AgeSettingThumbnail = () => {
   const errorFields = useAppSelector((state) => state.user.errorFields);
 
   const [ageSetting, setAgeSetting] = useState(age);
+
+  useEffect(() => {
+    setAgeSetting(age);
+  }, [age]);
 
   const ageSubmitHandler = (): void => {
     dispatch(
