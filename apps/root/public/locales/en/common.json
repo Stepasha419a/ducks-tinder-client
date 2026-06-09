@@ -441,3 +441,12 @@
     "changeProfile": "Change profile",
     "addPhotos": "Add photos"
   },
+  "tinder": {
+    "errorFields": "You have empty profile information fields",
+    "errorFieldsDescription": "Click to fill out your profile information",
+    "noUsers": "You don't have users currently",
+    "noUsersDescription": "Click to change your prefer settings to get more opportunities",
+    "like": "LIKE",
+    "dislike": "DISLIKE",
+    "superLike": "SUPER LIKE"
+  },
