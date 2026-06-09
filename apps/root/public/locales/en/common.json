@@ -450,3 +450,9 @@
     "dislike": "DISLIKE",
     "superLike": "SUPER LIKE"
   },
+  "validation": {
+    "required": "Field is required",
+    "email": "Incorrect email",
+    "lengthMin": "Value must be more than {{count}} characters",
+    "lengthMax": "Value must be less than {{count}} characters"
+  },
