@@ -419,6 +419,19 @@
         "workout": "Workout",
         "workoutSetting": "Do you workout?"
       },
+      "default": {
+        "editTitle": "Default title",
+        "editDescription": "Default description."
+      },
+      "place": {
+        "title": "Place",
+        "currentPositions": "Current positions",
+        "myCurrentPosition": "My current position",
+        "refresh": "Refresh",
+        "unchanged": "Your position is remained unchanged",
+        "refreshing": "Refreshing is already in progress",
+        "enableGeolocation": "Enable your geolocation, otherwise we wont be able to set your location"
+      }
     },
     "logout": "Log out",
     "addMorePhotos": "Add more photos to fill out your profile by another 4% and get more likes.",
