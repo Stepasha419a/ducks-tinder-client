@@ -1,1 +1,481 @@
-{}
+{
+  "user": {
+    "interests": {
+      "tennis": "Теннис",
+      "ping pong": "Пинг-понг",
+      "swimming": "Плавание",
+      "karting": "Картинг",
+      "horse ridding": "Верховая езда",
+      "hunting": "Охота",
+      "fishing": "Рыбалка",
+      "skateboarding": "Скейтбординг",
+      "bicycle": "Велосипед",
+      "running": "Бег",
+      "fighting": "Единоборства",
+      "surfing": "Серфинг",
+      "snowboarding": "Сноубординг",
+      "shooting": "Стрельба",
+      "parachuting": "Прыжки с парашютом",
+      "paintball": "Пейнтбол",
+      "bowling": "Боулинг",
+      "billiard": "Бильярд",
+      "skates": "Коньки",
+      "dancing": "Танцы",
+      "cosplay": "Косплей",
+      "ballet": "Балет",
+      "room quest": "Квесты",
+      "fitness": "Фитнес",
+      "yoga": "Йога",
+      "meditation": "Медитация",
+      "tourism": "Туризм",
+      "travelling": "Путешествия",
+      "hiking": "Хайкинг",
+      "camping": "Кемпинг",
+      "cars": "Автомобили",
+      "education": "Образование",
+      "foreign languages": "Иностранные языки",
+      "cards": "Карты",
+      "poker": "Покер",
+      "chess": "Шахматы",
+      "checkers": "Шашки",
+      "nard": "Нарды",
+      "psychology": "Психология",
+      "table games": "Настольные игры",
+      "sport": "Спорт",
+      "blogging": "Блогинг",
+      "computer games": "Компьютерные игры",
+      "programming": "Программирование",
+      "drawing": "Рисование",
+      "3D drawing": "3D-рисование",
+      "gardener": "Садоводство",
+      "animals": "Животные",
+      "volunteering": "Волонтерство",
+      "serials": "Сериалы",
+      "books": "Книги",
+      "movies": "Фильмы",
+      "cinema": "Кино",
+      "food": "Еда",
+      "cooking": "Кулинария",
+      "photo": "Фотография",
+      "design": "Дизайн",
+      "writing": "Писательство",
+      "music": "Музыка",
+      "handmade": "Рукоделие",
+      "football": "Футбол",
+      "ski": "Лыжи",
+      "volleyball": "Волейбол"
+    },
+    "alcoholAttitude": {
+      "Not for me": "Не для меня",
+      "Sober": "Не пью",
+      "Sober curious": "Интересуюсь трезвостью",
+      "On special occasions": "По особым случаям",
+      "Socially on weekends": "В компании по выходным",
+      "Most Nights": "Почти каждый вечер"
+    },
+    "attentionSign": {
+      "Attention gestures": "Знаки внимания",
+      "Gifts": "Подарки",
+      "Touches": "Прикосновения",
+      "Compliments": "Комплименты",
+      "Time together": "Время вместе"
+    },
+    "childrenAttitude": {
+      "I want children": "Хочу детей",
+      "I do not want children": "Не хочу детей",
+      "I have children and I want more": "Есть дети, хочу еще",
+      "I have children, but I do not want any more": "Есть дети, больше не хочу",
+      "Do not know yet": "Пока не знаю"
+    },
+    "chronotype": {
+      "Early bird": "Жаворонок",
+      "Night owl": "Сова",
+      "In a spectrum": "Смешанный тип"
+    },
+    "communicationStyle": {
+      "Messaging a lot": "Обожаю переписываться",
+      "Phone communication": "Телефонные звонки",
+      "Video chats": "Видеочаты",
+      "Do not like messaging": "Не люблю переписки",
+      "Meet in person": "Личные встречи"
+    },
+    "education": {
+      "Bachelor": "Бакалавр",
+      "College": "Колледж",
+      "Middle school": "Средняя школа",
+      "Doctor of sciences": "Доктор наук",
+      "Postgraduate": "Аспирантура",
+      "Magistracy": "Магистратура",
+      "Technical school": "Техникум"
+    },
+    "foodPreference": {
+      "Vegan": "Веган",
+      "Vegetarian": "Вегетарианец",
+      "Pescatarian": "Пескетарианец",
+      "Kosher": "Кошерная еда",
+      "Halal": "Халяльная еда",
+      "Carnivore": "Мясоед",
+      "Omnivore": "Всеяден",
+      "Other": "Другое"
+    },
+    "personalityType": {
+      "INTJ": "INTJ",
+      "INTP": "INTP",
+      "ENTJ": "ENTJ",
+      "ENTP": "ENTP",
+      "INFJ": "INFJ",
+      "INFP": "INFP",
+      "ENFJ": "ENFJ",
+      "ENFP": "ENFP",
+      "ISTJ": "ISTJ",
+      "ISFJ": "ISFJ",
+      "ESTJ": "ESTJ",
+      "ESFJ": "ESFJ",
+      "ISTP": "ISTP",
+      "ISFP": "ISFP",
+      "ESTP": "ESTP",
+      "Entertainer": "Артист"
+    },
+    "pet": {
+      "Dog": "Собака",
+      "Cat": "Кошка",
+      "Reptile": "Рептилия",
+      "Amphibian": "Амфибия",
+      "Bird": "Птица",
+      "Fish": "Рыбка",
+      "Other": "Другое",
+      "Turtle": "Черепаха",
+      "Hamster": "Хомяк",
+      "Rabbit": "Кролик",
+      "Pet-free": "Без питомцев",
+      "All the pets": "Люблю всех животных",
+      "Want a pet": "Хочу питомца",
+      "Allergic to pets": "Аллергия на животных"
+    },
+    "smokingAttitude": {
+      "Social smoker": "Курю за компанию",
+      "Smoker when drinking": "Курю, когда выпиваю",
+      "Non-smoker": "Не курю",
+      "Smoker": "Курю",
+      "Trying to quit": "Бросаю курить"
+    },
+    "socialNetworksActivity": {
+      "Influencer status": "Инфлюенсер",
+      "Socially active": "Активен в соцсетях",
+      "Off the grid": "Вне сетей",
+      "Passive scroller": "Пассивный зритель"
+    },
+    "trainingAttitude": {
+      "Everyday": "Каждый день",
+      "Often": "Часто",
+      "Sometimes": "Иногда",
+      "Gym rat": "Фанат спортзала",
+      "Occasionally": "Редко",
+      "Never": "Никогда"
+    },
+    "zodiacSign": {
+      "Aries": "Овен",
+      "Taurus": "Телец",
+      "Gemini": "Близнецы",
+      "Cancer": "Рак",
+      "Leo": "Лев",
+      "Virgo": "Дева",
+      "Libra": "Весы",
+      "Scorpius": "Скорпион",
+      "Sagittarius": "Стрелец",
+      "Capricornus": "Козерог",
+      "Aquarius": "Водолей",
+      "Pisces": "Рыбы"
+    }
+  },
+  "ui": {
+    "distance": "км от вас",
+    "livesIn": "Живет в",
+    "altAvatar": "аватар",
+    "ariaOpenFullPreview": "открыть полный профиль пользователя",
+    "unknownPlace": "неизвестное место",
+    "moreAboutMe": "Подробнее о себе",
+    "lifestyle": "Образ жизни",
+    "interests": "Интересы",
+    "close": "Закрыть",
+    "showAll": "Показать все",
+    "ariaShowAllInterests": "показать все интересы"
+  },
+  "commonPackage": {
+    "reconnection": "Что-то пошло не так при соединении. Переподключение...",
+    "successConnect": "Успешное соединение",
+    "incorrectEmailOrPassword": "Неверный E-mail или пароль",
+    "unauthorized": "Неавторизованн",
+    "userAlreadyExists": "Пользователь уже зарегистрирован",
+    "errorOccurred": "Произошла ошибка! Интерфейс заблокирован, чтобы предотвратить ошибку.",
+    "redirection": "Вы будете перенаправлены через 10 секунд.",
+    "clickToStay": "Нажмите, чтобы остаться",
+    "redirectionCancelled": "Перенаправление отменено!"
+  },
+  "nav_pairs": "Пары",
+  "instructions": {
+    "hide": "скрыть",
+    "show": "показать",
+    "no": "дизлайк",
+    "like": "лайк",
+    "openProfile": "открыть профиль",
+    "closeProfile": "закрыть профиль",
+    "superlike": "суперлайк",
+    "next": "далее"
+  },
+  "unknown": "неизвестно",
+  "likes_label": "лайков",
+  "likes_count_one": "{{count}} лайк",
+  "likes_count_few": "{{count}} лайка",
+  "likes_count_other": "{{count}} лайков",
+  "pairs": {
+    "filter": {
+      "title": "Фильтр лайков",
+      "haveInterests": "Есть интересы",
+      "distance": {
+        "title": "Макс. расстояние",
+        "unit": "км"
+      },
+      "age": {
+        "title": "Возраст",
+        "from": "от",
+        "to": "до"
+      },
+      "pictures": {
+        "title": "Мин. количество фото"
+      },
+      "interests": {
+        "title": "Интересы",
+        "showAll": "Показать все"
+      },
+      "checkboxes": {
+        "identifyConfirmed": "Личность подтверждена",
+        "haveInterests": "Есть интересы"
+      },
+      "buttons": {
+        "clear": "Очистить",
+        "confirm": "Подтвердить"
+      }
+    },
+    "list": {
+      "noLikes": "У вас пока нет лайков. Лайкните кого-нибудь, чтобы тоже получить лайк",
+      "noSuitable": "Подходящих пар не найдено. Попробуйте изменить настройки",
+      "loading": "загрузка..."
+    },
+    "preview": {
+      "distance": "км от вас"
+    },
+    "accept": "Принять",
+    "refuse": "Отклонить"
+  },
+  "age": {
+    "from": "от",
+    "to": "до"
+  },
+  "distance": {
+    "km": "{{count}} км."
+  },
+  "gender": {
+    "male": "Мужской",
+    "female": "Женский",
+    "other": "Другой"
+  },
+  "cancel": "Отмена",
+  "select": "Выбрать",
+  "preview": "Предпросмотр",
+  "change": "Изменить",
+  "saveChanges": "Сохранить изменения",
+  "submit": "Отправить",
+  "andSoOn": "и так далее...",
+  "add": "Добавить",
+  "profile": {
+    "emptyFields": "В профиле есть незаполненные поля, они выделены красным цветом в настройках профиля",
+    "settings": {
+      "notFound": "Настройка не найдена",
+      "fields": {
+        "email": "Email",
+        "name": "Имя",
+        "description": "Описание",
+        "sex": "Пол",
+        "preferSex": "Кто интересует",
+        "nickname": "Никнейм",
+        "language": "Язык",
+        "your": {
+          "email": "Ваш email",
+          "name": "Ваше имя",
+          "description": "Ваше описание",
+          "sex": "Ваш пол",
+          "preferSex": "Кто вас интересует",
+          "nickname": "Ваш никнейм",
+          "language": "Ваш язык"
+        },
+        "update": {
+          "email": "Обновить мой email",
+          "name": "Обновить мое имя",
+          "description": "Обновить мое описание",
+          "sex": "Изменить мой пол",
+          "preferSex": "Изменить, кто интересует",
+          "nickname": "Обновить мой никнейм",
+          "language": "Изменить язык"
+        }
+      },
+      "account": {
+        "title": "Настройки аккаунта",
+        "descr": "Подтвержденный адрес электронной почты помогает защитить ваш аккаунт.",
+        "thumbnails": {
+          "age": {
+            "title": "Возраст",
+            "years": "{{count}} лет"
+          },
+          "description": "Описание",
+          "email": "Эл. почта",
+          "name": "Имя",
+          "sex": "Пол",
+          "nickname": "Никнейм"
+        }
+      },
+      "find": {
+        "title": "Настройки поиска",
+        "descr": "Когда люди поблизости закончатся, вы сможете переключиться в глобальный режим, чтобы знакомиться с людьми со всего мира.",
+        "thumbnails": {
+          "partnerAge": "Возраст партнера",
+          "distance": {
+            "title": "Расстояние",
+            "range": "Показывать людей только в этом диапазоне"
+          },
+          "place": "Местоположение",
+          "preferSex": "Кто вас интересует"
+        }
+      },
+      "display": {
+        "title": "Внешний вид",
+        "thumbnails": {
+          "theme": {
+            "title": "Тема",
+            "darkMode": "Темная тема"
+          },
+          "language": "Язык"
+        }
+      },
+      "safety": {
+        "title": "Советы по безопасности",
+        "descr": "Берегите себя и оставайтесь в безопасности.",
+        "links": {
+          "community": "Правила сообщества",
+          "security": "Центр безопасности и политики",
+          "tips": "Советы по безопасности"
+        }
+      },
+      "photo": {
+        "upload": "Загрузить",
+        "uploadFrom": "Загрузить из",
+        "gallery": "Галерея",
+        "chooseContext": "Выберите тип контекста",
+        "onlyOnePhoto": "Вы можете загрузить только 1 фото за раз",
+        "notFound": "Фото не найдено",
+        "sizeLimit": "Размер не должен превышать 1 МБ",
+        "extension": "Можно загружать только фото в формате png или jpg",
+        "redactPhoto": "Редактировать фото",
+        "altDraggablePhoto": "перетаскиваемое фото"
+      },
+      "interests": {
+        "title": "Интересы",
+        "editTitle": "Изменить интересы",
+        "description": "Выберите интересы, которыми вы хотели бы поделиться с вашими парами",
+        "editDescription": "Выберите интересы, которыми вы хотели бы поделиться с вашими парами. Укажите как минимум 3 интереса.",
+        "thumbnail": "Интересы"
+      },
+      "moreAboutMe": {
+        "title": "Подробнее о себе",
+        "editDescription": "Раскройте себя с лучшей стороны, рассказав больше о себе",
+        "zodiac": "Зодиак",
+        "zodiacSetting": "Какой у вас знак зодиака?",
+        "education": "Образование",
+        "educationSetting": "Какой у вас уровень образования?",
+        "children": "Отношение к детям",
+        "childrenSetting": "Вы хотите детей?",
+        "personality": "Тип личности",
+        "personalitySetting": "Какой у вас тип личности?",
+        "communication": "Стиль общения",
+        "communicationSetting": "Какой у вас стиль общения?",
+        "attention": "Знаки внимания",
+        "attentionSetting": "Как вы проявляете любовь?"
+      },
+      "lifestyle": {
+        "title": "Образ жизни",
+        "editDescription": "Расскажите о своем образе жизни",
+        "drinking": "Алкоголь",
+        "drinkingSetting": "Как часто вы пьете?",
+        "chronotype": "Хронотип",
+        "chronotypeSetting": "Какой у вас режим сна?",
+        "food": "Питание",
+        "foodSetting": "Каковы ваши диетические предпочтения?",
+        "pets": "Питомцы",
+        "petSetting": "У вас есть домашние животные?",
+        "smoking": "Курение",
+        "smokingSetting": "Как часто вы курите?",
+        "social": "Соцсети",
+        "socialSetting": "Насколько вы активны в соцсетях?",
+        "workout": "Спорт",
+        "workoutSetting": "Вы занимаетесь спортом?"
+      },
+      "default": {
+        "editTitle": "Заголовок по умолчанию",
+        "editDescription": "Описание по умолчанию."
+      },
+      "place": {
+        "title": "Местоположение",
+        "currentPositions": "Текущие позиции",
+        "myCurrentPosition": "Мое текущее местоположение",
+        "refresh": "Обновить",
+        "unchanged": "Ваша локация не изменилась",
+        "refreshing": "Обновление уже в процессе",
+        "enableGeolocation": "Включите вашу геолокацию, иначе мы не сможем определить ее"
+      }
+    },
+    "logout": "Выйти",
+    "addMorePhotos": "Добавьте больше фото, чтобы заполнить профиль еще на 4% и получать больше лайков.",
+    "editProfile": "Изменить профиль",
+    "editInfo": "Изменить инфо",
+    "settingsMobile": "Настройки",
+    "changeProfile": "Сменить профиль",
+    "addPhotos": "Добавить фото"
+  },
+  "tinder": {
+    "errorFields": "В профиле есть незаполненные поля",
+    "errorFieldsDescription": "Нажмите, чтобы заполнить информацию о себе",
+    "noUsers": "Поблизости больше никого нет",
+    "noUsersDescription": "Нажмите, чтобы изменить настройки поиска и увидеть больше людей",
+    "like": "ЛАЙК",
+    "dislike": "ДИЗЛАЙК",
+    "superLike": "СУПЕР ЛАЙК"
+  },
+  "validation": {
+    "required": "Поле обязательно для заполнения",
+    "email": "Некорректный email",
+    "lengthMin": "Значение должно быть более {{count}} символов",
+    "lengthMax": "Значение должно быть менее {{count}} символов"
+  },
+  "auth": {
+    "create": "Создать аккаунт",
+    "memberLogin": "Вход для участников",
+    "login": "Войти",
+    "loginAccount": "Войдите в свой аккаунт",
+    "memberSignUp": "Регистрация",
+    "signUp": "Зарегистрироваться",
+    "email": "Email",
+    "emailRequired": "Введите Email",
+    "emailIncorrect": "Некорректный Email",
+    "emailLengthMax": "Email должен содержать менее {{count}} символов",
+    "password": "Пароль",
+    "passwordRequired": "Введите пароль",
+    "passwordLengthMin": "Пароль должен содержать более {{count}} символов",
+    "passwordLengthMax": "Пароль должен содержать менее {{count}} символов",
+    "name": "Имя",
+    "nameRequired": "Введите имя",
+    "nameLengthMin": "Имя должно содержать более {{count}} символов",
+    "nameLengthMax": "Имя должно содержать менее {{count}} символов",
+    "reconnection": "Что-то пошло не так при соединении. Переподключение...",
+    "successConnect": "Успешное соединение"
+  }
+}
