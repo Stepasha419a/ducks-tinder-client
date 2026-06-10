@@ -230,4 +230,24 @@
   "noChats": "You don't have chats. Accept some pairs to have personal chats with them",
   "noChatsYet": "You don't have chats yet",
   "edited": "edited",
+  "auth": {
+    "create": "Create your Account",
+    "memberLogin": "Member Login",
+    "login": "Login",
+    "loginAccount": "Log in your Account",
+    "memberSignUp": "Member Sign Up",
+    "signUp": "Sign up",
+    "email": "Email",
+    "emailRequired": "Email is required",
+    "emailIncorrect": "Incorrect email",
+    "emailLengthMax": "Email must be less than {{count}} symbols",
+    "password": "Password",
+    "passwordRequired": "Password is required",
+    "passwordLengthMin": "Password must be more than {{count}} symbols",
+    "passwordLengthMax": "Password must be less than {{count}} symbols",
+    "name": "First name",
+    "nameRequired": "Name is required",
+    "nameLengthMin": "Name must be more than {{count}} symbols",
+    "nameLengthMax": "Name must be less than {{count}} symbols"
+  }
 }
