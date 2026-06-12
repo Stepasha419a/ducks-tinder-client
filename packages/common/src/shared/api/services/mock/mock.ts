@@ -1,7 +1,7 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 
-import type { Chat, User } from '../../interfaces';
-import { chatStub, matchingUserStubs, messageStub, userStub } from './stub';
+import type { User } from '../../interfaces';
+import { matchingUserStubs, userStub } from './stub';
 import { COMMON_LIB_SETTINGS } from '@shared/lib';
 
 export async function resolveAxiosResponse<T>(
@@ -47,27 +47,6 @@ export const mockStorage = {
 
     return this.currentMatchingIndex;
   },
-  currentChatId: null as string | null,
-  chats: [
-    {
-      ...chatStub,
-      name: 'Juliet',
-      memberId: 'juliet',
-      lastMessage: {
-        ...messageStub,
-        createdAt: new Date(Date.now() - 1000).toISOString(),
-        updatedAt: new Date(Date.now() - 1000).toISOString(),
-        name: 'Juliet',
-        id: 'juliet',
-        userId: 'juliet',
-        text: 'Hi, I checked your profile, you are a handsome guy) Im Juliet!',
-      },
-      newMessagesCount: 1,
-      lastSeenAt: new Date(Date.now() - 1000).toISOString(),
-      createdAt: new Date(Date.now() - 1000).toISOString(),
-      updatedAt: new Date(Date.now() - 1000).toISOString(),
-    },
-  ] as Chat[],
 };
 
 export function saveTestUser(user: User) {
