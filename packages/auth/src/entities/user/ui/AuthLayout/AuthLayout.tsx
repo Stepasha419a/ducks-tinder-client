@@ -3,7 +3,7 @@ import type { FieldErrors } from 'react-hook-form';
 
 import styles from './AuthLayout.module.scss';
 import { authDuck } from '@ducks-tinder-client/ui';
-import type { RegistrationParams } from '@ducks-tinder-client/common';
+import type { RegistrationParams } from '@shared/api';
 
 interface AuthLayoutProps {
   errors: FieldErrors<RegistrationParams>;

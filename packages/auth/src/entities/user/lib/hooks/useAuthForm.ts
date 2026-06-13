@@ -2,10 +2,10 @@ import type { SubmitEventHandler } from 'react';
 import type { FieldErrors } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
-import type { RegistrationParams } from '@ducks-tinder-client/common';
 import { COMMON_LIB_SETTINGS, EMAIL_REGEXP } from '@ducks-tinder-client/common';
 import type { TextFieldProps } from '@ducks-tinder-client/ui';
 import { useLoginMutation, useRegisterMutation } from '@entities/user/api';
+import type { RegistrationParams } from '@shared/api';
 
 interface AuthFormReturn {
   fields: {
