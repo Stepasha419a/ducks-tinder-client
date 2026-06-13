@@ -4,12 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import {
   APP_PRIVATE_HOC_COMPOSITION,
-  AppContextProvider,
   HocCompositionStage,
   ROUTES,
-  useAppContext,
   WithErrorFallback,
-  WithUserData,
 } from '@ducks-tinder-client/common';
 import { setUiLibSettings, ThemeProvider } from '@ducks-tinder-client/ui';
 
@@ -27,6 +24,7 @@ import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 import { chatStore } from './model';
 import type { Store } from '@reduxjs/toolkit';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 setUiLibSettings({ IMAGE_BASE_URL: window._env_.VAR_FILE_SERVICE_URL });
 
@@ -45,9 +43,6 @@ i18n
     defaultNS: 'chat',
   });
 
-APP_PRIVATE_HOC_COMPOSITION.addHocs(HocCompositionStage.USER_HYDRATION, [
-  WithUserData,
-]);
 APP_PRIVATE_HOC_COMPOSITION.addHocs(HocCompositionStage.COMPLETE, [
   (Component) => WithErrorFallback(Component, { redirect: true }),
 ]);
@@ -57,20 +52,18 @@ const App = () => {
     <Provider store={chatStore as Store}>
       <BrowserRouter>
         {/* TODO: global state and auth hoc to reuse auth logic - but there is no login page, its in root */}
-        <AppContextProvider userId="id">
-          <LibLocaleProvider>
-            <ThemeProvider>
-              <WrappedRoutes />
-            </ThemeProvider>
-          </LibLocaleProvider>
-        </AppContextProvider>
+        <LibLocaleProvider>
+          <ThemeProvider>
+            <WrappedRoutes />
+          </ThemeProvider>
+        </LibLocaleProvider>
       </BrowserRouter>
     </Provider>
   );
 };
 
 const WrappedRoutes = APP_PRIVATE_HOC_COMPOSITION.appendHocs(() => {
-  const { userId } = useAppContext();
+  const userId = useUserStore((state) => state.currentUser?.id);
 
   return (
     <div className={styles.container}>
