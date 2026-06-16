@@ -9,6 +9,7 @@ import {
 
 import type { GetUserPairsProps } from './pair.interface';
 import { deletePairById } from './pair.slice';
+import { getUserService } from '@shared/api';
 
 export const getUserPairsThunk = createAsyncThunk(
   'users/getUserPairs',
@@ -55,7 +56,7 @@ export const getPairsInfoThunk = createAsyncThunk(
   'users/getPairsInfo',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await serviceGetter.getUserService().getPairsInfo();
+      const response = await getUserService().getPairsInfo();
 
       return response.data;
     } catch (error: unknown) {
@@ -70,7 +71,7 @@ export const acceptPairThunk = createAsyncThunk(
     try {
       dispatch(deletePairById(pairId));
 
-      const response = await serviceGetter.getUserService().acceptPair(pairId);
+      const response = await getUserService().acceptPair(pairId);
 
       return response.data;
     } catch (error: unknown) {
@@ -85,7 +86,7 @@ export const refusePairThunk = createAsyncThunk(
     try {
       dispatch(deletePairById(pairId));
 
-      const response = await serviceGetter.getUserService().deletePair(pairId);
+      const response = await getUserService().deletePair(pairId);
 
       return response.data;
     } catch (error: unknown) {
