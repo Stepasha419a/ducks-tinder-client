@@ -1,1 +1,0 @@
-export { SettingNameEnum } from './settingName';
