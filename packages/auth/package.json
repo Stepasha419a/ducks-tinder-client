@@ -45,7 +45,7 @@
     "@fortawesome/fontawesome-svg-core": "6.7.x",
     "@fortawesome/free-solid-svg-icons": "6.7.x",
     "@fortawesome/react-fontawesome": "0.2.x",
-    "axios": "1.9.x",
+    "axios": "1.17.x",
     "browserslist": "4.25.x",
     "classnames": "2.5.x",
     "react": "19.1.x",
