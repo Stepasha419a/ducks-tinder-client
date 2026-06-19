@@ -36,6 +36,7 @@
     "@fortawesome/react-fontawesome": "^3.1.0",
     "@pbe/react-yandex-maps": "^1.2.5",
     "@reduxjs/toolkit": "^2.10.1",
+    "axios": "^1.17.0",
     "browserslist": "^4.28.0",
     "classnames": "^2.5.1",
     "i18next": "^26.0.3",
