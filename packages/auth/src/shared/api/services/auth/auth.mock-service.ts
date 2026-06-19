@@ -4,31 +4,33 @@ import type { AxiosResponse } from 'axios';
 
 import type { AuthResponse, AuthService } from '@shared/api';
 import {
+  authMockStorage,
   authResponseStub,
   deleteTestUser,
   getTestUser,
-  rejectWithAxiosResponseError,
-  resolveAxiosResponse,
   saveTestUser,
 } from '@shared/api';
-import { mockStorage } from '@ducks-tinder-client/common';
+import {
+  rejectWithAxiosResponseError,
+  resolveAxiosResponse,
+} from '@ducks-tinder-client/common';
 
 export const authMockService: AuthService = {
   async registration(email, name, password) {
-    mockStorage.currentUser = { ...mockStorage.currentUser, name };
-    saveTestUser(mockStorage.currentUser);
+    authMockStorage.currentUser = { ...authMockStorage.currentUser, name };
+    saveTestUser(authMockStorage.currentUser);
 
     return resolveAxiosResponse({
       ...authResponseStub,
-      ...mockStorage.currentUser,
+      ...authMockStorage.currentUser,
     });
   },
   async login(email, password) {
-    saveTestUser(mockStorage.currentUser);
+    saveTestUser(authMockStorage.currentUser);
 
     return resolveAxiosResponse({
       ...authResponseStub,
-      ...mockStorage.currentUser,
+      ...authMockStorage.currentUser,
     });
   },
   async refresh() {
@@ -39,7 +41,7 @@ export const authMockService: AuthService = {
       ) as unknown as AxiosResponse<AuthResponse>;
     }
 
-    mockStorage.currentUser = savedUser;
+    authMockStorage.currentUser = savedUser;
     return resolveAxiosResponse({ ...authResponseStub, ...savedUser });
   },
   async logout() {

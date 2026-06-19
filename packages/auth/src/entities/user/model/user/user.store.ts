@@ -1,5 +1,5 @@
-import { create } from 'zustand';
 import type { User } from '@ducks-tinder-client/common';
+import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 
 export interface UserState {

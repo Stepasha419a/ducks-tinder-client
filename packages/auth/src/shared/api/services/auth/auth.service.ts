@@ -1,7 +1,10 @@
-import { getMockableService } from '../mock';
 import type { AuthResponse, AuthService } from './auth.interfaces';
 import { authMockService } from './auth.mock-service';
-import { COMMON_LIB_SETTINGS, instance } from '@ducks-tinder-client/common';
+import {
+  COMMON_LIB_SETTINGS,
+  getMockableService,
+  instance,
+} from '@ducks-tinder-client/common';
 
 export const createAuthService = (): AuthService =>
   getMockableService(
