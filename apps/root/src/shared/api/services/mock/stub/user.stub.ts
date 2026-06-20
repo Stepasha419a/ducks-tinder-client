@@ -1,11 +1,12 @@
-import type { PairsInfo, ShortUser, User } from '@shared/api';
+import type { ShortUser } from '@ducks-tinder-client/common';
 import {
   AttentionSign,
   ChildrenAttitude,
   Education,
   FoodPreference,
   Interest,
-} from '@shared/api';
+} from '@ducks-tinder-client/common';
+import type { PairsInfo } from '@shared/api';
 
 export const shortUserStub: ShortUser = {
   age: 18,
@@ -31,37 +32,6 @@ export const shortUserStub: ShortUser = {
   smokingAttitude: null,
   socialNetworksActivity: null,
   trainingAttitude: null,
-  zodiacSign: null,
-};
-
-export const userStub: User = {
-  age: 18,
-  alcoholAttitude: null,
-  attentionSign: null,
-  childrenAttitude: null,
-  chronotype: null,
-  communicationStyle: null,
-  description: null,
-  distance: 100,
-  education: null,
-  foodPreference: null,
-  id: 'id',
-  name: 'John',
-  interests: [],
-  isActivated: false,
-  nickname: null,
-  personalityType: null,
-  pet: null,
-  pictures: [],
-  place: { address: 'add', latitude: 1, longitude: 1, name: 'name' },
-  preferAgeFrom: 18,
-  preferAgeTo: 40,
-  preferSex: 'female',
-  sex: 'male',
-  smokingAttitude: null,
-  socialNetworksActivity: null,
-  trainingAttitude: null,
-  usersOnlyInDistance: false,
   zodiacSign: null,
 };
 
