@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import { authMockStorage, saveTestUser } from '@ducks-tinder-client/auth';
+import type { User } from '@ducks-tinder-client/common';
 import {
   globalEventEmitter,
   resolveAxiosResponse,
 } from '@ducks-tinder-client/common';
-import type { PairFilterParams, User, UserService } from '@shared/api';
+import type { PairFilterParams, UserService } from '@shared/api';
 import {
   matchingUserStubs,
   mockStorage,
   pairsInfoStub,
-  saveTestUser,
   shortUserStub,
 } from '@shared/api';
 
@@ -26,15 +27,15 @@ export const userMockService: UserService = {
   },
 
   async updateUser(data: Partial<User>) {
-    mockStorage.currentUser = { ...mockStorage.currentUser, ...data };
-    saveTestUser(mockStorage.currentUser);
+    authMockStorage.currentUser = { ...authMockStorage.currentUser, ...data };
+    saveTestUser(authMockStorage.currentUser);
 
-    return resolveAxiosResponse(mockStorage.currentUser);
+    return resolveAxiosResponse(authMockStorage.currentUser);
   },
 
   async updateUserPlace(latitude: number, longitude: number) {
-    mockStorage.currentUser = {
-      ...mockStorage.currentUser,
+    authMockStorage.currentUser = {
+      ...authMockStorage.currentUser,
       place: {
         address: 'place-address',
         latitude,
@@ -42,21 +43,21 @@ export const userMockService: UserService = {
         name: 'place-name',
       },
     };
-    saveTestUser(mockStorage.currentUser);
+    saveTestUser(authMockStorage.currentUser);
 
-    return resolveAxiosResponse(mockStorage.currentUser);
+    return resolveAxiosResponse(authMockStorage.currentUser);
   },
 
   async savePicture(picture: Blob) {
-    return resolveAxiosResponse(mockStorage.currentUser);
+    return resolveAxiosResponse(authMockStorage.currentUser);
   },
 
   async deletePicture(id: string) {
-    return resolveAxiosResponse(mockStorage.currentUser);
+    return resolveAxiosResponse(authMockStorage.currentUser);
   },
 
   async mixPictures(pictureOrders: number[]) {
-    return resolveAxiosResponse(mockStorage.currentUser);
+    return resolveAxiosResponse(authMockStorage.currentUser);
   },
 
   async getPairs(params: PairFilterParams) {

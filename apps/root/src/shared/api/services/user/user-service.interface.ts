@@ -1,5 +1,9 @@
-import type { PaginationParams } from '@ducks-tinder-client/common';
-import type { FullPicture, ShortUser, User } from '../../interfaces';
+import type {
+  FullPicture,
+  PaginationParams,
+  ShortUser,
+  User,
+} from '@ducks-tinder-client/common';
 import type { AxiosResponse } from 'axios';
 
 export interface PairFilterParams extends PaginationParams {
