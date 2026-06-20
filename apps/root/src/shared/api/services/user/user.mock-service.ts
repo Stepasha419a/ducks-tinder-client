@@ -14,10 +14,6 @@ import {
 } from '@shared/api';
 
 export const userMockService: UserService = {
-  async getMe() {
-    return resolveAxiosResponse(mockStorage.currentUser);
-  },
-
   async getMatchUsers(take: number, skipUserIds: string[]) {
     return resolveAxiosResponse(
       matchingUserStubs

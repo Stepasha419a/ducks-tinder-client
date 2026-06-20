@@ -20,7 +20,6 @@ export interface PairsInfo {
 }
 
 export interface UserService {
-  getMe(): Promise<AxiosResponse<User>>;
   getMatchUsers(
     take: number,
     skipUserIds?: string[]
