@@ -5,7 +5,6 @@ export {
   resetUserSlice,
 } from './user.slice';
 export {
-  getCurrentUser,
   updateUserThunk,
   updateUserPlaceThunk,
   saveUserImageThunk,

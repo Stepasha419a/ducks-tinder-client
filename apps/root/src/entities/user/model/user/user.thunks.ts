@@ -1,20 +1,7 @@
 import { returnErrorMessage } from '@ducks-tinder-client/common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getUserService, type Picture, type User } from '@shared/api';
-
-export const getCurrentUser = createAsyncThunk(
-  'users/getCurrentUser',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await getUserService().getMe();
-
-      return response.data;
-    } catch (error: unknown) {
-      return rejectWithValue(returnErrorMessage(error));
-    }
-  }
-);
+import { getUserService } from '@shared/api';
 
 export const updateUserThunk = createAsyncThunk(
   'users/updateUser',
