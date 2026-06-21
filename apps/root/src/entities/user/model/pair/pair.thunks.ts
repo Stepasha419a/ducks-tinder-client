@@ -1,14 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import type { PairFilterParams } from '@ducks-tinder-client/common';
 import {
   PAGINATION_TAKE,
   returnErrorMessage,
-  serviceGetter,
 } from '@ducks-tinder-client/common';
 
 import type { GetUserPairsProps } from './pair.interface';
 import { deletePairById } from './pair.slice';
+import type { PairFilterParams } from '@shared/api';
 import { getUserService } from '@shared/api';
 
 export const getUserPairsThunk = createAsyncThunk(
@@ -41,9 +40,7 @@ export const getUserPairsThunk = createAsyncThunk(
         params.identifyConfirmed = filter.identifyConfirmed;
       }
 
-      const response = await serviceGetter
-        .getUserService()
-        .getPairs(params, true);
+      const response = await getUserService().getPairs(params, true);
 
       return { pairs: response.data, isInitial };
     } catch (error: unknown) {

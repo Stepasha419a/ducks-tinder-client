@@ -1,7 +1,6 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { PairsInfo } from '@ducks-tinder-client/common';
 import { PAGINATION_TAKE } from '@ducks-tinder-client/common';
 
 import type {
@@ -9,6 +8,7 @@ import type {
   PairInitialState,
 } from './pair.interface';
 import { getPairsInfoThunk, getUserPairsThunk } from './pair.thunks';
+import type { PairsInfo } from '@shared/api';
 
 const initialState: PairInitialState = {
   pairs: [],

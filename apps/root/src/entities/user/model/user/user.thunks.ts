@@ -1,3 +1,4 @@
+import type { Picture, User } from '@ducks-tinder-client/common';
 import { returnErrorMessage } from '@ducks-tinder-client/common';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 

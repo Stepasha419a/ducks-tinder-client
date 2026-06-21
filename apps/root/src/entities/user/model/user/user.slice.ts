@@ -1,17 +1,15 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { User } from '@shared/api';
-
 import type { Setting, UserInitialState } from './user.interface';
 import {
   deleteUserPictureThunk,
-  getCurrentUser,
   mixUserPicturesThunk,
   saveUserImageThunk,
   updateUserPlaceThunk,
   updateUserThunk,
 } from './user.thunks';
+import type { User } from '@ducks-tinder-client/common';
 import { globalEventEmitter } from '@ducks-tinder-client/common';
 
 const initialState: UserInitialState = {
@@ -35,11 +33,6 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-        state.currentUser = payload;
-        // TODO: remove it when root-app actions move from common-package
-        globalEventEmitter.emit('set-user', payload);
-      })
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
         state.currentUser = payload;
         globalEventEmitter.emit('set-user', payload);

@@ -1,14 +1,13 @@
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
-import type { ShortUser } from '@ducks-tinder-client/common';
-
 import {
   dislikeUserThunk,
   getMatchUsersThunk,
   likeUserThunk,
   returnUserThunk,
 } from './tinder.thunks';
+import type { ShortUser } from '@ducks-tinder-client/common';
 
 interface InitialState {
   tinderUsers: ShortUser[];

@@ -1,5 +1,5 @@
+import type { User } from '@ducks-tinder-client/common';
 import type { SettingNameEnum } from '@entities/user';
-import type { User } from '@shared/api';
 
 export interface UserInitialState {
   currentUser: User | null;
