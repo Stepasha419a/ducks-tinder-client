@@ -2,13 +2,13 @@ import type { Dispatch, FC, SetStateAction } from 'react';
 import classNames from 'classnames';
 
 import type { ShortUser } from '@ducks-tinder-client/common';
-import { useAppDispatch } from '@ducks-tinder-client/common';
 import { Button, Popup, Preview } from '@ducks-tinder-client/ui';
 
 import { acceptPairThunk, refusePairThunk } from '@entities/user';
 
 import * as styles from './RatePairPopup.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useAppDispatch } from '@shared/lib';
 
 interface RatePairPopupProps {
   currentPair: ShortUser;

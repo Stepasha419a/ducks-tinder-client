@@ -1,17 +1,17 @@
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  ROUTES,
-  updateUserThunk,
-  useAdaptiveMediaQuery,
-  useAppDispatch,
-} from '@ducks-tinder-client/common';
+import { ROUTES, useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
-import { useDefaultValues, useMemoriedSettingUrl } from '@entities/user';
+import {
+  updateUserThunk,
+  useDefaultValues,
+  useMemoriedSettingUrl,
+} from '@entities/user';
 
 import type { SettingFieldValues } from './useCurrentValidation';
 import { useCurrentValidation } from './useCurrentValidation';
+import { useAppDispatch } from '@shared/lib';
 
 export function useTextForm() {
   const navigate = useNavigate();

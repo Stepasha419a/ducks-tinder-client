@@ -1,14 +1,18 @@
 import type { FC, ReactElement } from 'react';
 
-import { resetUserSlice, useAppDispatch } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
-import { resetPairSlice, resetTinderSlice } from '@entities/user';
+import {
+  resetPairSlice,
+  resetTinderSlice,
+  resetUserSlice,
+} from '@entities/user';
 
 import * as styles from './LogoutButton.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useChatSliceReset } from 'chatApp/hooks';
 import { useLogoutMutation } from '@ducks-tinder-client/auth';
+import { useAppDispatch } from '@shared/lib';
 
 export const LogoutButton: FC = (): ReactElement => {
   const { t } = useTranslation();

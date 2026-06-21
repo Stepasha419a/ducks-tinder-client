@@ -1,6 +1,7 @@
 import { useUserStore } from '@ducks-tinder-client/auth';
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { ROUTES } from '@ducks-tinder-client/common';
 import { LinkSettingThumbnail, SettingNameEnum } from '@entities/user';
+import { useAppSelector } from '@shared/lib';
 import { useTranslation } from 'react-i18next';
 
 export const SexSettingThumbnail = () => {

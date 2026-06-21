@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  updateUserThunk,
-  useAppDispatch,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
 import { RangeInput } from '@ducks-tinder-client/ui';
 
-import { SettingThumbnail } from '@entities/user';
+import { SettingThumbnail, updateUserThunk } from '@entities/user';
 
 import * as styles from '../SettingFeatureThumbnails.module.scss';
 import { useUserStore } from '@ducks-tinder-client/auth';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 export const PartnerAgeSettingThumbnail = () => {
   const { t } = useTranslation();

@@ -3,15 +3,11 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import {
-  checkFields,
-  useAppDispatch,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
-
 import { checkUserFields } from '../helpers';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore, useUserStore } from '@ducks-tinder-client/auth';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
+import { checkFields } from '@entities/user';
 
 export const WithCheckedFields = <P extends object>(
   Component: ComponentType<P>

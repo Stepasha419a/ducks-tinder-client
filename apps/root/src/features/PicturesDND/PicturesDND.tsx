@@ -1,17 +1,15 @@
 import type { Dispatch, FC, SetStateAction } from 'react';
 
 import type { Picture } from '@ducks-tinder-client/common';
-import {
-  createEmptyArray,
-  deleteUserPictureThunk,
-  useAppDispatch,
-} from '@ducks-tinder-client/common';
+import { createEmptyArray } from '@ducks-tinder-client/common';
 import { makeImageUrl } from '@ducks-tinder-client/ui';
 
 import { Card, DraggableCard } from './ui';
 import * as styles from './PicturesDND.module.scss';
 import { DragDropProvider } from '@dnd-kit/react';
 import { isSortable } from '@dnd-kit/react/sortable';
+import { useAppDispatch } from '@shared/lib';
+import { deleteUserPictureThunk } from '@entities/user';
 
 interface PicturesDNDProps {
   pictures: Picture[];

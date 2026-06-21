@@ -11,13 +11,13 @@ import classNames from 'classnames';
 import type { MotionValue } from 'motion/react';
 import { motion } from 'motion/react';
 
-import { useAppSelector } from '@ducks-tinder-client/common';
 import { Button } from '@ducks-tinder-client/ui';
 
 import * as styles from './RateButtons.module.scss';
 import { useRateButtons } from './lib';
 import type { TinderActions, TinderAnimations } from '@entities/user';
 import { DataRoles, useSwipeStyles } from '@entities/user';
+import { useAppSelector } from '@shared/lib';
 
 interface RateButtonsProps {
   onAnimation: (animation: TinderAnimations) => void;

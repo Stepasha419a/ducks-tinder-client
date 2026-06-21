@@ -1,7 +1,7 @@
 import type { Dispatch, RefObject, SetStateAction } from 'react';
 import type Slider from 'react-slick';
 
-import { useAppSelector, useEventListener } from '@ducks-tinder-client/common';
+import { useEventListener } from '@ducks-tinder-client/common';
 
 import {
   type TinderActions,
@@ -9,6 +9,7 @@ import {
   type TinderAnimations,
   useTinderAnimations,
 } from '@entities/user';
+import { useAppSelector } from '@shared/lib';
 
 export function useKeyboardEvents(
   setAnimation: Dispatch<SetStateAction<TinderAnimations>>,

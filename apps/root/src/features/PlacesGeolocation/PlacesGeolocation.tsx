@@ -2,17 +2,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import classNames from 'classnames';
 
-import {
-  updateUserPlaceThunk,
-  useAppDispatch,
-} from '@ducks-tinder-client/common';
-
-import { Places } from '@entities/user';
+import { Places, updateUserPlaceThunk } from '@entities/user';
 
 import { getAreDifferentPlaces } from './lib';
 import * as styles from './PlacesGeolocation.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useUserStore } from '@ducks-tinder-client/auth';
+import { useAppDispatch } from '@shared/lib';
 
 export const PlacesGeolocation = () => {
   const { t } = useTranslation();

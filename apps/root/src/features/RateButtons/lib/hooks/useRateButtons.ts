@@ -1,11 +1,10 @@
-import { useAppDispatch, useAppSelector } from '@ducks-tinder-client/common';
-
 import type { TinderAnimations } from '@entities/user';
 import {
   returnUserThunk,
   TinderActions,
   useTinderAnimations,
 } from '@entities/user';
+import { useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback } from 'react';
 
 export function useRateButtons({

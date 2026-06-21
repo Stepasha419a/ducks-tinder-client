@@ -1,7 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { ROUTES } from '@ducks-tinder-client/common';
 import { LinkSettingThumbnail, SettingNameEnum } from '@entities/user';
 import { useUserStore } from '@ducks-tinder-client/auth';
+import { useAppSelector } from '@shared/lib';
 
 export const PreferSexSettingThumbnail = () => {
   const { t } = useTranslation();
