@@ -30,6 +30,7 @@
       "@ducks-tinder-client/config",
       "@ducks-tinder-client/common",
       "@ducks-tinder-client/ui",
+      "@ducks-tinder-client/auth",
       "@ducks-tinder-client/root",
       "@ducks-tinder-client/chat",
       "@ducks-tinder-client/policy"
