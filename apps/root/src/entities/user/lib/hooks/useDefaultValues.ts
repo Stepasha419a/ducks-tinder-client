@@ -1,9 +1,10 @@
-import type { Place, Setting, User } from '@ducks-tinder-client/common';
+import type { Place, User } from '@ducks-tinder-client/common';
 
 import { SettingNameEnum } from '../constants';
 import { useTranslation } from 'react-i18next';
 import { SupportedLanguage } from '@shared/lib';
 import { useAuthStore, useUserStore } from '@ducks-tinder-client/auth';
+import type { Setting } from '@entities/user';
 
 export function useDefaultValues(
   settingName: Setting | null

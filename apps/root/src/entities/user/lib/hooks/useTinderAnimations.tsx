@@ -1,11 +1,10 @@
-import { useAppDispatch } from '@ducks-tinder-client/common';
-
 import {
   dislikeUserThunk,
   likeUserThunk,
   TinderActions,
   TinderAnimations,
 } from '@entities/user';
+import { useAppDispatch } from '@shared/lib';
 import { useCallback } from 'react';
 
 export function useTinderAnimations({
