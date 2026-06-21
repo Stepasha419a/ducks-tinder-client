@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useAppSelector } from '@ducks-tinder-client/common';
 import { Skeleton } from '@ducks-tinder-client/ui';
 
 import * as styles from './LikesCount.module.scss';
+import { useAppSelector } from '@shared/lib';
 
 export const LikesCount: FC = (): ReactElement => {
   const { t } = useTranslation();

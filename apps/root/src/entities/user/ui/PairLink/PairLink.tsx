@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import { faHeartCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { useAppSelector } from '@ducks-tinder-client/common';
 import { makeImageUrl } from '@ducks-tinder-client/ui';
 
 import { FailedPair, Loading } from './components';
 import * as styles from './PairLink.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '@shared/lib';
 
 export const PairLink = () => {
   const { t } = useTranslation();
