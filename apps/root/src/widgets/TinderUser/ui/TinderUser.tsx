@@ -1,10 +1,7 @@
 import type { FC } from 'react';
 import classNames from 'classnames';
 
-import {
-  useAdaptiveMediaQuery,
-  useAppSelector,
-} from '@ducks-tinder-client/common';
+import { useAdaptiveMediaQuery } from '@ducks-tinder-client/common';
 
 import { Explore } from '@entities/user';
 
@@ -13,6 +10,7 @@ import { SwipeUser, SwipeUserLazy } from '@features/SwipeUser';
 import { RateButtons } from '@features/RateButtons';
 import { useAnimationActions } from '../lib';
 import { FailedTinderUser } from './components';
+import { useAppSelector } from '@shared/lib';
 
 interface TinderUserProps {
   explore?: boolean;

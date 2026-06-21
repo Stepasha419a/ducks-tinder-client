@@ -1,10 +1,9 @@
 import type { Reducer } from '@reduxjs/toolkit';
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { userReducer } from '@ducks-tinder-client/common';
-
 import { pairReducer, tinderReducer } from '@entities/user';
 import { chatReducer } from 'chatApp/models';
+import { userReducer } from '@entities/user/model/user';
 
 export const rootReducer = combineReducers({
   user: userReducer,

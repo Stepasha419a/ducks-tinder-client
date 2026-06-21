@@ -8,12 +8,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { ROUTES, useAppSelector } from '@ducks-tinder-client/common';
+import { ROUTES } from '@ducks-tinder-client/common';
 
 import { getIsChatPage, getIsProfilePage } from '../../lib';
 import * as styles from './Nav.mobile.module.scss';
 
 import { NewMessagesCount } from 'chatApp/chat';
+import { useAppSelector } from '@shared/lib';
 
 export const NavMobile = () => {
   const { pathname } = useLocation();
