@@ -25,7 +25,7 @@
     ]
   },
   "dependencies": {
-    "@ducks-tinder-client/auth": "1.0.0-alpha.6",
+    "@ducks-tinder-client/auth": "1.0.0-alpha.7",
     "@ducks-tinder-client/common": "1.7.0-alpha.12",
     "@ducks-tinder-client/ui": "1.1.7-alpha.5",
     "@fortawesome/fontawesome-common-types": "^7.1.0",
