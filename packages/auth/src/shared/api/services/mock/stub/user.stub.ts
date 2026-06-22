@@ -1,4 +1,4 @@
-import type { User } from '@ducks-tinder-client/common';
+import type { ShortUser, User } from '@ducks-tinder-client/common';
 
 export const userStub: User = {
   age: 18,
@@ -28,5 +28,32 @@ export const userStub: User = {
   socialNetworksActivity: null,
   trainingAttitude: null,
   usersOnlyInDistance: false,
+  zodiacSign: null,
+};
+
+export const shortUserStub: ShortUser = {
+  age: 18,
+  alcoholAttitude: null,
+  attentionSign: null,
+  childrenAttitude: null,
+  chronotype: null,
+  communicationStyle: null,
+  description: null,
+  distance: 100,
+  education: null,
+  foodPreference: null,
+  id: 'id',
+  name: 'John',
+  interests: [],
+  isActivated: false,
+  personalityType: null,
+  pet: null,
+  pictures: [],
+  place: {
+    name: 'place-name',
+  },
+  smokingAttitude: null,
+  socialNetworksActivity: null,
+  trainingAttitude: null,
   zodiacSign: null,
 };

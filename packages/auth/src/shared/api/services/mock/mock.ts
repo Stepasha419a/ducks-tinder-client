@@ -1,5 +1,5 @@
 import type { User } from '@ducks-tinder-client/common';
-import { userStub } from '@shared/api';
+import { userStub } from '@shared/api/services/mock/stub';
 
 export const authMockStorage = {
   currentUser: userStub,
