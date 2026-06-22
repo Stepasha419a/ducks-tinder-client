@@ -11,14 +11,14 @@ export const WithAuthRedirect = <P extends object>(
 ): FC<P> => {
   const Wrapper = (props: P) => {
     const { pathname } = useLocation();
-    const { mutateAsync } = useRefreshMutation();
+    const { mutate } = useRefreshMutation();
     const isAuth = useAuthStore((state) => state.isAuth);
 
     useEffect(() => {
       if (isAuth === null) {
-        mutateAsync();
+        mutate();
       }
-    }, [isAuth, mutateAsync]);
+    }, [isAuth, mutate]);
 
     // already auth => no permission for login/reg pages
     if (pathname === ROUTES.LOGIN || pathname === ROUTES.REGISTRATION) {
