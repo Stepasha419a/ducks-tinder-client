@@ -15,12 +15,6 @@ import {
 export const createUserService = (): UserService =>
   getMockableService(
     {
-      async getMe() {
-        return instance.get<User>(
-          `${window._env_.VAR_USER_SERVICE_URL}/user/me`
-        );
-      },
-
       async getMatchUsers(take: number, skipUserIds?: string[]) {
         const config = getOptionalAbortControllerConfig('user/match', true);
 
