@@ -22,7 +22,7 @@ import { useChatDispatch } from '@shared/lib/hooks';
 import { useRefreshMutation, useUserStore } from '@ducks-tinder-client/auth';
 
 export function useChatConnection() {
-  const { mutateAsync } = useRefreshMutation();
+  const { mutate } = useRefreshMutation();
 
   const userId = useUserStore((state) => state.currentUser?.id);
 
@@ -41,7 +41,7 @@ export function useChatConnection() {
       if (event === 'exception' && (errors[0] as WsExceptionError).message) {
         switch ((errors[0] as WsExceptionError).message) {
           case 'Unauthorized':
-            mutateAsync();
+            mutate();
             break;
           case 'Validation failed (uuid v 4 is expected)':
           case 'Not Found':
@@ -80,5 +80,5 @@ export function useChatConnection() {
     return () => {
       getChatService().disconnect();
     };
-  }, [userId, dispatch, mutateAsync]);
+  }, [userId, dispatch, mutate]);
 }
