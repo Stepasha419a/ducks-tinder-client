@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import type { PaginationParams } from '@ducks-tinder-client/common';
-import {
-  resolveAxiosResponse,
-  shortUserStub,
-} from '@ducks-tinder-client/common';
+import { resolveAxiosResponse } from '@ducks-tinder-client/common';
+import { shortUserStub } from '@ducks-tinder-client/auth';
 import EventEmitter from 'events';
 import type {
   ChatConnectReturn,
