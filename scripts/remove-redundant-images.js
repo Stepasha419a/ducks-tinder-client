@@ -8,6 +8,10 @@ const isAlphaTag = (tagName) => {
   return tagName.includes('alpha');
 };
 
+const isReleaseCandidateTag = (tagName) => {
+  return tagName.includes('rc');
+};
+
 const getHeaders = (token) => ({
   Authorization: `JWT ${token}`,
   Accept: 'application/json',
