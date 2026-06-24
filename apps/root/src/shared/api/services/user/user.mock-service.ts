@@ -1,18 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import { authMockStorage, saveTestUser } from '@ducks-tinder-client/auth';
+import {
+  authMockStorage,
+  saveTestUser,
+  shortUserStub,
+} from '@ducks-tinder-client/auth';
 import type { User } from '@ducks-tinder-client/common';
 import {
   globalEventEmitter,
   resolveAxiosResponse,
 } from '@ducks-tinder-client/common';
 import type { PairFilterParams, UserService } from '@shared/api';
-import {
-  matchingUserStubs,
-  mockStorage,
-  pairsInfoStub,
-  shortUserStub,
-} from '@shared/api';
+import { matchingUserStubs, mockStorage, pairsInfoStub } from '@shared/api';
 
 export const userMockService: UserService = {
   async getMatchUsers(take: number, skipUserIds: string[]) {

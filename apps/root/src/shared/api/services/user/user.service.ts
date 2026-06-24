@@ -1,11 +1,10 @@
-import type { ShortUser, User } from '@shared/api';
-
 import { userMockService } from './user.mock-service';
 import type {
   PairFilterParams,
   PairsInfo,
   UserService,
 } from './user-service.interface';
+import type { ShortUser, User } from '@ducks-tinder-client/common';
 import {
   getMockableService,
   getOptionalAbortControllerConfig,
