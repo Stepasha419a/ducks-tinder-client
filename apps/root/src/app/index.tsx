@@ -12,7 +12,6 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 import { LibLocaleProvider } from './lib/providers';
-import { AppContextProvider } from '@ducks-tinder-client/common';
 
 const MFE_URLS: Record<string, string> = {
   policy: window._env_.VAR_POLICY_MFE_URL,
@@ -44,15 +43,13 @@ i18n
 // TODO: decompose ThemeProvider into hoc
 function App(): ReactElement {
   return (
-    <AppContextProvider>
-      <LibLocaleProvider>
-        <ThemeProvider>
-          <Routing />
-          <OptionalMetricsProvider />
-          <ToastContainer />
-        </ThemeProvider>
-      </LibLocaleProvider>
-    </AppContextProvider>
+    <LibLocaleProvider>
+      <ThemeProvider>
+        <Routing />
+        <OptionalMetricsProvider />
+        <ToastContainer />
+      </ThemeProvider>
+    </LibLocaleProvider>
   );
 }
 
