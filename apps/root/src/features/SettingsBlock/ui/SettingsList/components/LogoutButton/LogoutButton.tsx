@@ -19,12 +19,12 @@ export const LogoutButton: FC = (): ReactElement => {
 
   const dispatch = useAppDispatch();
 
-  const { mutateAsync } = useLogoutMutation();
+  const { mutate } = useLogoutMutation();
 
   const { handleResetChatSlice } = useChatSliceReset();
 
   const handleLogout = () => {
-    mutateAsync();
+    mutate();
 
     handleResetChatSlice();
     dispatch(resetUserSlice());
