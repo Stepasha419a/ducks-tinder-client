@@ -44,8 +44,8 @@ export const LinkSettingThumbnail: FC<
       {(title || value) && (
         <div className={styles.descr}>
           <div className={styles.title}>{title}</div>
-          <div className={styles.value}>
-            {value}
+          <div className={styles.valueContainer}>
+            <div className={styles.value}>{value}</div>
             {isPointer && !isLogout && (
               <FontAwesomeIcon icon={faAngleRight} className={styles.icon} />
             )}

@@ -22,6 +22,7 @@ export const CommunicationStyleSettingThumbnail = () => {
       title={t('profile.settings.moreAboutMe.communication')}
       value={value}
       isPointer
+      isOverflow
     />
   );
 };
