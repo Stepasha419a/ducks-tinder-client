@@ -64,7 +64,7 @@ async function deleteTag(tagName, headers) {
     console.log(`Deleted tag: ${tagName}`);
   } else {
     throw new Error(
-      `Failed to delete tag ${tagName}: ${res.status} ${res.statusText}`
+      `Failed to delete tag ${tagName}: ${res.status} ${res.statusText}`,
     );
   }
 }
@@ -88,11 +88,17 @@ async function main() {
     page += 1;
   }
 
-  const unstableTags = allTags
+  const alphaTags = allTags
     .filter((tag) => isAlphaTag(tag.name))
     .sort((a, b) => new Date(b.last_updated) - new Date(a.last_updated));
 
-  const toDelete = unstableTags.slice(KEEP_LAST);
+  const releaseCandidateTags = allTags
+    .filter((tag) => isReleaseCandidateTag(tag.name))
+    .sort((a, b) => new Date(b.last_updated) - new Date(a.last_updated));
+
+  const toDelete = alphaTags
+    .slice(KEEP_LAST)
+    .concat(releaseCandidateTags.slice(KEEP_LAST));
 
   if (toDelete.length === 0) {
     console.log(`Nothing to delete. ${unstableTags.length} tags found`);
