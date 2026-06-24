@@ -1,9 +1,4 @@
-export {
-  userReducer,
-  setCurrentUser,
-  checkFields,
-  resetUserSlice,
-} from './user.slice';
+export { userReducer, checkFields, resetUserSlice } from './user.slice';
 export {
   updateUserThunk,
   updateUserPlaceThunk,
@@ -11,5 +6,4 @@ export {
   deleteUserPictureThunk,
   mixUserPicturesThunk,
 } from './user.thunks';
-export { selectAvatar } from './user.selectors';
 export * from './user.interface';

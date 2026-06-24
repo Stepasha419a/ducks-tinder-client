@@ -9,11 +9,9 @@ import {
   updateUserPlaceThunk,
   updateUserThunk,
 } from './user.thunks';
-import type { User } from '@ducks-tinder-client/common';
-import { globalEventEmitter } from '@ducks-tinder-client/common';
+import { useUserStore } from '@ducks-tinder-client/auth';
 
 const initialState: UserInitialState = {
-  currentUser: null,
   errorFields: [],
 };
 
@@ -21,9 +19,6 @@ const userSlice = createSlice({
   name: 'userSlice',
   initialState,
   reducers: {
-    setCurrentUser: (state, { payload }: PayloadAction<User>) => {
-      state.currentUser = payload;
-    },
     checkFields: (state, { payload }: PayloadAction<Setting[]>) => {
       state.errorFields = payload;
     },
@@ -34,29 +29,23 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(updateUserThunk.fulfilled, (state, { payload }) => {
-        state.currentUser = payload;
-        globalEventEmitter.emit('set-user', payload);
+        useUserStore.getState().setCurrentUser(payload);
       })
       .addCase(updateUserPlaceThunk.fulfilled, (state, { payload }) => {
-        state.currentUser = payload;
-        globalEventEmitter.emit('set-user', payload);
+        useUserStore.getState().setCurrentUser(payload);
       })
       .addCase(saveUserImageThunk.fulfilled, (state, { payload }) => {
-        state.currentUser = payload;
-        globalEventEmitter.emit('set-user', payload);
+        useUserStore.getState().setCurrentUser(payload);
       })
       .addCase(deleteUserPictureThunk.fulfilled, (state, { payload }) => {
-        state.currentUser = payload;
-        globalEventEmitter.emit('set-user', payload);
+        useUserStore.getState().setCurrentUser(payload);
       })
       .addCase(mixUserPicturesThunk.fulfilled, (state, { payload }) => {
-        state.currentUser = payload;
-        globalEventEmitter.emit('set-user', payload);
+        useUserStore.getState().setCurrentUser(payload);
       });
   },
 });
 
-export const { setCurrentUser, checkFields, resetUserSlice } =
-  userSlice.actions;
+export const { checkFields, resetUserSlice } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
