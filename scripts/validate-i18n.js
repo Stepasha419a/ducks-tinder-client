@@ -45,6 +45,15 @@ localesPaths.forEach((localesPath) => {
       const targetContent = JSON.parse(fs.readFileSync(targetPath, 'utf-8'));
       const targetKeys = getDeepKeys(targetContent);
 
+      const missingKeys = baseKeys.filter((k) => !targetKeys.includes(k));
+      if (missingKeys.length > 0) {
+        console.error(
+          `[${lang}/${ns}] Missing keys in ${localesPath}:`,
+          missingKeys,
+        );
+        hasErrors = true;
+      }
+
       const extraKeys = targetKeys.filter((k) => !baseKeys.includes(k));
       if (extraKeys.length > 0) {
         console.error(
