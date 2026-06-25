@@ -18,3 +18,41 @@ function getDeepKeys(obj, prefix = '') {
     return res;
   }, []);
 }
+
+const localesPaths = globSync(`${MFEs_PATH}/*/public/locales`);
+
+localesPaths.forEach((localesPath) => {
+  const baseDir = path.join(localesPath, BASE_LANG);
+  if (!fs.existsSync(baseDir)) return;
+
+  const namespaces = fs.readdirSync(baseDir).filter((f) => f.endsWith('.json'));
+  const otherLangs = fs.readdirSync(localesPath).filter((l) => l !== BASE_LANG);
+
+  namespaces.forEach((ns) => {
+    const baseContent = JSON.parse(
+      fs.readFileSync(path.join(baseDir, ns), 'utf-8'),
+    );
+    const baseKeys = getDeepKeys(baseContent);
+
+    otherLangs.forEach((lang) => {
+      const targetPath = path.join(localesPath, lang, ns);
+
+      if (!fs.existsSync(targetPath)) {
+        console.error(`Missing namespace file: ${targetPath}`);
+        hasErrors = true;
+      }
+
+      const targetContent = JSON.parse(fs.readFileSync(targetPath, 'utf-8'));
+      const targetKeys = getDeepKeys(targetContent);
+
+      const extraKeys = targetKeys.filter((k) => !baseKeys.includes(k));
+      if (extraKeys.length > 0) {
+        console.error(
+          `[${lang}/${ns}] Extra keys found (not in EN):`,
+          extraKeys,
+        );
+        hasErrors = true;
+      }
+    });
+  });
+});
