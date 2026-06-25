@@ -248,6 +248,8 @@
     "name": "First name",
     "nameRequired": "Name is required",
     "nameLengthMin": "Name must be more than {{count}} symbols",
-    "nameLengthMax": "Name must be less than {{count}} symbols"
+    "nameLengthMax": "Name must be less than {{count}} symbols",
+    "reconnection": "Something went wrong during the initial check. Trying to reconnect...",
+    "successConnect": "Successful connection"
   }
 }
