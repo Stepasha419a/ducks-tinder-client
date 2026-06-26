@@ -1,0 +1,481 @@
+{
+  "user": {
+    "interests": {
+      "tennis": "Tennis",
+      "ping pong": "Tischtennis",
+      "swimming": "Schwimmen",
+      "karting": "Kartfahren",
+      "horse ridding": "Reiten",
+      "hunting": "Jagd",
+      "fishing": "Angeln",
+      "skateboarding": "Skateboarden",
+      "bicycle": "Radfahren",
+      "running": "Laufen",
+      "fighting": "Kampfsport",
+      "surfing": "Surfen",
+      "snowboarding": "Snowboarden",
+      "shooting": "Schießen",
+      "parachuting": "Fallschirmspringen",
+      "paintball": "Paintball",
+      "bowling": "Bowling",
+      "billiard": "Billard",
+      "skates": "Inlineskaten",
+      "dancing": "Tanzen",
+      "cosplay": "Cosplay",
+      "ballet": "Ballett",
+      "room quest": "Escape Room",
+      "fitness": "Fitness",
+      "yoga": "Yoga",
+      "meditation": "Meditation",
+      "tourism": "Tourismus",
+      "travelling": "Reisen",
+      "hiking": "Wandern",
+      "camping": "Camping",
+      "cars": "Autos",
+      "education": "Bildung",
+      "foreign languages": "Fremdsprachen",
+      "cards": "Kartenspiele",
+      "poker": "Poker",
+      "chess": "Schach",
+      "checkers": "Dame",
+      "nard": "Backgammon",
+      "psychology": "Psychologie",
+      "table games": "Brettspiele",
+      "sport": "Sport",
+      "blogging": "Bloggen",
+      "computer games": "Computerspiele",
+      "programming": "Programmieren",
+      "drawing": "Zeichnen",
+      "3D drawing": "3D-Zeichnen",
+      "gardener": "Gartenarbeit",
+      "animals": "Tiere",
+      "volunteering": "Ehrenamt",
+      "serials": "Serien",
+      "books": "Bücher",
+      "movies": "Filme",
+      "cinema": "Kino",
+      "food": "Essen",
+      "cooking": "Kochen",
+      "photo": "Fotografie",
+      "design": "Design",
+      "writing": "Schreiben",
+      "music": "Musik",
+      "handmade": "Handarbeit",
+      "football": "Fußball",
+      "ski": "Skifahren",
+      "volleyball": "Volleyball"
+    },
+    "alcoholAttitude": {
+      "Not for me": "Nicht für mich",
+      "Sober": "Abstinent",
+      "Sober curious": "Sober Curious",
+      "On special occasions": "Zu besonderen Anlässen",
+      "Socially on weekends": "Gesellig am Wochenende",
+      "Most Nights": "Meistens abends"
+    },
+    "attentionSign": {
+      "Attention gestures": "Aufmerksamkeiten",
+      "Gifts": "Geschenke",
+      "Touches": "Berührungen",
+      "Compliments": "Komplimente",
+      "Time together": "Gemeinsame Zeit"
+    },
+    "childrenAttitude": {
+      "I want children": "Ich möchte Kinder",
+      "I do not want children": "Ich möchte keine Kinder",
+      "I have children and I want more": "Ich habe Kinder und möchte mehr",
+      "I have children, but I do not want any more": "Ich habe Kinder, möchte aber keine weiteren",
+      "Do not know yet": "Weiß ich noch nicht"
+    },
+    "chronotype": {
+      "Early bird": "Frühaufsteher",
+      "Night owl": "Nachteule",
+      "In a spectrum": "Dazwischen"
+    },
+    "communicationStyle": {
+      "Messaging a lot": "Viel Schreiben",
+      "Phone communication": "Telefonieren",
+      "Video chats": "Video-Chats",
+      "Do not like messaging": "Schreibe nicht gerne",
+      "Meet in person": "Persönliches Treffen"
+    },
+    "education": {
+      "Bachelor": "Bachelor",
+      "College": "Hochschule",
+      "Middle school": "Mittlere Reife",
+      "Doctor of sciences": "Doktortitel",
+      "Postgraduate": "Postgraduiertenstudium",
+      "Magistracy": "Master",
+      "Technical school": "Berufsschule"
+    },
+    "foodPreference": {
+      "Vegan": "Vegan",
+      "Vegetarian": "Vegetarisch",
+      "Pescatarian": "Pescetarisch",
+      "Kosher": "Koscher",
+      "Halal": "Halal",
+      "Carnivore": "Carnivor",
+      "Omnivore": "Allesfresser",
+      "Other": "Andere"
+    },
+    "personalityType": {
+      "INTJ": "INTJ",
+      "INTP": "INTP",
+      "ENTJ": "ENTJ",
+      "ENTP": "ENTP",
+      "INFJ": "INFJ",
+      "INFP": "INFP",
+      "ENFJ": "ENFJ",
+      "ENFP": "ENFP",
+      "ISTJ": "ISTJ",
+      "ISFJ": "ISFJ",
+      "ESTJ": "ESTJ",
+      "ESFJ": "ESFJ",
+      "ISTP": "ISTP",
+      "ISFP": "ISFP",
+      "ESTP": "ESTP",
+      "Entertainer": "Entertainer"
+    },
+    "pet": {
+      "Dog": "Hund",
+      "Cat": "Katze",
+      "Reptile": "Reptil",
+      "Amphibian": "Amphibie",
+      "Bird": "Vogel",
+      "Fish": "Fisch",
+      "Other": "Anderes",
+      "Turtle": "Schildkröte",
+      "Hamster": "Hamster",
+      "Rabbit": "Hase",
+      "Pet-free": "Keine Haustiere",
+      "All the pets": "Alle Haustiere",
+      "Want a pet": "Möchte ein Haustier",
+      "Allergic to pets": "Allergisch gegen Tiere"
+    },
+    "smokingAttitude": {
+      "Social smoker": "Gelegenheitsraucher",
+      "Smoker when drinking": "Raucher beim Ausgehen",
+      "Non-smoker": "Nichtraucher",
+      "Smoker": "Raucher",
+      "Trying to quit": "Versuche aufzuhören"
+    },
+    "socialNetworksActivity": {
+      "Influencer status": "Influencer-Status",
+      "Socially active": "Social Media aktiv",
+      "Off the grid": "Offline",
+      "Passive scroller": "Passiver Scroller"
+    },
+    "trainingAttitude": {
+      "Everyday": "Jeden Tag",
+      "Often": "Oft",
+      "Sometimes": "Manchmal",
+      "Gym rat": "Stammgast im Gym",
+      "Occasionally": "Gelegentlich",
+      "Never": "Niemals"
+    },
+    "zodiacSign": {
+      "Aries": "Widder",
+      "Taurus": "Stier",
+      "Gemini": "Zwillinge",
+      "Cancer": "Krebs",
+      "Leo": "Löwe",
+      "Virgo": "Jungfrau",
+      "Libra": "Waage",
+      "Scorpius": "Skorpion",
+      "Sagittarius": "Schütze",
+      "Capricornus": "Steinbock",
+      "Aquarius": "Wassermann",
+      "Pisces": "Fische"
+    }
+  },
+  "ui": {
+    "distance": "km von dir entfernt",
+    "livesIn": "Wohnt in",
+    "altAvatar": "Avatar",
+    "ariaOpenFullPreview": "Vollständiges Profil öffnen",
+    "unknownPlace": "unbekannter Ort",
+    "moreAboutMe": "Mehr über mich",
+    "lifestyle": "Lifestyle",
+    "interests": "Interessen",
+    "close": "Schließen",
+    "showAll": "Alle anzeigen",
+    "ariaShowAllInterests": "alle Interessen anzeigen"
+  },
+  "commonPackage": {
+    "reconnection": "Bei der ersten Überprüfung ist etwas schiefgelaufen. Verbindung wird wiederhergestellt...",
+    "successConnect": "Verbindung erfolgreich",
+    "incorrectEmailOrPassword": "E-Mail или Passwort falsch",
+    "unauthorized": "Nicht autorisiert",
+    "userAlreadyExists": "Benutzer existiert bereits",
+    "errorOccurred": "Ein Fehler ist aufgetreten! Die Ansicht wurde blockiert, um weitere Fehler zu vermeiden.",
+    "redirection": "Du wirst in 10 Sekunden weitergeleitet.",
+    "clickToStay": "Hier klicken, um zu bleiben",
+    "redirectionCancelled": "Weiterleitung abgebrochen!"
+  },
+  "auth": {
+    "create": "Konto erstellen",
+    "memberLogin": "Login für Mitglieder",
+    "login": "Anmelden",
+    "loginAccount": "In dein Konto einloggen",
+    "memberSignUp": "Registrierung für Mitglieder",
+    "signUp": "Registrieren",
+    "email": "E-Mail",
+    "emailRequired": "E-Mail ist erforderlich",
+    "emailIncorrect": "Ungültige E-Mail",
+    "emailLengthMax": "E-Mail muss kürzer als {{count}} Zeichen sein",
+    "password": "Passwort",
+    "passwordRequired": "Passwort ist erforderlich",
+    "passwordLengthMin": "Passwort muss mehr als {{count}} Zeichen haben",
+    "passwordLengthMax": "Passwort muss weniger als {{count}} Zeichen haben",
+    "name": "Vorname",
+    "nameRequired": "Vorname ist erforderlich",
+    "nameLengthMin": "Vorname muss mehr als {{count}} Zeichen haben",
+    "nameLengthMax": "Vorname muss weniger als {{count}} Zeichen haben",
+    "reconnection": "Bei der ersten Überprüfung ist etwas schiefgelaufen. Verbindung wird wiederhergestellt...",
+    "successConnect": "Verbindung erfolgreich"
+  },
+  "nav_pairs": "Matches",
+  "instructions": {
+    "hide": "ausblenden",
+    "show": "anzeigen",
+    "no": "nein",
+    "like": "gefällt mir",
+    "openProfile": "Profil öffnen",
+    "closeProfile": "Profil schließen",
+    "superlike": "Superlike",
+    "next": "weiter"
+  },
+  "unknown": "unbekannt",
+  "likes_label": "Likes",
+  "likes_count_one": "{{count}} Like",
+  "likes_count_few": "{{count}} Likes",
+  "likes_count_other": "{{count}} Likes",
+  "pairs": {
+    "filter": {
+      "title": "Likes-Filter",
+      "haveInterests": "Interessen vorhanden",
+      "distance": {
+        "title": "Max. Entfernung",
+        "unit": "km"
+      },
+      "age": {
+        "title": "Altersbereich",
+        "from": "von",
+        "to": "bis"
+      },
+      "pictures": {
+        "title": "Mindestanzahl an Bildern"
+      },
+      "interests": {
+        "title": "Interessen",
+        "showAll": "Alle anzeigen"
+      },
+      "checkboxes": {
+        "identifyConfirmed": "Identität bestätigt",
+        "haveInterests": "Interessen vorhanden"
+      },
+      "buttons": {
+        "clear": "Löschen",
+        "confirm": "Bestätigen"
+      }
+    },
+    "list": {
+      "noLikes": "Du hast noch keine Likes. Like jemanden, um auch Likes zu erhalten!",
+      "noSuitable": "Keine passenden Matches gefunden. Versuche, deine Einstellungen zu ändern.",
+      "loading": "lädt..."
+    },
+    "preview": {
+      "distance": "km von dir entfernt"
+    },
+    "accept": "Annehmen",
+    "refuse": "Ablehnen"
+  },
+  "age": {
+    "from": "von",
+    "to": "bis"
+  },
+  "distance": {
+    "km": "{{count}} km"
+  },
+  "gender": {
+    "male": "Männlich",
+    "female": "Weiblich",
+    "other": "Andere"
+  },
+  "cancel": "Abbrechen",
+  "select": "Auswählen",
+  "preview": "Vorschau",
+  "change": "Ändern",
+  "saveChanges": "Änderungen speichern",
+  "submit": "Absenden",
+  "andSoOn": "und so weiter...",
+  "add": "Hinzufügen",
+  "profile": {
+    "emptyFields": "Du hast leere Felder, sie sind in deinen Profileinstellungen rot markiert",
+    "settings": {
+      "notFound": "Einstellung nicht gefunden",
+      "fields": {
+        "email": "E-Mail",
+        "name": "Vorname",
+        "description": "Beschreibung",
+        "sex": "Geschlecht",
+        "preferSex": "Interessiert an",
+        "nickname": "Benutzername",
+        "language": "Sprache",
+        "your": {
+          "email": "Deine E-Mail",
+          "name": "Dein Vorname",
+          "description": "Deine Beschreibung",
+          "sex": "Dein Geschlecht",
+          "preferSex": "Dein Interesse an",
+          "nickname": "Dein Benutzername",
+          "language": "Deine Sprache"
+        },
+        "update": {
+          "email": "E-Mail aktualisieren",
+          "name": "Vorname aktualisieren",
+          "description": "Beschreibung aktualisieren",
+          "sex": "Geschlecht aktualisieren",
+          "preferSex": "Interesse aktualisieren",
+          "nickname": "Benutzername aktualisieren",
+          "language": "Sprache aktualisieren"
+        }
+      },
+      "account": {
+        "title": "Kontoeinstellungen",
+        "descr": "Eine verifizierte E-Mail-Adresse hilft, dein Konto zu schützen.",
+        "thumbnails": {
+          "age": {
+            "title": "Alter",
+            "years": "{{count}} Jahre alt"
+          },
+          "description": "Beschreibung",
+          "email": "E-Mail",
+          "name": "Vorname",
+          "sex": "Geschlecht",
+          "nickname": "Benutzername"
+        }
+      },
+      "find": {
+        "title": "Sucheinstellungen",
+        "descr": "Wenn die lokalen Profile ausgehen, kannst du in den Globalen Modus wechseln, um Leute aus der ganzen Welt kennenzulernen.",
+        "thumbnails": {
+          "partnerAge": "Alter des Partners",
+          "distance": {
+            "title": "Entfernung",
+            "range": "Leute nur in diesem Bereich anzeigen"
+          },
+          "place": "Ort",
+          "preferSex": "Interessiert an"
+        }
+      },
+      "display": {
+        "title": "Anzeigeeinstellungen",
+        "thumbnails": {
+          "theme": {
+            "title": "Design",
+            "darkMode": "Dunkelmodus"
+          },
+          "language": "Sprache"
+        }
+      },
+      "safety": {
+        "title": "Sicherheitstipps",
+        "descr": "Bleib sicher und pass auf dich auf.",
+        "links": {
+          "community": "Community-Richtlinien",
+          "security": "Sicherheitszentrum",
+          "tips": "Sicherheitstipps"
+        }
+      },
+      "photo": {
+        "upload": "Hochladen",
+        "uploadFrom": "Hochladen von",
+        "gallery": "Galerie",
+        "chooseContext": "Kontext auswählen",
+        "onlyOnePhoto": "Du kannst nur 1 Foto gleichzeitig hochladen",
+        "notFound": "Foto nicht gefunden",
+        "sizeLimit": "Die Größe sollte 1 MB nicht überschreiten",
+        "extension": "Du kannst nur Fotos im Format png oder jpg hochladen",
+        "redactPhoto": "Foto bearbeiten",
+        "altDraggablePhoto": "verschiebbares Foto"
+      },
+      "interests": {
+        "title": "Interessen",
+        "editTitle": "Interessen bearbeiten",
+        "description": "Wähle die Interessen aus, die du mit deinen Matches teilen möchtest",
+        "editDescription": "Wähle die Interessen aus, die du mit deinen Matches teilen möchtest. Gib mindestens 3 Interessen an.",
+        "thumbnail": "Interessen"
+      },
+      "moreAboutMe": {
+        "title": "Mehr über mich",
+        "editDescription": "Zeig dich von deiner besten Seite, indem du mehr über dich erzählst",
+        "zodiac": "Sternzeichen",
+        "zodiacSetting": "Was ist dein Sternzeichen?",
+        "education": "Bildung",
+        "educationSetting": "Was ist dein Bildungsstand?",
+        "children": "Kinderwunsch",
+        "childrenSetting": "Möchtest du Kinder?",
+        "personality": "Persönlichkeitstyp",
+        "personalitySetting": "Was ist dein Persönlichkeitstyp?",
+        "communication": "Kommunikation",
+        "communicationSetting": "Wie ist dein Kommunikationsstil?",
+        "attention": "Zeichen der Aufmerksamkeit",
+        "attentionSetting": "Wie empfängst du gerne Liebe?"
+      },
+      "lifestyle": {
+        "title": "Lifestyle",
+        "editDescription": "Präsentiere dich von deiner besten Seite, indem du deinen Lifestyle ergänzt",
+        "drinking": "Alkoholkonsum",
+        "drinkingSetting": "Wie oft trinkst du?",
+        "chronotype": "Chronotyp",
+        "chronotypeSetting": "Wie sind deine Schlafgewohnheiten?",
+        "food": "Ernährung",
+        "foodSetting": "Was sind deine Ernährungsgewohnheiten?",
+        "pets": "Haustiere",
+        "petSetting": "Hast du Haustiere?",
+        "smoking": "Rauchen",
+        "smokingSetting": "Wie oft rauchst du?",
+        "social": "Social Media",
+        "socialSetting": "Wie aktiv bist du in den sozialen Medien?",
+        "workout": "Sport",
+        "workoutSetting": "Treibst du Sport?"
+      },
+      "default": {
+        "editTitle": "Standardtitel",
+        "editDescription": "Standardbeschreibung."
+      },
+      "place": {
+        "title": "Ort",
+        "currentPositions": "Aktuelle Positionen",
+        "myCurrentPosition": "Meine aktuelle Position",
+        "refresh": "Aktualisieren",
+        "unchanged": "Deine Position ist unverändert geblieben",
+        "refreshing": "Aktualisierung läuft bereits",
+        "enableGeolocation": "Aktiviere die Geolokalisierung, sonst können wir deinen Standort nicht bestimmen"
+      }
+    },
+    "logout": "Abmelden",
+    "addMorePhotos": "Füge mehr Fotos hinzu, um dein Profil um weitere 4 % zu vervollständigen und mehr Likes zu erhalten.",
+    "editProfile": "Profil bearbeiten",
+    "editInfo": "Info bearbeiten",
+    "settingsMobile": "Einstellungen",
+    "changeProfile": "Profil ändern",
+    "addPhotos": "Fotos hinzufügen"
+  },
+  "tinder": {
+    "errorFields": "Du hast leere Profilfelder",
+    "errorFieldsDescription": "Klicke hier, um deine Profilinformationen auszufüllen",
+    "noUsers": "Aktuell keine Nutzer verfügbar",
+    "noUsersDescription": "Klicke hier, um deine Einstellungen zu ändern und mehr Möglichkeiten zu erhalten",
+    "like": "LIKE",
+    "dislike": "NEIN",
+    "superLike": "SUPER-LIKE"
+  },
+  "validation": {
+    "required": "Pflichtfeld",
+    "email": "Ungültige E-Mail",
+    "lengthMin": "Der Wert muss mehr als {{count}} Zeichen haben",
+    "lengthMax": "Der Wert muss weniger als {{count}} Zeichen haben"
+  }
+}
