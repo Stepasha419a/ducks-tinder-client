@@ -1,5 +1,4 @@
 {
-  "navChat": "Messages",
   "user": {
     "interests": {
       "tennis": "Tennis",
@@ -213,23 +212,6 @@
     "clickToStay": "Click here to stay",
     "redirectionCancelled": "Redirection canceled!"
   },
-  "chooseChat": "Choose the chat",
-  "chatNotFound": "Such chat was not found",
-  "reply": "Reply",
-  "edit": "Edit",
-  "remove": "Remove",
-  "blockedThisChat": "blocked this chat",
-  "you": "You",
-  "sendFirstMessage": "Send first message",
-  "block": "Block",
-  "unblock": "Unblock",
-  "delete": "Delete",
-  "sureWantToDelete": "Are you sure to delete this chat?",
-  "noRecover": "It will not be available to recover it!",
-  "cancel": "Cancel",
-  "noChats": "You don't have chats. Accept some pairs to have personal chats with them",
-  "noChatsYet": "You don't have chats yet",
-  "edited": "edited",
   "auth": {
     "create": "Create your Account",
     "memberLogin": "Member Login",
@@ -251,5 +233,23 @@
     "nameLengthMax": "Name must be less than {{count}} symbols",
     "reconnection": "Something went wrong during the initial check. Trying to reconnect...",
     "successConnect": "Successful connection"
-  }
+  },
+  "navChat": "Messages",
+  "chooseChat": "Choose the chat",
+  "chatNotFound": "Such chat was not found",
+  "reply": "Reply",
+  "edit": "Edit",
+  "remove": "Remove",
+  "blockedThisChat": "blocked this chat",
+  "you": "You",
+  "sendFirstMessage": "Send first message",
+  "block": "Block",
+  "unblock": "Unblock",
+  "delete": "Delete",
+  "sureWantToDelete": "Are you sure to delete this chat?",
+  "noRecover": "It will not be available to recover it!",
+  "cancel": "Cancel",
+  "noChats": "You don't have chats. Accept some pairs to have personal chats with them",
+  "noChatsYet": "You don't have chats yet",
+  "edited": "edited"
 }
