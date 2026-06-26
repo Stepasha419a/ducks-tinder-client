@@ -212,6 +212,28 @@
     "clickToStay": "Click here to stay",
     "redirectionCancelled": "Redirection canceled!"
   },
+  "auth": {
+    "create": "Create your Account",
+    "memberLogin": "Member Login",
+    "login": "Login",
+    "loginAccount": "Log in your Account",
+    "memberSignUp": "Member Sign Up",
+    "signUp": "Sign up",
+    "email": "Email",
+    "emailRequired": "Email is required",
+    "emailIncorrect": "Incorrect email",
+    "emailLengthMax": "Email must be less than {{count}} symbols",
+    "password": "Password",
+    "passwordRequired": "Password is required",
+    "passwordLengthMin": "Password must be more than {{count}} symbols",
+    "passwordLengthMax": "Password must be less than {{count}} symbols",
+    "name": "First name",
+    "nameRequired": "Name is required",
+    "nameLengthMin": "Name must be more than {{count}} symbols",
+    "nameLengthMax": "Name must be less than {{count}} symbols",
+    "reconnection": "Something went wrong during the initial check. Trying to reconnect...",
+    "successConnect": "Successful connection"
+  },
   "nav_pairs": "Pairs",
   "instructions": {
     "hide": "hide",
@@ -455,27 +477,5 @@
     "email": "Incorrect email",
     "lengthMin": "Value must be more than {{count}} characters",
     "lengthMax": "Value must be less than {{count}} characters"
-  },
-  "auth": {
-    "create": "Create your Account",
-    "memberLogin": "Member Login",
-    "login": "Login",
-    "loginAccount": "Log in your Account",
-    "memberSignUp": "Member Sign Up",
-    "signUp": "Sign up",
-    "email": "Email",
-    "emailRequired": "Email is required",
-    "emailIncorrect": "Incorrect email",
-    "emailLengthMax": "Email must be less than {{count}} symbols",
-    "password": "Password",
-    "passwordRequired": "Password is required",
-    "passwordLengthMin": "Password must be more than {{count}} symbols",
-    "passwordLengthMax": "Password must be less than {{count}} symbols",
-    "name": "First name",
-    "nameRequired": "Name is required",
-    "nameLengthMin": "Name must be more than {{count}} symbols",
-    "nameLengthMax": "Name must be less than {{count}} symbols",
-    "reconnection": "Something went wrong during the initial check. Trying to reconnect...",
-    "successConnect": "Successful connection"
   }
 }

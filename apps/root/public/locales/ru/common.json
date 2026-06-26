@@ -212,6 +212,28 @@
     "clickToStay": "Нажмите, чтобы остаться",
     "redirectionCancelled": "Перенаправление отменено!"
   },
+  "auth": {
+    "create": "Создать аккаунт",
+    "memberLogin": "Вход для участников",
+    "login": "Войти",
+    "loginAccount": "Войдите в свой аккаунт",
+    "memberSignUp": "Регистрация",
+    "signUp": "Зарегистрироваться",
+    "email": "Email",
+    "emailRequired": "Введите Email",
+    "emailIncorrect": "Некорректный Email",
+    "emailLengthMax": "Email должен содержать менее {{count}} символов",
+    "password": "Пароль",
+    "passwordRequired": "Введите пароль",
+    "passwordLengthMin": "Пароль должен содержать более {{count}} символов",
+    "passwordLengthMax": "Пароль должен содержать менее {{count}} символов",
+    "name": "Имя",
+    "nameRequired": "Введите имя",
+    "nameLengthMin": "Имя должно содержать более {{count}} символов",
+    "nameLengthMax": "Имя должно содержать менее {{count}} символов",
+    "reconnection": "Что-то пошло не так при соединении. Переподключение...",
+    "successConnect": "Успешное соединение"
+  },
   "nav_pairs": "Пары",
   "instructions": {
     "hide": "скрыть",
@@ -455,27 +477,5 @@
     "email": "Некорректный email",
     "lengthMin": "Значение должно быть более {{count}} символов",
     "lengthMax": "Значение должно быть менее {{count}} символов"
-  },
-  "auth": {
-    "create": "Создать аккаунт",
-    "memberLogin": "Вход для участников",
-    "login": "Войти",
-    "loginAccount": "Войдите в свой аккаунт",
-    "memberSignUp": "Регистрация",
-    "signUp": "Зарегистрироваться",
-    "email": "Email",
-    "emailRequired": "Введите Email",
-    "emailIncorrect": "Некорректный Email",
-    "emailLengthMax": "Email должен содержать менее {{count}} символов",
-    "password": "Пароль",
-    "passwordRequired": "Введите пароль",
-    "passwordLengthMin": "Пароль должен содержать более {{count}} символов",
-    "passwordLengthMax": "Пароль должен содержать менее {{count}} символов",
-    "name": "Имя",
-    "nameRequired": "Введите имя",
-    "nameLengthMin": "Имя должно содержать более {{count}} символов",
-    "nameLengthMax": "Имя должно содержать менее {{count}} символов",
-    "reconnection": "Что-то пошло не так при соединении. Переподключение...",
-    "successConnect": "Успешное соединение"
   }
 }
