@@ -990,8 +990,8 @@ importers:
   packages/ui:
     dependencies:
       '@ducks-tinder-client/common':
-        specifier: 1.7.0-alpha.1
-        version: 1.7.0-alpha.1(@types/react@19.2.14)(browserslist@4.25.4)(react-toastify@11.0.5(react-dom@19.1.5(react@19.1.5))(react@19.1.5))(react@19.1.5)(redux@5.0.1)
+        specifier: 1.7.0-alpha.12
+        version: 1.7.0-alpha.12(@types/react@19.2.14)(browserslist@4.25.4)(react-toastify@11.0.5(react-dom@19.1.5(react@19.1.5))(react@19.1.5))(react@19.1.5)(redux@5.0.1)
       '@fortawesome/fontawesome-common-types':
         specifier: 6.7.x
         version: 6.7.2
@@ -9324,24 +9324,6 @@ snapshots:
       - '@types/react'
       - immer
       - use-sync-external-store
-
-  '@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.14)(browserslist@4.25.4)(react-toastify@11.0.5(react-dom@19.1.5(react@19.1.5))(react@19.1.5))(react@19.1.5)(redux@5.0.1)':
-    dependencies:
-      '@reduxjs/toolkit': 2.11.2(react-redux@9.2.0(@types/react@19.2.14)(react@19.1.5)(redux@5.0.1))(react@19.1.5)
-      axios: 1.18.0(debug@4.4.3)
-      browserslist: 4.25.4
-      events: 3.3.0
-      react: 19.1.5
-      react-redux: 9.2.0(@types/react@19.2.14)(react@19.1.5)(redux@5.0.1)
-      react-toastify: 11.0.5(react-dom@19.1.5(react@19.1.5))(react@19.1.5)
-      socket.io-client: 4.8.3
-    transitivePeerDependencies:
-      - '@types/react'
-      - bufferutil
-      - debug
-      - redux
-      - supports-color
-      - utf-8-validate
 
   '@ducks-tinder-client/common@1.7.0-alpha.1(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1)':
     dependencies:
