@@ -65,3 +65,6 @@ localesPaths.forEach((localesPath) => {
     });
   });
 });
+
+if (hasErrors) process.exit(1);
+console.log('i18n validation passed');
