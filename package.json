@@ -17,7 +17,8 @@
     "up:dev:minor:ui": "pnpm -F ui up:dev:minor && pnpm -F root up:dev:packages && pnpm -F policy up:dev:packages && pnpm -F chat up:dev:packages",
     "publish-packages": "node scripts/publish-packages.js",
     "remove-redundant-images": "node scripts/remove-redundant-images.js",
-    "install:webpack": "pnpm install && node scripts/remove-webpack-error.js"
+    "install:webpack": "pnpm install && node scripts/remove-webpack-error.js",
+    "validate-i18n": "node scripts/validate-i18n.js"
   },
   "devDependencies": {
     "glob": "^13.0.6",
