@@ -1,0 +1,481 @@
+{
+  "user": {
+    "interests": {
+      "tennis": "网球",
+      "ping pong": "乒乓球",
+      "swimming": "游泳",
+      "karting": "卡丁车",
+      "horse ridding": "骑马",
+      "hunting": "打猎",
+      "fishing": "垂钓",
+      "skateboarding": "滑板",
+      "bicycle": "骑行",
+      "running": "跑步",
+      "fighting": "格斗",
+      "surfing": "冲浪",
+      "snowboarding": "单板滑雪",
+      "shooting": "射击",
+      "parachuting": "跳伞",
+      "paintball": "真人CS",
+      "bowling": "保龄球",
+      "billiard": "台球",
+      "skates": "溜冰",
+      "dancing": "舞蹈",
+      "cosplay": "Cosplay",
+      "ballet": "芭蕾舞",
+      "room quest": "密室逃脱",
+      "fitness": "健身",
+      "yoga": "瑜伽",
+      "meditation": "冥想",
+      "tourism": "旅游",
+      "travelling": "旅行",
+      "hiking": "徒步",
+      "camping": "露营",
+      "cars": "汽车",
+      "education": "教育",
+      "foreign languages": "外语",
+      "cards": "卡牌游戏",
+      "poker": "扑克",
+      "chess": "国际象棋",
+      "checkers": "跳棋",
+      "nard": "双陆棋",
+      "psychology": "心理学",
+      "table games": "桌游",
+      "sport": "运动",
+      "blogging": "博主/写博客",
+      "computer games": "电脑游戏",
+      "programming": "编程",
+      "drawing": "绘画",
+      "3D drawing": "3D建模/绘图",
+      "gardener": "园艺",
+      "animals": "动物",
+      "volunteering": "志愿者",
+      "serials": "剧集",
+      "books": "书籍",
+      "movies": "电影",
+      "cinema": "电影院",
+      "food": "美食",
+      "cooking": "烹饪",
+      "photo": "摄影",
+      "design": "设计",
+      "writing": "写作",
+      "music": "音乐",
+      "handmade": "手工制作",
+      "football": "足球",
+      "ski": "滑雪",
+      "volleyball": "排球"
+    },
+    "alcoholAttitude": {
+      "Not for me": "我不喝酒",
+      "Sober": "滴酒不沾",
+      "Sober curious": "对戒酒感兴趣",
+      "On special occasions": "仅在特殊场合喝酒",
+      "Socially on weekends": "周末社交饮酒",
+      "Most Nights": "大部分晚上都会喝"
+    },
+    "attentionSign": {
+      "Attention gestures": "关怀举动",
+      "Gifts": "礼物",
+      "Touches": "身体接触",
+      "Compliments": "赞美",
+      "Time together": "陪伴时光"
+    },
+    "childrenAttitude": {
+      "I want children": "我想要孩子",
+      "I do not want children": "我不想要孩子",
+      "I have children and I want more": "我有孩子，还想再要",
+      "I have children, but I do not want any more": "我有孩子，但不想再要了",
+      "Do not know yet": "还没想好"
+    },
+    "chronotype": {
+      "Early bird": "晨型人",
+      "Night owl": "夜猫子",
+      "In a spectrum": "介于两者之间"
+    },
+    "communicationStyle": {
+      "Messaging a lot": "喜欢发消息",
+      "Phone communication": "喜欢打电话",
+      "Video chats": "视频聊天",
+      "Do not like messaging": "不喜欢发消息",
+      "Meet in person": "线下见面"
+    },
+    "education": {
+      "Bachelor": "本科",
+      "College": "大专/学院",
+      "Middle school": "初中",
+      "Doctor of sciences": "博士",
+      "Postgraduate": "研究生",
+      "Magistracy": "硕士",
+      "Technical school": "职业学校"
+    },
+    "foodPreference": {
+      "Vegan": "纯素食",
+      "Vegetarian": "素食",
+      "Pescatarian": "鱼素者",
+      "Kosher": "犹太洁食",
+      "Halal": "清真",
+      "Carnivore": "纯肉食",
+      "Omnivore": "杂食",
+      "Other": "其他"
+    },
+    "personalityType": {
+      "INTJ": "INTJ",
+      "INTP": "INTP",
+      "ENTJ": "ENTJ",
+      "ENTP": "ENTP",
+      "INFJ": "INFJ",
+      "INFP": "INFP",
+      "ENFJ": "ENFJ",
+      "ENFP": "ENFP",
+      "ISTJ": "ISTJ",
+      "ISFJ": "ISFJ",
+      "ESTJ": "ESTJ",
+      "ESFJ": "ESFJ",
+      "ISTP": "ISTP",
+      "ISFP": "ISFP",
+      "ESTP": "ESTP",
+      "Entertainer": "表演者"
+    },
+    "pet": {
+      "Dog": "狗",
+      "Cat": "猫",
+      "Reptile": "爬行动物",
+      "Amphibian": "两栖动物",
+      "Bird": "鸟",
+      "Fish": "鱼",
+      "Other": "其他",
+      "Turtle": "乌龟",
+      "Hamster": "仓鼠",
+      "Rabbit": "兔子",
+      "Pet-free": "无宠物",
+      "All the pets": "各种宠物都爱",
+      "Want a pet": "想养宠物",
+      "Allergic to pets": "对宠物过敏"
+    },
+    "smokingAttitude": {
+      "Social smoker": "社交性吸烟",
+      "Smoker when drinking": "饮酒时吸烟",
+      "Non-smoker": "不吸烟",
+      "Smoker": "吸烟",
+      "Trying to quit": "正在戒烟"
+    },
+    "socialNetworksActivity": {
+      "Influencer status": "网红/有影响力",
+      "Socially active": "社交活跃",
+      "Off the grid": "远离社交网络",
+      "Passive scroller": "潜水员"
+    },
+    "trainingAttitude": {
+      "Everyday": "每天",
+      "Often": "经常",
+      "Sometimes": "有时",
+      "Gym rat": "健身狂人",
+      "Occasionally": "偶尔",
+      "Never": "从不"
+    },
+    "zodiacSign": {
+      "Aries": "白羊座",
+      "Taurus": "金牛座",
+      "Gemini": "双子座",
+      "Cancer": "巨蟹座",
+      "Leo": "狮子座",
+      "Virgo": "处女座",
+      "Libra": "天秤座",
+      "Scorpius": "天蝎座",
+      "Sagittarius": "射手座",
+      "Capricornus": "摩羯座",
+      "Aquarius": "水瓶座",
+      "Pisces": "双鱼座"
+    }
+  },
+  "ui": {
+    "distance": "距离您 公里",
+    "livesIn": "居住在",
+    "altAvatar": "头像",
+    "ariaOpenFullPreview": "打开用户详情预览",
+    "unknownPlace": "未知地点",
+    "moreAboutMe": "更多关于我",
+    "lifestyle": "生活方式",
+    "interests": "兴趣爱好",
+    "close": "关闭",
+    "showAll": "显示全部",
+    "ariaShowAllInterests": "显示所有兴趣"
+  },
+  "commonPackage": {
+    "reconnection": "连接检查出错。正在尝试重新连接...",
+    "successConnect": "连接成功",
+    "incorrectEmailOrPassword": "邮箱或密码错误",
+    "unauthorized": "未授权",
+    "userAlreadyExists": "用户已存在",
+    "errorOccurred": "发生错误！为防止进一步出错，视图已被锁定。",
+    "redirection": "您将在 10 秒内被重定向。",
+    "clickToStay": "点击此处留在当前页面",
+    "redirectionCancelled": "重定向已取消！"
+  },
+  "auth": {
+    "create": "创建您的账户",
+    "memberLogin": "会员登录",
+    "login": "登录",
+    "loginAccount": "登录您的账户",
+    "memberSignUp": "会员注册",
+    "signUp": "注册",
+    "email": "邮箱",
+    "emailRequired": "必须填写邮箱",
+    "emailIncorrect": "邮箱格式不正确",
+    "emailLengthMax": "邮箱长度不能超过 {{count}} 个字符",
+    "password": "密码",
+    "passwordRequired": "必须填写密码",
+    "passwordLengthMin": "密码长度必须大于 {{count}} 个字符",
+    "passwordLengthMax": "密码长度不能超过 {{count}} 个字符",
+    "name": "名字",
+    "nameRequired": "必须填写名字",
+    "nameLengthMin": "名字长度必须大于 {{count}} 个字符",
+    "nameLengthMax": "名字长度不能超过 {{count}} 个字符",
+    "reconnection": "连接检查出错。正在尝试重新连接...",
+    "successConnect": "连接成功"
+  },
+  "nav_pairs": "匹配",
+  "instructions": {
+    "hide": "隐藏",
+    "show": "显示",
+    "no": "拒绝",
+    "like": "喜欢",
+    "openProfile": "打开资料",
+    "closeProfile": "关闭资料",
+    "superlike": "超级喜欢",
+    "next": "下一个"
+  },
+  "unknown": "未知",
+  "likes_label": "点赞",
+  "likes_count_one": "{{count}} 个赞",
+  "likes_count_few": "{{count}} 个赞",
+  "likes_count_other": "{{count}} 个赞",
+  "pairs": {
+    "filter": {
+      "title": "点赞筛选",
+      "haveInterests": "有共同兴趣",
+      "distance": {
+        "title": "最大距离",
+        "unit": "公里"
+      },
+      "age": {
+        "title": "年龄范围",
+        "from": "从",
+        "to": "到"
+      },
+      "pictures": {
+        "title": "最少照片数量"
+      },
+      "interests": {
+        "title": "兴趣爱好",
+        "showAll": "显示全部"
+      },
+      "checkboxes": {
+        "identifyConfirmed": "身份已确认",
+        "haveInterests": "有共同兴趣"
+      },
+      "buttons": {
+        "clear": "清除",
+        "confirm": "确认"
+      }
+    },
+    "list": {
+      "noLikes": "您还没有收到点赞。快去给别人点赞吧！",
+      "noSuitable": "没有合适的匹配对象。请尝试更改设置。",
+      "loading": "加载中..."
+    },
+    "preview": {
+      "distance": "距离您 公里"
+    },
+    "accept": "接受",
+    "refuse": "拒绝"
+  },
+  "age": {
+    "from": "从",
+    "to": "到"
+  },
+  "distance": {
+    "km": "{{count}} 公里"
+  },
+  "gender": {
+    "male": "男",
+    "female": "女",
+    "other": "其他"
+  },
+  "cancel": "取消",
+  "select": "选择",
+  "preview": "预览",
+  "change": "修改",
+  "saveChanges": "保存修改",
+  "submit": "提交",
+  "andSoOn": "等等...",
+  "add": "添加",
+  "profile": {
+    "emptyFields": "您的个人资料中有未填写项，已在设置中用红色标出",
+    "settings": {
+      "notFound": "未找到该设置",
+      "fields": {
+        "email": "电子邮箱",
+        "name": "姓名",
+        "description": "个人简介",
+        "sex": "性别",
+        "preferSex": "想找",
+        "nickname": "昵称",
+        "language": "语言",
+        "your": {
+          "email": "您的电子邮箱",
+          "name": "您的姓名",
+          "description": "您的个人简介",
+          "sex": "您的性别",
+          "preferSex": "您的倾向性别",
+          "nickname": "您的昵称",
+          "language": "您的语言"
+        },
+        "update": {
+          "email": "更新邮箱",
+          "name": "更新姓名",
+          "description": "更新个人简介",
+          "sex": "更新性别",
+          "preferSex": "更新倾向性别",
+          "nickname": "更新昵称",
+          "language": "更新语言"
+        }
+      },
+      "account": {
+        "title": "账户设置",
+        "descr": "验证邮箱有助于保护您的账户安全。",
+        "thumbnails": {
+          "age": {
+            "title": "年龄",
+            "years": "{{count}} 岁"
+          },
+          "description": "简介",
+          "email": "邮箱",
+          "name": "姓名",
+          "sex": "性别",
+          "nickname": "昵称"
+        }
+      },
+      "find": {
+        "title": "发现设置",
+        "descr": "当附近的人浏览完后，您可以切换到全球模式来结识世界各地的人。",
+        "thumbnails": {
+          "partnerAge": "对方年龄",
+          "distance": {
+            "title": "距离",
+            "range": "仅显示此范围内的人"
+          },
+          "place": "地点",
+          "preferSex": "想找"
+        }
+      },
+      "display": {
+        "title": "显示偏好",
+        "thumbnails": {
+          "theme": {
+            "title": "主题",
+            "darkMode": "深色模式"
+          },
+          "language": "语言"
+        }
+      },
+      "safety": {
+        "title": "安全指南",
+        "descr": "注意交友安全。",
+        "links": {
+          "community": "社区规则",
+          "security": "安全与政策中心",
+          "tips": "安全建议"
+        }
+      },
+      "photo": {
+        "upload": "上传",
+        "uploadFrom": "上传自",
+        "gallery": "手机相册",
+        "chooseContext": "选择上传方式",
+        "onlyOnePhoto": "一次只能上传一张照片",
+        "notFound": "未找到照片",
+        "sizeLimit": "文件大小不得超过 1 MB",
+        "extension": "仅支持 png 或 jpg 格式",
+        "redactPhoto": "编辑照片",
+        "altDraggablePhoto": "可拖拽照片"
+      },
+      "interests": {
+        "title": "兴趣爱好",
+        "editTitle": "编辑兴趣爱好",
+        "description": "选择你想与匹配对象分享的兴趣",
+        "editDescription": "选择你想与匹配对象分享的兴趣，请至少选择 3 个。",
+        "thumbnail": "兴趣爱好"
+      },
+      "moreAboutMe": {
+        "title": "更多关于我",
+        "editDescription": "完善个人信息，展示你最好的一面",
+        "zodiac": "星座",
+        "zodiacSetting": "你的星座是什么？",
+        "education": "教育程度",
+        "educationSetting": "你的教育水平是？",
+        "children": "孩子态度",
+        "childrenSetting": "你想要孩子吗？",
+        "personality": "人格类型",
+        "personalitySetting": "你的 MBTI 人格类型是？",
+        "communication": "沟通风格",
+        "communicationSetting": "你的沟通方式是？",
+        "attention": "关注信号",
+        "attentionSetting": "你最喜欢的示爱方式是？"
+      },
+      "lifestyle": {
+        "title": "生活方式",
+        "editDescription": "通过生活方式展示最真实的自己",
+        "drinking": "饮酒习惯",
+        "drinkingSetting": "你多久喝一次酒？",
+        "chronotype": "作息习惯",
+        "chronotypeSetting": "你的睡眠习惯是？",
+        "food": "饮食偏好",
+        "foodSetting": "你的饮食习惯是？",
+        "pets": "宠物",
+        "petSetting": "你有宠物吗？",
+        "smoking": "吸烟习惯",
+        "smokingSetting": "你多久抽一次烟？",
+        "social": "社交媒体",
+        "socialSetting": "你在社交媒体上活跃吗？",
+        "workout": "运动健身",
+        "workoutSetting": "你经常锻炼吗？"
+      },
+      "default": {
+        "editTitle": "默认标题",
+        "editDescription": "默认描述。"
+      },
+      "place": {
+        "title": "地点",
+        "currentPositions": "当前位置",
+        "myCurrentPosition": "我的当前位置",
+        "refresh": "刷新",
+        "unchanged": "您的位置没有变化",
+        "refreshing": "正在刷新中",
+        "enableGeolocation": "请开启定位权限，否则我们无法确定您的位置"
+      }
+    },
+    "logout": "退出登录",
+    "addMorePhotos": "再添加一些照片，让资料完善度提高 4%，获得更多点赞。",
+    "editProfile": "编辑个人资料",
+    "editInfo": "编辑信息",
+    "settingsMobile": "设置",
+    "changeProfile": "切换资料",
+    "addPhotos": "添加照片"
+  },
+  "tinder": {
+    "errorFields": "个人资料信息不完整",
+    "errorFieldsDescription": "点击完善您的个人资料",
+    "noUsers": "目前没有新用户",
+    "noUsersDescription": "点击更改您的偏好设置以获得更多机会",
+    "like": "喜欢",
+    "dislike": "不喜欢",
+    "superLike": "超级喜欢"
+  },
+  "validation": {
+    "required": "必填项",
+    "email": "邮箱格式不正确",
+    "lengthMin": "长度必须大于 {{count}} 个字符",
+    "lengthMax": "长度必须小于 {{count}} 个字符"
+  }
+}
