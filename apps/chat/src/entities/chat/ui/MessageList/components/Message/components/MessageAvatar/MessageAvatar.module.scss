@@ -1,3 +1,10 @@
+.avatar {
+  width: 36px;
+  min-width: 36px;
+  display: flex;
+  align-items: end;
+}
+
 @media (max-width: 1150px) {
   .avatar {
     display: none;

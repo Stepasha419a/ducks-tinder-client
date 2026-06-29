@@ -7,8 +7,16 @@ import * as styles from './MessageAvatar.module.scss';
 interface MessageAvatarProps {
   userId: string;
   avatar?: string;
+  showAvatar?: boolean;
 }
 
-export const MessageAvatar: FC<MessageAvatarProps> = ({ avatar }) => {
-  return <Avatar avatarUrl={avatar} extraClassName={styles.avatar} />;
+export const MessageAvatar: FC<MessageAvatarProps> = ({
+  avatar,
+  showAvatar,
+}) => {
+  return (
+    <div className={styles.avatar}>
+      {showAvatar && <Avatar avatarUrl={avatar} />}
+    </div>
+  );
 };
