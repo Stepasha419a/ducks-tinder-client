@@ -22,6 +22,8 @@ interface MessageProps {
   isOwn: boolean;
   selectedMessage: MessageInterface | null;
   handleSelectMessage: (message: MessageInterface) => void;
+  showUsername: boolean;
+  showAvatar: boolean;
 }
 
 export const Message = ({

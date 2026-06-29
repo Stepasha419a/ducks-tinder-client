@@ -128,6 +128,14 @@ export const MessageList: FC<MessagesProps> = ({
         const isNextDayMessage =
           messages[i + 1] && getIsNextDayMessage(message, messages[i + 1]);
 
+        const isNextAnotherPersonMessage =
+          messages[i + 1] && message.userId !== messages[i + 1].userId;
+        const showAvatar = !messages[i + 1] || isNextAnotherPersonMessage;
+
+        const isFirstAnotherPersonMessage =
+          messages[i - 1] && message.userId !== messages[i - 1].userId;
+        const showUsername = !messages[i - 1] || isFirstAnotherPersonMessage;
+
         return (
           <div key={message.id}>
             <MessageMemo
@@ -135,10 +143,18 @@ export const MessageList: FC<MessagesProps> = ({
               selectedMessage={selectedMessage}
               {...getMessageProps(message)}
               message={message}
+              showAvatar={showAvatar}
+              showUsername={showUsername}
             >
-              <Message.Avatar userId={message.userId} avatar={message.avatar} />
+              <Message.Avatar
+                userId={message.userId}
+                avatar={message.avatar}
+                showAvatar={showAvatar}
+              />
               <Message.Body {...getBodyProps(message)}>
-                <Message.Username {...getUsernameProps(message)} />
+                {showUsername && (
+                  <Message.Username {...getUsernameProps(message)} />
+                )}
                 <Message.Content>
                   <Message.Reply {...getReplyProps(message)} />
                   <Message.Text {...getTextProps(message)} />
