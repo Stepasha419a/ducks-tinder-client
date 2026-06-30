@@ -8,9 +8,18 @@ importers:
 
   .:
     devDependencies:
+      '@commitlint/cli':
+        specifier: ^20.5.0
+        version: 20.5.0(@types/node@24.12.0)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
+      '@commitlint/config-conventional':
+        specifier: ^20.5.0
+        version: 20.5.0
       glob:
         specifier: ^13.0.6
         version: 13.0.6
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
       nx:
         specifier: 22.0.3
         version: 22.0.3(@swc/core@1.15.21)
@@ -114,12 +123,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.28.5
         version: 7.28.5(@babel/core@7.29.0)
-      '@commitlint/cli':
-        specifier: ^20.1.0
-        version: 20.5.0(@types/node@24.12.0)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
-      '@commitlint/config-conventional':
-        specifier: ^20.0.0
-        version: 20.5.0
       '@ducks-tinder-client/config':
         specifier: 1.1.1-alpha.21
         version: 1.1.1-alpha.21(@swc/core@1.15.21)(eslint@9.39.4(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.99.0)(type-fest@2.19.0)(typescript@5.9.3)
@@ -177,9 +180,6 @@ importers:
       globals:
         specifier: ^16.5.0
         version: 16.5.0
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
       prettier:
         specifier: ^3.6.2
         version: 3.8.1
@@ -250,12 +250,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.28.5
         version: 7.28.5(@babel/core@7.29.0)
-      '@commitlint/cli':
-        specifier: ^20.1.0
-        version: 20.5.0(@types/node@24.12.0)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
-      '@commitlint/config-conventional':
-        specifier: ^20.0.0
-        version: 20.5.0
       '@ducks-tinder-client/config':
         specifier: 1.1.1-alpha.21
         version: 1.1.1-alpha.21(@swc/core@1.15.21)(eslint@9.39.4(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.99.0)(type-fest@2.19.0)(typescript@5.9.3)
@@ -313,9 +307,6 @@ importers:
       globals:
         specifier: ^16.5.0
         version: 16.5.0
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
       prettier:
         specifier: ^3.6.2
         version: 3.8.1
@@ -449,12 +440,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.28.5
         version: 7.28.5(@babel/core@7.29.0)
-      '@commitlint/cli':
-        specifier: ^20.1.0
-        version: 20.5.0(@types/node@24.12.0)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
-      '@commitlint/config-conventional':
-        specifier: ^20.0.0
-        version: 20.5.0
       '@ducks-tinder-client/config':
         specifier: 1.1.1-alpha.21
         version: 1.1.1-alpha.21(@swc/core@1.15.21)(debug@4.4.3)(eslint@9.39.4(jiti@2.6.1))(favicons@7.2.0)(sass-embedded@1.99.0)(type-fest@2.19.0)(typescript@5.9.3)
@@ -539,9 +524,6 @@ importers:
       globals:
         specifier: ^16.5.0
         version: 16.5.0
-      husky:
-        specifier: ^9.1.7
-        version: 9.1.7
       jest:
         specifier: ^30.2.0
         version: 30.3.0(@types/node@24.12.0)
@@ -929,12 +911,6 @@ importers:
         specifier: ^5.2.2
         version: 5.2.3(tslib@2.8.1)(webpack-cli@6.0.1)(webpack@5.105.4)
     devDependencies:
-      '@commitlint/cli':
-        specifier: ^20.1.0
-        version: 20.5.0(@types/node@24.12.0)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
-      '@commitlint/config-conventional':
-        specifier: ^20.0.0
-        version: 20.5.0
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.4
@@ -1038,12 +1014,6 @@ importers:
         specifier: ^1.8.1
         version: 1.8.1(jquery@4.0.0)
     devDependencies:
-      '@commitlint/cli':
-        specifier: ^20.1.0
-        version: 20.5.0(@types/node@24.12.0)(conventional-commits-parser@6.4.0)(typescript@5.9.3)
-      '@commitlint/config-conventional':
-        specifier: ^20.0.0
-        version: 20.5.0
       '@eslint/js':
         specifier: ^9.39.1
         version: 9.39.4
