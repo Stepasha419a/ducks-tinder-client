@@ -18,7 +18,8 @@
     "publish-packages": "node scripts/publish-packages.js",
     "remove-redundant-images": "node scripts/remove-redundant-images.js",
     "install:webpack": "pnpm install && node scripts/remove-webpack-error.js",
-    "validate-i18n": "node scripts/validate-i18n.js"
+    "validate-i18n": "node scripts/validate-i18n.js",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.5.0",
