@@ -21,7 +21,10 @@
     "validate-i18n": "node scripts/validate-i18n.js"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "glob": "^13.0.6",
+    "husky": "^9.1.7",
     "nx": "22.0.3",
     "semver": "^7.7.3",
     "webpack": "^5.102.1",
