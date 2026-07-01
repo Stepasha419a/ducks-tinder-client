@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -15,21 +15,21 @@
     "isolatedModules": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "dist",
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "rootDir": "src",
+    "outDir": "dist",
     "paths": {
-      "@app/*": ["./app/*"],
-      "@pages": ["./pages"],
-      "@pages/*": ["./pages/*"],
-      "@widgets/*": ["./widgets/*"],
-      "@widgets": ["./widgets"],
-      "@features/*": ["./features/*"],
-      "@entities/*": ["./entities/*"],
-      "@shared/*": ["./shared/*"],
-      "@shared/assets": ["./shared/ui/assets"],
-      "@shared/constants": ["./shared/lib/constants"],
-      "@shared/helpers": ["./shared/lib/helpers"]
+      "@app/*": ["./src/app/*"],
+      "@pages": ["./src/pages"],
+      "@pages/*": ["./src/pages/*"],
+      "@widgets/*": ["./src/widgets/*"],
+      "@widgets": ["./src/widgets"],
+      "@features/*": ["./src/features/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@shared/assets": ["./src/shared/ui/assets"],
+      "@shared/constants": ["./ssrc/hared/lib/constants"],
+      "@shared/helpers": ["./src/shared/lib/helpers"]
     }
   },
   "include": ["src"]
