@@ -10,7 +10,7 @@ declare global {
       VAR_FILE_SERVICE_URL: string;
       VAR_AUTH_SERVICE_URL: string;
       VAR_MODE: string;
-      VAR_ROOT_PATH?: string;
+      VAR_ROOT_PATH: string;
       VAR_MATOMO_URL?: string;
       VAR_MATOMO_SITE_ID?: string;
       VAR_POLICY_MFE_URL: string;
