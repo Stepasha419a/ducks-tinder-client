@@ -23,6 +23,7 @@
     "prettier": "prettier --check src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
     "prettier:fix": "prettier --write src/**/*{.css,.scss,.ts,.tsx,.js,.jsx}",
     "types": "tsc --noemit",
+    "steiger": "steiger ./src"
   },
   "browserslist": {
     "production": [
