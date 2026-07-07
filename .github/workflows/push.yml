@@ -22,6 +22,8 @@ jobs:
         run: pnpm nx:lint
       - name: Run prettier
         run: pnpm nx:prettier
+      - name: Check types
+        run: pnpm nx:types
       - name: Check i18n
         run: pnpm validate-i18n
       - name: Run build
