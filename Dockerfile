@@ -1,7 +1,3 @@
-# TODO: build image here, not in docker-compose
-# TODO: pass certs
-# TODO: pass env
-
 FROM alpine:3.22.0 AS nginx-build
 
 ARG TARGETARCH
