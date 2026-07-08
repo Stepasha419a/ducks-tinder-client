@@ -11,7 +11,6 @@ Ducks Tinder is a Tinder clone project
 - `nx:prettier` - checks prettier for all projects;
 - `publish-packages` - publish new versions of packages (ci-cd only);
 - `remove-redundant-images` - removes old unstable-dev images (ci-cd only);
-- `install:webpack` - installs dependencies for temporary unstable webpack behavior (unstable);
 
 ## Demo
 
@@ -23,7 +22,7 @@ Also you can check legacy [vercel deployment](https://ducks-tinder-client.vercel
 
 Install dependencies with:
 
-- `pnpm install:webpack`
+- `pnpm install`
 
 Then for each app run:
 
@@ -39,7 +38,7 @@ Due to [ducks-tinder-server](https://github.com/Stepasha419a/ducks-tinder-server
 
 Install dependencies with:
 
-- `pnpm install:webpack` to install dependencies
+- `pnpm install` to install dependencies
 
 Then for each app run:
 
