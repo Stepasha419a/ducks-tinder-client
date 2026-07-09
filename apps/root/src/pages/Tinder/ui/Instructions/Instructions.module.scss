@@ -17,6 +17,11 @@
 
   &.open {
     width: 100%;
+
+    .items {
+      visibility: visible;
+      opacity: 1;
+    }
   }
 
   &.explore {
@@ -57,6 +62,9 @@
     justify-content: space-between;
     gap: 8px;
     height: 25px;
+
+    visibility: hidden;
+    opacity: 0;
 
     .instruction {
       display: flex;
