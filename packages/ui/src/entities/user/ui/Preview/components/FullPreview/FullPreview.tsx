@@ -1,5 +1,4 @@
 import type { FC, ReactElement } from 'react';
-import { useState } from 'react';
 import { faHouse, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -12,7 +11,8 @@ import {
   MoreAboutMeList,
 } from './components';
 import styles from './FullPreview.module.scss';
-import { useLocaleContext } from '@shared/model';
+import { useLocaleContext, useOpenModal } from '@shared/model';
+import type { InterestsListPopupProps } from './components/InterestsListPopup/InterestsListPopup';
 
 interface FullPreviewPropsInterface {
   user: User | ShortUser;
@@ -23,10 +23,8 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
   user,
   extraContent,
 }) => {
+  const { openModal } = useOpenModal();
   const locale = useLocaleContext();
-
-  const [isInterestsListPopupOpen, setIsInterestsListPopupOpen] =
-    useState(false);
 
   return (
     <div>
@@ -54,18 +52,16 @@ export const FullPreview: FC<FullPreviewPropsInterface> = ({
       )}
       <InterestsList
         interests={user.interests}
-        handleShowAll={() => setIsInterestsListPopupOpen(true)}
+        handleShowAll={async () =>
+          openModal<InterestsListPopupProps>({
+            Component: InterestsListPopup,
+            props: { interestsList: user.interests },
+          })
+        }
       />
       <MoreAboutMeList user={user} />
       <LifestyleList user={user} />
       {extraContent && extraContent}
-
-      {isInterestsListPopupOpen && (
-        <InterestsListPopup
-          interestsList={user.interests}
-          setIsInterestsListPopupOpen={setIsInterestsListPopupOpen}
-        />
-      )}
     </div>
   );
 };
