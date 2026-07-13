@@ -1,26 +1,24 @@
-import type { FC } from 'react';
-
 import { Button, ListItem, Popup } from '@shared/ui';
 
 import styles from './InterestsListPopup.module.scss';
 import type { Locale } from '@shared/model';
-import { useLocaleContext } from '@shared/model';
+import { addModal, useLocaleContext, useModalProps } from '@shared/model';
 
-interface InterestsListPopupProps {
-  setIsInterestsListPopupOpen: (setting: boolean) => void;
+export interface InterestsListPopupProps {
   interestsList: string[];
 }
 
-export const InterestsListPopup: FC<InterestsListPopupProps> = ({
-  interestsList,
-  setIsInterestsListPopupOpen,
-}) => {
+export const InterestsListPopup = () => {
+  const { props, resolveModal } =
+    useModalProps<InterestsListPopupProps>(InterestsListPopup);
+  const { interestsList } = props;
+
   const locale = useLocaleContext();
 
   return (
     <Popup
       title={locale.interestsTitle}
-      closeHandler={() => setIsInterestsListPopupOpen(false)}
+      closeHandler={() => resolveModal(null)}
     >
       <div className={styles.items}>
         {interestsList.map((item) => {
@@ -31,12 +29,11 @@ export const InterestsListPopup: FC<InterestsListPopupProps> = ({
           );
         })}
       </div>
-      <Button
-        extraClassName={styles.btn}
-        onClick={() => setIsInterestsListPopupOpen(false)}
-      >
+      <Button extraClassName={styles.btn} onClick={() => resolveModal(null)}>
         {locale.close}
       </Button>
     </Popup>
   );
 };
+
+addModal(InterestsListPopup, 'InterestsListPopup');
