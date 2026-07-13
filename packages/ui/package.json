@@ -56,7 +56,8 @@
     "react-infinite-scroller": "^1.2.6",
     "react-loading-skeleton": "^3.5.0",
     "react-slick": "^0.31.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "zustand": "^5.0.13"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

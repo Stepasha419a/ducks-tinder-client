@@ -1013,6 +1013,9 @@ importers:
       slick-carousel:
         specifier: ^1.8.1
         version: 1.8.1(jquery@4.0.0)
+      zustand:
+        specifier: ^5.0.13
+        version: 5.0.13(@types/react@19.2.14)(immer@11.1.4)(react@19.1.5)(use-sync-external-store@1.6.0(react@19.1.5))
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.1
