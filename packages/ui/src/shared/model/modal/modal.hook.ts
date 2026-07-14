@@ -2,6 +2,7 @@ import { useModalStore } from './modal.store';
 
 import { getModalName } from './modal.helper';
 import type { ComponentType, FC } from 'react';
+import { useEffect } from 'react';
 
 interface OpenModalPayload<T> {
   Component: React.FC | React.ComponentType;
@@ -36,6 +37,12 @@ export const useOpenReactiveModal = <T>(
   const isOpen = useModalStore((s) =>
     s.openedModals.some((modal) => modal.name === name)
   );
+
+  useEffect(() => {
+    if (isOpen) {
+      updateModalProps({ name, props });
+    }
+  }, [props, isOpen, name, updateModalProps]);
 
   const handleOpenModal = async <TResult = never>() => {
     return openModal<T, TResult>({
