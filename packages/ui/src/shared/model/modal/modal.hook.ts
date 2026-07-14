@@ -25,6 +25,30 @@ export const useOpenModal = () => {
   };
 };
 
+export const useOpenReactiveModal = <T>(
+  Component: OpenModalPayload<T>['Component'],
+  props: OpenModalPayload<T>['props']
+) => {
+  const name = getModalName(Component);
+
+  const openModal = useModalStore((state) => state.openModal);
+  const updateModalProps = useModalStore((state) => state.updateModalProps);
+  const isOpen = useModalStore((s) =>
+    s.openedModals.some((modal) => modal.name === name)
+  );
+
+  const handleOpenModal = async <TResult = never>() => {
+    return openModal<T, TResult>({
+      name: getModalName(Component),
+      props: props,
+    });
+  };
+
+  return {
+    openModal: handleOpenModal,
+  };
+};
+
 export const useModalProps = <P = unknown>(
   modalComponent: ComponentType | FC
 ) => {
