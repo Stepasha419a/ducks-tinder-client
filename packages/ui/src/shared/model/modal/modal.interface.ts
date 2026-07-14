@@ -17,6 +17,7 @@ export type ModalsState = {
 
 export interface ModalsActions {
   openModal<T, R>(payload: ModalPayload<T>): Promise<R | null>;
+  updateModalProps<T>(payload: ModalPayload<T>): void;
   closeModal<TResult>(result: TResult | null): void;
 }
 

@@ -24,6 +24,14 @@ export const useModalStore: ModalsStore = create((set) => ({
       resolvers.set(payload.name, resolve);
     });
   },
+  updateModalProps: <T>(payload: ModalPayload<T>) =>
+    set((state) => ({
+      openedModals: state.openedModals.map((modal) =>
+        modal.name === payload.name
+          ? { ...modal, props: { ...(modal.props || {}), ...payload.props } }
+          : modal
+      ),
+    })),
   closeModal<TResult>(result: TResult | null) {
     const modal = useModalStore.getState().openedModals.at(-1);
 
