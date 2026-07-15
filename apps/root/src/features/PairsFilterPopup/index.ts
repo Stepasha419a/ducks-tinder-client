@@ -1,1 +1,1 @@
-export { PairsFilterPopup } from './PairsFilterPopup';
+export * from './PairsFilterPopup';

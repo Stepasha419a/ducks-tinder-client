@@ -2,6 +2,7 @@ import type { Control } from 'react-hook-form';
 import { useController } from 'react-hook-form';
 
 import type { PairFilterForm } from '@entities/user';
+import { useCallback } from 'react';
 
 export function usePairFilterForm(control: Control<PairFilterForm>) {
   const {
@@ -25,21 +26,24 @@ export function usePairFilterForm(control: Control<PairFilterForm>) {
     control,
   });
 
-  const toggleInterest = (item: string): void => {
-    if (interests.some((interest) => interest === item)) {
-      setInterests(interests.filter((interest) => interest !== item));
-    } else {
-      setInterests([...interests, item]);
-    }
-  };
+  const toggleInterest = useCallback(
+    (item: string): void => {
+      if (interests.some((interest) => interest === item)) {
+        setInterests(interests.filter((interest) => interest !== item));
+      } else {
+        setInterests([...interests, item]);
+      }
+    },
+    [interests, setInterests]
+  );
 
-  const toggleHasInterests = (): void => {
+  const toggleHasInterests = useCallback((): void => {
     setHasInterests(!hasInterests);
-  };
+  }, [hasInterests, setHasInterests]);
 
-  const toggleIdentifyConfirmed = (): void => {
+  const toggleIdentifyConfirmed = useCallback((): void => {
     setIdentifyConfirmed(!identifyConfirmed);
-  };
+  }, [identifyConfirmed, setIdentifyConfirmed]);
 
   return {
     hasInterests,

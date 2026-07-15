@@ -1,8 +1,6 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
-import { useState } from 'react';
-import type { Control, UseFormReset } from 'react-hook-form';
+import type { Control } from 'react-hook-form';
 
-import { Popup } from '@ducks-tinder-client/ui';
+import { addModal, Popup, useModalProps } from '@ducks-tinder-client/ui';
 
 import type { PairFilterForm } from '@entities/user';
 
@@ -12,27 +10,27 @@ import {
   Buttons,
   Checkboxes,
   DistanceSetting,
-  InterestSettingPopup,
   InterestsSetting,
   PicturesSetting,
 } from './ui';
 import * as styles from './PairsFilterPopup.module.scss';
 import { useTranslation } from 'react-i18next';
 
-interface PairsFilterPopupProps {
-  setIsFilterPopupOpen: Dispatch<SetStateAction<boolean>>;
+export interface PairsFilterPopupProps {
   control: Control<PairFilterForm>;
-  handleSubmit: () => void;
-  handleReset: UseFormReset<PairFilterForm>;
 }
 
-export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
-  setIsFilterPopupOpen,
-  control,
-  handleReset,
-  handleSubmit,
-}) => {
+export interface PairsFilterPopupReturn {
+  isSubmit?: boolean;
+  isReset?: boolean;
+}
+
+export const PairsFilterPopup = () => {
   const { t } = useTranslation();
+
+  const { props, resolveModal } =
+    useModalProps<PairsFilterPopupProps>(PairsFilterPopup);
+  const { control } = props;
 
   const {
     interests,
@@ -43,16 +41,12 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
     identifyConfirmed,
   } = usePairFilterForm(control);
 
-  const [isInterestsSettingPopupOpen, setIsInterestsSettingPopupOpen] =
-    useState(false);
-
   const submitHandler = () => {
-    handleSubmit();
-    setIsFilterPopupOpen(false);
+    resolveModal<PairsFilterPopupReturn>({ isSubmit: true });
   };
 
-  const handleCloseInterestSettingPopup = () => {
-    setIsInterestsSettingPopupOpen(false);
+  const handleReset = () => {
+    resolveModal<PairsFilterPopupReturn>({ isReset: true });
   };
 
   return (
@@ -70,7 +64,6 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
           <InterestsSetting
             interests={interests}
             toggleInterest={toggleInterest}
-            setIsInterestsSettingPopupOpen={setIsInterestsSettingPopupOpen}
           />
           <Checkboxes
             hasInterests={hasInterests}
@@ -81,13 +74,8 @@ export const PairsFilterPopup: FC<PairsFilterPopupProps> = ({
           <Buttons handleReset={handleReset} />
         </form>
       </Popup>
-      {isInterestsSettingPopupOpen && (
-        <InterestSettingPopup
-          activeItems={interests}
-          toggleItem={toggleInterest}
-          handleClose={handleCloseInterestSettingPopup}
-        />
-      )}
     </>
   );
 };
+
+addModal(PairsFilterPopup, 'PairsFilterPopup');
