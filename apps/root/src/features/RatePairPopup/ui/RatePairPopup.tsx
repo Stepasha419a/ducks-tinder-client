@@ -1,8 +1,13 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
 import classNames from 'classnames';
 
 import type { ShortUser } from '@ducks-tinder-client/common';
-import { Button, Popup, Preview } from '@ducks-tinder-client/ui';
+import {
+  addModal,
+  Button,
+  Popup,
+  Preview,
+  useModalProps,
+} from '@ducks-tinder-client/ui';
 
 import { acceptPairThunk, refusePairThunk } from '@entities/user';
 
@@ -10,32 +15,32 @@ import * as styles from './RatePairPopup.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '@shared/lib';
 
-interface RatePairPopupProps {
+export interface RatePairPopupProps {
   currentPair: ShortUser;
-  setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;
 }
 
-export const RatePairPopup: FC<RatePairPopupProps> = ({
-  currentPair,
-  setCurrentPair,
-}) => {
+export const RatePairPopup = () => {
   const { t } = useTranslation();
+
+  const { props, resolveModal } =
+    useModalProps<RatePairPopupProps>(RatePairPopup);
+  const { currentPair } = props;
 
   const dispatch = useAppDispatch();
 
   const handleAccept = (): void => {
     dispatch(acceptPairThunk(currentPair.id));
-    setCurrentPair(null);
+    resolveModal(null);
   };
 
   const handleRefuse = (): void => {
     dispatch(refusePairThunk(currentPair.id));
-    setCurrentPair(null);
+    resolveModal(null);
   };
 
   return (
     <>
-      <Popup closeHandler={() => setCurrentPair(null)} size="l">
+      <Popup closeHandler={() => resolveModal(null)} size="l">
         <Preview user={currentPair} isFull extraClassName={styles.preview} />
         <div className={styles.btns}>
           <Button
@@ -52,3 +57,5 @@ export const RatePairPopup: FC<RatePairPopupProps> = ({
     </>
   );
 };
+
+addModal(RatePairPopup, 'RatePairPopup');
