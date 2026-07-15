@@ -37,13 +37,13 @@ importers:
     dependencies:
       '@ducks-tinder-client/auth':
         specifier: 1.0.0
-        version: 1.0.0(127238f748d0d0b363160e2cbb718d22)
+        version: 1.0.0(253b11f43139b728244b9ebe93bc23ee)
       '@ducks-tinder-client/common':
         specifier: 1.7.0
         version: 1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1)
       '@ducks-tinder-client/ui':
-        specifier: 1.2.0-alpha.0
-        version: 1.2.0-alpha.0(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.18.0)(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
+        specifier: 1.2.0-alpha.1
+        version: 1.2.0-alpha.1(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.18.0)(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
       '@fortawesome/fontawesome-common-types':
         specifier: ^7.1.0
         version: 7.2.0
@@ -205,8 +205,8 @@ importers:
   apps/policy:
     dependencies:
       '@ducks-tinder-client/ui':
-        specifier: 1.2.0-alpha.0
-        version: 1.2.0-alpha.0(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.18.0)(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
+        specifier: 1.2.0-alpha.1
+        version: 1.2.0-alpha.1(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.18.0)(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
       browserslist:
         specifier: ^4.28.0
         version: 4.28.2
@@ -339,13 +339,13 @@ importers:
         version: 0.3.2(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@ducks-tinder-client/auth':
         specifier: 1.0.0
-        version: 1.0.0(32f1be8d8d6eebe13b5449157dbd245b)
+        version: 1.0.0(4b111cc9671635d57e0cd84c91476a6a)
       '@ducks-tinder-client/common':
         specifier: 1.7.0
         version: 1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1)
       '@ducks-tinder-client/ui':
-        specifier: 1.2.0-alpha.0
-        version: 1.2.0-alpha.0(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.17.0(debug@4.4.3))(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
+        specifier: 1.2.0-alpha.1
+        version: 1.2.0-alpha.1(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.17.0(debug@4.4.3))(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
       '@fortawesome/fontawesome-common-types':
         specifier: ^7.1.0
         version: 7.2.0
@@ -1960,8 +1960,8 @@ packages:
       react-dom: 19.1.x
       react-toastify: 11.0.x
 
-  '@ducks-tinder-client/ui@1.2.0-alpha.0':
-    resolution: {integrity: sha512-bAz7oysoG5FEaEr+YnUw3maTo7n31yAJsxrlIoqL+pXTrOieIyU8JcQWthNoZr9QmECciQqHm+RgEelppTaYSA==}
+  '@ducks-tinder-client/ui@1.2.0-alpha.1':
+    resolution: {integrity: sha512-5bWjVaFW85JABvs8X7PUxB2w+PKj1k3CK1VSSOf1XmAqws04cgXk6mi02sQwKOfBMmytb7eH30q07g+uAsnRFw==}
     peerDependencies:
       '@ducks-tinder-client/common': 1.7.0
       '@fortawesome/fontawesome-common-types': 6.7.x
@@ -9261,10 +9261,10 @@ snapshots:
       '@preact/signals-core': 1.14.1
       tslib: 2.8.1
 
-  '@ducks-tinder-client/auth@1.0.0(127238f748d0d0b363160e2cbb718d22)':
+  '@ducks-tinder-client/auth@1.0.0(253b11f43139b728244b9ebe93bc23ee)':
     dependencies:
       '@ducks-tinder-client/common': 1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1)
-      '@ducks-tinder-client/ui': 1.2.0-alpha.0(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.18.0)(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
+      '@ducks-tinder-client/ui': 1.2.0-alpha.1(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.18.0)(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
       '@fortawesome/fontawesome-common-types': 7.2.0
       '@fortawesome/fontawesome-svg-core': 7.2.0
       '@fortawesome/free-solid-svg-icons': 7.2.0
@@ -9284,10 +9284,10 @@ snapshots:
       - immer
       - use-sync-external-store
 
-  '@ducks-tinder-client/auth@1.0.0(32f1be8d8d6eebe13b5449157dbd245b)':
+  '@ducks-tinder-client/auth@1.0.0(4b111cc9671635d57e0cd84c91476a6a)':
     dependencies:
       '@ducks-tinder-client/common': 1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1)
-      '@ducks-tinder-client/ui': 1.2.0-alpha.0(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.17.0(debug@4.4.3))(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
+      '@ducks-tinder-client/ui': 1.2.0-alpha.1(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.17.0(debug@4.4.3))(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
       '@fortawesome/fontawesome-common-types': 7.2.0
       '@fortawesome/fontawesome-svg-core': 7.2.0
       '@fortawesome/free-solid-svg-icons': 7.2.0
@@ -9460,7 +9460,7 @@ snapshots:
     transitivePeerDependencies:
       - jquery
 
-  '@ducks-tinder-client/ui@1.2.0-alpha.0(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.17.0(debug@4.4.3))(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))':
+  '@ducks-tinder-client/ui@1.2.0-alpha.1(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.17.0(debug@4.4.3))(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))':
     dependencies:
       '@ducks-tinder-client/common': 1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1)
       '@fortawesome/fontawesome-common-types': 7.2.0
@@ -9485,7 +9485,7 @@ snapshots:
       - jquery
       - use-sync-external-store
 
-  '@ducks-tinder-client/ui@1.2.0-alpha.0(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.18.0)(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))':
+  '@ducks-tinder-client/ui@1.2.0-alpha.1(@ducks-tinder-client/common@1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1))(@fortawesome/fontawesome-common-types@7.2.0)(@fortawesome/fontawesome-svg-core@7.2.0)(@fortawesome/free-solid-svg-icons@7.2.0)(@fortawesome/react-fontawesome@3.3.0(@fortawesome/fontawesome-svg-core@7.2.0)(react@19.2.4))(@types/react@19.2.14)(axios@1.18.0)(browserslist@4.28.2)(classnames@2.5.1)(immer@11.1.4)(jquery@4.0.0)(motion@12.38.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))':
     dependencies:
       '@ducks-tinder-client/common': 1.7.0(@types/react@19.2.14)(browserslist@4.28.2)(debug@4.4.3)(react-toastify@11.0.5(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)(redux@5.0.1)
       '@fortawesome/fontawesome-common-types': 7.2.0
