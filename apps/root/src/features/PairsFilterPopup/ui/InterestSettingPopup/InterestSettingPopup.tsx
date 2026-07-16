@@ -1,26 +1,32 @@
-import type { FC } from 'react';
-
 import { Interest } from '@ducks-tinder-client/common';
-import { Button, ListItemButton, Popup } from '@ducks-tinder-client/ui';
+import {
+  addModal,
+  Button,
+  ListItemButton,
+  Popup,
+  useModalProps,
+} from '@ducks-tinder-client/ui';
 
 import * as styles from './InterestSettingPopup.module.scss';
 import { useTranslation } from 'react-i18next';
 
-interface InterestSettingPopupProps {
+export interface InterestSettingPopupProps {
   activeItems: string[];
   toggleItem: (item: string) => void;
-  handleClose: () => void;
 }
 
-export const InterestSettingPopup: FC<InterestSettingPopupProps> = ({
-  activeItems,
-  toggleItem,
-  handleClose,
-}) => {
+export const InterestSettingPopup = () => {
   const { t } = useTranslation();
 
+  const { props, resolveModal } =
+    useModalProps<InterestSettingPopupProps>(InterestSettingPopup);
+  const { activeItems: activeItems, toggleItem } = props;
+
   return (
-    <Popup title={t('pairs.filter.interests.title')} closeHandler={handleClose}>
+    <Popup
+      title={t('pairs.filter.interests.title')}
+      closeHandler={() => resolveModal(null)}
+    >
       <div className={styles.items}>
         {Object.values(Interest).map((selectItem) => {
           const isActive = activeItems.some((item) => selectItem === item);
@@ -35,9 +41,11 @@ export const InterestSettingPopup: FC<InterestSettingPopupProps> = ({
           );
         })}
       </div>
-      <Button extraClassName={styles.btn} onClick={handleClose}>
+      <Button extraClassName={styles.btn} onClick={() => resolveModal(null)}>
         {t('pairs.filter.buttons.confirm')}
       </Button>
     </Popup>
   );
 };
+
+addModal(InterestSettingPopup, 'InterestSettingPopup');
