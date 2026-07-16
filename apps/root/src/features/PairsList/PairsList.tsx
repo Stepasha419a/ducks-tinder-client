@@ -1,4 +1,4 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import type { FC } from 'react';
 import {
   faHeart,
   faMagnifyingGlassMinus,
@@ -18,10 +18,10 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 
 interface PairsListProps {
-  setCurrentPair: Dispatch<SetStateAction<ShortUser | null>>;
+  onPairClick: (pair: ShortUser) => void;
 }
 
-export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
+export const PairsList: FC<PairsListProps> = ({ onPairClick }) => {
   const dispatch = useAppDispatch();
   const pairs = useAppSelector((state) => state.pair.pairs);
   const pairsInfoCount = useAppSelector((state) => state.pair.pairsInfo?.count);
@@ -75,7 +75,7 @@ export const PairsList: FC<PairsListProps> = ({ setCurrentPair }) => {
           <Pair
             key={user.id}
             user={user}
-            setCurrentPair={() => setCurrentPair(user)}
+            setCurrentPair={() => onPairClick(user)}
           />
         );
       })}

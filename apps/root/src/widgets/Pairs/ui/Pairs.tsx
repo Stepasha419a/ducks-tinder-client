@@ -4,11 +4,12 @@ import { useForm } from 'react-hook-form';
 import type { ShortUser } from '@ducks-tinder-client/common';
 
 import { FilterPairsItems } from '@features/FilterPairsItems';
-import { PairsFilterPopup } from '@features/PairsFilterPopup';
 import { PairsList } from '@features/PairsList';
+import type { RatePairPopupProps } from '@features/RatePairPopup';
 import { RatePairPopup } from '@features/RatePairPopup';
 import { getUserPairsThunk, type PairFilterForm } from '@entities/user';
 import { useAppDispatch } from '@shared/lib';
+import { useOpenModal } from '@ducks-tinder-client/ui';
 
 export const pairFilterFormDefaultValues: PairFilterForm = {
   distance: 100,
@@ -22,8 +23,9 @@ export const pairFilterFormDefaultValues: PairFilterForm = {
 export const Pairs = () => {
   const dispatch = useAppDispatch();
 
-  const [currentPair, setCurrentPair] = useState<ShortUser | null>(null);
-  const [isFilterPopupOpen, setIsFilterPopupOpen] = useState(false);
+  const { openModal } = useOpenModal();
+
+  const [isFilterPopupOpen] = useState(false);
   const { control, handleSubmit, reset } = useForm<PairFilterForm>({
     defaultValues: pairFilterFormDefaultValues,
   });
@@ -42,29 +44,26 @@ export const Pairs = () => {
     reset(pairFilterFormDefaultValues);
   };
 
+  const handleSetPair = (pair: ShortUser | null) => {
+    if (!pair) {
+      return;
+    }
+
+    openModal<RatePairPopupProps>({
+      Component: RatePairPopup,
+      props: { currentPair: pair },
+    });
+  };
+
   return (
     <>
       <FilterPairsItems
         isFilterPopupOpen={isFilterPopupOpen}
-        setIsFilterPopupOpen={setIsFilterPopupOpen}
         control={control}
         handleSubmit={submitHandler}
+        handleReset={handleReset}
       />
-      <PairsList setCurrentPair={setCurrentPair} />
-      {currentPair && (
-        <RatePairPopup
-          setCurrentPair={setCurrentPair}
-          currentPair={currentPair}
-        />
-      )}
-      {isFilterPopupOpen && (
-        <PairsFilterPopup
-          control={control}
-          handleReset={handleReset}
-          handleSubmit={submitHandler}
-          setIsFilterPopupOpen={setIsFilterPopupOpen}
-        />
-      )}
+      <PairsList onPairClick={handleSetPair} />
     </>
   );
 };

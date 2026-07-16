@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { faCamera, faGear, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,22 +6,17 @@ import classNames from 'classnames';
 import { ROUTES } from '@ducks-tinder-client/common';
 import { Avatar } from '@ducks-tinder-client/ui';
 
-import { UploadImagePopups } from '@features/UploadImagePopups';
-
 import * as styles from './ProfilePreview.mobile.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useUserStore } from '@ducks-tinder-client/auth';
+import { useImageUpload } from '@features/CropImage';
 
 export const ProfilePreviewMobile = () => {
   const { t } = useTranslation();
 
   const user = useUserStore((state) => state.currentUser);
 
-  const [isUploadOpen, setIsUploadOpen] = useState(false);
-
-  const openSettingHandler = (): void => {
-    setIsUploadOpen(true);
-  };
+  const { handleUploadImage } = useImageUpload();
 
   return (
     <>
@@ -59,7 +53,7 @@ export const ProfilePreviewMobile = () => {
                 {t('profile.changeProfile')}
               </Link>
               <div
-                onClick={openSettingHandler}
+                onClick={handleUploadImage}
                 className={classNames(
                   styles.action,
                   styles.top,
@@ -75,10 +69,6 @@ export const ProfilePreviewMobile = () => {
           </div>
         </div>
       </div>
-      <UploadImagePopups
-        isUploadOpen={isUploadOpen}
-        setIsUploadOpen={setIsUploadOpen}
-      />
     </>
   );
 };

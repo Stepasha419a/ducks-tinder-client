@@ -1,24 +1,34 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import { useMemo, type FC } from 'react';
 
-import { ListItemButton } from '@ducks-tinder-client/ui';
+import { ListItemButton, useOpenReactiveModal } from '@ducks-tinder-client/ui';
 
 import { INTERESTS_FOR_LOOP } from '@entities/user';
 
 import * as styles from '../../PairsFilterPopup.module.scss';
 import { useTranslation } from 'react-i18next';
+import type { InterestSettingPopupProps } from '../InterestSettingPopup/InterestSettingPopup';
+import { InterestSettingPopup } from '../InterestSettingPopup/InterestSettingPopup';
 
 interface InterestsSettingProps {
   interests: string[];
   toggleInterest: (item: string) => void;
-  setIsInterestsSettingPopupOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const InterestsSetting: FC<InterestsSettingProps> = ({
   interests,
   toggleInterest,
-  setIsInterestsSettingPopupOpen,
 }) => {
   const { t } = useTranslation();
+
+  const props = useMemo<InterestSettingPopupProps>(
+    () => ({ activeItems: interests, toggleItem: toggleInterest }),
+    [interests, toggleInterest]
+  );
+
+  const { openModal } = useOpenReactiveModal<InterestSettingPopupProps>(
+    InterestSettingPopup,
+    props
+  );
 
   return (
     <div className={styles.setting}>
@@ -37,10 +47,7 @@ export const InterestsSetting: FC<InterestsSettingProps> = ({
           );
         })}
       </div>
-      <div
-        onClick={() => setIsInterestsSettingPopupOpen(true)}
-        className={styles.showAll}
-      >
+      <div onClick={openModal} className={styles.showAll}>
         {t('pairs.filter.interests.showAll')}
       </div>
     </div>
