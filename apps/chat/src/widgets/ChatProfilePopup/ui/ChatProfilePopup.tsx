@@ -1,29 +1,21 @@
-import {
-  addModal,
-  Popup,
-  Preview,
-  useModalProps,
-} from '@ducks-tinder-client/ui';
+import type { FC } from 'react';
+
+import { Popup, Preview } from '@ducks-tinder-client/ui';
 
 import { ChatControl } from '@features/ChatControl';
 
 import { ChatProfilePopupLazy } from './ChatProfilePopup.lazy';
 import * as styles from './ChatProfilePopup.module.scss';
-import { useChatDispatch, useChatSelector } from '@shared/lib/hooks';
-import { nullMember } from '@entities/chat';
-import { WithErrorFallback } from '@ducks-tinder-client/common';
+import { useChatSelector } from '@shared/lib/hooks';
 
-export const ChatProfilePopup = WithErrorFallback(() => {
-  const dispatch = useChatDispatch();
+interface ChatProfilePopupProps {
+  handleClose: () => void;
+}
 
-  const { resolveModal } = useModalProps(ChatProfilePopup);
-
+export const ChatProfilePopup: FC<ChatProfilePopupProps> = ({
+  handleClose,
+}) => {
   const chatMember = useChatSelector((state) => state.chat.chatMember);
-
-  const handleClose = () => {
-    dispatch(nullMember());
-    resolveModal(null);
-  };
 
   return (
     <Popup closeHandler={handleClose} size="l" extraClassName={styles.popup}>
@@ -38,6 +30,4 @@ export const ChatProfilePopup = WithErrorFallback(() => {
       )}
     </Popup>
   );
-});
-
-addModal(ChatProfilePopup, 'ChatProfilePopup');
+};
