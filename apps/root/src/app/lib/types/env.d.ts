@@ -9,6 +9,7 @@ declare global {
       VAR_CHAT_SERVICE_SOCKET_PATH: string;
       VAR_FILE_SERVICE_URL: string;
       VAR_AUTH_SERVICE_URL: string;
+      VAR_SUBSCRIPTION_SERVICE_URL: string;
       VAR_MODE: string;
       VAR_ROOT_PATH: string;
       VAR_MATOMO_URL?: string;
