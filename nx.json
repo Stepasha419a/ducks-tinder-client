@@ -33,6 +33,7 @@
       "@ducks-tinder-client/auth",
       "@ducks-tinder-client/root",
       "@ducks-tinder-client/chat",
+      "@ducks-tinder-client/subscription",
       "@ducks-tinder-client/policy"
     ],
     "version": {
