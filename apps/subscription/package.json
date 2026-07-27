@@ -48,7 +48,8 @@
     "react-i18next": "^17.0.2",
     "react-loading-skeleton": "^3.5.0",
     "react-router-dom": "^7.9.5",
-    "react-toastify": "^11.0.5"
+    "react-toastify": "^11.0.5",
+    "zustand": "^5.0.13"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",
