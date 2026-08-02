@@ -1,0 +1,97 @@
+.container {
+  background-color: var(--bg-primary);
+  color: var(--main-primary);
+  padding: 20px;
+  max-width: 339px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.subscriptionCard {
+  background-color: var(--bg-sub-primary);
+  border-radius: 12px;
+  padding: 24px 16px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &.active {
+    border: 4px solid var(--main-secondary);
+    padding: 20px 16px;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+  }
+
+  .subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  &.plus .badge {
+    background: var(--color--red-100);
+    color: var(--bg-sub-primary);
+  }
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.promoBanner {
+  background-color: var(--bg-sub-primary);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  margin: 8px 0;
+
+  .titleWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 4px;
+
+    .icon {
+      font-size: 20px;
+      color: var(--color--yellow-100);
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+
+  .description {
+    color: var(--main-secondary);
+    font-size: 13px;
+  }
+}
+
+.addonsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
