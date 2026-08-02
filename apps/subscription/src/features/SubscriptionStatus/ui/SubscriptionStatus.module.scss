@@ -95,3 +95,62 @@
   grid-template-columns: 1fr 1fr;
   gap: 12px;
 }
+
+.addonCard {
+  background-color: var(--bg-sub-primary);
+  border-radius: 12px;
+  padding: 32px 10px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  position: relative;
+
+  .iconWrapper {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: -20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+  }
+
+  &.boost {
+    .icon {
+      color: var(--color--purple-80);
+    }
+
+    .action {
+      color: var(--color--purple-80);
+    }
+  }
+
+  &.superlike {
+    .icon {
+      color: var(--color--blue-90);
+    }
+
+    .action {
+      color: var(--color--blue-90);
+    }
+  }
+
+  .remaining {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .action {
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+}
