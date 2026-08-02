@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import * as styles from './SubscriptionStatus.module.scss';
-import { faBolt, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faBolt, faFeather, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSubscriptionStore } from '@entities/subscription';
+import { Link, useMatch } from 'react-router-dom';
 import { useOpenModal } from '@ducks-tinder-client/ui';
 import { SuperLikesPopup } from '@features/SuperLikesPopup';
 
@@ -10,6 +11,9 @@ type AddonType = 'boost' | 'superlike';
 
 export const SubscriptionStatus = () => {
   const subscription = useSubscriptionStore((state) => state.subscription);
+  const isPlusPage = Boolean(
+    useMatch({ path: '/subscription/plus', end: true })
+  );
 
   const { openModal } = useOpenModal();
 
@@ -23,6 +27,34 @@ export const SubscriptionStatus = () => {
 
   return (
     <div className={styles.container}>
+      <Link
+        to={'/subscription/plus'}
+        className={classNames(
+          styles.subscriptionCard,
+          styles.plus,
+          isPlusPage && styles.active
+        )}
+      >
+        <div className={styles.header}>
+          <h2>Date</h2>
+          <span className={styles.badge}>plus</span>
+        </div>
+        <div className={styles.subtitle}>Unlimited Likes & More!</div>
+      </Link>
+
+      <Link to={'/subscription/plus'} className={styles.promoBanner}>
+        <div className={styles.titleWrapper}>
+          <FontAwesomeIcon
+            className={classNames(styles.icon)}
+            icon={faFeather}
+          />
+          <h3>Upgrade Your Love Life</h3>
+        </div>
+        <p className={styles.description}>
+          Subscribe to Date for premium features
+        </p>
+      </Link>
+
       <div className={styles.addonsGrid}>
         <AddonItem
           type="boost"
