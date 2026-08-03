@@ -104,6 +104,32 @@
   font-weight: 900;
 }
 
+.goldPromo {
+  width: 100%;
+  background-color: var(--bg-sub-secondary);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  .goldText {
+    .goldTitle {
+      font-size: 16px;
+      font-weight: 700;
+      text-align: left;
+      color: var(--main-primary);
+    }
+
+    .goldSubtitle {
+      font-size: 12px;
+      color: var(--main-secondary);
+      text-align: left;
+    }
+  }
+}
+
 .selectBtn {
   background-color: var(--color--white-90) !important;
   color: #000 !important;
