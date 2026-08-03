@@ -1,0 +1,131 @@
+.popupCustom {
+  background-color: var(--bg-sub-primary) !important;
+  color: var(--main-primary);
+  padding: 0;
+  height: 673px !important;
+}
+
+.content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.iconWrapper {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 15px var(--color--blue-90));
+  opacity: 0.8;
+}
+
+.starIcon {
+  width: 80px;
+  height: 80px;
+}
+
+.title {
+  font-family: 'Times New Roman', serif;
+  font-size: 36px;
+  font-weight: 900;
+  margin: 0 0 12px;
+  font-style: italic;
+  letter-spacing: -1px;
+  color: var(--main-primary);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--main-secondary);
+  line-height: 1.4;
+  margin-bottom: 24px;
+  max-width: 280px;
+}
+
+.plansList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.planHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+
+  .planLabel {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--main-primary);
+  }
+
+  .planDiscount {
+    background: var(--bg-secondary);
+    color: var(--color--white-100);
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+}
+
+.planBody {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .count {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .priceInfo {
+    text-align: right;
+
+    .perUnit {
+      font-size: 12px;
+      color: var(--main-secondary);
+    }
+    .total {
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+}
+
+.separator {
+  margin: 20px 0;
+  font-style: italic;
+  font-family: serif;
+  color: var(--main-primary);
+  font-weight: 900;
+}
+
+.selectBtn {
+  background-color: var(--color--white-90) !important;
+  color: #000 !important;
+  border-radius: 20px !important;
+  padding: 8px 20px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  min-height: auto !important;
+}
+
+.continueBtn {
+  width: 100%;
+  background-color: var(--color--white-100) !important;
+  color: var(--bg-secondary) !important;
+  border-radius: 30px !important;
+  padding: 16px !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  border: 2px solid var(--color--white-100) !important;
+
+  &:hover {
+    background-color: transparent !important;
+    color: var(--color--white-100) !important;
+  }
+}
