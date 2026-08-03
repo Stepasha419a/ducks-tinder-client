@@ -83,6 +83,32 @@ export const SuperLikesPopup = () => {
           Stand out with Super Like. You're 3x more likely to get a match!
         </p>
 
+        <div className={styles.plansList}>
+          {plans.map((plan) => (
+            <div
+              key={plan.id}
+              className={classNames(styles.planCard, {
+                [styles.activePlan]: selectedPlanId === plan.id,
+              })}
+              onClick={() => setSelectedPlanId(plan.id)}
+            >
+              {(plan.label || plan.discount) && (
+                <div className={styles.planHeader}>
+                  <span className={styles.planLabel}>{plan.label}</span>
+                  <span className={styles.planDiscount}>{plan.discount}</span>
+                </div>
+              )}
+              <div className={styles.planBody}>
+                <span className={styles.count}>{plan.count} Super Likes</span>
+                <div className={styles.priceInfo}>
+                  <div className={styles.perUnit}>{plan.pricePerUnit}</div>
+                  <div className={styles.total}>{plan.totalPrice}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
         <div className={styles.separator}>or</div>
 
         <div className={styles.goldPromo}>
