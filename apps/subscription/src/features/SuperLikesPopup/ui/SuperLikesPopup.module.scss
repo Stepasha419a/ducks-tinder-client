@@ -50,6 +50,35 @@
   gap: 12px;
 }
 
+.planCard {
+  background-color: var(--bg-sub-secondary);
+  border-radius: 16px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  text-align: left;
+
+  &.activePlan {
+    background-color: var(--color--white-90);
+    color: #000;
+
+    .perUnit,
+    .total,
+    .planLabel {
+      color: #000 !important;
+      opacity: 0.8;
+    }
+    .count {
+      color: #000 !important;
+    }
+  }
+
+  &:hover:not(.activePlan) {
+    background-color: var(--bg-chat-form);
+  }
+}
+
 .planHeader {
   display: flex;
   justify-content: space-between;
