@@ -76,6 +76,24 @@ export const GetDatePlus = () => {
             </div>
           ))}
         </div>
+
+        <div className={styles.checkoutSide}>
+          <h1>Get Date Plus</h1>
+          <span className={styles.subtitle}>
+            A First Class Dating Experience
+          </span>
+
+          <div className={styles.footer}>
+            <p className={styles.terms}>
+              By tapping Continue, you will be charged and your subscription
+              will renew for the same price and package length until you cancel
+              via Account Settings, and you agree to our&nbsp;
+              <Link to="/policy">Terms</Link>.
+            </p>
+            <button className={styles.continueBtn}>Continue</button>
+            <button className={styles.noThanks}>No Thanks</button>
+          </div>
+        </div>
       </div>
     </div>
   );
