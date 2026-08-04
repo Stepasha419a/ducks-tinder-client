@@ -1,0 +1,122 @@
+.pageWrapper {
+  background-color: var(--bg-primary);
+  color: var(--main-primary);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  font-family:
+    'Inter',
+    -apple-system,
+    sans-serif;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  width: 100%;
+}
+
+.featuresSide {
+  .header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+
+    .logo {
+      padding: 10px 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      h2 {
+        margin: 0;
+        font-size: 20px;
+        text-transform: uppercase;
+      }
+      .badge {
+        background: var(--color--red-100);
+        color: var(--bg-primary);
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-weight: 800;
+      }
+    }
+  }
+}
+
+.section {
+  position: relative;
+  border: 2px solid var(--main-primary);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+
+  .sectionLabel {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-primary);
+    padding: 0 12px;
+    color: var(--main-secondary);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
+.featureItem {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .checkmark {
+    color: var(--main-primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .text {
+    h4 {
+      margin: 0 0 4px 0;
+      font-size: 16px;
+      font-weight: 600;
+    }
+    p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--main-secondary);
+      line-height: 1.4;
+    }
+  }
+}
+
+.checkoutSide {
+  text-align: center;
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    color: var(--main-secondary);
+    margin-bottom: 40px;
+    display: block;
+  }
+}
+
+.plansList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
