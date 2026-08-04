@@ -120,3 +120,80 @@
   gap: 16px;
   margin-bottom: 24px;
 }
+
+.planCard {
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+
+  &.active {
+    border-color: var(--main-primary);
+    background: var(--bg-sub-primary);
+  }
+
+  .radio {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+    border: 2px solid var(--main-primary);
+    border-radius: 50%;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: var(--main-primary);
+      border-radius: 50%;
+      display: none;
+    }
+  }
+
+  &.active .radio {
+    border-color: var(--main-primary);
+    .dot {
+      display: block;
+    }
+  }
+
+  .planInfo {
+    text-align: left;
+    .duration {
+      font-size: 22px;
+      font-weight: 700;
+      display: block;
+    }
+    .price {
+      font-size: 14px;
+      color: var(--main-primary);
+      opacity: 0.9;
+    }
+    .save {
+      color: var(--main-primary);
+      font-weight: 600;
+      margin-left: 8px;
+    }
+  }
+
+  .bestValueBadge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--main-primary);
+    color: var(--bg-primary);
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+}
