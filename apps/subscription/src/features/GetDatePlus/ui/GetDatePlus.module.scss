@@ -197,3 +197,46 @@
     border-radius: 20px;
   }
 }
+
+.footer {
+  .terms {
+    font-size: 11px;
+    color: var(--main-secondary);
+    line-height: 1.5;
+    margin-bottom: 24px;
+    a {
+      color: #50b3ff;
+      text-decoration: underline;
+    }
+  }
+
+  .continueBtn {
+    width: 100%;
+    background: var(--main-primary);
+    color: var(--bg-primary);
+    border: none;
+    padding: 16px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 20px;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .noThanks {
+    width: 100%;
+    border: none;
+    color: var(--main-primary);
+    padding: 16px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
