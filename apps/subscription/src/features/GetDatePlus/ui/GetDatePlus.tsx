@@ -74,6 +74,34 @@ export const GetDatePlus = () => {
             A First Class Dating Experience
           </span>
 
+          <div className={styles.plansList}>
+            {plans.map((plan) => (
+              <div
+                key={plan.id}
+                className={`${styles.planCard} ${selectedPlan === plan.id ? styles.active : ''}`}
+                onClick={() => setSelectedPlan(plan.id)}
+              >
+                {plan.isBestValue && (
+                  <span className={styles.bestValueBadge}>Best Value</span>
+                )}
+                <div className={styles.radio}>
+                  <div className={styles.dot} />
+                </div>
+                <div className={styles.planInfo}>
+                  <span className={styles.duration}>{plan.duration}</span>
+                  <span className={styles.price}>
+                    {plan.price}
+                    {typeof plan.savePercent === 'number' && (
+                      <span className={styles.save}>
+                        Save {plan.savePercent}%
+                      </span>
+                    )}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <div className={styles.footer}>
             <p className={styles.terms}>
               By tapping Continue, you will be charged and your subscription
