@@ -134,7 +134,7 @@
   font-weight: 900;
 }
 
-.goldPromo {
+.plusPromo {
   width: 100%;
   background-color: var(--bg-sub-secondary);
   border-radius: 16px;
@@ -144,15 +144,15 @@
   align-items: center;
   margin-bottom: 24px;
 
-  .goldText {
-    .goldTitle {
+  .plusText {
+    .plusTitle {
       font-size: 16px;
       font-weight: 700;
       text-align: left;
       color: var(--main-primary);
     }
 
-    .goldSubtitle {
+    .plusSubtitle {
       font-size: 12px;
       color: var(--main-secondary);
       text-align: left;
@@ -168,6 +168,7 @@
   font-size: 14px !important;
   font-weight: 700 !important;
   min-height: auto !important;
+  width: 100px;
 }
 
 .continueBtn {

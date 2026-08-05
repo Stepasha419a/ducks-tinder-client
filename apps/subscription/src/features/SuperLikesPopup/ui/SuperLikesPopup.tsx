@@ -89,10 +89,10 @@ export const SuperLikesPopup = () => {
 
         <div className={styles.separator}>or</div>
 
-        <div className={styles.goldPromo}>
-          <div className={styles.goldText}>
-            <div className={styles.goldTitle}>Get Date Plus</div>
-            <div className={styles.goldSubtitle}>
+        <div className={styles.plusPromo}>
+          <div className={styles.plusText}>
+            <div className={styles.plusTitle}>Get Date Plus</div>
+            <div className={styles.plusSubtitle}>
               2 free Super Likes per week
             </div>
           </div>
