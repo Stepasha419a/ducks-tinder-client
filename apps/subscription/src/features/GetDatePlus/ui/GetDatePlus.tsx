@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import * as styles from './GetDatePlus.module.scss';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const featureSections = [
   {
@@ -55,18 +57,7 @@ export const GetDatePlus = () => {
               <span className={styles.sectionLabel}>{section.category}</span>
               {section.items.map((item, idx) => (
                 <div key={idx} className={styles.featureItem}>
-                  <div className={styles.checkmark}>
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                    >
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
-                  </div>
+                  <FontAwesomeIcon icon={faCheck} />
                   <div className={styles.text}>
                     <h4>{item.title}</h4>
                     {item.description && <p>{item.description}</p>}
