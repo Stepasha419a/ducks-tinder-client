@@ -48,7 +48,9 @@
     "react-i18next": "^17.0.2",
     "react-loading-skeleton": "^3.5.0",
     "react-router-dom": "^7.9.5",
+    "react-slick": "^0.31.0",
     "react-toastify": "^11.0.5",
+    "slick-carousel": "^1.8.1",
     "zustand": "^5.0.13"
   },
   "devDependencies": {
