@@ -59,6 +59,30 @@
   overflow: visible;
 }
 
+.planCard {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background-color: var(--color--purple-80);
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+
+  &.sidePlan {
+    transform: scale(0.85);
+    opacity: 0.4;
+    filter: grayscale(0.5);
+    background-color: var(--bg-sub-secondary);
+  }
+
+  &.activePlan {
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background-color: #f2a6ff;
+  }
+}
+
 .cardHeader {
   background-color: rgba(0, 0, 0, 0.15);
   padding: 6px;
