@@ -200,6 +200,22 @@
   font-weight: 900;
 }
 
+.plusPromo {
+  width: 100%;
+  background-color: var(--bg-sub-secondary);
+  border-radius: 20px;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .promoTitle {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--main-primary);
+  }
+}
+
 .selectBtn {
   background-color: var(--color--white-100) !important;
   color: #000 !important;
