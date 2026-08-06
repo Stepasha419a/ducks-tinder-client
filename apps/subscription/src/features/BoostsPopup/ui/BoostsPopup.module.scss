@@ -1,0 +1,188 @@
+.popupCustom {
+  background-color: var(--bg-sub-primary) !important;
+  color: var(--main-primary);
+  padding: 0;
+  min-height: 600px;
+}
+
+.content {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.iconWrapper {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  filter: drop-shadow(0 0 15px var(--color--purple-90));
+}
+
+.boltIconMain {
+  width: 60px;
+  height: 60px;
+  color: var(--color--purple-80);
+}
+
+.title {
+  font-family: 'Times New Roman', serif;
+  font-size: 42px;
+  font-weight: 900;
+  margin: 0;
+  font-style: italic;
+  color: var(--color--white-100);
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--color--purple-80);
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 10px 0 25px;
+  max-width: 320px;
+}
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.cardTrack {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  overflow: visible;
+}
+
+.cardHeader {
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--bg-secondary);
+}
+
+.cardBody {
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #000;
+
+  .count {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 15px;
+  }
+}
+
+.boltCircleWrapper {
+  position: relative;
+  margin-bottom: 15px;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+}
+
+.boltCircle {
+  width: 45px;
+  height: 45px;
+  background: var(--bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+}
+
+.price {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+
+.discountBadge {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.cardSelectBtn {
+  width: 100%;
+  background-color: var(--color--white-100) !important;
+  color: #000 !important;
+  border-radius: 25px !important;
+  font-weight: 800 !important;
+  text-transform: capitalize !important;
+  min-height: 40px !important;
+}
+
+.navBtn {
+  background: none;
+  border: none;
+  color: var(--main-secondary);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px;
+  &:hover {
+    color: var(--main-primary);
+  }
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--main-secondary);
+  opacity: 0.5;
+
+  &.activeDot {
+    background: var(--main-primary);
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.separator {
+  margin: 10px 0;
+  font-style: italic;
+  font-family: serif;
+  color: var(--main-primary);
+  font-weight: 900;
+}
+
+.selectBtn {
+  background-color: var(--color--white-100) !important;
+  color: #000 !important;
+  border-radius: 20px !important;
+  padding: 6px 18px !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  min-height: auto !important;
+  width: 90px;
+}
