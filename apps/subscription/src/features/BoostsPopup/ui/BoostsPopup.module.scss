@@ -1,8 +1,7 @@
 .popupCustom {
-  background-color: var(--bg-sub-primary) !important;
-  color: var(--main-primary);
-  padding: 0;
-  min-height: 600px;
+  & > div > div {
+    padding: 0;
+  }
 }
 
 .content {
@@ -42,54 +41,105 @@
   margin: 10px 0 25px;
   max-width: 320px;
 }
-
-.sliderContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.sliderWrapper {
   width: 100%;
-  gap: 10px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+
+  :global(.slick-slide) {
+    outline: none;
+    display: flex !important;
+    justify-content: center;
+    padding: 10px 0;
+  }
 }
 
-.cardTrack {
-  display: flex;
+.slideItem {
+  display: flex !important;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
-  overflow: visible;
+  width: 100%;
 }
 
 .planCard {
-  border-radius: 20px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  cursor: pointer;
   background-color: var(--color--purple-80);
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-
-  &.sidePlan {
-    transform: scale(0.85);
-    opacity: 0.4;
-    filter: grayscale(0.5);
-    background-color: var(--bg-sub-secondary);
-  }
+  border-radius: 20px;
+  width: 190px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  color: #000;
 
   &.activePlan {
-    transform: scale(1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     background-color: #f2a6ff;
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  &.sidePlan {
+    opacity: 0.4;
+    transform: scale(0.9);
+    filter: blur(1px);
   }
 }
 
+.controlsRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navBtn {
+  background: none;
+  border: none;
+  color: var(--main-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--main-primary);
+  }
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--main-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.4;
+
+  &.activeDot {
+    background-color: var(--main-primary);
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.separator {
+  margin: 12px 0;
+  font-style: italic;
+  font-family: serif;
+  font-weight: 900;
+  color: var(--main-primary);
+}
+
 .cardHeader {
-  background-color: rgba(0, 0, 0, 0.15);
-  padding: 6px;
-  font-size: 12px;
-  font-weight: 700;
+  background: rgba(0, 0, 0, 0.08);
+  font-size: 11px;
+  font-weight: 800;
   text-transform: uppercase;
-  color: var(--bg-secondary);
+  padding: 5px;
 }
 
 .cardBody {
@@ -97,41 +147,33 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #000;
 
   .count {
     font-size: 20px;
     font-weight: 800;
-    margin-bottom: 15px;
   }
 }
 
 .boltCircleWrapper {
-  position: relative;
-  margin-bottom: 15px;
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
+  .boltCircle {
+    width: 40px;
+    height: 40px;
+    background: #000;
+    color: #fff;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
-.boltCircle {
-  width: 45px;
-  height: 45px;
-  background: var(--bg-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: #fff;
+.cardSelectBtn {
+  background-color: #fff !important;
+  color: #000 !important;
+  border-radius: 20px !important;
+  width: 100% !important;
+  font-weight: 800 !important;
 }
 
 .price {
@@ -148,56 +190,6 @@
   font-size: 11px;
   font-weight: 700;
   margin-bottom: 15px;
-}
-
-.cardSelectBtn {
-  width: 100%;
-  background-color: var(--color--white-100) !important;
-  color: #000 !important;
-  border-radius: 25px !important;
-  font-weight: 800 !important;
-  text-transform: capitalize !important;
-  min-height: 40px !important;
-}
-
-.navBtn {
-  background: none;
-  border: none;
-  color: var(--main-secondary);
-  font-size: 24px;
-  cursor: pointer;
-  padding: 10px;
-  &:hover {
-    color: var(--main-primary);
-  }
-}
-
-.dots {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--main-secondary);
-  opacity: 0.5;
-
-  &.activeDot {
-    background: var(--main-primary);
-    opacity: 1;
-    transform: scale(1.2);
-  }
-}
-
-.separator {
-  margin: 10px 0;
-  font-style: italic;
-  font-family: serif;
-  color: var(--main-primary);
-  font-weight: 900;
 }
 
 .plusPromo {
