@@ -127,20 +127,32 @@ export const BoostsPopup = () => {
           </Slider>
         </div>
 
-          <button className={styles.navBtn} onClick={handleNext}>
+        <div className={styles.controlsRow}>
+          <button
+            className={styles.navBtn}
+            onClick={() => sliderRef.current?.slickPrev()}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+
+          <div className={styles.dots}>
+            {plans.map((_, i) => (
+              <div
+                key={i}
+                className={classNames(styles.dot, {
+                  [styles.activeDot]: i === activeIndex,
+                })}
+                onClick={() => sliderRef.current?.slickGoTo(i)}
+              />
+            ))}
+          </div>
+
+          <button
+            className={styles.navBtn}
+            onClick={() => sliderRef.current?.slickNext()}
+          >
             <FontAwesomeIcon icon={faChevronRight} />
           </button>
-        </div>
-
-        <div className={styles.dots}>
-          {plans.map((_, i) => (
-            <div
-              key={i}
-              className={classNames(styles.dot, {
-                [styles.activeDot]: i === activeIndex,
-              })}
-            />
-          ))}
         </div>
 
         <div className={styles.separator}>or</div>
