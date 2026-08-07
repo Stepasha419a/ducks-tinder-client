@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import classNames from 'classnames';
+import type { Settings } from 'react-slick';
+import Slider from 'react-slick';
 import {
   addModal,
   Button,
@@ -42,13 +44,21 @@ const plans: BoostPlan[] = [
   },
 ];
 
+const settings: Settings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 1,
+  centerMode: true,
+  centerPadding: '100px',
+  initialSlide: 1,
+  arrows: false,
+};
+
 export const BoostsPopup = () => {
   const { resolveModal } = useModalProps(BoostsPopup);
   const [activeIndex, setActiveIndex] = useState(1);
-
-  const handleNext = () => setActiveIndex((prev) => (prev + 1) % plans.length);
-  const handlePrev = () =>
-    setActiveIndex((prev) => (prev - 1 + plans.length) % plans.length);
+  const sliderRef = useRef<Slider>(null);
 
   return (
     <Popup
@@ -66,57 +76,56 @@ export const BoostsPopup = () => {
           Be a top profile in your area for 30 minutes to get more matches!
         </p>
 
-        <div className={styles.sliderContainer}>
-          <button className={styles.navBtn} onClick={handlePrev}>
-            <FontAwesomeIcon icon={faChevronLeft} />
-          </button>
-
-          <div className={styles.cardTrack}>
+        <div className={styles.sliderWrapper}>
+          <Slider
+            ref={sliderRef}
+            {...settings}
+            beforeChange={(_: number, next: number) => setActiveIndex(next)}
+          >
             {plans.map((plan, index) => {
               const isActive = index === activeIndex;
               return (
-                <div
-                  key={plan.id}
-                  className={classNames(styles.planCard, {
-                    [styles.activePlan]: isActive,
-                    [styles.sidePlan]: !isActive,
-                  })}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  {plan.label && (
-                    <div className={styles.cardHeader}>{plan.label}</div>
-                  )}
-
-                  <div className={styles.cardBody}>
-                    <span className={styles.count}>{plan.count} Boosts</span>
-
-                    <div className={styles.boltCircleWrapper}>
-                      <div className={styles.boltCircle}>
-                        <FontAwesomeIcon icon={faBolt} />
-                      </div>
-                    </div>
-
-                    <div className={styles.price}>{plan.pricePerUnit}</div>
-
-                    {plan.discount && (
-                      <div className={styles.discountBadge}>
-                        {plan.discount}
-                      </div>
+                <div key={plan.id} className={styles.slideItem}>
+                  <div
+                    className={classNames(styles.planCard, {
+                      [styles.activePlan]: isActive,
+                      [styles.sidePlan]: !isActive,
+                    })}
+                  >
+                    {plan.label && (
+                      <div className={styles.cardHeader}>{plan.label}</div>
                     )}
 
-                    {isActive && (
+                    <div className={styles.cardBody}>
+                      <span className={styles.count}>{plan.count} Boosts</span>
+
+                      <div className={styles.boltCircleWrapper}>
+                        <div className={styles.boltCircle}>
+                          <FontAwesomeIcon icon={faBolt} />
+                        </div>
+                      </div>
+
+                      <div className={styles.price}>{plan.pricePerUnit}</div>
+
+                      {plan.discount && (
+                        <div className={styles.discountBadge}>
+                          {plan.discount}
+                        </div>
+                      )}
+
                       <Button
                         extraClassName={styles.cardSelectBtn}
                         onClick={() => resolveModal(null)}
                       >
                         Select
                       </Button>
-                    )}
+                    </div>
                   </div>
                 </div>
               );
             })}
-          </div>
+          </Slider>
+        </div>
 
           <button className={styles.navBtn} onClick={handleNext}>
             <FontAwesomeIcon icon={faChevronRight} />
