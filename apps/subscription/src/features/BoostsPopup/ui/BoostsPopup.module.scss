@@ -13,7 +13,7 @@
 }
 
 .iconWrapper {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom: 5px;
   filter: drop-shadow(0 0 15px var(--color--purple-90));
 }
@@ -170,10 +170,11 @@
 
 .cardSelectBtn {
   background-color: #fff !important;
+  padding: 4px 0;
   color: #000 !important;
   border-radius: 20px !important;
   width: 100% !important;
-  font-weight: 800 !important;
+  font-weight: 700 !important;
 }
 
 .price {
@@ -190,6 +191,11 @@
   font-size: 11px;
   font-weight: 700;
   margin-bottom: 15px;
+}
+
+.plusWrapper {
+  padding: 0 20px;
+  width: 100%;
 }
 
 .plusPromo {
