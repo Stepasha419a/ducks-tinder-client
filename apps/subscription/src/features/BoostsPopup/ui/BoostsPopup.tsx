@@ -73,7 +73,9 @@ export const BoostsPopup = () => {
           <FontAwesomeIcon icon={faBolt} className={styles.boltIconMain} />
         </div>
 
-        <h2 className={styles.title}>Be Seen</h2>
+        <h2 className={styles.title}>
+          Be <span className={styles.italic}>Seen</span>
+        </h2>
         <p className={styles.subtitle}>
           Be a top profile in your area for 30 minutes to get more matches!
         </p>
