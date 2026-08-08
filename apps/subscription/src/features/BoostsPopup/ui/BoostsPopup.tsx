@@ -159,16 +159,18 @@ export const BoostsPopup = () => {
 
         <div className={styles.separator}>or</div>
 
-        <div className={styles.plusPromo}>
-          <div>
-            <div className={styles.promoTitle}>Get Date Plus</div>
+        <div className={styles.plusWrapper}>
+          <div className={styles.plusPromo}>
+            <div>
+              <div className={styles.promoTitle}>Get Date Plus</div>
+            </div>
+            <Button
+              extraClassName={styles.selectBtn}
+              onClick={() => console.log('Plus selected')}
+            >
+              Select
+            </Button>
           </div>
-          <Button
-            extraClassName={styles.selectBtn}
-            onClick={() => console.log('Plus selected')}
-          >
-            Select
-          </Button>
         </div>
       </div>
     </Popup>
