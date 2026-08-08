@@ -6,6 +6,7 @@
 }
 
 .content {
+  height: 100%;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -180,6 +181,8 @@
   font-size: 18px !important;
   font-weight: 700 !important;
   border: 2px solid var(--color--white-100) !important;
+  height: 56px;
+  margin-top: auto;
 
   &:hover {
     background-color: transparent !important;
