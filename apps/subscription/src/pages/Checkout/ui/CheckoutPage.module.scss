@@ -222,3 +222,13 @@
     color: #000 !important;
   }
 }
+
+.secureBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  color: var(--main-secondary);
+  font-size: 13px;
+}
