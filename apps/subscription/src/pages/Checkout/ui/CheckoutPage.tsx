@@ -7,10 +7,12 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as styles from './CheckoutPage.module.scss';
 import classNames from 'classnames';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const CheckoutPage = () => {
   const navigate = useNavigate();
+  const [nickname, setNickname] = useState('');
 
   return (
     <div className={styles.page}>
@@ -37,6 +39,20 @@ export const CheckoutPage = () => {
             <div className={styles.formHeader}>
               <FontAwesomeIcon icon={faStar} className={styles.formIcon} />
               <span>Give a Star to proceed</span>
+            </div>
+
+            <div className={styles.inputGroup}>
+              <label htmlFor="nickname" className={styles.label}>
+                Nickname
+              </label>
+              <input
+                id="nickname"
+                type="text"
+                className={styles.input}
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+                placeholder="Enter your github nickname"
+              />
             </div>
 
             <div className={styles.legalInfo}>
