@@ -1,13 +1,23 @@
 import { Button } from '@ducks-tinder-client/ui';
-import { faLock, faStar } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faLock,
+  faStar,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as styles from './CheckoutPage.module.scss';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 export const CheckoutPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
+        <button onClick={async () => navigate(-1)} className={styles.backBtn}>
+          <FontAwesomeIcon icon={faChevronLeft} />
+        </button>
         <h1 className={styles.pageTitle}>Checkout</h1>
       </header>
 
@@ -61,6 +71,10 @@ export const CheckoutPage = () => {
               <span className={styles.totalPrice}>USD 0</span>
             </div>
           </div>
+
+          <Button extraClassName={styles.buyBtn} disabled={!nickname}>
+            Buy Now
+          </Button>
 
           <div className={styles.secureBadge}>
             <FontAwesomeIcon icon={faLock} />
