@@ -1,0 +1,224 @@
+.page {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--main-primary);
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto 40px;
+  position: relative;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  color: var(--main-primary);
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+}
+
+.pageTitle {
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* Метод оплаты */
+.paymentMethods {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.methodCard {
+  border: 2px solid var(--border-main);
+  border-radius: 8px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  background: var(--bg-sub-secondary);
+  font-weight: 600;
+
+  &.active {
+    border-color: var(--color--red-100); // Характерная красная рамка Tinder
+  }
+}
+
+.methodIcon {
+  font-size: 24px;
+}
+
+/* Форма */
+.formSection {
+  border: 1px solid var(--border-main);
+  border-radius: 8px;
+  padding: 30px;
+  background-color: var(--bg-sub-secondary);
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.formIcon {
+  color: var(--main-primary);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  .label {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .input {
+    background: transparent;
+    border: none;
+    color: var(--main-primary);
+    padding: 8px 0;
+    font-size: 18px;
+    outline: none;
+    border-bottom: 2px solid transparent;
+
+    &:focus {
+      border-color: var(--color--blue-100);
+    }
+
+    &::placeholder {
+      color: var(--main-secondary);
+      opacity: 0.5;
+    }
+  }
+}
+
+.legalInfo {
+  color: var(--main-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+
+  p {
+    margin: 8px 0;
+  }
+}
+
+.summaryCard {
+  border: 1px solid var(--border-main);
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.summaryRow {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-main);
+  font-size: 14px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.productInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  .brand {
+    font-weight: 900;
+    letter-spacing: -1px;
+    font-size: 18px;
+  }
+  .badge {
+    color: #000;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 12px;
+
+    background: var(--color--red-100);
+    color: var(--bg-sub-primary);
+  }
+}
+
+.priceInfo {
+  text-align: right;
+  .mainPrice {
+    font-weight: 800;
+    font-size: 16px;
+  }
+  .subPrice {
+    font-size: 12px;
+    color: var(--main-secondary);
+  }
+}
+
+.totalRow {
+  background-color: rgba(255, 255, 255, 0.02);
+  .totalLabel {
+    font-weight: 800;
+    font-size: 16px;
+  }
+  .totalPrice {
+    font-weight: 800;
+    font-size: 18px;
+  }
+}
+
+.buyBtn {
+  width: 100%;
+  margin-top: 24px;
+  padding: 18px !important;
+  border-radius: 30px !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  background-color: var(
+    --bg-chat-form
+  ) !important; // Темная кнопка (disabled look)
+  color: var(--main-secondary) !important;
+  height: 56px;
+
+  &:not([disabled]) {
+    background-color: var(--color--white-100) !important;
+    color: #000 !important;
+  }
+}
