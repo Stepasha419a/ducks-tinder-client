@@ -56,7 +56,9 @@ export const SuperLikesPopup = () => {
           <FontAwesomeIcon icon={faStar} className={styles.starIcon} />
         </div>
 
-        <h2 className={styles.title}>Get Super Likes</h2>
+        <h2 className={styles.title}>
+          Get <span className={styles.italic}>Super Likes</span>
+        </h2>
         <p className={styles.subtitle}>
           Stand out with Super Like. You're 3x more likely to get a match!
         </p>

@@ -32,9 +32,11 @@
   font-size: 36px;
   font-weight: 900;
   margin: 0 0 12px;
-  font-style: italic;
-  letter-spacing: -1px;
   color: var(--main-primary);
+
+  .italic {
+    font-style: italic;
+  }
 }
 
 .subtitle {
