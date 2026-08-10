@@ -18,3 +18,10 @@ export interface CheckoutConsumable {
   count: number;
   price: number;
 }
+
+export type CheckoutItem = CheckoutPlus | CheckoutConsumable;
+
+export interface CheckoutState {
+  item: CheckoutItem | null;
+  setItem: (value: CheckoutItem | null) => void;
+}
