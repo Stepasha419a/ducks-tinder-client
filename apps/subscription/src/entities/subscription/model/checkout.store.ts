@@ -6,3 +6,10 @@ export enum CheckoutItemType {
   Boosts = 'boosts',
   SuperLikes = 'superLikes',
 }
+
+export interface CheckoutPlus {
+  type: CheckoutItemType.Plus;
+  months: number;
+  price: number;
+}
+
