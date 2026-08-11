@@ -21,7 +21,7 @@ export const CheckoutItemLabel: React.FC<Props> = ({ item }) => {
           </div>
           <div className={styles.priceInfo}>
             <div className={styles.mainPrice}>USD 0</div>
-            <div className={styles.subPrice}>USD 0 × 6 months</div>
+            <div className={styles.subPrice}>USD 0 × {item.months} months</div>
           </div>
         </div>
       );
