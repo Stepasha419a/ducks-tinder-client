@@ -26,5 +26,22 @@ export const CheckoutItemLabel: React.FC<Props> = ({ item }) => {
         </div>
       );
     }
+    case CheckoutItemType.SuperLikes:
+    case CheckoutItemType.Boosts: {
+      const label =
+        item.type === CheckoutItemType.SuperLikes ? 'Super Likes' : 'Boosts';
+
+      return (
+        <div className={styles.summaryRow}>
+          <div className={styles.productInfo}>
+            <span>{label}</span>
+          </div>
+          <div className={styles.priceInfo}>
+            <div className={styles.mainPrice}>USD 0</div>
+            <div className={styles.subPrice}>USD 0 × {item.count}</div>
+          </div>
+        </div>
+      );
+    }
   }
 };
