@@ -31,3 +31,15 @@
     color: var(--bg-sub-primary);
   }
 }
+
+.priceInfo {
+  text-align: right;
+  .mainPrice {
+    font-weight: 800;
+    font-size: 16px;
+  }
+  .subPrice {
+    font-size: 12px;
+    color: var(--main-secondary);
+  }
+}
