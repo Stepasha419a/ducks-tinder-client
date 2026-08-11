@@ -1,0 +1,33 @@
+.summaryRow {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-main);
+  font-size: 14px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.productInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  .brand {
+    font-weight: 900;
+    letter-spacing: -1px;
+    font-size: 18px;
+  }
+  .badge {
+    color: #000;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 12px;
+
+    background: var(--color--red-100);
+    color: var(--bg-sub-primary);
+  }
+}
